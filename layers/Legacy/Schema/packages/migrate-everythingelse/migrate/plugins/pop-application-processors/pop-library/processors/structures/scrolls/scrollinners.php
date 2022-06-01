@@ -87,7 +87,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_CONTENT_THUMBNAIL:
             case self::COMPONENT_SCROLLINNER_HIGHLIGHTS_THUMBNAIL:
             case self::COMPONENT_SCROLLINNER_POSTS_THUMBNAIL:
@@ -194,7 +194,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
             self::COMPONENT_SCROLLINNER_AUTHORPOSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_AUTHORLAYOUT_FULLVIEW_POST],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

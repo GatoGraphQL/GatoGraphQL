@@ -134,7 +134,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
@@ -255,12 +255,12 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::COMPONENT_BLOCK_USERS_CAROUSEL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getSectionFilterComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW:
@@ -315,7 +315,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return sprintf(
@@ -330,7 +330,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
@@ -394,7 +394,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
 
     public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
@@ -441,7 +441,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest Content', 'poptheme-wassup');
         }
@@ -453,7 +453,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_USERS_CAROUSEL:
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;

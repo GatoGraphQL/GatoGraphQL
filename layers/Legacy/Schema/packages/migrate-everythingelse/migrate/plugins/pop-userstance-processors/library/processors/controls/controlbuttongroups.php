@@ -19,7 +19,7 @@ class UserStance_Module_Processor_CustomControlButtonGroups extends PoP_Module_P
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_GENERAL:
                 $ret[] = [UserStance_Custom_Module_Processor_Codes::class, UserStance_Custom_Module_Processor_Codes::COMPONENT_CODE_STANCECOUNT_GENERAL];
                 $ret[] = [UserStance_Module_Processor_CustomAnchorControls::class, UserStance_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT];

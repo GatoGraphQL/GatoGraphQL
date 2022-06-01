@@ -19,7 +19,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
 
     public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS:
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
@@ -36,7 +36,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS:
                 $ret[] = [PoPApplicationProcessors_Module_Processor_CommentScrolls::class, PoPApplicationProcessors_Module_Processor_CommentScrolls::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS];
                 break;
@@ -59,7 +59,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
 
     public function isIndividual(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS:
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
@@ -72,7 +72,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS:
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:

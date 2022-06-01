@@ -15,7 +15,7 @@ class PoP_Module_Processor_SettingsFormInners extends PoP_Module_Processor_FormI
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_SETTINGS:
                 $ret[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_BROWSERURL];
                 

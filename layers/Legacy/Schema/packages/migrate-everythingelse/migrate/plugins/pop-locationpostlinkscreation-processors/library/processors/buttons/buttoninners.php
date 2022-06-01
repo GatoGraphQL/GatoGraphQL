@@ -18,7 +18,7 @@ class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor
             $routes = array(
                 self::COMPONENT_BUTTONINNER_LOCATIONPOSTLINK_CREATE => POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK,
             );
-            if ($route = $routes[$component[1]] ?? null) {
+            if ($route = $routes[$component->name] ?? null) {
                 return 'fa-fw '.getRouteIcon($route, false);
             }
         }
@@ -31,7 +31,7 @@ class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor
         $titles = array(
             self::COMPONENT_BUTTONINNER_LOCATIONPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('as Link', 'pop-locationpostlinkscreation-processors'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 

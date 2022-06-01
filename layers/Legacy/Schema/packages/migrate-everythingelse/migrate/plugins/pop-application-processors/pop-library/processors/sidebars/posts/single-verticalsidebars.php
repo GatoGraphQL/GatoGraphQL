@@ -20,7 +20,7 @@ class Wassup_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pr
             self::COMPONENT_VERTICALSIDEBAR_SINGLE_POST => [Wassup_Module_Processor_CustomVerticalSingleSidebarInners::class, Wassup_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_POST],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -29,7 +29,7 @@ class Wassup_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Pr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBAR_SINGLE_HIGHLIGHT:
             case self::COMPONENT_VERTICALSIDEBAR_SINGLE_POST:
                 $this->appendProp($component, $props, 'class', 'vertical');

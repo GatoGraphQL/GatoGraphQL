@@ -16,7 +16,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 // $ret[] = [GD_Custom_EM_Module_Processor_FormGroups::class, GD_Custom_EM_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
@@ -49,12 +49,12 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
             self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS => sprintf(TranslationAPIFacade::getInstance()->__('%s link details', 'pop-locationpostlinks-processors'), $locationpost),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
 
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 if ($class = $this->getProp($component, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
@@ -68,7 +68,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 return 'panel-body';
         }
@@ -77,7 +77,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 return '';
         }
@@ -87,7 +87,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 // Typeahead map: make it small
                 $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'wrapper-class', '');

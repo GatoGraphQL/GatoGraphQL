@@ -40,7 +40,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -50,7 +50,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return $this->getListQueryInputOutputHandler();
         }
@@ -60,7 +60,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return new \PoP\ComponentModel\Component\Component(CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:

@@ -17,7 +17,7 @@ class GD_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_GENERICUSER:
                 $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, GD_Custom_Module_Processor_UserWidgets::COMPONENT_WIDGETCOMPACT_GENERICUSERINFO];
                 break;

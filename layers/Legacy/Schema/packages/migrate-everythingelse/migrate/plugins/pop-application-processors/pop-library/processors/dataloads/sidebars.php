@@ -34,7 +34,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
                 [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
         );
 
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -43,7 +43,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
     //             return TagRequestNature::TAG;
 
@@ -56,7 +56,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
             case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
@@ -67,7 +67,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
                 return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
 

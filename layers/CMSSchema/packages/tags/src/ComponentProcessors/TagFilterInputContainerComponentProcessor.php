@@ -30,7 +30,7 @@ class TagFilterInputContainerComponentProcessor extends AbstractFilterInputConta
             new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_TAGS => [
                 ...$tagFilterInputComponents,
                 ...$paginationFilterInputComponents,

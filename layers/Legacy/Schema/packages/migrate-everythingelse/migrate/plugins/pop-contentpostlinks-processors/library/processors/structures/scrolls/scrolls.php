@@ -39,7 +39,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
             self::COMPONENT_SCROLL_AUTHORLINKS_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinks_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORLINKS_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

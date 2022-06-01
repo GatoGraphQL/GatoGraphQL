@@ -23,7 +23,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
@@ -44,12 +44,12 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::class, PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:
@@ -97,7 +97,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:
@@ -113,7 +113,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:
@@ -127,7 +127,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_Common
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:

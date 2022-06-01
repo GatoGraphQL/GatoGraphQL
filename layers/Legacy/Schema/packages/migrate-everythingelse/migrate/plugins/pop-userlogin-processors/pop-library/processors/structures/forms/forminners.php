@@ -25,7 +25,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOGIN:
                 $ret = array_merge(
                     $ret,
@@ -87,7 +87,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
 
     public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOSTPWDRESET:
                 // If loading the page straight, then set the value on the input directly
                 // Otherwise, use Javascript to fill in the value
@@ -105,7 +105,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
 
     // function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINNER_LOSTPWDRESET:
 

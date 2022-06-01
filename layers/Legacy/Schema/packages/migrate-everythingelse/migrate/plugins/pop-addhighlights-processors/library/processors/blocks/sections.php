@@ -34,7 +34,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_LIST => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
@@ -66,12 +66,12 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::COMPONENT_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW:
             case self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL:
             case self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_LIST:
@@ -91,7 +91,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_ADDONS:
             case self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_FULLVIEW:

@@ -14,7 +14,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Does your organization accept members?', 'ure-popprocessors');
         }
@@ -24,7 +24,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return GD_FormInput_YesNo::class;
         }
@@ -34,7 +34,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return 'isCommunity';
         }

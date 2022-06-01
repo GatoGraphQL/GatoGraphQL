@@ -75,7 +75,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_Scrolls extends PoP_Module_Proc
             self::COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW => [PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners::class, PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

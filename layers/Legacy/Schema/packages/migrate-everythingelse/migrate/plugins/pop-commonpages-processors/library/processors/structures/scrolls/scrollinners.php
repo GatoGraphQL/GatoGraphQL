@@ -19,7 +19,7 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -46,7 +46,7 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_THUMBNAIL];
                 break;

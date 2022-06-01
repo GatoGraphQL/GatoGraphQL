@@ -17,7 +17,7 @@ class PoP_Module_Processor_CustomMenuSidebars extends PoP_Module_Processor_Sideb
             self::COMPONENT_SIDEBAR_MENU_ABOUT => [PoP_Module_Processor_CustomMenuSidebarInners::class, PoP_Module_Processor_CustomMenuSidebarInners::COMPONENT_SIDEBARINNER_MENU_ABOUT],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 

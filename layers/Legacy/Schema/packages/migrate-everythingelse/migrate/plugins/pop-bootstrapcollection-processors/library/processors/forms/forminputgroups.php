@@ -17,7 +17,7 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS:
             case self::COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS:
                 $ret .= ' col-sm-2';
@@ -30,7 +30,7 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_MODERATEDPOSTSTATUS:
             case self::COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS:
                 $ret .= ' col-sm-10';
@@ -47,7 +47,7 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
             self::COMPONENT_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputs::class, PoP_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

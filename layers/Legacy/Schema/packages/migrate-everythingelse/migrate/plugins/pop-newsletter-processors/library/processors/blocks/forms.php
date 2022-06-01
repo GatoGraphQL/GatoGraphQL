@@ -18,7 +18,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
             self::COMPONENT_BLOCKCODE_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
             self::COMPONENT_BLOCK_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
@@ -28,7 +28,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NEWSLETTER:
                 return '';
         }
@@ -40,7 +40,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NEWSLETTER:
                 $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::COMPONENT_DATALOAD_NEWSLETTER];
                 break;
@@ -65,7 +65,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
             'PoP_Module_Processor_GFBlocks:newsletter:description',
             ''
         );
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NEWSLETTER:
                 $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER], $props, 'class', 'form-inline');
                 if ($newsletter_description) {
@@ -109,7 +109,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NEWSLETTER:
             case self::COMPONENT_BLOCKCODE_NEWSLETTER:
                 $this->appendProp($component, $props, 'class', 'block-newsletter');

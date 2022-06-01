@@ -13,7 +13,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
 
     protected function isLink(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return true;
         }
@@ -22,7 +22,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
     }
     protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return true;
         }
@@ -31,7 +31,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
     }
     protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
         }
@@ -49,7 +49,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return array_merge(
                     $ret,
@@ -65,7 +65,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::COMPONENT_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
 

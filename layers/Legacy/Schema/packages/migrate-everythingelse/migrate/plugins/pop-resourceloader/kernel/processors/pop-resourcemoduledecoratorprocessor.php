@@ -110,7 +110,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //     // Return initialized empty array at the last level
     //     $ret = array();
     //     if ($resources = $this->getResources($component, $props)) {
-    //         $ret[$component[1]] = $resources;
+    //         $ret[$component->name] = $resources;
     //     }
 
     //     foreach ($this->getDecoratedcomponentProcessor($component)->get_descendant_components_to_propagate($component) as $subcomponent) {

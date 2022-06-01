@@ -32,7 +32,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         $ret = parent::getSubcomponents($component);
 
         $components = array();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:
@@ -82,7 +82,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:

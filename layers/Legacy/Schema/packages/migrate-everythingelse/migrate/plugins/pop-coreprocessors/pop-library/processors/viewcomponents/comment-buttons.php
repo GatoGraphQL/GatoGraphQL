@@ -15,7 +15,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
 
     public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return array(
                     [PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT],
@@ -30,7 +30,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
      */
     public function getTargetDynamicallyRenderedSubcomponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return [
                     new RelationalComponentField(
@@ -51,9 +51,9 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
             self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT]
         );
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
-                return $buttoninners[$component[1]];
+                return $buttoninners[$component->name];
         }
 
         return parent::getButtoninnerSubcomponent($component);
@@ -63,7 +63,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 $ret .= ' btn btn-link btn-xs';
                 break;
@@ -74,7 +74,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return 'replycommentURL';
         }
@@ -83,7 +83,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
     }
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return POP_TARGET_ADDONS;
         }
@@ -93,7 +93,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 $this->appendProp($component, $props, 'class', 'pop-hidden-print');
                 break;

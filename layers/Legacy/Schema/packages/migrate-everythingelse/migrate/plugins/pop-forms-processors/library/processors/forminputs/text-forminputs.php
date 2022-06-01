@@ -24,7 +24,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_SENDERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your name', 'pop-coreprocessors');
         }
@@ -36,7 +36,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     {
         $ret = parent::getPagesectionJsmethod($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TARGETTITLE:
                 // fill the input when showing the modal
                 $this->addJsmethod($ret, 'fillModalInput');
@@ -53,7 +53,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_POSTTITLE:
                 return 'title';
 
@@ -71,7 +71,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TARGETTITLE:
             case self::COMPONENT_FORMINPUT_POSTTITLE:
             case self::COMPONENT_FORMINPUT_USERNICENAME:
@@ -103,7 +103,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_SENDERNAME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -115,7 +115,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
 
     public function isHidden(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TARGETURL:
             case self::COMPONENT_FORMINPUT_TARGETTITLE:
             case self::COMPONENT_FORMINPUT_POSTTITLE:
@@ -130,7 +130,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TARGETURL:
                 $this->mergeProp(
                     $component,

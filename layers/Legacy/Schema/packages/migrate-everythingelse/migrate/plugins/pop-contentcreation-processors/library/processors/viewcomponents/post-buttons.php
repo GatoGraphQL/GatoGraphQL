@@ -16,7 +16,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
 
     // function headerShowUrl(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
     //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
@@ -33,7 +33,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA],
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -44,7 +44,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-flag';
                 break;
@@ -55,7 +55,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Flag as inappropriate', 'pop-coreprocessors');
@@ -66,7 +66,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
@@ -77,7 +77,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
     }
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return 'flagURL';
@@ -88,7 +88,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return POP_TARGET_ADDONS;

@@ -44,7 +44,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
 
     public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
                 new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID),
             ],
@@ -67,7 +67,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
 
     public function getFieldFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): mixed
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING:
             case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $formatFilterInputName = FilterInputHelper::getFilterInputName(new Component(
@@ -79,7 +79,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
                 }
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE:
             case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $gmtFilterInputName = FilterInputHelper::getFilterInputName(new Component(
@@ -97,7 +97,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
     public function getFieldFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): int
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID:
                 $idFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,

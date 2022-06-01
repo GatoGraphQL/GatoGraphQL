@@ -45,7 +45,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 return $this->getPostObjectTypeResolver();
         }
@@ -55,7 +55,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
@@ -67,7 +67,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 $ret['authors'] = [
                     App::getState(['routing', 'queried-object-id']),
@@ -80,7 +80,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
                 return new \PoP\ComponentModel\Component\Component(PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS);
         }

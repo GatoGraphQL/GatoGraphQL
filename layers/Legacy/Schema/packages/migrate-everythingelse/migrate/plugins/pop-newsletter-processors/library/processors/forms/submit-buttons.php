@@ -16,7 +16,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
                 return TranslationAPIFacade::getInstance()->__('Subscribe', 'pop-genericforms');
 
@@ -29,7 +29,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
     
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
             case self::COMPONENT_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return 'btn btn-info';
@@ -40,7 +40,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
 
     public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
             case self::COMPONENT_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms');

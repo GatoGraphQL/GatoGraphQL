@@ -55,7 +55,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_LINKCATEGORIES:
             case self::COMPONENT_FILTERINPUTGROUP_APPLIESTO:
             case self::COMPONENT_FILTERINPUTGROUP_CATEGORIES:
@@ -75,7 +75,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_LINKCATEGORIES:
             case self::COMPONENT_FILTERINPUTGROUP_APPLIESTO:
             case self::COMPONENT_FILTERINPUTGROUP_CATEGORIES:
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CUP_TITLE:
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE:
                 return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE];
@@ -159,7 +159,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CUP_STATUS:
                 return TranslationAPIFacade::getInstance()->__('\'Draft\': still editing, our website admin will not publish it yet. \'Finished editing\': our website admin will publish it (almost) immediately. \'Already published\': our website admin has published it, post is already online.', 'poptheme-wassup');
 
@@ -179,7 +179,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $component = $this->getComponentSubcomponent($component);
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK:
                 $this->setProp($component, $props, 'placeholder', 'https://...');
                 break;
@@ -209,7 +209,7 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_HIGHLIGHTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Highlight:', 'poptheme-wassup');
         }

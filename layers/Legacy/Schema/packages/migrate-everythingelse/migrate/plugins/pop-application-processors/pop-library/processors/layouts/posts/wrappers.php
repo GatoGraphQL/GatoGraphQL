@@ -20,7 +20,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
                 $ret[] = [Wassup_Module_Processor_MultipleComponentLayouts::class, Wassup_Module_Processor_MultipleComponentLayouts::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION];
                 break;
@@ -35,7 +35,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');

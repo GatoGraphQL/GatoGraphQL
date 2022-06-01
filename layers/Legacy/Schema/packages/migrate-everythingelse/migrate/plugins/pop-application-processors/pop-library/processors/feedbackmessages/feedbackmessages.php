@@ -20,7 +20,7 @@ class PoP_Module_Processor_DomainFeedbackMessages extends PoP_Module_Processor_F
             self::COMPONENT_FEEDBACKMESSAGE_EMPTY => [PoP_Module_Processor_DomainFeedbackMessageInners::class, PoP_Module_Processor_DomainFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_EMPTY],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

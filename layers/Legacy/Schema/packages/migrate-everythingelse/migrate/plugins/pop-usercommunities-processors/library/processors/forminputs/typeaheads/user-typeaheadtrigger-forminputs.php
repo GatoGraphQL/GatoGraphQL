@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
     
     public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
                 return [GD_URE_Processor_SelectableHiddenInputFormInputs::class, GD_URE_Processor_SelectableHiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERCOMMUNITIES];
 
@@ -28,7 +28,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
 
     public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITIES:
                 return true;
@@ -41,7 +41,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
     {
         $ret = parent::getAlertClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
                 $ret .= ' alert-narrow';
                 break;

@@ -24,7 +24,7 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_SUBMIT:
                 return TranslationAPIFacade::getInstance()->__('Submit', 'pop-coreprocessors');
 
@@ -49,7 +49,7 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_SEARCH:
                 return 'btn btn-info';
         }
@@ -59,7 +59,7 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_SEARCH:
                 return 'fa fa-search';
         }
@@ -69,7 +69,7 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
 
     public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_SUBMIT:
             case self::COMPONENT_SUBMITBUTTON_SEND:
             case self::COMPONENT_SUBMITBUTTON_SAVE:
@@ -81,7 +81,7 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
                     self::COMPONENT_SUBMITBUTTON_UPDATE => TranslationAPIFacade::getInstance()->__('Updating...', 'pop-forms-processors'),
                 );
 
-                return $loadings[$component[1]];
+                return $loadings[$component->name];
         }
         
         return parent::getLoadingText($component, $props);

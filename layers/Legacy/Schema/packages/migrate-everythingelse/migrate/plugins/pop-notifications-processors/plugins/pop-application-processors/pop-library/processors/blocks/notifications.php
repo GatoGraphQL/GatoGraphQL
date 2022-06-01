@@ -18,7 +18,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
             self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
             default => parent::getRelevantRoute($component, $props),
@@ -36,7 +36,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
             self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST => [AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
         );
 
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -45,7 +45,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
 
     public function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Ask the user to log-in to see the personal notifications
@@ -66,7 +66,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Fetch latest notifications every 30 seconds
@@ -84,7 +84,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Needed to set the notifications count on the top bar, bell button
@@ -112,7 +112,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 return [AAL_PoPProcessors_Module_Processor_ControlGroups::class, AAL_PoPProcessors_Module_Processor_ControlGroups::COMPONENT_AAL_CONTROLGROUP_NOTIFICATIONLIST];
@@ -123,7 +123,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST:
                 // Artificial property added to identify the template when adding component-resources

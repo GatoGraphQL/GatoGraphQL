@@ -20,7 +20,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_LINK_ACCESS:
                 $ret[] = [PoP_ContentPostLinks_Module_Processor_Layouts::class, PoP_ContentPostLinks_Module_Processor_Layouts::COMPONENT_LAYOUT_LINK_ACCESS];
                 break;
@@ -49,7 +49,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::COMPONENT_WIDGETCOMPACT_LINKINFO => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -59,12 +59,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::COMPONENT_WIDGETCOMPACT_LINKINFO => 'fa-link',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LINKINFO:
                 return 'list-group list-group-sm';
         }
@@ -73,7 +73,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LINKINFO:
                 return 'pop-hide-empty list-group-item';
         }
@@ -82,7 +82,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LINKINFO:
                 return 'panel panel-default panel-sm';
         }

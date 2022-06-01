@@ -14,7 +14,7 @@ class GD_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor_Wid
 
     public function getMessage(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MESSAGE_NOCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('No Categories', 'poptheme-wassup');
         }

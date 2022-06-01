@@ -37,7 +37,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => [PoP_Module_Processor_FormsFilterInput::class, PoP_Module_Processor_FormsFilterInput::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
             default => null,
         };
@@ -45,7 +45,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
     //             return true;
     //     }
@@ -55,7 +55,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return TranslationAPIFacade::getInstance()->__('Authors', 'pop-coreprocessors');
         }
@@ -65,7 +65,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPROFILES];
         }
@@ -75,7 +75,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 // Allow PoP Common User Roles to change this
                 return \PoP\Root\App::applyFilters(
@@ -91,7 +91,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return [PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES];
         }
@@ -101,7 +101,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 // Calling it either 'authors' or 'users' for some reason doesn't work!
                 return 'profiles';
@@ -112,7 +112,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
@@ -120,7 +120,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
@@ -129,7 +129,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => $translationAPI->__('', ''),
             default => null,
         };

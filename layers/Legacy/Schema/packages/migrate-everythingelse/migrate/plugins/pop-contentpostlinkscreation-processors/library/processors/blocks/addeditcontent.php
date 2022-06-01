@@ -15,7 +15,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
             self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
             self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE],
             self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -39,7 +39,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE:
                 return true;
         }
@@ -48,7 +48,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE:
                 return true;
         }
@@ -58,7 +58,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE:
             case self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE:
                 $this->appendProp($component, $props, 'class', 'block-createupdate-contentpost');

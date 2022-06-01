@@ -15,7 +15,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_QuicklinkGroups extends PoP_Module_
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKGROUP_EVENTBOTTOM:
                 $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
                 $ret[] = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS];

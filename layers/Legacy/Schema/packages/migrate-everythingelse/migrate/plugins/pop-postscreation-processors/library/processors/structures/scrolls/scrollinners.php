@@ -15,7 +15,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW:
                 return array(
@@ -36,7 +36,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
             self::COMPONENT_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW => [PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_LINK],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

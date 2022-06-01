@@ -14,7 +14,7 @@ class PoP_ContentCreation_Module_Processor_TextareaFormInputs extends PoP_Module
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_WHYFLAG:
                 return TranslationAPIFacade::getInstance()->__('Please explain why this post is inappropriate', 'pop-genericforms');
         }
@@ -24,7 +24,7 @@ class PoP_ContentCreation_Module_Processor_TextareaFormInputs extends PoP_Module
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_WHYFLAG:
                 return true;
         }
@@ -34,7 +34,7 @@ class PoP_ContentCreation_Module_Processor_TextareaFormInputs extends PoP_Module
 
     public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_WHYFLAG:
                 return true;
         }

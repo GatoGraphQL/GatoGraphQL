@@ -81,7 +81,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Stances:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -103,7 +103,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::COMPONENT_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE => POP_FILTER_AUTHORSTANCES_STANCE,
     //         self::COMPONENT_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE => POP_FILTER_STANCES_GENERALSTANCE,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

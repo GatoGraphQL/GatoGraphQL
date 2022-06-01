@@ -31,7 +31,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -77,7 +77,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
             self::COMPONENT_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW => [GD_Custom_EM_Module_Processor_CustomFullViewLayouts::class, GD_Custom_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_LOCATIONPOST],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

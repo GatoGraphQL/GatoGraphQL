@@ -20,7 +20,7 @@ class PoP_Module_Processor_CommentsFeedbackMessageAlertLayouts extends PoP_Modul
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageLayouts::class, PoP_Module_Processor_CommentsFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

@@ -15,7 +15,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
             self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE => POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
             self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE],
             self::COMPONENT_BLOCK_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_HIGHLIGHT_CREATE],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -39,7 +39,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HIGHLIGHT_CREATE:
                 return true;
         }
@@ -48,7 +48,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE:
                 return true;
         }
@@ -58,7 +58,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Modu
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HIGHLIGHT_UPDATE:
             case self::COMPONENT_BLOCK_HIGHLIGHT_CREATE:
                 $this->appendProp($component, $props, 'class', 'addons-nocontrols');

@@ -37,8 +37,8 @@ trait FilterDataComponentProcessorTrait
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
         $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] = $this->activeDataloadQueryArgsFilteringComponents[$cacheKey] ?? [];
-        if (!is_null($this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component[1]] ?? null)) {
-            return $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component[1]];
+        if (!is_null($this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name] ?? null)) {
+            return $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name];
         }
 
         $components = [];
@@ -55,7 +55,7 @@ trait FilterDataComponentProcessorTrait
             );
         }
 
-        $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component[1]] = $components;
+        $this->activeDataloadQueryArgsFilteringComponents[$cacheKey][$component->name] = $components;
         return $components;
     }
 

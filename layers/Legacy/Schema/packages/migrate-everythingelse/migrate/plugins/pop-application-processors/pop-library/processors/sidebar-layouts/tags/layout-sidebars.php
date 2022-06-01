@@ -23,7 +23,7 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
             self::COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL => [PoP_Module_Processor_CustomTagLayoutSidebarInners::class, PoP_Module_Processor_CustomTagLayoutSidebarInners::COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

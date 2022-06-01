@@ -24,7 +24,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 
     public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
             case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP:
             case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP:
@@ -39,7 +39,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 
     protected function isStaticCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
             case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP:
             case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP:
@@ -57,7 +57,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
                 case self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP:
                 case self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP:
@@ -66,7 +66,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                         self::COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME],
                         self::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::COMPONENT_BLOCK_AUTHOR_CONTENT],
                     );
-                    $subcomponent = $subcomponents[$component[1]];
+                    $subcomponent = $subcomponents[$component->name];
 
                     // This value must be set by the parent module
                     $target_id = $this->getProp($component, $props, 'target-id');
@@ -116,13 +116,13 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
                     $welcometitle = sprintf(
                         '<a data-toggle="collapse" href="%s" aria-expanded="false" class="%s">%s</a>',
                         $target,
-                        $classes[$component[1]],
-                        $titles[$component[1]].' <i class="fa fa-angle-down"></i>'
+                        $classes[$component->name],
+                        $titles[$component->name].' <i class="fa fa-angle-down"></i>'
                     );
 
                     $welcome = sprintf(
                         '<%1$s id="%2$s" class="top-expand text-center">%3$s</%1$s>',
-                        $markups[$component[1]],
+                        $markups[$component->name],
                         $target_id.'-expand',
                         $welcometitle
                     );

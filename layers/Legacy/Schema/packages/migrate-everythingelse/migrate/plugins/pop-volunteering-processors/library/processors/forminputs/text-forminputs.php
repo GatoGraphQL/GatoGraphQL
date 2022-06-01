@@ -14,7 +14,7 @@ class PoP_Volunteering_Module_Processor_TextFormInputs extends PoP_Module_Proces
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_PHONE:
                 return TranslationAPIFacade::getInstance()->__('Your Phone number', 'pop-genericforms');
         }

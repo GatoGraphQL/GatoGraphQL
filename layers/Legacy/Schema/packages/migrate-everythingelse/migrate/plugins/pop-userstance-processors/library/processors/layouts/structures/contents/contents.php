@@ -14,7 +14,7 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
     }
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTLAYOUT_STANCES:
                 return [UserStance_Module_Processor_ContentMultipleInners::class, UserStance_Module_Processor_ContentMultipleInners::COMPONENT_LAYOUTCONTENTINNER_STANCES];
 
@@ -27,7 +27,7 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
 
     public function addFetchedData(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTLAYOUT_STANCES:
             case self::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE:
                 return false;
@@ -38,14 +38,14 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE:
                 $classes = array(
                     self::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE => GD_CLASS_STANCES,
                 );
 
                 $this->setProp($component, $props, 'appendable', true);
-                $this->setProp($component, $props, 'appendable-class', $classes[$component[1]] ?? null);
+                $this->setProp($component, $props, 'appendable-class', $classes[$component->name] ?? null);
 
                 // Show the lazy loading spinner?
                 // if ($this->getProp($component, $props, 'show-lazyloading-spinner')) {

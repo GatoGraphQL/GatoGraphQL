@@ -15,7 +15,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebarInners exten
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
                 $ret = array_merge(
                     $ret,

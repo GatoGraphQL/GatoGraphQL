@@ -21,7 +21,7 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
             self::COMPONENT_MULTIPLE_SECTION_MYEVENTS_SIDEBAR => [PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR],
             self::COMPONENT_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR => [PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR],
         );
-        if ($block = $blocks[$component[1]] ?? null) {
+        if ($block = $blocks[$component->name] ?? null) {
             $ret[] = $block;
         }
 
@@ -34,7 +34,7 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
             self::COMPONENT_MULTIPLE_SECTION_MYEVENTS_SIDEBAR => POP_SCREEN_MYCONTENT,
             self::COMPONENT_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR => POP_SCREEN_MYCONTENT,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -43,7 +43,7 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_MYEVENTS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;

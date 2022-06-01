@@ -15,7 +15,7 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_SHAREBYEMAIL:
                 $ret = array_merge(
                     $ret,

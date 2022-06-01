@@ -14,7 +14,7 @@ class PoP_Module_Processor_SegmentedButtonMenus extends PoP_Module_Processor_Con
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SEGMENTEDBUTTONMENU:
                 return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::COMPONENT_CONTENTINNER_MENU_SEGMENTEDBUTTON];
 

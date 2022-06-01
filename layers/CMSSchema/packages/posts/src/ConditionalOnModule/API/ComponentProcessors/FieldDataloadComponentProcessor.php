@@ -55,7 +55,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -65,7 +65,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTCOUNT:
@@ -79,7 +79,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
@@ -90,7 +90,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
                 return new \PoP\ComponentModel\Component\Component(PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTCOUNT:

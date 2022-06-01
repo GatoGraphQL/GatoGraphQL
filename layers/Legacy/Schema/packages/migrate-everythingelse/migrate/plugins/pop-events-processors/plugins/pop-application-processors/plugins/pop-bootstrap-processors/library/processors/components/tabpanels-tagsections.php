@@ -17,7 +17,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGEVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTIONCALENDAR);
         }
@@ -29,7 +29,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGEVENTS:
                 $ret = array_merge(
                     $ret,
@@ -74,7 +74,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGEVENTS:
                 $ret = array(
                     [

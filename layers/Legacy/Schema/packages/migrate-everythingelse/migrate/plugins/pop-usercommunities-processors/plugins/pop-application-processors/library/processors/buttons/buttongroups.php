@@ -13,7 +13,7 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
 
     protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONGROUP_MYUSERS:
                 return POP_URE_SCREEN_MYUSERS;
         }

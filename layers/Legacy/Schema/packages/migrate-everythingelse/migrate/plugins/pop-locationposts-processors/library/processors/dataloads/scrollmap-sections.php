@@ -26,7 +26,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
@@ -48,12 +48,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
             self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSections::class, GD_Custom_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::COMPONENT_FILTER_LOCATIONPOSTS];
@@ -93,7 +93,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     }
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
     //             return UserRequestNature::USER;
@@ -110,7 +110,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Filter by the Profile/Community
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
@@ -128,7 +128,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
@@ -143,7 +143,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:

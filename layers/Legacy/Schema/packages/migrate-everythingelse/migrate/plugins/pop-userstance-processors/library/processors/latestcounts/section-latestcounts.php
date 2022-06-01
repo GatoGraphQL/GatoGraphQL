@@ -43,7 +43,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
 
     public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
@@ -68,7 +68,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
 
     public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
@@ -95,7 +95,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
@@ -132,7 +132,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
 
     public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_PRO:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_AGAINST:
@@ -145,7 +145,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
 
     public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES_PRO:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES_AGAINST:
@@ -158,7 +158,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
 
     public function isSingle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_SINGLE_STANCES:
             case self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_PRO:
             case self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_AGAINST:

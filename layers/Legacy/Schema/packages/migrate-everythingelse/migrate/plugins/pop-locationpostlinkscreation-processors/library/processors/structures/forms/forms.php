@@ -17,7 +17,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
             GD_Custom_EM_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_LOCATIONPOSTLINK => [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_LOCATIONPOSTLINK],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -26,7 +26,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_LOCATIONPOSTLINK:
                 // Allow to override the classes, so it can be set for the Addons pageSection without the col-sm styles, but one on top of the other
                 if (!($form_row_classs = $this->getProp($component, $props, 'form-row-class')/*$this->get_general_prop($props, 'form-row-class')*/)) {

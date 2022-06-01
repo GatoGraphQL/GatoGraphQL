@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
             self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -41,7 +41,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION:
             case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL:
                 $this->appendProp($component, $props, 'class', 'vertical');

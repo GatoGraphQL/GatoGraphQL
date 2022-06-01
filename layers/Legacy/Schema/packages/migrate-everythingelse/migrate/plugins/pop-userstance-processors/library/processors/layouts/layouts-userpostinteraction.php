@@ -19,7 +19,7 @@ class UserStance_Module_Processor_UserPostInteractionLayouts extends PoP_Module_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSTANCEPOSTINTERACTION:
                 $ret[] = [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT];
                 break;

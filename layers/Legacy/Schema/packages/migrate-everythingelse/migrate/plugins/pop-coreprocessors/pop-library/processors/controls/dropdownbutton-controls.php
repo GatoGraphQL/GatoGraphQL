@@ -17,7 +17,7 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 $components = array();
@@ -41,7 +41,7 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'btn btn-compact btn-link';
@@ -52,7 +52,7 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'fa-share';

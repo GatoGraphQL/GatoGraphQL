@@ -17,7 +17,7 @@ class GD_URE_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_M
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_ORGANIZATION:
                 $ret[] = [GD_URE_Custom_Module_Processor_UserWidgets::class, GD_URE_Custom_Module_Processor_UserWidgets::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO];
                 $ret[] = [GD_URE_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES];

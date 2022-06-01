@@ -15,7 +15,7 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 return [PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_USER];
         }
@@ -27,7 +27,7 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 $component = $this->getComponentSubcomponent($component);
 
@@ -45,7 +45,7 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 return '';
         }

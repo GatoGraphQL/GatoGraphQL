@@ -25,7 +25,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
@@ -43,7 +43,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     }
     public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
                 return null;
         }
@@ -52,7 +52,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     }
     public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:
@@ -73,7 +73,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
                 $this->mergeProp(
                     $component,
@@ -158,7 +158,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO:
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS:

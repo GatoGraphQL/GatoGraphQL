@@ -20,7 +20,7 @@ class PoP_Module_Processor_PostLayoutSidebars extends PoP_Module_Processor_Sideb
             self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL => [PoP_Module_Processor_PostLayoutSidebarInners::class, PoP_Module_Processor_PostLayoutSidebarInners::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 

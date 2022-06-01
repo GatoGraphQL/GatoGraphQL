@@ -17,7 +17,7 @@ class Wassup_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT:
                 $ret[] = [Wassup_Module_Processor_Buttons::class, Wassup_Module_Processor_Buttons::COMPONENT_BUTTON_ADDONSPOSTEDIT];
                 break;

@@ -16,7 +16,7 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
     public function getUserAvatarComponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_PREVIEWNOTIFICATION_DETAILS:
                     return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR60];
             }

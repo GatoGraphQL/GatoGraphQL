@@ -14,7 +14,7 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMGROUP_EMBEDPREVIEW:
                 return [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW];
         }
@@ -24,7 +24,7 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMGROUP_EMBEDPREVIEW:
                 return TranslationAPIFacade::getInstance()->__('Preview', 'poptheme-wassup');
         }

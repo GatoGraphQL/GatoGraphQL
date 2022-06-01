@@ -13,7 +13,7 @@ class PoP_Module_Processor_FetchlinkTypeaheadFormComponents extends PoP_Module_P
 
     public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING:
                 return array(
                     [PoP_Module_Processor_UserTypeaheadComponentFormInputs::class, PoP_Module_Processor_UserTypeaheadComponentFormInputs::COMPONENT_TYPEAHEAD_COMPONENT_USERS],
@@ -28,7 +28,7 @@ class PoP_Module_Processor_FetchlinkTypeaheadFormComponents extends PoP_Module_P
 
     public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING:
                 return [PoP_Module_Processor_InputGroupFormComponents::class, PoP_Module_Processor_InputGroupFormComponents::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADSEARCH];
         }

@@ -129,7 +129,7 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             self::COMPONENT_SCROLL_SINGLERELATEDCONTENT_FULLVIEW => [PoP_Module_Processor_CustomScrollInners::class, PoP_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

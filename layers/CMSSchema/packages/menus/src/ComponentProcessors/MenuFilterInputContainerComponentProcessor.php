@@ -30,7 +30,7 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
             new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MENUS => [
                 ...$menuFilterInputComponents,
                 ...$paginationFilterInputComponents,

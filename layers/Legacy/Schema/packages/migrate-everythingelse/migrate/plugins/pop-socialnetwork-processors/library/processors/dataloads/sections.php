@@ -80,7 +80,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
             self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
             self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_LIST => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
@@ -158,12 +158,12 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW:
@@ -267,7 +267,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
@@ -313,7 +313,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL:
@@ -375,7 +375,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST:
                 return $this->instanceManager->getInstance(PostTagObjectTypeResolver::class);
@@ -419,7 +419,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('tags', 'poptheme-wassup'));

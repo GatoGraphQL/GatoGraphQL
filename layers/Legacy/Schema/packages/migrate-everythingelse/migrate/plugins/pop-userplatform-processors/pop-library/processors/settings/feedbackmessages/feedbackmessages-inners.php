@@ -19,7 +19,7 @@ class PoP_Module_Processor_SettingsFeedbackMessageInners extends PoP_Module_Proc
             self::COMPONENT_FEEDBACKMESSAGEINNER_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageAlertLayouts::class, PoP_Module_Processor_SettingsFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

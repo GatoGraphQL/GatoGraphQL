@@ -26,7 +26,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
             self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW],
             self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -18,7 +18,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
 
     public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return 'btn btn-link btn-compact';
         }
@@ -28,7 +28,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
 
     public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return 'btn btn-link btn-compact';
         }
@@ -37,7 +37,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     }
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Members', 'poptheme-wassup');
         }
@@ -47,14 +47,14 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
                 $routes = array(
                     self::COMPONENT_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
                 );
-                return RequestUtils::addRoute($url, $routes[$component[1]] ?? null);
+                return RequestUtils::addRoute($url, $routes[$component->name] ?? null);
         }
 
         return parent::getTitleLink($component, $props);

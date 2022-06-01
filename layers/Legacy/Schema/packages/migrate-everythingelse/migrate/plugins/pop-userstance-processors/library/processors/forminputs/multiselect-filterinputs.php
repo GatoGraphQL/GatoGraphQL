@@ -37,7 +37,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT => [PoP_Module_Processor_UserStanceFilterInput::class, PoP_Module_Processor_UserStanceFilterInput::FILTERINPUT_STANCE_MULTISELECT],
             default => null,
         };
@@ -45,7 +45,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT:
     //             return true;
     //     }
@@ -55,7 +55,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('Stance', 'pop-userstance-processors');
         }
@@ -65,7 +65,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT:
                 return GD_FormInput_MultiStance::class;
         }
@@ -75,7 +75,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT:
                 return 'stance';
         }
@@ -85,7 +85,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
@@ -93,7 +93,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
@@ -102,7 +102,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_STANCE_MULTISELECT => $translationAPI->__('', ''),
             default => null,
         };

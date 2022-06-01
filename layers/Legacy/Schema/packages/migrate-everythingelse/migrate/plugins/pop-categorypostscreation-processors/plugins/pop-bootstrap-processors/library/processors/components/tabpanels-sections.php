@@ -51,7 +51,7 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS00:
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS01:
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS02:
@@ -82,7 +82,7 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -309,7 +309,7 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS00:
                 return array(
                     [

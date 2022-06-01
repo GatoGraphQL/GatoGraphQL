@@ -18,7 +18,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks extend
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_MYLINKS => [PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents::class, PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYLINKS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks extend
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYLINKS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYCUSTOMPOSTLIST];
         }
@@ -37,7 +37,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelBlocks extend
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYLINKS:
                 return [PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::class, PoP_ContentPostLinksCreation_Module_Processor_CustomFilters::COMPONENT_FILTER_MYLINKS];
         }

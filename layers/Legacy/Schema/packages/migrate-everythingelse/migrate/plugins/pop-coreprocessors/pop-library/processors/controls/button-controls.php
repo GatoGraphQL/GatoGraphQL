@@ -19,7 +19,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     }
     public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
             case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -32,7 +32,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
             case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -47,7 +47,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
             case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -61,7 +61,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     }
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONCONTROL_RESETEDITOR:
                 return 'btn btn-compact btn-link';
         }
@@ -70,7 +70,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     }
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCK:
             case self::COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -97,7 +97,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP:
                 $this->addJsmethod($ret, 'reloadBlockGroup');
                 break;

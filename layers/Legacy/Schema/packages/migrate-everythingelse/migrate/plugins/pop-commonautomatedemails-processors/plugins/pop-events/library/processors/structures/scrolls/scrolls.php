@@ -30,7 +30,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
             self::COMPONENT_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

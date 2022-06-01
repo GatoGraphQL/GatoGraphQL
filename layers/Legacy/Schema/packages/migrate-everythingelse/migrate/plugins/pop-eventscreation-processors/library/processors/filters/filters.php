@@ -17,7 +17,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilters extends PoP_Module_Proce
             self::COMPONENT_FILTER_MYEVENTS => [PoP_EventsCreation_Module_Processor_CustomFilterInners::class, PoP_EventsCreation_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYEVENTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

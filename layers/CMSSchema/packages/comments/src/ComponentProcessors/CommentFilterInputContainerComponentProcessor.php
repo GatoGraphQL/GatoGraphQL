@@ -68,7 +68,7 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
             new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputComponents,
             self::COMPONENT_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputComponents,

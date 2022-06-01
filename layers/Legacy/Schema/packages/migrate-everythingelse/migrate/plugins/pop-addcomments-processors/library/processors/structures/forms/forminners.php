@@ -15,7 +15,7 @@ class PoP_Module_Processor_CommentsFormInners extends PoP_Module_Processor_FormI
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_ADDCOMMENT:
                 $ret = array_merge(
                     $ret,

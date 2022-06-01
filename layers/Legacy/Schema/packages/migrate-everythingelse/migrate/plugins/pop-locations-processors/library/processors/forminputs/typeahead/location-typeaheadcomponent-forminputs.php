@@ -15,7 +15,7 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
 
     protected function getLimit(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return 8;
         }
@@ -26,7 +26,7 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
     protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONS);
         }

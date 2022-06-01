@@ -18,7 +18,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -29,7 +29,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -40,7 +40,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     }
     public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -56,7 +56,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -70,7 +70,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -99,7 +99,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // The map is initially toggled non-visible
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:

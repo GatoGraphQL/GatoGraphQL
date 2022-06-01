@@ -15,7 +15,7 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_LOGIN:
                 $ret[] = [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::COMPONENT_BLOCK_LOGIN];
                 $ret = array_merge(
@@ -30,7 +30,7 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_LOGIN:
                 $this->appendProp($component, $props, 'class', 'blockgroup-login');
 

@@ -51,7 +51,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW:
             case self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS01_SIMPLEVIEW:
             case self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS02_SIMPLEVIEW:
@@ -112,7 +112,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
         if ($layout = \PoP\Root\App::applyFilters(
             'PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners:layout',
             [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
-            $categories[$component[1]]
+            $categories[$component->name]
         )
         ) {
             $ret[] = $layout;

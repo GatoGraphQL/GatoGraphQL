@@ -24,7 +24,7 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Comments:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -37,7 +37,7 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
 
     // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS:
     //             return POP_FILTER_COMMENTS;
     //     }

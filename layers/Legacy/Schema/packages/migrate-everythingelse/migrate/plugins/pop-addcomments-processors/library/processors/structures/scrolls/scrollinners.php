@@ -19,7 +19,7 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_COMMENTS_LIST:
             case self::COMPONENT_SCROLLINNER_COMMENTS_ADD:
             case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS:
@@ -37,7 +37,7 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_COMMENTS_LIST:
             case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::COMPONENT_LAYOUT_COMMENTFRAME_LIST];

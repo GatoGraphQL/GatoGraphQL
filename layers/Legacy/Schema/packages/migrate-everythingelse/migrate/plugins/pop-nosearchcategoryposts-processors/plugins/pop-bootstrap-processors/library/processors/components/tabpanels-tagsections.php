@@ -53,7 +53,7 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -320,7 +320,7 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:
                 $ret = array(
                     [

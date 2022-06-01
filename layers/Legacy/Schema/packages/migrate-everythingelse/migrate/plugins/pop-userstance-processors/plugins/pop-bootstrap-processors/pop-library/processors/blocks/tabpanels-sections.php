@@ -48,7 +48,7 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
             self::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_NEUTRAL_ARTICLE],
             self::COMPONENT_BLOCK_TABPANEL_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYSTANCES],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -57,7 +57,7 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_STANCES:
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_PRO:
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST:
@@ -79,7 +79,7 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_STANCES:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES];
 

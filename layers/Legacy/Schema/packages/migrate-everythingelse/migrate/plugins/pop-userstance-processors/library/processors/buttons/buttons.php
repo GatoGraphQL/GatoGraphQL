@@ -29,7 +29,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL],
             self::COMPONENT_BUTTON_POSTSTANCES_AGAINST => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -44,7 +44,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL => 'postStancesNeutralURL',
             self::COMPONENT_BUTTON_POSTSTANCES_AGAINST => 'postStancesAgainstURL',
         );
-        if ($field = $fields[$component[1]] ?? null) {
+        if ($field = $fields[$component->name] ?? null) {
             return $field;
         }
 
@@ -60,7 +60,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::COMPONENT_BUTTON_POSTSTANCES_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 
@@ -69,7 +69,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_STANCEEDIT:
                 return POP_TARGET_ADDONS;
 
@@ -86,7 +86,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_STANCEVIEW:
             case self::COMPONENT_BUTTON_STANCEEDIT:
                 $ret .= ' btn btn-xs btn-default';

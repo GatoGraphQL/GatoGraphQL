@@ -20,7 +20,7 @@ class PoP_Module_Processor_DomainFeedbackMessageAlertLayouts extends PoP_Module_
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EMPTY => [PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

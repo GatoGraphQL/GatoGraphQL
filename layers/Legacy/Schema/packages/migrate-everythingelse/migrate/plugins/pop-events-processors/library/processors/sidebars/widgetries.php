@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_WIDGET_DATETIMEDOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 break;
@@ -66,7 +66,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
             self::COMPONENT_EM_WIDGETCOMPACT_PASTEVENTINFO => TranslationAPIFacade::getInstance()->__('Past Event', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -77,11 +77,11 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
             self::COMPONENT_EM_WIDGETCOMPACT_PASTEVENTINFO => 'fa-calendar',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_WIDGET_DATETIMEDOWNLOADLINKS:
             case self::COMPONENT_EM_WIDGET_DATETIME:
                 return 'list-group';
@@ -95,7 +95,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_WIDGET_DATETIMEDOWNLOADLINKS:
             case self::COMPONENT_EM_WIDGET_DATETIME:
                 return 'list-group-item';
@@ -109,7 +109,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_WIDGETCOMPACT_EVENTINFO:
             case self::COMPONENT_EM_WIDGETCOMPACT_PASTEVENTINFO:
                 // return 'panel panel-info panel-sm';

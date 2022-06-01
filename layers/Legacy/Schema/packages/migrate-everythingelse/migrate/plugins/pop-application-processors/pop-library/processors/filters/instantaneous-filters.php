@@ -20,7 +20,7 @@ class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_Ins
             self::COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

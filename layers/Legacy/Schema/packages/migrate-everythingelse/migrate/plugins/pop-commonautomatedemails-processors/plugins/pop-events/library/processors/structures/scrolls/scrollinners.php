@@ -21,7 +21,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Pro
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL:
 
                 // Allow ThemeStyle Expansive to override the grid
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Pro
             self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_FULLVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_FullViewLayouts::class, PoPTheme_Wassup_EM_AE_Module_Processor_FullViewLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
@@ -68,7 +68,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Pro
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS:
             case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL:
             case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST:

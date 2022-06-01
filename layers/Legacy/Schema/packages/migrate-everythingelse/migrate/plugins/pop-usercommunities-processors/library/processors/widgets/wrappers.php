@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_WIDGETWRAPPER_COMMUNITIES:
                 $ret[] = [GD_URE_Module_Processor_Widgets::class, GD_URE_Module_Processor_Widgets::COMPONENT_URE_WIDGET_COMMUNITIES];
                 break;
@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_WIDGETWRAPPER_COMMUNITIES:
             case self::COMPONENT_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES:
                 return 'hasActiveCommunities';

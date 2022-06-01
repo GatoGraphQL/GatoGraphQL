@@ -18,7 +18,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 $ret .= ' col-sm-2';
                 break;
@@ -30,7 +30,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 $ret .= ' col-sm-10';
                 break;
@@ -46,7 +46,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
             self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFilterComponents::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -55,12 +55,12 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 $placeholders = array(
                     self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => TranslationAPIFacade::getInstance()->__('Type post title...', 'pop-coreprocessors'),
                 );
-                $placeholder = $placeholders[$component[1]];
+                $placeholder = $placeholders[$component->name];
                 $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', $placeholder);
                 break;
@@ -71,7 +71,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Please select all related content, so the reader can easily access this inter-related information.', 'pop-coreprocessors');
         }

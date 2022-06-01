@@ -34,7 +34,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
     {
         $ret = parent::getLabel($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CUU_USERWEBSITEURL:
                 $ret = '<i class="fa fa-fw fa-home"></i>'.$ret;
                 break;
@@ -58,7 +58,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
             self::COMPONENT_FORMINPUTGROUP_CUU_DESCRIPTION => [PoP_Module_Processor_CreateUpdateUserTextareaFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextareaFormInputs::COMPONENT_FORMINPUT_CUU_DESCRIPTION],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -67,7 +67,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CUU_EMAIL:
                 return TranslationAPIFacade::getInstance()->__('Please be careful to fill-in the email properly! It will not only appear in the profile page, but also be used by our system to send you notifications.', 'pop-coreprocessors');
         }
@@ -82,7 +82,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         $placeholders = array(
             self::COMPONENT_FORMINPUTGROUP_CUU_USERWEBSITEURL => 'https://...',
         );
-        if ($placeholder = $placeholders[$component[1]] ?? null) {
+        if ($placeholder = $placeholders[$component->name] ?? null) {
             $component = $this->getComponentSubcomponent($component);
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }

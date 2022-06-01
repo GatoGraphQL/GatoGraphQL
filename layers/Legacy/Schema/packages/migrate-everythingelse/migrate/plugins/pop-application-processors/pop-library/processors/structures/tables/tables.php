@@ -18,7 +18,7 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYCONTENT:
             case self::COMPONENT_TABLE_MYHIGHLIGHTS:
             case self::COMPONENT_TABLE_MYPOSTS:
@@ -28,7 +28,7 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                     self::COMPONENT_TABLE_MYPOSTS => [PoP_Module_Processor_TableInners::class, PoP_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYPOSTS],
                 );
 
-                return $inners[$component[1]];
+                return $inners[$component->name];
         }
 
         return parent::getInnerSubcomponent($component);
@@ -38,7 +38,7 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
     {
         $ret = parent::getHeaderTitles($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYCONTENT:
                 $ret[] = TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'poptheme-wassup');
@@ -62,7 +62,7 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYHIGHLIGHTS:
                 $this->appendProp($component, $props, 'class', 'table-myhighlights');
                 break;

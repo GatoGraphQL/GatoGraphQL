@@ -18,7 +18,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
         $inners = array(
             self::COMPONENT_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR => [PoP_ContentPostLinksCreation_Module_Processor_SidebarInners::class, PoP_ContentPostLinksCreation_Module_Processor_SidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_MYCONTENTPOSTLINKS_SIDEBAR],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -30,7 +30,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
         $screens = array(
             self::COMPONENT_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR => POP_SCREEN_MYCONTENT,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -39,7 +39,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }

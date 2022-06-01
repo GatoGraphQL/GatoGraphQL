@@ -19,7 +19,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW => POP_POSTSCREATION_ROUTE_MYPOSTS,
             self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW => POP_POSTSCREATION_ROUTE_MYPOSTS,
             self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT => POP_POSTSCREATION_ROUTE_MYPOSTS,
@@ -35,12 +35,12 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
             self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
@@ -78,7 +78,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
@@ -93,7 +93,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
@@ -105,7 +105,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:

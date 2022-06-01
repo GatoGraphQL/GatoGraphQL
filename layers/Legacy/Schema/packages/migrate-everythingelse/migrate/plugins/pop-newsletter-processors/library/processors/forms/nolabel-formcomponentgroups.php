@@ -14,7 +14,7 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER:
                 return TranslationAPIFacade::getInstance()->__('Keep up to date with our community activity through our weekly newsletter.', 'pop-genericforms');
         }
@@ -28,7 +28,7 @@ class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Mod
             self::COMPONENT_FORMINPUTGROUP_CUP_NEWSLETTER => [GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

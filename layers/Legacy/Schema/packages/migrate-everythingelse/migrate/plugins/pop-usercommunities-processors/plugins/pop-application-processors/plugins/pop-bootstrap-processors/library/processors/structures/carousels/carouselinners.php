@@ -13,7 +13,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS:
                 return array(
                     'row-items' => 12,
@@ -30,7 +30,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselInners extends PoP_Modu
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_AUTHORMEMBERS:
                 $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_USER_AVATAR];
                 break;

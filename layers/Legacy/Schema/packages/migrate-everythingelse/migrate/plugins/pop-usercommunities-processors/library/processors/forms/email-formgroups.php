@@ -17,7 +17,7 @@ class PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups extends PoP
             self::COMPONENT_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY => [GD_URE_Module_Processor_UserProfileCheckboxFormInputs::class, GD_URE_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -26,7 +26,7 @@ class PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups extends PoP
 
     public function useModuleConfiguration(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
                 return false;
         }

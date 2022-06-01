@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebars extends PoP_Module_
             self::COMPONENT_HORIZONTALSIDEBAR_AUTHOR_INDIVIDUAL => [GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_INDIVIDUAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 

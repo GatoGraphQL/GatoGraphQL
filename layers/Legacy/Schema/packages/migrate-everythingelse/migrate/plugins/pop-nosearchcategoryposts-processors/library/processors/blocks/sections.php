@@ -1076,7 +1076,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_CAROUSEL => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::COMPONENT_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::COMPONENT_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEW => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
@@ -2111,12 +2111,12 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::COMPONENT_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS:
@@ -2449,7 +2449,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
 
     public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEW:
@@ -2936,7 +2936,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS00_CAROUSEL:
             case self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS01_CAROUSEL:
             case self::COMPONENT_BLOCK_NOSEARCHCATEGORYPOSTS02_CAROUSEL:

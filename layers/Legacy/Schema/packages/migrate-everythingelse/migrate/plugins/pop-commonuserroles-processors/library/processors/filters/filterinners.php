@@ -31,7 +31,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'CommonUserRoles:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -48,7 +48,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
     //         self::COMPONENT_FILTERINPUTCONTAINER_INDIVIDUALS => POP_FILTER_INDIVIDUALS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_ORGANIZATIONS => POP_FILTER_ORGANIZATIONS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

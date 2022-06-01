@@ -23,7 +23,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilters extends PoP_Module_Proces
             self::COMPONENT_FILTER_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomFilterInners::class, PoP_LocationPosts_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

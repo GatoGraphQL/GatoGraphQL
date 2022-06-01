@@ -15,7 +15,7 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST:
                 $ret[] = [PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::class, PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST];
                 break;

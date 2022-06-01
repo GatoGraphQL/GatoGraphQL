@@ -17,7 +17,7 @@ class PoP_Share_Module_Processor_FeedbackMessages extends PoP_Module_Processor_F
             self::COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL => [PoP_Share_Module_Processor_FeedbackMessageInners::class, PoP_Share_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_SHAREBYEMAIL],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

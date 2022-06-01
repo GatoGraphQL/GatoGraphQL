@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CreateLocationFormInners extends PoP_Module_Process
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CREATELOCATION:
                 $ret = array_merge(
                     $ret,

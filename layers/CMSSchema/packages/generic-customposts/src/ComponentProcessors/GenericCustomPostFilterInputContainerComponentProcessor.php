@@ -39,7 +39,7 @@ class GenericCustomPostFilterInputContainerComponentProcessor extends AbstractCu
             new \PoP\ComponentModel\Component\Component(CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST=> [
                 ...$genericCustomPostFilterInputComponents,
                 ...$paginationFilterInputComponents,

@@ -28,7 +28,7 @@ class FilterInputHookSet extends AbstractHookSet
             UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS,
             UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT,
         ];
-        if (in_array($component[1], $adminComponentNames)) {
+        if (in_array($component->name, $adminComponentNames)) {
             return [
                 ...$filterInputComponents,
                 ...$this->getUserFilterInputComponents(),

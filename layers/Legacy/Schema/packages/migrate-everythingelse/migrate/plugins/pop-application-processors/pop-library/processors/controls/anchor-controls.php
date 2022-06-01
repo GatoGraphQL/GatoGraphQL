@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_ADDPOST:
                 return TranslationAPIFacade::getInstance()->__('Add Post', 'poptheme-wassup');
 
@@ -30,7 +30,7 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_ADDPOST:
                 return 'fa-plus';
 
@@ -43,14 +43,14 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
     public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_ADDPOST:
             case self::COMPONENT_ANCHORCONTROL_TAGSLINK:
                 $routes = array(
                     self::COMPONENT_ANCHORCONTROL_ADDPOST => POP_POSTSCREATION_ROUTE_ADDPOST,
                     self::COMPONENT_ANCHORCONTROL_TAGSLINK => PostTagsModuleConfiguration::getPostTagsRoute(),
                 );
-                $route = $routes[$component[1]];
+                $route = $routes[$component->name];
 
                 return RouteUtils::getRouteURL($route);
         }
@@ -59,7 +59,7 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
     }
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_ADDPOST:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -71,7 +71,7 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
     }
     public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TAGSLINK:
                 return null;
         }
@@ -80,7 +80,7 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
     }
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_ADDPOST:
                 $this->appendProp($component, $props, 'class', 'btn btn-primary');
                 break;

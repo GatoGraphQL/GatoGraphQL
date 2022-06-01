@@ -53,7 +53,7 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -85,7 +85,7 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($component[1]) {
+                switch ($component->name) {
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02:
@@ -134,7 +134,7 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 => [CPP_Module_Processor_AuthorSectionTabPanelComponents::class, CPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 => [CPP_Module_Processor_AuthorSectionTabPanelComponents::class, CPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -143,7 +143,7 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02:

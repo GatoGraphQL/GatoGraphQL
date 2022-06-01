@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Module
 
     public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
@@ -28,7 +28,7 @@ class PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts extends PoP_Module
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_MULTIPLESIMPLEVIEW:
                 $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT];
                 break;

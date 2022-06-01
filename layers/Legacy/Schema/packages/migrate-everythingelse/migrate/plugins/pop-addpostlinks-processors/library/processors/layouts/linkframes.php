@@ -18,7 +18,7 @@ class PoP_AddPostLinks_Module_Processor_LinkFrameLayouts extends PoP_AddPostLink
             self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE => [PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::class, PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
             self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED => [PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::class, PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 
@@ -27,7 +27,7 @@ class PoP_AddPostLinks_Module_Processor_LinkFrameLayouts extends PoP_AddPostLink
 
     public function printSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE:
             case self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMECOLLAPSED:
                 return true;
@@ -38,7 +38,7 @@ class PoP_AddPostLinks_Module_Processor_LinkFrameLayouts extends PoP_AddPostLink
 
     public function showFrameInCollapse(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE:
                 return false;
 

@@ -41,7 +41,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_ADDONS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
@@ -96,12 +96,12 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USER_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW:
@@ -155,7 +155,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
@@ -182,7 +182,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
@@ -205,7 +205,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS:

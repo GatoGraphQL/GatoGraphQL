@@ -30,7 +30,7 @@ class PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners extends PoP_M
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Events:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -46,7 +46,7 @@ class PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners extends PoP_M
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYEVENTS => POP_FILTER_MYEVENTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

@@ -17,7 +17,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
     {
         $ret = parent::getFooterSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_EVENT:
             case self::COMPONENT_LAYOUT_FULLVIEW_PASTEVENT:
                 $ret[] = [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
@@ -37,7 +37,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
 
     public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_EVENT:
             case self::COMPONENT_LAYOUT_FULLVIEW_PASTEVENT:
                 $sidebars = array(
@@ -45,7 +45,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
                     self::COMPONENT_LAYOUT_FULLVIEW_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT],
                 );
 
-                return $sidebars[$component[1]];
+                return $sidebars[$component->name];
         }
 
         return parent::getSidebarSubcomponent($component);

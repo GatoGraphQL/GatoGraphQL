@@ -21,7 +21,7 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
             self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::COMPONENT_TABPANEL_COMMUNITIES],
             self::COMPONENT_BLOCK_TABPANEL_MYMEMBERS => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYMEMBERS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -30,7 +30,7 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_USERLIST];
 
@@ -43,7 +43,7 @@ class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Pr
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_COMMUNITIES:
                 return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::COMPONENT_FILTER_COMMUNITIES];
 

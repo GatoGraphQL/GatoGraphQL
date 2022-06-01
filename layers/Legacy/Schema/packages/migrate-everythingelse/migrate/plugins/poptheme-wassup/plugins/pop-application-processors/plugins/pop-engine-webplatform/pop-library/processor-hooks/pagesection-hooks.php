@@ -27,7 +27,7 @@ class PoPTheme_Wassup_ApplicationProcessors_WebPlatform_PageSectionHooks
     public function initModelPropsAddons(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
                 $processor->mergeJsmethodsProp([PoP_Module_Processor_CommentsBlocks::class, PoP_Module_Processor_CommentsBlocks::COMPONENT_BLOCK_ADDCOMMENT], $props, array('destroyPageOnSuccess'));
                 break;

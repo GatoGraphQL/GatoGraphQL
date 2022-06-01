@@ -17,7 +17,7 @@ class PoP_Core_Module_Processor_FeedbackMessages extends PoP_Module_Processor_Fe
             self::COMPONENT_FEEDBACKMESSAGE_INVITENEWUSERS => [PoP_Core_Module_Processor_FeedbackMessageInners::class, PoP_Core_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_INVITENEWUSERS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

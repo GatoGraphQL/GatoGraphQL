@@ -15,7 +15,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
                 return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST];
         }
@@ -27,7 +27,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
                 $component = $this->getComponentSubcomponent($component);
 
@@ -45,7 +45,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
                 return '';
         }

@@ -44,7 +44,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
                 return $this->getCommentObjectTypeResolver();
         }
@@ -54,7 +54,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
                 return $this->getListQueryInputOutputHandler();
         }
@@ -64,7 +64,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
                 return new \PoP\ComponentModel\Component\Component(CommentFilterInputContainerComponentProcessor::class, CommentFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_COMMENTS);
         }

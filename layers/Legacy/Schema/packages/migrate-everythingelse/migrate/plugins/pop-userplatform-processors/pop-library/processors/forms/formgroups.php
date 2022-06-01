@@ -34,7 +34,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM => 'fa-instagram',
         );
 
-        if ($icon = $icons[$component[1]] ?? null) {
+        if ($icon = $icons[$component->name] ?? null) {
             $ret = sprintf(
                 '<i class="fa fa-fw %s"></i>%s',
                 $icon,
@@ -56,7 +56,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_INSTAGRAM],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -75,7 +75,7 @@ class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormCo
             self::COMPONENT_FORMINPUTGROUP_CUP_YOUTUBE => 'https://www.youtube.com/...',
             self::COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM => 'https://www.instagram.com/...',
         );
-        if ($placeholder = $placeholders[$component[1]] ?? null) {
+        if ($placeholder = $placeholders[$component->name] ?? null) {
             $component = $this->getComponentSubcomponent($component);
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }

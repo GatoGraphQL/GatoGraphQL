@@ -26,7 +26,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Modul
         $ret = parent::getMessages($component, $props);
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Hurray, login successful!', 'pop-coreprocessors');
                 $addnew = '<i class="fa fa-fw fa-plus"></i>'.TranslationAPIFacade::getInstance()->__('Add', 'pop-coreprocessors');

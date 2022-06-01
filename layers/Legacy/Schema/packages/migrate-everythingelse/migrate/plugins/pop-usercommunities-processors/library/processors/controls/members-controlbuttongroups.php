@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_CustomControlButtonGroups extends PoP_Module_Proce
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_INVITENEWMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS];
                 break;

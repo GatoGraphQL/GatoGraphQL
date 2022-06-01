@@ -23,7 +23,7 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
 
     public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERPROFILES:
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTAUTHORS:
@@ -38,7 +38,7 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
          // case self::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:
             case self::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTPROFILES:
             case self::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS:
@@ -47,7 +47,7 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
                     self::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTPROFILES => 'profiles',
                     self::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS => 'communityusers',
                 );
-                return $names[$component[1]];
+                return $names[$component->name];
         }
         
         return parent::getName($component);

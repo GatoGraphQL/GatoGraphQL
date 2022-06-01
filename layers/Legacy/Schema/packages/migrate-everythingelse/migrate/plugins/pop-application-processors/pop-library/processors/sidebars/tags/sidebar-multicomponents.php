@@ -17,7 +17,7 @@ class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_TAGLEFT:
                 $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_TAGSOCIALMEDIA];
                 break;

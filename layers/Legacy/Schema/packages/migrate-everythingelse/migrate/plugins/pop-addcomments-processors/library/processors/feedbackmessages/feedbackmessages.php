@@ -20,7 +20,7 @@ class PoP_Module_Processor_CommentsFeedbackMessages extends PoP_Module_Processor
             self::COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT => [PoP_Module_Processor_CommentsFeedbackMessageInners::class, PoP_Module_Processor_CommentsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_ADDCOMMENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

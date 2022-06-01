@@ -21,7 +21,7 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             self::COMPONENT_SCROLL_NOTIFICATIONS_LIST => [GD_AAL_Module_Processor_CustomScrollInners::class, GD_AAL_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -47,7 +47,7 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
         }
         $this->appendProp($component, $props, 'class', $extra_class);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLL_NOTIFICATIONS_DETAILS:
             case self::COMPONENT_SCROLL_NOTIFICATIONS_LIST:
                 // Artificial property added to identify the template when adding component-resources

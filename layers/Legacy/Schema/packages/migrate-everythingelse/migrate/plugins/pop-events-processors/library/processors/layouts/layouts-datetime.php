@@ -16,7 +16,7 @@ class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_Date
     }
     public function getSeparator(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_LAYOUT_DATETIMEHORIZONTAL:
                 return '&nbsp;';
         }
@@ -26,7 +26,7 @@ class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_Date
 
     public function addDownloadlinks(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS:
                 return true;
         }

@@ -17,7 +17,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
 
     public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
             case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
@@ -29,7 +29,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
 
     public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
             case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
@@ -43,7 +43,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_LOCATIONPOSTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
             case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
@@ -64,7 +64,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
 
     public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_LOCATIONPOSTS:
                 return true;
         }
@@ -74,7 +74,7 @@ class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends
 
     public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_LOCATIONPOSTS:
                 return true;
         }

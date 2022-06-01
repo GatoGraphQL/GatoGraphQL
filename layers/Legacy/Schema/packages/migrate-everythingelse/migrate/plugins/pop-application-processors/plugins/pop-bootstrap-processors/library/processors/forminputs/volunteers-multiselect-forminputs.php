@@ -37,7 +37,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => [PoP_Module_Processor_CRUDMultiSelectFilterInput::class, PoP_Module_Processor_CRUDMultiSelectFilterInput::FILTERINPUT_VOLUNTEERSNEEDED],
             default => null,
         };
@@ -45,7 +45,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT:
     //             return true;
     //     }
@@ -55,7 +55,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('Volunteers Needed?', 'poptheme-wassup');
         }
@@ -65,7 +65,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT:
                 return GD_FormInput_MultiYesNo::class;
         }
@@ -75,7 +75,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT:
                 return 'volunteersneeded';
         }
@@ -85,7 +85,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => $this->booleanScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
@@ -93,7 +93,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
@@ -102,7 +102,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT => $translationAPI->__('', ''),
             default => null,
         };

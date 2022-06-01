@@ -37,7 +37,7 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
             new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES => [
                 ...$categoryFilterInputComponents,
                 ...$topLevelCategoryFilterInputComponents,

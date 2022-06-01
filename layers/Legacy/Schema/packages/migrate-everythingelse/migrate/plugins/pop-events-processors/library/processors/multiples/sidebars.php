@@ -46,10 +46,10 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::COMPONENT_MULTIPLE_SINGLE_EVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR],
             self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR],
         );
-        if ($block = $blocks[$component[1]] ?? null) {
+        if ($block = $blocks[$component->name] ?? null) {
             $ret[] = $block;
         } else {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_MULTIPLE_AUTHOREVENTS_SIDEBAR:
                 case self::COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR:
                 case self::COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR:
@@ -59,7 +59,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
                         self::COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS],
                         self::COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR => [GD_EM_Module_Processor_CustomSectionSidebarInners::class, GD_EM_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR],
                     );
-                    $ret[] = $filters[$component[1]];
+                    $ret[] = $filters[$component->name];
 
                     // Allow User Role Editor to add blocks specific to that user role
                     $ret = \PoP\Root\App::applyFilters(
@@ -89,7 +89,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR => POP_SCREEN_AUTHORSECTIONCALENDAR,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -98,7 +98,7 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SECTION_EVENTS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR:
@@ -118,14 +118,14 @@ class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
 
     public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_EVENT_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR:
                 $inners = array(
                     self::COMPONENT_MULTIPLE_SINGLE_EVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR],
                     self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR => [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR],
                 );
-                $subcomponent = $inners[$component[1]];
+                $subcomponent = $inners[$component->name];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';

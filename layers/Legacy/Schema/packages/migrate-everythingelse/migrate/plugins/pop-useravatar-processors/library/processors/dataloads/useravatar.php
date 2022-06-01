@@ -19,7 +19,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_USERAVATAR_UPDATE => POP_USERAVATAR_ROUTE_EDITAVATAR,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -27,7 +27,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 return \PoP\Root\App::getState('current-user-id');
         }
@@ -37,7 +37,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
@@ -47,7 +47,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 return [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_USERAVATAR_UPDATE];
         }
@@ -57,7 +57,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
         }
@@ -69,7 +69,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 $ret[] = [PoP_UserAvatarProcessors_Module_Processor_UserForms::class, PoP_UserAvatarProcessors_Module_Processor_UserForms::COMPONENT_FORM_USERAVATAR_UPDATE];
                 break;
@@ -82,7 +82,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 $this->addJsmethod($ret, 'destroyPageOnUserLoggedOut');
                 $this->addJsmethod($ret, 'refetchBlockOnUserLoggedIn');
@@ -96,7 +96,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
     {
         // Replace the routes in the "componentPaths" and "actionpath" parameters:
         // point to the "execute" block instead
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 // We also must add ?action=execute to tell the componentroutingprocessor to fetch the module with the "execute" componentAtts
                 return GeneralUtils::addQueryArgs([
@@ -109,7 +109,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 // Two different actions, handled through $componentAtts:
                 // 1. Upload the image to the S3 repository, when first accessing the page
@@ -127,7 +127,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
     public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         // Always execute this action
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 if (!($component->atts['executeupdate'] ?? null)) {
                     return true;
@@ -140,7 +140,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
                 $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', TranslationAPIFacade::getInstance()->__('update your picture', 'pop-useravatar-processors'));
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Saving...', 'pop-useravatar-processors'));

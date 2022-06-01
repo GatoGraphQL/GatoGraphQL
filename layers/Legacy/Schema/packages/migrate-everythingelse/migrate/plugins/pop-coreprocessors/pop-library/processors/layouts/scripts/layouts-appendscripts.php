@@ -21,7 +21,7 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
 
     public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_COMMENTSEMPTY:
             case self::COMPONENT_SCRIPT_REFERENCESEMPTY:
                 return false;
@@ -32,7 +32,7 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_SINGLECOMMENT:
                 return [PoP_Module_Processor_AppendCommentLayouts::class, PoP_Module_Processor_AppendCommentLayouts::COMPONENT_SCRIPT_APPENDCOMMENT];
         }
@@ -44,7 +44,7 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_SINGLECOMMENT:
             case self::COMPONENT_SCRIPT_COMMENTS:
             case self::COMPONENT_SCRIPT_COMMENTSEMPTY:
@@ -57,7 +57,7 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
                     self::COMPONENT_SCRIPT_REFERENCES => 'references',
                     self::COMPONENT_SCRIPT_REFERENCESEMPTY => 'references',
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component->name];
                 break;
         }
         

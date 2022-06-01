@@ -18,7 +18,7 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTPREVIEW:
                 return 'fa-fw fa-eye';
             
@@ -34,7 +34,7 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTEDIT:
                 return TranslationAPIFacade::getInstance()->__('Edit', 'pop-coreprocessors');
             

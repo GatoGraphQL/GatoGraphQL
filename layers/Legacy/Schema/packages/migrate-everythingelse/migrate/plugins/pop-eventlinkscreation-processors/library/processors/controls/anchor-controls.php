@@ -15,7 +15,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 return TranslationAPIFacade::getInstance()->__('as Link', 'poptheme-wassup');
         }
@@ -24,7 +24,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 return 'fa-link';
         }
@@ -34,7 +34,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
     public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 return RouteUtils::getRouteURL(POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK);
         }
@@ -44,7 +44,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
 
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -57,7 +57,7 @@ class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_M
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK:
                 $this->appendProp($component, $props, 'class', 'btn btn-info aslink');
                 break;

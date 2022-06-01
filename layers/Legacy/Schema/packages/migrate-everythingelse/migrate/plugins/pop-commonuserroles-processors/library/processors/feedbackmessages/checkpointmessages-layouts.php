@@ -19,7 +19,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         $ret = parent::getMessages($component, $props);
 
         $action = $this->getProp($component, $props, 'action');
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL:
                 $ret['usernotloggedin'] = sprintf(
@@ -34,7 +34,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
                 $ret['profilenotorganization'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('Your user account is not an organization, as such you cannot %1$s under this URL.', 'poptheme-wassup'),

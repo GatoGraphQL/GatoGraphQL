@@ -41,7 +41,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
 
     public function getDropdownSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
                     $subcomponents, 
@@ -84,7 +84,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
 
     public function getSocialmediaprovidersSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
                 array_splice(
                     $subcomponents, 

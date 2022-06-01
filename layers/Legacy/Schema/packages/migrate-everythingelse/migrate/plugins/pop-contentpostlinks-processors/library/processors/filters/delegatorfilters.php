@@ -20,7 +20,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomDelegatorFilters extends PoP_M
             self::COMPONENT_DELEGATORFILTER_AUTHORCONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

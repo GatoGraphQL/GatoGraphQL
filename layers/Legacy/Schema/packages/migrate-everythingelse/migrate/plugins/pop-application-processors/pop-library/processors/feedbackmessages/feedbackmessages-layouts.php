@@ -18,7 +18,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
                 $names = $this->getProp($component, $props, 'pluralname');
                 $ret['noresults'] = sprintf(
@@ -37,7 +37,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
                 $this->setProp($component, $props, 'pluralname', TranslationAPIFacade::getInstance()->__('results', 'poptheme-wassup'));
                 break;

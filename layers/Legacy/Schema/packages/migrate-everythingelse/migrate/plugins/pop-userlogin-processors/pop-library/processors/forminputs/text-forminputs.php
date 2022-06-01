@@ -24,7 +24,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOGIN_USERNAME:
                 return TranslationAPIFacade::getInstance()->__('Username or email', 'pop-coreprocessors');
             
@@ -49,7 +49,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE:
             case self::COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
             case self::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
@@ -61,7 +61,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
 
     // function getName(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE:
                 
@@ -73,7 +73,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
 
     public function getType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOGIN_PWD:
             case self::COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
             case self::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
@@ -85,7 +85,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
 
     public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOGIN_USERNAME:
             case self::COMPONENT_FORMINPUT_LOGIN_PWD:
             case self::COMPONENT_FORMINPUT_LOSTPWD_USERNAME:

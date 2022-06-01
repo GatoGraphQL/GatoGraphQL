@@ -17,7 +17,7 @@ class PoP_Module_Processor_UserFeedbackMessages extends PoP_Module_Processor_Fee
             self::COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES => [PoP_Module_Processor_UserFeedbackMessageInners::class, PoP_Module_Processor_UserFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_MYPREFERENCES],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

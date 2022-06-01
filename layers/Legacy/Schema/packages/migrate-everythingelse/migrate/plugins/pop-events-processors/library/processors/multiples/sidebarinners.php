@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_EVENTS:
             case self::COMPONENT_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_SECTIONWITHMAP];

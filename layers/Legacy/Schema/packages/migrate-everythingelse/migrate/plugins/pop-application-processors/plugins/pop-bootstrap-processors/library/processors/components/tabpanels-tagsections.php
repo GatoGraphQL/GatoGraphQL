@@ -17,7 +17,7 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGSUBSCRIBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGUSERS);
         }
@@ -29,7 +29,7 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGCONTENT:
                 $ret = array_merge(
                     $ret,
@@ -77,7 +77,7 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGCONTENT:
                 $ret = array(
                     [

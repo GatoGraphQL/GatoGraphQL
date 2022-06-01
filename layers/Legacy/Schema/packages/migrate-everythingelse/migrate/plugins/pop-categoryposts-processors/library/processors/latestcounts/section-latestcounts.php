@@ -193,7 +193,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
@@ -264,7 +264,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
         }
 
@@ -273,7 +273,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
 
     public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS01:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS02:
@@ -302,7 +302,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
 
     public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS01:
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS02:
@@ -333,7 +333,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS00:

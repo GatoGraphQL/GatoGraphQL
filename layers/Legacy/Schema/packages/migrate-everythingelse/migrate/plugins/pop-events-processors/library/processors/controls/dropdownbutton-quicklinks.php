@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_GOOGLECALENDAR];
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_ICAL];
@@ -27,7 +27,7 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'btn btn-compact btn-link';
         }
@@ -37,7 +37,7 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'fa-thumb-tack';
         }

@@ -33,7 +33,7 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // When up-voting (and similar for down-voting), it must also do an undo down-vote had the post been down-voted
             case self::COMPONENT_CONTENTINNER_UPVOTESPOSTS:
                 $ret[] = [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_UPVOTEPOST_STYLES];
@@ -58,7 +58,7 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
                     // self::COMPONENT_CONTENTINNER_UPVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_UPVOTEPOST_STYLES],
                     // self::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_DOWNVOTEPOST_STYLES],
                 );
-                if ($layout = $layouts[$component[1]] ?? null) {
+                if ($layout = $layouts[$component->name] ?? null) {
                     $ret[] = $layout;
                 }
                 break;

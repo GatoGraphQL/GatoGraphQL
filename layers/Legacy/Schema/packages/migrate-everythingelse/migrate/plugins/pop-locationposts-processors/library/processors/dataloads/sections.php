@@ -52,7 +52,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
@@ -127,12 +127,12 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONPOSTS_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW:
@@ -161,7 +161,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW:
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW:
@@ -231,7 +231,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Filter by the Profile/Community
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW:
@@ -255,7 +255,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS:
@@ -282,7 +282,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS:

@@ -15,7 +15,7 @@ class PoPCore_Module_Processor_MultipleContentInners extends PoP_Module_Processo
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_LATESTCOUNTS:
                 $ret[] = [PoP_Module_Processor_LatestCountScriptsLayouts::class, PoP_Module_Processor_LatestCountScriptsLayouts::COMPONENT_LAYOUT_LATESTCOUNTSCRIPT];
                 break;

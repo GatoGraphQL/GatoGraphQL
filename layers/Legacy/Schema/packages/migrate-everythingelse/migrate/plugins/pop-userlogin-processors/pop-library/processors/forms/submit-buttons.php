@@ -20,7 +20,7 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Log in', 'pop-coreprocessors');
 
@@ -39,7 +39,7 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
 
     public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Logging in...', 'pop-coreprocessors');
 

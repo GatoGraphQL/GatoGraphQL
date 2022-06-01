@@ -22,7 +22,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     }
     public function getClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
             case self::COMPONENT_SUBMENU_TAG:
             case self::COMPONENT_SUBMENU_SINGLE:
@@ -33,7 +33,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     }
     public function getXsClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
             case self::COMPONENT_SUBMENU_TAG:
             case self::COMPONENT_SUBMENU_SINGLE:
@@ -44,7 +44,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     }
     public function getDropdownClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
             case self::COMPONENT_SUBMENU_TAG:
             case self::COMPONENT_SUBMENU_SINGLE:
@@ -61,7 +61,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         // Potentially, add an extra header level if the current page is one of the subheaders
         $route = \PoP\Root\App::getState('route');
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
                 $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:author:mainsubheaders',
@@ -117,7 +117,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);

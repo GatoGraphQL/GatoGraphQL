@@ -21,7 +21,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
             self::COMPONENT_BLOCK_TABPANEL_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::class, PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_HIGHLIGHTS],
             self::COMPONENT_BLOCK_TABPANEL_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::class, PoP_AddHighlights_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYHIGHLIGHTS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -30,7 +30,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_HIGHLIGHTS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
 
@@ -43,7 +43,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_HIGHLIGHTS:
                 return [PoP_AddHighlights_Module_Processor_CustomFilters::class, PoP_AddHighlights_Module_Processor_CustomFilters::COMPONENT_FILTER_HIGHLIGHTS];
 

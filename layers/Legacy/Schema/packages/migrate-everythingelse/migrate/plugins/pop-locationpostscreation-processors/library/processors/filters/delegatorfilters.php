@@ -17,7 +17,7 @@ class PoPSPEM_Module_Processor_CustomDelegatorFilters extends PoP_Module_Process
             self::COMPONENT_DELEGATORFILTER_MYLOCATIONPOSTS => [PoPSPEM_Module_Processor_CustomSimpleFilterInners::class, PoPSPEM_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

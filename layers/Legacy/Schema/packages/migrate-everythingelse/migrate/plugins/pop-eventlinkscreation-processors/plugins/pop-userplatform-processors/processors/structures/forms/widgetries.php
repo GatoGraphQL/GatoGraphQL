@@ -16,7 +16,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
                     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_CATEGORIES];
@@ -48,12 +48,12 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
             self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS => TranslationAPIFacade::getInstance()->__('Event link details', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
 
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
                 if ($class = $this->getProp($component, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
@@ -67,7 +67,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
                 return 'panel-body';
         }
@@ -76,7 +76,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
                 return '';
         }
@@ -86,7 +86,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
                 // Typeahead map: make it small
                 $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP], $props, 'wrapper-class', '');

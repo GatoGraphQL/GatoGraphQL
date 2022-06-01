@@ -18,7 +18,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
 
     public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
@@ -32,7 +32,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
@@ -51,7 +51,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     {
         $ret = parent::getBottomSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
@@ -63,7 +63,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
 
     public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
 
@@ -79,7 +79,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
 
     public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
@@ -94,7 +94,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
 
     public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
@@ -108,7 +108,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
 
     public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 return true;
         }
@@ -121,14 +121,14 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:

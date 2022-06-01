@@ -20,7 +20,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Mo
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_NEWSLETTERUNSUBSCRIPTION => [PoP_Newsletter_Module_Processor_FeedbackMessageLayouts::class, PoP_Newsletter_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

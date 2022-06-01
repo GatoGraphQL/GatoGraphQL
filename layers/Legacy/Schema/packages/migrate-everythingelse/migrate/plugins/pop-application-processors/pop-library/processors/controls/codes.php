@@ -14,7 +14,7 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
 
     public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
                 // Allow TPP Debate website to override this label with "Agree?"
                 $labels = array(
@@ -23,7 +23,7 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
 
                 return sprintf(
                     '<span class="btn btn-link btn-compact btn-span pop-functionbutton">%s</span>',
-                    $labels[$component[1]]
+                    $labels[$component->name]
                 );
         }
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
                 // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'functionbutton');

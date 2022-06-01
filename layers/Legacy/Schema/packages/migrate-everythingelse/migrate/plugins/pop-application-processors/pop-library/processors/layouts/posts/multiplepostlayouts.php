@@ -56,7 +56,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
             self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_SINGLELAYOUT_FULLVIEW_POST],
         );
 
-        if ($default = $defaults[$component[1]] ?? null) {
+        if ($default = $defaults[$component->name] ?? null) {
             return $default;
         }
 
@@ -65,7 +65,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
 
     public function getMultipleLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS:
             case self::COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS:
@@ -84,7 +84,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                     self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => POP_MULTILAYOUT_HANDLE_SINGLEPOSTCONTENT,
                     self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT => POP_MULTILAYOUT_HANDLE_POSTABOVECONTENT,
                 );
-                $handle = $handles[$component[1]] ?? POP_MULTILAYOUT_HANDLE_POSTCONTENT;
+                $handle = $handles[$component->name] ?? POP_MULTILAYOUT_HANDLE_POSTCONTENT;
 
                 $formats = array(
                     self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR => POP_FORMAT_NAVIGATOR,
@@ -100,7 +100,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                     self::COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW => POP_FORMAT_FULLVIEW,
                     self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => POP_FORMAT_FULLVIEW,
                 );
-                $format = $formats[$component[1]] ?? '';
+                $format = $formats[$component->name] ?? '';
 
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
                 return $multilayout_manager->getLayoutComponents($handle, $format);

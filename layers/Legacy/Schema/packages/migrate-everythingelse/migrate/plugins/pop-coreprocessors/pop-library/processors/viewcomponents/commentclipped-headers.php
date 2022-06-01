@@ -13,7 +13,7 @@ class PoP_Module_Processor_CommentClippedViewComponentHeaders extends PoP_Module
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTCLIPPED:
                 $this->appendProp($component, $props, 'class', 'bg-warning');
                 break;

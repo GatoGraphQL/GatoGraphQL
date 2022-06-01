@@ -15,7 +15,7 @@ class GD_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_Contr
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION:
                 $ret[] = [GD_AAL_Module_Processor_QuicklinkButtonGroups::class, GD_AAL_Module_Processor_QuicklinkButtonGroups::COMPONENT_AAL_QUICKLINKBUTTONGROUP_NOTIFICATION_MARKASREADUNREAD];
                 break;

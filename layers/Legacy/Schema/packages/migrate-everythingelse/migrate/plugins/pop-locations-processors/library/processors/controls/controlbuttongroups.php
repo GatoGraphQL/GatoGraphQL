@@ -19,7 +19,7 @@ class PoP_Locations_Module_Processor_CustomControlButtonGroups extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP:
                 $ret[] = [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_TOGGLEMAP];
                 break;

@@ -13,7 +13,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORUSERS);
         }
@@ -25,7 +25,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 $ret = array_merge(
                     $ret,
@@ -45,7 +45,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 $ret = array(
                     [

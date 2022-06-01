@@ -75,7 +75,7 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_TagSectionTabPanelComponents::class, NSCPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -84,7 +84,7 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02:

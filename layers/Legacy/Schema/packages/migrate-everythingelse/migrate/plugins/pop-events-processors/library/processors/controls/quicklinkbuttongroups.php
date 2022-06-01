@@ -17,7 +17,7 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_GOOGLECALENDAR];
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::COMPONENT_EM_BUTTON_ICAL];
@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
                 foreach ($this->getSubcomponents($component) as $subcomponent) {
                     $this->appendProp([$subcomponent], $props, 'class', 'btn btn-link btn-compact');

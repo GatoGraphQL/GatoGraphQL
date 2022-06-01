@@ -656,7 +656,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
   {
     $ret = parent::getSubcomponents($component);
 
-    switch ($component[1]) {
+    switch ($component->name) {
       
       case self::COMPONENT_SOMENAME:
         
@@ -673,7 +673,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
     $ret = parent::getImmutableConfiguration($component, $props);
 
     // Print the components properties ...
-    switch ($component[1]) {
+    switch ($component->name) {
       case self::COMPONENT_SOMENAME:        
         $ret['description'] = __('Some description');
         $ret['showmore'] = $this->getProp($component, $props, 'showmore');
@@ -687,7 +687,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
   function initModelProps($component, &$props) 
   {
     // Implement the components properties ...
-    switch ($component[1]) {
+    switch ($component->name) {
       case self::COMPONENT_SOMENAME:
         $this->setProp($component, $props, 'showmore', false);
         $this->appendProp($component, $props, 'class', 'text-center');
@@ -869,7 +869,7 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
     $ret = parent::foo($component);
 
     // Add properties to the component
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
@@ -918,7 +918,7 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
   {
     $ret = parent::getSubcomponents($component);
 
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
@@ -989,7 +989,7 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
 
   protected function getContentComponent($component) 
   {
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
@@ -1005,7 +1005,7 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
   }
   protected function getThumbnailComponent($component) 
   {
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
@@ -1022,7 +1022,7 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
   {
     $ret = parent::getAftercontentComponents($component);
 
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME2:
         
@@ -1156,7 +1156,7 @@ Let's see an example: a component for rendering maps has 2 orientations: `"horiz
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_MAP:
       // Component "map" is setting the default value
       $this->setProp($component, $props, 'orientation', 'vertical');
@@ -1178,7 +1178,7 @@ By default, component map will have prop `"orientation"` set with value `"vertic
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_MAPWRAPPER:
       $this->setProp([[SomeComponent::class, SomeComponent::COMPONENT_MAP]], $props, 'orientation', 'horizontal');      
       break;
@@ -1205,7 +1205,7 @@ Indicate if the results are `immutable` (eg: results which never change and are 
 ```php
 function getDatasource($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_WHOWEARE:
       return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
   }
@@ -1221,7 +1221,7 @@ Define the IDs of the objects to be retrieved from the database, through functio
 ```php
 function getDbobjectIds($component, &$props, $data_properties) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_WHOWEARE:
       return [13, 54, 998];
   }
@@ -1239,7 +1239,7 @@ Define what [Dataloader](#dataloader) to use, which is the object in charge of f
 ```php
 function getDataloader($component) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       return [Dataloader::class, Dataloader::DATALOADER_POSTLIST];
   }
@@ -1257,7 +1257,7 @@ protected function getImmutableDataloadQueryArgs($component, $props)
 {
   $ret = parent::getImmutableDataloadQueryArgs($component, $props);
   
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       // 55: id of "Articles" category
       $ret['cat'] = 55;
@@ -1271,7 +1271,7 @@ protected function getMutableonrequestDataloadQueryArgs($component, $props)
 {
   $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
   
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
     
       // Set the logged-in user id
@@ -1292,7 +1292,7 @@ The fetched data can be filtered through [Filter](#filter) objects, defined thro
 ```php
 function getFilter($component) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
           
       return GD_FILTER_AUTHORARTICLES;
@@ -1310,7 +1310,7 @@ After fetching data, we can communicate state (eg: are there more results? what'
 ```php
 function getQueryhandler($component) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       return GD_DATALOAD_QUERYHANDLER_LIST;
   }
@@ -1328,7 +1328,7 @@ function getImmutableHeaddatasetcomponentDataProperties($component, &$props)
 {
   $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       // Make it not fetch more results
       $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
@@ -1346,7 +1346,7 @@ We can instruct a dataloading component to not load its data simply by setting i
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
 
       // Set the content lazy
@@ -1379,7 +1379,7 @@ function getLeafComponentFields($component, $props)
 {
   $ret = parent::getLeafComponentFields($component, $props);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       $ret[] = 'title';
       $ret[] = 'content';
@@ -1407,7 +1407,7 @@ function getRelationalComponentFields($component)
 {
   $ret = parent::getRelationalComponentFields($component);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
     
       $ret['author'] = [
@@ -1436,7 +1436,7 @@ function getRelationalComponentFields($component)
 {
   $ret = parent::getRelationalComponentFields($component);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
     
       $ret['author'] = [
@@ -1705,7 +1705,7 @@ class TextFilterInputs extends TextFormInputsBase implements \PoP\ComponentModel
 {
   public function filterDataloadQueryArgs(array &$query, $component, $value)
   {
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_FILTERINPUT_SEARCH:
         $query['search'] = $value;
@@ -1732,7 +1732,7 @@ To achieve this, the ComponentProcessor must define the ActionExecuter object fo
 ```php
 function getActionExecuterClass($component) {
   
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_SOMENAME:
   
       return SomeActionExecuter::class;
@@ -1839,7 +1839,7 @@ function prepareDataPropertiesAfterMutationExecution($component, &$props, &$data
     
   parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_ADDCOMMENT:
 
       $actionexecution_manager = \PoP\Engine\ActionExecution_Manager_Factory::getInstance();
@@ -1872,7 +1872,7 @@ For instance, a component that needs to validate that the user's IP is whitelist
 ```php
 function getDataAccessCheckpoints($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_SOMECOMPONENT:
     
       return [CHECKPOINT_WHITELISTEDIP];
@@ -1887,7 +1887,7 @@ Pages can also be assigned checkpoints through their [SettingsProcessor](#settin
 ```php
 function getRelevantPage($component, &$props) {
     
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_MYPOSTS_SCROLL:
     case self::COMPONENT_MYPOSTS_CAROUSEL:
     case self::COMPONENT_MYPOSTS_TABLE:

@@ -16,7 +16,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_BUTTONGROUP_POSTSECTION:
                 return TranslationAPIFacade::getInstance()->__('Section', 'poptheme-wassup');
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_BUTTONGROUP_POSTSECTION:
                 return GD_FormInput_PostSection::class;
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
 
     public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_BUTTONGROUP_POSTSECTIONS:
                 return true;
         }
@@ -52,7 +52,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_BUTTONGROUP_POSTSECTION:
                 return 'mainCategory';
 

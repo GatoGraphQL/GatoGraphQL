@@ -14,7 +14,7 @@ class GD_URE_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 
     public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_CODE_MEMBERSLABEL:
                 return sprintf(
                     '<em>%s</em>',

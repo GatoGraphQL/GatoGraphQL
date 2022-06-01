@@ -33,7 +33,7 @@ class PoP_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_Proc
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FOLLOWUSER_STYLES:
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::COMPONENT_LAYOUT_FOLLOWUSER_HIDE_STYLES];
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES];

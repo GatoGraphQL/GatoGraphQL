@@ -54,7 +54,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return $this->getGenericCustomPostObjectTypeResolver();
@@ -65,7 +65,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
@@ -76,7 +76,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
                 new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,

@@ -23,7 +23,7 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::COMPONENT_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::COMPONENT_BLOCK_MYEVENTS_TABLE_EDIT => POP_EVENTSCREATION_ROUTE_MYEVENTS,
@@ -45,12 +45,12 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
             self::COMPONENT_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYEVENTS_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW:

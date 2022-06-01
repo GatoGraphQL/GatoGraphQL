@@ -18,7 +18,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
             self::COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
             default => parent::getRelevantRoute($component, $props),
@@ -27,7 +27,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:
             case self::COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
@@ -42,7 +42,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
             self::COMPONENT_DATALOAD_NEWSLETTER => NewsletterSubscriptionMutationResolverBridge::class,
             self::COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION => NewsletterUnsubscriptionMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$component[1]] ?? null) {
+        if ($actionexecuter = $actionexecuters[$component->name] ?? null) {
             return $actionexecuter;
         }
 
@@ -51,7 +51,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
 
     protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:
                 return [PoP_Newsletter_Module_Processor_FeedbackMessages::class, PoP_Newsletter_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_NEWSLETTER];
 
@@ -66,7 +66,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:
                 $ret[] = [PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::COMPONENT_FORM_NEWSLETTER];
                 break;
@@ -81,7 +81,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:
             case self::COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION:
                 // Change the 'Loading' message in the Status

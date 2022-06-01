@@ -17,7 +17,7 @@ class GD_EM_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Pr
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_EVENT:
                 $ret[] = [GD_EM_Module_Processor_SidebarComponents::class, GD_EM_Module_Processor_SidebarComponents::COMPONENT_EM_WIDGETCOMPACT_EVENTINFO];
                 $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES];

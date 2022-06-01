@@ -16,7 +16,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts exten
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Picture updated successfully.', 'pop-useravatar-processors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Such a good shot!', 'pop-useravatar-processors');

@@ -18,7 +18,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY:
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
                 $action = $this->getProp($component, $props, 'action');
@@ -38,7 +38,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
                 $ret['editingnotcommunitymember'] = TranslationAPIFacade::getInstance()->__('This user is not a member of your community.', 'ure-popprocessors');
                 $ret['nonceinvalid'] = TranslationAPIFacade::getInstance()->__('The URL is invalid, please reload the page and try again.', 'pop-coreprocessors');

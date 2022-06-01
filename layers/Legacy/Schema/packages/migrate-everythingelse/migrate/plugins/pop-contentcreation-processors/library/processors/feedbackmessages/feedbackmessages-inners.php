@@ -28,7 +28,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
             self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT => [PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATECONTENT],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
@@ -43,7 +43,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
     {
         $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FEEDBACKMESSAGEINNER_CREATECONTENT:
                 // If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages
                 if ($executed) {

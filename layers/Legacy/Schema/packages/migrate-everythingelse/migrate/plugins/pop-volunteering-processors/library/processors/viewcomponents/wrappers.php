@@ -19,7 +19,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
                 $ret[] = [PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG];
                 break;
@@ -38,7 +38,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
@@ -52,7 +52,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
                 $ret[] = [PoP_Module_Processor_HideIfEmpties::class, PoP_Module_Processor_HideIfEmpties::COMPONENT_HIDEIFEMPTY];
@@ -64,7 +64,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:

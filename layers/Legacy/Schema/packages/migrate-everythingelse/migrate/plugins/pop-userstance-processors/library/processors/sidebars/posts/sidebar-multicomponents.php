@@ -17,7 +17,7 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_STANCELEFT:
                 $ret[] = [UserStance_Module_Processor_CustomPostWidgets::class, UserStance_Module_Processor_CustomPostWidgets::COMPONENT_WIDGETCOMPACT_STANCEINFO];
                 $ret[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_WIDGETWRAPPER_STANCETARGET];

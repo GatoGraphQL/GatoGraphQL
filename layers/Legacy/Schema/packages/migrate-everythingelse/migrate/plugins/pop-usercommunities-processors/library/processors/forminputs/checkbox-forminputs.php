@@ -15,7 +15,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Include members?', 'pop-genericforms');
         }
@@ -25,7 +25,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
     //             return true;
     //     }
@@ -40,7 +40,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
                 return 'id';
         }
@@ -50,7 +50,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();
@@ -63,7 +63,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
 
     public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();

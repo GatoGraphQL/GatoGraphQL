@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION:
                 $ret = array_merge(
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION:
@@ -74,7 +74,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL:
                 return 'col-xsm-4';

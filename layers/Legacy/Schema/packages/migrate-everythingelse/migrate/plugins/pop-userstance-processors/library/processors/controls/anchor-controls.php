@@ -33,7 +33,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public function getMutableonrequestText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                     self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => $neutral,
                     self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT => $against,
                 );
-                $label = $labels[$component[1]];
+                $label = $labels[$component->name];
                 $cats = array(
                     self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT => POP_USERSTANCE_TERM_STANCE_PRO,
                     self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
@@ -121,7 +121,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 // Override the category
                 $query['tax-query'][] = [
                     'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
-                    'terms'    => $cats[$component[1]],
+                    'terms'    => $cats[$component->name],
                 ];
 
                 // // All results
@@ -152,7 +152,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return getRouteIcon($route, false);
         }
 
@@ -172,7 +172,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return RouteUtils::getRouteURL($route);
         }
 
@@ -180,7 +180,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:

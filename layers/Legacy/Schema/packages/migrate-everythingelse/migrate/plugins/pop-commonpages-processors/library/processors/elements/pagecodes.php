@@ -19,7 +19,7 @@ class GD_CommonPages_Module_Processor_PageCodes extends PoP_Module_Processor_HTM
             self::COMPONENT_PAGECODE_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
             self::COMPONENT_PAGECODE_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
         );
-        if ($page_id = $page_ids[$component[1]] ?? null) {
+        if ($page_id = $page_ids[$component->name] ?? null) {
             return $page_id;
         }
 

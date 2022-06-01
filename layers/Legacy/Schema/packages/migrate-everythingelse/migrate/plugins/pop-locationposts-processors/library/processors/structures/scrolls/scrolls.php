@@ -39,7 +39,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
             self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW => [PoP_LocationPosts_Module_Processor_CustomScrollInners::class, PoP_LocationPosts_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -28,7 +28,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERSTANCE_GROUP_HOMETOP:
                 $ret[] = [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_COMPACTWELCOME];
                 $ret[] = [self::class, self::COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA];
@@ -85,7 +85,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERSTANCE_GROUP_HOMETOP:
                 // Hide if no events
                 $this->setProp([[PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_CAROUSEL]], $props, 'do-not-render-if-no-results', true);

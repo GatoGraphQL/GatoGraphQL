@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_CREATELOCATION => POP_ADDLOCATIONS_ROUTE_ADDLOCATION,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -23,7 +23,7 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_CREATELOCATION:
                 $ret[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_CREATELOCATION];
                 $ret[] = [GD_EM_Module_Processor_CreateLocationDataloads::class, GD_EM_Module_Processor_CreateLocationDataloads::COMPONENT_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION];
@@ -35,7 +35,7 @@ class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_B
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_CREATELOCATION:
                 // Add an extra componentPath to the dataload-source for the create-location block, saying to also load the data block
                 $component_path_manager = ComponentPathManagerFacade::getInstance();

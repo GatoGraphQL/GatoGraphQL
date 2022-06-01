@@ -18,7 +18,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
                 $ret[] = [GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Custom_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS];
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
@@ -46,7 +46,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
             self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO => TranslationAPIFacade::getInstance()->__('Individual', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -55,12 +55,12 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
             self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO => getRouteIcon(POP_COMMONUSERROLES_ROUTE_INDIVIDUALS, false),
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
             case self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO:
                 return 'list-group list-group-sm';
@@ -70,7 +70,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
             case self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO:
                 return 'pop-hide-empty list-group-item';
@@ -80,7 +80,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
             case self::COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO:
                 // return 'panel panel-info panel-sm';

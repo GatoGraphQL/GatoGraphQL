@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_WIDGET_COMMUNITIES:
             case self::COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES:
                 $ret[] = [GD_URE_Module_Processor_UserCommunityLayouts::class, GD_URE_Module_Processor_UserCommunityLayouts::COMPONENT_URE_LAYOUT_COMMUNITIES];
@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES => TranslationAPIFacade::getInstance()->__('Member of', 'ure-popprocessors'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -45,11 +45,11 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_WIDGET_COMMUNITIES:
                 return 'list-group';
 
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_WIDGET_COMMUNITIES:
             case self::COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES:
                 return 'list-group-item';
@@ -71,7 +71,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES:
                 return 'panel panel-default panel-sm';
         }

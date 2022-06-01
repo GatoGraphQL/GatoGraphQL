@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
 
     public function getLocationlinksTemplate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP:
                 return [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS];
             ;

@@ -14,7 +14,7 @@ class PoP_Module_Processor_CaptchaFormInputs extends PoP_Module_Processor_Captch
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CAPTCHA:
                 return TranslationAPIFacade::getInstance()->__('Captcha', 'pop-coreprocessors');
         }
@@ -24,7 +24,7 @@ class PoP_Module_Processor_CaptchaFormInputs extends PoP_Module_Processor_Captch
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CAPTCHA:
                 return true;
         }

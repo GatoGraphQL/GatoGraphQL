@@ -13,7 +13,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
 
     protected function getFeaturedimageInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return null;
         }
@@ -22,7 +22,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     }
     protected function getCoauthorsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return null;
         }
@@ -31,7 +31,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     }
     protected function getTitleInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return null;
         }
@@ -40,7 +40,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     }
     protected function getEditorInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
         }
@@ -49,7 +49,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     }
     protected function getStatusInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 // Highlights are always published immediately, independently of value of GD_CONF_CREATEUPDATEPOST_MODERATE
                 return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT];
@@ -62,7 +62,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
     {
         $ret = parent::getLayoutSubcomponents($component);
         
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
                 return array_merge(
                     $ret,

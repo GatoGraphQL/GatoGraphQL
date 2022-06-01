@@ -17,7 +17,7 @@ class GD_UserPlatform_Module_Processor_FormInputGroups extends PoP_Module_Proces
             self::COMPONENT_FORMINPUTGROUP_SETTINGSFORMAT => [GD_UserPlatform_Module_Processor_SelectFormInputs::class, GD_UserPlatform_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_SETTINGSFORMAT],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

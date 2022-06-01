@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS:
                 $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_ORGANIZATIONTYPES];
                 $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_ORGANIZATIONCATEGORIES];
@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS:
                 $components = $this->getSubcomponents($component);
                 foreach ($components as $subcomponent) {

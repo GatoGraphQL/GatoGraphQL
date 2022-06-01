@@ -24,7 +24,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Short description', 'pop-coreprocessors');
 
@@ -49,7 +49,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return 'shortDescription';
 
@@ -83,7 +83,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
             self::COMPONENT_FORMINPUT_CUP_YOUTUBE => TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors'),
             self::COMPONENT_FORMINPUT_CUP_INSTAGRAM => TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors'),
         );
-        if ($placeholder = $placeholders[$component[1]] ?? null) {
+        if ($placeholder = $placeholders[$component->name] ?? null) {
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }
 

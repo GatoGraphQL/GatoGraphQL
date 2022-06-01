@@ -15,12 +15,12 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 $filters = array(
                     self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR];
                 break;
         }
@@ -30,7 +30,7 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
 
     public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 return POP_SCREEN_SINGLEUSERS;
         }
@@ -40,7 +40,7 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }

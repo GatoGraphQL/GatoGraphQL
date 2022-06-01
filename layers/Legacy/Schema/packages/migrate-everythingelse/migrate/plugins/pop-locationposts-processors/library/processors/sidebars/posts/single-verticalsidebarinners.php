@@ -15,7 +15,7 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Mo
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST:
                 $ret = array_merge(
                     $ret,

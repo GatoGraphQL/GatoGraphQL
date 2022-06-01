@@ -49,7 +49,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
 
     public function getProvider(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -80,7 +80,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
 
     public function getShareurlField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -111,7 +111,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -141,7 +141,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     }
     public function getShortname(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -172,7 +172,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -209,7 +209,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:

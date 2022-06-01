@@ -14,7 +14,7 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK:
                 return TranslationAPIFacade::getInstance()->__('Embed external link', 'poptheme-wassup');
         }
@@ -24,7 +24,7 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK:
                 return true;
         }
@@ -34,7 +34,7 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK:
                 return 'link';
         }

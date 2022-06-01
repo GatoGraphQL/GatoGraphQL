@@ -49,7 +49,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_LINKCATEGORIES => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput::FILTERINPUT_LINKCATEGORIES],
             self::COMPONENT_FILTERINPUT_LINKACCESS => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput::FILTERINPUT_LINKACCESS],
             default => null,
@@ -58,7 +58,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
     //         case self::COMPONENT_FILTERINPUT_LINKACCESS:
     //             return true;
@@ -69,7 +69,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
 
@@ -82,7 +82,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
                 return GD_FormInput_LinkCategories::class;
 
@@ -95,7 +95,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_LINKACCESS:
                 return 'linkaccess';
         }
@@ -105,7 +105,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
                 return 'categories';
 
@@ -118,7 +118,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_LINKCATEGORIES => $this->idScalarTypeResolver,
             self::COMPONENT_FILTERINPUT_LINKACCESS => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
@@ -127,7 +127,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_LINKCATEGORIES => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
@@ -136,7 +136,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_LINKCATEGORIES => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_LINKACCESS => $translationAPI->__('', ''),
             default => null,

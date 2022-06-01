@@ -15,7 +15,7 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('Add %s', 'pop-locationpostscreation-processors'),
@@ -28,7 +28,7 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 return 'fa-plus';
         }
@@ -38,13 +38,13 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
     public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 if (defined('POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST') && POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST) {
                     $routes = array(
                         self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
                     );
-                    $route = $routes[$component[1]];
+                    $route = $routes[$component->name];
 
                     return RouteUtils::getRouteURL($route);
                 }
@@ -55,7 +55,7 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
     }
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -67,7 +67,7 @@ class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor
     }
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST:
                 $this->appendProp($component, $props, 'class', 'btn btn-primary');
                 break;

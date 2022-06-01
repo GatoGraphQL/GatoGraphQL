@@ -21,7 +21,7 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_SINGLEAUTHORS:
             case self::COMPONENT_TABPANEL_SINGLERECOMMENDEDBY:
             case self::COMPONENT_TABPANEL_SINGLEUPVOTEDBY:
@@ -36,7 +36,7 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_SINGLERELATEDCONTENT:
                 $ret = array_merge(
                     $ret,
@@ -107,7 +107,7 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_SINGLERELATEDCONTENT:
                 $ret = array(
                     [

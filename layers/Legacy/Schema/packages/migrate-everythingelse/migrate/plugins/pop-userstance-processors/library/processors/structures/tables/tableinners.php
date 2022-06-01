@@ -16,7 +16,7 @@ class UserStance_Module_Processor_TableInners extends PoP_Module_Processor_Table
         $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLEINNER_MYSTANCES:
                 $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_EDIT];
                 $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::COMPONENT_LAYOUTPOST_DATE];

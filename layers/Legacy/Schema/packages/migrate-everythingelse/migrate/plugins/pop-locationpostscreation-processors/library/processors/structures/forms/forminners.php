@@ -12,7 +12,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
     }
     protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return true;
         }
@@ -21,7 +21,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
     }
     protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP];
         }
@@ -39,7 +39,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return array_merge(
                     $ret,
@@ -57,7 +57,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
     {
 
         // Allow RIPESS Asia to set an initial value for the Add Project form
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return \PoP\Root\App::applyFilters('GD_Custom_Module_Processor_CreateUpdatePostFormInners:editor_initialvalue', null, $component);
         }
@@ -67,7 +67,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 // Make it into left/right columns
                 $rightsides = array(
@@ -84,7 +84,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
                     $form_right_class = 'col-sm-4';
                 }
                 $this->appendProp($leftside, $props, 'class', $form_left_class);
-                $this->appendProp($rightsides[$component[1]], $props, 'class', $form_right_class);
+                $this->appendProp($rightsides[$component->name], $props, 'class', $form_right_class);
                 break;
         }
 

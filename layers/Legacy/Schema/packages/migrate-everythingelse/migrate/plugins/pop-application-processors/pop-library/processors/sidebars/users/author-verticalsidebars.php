@@ -17,7 +17,7 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Proce
             self::COMPONENT_VERTICALSIDEBAR_AUTHOR_GENERIC => [PoP_Module_Processor_CustomVerticalAuthorSidebarInners::class, PoP_Module_Processor_CustomVerticalAuthorSidebarInners::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -26,7 +26,7 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Proce
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBAR_AUTHOR_GENERIC:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

@@ -18,12 +18,12 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function showFetchmore(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return false;
         }
@@ -45,7 +45,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
@@ -55,7 +55,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
 
     public function getDatasource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
         }
@@ -65,7 +65,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return getWhoweareCoreUserIds();
         }

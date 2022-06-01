@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processo
             self::COMPONENT_DELEGATORFILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_ORGANIZATIONS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -19,7 +19,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
                 $ret = array_merge(
@@ -41,7 +41,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK:
                 return 'row';
@@ -52,7 +52,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
                 return 'col-xsm-4';
             

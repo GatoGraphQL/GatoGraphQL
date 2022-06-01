@@ -17,7 +17,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
         $buttoninners = array(
             self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::class, PoP_ContentPostLinksCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_CONTENTPOSTLINK_CREATE],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -26,7 +26,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
 
     public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE:
                 return array(
                     [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
@@ -38,7 +38,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -55,7 +55,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
         $titles = array(
             self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 
@@ -67,7 +67,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
         $fields = array(
             self::COMPONENT_BUTTON_CONTENTPOSTLINK_CREATE => 'addContentPostLinkURL',
         );
-        if ($field = $fields[$component[1]] ?? null) {
+        if ($field = $fields[$component->name] ?? null) {
             return $field;
         }
 

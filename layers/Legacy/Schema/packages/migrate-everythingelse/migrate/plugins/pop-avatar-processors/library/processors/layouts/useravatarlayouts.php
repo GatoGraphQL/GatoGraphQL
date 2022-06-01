@@ -15,7 +15,7 @@ class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAv
 
     public function getAvatarSize(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERAVATAR_60:
             case self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE:
                 return GD_AVATAR_SIZE_60;
@@ -26,7 +26,7 @@ class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAv
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE:
                 $this->appendProp($component, $props, 'class', 'img-responsive');
                 break;

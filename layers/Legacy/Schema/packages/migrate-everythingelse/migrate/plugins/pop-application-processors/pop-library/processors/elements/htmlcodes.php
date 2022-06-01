@@ -24,7 +24,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_EMPTYSIDEINFO:
                 // Comment Leo 07/12/2017: this function closes the sideinfo for [self::class, self::COMPONENT_CODE_EMPTYSIDEINFO], and it must take place immediately,
                 // or otherwise the sideinfo will show and then disappear a few seconds later and it looks ugly (eg: in Verticals homepage, where there is no sideinfo)
@@ -37,7 +37,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 
     public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_404:
                 return 'p';
         }
@@ -53,7 +53,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         $response_last = '<p>%s</p>';
         $li = '<li>%s</li>';
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_HOMEWELCOME:
                 $code = sprintf(
                     '<h3 class="media-heading">%s</h3>',
@@ -93,7 +93,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_HOMEWELCOME:
                 $this->appendProp($component, $props, 'class', 'block-homewelcome');
                 break;

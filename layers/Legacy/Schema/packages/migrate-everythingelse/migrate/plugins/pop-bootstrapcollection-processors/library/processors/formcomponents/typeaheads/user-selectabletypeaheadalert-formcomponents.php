@@ -19,7 +19,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
 
     public function getSelectedComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS:
                 return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::COMPONENT_LAYOUTUSER_CARD];
@@ -34,7 +34,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
     
     public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
                 return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTAUTHORS];
 
@@ -53,7 +53,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
 
     public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS:
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES:

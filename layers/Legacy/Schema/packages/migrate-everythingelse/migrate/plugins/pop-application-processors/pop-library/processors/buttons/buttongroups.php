@@ -49,7 +49,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
             self::COMPONENT_BUTTONGROUP_TAGS => POP_SCREEN_TAGS,
             self::COMPONENT_BUTTONGROUP_AUTHORTAGS => POP_SCREEN_AUTHORTAGS,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -58,7 +58,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
 
     protected function getHeadersdataformatsHasmap(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONGROUP_USERS:
             case self::COMPONENT_BUTTONGROUP_SECTIONWITHMAP:
             case self::COMPONENT_BUTTONGROUP_TAGSECTIONWITHMAP:

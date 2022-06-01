@@ -43,7 +43,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
     //         self::COMPONENT_MULTIPLE_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
     //         self::COMPONENT_MULTIPLE_MENU_BODY_ADDCONTENT => POP_CONTENTCREATION_ROUTE_ADDCONTENT,
     //     );
-    //     return $routes[$component[1]] ?? parent::getRelevantRoute($component, $props);
+    //     return $routes[$component->name] ?? parent::getRelevantRoute($component, $props);
     // }
 
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
@@ -66,12 +66,12 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             self::COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS => [PoP_Module_Processor_CustomMenuDataloads::class, PoP_Module_Processor_CustomMenuDataloads::COMPONENT_DATALOAD_MENU_BODY_MYSECTIONS],
             self::COMPONENT_MULTIPLE_MENU_BODY_ABOUT => [PoP_Module_Processor_CustomMenuDataloads::class, PoP_Module_Processor_CustomMenuDataloads::COMPONENT_DATALOAD_MENU_BODY_ABOUT],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         // Extra blocks
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN:
                 $ret[] = [GD_UserPlatform_Module_Processor_AnchorControls::class, GD_UserPlatform_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWUSERS];
                 break;
@@ -84,7 +84,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
     {
         $ret = parent::getBlocksectionsClasses($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_MENU_SIDEBAR_ABOUT:
                 $ret['controlgroup-top'] = 'top';
                 break;
@@ -97,7 +97,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -109,7 +109,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'menu-';
@@ -121,7 +121,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_MENU_TOP_ADDNEW:
             case self::COMPONENT_MULTIPLE_MENU_SIDE_ADDNEW:
                 $this->appendProp($component, $props, 'class', 'addnew-menu');
@@ -132,7 +132,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN:
             case self::COMPONENT_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN:
             case self::COMPONENT_MULTIPLE_MENU_TOPNAV_ABOUT:

@@ -41,7 +41,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
     protected function getThumbFieldArgs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_FAVICON:
                 return ['size' => 'favicon'];
 
@@ -77,7 +77,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
@@ -95,7 +95,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -110,7 +110,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
     {
         $ret = parent::getExtraThumbLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
             case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER:
             case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER:
@@ -133,7 +133,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
     public function getThumbLinkClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
@@ -145,7 +145,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
     public function getThumbImgClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
                 return 'img-responsive';
         }
@@ -155,7 +155,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
     public function getDbobjectParams(\PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE:
             case self::COMPONENT_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER:
@@ -172,7 +172,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED:
             case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER:
             case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:

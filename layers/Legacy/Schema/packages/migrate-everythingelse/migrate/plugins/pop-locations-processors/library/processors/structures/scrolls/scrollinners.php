@@ -27,7 +27,7 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_USERS_MAP:
             case self::COMPONENT_SCROLLINNER_USER_MAP:
             case self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP:
@@ -60,7 +60,7 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
             self::COMPONENT_SCROLLINNER_PASTEVENTS_MAP => [PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::class, PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS],
             self::COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP => [PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::class, PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

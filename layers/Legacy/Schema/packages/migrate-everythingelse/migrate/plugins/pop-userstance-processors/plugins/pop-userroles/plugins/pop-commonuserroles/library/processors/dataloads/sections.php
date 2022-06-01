@@ -28,7 +28,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
@@ -64,12 +64,12 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL => [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::COMPONENT_CAROUSEL_STANCES_BYINDIVIDUALS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:
@@ -117,7 +117,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
         //     case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
@@ -134,7 +134,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         //         break;
         // }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:
@@ -175,7 +175,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:
@@ -192,7 +192,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:

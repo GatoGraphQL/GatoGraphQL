@@ -15,7 +15,7 @@ class PoP_Locations_WebPlatform_PageSectionHooks
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS:
                 $processor->mergeJsmethodsProp([PoP_Module_Processor_LocationsMapBlocks::class, PoP_Module_Processor_LocationsMapBlocks::COMPONENT_BLOCK_STATICLOCATIONSMAP], $props, array('modalMapBlock'));
                 break;

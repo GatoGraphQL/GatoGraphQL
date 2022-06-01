@@ -14,7 +14,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 
     // function getRows(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 
@@ -26,7 +26,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 $this->appendProp($component, $props, 'class', 'pop-editor-form-clear');
                 break;
@@ -37,7 +37,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Comment', 'pop-coreprocessors');
         }
@@ -47,7 +47,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
@@ -59,7 +59,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 
     //     $ret = parent::getJsmethods($component, $props);
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 
@@ -71,7 +71,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 
     public function autofocus(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
@@ -81,7 +81,7 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 
     // function getPlaceholder(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 

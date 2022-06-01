@@ -18,7 +18,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
 
     // function headerShowUrl(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
     //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
@@ -37,7 +37,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL],
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -48,7 +48,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
                 $ret .= 'btn btn-info btn-block btn-important';
                 break;
@@ -67,7 +67,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
@@ -79,7 +79,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
@@ -91,7 +91,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:

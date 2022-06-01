@@ -252,7 +252,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_CAROUSEL_NOSEARCHCATEGORYPOSTS00:
         //     case self::COMPONENT_CAROUSEL_NOSEARCHCATEGORYPOSTS01:
@@ -509,7 +509,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             self::COMPONENT_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT],
             self::COMPONENT_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT => [NSCPP_Module_Processor_CarouselInners::class, NSCPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -519,7 +519,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
     public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_CAROUSEL_NOSEARCHCATEGORYPOSTS00:
         //     case self::COMPONENT_CAROUSEL_NOSEARCHCATEGORYPOSTS01:
@@ -754,7 +754,7 @@ class NSCPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBas
             self::COMPONENT_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS18_CONTENT => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS18],
             self::COMPONENT_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT => [NSCPP_Module_Processor_CarouselControls::class, NSCPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_TAGNOSEARCHCATEGORYPOSTS19],
         );
-        if ($control = $controls[$component[1]] ?? null) {
+        if ($control = $controls[$component->name] ?? null) {
             return $control;
         }
 

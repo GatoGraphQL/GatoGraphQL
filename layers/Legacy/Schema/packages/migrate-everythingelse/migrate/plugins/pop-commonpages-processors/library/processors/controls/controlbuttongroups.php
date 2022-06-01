@@ -17,7 +17,7 @@ class GD_CommonPages_Module_Processor_CustomControlButtonGroups extends PoP_Modu
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ:
                 $ret[] = [GD_CommonPages_Module_Processor_CustomAnchorControls::class, GD_CommonPages_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ];
                 break;

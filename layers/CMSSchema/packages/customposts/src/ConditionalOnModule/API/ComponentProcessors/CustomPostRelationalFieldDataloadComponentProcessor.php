@@ -64,7 +64,7 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -74,7 +74,7 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLECUSTOMPOST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
@@ -88,7 +88,7 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
@@ -101,7 +101,7 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
                 new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,

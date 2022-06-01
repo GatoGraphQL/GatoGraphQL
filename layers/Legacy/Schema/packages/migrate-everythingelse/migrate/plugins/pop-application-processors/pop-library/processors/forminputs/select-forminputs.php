@@ -14,7 +14,7 @@ class GD_Custom_Module_Processor_SelectFormInputs extends PoP_Module_Processor_B
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 return TranslationAPIFacade::getInstance()->__('Volunteers Needed?', 'poptheme-wassup');
         }
@@ -24,7 +24,7 @@ class GD_Custom_Module_Processor_SelectFormInputs extends PoP_Module_Processor_B
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 return GD_FormInput_YesNo::class;
         }
@@ -34,7 +34,7 @@ class GD_Custom_Module_Processor_SelectFormInputs extends PoP_Module_Processor_B
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 return 'volunteersNeeded';
         }
@@ -44,7 +44,7 @@ class GD_Custom_Module_Processor_SelectFormInputs extends PoP_Module_Processor_B
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 // By default, set it on "No"
                 $this->setProp($component, $props, 'default-value', false);

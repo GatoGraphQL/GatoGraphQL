@@ -16,7 +16,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return 'topics';
 

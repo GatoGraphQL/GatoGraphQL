@@ -21,7 +21,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrollMaps extends PoP_Module_Pro
             self::COMPONENT_SCROLL_LOCATIONPOSTS_HORIZONTALMAP => [PoP_LocationPosts_Module_Processor_CustomScrollInners::class, PoP_LocationPosts_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_LOCATIONPOSTS_HORIZONTALMAP],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

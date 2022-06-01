@@ -15,7 +15,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_STANCES);
@@ -28,7 +28,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array_merge(
                     $ret,
@@ -57,7 +57,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array(
                     [

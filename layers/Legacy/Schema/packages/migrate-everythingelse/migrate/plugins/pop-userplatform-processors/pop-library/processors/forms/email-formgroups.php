@@ -23,7 +23,7 @@ class PoP_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelF
             self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS => [PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelF
 
     public function useModuleConfiguration(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
             case self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS:
             case self::COMPONENT_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS:

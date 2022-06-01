@@ -55,7 +55,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -65,7 +65,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
@@ -77,7 +77,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
                 return $this->getListQueryInputOutputHandler();
@@ -88,7 +88,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST:
                 return new \PoP\ComponentModel\Component\Component(UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_USERS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERCOUNT:

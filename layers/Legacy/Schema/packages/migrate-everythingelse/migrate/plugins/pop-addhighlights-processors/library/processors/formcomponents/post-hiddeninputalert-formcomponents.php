@@ -13,7 +13,7 @@ class PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents exte
     
     public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST:
                 return [PoP_AddHighlights_Processor_HiddenInputFormInputs::class, PoP_AddHighlights_Processor_HiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_HIGHLIGHTEDPOST];
         }

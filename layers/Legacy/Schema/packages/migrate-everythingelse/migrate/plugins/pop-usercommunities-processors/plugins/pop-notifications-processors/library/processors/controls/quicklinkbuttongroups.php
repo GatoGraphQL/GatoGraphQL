@@ -17,7 +17,7 @@ class GD_URE_AAL_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP:
                 $ret[] = [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP];
                 break;

@@ -27,7 +27,7 @@ class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_Co
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE:
                 $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE];
                 break;

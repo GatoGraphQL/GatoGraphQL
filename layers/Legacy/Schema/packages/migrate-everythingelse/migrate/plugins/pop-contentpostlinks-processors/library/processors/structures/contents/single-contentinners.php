@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_Module_Processor_SingleContentInners extends PoP_Modu
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_LINKSINGLE:
                 $ret[] = [PoP_ContentPostLinks_Module_Processor_LinkContentLayouts::class, PoP_ContentPostLinks_Module_Processor_LinkContentLayouts::COMPONENT_LAYOUT_CONTENT_LINK];
                 break;

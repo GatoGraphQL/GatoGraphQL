@@ -15,7 +15,7 @@ class PoP_Core_Module_Processor_FormInners extends PoP_Module_Processor_FormInne
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVERYTHINGQUICKLINKS:
                 $ret[] = [PoP_Module_Processor_FetchlinkTypeaheadFormComponents::class, PoP_Module_Processor_FetchlinkTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING];
                 break;

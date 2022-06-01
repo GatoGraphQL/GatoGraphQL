@@ -14,7 +14,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
         }
@@ -24,7 +24,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES:
                 return GD_FormInput_LinkCategories::class;
         }
@@ -34,7 +34,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES:
                 return 'linkcategories';
         }

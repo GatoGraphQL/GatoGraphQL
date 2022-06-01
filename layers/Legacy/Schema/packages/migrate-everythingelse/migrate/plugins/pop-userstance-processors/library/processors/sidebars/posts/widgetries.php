@@ -15,7 +15,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
                 $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_WIDGETPUBLISHED];
                 break;
@@ -30,7 +30,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
             self::COMPONENT_WIDGETCOMPACT_STANCEINFO => PoP_UserStance_PostNameUtils::getNameUc(),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -38,12 +38,12 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
             self::COMPONENT_WIDGETCOMPACT_STANCEINFO => 'fa-commenting-o',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
                 return 'list-group list-group-sm';
         }
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
                 return 'pop-hide-empty list-group-item';
         }
@@ -61,7 +61,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
                 return 'panel panel-default panel-sm';
         }

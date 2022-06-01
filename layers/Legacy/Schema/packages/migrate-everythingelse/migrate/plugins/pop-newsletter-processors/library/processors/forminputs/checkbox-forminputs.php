@@ -14,7 +14,7 @@ class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Proces
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_NEWSLETTER:
                 return TranslationAPIFacade::getInstance()->__('Subscribe to our Newsletter?', 'pop-genericforms');
         }
@@ -24,7 +24,7 @@ class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Proces
 
     public function getInputDefaultValue(\PoP\ComponentModel\Component\Component $component, array &$props): mixed
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_NEWSLETTER:
                 // Subscribe to newsletter by default
                 return true;

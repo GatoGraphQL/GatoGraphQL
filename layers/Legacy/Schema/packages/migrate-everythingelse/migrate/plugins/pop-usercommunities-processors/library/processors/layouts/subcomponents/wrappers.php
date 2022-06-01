@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_Codes::class, GD_URE_Module_Processor_Codes::COMPONENT_URE_CODE_MEMBERSLABEL];
                 $ret[] = [GD_URE_Module_Processor_MembersLayoutMultipleComponents::class, GD_URE_Module_Processor_MembersLayoutMultipleComponents::COMPONENT_URE_MULTICOMPONENT_COMMUNITYMEMBERS];
@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:
                 return 'hasMembers';
         }

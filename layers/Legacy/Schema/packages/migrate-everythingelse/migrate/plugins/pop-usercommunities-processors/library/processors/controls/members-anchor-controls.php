@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return TranslationAPIFacade::getInstance()->__('Invite new members', 'poptheme-wassup');
@@ -28,7 +28,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     }
     public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
                 return null;
         }
@@ -37,7 +37,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return 'fa-user-plus';
@@ -50,7 +50,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS);
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
 
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 return POP_TARGET_MODALS;
@@ -74,7 +74,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
                 $this->appendProp($component, $props, 'class', 'btn btn-compact btn-link');
                 break;
@@ -92,7 +92,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     {
         $ret = parent::getClasses($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG:
                 $ret[GD_JS_CLASSES]['text'] = '';
                 break;

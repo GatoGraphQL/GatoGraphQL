@@ -14,7 +14,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
 
     public function getComponentSubname(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 return 'input';
         }
@@ -28,7 +28,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
             self::COMPONENT_FORMINPUTGROUP_CAPTCHA => [PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::COMPONENT_FORMINPUT_CAPTCHA],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -39,7 +39,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -51,7 +51,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -63,7 +63,7 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 

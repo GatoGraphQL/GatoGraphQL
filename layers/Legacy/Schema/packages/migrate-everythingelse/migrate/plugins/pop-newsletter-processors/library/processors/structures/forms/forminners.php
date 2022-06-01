@@ -18,7 +18,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_NEWSLETTER:
                 $ret = array_merge(
                     $ret,
@@ -54,7 +54,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
 
     public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 $inputs = array(

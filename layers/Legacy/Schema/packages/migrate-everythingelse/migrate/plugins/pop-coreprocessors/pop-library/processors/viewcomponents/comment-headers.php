@@ -15,7 +15,7 @@ class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Proces
 
     public function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST:
                 return [PoP_Module_Processor_PostViewComponentHeaders::class, PoP_Module_Processor_PostViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_POST];
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Proces
 
     public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL:
                 return true;
         }

@@ -15,7 +15,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFormInners extends PoP_Modul
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_USERAVATAR_UPDATE:
                 $ret = array_merge(
                     array(

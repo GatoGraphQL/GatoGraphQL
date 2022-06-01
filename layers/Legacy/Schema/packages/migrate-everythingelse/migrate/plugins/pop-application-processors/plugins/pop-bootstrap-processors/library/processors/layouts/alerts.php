@@ -13,7 +13,7 @@ class PoP_Module_Processor_Alerts extends PoP_Module_Processor_AlertsBase
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ALERT_STICKY:
                 return [PoP_Module_Processor_AnnouncementSpeechBubbles::class, PoP_Module_Processor_AnnouncementSpeechBubbles::COMPONENT_ANNOUNCEMENTSPEECHBUBBLE_STICKY];
         }

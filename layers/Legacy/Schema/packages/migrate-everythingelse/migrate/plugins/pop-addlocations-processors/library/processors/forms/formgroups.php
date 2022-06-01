@@ -35,7 +35,7 @@ class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Process
             self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONCOUNTRY => [GD_EM_Module_Processor_CreateLocationSelectFormInputs::class, GD_EM_Module_Processor_CreateLocationSelectFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

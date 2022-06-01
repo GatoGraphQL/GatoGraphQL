@@ -17,7 +17,7 @@ class PoP_Module_Processor_SettingsFeedbackMessages extends PoP_Module_Processor
             self::COMPONENT_FEEDBACKMESSAGE_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageInners::class, PoP_Module_Processor_SettingsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_SETTINGS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -22,7 +22,7 @@ class PoP_Module_Processor_ProfileFeedbackMessageInners extends PoP_Module_Proce
             self::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEPROFILE => [PoP_Module_Processor_ProfileFeedbackMessageAlertLayouts::class, PoP_Module_Processor_ProfileFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEPROFILE],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

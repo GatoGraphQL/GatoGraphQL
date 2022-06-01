@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_ControlGroups extends PoP_Module_Processor_Control
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_CONTROLGROUP_CONTENTSOURCE:
                 $ret[] = [GD_URE_Module_Processor_ControlButtonGroups::class, GD_URE_Module_Processor_ControlButtonGroups::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE];
                 break;

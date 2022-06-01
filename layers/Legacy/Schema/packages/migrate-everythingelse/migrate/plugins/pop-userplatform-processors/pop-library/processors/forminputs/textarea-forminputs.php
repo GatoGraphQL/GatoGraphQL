@@ -14,7 +14,7 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
 
     public function getRows(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_DESCRIPTION:
                 return 10;
         }
@@ -24,7 +24,7 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_DESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Description', 'pop-coreprocessors');
         }
@@ -34,7 +34,7 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_DESCRIPTION:
                 return 'description';
         }

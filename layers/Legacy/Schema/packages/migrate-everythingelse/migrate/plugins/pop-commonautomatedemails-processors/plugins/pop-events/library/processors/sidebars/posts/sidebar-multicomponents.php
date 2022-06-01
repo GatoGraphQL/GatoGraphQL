@@ -15,7 +15,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PostMultipleSidebarComponents exten
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT:
                 $ret[] = [PoPTheme_Wassup_EM_AE_Module_Processor_Widgets::class, PoPTheme_Wassup_EM_AE_Module_Processor_Widgets::COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO];
                 $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES];

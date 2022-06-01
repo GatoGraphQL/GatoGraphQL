@@ -15,7 +15,7 @@ class PoP_Module_Processor_CommentContentInners extends PoP_Module_Processor_Con
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_COMMENTSINGLE:
                 $ret[] = [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_LIST];
                 break;

@@ -15,7 +15,7 @@ class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Ap
     
     public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_STANCESEMPTY:
                 return false;
         }
@@ -27,14 +27,14 @@ class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Ap
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_STANCES:
             case self::COMPONENT_SCRIPT_STANCESEMPTY:
                 $classes = array(
                     self::COMPONENT_SCRIPT_STANCES => GD_CLASS_STANCES,
                     self::COMPONENT_SCRIPT_STANCESEMPTY => GD_CLASS_STANCES,
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component->name];
                 break;
         }
         

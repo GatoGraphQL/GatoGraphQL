@@ -42,7 +42,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
      */
     public function getDataAccessCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS:
@@ -59,7 +59,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS:
@@ -77,7 +77,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_UPVOTESPOSTS:
@@ -103,7 +103,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::COMPONENT_DATALOAD_UPVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::COMPONENT_CONTENT_UPVOTESPOSTS],
             self::COMPONENT_DATALOAD_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::COMPONENT_CONTENT_DOWNVOTESPOSTS],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
@@ -125,7 +125,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::COMPONENT_DATALOAD_DOWNVOTESPOSTS => GD_METAKEY_PROFILE_DOWNVOTESPOSTS,
         ];
 
-        if ($metaKey = $metaKeys[$component[1]] ?? null) {
+        if ($metaKey = $metaKeys[$component->name] ?? null) {
             $userID = \PoP\Root\App::getState('current-user-id');
             return \PoPCMSSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
@@ -135,7 +135,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
@@ -153,7 +153,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_UPVOTESPOSTS:

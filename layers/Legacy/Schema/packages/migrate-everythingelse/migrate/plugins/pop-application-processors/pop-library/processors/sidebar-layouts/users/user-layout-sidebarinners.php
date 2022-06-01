@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL:
                 $ret = array_merge(
@@ -40,7 +40,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL:
                 return 'row';
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
                 return 'col-xsm-4';
 

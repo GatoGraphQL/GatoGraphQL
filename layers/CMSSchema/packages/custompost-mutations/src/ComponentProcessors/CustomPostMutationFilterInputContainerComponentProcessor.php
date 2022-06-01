@@ -29,7 +29,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
      */
     public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        $targetModule = match ($component[1]) {
+        $targetModule = match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST),
             self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT =>new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT),
             default => null,

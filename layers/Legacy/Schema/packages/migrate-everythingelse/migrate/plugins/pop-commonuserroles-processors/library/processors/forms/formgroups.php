@@ -31,7 +31,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -45,7 +45,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -70,7 +70,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
             self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

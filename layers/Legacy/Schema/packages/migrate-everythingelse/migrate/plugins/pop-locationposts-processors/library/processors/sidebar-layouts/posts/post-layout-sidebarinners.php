@@ -19,7 +19,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Mo
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
                 $ret = array_merge(
@@ -41,7 +41,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Mo
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST:
                 return 'row';
@@ -52,7 +52,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Mo
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST:
                 return 'col-xsm-4';
             

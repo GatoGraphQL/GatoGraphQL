@@ -25,7 +25,7 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
                 $ret = array_merge(
@@ -62,7 +62,7 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
@@ -75,7 +75,7 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT:
                 return 'col-xsm-4';

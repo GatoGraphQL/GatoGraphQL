@@ -15,7 +15,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_HIGHLIGHTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
 
@@ -30,7 +30,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_HIGHLIGHTS:
                 $ret = array_merge(
                     $ret,
@@ -49,7 +49,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_HIGHLIGHTS:
                 $ret = array(
                     [

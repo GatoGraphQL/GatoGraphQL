@@ -15,7 +15,7 @@ class PoPTheme_Wassup_ApplicationProcessors_PageSectionHooks
     public function initModelPropsAddons(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
                 $subcomponents = array(
                     [PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_HIGHLIGHT_CREATE],

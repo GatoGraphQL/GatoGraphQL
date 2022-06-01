@@ -16,7 +16,7 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'btn btn-warning';
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return '<i class="fa fa-fw fa-plus"></i>';
             
@@ -42,7 +42,7 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
 
     public function getDropdownbtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'dropdown';
         }
@@ -52,7 +52,7 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
 
     public function innerList(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return true;
         }

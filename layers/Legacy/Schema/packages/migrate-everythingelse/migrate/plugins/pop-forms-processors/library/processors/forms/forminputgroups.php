@@ -38,7 +38,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_ORDERUSER:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERPOST:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERTAG:
@@ -56,7 +56,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_ORDERUSER:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERPOST:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERTAG:
@@ -88,7 +88,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
             self::COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE => [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -99,7 +99,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_SENDERNAME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -111,7 +111,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_SENDERNAME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -123,7 +123,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_SENDERNAME:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 

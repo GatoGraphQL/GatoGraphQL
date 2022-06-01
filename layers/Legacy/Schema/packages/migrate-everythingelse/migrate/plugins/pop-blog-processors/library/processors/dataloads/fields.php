@@ -36,7 +36,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
@@ -62,7 +62,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST:
@@ -82,7 +82,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorcontent($ret);
@@ -107,7 +107,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
@@ -128,7 +128,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_CONTENT];
 

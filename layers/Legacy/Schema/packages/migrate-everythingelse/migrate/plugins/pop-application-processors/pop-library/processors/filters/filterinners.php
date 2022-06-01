@@ -143,7 +143,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Blog:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -173,7 +173,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => POP_FILTER_MYPOSTS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

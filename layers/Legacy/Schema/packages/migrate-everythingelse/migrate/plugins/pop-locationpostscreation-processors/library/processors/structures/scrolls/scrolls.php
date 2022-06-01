@@ -21,7 +21,7 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
             self::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

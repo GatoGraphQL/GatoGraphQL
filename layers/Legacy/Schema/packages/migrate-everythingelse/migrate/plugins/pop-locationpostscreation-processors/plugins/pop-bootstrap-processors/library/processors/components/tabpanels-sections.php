@@ -13,7 +13,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents exten
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYLOCATIONPOSTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
@@ -25,7 +25,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents exten
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYLOCATIONPOSTS:
                 $ret = array_merge(
                     $ret,

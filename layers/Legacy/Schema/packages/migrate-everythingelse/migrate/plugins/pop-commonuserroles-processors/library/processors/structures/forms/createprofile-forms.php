@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE:
                 // Allow the Custom implementation to override
                 return \PoP\Root\App::applyFilters(
@@ -37,7 +37,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -50,7 +50,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE:
                 // For function addDomainClass
@@ -63,7 +63,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_FORM_PROFILEINDIVIDUAL_CREATE:
                 // Do not show if user already logged in

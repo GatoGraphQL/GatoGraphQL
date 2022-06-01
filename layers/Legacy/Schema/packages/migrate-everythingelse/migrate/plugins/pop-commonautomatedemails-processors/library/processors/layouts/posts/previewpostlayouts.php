@@ -18,7 +18,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function getAuthorComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
@@ -30,7 +30,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
                 return [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
@@ -43,7 +43,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 break;
@@ -56,7 +56,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     {
         $ret = parent::getBottomSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL];
                 break;
@@ -69,7 +69,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 $ret[] = [PoP_Module_Processor_PublishedLayouts::class, PoP_Module_Processor_PublishedLayouts::COMPONENT_LAYOUT_PUBLISHED];
                 break;
@@ -80,7 +80,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL];
 
@@ -94,7 +94,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return true;
@@ -105,7 +105,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
@@ -117,7 +117,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_THUMBNAIL:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
@@ -131,7 +131,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 return true;
         }
@@ -141,7 +141,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
 
     public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 return true;
         }
@@ -154,7 +154,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_LIST:
                 $ret[GD_JS_CLASSES]['excerpt'] = 'email-excerpt';
                 $ret[GD_JS_CLASSES]['authors-abovetitle'] = 'email-authors-abovetitle';
@@ -166,7 +166,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts extends PoP_Module_
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;

@@ -18,7 +18,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_LOCATIONPOST_CREATE => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
             self::COMPONENT_DATALOAD_LOCATIONPOST_UPDATE => POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST,
             default => parent::getRelevantRoute($component, $props),
@@ -27,7 +27,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOST_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -43,7 +43,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
             self::COMPONENT_DATALOAD_LOCATIONPOST_UPDATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostForms::class, GD_Custom_EM_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_LOCATIONPOST],
             self::COMPONENT_DATALOAD_LOCATIONPOST_CREATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostForms::class, GD_Custom_EM_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_LOCATIONPOST],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -52,7 +52,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOST_CREATE:
                 return true;
         }
@@ -61,7 +61,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOST_UPDATE:
                 return true;
         }
@@ -71,7 +71,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOST_UPDATE:
             case self::COMPONENT_DATALOAD_LOCATIONPOST_CREATE:
                 $name = PoP_LocationPosts_PostNameUtils::getNameUc();
@@ -89,7 +89,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOST_CREATE:
                 return $this->instanceManager->getInstance(CreateLocationPostMutationResolverBridge::class);
             case self::COMPONENT_DATALOAD_LOCATIONPOST_UPDATE:

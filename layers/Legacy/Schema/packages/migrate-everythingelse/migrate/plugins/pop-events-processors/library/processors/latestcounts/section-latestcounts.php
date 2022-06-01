@@ -26,7 +26,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
 
     public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_EVENTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
             case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
@@ -43,7 +43,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
 
     public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_EVENTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
             case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
@@ -64,7 +64,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
 
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event_post_type = $eventTypeAPI->getEventCustomPostType();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_EVENTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
             case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
@@ -84,7 +84,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
 
     public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS:
                 return true;
@@ -95,7 +95,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
 
     public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:
             case self::COMPONENT_LATESTCOUNT_TAG_PASTEVENTS:
                 return true;

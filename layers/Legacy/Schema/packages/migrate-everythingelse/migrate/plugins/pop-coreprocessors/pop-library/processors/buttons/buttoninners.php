@@ -22,7 +22,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
                 return 'fa-fw fa-print';
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
 
@@ -58,7 +58,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
 
     public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS:
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return 'commentCount';
@@ -69,7 +69,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
 
     public function getTextfieldOpen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('(', 'pop-coreprocessors');
         }
@@ -79,7 +79,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
 
     public function getTextfieldClose(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__(')', 'pop-coreprocessors');
         }

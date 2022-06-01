@@ -15,7 +15,7 @@ class PoP_Module_Processor_StanceReferencesFramesLayouts extends PoP_Module_Proc
 
     public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT:
                 return false;
         }
@@ -25,7 +25,7 @@ class PoP_Module_Processor_StanceReferencesFramesLayouts extends PoP_Module_Proc
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_STANCES_APPENDTOSCRIPT:
             case self::COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT:
                 return [UserStance_Module_Processor_StanceReferencedbyLayouts::class, UserStance_Module_Processor_StanceReferencedbyLayouts::COMPONENT_SUBCOMPONENT_STANCES];

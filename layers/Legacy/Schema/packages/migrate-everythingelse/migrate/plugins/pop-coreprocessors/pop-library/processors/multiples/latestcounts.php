@@ -18,7 +18,7 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
         $inner_components = array(
             self::COMPONENT_MULTIPLE_LATESTCOUNTS => [GD_Core_Module_Processor_Dataloads::class, GD_Core_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTCOUNTS],
         );
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -29,7 +29,7 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_LATESTCOUNTS:
                 // Fetch latest notifications every 30 seconds
                 $this->addJsmethod($ret, 'timeoutLoadLatestBlock');

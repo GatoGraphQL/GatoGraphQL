@@ -13,7 +13,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
 
     protected function isLink(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CONTENTPOSTLINK:
                 return true;
         }
@@ -25,7 +25,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CONTENTPOSTLINK:
                 return array_merge(
                     $ret,
@@ -41,7 +41,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CONTENTPOSTLINK:
                 $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE];
                 $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE];

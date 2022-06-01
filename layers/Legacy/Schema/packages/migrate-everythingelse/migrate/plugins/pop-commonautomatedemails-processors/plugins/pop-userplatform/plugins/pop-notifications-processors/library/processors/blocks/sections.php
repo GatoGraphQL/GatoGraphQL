@@ -20,7 +20,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY,
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY,
             default => parent::getRelevantRoute($component, $props),
@@ -38,7 +38,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST => [PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST],
         );
 
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -48,7 +48,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 // Important: this text can only be in the title, and not in the description, because the description is saved in pop-cache/,
@@ -65,7 +65,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
 
     protected function getDescriptionAbovetitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 return sprintf(
@@ -80,7 +80,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
     protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 return sprintf(

@@ -13,7 +13,7 @@ class PoP_ContentPostLinks_Module_Processor_CategoriesLayouts extends PoP_Module
 
     public function getCategoriesField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_LINK_CATEGORIES:
                 return 'linkCategoriesByName';
         }

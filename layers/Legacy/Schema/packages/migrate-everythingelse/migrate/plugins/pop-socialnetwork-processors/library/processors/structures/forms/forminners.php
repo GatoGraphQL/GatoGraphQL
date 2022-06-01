@@ -15,7 +15,7 @@ class PoP_SocialNetwork_Module_Processor_GFFormInners extends PoP_Module_Process
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CONTACTUSER:
                 $ret = array_merge(
                     $ret,

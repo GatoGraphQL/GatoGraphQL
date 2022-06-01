@@ -15,7 +15,7 @@ class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor
 
     public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_POST_URL:
                 return true;
         }
@@ -25,7 +25,7 @@ class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_POST_URL:
                 $this->appendProp($component, $props, 'class', 'alert alert-warning alert-sm');
                 break;

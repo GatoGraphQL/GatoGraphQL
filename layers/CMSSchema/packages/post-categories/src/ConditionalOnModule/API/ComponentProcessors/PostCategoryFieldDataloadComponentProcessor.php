@@ -23,7 +23,7 @@ class PostCategoryFieldDataloadComponentProcessor extends AbstractFieldDataloadC
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return $this->getPostCategoryObjectTypeResolver();

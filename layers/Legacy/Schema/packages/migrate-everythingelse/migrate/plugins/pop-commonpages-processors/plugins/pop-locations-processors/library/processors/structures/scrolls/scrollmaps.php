@@ -18,7 +18,7 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps exte
             self::COMPONENT_SCROLL_WHOWEARE_MAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_WHOWEARE_MAP],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

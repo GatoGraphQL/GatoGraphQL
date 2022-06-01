@@ -17,7 +17,7 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKGROUP_HIGHLIGHTEDIT:
                 $ret[] = [PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::class, PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT];
                 $ret[] = [PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::class, PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_HIGHLIGHTVIEW];
@@ -35,13 +35,13 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKGROUP_HIGHLIGHTCONTENT:
                 // Make the level below also a 'btn-group' so it shows inline
                 $downlevels = array(
                     self::COMPONENT_QUICKLINKGROUP_HIGHLIGHTCONTENT => [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST],
                 );
-                $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group');
+                $this->appendProp($downlevels[$component->name], $props, 'class', 'btn-group');
                 break;
         }
 

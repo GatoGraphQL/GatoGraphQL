@@ -15,7 +15,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_LOCATIONPOST_CREATE => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
             self::COMPONENT_BLOCK_LOCATIONPOST_UPDATE => POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
             self::COMPONENT_BLOCK_LOCATIONPOST_UPDATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_LOCATIONPOST_UPDATE],
             self::COMPONENT_BLOCK_LOCATIONPOST_CREATE => [GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_LOCATIONPOST_CREATE],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -39,7 +39,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONPOST_CREATE:
                 return true;
         }
@@ -48,7 +48,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONPOST_UPDATE:
                 return true;
         }
@@ -58,7 +58,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONPOST_UPDATE:
             case self::COMPONENT_BLOCK_LOCATIONPOST_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {

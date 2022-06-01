@@ -23,7 +23,7 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
 
     public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS:
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW:
@@ -35,7 +35,7 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS:
                 return [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS];

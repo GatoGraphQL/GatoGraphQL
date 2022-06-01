@@ -15,7 +15,7 @@ class PoP_Module_Processor_TagViewComponentHeaders extends PoP_Module_Processor_
 
     public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL:
                 // Add the URL in the header? Sometimes yes (eg: Addon) sometimes not (eg: modal)
                 return true;
@@ -26,7 +26,7 @@ class PoP_Module_Processor_TagViewComponentHeaders extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL:
                 $this->appendProp($component, $props, 'class', 'alert alert-warning alert-sm');
                 break;

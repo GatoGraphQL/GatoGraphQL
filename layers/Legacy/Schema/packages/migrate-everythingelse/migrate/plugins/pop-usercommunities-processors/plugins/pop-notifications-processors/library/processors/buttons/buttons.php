@@ -16,7 +16,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
 
     public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_UREAAL_BUTTONINNER_EDITMEMBERSHIP];
 
@@ -29,7 +29,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return 'editUserMembershipURL';
         
@@ -42,7 +42,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'poptheme-wassup');
         
@@ -55,7 +55,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return POP_TARGET_ADDONS;
         }
@@ -67,7 +67,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
             case self::COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS:
                 $ret .= ' btn btn-xs btn-link';

@@ -20,7 +20,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         $inners = array(
             self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS => [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::COMPONENT_DATALOAD_LATESTNOTIFICATIONS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -31,7 +31,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Display the dataset also when the block triggers event 'rendered', meaning
          // to do if after the user has logged in with the hover login block
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
@@ -50,7 +50,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
 
     public function getDataFeedbackInterreferencedComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 $component_path_manager = ComponentPathManagerFacade::getInstance();
                 $component_propagation_current_path = $component_path_manager->getPropagationCurrentPath();
@@ -66,7 +66,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     {
         $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 // Only add if the count is > 0
                 if ($dbobjectids) {
@@ -84,7 +84,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 $this->addJsmethod($ret, 'displayBlockDatasetCount');
                 break;
@@ -95,7 +95,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 $this->appendProp($component, $props, 'class', 'hidden');
                 $this->mergeProp(

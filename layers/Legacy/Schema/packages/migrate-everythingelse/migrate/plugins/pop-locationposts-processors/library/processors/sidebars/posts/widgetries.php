@@ -19,7 +19,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_LOCATIONPOST_CATEGORIES:
                 $ret[] = [GD_Custom_EM_Module_Processor_WidgetWrappers::class, GD_Custom_EM_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES];
                 break;
@@ -46,7 +46,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
             self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO => PoP_LocationPosts_PostNameUtils::getNameUc(),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -56,12 +56,12 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
             self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO => getRouteIcon(POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS, false),
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
                 return 'list-group list-group-sm';
         }
@@ -70,7 +70,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
                 return 'pop-hide-empty list-group-item';
         }
@@ -79,7 +79,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
                 return 'panel panel-default panel-sm';
         }

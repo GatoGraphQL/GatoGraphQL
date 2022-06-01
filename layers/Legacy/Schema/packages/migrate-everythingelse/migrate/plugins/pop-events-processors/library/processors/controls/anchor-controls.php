@@ -25,7 +25,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Calendar', 'poptheme-wassup');
 
@@ -39,7 +39,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
                 return getRouteIcon(POP_EVENTS_ROUTE_EVENTSCALENDAR, false);
 
@@ -55,14 +55,14 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
             case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
                 $routes = array(
                     self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR => POP_EVENTS_ROUTE_EVENTSCALENDAR,
                     self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS => POP_EVENTS_ROUTE_PASTEVENTS,
                 );
-                $route = $routes[$component[1]];
+                $route = $routes[$component->name];
 
                 return RouteUtils::getRouteURL($route);
 
@@ -87,7 +87,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
             case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
             case self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:

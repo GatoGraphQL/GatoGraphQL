@@ -15,7 +15,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                 return TranslationAPIFacade::getInstance()->__('Share by email', 'pop-coreprocessors');
         }
@@ -24,7 +24,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                 return 'fa-envelope';
         }
@@ -37,12 +37,12 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                     $modals = array(
                         self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL => [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::COMPONENT_MODAL_SHAREBYEMAIL],
                     );
-                    $modal = $modals[$component[1]];
+                    $modal = $modals[$component->name];
                     return '#'.$componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
             }
         }
@@ -52,7 +52,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
                 $this->mergeProp(
                     $component,

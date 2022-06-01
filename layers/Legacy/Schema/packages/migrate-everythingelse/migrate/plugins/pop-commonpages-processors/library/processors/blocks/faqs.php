@@ -15,7 +15,7 @@ class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
             self::COMPONENT_BLOCK_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
             default => parent::getRelevantRoute($component, $props),
@@ -26,7 +26,7 @@ class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_ADDCONTENTFAQ:
                 $ret[] = [GD_CommonPages_Module_Processor_PageCodes::class, GD_CommonPages_Module_Processor_PageCodes::COMPONENT_PAGECODE_ADDCONTENTFAQ];
                 break;

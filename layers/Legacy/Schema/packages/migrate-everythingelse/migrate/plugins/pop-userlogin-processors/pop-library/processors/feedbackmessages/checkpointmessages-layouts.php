@@ -25,7 +25,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
         $action = $this->getProp($component, $props, 'action');
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN:
                 // User already logged in (cannot welcome the person, can't say "Hi Peter!" since this message will be recorded at the beginning, when we still don't have the person logged in)
                 $ret['error-header'] = TranslationAPIFacade::getInstance()->__('Login/Register', 'pop-coreprocessors');
@@ -61,7 +61,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT:
                 $ret['usercannotedit'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You have no permissions to %1$s.', 'pop-coreprocessors'),

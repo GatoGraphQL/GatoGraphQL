@@ -18,7 +18,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
 
     public function getRows(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
                 return 5;
         }
@@ -28,7 +28,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Content', 'pop-coreprocessors');
                 
@@ -44,7 +44,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
             case self::COMPONENT_FORMINPUT_EMAILS:
                 return true;
@@ -55,7 +55,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
                 return 'contentEdit';
         }
@@ -65,7 +65,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
 
     public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMAILS:
                 return true;
         }

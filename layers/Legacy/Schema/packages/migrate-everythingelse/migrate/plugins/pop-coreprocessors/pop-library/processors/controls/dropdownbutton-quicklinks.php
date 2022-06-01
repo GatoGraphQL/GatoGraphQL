@@ -23,7 +23,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         $ret = parent::getSubcomponents($component);
 
         $components = array();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
@@ -57,7 +57,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
@@ -70,7 +70,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
@@ -85,7 +85,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
@@ -100,7 +100,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:

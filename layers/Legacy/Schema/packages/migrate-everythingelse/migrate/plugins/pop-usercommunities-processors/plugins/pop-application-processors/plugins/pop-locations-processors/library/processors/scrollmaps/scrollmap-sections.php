@@ -15,7 +15,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections extends GD_
 
     protected function isUserMap(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLMAP_COMMUNITIES_SCROLLMAP:
             case self::COMPONENT_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 return true;
@@ -31,7 +31,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections extends GD_
             self::COMPONENT_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_USERS_MAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 }
 

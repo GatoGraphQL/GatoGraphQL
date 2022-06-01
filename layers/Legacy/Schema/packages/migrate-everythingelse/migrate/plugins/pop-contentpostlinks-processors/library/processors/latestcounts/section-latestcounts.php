@@ -22,7 +22,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
             self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
@@ -36,7 +36,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
             self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
             ;
         }
@@ -48,7 +48,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_POSTLINKS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS:
             case self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS:
@@ -61,7 +61,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
 
     public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS:
                 return true;
         }
@@ -71,7 +71,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
 
     public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS:
                 return true;
         }

@@ -153,7 +153,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
@@ -303,12 +303,12 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
             case self::COMPONENT_BLOCK_STANCES_SCROLL_THUMBNAIL:
             case self::COMPONENT_BLOCK_STANCES_SCROLL_LIST:
@@ -392,7 +392,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
             case self::COMPONENT_BLOCK_STANCES_SCROLL_LIST:
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_STANCES];
@@ -463,7 +463,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL:
                 // Artificial property added to identify the template when adding component-resources

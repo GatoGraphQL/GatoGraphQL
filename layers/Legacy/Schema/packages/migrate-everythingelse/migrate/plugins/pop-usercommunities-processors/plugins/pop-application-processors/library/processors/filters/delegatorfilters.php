@@ -20,7 +20,7 @@ class PoP_UserCommunities_Module_Processor_CustomDelegatorFilters extends PoP_Mo
             self::COMPONENT_DELEGATORFILTER_COMMUNITIES => [GD_URE_Module_Processor_CustomSimpleFilterInners::class, GD_URE_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

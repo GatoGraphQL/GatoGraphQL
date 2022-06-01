@@ -62,7 +62,7 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
             self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER => [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
@@ -71,7 +71,7 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FAVICON:
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE:
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE:
@@ -95,7 +95,7 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_XSMALL:
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL:
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM:

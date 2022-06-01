@@ -52,7 +52,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
 
     public function getTag(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_FULL:
             case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_FULL:
@@ -71,7 +71,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
@@ -106,7 +106,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
                 return TranslationAPIFacade::getInstance()->__('Follow', 'pop-coreprocessors');
@@ -133,7 +133,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
 
     public function getBtntitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTONINNER_UNFOLLOWUSER_PREVIEW:
@@ -146,7 +146,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
 
     public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_PREVIEW:
             case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_FULL:
                 return 'recommendPostCount';

@@ -15,7 +15,7 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 return getRouteIcon(POP_BLOG_ROUTE_SEARCHCONTENT, true).TranslationAPIFacade::getInstance()->__('Search:', 'pop-coreprocessors');
         }
@@ -27,7 +27,7 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
     {
         $ret = parent::getStaticSuggestions($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 $query_wildcard = GD_JSPLACEHOLDER_QUERY;
                 $ret[] = array(

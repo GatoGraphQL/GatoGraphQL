@@ -136,7 +136,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
 
     public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS01:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS02:
@@ -205,7 +205,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
 
     public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS01:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS02:
@@ -335,7 +335,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return RouteUtils::getRouteTitle($route);
         }
 
@@ -411,13 +411,13 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return RouteUtils::getRouteURL($route);
-        } elseif ($route = $authorroutes[$component[1]] ?? null) {
+        } elseif ($route = $authorroutes[$component->name] ?? null) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $url = $userTypeAPI->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
-        } elseif ($route = $tagroutes[$component[1]] ?? null) {
+        } elseif ($route = $tagroutes[$component->name] ?? null) {
             $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
             return RequestUtils::addRoute($url, $route);
         }

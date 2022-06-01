@@ -29,7 +29,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
@@ -55,12 +55,12 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
             self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_LIST:
@@ -84,7 +84,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL:
             case self::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL:
                 // Artificial property added to identify the template when adding component-resources

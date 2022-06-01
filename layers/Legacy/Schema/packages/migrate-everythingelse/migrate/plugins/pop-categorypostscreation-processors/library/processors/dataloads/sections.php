@@ -135,7 +135,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
@@ -274,12 +274,12 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             self::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS01_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS02_TABLE_EDIT:
@@ -431,7 +431,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_FULLVIEWPREVIEW:
@@ -563,7 +563,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:

@@ -41,7 +41,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_CATEGORIES:
                 $ret[] = [Wassup_Module_Processor_CategoriesLayouts::class, Wassup_Module_Processor_CategoriesLayouts::COMPONENT_LAYOUT_CATEGORIES];
                 break;
@@ -106,7 +106,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
@@ -131,7 +131,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_DETAILS:
@@ -153,7 +153,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_CATEGORIES:
                 return 'hasTopics';
 

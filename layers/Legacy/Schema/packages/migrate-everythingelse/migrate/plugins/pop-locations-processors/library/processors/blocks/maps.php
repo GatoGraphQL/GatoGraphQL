@@ -15,7 +15,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_LOCATIONSMAP => POP_LOCATIONS_ROUTE_LOCATIONSMAP,
             self::COMPONENT_BLOCK_STATICLOCATIONSMAP => POP_LOCATIONS_ROUTE_LOCATIONSMAP,
             default => parent::getRelevantRoute($component, $props),
@@ -26,7 +26,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONSMAP:
                 $ret[] = [PoP_Module_Processor_LocationsMapDataloads::class, PoP_Module_Processor_LocationsMapDataloads::COMPONENT_DATALOAD_LOCATIONSMAP];
                 break;
@@ -41,7 +41,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STATICLOCATIONSMAP:
                 return '';
         }
@@ -51,7 +51,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONSMAP:
                 // No need to show the locations list, only the map will do
                 $this->appendProp([[PoP_Module_Processor_LocationsMapDataloads::class, PoP_Module_Processor_LocationsMapDataloads::COMPONENT_DATALOAD_LOCATIONSMAP], [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_LOCATIONS_MAP]], $props, 'class', 'hidden');

@@ -43,7 +43,7 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
             self::COMPONENT_CONTENT_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS],
             self::COMPONENT_CONTENT_UNDODOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -28,7 +28,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
             self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS,
             self::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY,
@@ -50,12 +50,12 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
             self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
@@ -89,7 +89,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
     //         case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
     //             return UserRequestNature::USER;
@@ -110,7 +110,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsTagsubscribers($ret);
                 break;
@@ -141,7 +141,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
@@ -156,7 +156,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
             case self::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:

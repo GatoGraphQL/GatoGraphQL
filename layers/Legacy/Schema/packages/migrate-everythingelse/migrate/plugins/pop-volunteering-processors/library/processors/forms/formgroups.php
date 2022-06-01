@@ -20,7 +20,7 @@ class PoP_Volunteering_Module_Processor_FormGroups extends PoP_Module_Processor_
             self::COMPONENT_FORMINPUTGROUP_WHYVOLUNTEER => [PoP_Volunteering_Module_Processor_TextareaFormInputs::class, PoP_Volunteering_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_WHYVOLUNTEER],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

@@ -21,7 +21,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::COMPONENT_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
@@ -55,7 +55,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:
             case self::COMPONENT_MULTICOMPONENT_EVENT_DATELOCATION:
             case self::COMPONENT_MULTICOMPONENT_LOCATIONVOLUNTEER:
@@ -67,12 +67,12 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
                     self::COMPONENT_MULTICOMPONENT_LOCATION => 'location',
                 );
 
-                $this->appendProp($component, $props, 'class', $classes[$component[1]] ?? null);
+                $this->appendProp($component, $props, 'class', $classes[$component->name] ?? null);
                 $this->appendProp([PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS], $props, 'btn-class', 'btn btn-link btn-nopadding');
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:
             case self::COMPONENT_MULTICOMPONENT_EVENT_DATELOCATION:
                 if (defined('POP_VOLUNTEERINGPROCESSORS_INITIALIZED')) {

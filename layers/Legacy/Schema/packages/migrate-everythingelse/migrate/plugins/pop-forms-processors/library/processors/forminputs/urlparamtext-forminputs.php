@@ -17,7 +17,7 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID:
             case self::COMPONENT_FORMINPUT_URLPARAMTEXT_USERID:
             case self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID:
@@ -27,7 +27,7 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
                     self::COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID => \PoPCMSSchema\Comments\Constants\InputNames::COMMENT_ID,
                 );
 
-                return $names[$component[1]];
+                return $names[$component->name];
         }
 
         return parent::getName($component);

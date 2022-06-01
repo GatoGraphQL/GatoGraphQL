@@ -21,7 +21,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60:
@@ -35,13 +35,13 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
 
     public function getLayoutContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
                 return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
 
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
                     return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR120];
 
@@ -55,7 +55,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
                     return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR26];
             }
         } else {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60:
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR40:
@@ -69,7 +69,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60:

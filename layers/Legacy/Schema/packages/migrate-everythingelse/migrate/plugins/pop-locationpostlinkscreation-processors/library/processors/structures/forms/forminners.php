@@ -13,7 +13,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
 
     protected function isLink(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return true;
         }
@@ -23,7 +23,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
 
     protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return true;
         }
@@ -32,7 +32,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
     }
     protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP];
         }
@@ -50,7 +50,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return array_merge(
                     $ret,
@@ -66,7 +66,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 // Make it into left/right columns
                 $rightside_component = [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE];

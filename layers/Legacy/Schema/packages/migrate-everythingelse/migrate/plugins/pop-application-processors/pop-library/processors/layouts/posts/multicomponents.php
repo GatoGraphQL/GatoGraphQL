@@ -18,7 +18,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
     protected function getUserpostinteractionLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
-        switch ($component[1]) {
+        switch ($component->name) {
          // Highlights: it has a different set-up
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
                 $layouts = array(
@@ -61,7 +61,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
                 $ret = array_merge(
@@ -76,7 +76,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction-single');

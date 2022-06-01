@@ -15,7 +15,7 @@ class PoP_Module_Processor_LocationContentInners extends PoP_Module_Processor_Co
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TRIGGERTYPEAHEADSELECTINNER_LOCATION:
                 $ret[] = [PoP_Module_Processor_TriggerLocationTypeaheadScriptLayouts::class, PoP_Module_Processor_TriggerLocationTypeaheadScriptLayouts::COMPONENT_EM_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION];
                 break;

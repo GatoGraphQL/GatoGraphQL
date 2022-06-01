@@ -16,7 +16,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_TableInners extends PoP_Modu
         $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLEINNER_MYLINKS:
                 $ret[] = [PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT];
                 $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::COMPONENT_LAYOUTPOST_DATE];

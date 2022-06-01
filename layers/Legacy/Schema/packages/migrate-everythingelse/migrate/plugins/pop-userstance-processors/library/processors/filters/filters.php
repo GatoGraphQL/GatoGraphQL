@@ -41,7 +41,7 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
             self::COMPONENT_FILTER_TAGSTANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES_STANCE],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

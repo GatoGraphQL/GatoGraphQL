@@ -27,7 +27,7 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
      */
     public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        $targetModule = match ($component[1]) {
+        $targetModule = match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
             self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
             default => null,

@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
 
     public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USERBOTTOM];
@@ -26,7 +26,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
 
     public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER];
@@ -39,7 +39,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS];
@@ -51,7 +51,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
 
     public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
                 return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::COMPONENT_LAYOUT_USERAVATAR_120_RESPONSIVE];
             
@@ -64,7 +64,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
 
     public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 return true;
         }
@@ -76,7 +76,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
                 $ret[GD_JS_CLASSES]['quicklinkgroup-bottom'] = 'icon-only pull-right';

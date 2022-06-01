@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_ORGANIZATIONS:
             case self::COMPONENT_TABPANEL_INDIVIDUALS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
@@ -28,7 +28,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_ORGANIZATIONS:
                 $ret = array_merge(
                     $ret,
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_ORGANIZATIONS:
                 return array(
                     [

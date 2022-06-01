@@ -42,7 +42,7 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Highlights:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -60,7 +60,7 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS => POP_FILTER_AUTHORHIGHLIGHTS,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS => POP_FILTER_MYHIGHLIGHTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

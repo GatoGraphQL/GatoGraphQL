@@ -23,7 +23,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
 
     protected function isPostMap(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP:
             case self::COMPONENT_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP:
@@ -47,12 +47,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
             self::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_LOCATIONPOSTS_HORIZONTALMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getMapDirection(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:

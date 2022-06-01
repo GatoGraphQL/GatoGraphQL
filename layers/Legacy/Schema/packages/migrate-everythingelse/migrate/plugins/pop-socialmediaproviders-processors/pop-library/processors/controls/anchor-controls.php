@@ -26,7 +26,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return TranslationAPIFacade::getInstance()->__('Facebook', 'pop-coreprocessors');
@@ -44,7 +44,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return 'fa-facebook';
@@ -65,7 +65,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER:
@@ -85,7 +85,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     $props,
                     'params',
                     array(
-                        'data-provider' => $providers[$component[1]],
+                        'data-provider' => $providers[$component->name],
                         'data-blocktarget' => $this->getProp($component, $props, 'control-target')
                     )
                 );
@@ -125,7 +125,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER:

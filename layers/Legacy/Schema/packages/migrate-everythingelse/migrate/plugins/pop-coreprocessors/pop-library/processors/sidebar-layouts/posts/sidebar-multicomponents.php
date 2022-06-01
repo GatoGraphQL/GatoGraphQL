@@ -19,7 +19,7 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:
                 $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::COMPONENT_POSTSOCIALMEDIA_POSTWRAPPER];
                 break;
@@ -38,7 +38,7 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT:
                 $this->appendProp([PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::COMPONENT_LAYOUT_SIMPLEPOSTAUTHORS], $props, 'class', 'pull-right');
                 break;

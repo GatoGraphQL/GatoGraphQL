@@ -74,7 +74,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_FULL => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_FULL],
             self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_PREVIEW => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -83,7 +83,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
                 return 'followUserURL';
@@ -130,7 +130,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
                 return TranslationAPIFacade::getInstance()->__('Follow', 'pop-coreprocessors');
@@ -179,7 +179,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_UNFOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_RECOMMENDPOST_FULL:
@@ -207,14 +207,14 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_UNFOLLOWUSER_FULL:
                 $ret .= ' pop-hidden-print';
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
                 $ret .= ' '.GD_CLASS_FOLLOWUSER;
@@ -266,7 +266,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTON_UNFOLLOWUSER_FULL:
@@ -291,7 +291,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTON_RECOMMENDPOST_FULL:
@@ -320,7 +320,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         }
 
         // Make the classes 'active' as to make them appear as they've been clicked from the previous state
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_UNFOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_UNFOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTON_UNRECOMMENDPOST_FULL:
@@ -340,7 +340,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
             case self::COMPONENT_BUTTON_RECOMMENDPOST_FULL:

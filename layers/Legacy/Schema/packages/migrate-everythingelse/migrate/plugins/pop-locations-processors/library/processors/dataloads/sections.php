@@ -17,7 +17,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_LOCATIONS_SCROLL => POP_LOCATIONS_ROUTE_LOCATIONS,
             self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD => POP_LOCATIONS_ROUTE_LOCATIONS,
             default => parent::getRelevantRoute($component, $props),
@@ -31,12 +31,12 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
             self::COMPONENT_DATALOAD_LOCATIONS_SCROLL => [PoP_Locations_Module_Processor_CustomScrolls::class, PoP_Locations_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONS_SCROLL:
             case self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD:
                 return [PoP_Locations_Module_Processor_CustomFilters::class, PoP_Locations_Module_Processor_CustomFilters::COMPONENT_FILTER_LOCATIONS];
@@ -61,7 +61,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONS_SCROLL:
             case self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD:
                 return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
@@ -72,7 +72,7 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONS_SCROLL:
             case self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('locations', 'poptheme-wassup'));

@@ -27,7 +27,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         // When in the Map window, the location link must not initialize the markers, since they are already initialized by the map itself.
         // Do it so, initializes them twice, which leads to problems, like when searching it displays markers from the previous state
         // (which were initialized then drawn then initialized again and remained there in the memory)
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
                 return false;
@@ -38,7 +38,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
     public function getLocationComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
@@ -53,7 +53,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
     public function getLocationComplementComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return [PoP_Module_Processor_LocationAddressLayouts::class, PoP_Module_Processor_LocationAddressLayouts::COMPONENT_EM_LAYOUT_LOCATIONADDRESS];
@@ -63,7 +63,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     }
     public function getJoinSeparator(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return '<br/>';
@@ -73,7 +73,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     }
     public function getEachSeparator(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return '<br/>';
@@ -83,7 +83,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
     }
     public function getComplementSeparator(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
                 return '<br/>';
@@ -103,14 +103,14 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
             self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
         );
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS:
-                return $buttoninners[$component[1]];
+                return $buttoninners[$component->name];
         }
 
         return parent::getButtoninnerSubcomponent($component);
@@ -118,7 +118,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
     // function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
     //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS:

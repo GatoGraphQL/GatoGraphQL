@@ -15,7 +15,7 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV];
                 $ret[] = [PoP_Module_Processor_CarouselButtonControls::class, PoP_Module_Processor_CarouselButtonControls::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT];
@@ -27,7 +27,7 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 // Pass the needed props down the line
                 if ($target = $this->getProp($component, $props, 'carousel-target')) {
@@ -45,7 +45,7 @@ class PoP_Module_Processor_CarouselControlButtonGroups extends PoP_Module_Proces
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL:
                 $this->addJsmethod($ret, 'carouselControls');
                 break;

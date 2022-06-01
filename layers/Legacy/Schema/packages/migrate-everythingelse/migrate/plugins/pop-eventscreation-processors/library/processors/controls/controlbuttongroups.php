@@ -23,7 +23,7 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT];
                 if (defined('POP_EVENTLINKSCREATIONPROCESSORS_INITIALIZED')) {

@@ -23,7 +23,7 @@ class PoP_AddHighlights_Module_Processor_CustomDelegatorFilters extends PoP_Modu
             self::COMPONENT_DELEGATORFILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::class, PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

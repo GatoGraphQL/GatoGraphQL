@@ -17,7 +17,7 @@ class PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners extends PoP
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_MYCONTENT];
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::class, PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYEVENTS];

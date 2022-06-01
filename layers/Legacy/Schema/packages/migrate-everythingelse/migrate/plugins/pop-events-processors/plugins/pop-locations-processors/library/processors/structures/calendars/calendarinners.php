@@ -15,7 +15,7 @@ class PoP_Events_Locations_Module_Processor_CalendarInners extends PoP_Module_Pr
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARINNER_EVENTSMAP:
                 $ret[] = [GD_EM_Module_Processor_CustomPopoverLayouts::class, GD_EM_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_EVENT];
                 break;

@@ -23,7 +23,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts extends P
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATECONTENT => [PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

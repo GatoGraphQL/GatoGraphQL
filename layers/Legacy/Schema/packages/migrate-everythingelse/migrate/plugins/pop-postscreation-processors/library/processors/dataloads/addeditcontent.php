@@ -18,7 +18,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
             self::COMPONENT_DATALOAD_POST_UPDATE => POP_POSTSCREATION_ROUTE_EDITPOST,
             default => parent::getRelevantRoute($component, $props),
@@ -27,7 +27,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -43,7 +43,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
             self::COMPONENT_DATALOAD_POST_UPDATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_POST],
             self::COMPONENT_DATALOAD_POST_CREATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_POST],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -52,7 +52,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 return true;
         }
@@ -61,7 +61,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_UPDATE:
                 return true;
         }
@@ -71,7 +71,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 return $this->instanceManager->getInstance(CreatePostMutationResolverBridge::class);
             case self::COMPONENT_DATALOAD_POST_UPDATE:
@@ -83,7 +83,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_UPDATE:
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 $name = TranslationAPIFacade::getInstance()->__('Post', 'pop-postscreation-processors');

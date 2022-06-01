@@ -21,7 +21,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTIONCONTAINER_HOLE:
             case self::COMPONENT_PAGESECTIONCONTAINER_MODALS:
                 $load_component = true;
@@ -33,7 +33,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
                     self::COMPONENT_PAGESECTIONCONTAINER_HOLE => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_HOLE],
                     self::COMPONENT_PAGESECTIONCONTAINER_MODALS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS],
                 );
-                $subcomponent = $subcomponents[$component[1]];
+                $subcomponent = $subcomponents[$component->name];
 
                 if ($load_component) {
                     $ret[] = $subcomponent;
@@ -54,7 +54,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTIONCONTAINER_HOLE:
                 $this->appendProp($component, $props, 'class', 'pagesection-group-after');
                 break;

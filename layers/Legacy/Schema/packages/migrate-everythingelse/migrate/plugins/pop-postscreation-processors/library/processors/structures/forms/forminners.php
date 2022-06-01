@@ -20,7 +20,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_POST:
                 return array_merge(
                     $ret,
@@ -36,7 +36,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_POST:
                 $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE];
                 $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE];

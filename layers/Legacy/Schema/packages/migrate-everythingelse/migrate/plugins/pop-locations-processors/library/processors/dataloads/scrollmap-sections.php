@@ -45,7 +45,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
             self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
             self::COMPONENT_DATALOAD_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
@@ -70,12 +70,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             self::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_USERS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_USERS_HORIZONTALSCROLLMAP:
@@ -132,7 +132,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
     //         case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
     //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
@@ -151,7 +151,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Filter by the Profile/Community
             case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
@@ -173,7 +173,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
@@ -186,7 +186,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
@@ -209,7 +209,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_SCROLLMAP:
             case self::COMPONENT_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP:
@@ -232,7 +232,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)
                 // if ($filter_component = $this->getFilterSubcomponent($component)) {

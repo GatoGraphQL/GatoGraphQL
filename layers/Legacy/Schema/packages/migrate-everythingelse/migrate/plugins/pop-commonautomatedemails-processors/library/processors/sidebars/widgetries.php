@@ -18,7 +18,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS:
                 $ret[] = [PoPTheme_Wassup_AE_Module_Processor_PostAuthorLayouts::class, PoPTheme_Wassup_AE_Module_Processor_PostAuthorLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTAUTHORS];
                 break;
@@ -45,7 +45,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
             self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -54,11 +54,11 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
             self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO => 'fa-circle',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
                 return 'list-group list-group-sm';
         }
@@ -67,7 +67,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
                 return 'pop-hide-empty list-group-item';
         }
@@ -76,7 +76,7 @@ class PoPTheme_Wassup_AE_Module_Processor_Widgets extends PoP_Module_Processor_W
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POST_AUTHORS:
             case self::COMPONENT_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO:
                 return 'panel panel-default panel-sm';

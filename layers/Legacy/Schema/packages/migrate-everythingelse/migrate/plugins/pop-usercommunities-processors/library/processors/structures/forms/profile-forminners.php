@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_ProfileFormInners extends PoP_Module_Processor_For
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EDITMEMBERSHIP:
                 $ret[] = [GD_URE_Module_Processor_ProfileFormGroups::class, GD_URE_Module_Processor_ProfileFormGroups::COMPONENT_URE_FORMINPUTGROUP_MEMBERSTATUS];
                 $ret[] = [GD_URE_Module_Processor_ProfileFormGroups::class, GD_URE_Module_Processor_ProfileFormGroups::COMPONENT_URE_FORMINPUTGROUP_MEMBERPRIVILEGES];

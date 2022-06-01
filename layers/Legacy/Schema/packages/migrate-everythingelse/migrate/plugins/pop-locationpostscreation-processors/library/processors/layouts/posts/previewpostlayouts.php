@@ -15,7 +15,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return 'editURL';
         }
@@ -25,7 +25,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -38,7 +38,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
     public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTEDIT];
         }
@@ -48,7 +48,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
     public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
         }
@@ -58,7 +58,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
     public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return array();
         }
@@ -68,7 +68,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
     public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
                 return true;
         }

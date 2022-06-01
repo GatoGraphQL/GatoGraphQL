@@ -42,7 +42,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Highlights:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -60,7 +60,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
     //         self::COMPONENT_FILTERINPUTCONTAINER_AUTHORHIGHLIGHTS => POP_FILTER_AUTHORHIGHLIGHTS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYHIGHLIGHTS => POP_FILTER_MYHIGHLIGHTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

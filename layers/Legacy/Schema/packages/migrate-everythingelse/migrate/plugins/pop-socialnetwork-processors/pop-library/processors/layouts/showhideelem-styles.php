@@ -73,7 +73,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
             self::COMPONENT_LAYOUT_DOWNVOTEPOST_HIDE_STYLES => GD_CLASS_DOWNVOTEPOST,
             self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES => GD_CLASS_UNDODOWNVOTEPOST,
         );
-        if ($target = $targets[$component[1]] ?? null) {
+        if ($target = $targets[$component->name] ?? null) {
             return '.'.$target;
         }
 
@@ -82,7 +82,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
 
     public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES:
             case self::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES:
             case self::COMPONENT_LAYOUT_RECOMMENDPOST_SHOW_STYLES:

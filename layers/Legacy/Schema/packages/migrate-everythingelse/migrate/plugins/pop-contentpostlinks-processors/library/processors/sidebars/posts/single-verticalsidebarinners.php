@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners ex
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK:
                 $ret = array_merge(
                     $ret,

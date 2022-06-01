@@ -15,7 +15,7 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_HOMECONTENT:
                 $ret = array_merge(
                     $ret,
@@ -35,7 +35,7 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_HOMECONTENT:
                 return [
                     [

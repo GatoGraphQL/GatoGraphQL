@@ -15,7 +15,7 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
 
     public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
                 return false;
         }
@@ -25,7 +25,7 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT:
             case self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
                 return [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];

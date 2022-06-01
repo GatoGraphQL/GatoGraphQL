@@ -17,7 +17,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES];
 
@@ -65,7 +65,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
                 // In addition, bring the new status (read/unread) of the notification to update the database/userstatedatabase in the webplatform, for consistency

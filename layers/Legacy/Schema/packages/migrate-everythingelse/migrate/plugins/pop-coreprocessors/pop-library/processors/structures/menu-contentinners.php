@@ -29,7 +29,7 @@ class PoP_Module_Processor_MenuContentInners extends PoP_Module_Processor_Conten
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_MENU_BUTTON:
                 $ret[] = [PoP_Module_Processor_AnchorMenuLayouts::class, PoP_Module_Processor_AnchorMenuLayouts::COMPONENT_LAYOUT_MENU_BUTTON];
                 break;

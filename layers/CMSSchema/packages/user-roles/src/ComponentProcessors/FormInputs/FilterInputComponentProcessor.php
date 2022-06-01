@@ -57,7 +57,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getUserRolesFilterInput(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getExcludeUserRolesFilterInput(),
             default => null,
@@ -66,7 +66,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => 'roles',
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => 'excludeRoles',
             default => parent::getName($component),
@@ -75,7 +75,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
@@ -84,7 +84,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES,
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -95,7 +95,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'user-roles'),
             default => null,

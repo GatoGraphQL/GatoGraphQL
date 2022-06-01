@@ -23,7 +23,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Processor
             self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL => [PoP_Module_Processor_CustomUserLayoutSidebarInners::class, PoP_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Processor
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

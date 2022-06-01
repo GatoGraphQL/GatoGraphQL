@@ -15,7 +15,7 @@ class PoP_ContentCreation_Module_Processor_GFFormInners extends PoP_Module_Proce
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_FLAG:
                 $ret = array_merge(
                     $ret,

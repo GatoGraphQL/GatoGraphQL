@@ -15,7 +15,7 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL:
                 return 'row';
         }
@@ -25,7 +25,7 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
 
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL:
                 return 'col-xsm-4';
         }

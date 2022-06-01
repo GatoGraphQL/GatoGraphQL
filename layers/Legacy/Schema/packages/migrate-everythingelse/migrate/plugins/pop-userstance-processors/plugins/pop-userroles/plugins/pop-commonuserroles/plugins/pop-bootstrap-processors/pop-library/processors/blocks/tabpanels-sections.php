@@ -15,7 +15,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS => POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
             self::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_SectionTabPanelComponents::class, UserStance_URE_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS],
             self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_SectionTabPanelComponents::class, UserStance_URE_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -39,7 +39,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
@@ -50,7 +50,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES_AUTHORROLE];

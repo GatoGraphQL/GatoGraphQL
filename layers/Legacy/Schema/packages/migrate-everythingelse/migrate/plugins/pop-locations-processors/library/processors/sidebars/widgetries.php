@@ -18,7 +18,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_WIDGET_POSTLOCATIONSMAP:
                 $ret[] = [GD_EM_Module_Processor_LocationMapConditionWrappers::class, GD_EM_Module_Processor_LocationMapConditionWrappers::COMPONENT_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP];
                 break;
@@ -38,7 +38,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
             self::COMPONENT_EM_WIDGET_USERLOCATIONSMAP => TranslationAPIFacade::getInstance()->__('Location(s)', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -47,11 +47,11 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
             self::COMPONENT_EM_WIDGET_USERLOCATIONSMAP => 'fa-map-marker',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_WIDGET_POSTLOCATIONSMAP:
             case self::COMPONENT_EM_WIDGET_USERLOCATIONSMAP:
                 return 'list-group';
@@ -61,7 +61,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_WIDGET_POSTLOCATIONSMAP:
             case self::COMPONENT_EM_WIDGET_USERLOCATIONSMAP:
                 return 'list-group-item';

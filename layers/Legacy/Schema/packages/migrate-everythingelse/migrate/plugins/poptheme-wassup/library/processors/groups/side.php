@@ -15,7 +15,7 @@ class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_SIDE:
                 // Allow GetPoP to only keep the Sections menu
                 if ($components = \PoP\Root\App::applyFilters(

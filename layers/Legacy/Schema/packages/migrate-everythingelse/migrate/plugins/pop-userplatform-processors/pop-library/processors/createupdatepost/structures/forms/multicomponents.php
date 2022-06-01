@@ -39,7 +39,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH:
                 $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_CUP_STATUS];
                 $ret[] = [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SUBMIT];
@@ -106,7 +106,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE:
             case self::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE:
                 if (!($classs = $this->getProp($component, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {

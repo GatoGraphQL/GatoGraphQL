@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
                 
@@ -42,7 +42,7 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
                 
@@ -58,7 +58,7 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES:
                 return 'organizationtypes';
 

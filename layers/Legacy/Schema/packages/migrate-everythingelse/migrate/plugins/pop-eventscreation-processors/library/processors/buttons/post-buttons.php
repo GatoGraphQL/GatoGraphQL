@@ -17,7 +17,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
         $buttoninners = array(
             self::COMPONENT_BUTTON_EVENT_CREATE => [GD_Custom_EM_Module_Processor_ButtonInners::class, GD_Custom_EM_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_EVENT_CREATE],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -26,7 +26,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
 
     public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_EVENT_CREATE:
                 return array(
                     [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
@@ -38,7 +38,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_EVENT_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -54,7 +54,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
         $titles = array(
             self::COMPONENT_BUTTON_EVENT_CREATE => TranslationAPIFacade::getInstance()->__('Event', 'poptheme-wassup'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 
@@ -66,7 +66,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
         $fields = array(
             self::COMPONENT_BUTTON_EVENT_CREATE => 'addEventURL',
         );
-        if ($field = $fields[$component[1]] ?? null) {
+        if ($field = $fields[$component->name] ?? null) {
             return $field;
         }
 

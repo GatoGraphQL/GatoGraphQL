@@ -17,7 +17,7 @@ class PoP_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_Module_Pr
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_MYPREFERENCES => [PoP_Module_Processor_UserFeedbackMessageLayouts::class, PoP_Module_Processor_UserFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

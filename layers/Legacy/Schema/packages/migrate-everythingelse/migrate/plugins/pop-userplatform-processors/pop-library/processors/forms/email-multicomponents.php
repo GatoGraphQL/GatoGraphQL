@@ -19,7 +19,7 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS:
                 $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL];
                 $ret[] = [self::class, self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL];

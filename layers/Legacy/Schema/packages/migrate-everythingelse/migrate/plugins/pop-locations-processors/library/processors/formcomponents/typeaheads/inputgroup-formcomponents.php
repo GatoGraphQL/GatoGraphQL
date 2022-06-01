@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
     {
         $ret = parent::getInputSubcomponent($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
                 return [GD_EM_Module_Processor_TextFormInputs::class, GD_EM_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION];
         }
@@ -27,7 +27,7 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
     {
         $ret = parent::getControlSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
                 // Allow PoP Add Locations Processors to inject the "+" button
                 if ($control = \PoP\Root\App::applyFilters(

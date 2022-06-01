@@ -15,7 +15,7 @@ class PoP_Module_Processor_CalendarControlButtonGroups extends PoP_Module_Proces
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARCONTROLBUTTONGROUP_CALENDAR:
                 $ret[] = [PoP_Module_Processor_CalendarButtonControls::class, PoP_Module_Processor_CalendarButtonControls::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV];
                 $ret[] = [PoP_Module_Processor_CalendarButtonControls::class, PoP_Module_Processor_CalendarButtonControls::COMPONENT_CALENDARBUTTONCONTROL_CALENDARNEXT];

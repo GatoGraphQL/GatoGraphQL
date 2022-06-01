@@ -26,7 +26,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT => [PoP_Module_Processor_MultipleContentInners::class, PoP_Module_Processor_MultipleContentInners::COMPONENT_CONTENTINNER_PAGECONTENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -39,7 +39,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
                 self::COMPONENT_CONTENT_SINGLE => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_SINGLE],
                 self::COMPONENT_CONTENT_USERPOSTINTERACTION => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_USERPOSTINTERACTION],
             );
-            $inner = $inners[$component[1]];
+            $inner = $inners[$component->name];
 
             return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_component', $inner, $component);
         }
@@ -51,7 +51,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT:
                 $this->addJsmethod($ret, 'prettyPrint');
                 break;
@@ -62,7 +62,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_SINGLE:
                 $this->appendProp($component, $props, 'class', 'content-single');
                 break;

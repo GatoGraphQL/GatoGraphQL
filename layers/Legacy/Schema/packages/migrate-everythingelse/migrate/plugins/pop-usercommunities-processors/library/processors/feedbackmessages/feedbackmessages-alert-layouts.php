@@ -23,7 +23,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Mod
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::class, GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

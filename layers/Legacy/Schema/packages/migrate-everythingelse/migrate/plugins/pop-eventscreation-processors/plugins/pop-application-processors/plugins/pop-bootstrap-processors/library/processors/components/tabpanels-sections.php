@@ -15,7 +15,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYEVENTS:
             case self::COMPONENT_TABPANEL_MYPASTEVENTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
@@ -28,7 +28,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYEVENTS:
                 $ret = array_merge(
                     $ret,
@@ -57,7 +57,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYEVENTS:
                 return array(
                     [

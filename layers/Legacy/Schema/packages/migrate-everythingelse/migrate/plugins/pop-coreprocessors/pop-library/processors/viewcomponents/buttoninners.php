@@ -18,7 +18,7 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
     
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
                 return 'fa-fw fa-reply';
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
                 return TranslationAPIFacade::getInstance()->__('Reply', 'pop-coreprocessors');
 

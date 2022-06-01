@@ -116,7 +116,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->getCustomPostIDsFilterInput(),
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->getCustomPostIDFilterInput(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getExcludeCustomPostIDsFilterInput(),
@@ -128,7 +128,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS:
             case self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS:
             case self::COMPONENT_FILTERINPUT_COMMENT_TYPES:
@@ -142,7 +142,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => 'customPostIDs',
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => 'customPostID',
             self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => 'excludeCustomPostIDs',
@@ -154,7 +154,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
@@ -166,7 +166,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS,
             self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS,
             self::COMPONENT_FILTERINPUT_COMMENT_TYPES,
@@ -179,7 +179,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component): mixed
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_COMMENT_TYPES => [
                 CommentTypes::COMMENT,
             ],
@@ -192,7 +192,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->__('Limit results to elements with the given custom post IDs', 'comments'),
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->__('Limit results to elements with the given custom post ID', 'comments'),
             self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->__('Exclude elements with the given custom post IDs', 'comments'),

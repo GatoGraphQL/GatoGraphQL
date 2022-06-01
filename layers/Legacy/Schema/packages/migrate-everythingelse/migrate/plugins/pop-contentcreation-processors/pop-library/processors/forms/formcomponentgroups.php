@@ -17,7 +17,7 @@ class GD_ContentCreation_Module_Processor_FormInputGroups extends PoP_Module_Pro
             self::COMPONENT_FORMCOMPONENTGROUP_FEATUREDIMAGE => [PoP_Module_Processor_FeaturedImageFormComponents::class, PoP_Module_Processor_FeaturedImageFormComponents::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

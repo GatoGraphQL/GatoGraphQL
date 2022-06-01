@@ -20,7 +20,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_FLAG:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Flag received successfully.', 'pop-genericforms');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__("Noted, we will evaluate your feedback and take appropriate action.", 'pop-genericforms');
@@ -55,7 +55,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT:
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT:
                 $this->setProp($component, $props, 'objectname', TranslationAPIFacade::getInstance()->__('content', 'poptheme-wassup'));

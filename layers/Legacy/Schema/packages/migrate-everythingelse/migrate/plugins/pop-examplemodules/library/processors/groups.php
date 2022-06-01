@@ -22,7 +22,7 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_HOME:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 if ($pageTypeAPI->getHomeStaticPageID()) {

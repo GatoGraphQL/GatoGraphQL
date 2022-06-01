@@ -24,7 +24,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
             self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST => [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -33,7 +33,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

@@ -34,7 +34,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_HOME_WELCOME:
                 $ret[] = [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::COMPONENT_HTMLCODE_HOMEWELCOMETOP];
                 $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME];
@@ -137,7 +137,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_HOME_WELCOME:
             case self::COMPONENT_GROUP_HOME_COMPACTWELCOME:
                 // It will add class "in" through .js if there is no cookie
@@ -150,7 +150,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
     public function initWebPlatformRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_HOME_WELCOME:
             case self::COMPONENT_GROUP_HOME_COMPACTWELCOME:
             case self::COMPONENT_GROUP_AUTHOR_DESCRIPTION:
@@ -163,7 +163,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 );
                 $frontend_id = $this->getFrontendId($component, $props);
                 $collapsible_frontend_id = $frontend_id.'collapse';
-                $this->setProp([$collapsible_subcomponents[$component[1]]], $props, 'frontend-id', $collapsible_frontend_id);
+                $this->setProp([$collapsible_subcomponents[$component->name]], $props, 'frontend-id', $collapsible_frontend_id);
 
                 // Then set the frontend-id to the labels
                 $label_subcomponents_set = array(
@@ -180,7 +180,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                         [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM],
                     ),
                 );
-                foreach ($label_subcomponents_set[$component[1]] as $subcomponent) {
+                foreach ($label_subcomponents_set[$component->name] as $subcomponent) {
                     $this->setProp([$subcomponent], $props, 'target-id', $collapsible_frontend_id);
                 }
                 break;
@@ -191,7 +191,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_HOME_WELCOMEACCOUNT:
                 $this->appendProp($component, $props, 'class', 'row');
                 break;
@@ -207,7 +207,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_AUTHOR_DESCRIPTION:
                 $this->appendProp($component, $props, 'class', 'blockgroup-author-description');
                 break;
@@ -258,7 +258,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_HOME_WIDGETAREA:
             case self::COMPONENT_GROUP_AUTHOR_WIDGETAREA:
             case self::COMPONENT_GROUP_TAG_WIDGETAREA:
@@ -288,14 +288,14 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_HOME_WELCOME:
             case self::COMPONENT_GROUP_HOME_COMPACTWELCOME:
                 $this->appendProp([[PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::COMPONENT_CODE_HOMEWELCOME]], $props, 'class', 'jumbotron text-center');
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_HOME_WELCOME:
                 $this->appendProp([[PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME]], $props, 'class', 'well well-sm');
                 break;

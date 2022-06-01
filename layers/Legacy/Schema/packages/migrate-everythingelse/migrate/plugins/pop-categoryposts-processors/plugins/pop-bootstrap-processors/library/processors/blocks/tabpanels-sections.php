@@ -51,7 +51,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -102,7 +102,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
             self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionTabPanelComponents::class, CPP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_CATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionTabPanelComponents::class, CPP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_CATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -111,7 +111,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS02:
@@ -140,7 +140,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS02:

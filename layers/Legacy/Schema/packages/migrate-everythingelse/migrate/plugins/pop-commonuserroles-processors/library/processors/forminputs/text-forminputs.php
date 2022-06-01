@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME:
                 return TranslationAPIFacade::getInstance()->__('Last name', 'ure-popprocessors');
 
@@ -36,7 +36,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
     {
         $ret = parent::getLabel($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON:
                 return '<i class="fa fa-fw fa-user"></i>'.$ret;
 
@@ -49,7 +49,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME:
                 return 'lastName';
 

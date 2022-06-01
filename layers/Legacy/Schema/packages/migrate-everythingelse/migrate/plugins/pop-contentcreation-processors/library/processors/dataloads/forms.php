@@ -19,7 +19,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_FLAG => POP_CONTENTCREATION_ROUTE_FLAG,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -27,7 +27,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -37,7 +37,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     protected function validateCaptcha(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 return true;
         }
@@ -50,7 +50,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
         $actionexecuters = array(
             self::COMPONENT_DATALOAD_FLAG => FlagCustomPostMutationResolverBridge::class,
         );
-        if ($actionexecuter = $actionexecuters[$component[1]] ?? null) {
+        if ($actionexecuter = $actionexecuters[$component->name] ?? null) {
             return $actionexecuter;
         }
 
@@ -59,7 +59,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 return [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_FLAG];
         }
@@ -71,7 +71,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 $ret[] = [PoP_ContentCreation_Module_Processor_GFForms::class, PoP_ContentCreation_Module_Processor_GFForms::COMPONENT_FORM_FLAG];
                 break;
@@ -82,7 +82,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 // Change the 'Loading' message in the Status
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
@@ -94,7 +94,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 return $this->getObjectIDFromURLParam($component, $props, $data_properties);
         }
@@ -103,7 +103,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     protected function getObjectIDParamName(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
@@ -112,7 +112,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FLAG:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();;
         }

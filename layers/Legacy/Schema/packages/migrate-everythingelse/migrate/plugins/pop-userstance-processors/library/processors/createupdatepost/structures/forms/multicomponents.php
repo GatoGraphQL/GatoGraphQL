@@ -17,7 +17,7 @@ class UserStance_Module_Processor_FormMultipleComponents extends PoP_Module_Proc
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE:
                 $ret[] = [UserStance_Module_Processor_FormComponentGroupsGroups::class, UserStance_Module_Processor_FormComponentGroupsGroups::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET];
                 $ret[] = [UserStance_Module_Processor_CreateUpdatePostFormInputGroups::class, UserStance_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_STANCEEDITOR];

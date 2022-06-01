@@ -18,7 +18,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
         $blocks = array(
             self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR => [PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR],
         );
-        if ($block = $blocks[$component[1]] ?? null) {
+        if ($block = $blocks[$component->name] ?? null) {
             $ret[] = $block;
         }
 
@@ -27,7 +27,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
 
     public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREEN_MYCONTENT;
         }
@@ -37,7 +37,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTWRITE;
         }

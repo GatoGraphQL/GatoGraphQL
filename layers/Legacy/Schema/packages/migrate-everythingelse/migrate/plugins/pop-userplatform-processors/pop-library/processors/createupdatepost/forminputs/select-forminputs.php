@@ -16,7 +16,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 return TranslationAPIFacade::getInstance()->__('Publishing status', 'poptheme-wassup');
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 return GD_FormInput_ModeratedStatusDescription::class;
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 $this->appendProp($component, $props, 'class', 'form-input-status');
                 break;
@@ -53,7 +53,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 return 'status';
 
@@ -68,7 +68,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
                 $this->addJsmethod($ret, 'manageStatus');
                 break;

@@ -43,7 +43,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGE_ADDONS:
             case self::COMPONENT_PAGE_QUICKVIEW:
             case self::COMPONENT_PAGE_QUICKVIEWSIDEINFO:
@@ -70,13 +70,13 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                     self::COMPONENT_PAGE_BODYSIDEINFO => POP_PAGECOMPONENTGROUP_PAGESECTION_SIDEINFOCONTENT,
                     self::COMPONENT_PAGE_BODY => POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT,
                 );
-                if ($page_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($module_groups[$component[1]] ?? null)) {
+                if ($page_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($module_groups[$component->name] ?? null)) {
                     $ret[] = $page_component;
                 }
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGE_FRAMECOMPONENTS:
                 if (!($component->atts['onlyinitial'] ?? null)) {
                      // Load targeted module
@@ -102,7 +102,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGE_BODY:
             case self::COMPONENT_PAGE_QUICKVIEW:
                 if ($pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT)) {
@@ -111,7 +111,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                         self::COMPONENT_PAGE_BODY => POP_PAGECOMPONENTGROUP_PAGESECTION_BODYFRAMETOPOPTIONS,
                         self::COMPONENT_PAGE_QUICKVIEW => POP_PAGECOMPONENTGROUP_PAGESECTION_QUICKVIEWFRAMETOPOPTIONS,
                     );
-                    if ($frameoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$component[1]] ?? null)) {
+                    if ($frameoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$component->name] ?? null)) {
                         $ret[] = $frameoptions_component;
                     }
                 }
@@ -139,7 +139,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGE_BODY:
             case self::COMPONENT_PAGE_QUICKVIEW:
                 if ($pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_MAINCONTENT)) {
@@ -148,7 +148,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                         self::COMPONENT_PAGE_BODY => POP_PAGECOMPONENTGROUP_PAGESECTION_BODYFRAMEBOTTOMOPTIONS,
                         self::COMPONENT_PAGE_QUICKVIEW => POP_PAGECOMPONENTGROUP_PAGESECTION_QUICKVIEWFRAMEBOTTOMOPTIONS,
                     );
-                    if ($frameoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$component[1]] ?? null)) {
+                    if ($frameoptions_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties($groups[$component->name] ?? null)) {
                         $ret[] = $frameoptions_component;
                     }
                 }
@@ -160,7 +160,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGE_ADDONS:
                 $this->appendProp($component, $props, 'class', 'tab-content');
                 break;
@@ -171,7 +171,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
 
     public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
          // Make the frame components have a unique ID
             case self::COMPONENT_PAGE_FRAMECOMPONENTS:
                 foreach (RequestUtils::getFramecomponentComponents() as $subcomponent) {

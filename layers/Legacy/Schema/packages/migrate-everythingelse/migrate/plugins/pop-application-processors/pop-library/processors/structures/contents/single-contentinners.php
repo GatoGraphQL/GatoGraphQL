@@ -23,7 +23,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_AUTHOR:
                 $ret[] = [PoP_Module_Processor_AuthorContentLayouts::class, PoP_Module_Processor_AuthorContentLayouts::COMPONENT_LAYOUTAUTHOR_CONTENT];
                 break;
@@ -47,7 +47,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_HIGHLIGHTSINGLE:
                 // Highlights: it has a different set-up
                 $this->appendProp($component, $props, 'class', 'well');

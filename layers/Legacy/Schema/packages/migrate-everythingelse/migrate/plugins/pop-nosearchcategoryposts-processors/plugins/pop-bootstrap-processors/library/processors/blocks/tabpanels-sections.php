@@ -75,7 +75,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
             self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -84,7 +84,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS02:
@@ -113,7 +113,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS02:

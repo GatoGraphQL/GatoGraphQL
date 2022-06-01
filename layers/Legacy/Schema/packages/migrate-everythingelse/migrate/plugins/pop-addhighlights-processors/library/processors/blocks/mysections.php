@@ -15,7 +15,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW => POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS,
             self::COMPONENT_BLOCK_MYHIGHLIGHTS_TABLE_EDIT => POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS,
             default => parent::getRelevantRoute($component, $props),
@@ -29,12 +29,12 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
             self::COMPONENT_BLOCK_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW => [PoP_AddHighlights_Module_Processor_MySectionDataloads::class, PoP_AddHighlights_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYHIGHLIGHTS_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_AddHighlights_Module_Processor_CustomControlGroups::class, PoP_AddHighlights_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST];

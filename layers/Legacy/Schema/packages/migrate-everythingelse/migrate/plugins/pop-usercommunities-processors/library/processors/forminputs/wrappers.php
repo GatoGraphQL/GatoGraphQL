@@ -15,7 +15,7 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
                 $ret[] = [PoP_UserCommunities_Module_Processor_CheckboxFormInputs::class, PoP_UserCommunities_Module_Processor_CheckboxFormInputs::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY];
                 break;
@@ -26,7 +26,7 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
                 return 'isCommunity';
         }

@@ -17,7 +17,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return TranslationAPIFacade::getInstance()->__('Organizations', 'ure-popprocessors');
 
@@ -31,7 +31,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
     protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return RouteUtils::getRouteURL(POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS);
 
@@ -46,7 +46,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
     {
         $ret = parent::getThumbprintQuery($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 $ret['role'] = GD_URE_ROLE_ORGANIZATION;
                 break;
@@ -61,7 +61,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
 
     protected function getPendingMsg(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return TranslationAPIFacade::getInstance()->__('Loading Organizations', 'ure-popprocessors');
 
@@ -74,7 +74,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
 
     protected function getNotfoundMsg(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return TranslationAPIFacade::getInstance()->__('No Organizations found', 'ure-popprocessors');
 

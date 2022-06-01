@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 $ret = array_merge(
                     $ret,
@@ -29,7 +29,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 return 'row';
         }
@@ -39,7 +39,7 @@ class PoP_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Modul
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_GENERIC:
                 return 'col-xsm-4';
         }

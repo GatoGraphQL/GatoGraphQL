@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_TABPANEL_TAGPASTEVENTS => [GD_EM_Module_Processor_TagSectionTabPanelComponents::class, GD_EM_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGPASTEVENTS],
             self::COMPONENT_BLOCK_TABPANEL_TAGEVENTSCALENDAR => [GD_EM_Module_Processor_TagSectionTabPanelComponents::class, GD_EM_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGEVENTSCALENDAR],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGEVENTS:
             case self::COMPONENT_BLOCK_TABPANEL_TAGPASTEVENTS:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_TAGEVENTS];
@@ -49,7 +49,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
     {
         if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_BLOCK_TABPANEL_TAGPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;

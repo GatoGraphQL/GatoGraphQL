@@ -29,7 +29,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
             self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
             self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
@@ -57,12 +57,12 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
             self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW:
             case self::COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL:
@@ -79,7 +79,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 // // Artificial property added to identify the template when adding component-resources
                 // $this->setProp($component, $props, 'resourceloader', 'block-carousel');

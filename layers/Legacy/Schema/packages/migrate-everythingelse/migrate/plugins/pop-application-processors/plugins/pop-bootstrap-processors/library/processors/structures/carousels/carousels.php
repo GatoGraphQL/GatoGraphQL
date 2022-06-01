@@ -13,7 +13,7 @@ class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carousel
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_USERS:
 
                 $this->appendProp($component, $props, 'class', 'slide');
@@ -26,7 +26,7 @@ class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carousel
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_USERS:
                 return [PoP_Module_Processor_CustomCarouselInners::class, PoP_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_USERS];
         }
@@ -36,7 +36,7 @@ class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carousel
 
     public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_USERS:
 
                 return 'static';
@@ -48,7 +48,7 @@ class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carousel
 
     public function getControlsTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_USERS:
                 return [PoP_Module_Processor_CustomCarouselControls::class, PoP_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_USERS];
         }

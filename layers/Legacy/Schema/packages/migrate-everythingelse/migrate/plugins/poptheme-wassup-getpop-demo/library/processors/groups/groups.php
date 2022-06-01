@@ -15,7 +15,7 @@ class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
     {
         $ret = parent::getJsmethods($component, $props);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_GROUP_HOMETOP:
                 // Needed to recalculate the waypoints for the sideinfo waypoints effect that shows the filter when reaching the top of the All Content block
                 $this->addJsmethod($ret, 'onBootstrapEventWindowResize');
@@ -32,7 +32,7 @@ class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_GROUP_HOMETOP:
                 $ret[] = [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_HOME_COMPACTWELCOME];
                 if (defined('POP_BOOTSTRAPPROCESSORS_INITIALIZED')) {

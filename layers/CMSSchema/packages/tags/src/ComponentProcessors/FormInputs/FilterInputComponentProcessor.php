@@ -68,7 +68,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->getTagSlugsFilterInput(),
             self::COMPONENT_FILTERINPUT_TAG_IDS => $this->getTagIDsFilterInput(),
             default => null,
@@ -77,7 +77,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_TAG_SLUGS:
             case self::COMPONENT_FILTERINPUT_TAG_IDS:
                 return FormMultipleInput::class;
@@ -88,7 +88,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_TAG_SLUGS => 'tagSlugs',
             self::COMPONENT_FILTERINPUT_TAG_IDS => 'tagIDs',
             default => parent::getName($component),
@@ -97,7 +97,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_TAG_IDS => $this->getIDScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
@@ -106,7 +106,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_TAG_SLUGS,
             self::COMPONENT_FILTERINPUT_TAG_IDS
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -117,7 +117,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->__('Limit results to elements with the given tags', 'tags'),
             self::COMPONENT_FILTERINPUT_TAG_IDS => $this->__('Limit results to elements with the given ids', 'tags'),
             default => null,

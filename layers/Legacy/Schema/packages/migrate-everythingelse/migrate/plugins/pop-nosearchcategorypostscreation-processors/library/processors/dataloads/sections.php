@@ -207,12 +207,12 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
             self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
@@ -364,7 +364,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_FULLVIEWPREVIEW:
@@ -496,7 +496,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:

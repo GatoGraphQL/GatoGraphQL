@@ -20,7 +20,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilters extends PoP_Module_Proc
             self::COMPONENT_FILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_ORGANIZATIONS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

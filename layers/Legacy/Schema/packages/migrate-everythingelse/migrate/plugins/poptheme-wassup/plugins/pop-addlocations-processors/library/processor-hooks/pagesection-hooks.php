@@ -47,7 +47,7 @@ class PoP_AddLocations_PageSectionHooks
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS:
                 $processor->setProp([GD_EM_Module_Processor_CreateLocationBlocks::class, GD_EM_Module_Processor_CreateLocationBlocks::COMPONENT_BLOCK_CREATELOCATION], $props, 'title', '');
                 break;

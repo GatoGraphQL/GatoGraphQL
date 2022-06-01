@@ -28,7 +28,7 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Locations:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -44,7 +44,7 @@ class GD_Custom_EM_Module_Processor_CustomFilterInners extends PoP_Module_Proces
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

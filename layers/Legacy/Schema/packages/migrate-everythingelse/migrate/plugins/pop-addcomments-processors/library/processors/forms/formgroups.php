@@ -17,7 +17,7 @@ class PoP_Module_Processor_CommentFormGroups extends PoP_Module_Processor_FormCo
             self::COMPONENT_FORMINPUTGROUP_COMMENTEDITOR => [PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

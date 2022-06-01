@@ -23,7 +23,7 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
 
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_CREATELOCATIONMAP:
                 return array(
                     $this->getMapdivSubcomponent($component),

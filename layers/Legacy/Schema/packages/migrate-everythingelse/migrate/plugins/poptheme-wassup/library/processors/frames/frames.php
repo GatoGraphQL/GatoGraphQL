@@ -27,7 +27,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
 
     public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
                 return [PoPTheme_Wassup_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_TemplateResourceLoaderProcessor::RESOURCE_FRAME_TOP];
 
@@ -49,7 +49,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
             case self::COMPONENT_FRAME_SIDE:
             case self::COMPONENT_FRAME_TOPSIMPLE:
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 $this->addJsmethod($ret, 'offcanvasToggle', 'togglepagetabs');
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
             case self::COMPONENT_FRAME_SIDE:
             case self::COMPONENT_FRAME_TOPSIMPLE:
@@ -68,7 +68,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 $this->addJsmethod($ret, 'offcanvasToggle', 'togglenav');
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
             case self::COMPONENT_FRAME_TOPSIMPLE:
             case self::COMPONENT_FRAME_TOPEMBED:
@@ -92,7 +92,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 }
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
                 $this->addJsmethod($ret, 'switchTargetClass', 'togglesearch-xs');
                 $this->addJsmethod($ret, 'scrollbarVertical', 'notifications');
@@ -110,7 +110,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 $this->addJsmethod($ret, 'tooltip', 'new-window');
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_SIDE:
             case self::COMPONENT_FRAME_BACKGROUND:
                 $this->addJsmethod($ret, 'scrollbarVertical');
@@ -122,7 +122,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
                 $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationBlocks::class, AAL_PoPProcessors_Module_Processor_NotificationBlocks::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST], $props, 'set-datasetcount', true);
                 $this->setProp([AAL_PoPProcessors_Module_Processor_NotificationDataloads::class, AAL_PoPProcessors_Module_Processor_NotificationDataloads::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST], $props, 'lazy-load', true);
@@ -136,7 +136,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
                 $ret = array_merge(
                     $ret,
@@ -181,7 +181,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         $togglenav = TranslationAPIFacade::getInstance()->__('Toggle Navigation', 'poptheme-wassup');
         $togglehistory = TranslationAPIFacade::getInstance()->__('Toggle Browsing Tabs', 'poptheme-wassup');
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Comment Leo 24/10/2016: This is the only difference between self::COMPONENT_FRAME_TOPSIMPLE and self::COMPONENT_FRAME_TOPEMBED:
          // the Embed does not use the Side, as such do not execute this JS below which will add class "active-side" and so create a bug
             case self::COMPONENT_FRAME_TOP:
@@ -205,7 +205,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOP:
                 $title = $cmsapplicationapi->getSiteName();
 
@@ -434,7 +434,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FRAME_TOPSIMPLE:
             case self::COMPONENT_FRAME_TOPEMBED:
                 $ret[GD_JS_TITLES]['document'] = \PoP\Root\App::applyFilters(

@@ -20,7 +20,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NEWSLETTERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your Name', 'pop-genericforms');
             
@@ -37,7 +37,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
             case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
             case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
@@ -49,7 +49,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
 
     public function isHidden(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
@@ -59,7 +59,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
 
     // function getName(\PoP\ComponentModel\Component\Component $component) {
     
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
         
     //         case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
             
@@ -75,7 +75,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
 
     public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NEWSLETTERNAME:
             case self::COMPONENT_FORMINPUT_NEWSLETTEREMAIL:
             case self::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:

@@ -228,7 +228,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
 
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInput(),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->getLimitFilterInput(),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->getOffsetFilterInput(),
@@ -250,7 +250,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_SORT:
                 return OrderFormInput::class;
             case self::COMPONENT_FILTERINPUT_IDS:
@@ -271,7 +271,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        return match ((string) $component[1]) {
+        return match ((string) $component->name) {
             self::COMPONENT_FILTERINPUT_SORT => 'order',
             self::COMPONENT_FILTERINPUT_LIMIT => 'limit',
             self::COMPONENT_FILTERINPUT_OFFSET => 'offset',
@@ -293,7 +293,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->getIntScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->getIntScalarTypeResolver(),
@@ -315,7 +315,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_IDS,
             self::COMPONENT_FILTERINPUT_EXCLUDE_IDS,
             self::COMPONENT_FILTERINPUT_PARENT_IDS,
@@ -329,7 +329,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
 
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->__('Offset the results by how many positions', 'schema-commons'),

@@ -41,7 +41,7 @@ class PoPVP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor
             self::COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE => [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -23,7 +23,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
     {
 
         // Add the layout below to preload the popover content for user @mentions, coupled with js function 'contentPopover'
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CONTENT_POST:
             case self::COMPONENT_LAYOUT_CONTENT_POSTFEED:
             case self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT:
@@ -40,7 +40,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CONTENT_POST:
                 if (defined('POP_ADDPOSTLINKSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_AddPostLinks_Module_Processor_LayoutWrappers::class, PoP_AddPostLinks_Module_Processor_LayoutWrappers::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE];
@@ -55,7 +55,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         }
 
         // Add the layout below to preload the popover content for user @mentions, coupled with js function 'contentPopover'
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CONTENT_POST:
             case self::COMPONENT_LAYOUT_CONTENT_POSTFEED:
             case self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT:
@@ -69,7 +69,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
 
     public function getContentMaxlength(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT:
                 // Length: 400 characters max
                 return 400;
@@ -82,7 +82,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CONTENT_POST:
             case self::COMPONENT_LAYOUT_CONTENT_POSTFEED:
             case self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT:
@@ -102,7 +102,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
     {
 
         // Hide the @mentions popover code
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CONTENT_POST:
             case self::COMPONENT_LAYOUT_CONTENT_POSTFEED:
             case self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT:
@@ -112,7 +112,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CONTENT_POST:
             case self::COMPONENT_LAYOUT_CONTENT_POSTFEED:
                 $this->appendProp($component, $props, 'class', 'readable');

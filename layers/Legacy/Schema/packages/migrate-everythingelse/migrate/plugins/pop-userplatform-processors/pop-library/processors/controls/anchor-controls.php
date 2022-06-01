@@ -17,7 +17,7 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return TranslationAPIFacade::getInstance()->__('Email', 'pop-coreprocessors');
 
@@ -29,7 +29,7 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return 'fa-envelope';
 
@@ -42,7 +42,7 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
     public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return RouteUtils::getRouteURL(POP_USERPLATFORM_ROUTE_INVITENEWUSERS);
@@ -53,7 +53,7 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
 
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return POP_TARGET_MODALS;
@@ -64,7 +64,7 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
                 $this->appendProp($component, $props, 'class', 'btn btn-default btn-block btn-invitenewusers');
                 break;

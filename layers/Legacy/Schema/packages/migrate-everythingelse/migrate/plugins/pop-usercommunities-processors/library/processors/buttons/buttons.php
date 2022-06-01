@@ -14,7 +14,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return [GD_URE_Module_Processor_ButtonInners::class, GD_URE_Module_Processor_ButtonInners::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP];
         }
@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return 'editMembershipURL';
         }
@@ -34,7 +34,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return POP_TARGET_ADDONS;
         }
@@ -44,7 +44,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'ure-popprocessors');
         }
@@ -56,7 +56,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_BUTTON_EDITMEMBERSHIP:
                 $ret .= ' btn btn-xs btn-default';
                 break;

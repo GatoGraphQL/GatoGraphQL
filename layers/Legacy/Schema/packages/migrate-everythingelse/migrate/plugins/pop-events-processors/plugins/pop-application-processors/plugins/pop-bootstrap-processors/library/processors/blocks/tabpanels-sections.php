@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
             self::COMPONENT_BLOCK_TABPANEL_PASTEVENTS => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_PASTEVENTS],
             self::COMPONENT_BLOCK_TABPANEL_EVENTSCALENDAR => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_EVENTSCALENDAR],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_EVENTS:
                 return [PoP_Events_Module_Processor_CustomControlGroups::class, PoP_Events_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_EVENTLIST];
 
@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_EVENTS:
             case self::COMPONENT_BLOCK_TABPANEL_PASTEVENTS:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_EVENTS];
@@ -63,7 +63,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
     {
         if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_BLOCK_TABPANEL_PASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;

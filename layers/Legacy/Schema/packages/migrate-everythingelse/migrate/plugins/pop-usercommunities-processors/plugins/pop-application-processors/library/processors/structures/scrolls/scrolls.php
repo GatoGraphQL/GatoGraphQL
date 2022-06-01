@@ -30,7 +30,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
             self::COMPONENT_SCROLL_COMMUNITIES_LIST => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_COMMUNITIES_LIST],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

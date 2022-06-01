@@ -252,7 +252,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS00:
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS01:
@@ -509,7 +509,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_CATEGORYPOSTS18_CONTENT],
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_CATEGORYPOSTS19_CONTENT],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -519,7 +519,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
     public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS00:
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS01:
@@ -774,7 +774,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18],
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19],
         );
-        if ($control = $controls[$component[1]] ?? null) {
+        if ($control = $controls[$component->name] ?? null) {
             return $control;
         }
 

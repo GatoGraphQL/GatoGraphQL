@@ -17,7 +17,7 @@ class UserStance_Module_Processor_ContentMultipleInners extends PoP_Module_Proce
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTCONTENTINNER_STANCES:
                 $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED];
                 break;

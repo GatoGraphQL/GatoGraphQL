@@ -28,7 +28,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
                 [UserStance_Module_Processor_CustomVerticalSingleSidebars::class, UserStance_Module_Processor_CustomVerticalSingleSidebars::COMPONENT_VERTICALSIDEBAR_SINGLE_STANCE] :
                 [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -37,7 +37,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR:
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
@@ -47,7 +47,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -57,7 +57,7 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }

@@ -17,7 +17,7 @@ class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_Map
 
     public function getMapdivSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS:
                 return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAPSTATICIMAGE_DIV];
 

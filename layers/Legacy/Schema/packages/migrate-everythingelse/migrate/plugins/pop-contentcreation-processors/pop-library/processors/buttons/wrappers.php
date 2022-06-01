@@ -19,7 +19,7 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
                 $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTVIEW];
                 break;
@@ -34,7 +34,7 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
 

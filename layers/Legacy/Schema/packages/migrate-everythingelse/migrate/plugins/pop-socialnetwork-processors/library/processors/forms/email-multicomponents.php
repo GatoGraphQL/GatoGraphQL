@@ -17,7 +17,7 @@ class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Modu
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK:
                 $ret[] = [PoP_SocialNetwork_Module_Processor_UserCodes::class, PoP_SocialNetwork_Module_Processor_UserCodes::COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL];
 

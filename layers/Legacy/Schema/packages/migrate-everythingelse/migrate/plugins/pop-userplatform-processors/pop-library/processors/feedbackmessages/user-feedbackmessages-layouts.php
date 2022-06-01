@@ -16,7 +16,7 @@ class PoP_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Process
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Preferences saved.', 'pop-coreprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('You have successfully updated your preferences.', 'pop-coreprocessors');

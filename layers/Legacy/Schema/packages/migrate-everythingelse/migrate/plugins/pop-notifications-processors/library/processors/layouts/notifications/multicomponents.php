@@ -20,7 +20,7 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
     {
         $ret = parent::getConditionalLeafComponentFields($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
                 $ret = array_merge(
                     $ret,

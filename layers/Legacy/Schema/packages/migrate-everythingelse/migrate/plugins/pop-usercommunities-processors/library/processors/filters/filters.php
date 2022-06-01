@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_CustomFilters extends PoP_Module_Processor_Filters
             self::COMPONENT_FILTER_COMMUNITIES => [GD_URE_Module_Processor_CustomFilterInners::class, GD_URE_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

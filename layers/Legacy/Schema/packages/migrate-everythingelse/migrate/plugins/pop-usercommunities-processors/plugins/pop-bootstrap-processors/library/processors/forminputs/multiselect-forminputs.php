@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return TranslationAPIFacade::getInstance()->__('Privileges', 'ure-popprocessors');
 
@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return GD_URE_FormInput_MemberPrivileges::class;
             
@@ -42,7 +42,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return 'memberprivileges';
 

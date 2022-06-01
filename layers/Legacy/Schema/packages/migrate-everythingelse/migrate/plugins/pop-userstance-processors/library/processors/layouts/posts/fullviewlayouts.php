@@ -16,7 +16,7 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
     {
         $ret = parent::getFooterSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
                 $ret[] = [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL];
                 $ret[] = [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION];
@@ -30,13 +30,13 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
 
     public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
                 $sidebars = array(
                     self::COMPONENT_LAYOUT_FULLVIEW_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE],
                 );
 
-                return $sidebars[$component[1]];
+                return $sidebars[$component->name];
         }
 
         return parent::getSidebarSubcomponent($component);
@@ -48,7 +48,7 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
                 $ret[GD_JS_CLASSES]['content'] = 'alert alert-stance';
                 $ret[GD_JS_CLASSES]['content-inner'] = 'readable';
@@ -62,7 +62,7 @@ class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Proce
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_STANCE:
                 $ret[] = [UserStance_Module_Processor_Layouts::class, UserStance_Module_Processor_Layouts::COMPONENT_LAYOUTSTANCE];
                 break;

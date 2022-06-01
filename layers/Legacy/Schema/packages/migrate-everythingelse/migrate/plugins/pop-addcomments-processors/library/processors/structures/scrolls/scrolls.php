@@ -21,7 +21,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLL_COMMENTS_LIST:
                 return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::COMPONENT_SCROLLINNER_COMMENTS_LIST];
 
@@ -40,7 +40,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
 
     public function addFetchedData(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT:
             case self::COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
                 return false;
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLL_COMMENTS_LIST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $this->appendProp($component, $props, 'class', 'pop-commentpost-'.$post_id);
@@ -64,7 +64,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                 );
 
                 $this->setProp($component, $props, 'appendable', true);
-                $this->setProp($component, $props, 'appendable-class', $classes[$component[1]] ?? null);
+                $this->setProp($component, $props, 'appendable-class', $classes[$component->name] ?? null);
 
                 break;
         }
@@ -74,7 +74,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
 
     public function getFetchmoreButtonSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLL_COMMENTS_LIST:
             case self::COMPONENT_SCROLL_COMMENTS_ADD:
                 return null;

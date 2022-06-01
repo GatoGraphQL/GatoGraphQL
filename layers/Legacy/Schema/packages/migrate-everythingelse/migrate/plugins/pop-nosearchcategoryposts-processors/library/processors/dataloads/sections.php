@@ -1120,7 +1120,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_CAROUSEL => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEW => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
@@ -2220,12 +2220,12 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
             self::COMPONENT_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT => [NSCPP_Module_Processor_Carousels::class, NSCPP_Module_Processor_Carousels::COMPONENT_CAROUSEL_TAGNOSEARCHCATEGORYPOSTS19_CONTENT],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS01_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS02_TYPEAHEAD:
@@ -3173,7 +3173,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS:
@@ -3507,7 +3507,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_ADDONS:
@@ -4116,7 +4116,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Filter by the Profile/Community
             case self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS:
@@ -4455,7 +4455,7 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:

@@ -16,7 +16,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
 
     public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return array(
@@ -28,7 +28,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
     }
     public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
                 return [PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS];
 
@@ -41,7 +41,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
 
     public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return false;
         }
@@ -51,7 +51,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
                 return 'locations';
 
@@ -82,7 +82,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 // Provide a pre-define list of locations

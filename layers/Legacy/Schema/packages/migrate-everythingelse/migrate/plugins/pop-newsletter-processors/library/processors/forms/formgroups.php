@@ -23,7 +23,7 @@ class PoP_Newsletter_Module_Processor_FormGroups extends PoP_Module_Processor_Fo
             self::COMPONENT_FORMINPUTGROUP_NEWSLETTEREMAILVERIFICATIONEMAIL => [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

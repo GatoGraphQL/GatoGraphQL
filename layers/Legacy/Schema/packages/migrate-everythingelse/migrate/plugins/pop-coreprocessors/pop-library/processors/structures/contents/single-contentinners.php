@@ -15,7 +15,7 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
 
     protected function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
                 return [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
 
@@ -30,7 +30,7 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
             case self::COMPONENT_CONTENTINNER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL:
                 $ret[] = $this->getLayoutSubcomponent($component);

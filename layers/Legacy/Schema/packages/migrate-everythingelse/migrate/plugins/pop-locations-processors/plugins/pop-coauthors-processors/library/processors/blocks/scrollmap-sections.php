@@ -13,7 +13,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -25,12 +25,12 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleTitle();
         }
@@ -40,7 +40,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKUSERLIST];
         }

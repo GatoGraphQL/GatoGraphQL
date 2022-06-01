@@ -22,7 +22,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN];
 
@@ -44,7 +44,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 return 'printURL';
@@ -59,7 +59,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 return TranslationAPIFacade::getInstance()->__('Print', 'pop-coreprocessors');
@@ -83,7 +83,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 return GD_URLPARAM_TARGET_PRINT;
@@ -96,7 +96,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-print';
                 break;
@@ -113,7 +113,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');

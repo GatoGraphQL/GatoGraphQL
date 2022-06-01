@@ -51,7 +51,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -61,7 +61,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getPostTagObjectTypeResolver();
@@ -72,7 +72,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getListQueryInputOutputHandler();
         }
@@ -82,7 +82,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return new \PoP\ComponentModel\Component\Component(TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_TAGS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGCOUNT:

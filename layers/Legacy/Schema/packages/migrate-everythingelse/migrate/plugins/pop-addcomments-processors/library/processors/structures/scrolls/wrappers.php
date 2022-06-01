@@ -17,7 +17,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_CommentsWidgets::class, PoP_Module_Processor_CommentsWidgets::COMPONENT_WIDGET_POSTCOMMENTS];
                 break;
@@ -32,7 +32,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
                 $this->appendProp($component, $props, 'class', 'postcomments clearfix');
@@ -44,7 +44,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
                 return 'hasComments';

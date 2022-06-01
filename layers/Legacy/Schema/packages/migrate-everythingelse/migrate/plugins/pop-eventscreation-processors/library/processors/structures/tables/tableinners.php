@@ -18,7 +18,7 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
         $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLEINNER_MYEVENTS:
                 $ret[] = [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT];
                 $ret[] = [PoP_Module_Processor_EventDateAndTimeLayouts::class, PoP_Module_Processor_EventDateAndTimeLayouts::COMPONENT_EM_LAYOUTEVENT_TABLECOL];

@@ -15,7 +15,7 @@ class PoP_Module_Processor_TagLayouts extends PoP_Module_Processor_TagLayoutsBas
 
     public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAGH4:
                 return 'h4';
         }

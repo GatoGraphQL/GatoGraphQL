@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomMenuSidebarInners extends PoP_Module_Processor_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARINNER_MENU_ABOUT:
                 $ret[] = [GD_Custom_Module_Processor_MenuWidgets::class, GD_Custom_Module_Processor_MenuWidgets::COMPONENT_WIDGET_MENU_ABOUT];
                 break;

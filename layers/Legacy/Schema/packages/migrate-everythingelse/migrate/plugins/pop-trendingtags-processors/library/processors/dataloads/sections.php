@@ -16,7 +16,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS => POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS,
             self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST => POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
             self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_TAGS_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
@@ -53,7 +53,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_LIST:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('tags', 'poptheme-wassup'));

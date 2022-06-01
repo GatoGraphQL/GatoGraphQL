@@ -15,7 +15,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_EVENTLINK_CREATE => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
             self::COMPONENT_BLOCK_EVENTLINK_UPDATE => POP_EVENTLINKSCREATION_ROUTE_EDITEVENTLINK,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
             self::COMPONENT_BLOCK_EVENTLINK_UPDATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENTLINK_UPDATE],
             self::COMPONENT_BLOCK_EVENTLINK_CREATE => [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENTLINK_CREATE],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -39,7 +39,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTLINK_CREATE:
                 return true;
         }
@@ -48,7 +48,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTLINK_UPDATE:
                 return true;
         }
@@ -58,7 +58,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTLINK_UPDATE:
             case self::COMPONENT_BLOCK_EVENTLINK_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {

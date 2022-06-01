@@ -17,7 +17,7 @@ class PoP_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condition
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_POSTPERMALINK:
                 $ret[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_POSTPERMALINK];
                 break;
@@ -28,7 +28,7 @@ class PoP_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condition
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_POSTPERMALINK:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }

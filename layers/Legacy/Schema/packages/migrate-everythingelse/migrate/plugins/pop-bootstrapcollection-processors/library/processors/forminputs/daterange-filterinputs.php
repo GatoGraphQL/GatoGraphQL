@@ -35,7 +35,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             // @todo This FilterInput was deleted, since it shouldn't be used anymore
             self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => null,
             default => null,
@@ -44,7 +44,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES:
     //             return true;
     //     }
@@ -54,7 +54,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
         }
@@ -64,13 +64,13 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES:
                 // Add a nice name, so that the URL params when filtering make sense
                 $names = array(
                     self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => 'date',
                 );
-                return $names[$component[1]];
+                return $names[$component->name];
         }
 
         return parent::getName($component);
@@ -78,7 +78,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => $this->dateScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
@@ -87,7 +87,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES => $translationAPI->__('', ''),
             default => null,
         };

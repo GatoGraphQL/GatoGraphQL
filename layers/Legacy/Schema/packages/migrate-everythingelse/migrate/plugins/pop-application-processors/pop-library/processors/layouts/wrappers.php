@@ -22,7 +22,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
                 $ret[] = [Wassup_Module_Processor_UserPostInteractionLayouts::class, Wassup_Module_Processor_UserPostInteractionLayouts::COMPONENT_LAYOUT_USERPOSTINTERACTION];
                 break;
@@ -43,7 +43,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
 
     //     $ret = parent::getConditionFailedSubcomponents($component);
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
 
@@ -58,7 +58,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
@@ -70,7 +70,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction clearfix');

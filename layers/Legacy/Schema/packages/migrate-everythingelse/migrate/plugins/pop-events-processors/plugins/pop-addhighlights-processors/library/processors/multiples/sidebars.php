@@ -17,7 +17,7 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR:
                 // Comment Leo 27/07/2016: can't have the filter for "POSTAUTHORSSIDEBAR", because to get the authors we do:
@@ -27,7 +27,7 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
                 $filters = array(
                     self::COMPONENT_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR];
                 break;
 
@@ -35,7 +35,7 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
                 $filters = array(
                     self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::COMPONENT_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR];
                 break;
         }
@@ -49,7 +49,7 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
             self::COMPONENT_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
             self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -58,7 +58,7 @@ class PoP_Events_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Mod
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR:
             case self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;

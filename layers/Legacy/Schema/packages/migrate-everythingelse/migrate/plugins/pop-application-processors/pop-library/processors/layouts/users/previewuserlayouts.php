@@ -27,7 +27,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
 
     public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 // case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
@@ -43,7 +43,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
 
     public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 return 'h3';
         }
@@ -53,7 +53,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
 
     public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 // case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
@@ -71,7 +71,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
     {
         $ret = parent::getBelowavatarLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
@@ -86,7 +86,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
@@ -101,7 +101,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
     public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR:
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
@@ -125,7 +125,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
 
     public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 return true;
         }
@@ -135,7 +135,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
 
     public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 return true;
         }
@@ -145,7 +145,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
 
     public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
@@ -162,7 +162,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 // case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
@@ -171,7 +171,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
                 $ret[GD_JS_CLASSES]['quicklinkgroup-bottom'] = 'icon-only pull-right';
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowavatar'] = 'bg-info text-info belowavatar';
@@ -183,7 +183,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HEADER:
                 $this->appendProp($component, $props, 'class', 'alert alert-info alert-sm');
                 break;

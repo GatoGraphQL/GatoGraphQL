@@ -13,7 +13,7 @@ class PoP_Module_Processor_StanceScriptsLayouts extends PoP_Module_Processor_App
 
     public function getOperation(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON:
                 return 'replace';
         }
@@ -25,12 +25,12 @@ class PoP_Module_Processor_StanceScriptsLayouts extends PoP_Module_Processor_App
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON:
                 $classes = array(
                     self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON => 'createorupdatestance',
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component->name];
                 break;
         }
         

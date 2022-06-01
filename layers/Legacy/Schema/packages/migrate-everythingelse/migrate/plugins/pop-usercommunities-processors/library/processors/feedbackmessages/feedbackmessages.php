@@ -23,7 +23,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Process
             self::COMPONENT_FEEDBACKMESSAGE_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_EDITMEMBERSHIP],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

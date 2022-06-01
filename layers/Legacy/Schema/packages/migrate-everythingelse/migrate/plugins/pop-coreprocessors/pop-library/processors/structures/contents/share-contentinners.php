@@ -21,7 +21,7 @@ class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_Conte
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_EMBEDPREVIEW:
                 $ret[] = [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_EMBEDPREVIEW];
                 break;

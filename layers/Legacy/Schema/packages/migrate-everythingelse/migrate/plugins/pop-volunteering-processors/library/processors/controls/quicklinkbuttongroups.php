@@ -15,7 +15,7 @@ class PoP_Volunteering_Module_Processor_QuicklinkButtonGroups extends PoP_Module
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTVOLUNTEER:
                 $ret[] = [PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::class, PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY];
                 break;

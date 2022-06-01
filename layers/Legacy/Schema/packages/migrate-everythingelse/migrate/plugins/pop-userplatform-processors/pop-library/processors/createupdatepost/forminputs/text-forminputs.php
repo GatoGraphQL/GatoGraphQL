@@ -16,7 +16,7 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_TITLE:
                 return TranslationAPIFacade::getInstance()->__('Title', 'poptheme-wassup');
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_TITLE:
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK:
                 return true;
@@ -40,7 +40,7 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_TITLE:
                 return 'titleEdit';
 

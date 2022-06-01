@@ -117,7 +117,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW => POP_EVENTS_ROUTE_EVENTS,
@@ -193,7 +193,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::COMPONENT_CALENDAR_EVENTSMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
@@ -297,12 +297,12 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL => [GD_EM_Module_Processor_CustomCarousels::class, GD_EM_Module_Processor_CustomCarousels::COMPONENT_CAROUSEL_TAGEVENTS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getFeedbackmessagesPosition(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP:
             case self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP:
             case self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
@@ -322,7 +322,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW:
@@ -475,7 +475,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
@@ -514,7 +514,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Filter by the Profile/Community
             case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
@@ -554,7 +554,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_NAVIGATOR:
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_ADDONS:
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR:
@@ -573,7 +573,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PASTEVENTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_ADDONS:
@@ -601,7 +601,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS:
@@ -657,7 +657,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS:

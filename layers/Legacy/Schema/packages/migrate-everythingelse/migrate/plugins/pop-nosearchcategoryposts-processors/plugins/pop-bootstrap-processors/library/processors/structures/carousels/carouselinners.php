@@ -91,7 +91,7 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02:
@@ -202,7 +202,7 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
             self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
             self::COMPONENT_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] =$layout;
         }
 

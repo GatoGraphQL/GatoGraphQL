@@ -16,7 +16,7 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
 
     public function useTime(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
@@ -26,7 +26,7 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DATERANGEPICKER:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
 
@@ -39,7 +39,7 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }

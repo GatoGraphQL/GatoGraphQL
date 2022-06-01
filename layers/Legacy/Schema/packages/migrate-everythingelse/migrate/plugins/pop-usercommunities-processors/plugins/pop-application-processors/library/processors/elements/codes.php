@@ -15,7 +15,7 @@ class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HT
 
     public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_INVITENEWMEMBERSHELP:
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 $invitenew_processor = $componentprocessor_manager->getProcessor([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS]);

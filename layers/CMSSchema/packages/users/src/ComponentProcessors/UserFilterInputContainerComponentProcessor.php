@@ -36,7 +36,7 @@ class UserFilterInputContainerComponentProcessor extends AbstractFilterInputCont
             new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EMAILS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_USERS => [
                 ...$userFilterInputComponents,
                 ...$paginationFilterInputComponents,

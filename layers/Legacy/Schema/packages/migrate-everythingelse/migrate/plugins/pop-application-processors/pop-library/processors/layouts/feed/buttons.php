@@ -17,7 +17,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         $buttoninners = array(
             self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY => [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -26,7 +26,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('Comments, responses and highlights', 'poptheme-wassup');
         }
@@ -38,7 +38,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 $ret .= ' btn btn-default';
                 break;
@@ -49,7 +49,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 // We use the "previouscomponents-ids" to obtain the url to point to
                 return null;
@@ -60,7 +60,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 $this->appendProp($component, $props, 'class', 'pop-collapse-btn');
 

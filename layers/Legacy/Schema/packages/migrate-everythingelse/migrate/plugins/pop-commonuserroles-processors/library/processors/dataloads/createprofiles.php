@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
             self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
@@ -40,7 +40,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class);
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::COMPONENT_FORM_PROFILEORGANIZATION_CREATE];
                 break;

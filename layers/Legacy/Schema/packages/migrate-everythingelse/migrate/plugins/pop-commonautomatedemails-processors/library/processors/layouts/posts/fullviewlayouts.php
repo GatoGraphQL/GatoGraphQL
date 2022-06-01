@@ -15,7 +15,7 @@ class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Pro
 
     //     $ret = parent::getFooterSubcomponents($component);
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
 
@@ -28,13 +28,13 @@ class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Pro
 
     public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:
                 $sidebars = array(
                     self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST => [PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                 );
 
-                return $sidebars[$component[1]];
+                return $sidebars[$component->name];
         }
 
         return parent::getSidebarSubcomponent($component);

@@ -17,7 +17,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebars extends
             self::COMPONENT_VERTICALSIDEBAR_SINGLE_LINK => [PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners::class, PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -26,7 +26,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebars extends
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBAR_SINGLE_LINK:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

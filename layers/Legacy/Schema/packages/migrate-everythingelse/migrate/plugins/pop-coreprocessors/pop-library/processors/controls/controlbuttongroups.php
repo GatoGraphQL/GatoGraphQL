@@ -37,7 +37,7 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS:
                 $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS];
                 break;
@@ -92,7 +92,7 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS:
                 $this->appendProp($component, $props, 'class', 'hidden-sm hidden-md hidden-lg');
                 break;

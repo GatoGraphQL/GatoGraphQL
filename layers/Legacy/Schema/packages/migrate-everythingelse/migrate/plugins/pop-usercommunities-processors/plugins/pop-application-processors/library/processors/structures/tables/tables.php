@@ -14,13 +14,13 @@ class PoP_UserCommunities_Module_Processor_Tables extends PoP_Module_Processor_T
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYMEMBERS:
                 $inners = array(
                     self::COMPONENT_TABLE_MYMEMBERS => [PoP_UserCommunities_Module_Processor_TableInners::class, PoP_UserCommunities_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYMEMBERS],
                 );
 
-                return $inners[$component[1]];
+                return $inners[$component->name];
         }
 
         return parent::getInnerSubcomponent($component);
@@ -30,7 +30,7 @@ class PoP_UserCommunities_Module_Processor_Tables extends PoP_Module_Processor_T
     {
         $ret = parent::getHeaderTitles($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYMEMBERS:
                 $ret[] = TranslationAPIFacade::getInstance()->__('User', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'poptheme-wassup');

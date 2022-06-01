@@ -26,7 +26,7 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
 
     public function getDropdownSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
                     $subcomponents, 
@@ -72,7 +72,7 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
 
     public function getSocialmediaSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
                 $subcomponents[] = [PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::class, PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA];
                 break;

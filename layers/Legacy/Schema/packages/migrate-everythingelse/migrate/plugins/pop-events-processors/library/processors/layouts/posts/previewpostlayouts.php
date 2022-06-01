@@ -44,7 +44,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return 'editURL';
@@ -55,7 +55,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
@@ -69,7 +69,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getAuthorComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
@@ -79,7 +79,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTEDIT];
@@ -96,7 +96,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
@@ -119,7 +119,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
@@ -143,7 +143,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     {
         $ret = parent::getBottomSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_LIST:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
@@ -176,7 +176,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
@@ -211,7 +211,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 return true;
@@ -222,7 +222,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 return 'h3';
@@ -233,7 +233,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
@@ -267,7 +267,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
@@ -291,7 +291,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
@@ -303,7 +303,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_RELATED:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_EDIT:
@@ -323,7 +323,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL:
@@ -334,21 +334,21 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER:
                 // Hide for small screens since otherwise it doesn't fit in the viewport and the whole popover is then not visible
                 $ret[GD_JS_CLASSES]['thumb'] = 'hidden-xs';
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_ADDONS:
@@ -370,7 +370,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL:
                 $this->appendProp($component, $props, 'class', 'events-carousel');
                 break;

@@ -15,7 +15,7 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
 
     public function getDescriptionMaxlength(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTAUTHOR_LIMITEDCONTENT:
                 return 300;
         }
@@ -25,7 +25,7 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTAUTHOR_CONTENT:
                 $this->appendProp($component, $props, 'class', 'layoutauthor readable clearfix');
                 break;

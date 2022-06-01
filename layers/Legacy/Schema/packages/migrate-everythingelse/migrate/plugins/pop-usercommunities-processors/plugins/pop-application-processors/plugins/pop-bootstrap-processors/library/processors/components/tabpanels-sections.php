@@ -15,7 +15,7 @@ class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends P
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_COMMUNITIES:
             case self::COMPONENT_TABPANEL_MYMEMBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
@@ -28,7 +28,7 @@ class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends P
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_COMMUNITIES:
                 $ret = array_merge(
                     $ret,
@@ -58,7 +58,7 @@ class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends P
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_COMMUNITIES:
                 return array(
                     [

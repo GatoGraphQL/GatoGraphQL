@@ -19,7 +19,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrollInners extends PoP_Module_
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_SCROLLINNER_MYPASTEVENTS_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW:
@@ -44,7 +44,7 @@ class PoP_EventsCreation_Module_Processor_CustomScrollInners extends PoP_Module_
             self::COMPONENT_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_EVENT],
             self::COMPONENT_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_PASTEVENT],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

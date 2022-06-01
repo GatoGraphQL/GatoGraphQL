@@ -19,7 +19,7 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
 
     public function getMapdivSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_INDIVIDUAL_POST:
             case self::COMPONENT_MAP_INDIVIDUAL_USER:
             case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
@@ -31,7 +31,7 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
 
     public function getDrawmarkersSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_INDIVIDUAL_POST:
             case self::COMPONENT_MAP_INDIVIDUAL_USER:
             case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
@@ -43,7 +43,7 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
 
     public function openOnemarkerInfowindow(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
                 return false;
         }

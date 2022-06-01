@@ -18,7 +18,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_POSTDATES:
                 $ret .= ' col-sm-2';
                 break;
@@ -30,7 +30,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_POSTDATES:
                 $ret .= ' col-sm-10';
                 break;
@@ -41,7 +41,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
 
     public function getComponentSubname(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER:
             case self::COMPONENT_FILTERINPUTGROUP_POSTDATES:
                 return 'readable';
@@ -57,7 +57,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
             self::COMPONENT_FILTERINPUTGROUP_POSTDATES => [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_CUSTOMPOSTDATES],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -66,7 +66,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER:
                 $this->setProp($this->getComponentSubcomponent($component), $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Click here...', 'pop-coreprocessors'));
                 break;

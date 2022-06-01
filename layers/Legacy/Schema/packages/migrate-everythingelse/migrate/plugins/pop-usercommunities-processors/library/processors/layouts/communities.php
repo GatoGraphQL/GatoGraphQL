@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_UserCommunityLayouts extends GD_URE_Module_Process
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_LAYOUT_COMMUNITIES:
                 $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_ADDONS];
                 break;

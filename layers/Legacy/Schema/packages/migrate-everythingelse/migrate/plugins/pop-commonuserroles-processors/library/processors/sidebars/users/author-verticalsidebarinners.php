@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Modu
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION:
                 $ret = array_merge(
                     $ret,

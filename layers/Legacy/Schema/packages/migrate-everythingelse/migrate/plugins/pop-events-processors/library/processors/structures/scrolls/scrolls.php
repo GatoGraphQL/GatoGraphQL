@@ -63,7 +63,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
             self::COMPONENT_SCROLL_AUTHORPASTEVENTS_FULLVIEW => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

@@ -37,7 +37,7 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
             new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_POSTS => [
                 ...$postFilterInputComponents,
                 ...$paginationFilterInputComponents,

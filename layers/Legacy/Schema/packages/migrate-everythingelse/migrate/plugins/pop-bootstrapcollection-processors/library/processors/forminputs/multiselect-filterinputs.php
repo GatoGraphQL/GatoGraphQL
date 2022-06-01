@@ -49,7 +49,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInput::class, PoP_Module_Processor_MultiSelectFilterInput::FILTERINPUT_MODERATEDPOSTSTATUS],
             self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInput::class, PoP_Module_Processor_MultiSelectFilterInput::FILTERINPUT_UNMODERATEDPOSTSTATUS],
             default => null,
@@ -58,7 +58,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
     //         case self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS:
     //             return true;
@@ -69,7 +69,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
             case self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status', 'pop-coreprocessors');
@@ -80,7 +80,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
                 return GD_FormInput_ModeratedStatus::class;
 
@@ -93,7 +93,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS:
             case self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 // Add a nice name, so that the URL params when filtering make sense
@@ -105,7 +105,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS => $this->customPostModeratedStatusEnumTypeResolver,
             self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS => $this->customPostUnmoderatedStatusEnumTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
@@ -114,7 +114,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS,
             self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS
                 => SchemaTypeModifiers::IS_ARRAY,
@@ -126,7 +126,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS => $translationAPI->__('', ''),
             default => null,

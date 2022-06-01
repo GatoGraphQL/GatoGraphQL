@@ -35,7 +35,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
         $ret = parent::getFooterSubcomponents($component);
 
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_POST:
             case self::COMPONENT_AUTHORLAYOUT_FULLVIEW_POST:
             case self::COMPONENT_SINGLELAYOUT_FULLVIEW_POST:
@@ -72,7 +72,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
 
     public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW:
             case self::COMPONENT_LAYOUT_FULLVIEW_HIGHLIGHT:
             case self::COMPONENT_LAYOUT_FULLVIEW_POST:
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
                     self::COMPONENT_SINGLELAYOUT_FULLVIEW_POST => [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                 );
 
-                return $sidebars[$component[1]];
+                return $sidebars[$component->name];
         }
 
         return parent::getSidebarSubcomponent($component);
@@ -106,7 +106,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_HIGHLIGHT:
             case self::COMPONENT_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT:
             case self::COMPONENT_SINGLELAYOUT_FULLVIEW_HIGHLIGHT:

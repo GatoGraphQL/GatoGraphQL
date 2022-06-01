@@ -19,7 +19,7 @@ class GD_EM_Module_Processor_CalendarInners extends PoP_Module_Processor_Calenda
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARINNER_EVENTS_NAVIGATOR:
             case self::COMPONENT_CALENDARINNER_EVENTS_ADDONS:
             case self::COMPONENT_CALENDARINNER_EVENTS_MAIN:

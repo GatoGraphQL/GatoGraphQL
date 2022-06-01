@@ -56,7 +56,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_QUICKVIEW:
             case self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO:
             case self::COMPONENT_PAGESECTION_ADDONTABS:
@@ -85,7 +85,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                         self::COMPONENT_PAGESECTION_BODYTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::COMPONENT_PAGE_BODYTABS],
                         self::COMPONENT_PAGESECTION_BODY => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_BODY],
                     );
-                    $ret[] = $subcomponents[$component[1]];
+                    $ret[] = $subcomponents[$component->name];
                 }
                 break;
 
@@ -123,7 +123,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
     public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_HOVER:
                 return POP_COMPONENTID_PAGESECTIONCONTAINERID_HOVER;
 
@@ -172,7 +172,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_QUICKVIEW:
                 $this->appendProp($component, $props, 'class', 'offcanvas body tab-content');
                 $this->mergeProp(
@@ -201,7 +201,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_FRAMECOMPONENTS:
                 $this->appendProp($component, $props, 'class', 'framecomponents');
                 break;
@@ -228,7 +228,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         $component_props = array(
             $componentFullName => &$props[$componentFullName],
         );
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_BODYSIDEINFO:
                 // Allow the Sideinfo's permanent Events Calendar to be lazy-load
                 \PoP\Root\App::doAction(
@@ -275,7 +275,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONTABS:
                 $this->addJsmethod($ret, 'scrollbarHorizontal');
                 break;

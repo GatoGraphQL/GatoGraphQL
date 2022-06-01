@@ -42,7 +42,7 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Locations:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -60,7 +60,7 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS => POP_FILTER_AUTHORLOCATIONPOSTS,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS => POP_FILTER_TAGLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

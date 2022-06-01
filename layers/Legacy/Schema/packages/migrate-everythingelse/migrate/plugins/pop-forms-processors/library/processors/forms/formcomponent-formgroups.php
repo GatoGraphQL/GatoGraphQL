@@ -15,7 +15,7 @@ class PoP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Form
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES:
                 $ret .= ' col-sm-2';
                 break;
@@ -27,7 +27,7 @@ class PoP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Form
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES:
                 $ret .= ' col-sm-10';
                 break;
@@ -42,7 +42,7 @@ class PoP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Form
             self::COMPONENT_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES => [PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::class, PoP_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

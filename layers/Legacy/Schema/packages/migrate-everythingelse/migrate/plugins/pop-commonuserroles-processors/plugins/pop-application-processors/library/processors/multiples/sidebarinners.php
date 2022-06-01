@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proc
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_USERS];
                 $ret[] = [GD_URE_Module_Processor_CustomDelegatorFilters::class, GD_URE_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_ORGANIZATIONS];

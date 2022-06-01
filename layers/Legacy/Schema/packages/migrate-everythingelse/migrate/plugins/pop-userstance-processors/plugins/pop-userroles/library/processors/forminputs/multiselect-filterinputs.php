@@ -37,7 +37,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => [PoP_Module_Processor_UserStanceUserRolesFilterInput::class, PoP_Module_Processor_UserStanceUserRolesFilterInput::FILTERINPUT_AUTHORROLE_MULTISELECT],
             default => null,
         };
@@ -45,7 +45,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
     //             return true;
     //     }
@@ -55,7 +55,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('Author Role', 'pop-userstance-processors');
         }
@@ -65,7 +65,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return GD_URE_FormInput_MultiAuthorRole::class;
         }
@@ -75,7 +75,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return 'role';
         }
@@ -85,7 +85,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => $this->stringScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
@@ -93,7 +93,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
@@ -102,7 +102,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => $translationAPI->__('', ''),
             default => null,
         };

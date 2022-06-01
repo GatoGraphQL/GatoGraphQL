@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
 
     protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENT:
                 return true;
         }
@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
     }
     protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENT:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
         }
@@ -40,7 +40,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENT:
                 return array_merge(
                     $ret,
@@ -56,7 +56,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENT:
                 $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::COMPONENT_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
 
@@ -74,7 +74,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
                     $form_right_class = 'col-sm-4';
                 }
                 $this->appendProp($leftside, $props, 'class', $form_left_class);
-                $this->appendProp($rightsides[$component[1]], $props, 'class', $form_right_class);
+                $this->appendProp($rightsides[$component->name], $props, 'class', $form_right_class);
                 break;
         }
 

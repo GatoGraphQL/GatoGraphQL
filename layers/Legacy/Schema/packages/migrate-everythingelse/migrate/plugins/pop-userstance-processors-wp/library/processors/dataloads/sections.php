@@ -13,7 +13,7 @@ class UserStance_WP_Module_Processor_CustomSectionDataloads extends UserStance_M
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
         
-        switch ($component[1]) {
+        switch ($component->name) {
             // Order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
             case self::COMPONENT_DATALOAD_AUTHORSTANCES_CAROUSEL:
                 // General thought: menu_order = 0. Article-related thought: menu_order = 1. So order ASC.

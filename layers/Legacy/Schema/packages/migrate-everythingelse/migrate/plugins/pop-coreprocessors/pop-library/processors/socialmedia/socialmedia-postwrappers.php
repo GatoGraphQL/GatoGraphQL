@@ -26,7 +26,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
             self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER],
         );
 
-        if ($socialmedia = $socialmedias[$component[1]] ?? null) {
+        if ($socialmedia = $socialmedias[$component->name] ?? null) {
             return $socialmedia;
         }
 

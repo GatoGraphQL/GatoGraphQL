@@ -15,7 +15,7 @@ class PoP_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_USERSENDMESSAGE:
                 $ret[] = [PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::class, PoP_SocialNetwork_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW];
                 break;

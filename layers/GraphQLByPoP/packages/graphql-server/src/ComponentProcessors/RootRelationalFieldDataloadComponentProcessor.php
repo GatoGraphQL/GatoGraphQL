@@ -40,7 +40,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         if (App::getState('does-api-query-have-errors')) {
             return null;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return QueryRoot::ID;
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
@@ -51,7 +51,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:

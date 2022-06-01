@@ -31,7 +31,7 @@ class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputCon
             new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_MIME_TYPES),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MEDIAITEMS => [
                 ...$mediaFilterInputComponents,
                 ...$paginationFilterInputComponents,

@@ -16,7 +16,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
                 return [GD_EM_Module_Processor_ButtonInners::class, GD_EM_Module_Processor_ButtonInners::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR];
 
@@ -29,7 +29,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
                 return 'googleCalendarURL';
 
@@ -42,7 +42,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
             case self::COMPONENT_EM_BUTTON_ICAL:
                 return '_blank';
@@ -53,7 +53,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Google Calendar', 'em-popprocessors');
 

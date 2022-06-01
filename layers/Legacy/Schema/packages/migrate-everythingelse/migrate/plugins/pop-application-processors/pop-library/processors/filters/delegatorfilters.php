@@ -68,7 +68,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
             self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -81,7 +81,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
         // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
         // Comment Leo 12/01/2017: Actually, for the forms we must use .active instead of :last-child, because the selector is executed
         // on runtime, and not when initializing the JS
-        switch ($component[1]) {
+        switch ($component->name) {
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
             case self::COMPONENT_DELEGATORFILTER_HOMECONTENT:
                 return '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';

@@ -15,7 +15,7 @@ class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Append
     
     public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY:
                 return false;
         }
@@ -27,14 +27,14 @@ class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Append
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_HIGHLIGHTS:
             case self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY:
                 $classes = array(
                     self::COMPONENT_SCRIPT_HIGHLIGHTS => 'highlights',
                     self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY => 'highlights',
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component->name];
                 break;
         }
         

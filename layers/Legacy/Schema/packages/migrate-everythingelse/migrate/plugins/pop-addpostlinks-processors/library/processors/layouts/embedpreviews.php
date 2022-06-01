@@ -12,7 +12,7 @@ class PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts extends PoP_Module_P
     }
     public function getFrameSrcField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
                 return 'link';
         }
@@ -21,7 +21,7 @@ class PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts extends PoP_Module_P
     }
     public function getFrameHeight(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
                 return '400';
         }
@@ -30,7 +30,7 @@ class PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts extends PoP_Module_P
     }
     // function printSource(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
             
     //         case self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
 

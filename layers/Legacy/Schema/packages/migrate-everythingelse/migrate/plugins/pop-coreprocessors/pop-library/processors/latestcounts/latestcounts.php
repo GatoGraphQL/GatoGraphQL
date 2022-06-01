@@ -21,7 +21,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
 
     public function getClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_CONTENT:
                 return array(
                     'tag'.\PoP\Root\App::getState(['routing', 'queried-object-id'])

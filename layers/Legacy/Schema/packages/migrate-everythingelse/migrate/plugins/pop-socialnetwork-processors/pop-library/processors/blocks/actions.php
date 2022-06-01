@@ -31,7 +31,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
             self::COMPONENT_BLOCK_FOLLOWUSER => POP_SOCIALNETWORK_ROUTE_FOLLOWUSER,
             self::COMPONENT_BLOCK_RECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST,
@@ -62,7 +62,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             self::COMPONENT_BLOCK_DOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::COMPONENT_DATALOADACTION_DOWNVOTEPOST],
             self::COMPONENT_BLOCK_UNDODOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
@@ -71,7 +71,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
 
     public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_FOLLOWUSER:
             case self::COMPONENT_BLOCK_UNFOLLOWUSER:
             case self::COMPONENT_BLOCK_RECOMMENDPOST:
@@ -110,7 +110,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_FOLLOWUSER:
             case self::COMPONENT_BLOCK_UNFOLLOWUSER:
             case self::COMPONENT_BLOCK_RECOMMENDPOST:

@@ -15,7 +15,7 @@ class PoP_Module_Processor_QuicklinksBlocks extends PoP_Module_Processor_BlocksB
     {
         $ret = parent::getInnerSubcomponents($component);
         
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVERYTHING_QUICKLINKS:
                 $ret[] = [PoP_Core_Module_Processor_Forms::class, PoP_Core_Module_Processor_Forms::COMPONENT_FORM_EVERYTHINGQUICKLINKS];
                 break;

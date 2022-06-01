@@ -14,7 +14,7 @@ class PoP_ContactUs_Module_Processor_TextFormInputs extends PoP_Module_Processor
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_SUBJECT:
                 return  TranslationAPIFacade::getInstance()->__('Subject', 'pop-genericforms');
         }
@@ -24,7 +24,7 @@ class PoP_ContactUs_Module_Processor_TextFormInputs extends PoP_Module_Processor
 
     public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_SUBJECT:
                 return true;
         }

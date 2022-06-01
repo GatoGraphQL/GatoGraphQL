@@ -58,7 +58,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($component[1]) {
+                switch ($component->name) {
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02:
@@ -107,7 +107,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -116,7 +116,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02:

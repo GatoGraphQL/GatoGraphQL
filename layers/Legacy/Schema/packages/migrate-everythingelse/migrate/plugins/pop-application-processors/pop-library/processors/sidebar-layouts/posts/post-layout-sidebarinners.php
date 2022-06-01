@@ -31,7 +31,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
                 $ret = array_merge(
@@ -83,7 +83,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST:
@@ -98,7 +98,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST:

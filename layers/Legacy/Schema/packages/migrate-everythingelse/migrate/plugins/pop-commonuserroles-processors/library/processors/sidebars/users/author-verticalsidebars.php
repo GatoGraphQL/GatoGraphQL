@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Pr
             self::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL => [GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Pr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION:
             case self::COMPONENT_VERTICALSIDEBAR_AUTHOR_INDIVIDUAL:
                 $this->appendProp($component, $props, 'class', 'vertical');

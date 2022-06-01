@@ -16,7 +16,7 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV:
                 return TranslationAPIFacade::getInstance()->__('Previous month', 'em-popprocessors');
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
     }
     public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV:
                 return 'glyphicon-chevron-left';
 
@@ -40,14 +40,14 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
     }
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV:
             case self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARNEXT:
                 $classes = array(
                     self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV => 'calendar-prev',
                     self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARNEXT => 'calendar-next'
                 );
-                $class = $classes[$component[1]];
+                $class = $classes[$component->name];
 
                 $this->appendProp($component, $props, 'class', $class . ' fetchmore-btn-disable');
                 // $calendar_target = $this->getProp($component, $props, 'calendar-target');
@@ -61,7 +61,7 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
     }
     public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV:
             case self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARNEXT:
                 return null;
@@ -74,7 +74,7 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV:
                 $this->addJsmethod($ret, 'controlCalendarPrev');
                 break;

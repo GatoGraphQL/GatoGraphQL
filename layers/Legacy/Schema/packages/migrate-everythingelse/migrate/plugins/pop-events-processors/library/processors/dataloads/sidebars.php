@@ -33,7 +33,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
                 [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -42,7 +42,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR:
             case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
@@ -53,7 +53,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR:
     //         case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
     //             return CustomPostRequestNature::CUSTOMPOST;
@@ -65,7 +65,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR:
             case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
                 return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
@@ -76,7 +76,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
                 $daterange_class = 'daterange-past opens-left';
                 break;

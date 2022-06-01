@@ -19,7 +19,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_CommentScrolls::class, PoP_Module_Processor_CommentScrolls::COMPONENT_SCROLLLAYOUT_POSTCOMMENT];
                 break;
@@ -35,7 +35,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
 
     public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_POSTCOMMENTS:
                 return 'comments';
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
 
     public function isIndividual(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_POSTCOMMENTS:
             case self::COMPONENT_LAZYSUBCOMPONENT_POSTCOMMENTS:
             case self::COMPONENT_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:
@@ -63,7 +63,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_POSTCOMMENTS:
             case self::COMPONENT_LAZYSUBCOMPONENT_POSTCOMMENTS:
             case self::COMPONENT_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:

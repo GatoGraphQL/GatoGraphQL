@@ -15,7 +15,7 @@ class PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents extends Po
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGLOCATIONPOSTS:
                 $ret = array_merge(
                     $ret,
@@ -36,7 +36,7 @@ class PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents extends Po
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGLOCATIONPOSTS:
                 $ret = array(
                     [

@@ -15,7 +15,7 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
 
     public function getUrlparamSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_STATICIMAGE:
                 return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::COMPONENT_MAP_STATICIMAGE_URLPARAM];
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_STATICIMAGE:
             case self::COMPONENT_MAP_STATICIMAGE_USERORPOST:
                 $this->appendProp($component, $props, 'class', 'img-responsive');

@@ -14,7 +14,7 @@ class PoP_Share_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DESTINATIONEMAIL:
                 return TranslationAPIFacade::getInstance()->__('To Email(s)', 'pop-genericforms');
         }
@@ -24,7 +24,7 @@ class PoP_Share_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DESTINATIONEMAIL:
                 return true;
         }

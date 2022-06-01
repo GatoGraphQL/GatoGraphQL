@@ -17,7 +17,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
                 return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST];
 
@@ -30,7 +30,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT:
                 $component = $this->getComponentSubcomponent($component);
@@ -49,7 +49,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                 );
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
-                    $descriptions[$component[1]]
+                    $descriptions[$component->name]
                 );
                 $this->setProp($trigger, $props, 'description', $description);
                 break;
@@ -60,7 +60,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT:
                 return '';

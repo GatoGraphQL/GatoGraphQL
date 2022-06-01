@@ -13,7 +13,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 
     public function getClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
                 // Using btn-link instead of btn-success because the 'active' cannot be calculated on runtime, and btn-link does not paint the active in any different way
                 return 'btn btn-link';
@@ -23,7 +23,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     }
     public function getXsClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
                 // Using btn-link instead of btn-success because the 'active' cannot be calculated on runtime, and btn-link does not paint the active in any different way
                 return 'btn btn-default btn-block';
@@ -33,7 +33,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     }
     public function getDropdownClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
                 return 'btn-link';
         }
@@ -43,7 +43,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 
     public function getRoutes(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
                 $ret = array(
                     POP_USERLOGIN_ROUTE_LOGIN => array(),
@@ -60,7 +60,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -72,7 +72,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -84,7 +84,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
                 break;

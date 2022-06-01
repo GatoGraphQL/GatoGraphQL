@@ -19,7 +19,7 @@ class PoP_UserCommunities_Module_Processor_SectionSidebarInners extends PoP_Modu
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR:
                 $ret[] = [PoP_UserCommunities_ComponentProcessor_ButtonGroups::class, PoP_UserCommunities_ComponentProcessor_ButtonGroups::COMPONENT_BUTTONGROUP_MYUSERS];
                 $ret[] = [PoP_UserCommunities_Module_Processor_CustomDelegatorFilters::class, PoP_UserCommunities_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_MYMEMBERS];

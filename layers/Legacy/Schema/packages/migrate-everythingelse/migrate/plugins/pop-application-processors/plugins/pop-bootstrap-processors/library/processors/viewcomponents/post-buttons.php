@@ -21,7 +21,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA => [PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::class, PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA],
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN => [PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::class, PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -32,7 +32,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-email';
                 break;
@@ -43,7 +43,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Share by email', 'pop-coreprocessors');
@@ -54,7 +54,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN:
                 $this->mergeProp(
@@ -68,7 +68,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
@@ -84,7 +84,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA:
                 case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN:
                     $modals = array(
@@ -92,7 +92,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
                         self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN => [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::COMPONENT_MODAL_SHAREBYEMAIL],
                     );
 
-                    $modal = $modals[$component[1]];
+                    $modal = $modals[$component->name];
                     $modal_id = $componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props);
                     return '#'.PoP_Bootstrap_Utils::getFrontendId($modal_id, 'modal');
             }

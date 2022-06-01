@@ -13,7 +13,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
 
     protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYLINKS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
@@ -25,7 +25,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYLINKS:
                 $ret = array_merge(
                     $ret,
@@ -43,7 +43,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYLINKS:
                 $ret = array(
                     [

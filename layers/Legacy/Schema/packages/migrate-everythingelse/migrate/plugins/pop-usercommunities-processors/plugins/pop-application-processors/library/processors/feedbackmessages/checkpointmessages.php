@@ -20,7 +20,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessages extends PoP_Mod
             self::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

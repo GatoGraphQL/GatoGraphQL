@@ -23,7 +23,7 @@ class PoP_ContactUs_Module_Processor_FormGroups extends PoP_Module_Processor_For
             self::COMPONENT_FORMINPUTGROUP_MESSAGE => [PoP_ContactUs_Module_Processor_TextareaFormInputs::class, PoP_ContactUs_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_MESSAGE],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

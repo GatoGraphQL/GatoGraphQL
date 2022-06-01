@@ -199,12 +199,12 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
             self::COMPONENT_BLOCK_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:

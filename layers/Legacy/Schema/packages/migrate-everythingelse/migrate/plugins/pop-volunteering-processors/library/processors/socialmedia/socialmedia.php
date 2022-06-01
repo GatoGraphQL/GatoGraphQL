@@ -15,7 +15,7 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
 
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
                 return array(
                     [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND],
@@ -36,7 +36,7 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
                 foreach ($this->getSubcomponents($component) as $subcomponent) {
                     $this->appendProp([$subcomponent], $props, 'class', 'inline');

@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_EVENT_CREATE => POP_EVENTSCREATION_ROUTE_ADDEVENT,
             self::COMPONENT_BLOCK_EVENT_UPDATE => POP_EVENTSCREATION_ROUTE_EDITEVENT,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
             self::COMPONENT_BLOCK_EVENT_UPDATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENT_UPDATE],
             self::COMPONENT_BLOCK_EVENT_CREATE => [GD_EM_Module_Processor_CreateUpdatePostDataloads::class, GD_EM_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_EVENT_CREATE],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -39,7 +39,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENT_CREATE:
                 return true;
         }
@@ -48,7 +48,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENT_UPDATE:
                 return true;
         }
@@ -58,7 +58,7 @@ class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENT_UPDATE:
             case self::COMPONENT_BLOCK_EVENT_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {

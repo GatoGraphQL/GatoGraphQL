@@ -20,7 +20,7 @@ class PoP_Module_Processor_TableInners extends PoP_Module_Processor_TableInnersB
         $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLEINNER_MYCONTENT:
                 $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_EDIT];
                 $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::COMPONENT_LAYOUTPOST_STATUS];

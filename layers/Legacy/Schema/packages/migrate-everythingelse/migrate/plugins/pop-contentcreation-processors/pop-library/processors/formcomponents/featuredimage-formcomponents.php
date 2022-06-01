@@ -14,7 +14,7 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
 
     public function getFeaturedimageinnerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE:
                 return [PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER];
         }
@@ -24,7 +24,7 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE:
                 return TranslationAPIFacade::getInstance()->__('Featured Image', 'pop-coreprocessors');
         }
@@ -34,7 +34,7 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE:
                 return true;
         }

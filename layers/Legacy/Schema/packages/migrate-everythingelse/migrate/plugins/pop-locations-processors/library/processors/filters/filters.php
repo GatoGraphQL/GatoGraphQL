@@ -17,7 +17,7 @@ class PoP_Locations_Module_Processor_CustomFilters extends PoP_Module_Processor_
             self::COMPONENT_FILTER_LOCATIONS => [PoP_Locations_Module_Processor_CustomFilterInners::class, PoP_Locations_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_LOCATIONS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

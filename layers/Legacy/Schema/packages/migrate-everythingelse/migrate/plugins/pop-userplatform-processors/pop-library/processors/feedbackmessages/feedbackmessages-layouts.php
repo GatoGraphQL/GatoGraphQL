@@ -16,7 +16,7 @@ class PoP_Core_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Proces
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Invite successful!', 'pop-coreprocessors');
                 break;

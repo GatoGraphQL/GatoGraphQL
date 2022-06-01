@@ -28,7 +28,7 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
                 return TranslationAPIFacade::getInstance()->__('Created content', 'pop-coreprocessors');
             
@@ -59,7 +59,7 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
 
     public function getCheckboxValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
@@ -78,7 +78,7 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
                     self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT,
                     self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
                 );
-                return $values[$component[1]];
+                return $values[$component->name];
         }
 
         return parent::getCheckboxValue($component, $props);

@@ -20,7 +20,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGE_ADDONTABS:
             case self::COMPONENT_PAGE_BODYTABS:
                 if ($tab_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_PAGESECTION_TAB)) {
@@ -34,7 +34,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGE_ADDONTABS:
                 return 'btn btn-warning btn-sm';
 

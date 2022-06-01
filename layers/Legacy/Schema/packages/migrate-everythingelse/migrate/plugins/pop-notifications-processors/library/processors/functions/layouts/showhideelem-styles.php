@@ -19,7 +19,7 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
 
     public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES:
                 return '.preview.notification-layout .pop-functional.'.AAL_CLASS_NOTIFICATION_MARKASREAD;
@@ -34,7 +34,7 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
     
     public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES:
                 return array(

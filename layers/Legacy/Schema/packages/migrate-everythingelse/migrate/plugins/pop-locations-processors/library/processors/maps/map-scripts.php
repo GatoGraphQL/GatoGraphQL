@@ -22,7 +22,7 @@ class PoP_Module_Processor_MapScripts extends PoP_Module_Processor_MapScriptsBas
             self::COMPONENT_MAP_SCRIPT_USER => [PoP_Module_Processor_UserMapScriptCustomizations::class, PoP_Module_Processor_UserMapScriptCustomizations::COMPONENT_MAP_SCRIPTCUSTOMIZATION_USER],
         );
 
-        if ($customization = $customizations[$component[1]] ?? null) {
+        if ($customization = $customizations[$component->name] ?? null) {
             return $customization;
         }
 

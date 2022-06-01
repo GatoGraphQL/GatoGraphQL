@@ -67,7 +67,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_NAME => $this->getNameFilterInput(),
             self::COMPONENT_FILTERINPUT_EMAILS => $this->getEmailOrEmailsFilterInput(),
             default => null,
@@ -76,7 +76,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_NAME:
             case self::COMPONENT_FILTERINPUT_EMAILS:
             // Add a nice name, so that the URL params when filtering make sense
@@ -84,7 +84,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
                     self::COMPONENT_FILTERINPUT_NAME => 'nombre',
                     self::COMPONENT_FILTERINPUT_EMAILS => 'emails',
                 );
-                return $names[$component[1]];
+                return $names[$component->name];
         }
 
         return parent::getName($component);
@@ -92,7 +92,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_NAME => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_EMAILS => $this->getEmailScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
@@ -101,7 +101,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_EMAILS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
@@ -109,7 +109,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_NAME => $this->__('Search users whose name contains this string', 'pop-users'),
             self::COMPONENT_FILTERINPUT_EMAILS => $this->__('Search users with any of the provided emails', 'pop-users'),
             default => null,

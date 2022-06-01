@@ -17,7 +17,7 @@ class PoP_EventLinksCreation_Module_Processor_ButtonInners extends PoP_Module_Pr
         $routes = array(
             self::COMPONENT_BUTTONINNER_EVENTLINK_CREATE => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
 
@@ -29,7 +29,7 @@ class PoP_EventLinksCreation_Module_Processor_ButtonInners extends PoP_Module_Pr
         $titles = array(
             self::COMPONENT_BUTTONINNER_EVENTLINK_CREATE => TranslationAPIFacade::getInstance()->__('as Link', 'poptheme-wassup'),//TranslationAPIFacade::getInstance()->__('Event link', 'poptheme-wassup'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 

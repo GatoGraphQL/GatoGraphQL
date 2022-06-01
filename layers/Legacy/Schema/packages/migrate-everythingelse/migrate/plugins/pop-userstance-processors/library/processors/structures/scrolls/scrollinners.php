@@ -31,7 +31,7 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_STANCES_THUMBNAIL:
             case self::COMPONENT_SCROLLINNER_AUTHORSTANCES_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
             self::COMPONENT_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW => [UserStance_Module_Processor_CustomFullViewLayouts::class, UserStance_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_STANCE],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

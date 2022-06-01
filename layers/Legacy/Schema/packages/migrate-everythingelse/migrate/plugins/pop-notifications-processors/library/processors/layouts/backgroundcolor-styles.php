@@ -15,7 +15,7 @@ class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP
 
     public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
                 return '.preview.notification-layout';
@@ -26,7 +26,7 @@ class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP
     
     public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES:
                 return array(

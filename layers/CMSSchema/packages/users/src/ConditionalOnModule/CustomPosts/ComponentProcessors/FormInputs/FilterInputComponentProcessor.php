@@ -79,7 +79,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->getAuthorIDsFilterInput(),
             self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => $this->getAuthorSlugFilterInput(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->getExcludeAuthorIDsFilterInput(),
@@ -89,7 +89,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => 'authorIDs',
             self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => 'authorSlug',
             self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => 'excludeAuthorIDs',
@@ -99,7 +99,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->getIDScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->getIDScalarTypeResolver(),
@@ -109,7 +109,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS,
             self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -120,7 +120,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->__('Get results from the authors with given IDs', 'pop-users'),
             self::COMPONENT_FILTERINPUT_AUTHOR_SLUG => $this->__('Get results from the authors with given slug', 'pop-users'),
             self::COMPONENT_FILTERINPUT_EXCLUDE_AUTHOR_IDS => $this->__('Get results excluding the ones from authors with given IDs', 'pop-users'),

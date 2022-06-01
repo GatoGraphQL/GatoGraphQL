@@ -15,7 +15,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
 
     public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
                 return 'stances';
 
@@ -28,7 +28,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
                 $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::COMPONENT_CONTENTLAYOUT_STANCES];
                 break;
@@ -43,7 +43,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
 
     public function isIndividual(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
             case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 return false;
@@ -54,7 +54,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
             case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 $this->appendProp($component, $props, 'class', 'referencedby clearfix');

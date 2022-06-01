@@ -17,7 +17,7 @@ class GD_AAL_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_QUICKLINKBUTTONGROUP_VIEWUSER:
                 $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_USERVIEW];
                 break;

@@ -15,7 +15,7 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:
                 return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST];
         }
@@ -27,7 +27,7 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:
                 $component = $this->getComponentSubcomponent($component);
 
@@ -45,7 +45,7 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:
                 return '';
         }

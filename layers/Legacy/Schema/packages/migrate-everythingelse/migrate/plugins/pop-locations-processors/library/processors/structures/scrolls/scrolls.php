@@ -24,7 +24,7 @@ class PoP_Locations_Module_Processor_CustomScrolls extends PoP_Module_Processor_
             self::COMPONENT_SCROLL_STATICIMAGE_USERORPOST => [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::COMPONENT_MAP_STATICIMAGE_USERORPOST],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

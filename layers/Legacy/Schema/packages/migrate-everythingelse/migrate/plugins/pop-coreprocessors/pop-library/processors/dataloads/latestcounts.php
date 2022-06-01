@@ -23,7 +23,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
             self::COMPONENT_DATALOAD_LATESTCOUNTS => [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::COMPONENT_CONTENT_LATESTCOUNTS],
         );
 
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -34,7 +34,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 PoP_Application_SectionUtils::addDataloadqueryargsLatestcounts($ret);
                 break;
@@ -60,7 +60,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
@@ -70,7 +70,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
@@ -80,7 +80,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LATESTCOUNTS:
                 // It can be invisible, nothing to show
                 $this->appendProp($component, $props, 'class', 'hidden');

@@ -13,7 +13,7 @@ class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_Blo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -23,7 +23,7 @@ class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_Blo
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SETTINGS:
                 $ret[] = [PoP_Module_Processor_CustomSettingsDataloads::class, PoP_Module_Processor_CustomSettingsDataloads::COMPONENT_DATALOAD_SETTINGS];
                 break;

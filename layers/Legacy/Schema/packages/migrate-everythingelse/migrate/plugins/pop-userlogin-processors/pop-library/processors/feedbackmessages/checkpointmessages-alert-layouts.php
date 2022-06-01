@@ -26,7 +26,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts extends Po
             self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

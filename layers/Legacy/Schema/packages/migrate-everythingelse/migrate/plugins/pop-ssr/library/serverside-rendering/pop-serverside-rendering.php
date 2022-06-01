@@ -186,7 +186,7 @@ class PoP_ServerSideRendering
         $templates = $this->getJsonTemplates();
 
         // If a template source is not defined, then it is the template itself (eg: the pageSection templates)
-        $template = $templates[$component[1]] ?? $component;
+        $template = $templates[$component->name] ?? $component;
 
         // Render and return the html
         return $this->renderTemplate($template, $configuration);

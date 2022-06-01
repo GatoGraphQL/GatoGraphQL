@@ -13,7 +13,7 @@ class PoP_SocialNetwork_Module_Processor_Blocks extends PoP_Module_Processor_For
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_CONTACTUSER => POP_SOCIALNETWORK_ROUTE_CONTACTUSER,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -23,7 +23,7 @@ class PoP_SocialNetwork_Module_Processor_Blocks extends PoP_Module_Processor_For
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_CONTACTUSER:
                 $ret[] = [PoP_SocialNetwork_Module_Processor_Dataloads::class, PoP_SocialNetwork_Module_Processor_Dataloads::COMPONENT_DATALOAD_CONTACTUSER];
                 break;

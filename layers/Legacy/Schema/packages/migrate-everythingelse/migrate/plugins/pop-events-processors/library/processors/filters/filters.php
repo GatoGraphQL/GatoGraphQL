@@ -32,7 +32,7 @@ class PoP_Events_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
             self::COMPONENT_FILTER_TAGEVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

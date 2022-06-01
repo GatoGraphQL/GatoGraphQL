@@ -15,7 +15,7 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME:
                 return 'fa-fw fa-map-marker';
         }

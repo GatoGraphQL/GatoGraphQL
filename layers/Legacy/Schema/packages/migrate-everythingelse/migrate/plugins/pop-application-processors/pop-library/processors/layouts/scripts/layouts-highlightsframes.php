@@ -15,7 +15,7 @@ class PoP_Module_Processor_HighlightReferencesFramesLayouts extends PoP_Module_P
 
     public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_HIGHLIGHTSEMPTY_APPENDTOSCRIPT:
                 return false;
         }
@@ -25,7 +25,7 @@ class PoP_Module_Processor_HighlightReferencesFramesLayouts extends PoP_Module_P
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_HIGHLIGHTS_APPENDTOSCRIPT:
             case self::COMPONENT_LAYOUT_HIGHLIGHTSEMPTY_APPENDTOSCRIPT:
                 return [PoP_Module_Processor_HighlightReferencedbyLayouts::class, PoP_Module_Processor_HighlightReferencedbyLayouts::COMPONENT_SUBCOMPONENT_HIGHLIGHTS];

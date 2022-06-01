@@ -19,7 +19,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
             self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
             default => parent::getRelevantRoute($component, $props),
@@ -32,7 +32,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
                 $ret[] = [PoP_UserCommunities_Module_Processor_Codes::class, PoP_UserCommunities_Module_Processor_Codes::COMPONENT_CODE_INVITENEWMEMBERSHELP];
                 $ret[] = [GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS_BIG];
@@ -51,7 +51,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
                 $this->addJsmethod($ret, 'destroyPageOnUserLoggedOut');
@@ -64,7 +64,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
                 return [GD_URE_Module_Processor_CustomFilters::class, GD_URE_Module_Processor_CustomFilters::COMPONENT_FILTER_MYMEMBERS];
@@ -96,7 +96,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Members of the Community
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
@@ -116,7 +116,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
@@ -127,7 +127,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
                 return [GD_UserCommunities_Module_Processor_UserCheckpointMessages::class, GD_UserCommunities_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITY];
@@ -138,7 +138,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('members', 'poptheme-wassup'));

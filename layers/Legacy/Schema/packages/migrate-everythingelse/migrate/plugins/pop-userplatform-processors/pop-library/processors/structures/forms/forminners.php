@@ -17,7 +17,7 @@ class PoP_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInner
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_INVITENEWUSERS:
                 $ret[] = [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FORMINPUTGROUP_EMAILS];
                 $ret[] = [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FORMINPUTGROUP_SENDERNAME];

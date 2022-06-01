@@ -13,7 +13,7 @@ class PoP_AddHighlights_Processor_HiddenInputFormInputs extends PoP_Module_Proce
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_HIGHLIGHTEDPOST:
                 return POP_INPUTNAME_HIGHLIGHTEDPOST;
         }

@@ -35,7 +35,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
 
     public function getDefaultLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_POPOVER:
                 return [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER];
 
@@ -70,7 +70,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
     public function getMultipleLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_POPOVER:
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_POSTAUTHOR:
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR:
@@ -79,7 +79,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
                     self::COMPONENT_LAYOUT_MULTIPLEUSER_POSTAUTHOR => POP_MULTILAYOUT_HANDLE_USERPOSTAUTHOR,
                     self::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR => POP_MULTILAYOUT_HANDLE_USERCONTEXTUALPOSTAUTHOR,
                 );
-                return $multilayout_manager->getLayoutComponents($handles[$component[1]]);
+                return $multilayout_manager->getLayoutComponents($handles[$component->name]);
 
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_NAVIGATOR:
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_ADDONS:
@@ -95,7 +95,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
                     self::COMPONENT_LAYOUT_MULTIPLEUSER_LIST => POP_FORMAT_LIST,
                     self::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER => POP_FORMAT_FULLVIEW,
                 );
-                return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_USERCONTENT, $formats[$component[1]]);
+                return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_USERCONTENT, $formats[$component->name]);
         }
 
         return parent::getMultipleLayoutSubcomponents($component);

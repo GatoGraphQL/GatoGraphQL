@@ -31,7 +31,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
             self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW => [PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts::class, PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST],
         );
 
-        if ($default = $defaults[$component[1]] ?? null) {
+        if ($default = $defaults[$component->name] ?? null) {
             return $default;
         }
 
@@ -40,7 +40,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
 
     public function getMultipleLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_THUMBNAIL:
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_LIST:
@@ -55,7 +55,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
                 );
 
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-                return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT, $formats[$component[1]]);
+                return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT, $formats[$component->name]);
         }
 
         return parent::getMultipleLayoutSubcomponents($component);

@@ -17,7 +17,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
                 $ret[] = [PoP_Module_Processor_TagInfoLayouts::class, PoP_Module_Processor_TagInfoLayouts::COMPONENT_LAYOUT_TAGINFO];
                 break;
@@ -32,7 +32,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
             self::COMPONENT_WIDGETCOMPACT_TAGINFO => TranslationAPIFacade::getInstance()->__('Tag/topic', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -40,12 +40,12 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
             self::COMPONENT_WIDGETCOMPACT_TAGINFO => getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), false),
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
                 return 'list-group list-group-sm';
         }
@@ -54,7 +54,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
                 return 'pop-hide-empty list-group-item';
         }
@@ -63,7 +63,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
                 // return 'panel panel-info panel-sm';
                 return 'panel panel-default panel-sm';

@@ -18,7 +18,7 @@ class PoP_Module_Processor_CommentsFeedbackMessageLayouts extends PoP_Module_Pro
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_COMMENTS:
                 $names = TranslationAPIFacade::getInstance()->__('comments', 'pop-coreprocessors');
                 $ret['noresults'] = sprintf(

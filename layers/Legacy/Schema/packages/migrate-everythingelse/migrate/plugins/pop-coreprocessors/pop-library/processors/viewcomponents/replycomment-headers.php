@@ -15,7 +15,7 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
 
     public function getPostSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
                 return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST];
         
@@ -28,7 +28,7 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
 
     public function getCommentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
             case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL:
                 return [PoP_Module_Processor_CommentClippedViewComponentHeaders::class, PoP_Module_Processor_CommentClippedViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTCLIPPED];

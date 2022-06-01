@@ -19,7 +19,7 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEEDIT:
                 $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::COMPONENT_BUTTON_STANCEEDIT];
                 break;
@@ -41,7 +41,7 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE:
                 $this->appendProp($component, $props, 'class', 'pop-stance-count');
                 break;

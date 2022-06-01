@@ -14,7 +14,7 @@ class PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs extends P
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS:
                 return TranslationAPIFacade::getInstance()->__('My notifications (daily)', 'pop-coreprocessors');
         }
@@ -24,12 +24,12 @@ class PoP_Notifications_Module_Processor_UserProfileCheckboxFormInputs extends P
 
     public function getCheckboxValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS:
                 $values = array(
                     self::COMPONENT_FORMINPUT_EMAILDIGESTS_DAILYNOTIFICATIONS => POP_USERPREFERENCES_EMAILDIGESTS_DAILYNOTIFICATIONS,
                 );
-                return $values[$component[1]];
+                return $values[$component->name];
         }
 
         return parent::getCheckboxValue($component, $props);

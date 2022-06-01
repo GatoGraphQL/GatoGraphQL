@@ -15,7 +15,7 @@ class PoP_Module_ProcessorTagMultipleComponents extends PoP_Module_Processor_Mul
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAG_DETAILS:
                 $ret[] = [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_TAG];
                 $ret[] = [PoP_Module_Processor_TagLayouts::class, PoP_Module_Processor_TagLayouts::COMPONENT_LAYOUT_TAGH4];
@@ -28,7 +28,7 @@ class PoP_Module_ProcessorTagMultipleComponents extends PoP_Module_Processor_Mul
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAG_DETAILS:
                 $this->appendProp($component, $props, 'class', 'layout');
                 $this->appendProp([PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_TAG], $props, 'class', 'quicklinkgroup quicklinkgroup-top icon-only pull-right');

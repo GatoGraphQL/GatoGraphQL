@@ -21,7 +21,7 @@ class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Process
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_EVENTLIST:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::class, PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];

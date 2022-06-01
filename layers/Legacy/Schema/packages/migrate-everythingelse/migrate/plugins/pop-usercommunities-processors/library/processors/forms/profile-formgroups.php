@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             // case self::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES:
             case self::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS:
             case self::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_POST:
@@ -39,7 +39,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             // case self::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES:
             case self::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS:
             case self::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_POST:
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
             self::COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_USER => [GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -70,7 +70,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return TranslationAPIFacade::getInstance()->__('Please select the communities you are a member of: all your content will also show under their profiles.', 'ure-popprocessors');
         }
@@ -80,7 +80,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES:
                 $placeholder = TranslationAPIFacade::getInstance()->__('Community', 'pop-coreprocessors');
                 $this->setProp([GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::class, GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES], $props, 'placeholder', $placeholder);

@@ -38,7 +38,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
      */
     public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_ReferencesFilterInput::class, PoP_Module_Processor_ReferencesFilterInput::FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
             default => null,
         };
@@ -46,7 +46,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
     //             return true;
     //     }
@@ -56,7 +56,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT];
         }
@@ -66,7 +66,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return array(
                     [PoP_Module_Processor_PostTypeaheadComponentFormInputs::class, PoP_Module_Processor_PostTypeaheadComponentFormInputs::COMPONENT_TYPEAHEAD_COMPONENT_CONTENT],
@@ -78,7 +78,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return [PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES];
         }
@@ -88,7 +88,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
@@ -96,7 +96,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 
     public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
@@ -105,7 +105,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
     public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES => $translationAPI->__('', ''),
             default => null,
         };

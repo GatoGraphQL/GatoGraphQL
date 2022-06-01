@@ -16,7 +16,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
                 return TranslationAPIFacade::getInstance()->__('Author(s)', 'pop-coreprocessors');
 
@@ -29,7 +29,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return [GD_CAP_Module_Processor_TypeaheadTextFormInputs::class, GD_CAP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADPOSTAUTHORS];
@@ -40,7 +40,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return array(
@@ -53,7 +53,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
                 return [PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS];
 
@@ -66,7 +66,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
                 return 'authors';
 

@@ -20,7 +20,7 @@ class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Process
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
 
@@ -34,7 +34,7 @@ class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Process
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE => $extract,
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN => $extract,
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 

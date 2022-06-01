@@ -21,7 +21,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
                 $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::COMPONENT_LAYOUT_USERSTANCEPOSTINTERACTION];
                 break;
@@ -40,7 +40,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:

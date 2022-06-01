@@ -13,7 +13,7 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_FLAG => POP_CONTENTCREATION_ROUTE_FLAG,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -23,7 +23,7 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_FLAG:
                 $ret[] = [PoP_ContentCreation_Module_Processor_Dataloads::class, PoP_ContentCreation_Module_Processor_Dataloads::COMPONENT_DATALOAD_FLAG];
                 break;

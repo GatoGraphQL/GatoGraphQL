@@ -32,7 +32,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = 'content';
                 break;
@@ -62,7 +62,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     {
         $ret = parent::getRelationalComponentFields($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = new RelationalComponentField(
                     'author',

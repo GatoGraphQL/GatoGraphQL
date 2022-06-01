@@ -15,7 +15,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_CAROUSEL_STANCES_BYINDIVIDUALS:
                 $this->appendProp($component, $props, 'class', 'slide');
@@ -29,7 +29,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_CAROUSEL_STANCES_BYINDIVIDUALS:
                 return [UserStance_Module_Processor_CustomCarouselInners::class, UserStance_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_STANCES];
@@ -40,7 +40,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
 
     public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_CAROUSEL_STANCES_BYINDIVIDUALS:
                 return 'static';
@@ -52,7 +52,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
 
     public function getControlsTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:
                 return [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS];
 

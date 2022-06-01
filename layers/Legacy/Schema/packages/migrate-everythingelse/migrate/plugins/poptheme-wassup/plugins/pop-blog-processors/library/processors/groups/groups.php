@@ -22,7 +22,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
                     self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
                     self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST],
                 );
-                return $inners[$component[1]];
+                return $inners[$component->name];
         }
 
         return null;
@@ -43,7 +43,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
 
     public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
@@ -80,7 +80,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:

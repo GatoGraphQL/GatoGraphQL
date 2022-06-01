@@ -19,7 +19,7 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW:
                 $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW];
                 $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW];
@@ -44,7 +44,7 @@ class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_Multi
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW:
                 // Make the User Post Interaction group a collapse, initially collapsed
                 $this->appendProp([self::class, self::COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY], $props, 'class', 'collapse');

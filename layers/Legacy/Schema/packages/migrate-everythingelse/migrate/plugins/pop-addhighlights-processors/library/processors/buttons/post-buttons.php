@@ -20,7 +20,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE],
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -29,7 +29,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
 
     public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
             case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 return array(
@@ -42,7 +42,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
             case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 return POP_TARGET_ADDONS;
@@ -55,7 +55,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN:
                 $ret .= 'btn btn-link';
                 break;
@@ -71,7 +71,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => $extract,
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => $extract,
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 
@@ -84,7 +84,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlightURL',
         );
-        if ($field = $fields[$component[1]] ?? null) {
+        if ($field = $fields[$component->name] ?? null) {
             return $field;
         }
 

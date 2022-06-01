@@ -16,7 +16,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTONINNER_EDITMEMBERSHIP:
                 return 'fa-fw fa-asterisk';
 
@@ -29,7 +29,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTONINNER_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'poptheme-wassup');
 

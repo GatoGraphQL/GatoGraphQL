@@ -20,7 +20,7 @@ class PoP_Share_Module_Processor_GFFormInnerHooks
 
     public function getLayoutSubcomponents($layouts, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Share_Module_Processor_GFFormInners::COMPONENT_FORMINNER_SHAREBYEMAIL:
                 $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID];
                 break;
@@ -32,7 +32,7 @@ class PoP_Share_Module_Processor_GFFormInnerHooks
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Share_Module_Processor_GFFormInners::COMPONENT_FORMINNER_SHAREBYEMAIL:
                 // Form ID
                 $form_id = PoP_Share_GFHelpers::getSharebyemailFormId();

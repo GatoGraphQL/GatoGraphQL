@@ -18,12 +18,12 @@ class CommonPages_EM_Module_Processor_ControlGroups extends PoP_Module_Processor
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST:
                 $addposts = array(
                     self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST => [CommonPages_EM_Module_Processor_ControlButtonGroups::class, CommonPages_EM_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST],
                 );
-                $ret[] = $addposts[$component[1]];
+                $ret[] = $addposts[$component->name];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;

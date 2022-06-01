@@ -24,7 +24,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
@@ -39,7 +39,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                     self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR],
                     self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
                 );
-                if ($filter = $filters[$component[1]] ?? null) {
+                if ($filter = $filters[$component->name] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -65,7 +65,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
             self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -74,7 +74,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORCONTENT_SIDEBAR:
@@ -88,7 +88,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
 
     public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
                 $subcomponents = array_diff(
                     $this->getSubcomponents($component),

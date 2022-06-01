@@ -30,7 +30,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
             self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -39,7 +39,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
 
     protected function getControlgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
@@ -53,7 +53,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
     public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
@@ -70,7 +70,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES];
 

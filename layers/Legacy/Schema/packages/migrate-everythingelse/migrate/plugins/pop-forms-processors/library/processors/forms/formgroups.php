@@ -15,7 +15,7 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH:
                 $ret .= ' col-sm-offset-2 col-sm-10';
                 break;
@@ -30,7 +30,7 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
             self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH => [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SEARCH],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

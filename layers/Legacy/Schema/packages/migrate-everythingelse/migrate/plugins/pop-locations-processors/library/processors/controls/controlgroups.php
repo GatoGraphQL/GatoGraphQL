@@ -24,7 +24,7 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_BLOCKMAPPOSTLIST:
             case self::COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST:
                 $ret[] = [PoP_Locations_Module_Processor_CustomControlButtonGroups::class, PoP_Locations_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP];

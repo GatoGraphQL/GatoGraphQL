@@ -21,7 +21,7 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
 
     public function getAvatarSize(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTPOST_AUTHORAVATAR:
                 return GD_AVATAR_SIZE_40;
 

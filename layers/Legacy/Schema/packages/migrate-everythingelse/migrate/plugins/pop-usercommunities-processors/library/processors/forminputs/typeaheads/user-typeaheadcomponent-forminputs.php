@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Communities', 'ure-popprocessors');
         }
@@ -31,7 +31,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
     protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
@@ -48,7 +48,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
     {
         $ret = parent::getThumbprintQuery($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 $ret['role'] = GD_URE_ROLE_COMMUNITY;
                 break;
@@ -59,7 +59,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
 
     protected function getPendingMsg(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Loading Communities', 'ure-popprocessors');
         }
@@ -69,7 +69,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
 
     protected function getNotfoundMsg(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('No Communities found', 'ure-popprocessors');
         }

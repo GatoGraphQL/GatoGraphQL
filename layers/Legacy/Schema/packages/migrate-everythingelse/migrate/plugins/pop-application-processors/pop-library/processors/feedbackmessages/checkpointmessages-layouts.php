@@ -16,7 +16,7 @@ class PoP_Application_Module_Processor_UserCheckpointMessageLayouts extends PoP_
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_DOMAIN:
                 $ret['domainempty'] = TranslationAPIFacade::getInstance()->__('The domain is empty.', 'pop-coreprocessors');
                 $ret['domainnotvalid'] = sprintf(

@@ -48,7 +48,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 return $this->getPostObjectTypeResolver();
         }
@@ -58,7 +58,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
 
     public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
@@ -70,7 +70,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 $ret['tag-ids'] = [App::getState(['routing', 'queried-object-id'])];
                 break;
@@ -81,7 +81,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 return new \PoP\ComponentModel\Component\Component(PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTS);
         }

@@ -13,7 +13,7 @@ class GD_Custom_EM_Module_Processor_Layouts extends PoP_Module_Processor_Categor
 
     public function getCategoriesField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_LOCATIONPOST_CATEGORIES:
                 return 'locationpostcategories-byname';
         }

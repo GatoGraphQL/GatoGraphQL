@@ -18,7 +18,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
             self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK,
             default => parent::getRelevantRoute($component, $props),
@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -43,7 +43,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
             self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_CONTENTPOSTLINK],
             self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_CONTENTPOSTLINK],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -52,7 +52,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 return true;
         }
@@ -61,7 +61,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE:
                 return true;
         }
@@ -71,7 +71,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE:
             case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 $name = TranslationAPIFacade::getInstance()->__('Link', 'pop-userplatform-processors');
@@ -88,7 +88,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE:
                 return $this->instanceManager->getInstance(CreatePostLinkMutationResolverBridge::class);
             case self::COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE:

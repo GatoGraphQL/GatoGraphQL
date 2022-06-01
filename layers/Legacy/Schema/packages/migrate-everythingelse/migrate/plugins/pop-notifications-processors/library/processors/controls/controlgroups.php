@@ -18,7 +18,7 @@ class AAL_PoPProcessors_Module_Processor_ControlGroups extends PoP_Module_Proces
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_CONTROLGROUP_NOTIFICATIONLIST:
                 $ret[] = [AAL_PoPProcessors_Module_Processor_ControlButtonGroups::class, AAL_PoPProcessors_Module_Processor_ControlButtonGroups::COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK];

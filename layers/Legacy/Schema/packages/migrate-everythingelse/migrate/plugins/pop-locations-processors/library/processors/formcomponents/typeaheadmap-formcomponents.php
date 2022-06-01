@@ -16,7 +16,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
 
     public function getLocationsTypeaheadSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return [PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::class, PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS];
 
@@ -29,7 +29,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
 

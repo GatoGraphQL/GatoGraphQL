@@ -51,7 +51,7 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -102,7 +102,7 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
             self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 => [CPP_Module_Processor_TagSectionTabPanelComponents::class, CPP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -111,7 +111,7 @@ class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS02:

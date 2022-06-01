@@ -14,7 +14,7 @@ class GD_EM_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetM
 
     public function getMessage(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_MESSAGE_NOLOCATION:
                 return TranslationAPIFacade::getInstance()->__('No location', 'em-popprocessors');
         }

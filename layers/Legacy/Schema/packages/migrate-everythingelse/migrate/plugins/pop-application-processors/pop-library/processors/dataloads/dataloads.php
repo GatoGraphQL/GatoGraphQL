@@ -15,7 +15,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
 
     protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_INITIALIZEDOMAIN:
                 return [PoP_Application_Module_Processor_UserCheckpointMessages::class, PoP_Application_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_DOMAIN];
         }
@@ -25,7 +25,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_INITIALIZEDOMAIN => POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -35,7 +35,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_INITIALIZEDOMAIN:
                 $ret = array_merge(
                     $ret,
@@ -52,7 +52,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
     {
         $ret = parent::getBackgroundurls($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_INITIALIZEDOMAIN:
                 // Allow PoP SPA to set the backgroundload URLs
                 $domain = PoP_Application_Utils::getRequestDomain();
@@ -70,7 +70,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_INITIALIZEDOMAIN:
                 // Make it invisible, nothing to show
                 $this->appendProp($component, $props, 'class', 'hidden');

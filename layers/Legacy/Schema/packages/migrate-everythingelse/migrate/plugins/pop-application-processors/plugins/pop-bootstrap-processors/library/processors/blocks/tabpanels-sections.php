@@ -38,7 +38,7 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
             self::COMPONENT_BLOCK_TABPANEL_MYCONTENT => [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYCONTENT],
             self::COMPONENT_BLOCK_TABPANEL_MYPOSTS => [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYPOSTS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -47,7 +47,7 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_CONTENT:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_CONTENT];
@@ -72,7 +72,7 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_CONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_POSTS:

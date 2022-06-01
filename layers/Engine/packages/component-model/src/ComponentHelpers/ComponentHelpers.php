@@ -26,7 +26,7 @@ class ComponentHelpers implements ComponentHelpersInterface
 
     public function getComponentFullName(\PoP\ComponentModel\Component\Component $component): string
     {
-        $componentFullName = $component->processorClass . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . $component[1];
+        $componentFullName = $component->processorClass . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . $component->name;
         if ($component->atts !== []) {
             $componentFullName .= self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . serialize($component[2]);
         }

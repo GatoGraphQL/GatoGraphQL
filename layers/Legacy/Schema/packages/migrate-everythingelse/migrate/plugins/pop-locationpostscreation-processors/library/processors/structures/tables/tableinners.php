@@ -16,7 +16,7 @@ class GD_Custom_EM_Module_Processor_TableInners extends PoP_Module_Processor_Tab
         $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLEINNER_MYLOCATIONPOSTS:
                 $ret[] = [PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::class, PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT];
                 $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::COMPONENT_LAYOUTPOST_DATE];

@@ -19,7 +19,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
 
@@ -37,7 +37,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Write here...', 'pop-userstance-processors'));
@@ -49,7 +49,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 return TranslationAPIFacade::getInstance()->__('You can leave 1 general stance, and 1 stance for each article on the website. Your opinions can be edited any moment.', 'pop-userstance-processors');
         }
@@ -59,7 +59,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 return PoP_UserStanceProcessors_Utils::getWhatisyourvoteTitle();
 
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE:
                 $ret .= ' col-sm-2';
                 break;
@@ -89,7 +89,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE:
                 $ret .= ' col-sm-10';
                 break;

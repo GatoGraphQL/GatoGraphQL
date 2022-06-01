@@ -22,7 +22,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 return sprintf(TranslationAPIFacade::getInstance()->__('Search %s', 'pop-coreprocessors'), $cmsapplicationapi->getSiteName());
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 $this->addJsmethod($ret, 'typeaheadSearchInput');
                 break;
@@ -52,7 +52,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH:
                 // Comment Leo 08/12/2017: Assign the input the "searchfor" name, so that it works to perform search
                 // even when JS is disabled or fails

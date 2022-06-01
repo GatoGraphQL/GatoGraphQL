@@ -22,7 +22,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR:
@@ -35,7 +35,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                     self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR],
                     self::COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
                 );
-                if ($filter = $filters[$component[1]] ?? null) {
+                if ($filter = $filters[$component->name] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -60,7 +60,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => POP_SCREEN_AUTHORTAGS,
             self::COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -69,7 +69,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR:

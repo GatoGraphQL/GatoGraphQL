@@ -19,7 +19,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS => POP_ROUTE_AUTHORS,
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW => POP_ROUTE_AUTHORS,
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_LIST => POP_ROUTE_AUTHORS,
@@ -37,12 +37,12 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_LIST => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
          // Single Authors has no filter, so show only the Share control
             case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW:

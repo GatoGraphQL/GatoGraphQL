@@ -20,7 +20,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
             self::COMPONENT_BLOCK_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
             self::COMPONENT_BLOCK_STANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
@@ -31,7 +31,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCE_CREATEORUPDATE:
             case self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_EDITPOST];
@@ -50,7 +50,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
             self::COMPONENT_BLOCK_STANCE_CREATEORUPDATE => [UserStance_Module_Processor_CreateUpdatePostDataloads::class, UserStance_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE],
             self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE => [UserStance_Module_Processor_CreateUpdatePostDataloads::class, UserStance_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -59,7 +59,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCE_CREATE:
                 return true;
         }
@@ -68,7 +68,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCE_UPDATE:
                 return true;
         }
@@ -80,7 +80,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
     {
         $ret = parent::getBlocksectionsClasses($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $ret['blocksection-inners'] = 'well';
                 break;
@@ -91,7 +91,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 // Allow Events to have a different title
                 $title = sprintf(
@@ -111,7 +111,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCE_CREATEORUPDATE:
             case self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $ret['loadBlockContent']['loadcontent-showdisabledlayer'] = true;
@@ -123,14 +123,14 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCE_CREATEORUPDATE:
             case self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $this->appendProp($component, $props, 'class', 'pop-blockstance-createorupdate');
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Make it horizontal
             case self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 // Do not show in the quickview
@@ -139,7 +139,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCE_UPDATE:
             case self::COMPONENT_BLOCK_STANCE_CREATE:
                 $this->appendProp($component, $props, 'class', 'addons-nocontrols');

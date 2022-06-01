@@ -18,7 +18,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends Po
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS => [PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYLOCATIONPOSTS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -27,7 +27,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends Po
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS:
                 return [CommonPages_EM_Module_Processor_ControlGroups::class, CommonPages_EM_Module_Processor_ControlGroups::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST];
         }
@@ -37,7 +37,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends Po
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS:
                 return [GD_Custom_EM_Module_Processor_CustomFilters::class, GD_Custom_EM_Module_Processor_CustomFilters::COMPONENT_FILTER_MYLOCATIONPOSTS];
         }

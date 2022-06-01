@@ -15,7 +15,7 @@ class GD_URE_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Proces
 
     public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERCOMMUNITIES:
             case self::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES:
                 return true;
@@ -26,12 +26,12 @@ class GD_URE_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Proces
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES:
                 $names = array(
                     self::COMPONENT_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES => 'communities',
                 );
-                return $names[$component[1]];
+                return $names[$component->name];
         }
         
         return parent::getName($component);

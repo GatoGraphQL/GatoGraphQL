@@ -20,7 +20,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
             self::COMPONENT_FORMINPUTGROUP_EMAIL => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_EMAIL],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -31,7 +31,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_NAME:
             case self::COMPONENT_FORMINPUTGROUP_EMAIL:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -44,7 +44,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_NAME:
             case self::COMPONENT_FORMINPUTGROUP_EMAIL:
                 // For function addDomainClass
@@ -57,7 +57,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_NAME:
             case self::COMPONENT_FORMINPUTGROUP_EMAIL:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');

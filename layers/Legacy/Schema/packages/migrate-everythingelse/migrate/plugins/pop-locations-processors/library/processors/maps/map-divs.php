@@ -19,7 +19,7 @@ class PoP_Module_Processor_MapDivs extends PoP_Module_Processor_MapDivsBase
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAPSTATICIMAGE_DIV:
                 $ret[] = [PoP_Locations_Module_Processor_CustomScrolls::class, PoP_Locations_Module_Processor_CustomScrolls::COMPONENT_SCROLL_STATICIMAGE];
                 break;

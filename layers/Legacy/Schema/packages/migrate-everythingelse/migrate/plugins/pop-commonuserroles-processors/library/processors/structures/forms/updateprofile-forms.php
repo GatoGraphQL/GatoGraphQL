@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_UpdateProfileForms extends PoP_Module_Processor_Fo
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_UPDATE:
                 return \PoP\Root\App::applyFilters(
                     'GD_URE_Module_Processor_UpdateProfileForms:getInnerSubcomponent:profileorganization', 

@@ -19,7 +19,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
                 $ret = array_merge(
@@ -41,7 +41,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
 
     public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
                 return 'row';
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
     
     public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
                 return 'col-xsm-4';
             

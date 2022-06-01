@@ -18,7 +18,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NAME:
                 return TranslationAPIFacade::getInstance()->__('Your Name', 'pop-genericforms');
 
@@ -31,7 +31,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NAME:
             case self::COMPONENT_FORMINPUT_EMAIL:
                 return true;
@@ -49,7 +49,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         if (PoP_FormUtils::useLoggedinuserData() && doingPost() && \PoP\Root\App::getState('is-user-logged-in')) {
             $user_id = \PoP\Root\App::getState('current-user-id');
             $userTypeAPI = UserTypeAPIFacade::getInstance();
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_FORMINPUT_NAME:
                     $options['selected'] = $userTypeAPI->getUserDisplayName($user_id);
                     break;
@@ -67,7 +67,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NAME:
             case self::COMPONENT_FORMINPUT_EMAIL:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -80,7 +80,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NAME:
             case self::COMPONENT_FORMINPUT_EMAIL:
                 // For function addDomainClass
@@ -93,7 +93,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_NAME:
             case self::COMPONENT_FORMINPUT_EMAIL:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');

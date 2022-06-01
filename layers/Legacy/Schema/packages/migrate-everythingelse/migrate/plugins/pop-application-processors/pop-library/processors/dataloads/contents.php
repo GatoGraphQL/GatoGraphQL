@@ -31,7 +31,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             // The Page Content block uses whichever is the current page
             self::COMPONENT_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
             self::COMPONENT_DATALOAD_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
@@ -44,7 +44,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT:
             case self::COMPONENT_DATALOAD_AUTHOR_CONTENT:
                 // Add the Sidebar on the top
@@ -100,7 +100,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHOR_CONTENT:
     //         case self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT:
     //             return UserRequestNature::USER;
@@ -118,7 +118,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLE_CONTENT:
             case self::COMPONENT_DATALOAD_SINGLEINTERACTION_CONTENT:
             case self::COMPONENT_DATALOAD_PAGE_CONTENT:
@@ -133,7 +133,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_CONTENT:
             case self::COMPONENT_DATALOAD_AUTHOR_SUMMARYCONTENT:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);

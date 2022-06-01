@@ -20,7 +20,7 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
 
     protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_EMBEDPREVIEW:
                 return sprintf(
                     '<h4><i class="fa fa-fw fa-eye"></i>%s</h4>',
@@ -46,7 +46,7 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_EMBEDPREVIEW:
                 return [PoP_Module_Processor_ShareContentInners::class, PoP_Module_Processor_ShareContentInners::COMPONENT_CONTENTINNER_EMBEDPREVIEW];
 

@@ -104,7 +104,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_DETAILS => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW => POP_EVENTS_ROUTE_EVENTS,
@@ -204,12 +204,12 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_ADDONS:
             case self::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS:
             case self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
@@ -272,7 +272,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL:
@@ -284,7 +284,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL:

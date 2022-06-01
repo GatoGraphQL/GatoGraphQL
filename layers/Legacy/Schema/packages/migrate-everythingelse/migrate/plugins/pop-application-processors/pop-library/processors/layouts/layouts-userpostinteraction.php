@@ -17,7 +17,7 @@ class Wassup_Module_Processor_UserPostInteractionLayouts extends PoP_Module_Proc
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERPOSTINTERACTION:
                 // Allow TPPDebate to add the "What do you think about TPP?" before these layouts
                 if ($layouts = \PoP\Root\App::applyFilters(

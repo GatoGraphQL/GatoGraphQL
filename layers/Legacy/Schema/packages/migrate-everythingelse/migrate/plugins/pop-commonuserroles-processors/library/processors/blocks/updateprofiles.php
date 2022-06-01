@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_UpdateProfileBlocks extends PoP_Module_Processor_U
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL,
             self::COMPONENT_BLOCK_PROFILEORGANIZATION_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_UpdateProfileBlocks extends PoP_Module_Processor_U
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_UPDATE:
                 $ret[] = [GD_URE_Module_Processor_UpdateProfileDataloads::class, GD_URE_Module_Processor_UpdateProfileDataloads::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE];
                 break;

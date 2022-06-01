@@ -17,7 +17,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
             self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE => POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT,
             default => parent::getRelevantRoute($component, $props),
@@ -26,7 +26,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -42,7 +42,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
             self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_HIGHLIGHT],
             self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_HIGHLIGHT],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -51,7 +51,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 return true;
         }
@@ -60,7 +60,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE:
                 return true;
         }
@@ -70,7 +70,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 return $this->instanceManager->getInstance(CreateHighlightMutationResolverBridge::class);
             case self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE:
@@ -82,7 +82,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHT_UPDATE:
             case self::COMPONENT_DATALOAD_HIGHLIGHT_CREATE:
                 $name = TranslationAPIFacade::getInstance()->__('Highlight', 'pop-addhighlights-processors');

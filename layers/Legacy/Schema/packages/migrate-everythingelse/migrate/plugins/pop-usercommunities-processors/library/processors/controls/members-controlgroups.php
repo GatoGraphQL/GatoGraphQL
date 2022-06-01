@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_MYMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_CustomControlButtonGroups::class, GD_URE_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_INVITENEWMEMBERS];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];

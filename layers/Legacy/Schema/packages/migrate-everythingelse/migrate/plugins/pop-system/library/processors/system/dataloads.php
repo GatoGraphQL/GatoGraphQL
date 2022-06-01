@@ -24,7 +24,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
     {
 
         // The actionexecution is triggered directly
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_BUILD:
             case self::COMPONENT_DATALOADACTION_SYSTEM_GENERATE:
             case self::COMPONENT_DATALOADACTION_SYSTEM_INSTALL:
@@ -36,7 +36,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_BUILD:
                 return $this->instanceManager->getInstance(BuildSystemMutationResolverBridge::class);
 

@@ -53,7 +53,7 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -320,7 +320,7 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
 
     public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS00:
                 return array(
                     [

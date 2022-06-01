@@ -22,7 +22,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY,
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY,
             default => parent::getRelevantRoute($component, $props),
@@ -40,7 +40,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST => [GD_AAL_Module_Processor_AutomatedEmailsScrolls::class, GD_AAL_Module_Processor_AutomatedEmailsScrolls::COMPONENT_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -71,7 +71,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 // Return the notifications from within the last 24 hs (timestamp is runtime, it must not be cached)
@@ -93,7 +93,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 // Return the notifications from within the last 24 hs
@@ -112,7 +112,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
@@ -123,7 +123,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('notifications', 'poptheme-wassup'));

@@ -21,7 +21,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL:
                 return array(
                     'row-items' => 3,
@@ -53,7 +53,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
             self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

@@ -16,7 +16,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
 
     // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES:
     //             return true;
     //     }
@@ -26,7 +26,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
             case self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'pop-locationposts-processors');
@@ -37,7 +37,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
 
     public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
             case self::COMPONENT_FILTERINPUT_LOCATIONPOSTCATEGORIES:
                 return GD_FormInput_LocationPostCategories::class;
@@ -48,7 +48,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
                 return 'locationpostcategories';
         }
@@ -58,7 +58,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
 
     public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES:
                 return 'categories';
         }

@@ -13,7 +13,7 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
 
     public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:
                 return 'h1';
         }
@@ -23,7 +23,7 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
 
     public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).PoP_UserStanceProcessors_Utils::getLatestvotesTitle();
         }

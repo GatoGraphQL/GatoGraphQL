@@ -31,7 +31,7 @@ class PoPVP_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR:
                 $ret[] = [PoPVP_Module_Processor_ButtonGroups::class, PoPVP_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_STANCES];
                 $ret[] = [PoPVP_Module_Processor_CustomDelegatorFilters::class, PoPVP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_STANCES];

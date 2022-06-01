@@ -17,7 +17,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultipleInners extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR:
                 $ret[] = [PoP_AddHighlights_Module_Processor_ButtonGroups::class, PoP_AddHighlights_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_HIGHLIGHTS];
                 $ret[] = [PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::class, PoP_AddHighlights_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_HIGHLIGHTS];

@@ -28,7 +28,7 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Locations:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -44,7 +44,7 @@ class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proce
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS => POP_FILTER_MYLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

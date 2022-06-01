@@ -59,7 +59,7 @@ class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBas
             self::COMPONENT_FILTER_MYCATEGORYPOSTS => [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

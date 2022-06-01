@@ -15,7 +15,7 @@ class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Process
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_COMMENTFRAME_LIST:
                 return [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_LIST];
 

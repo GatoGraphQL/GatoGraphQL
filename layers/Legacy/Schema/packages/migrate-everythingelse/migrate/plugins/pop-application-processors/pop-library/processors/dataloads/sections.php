@@ -22,7 +22,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS => POP_ROUTE_AUTHORS,
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW => POP_ROUTE_AUTHORS,
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST => POP_ROUTE_AUTHORS,
@@ -40,13 +40,13 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     // // Single Authors has no filter, because the authors are provided using 'include' which can't be filtered
     // function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
@@ -90,7 +90,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
     //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL:
@@ -105,7 +105,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL:
@@ -119,7 +119,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL:
@@ -132,7 +132,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL:

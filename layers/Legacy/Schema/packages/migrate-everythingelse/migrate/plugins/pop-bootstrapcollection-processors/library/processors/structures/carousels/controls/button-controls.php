@@ -16,7 +16,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
                 return TranslationAPIFacade::getInstance()->__('Previous', 'pop-coreprocessors');
 
@@ -28,7 +28,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
     }
     public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
                 return 'glyphicon-chevron-left';
 
@@ -40,14 +40,14 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
     }
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT:
                 $classes = array(
                     self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV => 'carousel-prev',
                     self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT => 'carousel-next'
                 );
-                $class = $classes[$component[1]];
+                $class = $classes[$component->name];
 
                 $this->appendProp($component, $props, 'class', $class . ' fetchmore-btn-disable');
                 $carousel_target = $this->getProp($component, $props, 'carousel-target');
@@ -66,7 +66,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
     }
     public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELNEXT:
                 return null;
@@ -79,7 +79,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
                 $this->addJsmethod($ret, 'controlCarouselPrev');
                 $this->addJsmethod($ret, 'fetchMoreDisable');

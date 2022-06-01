@@ -19,7 +19,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::COMPONENT_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS];
 
@@ -38,7 +38,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
 
     public function addFetchedData(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
             case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
             case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
@@ -51,14 +51,14 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
                 $classes = array(
                     self::COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE => 'references',
                 );
 
                 $this->setProp($component, $props, 'appendable', true);
-                $this->setProp($component, $props, 'appendable-class', $classes[$component[1]] ?? null);
+                $this->setProp($component, $props, 'appendable-class', $classes[$component->name] ?? null);
 
                 break;
         }

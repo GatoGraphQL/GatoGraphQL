@@ -16,7 +16,7 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR:
                 return 'fa-fw fa-thumb-tack';
             
@@ -29,7 +29,7 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_BUTTONINNER_GOOGLECALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Google Calendar', 'em-popprocessors');
             

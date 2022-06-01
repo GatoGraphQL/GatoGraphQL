@@ -50,7 +50,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOADACTION_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
             self::COMPONENT_DATALOADACTION_FOLLOWUSER => POP_SOCIALNETWORK_ROUTE_FOLLOWUSER,
             self::COMPONENT_DATALOADACTION_RECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST,
@@ -79,7 +79,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::COMPONENT_DATALOADACTION_DOWNVOTEPOST => DownvoteCustomPostMutationResolverBridge::class,
             self::COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST => UndoDownvoteCustomPostMutationResolverBridge::class,
         );
-        if ($executer = $executers[$component[1]] ?? null) {
+        if ($executer = $executers[$component->name] ?? null) {
             return $executer;
         }
 
@@ -89,7 +89,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     // function getActionexecutionCheckpointConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     // The actionexecution is triggered when clicking on the link, not when submitting a form
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
     //         case self::COMPONENT_DATALOADACTION_UNFOLLOWUSER:
@@ -111,7 +111,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         // The actionexecution is triggered when clicking on the link, not when submitting a form
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_UNFOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
@@ -130,7 +130,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
     protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_UNFOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
@@ -149,7 +149,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
     protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_UNFOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
@@ -170,7 +170,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     {
         parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_UNFOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
@@ -206,7 +206,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::COMPONENT_DATALOADACTION_DOWNVOTEPOST => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::COMPONENT_CONTENT_DOWNVOTESPOSTS],
             self::COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::COMPONENT_CONTENT_UNDODOWNVOTESPOSTS],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
@@ -215,7 +215,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
             case self::COMPONENT_DATALOADACTION_UNRECOMMENDPOST:
             case self::COMPONENT_DATALOADACTION_UPVOTEPOST:
@@ -233,7 +233,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
     protected function getObjectIDParamName(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
             case self::COMPONENT_DATALOADACTION_UNRECOMMENDPOST:
             case self::COMPONENT_DATALOADACTION_UPVOTEPOST:
@@ -253,7 +253,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_UNFOLLOWUSER:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
@@ -288,7 +288,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::COMPONENT_DATALOADACTION_DOWNVOTEPOST => TranslationAPIFacade::getInstance()->__('down-vote posts', 'pop-coreprocessors'),
             self::COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST => TranslationAPIFacade::getInstance()->__('stop down-voting posts', 'pop-coreprocessors'),
         );
-        if ($towhat = $towhats[$component[1]] ?? null) {
+        if ($towhat = $towhats[$component->name] ?? null) {
             $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', $towhat);
         }
 
@@ -296,7 +296,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY], $props, 'error-header', '');
         $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY], $props, 'success-header', '');
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_UNFOLLOWUSER:
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:

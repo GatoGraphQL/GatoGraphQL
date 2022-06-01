@@ -15,7 +15,7 @@ class CommonPages_EM_Module_Processor_ControlButtonGroups extends PoP_Module_Pro
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST:
                 $ret[] = [CommonPagesEM_Module_Processor_AnchorControls::class, CommonPagesEM_Module_Processor_AnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDLOCATIONPOST];
                 $ret = \PoP\Root\App::applyFilters(

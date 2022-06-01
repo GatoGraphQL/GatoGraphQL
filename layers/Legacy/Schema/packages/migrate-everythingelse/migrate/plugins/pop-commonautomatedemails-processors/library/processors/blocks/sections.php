@@ -25,7 +25,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
@@ -46,13 +46,13 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => [PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
@@ -73,7 +73,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
     protected function getDescriptionAbovetitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
@@ -95,7 +95,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
     protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:

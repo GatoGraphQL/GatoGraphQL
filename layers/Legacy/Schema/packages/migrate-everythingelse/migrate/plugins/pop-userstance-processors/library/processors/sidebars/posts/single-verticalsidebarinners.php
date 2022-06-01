@@ -15,7 +15,7 @@ class UserStance_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_STANCE:
                 $ret = array_merge(
                     $ret,

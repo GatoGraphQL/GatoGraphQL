@@ -25,7 +25,7 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS];
                 break;
@@ -56,7 +56,7 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:
@@ -73,7 +73,7 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:

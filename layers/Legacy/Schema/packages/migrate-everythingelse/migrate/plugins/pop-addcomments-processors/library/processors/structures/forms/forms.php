@@ -13,7 +13,7 @@ class PoP_Module_Processor_CommentsForms extends PoP_Module_Processor_FormsBase
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_ADDCOMMENT:
                 return [PoP_Module_Processor_CommentsFormInners::class, PoP_Module_Processor_CommentsFormInners::COMPONENT_FORMINNER_ADDCOMMENT];
         }

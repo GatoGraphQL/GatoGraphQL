@@ -53,7 +53,7 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Trending Tags has no filter
             case self::COMPONENT_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGS];

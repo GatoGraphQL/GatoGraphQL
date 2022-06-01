@@ -15,7 +15,7 @@ class GD_SP_Custom_EM_Module_Processor_PostMultipleSidebarComponents extends PoP
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_LOCATIONPOST:
                 $ret[] = [GD_Custom_EM_Module_Processor_PostWidgets::class, GD_Custom_EM_Module_Processor_PostWidgets::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO];
                 $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::COMPONENT_WIDGETWRAPPER_REFERENCES];

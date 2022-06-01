@@ -20,7 +20,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
 
     public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return [AAL_PoPProcessors_Module_Processor_ButtonInners::class, AAL_PoPProcessors_Module_Processor_ButtonInners::COMPONENT_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK];
 
@@ -38,7 +38,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
     }
     public function getLinktargetField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return 'target';
         }
@@ -48,7 +48,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 return 'url';
 
@@ -67,7 +67,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
 
     public function showTooltip(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
             case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 return true;
@@ -78,7 +78,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_USERVIEW:
                 return TranslationAPIFacade::getInstance()->__('View', 'pop-notifications-processors');
 
@@ -96,7 +96,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
                 $ret .= ' url';
                 break;
@@ -111,7 +111,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
                 $ret .= ' pop-functional '.AAL_CLASS_NOTIFICATION_MARKASREAD;
                 break;
@@ -126,7 +126,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
             case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
                 // Tell the Search engines to not follow the link

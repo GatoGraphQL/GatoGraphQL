@@ -34,7 +34,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
                 [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
         );
 
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -43,7 +43,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
     //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
     //             return UserRequestNature::USER;
@@ -54,7 +54,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
@@ -66,7 +66,7 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);

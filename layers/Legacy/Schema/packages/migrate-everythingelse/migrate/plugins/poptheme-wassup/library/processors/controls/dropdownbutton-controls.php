@@ -17,7 +17,7 @@ class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Proce
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
                 $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO];
                 $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS];
@@ -35,7 +35,7 @@ class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Proce
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
                 return 'btn btn-link';
@@ -46,7 +46,7 @@ class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Proce
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_QUICKVIEWCLOSETOGGLE:
                 return 'fa-ellipsis-v';

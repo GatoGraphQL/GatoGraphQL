@@ -23,7 +23,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
             self::COMPONENT_FEEDBACKMESSAGE_UPDATECONTENT => [PoP_ContentCreation_Module_Processor_FeedbackMessageInners::class, PoP_ContentCreation_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

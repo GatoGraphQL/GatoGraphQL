@@ -14,7 +14,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return 'communities';
         }
@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return TranslationAPIFacade::getInstance()->__('Are you member of any community? Select them here.', 'ure-popprocessors');
         }
@@ -34,7 +34,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return [GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::class, GD_UserCommunities_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEADCOMMUNITIES];
         }
@@ -44,7 +44,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return array(
                     [GD_URE_Module_Processor_UserTypeaheadComponentFormInputs::class, GD_URE_Module_Processor_UserTypeaheadComponentFormInputs::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY],
@@ -56,7 +56,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
 
     public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
                 return [GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES];
         }

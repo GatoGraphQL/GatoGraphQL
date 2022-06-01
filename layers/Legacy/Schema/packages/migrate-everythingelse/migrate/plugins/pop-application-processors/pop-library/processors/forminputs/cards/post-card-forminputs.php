@@ -15,7 +15,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
 
     public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_CARD_POST:
                 return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST];
 
@@ -28,7 +28,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_CARD_POST:
                 return 'self';
 

@@ -18,7 +18,7 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
 
     public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL:
             case self::COMPONENT_CODE_EMAILDIGESTS_LABEL:
                 $titles = array(
@@ -27,7 +27,7 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
                 );
                 return sprintf(
                     '<h3>%s</h3>',
-                    $titles[$component[1]]
+                    $titles[$component->name]
                 );
 
             case self::COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL:
@@ -36,7 +36,7 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
                 );
                 return sprintf(
                     '<h4>%s</h4>',
-                    $titles[$component[1]]
+                    $titles[$component->name]
                 );
         }
     

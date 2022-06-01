@@ -16,7 +16,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $ret = array_merge(
                     $ret,
@@ -33,7 +33,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
 
     public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return 'btn btn-compact btn-link';
         }
@@ -43,7 +43,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return 'fa-reply';
         }
@@ -53,7 +53,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return TranslationAPIFacade::getInstance()->__('Reply with...', 'pop-coreprocessors').' <span class="caret"></span>';
         }
@@ -63,7 +63,7 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $this->appendProp($component, $props, 'class', 'pop-addrelatedpost-dropdown');
                 break;

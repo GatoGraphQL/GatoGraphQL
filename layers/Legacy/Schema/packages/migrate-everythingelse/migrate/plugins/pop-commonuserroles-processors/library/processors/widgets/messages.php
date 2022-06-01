@@ -14,7 +14,7 @@ class GD_URE_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor
 
     public function getMessage(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_MESSAGE_NODETAILS:
                 return TranslationAPIFacade::getInstance()->__('No details', 'poptheme-wassup');
         }

@@ -20,7 +20,7 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
             self::COMPONENT_BLOCK_WHOWEARE_SCROLL_THUMBNAIL => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
             self::COMPONENT_BLOCK_WHOWEARE_SCROLL_LIST => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
@@ -38,12 +38,12 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
             self::COMPONENT_BLOCK_WHOWEARE_SCROLL_FULLVIEW => [GD_Custom_Module_Processor_CustomSectionDataloads::class, GD_Custom_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_WHOWEARE_SCROLL_FULLVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_WHOWEARE_SCROLL_THUMBNAIL:
             case self::COMPONENT_BLOCK_WHOWEARE_SCROLL_LIST:

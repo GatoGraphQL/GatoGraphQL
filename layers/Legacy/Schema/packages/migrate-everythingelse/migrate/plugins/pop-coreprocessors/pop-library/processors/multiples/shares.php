@@ -19,7 +19,7 @@ class PoP_Module_Processor_ShareMultiples extends PoP_Module_Processor_Multiples
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_EMBED:
                 $ret[] = [PoP_Module_Processor_ShareContents::class, PoP_Module_Processor_ShareContents::COMPONENT_CONTENT_EMBED];
                 $ret[] = [PoP_Module_Processor_ShareContents::class, PoP_Module_Processor_ShareContents::COMPONENT_CONTENT_EMBEDPREVIEW];

@@ -19,7 +19,7 @@ class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Modu
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTEDIT:
                 $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTEDIT];
                 break;

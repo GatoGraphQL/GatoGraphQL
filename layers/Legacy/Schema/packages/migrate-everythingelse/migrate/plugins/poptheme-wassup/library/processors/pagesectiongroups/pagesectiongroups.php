@@ -19,7 +19,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
 
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ENTRY_DEFAULT:
                 return array(
                     [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::COMPONENT_OFFCANVAS_TOP],
@@ -61,7 +61,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ENTRY_DEFAULT:
             case self::COMPONENT_ENTRY_PRINT:
             case self::COMPONENT_ENTRY_EMBED:
@@ -71,8 +71,8 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                     self::COMPONENT_ENTRY_DEFAULT => array('active-top', 'active-side'),
                     self::COMPONENT_ENTRY_EMBED => array('active-top'),
                 );
-                if ($active_pagesections[$component[1]] ?? null) {
-                    $this->appendProp($component, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$component[1]] ?? null)));
+                if ($active_pagesections[$component->name] ?? null) {
+                    $this->appendProp($component, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$component->name] ?? null)));
                 }
 
                 // When loading the whole site, only the main pageSection can have components retrieve params from the $_GET

@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Module_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_GENERIC:
                 $ret = array_merge(
                     $ret,

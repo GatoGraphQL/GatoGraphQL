@@ -26,7 +26,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($component[1]) {
+                switch ($component->name) {
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES_PRO:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL:
@@ -43,7 +43,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
             self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL => [UserStance_Module_Processor_AuthorSectionTabPanelComponents::class, UserStance_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL],
             self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST => [UserStance_Module_Processor_AuthorSectionTabPanelComponents::class, UserStance_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHORSTANCES];
 

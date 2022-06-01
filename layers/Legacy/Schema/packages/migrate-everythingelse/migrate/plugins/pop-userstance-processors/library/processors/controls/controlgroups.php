@@ -22,7 +22,7 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_STANCESTATS:
                 $ret[] = [UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_GENERAL];
                 $ret[] = [UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE];
@@ -53,7 +53,7 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_STANCESTATS:
                 // Make them collapsible, with a control expanding them by looking for class "collapse"
                 $this->appendProp([UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE], $props, 'class', 'collapse');

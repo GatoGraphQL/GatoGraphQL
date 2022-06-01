@@ -16,7 +16,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
 
     public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return 'btn btn-link btn-compact';
         }
@@ -26,7 +26,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
 
     public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return 'btn btn-link btn-compact';
         }
@@ -35,7 +35,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
     }
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users', 'poptheme-wassup');
         }
@@ -45,7 +45,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
     protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_USERS:
                 return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }

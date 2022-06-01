@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($component[1]) {
+                switch ($component->name) {
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTS:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR:
@@ -39,7 +39,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORPASTEVENTS],
             self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHOREVENTSCALENDAR],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -48,7 +48,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTS:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::COMPONENT_FILTER_AUTHOREVENTS];
@@ -64,7 +64,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
     {
         if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;

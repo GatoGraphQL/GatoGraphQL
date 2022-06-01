@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL,
             self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class);
@@ -50,7 +50,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
                 $ret[] = [GD_URE_Module_Processor_UpdateProfileForms::class, GD_URE_Module_Processor_UpdateProfileForms::COMPONENT_FORM_PROFILEORGANIZATION_UPDATE];
                 break;
@@ -65,7 +65,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
 
     protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
                 return [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_PROFILEORGANIZATION];
 
@@ -78,7 +78,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
                 $this->setProp([PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION], $props, 'action', TranslationAPIFacade::getInstance()->__('edit your user account', 'poptheme-wassup'));
                 break;

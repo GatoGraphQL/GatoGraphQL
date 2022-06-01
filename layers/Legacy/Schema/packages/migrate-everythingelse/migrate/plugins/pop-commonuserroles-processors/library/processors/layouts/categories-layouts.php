@@ -17,7 +17,7 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
 
     public function getCategoriesField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_ORGANIZATIONCATEGORIES:
                 return 'organizationCategoriesByName';
 
@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     }
     public function getLabelClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_ORGANIZATIONTYPES:
                 return 'label-primary';
         }

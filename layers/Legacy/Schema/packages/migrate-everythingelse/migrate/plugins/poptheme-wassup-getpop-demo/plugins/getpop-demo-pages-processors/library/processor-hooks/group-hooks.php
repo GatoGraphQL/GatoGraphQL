@@ -29,7 +29,7 @@ class GetPoPDemo_Processors_GroupHooks
     public function setModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHOR_WIDGETAREA:
             case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_TAG_WIDGETAREA:
                 // Hide if block is empty
@@ -39,7 +39,7 @@ class GetPoPDemo_Processors_GroupHooks
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_CustomGroups::COMPONENT_GROUP_AUTHOR_WIDGETAREA:
                 // Format
                 $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');

@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
             self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
                 $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE];
                 $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT];
@@ -44,7 +44,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEACCOUNT];
@@ -55,7 +55,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
 
     public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::COMPONENT_SUBMENU_ACCOUNT];
@@ -68,7 +68,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 $this->setProp(

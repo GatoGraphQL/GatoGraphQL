@@ -17,7 +17,7 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
                 $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT];
                 $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT];
@@ -34,7 +34,7 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
 
     // function getWrapperClass(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
     //         case self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
@@ -47,7 +47,7 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
 
     // function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
     //         case self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
@@ -60,7 +60,7 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
                 $this->appendProp([PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::COMPONENT_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT], $props, 'class', 'pull-right');

@@ -193,7 +193,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18,
             self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
@@ -264,7 +264,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18,
             self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
         }
 
@@ -273,7 +273,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
 
     public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS02:
@@ -302,7 +302,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
 
     public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS02:
@@ -333,7 +333,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_NOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS00:

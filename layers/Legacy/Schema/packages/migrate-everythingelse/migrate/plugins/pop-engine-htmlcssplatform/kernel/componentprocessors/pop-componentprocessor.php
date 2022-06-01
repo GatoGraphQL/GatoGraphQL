@@ -171,7 +171,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 		// The cb applies to what actions
     // 		if ($module_cb_actions = $this->getComponentCBActions($component, $props)) {
 
-    // 			$ret['actions'][$component[1]] = $module_cb_actions;
+    // 			$ret['actions'][$component->name] = $module_cb_actions;
     // 		}
     // 	}
     // 	foreach ($this->getSubcomponentsByGroup($component) as $subcomponent) {
@@ -205,7 +205,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	if ($component_path = $this->getComponentPath($component, $props)) {
 
     // 		// Key: component / Value: path to arrive to this component
-    // 		$ret[$component[1]] = array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $componentOutputName);
+    // 		$ret[$component->name] = array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $componentOutputName);
     // 	}
 
     // 	// Add the path from this component to its components

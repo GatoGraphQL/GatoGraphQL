@@ -19,7 +19,7 @@ class GD_Custom_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_SECTIONWITHMAP];
                 $ret[] = [PoP_LocationPosts_Module_Processor_CustomDelegatorFilters::class, PoP_LocationPosts_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_LOCATIONPOSTS];

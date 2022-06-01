@@ -16,7 +16,7 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
 
     public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL:
             case self::COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL:
                 $titles = array(
@@ -25,7 +25,7 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
                 );
                 return sprintf(
                     '<h4>%s</h4>',
-                    $titles[$component[1]]
+                    $titles[$component->name]
                 );
         }
     

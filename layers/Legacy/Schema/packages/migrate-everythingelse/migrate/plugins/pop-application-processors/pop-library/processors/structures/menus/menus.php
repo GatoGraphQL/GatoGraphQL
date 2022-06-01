@@ -17,7 +17,7 @@ class PoP_Module_Processor_Menus extends PoP_Module_Processor_ContentsBase
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONMENU_TOP:
                 return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::COMPONENT_CONTENTINNER_MENU_DROPDOWNBUTTON_TOP];
             

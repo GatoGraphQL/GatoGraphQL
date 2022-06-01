@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
             self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -31,7 +31,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
             case self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('If you can\'t find the location in the input below, click on the "+" button to add a new one.', 'em-popprocessors');
@@ -44,7 +44,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
             case self::COMPONENT_EM_FORMCOMPONENTGROUP_SINGLELOCATIONTYPEAHEADMAP:
                 // Make it mandatory?

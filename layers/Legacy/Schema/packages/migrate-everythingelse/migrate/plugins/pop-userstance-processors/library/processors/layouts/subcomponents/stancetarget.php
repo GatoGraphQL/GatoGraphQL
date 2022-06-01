@@ -21,7 +21,7 @@ class PoP_Module_Processor_StanceTargetSubcomponentLayouts extends PoP_Module_Pr
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_STANCETARGET_POSTTITLE:
                 $ret[] = [UserStance_Custom_Module_Processor_Codes::class, UserStance_Custom_Module_Processor_Codes::COMPONENT_CODE_REFERENCEDAFTERREADING];
                 $ret[] = [PoP_Module_Processor_CustomFullViewTitleLayouts::class, PoP_Module_Processor_CustomFullViewTitleLayouts::COMPONENT_LAYOUT_POSTTITLE];
@@ -37,7 +37,7 @@ class PoP_Module_Processor_StanceTargetSubcomponentLayouts extends PoP_Module_Pr
                     self::COMPONENT_LAYOUT_STANCETARGET_LINE => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_LINE],
                     self::COMPONENT_LAYOUT_STANCETARGET_ADDONS => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS],
                 );
-                if ($layout = $layouts[$component[1]] ?? null) {
+                if ($layout = $layouts[$component->name] ?? null) {
                     $ret[] = $layout;
                 }
                 break;
@@ -48,7 +48,7 @@ class PoP_Module_Processor_StanceTargetSubcomponentLayouts extends PoP_Module_Pr
 
     public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_STANCETARGET_POSTTITLE:
             case self::COMPONENT_LAYOUT_STANCETARGET_AUTHORPOSTTITLE:
                 return 'span';

@@ -18,7 +18,7 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
 
     public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return 'btn btn-link btn-compact';
@@ -29,7 +29,7 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
 
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return POP_TARGET_QUICKVIEW;
@@ -39,7 +39,7 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     }
     public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS:
                 return 'btn btn-link btn-compact';
@@ -49,7 +49,7 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     }
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).TranslationAPIFacade::getInstance()->__('By organizations', 'pop-userstance-processors');
 
@@ -62,7 +62,7 @@ class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_
     protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS);
 

@@ -26,7 +26,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
 
     public function getSocialmediaSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS:
                 $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_SOCIALMEDIA], $subcomponents);
                 array_splice($subcomponents, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA]));
@@ -51,7 +51,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
 
     public function getDropdownSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 $pos = array_search([PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subcomponents);
                 array_splice($subcomponents, $pos, 0, array([PoP_Module_Processor_PostViewComponentButtons::class, PoP_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN]));

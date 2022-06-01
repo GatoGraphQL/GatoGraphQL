@@ -23,7 +23,7 @@ class GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER:
                 $ret[] = [PoP_Module_Processor_FunctionButtons::class, PoP_Module_Processor_FunctionButtons::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW];
                 $ret[] = [PoP_Module_Processor_FunctionButtons::class, PoP_Module_Processor_FunctionButtons::COMPONENT_BUTTON_UNFOLLOWUSER_PREVIEW];

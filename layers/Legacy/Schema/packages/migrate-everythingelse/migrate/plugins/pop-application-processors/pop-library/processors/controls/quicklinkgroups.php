@@ -39,7 +39,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKGROUP_POST:
                 $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE];
                 break;
@@ -152,20 +152,20 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 $this->appendProp($component, $props, 'class', 'pop-functiongroup');
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 // Make the level below also a 'btn-group' so it shows inline
                 $downlevels = array(
                     self::COMPONENT_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST => [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
                 );
-                // $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group bg-warning');
-                $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group');
+                // $this->appendProp($downlevels[$component->name], $props, 'class', 'btn-group bg-warning');
+                $this->appendProp($downlevels[$component->name], $props, 'class', 'btn-group');
                 break;
         }
 

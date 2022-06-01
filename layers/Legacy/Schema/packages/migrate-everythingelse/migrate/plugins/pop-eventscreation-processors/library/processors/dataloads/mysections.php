@@ -27,7 +27,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT => POP_EVENTSCREATION_ROUTE_MYEVENTS,
@@ -58,12 +58,12 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrolls::class, PoP_EventsCreation_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW:
@@ -107,7 +107,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW:
@@ -120,7 +120,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW:

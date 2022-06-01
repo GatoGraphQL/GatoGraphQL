@@ -133,7 +133,7 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::COMPONENT_BLOCK_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::COMPONENT_BLOCK_MYCATEGORYPOSTS00_TABLE_EDIT => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
@@ -266,12 +266,12 @@ class LPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySecti
             self::COMPONENT_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYCATEGORYPOSTS01_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYCATEGORYPOSTS02_TABLE_EDIT:

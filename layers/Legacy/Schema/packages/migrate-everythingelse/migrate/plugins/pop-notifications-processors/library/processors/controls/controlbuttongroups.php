@@ -17,7 +17,7 @@ class AAL_PoPProcessors_Module_Processor_ControlButtonGroups extends PoP_Module_
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONLIST:
                 $ret[] = [AAL_PoPProcessors_Module_Processor_AnchorControls::class, AAL_PoPProcessors_Module_Processor_AnchorControls::COMPONENT_AAL_ANCHORCONTROL_NOTIFICATIONS];
                 break;

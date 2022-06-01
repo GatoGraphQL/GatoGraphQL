@@ -25,7 +25,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_FEATUREDIMAGE:
                 // Allow TPP Debate to override, adding UserStance_Module_Processor_WidgetWrappers::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT
                 $layouts = array();

@@ -23,7 +23,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
 
     public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
@@ -35,7 +35,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
 
     public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
@@ -46,7 +46,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     }
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
@@ -63,7 +63,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
                 return RouteUtils::getRouteURL(POP_EVENTS_ROUTE_EVENTS);
 
@@ -73,14 +73,14 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 $routes = array(
                     self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );
-                return RequestUtils::addRoute($url, $routes[$component[1]] ?? null);
+                return RequestUtils::addRoute($url, $routes[$component->name] ?? null);
 
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
                 $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 $routes = array(
                     self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );
-                return RequestUtils::addRoute($url, $routes[$component[1]] ?? null);
+                return RequestUtils::addRoute($url, $routes[$component->name] ?? null);
         }
 
         return parent::getTitleLink($component, $props);

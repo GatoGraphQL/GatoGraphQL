@@ -30,7 +30,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_USERNAME:
                 return TranslationAPIFacade::getInstance()->__('Username', 'pop-coreprocessors');
 
@@ -64,7 +64,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
 
     public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_USERNAME:
             case self::COMPONENT_FORMINPUT_CUU_EMAIL:
             case self::COMPONENT_FORMINPUT_CUU_PASSWORD:
@@ -80,7 +80,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
 
     public function getType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_CURRENTPASSWORD:
             case self::COMPONENT_FORMINPUT_CUU_PASSWORD:
             case self::COMPONENT_FORMINPUT_CUU_NEWPASSWORD:
@@ -94,7 +94,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
 
     public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_USERNAME:
                 return 'username';
 
@@ -113,7 +113,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
 
     public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_CURRENTPASSWORD:
             case self::COMPONENT_FORMINPUT_CUU_PASSWORD:
             case self::COMPONENT_FORMINPUT_CUU_NEWPASSWORD:

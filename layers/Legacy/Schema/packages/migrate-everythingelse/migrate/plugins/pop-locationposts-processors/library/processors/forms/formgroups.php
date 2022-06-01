@@ -19,7 +19,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES:
                 $ret .= ' col-sm-2';
                 break;
@@ -31,7 +31,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES:
                 $ret .= ' col-sm-10';
                 break;
@@ -42,7 +42,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
 
     public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES:
                 return [GD_Custom_EM_Module_Processor_MultiSelectFormInputs::class, GD_Custom_EM_Module_Processor_MultiSelectFormInputs::COMPONENT_FORMINPUT_LOCATIONPOSTCATEGORIES];
 
@@ -55,7 +55,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES:
                 // case self::COMPONENT_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES:
 

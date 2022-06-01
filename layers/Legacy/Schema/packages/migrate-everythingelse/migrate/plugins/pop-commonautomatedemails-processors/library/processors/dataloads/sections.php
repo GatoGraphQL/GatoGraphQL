@@ -23,7 +23,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
@@ -44,12 +44,12 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
             self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST => [PoPTheme_Wassup_AE_Module_Processor_Scrolls::class, PoPTheme_Wassup_AE_Module_Processor_Scrolls::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
@@ -99,7 +99,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
@@ -124,7 +124,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:

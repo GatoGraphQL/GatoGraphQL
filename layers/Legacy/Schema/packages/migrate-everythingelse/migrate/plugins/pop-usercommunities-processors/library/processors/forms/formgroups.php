@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
             case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERTAGS:
             case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS:
@@ -40,7 +40,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES:
             case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERTAGS:
             case self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS:
@@ -62,7 +62,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
             self::COMPONENT_URE_FILTERINPUTGROUP_MEMBERSTATUS => [GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_MEMBERSTATUS],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -71,7 +71,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUTGROUP_MEMBERSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status "Active" if the user is truly your member, or "Rejected" otherwise. Rejected users will not appear as your community\'s members, or contribute content.');
 

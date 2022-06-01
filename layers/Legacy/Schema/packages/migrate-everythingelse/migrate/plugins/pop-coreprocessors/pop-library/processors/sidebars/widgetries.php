@@ -28,7 +28,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_POST_AUTHORS:
             case self::COMPONENT_WIDGETCOMPACT_POST_AUTHORS:
                 $ret[] = [PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::COMPONENT_LAYOUT_POSTAUTHORS];
@@ -75,7 +75,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE => TranslationAPIFacade::getInstance()->__('Highlighted from', 'pop-coreprocessors'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -89,11 +89,11 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE => 'fa-circle',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_POST_AUTHORS:
                 return 'list-group';
 
@@ -106,7 +106,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_AUTHOR_CONTACT:
                 return 'list-group-item';
 
@@ -119,7 +119,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     }
     public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_POST_AUTHORS:
             case self::COMPONENT_WIDGETCOMPACT_AUTHORDESCRIPTION:
                 return 'panel panel-default panel-sm';
@@ -134,7 +134,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     }
     public function getTitleWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_REFERENCES_LINE:
             case self::COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE:
                 return '';
@@ -144,7 +144,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     }
     public function getTitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_REFERENCES_LINE:
             case self::COMPONENT_WIDGET_HIGHLIGHTEDPOST_LINE:
                 return '';

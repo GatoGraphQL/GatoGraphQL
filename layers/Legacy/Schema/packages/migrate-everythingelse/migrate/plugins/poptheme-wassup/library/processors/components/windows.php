@@ -25,7 +25,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
     {
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WINDOW_ADDONS:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
@@ -65,7 +65,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         $ret = parent::getComponentClasses($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WINDOW_ADDONS:
                 list($addons_subcomponent, $addontabs_subcomponent) = $this->getInnerSubcomponents($component);
                 $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($addons_subcomponent);
@@ -83,7 +83,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         $ret = parent::getComponentParams($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WINDOW_ADDONS:
                 list($addons_subcomponent, $addontabs_subcomponent) = $this->getInnerSubcomponents($component);
                 $addonsSubcomponentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($addons_subcomponent);

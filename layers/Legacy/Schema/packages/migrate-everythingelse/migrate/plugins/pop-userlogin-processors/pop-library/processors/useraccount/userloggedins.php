@@ -16,7 +16,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
 
     public function getTitleTop(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 return TranslationAPIFacade::getInstance()->__('Welcome', 'pop-coreprocessors');
 
@@ -30,7 +30,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     public function getTitleBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT:
                 return sprintf(
                     '<p><a href="%s">%s</a></p>',
@@ -46,7 +46,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -58,7 +58,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-loggedin-';
@@ -70,7 +70,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME:
                 $this->appendProp($component, $props, 'class', 'visible-loggedin');
                 break;

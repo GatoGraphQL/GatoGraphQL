@@ -42,7 +42,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_AUTHORDESCRIPTION:
                 $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_AUTHORPROPERTIES];
                 break;
@@ -57,7 +57,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_SINGLE:
             case self::COMPONENT_EXAMPLE_PAGE:
             case self::COMPONENT_EXAMPLE_TAGDESCRIPTION:
@@ -73,7 +73,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_LATESTPOSTS:
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
             case self::COMPONENT_EXAMPLE_TAGLATESTPOSTS:
@@ -98,7 +98,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
                 $ret['authors'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
@@ -118,7 +118,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     {
         $ret = parent::getRelationalComponentFields($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_SINGLE:
             case self::COMPONENT_EXAMPLE_LATESTPOSTS:
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
@@ -158,7 +158,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         );
         return array_merge(
             parent::getLeafComponentFields($component, $props),
-            $data_fields[$component[1]] ?? array()
+            $data_fields[$component->name] ?? array()
         );
     }
 }

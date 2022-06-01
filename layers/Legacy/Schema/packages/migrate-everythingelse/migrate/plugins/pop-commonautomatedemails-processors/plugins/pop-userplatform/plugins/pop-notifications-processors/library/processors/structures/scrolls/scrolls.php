@@ -21,7 +21,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
             self::COMPONENT_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST => [GD_AAL_Module_Processor_AutomatedEmailsScrollInners::class, GD_AAL_Module_Processor_AutomatedEmailsScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -47,7 +47,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
         }
         $this->appendProp($component, $props, 'class', $extra_class);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS:
             case self::COMPONENT_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST:
                 $this->appendProp($component, $props, 'class', 'scroll-notifications');

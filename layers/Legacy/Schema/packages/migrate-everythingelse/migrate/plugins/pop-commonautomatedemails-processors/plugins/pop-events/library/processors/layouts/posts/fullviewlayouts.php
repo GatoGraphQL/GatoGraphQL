@@ -13,13 +13,13 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_FullViewLayouts extends PoP_Module_
 
     public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:
                 $sidebars = array(
                     self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT => [PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebars::class, PoPTheme_Wassup_EM_AE_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT],
                 );
 
-                return $sidebars[$component[1]];
+                return $sidebars[$component->name];
         }
 
         return parent::getSidebarSubcomponent($component);

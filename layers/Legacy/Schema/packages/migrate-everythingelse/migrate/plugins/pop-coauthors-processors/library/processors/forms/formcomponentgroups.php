@@ -21,7 +21,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
             self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS => [GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
@@ -30,14 +30,14 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS:
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 $placeholders = array(
                     self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS => TranslationAPIFacade::getInstance()->__('Type name...', 'pop-coreprocessors'),
                     self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS => TranslationAPIFacade::getInstance()->__('Type name...', 'pop-coreprocessors'),
                 );
-                $placeholder = $placeholders[$component[1]];
+                $placeholder = $placeholders[$component->name];
                 $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', $placeholder);
                 break;
@@ -48,7 +48,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
 
     public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS:
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return TranslationAPIFacade::getInstance()->__('Co-authoring this post with other users? Select them all here, they will not only appear as co-owners in the webpage, but will also be able to edit this post.', 'pop-coreprocessors');
@@ -59,7 +59,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return TranslationAPIFacade::getInstance()->__('Co-authors', 'pop-coreprocessors');
         }

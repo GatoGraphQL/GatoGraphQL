@@ -13,7 +13,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_CODE_EXTERNAL => POP_MULTIDOMAIN_ROUTE_EXTERNAL,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -23,7 +23,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_EXTERNAL:
                 // This is all this block does: load the external url defined in parameter "url"
                 $this->addJsmethod($ret, 'clickURLParam');
@@ -35,7 +35,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_EXTERNAL:
                 // Make it invisible, nothing to show
                 $this->appendProp($component, $props, 'class', 'hidden');

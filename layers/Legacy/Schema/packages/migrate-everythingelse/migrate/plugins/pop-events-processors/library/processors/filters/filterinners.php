@@ -61,7 +61,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Events:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -82,7 +82,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR => POP_FILTER_AUTHOREVENTSCALENDAR,
     //         self::COMPONENT_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR => POP_FILTER_TAGEVENTSCALENDAR,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

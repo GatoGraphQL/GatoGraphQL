@@ -21,7 +21,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrolls extends PoP_Mo
             self::COMPONENT_SCROLL_MYLINKS_FULLVIEWPREVIEW => [PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

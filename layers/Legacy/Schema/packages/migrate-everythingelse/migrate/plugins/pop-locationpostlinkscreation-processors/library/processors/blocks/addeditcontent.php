@@ -15,7 +15,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_LOCATIONPOSTLINK_CREATE => POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK,
             self::COMPONENT_BLOCK_LOCATIONPOSTLINK_UPDATE => POP_LOCATIONPOSTLINKSCREATION_ROUTE_EDITLOCATIONPOSTLINK,
             default => parent::getRelevantRoute($component, $props),
@@ -30,7 +30,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
             self::COMPONENT_BLOCK_LOCATIONPOSTLINK_UPDATE => [PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_LOCATIONPOSTLINK_UPDATE],
             self::COMPONENT_BLOCK_LOCATIONPOSTLINK_CREATE => [PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::class, PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads::COMPONENT_DATALOAD_LOCATIONPOSTLINK_CREATE],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
@@ -39,7 +39,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTLINK_CREATE:
                 return true;
         }
@@ -48,7 +48,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTLINK_UPDATE:
                 return true;
         }
@@ -58,7 +58,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exte
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTLINK_UPDATE:
             case self::COMPONENT_BLOCK_LOCATIONPOSTLINK_CREATE:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {

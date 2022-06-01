@@ -20,7 +20,7 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
 
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTONINNER_USERVIEW:
                 return 'fa-fw fa-eye';
 
@@ -36,7 +36,7 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTONINNER_USERVIEW:
                 return TranslationAPIFacade::getInstance()->__('View', 'pop-notifications-processors');
         }

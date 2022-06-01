@@ -13,7 +13,7 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners ex
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_WHOWEARE_MAP:
                 return array(
                     'row-items' => 1,
@@ -31,7 +31,7 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners ex
         $layouts = array(
             self::COMPONENT_SCROLLINNER_WHOWEARE_MAP => [GD_EM_Module_Processor_MultipleUserLayouts::class, GD_EM_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

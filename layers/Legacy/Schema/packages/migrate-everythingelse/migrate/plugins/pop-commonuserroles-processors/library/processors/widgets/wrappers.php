@@ -17,7 +17,7 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
                 $ret[] = [GD_URE_Custom_Module_Processor_ProfileIndividualLayouts::class, GD_URE_Custom_Module_Processor_ProfileIndividualLayouts::COMPONENT_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS];
                 break;
@@ -34,7 +34,7 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
             case self::COMPONENT_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS:
                 $ret[] = [GD_URE_Custom_Module_Processor_WidgetMessages::class, GD_URE_Custom_Module_Processor_WidgetMessages::COMPONENT_URE_MESSAGE_NODETAILS];
@@ -46,7 +46,7 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
                 return 'hasIndividualDetails';
 

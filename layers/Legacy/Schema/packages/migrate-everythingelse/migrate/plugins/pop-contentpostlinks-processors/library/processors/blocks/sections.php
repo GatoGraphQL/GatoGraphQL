@@ -45,7 +45,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
@@ -88,12 +88,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
             self::COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST => [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW:
@@ -120,7 +120,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
 
     public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LINKS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_LINKS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_LINKS_SCROLL_FULLVIEW:

@@ -42,7 +42,7 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
 
     public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS => [
                 new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS),
             ],
@@ -86,7 +86,7 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
     public function getFieldFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): int
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE:
             case self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE:

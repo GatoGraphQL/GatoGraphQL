@@ -26,7 +26,7 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
             self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW => [GD_Custom_Module_Processor_CustomScrollInners::class, GD_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -35,7 +35,7 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
 
     public function getFetchmoreButtonSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLL_WHOWEARE_DETAILS:
             case self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL:
             case self::COMPONENT_SCROLL_WHOWEARE_LIST:

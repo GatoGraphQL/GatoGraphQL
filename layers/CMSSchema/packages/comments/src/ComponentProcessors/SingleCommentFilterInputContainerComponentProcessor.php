@@ -28,7 +28,7 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
 
     public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS => [
                 new \PoP\ComponentModel\Component\Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS),
             ],
@@ -43,7 +43,7 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
     public function getFieldFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): int
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,

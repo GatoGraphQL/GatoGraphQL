@@ -18,7 +18,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
 
     public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('My Past Events', 'poptheme-wassup');
 
@@ -30,7 +30,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 return getRouteIcon(POP_EVENTSCREATION_ROUTE_MYPASTEVENTS, false);
 
@@ -43,14 +43,14 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
                 $routes = array(
                     self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
                     self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT => POP_EVENTSCREATION_ROUTE_ADDEVENT,
                 );
-                $route = $routes[$component[1]];
+                $route = $routes[$component->name];
 
                 return RouteUtils::getRouteURL($route);
         }
@@ -59,7 +59,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     }
     public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -72,7 +72,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 $this->appendProp($component, $props, 'class', 'btn btn-link btn-compact');
                 break;

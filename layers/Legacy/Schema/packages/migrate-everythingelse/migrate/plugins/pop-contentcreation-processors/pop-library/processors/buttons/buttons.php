@@ -18,7 +18,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
 
     public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_POSTEDIT:
                 return [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTEDIT];
 
@@ -34,7 +34,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
 
     public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_POSTEDIT:
                 return 'editURL';
 
@@ -47,7 +47,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_POSTEDIT:
                 return TranslationAPIFacade::getInstance()->__('Edit', 'pop-coreprocessors');
 
@@ -63,7 +63,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_POSTPREVIEW:
                 return PoP_Application_Utils::getPreviewTarget();
         }
@@ -75,7 +75,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_POSTEDIT:
             case self::COMPONENT_BUTTON_POSTVIEW:
             case self::COMPONENT_BUTTON_POSTPREVIEW:
@@ -88,7 +88,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_POSTPREVIEW:
                 // Allow to add data-sw-networkfirst="true"
                 if ($params = \PoP\Root\App::applyFilters('GD_ContentCreation_Module_Processor_Buttons:postpreview:params', array())) {

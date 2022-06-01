@@ -21,7 +21,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
             self::COMPONENT_BLOCK_TABPANEL_MYEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYEVENTS],
             self::COMPONENT_BLOCK_TABPANEL_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_EventsCreation_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYPASTEVENTS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -30,7 +30,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYEVENTS:
                 return [PoP_EventsCreation_Module_Processor_CustomControlGroups::class, PoP_EventsCreation_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_MYEVENTLIST];
 
@@ -43,7 +43,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
 
     public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYEVENTS:
             case self::COMPONENT_BLOCK_TABPANEL_MYPASTEVENTS:
                 return [PoP_EventsCreation_Module_Processor_CustomFilters::class, PoP_EventsCreation_Module_Processor_CustomFilters::COMPONENT_FILTER_MYEVENTS];
@@ -56,7 +56,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
     {
         if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_BLOCK_TABPANEL_MYPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;

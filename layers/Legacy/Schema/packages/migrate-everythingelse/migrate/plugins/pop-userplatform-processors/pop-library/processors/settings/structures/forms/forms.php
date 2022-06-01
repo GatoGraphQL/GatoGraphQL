@@ -13,7 +13,7 @@ class PoP_Module_Processor_SettingsForms extends PoP_Module_Processor_FormsBase
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_SETTINGS:
                 return [PoP_Module_Processor_SettingsFormInners::class, PoP_Module_Processor_SettingsFormInners::COMPONENT_FORMINNER_SETTINGS];
         }

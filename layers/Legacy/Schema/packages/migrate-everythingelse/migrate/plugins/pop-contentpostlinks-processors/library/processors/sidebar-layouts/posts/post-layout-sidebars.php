@@ -23,7 +23,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars extends PoP
             self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -32,7 +32,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars extends PoP
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LINK:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

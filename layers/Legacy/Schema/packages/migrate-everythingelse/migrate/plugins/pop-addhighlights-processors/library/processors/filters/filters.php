@@ -23,7 +23,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
             self::COMPONENT_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYHIGHLIGHTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

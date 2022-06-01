@@ -20,14 +20,14 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $filters = array(
                     self::COMPONENT_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR],
                 );
-                if ($filter = $filters[$component[1]] ?? null) {
+                if ($filter = $filters[$component->name] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -45,7 +45,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
                     self::COMPONENT_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR],
                     self::COMPONENT_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR => [PoP_UserCommunities_Module_Processor_SectionSidebarInners::class, PoP_UserCommunities_Module_Processor_SectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR],
                 );
-                if ($inner = $inners[$component[1]] ?? null) {
+                if ($inner = $inners[$component->name] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -61,7 +61,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
             self::COMPONENT_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR => POP_SCREEN_USERS,
             self::COMPONENT_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR => POP_SCREEN_AUTHORUSERS,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
@@ -70,7 +70,7 @@ class PoP_UserCommunities_Module_Processor_SidebarMultiples extends PoP_Module_P
 
     public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_COMMUNITIES_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORCOMMUNITYMEMBERS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;

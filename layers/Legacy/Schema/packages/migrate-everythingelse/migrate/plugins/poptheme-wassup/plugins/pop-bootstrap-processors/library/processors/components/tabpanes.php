@@ -19,7 +19,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 // If not told to be empty, then add the page subcomponent
                 if (!($component->atts['empty'] ?? null)) {
@@ -35,7 +35,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 $this->addJsmethod($ret, 'scrollbarVertical');
                 break;
@@ -48,7 +48,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
     {
         $ret = parent::getContentClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 $ret .= ' perfect-scrollbar-offsetreference';
                 break;
@@ -59,7 +59,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
 
     public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 return POP_COMPONENTID_PAGESECTIONCONTAINERID_ADDONS;
         }
@@ -71,7 +71,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
     {
         $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 // Override the style of all the form submit buttons
                 $ret['btn-submit-class'] = 'btn btn-warning btn-block';
@@ -105,7 +105,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         $component_props = array(
             $componentFullName => &$props[$componentFullName],
         );
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 // // Override the style of all the form submit buttons
                 // $this->add_general_prop($ret, 'btn-submit-class', 'btn btn-warning btn-block');

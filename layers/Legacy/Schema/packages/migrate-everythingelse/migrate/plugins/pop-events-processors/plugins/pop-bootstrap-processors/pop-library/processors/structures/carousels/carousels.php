@@ -17,7 +17,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_EVENTS:
             case self::COMPONENT_CAROUSEL_AUTHOREVENTS:
             case self::COMPONENT_CAROUSEL_TAGEVENTS:
@@ -31,7 +31,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
 
     public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_EVENTS:
                 return [GD_EM_Module_Processor_CustomCarouselInners::class, GD_EM_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_EVENTS];
 
@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
 
     public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_EVENTS:
             case self::COMPONENT_CAROUSEL_AUTHOREVENTS:
             case self::COMPONENT_CAROUSEL_TAGEVENTS:
@@ -60,7 +60,7 @@ class GD_EM_Module_Processor_CustomCarousels extends PoP_Module_Processor_Carous
 
     public function getControlsTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_EVENTS:
                 return [GD_EM_Module_Processor_CustomCarouselControls::class, GD_EM_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_EVENTS];
 

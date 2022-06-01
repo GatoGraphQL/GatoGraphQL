@@ -19,7 +19,7 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_POSTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS:
             case self::COMPONENT_LATESTCOUNT_TAG_POSTS:
@@ -34,7 +34,7 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
 
     public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS:
                 return true;
         }
@@ -44,7 +44,7 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
 
     public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_POSTS:
                 return true;
         }

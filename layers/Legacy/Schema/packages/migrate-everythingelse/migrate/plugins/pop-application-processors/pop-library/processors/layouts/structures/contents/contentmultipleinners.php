@@ -17,7 +17,7 @@ class Wassup_Module_Processor_ContentMultipleInners extends PoP_Module_Processor
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS:
                 $ret[] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];
                 break;

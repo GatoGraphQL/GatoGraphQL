@@ -24,7 +24,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
             self::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE => [UserStance_Module_Processor_CustomPostLayoutSidebarInners::class, UserStance_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
@@ -33,7 +33,7 @@ class UserStance_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Pr
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_STANCE:
                 $this->appendProp($component, $props, 'class', 'vertical stances');
                 break;

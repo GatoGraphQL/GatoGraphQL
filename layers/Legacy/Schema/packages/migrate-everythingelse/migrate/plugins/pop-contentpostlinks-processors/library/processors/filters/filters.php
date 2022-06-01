@@ -20,7 +20,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilters extends PoP_Module_Pro
             self::COMPONENT_FILTER_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

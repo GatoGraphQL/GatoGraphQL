@@ -39,7 +39,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
@@ -73,12 +73,12 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::COMPONENT_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_HIGHLIGHTS_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_THUMBNAIL:
@@ -144,7 +144,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW:
     //         case self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL:
     //         case self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST:
@@ -163,7 +163,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST:
@@ -182,7 +182,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR:
@@ -203,7 +203,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW:

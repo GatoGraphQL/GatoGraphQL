@@ -19,7 +19,7 @@ class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Process
             self::COMPONENT_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,
             self::COMPONENT_BUTTONGROUP_MYHIGHLIGHTS => POP_SCREEN_MYHIGHLIGHTS,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 

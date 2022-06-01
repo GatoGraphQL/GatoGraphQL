@@ -16,7 +16,7 @@ class PoP_Share_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Proce
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SHAREBYEMAIL:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Email sent successfully.', 'pop-genericforms');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__("Any more friends who might be interested? Keep sending!", 'pop-genericforms');

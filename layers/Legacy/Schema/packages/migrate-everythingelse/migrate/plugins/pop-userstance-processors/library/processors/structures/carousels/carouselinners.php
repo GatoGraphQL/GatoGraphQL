@@ -17,7 +17,7 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
 
     public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_STANCES:
             case self::COMPONENT_CAROUSELINNER_AUTHORSTANCES:
             case self::COMPONENT_CAROUSELINNER_TAGSTANCES:
@@ -35,7 +35,7 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_STANCES:
             case self::COMPONENT_CAROUSELINNER_AUTHORSTANCES:
             case self::COMPONENT_CAROUSELINNER_TAGSTANCES:

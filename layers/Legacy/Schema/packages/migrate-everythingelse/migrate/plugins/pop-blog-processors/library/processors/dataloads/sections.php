@@ -157,7 +157,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
@@ -328,12 +328,12 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::COMPONENT_DATALOAD_USERS_CAROUSEL => [PoP_Module_Processor_CustomCarousels::class, PoP_Module_Processor_CustomCarousels::COMPONENT_CAROUSEL_USERS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
@@ -546,7 +546,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW:
     //         case self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW:
@@ -588,7 +588,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS:
@@ -666,7 +666,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW:
@@ -703,7 +703,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_SIMPLEVIEW:
@@ -787,7 +787,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 // Don't bring anymore
                 $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
@@ -799,7 +799,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
 
     public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW:
@@ -826,7 +826,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_DETAILS:

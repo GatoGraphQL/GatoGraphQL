@@ -15,7 +15,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
                 $ret[] = [PoP_Module_Processor_FeedButtons::class, PoP_Module_Processor_FeedButtons::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY];
                 break;
@@ -26,7 +26,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
 
     public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
                 return 'hasUserpostactivity';
         }
@@ -36,7 +36,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
 
     public function getTextfieldComponent(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
                 return [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY];
         }
@@ -46,7 +46,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
                 $this->appendProp($component, $props, 'class', 'pop-collapse-btn');
                 break;

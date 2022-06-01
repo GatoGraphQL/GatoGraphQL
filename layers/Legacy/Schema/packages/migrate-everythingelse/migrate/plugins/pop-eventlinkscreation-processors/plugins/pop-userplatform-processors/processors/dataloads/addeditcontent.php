@@ -22,7 +22,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_EVENTLINK_CREATE => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
             self::COMPONENT_DATALOAD_EVENTLINK_UPDATE => POP_EVENTLINKSCREATION_ROUTE_EDITEVENTLINK,
             default => parent::getRelevantRoute($component, $props),
@@ -31,7 +31,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -47,7 +47,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
             self::COMPONENT_DATALOAD_EVENTLINK_UPDATE => [GD_EM_Module_Processor_CreateUpdatePostForms::class, GD_EM_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_EVENTLINK],
             self::COMPONENT_DATALOAD_EVENTLINK_CREATE => [GD_EM_Module_Processor_CreateUpdatePostForms::class, GD_EM_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_EVENTLINK],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
@@ -56,7 +56,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_CREATE:
                 return true;
         }
@@ -65,7 +65,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
     }
     protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_UPDATE:
                 return true;
         }
@@ -75,7 +75,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_UPDATE:
             case self::COMPONENT_DATALOAD_EVENTLINK_CREATE:
                 if ($this->isUpdate($component)) {
@@ -91,7 +91,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_CREATE:
                 return $this->instanceManager->getInstance(CreateEventLinkMutationResolverBridge::class);
             case self::COMPONENT_DATALOAD_EVENTLINK_UPDATE:
@@ -103,7 +103,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_UPDATE:
                 return $this->getObjectIDFromURLParam($component, $props, $data_properties);
         }
@@ -112,7 +112,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     protected function getObjectIDParamName(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_UPDATE:
                 return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
@@ -121,7 +121,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 
     public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTLINK_UPDATE:
             case self::COMPONENT_DATALOAD_EVENTLINK_CREATE:
                 return $this->instanceManager->getInstance(EventObjectTypeResolver::class);

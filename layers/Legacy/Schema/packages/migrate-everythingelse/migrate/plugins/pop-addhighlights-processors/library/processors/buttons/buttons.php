@@ -20,7 +20,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             self::COMPONENT_BUTTON_HIGHLIGHTEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTEDIT],
             self::COMPONENT_BUTTON_HIGHLIGHTVIEW => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTVIEW],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
@@ -33,7 +33,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             self::COMPONENT_BUTTON_HIGHLIGHTEDIT => 'editURL',
             // self::COMPONENT_BUTTON_HIGHLIGHTVIEW => 'highlightedPostURL',
         );
-        if ($field = $fields[$component[1]] ?? null) {
+        if ($field = $fields[$component->name] ?? null) {
             return $field;
         }
 
@@ -46,7 +46,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
             self::COMPONENT_BUTTON_HIGHLIGHTEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
             self::COMPONENT_BUTTON_HIGHLIGHTVIEW => TranslationAPIFacade::getInstance()->__('View', 'poptheme-wassup'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 
@@ -55,7 +55,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
 
     public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_HIGHLIGHTEDIT:
                 return POP_TARGET_ADDONS;
         }
@@ -67,7 +67,7 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_HIGHLIGHTVIEW:
             case self::COMPONENT_BUTTON_HIGHLIGHTEDIT:
                 $ret .= ' btn btn-xs btn-default';

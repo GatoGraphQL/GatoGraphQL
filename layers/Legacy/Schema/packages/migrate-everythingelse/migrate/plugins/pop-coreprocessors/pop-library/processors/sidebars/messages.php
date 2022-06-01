@@ -16,7 +16,7 @@ class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMes
 
     public function getMessage(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MESSAGE_NOREFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Nothing here', 'pop-coreprocessors');
 

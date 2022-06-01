@@ -36,7 +36,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
             self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
             self::COMPONENT_BLOCK_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
@@ -61,12 +61,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
             self::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
@@ -81,7 +81,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_SCROLLMAP:
             case self::COMPONENT_BLOCK_PASTEVENTS_SCROLLMAP:
                 return [PoP_Events_Module_Processor_CustomControlGroups::class, PoP_Events_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKEVENTLIST];
@@ -116,7 +116,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
 
     protected function getComponentTogglemapanchorcontrolPath(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
@@ -140,7 +140,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
                         [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP],
                     ),
                 );
-                return $paths[$component[1]];
+                return $paths[$component->name];
         }
 
         return null;
@@ -148,7 +148,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_SCROLLMAP:
             case self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP:
@@ -164,7 +164,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
 
     public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:

@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageLayouts extends PoP_Module_P
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Update successful!', 'ure-popprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Your changes have been saved.', 'ure-popprocessors');

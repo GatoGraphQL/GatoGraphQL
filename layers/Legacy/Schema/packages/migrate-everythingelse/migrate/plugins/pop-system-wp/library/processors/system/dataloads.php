@@ -18,7 +18,7 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadCom
     {
 
         // The actionexecution is triggered directly
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
                 return true;
         }
@@ -28,7 +28,7 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadCom
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
                 return $this->instanceManager->getInstance(ActivatePluginsMutationResolverBridge::class);
         }

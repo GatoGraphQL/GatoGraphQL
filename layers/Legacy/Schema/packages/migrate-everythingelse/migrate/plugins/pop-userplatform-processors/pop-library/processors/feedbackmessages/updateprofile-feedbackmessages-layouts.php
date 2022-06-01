@@ -16,7 +16,7 @@ class PoP_Module_Processor_UpdateProfileFeedbackMessageLayouts extends PoP_Modul
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEPROFILE:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Profile updated successfully.', 'pop-coreprocessors');
                 break;

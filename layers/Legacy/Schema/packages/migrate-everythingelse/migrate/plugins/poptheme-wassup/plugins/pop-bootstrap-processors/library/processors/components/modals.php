@@ -17,7 +17,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MODAL_QUICKVIEW:
                 $this->addJsmethod($ret, 'customQuickView');
                 $this->addJsmethod($ret, 'destroyPageOnModalClose', 'close');
@@ -33,7 +33,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MODAL_QUICKVIEW:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
@@ -69,7 +69,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
     {
         $ret = parent::getBodyClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MODAL_QUICKVIEW:
                 $ret .= ' pop-pagesection-group quickviewpagesection-group row';
                 break;

@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
 
     public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
                 return [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_POPOVER];
         }
@@ -23,7 +23,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
 
     public function getLayoutContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
                 return [PoP_Module_Processor_CalendarContentLayouts::class, PoP_Module_Processor_CalendarContentLayouts::COMPONENT_LAYOUTCALENDAR_CONTENT_POPOVER];
         }
@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
                 // Use no Author popover
                 $this->appendProp($component, $props, 'class', 'pop-elem');
@@ -45,7 +45,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
 
     // function getComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_LAYOUT_POPOVER_EVENT:
 

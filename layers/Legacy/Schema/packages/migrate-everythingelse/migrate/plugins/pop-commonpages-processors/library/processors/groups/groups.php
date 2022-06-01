@@ -15,7 +15,7 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_WHOWEARE:
                 // Allow to override with custom blocks
                 $ret = array_merge(

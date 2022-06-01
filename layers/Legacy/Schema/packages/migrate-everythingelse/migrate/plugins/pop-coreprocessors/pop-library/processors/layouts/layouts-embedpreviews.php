@@ -14,7 +14,7 @@ class PoP_Module_Processor_EmbedPreviewLayouts extends PoP_Module_Processor_Embe
     }
     public function getFrameSrc(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW:
                 return \PoP\Root\App::applyFilters('PoP_Module_Processor_EmbedPreviewLayouts:getFrameSrc', '');
         }

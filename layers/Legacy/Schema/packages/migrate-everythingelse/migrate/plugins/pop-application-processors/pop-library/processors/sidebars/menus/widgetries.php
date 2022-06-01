@@ -16,7 +16,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_MENU_ABOUT:
                 $ret[] = [PoP_Module_Processor_IndentMenuLayouts::class, PoP_Module_Processor_IndentMenuLayouts::COMPONENT_LAYOUT_MENU_INDENT];
                 break;
@@ -33,7 +33,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::COMPONENT_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
@@ -43,12 +43,12 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::COMPONENT_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
     public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_MENU_ABOUT:
                 return 'panel-body';
         }
@@ -57,7 +57,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
     }
     public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_MENU_ABOUT:
                 return '';
         }

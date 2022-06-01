@@ -16,7 +16,7 @@ class PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners exte
     
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA:
                 return 'fa-fw fa-envelope fa-lg';
                     
@@ -29,7 +29,7 @@ class PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners exte
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Share by email', 'pop-coreprocessors');
         }

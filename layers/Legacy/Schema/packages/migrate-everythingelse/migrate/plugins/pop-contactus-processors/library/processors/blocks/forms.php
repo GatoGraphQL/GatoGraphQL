@@ -13,7 +13,7 @@ class PoP_ContactUs_Module_Processor_Blocks extends PoP_Module_Processor_FormBlo
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_CONTACTUS => POP_CONTACTUS_ROUTE_CONTACTUS,
             default => parent::getRelevantRoute($component, $props),
         };
@@ -23,7 +23,7 @@ class PoP_ContactUs_Module_Processor_Blocks extends PoP_Module_Processor_FormBlo
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_CONTACTUS:
                 $ret[] = [PoP_ContactUs_Module_Processor_Dataloads::class, PoP_ContactUs_Module_Processor_Dataloads::COMPONENT_DATALOAD_CONTACTUS];
                 break;

@@ -14,7 +14,7 @@ class PoP_CommonPagesProcessors_Application_Hooks
 
     public function getSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEPOST:
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATERESETPOST:
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_EDITPOST:

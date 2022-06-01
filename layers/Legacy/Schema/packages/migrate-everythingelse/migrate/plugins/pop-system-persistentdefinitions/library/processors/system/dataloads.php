@@ -17,7 +17,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
     public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         // The actionexecution is triggered directly
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
                 return true;
         }
@@ -27,7 +27,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
 
     public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
                 return $this->instanceManager->getInstance(SaveDefinitionFileMutationResolverBridge::class);
         }

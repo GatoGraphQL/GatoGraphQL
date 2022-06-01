@@ -20,7 +20,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
         $ret = parent::getMessages($component, $props);
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Subscription Successful!', 'pop-genericforms');
                 $ret['success'] = sprintf(

@@ -16,7 +16,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS:
                 return getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), true).TranslationAPIFacade::getInstance()->__('Tags:', 'pop-coreprocessors');
         }
@@ -27,7 +27,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
     protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS:
                 return RouteUtils::getRouteURL(PostTagsModuleConfiguration::getPostTagsRoute());
         }

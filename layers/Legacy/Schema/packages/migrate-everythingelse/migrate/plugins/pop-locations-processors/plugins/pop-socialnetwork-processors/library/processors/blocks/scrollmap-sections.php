@@ -23,7 +23,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
             self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS,
             self::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY,
@@ -45,12 +45,12 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
             self::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
@@ -69,7 +69,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
             case self::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:

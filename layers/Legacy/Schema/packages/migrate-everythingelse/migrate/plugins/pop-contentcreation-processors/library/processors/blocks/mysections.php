@@ -17,7 +17,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
 
     public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT => POP_CONTENTCREATION_ROUTE_MYCONTENT,
@@ -33,12 +33,12 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
             self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW => [PoP_ContentCreation_Module_Processor_MySectionDataloads::class, PoP_ContentCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
     protected function getSectionFilterComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
@@ -53,7 +53,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
 
     protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW:

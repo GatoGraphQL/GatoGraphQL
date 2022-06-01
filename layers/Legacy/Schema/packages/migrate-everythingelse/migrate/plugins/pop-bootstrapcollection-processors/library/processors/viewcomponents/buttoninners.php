@@ -20,7 +20,7 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
     
     public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA:
                 return 'fa-fw fa-code fa-lg';
 
@@ -39,7 +39,7 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
 
     public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Embed', 'pop-coreprocessors');
 

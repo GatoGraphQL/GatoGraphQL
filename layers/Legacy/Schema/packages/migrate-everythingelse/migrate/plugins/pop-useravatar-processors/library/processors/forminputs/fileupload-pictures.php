@@ -14,7 +14,7 @@ class PoP_Module_Processor_FileUploadPictures extends PoP_Module_Processor_FileU
 
     public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILEUPLOAD_PICTURE:
                 return TranslationAPIFacade::getInstance()->__('Picture', 'pop-useravatar-processors');
         }

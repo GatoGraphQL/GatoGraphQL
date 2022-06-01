@@ -13,7 +13,7 @@ class PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts extends PoP_Module_P
 
     public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POST];
         }
@@ -25,7 +25,7 @@ class PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts extends PoP_Module_P
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW:
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
                     $ret[] = [GD_EM_Module_Processor_EventMultipleComponents::class, GD_EM_Module_Processor_EventMultipleComponents::COMPONENT_MULTICOMPONENT_LOCATION];

@@ -259,7 +259,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             );
             $nestedModule = [
                 $component->processorClass,
-                $component[1],
+                $component->name,
                 [
                     self::COMPONENT_ATTS_FIELD_IDS => $nestedFieldIDs,
                 ]
@@ -356,7 +356,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             );
             $fragmentModelListNestedModule = [
                 $component->processorClass,
-                $component[1],
+                $component->name,
                 [
                     self::COMPONENT_ATTS_FIELD_IDS => $fragmentModelListFieldIDs,
                     self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
@@ -440,7 +440,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         $location = $field->getLocation();
     //         $nestedModule = [
     //             $component->processorClass,
-    //             $component[1],
+    //             $component->name,
     //             [
     //                 self::COMPONENT_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
     //                 self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
@@ -503,7 +503,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         $location = $relationalField->getLocation();
     //         $nestedModule = [
     //             $component->processorClass,
-    //             $component[1],
+    //             $component->name,
     //             [
     //                 self::COMPONENT_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
     //                 self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
