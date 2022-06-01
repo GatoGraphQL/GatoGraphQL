@@ -24,7 +24,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends UpstreamAb
     }
 
     /**
-     * @return array<array<mixed>>
+     * @return Component[]
      */
     protected function getPaginationFilterInputComponents(): array
     {
@@ -36,7 +36,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends UpstreamAb
     }
 
     /**
-     * @return array<array<mixed>>
+     * @return Component[]
      */
     protected function getIDFilterInputComponents(): array
     {

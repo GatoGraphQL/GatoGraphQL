@@ -32,6 +32,9 @@ class FilterInputHookSet extends AbstractHookSet
         ];
     }
 
+    /**
+     * @return Component[]
+     */
     public function getAuthorFilterInputComponents(): array
     {
         return [

@@ -34,6 +34,9 @@ class FilterInputHookSet extends AbstractHookSet
         ];
     }
 
+    /**
+     * @return Component[]
+     */
     public function getAuthorFilterInputComponents(): array
     {
         return [
@@ -48,6 +51,9 @@ class FilterInputHookSet extends AbstractHookSet
         ];
     }
 
+    /**
+     * @return Component[]
+     */
     public function getCustomPostAuthorFilterInputComponents(): array
     {
         return [

@@ -37,6 +37,9 @@ class FilterInputHookSet extends AbstractHookSet
         return $filterInputComponents;
     }
 
+    /**
+     * @return Component[]
+     */
     public function getUserFilterInputComponents(): array
     {
         return [
