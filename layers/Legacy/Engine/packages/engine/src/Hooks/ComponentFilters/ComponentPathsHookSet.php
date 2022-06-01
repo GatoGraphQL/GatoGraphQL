@@ -31,7 +31,7 @@ class ComponentPathsHookSet extends AbstractHookSet
         );
     }
     
-    public function maybeAddComponent(array $components): array
+    public function maybeAddComponent(array $elements): array
     {
         if (App::getState('componentFilter') === $this->componentPaths->getName()) {
             if ($componentPaths = App::getState('componentPaths')) {
@@ -40,10 +40,10 @@ class ComponentPathsHookSet extends AbstractHookSet
                     fn ($componentPath) => $componentPathHelpers->stringifyComponentPath($componentPath),
                     $componentPaths
                 );
-                $components[] = $this->getTranslationAPI()->__('component paths:', 'engine') . implode(',', $paths);
+                $elements[] = $this->getTranslationAPI()->__('component paths:', 'engine') . implode(',', $paths);
             }
         }
 
-        return $components;
+        return $elements;
     }
 }

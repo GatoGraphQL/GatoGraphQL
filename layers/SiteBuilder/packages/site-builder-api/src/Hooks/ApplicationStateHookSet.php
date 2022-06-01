@@ -18,12 +18,12 @@ class ApplicationStateHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeAddComponent(array $components): array
+    public function maybeAddComponent(array $elements): array
     {
         if ($stratum = App::getState('stratum')) {
-            $components[] = $this->__('stratum:', 'component-model') . $stratum;
+            $elements[] = $this->__('stratum:', 'component-model') . $stratum;
         }
 
-        return $components;
+        return $elements;
     }
 }

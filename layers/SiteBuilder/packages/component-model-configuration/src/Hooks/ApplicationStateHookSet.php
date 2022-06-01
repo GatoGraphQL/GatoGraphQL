@@ -18,15 +18,15 @@ class ApplicationStateHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeAddComponent(array $components): array
+    public function maybeAddComponent(array $elements): array
     {
         if ($target = App::getState('target')) {
-            $components[] = $this->__('target:', 'component-model') . $target;
+            $elements[] = $this->__('target:', 'component-model') . $target;
         }
         if ($format = App::getState('format')) {
-            $components[] = $this->__('format:', 'component-model') . $format;
+            $elements[] = $this->__('format:', 'component-model') . $format;
         }
 
-        return $components;
+        return $elements;
     }
 }

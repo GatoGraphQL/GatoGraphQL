@@ -18,12 +18,12 @@ class SchemaCacheHookSet extends AbstractHookSet
         );
     }
 
-    public function getSchemaCacheKeyComponents(array $components): array
+    public function getSchemaCacheKeyComponents(array $elements): array
     {
         if ($graphQLOperationType = App::getState('graphql-operation-type')) {
-            $components['graphql-operation-type'] = $graphQLOperationType;
+            $elements['graphql-operation-type'] = $graphQLOperationType;
         }
-        $components['nested-mutations-enabled'] = App::getState('nested-mutations-enabled');
-        return $components;
+        $elements['nested-mutations-enabled'] = App::getState('nested-mutations-enabled');
+        return $elements;
     }
 }
