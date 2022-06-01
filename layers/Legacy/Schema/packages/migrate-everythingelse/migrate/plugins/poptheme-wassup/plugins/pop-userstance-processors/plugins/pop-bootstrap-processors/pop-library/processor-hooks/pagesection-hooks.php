@@ -17,11 +17,11 @@ class PoPTheme_UserStance_PageSectionHooks
         $props = &$props_in_array[0];
         switch ($component[1]) {
             case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
-                $subComponents = array(
+                $subcomponents = array(
                     [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_CREATE],
                     [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_UPDATE],
                 );
-                foreach ($subComponents as $subcomponent) {
+                foreach ($subcomponents as $subcomponent) {
                     $processor->setProp($subcomponent, $props, 'title', '');
                 }
                 break;

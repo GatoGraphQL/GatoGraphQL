@@ -12,22 +12,22 @@ class PoP_CommonPagesProcessors_Application_Hooks
         );
     }
 
-    public function getSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
+    public function getSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEPOST:
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATERESETPOST:
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_EDITPOST:
-                $subComponents[] = [GD_CommonPages_Module_Processor_CustomControlButtonGroups::class, GD_CommonPages_Module_Processor_CustomControlButtonGroups::COMPONENT_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ];
+                $subcomponents[] = [GD_CommonPages_Module_Processor_CustomControlButtonGroups::class, GD_CommonPages_Module_Processor_CustomControlButtonGroups::COMPONENT_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ];
                 break;
         
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_ACCOUNT:
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEACCOUNT:
-                $subComponents[] = [GD_CommonPages_Module_Processor_CustomControlButtonGroups::class, GD_CommonPages_Module_Processor_CustomControlButtonGroups::COMPONENT_CUSTOMCONTROLBUTTONGROUP_ACCOUNTFAQ];
+                $subcomponents[] = [GD_CommonPages_Module_Processor_CustomControlButtonGroups::class, GD_CommonPages_Module_Processor_CustomControlButtonGroups::COMPONENT_CUSTOMCONTROLBUTTONGROUP_ACCOUNTFAQ];
                 break;
         }
         
-        return $subComponents;
+        return $subcomponents;
     }
 }
 

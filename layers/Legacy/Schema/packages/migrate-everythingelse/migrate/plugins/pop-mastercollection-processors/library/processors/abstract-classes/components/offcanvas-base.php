@@ -71,10 +71,10 @@ abstract class PoP_Module_Processor_OffcanvasBase extends PoPEngine_QueryDataCom
                 $ret[GD_JS_TITLES]['closebutton'] = $closebutton_title;
             }
         }
-        if ($subComponents = $this->getSubcomponents($component)) {
+        if ($subcomponents = $this->getSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['elements'] = array_map(
                 \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
-                $subComponents
+                $subcomponents
             );
         }
 

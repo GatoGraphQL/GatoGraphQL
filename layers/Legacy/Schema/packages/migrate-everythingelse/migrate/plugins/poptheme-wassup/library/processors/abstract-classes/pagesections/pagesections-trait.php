@@ -44,10 +44,10 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 
         $ret = parent::getMutableonmodelConfiguration($component, $props);
 
-        if ($subComponents = $this->getFrameoptionsSubcomponents($component)) {
+        if ($subcomponents = $this->getFrameoptionsSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['frameoptions'] = array_map(
                 \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
-                $subComponents
+                $subcomponents
             );
         }
 

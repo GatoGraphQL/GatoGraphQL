@@ -191,14 +191,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
 
         // Propagate
-        $subComponents = $this->getAllSubcomponents($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
+        $subcomponents = $this->getAllSubcomponents($component);
+        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
         // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        if ($subComponents) {
+        if ($subcomponents) {
             $props[$componentFullName][Props::SUBCOMPONENTS] = $props[$componentFullName][Props::SUBCOMPONENTS] ?? array();
-            foreach ($subComponents as $subcomponent) {
+            foreach ($subcomponents as $subcomponent) {
                 $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
                 $subcomponent_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
@@ -678,10 +678,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Only components which do not load data
-            $subComponents = array_filter($this->getSubcomponents($component), function ($subcomponent) {
+            $subcomponents = array_filter($this->getSubcomponents($component), function ($subcomponent) {
                 return !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent);
             });
-            foreach ($subComponents as $subcomponent) {
+            foreach ($subcomponents as $subcomponent) {
                 $this->getComponentProcessorManager()->getProcessor($subcomponent)->addToDatasetDatabaseKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
@@ -864,8 +864,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Propagate down to the components
         // $this->flattenDatasetcomponentTreeComponents(__FUNCTION__, $ret, $component);
         // Exclude the subcomponent components here
-        if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
-            foreach ($subComponents as $subcomponent) {
+        if ($subcomponents = $this->getComponentsToPropagateDataProperties($component)) {
+            foreach ($subcomponents as $subcomponent) {
                 $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
 
                 // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
@@ -879,8 +879,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // protected function flattenDatasetcomponentTreeComponents($propagate_fn, &$ret, \PoP\ComponentModel\Component\Component $component)
     // {
     //     // Exclude the subcomponent components here
-    //     if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
-    //         foreach ($subComponents as $subcomponent) {
+    //     if ($subcomponents = $this->getComponentsToPropagateDataProperties($component)) {
+    //         foreach ($subcomponents as $subcomponent) {
     //             $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
 
     //             // Propagate only if the subcomponent doesn't have a typeResolver. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
@@ -1117,7 +1117,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // Exclude the subcomponent components here
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
+        if ($subcomponents = $this->getComponentsToPropagateDataProperties($component)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-subcomponents must have their data-fields added under entry "conditional-data-fields"
             $conditionalLeafComponentFields = $this->getConditionalLeafComponentFields($component);
@@ -1187,16 +1187,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
                     // Extract the conditional subcomponents from the rest of the subcomponents, which will be processed below
                     foreach ($conditionalSubcomponents as $conditionalSubcomponent) {
-                        $pos = array_search($conditionalSubcomponent, $subComponents);
+                        $pos = array_search($conditionalSubcomponent, $subcomponents);
                         if ($pos !== false) {
-                            array_splice($subComponents, $pos, 1);
+                            array_splice($subcomponents, $pos, 1);
                         }
                     }
                 }
             }
 
             // Second step: all the other subcomponents can be calculated directly
-            foreach ($subComponents as $subcomponent) {
+            foreach ($subcomponents as $subcomponent) {
                 $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
 
                 // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree

@@ -83,7 +83,7 @@ class ComponentPaths extends AbstractComponentFilter
         return true;
     }
 
-    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subComponents): array
+    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -91,7 +91,7 @@ class ComponentPaths extends AbstractComponentFilter
 
         // If there are no remaining path left, then everything goes in
         if (!$this->propagation_unsettled_paths) {
-            return $subComponents;
+            return $subcomponents;
         }
 
         // $component_unsettled_path: Start only from the specified component. It is passed under URL param "componentPaths", and it's the list of component paths
@@ -105,12 +105,12 @@ class ComponentPaths extends AbstractComponentFilter
             if (count($unsettled_path) == 1) {
                 // We reached the end of the unsettled path => from now on, all components must be included
                 if ($unsettled_path_component == $component) {
-                    return $subComponents;
+                    return $subcomponents;
                 }
             } else {
                 // Then, check that the following element in the unsettled_path, which is the subComponent, is on the subComponents
                 $unsettled_path_subComponent = $unsettled_path[1];
-                if ($unsettled_path_component == $component && in_array($unsettled_path_subComponent, $subComponents) && !in_array($unsettled_path_subComponent, $matching_subComponents)) {
+                if ($unsettled_path_component == $component && in_array($unsettled_path_subComponent, $subcomponents) && !in_array($unsettled_path_subComponent, $matching_subComponents)) {
                     $matching_subComponents[] = $unsettled_path_subComponent;
                 }
             }

@@ -106,8 +106,8 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     }
     public function getActivepanelSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        $subComponents = $this->getSubcomponents($component);
-        foreach ($subComponents as $subcomponent) {
+        $subcomponents = $this->getSubcomponents($component);
+        foreach ($subcomponents as $subcomponent) {
             if ($this->isSubcomponentActivePanel($component, $subcomponent)) {
                 return $subcomponent;
             }
@@ -128,8 +128,8 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
 
         // Simply return the first one
-        $subComponents = $this->getSubcomponents($component);
-        return $subComponents[0];
+        $subcomponents = $this->getSubcomponents($component);
+        return $subcomponents[0];
     }
 
     public function getPanelTitle(\PoP\ComponentModel\Component\Component $component)

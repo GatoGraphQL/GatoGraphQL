@@ -16,11 +16,11 @@ class PoPTheme_Wassup_URE_PageSectionHooks
     {
         $props = &$props_in_array[0];
         
-        $subComponents = array(
+        $subcomponents = array(
             [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE],
             [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE],
         );
-        foreach ($subComponents as $subcomponent) {
+        foreach ($subcomponents as $subcomponent) {
             $processor->mergeJsmethodsProp($subcomponent, $props, array('resetOnSuccess'));
         }
     }

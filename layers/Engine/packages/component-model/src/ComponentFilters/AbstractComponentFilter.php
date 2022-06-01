@@ -27,9 +27,9 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return false;
     }
 
-    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subComponents): array
+    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array
     {
-        return $subComponents;
+        return $subcomponents;
     }
 
     public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void

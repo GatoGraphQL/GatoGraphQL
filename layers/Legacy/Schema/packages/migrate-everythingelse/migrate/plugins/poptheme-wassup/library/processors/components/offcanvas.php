@@ -43,12 +43,12 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponents = array(
+                $subcomponents = array(
                     self::COMPONENT_OFFCANVAS_HOVER => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_HOVER],
                     self::COMPONENT_OFFCANVAS_NAVIGATOR => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_NAVIGATOR],
                     self::COMPONENT_OFFCANVAS_BODY => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODY],
                 );
-                $subcomponent = $subComponents[$component[1]];
+                $subcomponent = $subcomponents[$component[1]];
 
                 if ($load_component) {
                     $ret[] = $subcomponent;
@@ -74,11 +74,11 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $load_component = $dependencies[$component[1]] == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponents = array(
+                $subcomponents = array(
                     self::COMPONENT_OFFCANVAS_BODYTABS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYTABS],
                     self::COMPONENT_OFFCANVAS_BODYSIDEINFO => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO],
                 );
-                $subcomponent = $subComponents[$component[1]];
+                $subcomponent = $subcomponents[$component[1]];
 
                 if ($load_component) {
                     $ret[] = $subcomponent;

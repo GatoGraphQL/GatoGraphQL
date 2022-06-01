@@ -29,11 +29,11 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponents = array(
+                $subcomponents = array(
                     self::COMPONENT_PAGESECTIONCONTAINER_HOLE => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_HOLE],
                     self::COMPONENT_PAGESECTIONCONTAINER_MODALS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS],
                 );
-                $subcomponent = $subComponents[$component[1]];
+                $subcomponent = $subcomponents[$component[1]];
 
                 if ($load_component) {
                     $ret[] = $subcomponent;

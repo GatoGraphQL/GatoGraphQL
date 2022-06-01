@@ -923,12 +923,12 @@ class Engine implements EngineInterface
         );
 
         // Propagate to its inner modules
-        $subComponents = $processor->getAllSubcomponents($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
+        $subcomponents = $processor->getAllSubcomponents($component);
+        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subcomponent) {
+        foreach ($subcomponents as $subcomponent) {
             $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
@@ -971,12 +971,12 @@ class Engine implements EngineInterface
         );
 
         // Propagate to its inner modules
-        $subComponents = $processor->getAllSubcomponents($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
+        $subcomponents = $processor->getAllSubcomponents($component);
+        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subcomponent) {
+        foreach ($subcomponents as $subcomponent) {
             $this->addDataloadingComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);

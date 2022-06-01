@@ -139,20 +139,20 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return false;
     }
 
-    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subComponents): array
+    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array
     {
         if (!$this->initialized) {
             $this->init();
         }
         if ($this->selected_filter_name) {
             if ($this->neverExclude) {
-                return $subComponents;
+                return $subcomponents;
             }
 
-            return $this->selected_filter->removeExcludedSubcomponents($component, $subComponents);
+            return $this->selected_filter->removeExcludedSubcomponents($component, $subcomponents);
         }
 
-        return $subComponents;
+        return $subcomponents;
     }
 
     /**

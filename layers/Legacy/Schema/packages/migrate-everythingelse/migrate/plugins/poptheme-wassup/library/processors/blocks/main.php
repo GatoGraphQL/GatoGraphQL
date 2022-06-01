@@ -192,13 +192,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
                 $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-                $subComponents = array_diff(
+                $subcomponents = array_diff(
                     $this->getSubcomponents($component),
                     [
                         $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_MAINCONTENT)
                     ]
                 );
-                foreach ($subComponents as $subcomponent) {
+                foreach ($subcomponents as $subcomponent) {
                     $this->setProp($subcomponent, $props, 'ignore-request-params', true);
                 }
                 break;
