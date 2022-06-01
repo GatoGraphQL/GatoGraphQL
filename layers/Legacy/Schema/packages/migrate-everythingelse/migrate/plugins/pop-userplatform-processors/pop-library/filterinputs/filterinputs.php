@@ -34,9 +34,9 @@ class PoP_Module_Processor_UserPlatformFilterInput extends AbstractValueToQueryF
                 $query['tax-query'] = $query['tax-query'] ?? ['relation' => 'AND'];
                 $taxonomy_terms = [];
                 foreach ($value as $pair) {
-                    $component = explode('|', $pair);
-                    $taxonomy = $component[0];
-                    $term = $component[1];
+                    $elements = explode('|', $pair);
+                    $taxonomy = $elements[0];
+                    $term = $elements[1];
                     $taxonomy_terms[$taxonomy][] = $term;
                 }
                 foreach ($taxonomy_terms as $taxonomy => $terms) {
