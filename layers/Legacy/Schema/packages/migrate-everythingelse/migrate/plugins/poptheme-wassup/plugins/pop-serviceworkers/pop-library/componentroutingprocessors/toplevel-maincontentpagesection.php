@@ -5,7 +5,7 @@ use PoP\Root\Routing\RequestNature;
 class PoPTheme_Wassup_ServiceWorkers_Module_ContentPageSectionTopLevelComponentRoutingProcessor extends PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessorBase
 {
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {

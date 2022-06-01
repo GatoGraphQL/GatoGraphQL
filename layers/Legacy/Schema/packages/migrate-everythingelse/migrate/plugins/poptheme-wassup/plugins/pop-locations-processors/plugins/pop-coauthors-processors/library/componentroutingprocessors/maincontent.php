@@ -5,7 +5,7 @@ use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 class Wassup_EM_CAP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {

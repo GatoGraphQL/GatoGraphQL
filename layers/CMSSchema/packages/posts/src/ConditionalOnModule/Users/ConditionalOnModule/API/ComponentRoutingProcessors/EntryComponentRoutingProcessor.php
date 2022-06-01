@@ -16,7 +16,7 @@ use PoPCMSSchema\Users\Routing\RequestNature;
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
