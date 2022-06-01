@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Constants\PaginationParams;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentProcessors\FilterDataComponentProcessorInterface;
-use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
+use PoP\ComponentModel\Constants\PaginationParams;
+use PoP\Root\App;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
@@ -65,6 +66,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
 
         // Apply filtering of the data
         if ($filtering_components = $data_properties[DataloadingConstants::QUERYARGSFILTERINGCOMPONENTS] ?? null) {
+            /** @var Component[] $filtering_components */
             foreach ($filtering_components as $component) {
                 /** @var FilterDataComponentProcessorInterface */
                 $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);

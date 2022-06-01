@@ -45,6 +45,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         $appState = App::getAppStateManager()->all();
 
         $processors = $this->getProcessors($group);
+        /** @var Component|false */
         $most_matching_component = false;
         $most_matching_properties_count = -1; // Start with -1, since 0 matches is possible
 
@@ -118,6 +119,6 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         }
 
         // If it is false, then return null
-        return $most_matching_component ? (array)$most_matching_component : null;
+        return $most_matching_component ? $most_matching_component : null;
     }
 }
