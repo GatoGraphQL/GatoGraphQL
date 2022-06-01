@@ -103,42 +103,42 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT:
-                new Component(
+                return new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT
                 );
