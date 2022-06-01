@@ -22,7 +22,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function getFieldFilterInputContainerComponent(string $fieldName): ?array
+    public function getFieldFilterInputContainerComponent(string $fieldName): ?\PoP\ComponentModel\Component\Component
     {
         /**
          * An interface may implement another interface which is not Queryable
