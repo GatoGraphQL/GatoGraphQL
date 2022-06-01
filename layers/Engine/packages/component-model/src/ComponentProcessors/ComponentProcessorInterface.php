@@ -122,5 +122,5 @@ interface ComponentProcessorInterface
     public function doesComponentLoadData(Component $component): bool;
     public function startDataloadingSection(Component $component): bool;
     public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void;
-    public function addDatasetcomponentTreeSectionFlattenedComponents(&$ret, Component $component): void;
+    public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void;
 }

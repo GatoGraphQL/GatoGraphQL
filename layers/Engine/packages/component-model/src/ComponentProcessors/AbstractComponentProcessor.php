@@ -902,7 +902,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function addDatasetcomponentTreeSectionFlattenedComponents(&$ret, Component $component): void
+    public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void
     {
         $ret[] = $component;
 
