@@ -4,12 +4,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MAXHEIGHT];
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -23,12 +23,12 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getMaxheight(array $component, array &$props)
+    public function getMaxheight(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    // function getShowmoreBtnHtml(array $component, array &$props) {
+    // function getShowmoreBtnHtml(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $titles = $this->getShowmoreBtnTitles($component, $props);
     //     return sprintf(
@@ -39,14 +39,14 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
     //     );
     // }
 
-    // function getShowmoreBtnTitles(array $component, array &$props) {
+    // function getShowmoreBtnTitles(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     return array(
     //         'more' => TranslationAPIFacade::getInstance()->__('Show more', 'pop-coreprocessors'),
     //         'less' => TranslationAPIFacade::getInstance()->__('Show less', 'pop-coreprocessors'),
     //     );
     // }
-    public function getBtnTitles(array $component, array &$props)
+    public function getBtnTitles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array(
             'more' => TranslationAPIFacade::getInstance()->__('Show more', 'pop-coreprocessors'),
@@ -54,17 +54,17 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         );
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-link';
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -77,7 +77,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -112,7 +112,7 @@ abstract class PoP_Module_Processor_MaxHeightLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'maxheight', $this->getMaxheight($component, $props));
         // $maxheight = $this->getProp($component, $props, 'maxheight');

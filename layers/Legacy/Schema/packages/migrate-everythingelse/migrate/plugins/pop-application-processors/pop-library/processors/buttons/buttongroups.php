@@ -33,7 +33,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $screens = array(
             self::COMPONENT_BUTTONGROUP_SECTION => POP_SCREEN_SECTION,
@@ -56,7 +56,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
         return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataformatsHasmap(array $component, array &$props)
+    protected function getHeadersdataformatsHasmap(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONGROUP_USERS:

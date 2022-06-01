@@ -11,7 +11,7 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     

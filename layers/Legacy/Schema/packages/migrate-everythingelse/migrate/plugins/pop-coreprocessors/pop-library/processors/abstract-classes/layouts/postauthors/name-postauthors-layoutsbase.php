@@ -2,17 +2,17 @@
 
 abstract class PoP_Module_Processor_PostAuthorNameLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTPOST_AUTHORNAME];
     }
 
-    public function getUrlField(array $component, array &$props)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'url';
     }
 
-    public function getLinkTarget(array $component, array &$props)
+    public function getLinkTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_PostAuthorNameLayoutsBase extends PoPEngine_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
     
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_PostAuthorNameLayoutsBase extends PoPEngine_
     }
 
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

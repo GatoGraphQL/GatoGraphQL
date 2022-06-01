@@ -11,7 +11,7 @@ class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Pro
         );
     }
 
-    // function getFooterSubcomponents(array $component) {
+    // function getFooterSubcomponents(\PoP\ComponentModel\Component\Component $component) {
 
     //     $ret = parent::getFooterSubcomponents($component);
 
@@ -26,7 +26,7 @@ class PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts extends PoP_Module_Pro
     //     return $ret;
     // }
 
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST:

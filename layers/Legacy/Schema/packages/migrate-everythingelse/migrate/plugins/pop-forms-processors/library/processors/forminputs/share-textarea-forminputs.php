@@ -12,7 +12,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EMBEDCODE:
@@ -22,7 +22,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         return parent::getLabelText($component, $props);
     }
 
-    public function getPagesectionJsmethod(array $component, array &$props)
+    public function getPagesectionJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getPagesectionJsmethod($component, $props);
 
@@ -37,7 +37,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EMBEDCODE:

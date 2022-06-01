@@ -5,26 +5,26 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponen
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_SCRIPTCUSTOMIZATION_POST];
     }
 
-    public function getAuthorsComponent(array $component)
+    public function getAuthorsComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
     }
-    public function getAuthorsSeparator(array $component, array &$props)
+    public function getAuthorsSeparator(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_CONSTANT_AUTHORS_SEPARATOR;
     }
 
-    public function getLayoutExtraSubcomponent(array $component)
+    public function getLayoutExtraSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($authors_component = $this->getAuthorsComponent($component)) {
             return [
@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return parent::getRelationalComponentFields($component);
     }
 
-    public function getThumbField(array $component, array &$props)
+    public function getThumbField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return FieldQueryInterpreterFacade::getInstance()->getField(
             $this->getThumbFieldName($component, $props),
@@ -63,17 +63,17 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         );
     }
 
-    protected function getThumbFieldName(array $component, array &$props)
+    protected function getThumbFieldName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'thumb';
     }
 
-    protected function getThumbFieldArgs(array $component, array &$props)
+    protected function getThumbFieldArgs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return ['size' => 'thumb-sm'];
     }
 
-    protected function getThumbFieldAlias(array $component, array &$props)
+    protected function getThumbFieldAlias(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'thumb';
     }
@@ -83,13 +83,13 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $thumb = $this->getThumbField($component, $props);
         return array('id', 'title', $thumb, 'url');
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

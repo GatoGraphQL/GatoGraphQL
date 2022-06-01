@@ -5,7 +5,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends PoP_Module_Processor_FormatActiveTabPanelComponentsBase
 {
-    public function getPanelHeaderThumbs(array $component, array &$props)
+    public function getPanelHeaderThumbs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
 
         return parent::getPanelHeaderThumbs($component, $props);
     }
-    public function getPanelHeaderTitles(array $component, array &$props)
+    public function getPanelHeaderTitles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -72,7 +72,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
         return parent::getPanelHeaderTitles($component, $props);
     }
 
-    protected function lazyLoadInactivePanels(array $component, array &$props)
+    protected function lazyLoadInactivePanels(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }

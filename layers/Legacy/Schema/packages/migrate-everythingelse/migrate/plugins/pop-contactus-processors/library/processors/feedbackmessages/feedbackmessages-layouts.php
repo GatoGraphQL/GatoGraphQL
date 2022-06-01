@@ -12,7 +12,7 @@ class PoP_ContactUs_Module_Processor_FeedbackMessageLayouts extends PoP_Module_P
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 

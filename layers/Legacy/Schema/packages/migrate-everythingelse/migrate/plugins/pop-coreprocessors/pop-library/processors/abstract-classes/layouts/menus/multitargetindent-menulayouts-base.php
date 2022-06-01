@@ -2,29 +2,29 @@
 
 abstract class PoP_Module_Processor_MultiTargetIndentMenuLayoutsBase extends PoP_Module_Processor_MenuLayoutsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_MULTITARGETINDENT];
     }
 
-    public function getTargets(array $component, array &$props)
+    public function getTargets(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    // function getDropdownmenuClass(array $component, array &$props) {
+    // function getDropdownmenuClass(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     return '';
     // }
-    public function getMultitargetClass(array $component, array &$props)
+    public function getMultitargetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
-    public function getMultitargetTooltip(array $component, array &$props)
+    public function getMultitargetTooltip(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_MultiTargetIndentMenuLayoutsBase extends PoP
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

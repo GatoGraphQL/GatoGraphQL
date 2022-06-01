@@ -4,12 +4,12 @@ define('POP_HOOK_SCROLLINNER_THUMBNAIL_GRID', 'scrollinner-thumbnail-grid');
 
 abstract class PoP_Module_Processor_ScrollInnersBase extends PoP_Module_Processor_StructureInnersBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SCROLL_INNER];
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array(
             'row-items' => 1,
@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_ScrollInnersBase extends PoP_Module_Processo
         );
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_ScrollInnersBase extends PoP_Module_Processo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'layout-grid', $this->getLayoutGrid($component, $props));
 

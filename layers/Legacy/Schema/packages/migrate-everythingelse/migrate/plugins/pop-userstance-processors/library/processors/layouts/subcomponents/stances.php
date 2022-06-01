@@ -13,7 +13,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         );
     }
 
-    public function getSubcomponentField(array $component)
+    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
@@ -24,7 +24,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         }
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -41,7 +41,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         return $ret;
     }
 
-    public function isIndividual(array $component, array &$props)
+    public function isIndividual(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         return parent::isIndividual($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:

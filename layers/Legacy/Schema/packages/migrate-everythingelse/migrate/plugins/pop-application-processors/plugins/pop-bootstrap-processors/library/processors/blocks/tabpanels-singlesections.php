@@ -23,7 +23,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -41,7 +41,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
         return $ret;
     }
 
-    protected function getControlgroupBottomSubcomponent(array $component)
+    protected function getControlgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
@@ -60,7 +60,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
         return parent::getControlgroupBottomSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
@@ -76,7 +76,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     }
 
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {

@@ -11,7 +11,7 @@ class PoP_Module_Processor_StanceScriptsLayouts extends PoP_Module_Processor_App
         );
     }
 
-    public function getOperation(array $component, array &$props)
+    public function getOperation(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCRIPT_CREATEORUPDATESTANCEBUTTON:
@@ -21,7 +21,7 @@ class PoP_Module_Processor_StanceScriptsLayouts extends PoP_Module_Processor_App
         return parent::getOperation($component, $props);
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

@@ -17,7 +17,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $screens = array(
             self::COMPONENT_BUTTONGROUP_STANCES => POP_USERSTANCE_SCREEN_STANCES,
@@ -32,7 +32,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
         return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataFormats(array $component, array &$props)
+    protected function getHeadersdataFormats(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen

@@ -5,22 +5,22 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_BasicBlocksBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BLOCK];
     }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -79,7 +79,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -102,16 +102,16 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return $ret;
     }
 
-    protected function showDisabledLayer(array $component, array &$props)
+    protected function showDisabledLayer(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
-    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getJsdataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
@@ -122,7 +122,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -134,7 +134,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return $ret;
     }
 
-    public function initWebPlatformRequestProps(array $component, array &$props)
+    public function initWebPlatformRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -148,7 +148,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         parent::initWebPlatformRequestProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -171,7 +171,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         parent::initRequestProps($component, $props);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Block target for the controls. This is set in advance by the blockgroup (panelbootstrapjavascript-base) or,
@@ -188,7 +188,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'show-controls', true);
         if ($showControls = $this->getProp($component, $props, 'show-controls')) {
@@ -218,32 +218,32 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         parent::initModelProps($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    protected function getControlgroupBottomSubcomponent(array $component)
+    protected function getControlgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    protected function addClearfixdiv(array $component)
+    protected function addClearfixdiv(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
-    protected function getDescriptionBottom(array $component, array &$props)
+    protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    protected function getDescriptionTop(array $component, array &$props)
+    protected function getDescriptionTop(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    protected function getDescriptionAbovetitle(array $component, array &$props)
+    protected function getDescriptionAbovetitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    protected function getBlocksectionsClasses(array $component)
+    protected function getBlocksectionsClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBlocksectionsClasses($component);
 
@@ -257,7 +257,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         if ($dataaccess_checkpoint_validation !== null || $actionexecution_checkpoint_validation !== null) {

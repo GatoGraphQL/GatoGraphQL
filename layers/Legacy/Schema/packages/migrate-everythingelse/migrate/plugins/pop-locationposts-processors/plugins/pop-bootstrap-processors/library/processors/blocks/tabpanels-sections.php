@@ -11,7 +11,7 @@ class PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -25,7 +25,7 @@ class PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS:
@@ -35,7 +35,7 @@ class PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS:

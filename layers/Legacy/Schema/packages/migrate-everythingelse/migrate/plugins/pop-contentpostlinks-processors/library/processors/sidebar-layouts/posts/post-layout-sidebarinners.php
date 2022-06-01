@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -39,7 +39,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
         return $ret;
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:
@@ -50,7 +50,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extend
         return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK:

@@ -18,7 +18,7 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMITBUTTON_LOGIN:
@@ -37,7 +37,7 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
         return parent::getLabel($component, $props);
     }
 
-    public function getLoadingText(array $component, array &$props)
+    public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMITBUTTON_LOGIN:

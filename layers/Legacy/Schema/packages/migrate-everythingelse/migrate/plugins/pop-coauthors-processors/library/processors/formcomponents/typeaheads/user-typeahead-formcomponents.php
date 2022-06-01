@@ -14,7 +14,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -27,7 +27,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputSubcomponent(array $component)
+    public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -38,7 +38,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getInputSubcomponent($component);
     }
 
-    public function getComponentSubcomponents(array $component)
+    public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -51,7 +51,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getComponentSubcomponents($component);
     }
 
-    public function getTriggerLayoutSubcomponent(array $component)
+    public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -64,7 +64,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getTriggerLayoutSubcomponent($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:

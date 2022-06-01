@@ -21,7 +21,7 @@ class FilterInputHookSet extends AbstractHookSet
         );
     }
 
-    public function getFilterInputComponents(array $filterInputComponents, array $component): array
+    public function getFilterInputComponents(array $filterInputComponents, \PoP\ComponentModel\Component\Component $component): array
     {
         $adminComponentNames = [
             UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS,

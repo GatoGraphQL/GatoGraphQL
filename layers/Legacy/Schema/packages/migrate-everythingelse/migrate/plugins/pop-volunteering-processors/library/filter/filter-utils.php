@@ -22,7 +22,7 @@ class PoP_VolunteeringProcessors_FilterUtils
         return self::$volunteer_components;
     }
 
-    public static function maybeAddVolunteerFilterinput($filterinputs, array $component)
+    public static function maybeAddVolunteerFilterinput($filterinputs, \PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
             $volunteer_components = self::getVolunteerComponents();

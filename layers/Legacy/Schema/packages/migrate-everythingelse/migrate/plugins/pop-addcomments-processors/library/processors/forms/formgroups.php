@@ -11,7 +11,7 @@ class PoP_Module_Processor_CommentFormGroups extends PoP_Module_Processor_FormCo
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_COMMENTEDITOR => [PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR],

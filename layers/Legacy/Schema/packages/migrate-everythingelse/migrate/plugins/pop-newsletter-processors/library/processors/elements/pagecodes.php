@@ -11,7 +11,7 @@ class GenericForms_Module_Processor_PageCodes extends PoP_Module_Processor_HTMLP
         );
     }
 
-    public function getPageId(array $component)
+    public function getPageId(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGECODE_NEWSLETTER:

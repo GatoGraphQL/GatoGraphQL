@@ -19,7 +19,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -38,7 +38,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
         return parent::getLabelText($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -50,7 +50,7 @@ class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADSEARCH:

@@ -18,13 +18,13 @@ class PoPTheme_Wassup_ApplicationProcessors_WebPlatform_PageSectionHooks
         );
     }
 
-    public function initModelPropsHover(array $component, $props_in_array, $processor)
+    public function initModelPropsHover(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         $processor->mergeJsmethodsProp([PoP_ContactUs_Module_Processor_Blocks::class, PoP_ContactUs_Module_Processor_Blocks::COMPONENT_BLOCK_CONTACTUS], $props, array('resetOnUserLogout'));
     }
 
-    public function initModelPropsAddons(array $component, $props_in_array, $processor)
+    public function initModelPropsAddons(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {

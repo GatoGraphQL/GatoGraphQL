@@ -15,7 +15,7 @@ class GD_Custom_EM_Module_Processor_MySectionBlocks extends PoP_Module_Processor
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW => POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS,
@@ -25,7 +25,7 @@ class GD_Custom_EM_Module_Processor_MySectionBlocks extends PoP_Module_Processor
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_MYLOCATIONPOSTS_TABLE_EDIT => [GD_Custom_EM_Module_Processor_MySectionDataloads::class, GD_Custom_EM_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYLOCATIONPOSTS_TABLE_EDIT],
@@ -36,7 +36,7 @@ class GD_Custom_EM_Module_Processor_MySectionBlocks extends PoP_Module_Processor
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYLOCATIONPOSTS_TABLE_EDIT:

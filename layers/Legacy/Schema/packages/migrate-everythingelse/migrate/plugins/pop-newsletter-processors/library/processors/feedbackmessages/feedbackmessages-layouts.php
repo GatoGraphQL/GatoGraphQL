@@ -15,7 +15,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();

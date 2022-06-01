@@ -4,45 +4,45 @@ use PoP\Engine\Route\RouteUtils;
 
 abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SUBMENU];
     }
     
-    public function fixedId(array $component, array &$props): bool
+    public function fixedId(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         return true;
     }
 
-    public function getRoutes(array $component, array &$props)
+    public function getRoutes(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
 
-    public function getClass(array $component)
+    public function getClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getXsClass(array $component)
+    public function getXsClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getDropdownClass(array $component)
+    public function getDropdownClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
     
-    protected function getUrl(array $component, $route, array &$props)
+    protected function getUrl(\PoP\ComponentModel\Component\Component $component, $route, array &$props)
     {
         return RouteUtils::getRouteURL($route);
     }
     
-    protected function getTitle(array $component, $route, array &$props)
+    protected function getTitle(\PoP\ComponentModel\Component\Component $component, $route, array &$props)
     {
         return RouteUtils::getRouteTitle($route);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
         
@@ -59,7 +59,7 @@ abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataComp
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 

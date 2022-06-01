@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 {
-    public function getExtraTemplateResources(array $component, array &$props): array
+    public function getExtraTemplateResources(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         // Add the extension templates
         $ret = parent::getExtraTemplateResources($component, $props);
@@ -12,7 +12,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
         return $ret;
     }
 
-    protected function getFrameoptionsSubcomponents(array $component): array
+    protected function getFrameoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             $this->getFrametopoptionsSubcomponents($component),
@@ -20,17 +20,17 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
         );
     }
 
-    public function getFrametopoptionsSubcomponents(array $component): array
+    public function getFrametopoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getFramebottomoptionsSubcomponents(array $component): array
+    public function getFramebottomoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             parent::getSubcomponents($component),
@@ -38,7 +38,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
         );
     }
 
-    public function getMutableonmodelConfiguration(array $component, array &$props): array
+    public function getMutableonmodelConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -58,7 +58,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"

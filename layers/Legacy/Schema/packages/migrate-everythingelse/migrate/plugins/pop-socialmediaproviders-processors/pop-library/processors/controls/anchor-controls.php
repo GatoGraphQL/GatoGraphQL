@@ -24,7 +24,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
@@ -42,7 +42,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
@@ -61,7 +61,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
@@ -121,7 +121,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 

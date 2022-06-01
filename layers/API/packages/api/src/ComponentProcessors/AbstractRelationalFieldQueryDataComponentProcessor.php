@@ -149,7 +149,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -204,7 +204,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -306,7 +306,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * @todo Remove all commented code below this function
      */
-    public function getConditionalLeafComponentFields(array $component): array
+    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -417,7 +417,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalLeafComponentField[]
     //  */
-    // public function getConditionalLeafComponentFields(array $component): array
+    // public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
     // {
     //     $componentAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($componentAtts)) {
@@ -479,7 +479,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalRelationalComponentField[]
     //  */
-    // public function getConditionalRelationalComponentFields(array $component): array
+    // public function getConditionalRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     // {
     //     $componentAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($componentAtts)) {

@@ -20,7 +20,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
@@ -31,7 +31,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         };
     }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOGIN:
@@ -43,7 +43,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         return parent::getSubmenuSubcomponent($component);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOGIN:
@@ -55,7 +55,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -77,7 +77,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         return $ret;
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
         switch ($component[1]) {
@@ -93,7 +93,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         return parent::getDescription($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOGIN:

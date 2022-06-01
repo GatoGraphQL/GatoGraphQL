@@ -3,21 +3,21 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POPOVER];
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getLayoutContentSubcomponent(array $component)
+    public function getLayoutContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -31,14 +31,14 @@ abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDa
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'popover');
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

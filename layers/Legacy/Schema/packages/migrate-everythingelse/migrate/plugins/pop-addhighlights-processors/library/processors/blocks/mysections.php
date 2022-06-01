@@ -13,7 +13,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW => POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS,
@@ -22,7 +22,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_MYHIGHLIGHTS_TABLE_EDIT => [PoP_AddHighlights_Module_Processor_MySectionDataloads::class, PoP_AddHighlights_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT],
@@ -32,7 +32,7 @@ class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Proc
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYHIGHLIGHTS_TABLE_EDIT:

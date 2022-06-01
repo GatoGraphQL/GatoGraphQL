@@ -24,7 +24,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         );
     }
 
-    public function getShareSubcomponents($subComponents, array $component)
+    public function getShareSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         // Insert at the beginning
         array_splice(
@@ -39,7 +39,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         return $subComponents;
     }
 
-    public function getDropdownSubcomponents($subComponents, array $component)
+    public function getDropdownSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
@@ -82,7 +82,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         return $subComponents;
     }
 
-    public function getSocialmediaprovidersSubcomponents($subComponents, array $component)
+    public function getSocialmediaprovidersSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:

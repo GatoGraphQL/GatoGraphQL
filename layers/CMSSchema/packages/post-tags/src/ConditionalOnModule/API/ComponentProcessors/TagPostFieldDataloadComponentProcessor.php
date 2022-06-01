@@ -46,7 +46,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
         );
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
@@ -56,7 +56,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
@@ -66,7 +66,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
         return parent::getQueryInputOutputHandler($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
@@ -79,7 +79,7 @@ class TagPostFieldDataloadComponentProcessor extends AbstractRelationalFieldData
         return $ret;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:

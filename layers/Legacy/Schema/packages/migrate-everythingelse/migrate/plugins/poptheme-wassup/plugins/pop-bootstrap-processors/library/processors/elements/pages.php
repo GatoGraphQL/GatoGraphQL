@@ -37,7 +37,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -97,7 +97,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function getFrametopoptionsSubcomponents(array $component): array
+    public function getFrametopoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getFrametopoptionsSubcomponents($component);
 
@@ -134,7 +134,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function getFramebottomoptionsSubcomponents(array $component): array
+    public function getFramebottomoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getFramebottomoptionsSubcomponents($component);
 
@@ -159,7 +159,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGE_ADDONS:
@@ -170,7 +170,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         parent::initModelProps($component, $props);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
          // Make the frame components have a unique ID

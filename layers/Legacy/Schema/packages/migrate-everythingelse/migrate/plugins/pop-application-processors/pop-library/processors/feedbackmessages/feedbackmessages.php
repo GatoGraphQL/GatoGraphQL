@@ -13,7 +13,7 @@ class PoP_Module_Processor_DomainFeedbackMessages extends PoP_Module_Processor_F
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_ITEMLIST => [PoP_Module_Processor_ListFeedbackMessageInners::class, PoP_Module_Processor_ListFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_ITEMLIST],

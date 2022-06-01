@@ -12,7 +12,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -37,7 +37,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGET_FORM_EVENTDETAILS => TranslationAPIFacade::getInstance()->__('Event details', 'poptheme-wassup'),
@@ -46,7 +46,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
         return $titles[$component[1]] ?? null;
     }
 
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
@@ -60,7 +60,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
         return parent::getWidgetClass($component, $props);
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
@@ -69,7 +69,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:
@@ -79,7 +79,7 @@ class GD_EM_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_Wid
         return parent::getItemWrapper($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTDETAILS:

@@ -13,7 +13,7 @@ class PoP_UserCommunities_Module_Processor_CustomDelegatorFilters extends PoP_Mo
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_MYMEMBERS => [GD_URE_Module_Processor_CustomSimpleFilterInners::class, GD_URE_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS],

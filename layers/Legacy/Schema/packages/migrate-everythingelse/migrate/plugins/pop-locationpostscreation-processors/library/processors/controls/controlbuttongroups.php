@@ -11,7 +11,7 @@ class CommonPages_EM_Module_Processor_ControlButtonGroups extends PoP_Module_Pro
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     

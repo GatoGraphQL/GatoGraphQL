@@ -47,7 +47,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_LINKCATEGORIES => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput::FILTERINPUT_LINKCATEGORIES],
@@ -56,7 +56,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
@@ -67,7 +67,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
@@ -80,7 +80,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
@@ -93,7 +93,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_LINKACCESS:
@@ -103,7 +103,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return parent::getDbobjectField($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_LINKCATEGORIES:
@@ -116,7 +116,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_LINKCATEGORIES => $this->idScalarTypeResolver,
@@ -125,7 +125,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_LINKCATEGORIES => SchemaTypeModifiers::IS_ARRAY,
@@ -133,7 +133,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {

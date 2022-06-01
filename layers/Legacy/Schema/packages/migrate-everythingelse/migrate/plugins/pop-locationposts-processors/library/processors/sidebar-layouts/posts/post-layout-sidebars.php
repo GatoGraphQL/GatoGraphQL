@@ -16,7 +16,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST => [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST],
@@ -31,7 +31,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST:

@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks extends PoP
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -25,7 +25,7 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks extends PoP
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGLINKS:

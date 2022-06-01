@@ -17,7 +17,7 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL:
@@ -42,7 +42,7 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

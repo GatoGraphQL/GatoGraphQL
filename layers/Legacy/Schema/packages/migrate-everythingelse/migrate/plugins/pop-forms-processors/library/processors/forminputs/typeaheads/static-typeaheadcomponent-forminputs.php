@@ -13,7 +13,7 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH:
@@ -23,7 +23,7 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
         return parent::getLabelText($component, $props);
     }
 
-    protected function getStaticSuggestions(array $component, array &$props)
+    protected function getStaticSuggestions(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getStaticSuggestions($component, $props);
 

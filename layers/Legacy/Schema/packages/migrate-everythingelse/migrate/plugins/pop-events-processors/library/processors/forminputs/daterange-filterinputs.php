@@ -34,7 +34,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_EVENTSCOPE => [PoP_Events_Module_Processor_FilterInput::class, PoP_Events_Module_Processor_FilterInputPrDATEsor::FILTERINPUT_EVENTSCOPE],
@@ -42,7 +42,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_FILTERINPUT_EVENTSCOPE:
@@ -52,7 +52,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_EVENTSCOPE:
@@ -62,7 +62,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         return parent::getLabelText($component, $props);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_EVENTSCOPE:
@@ -76,7 +76,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_EVENTSCOPE => $this->dateScalarTypeResolver,
@@ -84,7 +84,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {

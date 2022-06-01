@@ -11,7 +11,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts 
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE],

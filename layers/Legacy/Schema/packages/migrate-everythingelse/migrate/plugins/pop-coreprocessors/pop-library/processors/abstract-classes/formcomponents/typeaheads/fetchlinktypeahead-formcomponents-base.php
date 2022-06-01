@@ -3,19 +3,19 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends PoP_Module_Processor_TypeaheadFormComponentsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         // Hack: re-use multiple.tmpl
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_MULTIPLE];
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'fetchlinkTypeahead');
         return $ret;
     }
-    public function getTypeaheadJsmethod(array $component, array &$props)
+    public function getTypeaheadJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'fetchlinkTypeahead';
     }
@@ -25,7 +25,7 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase extends
         return $ret;
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

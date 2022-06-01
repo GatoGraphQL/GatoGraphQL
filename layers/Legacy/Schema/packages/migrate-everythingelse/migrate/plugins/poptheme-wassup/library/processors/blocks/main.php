@@ -31,7 +31,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         );
     }
 
-    protected function getControlgroupBottomSubcomponent(array $component)
+    protected function getControlgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
@@ -56,7 +56,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getControlgroupBottomSubcomponent($component);
     }
 
-    protected function getBlocksectionsClasses(array $component)
+    protected function getBlocksectionsClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBlocksectionsClasses($component);
 
@@ -77,7 +77,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // switch ($component[1]) {
@@ -207,7 +207,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
@@ -223,7 +223,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         parent::initRequestProps($component, $props);
     }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_SINGLEPOST:
@@ -243,7 +243,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getSubmenuSubcomponent($component);
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_404:
@@ -256,7 +256,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getDescription($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -281,7 +281,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getTitle($component, $props);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

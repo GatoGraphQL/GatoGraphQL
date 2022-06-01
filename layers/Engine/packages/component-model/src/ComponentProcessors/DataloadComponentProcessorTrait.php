@@ -10,7 +10,7 @@ trait DataloadComponentProcessorTrait
 {
     use FormattableModuleTrait;
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -28,17 +28,17 @@ trait DataloadComponentProcessorTrait
         return $ret;
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         return null;
     }
 
-    public function metaInitProps(array $component, array &$props)
+    public function metaInitProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         /**
          * Allow to add more stuff
@@ -51,13 +51,13 @@ trait DataloadComponentProcessorTrait
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->metaInitProps($component, $props);
         parent::initModelProps($component, $props);
     }
 
-    public function startDataloadingSection(array $component): bool
+    public function startDataloadingSection(\PoP\ComponentModel\Component\Component $component): bool
     {
         return true;
     }

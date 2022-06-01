@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
         if ($layouts = $this->getLayoutSubcomponents($component)) {
@@ -19,12 +19,12 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_USERPOSTINTERACTION];
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
@@ -38,19 +38,19 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return null;
     }
 
-    public function getStyleClass(array $component, array &$props)
+    public function getStyleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function addUseravatar(array $component, array &$props)
+    public function addUseravatar(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If the plugin to create avatar is defined, then enable it
         return PoP_Application_ConfigurationUtils::useUseravatar();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -72,7 +72,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -83,7 +83,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'frame-addcomment');
 

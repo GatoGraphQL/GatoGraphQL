@@ -15,7 +15,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
@@ -28,7 +28,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
@@ -58,7 +58,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
         parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST:

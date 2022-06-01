@@ -42,7 +42,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
         );
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
@@ -52,7 +52,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:
@@ -62,7 +62,7 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_COMMENTS:

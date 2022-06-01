@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Mod
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES => [GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::class, GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],

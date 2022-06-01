@@ -37,7 +37,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -102,7 +102,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
@@ -129,7 +129,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
@@ -151,7 +151,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_CATEGORIES:

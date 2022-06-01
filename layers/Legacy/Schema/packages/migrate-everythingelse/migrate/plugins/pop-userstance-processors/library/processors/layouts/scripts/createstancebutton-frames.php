@@ -11,7 +11,7 @@ class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts extends 
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
@@ -21,7 +21,7 @@ class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts extends 
         return parent::getLayoutSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:

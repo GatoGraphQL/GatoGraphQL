@@ -2,12 +2,12 @@
 
 abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public function showDate(array $component)
+    public function showDate(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
 
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
         return $ret;
     }
 
-    public function getAuthorAvatarComponent(array $component)
+    public function getAuthorAvatarComponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR82];
@@ -25,36 +25,36 @@ abstract class PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase extends
         return null;
     }
 
-    public function getContentSubcomponent(array $component)
+    public function getContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_MaxHeightLayoutMultipleComponents::class, PoP_Module_Processor_MaxHeightLayoutMultipleComponents::COMPONENT_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT];
     }
     
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'h3';
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         return array(
             GD_CONSTANT_AUTHORPOSITION_ABOVETITLE
         );
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
     
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

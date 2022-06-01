@@ -22,7 +22,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_LOGIN_USERNAME:
@@ -47,7 +47,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_LOSTPWDRESET_CODE:
@@ -59,7 +59,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
         return parent::isMandatory($component, $props);
     }
 
-    // function getName(array $component) {
+    // function getName(\PoP\ComponentModel\Component\Component $component) {
 
     //     switch ($component[1]) {
 
@@ -71,7 +71,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
     //     return parent::getName($component);
     // }
 
-    public function getType(array $component, array &$props)
+    public function getType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_LOGIN_PWD:
@@ -83,7 +83,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
         return parent::getType($component, $props);
     }
 
-    public function clearInput(array $component, array &$props)
+    public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_LOGIN_USERNAME:

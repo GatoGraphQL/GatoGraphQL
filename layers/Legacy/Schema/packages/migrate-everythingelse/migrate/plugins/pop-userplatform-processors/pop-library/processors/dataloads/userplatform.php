@@ -21,7 +21,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_INVITENEWUSERS => POP_USERPLATFORM_ROUTE_INVITENEWUSERS,
@@ -31,7 +31,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_INVITENEWUSERS:
@@ -42,7 +42,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USER_CHANGEPASSWORD:
@@ -58,7 +58,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -76,7 +76,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYPREFERENCES:
@@ -85,7 +85,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYPREFERENCES:
@@ -95,7 +95,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -112,7 +112,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return $ret;
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USER_CHANGEPASSWORD:
@@ -128,7 +128,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USER_CHANGEPASSWORD:
@@ -141,7 +141,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getCheckpointMessageComponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USER_CHANGEPASSWORD:

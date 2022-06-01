@@ -50,7 +50,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_Scrolls extends PoP_Module_Proc
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW => [PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners::class, PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW],
@@ -82,7 +82,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_Scrolls extends PoP_Module_Proc
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

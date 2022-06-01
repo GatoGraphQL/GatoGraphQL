@@ -11,7 +11,7 @@ class PoP_Core_Module_Processor_FormInners extends PoP_Module_Processor_FormInne
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
     

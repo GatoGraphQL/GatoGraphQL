@@ -11,7 +11,7 @@ class PoP_Module_Processor_InputGroupFormComponents extends PoP_Module_Processor
         );
     }
 
-    public function getInputSubcomponent(array $component)
+    public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponent($component);
 
@@ -23,7 +23,7 @@ class PoP_Module_Processor_InputGroupFormComponents extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getControlSubcomponents(array $component)
+    public function getControlSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getControlSubcomponents($component);
 

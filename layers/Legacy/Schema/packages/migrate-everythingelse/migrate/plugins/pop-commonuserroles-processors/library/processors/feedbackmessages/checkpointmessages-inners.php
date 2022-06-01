@@ -13,7 +13,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners extends P
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

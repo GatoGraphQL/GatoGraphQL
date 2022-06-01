@@ -17,7 +17,7 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
         );
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTPOST:

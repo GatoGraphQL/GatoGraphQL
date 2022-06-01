@@ -12,7 +12,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
@@ -22,7 +22,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
@@ -32,7 +32,7 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
         return parent::getInfo($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:

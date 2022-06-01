@@ -14,7 +14,7 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -31,7 +31,7 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_URE_WIDGET_PROFILEORGANIZATION_DETAILS => TranslationAPIFacade::getInstance()->__('Details', 'poptheme-wassup'),
@@ -40,7 +40,7 @@ class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_Widget
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_URE_WIDGET_PROFILEORGANIZATION_DETAILS => 'fa-info-circle',

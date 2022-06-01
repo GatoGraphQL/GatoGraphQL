@@ -33,7 +33,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         );
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE:
@@ -43,7 +43,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE:

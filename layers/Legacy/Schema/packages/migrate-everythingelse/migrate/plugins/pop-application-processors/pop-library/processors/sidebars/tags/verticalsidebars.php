@@ -11,7 +11,7 @@ class Wassup_Module_Processor_CustomVerticalTagSidebars extends PoP_Module_Proce
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_VERTICALSIDEBAR_TAG => [Wassup_Module_Processor_CustomVerticalTagSidebarInners::class, Wassup_Module_Processor_CustomVerticalTagSidebarInners::COMPONENT_VERTICALSIDEBARINNER_TAG],
@@ -24,7 +24,7 @@ class Wassup_Module_Processor_CustomVerticalTagSidebars extends PoP_Module_Proce
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_VERTICALSIDEBAR_TAG:

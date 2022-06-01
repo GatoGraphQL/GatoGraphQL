@@ -2,44 +2,44 @@
 
 abstract class PoP_Module_Processor_TabPanelComponentsBase extends PoP_Module_Processor_PanelBootstrapComponentsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BOOTSTRAPCOMPONENT_TABPANEL];
     }
 
-    protected function isMandatoryActivePanel(array $component)
+    protected function isMandatoryActivePanel(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
 
-    public function getPanelHeaderType(array $component)
+    public function getPanelHeaderType(\PoP\ComponentModel\Component\Component $component)
     {
         return 'tab';
     }
 
-    public function getPanelactiveClass(array $component)
+    public function getPanelactiveClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'active';
     }
 
-    public function getBootstrapcomponentType(array $component)
+    public function getBootstrapcomponentType(\PoP\ComponentModel\Component\Component $component)
     {
         return 'tabpanel';
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'activeTabLink', 'tablink');
         return $ret;
     }
 
-    protected function getContentClass(array $component, array &$props)
+    protected function getContentClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -50,7 +50,7 @@ abstract class PoP_Module_Processor_TabPanelComponentsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Through this class, we can identify the blockgroups with tabpanels and place the controlgroup_bottom to the right of the tabs

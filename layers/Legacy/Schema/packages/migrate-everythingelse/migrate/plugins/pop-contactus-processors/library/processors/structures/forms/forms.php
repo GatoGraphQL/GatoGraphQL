@@ -12,7 +12,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FORM_CONTACTUS => [PoP_ContactUs_Module_Processor_GFFormInners::class, PoP_ContactUs_Module_Processor_GFFormInners::COMPONENT_FORMINNER_CONTACTUS],
@@ -25,7 +25,7 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_CONTACTUS:

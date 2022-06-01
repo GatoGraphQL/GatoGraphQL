@@ -11,7 +11,7 @@ class GD_Custom_EM_Module_Processor_CustomFilters extends PoP_Module_Processor_F
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FILTER_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_CustomFilterInners::class, GD_Custom_EM_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYLOCATIONPOSTS],

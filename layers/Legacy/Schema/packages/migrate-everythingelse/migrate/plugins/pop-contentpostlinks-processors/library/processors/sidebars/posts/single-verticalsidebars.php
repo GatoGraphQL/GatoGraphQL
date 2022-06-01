@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebars extends
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_VERTICALSIDEBAR_SINGLE_LINK => [PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners::class, PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK],
@@ -24,7 +24,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebars extends
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_VERTICALSIDEBAR_SINGLE_LINK:

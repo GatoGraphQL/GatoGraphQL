@@ -14,7 +14,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         );
     }
 
-    public function getTargetDynamicallyRenderedSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
@@ -27,7 +27,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
-    // function headerShowUrl(array $component) {
+    // function headerShowUrl(\PoP\ComponentModel\Component\Component $component) {
 
     //     switch ($component[1]) {
 
@@ -40,7 +40,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
     //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT],
@@ -54,7 +54,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -71,7 +71,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
@@ -82,7 +82,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
@@ -92,7 +92,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
 
         return parent::getUrlField($component);
     }
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
@@ -103,7 +103,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return parent::getLinktarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:

@@ -12,7 +12,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_TABLE_MYSTANCES => [UserStance_Module_Processor_TableInners::class, UserStance_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYSTANCES],
@@ -25,7 +25,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getHeaderTitles(array $component)
+    public function getHeaderTitles(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getHeaderTitles($component);
 
@@ -40,7 +40,7 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_TABLE_MYSTANCES:

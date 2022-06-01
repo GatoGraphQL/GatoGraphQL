@@ -13,7 +13,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -26,7 +26,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGETCOMPACT_TAGINFO => TranslationAPIFacade::getInstance()->__('Tag/topic', 'poptheme-wassup'),
@@ -34,7 +34,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGETCOMPACT_TAGINFO => getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), false),
@@ -43,7 +43,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
         return $fontawesomes[$component[1]] ?? null;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
@@ -52,7 +52,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_TAGINFO:
@@ -61,7 +61,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_TAGINFO:

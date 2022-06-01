@@ -102,7 +102,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
@@ -154,7 +154,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDARMAP => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP],
@@ -207,7 +207,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_ADDONS:
@@ -270,7 +270,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_EVENTS_CAROUSEL:
@@ -282,7 +282,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_EVENTS_CAROUSEL:

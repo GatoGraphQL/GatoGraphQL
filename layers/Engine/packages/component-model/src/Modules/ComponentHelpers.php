@@ -11,7 +11,7 @@ class ComponentHelpers implements ComponentHelpersInterface
 {
     use BasicServiceTrait;
 
-    public function getComponentFullName(array $component): string
+    public function getComponentFullName(\PoP\ComponentModel\Component\Component $component): string
     {
         return ProcessorItemUtils::getItemFullName($component);
     }
@@ -19,7 +19,7 @@ class ComponentHelpers implements ComponentHelpersInterface
     {
         return ProcessorItemUtils::getItemFromFullName($componentFullName);
     }
-    public function getComponentOutputName(array $component): string
+    public function getComponentOutputName(\PoP\ComponentModel\Component\Component $component): string
     {
         return ProcessorItemUtils::getItemOutputName($component, DefinitionGroups::COMPONENTS);
     }

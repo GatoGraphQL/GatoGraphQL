@@ -2,7 +2,7 @@
 
 abstract class GD_URE_Module_Processor_MemberTagsLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [URE_PoPProcessors_TemplateResourceLoaderProcessor::class, URE_PoPProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_MEMBERTAGS];
     }
@@ -12,22 +12,22 @@ abstract class GD_URE_Module_Processor_MemberTagsLayoutsBase extends PoPEngine_Q
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array('memberTagsByName');
     }
 
-    public function getDescription(array $component, array &$props)
+    public function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getLabelClass(array $component, array &$props)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'label-info';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

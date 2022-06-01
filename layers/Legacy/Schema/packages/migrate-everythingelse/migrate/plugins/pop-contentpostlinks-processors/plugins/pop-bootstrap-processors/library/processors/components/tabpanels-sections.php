@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents extends Po
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
@@ -33,7 +33,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionTabPanelComponents extends Po
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABPANEL_LINKS:

@@ -11,7 +11,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP => POP_ROUTE_AUTHORS,
@@ -19,7 +19,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLLMAP],
@@ -28,7 +28,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP:
@@ -38,7 +38,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks exte
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLLMAP:

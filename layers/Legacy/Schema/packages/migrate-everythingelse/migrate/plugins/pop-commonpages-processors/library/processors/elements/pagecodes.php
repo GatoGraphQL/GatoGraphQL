@@ -13,7 +13,7 @@ class GD_CommonPages_Module_Processor_PageCodes extends PoP_Module_Processor_HTM
         );
     }
 
-    public function getPageId(array $component)
+    public function getPageId(\PoP\ComponentModel\Component\Component $component)
     {
         $page_ids = array(
             self::COMPONENT_PAGECODE_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,

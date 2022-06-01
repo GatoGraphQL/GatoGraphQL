@@ -5,12 +5,12 @@ use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 
 abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getMenu(array $component)
+    public function getMenu(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -19,12 +19,12 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         return $ret;
     }
 
-    public function getDatasource(array $component, array &$props): string
+    public function getDatasource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         $query_args = $data_properties[DataloadingConstants::QUERYARGS];
         if ($menuName = $query_args['menu']) {
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(MenuObjectTypeResolver::class);
     }

@@ -50,7 +50,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
         );
     }
 
-    public function getTag(array $component)
+    public function getTag(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_FULL:
@@ -69,7 +69,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
         return parent::getTag($component);
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
@@ -104,7 +104,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
@@ -131,7 +131,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
         return parent::getBtnTitle($component);
     }
 
-    public function getBtntitleClass(array $component, array &$props)
+    public function getBtntitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW:
@@ -144,7 +144,7 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
         return parent::getBtntitleClass($component, $props);
     }
 
-    public function getTextField(array $component, array &$props)
+    public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_RECOMMENDPOST_PREVIEW:

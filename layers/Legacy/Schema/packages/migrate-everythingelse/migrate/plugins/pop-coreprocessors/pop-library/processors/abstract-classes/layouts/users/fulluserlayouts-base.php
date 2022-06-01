@@ -5,7 +5,7 @@ define('GD_CONSTANT_FULLUSER_TITLEPOSITION_BODY', 'body');
 
 abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Processor_FullObjectLayoutsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_FULLUSER];
     }
@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Proce
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array_merge(
             parent::getLeafComponentFields($component, $props),
@@ -23,17 +23,17 @@ abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Proce
         );
     }
 
-    public function titlePosition(array $component, array &$props)
+    public function titlePosition(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_CONSTANT_FULLUSER_TITLEPOSITION_TOP;
     }
 
-    public function showDescription(array $component, array &$props)
+    public function showDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($this->showDescription($component, $props)) {
             $this->appendProp($component, $props, 'class', 'showdescription');

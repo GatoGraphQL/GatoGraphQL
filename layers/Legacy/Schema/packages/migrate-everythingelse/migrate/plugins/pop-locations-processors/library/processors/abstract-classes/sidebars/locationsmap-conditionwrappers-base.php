@@ -2,17 +2,17 @@
 
 abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public function getLocationlinksTemplate(array $component)
+    public function getLocationlinksTemplate(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getMapSubcomponent(array $component)
+    public function getMapSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::COMPONENT_MAP_SIDEBARINDIVIDUAL];
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -26,12 +26,12 @@ abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends P
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return 'hasLocation';
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 

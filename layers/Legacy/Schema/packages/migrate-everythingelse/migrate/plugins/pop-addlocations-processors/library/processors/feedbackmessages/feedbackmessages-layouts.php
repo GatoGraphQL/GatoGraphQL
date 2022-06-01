@@ -12,7 +12,7 @@ class PoP_Module_Processor_CreateLocationFeedbackMessageLayouts extends PoP_Modu
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 

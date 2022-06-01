@@ -30,7 +30,7 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_MYSTANCES_FULLVIEWPREVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW],
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Extra classes
         $independentitem_thumbnails = array(

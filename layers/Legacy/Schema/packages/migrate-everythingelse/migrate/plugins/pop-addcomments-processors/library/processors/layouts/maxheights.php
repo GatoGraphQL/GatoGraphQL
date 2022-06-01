@@ -11,7 +11,7 @@ class PoP_Module_Processor_PostCommentMaxHeightLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -24,7 +24,7 @@ class PoP_Module_Processor_PostCommentMaxHeightLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getMaxheight(array $component, array &$props)
+    public function getMaxheight(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_MAXHEIGHT_SUBCOMPONENT_POSTCOMMENTS:

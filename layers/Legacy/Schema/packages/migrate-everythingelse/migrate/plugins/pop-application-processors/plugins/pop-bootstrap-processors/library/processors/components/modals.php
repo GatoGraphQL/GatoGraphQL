@@ -12,7 +12,7 @@ class PoP_Module_Processor_GFModalComponents extends PoP_Module_Processor_FormMo
         );
     }
     
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -25,7 +25,7 @@ class PoP_Module_Processor_GFModalComponents extends PoP_Module_Processor_FormMo
         return $ret;
     }
 
-    public function getHeaderTitle(array $component)
+    public function getHeaderTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $header_placeholder = '<i class="fa %s fa-fw"></i><em>%s</em>';
         switch ($component[1]) {

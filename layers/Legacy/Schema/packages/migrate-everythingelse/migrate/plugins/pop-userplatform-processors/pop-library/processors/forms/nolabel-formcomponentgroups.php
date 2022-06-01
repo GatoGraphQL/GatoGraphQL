@@ -11,7 +11,7 @@ class PoP_Module_Processor_NoLabelProfileFormGroups extends PoP_Module_Processor
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_CUP_DISPLAYEMAIL => [PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_DISPLAYEMAIL],

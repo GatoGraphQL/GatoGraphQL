@@ -2,7 +2,7 @@
 
 trait PoPTheme_Wassup_Module_Processor_PageTrait
 {
-    protected function getFrameoptionsSubcomponents(array $component): array
+    protected function getFrameoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             $this->getFrametopoptionsSubcomponents($component),
@@ -10,17 +10,17 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
         );
     }
 
-    public function getFrametopoptionsSubcomponents(array $component): array
+    public function getFrametopoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getFramebottomoptionsSubcomponents(array $component): array
+    public function getFramebottomoptionsSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             parent::getSubcomponents($component),
@@ -32,7 +32,7 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"

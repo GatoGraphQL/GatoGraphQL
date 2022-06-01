@@ -11,7 +11,7 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_FLAG => POP_CONTENTCREATION_ROUTE_FLAG,
@@ -19,7 +19,7 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

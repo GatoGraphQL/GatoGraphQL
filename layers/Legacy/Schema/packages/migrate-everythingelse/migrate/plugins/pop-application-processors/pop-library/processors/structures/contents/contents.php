@@ -18,7 +18,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             [self::class, self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT],
         );
     }
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CONTENT_AUTHOR => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_AUTHOR],
@@ -47,7 +47,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -60,7 +60,7 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENT_SINGLE:

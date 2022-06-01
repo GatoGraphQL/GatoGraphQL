@@ -14,7 +14,7 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
         );
     }
 
-    public function useTime(array $component)
+    public function useTime(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
@@ -24,7 +24,7 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
         return parent::useTime($component);
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_DATERANGEPICKER:
@@ -37,7 +37,7 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:

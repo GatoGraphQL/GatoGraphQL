@@ -37,7 +37,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
-    public function getStringifiedModulePropagationCurrentPath(array $component): string
+    public function getStringifiedModulePropagationCurrentPath(\PoP\ComponentModel\Component\Component $component): string
     {
         $module_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
         $module_propagation_current_path[] = $component;

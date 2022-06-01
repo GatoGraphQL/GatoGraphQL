@@ -19,7 +19,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -50,7 +50,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES:

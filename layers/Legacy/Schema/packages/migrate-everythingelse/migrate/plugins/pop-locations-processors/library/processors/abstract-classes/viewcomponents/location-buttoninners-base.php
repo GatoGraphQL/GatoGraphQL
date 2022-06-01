@@ -4,26 +4,26 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extends PoP_Module_Processor_ButtonInnersBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_LOCATIONBUTTONINNER];
     }
 
-    public function getLocationComponent(array $component)
+    public function getLocationComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function separator(array $component, array &$props)
+    public function separator(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return ' | ';
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'fa-map-marker';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($location_component = $this->getLocationComponent($component)) {
             return [

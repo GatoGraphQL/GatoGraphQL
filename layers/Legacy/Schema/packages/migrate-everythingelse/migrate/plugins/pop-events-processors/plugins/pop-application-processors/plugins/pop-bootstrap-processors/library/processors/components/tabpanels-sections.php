@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABPANEL_EVENTSCALENDAR:
@@ -25,7 +25,7 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
@@ -72,7 +72,7 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABPANEL_EVENTS:

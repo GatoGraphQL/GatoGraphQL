@@ -11,7 +11,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostForms extends PoP_Modul
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FORM_POST => [PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_POST],
@@ -24,7 +24,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostForms extends PoP_Modul
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_POST:

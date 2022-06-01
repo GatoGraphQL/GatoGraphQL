@@ -15,7 +15,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         );
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
@@ -29,7 +29,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         }
     }
 
-    protected function getStatusSubcomponent(array $component)
+    protected function getStatusSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
@@ -39,7 +39,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         return parent::getStatusSubcomponent($component);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:
@@ -49,7 +49,7 @@ class AAL_PoPProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LATESTNOTIFICATIONS:

@@ -24,7 +24,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -83,7 +83,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_USERSTANCE_GROUP_HOMETOP:

@@ -15,7 +15,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -52,7 +52,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTIONCONTAINER_HOLE:

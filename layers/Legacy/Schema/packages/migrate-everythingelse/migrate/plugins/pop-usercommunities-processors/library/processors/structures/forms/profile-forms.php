@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_ProfileForms extends PoP_Module_Processor_FormsBas
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_EDITMEMBERSHIP:

@@ -37,7 +37,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         );
     }
 
-    public function getComponentSettings(array $component, $model_props, array &$props)
+    public function getComponentSettings(\PoP\ComponentModel\Component\Component $component, $model_props, array &$props)
     {
         $ret = parent::getComponentSettings($component, $model_props, $props);
 
@@ -171,7 +171,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
     protected function processAndAddComponentData(
         array $component_path,
-        array $component,
+        \PoP\ComponentModel\Component\Component $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
@@ -340,7 +340,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
     }
 
-    // protected function getJsonModuleImmutableSettings(array $component, array &$props) {
+    // protected function getJsonModuleImmutableSettings(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -367,7 +367,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	);
     // }
 
-    // protected function getJsonModuleMutableonrequestSettings(array $component, array &$props) {
+    // protected function getJsonModuleMutableonrequestSettings(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

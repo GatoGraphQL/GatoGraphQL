@@ -34,7 +34,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         );
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
@@ -60,7 +60,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
@@ -78,7 +78,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         return parent::getQueryInputOutputHandler($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
@@ -103,7 +103,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
 
         return $ret;
     }
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -126,7 +126,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         return $ret;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:

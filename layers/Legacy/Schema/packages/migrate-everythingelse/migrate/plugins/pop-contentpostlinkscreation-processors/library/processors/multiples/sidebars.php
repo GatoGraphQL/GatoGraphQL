@@ -11,7 +11,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -25,7 +25,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR => POP_SCREEN_MYCONTENT,
@@ -37,7 +37,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarMultiples extends PoP
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_SECTION_MYCONTENTPOSTLINKS_SIDEBAR:

@@ -16,7 +16,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -33,7 +33,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:

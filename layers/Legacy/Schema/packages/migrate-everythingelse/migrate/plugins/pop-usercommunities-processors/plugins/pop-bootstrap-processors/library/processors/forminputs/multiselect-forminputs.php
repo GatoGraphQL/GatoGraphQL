@@ -14,7 +14,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
@@ -40,7 +40,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
         return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:

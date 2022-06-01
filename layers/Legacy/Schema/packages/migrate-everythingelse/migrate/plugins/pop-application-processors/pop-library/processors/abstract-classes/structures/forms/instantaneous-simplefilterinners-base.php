@@ -7,19 +7,19 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function getSubmitbtnComponent(array $component)
+    public function getSubmitbtnComponent(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Use a special Search button, so it doesn't share the $props with the Search from the filter
         return [PoPTheme_Wassup_Module_Processor_SubmitButtons::class, PoPTheme_Wassup_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH];
     }
 
-    public function getTriggerInternaltarget(array $component, array &$props)
+    public function getTriggerInternaltarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // When clicking on any button, already submit the form
@@ -59,7 +59,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
 
         parent::initWebPlatformModelProps($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // When clicking on any button, already submit the form

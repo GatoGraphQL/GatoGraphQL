@@ -11,7 +11,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             GD_Custom_EM_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_LOCATIONPOSTLINK => [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_LOCATIONPOSTLINK],
@@ -24,7 +24,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms exten
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_LOCATIONPOSTLINK:

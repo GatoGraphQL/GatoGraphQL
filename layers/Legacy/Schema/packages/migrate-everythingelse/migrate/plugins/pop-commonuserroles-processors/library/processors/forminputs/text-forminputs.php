@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME:
@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         return parent::getLabelText($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getLabel($component, $props);
 
@@ -47,7 +47,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         return $ret;
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME:

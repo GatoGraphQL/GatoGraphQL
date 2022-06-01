@@ -11,7 +11,7 @@ class PoP_Share_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FORM_SHAREBYEMAIL => [PoP_Share_Module_Processor_GFFormInners::class, PoP_Share_Module_Processor_GFFormInners::COMPONENT_FORMINNER_SHAREBYEMAIL],

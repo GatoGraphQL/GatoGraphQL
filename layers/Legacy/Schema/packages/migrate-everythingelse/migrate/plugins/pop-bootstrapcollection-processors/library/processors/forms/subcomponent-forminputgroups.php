@@ -14,7 +14,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -26,7 +26,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -39,7 +39,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
         return $ret;
     }
 
-    public function getComponentSubname(array $component)
+    public function getComponentSubname(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER:
@@ -50,7 +50,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
         return parent::getComponentSubname($component);
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER => [PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::COMPONENT_FORMINPUT_DATERANGETIMEPICKER],
@@ -64,7 +64,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_DATERANGETIMEPICKER:

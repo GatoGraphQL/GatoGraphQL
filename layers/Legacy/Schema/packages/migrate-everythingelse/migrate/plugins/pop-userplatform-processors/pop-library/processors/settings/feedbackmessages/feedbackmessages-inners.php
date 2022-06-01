@@ -11,7 +11,7 @@ class PoP_Module_Processor_SettingsFeedbackMessageInners extends PoP_Module_Proc
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

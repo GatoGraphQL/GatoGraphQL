@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
 
         return parent::getLabel($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
 
         return parent::getText($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
@@ -59,7 +59,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         return parent::getHref($component, $props);
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS:
@@ -70,7 +70,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -88,7 +88,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
         parent::initModelProps($component, $props);
     }
 
-    public function getClasses(array $component)
+    public function getClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getClasses($component);
 

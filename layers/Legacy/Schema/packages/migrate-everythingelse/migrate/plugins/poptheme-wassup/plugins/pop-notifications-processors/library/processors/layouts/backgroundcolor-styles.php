@@ -13,7 +13,7 @@ class PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts extends Po
         );
     }
 
-    public function getElemTarget(array $component, array &$props)
+    public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:
@@ -24,7 +24,7 @@ class PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts extends Po
         return parent::getElemTarget($component, $props);
     }
     
-    public function getElemStyles(array $component, array &$props)
+    public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_TOPBGCOLORSTYLES:

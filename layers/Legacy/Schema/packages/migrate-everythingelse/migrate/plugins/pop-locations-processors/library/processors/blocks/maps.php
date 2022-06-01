@@ -13,7 +13,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_LOCATIONSMAP => POP_LOCATIONS_ROUTE_LOCATIONSMAP,
@@ -22,7 +22,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -39,7 +39,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STATICLOCATIONSMAP:
@@ -49,7 +49,7 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
         return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONSMAP:

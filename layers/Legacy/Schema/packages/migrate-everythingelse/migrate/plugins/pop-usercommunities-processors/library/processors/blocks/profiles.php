@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_EDITMEMBERSHIP => POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP,
@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
         };
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
         return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
         return $ret;
     }
 
-    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE:

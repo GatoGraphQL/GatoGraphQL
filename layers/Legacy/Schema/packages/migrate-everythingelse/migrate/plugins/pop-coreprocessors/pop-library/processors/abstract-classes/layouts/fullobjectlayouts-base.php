@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getTitleSubcomponent(array $component)
+    public function getTitleSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array_merge(
             parent::getLeafComponentFields($component, $props),
@@ -26,24 +26,24 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
         );
     }
 
-    public function getHeaderSubcomponents(array $component)
+    public function getHeaderSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getFooterSubcomponents(array $component)
+    public function getFooterSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getFullviewFooterSubcomponents(array $component)
+    public function getFullviewFooterSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow 3rd parties to modify the modules. Eg: for the TPP website we re-use the MESYM Theme but we modify some of its elements, eg: adding the "What do you think about TPP?" modules in the fullview templates
         return \PoP\Root\App::applyFilters('PoP_Module_Processor_FullObjectLayoutsBase:footer_components', $this->getFooterSubcomponents($component), $component);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

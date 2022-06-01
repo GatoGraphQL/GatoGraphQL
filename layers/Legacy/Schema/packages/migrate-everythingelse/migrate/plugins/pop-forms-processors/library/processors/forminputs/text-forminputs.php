@@ -22,7 +22,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_SENDERNAME:
@@ -32,7 +32,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return parent::getLabelText($component, $props);
     }
 
-    public function getPagesectionJsmethod(array $component, array &$props)
+    public function getPagesectionJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getPagesectionJsmethod($component, $props);
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return $ret;
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_POSTTITLE:
@@ -67,7 +67,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return parent::getDbobjectField($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -99,7 +99,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -113,7 +113,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return $ret;
     }
 
-    public function isHidden(array $component, array &$props)
+    public function isHidden(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TARGETURL:
@@ -128,7 +128,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return parent::isHidden($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TARGETURL:

@@ -11,7 +11,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_LOCATIONPOST_CREATE => [PoP_LocationPostsCreation_Module_Processor_ButtonInners::class, PoP_LocationPostsCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_LOCATIONPOST_CREATE],
@@ -23,7 +23,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_LOCATIONPOST_CREATE:
@@ -35,7 +35,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_LOCATIONPOST_CREATE:
@@ -48,7 +48,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         return parent::getLinktarget($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_BUTTON_LOCATIONPOST_CREATE => PoP_LocationPosts_PostNameUtils::getNameUc(),
@@ -60,7 +60,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
         return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         $fields = array(
             self::COMPONENT_BUTTON_LOCATIONPOST_CREATE => 'addLocationPostURL',

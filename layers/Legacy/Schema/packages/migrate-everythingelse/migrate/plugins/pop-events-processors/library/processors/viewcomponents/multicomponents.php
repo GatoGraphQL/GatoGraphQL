@@ -17,7 +17,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -53,7 +53,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:

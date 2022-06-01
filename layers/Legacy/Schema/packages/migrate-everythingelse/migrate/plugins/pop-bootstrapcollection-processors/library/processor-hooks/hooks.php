@@ -24,7 +24,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
         );
     }
 
-    public function getSocialmediaSubcomponents($subComponents, array $component)
+    public function getSocialmediaSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS:
@@ -49,7 +49,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
         return $subComponents;
     }
 
-    public function getDropdownSubcomponents($subComponents, array $component)
+    public function getDropdownSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
@@ -74,7 +74,7 @@ class PoP_CoreProcessors_Bootstrap_Hooks
         return $subComponents;
     }
 
-    public function getShareSubcomponents($subComponents, array $component)
+    public function getShareSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Insert before/after the Print button

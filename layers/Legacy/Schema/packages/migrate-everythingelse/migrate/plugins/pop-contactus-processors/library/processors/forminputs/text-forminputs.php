@@ -12,7 +12,7 @@ class PoP_ContactUs_Module_Processor_TextFormInputs extends PoP_Module_Processor
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_SUBJECT:
@@ -22,7 +22,7 @@ class PoP_ContactUs_Module_Processor_TextFormInputs extends PoP_Module_Processor
         return parent::getLabelText($component, $props);
     }
 
-    public function clearInput(array $component, array &$props)
+    public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_SUBJECT:

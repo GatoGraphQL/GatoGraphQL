@@ -11,7 +11,7 @@ class PoP_Module_Processor_Alerts extends PoP_Module_Processor_AlertsBase
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_ALERT_STICKY:

@@ -11,7 +11,7 @@ class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_
             [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],        );
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
@@ -22,7 +22,7 @@ class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_
         return parent::getBtnTitle($component);
     }
 
-    public function getLocationComponent(array $component)
+    public function getLocationComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:

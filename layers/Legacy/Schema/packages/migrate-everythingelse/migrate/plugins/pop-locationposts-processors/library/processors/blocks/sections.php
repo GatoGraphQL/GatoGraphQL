@@ -45,7 +45,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
@@ -69,7 +69,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR],
@@ -94,7 +94,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
@@ -121,7 +121,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS:

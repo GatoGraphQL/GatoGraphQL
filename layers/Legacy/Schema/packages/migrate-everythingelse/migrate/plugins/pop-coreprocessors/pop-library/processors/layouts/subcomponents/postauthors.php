@@ -13,7 +13,7 @@ class PoP_Module_Processor_PostAuthorLayouts extends PoP_Module_Processor_PostAu
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

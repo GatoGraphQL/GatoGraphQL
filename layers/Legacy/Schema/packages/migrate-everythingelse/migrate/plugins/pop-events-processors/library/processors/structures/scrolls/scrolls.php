@@ -42,7 +42,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_EVENTS_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrollInners::class, PoP_Events_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR],
@@ -70,7 +70,7 @@ class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

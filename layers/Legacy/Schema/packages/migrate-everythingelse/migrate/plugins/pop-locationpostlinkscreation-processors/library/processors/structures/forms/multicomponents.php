@@ -12,7 +12,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents exte
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -35,7 +35,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents exte
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

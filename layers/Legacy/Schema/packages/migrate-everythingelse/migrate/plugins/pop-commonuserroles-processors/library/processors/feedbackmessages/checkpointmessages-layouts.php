@@ -14,7 +14,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
@@ -53,7 +53,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
         parent::initModelProps($component, $props);

@@ -18,12 +18,12 @@ trait ComponentPathProcessorTrait
     abstract protected function getComponentFilterManager(): ComponentFilterManagerInterface;
     abstract protected function getComponentHelpers(): ComponentHelpersInterface;
 
-    protected function getComponentProcessor(array $component)
+    protected function getComponentProcessor(\PoP\ComponentModel\Component\Component $component)
     {
         return $this->getComponentProcessorManager()->getProcessor($component);
     }
 
-    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, \PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
         $ret = [];
         $key = $this->getComponentHelpers()->getComponentOutputName($component);
@@ -62,7 +62,7 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, \PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
@@ -98,7 +98,7 @@ trait ComponentPathProcessorTrait
      * @param boolean $use_component_output_name_as_key For response structures (eg: configuration, feedback, etc) must be `true`, for internal structures (eg: $props, $data_properties) no need
      * @return mixed[]
      */
-    protected function executeOnSelfAndPropagateToComponents(string $eval_self_fn, string $propagate_fn, array $component, array &$props, bool $use_component_output_name_as_key = true, array $options = array()): array
+    protected function executeOnSelfAndPropagateToComponents(string $eval_self_fn, string $propagate_fn, \PoP\ComponentModel\Component\Component $component, array &$props, bool $use_component_output_name_as_key = true, array $options = array()): array
     {
         $ret = [];
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -137,7 +137,7 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $recursive = true)
+    protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, \PoP\ComponentModel\Component\Component $component, array &$props, $recursive = true)
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 

@@ -32,7 +32,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
         );
     }
 
-    protected function getFontawesome(array $component, array &$props)
+    protected function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_LAYOUT_PAGETABS_HOME => 'fa-home',
@@ -44,7 +44,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
         }
         return parent::getFontawesome($component, $props);
     }
-    protected function getThumb(array $component, array &$props)
+    protected function getThumb(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PAGETABS_AUTHOR:
@@ -73,7 +73,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
         return parent::getThumb($component, $props);
     }
-    // protected function getPretitle(array $component, array &$props)
+    // protected function getPretitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     // {
     //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
     //     switch ($component[1]) {
@@ -94,7 +94,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
     //     return parent::getPretitle($component, $props);
     // }
-    protected function getTitle(array $component, array &$props)
+    protected function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

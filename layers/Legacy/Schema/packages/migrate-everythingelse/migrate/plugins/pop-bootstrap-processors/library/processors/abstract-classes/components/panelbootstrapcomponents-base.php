@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Module_Processor_BootstrapComponentsBase
 {
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             parent::getSubcomponents($component),
@@ -11,38 +11,38 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getButtons(array $component)
+    public function getButtons(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getBodyClass(array $component)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getIcon(array $component)
-    {
-        return array();
-    }
-
-    public function getPanelParams(array $component, array &$props)
+    public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getCustomPanelClass(array $component, array &$props)
+    public function getPanelParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    public function getPanelClass(array $component)
+
+    public function getCustomPanelClass(\PoP\ComponentModel\Component\Component $component, array &$props)
+    {
+        return array();
+    }
+    public function getPanelClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getCustomPanelParams(array $component, array &$props)
+    public function getCustomPanelParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = array();
 
@@ -61,12 +61,12 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getPanelactiveClass(array $component)
+    public function getPanelactiveClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
 
-    // protected function getInitjsBlockbranches(array $component, array &$props) {
+    // protected function getInitjsBlockbranches(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     return array_merge(
     //         parent::getInitjsBlockbranches($component, $props),
@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     //     );
     // }
 
-    // function getActivemoduleSelectors(array $component, array &$props) {
+    // function getActivemoduleSelectors(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -95,16 +95,16 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     //     return $ret;
     // }
 
-    public function getButtonsClass(array $component, array &$props)
+    public function getButtonsClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
 
-    public function isSubcomponentActivePanel(array $component, $subComponent)
+    public function isSubcomponentActivePanel(\PoP\ComponentModel\Component\Component $component, $subComponent)
     {
         return false;
     }
-    public function getActivepanelSubcomponent(array $component)
+    public function getActivepanelSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $subComponents = $this->getSubcomponents($component);
         foreach ($subComponents as $subComponent) {
@@ -119,12 +119,12 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
         return null;
     }
-    protected function isMandatoryActivePanel(array $component)
+    protected function isMandatoryActivePanel(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getDefaultActivepanelSubcomponent(array $component)
+    public function getDefaultActivepanelSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Simply return the first one
@@ -132,20 +132,20 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return $subComponents[0];
     }
 
-    public function getPanelTitle(array $component)
+    public function getPanelTitle(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getPanelHeaderType(array $component)
+    public function getPanelHeaderType(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getDropdownTitle(array $component)
+    public function getDropdownTitle(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = array();
 
@@ -158,35 +158,35 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getPanelHeaderThumbs(array $component, array &$props)
+    public function getPanelHeaderThumbs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getPanelHeaderTooltips(array $component, array &$props)
+    public function getPanelHeaderTooltips(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getPanelHeaderTitles(array $component, array &$props)
+    public function getPanelHeaderTitles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         // Comment Leo 19/11/2018: Check this out: initially, this gets the title from the block, but since migrating blocks to dataloads, the processor may not have `getTitle` anymore and the code below explodes
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         // return $componentprocessor_manager->getProcessor($subComponent)->getTitle($subComponent, $props);
         return array();
     }
-    public function getPanelheaderClass(array $component)
+    public function getPanelheaderClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getPanelheaderItemClass(array $component)
+    public function getPanelheaderItemClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getPanelheaderParams(array $component)
+    public function getPanelheaderParams(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -197,7 +197,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -306,7 +306,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getMutableonmodelConfiguration(array $component, array &$props): array
+    public function getMutableonmodelConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonmodelConfiguration($component, $props);
 
@@ -317,12 +317,12 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return $ret;
     }
 
-    protected function lazyLoadInactivePanels(array $component, array &$props)
+    protected function lazyLoadInactivePanels(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($this->lazyLoadInactivePanels($component, $props)) {
             $active_subcomponent = $this->getActivepanelSubcomponent($component);
@@ -340,7 +340,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         parent::initModelProps($component, $props);
     }
 
-    // function initModelProps(array $component, array &$props) {
+    // function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $blocktarget = implode(', ', $this->getActivemoduleSelectors($component, $props));
     //     if ($controlgroup_top = $this->getControlgroupTopSubcomponent($component)) {

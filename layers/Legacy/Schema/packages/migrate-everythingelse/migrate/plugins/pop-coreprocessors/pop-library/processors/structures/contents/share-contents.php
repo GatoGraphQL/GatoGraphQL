@@ -18,7 +18,7 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
         );
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENT_EMBEDPREVIEW:
@@ -44,7 +44,7 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
         return parent::getDescription($component, $props);
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENT_EMBEDPREVIEW:

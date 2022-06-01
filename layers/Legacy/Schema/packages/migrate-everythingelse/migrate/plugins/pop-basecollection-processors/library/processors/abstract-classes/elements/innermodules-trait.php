@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 trait PoP_Engine_Module_Processor_InnerModules_Trait
 {
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             parent::getSubcomponents($component),
@@ -16,7 +16,7 @@ trait PoP_Engine_Module_Processor_InnerModules_Trait
         );
     }
     
-    public function getMutableonmodelConfiguration(array $component, array &$props): array
+    public function getMutableonmodelConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

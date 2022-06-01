@@ -23,7 +23,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             // The Page Content block uses whichever is the current page
@@ -34,7 +34,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         };
     }
 
-    protected function getDescriptionBottom(array $component, array &$props)
+    protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($component[1]) {
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return parent::getDescriptionBottom($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -70,7 +70,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PAGE_CONTENT:
@@ -80,7 +80,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -98,7 +98,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TAG_CONTENT:
@@ -121,7 +121,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
@@ -137,7 +137,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         parent::initRequestProps($component, $props);
     }
 
-    protected function getBlocksectionsClasses(array $component)
+    protected function getBlocksectionsClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBlocksectionsClasses($component);
 
@@ -150,7 +150,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return $ret;
     }
 
-    // function getNature(array $component) {
+    // function getNature(\PoP\ComponentModel\Component\Component $component) {
 
     //     switch ($component[1]) {
 

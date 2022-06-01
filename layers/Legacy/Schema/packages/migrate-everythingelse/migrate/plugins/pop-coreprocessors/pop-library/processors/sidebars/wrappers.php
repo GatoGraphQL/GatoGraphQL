@@ -17,7 +17,7 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
@@ -55,7 +55,7 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
@@ -67,7 +67,7 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_REFERENCES:

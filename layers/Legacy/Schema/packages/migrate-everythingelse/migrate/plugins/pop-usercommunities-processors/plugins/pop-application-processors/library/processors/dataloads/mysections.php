@@ -17,7 +17,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
@@ -26,7 +26,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -47,7 +47,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -62,7 +62,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
@@ -73,7 +73,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
@@ -92,7 +92,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
@@ -114,7 +114,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
@@ -125,7 +125,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:
@@ -136,7 +136,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return parent::getCheckpointMessageComponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT:

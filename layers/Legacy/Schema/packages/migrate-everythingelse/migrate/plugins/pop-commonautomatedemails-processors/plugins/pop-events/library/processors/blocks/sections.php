@@ -23,7 +23,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS => [PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS],
@@ -48,7 +48,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
         switch ($component[1]) {
@@ -69,7 +69,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
         return parent::getTitle($component, $props);
     }
 
-    protected function getDescriptionAbovetitle(array $component, array &$props)
+    protected function getDescriptionAbovetitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -91,7 +91,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
         return parent::getDescriptionAbovetitle($component, $props);
     }
 
-    protected function getDescriptionBottom(array $component, array &$props)
+    protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {

@@ -3,19 +3,19 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_StructuresBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_CALENDAR];
     }
 
-    public function isCritical(array $component, array &$props)
+    public function isCritical(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow to set the value from above
         return $this->getProp($component, $props, 'critical');
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -52,17 +52,17 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getControlgroupSubcomponent(array $component)
+    public function getControlgroupSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_CalendarControlGroups::class, PoP_Module_Processor_CalendarControlGroups::COMPONENT_CALENDARCONTROLGROUP_CALENDAR];
     }
 
-    public function getOptions(array $component, array &$props)
+    public function getOptions(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -78,7 +78,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
         );
     }
 
-    public function getFooterSubcomponents(array $component)
+    public function getFooterSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFooterSubcomponents($component);
 
@@ -35,7 +35,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
         return $ret;
     }
 
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLVIEW_LINK:

@@ -17,7 +17,7 @@ class PoP_WebPlatform_CSSConverter_Hooks
         );
     }
 
-    public function getImmutableConfiguration($configuration, array $component, array $props, $processor)
+    public function getImmutableConfiguration($configuration, \PoP\ComponentModel\Component\Component $component, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed
@@ -53,7 +53,7 @@ class PoP_WebPlatform_CSSConverter_Hooks
         return $configuration;
     }
 
-    public function getMutableonrequestConfiguration($configuration, array $component, array $props, $processor)
+    public function getMutableonrequestConfiguration($configuration, \PoP\ComponentModel\Component\Component $component, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed

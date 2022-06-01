@@ -17,7 +17,7 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -34,7 +34,7 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGSTANCES:

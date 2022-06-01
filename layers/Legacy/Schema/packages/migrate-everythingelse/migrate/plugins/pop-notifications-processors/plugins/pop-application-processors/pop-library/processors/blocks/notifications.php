@@ -16,7 +16,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
@@ -25,7 +25,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -43,7 +43,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         return $ret;
     }
 
-    public function getDescription(array $component, array &$props)
+    public function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
@@ -62,7 +62,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         return parent::getDescription($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -80,7 +80,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -110,7 +110,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
@@ -121,7 +121,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:

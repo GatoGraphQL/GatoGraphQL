@@ -12,7 +12,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups exte
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY => [GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY],
@@ -25,7 +25,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups exte
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY:

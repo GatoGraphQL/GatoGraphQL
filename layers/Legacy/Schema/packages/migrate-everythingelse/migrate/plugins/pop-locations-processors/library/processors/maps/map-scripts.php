@@ -15,7 +15,7 @@ class PoP_Module_Processor_MapScripts extends PoP_Module_Processor_MapScriptsBas
         );
     }
 
-    public function getCustomizationSubcomponent(array $component)
+    public function getCustomizationSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $customizations = array(
             self::COMPONENT_MAP_SCRIPT_POST => [PoP_Module_Processor_PostMapScriptCustomizations::class, PoP_Module_Processor_PostMapScriptCustomizations::COMPONENT_MAP_SCRIPTCUSTOMIZATION_POST],

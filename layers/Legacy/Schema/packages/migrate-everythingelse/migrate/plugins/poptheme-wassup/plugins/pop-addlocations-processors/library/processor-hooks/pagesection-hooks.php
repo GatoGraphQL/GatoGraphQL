@@ -44,7 +44,7 @@ class PoP_AddLocations_PageSectionHooks
     //     );
     // }
 
-    public function initModelProps(array $component, $props_in_array, $processor)
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {

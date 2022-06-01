@@ -32,7 +32,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
@@ -50,7 +50,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR],
@@ -69,7 +69,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW:
@@ -89,7 +89,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR:

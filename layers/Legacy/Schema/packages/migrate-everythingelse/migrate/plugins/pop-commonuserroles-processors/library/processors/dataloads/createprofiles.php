@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
@@ -38,7 +38,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
@@ -57,7 +57,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

@@ -12,7 +12,7 @@ class GD_EM_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitBu
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION:
@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitBu
         return parent::getLabel($component, $props);
     }
 
-    public function getLoadingText(array $component, array &$props)
+    public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_SUBMITBUTTON_ADDLOCATION:

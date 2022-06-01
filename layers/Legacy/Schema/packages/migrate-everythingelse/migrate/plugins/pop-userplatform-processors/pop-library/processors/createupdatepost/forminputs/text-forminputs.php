@@ -14,7 +14,7 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_TITLE:
@@ -27,7 +27,7 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_TITLE:
@@ -38,7 +38,7 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
         return parent::isMandatory($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_TITLE:

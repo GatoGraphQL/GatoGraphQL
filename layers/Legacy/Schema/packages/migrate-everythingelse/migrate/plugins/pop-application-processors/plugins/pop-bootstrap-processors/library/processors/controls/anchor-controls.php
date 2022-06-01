@@ -13,7 +13,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
@@ -22,7 +22,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:
@@ -31,7 +31,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
@@ -50,7 +50,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
         return parent::getHref($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL:

@@ -14,7 +14,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -52,7 +52,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
@@ -79,7 +79,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
 
         parent::initWebPlatformModelProps($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Allow Gravity Forms to set props on its added fields

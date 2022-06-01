@@ -18,7 +18,7 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
@@ -29,7 +29,7 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS => [GD_Custom_Module_Processor_CustomSectionDataloads::class, GD_Custom_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS],
@@ -41,7 +41,7 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_WHOWEARE_SCROLL_DETAILS:

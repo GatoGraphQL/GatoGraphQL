@@ -25,7 +25,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
@@ -41,7 +41,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
@@ -67,7 +67,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowavatarLayoutSubcomponents(array $component)
+    public function getBelowavatarLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowavatarLayoutSubcomponents($component);
 
@@ -82,7 +82,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getBelowexcerptLayoutSubcomponents(array $component)
+    public function getBelowexcerptLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
@@ -98,7 +98,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getUseravatarSubcomponent(array $component)
+    public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -123,7 +123,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getUseravatarSubcomponent($component);
     }
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
@@ -133,7 +133,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::showExcerpt($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
@@ -143,7 +143,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER:
@@ -158,7 +158,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -181,7 +181,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HEADER:

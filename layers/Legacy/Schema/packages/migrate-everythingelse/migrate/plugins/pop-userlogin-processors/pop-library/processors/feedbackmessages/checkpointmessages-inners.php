@@ -17,7 +17,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

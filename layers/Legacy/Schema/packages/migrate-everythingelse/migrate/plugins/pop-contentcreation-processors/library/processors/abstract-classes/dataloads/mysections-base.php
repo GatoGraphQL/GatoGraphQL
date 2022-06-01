@@ -9,12 +9,12 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
     //-------------------------------------------------
     // PUBLIC Overriding Functions
     //-------------------------------------------------
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 

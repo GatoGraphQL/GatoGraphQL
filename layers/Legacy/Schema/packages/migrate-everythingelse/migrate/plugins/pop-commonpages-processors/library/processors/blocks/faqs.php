@@ -13,7 +13,7 @@ class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
@@ -22,7 +22,7 @@ class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

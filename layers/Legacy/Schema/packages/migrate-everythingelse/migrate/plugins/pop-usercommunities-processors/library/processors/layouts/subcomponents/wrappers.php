@@ -11,7 +11,7 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:

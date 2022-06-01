@@ -28,7 +28,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
@@ -39,7 +39,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
@@ -51,7 +51,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         $feedbacks = array(
             self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT],
@@ -65,7 +65,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getFeedbackMessageComponent($component);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
@@ -80,7 +80,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -96,7 +96,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
@@ -105,7 +105,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
 
         return parent::isCreate($component);
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCE_UPDATE:
@@ -115,7 +115,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::isUpdate($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -130,7 +130,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
@@ -161,7 +161,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
@@ -173,7 +173,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
@@ -184,7 +184,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -198,7 +198,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $name = PoP_UserStance_PostNameUtils::getNameUc();
         switch ($component[1]) {

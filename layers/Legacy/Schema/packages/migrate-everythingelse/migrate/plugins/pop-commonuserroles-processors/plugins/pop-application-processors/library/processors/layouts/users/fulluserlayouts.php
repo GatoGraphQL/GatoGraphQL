@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor
         );
     }
 
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLUSER_ORGANIZATION:

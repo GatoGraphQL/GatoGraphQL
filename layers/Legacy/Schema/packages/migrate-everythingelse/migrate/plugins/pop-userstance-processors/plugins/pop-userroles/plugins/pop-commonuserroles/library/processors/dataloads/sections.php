@@ -26,7 +26,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
@@ -41,7 +41,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -67,7 +67,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
@@ -82,7 +82,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $fullviews = array(
             [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
@@ -113,7 +113,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -173,7 +173,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
@@ -190,7 +190,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:

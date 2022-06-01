@@ -13,7 +13,7 @@ class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

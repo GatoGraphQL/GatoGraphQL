@@ -12,7 +12,7 @@ class Wassup_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_BUTTONINNER_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
@@ -24,7 +24,7 @@ class Wassup_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $titles = array(
             self::COMPONENT_BUTTONINNER_POST_CREATE => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),

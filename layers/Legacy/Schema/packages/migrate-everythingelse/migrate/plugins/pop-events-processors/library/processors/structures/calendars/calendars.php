@@ -16,7 +16,7 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CALENDAR_EVENTS_NAVIGATOR => [GD_EM_Module_Processor_CalendarInners::class, GD_EM_Module_Processor_CalendarInners::COMPONENT_CALENDARINNER_EVENTS_NAVIGATOR],
@@ -31,7 +31,7 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getOptions(array $component, array &$props)
+    public function getOptions(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getOptions($component, $props);
 
@@ -58,7 +58,7 @@ class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBas
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CALENDAR_EVENTS_NAVIGATOR:

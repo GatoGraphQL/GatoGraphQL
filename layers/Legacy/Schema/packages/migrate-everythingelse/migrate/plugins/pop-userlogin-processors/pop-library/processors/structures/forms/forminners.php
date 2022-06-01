@@ -21,7 +21,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -85,7 +85,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_LOSTPWDRESET:
@@ -103,7 +103,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         parent::initRequestProps($component, $props);
     }
 
-    // function initModelProps(array $component, array &$props) {
+    // function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     switch ($component[1]) {
 

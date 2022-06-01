@@ -39,7 +39,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
         );
     }
 
-    public function getDefaultLayoutSubcomponent(array $component)
+    public function getDefaultLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $defaults = array(
             self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
@@ -63,7 +63,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
         return parent::getDefaultLayoutSubcomponent($component);
     }
 
-    public function getMultipleLayoutSubcomponents(array $component)
+    public function getMultipleLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR:

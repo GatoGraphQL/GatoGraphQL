@@ -50,7 +50,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -122,7 +122,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         return $ret;
     }
 
-    public function getID(array $component, array &$props): string
+    public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTION_HOVER:
@@ -171,7 +171,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         return parent::getID($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTION_QUICKVIEW:
@@ -272,7 +272,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 

@@ -14,7 +14,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
@@ -26,7 +26,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
 
         return parent::getLabel($component, $props);
     }
-    public function getIcon(array $component)
+    public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
@@ -38,7 +38,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
 
         return parent::getIcon($component);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
@@ -64,7 +64,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
 
         parent::initModelProps($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELBUTTONCONTROL_CAROUSELPREV:
@@ -75,7 +75,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
         return parent::getText($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 

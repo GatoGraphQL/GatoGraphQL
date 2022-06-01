@@ -15,7 +15,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
@@ -28,7 +28,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
         return parent::getLabelText($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $component, array &$props)
+    protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -42,7 +42,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
         return parent::getTypeaheadDataloadSource($component, $props);
     }
 
-    protected function getThumbprintQuery(array $component, array &$props)
+    protected function getThumbprintQuery(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getThumbprintQuery($component, $props);
 
@@ -59,7 +59,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
         return $ret;
     }
 
-    protected function getPendingMsg(array $component)
+    protected function getPendingMsg(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
@@ -72,7 +72,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
         return parent::getPendingMsg($component);
     }
 
-    protected function getNotfoundMsg(array $component)
+    protected function getNotfoundMsg(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:

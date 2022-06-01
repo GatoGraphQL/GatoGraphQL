@@ -16,7 +16,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
@@ -27,7 +27,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
@@ -38,7 +38,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
@@ -52,7 +52,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         return parent::getHref($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -68,7 +68,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:

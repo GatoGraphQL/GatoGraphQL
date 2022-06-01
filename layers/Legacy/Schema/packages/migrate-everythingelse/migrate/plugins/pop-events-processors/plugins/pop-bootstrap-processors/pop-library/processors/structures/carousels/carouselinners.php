@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELINNER_EVENTS:
@@ -34,7 +34,7 @@ class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_C
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

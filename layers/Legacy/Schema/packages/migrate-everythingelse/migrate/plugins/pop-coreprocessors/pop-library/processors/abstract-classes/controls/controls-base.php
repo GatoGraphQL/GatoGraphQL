@@ -2,32 +2,32 @@
 
 abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return $this->getLabel($component, $props);
     }
-    public function getMutableonrequestText(array $component, array &$props)
+    public function getMutableonrequestText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getIcon(array $component)
+    public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function showTooltip(array $component, array &$props)
+    public function showTooltip(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataComp
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -50,7 +50,7 @@ abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataComp
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -70,7 +70,7 @@ abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataComp
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($blocktarget = $this->getProp($component, $props, 'control-target')) {
             foreach ($this->getSubcomponents($component) as $subComponent) {

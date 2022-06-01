@@ -11,7 +11,7 @@ class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_Blo
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
@@ -19,7 +19,7 @@ class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_Blo
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

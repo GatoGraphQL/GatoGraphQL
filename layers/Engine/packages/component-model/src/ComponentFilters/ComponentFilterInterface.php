@@ -7,8 +7,8 @@ namespace PoP\ComponentModel\ComponentFilters;
 interface ComponentFilterInterface
 {
     public function getName(): string;
-    public function excludeSubcomponent(array $component, array &$props): bool;
-    public function removeExcludedSubcomponents(array $component, array $subComponents): array;
-    public function prepareForPropagation(array $component, array &$props): void;
-    public function restoreFromPropagation(array $component, array &$props): void;
+    public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool;
+    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subComponents): array;
+    public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void;
+    public function restoreFromPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void;
 }

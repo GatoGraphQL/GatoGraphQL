@@ -16,7 +16,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
@@ -28,7 +28,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBelowthumbLayoutSubcomponents(array $component)
+    public function getBelowthumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
@@ -47,7 +47,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getBottomSubcomponents(array $component)
+    public function getBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBottomSubcomponents($component);
 
@@ -61,7 +61,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
@@ -77,7 +77,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getPostThumbSubcomponent($component);
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
@@ -92,7 +92,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::authorPositions($component);
     }
 
-    public function getTitleBeforeauthors(array $component, array &$props)
+    public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
@@ -106,7 +106,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getTitleBeforeauthors($component, $props);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
@@ -117,7 +117,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     }
     
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

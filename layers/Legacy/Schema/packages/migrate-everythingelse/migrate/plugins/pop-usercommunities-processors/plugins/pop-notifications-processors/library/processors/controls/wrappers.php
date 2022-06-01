@@ -14,7 +14,7 @@ class GD_URE_AAL_Module_Processor_QuicklinkButtonGroupWrappers extends PoP_Modul
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -31,7 +31,7 @@ class GD_URE_AAL_Module_Processor_QuicklinkButtonGroupWrappers extends PoP_Modul
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_EDITUSERMEMBERSHIP:

@@ -11,7 +11,7 @@ class PoP_LocationPostsCreation_Module_Processor_ButtonInners extends PoP_Module
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if (defined('POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST') && POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST) {
             $routes = array(
@@ -25,7 +25,7 @@ class PoP_LocationPostsCreation_Module_Processor_ButtonInners extends PoP_Module
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $titles = array(
             self::COMPONENT_BUTTONINNER_LOCATIONPOST_CREATE => PoP_LocationPosts_PostNameUtils::getNameUc(),

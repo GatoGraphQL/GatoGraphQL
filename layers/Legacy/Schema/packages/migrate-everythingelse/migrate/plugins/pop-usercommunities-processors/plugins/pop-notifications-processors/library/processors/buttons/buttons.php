@@ -14,7 +14,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
@@ -27,7 +27,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
@@ -40,7 +40,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
         return parent::getUrlField($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
@@ -53,7 +53,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
         return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP:
@@ -63,7 +63,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
         return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 

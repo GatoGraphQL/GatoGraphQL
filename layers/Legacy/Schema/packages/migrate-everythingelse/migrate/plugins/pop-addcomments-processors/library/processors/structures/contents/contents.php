@@ -10,7 +10,7 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
             [self::class, self::COMPONENT_CONTENT_COMMENTSINGLE],
         );
     }
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENT_COMMENTSINGLE:
@@ -20,7 +20,7 @@ class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_Content
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENT_COMMENTSINGLE:

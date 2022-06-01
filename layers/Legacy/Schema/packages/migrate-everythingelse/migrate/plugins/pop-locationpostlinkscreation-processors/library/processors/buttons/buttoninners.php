@@ -12,7 +12,7 @@ class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if (defined('POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK') && POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK) {
             $routes = array(
@@ -26,7 +26,7 @@ class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $titles = array(
             self::COMPONENT_BUTTONINNER_LOCATIONPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('as Link', 'pop-locationpostlinkscreation-processors'),

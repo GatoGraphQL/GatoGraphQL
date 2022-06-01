@@ -4,12 +4,12 @@ define('GD_SUBMITFORMTYPE_FETCHBLOCK', 'fetchblock');
 
 abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_StructuresBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORM];
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -26,17 +26,17 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
         return $ret;
     }
 
-    public function getFormType(array $component, array &$props)
+    public function getFormType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_SUBMITFORMTYPE_FETCHBLOCK;
     }
 
-    public function getMethod(array $component, array &$props)
+    public function getMethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'POST';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -60,7 +60,7 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
         return $ret;
     }
 
-    public function getInterceptType(array $component, array &$props)
+    public function getInterceptType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($this->getProp($component, $props, 'intercept-action-url')) {
             return 'partialurl';
@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
         return parent::getInterceptType($component, $props);
     }
 
-    public function getAction(array $component, array &$props)
+    public function getAction(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($this->doesComponentLoadData($component)) {
             return $this->getDataloadSource($component, $props);
@@ -78,7 +78,7 @@ abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_Struc
         return null;
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'action', $this->getAction($component, $props));
         parent::initRequestProps($component, $props);

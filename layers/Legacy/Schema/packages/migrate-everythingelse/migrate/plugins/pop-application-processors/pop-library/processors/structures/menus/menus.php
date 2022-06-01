@@ -15,7 +15,7 @@ class PoP_Module_Processor_Menus extends PoP_Module_Processor_ContentsBase
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONMENU_TOP:

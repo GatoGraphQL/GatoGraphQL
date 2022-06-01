@@ -77,7 +77,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->getAuthorIDsFilterInput(),
@@ -87,7 +87,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => 'authorIDs',
@@ -97,7 +97,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->getIDScalarTypeResolver(),
@@ -107,7 +107,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS,
@@ -118,7 +118,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHOR_IDS => $this->__('Get results from the authors with given IDs', 'pop-users'),

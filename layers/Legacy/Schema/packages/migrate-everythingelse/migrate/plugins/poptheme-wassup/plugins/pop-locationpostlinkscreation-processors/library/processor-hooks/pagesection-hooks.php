@@ -12,7 +12,7 @@ class PoP_LocationPostLinksCreation_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $component, $props_in_array, $processor)
+    public function initModelPropsAddons(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {

@@ -24,7 +24,7 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         );
     }
 
-    public function getDropdownSubcomponents($subComponents, array $component)
+    public function getDropdownSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
@@ -70,7 +70,7 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         return $subComponents;
     }
 
-    public function getSocialmediaSubcomponents($subComponents, array $component)
+    public function getSocialmediaSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
@@ -89,7 +89,7 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         return $subComponents;
     }
 
-    public function getShareSubcomponents($subComponents, array $component)
+    public function getShareSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Insert before the Embed button

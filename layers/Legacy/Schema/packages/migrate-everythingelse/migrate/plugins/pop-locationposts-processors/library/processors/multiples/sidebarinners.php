@@ -15,7 +15,7 @@ class GD_Custom_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Modul
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

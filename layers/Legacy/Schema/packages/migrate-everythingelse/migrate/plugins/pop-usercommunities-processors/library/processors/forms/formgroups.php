@@ -22,7 +22,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -36,7 +36,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -51,7 +51,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMINPUTGROUP_MEMBERPRIVILEGES => [GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES],
@@ -69,7 +69,7 @@ class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_For
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUTGROUP_MEMBERSTATUS:

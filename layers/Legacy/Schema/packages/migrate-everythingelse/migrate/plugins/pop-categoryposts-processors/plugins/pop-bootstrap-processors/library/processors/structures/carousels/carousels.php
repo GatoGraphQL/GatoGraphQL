@@ -249,7 +249,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // switch ($component[1]) {
@@ -385,7 +385,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CAROUSEL_CATEGORYPOSTS00 => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00],
@@ -516,7 +516,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getMode(array $component, array &$props)
+    public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // switch ($component[1]) {
@@ -650,7 +650,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
     }
 
 
-    public function getControlsTopSubcomponent(array $component)
+    public function getControlsTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $controls = array(
             self::COMPONENT_CAROUSEL_CATEGORYPOSTS00 => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00],

@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
@@ -41,7 +41,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
@@ -57,7 +57,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
@@ -76,7 +76,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         parent::initRequestProps($component, $props);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

@@ -14,7 +14,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -26,7 +26,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -39,7 +39,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
@@ -53,7 +53,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:
@@ -69,7 +69,7 @@ class PoP_RelatedPosts_Module_Processor_FormComponentGroups extends PoP_Module_P
         parent::initModelProps($component, $props);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_REFERENCES:

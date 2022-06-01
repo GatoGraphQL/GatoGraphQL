@@ -17,7 +17,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -46,7 +46,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHOREVENTS:
@@ -60,7 +60,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         return parent::getDelegatorfilterSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future

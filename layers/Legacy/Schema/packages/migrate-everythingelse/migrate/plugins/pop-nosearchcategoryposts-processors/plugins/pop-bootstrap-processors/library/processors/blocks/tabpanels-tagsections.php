@@ -49,7 +49,7 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -82,7 +82,7 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:

@@ -6,32 +6,32 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         // Hack: re-use multiple.tmpl
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_MULTIPLE];
     }
 
-    public function getFormcomponentComponent(array $component)
+    public function getFormcomponentComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return $this->getFeaturedimageinnerSubcomponent($component);
     }
 
-    abstract public function getFeaturedimageinnerSubcomponent(array $component): ?array;
+    abstract public function getFeaturedimageinnerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array;
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array(
             $this->getFeaturedimageinnerSubcomponent($component),
         );
     }
 
-    public function getImageSize(array $component, array &$props)
+    public function getImageSize(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'thumb-md';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         return $ret;
     }
 
-    public function getDefaultImage(array $component, array &$props)
+    public function getDefaultImage(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if (defined('POP_CONTENTCREATION_IMAGE_DEFAULTFEATUREDIMAGE') && POP_CONTENTCREATION_IMAGE_DEFAULTFEATUREDIMAGE) {
             return POP_CONTENTCREATION_IMAGE_DEFAULTFEATUREDIMAGE;
@@ -53,7 +53,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         return null;
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $featuredimageinner = $this->getFeaturedimageinnerSubcomponent($component);
 
@@ -63,13 +63,13 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($component, $props);
         parent::initRequestProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $featuredimageinner = $this->getFeaturedimageinnerSubcomponent($component);
 

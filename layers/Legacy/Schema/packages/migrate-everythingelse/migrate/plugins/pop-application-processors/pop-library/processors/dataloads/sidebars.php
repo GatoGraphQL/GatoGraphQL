@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -41,7 +41,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
         return $ret;
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_DATALOAD_TAG_SIDEBAR:
@@ -54,7 +54,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     //     return parent::getNature($component);
     // }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR:
@@ -65,7 +65,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_TAG_SIDEBAR:

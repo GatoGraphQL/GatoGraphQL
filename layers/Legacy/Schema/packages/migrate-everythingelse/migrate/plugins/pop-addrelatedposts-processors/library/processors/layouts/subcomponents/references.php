@@ -15,7 +15,7 @@ class PoP_Module_Processor_ReferencesLayouts extends PoP_Module_Processor_Refere
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

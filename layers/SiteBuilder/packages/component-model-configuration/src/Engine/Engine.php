@@ -73,7 +73,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         );
     }
 
-    public function getComponentSettings(array $component, $model_props, array &$props)
+    public function getComponentSettings(\PoP\ComponentModel\Component\Component $component, $model_props, array &$props)
     {
         $ret = array();
 

@@ -13,7 +13,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultipleInners extends PoP_Modul
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

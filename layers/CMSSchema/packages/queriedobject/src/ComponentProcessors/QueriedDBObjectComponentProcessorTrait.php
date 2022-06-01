@@ -8,7 +8,7 @@ use PoP\Root\App;
 
 trait QueriedDBObjectComponentProcessorTrait
 {
-    protected function getQueriedDBObjectID(array $component, array &$props, &$data_properties): string | int | array | null
+    protected function getQueriedDBObjectID(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
         return App::getState(['routing', 'queried-object-id']) ?? null;
     }

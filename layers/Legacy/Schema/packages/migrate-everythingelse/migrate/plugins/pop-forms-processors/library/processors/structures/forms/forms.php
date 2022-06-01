@@ -12,7 +12,7 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_EVERYTHINGQUICKLINKS:
@@ -22,7 +22,7 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getMethod(array $component, array &$props)
+    public function getMethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_EVERYTHINGQUICKLINKS:
@@ -32,7 +32,7 @@ class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
         return parent::getMethod($component, $props);
     }
 
-    public function getAction(array $component, array &$props)
+    public function getAction(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {

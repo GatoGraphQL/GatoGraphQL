@@ -2,33 +2,33 @@
 
 abstract class PoP_Module_Processor_DropdownButtonMenuLayoutsBase extends PoP_Module_Processor_MenuLayoutsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_DROPDOWNBUTTON];
     }
 
-    public function getDropdownbtnClass(array $component, array &$props)
+    public function getDropdownbtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn-group';
     }
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
-    public function getDropdownmenuClass(array $component, array &$props)
+    public function getDropdownmenuClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
-    public function getBtnTitle(array $component, array &$props)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
-    public function innerList(array $component, array &$props)
+    public function innerList(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_DropdownButtonMenuLayoutsBase extends PoP_Mo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'dropdownmenu-class', $this->getDropdownmenuClass($component, $props));
         parent::initModelProps($component, $props);

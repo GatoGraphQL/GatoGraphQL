@@ -30,7 +30,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
@@ -56,7 +56,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getLabel($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_FILTERTOGGLE:
@@ -66,7 +66,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getText($component, $props);
     }
-    public function getIcon(array $component)
+    public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS:
@@ -83,7 +83,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getIcon($component);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
@@ -101,7 +101,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -145,7 +145,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         return parent::getHref($component, $props);
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_CURRENTURL:
@@ -155,7 +155,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -215,7 +215,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 

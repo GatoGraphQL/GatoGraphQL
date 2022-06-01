@@ -12,7 +12,7 @@ class PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor_Hooks
         );
     }
 
-    public function getComponentCSSResources(array $resources, array $component, array $templateResource, string $template, array $props): array
+    public function getComponentCSSResources(array $resources, \PoP\ComponentModel\Component\Component $component, array $templateResource, string $template, array $props): array
     {
         switch ($template) {
             case POP_TEMPLATE_FORMINPUT_DATERANGE:

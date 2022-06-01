@@ -20,7 +20,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS => POP_ROUTE_AUTHORS,
@@ -31,7 +31,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USERS_FULLVIEW],
@@ -44,7 +44,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     }
 
     // // Single Authors has no filter, because the authors are provided using 'include' which can't be filtered
-    // function getFilterSubcomponent(array $component) {
+    // function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component) {
 
     //     switch ($component[1]) {
 
@@ -59,7 +59,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     //     return parent::getFilterSubcomponent($component);
     // }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
@@ -88,7 +88,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
@@ -101,7 +101,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     //     return parent::getNature($component);
     // }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
@@ -117,7 +117,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
@@ -130,7 +130,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:

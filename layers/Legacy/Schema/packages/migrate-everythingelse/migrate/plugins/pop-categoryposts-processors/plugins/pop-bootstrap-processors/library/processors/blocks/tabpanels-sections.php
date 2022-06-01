@@ -49,7 +49,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -76,7 +76,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
         };
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -109,7 +109,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00:
@@ -138,7 +138,7 @@ class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Ta
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00:

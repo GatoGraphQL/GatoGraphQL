@@ -11,7 +11,7 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
         );
     }
 
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -24,7 +24,7 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH => [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SEARCH],

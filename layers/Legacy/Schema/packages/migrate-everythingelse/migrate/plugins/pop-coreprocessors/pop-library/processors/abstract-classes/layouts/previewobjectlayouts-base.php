@@ -3,36 +3,36 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         return 'url';
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'h4';
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -52,7 +52,7 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -64,7 +64,7 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -90,7 +90,7 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Artificial property added to identify the module when adding component-resources

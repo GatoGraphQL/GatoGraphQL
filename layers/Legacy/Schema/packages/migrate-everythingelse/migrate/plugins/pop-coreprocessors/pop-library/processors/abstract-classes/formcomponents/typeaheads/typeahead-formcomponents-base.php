@@ -6,21 +6,21 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentComponent(array $component)
+    public function getFormcomponentComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return $this->getInputSubcomponent($component);
     }
 
-    public function getComponentSubcomponents(array $component)
+    public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getInputSubcomponent(array $component)
+    public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::COMPONENT_FORMINPUT_TEXT_TYPEAHEAD];
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
@@ -35,13 +35,13 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         return $componentprocessor_manager->getProcessor($input)->getLabel($input, $subcomponent_props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($component, $props);
         parent::initRequestProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $typeahead_class = $this->getTypeaheadClass($component, $props);
         $this->appendProp($component, $props, 'class', $typeahead_class);
@@ -64,7 +64,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -76,7 +76,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         return $ret;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -88,16 +88,16 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
             )
         );
     }
-    public function getTypeaheadClass(array $component, array &$props)
+    public function getTypeaheadClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'pop-typeahead';
     }
-    public function getTypeaheadJsmethod(array $component, array &$props)
+    public function getTypeaheadJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -108,7 +108,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         return $ret;
     }
 
-    public function getComponentsToPropagateDataProperties(array $component): array
+    public function getComponentsToPropagateDataProperties(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // Important: the TYPEAHEAD_COMPONENT (eg: PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}

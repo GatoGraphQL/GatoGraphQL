@@ -48,7 +48,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOADACTION_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
@@ -65,7 +65,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         };
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $executers = array(
             self::COMPONENT_DATALOADACTION_FOLLOWUSER => FollowUserMutationResolverBridge::class,
@@ -86,7 +86,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    // function getActionexecutionCheckpointConfiguration(array $component, array &$props) {
+    // function getActionexecutionCheckpointConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     // The actionexecution is triggered when clicking on the link, not when submitting a form
     //     switch ($component[1]) {
@@ -108,7 +108,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     //     return parent::getActionexecutionCheckpointConfiguration($component, $props);
     // }
 
-    public function shouldExecuteMutation(array $component, array &$props): bool
+    public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         // The actionexecution is triggered when clicking on the link, not when submitting a form
         switch ($component[1]) {
@@ -128,7 +128,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::shouldExecuteMutation($component, $props);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
@@ -147,7 +147,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getCheckpointMessageComponent($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
@@ -166,7 +166,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getFeedbackMessageComponent($component);
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
@@ -190,7 +190,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         }
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -213,7 +213,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
@@ -231,7 +231,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $component, array &$props, array &$data_properties): ?string
+    protected function getObjectIDParamName(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOADACTION_RECOMMENDPOST:
@@ -251,7 +251,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return null;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOADACTION_FOLLOWUSER:
@@ -274,7 +274,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $towhats = array(
             self::COMPONENT_DATALOADACTION_FOLLOWUSER => TranslationAPIFacade::getInstance()->__('follow users', 'pop-coreprocessors'),

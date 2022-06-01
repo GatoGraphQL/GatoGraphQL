@@ -12,7 +12,7 @@ class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processo
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH:
@@ -22,7 +22,7 @@ class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processo
         return parent::getLabel($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH:
@@ -32,7 +32,7 @@ class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processo
         return parent::getBtnClass($component, $props);
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH:

@@ -12,7 +12,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         );
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
@@ -22,7 +22,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getDbobjectField($component);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getLabel($component, $props);
     }
 
-    public function getInputSubcomponent(array $component)
+    public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
@@ -42,7 +42,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getInputSubcomponent($component);
     }
 
-    public function getComponentSubcomponents(array $component)
+    public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:
@@ -54,7 +54,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getComponentSubcomponents($component);
     }
 
-    public function getTriggerLayoutSubcomponent(array $component)
+    public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:

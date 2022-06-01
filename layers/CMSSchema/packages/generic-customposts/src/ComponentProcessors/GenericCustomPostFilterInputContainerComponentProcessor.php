@@ -28,7 +28,7 @@ class GenericCustomPostFilterInputContainerComponentProcessor extends AbstractCu
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $genericCustomPostFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),

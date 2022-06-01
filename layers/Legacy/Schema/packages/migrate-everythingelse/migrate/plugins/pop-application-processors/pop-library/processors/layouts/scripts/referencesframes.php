@@ -21,7 +21,7 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function doAppend(array $component)
+    public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS:
@@ -33,7 +33,7 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
         return parent::doAppend($component);
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:

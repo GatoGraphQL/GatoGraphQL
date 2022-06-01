@@ -14,7 +14,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
@@ -27,7 +27,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
@@ -40,7 +40,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         return parent::getInputClass($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         parent::initModelProps($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_STATUS:
@@ -64,7 +64,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         return parent::getDbobjectField($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 

@@ -15,7 +15,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -38,7 +38,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $categories = TranslationAPIFacade::getInstance()->__('Categories', 'pop-locationposts-processors');
         $titles = array(
@@ -48,7 +48,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $categories = 'fa-info-circle';
         $fontawesomes = array(
@@ -59,7 +59,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
         return $fontawesomes[$component[1]] ?? null;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
@@ -68,7 +68,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
@@ -77,7 +77,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:

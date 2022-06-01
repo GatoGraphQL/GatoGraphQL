@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_LatestCountScriptsLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_LATESTCOUNTSCRIPT];
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_LatestCountScriptsLayoutsBase extends PoPEng
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array_merge(
             parent::getLeafComponentFields($component, $props),

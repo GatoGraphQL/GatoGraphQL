@@ -25,7 +25,7 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT => [PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT],
@@ -45,7 +45,7 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
         return parent::getComponentSubcomponent($component);
     }
 
-    public function useModuleConfiguration(array $component)
+    public function useModuleConfiguration(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:

@@ -11,7 +11,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
@@ -21,7 +21,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
         return parent::getLayoutSubcomponent($component);
     }
 
-    public function getLayoutContentSubcomponent(array $component)
+    public function getLayoutContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
@@ -31,7 +31,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
         return parent::getLayoutContentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POPOVER_EVENT:
@@ -43,7 +43,7 @@ class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_P
         parent::initModelProps($component, $props);
     }
 
-    // function getComponentPath(array $component, array &$props) {
+    // function getComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     switch ($component[1]) {
 

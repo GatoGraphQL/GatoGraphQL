@@ -11,7 +11,7 @@ class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCo
         );
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CODE_DOMAINSTYLES:

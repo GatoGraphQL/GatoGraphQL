@@ -32,7 +32,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         return $form_data;
     }
 
-    public function getComponentSubcomponents($components, array $component, $processor)
+    public function getComponentSubcomponents($components, \PoP\ComponentModel\Component\Component $component, $processor)
     {
         if (!$this->enabled()) {
             return $components;

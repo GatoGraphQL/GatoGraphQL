@@ -21,7 +21,7 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
         );
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:
@@ -36,7 +36,7 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
         return parent::isMultiple($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
          // case self::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:

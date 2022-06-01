@@ -9,7 +9,7 @@ use PoPCMSSchema\Tags\ConditionalOnModule\API\ComponentProcessors\AbstractFieldD
 
 class PostTagFieldDataloadComponentProcessor extends AbstractFieldDataloadComponentProcessor
 {
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG:

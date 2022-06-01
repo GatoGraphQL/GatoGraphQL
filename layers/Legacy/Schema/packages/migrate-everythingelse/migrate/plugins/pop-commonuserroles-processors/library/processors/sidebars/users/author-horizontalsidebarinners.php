@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -36,7 +36,7 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
         return $ret;
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:
@@ -47,7 +47,7 @@ class GD_URE_Module_Processor_CustomHorizontalAuthorSidebarInners extends PoP_Mo
         return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_HORIZONTALSIDEBARINNER_AUTHOR_ORGANIZATION:

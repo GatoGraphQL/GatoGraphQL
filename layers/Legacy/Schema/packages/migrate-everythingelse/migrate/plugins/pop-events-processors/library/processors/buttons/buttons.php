@@ -14,7 +14,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
@@ -27,7 +27,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
@@ -40,7 +40,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:
@@ -51,7 +51,7 @@ class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         return parent::getLinktarget($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_BUTTON_GOOGLECALENDAR:

@@ -15,7 +15,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_LOCATIONSMAP => POP_LOCATIONS_ROUTE_LOCATIONSMAP,
@@ -23,7 +23,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LOCATIONSMAP:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    protected function getObjectIDsParamName(array $component, array &$props, &$data_properties)
+    protected function getObjectIDsParamName(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LOCATIONSMAP:
@@ -60,7 +60,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         return null;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_LOCATIONSMAP:

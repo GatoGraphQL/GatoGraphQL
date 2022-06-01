@@ -11,7 +11,7 @@ class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getDefaultLayoutSubcomponent(array $component)
+    public function getDefaultLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS:
@@ -21,7 +21,7 @@ class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mu
         return parent::getDefaultLayoutSubcomponent($component);
     }
 
-    public function getMultipleLayoutSubcomponents(array $component)
+    public function getMultipleLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
         switch ($component[1]) {

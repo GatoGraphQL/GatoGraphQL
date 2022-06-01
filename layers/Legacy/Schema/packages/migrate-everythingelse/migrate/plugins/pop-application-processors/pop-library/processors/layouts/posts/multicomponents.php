@@ -15,7 +15,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         );
     }
 
-    protected function getUserpostinteractionLayoutSubcomponents(array $component)
+    protected function getUserpostinteractionLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
         switch ($component[1]) {
@@ -57,7 +57,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -74,7 +74,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:

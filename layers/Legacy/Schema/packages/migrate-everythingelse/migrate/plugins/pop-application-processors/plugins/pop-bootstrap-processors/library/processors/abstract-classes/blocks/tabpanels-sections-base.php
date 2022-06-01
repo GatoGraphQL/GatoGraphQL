@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_TabPanelSectionBlocksBase extends PoP_Module_Processor_SectionBlocksBase
 {
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_TabPanelSectionBlocksBase extends PoP_Module
         return $ret;
     }
 
-    protected function getDelegatorfilterSubcomponent(array $component)
+    protected function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }

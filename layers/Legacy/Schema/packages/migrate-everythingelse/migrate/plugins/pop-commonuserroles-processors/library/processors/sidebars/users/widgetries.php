@@ -14,7 +14,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -39,7 +39,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO => TranslationAPIFacade::getInstance()->__('Organization', 'poptheme-wassup'),
@@ -48,7 +48,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO => getRouteIcon(POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS, false),
@@ -58,7 +58,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
         return $fontawesomes[$component[1]] ?? null;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
@@ -68,7 +68,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:
@@ -78,7 +78,7 @@ class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Wi
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO:

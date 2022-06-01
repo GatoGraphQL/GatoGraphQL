@@ -22,7 +22,7 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_BUTTONINNER_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
@@ -39,7 +39,7 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow Events to have a different title
@@ -66,7 +66,7 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
         return parent::getBtnTitle($component);
     }
 
-    public function getTextField(array $component, array &$props)
+    public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_POSTSTANCE_PRO:

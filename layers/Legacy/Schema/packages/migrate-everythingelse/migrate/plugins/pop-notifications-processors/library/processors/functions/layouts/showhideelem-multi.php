@@ -13,7 +13,7 @@ class GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_P
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

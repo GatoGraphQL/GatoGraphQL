@@ -11,7 +11,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_FullViewLayouts extends PoP_Module_
         );
     }
 
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT:

@@ -23,7 +23,7 @@ class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputCon
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $mediaFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),

@@ -16,7 +16,7 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_INVITENEWUSERS => POP_USERPLATFORM_ROUTE_INVITENEWUSERS,
@@ -26,7 +26,7 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
         };
     }
 
-    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYPREFERENCES:
@@ -37,7 +37,7 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
         ;
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -58,7 +58,7 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
         return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

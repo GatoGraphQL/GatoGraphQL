@@ -14,7 +14,7 @@ class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Process
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
@@ -27,7 +27,7 @@ class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Process
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $extract = TranslationAPIFacade::getInstance()->__('Add Highlight', 'poptheme-wassup');
         $titles = array(

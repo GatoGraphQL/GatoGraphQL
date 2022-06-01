@@ -39,7 +39,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         );
     }
 
-    protected function getThumbFieldArgs(array $component, array &$props)
+    protected function getThumbFieldArgs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_FAVICON:
@@ -75,7 +75,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getThumbFieldArgs($component, $props);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
@@ -93,7 +93,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
@@ -106,7 +106,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getLinktarget($component, $props);
     }
 
-    public function getExtraThumbLayoutSubcomponents(array $component)
+    public function getExtraThumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getExtraThumbLayoutSubcomponents($component);
 
@@ -131,7 +131,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return $ret;
     }
 
-    public function getThumbLinkClass(array $component)
+    public function getThumbLinkClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
@@ -143,7 +143,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getThumbLinkClass($component);
     }
 
-    public function getThumbImgClass(array $component)
+    public function getThumbImgClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
@@ -153,7 +153,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getThumbImgClass($component);
     }
 
-    public function getDbobjectParams(array $component): array
+    public function getDbobjectParams(\PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE:
@@ -170,7 +170,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
         return parent::getDbobjectParams($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDFEED:

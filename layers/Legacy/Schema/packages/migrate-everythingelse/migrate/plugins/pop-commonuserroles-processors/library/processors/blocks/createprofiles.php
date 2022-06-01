@@ -14,7 +14,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
@@ -23,7 +23,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -42,7 +42,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
@@ -53,7 +53,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
@@ -64,7 +64,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return parent::getSubmenuSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

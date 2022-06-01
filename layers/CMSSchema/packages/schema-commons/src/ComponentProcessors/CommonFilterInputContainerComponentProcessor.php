@@ -41,7 +41,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
@@ -64,7 +64,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         };
     }
 
-    public function getFieldFilterInputDefaultValue(array $component, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): mixed
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING:
@@ -93,7 +93,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         return parent::getFieldFilterInputDefaultValue($component, $fieldArgName);
     }
 
-    public function getFieldFilterInputTypeModifiers(array $component, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): int
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
         switch ($component[1]) {

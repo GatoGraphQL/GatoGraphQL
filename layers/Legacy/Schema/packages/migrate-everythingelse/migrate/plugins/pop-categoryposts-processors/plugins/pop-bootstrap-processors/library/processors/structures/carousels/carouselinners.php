@@ -89,7 +89,7 @@ class CPP_Module_Processor_CarouselInners extends PoP_Module_Processor_CarouselI
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00:
@@ -156,7 +156,7 @@ class CPP_Module_Processor_CarouselInners extends PoP_Module_Processor_CarouselI
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

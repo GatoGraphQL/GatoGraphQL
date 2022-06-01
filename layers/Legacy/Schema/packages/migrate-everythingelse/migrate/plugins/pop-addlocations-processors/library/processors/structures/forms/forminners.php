@@ -11,7 +11,7 @@ class GD_EM_Module_Processor_CreateLocationFormInners extends PoP_Module_Process
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
     

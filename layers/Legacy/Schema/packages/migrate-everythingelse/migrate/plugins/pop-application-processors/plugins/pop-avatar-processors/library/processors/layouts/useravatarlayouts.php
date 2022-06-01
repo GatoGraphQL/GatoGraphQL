@@ -21,7 +21,7 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getAvatarSize(array $component)
+    public function getAvatarSize(\PoP\ComponentModel\Component\Component $component)
     {
         $avatars = array(
             self::COMPONENT_LAYOUT_USERAVATAR_40 => GD_AVATAR_SIZE_40,
@@ -39,7 +39,7 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
         return parent::getAvatarSize($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_USERAVATAR_40_RESPONSIVE:

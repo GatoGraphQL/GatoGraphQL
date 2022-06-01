@@ -25,7 +25,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         );
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_FRAME_TOP:
@@ -45,7 +45,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return null;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -120,7 +120,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FRAME_TOP:
@@ -132,7 +132,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         parent::initModelProps($component, $props);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -170,7 +170,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
@@ -429,7 +429,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataCompone
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 

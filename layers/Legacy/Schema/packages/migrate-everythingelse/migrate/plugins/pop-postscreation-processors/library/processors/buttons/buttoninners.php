@@ -12,7 +12,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_ButtonInners extends PoP_Mod
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_BUTTONINNER_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
@@ -24,7 +24,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_ButtonInners extends PoP_Mod
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $titles = array(
             self::COMPONENT_BUTTONINNER_CONTENTPOSTLINK_CREATE => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),

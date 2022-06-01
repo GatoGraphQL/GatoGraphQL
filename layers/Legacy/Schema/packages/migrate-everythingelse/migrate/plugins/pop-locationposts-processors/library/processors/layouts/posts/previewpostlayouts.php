@@ -26,7 +26,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         );
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
@@ -36,7 +36,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
@@ -54,7 +54,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBottomSubcomponents(array $component)
+    public function getBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBottomSubcomponents($component);
 
@@ -89,7 +89,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return $ret;
     }
 
-    public function getBelowthumbLayoutSubcomponents(array $component)
+    public function getBelowthumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
@@ -120,7 +120,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return $ret;
     }
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS:
@@ -141,7 +141,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::getPostThumbSubcomponent($component);
     }
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
@@ -151,7 +151,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
@@ -161,7 +161,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
@@ -181,7 +181,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS:
@@ -191,7 +191,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED:
@@ -204,7 +204,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getTitleBeforeauthors(array $component, array &$props)
+    public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR:
@@ -223,7 +223,7 @@ class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_
         return parent::getTitleBeforeauthors($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

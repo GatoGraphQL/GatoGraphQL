@@ -11,7 +11,7 @@ class PoP_Module_Processor_CreateLocationFeedbackMessages extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_CREATELOCATION => [PoP_Module_Processor_CreateLocationFeedbackMessageInners::class, PoP_Module_Processor_CreateLocationFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_CREATELOCATION],

@@ -13,7 +13,7 @@ class UserStance_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Co
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -26,7 +26,7 @@ class UserStance_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONWRAPPER_STANCEVIEW:

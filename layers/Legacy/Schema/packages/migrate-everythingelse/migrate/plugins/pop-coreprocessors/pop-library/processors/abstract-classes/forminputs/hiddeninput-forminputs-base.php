@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_HiddenInputFormInputsBase extends PoP_Module_Processor_HiddenIDTextFormInputsBase
 {
-    public function printValue(array $component, array &$props)
+    public function printValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Currently there is a bug: calling https://www.mesym.com/en/posts/?profiles[0]=1782&profiles[1]=1764&filter=posts

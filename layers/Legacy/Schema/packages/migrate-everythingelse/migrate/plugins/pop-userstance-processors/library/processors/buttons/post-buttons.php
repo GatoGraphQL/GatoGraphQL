@@ -21,7 +21,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -34,7 +34,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return $ret;
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_STANCE_CREATE => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_STANCE_CREATE],
@@ -48,7 +48,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_STANCE_CREATE:
@@ -62,7 +62,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_STANCE_CREATE:
@@ -74,7 +74,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -95,7 +95,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow Events to have a different title
@@ -119,7 +119,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         $fields = array(
             self::COMPONENT_BUTTON_STANCE_CREATE => 'addStanceURL',

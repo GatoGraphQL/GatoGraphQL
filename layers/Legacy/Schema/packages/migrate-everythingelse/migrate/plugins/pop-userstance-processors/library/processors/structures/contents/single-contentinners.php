@@ -15,7 +15,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         );
     }
 
-    protected function getCommentssingleLayouts(array $component)
+    protected function getCommentssingleLayouts(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
@@ -30,7 +30,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -51,7 +51,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
@@ -66,7 +66,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         switch ($component[1]) {

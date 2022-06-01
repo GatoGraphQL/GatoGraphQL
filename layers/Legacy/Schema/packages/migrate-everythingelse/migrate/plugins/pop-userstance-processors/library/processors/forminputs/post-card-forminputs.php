@@ -11,7 +11,7 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
         );
     }
 
-    public function getTriggerSubcomponent(array $component): ?array
+    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET:
@@ -21,7 +21,7 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
         return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET:

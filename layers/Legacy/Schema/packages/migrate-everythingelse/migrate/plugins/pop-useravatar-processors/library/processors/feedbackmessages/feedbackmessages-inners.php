@@ -11,7 +11,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners extend
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

@@ -18,7 +18,7 @@ class PoP_Newsletter_Module_Processor_GFFormInnerHooks
         );
     }
 
-    public function getLayoutSubcomponents($layouts, array $component)
+    public function getLayoutSubcomponents($layouts, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Newsletter_Module_Processor_GFFormInners::COMPONENT_FORMINNER_NEWSLETTER:
@@ -29,7 +29,7 @@ class PoP_Newsletter_Module_Processor_GFFormInnerHooks
         return $layouts;
     }
 
-    public function initModelProps(array $component, $props_in_array, $processor)
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {

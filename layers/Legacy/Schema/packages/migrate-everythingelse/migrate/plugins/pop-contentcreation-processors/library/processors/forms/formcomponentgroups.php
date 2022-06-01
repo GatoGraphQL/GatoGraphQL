@@ -13,7 +13,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
@@ -23,7 +23,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -43,7 +43,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
         parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:

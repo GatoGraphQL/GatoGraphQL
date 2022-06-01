@@ -45,7 +45,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_TAGS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS],
@@ -75,7 +75,7 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getBlockTarget(array $component, array &$props)
+    public function getBlockTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"

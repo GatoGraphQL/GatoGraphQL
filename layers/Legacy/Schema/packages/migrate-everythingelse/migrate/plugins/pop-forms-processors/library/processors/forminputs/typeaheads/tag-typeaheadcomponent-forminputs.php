@@ -14,7 +14,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_TAGS:
@@ -24,7 +24,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
         return parent::getLabelText($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $component, array &$props)
+    protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {

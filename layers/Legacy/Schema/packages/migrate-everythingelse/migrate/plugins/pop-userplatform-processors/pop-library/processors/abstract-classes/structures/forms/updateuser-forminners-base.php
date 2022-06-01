@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_UpdateUserFormInnersBase extends PoP_Module_Processor_FormInnersBase
 {
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array_merge(
             parent::getLayoutSubcomponents($component),
@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_UpdateUserFormInnersBase extends PoP_Module_
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::COMPONENT_FORMINPUT_CUU_USERNAME], $props, 'readonly', true);
         parent::initModelProps($component, $props);

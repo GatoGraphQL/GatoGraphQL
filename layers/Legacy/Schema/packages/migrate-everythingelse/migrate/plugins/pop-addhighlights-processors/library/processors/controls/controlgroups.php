@@ -11,7 +11,7 @@ class PoP_AddHighlights_Module_Processor_CustomControlGroups extends PoP_Module_
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

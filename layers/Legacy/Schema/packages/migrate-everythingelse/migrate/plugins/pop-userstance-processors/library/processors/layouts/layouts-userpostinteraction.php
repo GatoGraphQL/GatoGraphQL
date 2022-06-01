@@ -15,7 +15,7 @@ class UserStance_Module_Processor_UserPostInteractionLayouts extends PoP_Module_
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

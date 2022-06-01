@@ -13,7 +13,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         );
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_INITIALIZEDOMAIN:
@@ -23,7 +23,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         return parent::getCheckpointMessageComponent($component);
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_INITIALIZEDOMAIN => POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN,
@@ -31,7 +31,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         };
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -48,7 +48,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getBackgroundurls(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    public function getBackgroundurls(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $ret = parent::getBackgroundurls($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
@@ -68,7 +68,7 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_INITIALIZEDOMAIN:

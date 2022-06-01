@@ -35,7 +35,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => [PoP_Module_Processor_UserStanceUserRolesFilterInput::class, PoP_Module_Processor_UserStanceUserRolesFilterInput::FILTERINPUT_AUTHORROLE_MULTISELECT],
@@ -43,7 +43,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
@@ -53,7 +53,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
@@ -63,7 +63,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
@@ -73,7 +73,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT:
@@ -83,7 +83,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => $this->stringScalarTypeResolver,
@@ -91,7 +91,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         return match($component[1]) {
             self::COMPONENT_FILTERINPUT_AUTHORROLE_MULTISELECT => SchemaTypeModifiers::IS_ARRAY,
@@ -99,7 +99,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {

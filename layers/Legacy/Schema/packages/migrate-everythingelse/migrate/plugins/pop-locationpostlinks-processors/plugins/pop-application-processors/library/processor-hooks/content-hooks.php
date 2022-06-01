@@ -16,7 +16,7 @@ class PoPTheme_LocationPostLinks_ContentHooks
         );
     }
 
-    public function contentInner($inner, array $component)
+    public function contentInner($inner, \PoP\ComponentModel\Component\Component $component)
     {
         if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE]) {
             $postTypeAPI = PostTypeAPIFacade::getInstance();

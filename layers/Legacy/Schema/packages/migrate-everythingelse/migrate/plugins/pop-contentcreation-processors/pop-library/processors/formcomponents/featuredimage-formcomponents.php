@@ -12,7 +12,7 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         );
     }
 
-    public function getFeaturedimageinnerSubcomponent(array $component): ?array
+    public function getFeaturedimageinnerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE:
@@ -22,7 +22,7 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         return null;
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE:
@@ -32,7 +32,7 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_FEATUREDIMAGE:

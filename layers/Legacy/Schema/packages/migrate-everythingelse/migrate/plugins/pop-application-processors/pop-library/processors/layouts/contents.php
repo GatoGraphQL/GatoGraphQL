@@ -19,7 +19,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         );
     }
 
-    protected function getUsermentionsLayout(array $component)
+    protected function getUsermentionsLayout(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Add the layout below to preload the popover content for user @mentions, coupled with js function 'contentPopover'
@@ -36,7 +36,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return null;
     }
 
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
@@ -67,7 +67,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return $ret;
     }
 
-    public function getContentMaxlength(array $component, array &$props)
+    public function getContentMaxlength(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT:
@@ -78,7 +78,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return parent::getContentMaxlength($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -98,7 +98,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Hide the @mentions popover code

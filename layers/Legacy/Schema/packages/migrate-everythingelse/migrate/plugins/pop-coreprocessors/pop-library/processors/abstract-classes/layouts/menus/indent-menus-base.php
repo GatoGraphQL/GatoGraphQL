@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_IndentMenuLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_INDENT];
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_IndentMenuLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
     }

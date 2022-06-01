@@ -27,7 +27,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    public function getDatasetmeta(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
@@ -45,7 +45,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getModelPropsForDescendantDatasetComponents(array $component, array &$props): array
+    public function getModelPropsForDescendantDatasetComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getModelPropsForDescendantDatasetComponents($component, $props);
 
@@ -64,7 +64,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props): void
+    protected function addHeaddatasetcomponentDataProperties(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
@@ -90,7 +90,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         $ret[DataloadingConstants::EXTERNALLOAD] = $this->queriesExternalDomain($component, $props);
     }
 
-    public function getDataloadMultidomainQuerySources(array $component, array &$props): array
+    public function getDataloadMultidomainQuerySources(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $sources = $this->getDataloadMultidomainSources($component, $props);
         // If this website and the external one have the same software installed, then the external application can already retrieve the needed data
@@ -101,7 +101,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $this->addAPIQueryToSources($sources, $component, $props);
     }
 
-    public function getDataloadMultidomainSources(array $component, array &$props): array
+    public function getDataloadMultidomainSources(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         if ($sources = $this->getProp($component, $props, 'dataload-multidomain-sources')) {
             return is_array($sources) ? $sources : [$sources];
@@ -110,7 +110,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return [];
     }
 
-    public function queriesExternalDomain(array $component, array &$props): bool
+    public function queriesExternalDomain(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         if ($sources = $this->getDataloadMultidomainSources($component, $props)) {
             $domain = $this->getCMSService()->getSiteURL();
@@ -124,7 +124,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return false;
     }
 
-    public function isMultidomain(array $component, array &$props): bool
+    public function isMultidomain(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         if (!$this->queriesExternalDomain($component, $props)) {
             return false;
@@ -134,12 +134,12 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return is_array($multidomain_urls) && count($multidomain_urls) >= 2;
     }
 
-    public function isLazyload(array $component, array &$props): bool
+    public function isLazyload(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         return $this->getProp($component, $props, 'lazy-load') ?? false;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // If it is a dataloading component, then set all the props related to data
         if ($this->doesComponentLoadData($component)) {

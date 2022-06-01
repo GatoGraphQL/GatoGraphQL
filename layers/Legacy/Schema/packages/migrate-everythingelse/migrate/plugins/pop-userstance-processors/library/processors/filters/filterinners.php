@@ -23,7 +23,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -92,7 +92,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_STANCES => POP_FILTER_STANCES,

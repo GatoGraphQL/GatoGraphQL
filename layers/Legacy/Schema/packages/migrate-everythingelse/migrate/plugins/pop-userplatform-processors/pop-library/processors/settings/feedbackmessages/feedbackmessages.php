@@ -11,7 +11,7 @@ class PoP_Module_Processor_SettingsFeedbackMessages extends PoP_Module_Processor
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageInners::class, PoP_Module_Processor_SettingsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_SETTINGS],

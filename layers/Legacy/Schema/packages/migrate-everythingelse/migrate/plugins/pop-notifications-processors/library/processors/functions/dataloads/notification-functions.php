@@ -21,7 +21,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
@@ -31,7 +31,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         };
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
@@ -48,7 +48,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         }
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -64,7 +64,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD:
@@ -76,7 +76,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD:
@@ -89,7 +89,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         parent::initModelProps($component, $props);
     }
 
-    // function getActionexecutionCheckpointConfiguration(array $component, array &$props) {
+    // function getActionexecutionCheckpointConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     switch ($component[1]) {
 
@@ -104,7 +104,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     //     parent::getActionexecutionCheckpointConfiguration($component, $props);
     // }
 
-    public function shouldExecuteMutation(array $component, array &$props): bool
+    public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
 
         // The actionexecuter is invoked directly through GET, no ?actionpath required
@@ -118,7 +118,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         return parent::shouldExecuteMutation($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $executers = array(
             self::COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD => MarkAllAsReadNotificationMutationResolverBridge::class,

@@ -11,7 +11,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -25,7 +25,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:
@@ -35,7 +35,7 @@ class PoPSPEM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sid
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_SECTION_MYLOCATIONPOSTS_SIDEBAR:

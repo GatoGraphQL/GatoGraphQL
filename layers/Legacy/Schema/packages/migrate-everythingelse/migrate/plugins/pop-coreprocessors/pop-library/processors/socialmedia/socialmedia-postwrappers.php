@@ -17,7 +17,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
         );
     }
 
-    public function getSocialmediaComponent(array $component)
+    public function getSocialmediaComponent(\PoP\ComponentModel\Component\Component $component)
     {
         $socialmedias = array(
             self::COMPONENT_POSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::COMPONENT_POSTSOCIALMEDIA],

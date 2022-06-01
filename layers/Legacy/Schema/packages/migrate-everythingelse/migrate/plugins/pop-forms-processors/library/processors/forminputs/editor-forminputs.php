@@ -12,7 +12,7 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EDITOR:
@@ -22,7 +22,7 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EDITOR:
@@ -32,7 +32,7 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
         return parent::isMandatory($component, $props);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
         switch ($component[1]) {

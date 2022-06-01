@@ -13,7 +13,7 @@ class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP
         );
     }
 
-    public function getElemTarget(array $component, array &$props)
+    public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
@@ -24,7 +24,7 @@ class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP
         return parent::getElemTarget($component, $props);
     }
     
-    public function getElemStyles(array $component, array &$props)
+    public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:

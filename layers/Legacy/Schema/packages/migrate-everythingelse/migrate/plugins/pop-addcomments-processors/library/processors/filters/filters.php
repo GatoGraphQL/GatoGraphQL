@@ -11,7 +11,7 @@ class PoP_Module_Processor_CommentFilters extends PoP_Module_Processor_FiltersBa
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FILTER_COMMENTS => [PoP_Module_Processor_CommentFilterInners::class, PoP_Module_Processor_CommentFilterInners::COMPONENT_FILTERINPUTCONTAINER_COMMENTS],

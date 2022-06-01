@@ -22,21 +22,21 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function excludeSubcomponent(array $component, array &$props): bool
+    public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         return false;
     }
 
-    public function removeExcludedSubcomponents(array $component, array $subComponents): array
+    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subComponents): array
     {
         return $subComponents;
     }
 
-    public function prepareForPropagation(array $component, array &$props): void
+    public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
     }
 
-    public function restoreFromPropagation(array $component, array &$props): void
+    public function restoreFromPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
     }
 }

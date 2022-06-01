@@ -15,7 +15,7 @@ class PoP_Module_Processor_MapDivs extends PoP_Module_Processor_MapDivsBase
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         );
     }
 
-    public function getObjectName(array $component, array &$props)
+    public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_EVENTS:
@@ -41,7 +41,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         return parent::getObjectName($component, $props);
     }
 
-    public function getObjectNames(array $component, array &$props)
+    public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_EVENTS:
@@ -58,7 +58,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         return parent::getObjectNames($component, $props);
     }
 
-    public function getSectionClasses(array $component, array &$props)
+    public function getSectionClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSectionClasses($component, $props);
 
@@ -82,7 +82,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         return $ret;
     }
 
-    public function isAuthor(array $component, array &$props)
+    public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_EVENTS:
@@ -93,7 +93,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $component, array &$props)
+    public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_TAG_EVENTS:

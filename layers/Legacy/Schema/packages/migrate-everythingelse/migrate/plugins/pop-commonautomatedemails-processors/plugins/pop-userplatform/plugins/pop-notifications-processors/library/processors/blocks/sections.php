@@ -18,7 +18,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY,
@@ -27,7 +27,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -45,7 +45,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
         switch ($component[1]) {
@@ -63,7 +63,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
         return parent::getTitle($component, $props);
     }
 
-    protected function getDescriptionAbovetitle(array $component, array &$props)
+    protected function getDescriptionAbovetitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
@@ -77,7 +77,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
         return parent::getDescriptionAbovetitle($component, $props);
     }
 
-    protected function getDescriptionBottom(array $component, array &$props)
+    protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {

@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_APPENDSCRIPT];
     }
 
-    public function doAppend(array $component)
+    public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Through doAppend, we can have both success and conditionfailed layouts execute.
@@ -16,18 +16,18 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
         return true;
     }
 
-    // function stopAppending(array $component) {
+    // function stopAppending(\PoP\ComponentModel\Component\Component $component) {
 
     //     // Comments will not stop appending, everything else will
     //     return true;
     // }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -40,12 +40,12 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
         return $ret;
     }
 
-    public function getOperation(array $component, array &$props)
+    public function getOperation(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'append';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     

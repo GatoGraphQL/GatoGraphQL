@@ -14,7 +14,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
         );
     }
 
-    public function getLocationsTypeaheadSubcomponent(array $component)
+    public function getLocationsTypeaheadSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP:
@@ -27,7 +27,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
         return parent::getLocationsTypeaheadSubcomponent($component);
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP:

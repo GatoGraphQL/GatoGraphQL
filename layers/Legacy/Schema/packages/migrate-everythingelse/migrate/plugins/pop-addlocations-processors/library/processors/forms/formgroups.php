@@ -23,7 +23,7 @@ class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_EM_LOCATIONNAME => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::COMPONENT_FORMINPUT_EM_LOCATIONNAME],

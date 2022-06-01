@@ -17,9 +17,9 @@ interface EngineInterface
     public function listExtraRouteVars(): array;
     public function generateDataAndPrepareResponse(): void;
     public function calculateOutputData(): void;
-    public function getModelPropsComponentTree(array $component): array;
-    public function addRequestPropsComponentTree(array $component, array $props): array;
-    public function getComponentDatasetSettings(array $component, $model_props, array &$props): array;
+    public function getModelPropsComponentTree(\PoP\ComponentModel\Component\Component $component): array;
+    public function addRequestPropsComponentTree(\PoP\ComponentModel\Component\Component $component, array $props): array;
+    public function getComponentDatasetSettings(\PoP\ComponentModel\Component\Component $component, $model_props, array &$props): array;
     public function getRequestMeta(): array;
     public function getSessionMeta(): array;
     public function getSiteMeta(): array;

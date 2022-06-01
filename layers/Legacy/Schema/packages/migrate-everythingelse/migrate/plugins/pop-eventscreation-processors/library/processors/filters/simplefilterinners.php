@@ -11,7 +11,7 @@ class PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners extends PoP_M
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -41,7 +41,7 @@ class PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners extends PoP_M
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYEVENTS => POP_FILTER_MYEVENTS,

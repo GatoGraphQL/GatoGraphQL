@@ -9,7 +9,7 @@ class UserStance_WP_Module_Processor_CustomSectionDataloads extends UserStance_M
         );
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
         

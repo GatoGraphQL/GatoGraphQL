@@ -24,7 +24,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         );
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
@@ -34,7 +34,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
@@ -47,7 +47,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
@@ -60,7 +60,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
@@ -74,7 +74,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBottomSubcomponents(array $component)
+    public function getBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBottomSubcomponents($component);
 
@@ -90,7 +90,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getBelowthumbLayoutSubcomponents(array $component)
+    public function getBelowthumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
@@ -111,7 +111,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
@@ -131,7 +131,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getPostThumbSubcomponent($component);
     }
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
@@ -141,7 +141,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
@@ -151,7 +151,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
@@ -171,7 +171,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
@@ -181,7 +181,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
@@ -194,7 +194,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -226,7 +226,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getTitleBeforeauthors(array $component, array &$props)
+    public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:

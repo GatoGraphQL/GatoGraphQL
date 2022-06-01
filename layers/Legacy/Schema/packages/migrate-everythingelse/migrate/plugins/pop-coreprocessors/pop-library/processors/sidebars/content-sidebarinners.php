@@ -13,7 +13,7 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
         );
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL:
@@ -23,7 +23,7 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
         return parent::getWrapperClass($component);
     }
 
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL:

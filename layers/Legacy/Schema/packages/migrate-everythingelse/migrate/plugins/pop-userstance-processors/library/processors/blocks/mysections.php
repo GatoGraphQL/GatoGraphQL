@@ -13,7 +13,7 @@ class UserStance_Module_Processor_MySectionBlocks extends PoP_Module_Processor_M
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_MYSTANCES_SCROLL_FULLVIEWPREVIEW => POP_USERSTANCE_ROUTE_MYSTANCES,
@@ -22,7 +22,7 @@ class UserStance_Module_Processor_MySectionBlocks extends PoP_Module_Processor_M
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -33,7 +33,7 @@ class UserStance_Module_Processor_MySectionBlocks extends PoP_Module_Processor_M
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYSTANCES_TABLE_EDIT:

@@ -40,7 +40,7 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -69,7 +69,7 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_FAVICON:
@@ -93,7 +93,7 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_POSTTHUMB_XSMALL:

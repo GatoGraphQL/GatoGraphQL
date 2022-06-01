@@ -4,19 +4,19 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_CARD];
     }
 
-    public function getAdditionalSubcomponents(array $component)
+    public function getAdditionalSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow URE to override adding their own templates to include Community members in the filter
         return \PoP\Root\App::applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubcomponents', array(), $component);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
         if ($extra_templates = $this->getAdditionalSubcomponents($component)) {
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -57,12 +57,12 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
         );
     }
     
-    public function getAvatarSize(array $component, array &$props)
+    public function getAvatarSize(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_AVATAR_SIZE_40;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

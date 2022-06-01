@@ -12,7 +12,7 @@ class PoP_Application_Module_Processor_UserCheckpointMessageLayouts extends PoP_
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 

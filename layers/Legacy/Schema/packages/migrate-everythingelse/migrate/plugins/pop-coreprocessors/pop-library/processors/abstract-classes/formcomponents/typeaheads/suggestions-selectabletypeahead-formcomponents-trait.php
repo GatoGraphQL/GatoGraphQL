@@ -4,12 +4,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 trait SuggestionsSelectableTypeaheadFormComponentsTrait
 {
-    protected function enableSuggestions(array $component)
+    protected function enableSuggestions(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -22,7 +22,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -35,7 +35,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getExtraTemplateResources(array $component, array &$props): array
+    public function getExtraTemplateResources(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getExtraTemplateResources($component, $props);
 
@@ -50,19 +50,19 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getSuggestionsLayoutSubcomponent(array $component)
+    public function getSuggestionsLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getSuggestionsFontawesome(array $component, array &$props)
+    public function getSuggestionsFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getSuggestionClass(array $component, array &$props)
+    public function getSuggestionClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-link btn-compact';
     }
-    public function getSuggestionsTitle(array $component, array &$props)
+    public function getSuggestionsTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return sprintf(
             '<hr/><div class="suggestions-title"><label>%s</label></div>',
@@ -70,7 +70,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -83,7 +83,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($this->enableSuggestions($component)) {
             // No suggestions by default. It's overridable from above
@@ -93,7 +93,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -128,7 +128,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
         return $ret;
     }
 
-    public function getModelSupplementaryDBObjectData(array $component, array &$props): array
+    public function getModelSupplementaryDBObjectData(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
 
         // Please notice: the IDs to be extended here are permanent, so they can be saved in the configuration for the data-settings

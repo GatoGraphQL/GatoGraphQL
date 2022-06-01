@@ -11,7 +11,7 @@ class PoP_Module_Processor_HomeTabPanelSectionBlocks extends PoP_Module_Processo
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -25,7 +25,7 @@ class PoP_Module_Processor_HomeTabPanelSectionBlocks extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_HOMECONTENT:
@@ -35,7 +35,7 @@ class PoP_Module_Processor_HomeTabPanelSectionBlocks extends PoP_Module_Processo
         return parent::getDelegatorfilterSubcomponent($component);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_HOMECONTENT:
@@ -45,7 +45,7 @@ class PoP_Module_Processor_HomeTabPanelSectionBlocks extends PoP_Module_Processo
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_HOMECONTENT:

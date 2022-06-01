@@ -8,29 +8,29 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
 
-    // protected function getComponentTemplateResource(array $component) {
+    // protected function getComponentTemplateResource(\PoP\ComponentModel\Component\Component $component) {
 
     //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     // }
-    protected function getValueKey(array $component, array &$props)
+    protected function getValueKey(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'displayName';
     }
-    protected function getComponentTemplateResource(array $component)
+    protected function getComponentTemplateResource(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     }
-    // protected function getLayoutSubcomponent(array $component) {
+    // protected function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component) {
 
     //     return [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::COMPONENT_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     // }
-    protected function getTokenizerKeys(array $component, array &$props)
+    protected function getTokenizerKeys(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array('displayName');
     }
 
 
-    protected function getThumbprintQuery(array $component, array &$props)
+    protected function getThumbprintQuery(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow PoP User Platform to add the role "profile"
@@ -50,11 +50,11 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
         return $userTypeAPI->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
-    protected function getPendingMsg(array $component)
+    protected function getPendingMsg(\PoP\ComponentModel\Component\Component $component)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Users', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $component)
+    protected function getNotfoundMsg(\PoP\ComponentModel\Component\Component $component)
     {
         return TranslationAPIFacade::getInstance()->__('No Users found', 'pop-coreprocessors');
     }

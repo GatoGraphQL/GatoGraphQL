@@ -12,7 +12,7 @@ class PoP_AddHighlights_Module_Processor_FormComponentGroups extends PoP_Module_
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST:
@@ -22,7 +22,7 @@ class PoP_AddHighlights_Module_Processor_FormComponentGroups extends PoP_Module_
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST:

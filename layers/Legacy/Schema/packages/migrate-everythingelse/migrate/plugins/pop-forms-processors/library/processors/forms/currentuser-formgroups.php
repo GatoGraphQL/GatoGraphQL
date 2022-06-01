@@ -13,7 +13,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_NAME => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_NAME],
@@ -27,7 +27,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -40,7 +40,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -55,7 +55,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_NAME:

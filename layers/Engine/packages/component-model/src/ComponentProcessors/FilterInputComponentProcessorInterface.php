@@ -8,8 +8,8 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 interface FilterInputComponentProcessorInterface extends FormInputComponentProcessorInterface
 {
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface;
-    public function getFilterInputDescription(array $component): ?string;
-    public function getFilterInputDefaultValue(array $component): mixed;
-    public function getFilterInputTypeModifiers(array $component): int;
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface;
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string;
+    public function getFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component): mixed;
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int;
 }

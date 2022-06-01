@@ -20,7 +20,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -35,7 +35,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         return $ret;
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CODE_404:
@@ -45,7 +45,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         return parent::getHtmlTag($component, $props);
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $question = '<h4>%s</h4>';
@@ -91,7 +91,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         return parent::getCode($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CODE_HOMEWELCOME:

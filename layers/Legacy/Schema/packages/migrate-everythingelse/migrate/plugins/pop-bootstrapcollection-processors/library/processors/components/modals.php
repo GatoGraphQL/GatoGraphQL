@@ -15,7 +15,7 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
         );
     }
     
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -36,7 +36,7 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function getHeaderTitle(array $component)
+    public function getHeaderTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $header_placeholder = '<i class="fa %s fa-fw"></i><em>%s</em>';
         switch ($component[1]) {
@@ -65,7 +65,7 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
         return parent::getHeaderTitle($component);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_MODAL_EMBED:

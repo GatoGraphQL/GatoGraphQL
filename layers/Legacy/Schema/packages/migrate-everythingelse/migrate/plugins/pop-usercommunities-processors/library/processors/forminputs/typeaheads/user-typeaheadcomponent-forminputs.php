@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
@@ -28,7 +28,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         return parent::getLabelText($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $component, array &$props)
+    protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         switch ($component[1]) {
@@ -44,7 +44,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         return parent::getTypeaheadDataloadSource($component, $props);
     }
 
-    protected function getThumbprintQuery(array $component, array &$props)
+    protected function getThumbprintQuery(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getThumbprintQuery($component, $props);
 
@@ -57,7 +57,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         return $ret;
     }
 
-    protected function getPendingMsg(array $component)
+    protected function getPendingMsg(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
@@ -67,7 +67,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         return parent::getPendingMsg($component);
     }
 
-    protected function getNotfoundMsg(array $component)
+    protected function getNotfoundMsg(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY:

@@ -14,7 +14,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS => POP_TRENDINGTAGS_ROUTE_TRENDINGTAGS,
@@ -23,7 +23,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_TAGS_DETAILS],
@@ -33,7 +33,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         // Add the format attr
         $details = array(
@@ -51,7 +51,7 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_Tr
         return $format ?? parent::getFormat($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS:

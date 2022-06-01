@@ -13,7 +13,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_LOCATIONPOST_CREATE => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
@@ -22,7 +22,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -37,7 +37,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
         return $ret;
     }
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONPOST_CREATE:
@@ -46,7 +46,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
 
         return parent::isCreate($component);
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONPOST_UPDATE:
@@ -56,7 +56,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Pr
         return parent::isUpdate($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_LOCATIONPOST_UPDATE:

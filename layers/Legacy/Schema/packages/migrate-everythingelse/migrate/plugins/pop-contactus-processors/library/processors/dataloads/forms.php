@@ -13,7 +13,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_CONTACTUS => POP_CONTACTUS_ROUTE_CONTACTUS,
@@ -21,7 +21,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CONTACTUS:
@@ -31,7 +31,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function validateCaptcha(array $component, array &$props)
+    protected function validateCaptcha(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CONTACTUS:
@@ -41,7 +41,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         return parent::validateCaptcha($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $actionexecuters = array(
             self::COMPONENT_DATALOAD_CONTACTUS => ContactUsComponentMutationResolverBridge::class,
@@ -53,7 +53,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CONTACTUS:
@@ -63,7 +63,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -76,7 +76,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CONTACTUS:

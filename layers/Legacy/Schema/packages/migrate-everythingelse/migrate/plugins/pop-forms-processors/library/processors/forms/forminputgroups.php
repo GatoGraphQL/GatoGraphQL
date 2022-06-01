@@ -34,7 +34,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -52,7 +52,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -71,7 +71,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_EDITOR => [PoP_Module_Processor_EditorFormInputs::class, PoP_Module_Processor_EditorFormInputs::COMPONENT_FORMINPUT_EDITOR],
@@ -95,7 +95,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -107,7 +107,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -121,7 +121,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_SENDERNAME:

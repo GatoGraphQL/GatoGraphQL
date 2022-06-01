@@ -2,31 +2,31 @@
 
 abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_Module_Processor_AlertsBase
 {
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
         $ret[] = $this->getLayoutSubcomponent($component);
         return $ret;
     }
 
-    public function addFeedbackobjectClass(array $component, array &$props)
+    public function addFeedbackobjectClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'addDomainClass');
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -36,7 +36,7 @@ abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_
         return $ret;
     }
 
-    public function getAlertClass(array $component, array &$props)
+    public function getAlertClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If the block is multidomain, then make the feedbackmessage look smaller,
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_FeedbackMessageAlertLayoutsBase extends PoP_
         return '';
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-feedbackmessage');
         parent::initModelProps($component, $props);

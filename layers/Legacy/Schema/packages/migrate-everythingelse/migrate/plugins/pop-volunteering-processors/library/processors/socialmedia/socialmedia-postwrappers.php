@@ -13,7 +13,7 @@ class PoPCore_GenericForms_Module_Processor_SocialMediaPostWrappers extends PoP_
         );
     }
 
-    public function getSocialmediaComponent(array $component)
+    public function getSocialmediaComponent(\PoP\ComponentModel\Component\Component $component)
     {
         $socialmedias = array(
             self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEERPOSTWRAPPER => [PoPCore_GenericForms_Module_Processor_SocialMedia::class, PoPCore_GenericForms_Module_Processor_SocialMedia::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER],

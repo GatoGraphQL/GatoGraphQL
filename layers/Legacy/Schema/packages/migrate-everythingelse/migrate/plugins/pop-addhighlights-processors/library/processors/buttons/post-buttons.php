@@ -14,7 +14,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => [PoP_AddHighlights_Module_Processor_ButtonInners::class, PoP_AddHighlights_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE],
@@ -27,7 +27,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
@@ -40,7 +40,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         return parent::get_selectabletypeahead_template($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_HIGHLIGHT_CREATE:
@@ -51,7 +51,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -64,7 +64,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $extract = TranslationAPIFacade::getInstance()->__('Add Highlight', 'poptheme-wassup');
         $titles = array(
@@ -78,7 +78,7 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
         return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         $fields = array(
             self::COMPONENT_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',

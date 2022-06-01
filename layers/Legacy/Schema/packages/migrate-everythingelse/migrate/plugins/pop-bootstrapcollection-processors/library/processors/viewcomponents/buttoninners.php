@@ -18,7 +18,7 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
         );
     }
     
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA:
@@ -37,7 +37,7 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:

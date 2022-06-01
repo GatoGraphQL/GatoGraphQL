@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_UPDATE => POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL,
@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         };
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
@@ -46,7 +46,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -63,7 +63,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:
@@ -76,7 +76,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
         return parent::getCheckpointMessageComponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_UPDATE:

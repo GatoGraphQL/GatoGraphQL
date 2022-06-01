@@ -13,7 +13,7 @@ class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Proce
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
@@ -33,7 +33,7 @@ class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getBtnClass(array $component)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:
@@ -44,7 +44,7 @@ class GD_Wassup_Module_Processor_DropdownButtonControls extends PoP_Module_Proce
         return parent::getBtnClass($component);
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_CLOSETOGGLE:

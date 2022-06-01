@@ -11,7 +11,7 @@ class PoP_Module_Processor_SettingsFeedbackMessageAlertLayouts extends PoP_Modul
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageLayouts::class, PoP_Module_Processor_SettingsFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_SETTINGS],

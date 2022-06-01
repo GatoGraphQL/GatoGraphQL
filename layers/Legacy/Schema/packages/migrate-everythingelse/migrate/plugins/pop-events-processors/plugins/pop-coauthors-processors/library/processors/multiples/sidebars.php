@@ -13,7 +13,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -43,7 +43,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR => POP_SCREEN_SINGLEUSERS,
@@ -56,7 +56,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR:

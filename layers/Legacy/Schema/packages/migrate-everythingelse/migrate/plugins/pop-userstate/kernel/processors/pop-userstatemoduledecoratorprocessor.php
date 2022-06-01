@@ -19,7 +19,7 @@ class PoP_UserStateModuleDecoratorProcessor extends AbstractModuleDecoratorProce
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function requiresUserState(array $component, array &$props)
+    public function requiresUserState(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $componentprocessor_manager->getProcessor($component);

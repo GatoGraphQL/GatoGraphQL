@@ -27,7 +27,7 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FILTER_STANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES],

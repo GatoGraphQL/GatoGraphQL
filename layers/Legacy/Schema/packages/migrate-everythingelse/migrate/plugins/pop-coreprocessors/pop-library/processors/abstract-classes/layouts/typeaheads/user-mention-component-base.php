@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_MENTION_COMPONENT];
     }
@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         // Can't use "user-nicename", because @Mentions plugin does not store the "-" in the html attribute, so it would
         // save the entry as data-usernicename. To avoid conflicts, just remove the "-"
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
         return $data_fields;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

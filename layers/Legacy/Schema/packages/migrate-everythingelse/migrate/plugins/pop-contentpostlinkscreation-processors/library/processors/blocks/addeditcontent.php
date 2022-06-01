@@ -13,7 +13,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
@@ -22,7 +22,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -37,7 +37,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
         return $ret;
     }
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE:
@@ -46,7 +46,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
 
         return parent::isCreate($component);
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE:
@@ -56,7 +56,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks exten
         return parent::isUpdate($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE:

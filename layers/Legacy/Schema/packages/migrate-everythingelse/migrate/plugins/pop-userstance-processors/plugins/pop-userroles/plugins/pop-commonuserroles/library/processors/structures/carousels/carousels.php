@@ -13,7 +13,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:
@@ -27,7 +27,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:
@@ -38,7 +38,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getMode(array $component, array &$props)
+    public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:
@@ -50,7 +50,7 @@ class UserStance_URE_Module_Processor_CustomCarousels extends PoP_Module_Process
     }
 
 
-    public function getControlsTopSubcomponent(array $component)
+    public function getControlsTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSEL_STANCES_BYORGANIZATIONS:

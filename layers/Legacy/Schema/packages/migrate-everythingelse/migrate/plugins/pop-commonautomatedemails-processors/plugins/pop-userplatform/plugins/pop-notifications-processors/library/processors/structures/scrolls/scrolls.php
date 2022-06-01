@@ -14,7 +14,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS => [GD_AAL_Module_Processor_AutomatedEmailsScrollInners::class, GD_AAL_Module_Processor_AutomatedEmailsScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS],
@@ -28,7 +28,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

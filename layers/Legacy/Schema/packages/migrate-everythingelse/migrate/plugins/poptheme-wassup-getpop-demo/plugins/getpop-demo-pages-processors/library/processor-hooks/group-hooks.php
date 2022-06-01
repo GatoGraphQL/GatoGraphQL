@@ -26,7 +26,7 @@ class GetPoPDemo_Processors_GroupHooks
         );
     }
 
-    public function setModelProps(array $component, $props_in_array, $processor)
+    public function setModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         switch ($component[1]) {

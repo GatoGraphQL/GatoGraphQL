@@ -14,7 +14,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:
@@ -49,7 +49,7 @@ class PoP_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_Proc
         return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_USERSIDEBARINNER_HORIZONTAL:

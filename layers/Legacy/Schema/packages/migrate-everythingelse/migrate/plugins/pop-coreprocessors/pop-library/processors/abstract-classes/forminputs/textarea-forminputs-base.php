@@ -2,12 +2,12 @@
 
 abstract class PoP_Module_Processor_TextareaFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_TEXTAREA];
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_TextareaFormInputsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Use the label as placeholder
@@ -27,7 +27,7 @@ abstract class PoP_Module_Processor_TextareaFormInputsBase extends PoP_Module_Pr
         parent::initModelProps($component, $props);
     }
 
-    public function getRows(array $component, array &$props)
+    public function getRows(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 5;
     }

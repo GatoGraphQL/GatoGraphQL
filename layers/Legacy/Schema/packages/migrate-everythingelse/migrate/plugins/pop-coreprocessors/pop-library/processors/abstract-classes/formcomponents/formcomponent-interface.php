@@ -4,5 +4,5 @@ use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterf
 
 interface FormComponentComponentProcessorInterface extends UpstreamFormComponentComponentProcessorInterface
 {
-    public function getLabel(array $component, array &$props);
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props);
 }

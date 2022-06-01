@@ -11,7 +11,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -53,7 +53,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS => POP_FILTER_MYLINKS,

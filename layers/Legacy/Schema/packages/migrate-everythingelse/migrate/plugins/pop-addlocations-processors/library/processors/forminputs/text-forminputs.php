@@ -26,7 +26,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONNAME:
@@ -51,7 +51,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONNAME:
@@ -62,7 +62,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
         return parent::isMandatory($component, $props);
     }
 
-    public function isHidden(array $component, array &$props)
+    public function isHidden(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONLAT:
@@ -73,7 +73,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
         return parent::isHidden($component, $props);
     }
 
-    public function clearInput(array $component, array &$props)
+    public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONNAME:
@@ -90,7 +90,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
         return parent::clearInput($component, $props);
     }
 
-    // function getName(array $component) {
+    // function getName(\PoP\ComponentModel\Component\Component $component) {
 
     //     switch ($component[1]) {
 
@@ -131,7 +131,7 @@ class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Pro
     //     return parent::getName($component);
     // }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONLAT:

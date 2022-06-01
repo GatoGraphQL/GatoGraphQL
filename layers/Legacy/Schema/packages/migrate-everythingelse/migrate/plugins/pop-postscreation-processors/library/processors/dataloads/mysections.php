@@ -17,7 +17,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW => POP_POSTSCREATION_ROUTE_MYPOSTS,
@@ -27,7 +27,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
@@ -38,7 +38,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
@@ -50,7 +50,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
@@ -74,7 +74,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -91,7 +91,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
@@ -103,7 +103,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:

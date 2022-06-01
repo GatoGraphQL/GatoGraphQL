@@ -12,7 +12,7 @@ class PoP_SocialNetwork_Module_Processor_TextareaFormInputs extends PoP_Module_P
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_MESSAGETOUSER:
@@ -22,7 +22,7 @@ class PoP_SocialNetwork_Module_Processor_TextareaFormInputs extends PoP_Module_P
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_MESSAGETOUSER:
@@ -32,7 +32,7 @@ class PoP_SocialNetwork_Module_Processor_TextareaFormInputs extends PoP_Module_P
         return parent::isMandatory($component, $props);
     }
 
-    public function clearInput(array $component, array &$props)
+    public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_MESSAGETOUSER:

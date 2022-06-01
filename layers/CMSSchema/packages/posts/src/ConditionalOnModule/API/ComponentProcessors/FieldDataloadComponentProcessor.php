@@ -53,7 +53,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         );
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
@@ -63,7 +63,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST:
@@ -77,7 +77,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:
@@ -88,7 +88,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST:

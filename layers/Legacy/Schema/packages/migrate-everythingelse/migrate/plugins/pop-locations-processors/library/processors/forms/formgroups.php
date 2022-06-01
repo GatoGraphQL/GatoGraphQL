@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP => [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP],
@@ -29,7 +29,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_FORMCOMPONENTGROUP_TYPEAHEADMAP:
@@ -40,7 +40,7 @@ class GD_EM_Module_Processor_FormComponentGroups extends PoP_Module_Processor_Fo
         return parent::getInfo($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

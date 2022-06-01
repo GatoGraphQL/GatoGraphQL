@@ -18,7 +18,7 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTONINNER_USERVIEW:
@@ -34,7 +34,7 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTONINNER_USERVIEW:

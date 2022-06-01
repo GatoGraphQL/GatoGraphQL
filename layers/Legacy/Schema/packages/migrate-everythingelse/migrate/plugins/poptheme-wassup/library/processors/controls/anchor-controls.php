@@ -23,7 +23,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
@@ -41,7 +41,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
 
         return parent::getLabel($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK:
@@ -50,7 +50,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
 
         return parent::getText($component, $props);
     }
-    public function getIcon(array $component)
+    public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO:
@@ -69,7 +69,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
         return parent::getIcon($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -154,7 +154,7 @@ class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_Anc
         parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 

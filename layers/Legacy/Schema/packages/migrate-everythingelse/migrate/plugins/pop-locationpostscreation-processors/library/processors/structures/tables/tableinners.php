@@ -11,7 +11,7 @@ class GD_Custom_EM_Module_Processor_TableInners extends PoP_Module_Processor_Tab
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

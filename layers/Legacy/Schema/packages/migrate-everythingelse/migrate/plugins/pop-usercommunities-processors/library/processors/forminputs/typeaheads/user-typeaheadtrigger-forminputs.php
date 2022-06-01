@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
         );
     }
     
-    public function getHiddenInputComponent(array $component)
+    public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
         return parent::getHiddenInputComponent($component);
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_USERCOMMUNITIES:
@@ -37,7 +37,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends
         return parent::isMultiple($component);
     }
 
-    public function getAlertClass(array $component, array &$props)
+    public function getAlertClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getAlertClass($component, $props);
 

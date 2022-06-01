@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         );
     }
 
-    public function getObjectName(array $component, array &$props)
+    public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cats = array(
             self::COMPONENT_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
@@ -29,7 +29,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $component, array &$props)
+    public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cats = array(
             self::COMPONENT_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
@@ -44,7 +44,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         return parent::getObjectNames($component, $props);
     }
 
-    public function getSectionClasses(array $component, array &$props)
+    public function getSectionClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSectionClasses($component, $props);
 
@@ -59,7 +59,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         return $ret;
     }
 
-    public function isAuthor(array $component, array &$props)
+    public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTLINKS:
@@ -69,7 +69,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $component, array &$props)
+    public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_TAG_POSTLINKS:

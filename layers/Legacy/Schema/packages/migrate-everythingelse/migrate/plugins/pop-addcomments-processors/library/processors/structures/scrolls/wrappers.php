@@ -13,7 +13,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -30,7 +30,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETWRAPPER_POSTCOMMENTS:

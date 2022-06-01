@@ -49,7 +49,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
         );
     }
 
-    public function getElemTarget(array $component, array &$props)
+    public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $targets = array(
             self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES => GD_CLASS_FOLLOWUSER,
@@ -80,7 +80,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
         return parent::getElemTarget($component, $props);
     }
 
-    public function getElemStyles(array $component, array &$props)
+    public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES:

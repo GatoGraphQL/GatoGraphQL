@@ -24,7 +24,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -58,7 +58,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // $asresponse = TranslationAPIFacade::getInstance()->__('Posted in response / as an addition to', 'pop-coreprocessors');
@@ -77,7 +77,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGET_AUTHOR_CONTACT => 'fa-link',
@@ -91,7 +91,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POST_AUTHORS:
@@ -104,7 +104,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_AUTHOR_CONTACT:
@@ -117,7 +117,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_POST_AUTHORS:
@@ -132,7 +132,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getWidgetClass($component, $props);
     }
-    public function getTitleWrapperClass(array $component, array &$props)
+    public function getTitleWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_REFERENCES_LINE:
@@ -142,7 +142,7 @@ class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getTitleWrapperClass($component, $props);
     }
-    public function getTitleClass(array $component, array &$props)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_REFERENCES_LINE:

@@ -14,7 +14,7 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
@@ -28,7 +28,7 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

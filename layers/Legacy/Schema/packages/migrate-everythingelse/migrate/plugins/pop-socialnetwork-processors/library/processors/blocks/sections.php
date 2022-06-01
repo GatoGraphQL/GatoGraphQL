@@ -73,7 +73,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLL_DETAILS => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
@@ -111,7 +111,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLL_DETAILS => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS],
@@ -150,7 +150,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getSectionFilterComponent(array $component)
+    protected function getSectionFilterComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:
@@ -167,7 +167,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return parent::getSectionFilterComponent($component);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:

@@ -11,7 +11,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents exten
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABPANEL_MYLOCATIONPOSTS:
@@ -21,7 +21,7 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents exten
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 

@@ -18,7 +18,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -55,7 +55,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getBtnClass(array $component)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
@@ -68,7 +68,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return parent::getBtnClass($component);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
@@ -83,7 +83,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return parent::getLabel($component, $props);
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
@@ -98,7 +98,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:

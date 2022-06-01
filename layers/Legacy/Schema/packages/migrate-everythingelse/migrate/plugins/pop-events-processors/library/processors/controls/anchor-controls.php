@@ -23,7 +23,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
@@ -37,7 +37,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
@@ -51,7 +51,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
@@ -85,7 +85,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
 
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:

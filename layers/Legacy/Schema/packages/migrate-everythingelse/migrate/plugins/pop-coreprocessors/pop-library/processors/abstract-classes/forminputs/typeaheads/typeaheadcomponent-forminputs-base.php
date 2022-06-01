@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         }
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // If PoP Resource Loader is not defined, then there is no PoP_ResourceLoaderProcessorUtils
@@ -53,29 +53,29 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         return $resources;
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return $this->getComponentTemplateResource($component);
     }
-    protected function getComponentTemplateResource(array $component)
+    protected function getComponentTemplateResource(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    protected function getValueKey(array $component, array &$props)
+    protected function getValueKey(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'id';
     }
-    protected function getTokenizerKeys(array $component, array &$props)
+    protected function getTokenizerKeys(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    protected function getLimit(array $component, array &$props)
+    protected function getLimit(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 5;
     }
 
-    protected function getThumbprintQuery(array $component, array &$props)
+    protected function getThumbprintQuery(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
@@ -83,26 +83,26 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
     {
         return array();
     }
-    protected function getThumbprint(array $component, array &$props)
+    protected function getThumbprint(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $query = $this->getThumbprintQuery($component, $props);
         $results = $this->executeThumbprint($query);
 
         return (int) $results[0];
     }
-    protected function getTypeaheadDataloadSource(array $component, array &$props)
+    protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    // protected function getSourceFilter(array $component, array &$props)
+    // protected function getSourceFilter(\PoP\ComponentModel\Component\Component $component, array &$props)
     // {
     //     return null;
     // }
-    protected function getSourceFilterParams(array $component, array &$props)
+    protected function getSourceFilterParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return [];
     }
-    protected function getSourceUrl(array $component, array &$props)
+    protected function getSourceUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = $this->getTypeaheadDataloadSource($component, $props);
 
@@ -116,7 +116,7 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
 
         return $url;
     }
-    protected function getPrefetchUrl(array $component, array &$props)
+    protected function getPrefetchUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = $this->getSourceUrl($component, $props);
 
@@ -127,27 +127,27 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
             \PoP\ComponentModel\Constants\PaginationParams::LIMIT => $limit,
         ], $url);
     }
-    protected function getRemoteUrl(array $component, array &$props)
+    protected function getRemoteUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = $this->getSourceUrl($component, $props);
         return GeneralUtils::addQueryArgs([
             \PoP\ComponentModel\Constants\PaginationParams::LIMIT => 12,
         ], $url);
     }
-    protected function getStaticSuggestions(array $component, array &$props)
+    protected function getStaticSuggestions(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    protected function getPendingMsg(array $component)
+    protected function getPendingMsg(\PoP\ComponentModel\Component\Component $component)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Suggestions', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $component)
+    protected function getNotfoundMsg(\PoP\ComponentModel\Component\Component $component)
     {
         return TranslationAPIFacade::getInstance()->__('No Results', 'pop-coreprocessors');
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -181,7 +181,7 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         return $ret;
     }
 
-    public function getMutableonrequestJsconfiguration(array $component, array &$props): array
+    public function getMutableonrequestJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestJsconfiguration($component, $props);
 

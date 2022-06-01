@@ -11,7 +11,7 @@ class PoP_Module_Processor_LocationContents extends PoP_Module_Processor_Content
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_TRIGGERTYPEAHEADSELECT_LOCATION:

@@ -12,7 +12,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts exten
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 

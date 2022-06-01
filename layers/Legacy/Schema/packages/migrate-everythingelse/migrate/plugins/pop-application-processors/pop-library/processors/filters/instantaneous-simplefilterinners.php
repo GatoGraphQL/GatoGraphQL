@@ -13,7 +13,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
     //     return parent::getFilter($component);
     // }
 
-    public function getTriggerInternaltarget(array $component, array &$props)
+    public function getTriggerInternaltarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS:
@@ -63,7 +63,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         return parent::getTriggerInternaltarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS:

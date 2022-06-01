@@ -20,7 +20,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
@@ -40,7 +40,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
@@ -56,7 +56,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getBtnTitle($component);
     }
 
-    public function getTextField(array $component, array &$props)
+    public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS:
@@ -67,7 +67,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getTextField($component, $props);
     }
 
-    public function getTextfieldOpen(array $component, array &$props)
+    public function getTextfieldOpen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
@@ -77,7 +77,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getTextfieldOpen($component, $props);
     }
 
-    public function getTextfieldClose(array $component, array &$props)
+    public function getTextfieldClose(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:

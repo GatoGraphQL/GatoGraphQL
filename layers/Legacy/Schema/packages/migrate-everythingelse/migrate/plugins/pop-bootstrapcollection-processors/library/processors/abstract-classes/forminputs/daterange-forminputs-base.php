@@ -8,19 +8,19 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
 {
     use FormMultipleInputComponentProcessorTrait;
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_DATERANGE];
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'dateRange');
         return $ret;
     }
 
-    public function getInputSubnames(array $component): array
+    public function getInputSubnames(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($this->useTime($component)) {
             return array('from', 'to', 'fromtime', 'totime', 'readable');
@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return array('from', 'to', 'readable');
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         if ($this->useTime($component)) {
             return DateRangeTimeFormInput::class;
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return DateRangeFormInput::class;
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         if ($this->useTime($component)) {
             return 'daterangetime';
@@ -47,12 +47,12 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return 'daterange';
     }
 
-    public function useTime(array $component)
+    public function useTime(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Use the label as placeholder

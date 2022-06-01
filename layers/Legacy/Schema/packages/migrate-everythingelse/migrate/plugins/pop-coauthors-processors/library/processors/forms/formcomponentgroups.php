@@ -14,7 +14,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS => [GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS],
@@ -28,7 +28,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -46,7 +46,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
         parent::initModelProps($component, $props);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS:
@@ -57,7 +57,7 @@ class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_F
         return parent::getInfo($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS:

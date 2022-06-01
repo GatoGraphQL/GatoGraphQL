@@ -35,7 +35,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         );
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
         if (App::getState('does-api-query-have-errors')) {
             return null;
@@ -49,7 +49,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT:

@@ -12,7 +12,7 @@ class GenericForms_Module_Processor_SelectFormInputs extends PoP_Module_Processo
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TOPIC:
@@ -22,7 +22,7 @@ class GenericForms_Module_Processor_SelectFormInputs extends PoP_Module_Processo
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TOPIC:

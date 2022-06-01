@@ -5,29 +5,29 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SOCIALMEDIA_ITEM];
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         return null;
     }
-    public function getShortname(array $component)
+    public function getShortname(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getProvider(array $component)
+    public function getProvider(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getShareurlField(array $component, array &$props)
+    public function getShareurlField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array(
             $this->getShareurlField($component, $props),
@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

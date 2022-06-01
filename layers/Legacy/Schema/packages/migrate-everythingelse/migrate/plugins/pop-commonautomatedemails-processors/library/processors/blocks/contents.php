@@ -14,7 +14,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST => POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL,
@@ -22,7 +22,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
         };
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
@@ -41,7 +41,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
         return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

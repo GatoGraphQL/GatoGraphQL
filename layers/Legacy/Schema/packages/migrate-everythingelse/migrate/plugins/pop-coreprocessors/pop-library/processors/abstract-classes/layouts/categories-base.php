@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CategoriesLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_CATEGORIES];
     }
@@ -12,23 +12,23 @@ abstract class PoP_Module_Processor_CategoriesLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array(
             $this->getCategoriesField($component, $props),
         );
     }
 
-    public function getCategoriesField(array $component, array &$props)
+    public function getCategoriesField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getLabelClass(array $component, array &$props)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'label-warning';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

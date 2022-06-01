@@ -11,7 +11,7 @@ class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Mo
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

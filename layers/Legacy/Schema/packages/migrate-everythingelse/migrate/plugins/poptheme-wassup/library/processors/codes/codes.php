@@ -22,7 +22,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
         );
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
@@ -37,7 +37,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
         return parent::getHtmlTag($component, $props);
     }
 
-    protected function isStaticCode(array $component, array &$props)
+    protected function isStaticCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_HTMLCODE_HOMEWELCOMETOP:
@@ -52,7 +52,7 @@ class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
         return parent::isStaticCode($component, $props);
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`

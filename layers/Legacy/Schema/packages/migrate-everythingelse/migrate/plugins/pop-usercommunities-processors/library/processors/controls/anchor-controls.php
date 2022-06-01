@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
@@ -30,7 +30,7 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
 
         return parent::getLabel($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
 
         return parent::getText($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
@@ -66,7 +66,7 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
 
         return parent::getHref($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

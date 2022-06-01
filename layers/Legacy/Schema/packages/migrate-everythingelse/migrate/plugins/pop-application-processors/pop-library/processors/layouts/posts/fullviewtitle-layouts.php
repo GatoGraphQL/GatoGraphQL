@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
         );
     }
 
-    public function getHtmlmarkup(array $component, array &$props)
+    public function getHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE:

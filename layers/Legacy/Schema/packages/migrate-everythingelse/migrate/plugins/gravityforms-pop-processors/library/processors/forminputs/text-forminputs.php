@@ -11,7 +11,7 @@ class GD_GF_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
         );
     }
 
-    public function isHidden(array $component, array &$props)
+    public function isHidden(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_GF_FORMINPUT_FORMID:
@@ -21,7 +21,7 @@ class GD_GF_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
         return parent::isHidden($component, $props);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             // Do not change the name of this input below!

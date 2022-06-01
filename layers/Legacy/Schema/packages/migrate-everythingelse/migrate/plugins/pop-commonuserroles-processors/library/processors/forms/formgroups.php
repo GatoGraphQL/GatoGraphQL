@@ -27,7 +27,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -41,7 +41,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -56,7 +56,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON],

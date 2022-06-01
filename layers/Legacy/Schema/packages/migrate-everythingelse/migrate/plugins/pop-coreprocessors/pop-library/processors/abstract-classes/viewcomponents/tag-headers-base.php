@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_TagViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_TAG];
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_TagViewComponentHeadersBase extends PoPEngin
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $data_fields = array('id', 'symbolnamedescription');
         if ($this->headerShowUrl($component, $props)) {
@@ -22,12 +22,12 @@ abstract class PoP_Module_Processor_TagViewComponentHeadersBase extends PoPEngin
         return $data_fields;
     }
 
-    public function headerShowUrl(array $component, array &$props)
+    public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
     

@@ -30,7 +30,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getLabel($component, $props);
 
@@ -43,7 +43,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_CUU_USERNAME => [PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::COMPONENT_FORMINPUT_CUU_USERNAME],
@@ -65,7 +65,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_CUU_EMAIL:
@@ -75,7 +75,7 @@ class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormCompo
         return parent::getInfo($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Override the placeholders

@@ -15,7 +15,7 @@ class GD_Custom_EM_Module_Processor_ButtonGroups extends PoP_Module_Processor_Cu
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONGROUP_CALENDARSECTION:

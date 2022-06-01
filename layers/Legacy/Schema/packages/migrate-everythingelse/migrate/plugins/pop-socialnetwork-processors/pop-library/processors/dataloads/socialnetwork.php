@@ -36,11 +36,11 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         );
     }
 
-    // function getDataaccessCheckpointConfiguration(array $component, array &$props) {
+    // function getDataaccessCheckpointConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props) {
     /**
      * @return CheckpointInterface[]
      */
-    public function getDataAccessCheckpoints(array $component, array &$props): array
+    public function getDataAccessCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
@@ -55,7 +55,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getDataAccessCheckpoints($component, $props);
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
@@ -73,7 +73,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         }
     }
 
-    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
@@ -92,7 +92,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $ret;
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -110,7 +110,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         // All of these modules require the user to be logged in
         if (!\PoP\Root\App::getState('is-user-logged-in')) {
@@ -133,7 +133,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
@@ -151,7 +151,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:

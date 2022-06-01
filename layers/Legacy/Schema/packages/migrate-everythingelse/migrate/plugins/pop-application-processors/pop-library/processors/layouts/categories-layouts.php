@@ -13,7 +13,7 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
         );
     }
 
-    public function getCategoriesField(array $component, array &$props)
+    public function getCategoriesField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_CATEGORIES:
@@ -25,7 +25,7 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
         
         return parent::getCategoriesField($component, $props);
     }
-    public function getLabelClass(array $component, array &$props)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_APPLIESTO:

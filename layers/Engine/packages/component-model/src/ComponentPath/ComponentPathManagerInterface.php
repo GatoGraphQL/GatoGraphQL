@@ -11,6 +11,6 @@ interface ComponentPathManagerInterface
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $component, array &$props): void;
-    public function restoreFromPropagation(array $component, array &$props): void;
+    public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void;
+    public function restoreFromPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void;
 }

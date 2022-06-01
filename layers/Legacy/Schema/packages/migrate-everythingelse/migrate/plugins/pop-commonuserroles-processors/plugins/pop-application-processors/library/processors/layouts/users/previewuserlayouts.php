@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
@@ -24,7 +24,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
@@ -46,7 +46,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowexcerptLayoutSubcomponents(array $component)
+    public function getBelowexcerptLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
@@ -66,7 +66,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getBelowavatarLayoutSubcomponents(array $component)
+    public function getBelowavatarLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowavatarLayoutSubcomponents($component);
 
@@ -80,7 +80,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getUseravatarSubcomponent(array $component)
+    public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -94,7 +94,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
     }
 
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
@@ -105,7 +105,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::showExcerpt($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
@@ -116,7 +116,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::horizontalLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

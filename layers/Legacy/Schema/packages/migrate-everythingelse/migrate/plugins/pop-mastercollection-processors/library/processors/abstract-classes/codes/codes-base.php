@@ -2,17 +2,17 @@
 
 abstract class PoP_Module_Processor_CodesBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    protected function isStaticCode(array $component, array &$props)
+    protected function isStaticCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
     
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_CodesBase extends PoPEngine_QueryDataCompone
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
     

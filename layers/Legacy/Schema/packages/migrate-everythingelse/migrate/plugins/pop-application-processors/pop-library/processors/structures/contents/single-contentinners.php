@@ -19,7 +19,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -45,7 +45,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_HIGHLIGHTSINGLE:

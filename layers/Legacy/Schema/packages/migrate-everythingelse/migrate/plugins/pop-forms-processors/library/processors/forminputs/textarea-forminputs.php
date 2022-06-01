@@ -16,7 +16,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
         );
     }
 
-    public function getRows(array $component, array &$props)
+    public function getRows(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
@@ -26,7 +26,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
         return parent::getRows($component, $props);
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
@@ -42,7 +42,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
@@ -53,7 +53,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
         return parent::isMandatory($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TEXTAREAEDITOR:
@@ -63,7 +63,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
         return parent::getDbobjectField($component);
     }
 
-    public function clearInput(array $component, array &$props)
+    public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EMAILS:

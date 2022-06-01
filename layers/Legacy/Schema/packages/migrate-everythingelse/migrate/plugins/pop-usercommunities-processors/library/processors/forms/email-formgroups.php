@@ -11,7 +11,7 @@ class PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups extends PoP
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY => [GD_URE_Module_Processor_UserProfileCheckboxFormInputs::class, GD_URE_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
@@ -24,7 +24,7 @@ class PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups extends PoP
         return parent::getComponentSubcomponent($component);
     }
 
-    public function useModuleConfiguration(array $component)
+    public function useModuleConfiguration(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:

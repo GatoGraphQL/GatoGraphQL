@@ -22,7 +22,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_LOGIN:
@@ -44,7 +44,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -57,7 +57,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -76,7 +76,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {

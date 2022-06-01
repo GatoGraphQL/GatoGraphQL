@@ -5,26 +5,26 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
 {
     use SuggestionsSelectableTypeaheadFormComponentsTrait;
 
-    public function getInputSubcomponent(array $component)
+    public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [GD_EM_Module_Processor_InputGroupFormComponents::class, GD_EM_Module_Processor_InputGroupFormComponents::COMPONENT_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION];
     }
 
-    public function getSuggestionsLayoutSubcomponent(array $component)
+    public function getSuggestionsLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONNAME];
     }
-    public function getSuggestionsFontawesome(array $component, array &$props)
+    public function getSuggestionsFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'fa-fw fa-map-marker';
     }
 
-    public function fixedId(array $component, array &$props): bool
+    public function fixedId(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         return true;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

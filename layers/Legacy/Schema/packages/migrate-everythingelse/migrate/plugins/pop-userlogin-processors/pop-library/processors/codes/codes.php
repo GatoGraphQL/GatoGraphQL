@@ -12,7 +12,7 @@ class PoP_UserLogin_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTML
         );
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN:
@@ -22,7 +22,7 @@ class PoP_UserLogin_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTML
         return parent::getHtmlTag($component, $props);
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN:

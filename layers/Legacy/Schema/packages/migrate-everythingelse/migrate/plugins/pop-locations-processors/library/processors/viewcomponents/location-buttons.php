@@ -21,7 +21,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         );
     }
 
-    public function initMarkers(array $component)
+    public function initMarkers(\PoP\ComponentModel\Component\Component $component)
     {
 
         // When in the Map window, the location link must not initialize the markers, since they are already initialized by the map itself.
@@ -36,7 +36,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         return parent::initMarkers($component);
     }
 
-    public function getLocationComponent(array $component)
+    public function getLocationComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         return parent::getLocationComponent($component);
     }
 
-    public function getLocationComplementComponent(array $component)
+    public function getLocationComplementComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
@@ -61,7 +61,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
         return parent::getLocationComplementComponent($component);
     }
-    public function getJoinSeparator(array $component)
+    public function getJoinSeparator(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
@@ -71,7 +71,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
         return parent::getJoinSeparator($component);
     }
-    public function getEachSeparator(array $component)
+    public function getEachSeparator(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
@@ -81,7 +81,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
 
         return parent::getEachSeparator($component);
     }
-    public function getComplementSeparator(array $component)
+    public function getComplementSeparator(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS:
@@ -92,7 +92,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         return parent::getComplementSeparator($component);
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS => [PoP_Module_Processor_LocationViewComponentButtonInners::class, PoP_Module_Processor_LocationViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],
@@ -116,7 +116,7 @@ class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Proce
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    // function getHeaderSubcomponent(array $component) {
+    // function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component) {
 
     //     switch ($component[1]) {
 

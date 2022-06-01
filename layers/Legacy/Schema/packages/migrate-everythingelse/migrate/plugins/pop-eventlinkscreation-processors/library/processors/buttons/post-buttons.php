@@ -12,7 +12,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_EVENTLINK_CREATE => [PoP_EventLinksCreation_Module_Processor_ButtonInners::class, PoP_EventLinksCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_EVENTLINK_CREATE],
@@ -24,7 +24,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTargetDynamicallyRenderedSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_EVENTLINK_CREATE:
@@ -36,7 +36,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_EVENTLINK_CREATE:
@@ -49,7 +49,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         return parent::getLinktarget($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_BUTTON_EVENTLINK_CREATE => TranslationAPIFacade::getInstance()->__('Event link', 'poptheme-wassup'),
@@ -61,7 +61,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
         return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         $fields = array(
             self::COMPONENT_BUTTON_EVENTLINK_CREATE => 'addEventLinkURL',

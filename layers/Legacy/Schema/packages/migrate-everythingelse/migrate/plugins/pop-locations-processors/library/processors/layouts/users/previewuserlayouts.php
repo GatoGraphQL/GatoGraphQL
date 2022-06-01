@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         );
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
@@ -35,7 +35,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBelowexcerptLayoutSubcomponents(array $component)
+    public function getBelowexcerptLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
@@ -49,7 +49,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function getUseravatarSubcomponent(array $component)
+    public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS:
@@ -62,7 +62,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         return parent::getUseravatarSubcomponent($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS:
@@ -72,7 +72,7 @@ class GD_EM_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Process
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

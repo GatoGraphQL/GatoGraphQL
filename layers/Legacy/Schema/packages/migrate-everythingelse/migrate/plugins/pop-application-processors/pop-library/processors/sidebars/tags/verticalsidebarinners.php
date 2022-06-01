@@ -11,7 +11,7 @@ class Wassup_Module_Processor_CustomVerticalTagSidebarInners extends PoP_Module_
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

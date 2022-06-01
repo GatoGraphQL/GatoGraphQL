@@ -19,7 +19,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageInners extends PoP_Module
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

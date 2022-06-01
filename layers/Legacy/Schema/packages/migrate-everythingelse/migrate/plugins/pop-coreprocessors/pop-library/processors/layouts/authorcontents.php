@@ -13,7 +13,7 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
         );
     }
 
-    public function getDescriptionMaxlength(array $component, array &$props)
+    public function getDescriptionMaxlength(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTAUTHOR_LIMITEDCONTENT:
@@ -23,7 +23,7 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
         return parent::getDescriptionMaxlength($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTAUTHOR_CONTENT:

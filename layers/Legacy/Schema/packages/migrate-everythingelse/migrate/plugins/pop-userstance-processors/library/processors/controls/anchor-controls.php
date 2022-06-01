@@ -31,7 +31,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
         );
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
@@ -49,7 +49,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
         return parent::getTarget($component, $props);
     }
 
-    public function getMutableonrequestText(array $component, array &$props)
+    public function getMutableonrequestText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($component[1]) {
@@ -139,7 +139,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getMutableonrequestText($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT => POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL,
@@ -158,7 +158,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $routes = array(
@@ -178,7 +178,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getHref($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:

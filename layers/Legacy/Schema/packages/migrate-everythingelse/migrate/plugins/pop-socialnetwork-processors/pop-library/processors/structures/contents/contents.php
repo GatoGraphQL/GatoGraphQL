@@ -29,7 +29,7 @@ class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_Conten
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CONTENT_FOLLOWSUSERS => [PoP_Module_Processor_FunctionsContentMultipleInners::class, PoP_Module_Processor_FunctionsContentMultipleInners::COMPONENT_CONTENTINNER_FOLLOWSUSERS],

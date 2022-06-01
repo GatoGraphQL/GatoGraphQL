@@ -26,7 +26,7 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
@@ -57,7 +57,7 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
         return parent::getLabelText($component, $props);
     }
 
-    public function getCheckboxValue(array $component, array &$props)
+    public function getCheckboxValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:

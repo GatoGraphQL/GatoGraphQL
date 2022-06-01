@@ -20,7 +20,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_EVENT_CREATE => POP_EVENTSCREATION_ROUTE_ADDEVENT,
@@ -29,7 +29,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_CREATE:
@@ -39,7 +39,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -54,7 +54,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_CREATE:
@@ -63,7 +63,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
 
         return parent::isCreate($component);
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_UPDATE:
@@ -73,7 +73,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return parent::isUpdate($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_UPDATE:
@@ -89,7 +89,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         parent::initModelProps($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_CREATE:
@@ -101,7 +101,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_UPDATE:
@@ -110,7 +110,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $component, array &$props, array &$data_properties): ?string
+    protected function getObjectIDParamName(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_UPDATE:
@@ -119,7 +119,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return null;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EVENT_UPDATE:

@@ -17,7 +17,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_USERAVATAR_UPDATE => POP_USERAVATAR_ROUTE_EDITAVATAR,
@@ -25,7 +25,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         };
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
@@ -35,7 +35,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
@@ -45,7 +45,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
@@ -55,7 +55,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
@@ -65,7 +65,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getCheckpointMessageComponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -78,7 +78,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -92,7 +92,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getDataloadSource(array $component, array &$props): string
+    public function getDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         // Replace the routes in the "componentPaths" and "actionpath" parameters:
         // point to the "execute" block instead
@@ -107,7 +107,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getDataloadSource($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
@@ -125,7 +125,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function shouldExecuteMutation(array $component, array &$props): bool
+    public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         // Always execute this action
         switch ($component[1]) {
@@ -140,7 +140,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::shouldExecuteMutation($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:

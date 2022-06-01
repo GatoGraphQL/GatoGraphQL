@@ -12,7 +12,7 @@ class PoP_UserAvatarProcessors_UserPlatformProcessors_CreateUpdateUser_Hooks
         );
     }
 
-    public function getComponentSubcomponents($components, array $component, $processor)
+    public function getComponentSubcomponents($components, \PoP\ComponentModel\Component\Component $component, $processor)
     {
 
         // Add After the email

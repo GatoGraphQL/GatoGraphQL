@@ -12,7 +12,7 @@ class GD_URE_Module_Processor_WidgetMessages extends PoP_Module_Processor_Widget
         );
     }
 
-    public function getMessage(array $component)
+    public function getMessage(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_MESSAGE_NOCOMMUNITIES:

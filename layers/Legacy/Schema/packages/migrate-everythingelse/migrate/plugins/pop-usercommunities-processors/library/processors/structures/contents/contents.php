@@ -11,7 +11,7 @@ class GD_URE_Module_Processor_CustomContents extends PoP_Module_Processor_Conten
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_CONTENT_MEMBER:

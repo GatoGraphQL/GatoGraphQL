@@ -27,7 +27,7 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $postFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),

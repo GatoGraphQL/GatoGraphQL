@@ -20,7 +20,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
@@ -37,7 +37,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

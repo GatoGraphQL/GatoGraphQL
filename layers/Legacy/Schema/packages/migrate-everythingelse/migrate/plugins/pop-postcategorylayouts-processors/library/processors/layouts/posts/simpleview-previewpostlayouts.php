@@ -11,7 +11,7 @@ class PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts exte
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE:
@@ -21,7 +21,7 @@ class PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts exte
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getTopSubcomponents(array $component)
+    public function getTopSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getTopSubcomponents($component);
         switch ($component[1]) {
@@ -33,7 +33,7 @@ class PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts exte
         return $ret;
     }
 
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // $ret = parent::getAbovecontentSubcomponents($component);

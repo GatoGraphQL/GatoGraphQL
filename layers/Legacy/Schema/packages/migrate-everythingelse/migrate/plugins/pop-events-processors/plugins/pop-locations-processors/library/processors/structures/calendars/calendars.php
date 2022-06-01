@@ -11,7 +11,7 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CALENDAR_EVENTSMAP => [PoP_Events_Locations_Module_Processor_CalendarInners::class, PoP_Events_Locations_Module_Processor_CalendarInners::COMPONENT_CALENDARINNER_EVENTSMAP],
@@ -24,7 +24,7 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -37,7 +37,7 @@ class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CALENDAR_EVENTSMAP:

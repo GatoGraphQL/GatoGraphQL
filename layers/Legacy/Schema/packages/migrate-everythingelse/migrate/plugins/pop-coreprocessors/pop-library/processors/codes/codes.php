@@ -13,7 +13,7 @@ class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesB
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -27,7 +27,7 @@ class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesB
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CODE_APPSHELL:

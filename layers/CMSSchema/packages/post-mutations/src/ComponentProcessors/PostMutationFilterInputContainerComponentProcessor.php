@@ -25,7 +25,7 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
     /**
      * Retrieve the same elements as for Posts, and add the "status" filter
      */
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $targetModule = match ($component[1]) {
             self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],

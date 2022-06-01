@@ -26,7 +26,7 @@ class UserFilterInputContainerComponentProcessor extends AbstractFilterInputCont
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $userFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),

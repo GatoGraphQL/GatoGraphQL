@@ -8,5 +8,5 @@ use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 
 interface DataloadQueryArgsFilterInputComponentProcessorInterface extends FilterInputComponentProcessorInterface
 {
-    public function getFilterInput(array $component): ?FilterInputInterface;
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface;
 }

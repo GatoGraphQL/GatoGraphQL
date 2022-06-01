@@ -11,7 +11,7 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
         );
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
@@ -21,7 +21,7 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getUseravatarSubcomponent(array $component)
+    public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -33,7 +33,7 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
         return parent::getUseravatarSubcomponent($component);
     }
 
-    public function showShortDescription(array $component)
+    public function showShortDescription(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:
@@ -43,7 +43,7 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
         return parent::showShortDescription($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS:

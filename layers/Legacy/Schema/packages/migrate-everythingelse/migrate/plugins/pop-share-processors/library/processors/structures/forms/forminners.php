@@ -11,7 +11,7 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -56,7 +56,7 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Allow Gravity Forms to set props on its added fields

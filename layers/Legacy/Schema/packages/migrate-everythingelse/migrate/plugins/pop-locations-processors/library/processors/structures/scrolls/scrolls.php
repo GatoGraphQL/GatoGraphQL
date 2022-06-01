@@ -16,7 +16,7 @@ class PoP_Locations_Module_Processor_CustomScrolls extends PoP_Module_Processor_
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_LOCATIONS => [PoP_Locations_Module_Processor_CustomScrollInners::class, PoP_Locations_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_LOCATIONS],

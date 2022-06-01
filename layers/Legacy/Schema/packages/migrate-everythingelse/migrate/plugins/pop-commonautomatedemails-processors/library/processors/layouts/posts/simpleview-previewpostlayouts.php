@@ -12,7 +12,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SimpleViewPreviewPostLayouts extends P
     }
 
 
-    public function getAuthorComponent(array $component)
+    public function getAuthorComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_SIMPLEVIEW:
@@ -22,7 +22,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SimpleViewPreviewPostLayouts extends P
         return parent::getAuthorComponent($component);
     }
 
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SimpleViewPreviewPostLayouts extends P
         return $ret;
     }
 
-    public function getAftercontentSubcomponents(array $component)
+    public function getAftercontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getAftercontentSubcomponents($component);
 

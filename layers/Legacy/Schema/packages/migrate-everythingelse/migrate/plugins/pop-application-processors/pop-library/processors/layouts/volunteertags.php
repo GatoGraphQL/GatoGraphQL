@@ -11,7 +11,7 @@ class PoP_Module_Processor_VolunteerTagLayouts extends PoP_Module_Processor_Volu
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_POSTADDITIONAL_VOLUNTEER:

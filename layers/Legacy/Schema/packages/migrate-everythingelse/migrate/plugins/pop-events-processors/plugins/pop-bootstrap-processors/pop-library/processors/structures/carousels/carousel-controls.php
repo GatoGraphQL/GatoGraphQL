@@ -21,7 +21,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
         );
     }
 
-    public function getControlClass(array $component)
+    public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
         return parent::getControlClass($component);
     }
 
-    public function getTitleClass(array $component)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
@@ -44,7 +44,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
 
         return parent::getTitleClass($component);
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
@@ -59,7 +59,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
 
         return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();

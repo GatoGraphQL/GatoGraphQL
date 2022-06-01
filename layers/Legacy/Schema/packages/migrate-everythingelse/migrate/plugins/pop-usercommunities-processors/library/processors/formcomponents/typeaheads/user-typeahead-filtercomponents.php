@@ -39,7 +39,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match($component[1]) {
             self::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST => [GD_URE_Module_Processor_FilterInput::class, GD_URE_Module_Processor_FilterInput::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST],
@@ -49,7 +49,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         };
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER:
@@ -59,7 +59,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         return parent::getLabel($component, $props);
     }
 
-    public function getInputSubcomponent(array $component)
+    public function getInputSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST:
@@ -73,7 +73,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         return parent::getInputSubcomponent($component);
     }
 
-    public function getComponentSubcomponents(array $component)
+    public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST:
@@ -91,7 +91,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         return parent::getComponentSubcomponents($component);
     }
 
-    public function getTriggerLayoutSubcomponent(array $component)
+    public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS:
@@ -105,7 +105,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         return parent::getTriggerLayoutSubcomponent($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         return match($component[1]) {
             self::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST => $this->idScalarTypeResolver,
@@ -115,7 +115,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         return match($component[1]) {
             self::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST,
@@ -127,7 +127,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Mo
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {

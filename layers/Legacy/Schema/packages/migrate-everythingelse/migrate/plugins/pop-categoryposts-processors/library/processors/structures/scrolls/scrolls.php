@@ -50,7 +50,7 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_ScrollInners::class, PoP_CategoryPosts_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW],
@@ -82,7 +82,7 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

@@ -12,7 +12,7 @@ class PoP_Module_Processor_EmbedPreviewLayouts extends PoP_Module_Processor_Embe
             [self::class, self::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW],
         );
     }
-    public function getFrameSrc(array $component, array &$props)
+    public function getFrameSrc(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW:

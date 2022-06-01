@@ -3,25 +3,25 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_AddLocations_TemplateResourceLoaderProcessor::class, PoP_AddLocations_TemplateResourceLoaderProcessor::RESOURCE_FRAME_CREATELOCATIONMAP];
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'formMapLocationGeocode');
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-map-locationgeocode');
         parent::initModelProps($component, $props);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component[1]) {
             case self::COMPONENT_FRAME_CREATELOCATIONMAP:
@@ -34,17 +34,17 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
         return parent::getSubcomponents($component);
     }
 
-    public function getFormSubcomponent(array $component)
+    public function getFormSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [GD_EM_Module_Processor_CreateLocationForms::class, GD_EM_Module_Processor_CreateLocationForms::COMPONENT_FORM_CREATELOCATION];
     }
 
-    public function getMapdivSubcomponent(array $component)
+    public function getMapdivSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::COMPONENT_MAP_DIV];
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

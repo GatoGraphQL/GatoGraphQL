@@ -13,7 +13,7 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
         );
     }
     
-    public function getUserAvatarComponent(array $component)
+    public function getUserAvatarComponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {

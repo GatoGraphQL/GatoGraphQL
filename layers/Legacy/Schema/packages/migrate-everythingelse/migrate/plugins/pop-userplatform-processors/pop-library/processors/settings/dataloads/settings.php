@@ -14,7 +14,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_SETTINGS => POP_USERPLATFORM_ROUTE_SETTINGS,
@@ -22,7 +22,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SETTINGS:
@@ -32,7 +32,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SETTINGS:
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SETTINGS:
@@ -52,7 +52,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return parent::getQueryInputOutputHandler($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -65,7 +65,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return $ret;
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_SETTINGS:

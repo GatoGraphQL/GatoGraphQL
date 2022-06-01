@@ -56,7 +56,7 @@ class ComponentPaths extends AbstractComponentFilter
         return 'componentPaths';
     }
 
-    public function excludeSubcomponent(array $component, array &$props): bool
+    public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -83,7 +83,7 @@ class ComponentPaths extends AbstractComponentFilter
         return true;
     }
 
-    public function removeExcludedSubcomponents(array $component, array $subComponents): array
+    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subComponents): array
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -122,7 +122,7 @@ class ComponentPaths extends AbstractComponentFilter
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subComponents, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $component, array &$props): void
+    public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -145,7 +145,7 @@ class ComponentPaths extends AbstractComponentFilter
             $this->propagation_unsettled_paths = $matching_unsettled_paths;
         }
     }
-    public function restoreFromPropagation(array $component, array &$props): void
+    public function restoreFromPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();

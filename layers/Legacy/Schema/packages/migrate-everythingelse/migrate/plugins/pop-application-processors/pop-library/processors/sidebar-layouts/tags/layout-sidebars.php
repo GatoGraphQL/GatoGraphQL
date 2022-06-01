@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL => [PoP_Module_Processor_CustomTagLayoutSidebarInners::class, PoP_Module_Processor_CustomTagLayoutSidebarInners::COMPONENT_LAYOUT_TAGSIDEBARINNER_VERTICAL],
@@ -30,7 +30,7 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL:

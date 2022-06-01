@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_Processor_FormInnersBase
 {
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $components =  array_merge(
             parent::getLayoutSubcomponents($component),
@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         return $components;
     }
 
-    protected function getMandatoryLayouts(array $component, array &$props)
+    protected function getMandatoryLayouts(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Make all formComponentGroups be collapsed if they are non-mandatory
@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Make all formComponentGroups be collapsed if they are non-mandatory

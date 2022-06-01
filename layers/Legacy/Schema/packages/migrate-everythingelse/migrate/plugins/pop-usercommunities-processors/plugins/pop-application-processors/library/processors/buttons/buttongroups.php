@@ -11,7 +11,7 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONGROUP_MYUSERS:
@@ -21,7 +21,7 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
         return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataFormats(array $component, array &$props)
+    protected function getHeadersdataFormats(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen

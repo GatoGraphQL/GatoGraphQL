@@ -13,7 +13,7 @@ class UserStance_Module_Processor_FormMultipleComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

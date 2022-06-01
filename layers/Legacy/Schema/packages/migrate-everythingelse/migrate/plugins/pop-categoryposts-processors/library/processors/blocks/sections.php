@@ -1074,7 +1074,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_CAROUSEL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -1561,7 +1561,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -2115,7 +2115,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
@@ -2448,7 +2448,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_DETAILS:
@@ -2935,7 +2935,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         return parent::getLatestcountSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_CATEGORYPOSTS00_CAROUSEL:

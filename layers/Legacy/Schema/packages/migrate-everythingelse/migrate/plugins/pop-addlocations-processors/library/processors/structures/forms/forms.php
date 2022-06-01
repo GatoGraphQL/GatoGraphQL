@@ -11,7 +11,7 @@ class GD_EM_Module_Processor_CreateLocationForms extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_CREATELOCATION:

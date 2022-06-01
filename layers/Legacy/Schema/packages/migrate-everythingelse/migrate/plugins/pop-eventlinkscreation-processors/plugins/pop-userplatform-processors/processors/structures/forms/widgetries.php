@@ -12,7 +12,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -42,7 +42,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS => TranslationAPIFacade::getInstance()->__('Event link details', 'poptheme-wassup'),
@@ -51,7 +51,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         return $titles[$component[1]] ?? null;
     }
 
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
@@ -65,7 +65,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         return parent::getWidgetClass($component, $props);
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
@@ -74,7 +74,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:
@@ -84,7 +84,7 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Mod
         return parent::getItemWrapper($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS:

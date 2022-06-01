@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Process
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES => [GD_URE_Module_Processor_ProfileFeedbackMessageInners::class, GD_URE_Module_Processor_ProfileFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_UPDATEMYCOMMUNITIES],

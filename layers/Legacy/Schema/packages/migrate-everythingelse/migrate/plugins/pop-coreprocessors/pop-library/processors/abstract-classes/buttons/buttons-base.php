@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_BUTTON];
     }
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
         if ($url = $this->getUrlField($component)) {
@@ -35,44 +35,44 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         return 'url';
     }
-    public function getLinktargetField(array $component)
+    public function getLinktargetField(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getLinkClass(array $component)
+    public function getLinkClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
-    public function showTitle(array $component, array &$props)
+    public function showTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
-    public function showTooltip(array $component, array &$props)
+    public function showTooltip(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -83,7 +83,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -111,7 +111,7 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($btn_class = $this->getBtnClass($component, $props)) {
             $this->appendProp($component, $props, 'btn-class', $btn_class);

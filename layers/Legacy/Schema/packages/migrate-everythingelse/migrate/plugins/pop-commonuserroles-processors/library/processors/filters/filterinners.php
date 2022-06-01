@@ -13,7 +13,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -42,7 +42,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_INDIVIDUALS => POP_FILTER_INDIVIDUALS,

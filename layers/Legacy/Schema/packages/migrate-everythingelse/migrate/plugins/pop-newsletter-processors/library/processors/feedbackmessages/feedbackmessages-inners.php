@@ -13,7 +13,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageInners extends PoP_Module_P
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

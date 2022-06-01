@@ -12,7 +12,7 @@ class PoP_Share_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_DESTINATIONEMAIL:
@@ -22,7 +22,7 @@ class PoP_Share_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_DESTINATIONEMAIL:

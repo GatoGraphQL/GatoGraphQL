@@ -13,7 +13,7 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
         );
     }
 
-    public function getPostSubcomponent(array $component)
+    public function getPostSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
@@ -26,7 +26,7 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
         return parent::getPostSubcomponent($component);
     }
 
-    public function getCommentSubcomponent(array $component)
+    public function getCommentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_REPLYCOMMENT:

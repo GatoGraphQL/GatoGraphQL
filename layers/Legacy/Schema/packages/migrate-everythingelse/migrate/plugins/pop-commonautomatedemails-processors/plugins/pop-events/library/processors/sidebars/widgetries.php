@@ -12,7 +12,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -27,7 +27,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO => TranslationAPIFacade::getInstance()->__('Event', 'poptheme-wassup'),
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO => 'fa-calendar',
@@ -43,7 +43,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
 
         return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO:
@@ -52,7 +52,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO:
@@ -61,7 +61,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processo
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO:

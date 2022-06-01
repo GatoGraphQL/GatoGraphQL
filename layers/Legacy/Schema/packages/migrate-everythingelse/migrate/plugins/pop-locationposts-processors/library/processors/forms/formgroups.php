@@ -15,7 +15,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
     }
 
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -27,7 +27,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -40,7 +40,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES:
@@ -53,7 +53,7 @@ class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_Form
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES:

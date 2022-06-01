@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getFooterSubcomponents(array $component)
+    public function getFooterSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFooterSubcomponents($component);
 
@@ -35,7 +35,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FULLVIEW_EVENT:

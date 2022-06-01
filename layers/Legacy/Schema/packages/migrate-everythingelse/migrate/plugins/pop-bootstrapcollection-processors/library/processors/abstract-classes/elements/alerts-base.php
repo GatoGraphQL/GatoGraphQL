@@ -3,37 +3,37 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_ALERT];
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function useCookie(array $component, array &$props)
+    public function useCookie(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function showCloseButton(array $component, array &$props)
+    public function showCloseButton(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function getClosebuttonTitle(array $component, array &$props)
+    public function getClosebuttonTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return TranslationAPIFacade::getInstance()->__('Dismiss', 'pop-coreprocessors');
     }
 
-    public function getClosebuttonText(array $component, array &$props)
+    public function getClosebuttonText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'x';
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -47,7 +47,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -58,27 +58,27 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
         return $ret;
     }
 
-    public function getAlertClass(array $component, array &$props)
+    public function getAlertClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'alert-info alert-sm';
     }
 
-    public function getAlertBaseClass(array $component, array &$props)
+    public function getAlertBaseClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'alert fade in';
     }
 
-    public function getClosebuttonClass(array $component, array &$props)
+    public function getClosebuttonClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'close';
     }
 
-    public function addFeedbackobjectClass(array $component, array &$props)
+    public function addFeedbackobjectClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -115,7 +115,7 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($class = $this->getAlertBaseClass($component, $props)) {
             $this->appendProp($component, $props, 'class', $class);

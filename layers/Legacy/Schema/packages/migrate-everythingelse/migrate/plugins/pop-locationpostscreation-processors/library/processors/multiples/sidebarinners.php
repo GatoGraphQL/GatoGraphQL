@@ -11,7 +11,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners exte
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CustomDelegatorFiltersBase extends PoP_Module_Processor_DelegatorFiltersBase
 {
-    public function getBlockTarget(array $component, array &$props)
+    public function getBlockTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // The proxied block is in the Main PageSection
@@ -12,12 +12,12 @@ abstract class PoP_Module_Processor_CustomDelegatorFiltersBase extends PoP_Modul
         return '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .pop-block.withfilter';
     }
 
-    public function getClasses(array $component, array &$props)
+    public function getClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'alert alert-info';
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', $this->getClasses($component, $props));
         parent::initModelProps($component, $props);

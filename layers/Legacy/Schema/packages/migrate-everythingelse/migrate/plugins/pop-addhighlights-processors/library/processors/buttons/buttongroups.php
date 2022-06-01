@@ -13,7 +13,7 @@ class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Process
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $screens = array(
             self::COMPONENT_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,

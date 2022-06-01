@@ -13,7 +13,7 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -30,7 +30,7 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:

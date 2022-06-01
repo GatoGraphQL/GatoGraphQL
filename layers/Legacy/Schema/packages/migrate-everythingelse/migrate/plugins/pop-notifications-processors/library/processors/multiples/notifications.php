@@ -13,7 +13,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -27,7 +27,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -48,7 +48,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
 
 
 
-    public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
+    public function getDataFeedbackInterreferencedComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
@@ -62,7 +62,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         return parent::getDataFeedbackInterreferencedComponentPath($component, $props);
     }
 
-    public function getJsdataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
@@ -80,7 +80,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -93,7 +93,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:

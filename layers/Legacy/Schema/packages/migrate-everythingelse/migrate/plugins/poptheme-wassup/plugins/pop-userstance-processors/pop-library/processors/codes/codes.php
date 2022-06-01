@@ -11,7 +11,7 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
         );
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:
@@ -21,7 +21,7 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
         return parent::getHtmlTag($component, $props);
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:

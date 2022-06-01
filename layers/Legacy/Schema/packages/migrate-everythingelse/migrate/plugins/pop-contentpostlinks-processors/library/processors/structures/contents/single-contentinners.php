@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_SingleContentInners extends PoP_Modu
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

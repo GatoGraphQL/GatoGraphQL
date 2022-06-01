@@ -13,7 +13,7 @@ trait FilterDataComponentProcessorTrait
      */
     protected array $activeDataloadQueryArgsFilteringModules = [];
 
-    public function filterHeadcomponentDataloadQueryArgs(array $component, array &$query, array $source = null): void
+    public function filterHeadcomponentDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$query, array $source = null): void
     {
         if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
             foreach ($activeDataloadQueryArgsFilteringModules as $subComponent) {
@@ -27,7 +27,7 @@ trait FilterDataComponentProcessorTrait
         }
     }
 
-    public function getActiveDataloadQueryArgsFilteringComponents(array $component, array $source = null): array
+    public function getActiveDataloadQueryArgsFilteringComponents(\PoP\ComponentModel\Component\Component $component, array $source = null): array
     {
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
@@ -42,7 +42,7 @@ trait FilterDataComponentProcessorTrait
             // Check if if we're currently filtering by any filtercomponent
             $components = array_filter(
                 $dataloadQueryArgsFilteringModules,
-                function (array $component) use ($source) {
+                function (\PoP\ComponentModel\Component\Component $component) use ($source) {
                     /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
                     $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);
                     return $dataloadQueryArgsFilterInputComponentProcessor->isInputSetInSource($component, $source);
@@ -54,7 +54,7 @@ trait FilterDataComponentProcessorTrait
         return $components;
     }
 
-    public function getDataloadQueryArgsFilteringComponents(array $component): array
+    public function getDataloadQueryArgsFilteringComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_values(array_filter(
             $this->getDatasetcomponentTreeSectionFlattenedComponents($component),

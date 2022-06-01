@@ -4,12 +4,12 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_STATICIMAGE];
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -20,12 +20,12 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
         return $ret;
     }
 
-    public function getUrlparamSubcomponent(array $component)
+    public function getUrlparamSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -40,13 +40,13 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'staticmap-size', $this->getStaticmapSize($component, $props));
         parent::initModelProps($component, $props);
     }
 
-    protected function getStaticmapSize(array $component, array &$props)
+    protected function getStaticmapSize(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '640x400';
     }
@@ -66,7 +66,7 @@ abstract class PoP_Module_Processor_MapStaticImagesBase extends PoPEngine_QueryD
         return null;
     }
 
-    protected function getStaticmapUrl(array $component, array &$props)
+    protected function getStaticmapUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = 'https://maps.googleapis.com/maps/api/staticmap';
         if (POP_COREPROCESSORS_APIKEY_GOOGLEMAPS) {

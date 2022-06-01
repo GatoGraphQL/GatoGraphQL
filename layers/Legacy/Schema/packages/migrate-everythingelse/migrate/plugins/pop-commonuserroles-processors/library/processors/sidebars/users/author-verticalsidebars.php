@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Pr
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION => [GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::class, GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION],
@@ -27,7 +27,7 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebars extends PoP_Module_Pr
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_VERTICALSIDEBAR_AUTHOR_ORGANIZATION:

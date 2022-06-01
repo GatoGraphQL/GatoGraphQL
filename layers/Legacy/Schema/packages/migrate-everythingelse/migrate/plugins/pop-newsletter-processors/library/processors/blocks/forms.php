@@ -16,7 +16,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
@@ -26,7 +26,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
         };
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_NEWSLETTER:
@@ -36,7 +36,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
         return parent::getTitle($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -58,7 +58,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $newsletter_description = \PoP\Root\App::applyFilters(

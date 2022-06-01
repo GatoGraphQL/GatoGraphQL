@@ -10,16 +10,16 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
 {
     use ObjectIDFromURLParamComponentProcessorTrait;
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         if ($this->isUpdate($component)) {
             return $this->getObjectIDFromURLParam($component, $props, $data_properties);
@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return $ids;
     }
 
-    protected function getObjectIDParamName(array $component, array &$props, array &$data_properties): ?string
+    protected function getObjectIDParamName(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): ?string
     {
         if ($this->isUpdate($component)) {
             return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
@@ -40,12 +40,12 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return null;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         if ($this->isUpdate($component)) {
             return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_EditPost::class);
@@ -56,7 +56,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         }
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         if ($this->isCreate($component)) {
             return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return parent::getCheckpointMessageComponent($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         if ($this->isCreate($component)) {
             return [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT];
@@ -91,7 +91,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return parent::getFeedbackMessageComponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -105,7 +105,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::COMPONENT_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Submitting...', 'pop-application-processors'));
 

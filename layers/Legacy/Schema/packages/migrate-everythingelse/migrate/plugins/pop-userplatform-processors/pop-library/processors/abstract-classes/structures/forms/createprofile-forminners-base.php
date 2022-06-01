@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Module_Processor_CreateUserFormInnersBase
 {
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $components = parent::getLayoutSubcomponents($component);
 
@@ -15,14 +15,14 @@ abstract class PoP_Module_Processor_CreateProfileFormInnersBase extends PoP_Modu
         return $components;
     }
 
-    protected function getMandatoryLayouts(array $component, array &$props)
+    protected function getMandatoryLayouts(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMandatoryLayouts($component, $props);
         $ret[] = [PoP_Module_Processor_NoLabelProfileFormGroups::class, PoP_Module_Processor_NoLabelProfileFormGroups::COMPONENT_FORMINPUTGROUP_CUP_DISPLAYEMAIL];
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // For the Creation, set the Display Email by default on Yes

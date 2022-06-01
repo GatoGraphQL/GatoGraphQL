@@ -18,7 +18,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
@@ -36,7 +36,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
 
         return parent::getButtoninnerSubcomponent($component);
     }
-    public function getLinktargetField(array $component)
+    public function getLinktargetField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
@@ -46,7 +46,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return parent::getLinktargetField($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK:
@@ -65,7 +65,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return parent::getUrlField($component);
     }
 
-    public function showTooltip(array $component, array &$props)
+    public function showTooltip(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:
@@ -76,7 +76,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return parent::showTooltip($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTON_USERVIEW:
@@ -92,7 +92,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -124,7 +124,7 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD:

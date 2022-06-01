@@ -49,7 +49,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -82,7 +82,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00:
@@ -111,7 +111,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00:

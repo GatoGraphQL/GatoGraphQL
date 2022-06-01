@@ -31,7 +31,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABPANEL_STANCES:
@@ -53,7 +53,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
@@ -182,7 +182,7 @@ class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_P
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_TABPANEL_STANCES:

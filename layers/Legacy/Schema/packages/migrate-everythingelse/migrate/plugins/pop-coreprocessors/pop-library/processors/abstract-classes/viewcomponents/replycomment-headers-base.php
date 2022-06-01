@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_REPLYCOMMENT];
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -22,17 +22,17 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
         return $ret;
     }
 
-    public function getPostSubcomponent(array $component)
+    public function getPostSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getCommentSubcomponent(array $component)
+    public function getCommentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getInresponsetoTitle(array $component, array &$props)
+    public function getInresponsetoTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return sprintf(
             '<p><em>%s</em></p>',
@@ -40,7 +40,7 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
         );
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

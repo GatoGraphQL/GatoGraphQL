@@ -6,17 +6,17 @@ use PoP\Engine\Route\RouteUtils;
 
 abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BASICBLOCK];
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
             return RouteUtils::getRouteTitle($route);
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return null;
     }
 
-    protected function getBlockTitle(array $component, array &$props)
+    protected function getBlockTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If the title has been set in the $props by a parent, use it
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $this->getProp($component, $props, 'title') ?? $this->getTitle($component, $props);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -77,7 +77,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -94,7 +94,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $ret;
     }
 
-    public function getRequestPropsForDescendantComponents(array $component, array &$props): array
+    public function getRequestPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getRequestPropsForDescendantComponents($component, $props);
 
@@ -105,7 +105,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $ret;
     }
 
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
             return RouteUtils::getRouteURL($route);
@@ -114,7 +114,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -131,17 +131,17 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         parent::initModelProps($component, $props);
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    protected function getTitleHtmltag(array $component, array &$props)
+    protected function getTitleHtmltag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'h1';
     }
 
-    protected function getBlocksectionsClasses(array $component)
+    protected function getBlocksectionsClasses(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
@@ -150,7 +150,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 

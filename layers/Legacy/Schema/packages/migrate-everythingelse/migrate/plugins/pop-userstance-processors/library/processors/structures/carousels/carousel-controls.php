@@ -21,7 +21,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
         );
     }
 
-    public function getControlClass(array $component)
+    public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
@@ -33,7 +33,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
         return parent::getControlClass($component);
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
@@ -44,7 +44,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
         return parent::getTarget($component, $props);
     }
-    public function getTitleClass(array $component)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
@@ -55,7 +55,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
         return parent::getTitleClass($component);
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
@@ -88,7 +88,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
         return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();

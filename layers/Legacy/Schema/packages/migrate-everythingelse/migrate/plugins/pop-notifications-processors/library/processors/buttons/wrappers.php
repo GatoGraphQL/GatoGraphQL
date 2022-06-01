@@ -11,7 +11,7 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         );
     }
 
-    // function getFailedLayouts(array $component) {
+    // function getFailedLayouts(\PoP\ComponentModel\Component\Component $component) {
 
     //     $ret = parent::getFailedLayouts($component);
 
@@ -26,7 +26,7 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     //     return $ret;
     // }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -40,7 +40,7 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:

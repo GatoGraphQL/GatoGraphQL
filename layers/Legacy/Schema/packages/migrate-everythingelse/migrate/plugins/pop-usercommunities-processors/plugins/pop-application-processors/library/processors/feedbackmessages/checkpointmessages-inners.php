@@ -13,7 +13,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageInners extends Po
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

@@ -12,7 +12,7 @@ class PoP_CommonPagesProcessors_Application_Hooks
         );
     }
 
-    public function getSubcomponents($subComponents, array $component)
+    public function getSubcomponents($subComponents, \PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEPOST:

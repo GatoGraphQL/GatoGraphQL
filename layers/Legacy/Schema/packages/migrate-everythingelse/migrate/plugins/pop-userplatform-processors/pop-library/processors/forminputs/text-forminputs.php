@@ -22,7 +22,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
@@ -47,7 +47,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
         return parent::getLabelText($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
@@ -73,7 +73,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     }
 
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Remove the html code from the placeholder
         $placeholders = array(

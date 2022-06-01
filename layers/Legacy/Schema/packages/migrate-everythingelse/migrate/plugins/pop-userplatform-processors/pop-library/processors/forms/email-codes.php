@@ -16,7 +16,7 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
         );
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL:

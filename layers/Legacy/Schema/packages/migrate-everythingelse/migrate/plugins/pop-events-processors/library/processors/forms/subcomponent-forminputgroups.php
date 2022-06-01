@@ -11,7 +11,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -23,7 +23,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -36,7 +36,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         return $ret;
     }
 
-    public function getComponentSubname(array $component)
+    public function getComponentSubname(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE:
@@ -46,7 +46,7 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         return parent::getComponentSubname($component);
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE => [PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_EVENTSCOPE],

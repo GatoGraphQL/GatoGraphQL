@@ -13,7 +13,7 @@ class PoP_Module_Processor_Dividers extends PoP_Module_Processor_DividersBase
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_COLLAPSIBLEDIVIDER:

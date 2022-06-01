@@ -12,7 +12,7 @@ class GD_URE_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP:
@@ -22,7 +22,7 @@ class GD_URE_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP:

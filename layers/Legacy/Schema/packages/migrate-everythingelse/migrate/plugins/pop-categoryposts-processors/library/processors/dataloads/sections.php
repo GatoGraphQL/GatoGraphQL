@@ -1118,7 +1118,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_AUTHORCATEGORYPOSTS00_CAROUSEL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -1625,7 +1625,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -2223,7 +2223,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CATEGORYPOSTS00_TYPEAHEAD:
@@ -2616,7 +2616,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
@@ -3171,7 +3171,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
@@ -3503,7 +3503,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
     // }
 
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -4112,7 +4112,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
@@ -4448,12 +4448,12 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_NAVIGATOR:

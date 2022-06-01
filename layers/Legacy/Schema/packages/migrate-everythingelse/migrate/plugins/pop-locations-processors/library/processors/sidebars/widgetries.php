@@ -14,7 +14,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -31,7 +31,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_EM_WIDGET_POSTLOCATIONSMAP => TranslationAPIFacade::getInstance()->__('Location(s)', 'poptheme-wassup'),
@@ -40,7 +40,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_EM_WIDGET_POSTLOCATIONSMAP => 'fa-map-marker',
@@ -49,7 +49,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
 
         return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_WIDGET_POSTLOCATIONSMAP:
@@ -59,7 +59,7 @@ class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Proces
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_WIDGET_POSTLOCATIONSMAP:

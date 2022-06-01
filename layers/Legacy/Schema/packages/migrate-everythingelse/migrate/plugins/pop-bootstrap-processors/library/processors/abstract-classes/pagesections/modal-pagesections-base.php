@@ -2,20 +2,20 @@
 
 abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_PAGESECTION_MODAL];
     }
 
-    public function getHeaderClass(array $component)
+    public function getHeaderClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getDialogClasses(array $component)
+    public function getDialogClasses(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getBodyClasses(array $component)
+    public function getBodyClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = array();
 
@@ -26,12 +26,12 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
 
         return $ret;
     }
-    public function getHeaderTitles(array $component)
+    public function getHeaderTitles(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -53,7 +53,7 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         $this->mergeProp(
@@ -67,7 +67,7 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
         parent::initModelProps($component, $props);
     }
 
-    protected function getInitjsBlockbranches(array $component, array &$props)
+    protected function getInitjsBlockbranches(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getInitjsBlockbranches($component, $props);
 

@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     // PUBLIC Overriding Functions
     //-------------------------------------------------
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -31,7 +31,7 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
         return $ret;
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

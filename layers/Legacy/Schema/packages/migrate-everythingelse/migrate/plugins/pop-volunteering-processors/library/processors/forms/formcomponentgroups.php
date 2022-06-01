@@ -13,7 +13,7 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:
@@ -23,7 +23,7 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -43,7 +43,7 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
         parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:

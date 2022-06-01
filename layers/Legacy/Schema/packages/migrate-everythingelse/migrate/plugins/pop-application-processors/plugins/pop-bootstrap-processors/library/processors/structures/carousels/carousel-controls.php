@@ -14,7 +14,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
         );
     }
 
-    public function getControlClass(array $component)
+    public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_USERS:
@@ -24,7 +24,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
         return parent::getControlClass($component);
     }
 
-    public function getTitleClass(array $component)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_USERS:
@@ -33,7 +33,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
 
         return parent::getTitleClass($component);
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CAROUSELCONTROLS_USERS:
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
 
         return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {

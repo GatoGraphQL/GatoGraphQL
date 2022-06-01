@@ -15,7 +15,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_CONTENT:
@@ -25,7 +25,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
         return parent::getLabelText($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $component, array &$props)
+    protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -37,11 +37,11 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
     }
 
 
-    // protected function getSourceFilter(array $component, array &$props)
+    // protected function getSourceFilter(\PoP\ComponentModel\Component\Component $component, array &$props)
     // {
     //     return POP_FILTER_CONTENT;
     // }
-    protected function getSourceFilterParams(array $component, array &$props)
+    protected function getSourceFilterParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSourceFilterParams($component, $props);
 
@@ -55,7 +55,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
 
         return $ret;
     }
-    protected function getRemoteUrl(array $component, array &$props)
+    protected function getRemoteUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = parent::getRemoteUrl($component, $props);
 

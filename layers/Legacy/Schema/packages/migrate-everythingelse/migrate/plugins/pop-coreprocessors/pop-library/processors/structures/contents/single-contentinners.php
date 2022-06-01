@@ -13,7 +13,7 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
         );
     }
 
-    protected function getLayoutSubcomponent(array $component)
+    protected function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
@@ -26,7 +26,7 @@ class PoPCore_Module_Processor_SingleContentInners extends PoP_Module_Processor_
         return null;
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

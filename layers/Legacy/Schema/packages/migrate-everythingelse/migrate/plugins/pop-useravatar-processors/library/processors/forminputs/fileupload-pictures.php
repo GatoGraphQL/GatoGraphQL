@@ -12,7 +12,7 @@ class PoP_Module_Processor_FileUploadPictures extends PoP_Module_Processor_FileU
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILEUPLOAD_PICTURE:

@@ -151,7 +151,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
@@ -228,7 +228,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_STANCES_SCROLL_NAVIGATOR => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_SCROLL_NAVIGATOR],
@@ -306,7 +306,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
@@ -390,7 +390,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
@@ -461,7 +461,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getLatestcountSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL:

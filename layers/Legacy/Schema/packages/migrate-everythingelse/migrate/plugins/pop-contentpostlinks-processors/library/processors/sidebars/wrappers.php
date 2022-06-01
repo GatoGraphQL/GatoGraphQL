@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_WidgetWrappers extends PoP_Module_Pr
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -24,7 +24,7 @@ class PoP_ContentPostLinks_Module_Processor_WidgetWrappers extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES:

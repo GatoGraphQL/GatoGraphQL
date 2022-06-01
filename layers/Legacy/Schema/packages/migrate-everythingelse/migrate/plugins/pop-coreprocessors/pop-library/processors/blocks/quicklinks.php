@@ -11,7 +11,7 @@ class PoP_Module_Processor_QuicklinksBlocks extends PoP_Module_Processor_BlocksB
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
         

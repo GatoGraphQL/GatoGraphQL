@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Pr
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

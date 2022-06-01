@@ -13,7 +13,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
@@ -29,7 +29,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return $ret;
     }
 
-    protected function lazyLoadInactivePanels(array $component, array &$props)
+    protected function lazyLoadInactivePanels(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
@@ -39,7 +39,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::lazyLoadInactivePanels($component, $props);
     }
 
-    public function getPanelHeaderType(array $component)
+    public function getPanelHeaderType(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
@@ -49,7 +49,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::getPanelHeaderType($component);
     }
 
-    public function closeParent(array $component)
+    public function closeParent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
@@ -59,7 +59,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::closeParent($component);
     }
 
-    public function getPanelTitle(array $component)
+    public function getPanelTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $placeholder =
@@ -102,7 +102,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::getPanelTitle($component);
     }
 
-    public function getPaneltitleHtmltag(array $component)
+    public function getPaneltitleHtmltag(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
@@ -112,7 +112,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::getPaneltitleHtmltag($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:

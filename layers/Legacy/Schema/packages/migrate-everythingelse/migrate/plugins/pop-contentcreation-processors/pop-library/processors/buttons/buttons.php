@@ -16,7 +16,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_POSTEDIT:
@@ -32,7 +32,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_POSTEDIT:
@@ -45,7 +45,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         return parent::getUrlField($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_POSTEDIT:
@@ -61,7 +61,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_POSTPREVIEW:
@@ -71,7 +71,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -86,7 +86,7 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_POSTPREVIEW:

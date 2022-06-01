@@ -15,7 +15,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW => POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS,
@@ -24,7 +24,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYHIGHLIGHTS],
@@ -34,7 +34,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT:
@@ -45,7 +45,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
@@ -64,7 +64,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $format ?? parent::getFormat($component);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT:
@@ -75,7 +75,7 @@ class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_P
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT:

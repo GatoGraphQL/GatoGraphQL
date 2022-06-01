@@ -11,7 +11,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
         );
     }
 
-    public function getClass(array $component)
+    public function getClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
@@ -21,7 +21,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 
         return parent::getClass($component);
     }
-    public function getXsClass(array $component)
+    public function getXsClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
@@ -31,7 +31,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 
         return parent::getClass($component);
     }
-    public function getDropdownClass(array $component)
+    public function getDropdownClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
@@ -41,7 +41,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
         return parent::getDropdownClass($component);
     }
 
-    public function getRoutes(array $component, array &$props)
+    public function getRoutes(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_ACCOUNT:
@@ -56,7 +56,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
         return parent::getRoutes($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -68,7 +68,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -82,7 +82,7 @@ class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_ACCOUNT:

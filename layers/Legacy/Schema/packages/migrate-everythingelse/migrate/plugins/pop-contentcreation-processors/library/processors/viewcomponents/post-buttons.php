@@ -14,7 +14,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         );
     }
 
-    // function headerShowUrl(array $component) {
+    // function headerShowUrl(\PoP\ComponentModel\Component\Component $component) {
 
     //     switch ($component[1]) {
 
@@ -27,7 +27,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
     //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA],
@@ -40,7 +40,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -53,7 +53,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
@@ -64,7 +64,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
@@ -75,7 +75,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
 
         parent::initModelProps($component, $props);
     }
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
@@ -86,7 +86,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:

@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Module_Processor_UpdateProfileOrganizationFormInnersBase extends PoP_Module_Processor_UpdateProfileFormInnersBase
 {
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -29,7 +29,7 @@ abstract class GD_URE_Module_Processor_UpdateProfileOrganizationFormInnersBase e
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Change the label

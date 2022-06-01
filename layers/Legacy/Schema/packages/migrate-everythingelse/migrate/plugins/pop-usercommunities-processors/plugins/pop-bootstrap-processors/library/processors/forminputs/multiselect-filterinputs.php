@@ -58,7 +58,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match($component[1]) {
             self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES => [GD_URE_Module_Processor_FilterInput::class, GD_URE_Module_Processor_FilterInput::URE_FILTERINPUT_MEMBERPRIVILEGES],
@@ -68,7 +68,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
@@ -80,7 +80,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
@@ -96,7 +96,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
@@ -112,7 +112,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES:
@@ -128,7 +128,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): \PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface
     {
         return match($component[1]) {
             self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES => $this->memberPrivilegeEnumTypeResolver,
@@ -138,7 +138,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         return match($component[1]) {
             self::COMPONENT_URE_FILTERINPUT_MEMBERPRIVILEGES,
@@ -150,7 +150,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         return match ($component[1]) {

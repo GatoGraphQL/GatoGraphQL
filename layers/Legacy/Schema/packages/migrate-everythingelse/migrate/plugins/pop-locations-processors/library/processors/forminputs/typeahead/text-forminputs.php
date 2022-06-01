@@ -12,7 +12,7 @@ class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
@@ -22,7 +22,7 @@ class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
         return parent::getLabelText($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:

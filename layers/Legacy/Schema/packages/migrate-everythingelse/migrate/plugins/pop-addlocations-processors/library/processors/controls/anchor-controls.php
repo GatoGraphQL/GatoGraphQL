@@ -12,7 +12,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
             [self::class, self::COMPONENT_ANCHORCONTROL_CREATELOCATION],
         );
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ANCHORCONTROL_CREATELOCATION:
@@ -21,7 +21,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
 
         return parent::getFontawesome($component, $props);
     }
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
 
         return parent::getTarget($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -44,7 +44,7 @@ class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_
 
         return parent::getHref($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

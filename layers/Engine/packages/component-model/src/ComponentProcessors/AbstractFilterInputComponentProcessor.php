@@ -21,12 +21,12 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
-    protected function getFilterInputSchemaDefinitionResolver(array $component): FilterInputComponentProcessorInterface
+    protected function getFilterInputSchemaDefinitionResolver(\PoP\ComponentModel\Component\Component $component): FilterInputComponentProcessorInterface
     {
         return $this;
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {
@@ -40,7 +40,7 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return $this->getSchemaDefinitionService()->getDefaultInputTypeResolver();
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {
@@ -49,7 +49,7 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return null;
     }
 
-    public function getFilterInputDefaultValue(array $component): mixed
+    public function getFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component): mixed
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {
@@ -58,7 +58,7 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return null;
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {

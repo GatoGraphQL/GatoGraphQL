@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CalendarInners extends PoP_Module_Processor_Calenda
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

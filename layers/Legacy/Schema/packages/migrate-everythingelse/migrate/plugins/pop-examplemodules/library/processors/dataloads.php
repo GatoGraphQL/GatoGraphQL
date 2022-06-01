@@ -38,7 +38,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -55,7 +55,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_EXAMPLE_SINGLE:
@@ -71,7 +71,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_EXAMPLE_LATESTPOSTS:
@@ -94,7 +94,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
@@ -114,7 +114,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getRelationalComponentFields($component);
 
@@ -146,7 +146,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $data_fields = array(
             self::COMPONENT_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),

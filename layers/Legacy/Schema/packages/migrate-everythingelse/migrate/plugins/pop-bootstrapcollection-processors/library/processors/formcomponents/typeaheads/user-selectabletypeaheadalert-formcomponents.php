@@ -17,7 +17,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         );
     }
 
-    public function getSelectedComponent(array $component)
+    public function getSelectedComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
@@ -32,7 +32,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         return parent::getSelectedComponent($component);
     }
     
-    public function getHiddenInputComponent(array $component)
+    public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         return parent::getHiddenInputComponent($component);
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:

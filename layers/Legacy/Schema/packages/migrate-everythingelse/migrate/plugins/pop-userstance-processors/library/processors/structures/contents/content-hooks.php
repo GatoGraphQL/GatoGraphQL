@@ -14,7 +14,7 @@ class PoPTheme_UserStance_ContentHooks
         );
     }
 
-    public function contentInner($inner, array $component)
+    public function contentInner($inner, \PoP\ComponentModel\Component\Component $component)
     {
         if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_SINGLE] || $component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::COMPONENT_CONTENT_USERPOSTINTERACTION]) {
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);

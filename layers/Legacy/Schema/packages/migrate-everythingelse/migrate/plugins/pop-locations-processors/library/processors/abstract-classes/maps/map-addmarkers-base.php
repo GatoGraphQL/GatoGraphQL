@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_ADDMARKER];
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array(
             $this->getMarkerscriptSubcomponent($component),
@@ -16,28 +16,28 @@ abstract class PoP_Module_Processor_MapAddMarkersBase extends PoPEngine_QueryDat
         );
     }
 
-    public function getMarkerscriptSubcomponent(array $component)
+    public function getMarkerscriptSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS];
     }
 
-    public function getResetmarkerscriptSubcomponent(array $component)
+    public function getResetmarkerscriptSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
     }
 
-    public function getDatasetcomponentTreeSectionFlattenedDataFields(array $component, array &$props): array
+    public function getDatasetcomponentTreeSectionFlattenedDataFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         // Important: Do not bring the data-fields for Add_Marker since they will apply to "post" and not to "location"
         return array();
     }
 
-    // function getComponentPath(array $component, array &$props) {
+    // function getComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props) {
     
     //     return $component;
     // }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

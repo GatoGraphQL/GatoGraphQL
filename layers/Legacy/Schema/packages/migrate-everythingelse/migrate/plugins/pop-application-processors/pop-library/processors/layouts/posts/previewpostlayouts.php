@@ -49,7 +49,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         );
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
@@ -61,7 +61,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
@@ -76,7 +76,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
@@ -97,7 +97,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function showPosttitle(array $component)
+    public function showPosttitle(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
@@ -108,7 +108,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::showPosttitle($component);
     }
 
-    public function getContentSubcomponent(array $component)
+    public function getContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
@@ -119,7 +119,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getContentSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
@@ -139,7 +139,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBottomSubcomponents(array $component)
+    public function getBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBottomSubcomponents($component);
 
@@ -179,7 +179,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getBelowthumbLayoutSubcomponents(array $component)
+    public function getBelowthumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
@@ -203,7 +203,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
@@ -238,7 +238,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getPostThumbSubcomponent($component);
     }
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
@@ -249,7 +249,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
@@ -263,7 +263,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getAuthorAvatarComponent(array $component)
+    public function getAuthorAvatarComponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             switch ($component[1]) {
@@ -279,7 +279,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getAuthorAvatarComponent($component);
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
@@ -315,7 +315,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
@@ -326,7 +326,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:
@@ -345,7 +345,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -380,7 +380,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getTitleBeforeauthors(array $component, array &$props)
+    public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
@@ -392,7 +392,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getTitleBeforeauthors($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:

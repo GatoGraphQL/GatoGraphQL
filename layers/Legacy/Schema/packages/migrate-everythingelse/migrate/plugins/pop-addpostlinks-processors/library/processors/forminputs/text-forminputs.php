@@ -12,7 +12,7 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK:
@@ -22,7 +22,7 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK:
@@ -32,7 +32,7 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
         return parent::isMandatory($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK:

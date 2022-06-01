@@ -12,7 +12,7 @@ class PoP_TrendingTags_SidebarHooks
         );
     }
 
-    public function getSidebarSubcomponents($components, $screengroup, $screen, array $component)
+    public function getSidebarSubcomponents($components, $screengroup, $screen, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Add the Trending Tags to all Groups in the Sideinfo

@@ -12,7 +12,7 @@ class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Proces
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_NEWSLETTER:
@@ -22,7 +22,7 @@ class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Proces
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputDefaultValue(array $component, array &$props): mixed
+    public function getInputDefaultValue(\PoP\ComponentModel\Component\Component $component, array &$props): mixed
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_CUP_NEWSLETTER:

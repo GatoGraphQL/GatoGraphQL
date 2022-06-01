@@ -11,7 +11,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
         );
     }
 
-    protected function volunteering(array $component)
+    protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_EVENT:
@@ -20,7 +20,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
 
         return parent::volunteering($component);
     }
-    protected function getLocationsInput(array $component)
+    protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_EVENT:
@@ -30,7 +30,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -54,7 +54,7 @@ class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Pr
         return parent::getComponentSubcomponents($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_EVENT:

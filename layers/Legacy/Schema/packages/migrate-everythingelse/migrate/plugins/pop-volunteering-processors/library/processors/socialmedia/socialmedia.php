@@ -13,7 +13,7 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component[1]) {
             case self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
@@ -34,7 +34,7 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
         return parent::getSubcomponents($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:

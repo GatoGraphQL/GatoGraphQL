@@ -11,7 +11,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SidebarInners extends PoP_Mo
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

@@ -13,7 +13,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserBlocks extends PoP_Module_Pr
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_USERAVATAR_UPDATE => POP_USERAVATAR_ROUTE_EDITAVATAR,
@@ -21,7 +21,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserBlocks extends PoP_Module_Pr
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 

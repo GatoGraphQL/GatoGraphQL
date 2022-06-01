@@ -15,7 +15,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -34,7 +34,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -47,7 +47,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    protected function getContentClass(array $component, array &$props)
+    protected function getContentClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getContentClass($component, $props);
 
@@ -60,7 +60,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getID(array $component, array &$props): string
+    public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTION_ADDONS:
@@ -70,7 +70,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return parent::getID($component, $props);
     }
 
-    public function getModelPropsForDescendantComponents(array $component, array &$props): array
+    public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
@@ -101,7 +101,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadComponent` can work
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);

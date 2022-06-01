@@ -11,7 +11,7 @@ class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
     
@@ -28,7 +28,7 @@ class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         return $ret;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

@@ -15,7 +15,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PostMultipleSidebarComponents extends 
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

@@ -14,7 +14,7 @@ class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -27,7 +27,7 @@ class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW:

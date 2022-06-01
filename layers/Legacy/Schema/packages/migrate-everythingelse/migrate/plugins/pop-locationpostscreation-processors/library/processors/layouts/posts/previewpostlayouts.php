@@ -13,7 +13,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
 
 
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
@@ -23,7 +23,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
         return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
@@ -36,7 +36,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
         return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
@@ -46,7 +46,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
@@ -56,7 +56,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
         return parent::getPostThumbSubcomponent($component);
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
@@ -66,7 +66,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
         return parent::authorPositions($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:

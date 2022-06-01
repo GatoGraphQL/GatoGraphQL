@@ -11,7 +11,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -24,7 +24,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGETCOMPACT_STANCEINFO => PoP_UserStance_PostNameUtils::getNameUc(),
@@ -32,7 +32,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGETCOMPACT_STANCEINFO => 'fa-commenting-o',
@@ -41,7 +41,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
         return $fontawesomes[$component[1]] ?? null;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
@@ -50,7 +50,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:
@@ -59,7 +59,7 @@ class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGETCOMPACT_STANCEINFO:

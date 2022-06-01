@@ -14,7 +14,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
@@ -35,7 +35,7 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:

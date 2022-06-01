@@ -19,7 +19,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     // PUBLIC Functions
     //-------------------------------------------------
 
-    function getResourcesMergedComponentTree(array $component, array &$props) {
+    function getResourcesMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         return array_unique(
             $this->executeOnSelfAndMergeWithComponents('getResources', __FUNCTION__, $component, $props, false),
@@ -27,7 +27,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         );
     }
 
-    function getResources(array $component, array &$props) {
+    function getResources(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         $processor = $this->getDecoratedcomponentProcessor($component);
 
@@ -52,8 +52,8 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         );
     }
 
-    // function getDynamicModulesResources(array $component, array &$props) {
-    function getDynamicResourcesMergedComponentTree(array $component, array &$props) {
+    // function getDynamicModulesResources(\PoP\ComponentModel\Component\Component $component, array &$props) {
+    function getDynamicResourcesMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
@@ -98,14 +98,14 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         return $ret;
     }
 
-    function isDynamicModule(array $component, array &$props) {
+    function isDynamicModule(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         // // By default: does it have a path?
         // return $this->getDecoratedcomponentProcessor($component)->getComponentPath($component, $props);
         return $this->getDecoratedcomponentProcessor($component)->getProp($component, $props, 'dynamic-component');
     }
 
-    // function getModulesResources(array $component, array &$props) {
+    // function getModulesResources(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     // Return initialized empty array at the last level
     //     $ret = array();
@@ -127,7 +127,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //     return $ret;
     // }
 
-    function getDynamicTemplateResourcesMergedComponentTree(array $component, array &$props) {
+    function getDynamicTemplateResourcesMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         $processor = $this->getDecoratedcomponentProcessor($component);
         $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);

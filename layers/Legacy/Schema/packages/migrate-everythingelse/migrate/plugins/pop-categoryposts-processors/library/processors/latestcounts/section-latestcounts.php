@@ -129,7 +129,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         );
     }
 
-    public function getObjectName(array $component, array &$props)
+    public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cats = array(
             self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -200,7 +200,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $component, array &$props)
+    public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cats = array(
             self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -271,7 +271,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         return parent::getObjectNames($component, $props);
     }
 
-    public function isAuthor(array $component, array &$props)
+    public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
@@ -300,7 +300,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $component, array &$props)
+    public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS00:
@@ -329,7 +329,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         return parent::isTag($component, $props);
     }
 
-    public function getSectionClasses(array $component, array &$props)
+    public function getSectionClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSectionClasses($component, $props);
 

@@ -11,7 +11,7 @@ class PoP_Module_ProcessorTagMultipleComponents extends PoP_Module_Processor_Mul
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -26,7 +26,7 @@ class PoP_Module_ProcessorTagMultipleComponents extends PoP_Module_Processor_Mul
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_TAG_DETAILS:

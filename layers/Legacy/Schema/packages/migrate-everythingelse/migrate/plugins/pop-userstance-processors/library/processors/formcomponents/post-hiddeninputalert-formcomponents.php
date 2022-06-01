@@ -11,7 +11,7 @@ class PoP_UserStance_Module_Processor_PostHiddenInputAlertFormComponents extends
         );
     }
     
-    public function getHiddenInputComponent(array $component)
+    public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_STANCETARGET:

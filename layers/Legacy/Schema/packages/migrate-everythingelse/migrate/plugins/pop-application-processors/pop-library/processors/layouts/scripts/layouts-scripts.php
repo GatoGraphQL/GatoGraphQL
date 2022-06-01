@@ -13,7 +13,7 @@ class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Append
         );
     }
     
-    public function doAppend(array $component)
+    public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCRIPT_HIGHLIGHTSEMPTY:
@@ -23,7 +23,7 @@ class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Append
         return parent::doAppend($component);
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

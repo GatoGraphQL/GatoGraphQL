@@ -13,7 +13,7 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
         );
     }
 
-    public function getUrlparamSubcomponent(array $component)
+    public function getUrlparamSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_MAP_STATICIMAGE:
@@ -26,7 +26,7 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
         return parent::getUrlparamSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_MAP_STATICIMAGE:

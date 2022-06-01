@@ -11,7 +11,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_CODE_EXTERNAL => POP_MULTIDOMAIN_ROUTE_EXTERNAL,
@@ -19,7 +19,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
         };
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -33,7 +33,7 @@ class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCod
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CODE_EXTERNAL:

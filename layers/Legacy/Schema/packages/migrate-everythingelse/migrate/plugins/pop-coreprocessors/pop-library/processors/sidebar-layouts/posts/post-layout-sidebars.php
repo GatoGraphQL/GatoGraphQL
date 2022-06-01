@@ -13,7 +13,7 @@ class PoP_Module_Processor_PostLayoutSidebars extends PoP_Module_Processor_Sideb
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBAR_HORIZONTAL => [PoP_Module_Processor_PostLayoutSidebarInners::class, PoP_Module_Processor_PostLayoutSidebarInners::COMPONENT_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL],

@@ -226,7 +226,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInput(),
@@ -248,7 +248,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_SORT:
@@ -268,7 +268,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
         return match ((string) $component[1]) {
@@ -291,7 +291,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         return match ((string)$component[1]) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getStringScalarTypeResolver(),
@@ -313,7 +313,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_IDS,
@@ -327,7 +327,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return match ((string)$component[1]) {
             self::COMPONENT_FILTERINPUT_SORT => $this->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),

@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE:
@@ -33,7 +33,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -46,7 +46,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_CreateProfileForms extends PoP_Module_Processor_Fo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORM_PROFILEORGANIZATION_CREATE:

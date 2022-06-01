@@ -13,7 +13,7 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
         );
     }
 
-    public function getLocationlinksTemplate(array $component)
+    public function getLocationlinksTemplate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP:

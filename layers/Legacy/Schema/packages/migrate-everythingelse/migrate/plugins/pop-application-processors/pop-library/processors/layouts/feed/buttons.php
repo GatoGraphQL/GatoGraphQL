@@ -12,7 +12,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY => [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::COMPONENT_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
@@ -24,7 +24,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
@@ -34,7 +34,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -47,7 +47,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         return $ret;
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:
@@ -58,7 +58,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         return parent::getUrlField($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_TOGGLEUSERPOSTACTIVITY:

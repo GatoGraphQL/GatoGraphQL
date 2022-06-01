@@ -12,7 +12,7 @@ class Wassup_URE_AAL_Module_Processor_MemberStatusLayouts extends GD_URE_Module_
         );
     }
 
-    public function getDescription(array $component, array &$props)
+    public function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERSTATUS:

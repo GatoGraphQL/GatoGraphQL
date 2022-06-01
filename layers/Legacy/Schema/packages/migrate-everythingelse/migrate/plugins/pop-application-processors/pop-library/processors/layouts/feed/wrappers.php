@@ -11,7 +11,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -24,7 +24,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
@@ -34,7 +34,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
         return null;
     }
 
-    public function getTextfieldComponent(array $component, array &$props)
+    public function getTextfieldComponent(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
@@ -44,7 +44,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
         return parent::getTextfieldComponent($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:

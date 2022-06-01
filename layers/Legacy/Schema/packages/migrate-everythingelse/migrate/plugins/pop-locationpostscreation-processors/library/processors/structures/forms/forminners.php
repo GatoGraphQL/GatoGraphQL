@@ -10,7 +10,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
             [self::class, self::COMPONENT_FORMINNER_LOCATIONPOST],
         );
     }
-    protected function volunteering(array $component)
+    protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
@@ -19,7 +19,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
 
         return parent::volunteering($component);
     }
-    protected function getLocationsInput(array $component)
+    protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
@@ -29,7 +29,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -53,7 +53,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         return parent::getComponentSubcomponents($component, $props);
     }
 
-    protected function getEditorInitialvalue(array $component)
+    protected function getEditorInitialvalue(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow RIPESS Asia to set an initial value for the Add Project form
@@ -65,7 +65,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         return parent::getEditorInitialvalue($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:

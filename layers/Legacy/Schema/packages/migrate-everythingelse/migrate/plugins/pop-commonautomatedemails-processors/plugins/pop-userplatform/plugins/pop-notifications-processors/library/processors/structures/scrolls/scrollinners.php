@@ -13,7 +13,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrollInners extends PoP_Module_Pro
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS:
@@ -27,7 +27,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrollInners extends PoP_Module_Pro
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

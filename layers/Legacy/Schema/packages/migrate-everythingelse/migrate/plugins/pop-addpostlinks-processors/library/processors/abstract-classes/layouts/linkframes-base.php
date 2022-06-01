@@ -4,17 +4,17 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_AddPostLinksWebPlatform_TemplateResourceLoaderProcessor::class, PoP_AddPostLinksWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_LINKFRAME];
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -30,7 +30,7 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -40,32 +40,32 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
         return $ret;
     }
 
-    public function showFrameInCollapse(array $component, array &$props)
+    public function showFrameInCollapse(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getCollapseClass(array $component, array &$props)
+    public function getCollapseClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
     
         // return 'collapse';
         return '';
     }
 
-    public function getLoadlinkBtnClass(array $component, array &$props)
+    public function getLoadlinkBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-primary';
     }
-    public function getOpennewtabBtnClass(array $component, array &$props)
+    public function getOpennewtabBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-default';
     }
-    public function printSource(array $component, array &$props)
+    public function printSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -91,7 +91,7 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
         return $ret;
     }
 
-    // function initModelProps(array $component, array &$props) {
+    // function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     if ($this->showFrameInCollapse($component, $props)) {
 

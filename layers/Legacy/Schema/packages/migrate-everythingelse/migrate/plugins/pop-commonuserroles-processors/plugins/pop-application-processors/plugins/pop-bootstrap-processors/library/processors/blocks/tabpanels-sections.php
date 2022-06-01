@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_TABPANEL_INDIVIDUALS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS,
@@ -22,7 +22,7 @@ class GD_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -37,7 +37,7 @@ class GD_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_ORGANIZATIONS:
@@ -48,7 +48,7 @@ class GD_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_ORGANIZATIONS:

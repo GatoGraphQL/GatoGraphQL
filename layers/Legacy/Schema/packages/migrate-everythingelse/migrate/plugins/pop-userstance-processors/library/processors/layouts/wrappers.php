@@ -17,7 +17,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -38,7 +38,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
@@ -50,7 +50,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:

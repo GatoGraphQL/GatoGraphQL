@@ -13,7 +13,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
@@ -23,7 +23,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         return parent::getLabelText($component, $props);
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
     //     switch ($component[1]) {
     //         case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
@@ -38,7 +38,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         return [GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::COMPONENT_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST];
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
@@ -48,7 +48,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         return parent::getDbobjectField($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:
@@ -61,7 +61,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         return parent::getName($component);
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY:

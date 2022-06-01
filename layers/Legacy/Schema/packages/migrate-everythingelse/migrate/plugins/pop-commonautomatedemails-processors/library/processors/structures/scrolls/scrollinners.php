@@ -19,7 +19,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL:
@@ -45,7 +45,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -64,7 +64,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS:

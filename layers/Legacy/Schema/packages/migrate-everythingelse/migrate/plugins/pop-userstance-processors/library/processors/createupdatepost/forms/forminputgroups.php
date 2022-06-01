@@ -17,7 +17,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
@@ -33,7 +33,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -47,7 +47,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         parent::initModelProps($component, $props);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
@@ -57,7 +57,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         return parent::getInfo($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
@@ -73,7 +73,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         return parent::getLabel($component, $props);
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -85,7 +85,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 

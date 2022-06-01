@@ -14,7 +14,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -31,7 +31,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGET_POSTCOMMENTS => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
@@ -40,7 +40,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGET_POSTCOMMENTS => 'fa-comments',
@@ -49,7 +49,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:
@@ -60,7 +60,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:
@@ -71,7 +71,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:
@@ -82,7 +82,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return parent::getWidgetClass($component, $props);
     }
-    public function getTitleWrapperClass(array $component, array &$props)
+    public function getTitleWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:
@@ -93,7 +93,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return parent::getTitleWrapperClass($component, $props);
     }
-    public function getTitleClass(array $component, array &$props)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:
@@ -103,7 +103,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
 
         return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubcomponent(array $component)
+    public function getQuicklinkgroupSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_WIDGET_POSTCOMMENTS:

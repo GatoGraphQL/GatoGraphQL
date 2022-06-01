@@ -18,7 +18,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
@@ -29,7 +29,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         };
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCE_CREATEORUPDATE:
@@ -40,7 +40,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -57,7 +57,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCE_CREATE:
@@ -66,7 +66,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
 
         return parent::isCreate($component);
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCE_UPDATE:
@@ -76,7 +76,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return parent::isUpdate($component);
     }
 
-    protected function getBlocksectionsClasses(array $component)
+    protected function getBlocksectionsClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBlocksectionsClasses($component);
 
@@ -89,7 +89,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
@@ -107,7 +107,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return parent::getTitle($component, $props);
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -121,7 +121,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_STANCE_CREATEORUPDATE:

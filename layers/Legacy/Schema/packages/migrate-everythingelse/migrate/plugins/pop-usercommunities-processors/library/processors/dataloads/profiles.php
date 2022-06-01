@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_EDITMEMBERSHIP => POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP,
@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_INVITENEWMEMBERS:
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_INVITENEWMEMBERS:
@@ -61,7 +61,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -83,7 +83,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -108,7 +108,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return $ret;
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE:
@@ -124,7 +124,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE:
@@ -140,7 +140,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getCheckpointMessageComponent($component);
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EDITMEMBERSHIP:
@@ -151,7 +151,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $component, array &$props, array &$data_properties): ?string
+    protected function getObjectIDParamName(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EDITMEMBERSHIP:
@@ -160,7 +160,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return null;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE:
@@ -171,7 +171,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_EDITMEMBERSHIP:
@@ -181,7 +181,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_MYCOMMUNITIES_UPDATE:

@@ -12,7 +12,7 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
@@ -22,7 +22,7 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
@@ -32,7 +32,7 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
         return parent::getLabel($component, $props);
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -44,7 +44,7 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 

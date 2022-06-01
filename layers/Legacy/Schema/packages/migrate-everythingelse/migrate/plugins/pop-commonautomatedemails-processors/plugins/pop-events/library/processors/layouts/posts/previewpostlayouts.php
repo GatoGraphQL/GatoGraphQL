@@ -16,7 +16,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
     }
 
 
-    public function getAuthorComponent(array $component)
+    public function getAuthorComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_DETAILS:
@@ -29,7 +29,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return parent::getAuthorComponent($component);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_DETAILS:
@@ -40,7 +40,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowthumbLayoutSubcomponents(array $component)
+    public function getBelowthumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return $ret;
     }
 
-    public function getBottomSubcomponents(array $component)
+    public function getBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBottomSubcomponents($component);
 
@@ -72,7 +72,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return $ret;
     }
 
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 
@@ -86,7 +86,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return $ret;
     }
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_LIST:
@@ -100,7 +100,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return parent::getPostThumbSubcomponent($component);
     }
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_LIST:
@@ -112,7 +112,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_LIST:
@@ -125,7 +125,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_DETAILS:
@@ -140,7 +140,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_DETAILS:
@@ -151,7 +151,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_LIST:
@@ -163,7 +163,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts extends PoP_Modu
     }
     
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

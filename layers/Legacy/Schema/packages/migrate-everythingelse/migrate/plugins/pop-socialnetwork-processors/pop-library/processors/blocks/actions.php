@@ -29,7 +29,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
@@ -46,7 +46,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -69,7 +69,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_FOLLOWUSER:
@@ -108,7 +108,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_FOLLOWUSER:

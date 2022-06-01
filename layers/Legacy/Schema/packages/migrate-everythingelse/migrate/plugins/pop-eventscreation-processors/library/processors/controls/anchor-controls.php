@@ -16,7 +16,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
@@ -28,7 +28,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:
@@ -40,7 +40,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -57,7 +57,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
 
         return parent::getHref($component, $props);
     }
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT:
@@ -70,7 +70,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
         return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS:

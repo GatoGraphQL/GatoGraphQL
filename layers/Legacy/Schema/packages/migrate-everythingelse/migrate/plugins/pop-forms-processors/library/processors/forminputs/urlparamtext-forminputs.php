@@ -15,7 +15,7 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
         );
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID:

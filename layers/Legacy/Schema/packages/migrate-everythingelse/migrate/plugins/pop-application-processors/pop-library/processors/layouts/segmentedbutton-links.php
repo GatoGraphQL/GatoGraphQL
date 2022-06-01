@@ -13,7 +13,7 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
@@ -24,7 +24,7 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
         return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:

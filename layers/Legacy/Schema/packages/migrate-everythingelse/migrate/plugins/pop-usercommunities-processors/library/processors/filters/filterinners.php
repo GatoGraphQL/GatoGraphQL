@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -44,7 +44,7 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS => POP_FILTER_MYMEMBERS,

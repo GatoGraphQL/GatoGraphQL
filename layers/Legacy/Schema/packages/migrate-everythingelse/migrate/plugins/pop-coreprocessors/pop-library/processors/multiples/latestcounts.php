@@ -11,7 +11,7 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -25,7 +25,7 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 

@@ -49,7 +49,7 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

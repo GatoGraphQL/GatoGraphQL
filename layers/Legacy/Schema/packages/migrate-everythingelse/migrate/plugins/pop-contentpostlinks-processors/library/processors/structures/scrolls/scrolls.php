@@ -26,7 +26,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_LINKS_NAVIGATOR => [PoP_ContentPostLinks_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinks_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_LINKS_NAVIGATOR],
@@ -46,7 +46,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

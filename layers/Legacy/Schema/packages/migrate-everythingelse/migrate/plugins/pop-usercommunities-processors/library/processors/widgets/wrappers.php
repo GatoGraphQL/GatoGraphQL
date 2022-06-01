@@ -13,7 +13,7 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -30,7 +30,7 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_WIDGETWRAPPER_COMMUNITIES:

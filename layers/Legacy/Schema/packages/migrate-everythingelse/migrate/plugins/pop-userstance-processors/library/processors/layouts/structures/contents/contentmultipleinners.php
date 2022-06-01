@@ -13,7 +13,7 @@ class UserStance_Module_Processor_ContentMultipleInners extends PoP_Module_Proce
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

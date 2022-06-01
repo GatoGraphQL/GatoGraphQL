@@ -19,7 +19,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
         );
     }
 
-    public function getClasses(array $component, array &$props)
+    public function getClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LATESTCOUNT_TAG_CONTENT:

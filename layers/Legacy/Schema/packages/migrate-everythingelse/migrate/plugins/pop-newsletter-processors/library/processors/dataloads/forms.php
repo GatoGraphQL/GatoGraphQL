@@ -16,7 +16,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
@@ -25,7 +25,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:
@@ -36,7 +36,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         $actionexecuters = array(
             self::COMPONENT_DATALOAD_NEWSLETTER => NewsletterSubscriptionMutationResolverBridge::class,
@@ -49,7 +49,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:
@@ -62,7 +62,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -79,7 +79,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NEWSLETTER:

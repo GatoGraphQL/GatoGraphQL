@@ -13,7 +13,7 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_MYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MYMEMBERS,
@@ -22,7 +22,7 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT => [PoP_UserCommunities_Module_Processor_MySectionDataloads::class, PoP_UserCommunities_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT],
@@ -31,7 +31,7 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         return $inners[$component[1]] ?? null;
     }
 
-    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT:
@@ -43,7 +43,7 @@ class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         ;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_MYMEMBERS_TABLE_EDIT:

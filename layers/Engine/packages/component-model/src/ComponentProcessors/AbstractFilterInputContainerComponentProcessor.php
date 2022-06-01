@@ -11,7 +11,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    final public function getSubcomponents(array $component): array
+    final public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $filterInputComponents = $this->getFilterInputComponents($component);
 
@@ -41,7 +41,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
         ];
     }
 
-    public function getFieldFilterInputNameTypeResolvers(array $component): array
+    public function getFieldFilterInputNameTypeResolvers(\PoP\ComponentModel\Component\Component $component): array
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponents($component);
         $schemaFieldArgNameTypeResolvers = [];
@@ -54,7 +54,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
         return $schemaFieldArgNameTypeResolvers;
     }
 
-    public function getFieldFilterInputDescription(array $component, string $fieldArgName): ?string
+    public function getFieldFilterInputDescription(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): ?string
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponents($component);
         foreach ($filterQueryArgsModules as $component) {
@@ -68,7 +68,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
         return null;
     }
 
-    public function getFieldFilterInputDefaultValue(array $component, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): mixed
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponents($component);
         foreach ($filterQueryArgsModules as $component) {
@@ -82,7 +82,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
         return null;
     }
 
-    public function getFieldFilterInputTypeModifiers(array $component, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): int
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringComponents($component);
         foreach ($filterQueryArgsModules as $component) {

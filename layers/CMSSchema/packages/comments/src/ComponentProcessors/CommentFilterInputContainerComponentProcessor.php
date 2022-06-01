@@ -44,7 +44,7 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $responseFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),

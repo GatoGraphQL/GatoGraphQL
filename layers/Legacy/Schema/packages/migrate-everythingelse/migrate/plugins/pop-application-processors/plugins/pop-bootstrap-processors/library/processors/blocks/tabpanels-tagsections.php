@@ -16,7 +16,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         return $ret;
     }
 
-    protected function getControlgroupBottomSubcomponent(array $component)
+    protected function getControlgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGSUBSCRIBERS:
@@ -42,7 +42,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         return parent::getControlgroupBottomSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:
@@ -52,7 +52,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:
@@ -62,7 +62,7 @@ class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_TAGCONTENT:

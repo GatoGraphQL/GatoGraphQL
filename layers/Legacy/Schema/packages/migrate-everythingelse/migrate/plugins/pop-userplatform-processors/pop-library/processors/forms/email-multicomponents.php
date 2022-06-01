@@ -15,7 +15,7 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

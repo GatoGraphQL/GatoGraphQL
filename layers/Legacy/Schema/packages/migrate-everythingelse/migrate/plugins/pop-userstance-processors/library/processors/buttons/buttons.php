@@ -20,7 +20,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_STANCEEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTEDIT],
@@ -36,7 +36,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         $fields = array(
             self::COMPONENT_BUTTON_STANCEEDIT => 'editURL',
@@ -51,7 +51,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         return parent::getUrlField($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_BUTTON_STANCEEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'pop-userstance-processors'),
@@ -67,7 +67,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_STANCEEDIT:
@@ -82,7 +82,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 

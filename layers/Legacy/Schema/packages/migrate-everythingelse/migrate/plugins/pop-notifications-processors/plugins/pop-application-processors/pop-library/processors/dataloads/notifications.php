@@ -19,7 +19,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
@@ -28,7 +28,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -46,7 +46,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -64,7 +64,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $ret;
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $details = array(
             [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],
@@ -81,7 +81,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -104,7 +104,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $ret;
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
@@ -115,7 +115,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getFeedbackMessageComponent($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
@@ -126,7 +126,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
@@ -137,7 +137,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:

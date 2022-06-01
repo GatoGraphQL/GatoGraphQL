@@ -13,7 +13,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             parent::getSubcomponents($component),
@@ -21,7 +21,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
@@ -60,7 +60,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         return null;
     }
 
-    protected function getComponentClasses(array $component, array &$props)
+    protected function getComponentClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getComponentClasses($component, $props);
 
@@ -78,7 +78,7 @@ class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
         return $ret;
     }
 
-    protected function getComponentParams(array $component, array &$props)
+    protected function getComponentParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getComponentParams($component, $props);
 

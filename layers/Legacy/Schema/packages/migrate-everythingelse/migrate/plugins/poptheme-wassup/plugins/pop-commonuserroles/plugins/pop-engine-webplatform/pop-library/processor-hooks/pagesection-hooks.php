@@ -12,7 +12,7 @@ class PoPTheme_Wassup_URE_PageSectionHooks
         );
     }
 
-    public function initModelPropsHover(array $component, $props_in_array, $processor)
+    public function initModelPropsHover(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         

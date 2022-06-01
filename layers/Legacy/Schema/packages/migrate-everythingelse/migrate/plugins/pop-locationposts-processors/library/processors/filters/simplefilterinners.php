@@ -15,7 +15,7 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -53,7 +53,7 @@ class PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LOCATIONPOSTS => POP_FILTER_LOCATIONPOSTS,

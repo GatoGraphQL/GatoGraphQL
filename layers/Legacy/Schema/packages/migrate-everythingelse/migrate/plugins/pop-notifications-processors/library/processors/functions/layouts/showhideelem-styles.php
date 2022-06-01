@@ -17,7 +17,7 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getElemTarget(array $component, array &$props)
+    public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:
@@ -32,7 +32,7 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
         return parent::getElemTarget($component, $props);
     }
     
-    public function getElemStyles(array $component, array &$props)
+    public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:

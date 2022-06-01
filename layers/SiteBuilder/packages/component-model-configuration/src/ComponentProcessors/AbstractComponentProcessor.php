@@ -20,12 +20,12 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
-    public function getImmutableSettingsComponentTree(array $component, array &$props): array
+    public function getImmutableSettingsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getImmutableSettings', __FUNCTION__, $component, $props);
     }
 
-    public function getImmutableSettings(array $component, array &$props): array
+    public function getImmutableSettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -40,7 +40,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array();
     }
@@ -49,12 +49,12 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // New PUBLIC Functions: Model Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonmodelSettingsComponentTree(array $component, array &$props): array
+    public function getMutableonmodelSettingsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelSettings', __FUNCTION__, $component, $props);
     }
 
-    public function getMutableonmodelSettings(array $component, array &$props): array
+    public function getMutableonmodelSettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -65,7 +65,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getMutableonmodelConfiguration(array $component, array &$props): array
+    public function getMutableonmodelConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array();
     }
@@ -74,12 +74,12 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // New PUBLIC Functions: Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonrequestSettingsComponentTree(array $component, array &$props): array
+    public function getMutableonrequestSettingsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestSettings', __FUNCTION__, $component, $props);
     }
 
-    public function getMutableonrequestSettings(array $component, array &$props): array
+    public function getMutableonrequestSettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -90,7 +90,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array();
     }
@@ -99,12 +99,12 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     // Others
     //-------------------------------------------------
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return null;
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         return DataLoading::DATA_ACCESS_CHECKPOINTS;
     }
@@ -125,7 +125,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     /**
      * @return CheckpointInterface[]
      */
-    public function getDataAccessCheckpoints(array $component, array &$props): array
+    public function getDataAccessCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
             if ($this->getRelevantRouteCheckpointTarget($component, $props) == DataLoading::DATA_ACCESS_CHECKPOINTS) {
@@ -136,7 +136,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return parent::getDataAccessCheckpoints($component, $props);
     }
 
-    public function getActionExecutionCheckpoints(array $component, array &$props): array
+    public function getActionExecutionCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
             if ($this->getRelevantRouteCheckpointTarget($component, $props) == DataLoading::ACTION_EXECUTION_CHECKPOINTS) {
@@ -147,7 +147,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return parent::getActionExecutionCheckpoints($component, $props);
     }
 
-    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
 
@@ -158,7 +158,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getDatasetmeta(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
@@ -169,7 +169,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getDataloadSource(array $component, array &$props): ?string
+    public function getDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         if (!App::isHTTPRequest()) {
             return null;

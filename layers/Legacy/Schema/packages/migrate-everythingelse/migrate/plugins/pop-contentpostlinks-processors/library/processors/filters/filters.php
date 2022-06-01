@@ -13,7 +13,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilters extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FILTER_LINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_LINKS],

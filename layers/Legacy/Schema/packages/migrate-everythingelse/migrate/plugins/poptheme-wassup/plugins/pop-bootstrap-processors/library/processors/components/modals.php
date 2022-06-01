@@ -13,7 +13,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -27,7 +27,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         return $ret;
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -65,7 +65,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         return $ret;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBodyClass($component, $props);
 

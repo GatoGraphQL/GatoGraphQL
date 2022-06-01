@@ -9,7 +9,7 @@ use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 
 abstract class AbstractRelationalFieldDataloadComponentProcessor extends AbstractDataloadComponentProcessor
 {
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
         // The fields to retrieve are passed through component atts, so simply transfer all component atts down the line
@@ -17,7 +17,7 @@ abstract class AbstractRelationalFieldDataloadComponentProcessor extends Abstrac
         return $ret;
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return Formats::FIELDS;
     }

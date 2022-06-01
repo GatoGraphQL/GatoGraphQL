@@ -3,25 +3,25 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function addDownloadlinks(array $component)
+    public function addDownloadlinks(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
-    public function getDownloadlinksClass(array $component)
+    public function getDownloadlinksClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'pull-right';
     }
-    public function getSeparator(array $component, array &$props)
+    public function getSeparator(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '<br/>';
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_DATETIME];
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
@@ -32,7 +32,7 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
         return $ret;
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -61,7 +61,7 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array('dates', 'times');
     }

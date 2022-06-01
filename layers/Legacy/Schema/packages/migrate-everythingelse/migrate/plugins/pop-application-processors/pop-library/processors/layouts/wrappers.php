@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -39,7 +39,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         return $ret;
     }
 
-    // function getConditionFailedSubcomponents(array $component) {
+    // function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component) {
 
     //     $ret = parent::getConditionFailedSubcomponents($component);
 
@@ -56,7 +56,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     //     return $ret;
     // }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
@@ -68,7 +68,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:

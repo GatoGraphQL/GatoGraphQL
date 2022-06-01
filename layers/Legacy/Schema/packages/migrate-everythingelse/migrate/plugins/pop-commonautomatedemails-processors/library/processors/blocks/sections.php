@@ -23,7 +23,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY,
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -49,7 +49,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
         switch ($component[1]) {
@@ -70,7 +70,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
         return parent::getTitle($component, $props);
     }
 
-    protected function getDescriptionAbovetitle(array $component, array &$props)
+    protected function getDescriptionAbovetitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {
@@ -92,7 +92,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutoma
         return parent::getDescriptionAbovetitle($component, $props);
     }
 
-    protected function getDescriptionBottom(array $component, array &$props)
+    protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         switch ($component[1]) {

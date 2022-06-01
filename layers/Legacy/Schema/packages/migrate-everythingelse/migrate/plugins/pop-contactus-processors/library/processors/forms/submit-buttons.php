@@ -12,7 +12,7 @@ class PoP_ContactUs_Module_Processor_SubmitButtons extends PoP_Module_Processor_
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE:
@@ -22,7 +22,7 @@ class PoP_ContactUs_Module_Processor_SubmitButtons extends PoP_Module_Processor_
         return parent::getLabel($component, $props);
     }
 
-    public function getLoadingText(array $component, array &$props)
+    public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_GF_SUBMITBUTTON_SENDMESSAGE:

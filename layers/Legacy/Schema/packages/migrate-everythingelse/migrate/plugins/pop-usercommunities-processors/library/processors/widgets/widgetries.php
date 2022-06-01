@@ -14,7 +14,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -28,7 +28,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_URE_WIDGET_COMMUNITIES => TranslationAPIFacade::getInstance()->__('Member of', 'ure-popprocessors'),
@@ -37,7 +37,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_URE_WIDGET_COMMUNITIES => 'fa-users',
@@ -47,7 +47,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_WIDGET_COMMUNITIES:
@@ -59,7 +59,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_WIDGET_COMMUNITIES:
@@ -69,7 +69,7 @@ class GD_URE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_WIDGETCOMPACT_COMMUNITIES:

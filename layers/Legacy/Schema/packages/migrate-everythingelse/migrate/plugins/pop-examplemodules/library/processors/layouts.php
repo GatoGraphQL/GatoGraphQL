@@ -28,7 +28,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -58,7 +58,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getRelationalComponentFields($component);
 

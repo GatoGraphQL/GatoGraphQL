@@ -50,7 +50,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_FOLLOWUSER_PREVIEW],
@@ -81,7 +81,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
@@ -128,7 +128,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         return parent::getUrlField($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW:
@@ -175,7 +175,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -338,7 +338,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_FOLLOWUSER_FULL:

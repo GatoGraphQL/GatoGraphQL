@@ -20,7 +20,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_ADDCOMMENT => POP_ADDCOMMENTS_ROUTE_ADDCOMMENT,
@@ -29,7 +29,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
@@ -39,7 +39,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
@@ -49,7 +49,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
@@ -59,7 +59,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
@@ -69,7 +69,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getFilterSubcomponent($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
@@ -82,7 +82,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
@@ -92,7 +92,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getCheckpointMessageComponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -110,7 +110,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
@@ -121,7 +121,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
@@ -136,7 +136,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         }
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:

@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_TagViewComponentButtonsBase extends PoP_Module_Processor_ViewComponentButtonsBase
 {
-    public function getHeaderSubcomponent(array $component): ?array
+    public function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component): ?array
     {
         if ($this->headerShowUrl($component)) {
             return [PoP_Module_Processor_TagViewComponentHeaders::class, PoP_Module_Processor_TagViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_TAG_URL];
@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_TagViewComponentButtonsBase extends PoP_Modu
         return [PoP_Module_Processor_TagViewComponentHeaders::class, PoP_Module_Processor_TagViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_TAG];
     }
 
-    public function getDbobjectParams(array $component): array
+    public function getDbobjectParams(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getDbobjectParams($component);
 

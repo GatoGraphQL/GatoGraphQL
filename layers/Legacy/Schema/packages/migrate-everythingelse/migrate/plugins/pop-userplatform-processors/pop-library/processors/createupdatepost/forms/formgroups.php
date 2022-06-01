@@ -12,7 +12,7 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMGROUP_EMBEDPREVIEW:
@@ -22,7 +22,7 @@ class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Process
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMGROUP_EMBEDPREVIEW:

@@ -15,7 +15,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
@@ -36,7 +36,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
@@ -48,7 +48,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         return null;
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
@@ -62,7 +62,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:

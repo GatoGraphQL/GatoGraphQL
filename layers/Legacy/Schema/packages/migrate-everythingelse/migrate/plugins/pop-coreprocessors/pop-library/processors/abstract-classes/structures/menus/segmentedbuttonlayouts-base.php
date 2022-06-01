@@ -4,21 +4,21 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_COLLAPSESEGMENTEDBUTTON];
     }
 
-    public function getSegmentedbuttonSubcomponents(array $component)
+    public function getSegmentedbuttonSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getDropdownsegmentedbuttonSubcomponents(array $component)
+    public function getDropdownsegmentedbuttonSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -31,16 +31,16 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
         return $ret;
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-default';
     }
-    public function getCollapseClass(array $component)
+    public function getCollapseClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'pop-showactive';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

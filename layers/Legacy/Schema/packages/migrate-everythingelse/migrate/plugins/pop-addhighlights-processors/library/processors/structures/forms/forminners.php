@@ -11,7 +11,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
         );
     }
 
-    protected function getFeaturedimageInput(array $component)
+    protected function getFeaturedimageInput(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
@@ -20,7 +20,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
 
         return parent::getFeaturedimageInput($component);
     }
-    protected function getCoauthorsInput(array $component)
+    protected function getCoauthorsInput(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
@@ -29,7 +29,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
 
         return parent::getCoauthorsInput($component);
     }
-    protected function getTitleInput(array $component)
+    protected function getTitleInput(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
@@ -38,7 +38,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
 
         return parent::getTitleInput($component);
     }
-    protected function getEditorInput(array $component)
+    protected function getEditorInput(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
@@ -47,7 +47,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
 
         return parent::getEditorInput($component);
     }
-    protected function getStatusInput(array $component)
+    protected function getStatusInput(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_FORMINNER_HIGHLIGHT:
@@ -58,7 +58,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wass
         return parent::getStatusInput($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
         

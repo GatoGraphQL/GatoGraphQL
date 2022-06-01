@@ -12,7 +12,7 @@ class Wassup_URE_AAL_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Pr
         );
     }
 
-    public function getDescription(array $component, array &$props)
+    public function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_UREAAL_LAYOUTUSER_MEMBERTAGS:

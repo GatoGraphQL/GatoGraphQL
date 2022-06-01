@@ -37,7 +37,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
         );
     }
 
-    // function getRelevantRoute(array $component, array &$props) {
+    // function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $routes = array(
     //         self::COMPONENT_DATALOAD_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
@@ -46,7 +46,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
     //     return $routes[$component[1]] ?? parent::getRelevantRoute($component, $props);
     // }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -74,7 +74,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
         return $ret;
     }
 
-    public function getMenu(array $component)
+    public function getMenu(\PoP\ComponentModel\Component\Component $component)
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_MENU_SIDEBAR_ABOUT => GD_MENU_SIDEBAR_ABOUT,

@@ -13,7 +13,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         );
     }
 
-    public function getCollapseClass(array $component)
+    public function getCollapseClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getCollapseClass($component);
 
@@ -32,7 +32,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MENU_SEGMENTEDBUTTON:
@@ -43,7 +43,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         return parent::getLeafComponentFields($component, $props);
     }
 
-    public function getSegmentedbuttonSubcomponents(array $component)
+    public function getSegmentedbuttonSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getSegmentedbuttonSubcomponents($component);
 
@@ -55,7 +55,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
 
         return $ret;
     }
-    public function getDropdownsegmentedbuttonSubcomponents(array $component)
+    public function getDropdownsegmentedbuttonSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getDropdownsegmentedbuttonSubcomponents($component);
 
@@ -69,7 +69,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         return $ret;
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 

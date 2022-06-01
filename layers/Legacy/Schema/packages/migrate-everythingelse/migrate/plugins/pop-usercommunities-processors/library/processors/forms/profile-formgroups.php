@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
@@ -51,7 +51,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES => [GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs::COMPONENT_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES],
@@ -68,7 +68,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES:
@@ -78,7 +78,7 @@ class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormCompon
         return parent::getInfo($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES:

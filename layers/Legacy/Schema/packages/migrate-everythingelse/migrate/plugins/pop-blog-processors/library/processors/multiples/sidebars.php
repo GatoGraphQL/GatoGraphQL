@@ -20,7 +20,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -56,7 +56,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR => POP_SCREEN_AUTHOR,
@@ -72,7 +72,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR:
@@ -86,7 +86,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         return parent::getScreengroup($component);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:

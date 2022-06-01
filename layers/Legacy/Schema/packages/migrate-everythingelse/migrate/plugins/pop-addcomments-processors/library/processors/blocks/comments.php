@@ -13,7 +13,7 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_BLOCK_ADDCOMMENT => POP_ADDCOMMENTS_ROUTE_ADDCOMMENT,
@@ -22,7 +22,7 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
         };
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_COMMENTS_SCROLL:
@@ -32,7 +32,7 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -49,7 +49,7 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_COMMENTS_SCROLL:

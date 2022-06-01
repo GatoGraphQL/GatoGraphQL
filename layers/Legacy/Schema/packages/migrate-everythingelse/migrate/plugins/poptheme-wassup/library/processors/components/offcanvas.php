@@ -28,7 +28,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -109,7 +109,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getHtmltag(array $component, array &$props)
+    protected function getHtmltag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_OFFCANVAS_TOP:
@@ -119,7 +119,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return parent::getHtmltag($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -148,7 +148,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getWrapperClass(array $component, array &$props)
+    protected function getWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getWrapperClass($component, $props);
 
@@ -170,7 +170,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getContentClass(array $component, array &$props)
+    protected function getContentClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getContentClass($component, $props);
 
@@ -186,7 +186,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getClosebuttonClass(array $component, array &$props)
+    protected function getClosebuttonClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getClosebuttonClass($component, $props);
 
@@ -199,7 +199,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getOffcanvasClass(array $component, array &$props)
+    protected function getOffcanvasClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_OFFCANVAS_HOVER:
@@ -226,7 +226,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return parent::getOffcanvasClass($component, $props);
     }
 
-    protected function addClosebutton(array $component, array &$props)
+    protected function addClosebutton(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_OFFCANVAS_HOVER:
@@ -237,7 +237,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return parent::addClosebutton($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_OFFCANVAS_HOVER:

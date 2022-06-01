@@ -11,7 +11,7 @@ class PoP_Application_Module_Processor_UserCheckpointMessageInners extends PoP_M
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLayoutSubcomponents($component);
 

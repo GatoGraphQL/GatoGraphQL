@@ -11,7 +11,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Mod
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -25,7 +25,7 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Mod
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS:

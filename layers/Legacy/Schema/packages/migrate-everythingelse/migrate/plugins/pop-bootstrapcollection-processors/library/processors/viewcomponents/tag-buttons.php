@@ -19,7 +19,7 @@ class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
@@ -34,7 +34,7 @@ class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
@@ -49,7 +49,7 @@ class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_
         return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
@@ -66,7 +66,7 @@ class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA:
@@ -95,7 +95,7 @@ class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_
         parent::initModelProps($component, $props);
     }
 
-    public function getUrl(array $component, array &$props)
+    public function getUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`

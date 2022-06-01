@@ -16,7 +16,7 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalLeafComponentFields(array $component): array
+    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getConditionalLeafComponentFields($component);
 

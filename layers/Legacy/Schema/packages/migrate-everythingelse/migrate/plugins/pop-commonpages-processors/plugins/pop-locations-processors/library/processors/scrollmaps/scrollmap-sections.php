@@ -11,7 +11,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSections extends GD_EM_M
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_WHOWEARE_MAP],
@@ -20,7 +20,7 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSections extends GD_EM_M
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function isUserMap(array $component)
+    protected function isUserMap(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP:

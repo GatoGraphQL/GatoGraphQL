@@ -15,7 +15,7 @@ class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Modu
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_AUTHORLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS],

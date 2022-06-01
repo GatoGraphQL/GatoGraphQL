@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_MenuMultiplesBase extends PoP_Module_Processor_MultiplesBase
 {
-    protected function getActiveLinkMenuItemIds(array $component, array &$props)
+    protected function getActiveLinkMenuItemIds(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_MenuMultiplesBase:active-link-menu-item-ids',
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_MenuMultiplesBase extends PoP_Module_Process
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_MenuMultiplesBase extends PoP_Module_Process
         return $ret;
     }
 
-    public function getMutableonrequestJsconfiguration(array $component, array &$props): array
+    public function getMutableonrequestJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestJsconfiguration($component, $props);
 

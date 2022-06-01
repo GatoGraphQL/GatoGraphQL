@@ -14,7 +14,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
@@ -27,7 +27,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
         return parent::getLabel($component, $props);
     }
     
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:
@@ -38,7 +38,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
         return parent::getBtnClass($component, $props);
     }
 
-    public function getLoadingText(array $component, array &$props)
+    public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_GF_SUBMITBUTTON_SUBSCRIBE:

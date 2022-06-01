@@ -4,22 +4,22 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafCom
 
 abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MULTIPLE];
     }
 
-    public function getDefaultLayoutSubcomponent(array $component)
+    public function getDefaultLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getMultipleLayoutSubcomponents(array $component)
+    public function getMultipleLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalLeafComponentFields(array $component): array
+    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getConditionalLeafComponentFields($component);
 
@@ -51,13 +51,13 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-multilayout');
         parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

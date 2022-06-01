@@ -18,7 +18,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
@@ -81,7 +81,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'extra-checkpoint-messages', array());
         $this->setProp($component, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));

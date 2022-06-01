@@ -9,12 +9,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PREVIEWPOST];
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -73,7 +73,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getRelationalComponentFields($component);
 
@@ -106,7 +106,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -122,92 +122,92 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    public function showPosttitle(array $component)
+    public function showPosttitle(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
-    public function showDate(array $component)
+    public function showDate(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getContentSubcomponent(array $component)
+    public function getContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getAuthorComponent(array $component)
+    public function getAuthorComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR];
     }
-    public function getAuthorAvatarComponent(array $component)
+    public function getAuthorAvatarComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getTitleBeforeauthors(array $component, array &$props)
+    public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    public function getTitleAfterauthors(array $component, array &$props)
+    public function getTitleAfterauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
         return array(
             GD_CONSTANT_AUTHORPOSITION_ABOVETHUMB
         );
     }
-    // function layoutextraPosition(array $component, array &$props) {
+    // function layoutextraPosition(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     return GD_CONSTANT_LAYOUTEXTRAPOSITION_BELOWTHUMB;
     // }
-    public function getAuthorsSeparator(array $component, array &$props)
+    public function getAuthorsSeparator(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_CONSTANT_AUTHORS_SEPARATOR;
     }
 
-    public function getBelowthumbLayoutSubcomponents(array $component)
+    public function getBelowthumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = array();
 
         return $ret;
     }
-    public function getBelowcontentSubcomponents(array $component)
+    public function getBelowcontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getBottomSubcomponents(array $component)
+    public function getBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getTopSubcomponents(array $component)
+    public function getTopSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getAftercontentSubcomponents(array $component)
+    public function getAftercontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getBeforecontentSubcomponents(array $component)
+    public function getBeforecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getPreviewpostBottomSubcomponents(array $component)
+    public function getPreviewpostBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow 3rd parties to modify the modules. Eg: for the TPP website we re-use the MESYM Theme but we modify some of its elements, eg: adding the "What do you think about TPP?" modules in the fullview templates
         return \PoP\Root\App::applyFilters('PoP_Module_Processor_PreviewPostLayoutsBase:bottom_components', $this->getBottomSubcomponents($component), $component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -291,7 +291,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($author_component = $this->getAuthorComponent($component)) {
             $this->appendProp($author_component, $props, 'class', 'preview-author');

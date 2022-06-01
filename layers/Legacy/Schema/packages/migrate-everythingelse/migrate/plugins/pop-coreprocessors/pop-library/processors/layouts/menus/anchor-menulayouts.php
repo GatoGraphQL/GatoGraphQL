@@ -11,7 +11,7 @@ class PoP_Module_Processor_AnchorMenuLayouts extends PoP_Module_Processor_Anchor
         );
     }
 
-    public function getItemClass(array $component, array &$props)
+    public function getItemClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_MENU_BUTTON:

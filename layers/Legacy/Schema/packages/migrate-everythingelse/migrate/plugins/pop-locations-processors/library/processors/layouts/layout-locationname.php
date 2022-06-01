@@ -13,7 +13,7 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME:
@@ -23,7 +23,7 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
         return parent::getFontawesome($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

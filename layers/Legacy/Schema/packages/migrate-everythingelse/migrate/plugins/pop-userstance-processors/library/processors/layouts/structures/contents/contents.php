@@ -12,7 +12,7 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
             [self::class, self::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE],
         );
     }
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTLAYOUT_STANCES:
@@ -25,7 +25,7 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
         return parent::getInnerSubcomponent($component);
     }
 
-    public function addFetchedData(array $component, array &$props)
+    public function addFetchedData(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTLAYOUT_STANCES:
@@ -36,7 +36,7 @@ class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_Co
         return parent::addFetchedData($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         switch ($component[1]) {
             case self::COMPONENT_CONTENTLAYOUT_STANCES_APPENDABLE:

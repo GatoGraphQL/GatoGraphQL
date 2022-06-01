@@ -20,7 +20,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
             [self::class, self::COMPONENT_SUBMENU_SINGLE],
         );
     }
-    public function getClass(array $component)
+    public function getClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_AUTHOR:
@@ -31,7 +31,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
         return parent::getClass($component);
     }
-    public function getXsClass(array $component)
+    public function getXsClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_AUTHOR:
@@ -42,7 +42,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
         return parent::getClass($component);
     }
-    public function getDropdownClass(array $component)
+    public function getDropdownClass(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SUBMENU_AUTHOR:
@@ -54,7 +54,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         return parent::getDropdownClass($component);
     }
 
-    public function getRoutes(array $component, array &$props)
+    public function getRoutes(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getRoutes($component, $props);
 
@@ -112,7 +112,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         return $ret;
     }
 
-    public function getUrl(array $component, $route, array &$props)
+    public function getUrl(\PoP\ComponentModel\Component\Component $component, $route, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

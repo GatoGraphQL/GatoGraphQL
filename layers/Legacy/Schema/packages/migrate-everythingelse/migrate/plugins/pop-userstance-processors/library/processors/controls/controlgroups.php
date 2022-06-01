@@ -18,7 +18,7 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
         );
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -49,7 +49,7 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

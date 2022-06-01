@@ -37,7 +37,7 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
         return GD_THEMEMODE_WASSUP_PRINT;
     }
 
-    public function getPagesectionJsmethod($jsmethod, array $component)
+    public function getPagesectionJsmethod($jsmethod, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Remove all the scrollbars

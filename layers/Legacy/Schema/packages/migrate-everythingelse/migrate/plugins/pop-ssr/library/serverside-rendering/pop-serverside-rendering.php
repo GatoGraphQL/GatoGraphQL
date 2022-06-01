@@ -167,7 +167,7 @@ class PoP_ServerSideRendering
         return $renderer($configuration);
     }
 
-    public function renderModule(array $component, $configuration)
+    public function renderModule(\PoP\ComponentModel\Component\Component $component, $configuration)
     {
         if (!$this->enabled) {
             return '';

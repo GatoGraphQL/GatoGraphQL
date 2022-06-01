@@ -11,7 +11,7 @@ class PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts extends PoP_Module_P
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW:
@@ -21,7 +21,7 @@ class PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts extends PoP_Module_P
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getAbovecontentSubcomponents($component);
 

@@ -33,7 +33,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_SCROLLMAP_SEARCHUSERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_USERS_MAP],
@@ -53,7 +53,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
         return $inner_components[$component[1]] ?? null;
     }
 
-    protected function isUserMap(array $component)
+    protected function isUserMap(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLMAP_SEARCHUSERS_SCROLLMAP:
@@ -65,7 +65,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
         return parent::isUserMap($component);
     }
 
-    protected function isPostMap(array $component)
+    protected function isPostMap(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLMAP_EVENTS_SCROLLMAP:
@@ -83,7 +83,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
         return parent::isPostMap($component);
     }
 
-    public function getMapDirection(array $component, array &$props)
+    public function getMapDirection(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         switch ($component[1]) {
             case self::COMPONENT_SCROLLMAP_USERS_HORIZONTALSCROLLMAP:

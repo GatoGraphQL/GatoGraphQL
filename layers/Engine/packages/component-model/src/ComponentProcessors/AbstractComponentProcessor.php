@@ -125,17 +125,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
-    public function getSubcomponents(array $component): array
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return [];
     }
 
-    final public function getAllSubcomponents(array $component): array
+    final public function getAllSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return $this->getSubcomponentsByGroup($component);
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
     //     return null;
     // }
@@ -144,7 +144,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
 
-    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, \PoP\ComponentModel\Component\Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
         // Convert the component to its string representation to access it in the array
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -216,12 +216,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    public function initModelPropsComponentTree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
+    public function initModelPropsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
         $this->executeInitPropsComponentTree($this->initModelProps(...), $this->getModelPropsForDescendantComponents(...), $this->getModelPropsForDescendantDatasetComponents(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
-    public function getModelPropsForDescendantComponents(array $component, array &$props): array
+    public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -240,12 +240,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getModelPropsForDescendantDatasetComponents(array $component, array &$props): array
+    public function getModelPropsForDescendantDatasetComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Set property "succeeding-typeResolver" on every component, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
@@ -296,22 +296,22 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function initRequestPropsComponentTree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
+    public function initRequestPropsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
         $this->executeInitPropsComponentTree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponents(...), $this->getRequestPropsForDescendantDatasetComponents(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
-    public function getRequestPropsForDescendantComponents(array $component, array &$props): array
+    public function getRequestPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
 
-    public function getRequestPropsForDescendantDatasetComponents(array $component, array &$props): array
+    public function getRequestPropsForDescendantDatasetComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         /**
          * Allow to add more stuff
@@ -489,12 +489,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $props = $current_props;
         }
     }
-    protected function getPropGroupField(string $group, array $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    protected function getPropGroupField(string $group, \PoP\ComponentModel\Component\Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
     {
         $group = $this->getPropGroup($group, $component, $props, $starting_from_componentPath);
         return $group[$field] ?? null;
     }
-    protected function getPropGroup(string $group, array $component, array &$props, array $starting_from_componentPath = array()): array
+    protected function getPropGroup(string $group, \PoP\ComponentModel\Component\Component $component, array &$props, array $starting_from_componentPath = array()): array
     {
         if (!$props) {
             return [];
@@ -533,11 +533,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
     }
-    public function getGroupProp(string $group, array $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    public function getGroupProp(string $group, \PoP\ComponentModel\Component\Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
     {
         return $this->getPropGroupField($group, $component, $props, $field, $starting_from_componentPath);
     }
-    public function getProp(array $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    public function getProp(\PoP\ComponentModel\Component\Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
     {
         return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $field, $starting_from_componentPath);
     }
@@ -558,7 +558,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getDatabaseKeys(array $component, array &$props): array
+    public function getDatabaseKeys(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
@@ -604,7 +604,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getImmutableSettingsDatasetcomponentTree(array $component, array &$props): array
+    public function getImmutableSettingsDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $options = array(
             'only-execute-on-dataloading-components' => true,
@@ -612,7 +612,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->executeOnSelfAndPropagateToComponents('getImmutableDatasetsettings', __FUNCTION__, $component, $props, true, $options);
     }
 
-    public function getImmutableDatasetsettings(array $component, array &$props): array
+    public function getImmutableDatasetsettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -623,7 +623,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function addToDatasetDatabaseKeys(array $component, array &$props, array $path, array &$ret): void
+    public function addToDatasetDatabaseKeys(\PoP\ComponentModel\Component\Component $component, array &$props, array $path, array &$ret): void
     {
         // Add the current component's dbkeys
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
@@ -688,7 +688,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
     }
 
-    public function getDatasetDatabaseKeys(array $component, array &$props): array
+    public function getDatasetDatabaseKeys(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
         $this->addToDatasetDatabaseKeys($component, $props, array(), $ret);
@@ -699,39 +699,39 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Static + Stateful Data
     //-------------------------------------------------
 
-    public function getDatasource(array $component, array &$props): string
+    public function getDatasource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         // Each component can only return one piece of data, and it must be indicated if it static or mutableonrequest
         // Retrieving only 1 piece is needed so that its children do not get confused what data their getLeafComponentFields applies to
         return DataSources::MUTABLEONREQUEST;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
     {
         return [];
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
     {
         return null;
     }
 
-    public function doesComponentLoadData(array $component): bool
+    public function doesComponentLoadData(\PoP\ComponentModel\Component\Component $component): bool
     {
         return $this->getRelationalTypeResolver($component) !== null;
     }
 
-    public function startDataloadingSection(array $component): bool
+    public function startDataloadingSection(\PoP\ComponentModel\Component\Component $component): bool
     {
         return $this->doesComponentLoadData($component);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?ComponentMutationResolverBridgeInterface
     {
         return null;
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): void
     {
         // Do nothing
     }
@@ -739,7 +739,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
@@ -747,7 +747,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         return [];
     }
@@ -755,7 +755,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalLeafComponentFields(array $component): array
+    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         return [];
     }
@@ -763,7 +763,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return ConditionalRelationalComponentField[]
      */
-    public function getConditionalRelationalComponentFields(array $component): array
+    public function getConditionalRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         return [];
     }
@@ -772,14 +772,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Properties
     //-------------------------------------------------
 
-    public function getImmutableDataPropertiesDatasetcomponentTree(array $component, array &$props): array
+    public function getImmutableDataPropertiesDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         // The data-properties start on a dataloading component, and finish on the next dataloding component down the line
         // This way, we can collect all the data-fields that the component will need to load for its dbobjects
         return $this->executeOnSelfAndPropagateToComponents('getImmutableDataPropertiesDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(array $component, array &$props): array
+    public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -800,7 +800,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDatasetcomponentTreeSectionFlattenedDataFields(array $component, array &$props): array
+    public function getDatasetcomponentTreeSectionFlattenedDataFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -843,7 +843,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDatasetcomponentTreeSectionFlattenedComponents(array $component): array
+    public function getDatasetcomponentTreeSectionFlattenedComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = [];
 
@@ -857,7 +857,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function addDatasetcomponentTreeSectionFlattenedComponents(&$ret, array $component): void
+    public function addDatasetcomponentTreeSectionFlattenedComponents(&$ret, \PoP\ComponentModel\Component\Component $component): void
     {
         $ret[] = $component;
 
@@ -876,7 +876,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
     }
 
-    // protected function flattenDatasetcomponentTreeComponents($propagate_fn, &$ret, array $component)
+    // protected function flattenDatasetcomponentTreeComponents($propagate_fn, &$ret, \PoP\ComponentModel\Component\Component $component)
     // {
     //     // Exclude the subcomponent components here
     //     if ($subComponents = $this->getComponentsToPropagateDataProperties($component)) {
@@ -896,7 +896,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //     }
     // }
 
-    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         // By default return nothing at the last level
         $ret = array();
@@ -913,7 +913,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props): void
+    protected function addHeaddatasetcomponentDataProperties(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         /**
          * Allow to add more stuff
@@ -927,12 +927,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function getMutableonmodelDataPropertiesDatasetcomponentTree(array $component, array &$props): array
+    public function getMutableonmodelDataPropertiesDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection(array $component, array &$props): array
+    public function getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -947,7 +947,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonmodelHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getMutableonmodelHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -972,12 +972,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonrequestDataPropertiesDatasetcomponentTree(array $component, array &$props): array
+    public function getMutableonrequestDataPropertiesDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(array $component, array &$props): array
+    public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -999,7 +999,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -1028,12 +1028,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
 
-    public function getDataFeedbackDatasetcomponentTree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         return $this->executeOnSelfAndPropagateToDatasetComponents('getDataFeedbackComponentTree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
 
-    public function getDataFeedbackComponentTree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = array();
 
@@ -1044,12 +1044,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         return [];
     }
 
-    public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
+    public function getDataFeedbackInterreferencedComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return null;
     }
@@ -1058,12 +1058,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Background URLs
     //-------------------------------------------------
 
-    public function getBackgroundurlsMergeddatasetcomponentTree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    public function getBackgroundurlsMergeddatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return $this->executeOnSelfAndMergeWithDatasetComponents('getBackgroundurls', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
     }
 
-    public function getBackgroundurls(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    public function getBackgroundurls(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return [];
     }
@@ -1072,7 +1072,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Dataset Meta
     //-------------------------------------------------
 
-    public function getDatasetmeta(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         return [];
     }
@@ -1084,23 +1084,23 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return CheckpointInterface[]
      */
-    public function getDataAccessCheckpoints(array $component, array &$props): array
+    public function getDataAccessCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
 
-    public function getActionExecutionCheckpoints(array $component, array &$props): array
+    public function getActionExecutionCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
 
-    public function shouldExecuteMutation(array $component, array &$props): bool
+    public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
         // By default, execute only if the component is targeted for execution and doing POST
         return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getComponentPathHelpers()->getStringifiedModulePropagationCurrentPath($component);
     }
 
-    public function getComponentsToPropagateDataProperties(array $component): array
+    public function getComponentsToPropagateDataProperties(\PoP\ComponentModel\Component\Component $component): array
     {
         return $this->getSubcomponentsByGroup(
             $component,
@@ -1111,7 +1111,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    protected function flattenDatasetcomponentTreeDataProperties($propagate_fn, &$ret, array $component, array &$props): void
+    protected function flattenDatasetcomponentTreeDataProperties($propagate_fn, &$ret, \PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
@@ -1219,7 +1219,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $component, array &$props): void
+    protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, \PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
@@ -1292,12 +1292,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Static Data
     //-------------------------------------------------
 
-    public function getModelSupplementaryDBObjectDataComponentTree(array $component, array &$props): array
+    public function getModelSupplementaryDBObjectDataComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithComponents('getModelSupplementaryDBObjectData', __FUNCTION__, $component, $props);
     }
 
-    public function getModelSupplementaryDBObjectData(array $component, array &$props): array
+    public function getModelSupplementaryDBObjectData(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
@@ -1306,17 +1306,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Stateful Data
     //-------------------------------------------------
 
-    public function getMutableonrequestSupplementaryDBObjectDataComponentTree(array $component, array &$props): array
+    public function getMutableonrequestSupplementaryDBObjectDataComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithComponents('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $component, $props);
     }
 
-    public function getMutableonrequestSupplementaryDbobjectdata(array $component, array &$props): array
+    public function getMutableonrequestSupplementaryDbobjectdata(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return [];
     }
 
-    private function getSubcomponentsByGroup(array $component, array $elements = array()): array
+    private function getSubcomponentsByGroup(\PoP\ComponentModel\Component\Component $component, array $elements = array()): array
     {
         if (empty($elements)) {
             $elements = array(

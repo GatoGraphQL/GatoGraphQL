@@ -13,7 +13,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -28,7 +28,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_MYEVENTS:
@@ -41,7 +41,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_TABPANEL_MYEVENTS:
@@ -52,7 +52,7 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks extends PoP_Modu
         return parent::getDelegatorfilterSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($filter_component = $this->getDelegatorfilterSubcomponent($component)) {
             // Events: choose to only select past/future

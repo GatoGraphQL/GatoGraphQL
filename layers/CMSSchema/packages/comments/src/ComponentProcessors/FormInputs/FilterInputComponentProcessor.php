@@ -114,7 +114,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->getCustomPostIDsFilterInput(),
@@ -126,7 +126,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
         switch ($component[1]) {
             case self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS:
@@ -139,7 +139,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
         return match ($component[1]) {
@@ -152,7 +152,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
@@ -164,7 +164,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS,
@@ -177,7 +177,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDefaultValue(array $component): mixed
+    public function getFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component): mixed
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_COMMENT_TYPES => [
@@ -190,7 +190,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return match ($component[1]) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->__('Limit results to elements with the given custom post IDs', 'comments'),

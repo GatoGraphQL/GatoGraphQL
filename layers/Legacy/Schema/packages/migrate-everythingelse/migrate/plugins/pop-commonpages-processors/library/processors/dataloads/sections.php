@@ -18,7 +18,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
         return match($component[1]) {
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
@@ -29,7 +29,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS => [GD_Custom_Module_Processor_CustomScrolls::class, GD_Custom_Module_Processor_CustomScrolls::COMPONENT_SCROLL_WHOWEARE_DETAILS],
@@ -41,7 +41,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return $inner_components[$component[1]] ?? null;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS:
@@ -54,7 +54,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getDatasource(array $component, array &$props): string
+    public function getDatasource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS:
@@ -67,7 +67,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return parent::getDatasource($component, $props);
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS:
