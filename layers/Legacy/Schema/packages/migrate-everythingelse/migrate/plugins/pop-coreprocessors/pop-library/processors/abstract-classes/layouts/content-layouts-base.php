@@ -8,6 +8,9 @@ abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDa
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_CONTENT];
     }
     
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

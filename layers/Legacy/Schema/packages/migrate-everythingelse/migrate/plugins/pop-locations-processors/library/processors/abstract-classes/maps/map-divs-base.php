@@ -8,6 +8,9 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_DIV];
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

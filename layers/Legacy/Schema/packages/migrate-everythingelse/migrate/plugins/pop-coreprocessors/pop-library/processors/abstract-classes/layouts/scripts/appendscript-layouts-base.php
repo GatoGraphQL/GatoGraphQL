@@ -27,6 +27,9 @@ abstract class PoP_Module_Processor_AppendScriptsLayoutsBase extends PoPEngine_Q
         return null;
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

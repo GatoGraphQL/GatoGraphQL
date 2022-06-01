@@ -281,6 +281,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getTitle($component, $props);
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

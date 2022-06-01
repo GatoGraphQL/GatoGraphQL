@@ -13,6 +13,9 @@ class GD_URE_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_M
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

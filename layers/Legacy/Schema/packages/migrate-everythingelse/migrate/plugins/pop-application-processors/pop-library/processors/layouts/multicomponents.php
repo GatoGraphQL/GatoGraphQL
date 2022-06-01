@@ -11,6 +11,9 @@ class PoP_Module_Processor_MaxHeightLayoutMultipleComponents extends PoP_Module_
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

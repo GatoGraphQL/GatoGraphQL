@@ -37,6 +37,9 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

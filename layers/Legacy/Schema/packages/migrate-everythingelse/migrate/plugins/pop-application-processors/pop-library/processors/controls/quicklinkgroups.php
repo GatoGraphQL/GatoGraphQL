@@ -35,6 +35,9 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

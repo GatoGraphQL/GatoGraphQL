@@ -19,6 +19,9 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
         };
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

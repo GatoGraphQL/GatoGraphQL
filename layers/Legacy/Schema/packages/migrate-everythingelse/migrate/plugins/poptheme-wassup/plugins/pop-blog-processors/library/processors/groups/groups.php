@@ -76,6 +76,9 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         parent::initRequestProps($component, $props);
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

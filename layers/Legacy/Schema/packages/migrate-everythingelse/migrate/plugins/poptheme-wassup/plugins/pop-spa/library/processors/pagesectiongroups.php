@@ -7,6 +7,9 @@ use PoP\SPA\ComponentFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 {
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         // If fetching a page, then load only the required pageSection modules and nothing else

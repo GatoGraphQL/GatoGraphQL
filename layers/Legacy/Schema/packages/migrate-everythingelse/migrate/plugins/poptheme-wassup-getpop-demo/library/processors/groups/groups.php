@@ -28,6 +28,9 @@ class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         return $ret;
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

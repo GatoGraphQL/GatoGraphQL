@@ -35,6 +35,9 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $this->getProp($component, $props, 'title') ?? $this->getTitle($component, $props);
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

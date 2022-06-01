@@ -28,6 +28,9 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

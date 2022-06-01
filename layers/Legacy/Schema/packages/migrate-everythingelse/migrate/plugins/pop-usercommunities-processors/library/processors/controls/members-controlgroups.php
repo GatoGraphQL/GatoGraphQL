@@ -13,6 +13,9 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

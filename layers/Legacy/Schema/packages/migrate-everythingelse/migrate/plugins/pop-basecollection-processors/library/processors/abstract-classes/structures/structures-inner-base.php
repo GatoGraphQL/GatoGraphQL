@@ -19,6 +19,9 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     // PUBLIC Overriding Functions
     //-------------------------------------------------
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

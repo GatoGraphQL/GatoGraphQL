@@ -12,6 +12,9 @@ class GD_EM_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

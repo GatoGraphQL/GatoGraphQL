@@ -20,6 +20,9 @@ trait PoPTheme_Wassup_Module_Processor_PageTrait
         return array();
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(

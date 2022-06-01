@@ -13,6 +13,9 @@ class GD_CommonPages_Module_Processor_CustomControlButtonGroups extends PoP_Modu
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

@@ -57,6 +57,9 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

@@ -37,6 +37,9 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
         return parent::useCounter($component);
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component->name) {

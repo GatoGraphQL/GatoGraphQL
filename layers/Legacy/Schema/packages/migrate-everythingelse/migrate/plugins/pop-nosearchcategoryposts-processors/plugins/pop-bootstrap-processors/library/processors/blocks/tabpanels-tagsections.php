@@ -49,6 +49,9 @@ class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

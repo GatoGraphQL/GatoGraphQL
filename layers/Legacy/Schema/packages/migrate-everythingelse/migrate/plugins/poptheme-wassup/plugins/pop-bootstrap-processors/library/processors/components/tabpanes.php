@@ -15,6 +15,9 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

@@ -15,6 +15,9 @@ class PoP_UserCommunities_Module_Processor_SectionSidebarInners extends PoP_Modu
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

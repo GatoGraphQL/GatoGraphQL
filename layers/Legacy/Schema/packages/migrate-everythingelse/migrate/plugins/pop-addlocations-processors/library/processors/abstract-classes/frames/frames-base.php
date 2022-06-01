@@ -21,6 +21,9 @@ abstract class GD_EM_Module_Processor_CreateLocationFramesBase extends PoPEngine
         parent::initModelProps($component, $props);
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component->name) {

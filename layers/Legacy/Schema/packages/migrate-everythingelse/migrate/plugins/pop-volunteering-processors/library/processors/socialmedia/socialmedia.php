@@ -13,6 +13,9 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         switch ($component->name) {

@@ -16,6 +16,9 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
         return \PoP\Root\App::applyFilters('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubcomponents', array(), $component);
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

@@ -13,6 +13,9 @@ class Wassup_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

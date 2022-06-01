@@ -11,6 +11,9 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

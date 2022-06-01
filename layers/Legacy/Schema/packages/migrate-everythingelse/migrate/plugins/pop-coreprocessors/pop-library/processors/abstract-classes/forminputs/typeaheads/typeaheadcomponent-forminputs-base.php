@@ -22,6 +22,9 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
         }
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
 

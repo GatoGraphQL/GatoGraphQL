@@ -8,6 +8,9 @@ trait PoP_Engine_Module_Processor_InnerModules_Trait
         return array();
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(

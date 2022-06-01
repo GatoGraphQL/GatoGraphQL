@@ -13,6 +13,9 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);

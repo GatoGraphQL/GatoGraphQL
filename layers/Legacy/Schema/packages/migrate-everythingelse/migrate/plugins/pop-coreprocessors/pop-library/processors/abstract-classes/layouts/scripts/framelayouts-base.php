@@ -18,6 +18,9 @@ abstract class PoP_Module_Processor_ScriptFrameLayoutsBase extends PoPEngine_Que
         return null;
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(

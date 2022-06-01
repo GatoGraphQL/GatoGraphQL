@@ -13,6 +13,9 @@ class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Modu
         );
     }
 
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
     public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
