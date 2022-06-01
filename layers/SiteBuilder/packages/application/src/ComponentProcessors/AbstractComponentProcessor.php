@@ -46,6 +46,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelPropsForDescendantDatasetComponents(Component $component, array &$props): array
     {
         $ret = parent::getModelPropsForDescendantDatasetComponents($component, $props);

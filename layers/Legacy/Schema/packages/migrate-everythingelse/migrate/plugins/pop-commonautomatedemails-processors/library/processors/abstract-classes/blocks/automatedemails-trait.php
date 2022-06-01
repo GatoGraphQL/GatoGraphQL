@@ -12,6 +12,9 @@ trait AutomatedEmailsBlocksBaseTrait
         return false;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getModelPropsForDescendantComponents($component, $props);

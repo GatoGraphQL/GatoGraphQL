@@ -94,6 +94,9 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataC
         return $ret;
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getRequestPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getRequestPropsForDescendantComponents($component, $props);

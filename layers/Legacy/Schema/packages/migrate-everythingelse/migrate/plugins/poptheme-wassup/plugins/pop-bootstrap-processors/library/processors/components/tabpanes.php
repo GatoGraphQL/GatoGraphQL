@@ -67,6 +67,9 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return parent::getID($component, $props);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getModelPropsForDescendantComponents($component, $props);
