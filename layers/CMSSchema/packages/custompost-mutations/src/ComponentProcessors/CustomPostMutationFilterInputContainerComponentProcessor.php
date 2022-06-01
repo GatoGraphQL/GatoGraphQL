@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\FilterInputContainerComponentProcessorInterface;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\CustomPostFilterInputContainerComponentProcessor;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
@@ -29,8 +30,8 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
     public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $targetModule = match ($component[1]) {
-            self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
-            self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST),
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT =>new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT),
             default => null,
         };
         /** @var FilterInputContainerComponentProcessorInterface */
