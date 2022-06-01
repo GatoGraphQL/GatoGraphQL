@@ -31,14 +31,14 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
      */
     public function getFilterInputComponents(Component $component): array
     {
-        $targetModule = match ($component->name) {
+        $targetComponent = match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST),
             self::COMPONENT_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT =>new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT),
             default => null,
         };
         /** @var FilterInputContainerComponentProcessorInterface */
-        $targetComponentProcessor = $this->getComponentProcessorManager()->getProcessor($targetModule);
-        $targetFilterInputComponents = $targetComponentProcessor->getFilterInputComponents($targetModule);
+        $targetComponentProcessor = $this->getComponentProcessorManager()->getProcessor($targetComponent);
+        $targetFilterInputComponents = $targetComponentProcessor->getFilterInputComponents($targetComponent);
         return array_merge(
             $targetFilterInputComponents,
             [

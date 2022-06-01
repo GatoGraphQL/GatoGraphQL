@@ -28,12 +28,12 @@ class CommentFilterInputContainerComponentProcessor extends UpstreamCommentFilte
     public function getFilterInputComponents(Component $component): array
     {
         // Get the original config from above
-        $targetModule = match ($component->name) {
+        $targetComponent = match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTS => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTS),
             self::COMPONENT_FILTERINPUTCONTAINER_MYCOMMENTCOUNT => new Component(parent::class, parent::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT),
             default => null,
         };
-        return parent::getFilterInputComponents($targetModule ?? $component);
+        return parent::getFilterInputComponents($targetComponent ?? $component);
     }
 
     /**
