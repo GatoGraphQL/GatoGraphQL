@@ -9,5 +9,5 @@ interface EntryComponentManagerInterface
     /**
      * Obtain the first module from which the Module Model is processed
      */
-    public function getEntryComponent(): ?array;
+    public function getEntryComponent(): ?\PoP\ComponentModel\Component\Component;
 }
