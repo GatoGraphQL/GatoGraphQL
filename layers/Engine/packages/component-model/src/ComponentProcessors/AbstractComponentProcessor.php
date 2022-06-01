@@ -351,7 +351,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    private function isDescendantModule(array|Component $component_or_componentPath, array &$props): bool
+    private function isDescendantComponent(array|Component $component_or_componentPath, array &$props): bool
     {
         if ($this->isComponentPath($component_or_componentPath)) {
             return false;
@@ -440,7 +440,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // If the component is a string, there are 2 possibilities: either it is the current component or not
         // If it is not, then it is a descendant component, which will appear at some point down the path.
         // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsComponentTree`
-        if ($this->isDescendantModule($component_or_componentPath, $props)) {
+        if ($this->isDescendantComponent($component_or_componentPath, $props)) {
             // It is a child component
             $att_component = $component_or_componentPath;
             $attComponentFullName = $this->getComponentHelpers()->getComponentFullName($att_component);
