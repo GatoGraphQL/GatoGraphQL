@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
@@ -73,7 +74,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         );
     }
 
-    public function getComponentSettings(\PoP\ComponentModel\Component\Component $component, $model_props, array &$props)
+    public function getComponentSettings(Component $component, $model_props, array &$props)
     {
         $ret = array();
 

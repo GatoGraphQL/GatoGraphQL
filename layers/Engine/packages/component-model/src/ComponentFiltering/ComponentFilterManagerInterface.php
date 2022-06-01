@@ -14,15 +14,15 @@ interface ComponentFilterManagerInterface
     public function setSelectedComponentFilterName(string $selectedComponentFilterName): void;
     public function getNotExcludedComponentSets(): ?array;
     public function setNeverExclude(bool $neverExclude): void;
-    public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool;
+    public function excludeSubcomponent(Component $component, array &$props): bool;
     /**
      * @param Component[] $subcomponents
      * @return Component[]
      */
-    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array;
+    public function removeExcludedSubcomponents(Component $component, array $subcomponents): array;
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void;
-    public function restoreFromPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void;
+    public function prepareForPropagation(Component $component, array &$props): void;
+    public function restoreFromPropagation(Component $component, array &$props): void;
 }

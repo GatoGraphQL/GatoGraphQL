@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentHelpers;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -24,7 +25,7 @@ class ComponentHelpers implements ComponentHelpersInterface
         return $this->definitionManager ??= $this->instanceManager->getInstance(DefinitionManagerInterface::class);
     }
 
-    public function getComponentFullName(\PoP\ComponentModel\Component\Component $component): string
+    public function getComponentFullName(Component $component): string
     {
         $componentFullName = $component->processorClass . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . $component->name;
         if ($component->atts !== []) {
@@ -34,7 +35,7 @@ class ComponentHelpers implements ComponentHelpersInterface
         return $componentFullName;
     }
 
-    public function getComponentFromFullName(string $componentFullName): ?\PoP\ComponentModel\Component\Component
+    public function getComponentFromFullName(string $componentFullName): ?Component
     {
         $parts = explode(self::SEPARATOR_PROCESSORCOMPONENTFULLNAME, $componentFullName);
 
@@ -62,12 +63,12 @@ class ComponentHelpers implements ComponentHelpersInterface
             $parts;
     }
 
-    public function getComponentOutputName(\PoP\ComponentModel\Component\Component $component): string
+    public function getComponentOutputName(Component $component): string
     {
         return $this->getDefinitionManager()->getDefinition($this->getComponentFullName($component), DefinitionGroups::COMPONENTS);
     }
 
-    public function getComponentFromOutputName(string $componentOutputName): ?\PoP\ComponentModel\Component\Component
+    public function getComponentFromOutputName(string $componentOutputName): ?Component
     {
         return $this->getComponentFromFullName($this->getDefinitionManager()->getOriginalName($componentOutputName, DefinitionGroups::COMPONENTS));
     }

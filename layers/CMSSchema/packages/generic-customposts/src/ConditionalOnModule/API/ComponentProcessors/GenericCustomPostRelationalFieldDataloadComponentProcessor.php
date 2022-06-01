@@ -52,7 +52,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
         );
     }
 
-    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
@@ -63,7 +63,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(Component $component): ?QueryInputOutputHandlerInterface
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
@@ -74,7 +74,7 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
+    public function getFilterSubcomponent(Component $component): ?Component
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:

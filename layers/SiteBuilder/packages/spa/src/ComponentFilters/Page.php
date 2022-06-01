@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SPA\ComponentFilters;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentFilters\AbstractComponentFilter;
 use PoP\SPA\ComponentProcessors\PageComponentProcessorInterface;
 
@@ -17,7 +18,7 @@ class Page extends AbstractComponentFilter
     /**
      * Exclude until reaching the pageSection
      */
-    public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool
+    public function excludeSubcomponent(Component $component, array &$props): bool
     {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
         return !($processor instanceof PageComponentProcessorInterface);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\ComponentProcessors\FormInputs;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -44,7 +45,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
+    public function getFilterInput(Component $component): ?FilterInputInterface
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->getMimeTypesFilterInput(),
@@ -52,7 +53,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
+    public function getInputClass(Component $component): string
     {
         switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_MIME_TYPES:
@@ -62,7 +63,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return parent::getInputClass($component);
     }
 
-    public function getName(\PoP\ComponentModel\Component\Component $component): string
+    public function getName(Component $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
         return match ($component->name) {
@@ -71,7 +72,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->getStringScalarTypeResolver(),
@@ -79,7 +80,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_MIME_TYPES => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -87,7 +88,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->__('Limit results to elements with the given mime types', 'media'),

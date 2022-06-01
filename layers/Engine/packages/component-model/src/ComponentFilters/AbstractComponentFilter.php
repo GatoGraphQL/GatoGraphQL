@@ -23,7 +23,7 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool
+    public function excludeSubcomponent(Component $component, array &$props): bool
     {
         return false;
     }
@@ -32,16 +32,16 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
      * @param Component[] $subcomponents
      * @return Component[]
      */
-    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array
+    public function removeExcludedSubcomponents(Component $component, array $subcomponents): array
     {
         return $subcomponents;
     }
 
-    public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
+    public function prepareForPropagation(Component $component, array &$props): void
     {
     }
 
-    public function restoreFromPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
+    public function restoreFromPropagation(Component $component, array &$props): void
     {
     }
 }

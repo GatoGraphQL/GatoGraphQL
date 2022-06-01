@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\ComponentProcessors\FormInputs;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -55,7 +56,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
+    public function getFilterInput(Component $component): ?FilterInputInterface
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getUserRolesFilterInput(),
@@ -64,7 +65,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getName(\PoP\ComponentModel\Component\Component $component): string
+    public function getName(Component $component): string
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => 'roles',
@@ -73,7 +74,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getStringScalarTypeResolver(),
@@ -82,7 +83,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES,
@@ -93,7 +94,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),

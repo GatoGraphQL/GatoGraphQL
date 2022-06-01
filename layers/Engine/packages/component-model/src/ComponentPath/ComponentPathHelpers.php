@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentPath;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Facades\ComponentPath\ComponentPathHelpersFacade;
 use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
@@ -37,7 +38,7 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
-    public function getStringifiedModulePropagationCurrentPath(\PoP\ComponentModel\Component\Component $component): string
+    public function getStringifiedModulePropagationCurrentPath(Component $component): string
     {
         $module_propagation_current_path = $this->getComponentPathManager()->getPropagationCurrentPath();
         $module_propagation_current_path[] = $component;

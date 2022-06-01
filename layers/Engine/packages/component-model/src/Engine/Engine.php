@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
@@ -460,7 +461,7 @@ class Engine implements EngineInterface
         return $data;
     }
 
-    public function getModelPropsComponentTree(\PoP\ComponentModel\Component\Component $component): array
+    public function getModelPropsComponentTree(Component $component): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -489,7 +490,7 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
-    public function addRequestPropsComponentTree(\PoP\ComponentModel\Component\Component $component, array $props): array
+    public function addRequestPropsComponentTree(Component $component, array $props): array
     {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
@@ -635,7 +636,7 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getComponentDatasetSettings(\PoP\ComponentModel\Component\Component $component, $model_props, array &$props): array
+    public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array
     {
         $ret = [];
         /** @var ModuleConfiguration */
@@ -884,7 +885,7 @@ class Engine implements EngineInterface
         $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
     }
 
-    protected function getInterreferencedComponentFullPaths(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
         $this->addInterreferencedComponentFullPaths($paths, [], $component, $props);
@@ -894,7 +895,7 @@ class Engine implements EngineInterface
     private function addInterreferencedComponentFullPaths(
         array &$paths,
         array $component_path,
-        \PoP\ComponentModel\Component\Component $component,
+        Component $component,
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
@@ -934,7 +935,7 @@ class Engine implements EngineInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function getDataloadingComponentFullPaths(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    protected function getDataloadingComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
         $this->addDataloadingComponentFullPaths($paths, [], $component, $props);
@@ -944,7 +945,7 @@ class Engine implements EngineInterface
     private function addDataloadingComponentFullPaths(
         array &$paths,
         array $component_path,
-        \PoP\ComponentModel\Component\Component $component,
+        Component $component,
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
@@ -985,7 +986,7 @@ class Engine implements EngineInterface
     protected function assignValueForComponent(
         array &$array,
         array $component_path,
-        \PoP\ComponentModel\Component\Component $component,
+        Component $component,
         string $key,
         mixed $value,
     ): void {
@@ -1029,7 +1030,7 @@ class Engine implements EngineInterface
         return null;
     }
 
-    protected function getComponentPathKey(array $component_path, \PoP\ComponentModel\Component\Component $component): string
+    protected function getComponentPathKey(array $component_path, Component $component): string
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
         return $componentFullName . '-' . implode('.', $component_path);
@@ -2436,7 +2437,7 @@ class Engine implements EngineInterface
 
     protected function processAndAddComponentData(
         array $component_path,
-        \PoP\ComponentModel\Component\Component $component,
+        Component $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,

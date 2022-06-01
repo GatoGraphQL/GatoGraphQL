@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -18,15 +19,15 @@ trait QueryDataComponentProcessorTrait
 
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
-    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(Component $component, array &$props): array
     {
         return array();
     }
-    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(Component $component, array &$props): array
     {
         return array();
     }
-    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(Component $component): ?QueryInputOutputHandlerInterface
     {
         return $this->getActionExecutionQueryInputOutputHandler();
     }
@@ -35,7 +36,7 @@ trait QueryDataComponentProcessorTrait
     //     return null;
     // }
 
-    public function getImmutableHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
@@ -45,7 +46,7 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getQueryArgsFilteringComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getQueryArgsFilteringComponents(Component $component, array &$props): array
     {
         // Attributes overriding the query args, taken from the request
         return [
@@ -53,7 +54,7 @@ trait QueryDataComponentProcessorTrait
         ];
     }
 
-    public function getMutableonmodelHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getMutableonmodelHeaddatasetcomponentDataProperties($component, $props);
 
@@ -70,7 +71,7 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getMutableonrequestHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
 
@@ -79,7 +80,7 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
     {
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
@@ -126,7 +127,7 @@ trait QueryDataComponentProcessorTrait
         return $typeDataLoader->findIDs($data_properties);
     }
 
-    public function getDatasetmeta(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 

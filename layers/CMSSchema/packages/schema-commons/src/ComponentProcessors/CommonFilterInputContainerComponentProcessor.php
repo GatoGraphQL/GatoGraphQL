@@ -42,30 +42,30 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         );
     }
 
-    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
+    public function getFilterInputComponents(Component $component): array
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
-                new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID),
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG => [
-                new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG),
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING => [
-                new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT),
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE => [
-                new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT),
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING => [
-                new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT),
-                new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT),
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT),
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT),
             ],
             default => [],
         };
     }
 
-    public function getFieldFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(Component $component, string $fieldArgName): mixed
     {
         switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING:
@@ -94,7 +94,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         return parent::getFieldFilterInputDefaultValue($component, $fieldArgName);
     }
 
-    public function getFieldFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(Component $component, string $fieldArgName): int
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
         switch ($component->name) {

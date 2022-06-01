@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 interface FormattableModuleInterface
 {
-    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string;
+    public function getFormat(Component $component): ?string;
 }

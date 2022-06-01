@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\ComponentRoutingProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
@@ -37,7 +38,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     {
         $ret = array();
         $ret[TagRequestNature::TAG][] = [
-            'component' => new \PoP\ComponentModel\Component\Component(PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG),
+            'component' => new Component(PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing' => [
@@ -57,7 +58,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostTagsRoute() => new \PoP\ComponentModel\Component\Component(PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST),
+            $moduleConfiguration->getPostTagsRoute() => new Component(PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -70,7 +71,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostsRoute() => new \PoP\ComponentModel\Component\Component(TagPostFieldDataloadComponentProcessor::class, TagPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST),
+            $moduleConfiguration->getPostsRoute() => new Component(TagPostFieldDataloadComponentProcessor::class, TagPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

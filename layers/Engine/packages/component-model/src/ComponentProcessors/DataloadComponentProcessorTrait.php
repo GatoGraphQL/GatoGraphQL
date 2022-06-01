@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 
 trait DataloadComponentProcessorTrait
 {
     use FormattableModuleTrait;
 
-    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
+    public function getSubcomponents(Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -28,17 +29,17 @@ trait DataloadComponentProcessorTrait
         return $ret;
     }
 
-    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
+    protected function getInnerSubcomponents(Component $component): array
     {
         return array();
     }
 
-    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
+    public function getFilterSubcomponent(Component $component): ?Component
     {
         return null;
     }
 
-    public function metaInitProps(\PoP\ComponentModel\Component\Component $component, array &$props)
+    public function metaInitProps(Component $component, array &$props)
     {
         /**
          * Allow to add more stuff
@@ -51,13 +52,13 @@ trait DataloadComponentProcessorTrait
         );
     }
 
-    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
+    public function initModelProps(Component $component, array &$props): void
     {
         $this->metaInitProps($component, $props);
         parent::initModelProps($component, $props);
     }
 
-    public function startDataloadingSection(\PoP\ComponentModel\Component\Component $component): bool
+    public function startDataloadingSection(Component $component): bool
     {
         return true;
     }

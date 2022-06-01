@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -17,9 +18,9 @@ interface EngineInterface
     public function listExtraRouteVars(): array;
     public function generateDataAndPrepareResponse(): void;
     public function calculateOutputData(): void;
-    public function getModelPropsComponentTree(\PoP\ComponentModel\Component\Component $component): array;
-    public function addRequestPropsComponentTree(\PoP\ComponentModel\Component\Component $component, array $props): array;
-    public function getComponentDatasetSettings(\PoP\ComponentModel\Component\Component $component, $model_props, array &$props): array;
+    public function getModelPropsComponentTree(Component $component): array;
+    public function addRequestPropsComponentTree(Component $component, array $props): array;
+    public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array;
     public function getRequestMeta(): array;
     public function getSessionMeta(): array;
     public function getSiteMeta(): array;

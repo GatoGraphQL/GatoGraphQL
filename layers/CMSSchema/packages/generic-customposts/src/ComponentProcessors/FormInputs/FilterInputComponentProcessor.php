@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\GenericCustomPosts\ComponentProcessors\FormInputs;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -44,7 +45,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         );
     }
 
-    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
+    public function getFilterInput(Component $component): ?FilterInputInterface
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostTypesFilterInput(),
@@ -52,7 +53,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
+    public function getInputClass(Component $component): string
     {
         switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES:
@@ -61,7 +62,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
         return parent::getInputClass($component);
     }
-    public function getName(\PoP\ComponentModel\Component\Component $component): string
+    public function getName(Component $component): string
     {
         switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES:
@@ -74,7 +75,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostEnumTypeResolver(),
@@ -82,7 +83,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -90,7 +91,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDefaultValue(\PoP\ComponentModel\Component\Component $component): mixed
+    public function getFilterInputDefaultValue(Component $component): mixed
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->getGenericCustomPostEnumTypeResolver()->getConsolidatedEnumValues(),
@@ -98,7 +99,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_GENERICCUSTOMPOSTTYPES => $this->__('Return results from Custom Post Types', 'customposts'),

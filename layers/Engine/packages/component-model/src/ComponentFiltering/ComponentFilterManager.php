@@ -121,7 +121,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->neverExclude = $neverExclude;
     }
 
-    public function excludeSubcomponent(\PoP\ComponentModel\Component\Component $component, array &$props): bool
+    public function excludeSubcomponent(Component $component, array &$props): bool
     {
         if (!$this->initialized) {
             $this->init();
@@ -144,7 +144,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      * @param Component[] $subcomponents
      * @return Component[]
      */
-    public function removeExcludedSubcomponents(\PoP\ComponentModel\Component\Component $component, array $subcomponents): array
+    public function removeExcludedSubcomponents(Component $component, array $subcomponents): array
     {
         if (!$this->initialized) {
             $this->init();
@@ -163,7 +163,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
+    public function prepareForPropagation(Component $component, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();
@@ -189,7 +189,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         // Add the component to the path
         $this->getComponentPathManager()->prepareForPropagation($component, $props);
     }
-    public function restoreFromPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
+    public function restoreFromPropagation(Component $component, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();

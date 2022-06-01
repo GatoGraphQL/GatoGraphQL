@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentField;
@@ -16,83 +17,83 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 interface ComponentProcessorInterface
 {
     public function getComponentNamesToProcess(): array;
-    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array;
-    public function getAllSubcomponents(\PoP\ComponentModel\Component\Component $component): array;
-    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, \PoP\ComponentModel\Component\Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
-    public function initModelPropsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
-    public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getModelPropsForDescendantDatasetComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void;
-    public function initRequestPropsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
-    public function getRequestPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getRequestPropsForDescendantDatasetComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void;
+    public function getSubcomponents(Component $component): array;
+    public function getAllSubcomponents(Component $component): array;
+    public function executeInitPropsComponentTree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetcomponents_fn, string $propagate_fn, Component $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void;
+    public function initModelPropsComponentTree(Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
+    public function getModelPropsForDescendantComponents(Component $component, array &$props): array;
+    public function getModelPropsForDescendantDatasetComponents(Component $component, array &$props): array;
+    public function initModelProps(Component $component, array &$props): void;
+    public function initRequestPropsComponentTree(Component $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void;
+    public function getRequestPropsForDescendantComponents(Component $component, array &$props): array;
+    public function getRequestPropsForDescendantDatasetComponents(Component $component, array &$props): array;
+    public function initRequestProps(Component $component, array &$props): void;
     public function setProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function appendGroupProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function appendProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function mergeGroupProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function mergeProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
-    public function getGroupProp(string $group, \PoP\ComponentModel\Component\Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed;
-    public function getProp(\PoP\ComponentModel\Component\Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed;
+    public function getGroupProp(string $group, Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed;
+    public function getProp(Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed;
     public function mergeGroupIterateKeyProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function mergeIterateKeyProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
     public function pushProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
-    public function getDatabaseKeys(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getImmutableSettingsDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getImmutableDatasetsettings(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getDatasetDatabaseKeys(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getDatasource(\PoP\ComponentModel\Component\Component $component, array &$props): string;
-    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array | null;
-    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?RelationalTypeResolverInterface;
-    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?ComponentMutationResolverBridgeInterface;
-    public function prepareDataPropertiesAfterMutationExecution(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): void;
+    public function getDatabaseKeys(Component $component, array &$props): array;
+    public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
+    public function getImmutableDatasetsettings(Component $component, array &$props): array;
+    public function getDatasetDatabaseKeys(Component $component, array &$props): array;
+    public function getDatasource(Component $component, array &$props): string;
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null;
+    public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;
+    public function getComponentMutationResolverBridge(Component $component): ?ComponentMutationResolverBridgeInterface;
+    public function prepareDataPropertiesAfterMutationExecution(Component $component, array &$props, array &$data_properties): void;
     /**
      * @return LeafComponentField[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array;
+    public function getLeafComponentFields(Component $component, array &$props): array;
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array;
+    public function getRelationalComponentFields(Component $component): array;
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array;
+    public function getConditionalLeafComponentFields(Component $component): array;
     /**
      * @return ConditionalRelationalComponentField[]
      */
-    public function getConditionalRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array;
-    public function getImmutableDataPropertiesDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getDatasetcomponentTreeSectionFlattenedDataFields(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getDatasetcomponentTreeSectionFlattenedComponents(\PoP\ComponentModel\Component\Component $component): array;
-    public function getImmutableHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonmodelDataPropertiesDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonmodelHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonrequestDataPropertiesDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonrequestHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getDataFeedbackDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
-    public function getDataFeedbackComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
-    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
-    public function getDataFeedbackInterreferencedComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props): ?array;
-    public function getBackgroundurlsMergeddatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
-    public function getBackgroundurls(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
-    public function getDatasetmeta(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array;
+    public function getConditionalRelationalComponentFields(Component $component): array;
+    public function getImmutableDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
+    public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
+    public function getDatasetcomponentTreeSectionFlattenedDataFields(Component $component, array &$props): array;
+    public function getDatasetcomponentTreeSectionFlattenedComponents(Component $component): array;
+    public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
+    public function getMutableonmodelDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
+    public function getMutableonmodelDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
+    public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
+    public function getMutableonrequestDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
+    public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
+    public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
+    public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
+    public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
+    public function getDataFeedbackInterreferencedComponentPath(Component $component, array &$props): ?array;
+    public function getBackgroundurlsMergeddatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    public function getBackgroundurls(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array;
     /**
      * @return CheckpointInterface[]
      */
-    public function getDataAccessCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getActionExecutionCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool;
-    public function getComponentsToPropagateDataProperties(\PoP\ComponentModel\Component\Component $component): array;
-    public function getModelSupplementaryDBObjectDataComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getModelSupplementaryDBObjectData(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonrequestSupplementaryDBObjectDataComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function getMutableonrequestSupplementaryDbobjectdata(\PoP\ComponentModel\Component\Component $component, array &$props): array;
-    public function doesComponentLoadData(\PoP\ComponentModel\Component\Component $component): bool;
-    public function startDataloadingSection(\PoP\ComponentModel\Component\Component $component): bool;
-    public function addToDatasetDatabaseKeys(\PoP\ComponentModel\Component\Component $component, array &$props, array $path, array &$ret): void;
-    public function addDatasetcomponentTreeSectionFlattenedComponents(&$ret, \PoP\ComponentModel\Component\Component $component): void;
+    public function getDataAccessCheckpoints(Component $component, array &$props): array;
+    public function getActionExecutionCheckpoints(Component $component, array &$props): array;
+    public function shouldExecuteMutation(Component $component, array &$props): bool;
+    public function getComponentsToPropagateDataProperties(Component $component): array;
+    public function getModelSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array;
+    public function getModelSupplementaryDBObjectData(Component $component, array &$props): array;
+    public function getMutableonrequestSupplementaryDBObjectDataComponentTree(Component $component, array &$props): array;
+    public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array;
+    public function doesComponentLoadData(Component $component): bool;
+    public function startDataloadingSection(Component $component): bool;
+    public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void;
+    public function addDatasetcomponentTreeSectionFlattenedComponents(&$ret, Component $component): void;
 }

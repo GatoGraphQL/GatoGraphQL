@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentRouting\Helpers\Methods;
 use PoP\Root\App;
 
@@ -36,7 +37,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         return ComponentRoutingGroups::ENTRYCOMPONENT;
     }
 
-    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?\PoP\ComponentModel\Component\Component
+    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?Component
     {
         $group ??= $this->getDefaultGroup();
         $nature = App::getState('nature');

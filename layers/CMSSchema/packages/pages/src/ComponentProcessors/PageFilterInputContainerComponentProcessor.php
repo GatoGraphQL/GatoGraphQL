@@ -27,7 +27,7 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
         );
     }
 
-    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
+    public function getFilterInputComponents(Component $component): array
     {
         // Get the original config from above
         $targetModule = match ($component->name) {
@@ -39,9 +39,9 @@ class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputCo
         };
         $filterInputComponents = parent::getFilterInputComponents($targetModule);
         // Add the parentIDs and parentID filterInputs
-        $filterInputComponents[] = new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS);
-        $filterInputComponents[] = new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID);
-        $filterInputComponents[] = new \PoP\ComponentModel\Component\Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS);
+        $filterInputComponents[] = new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS);
+        $filterInputComponents[] = new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID);
+        $filterInputComponents[] = new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS);
         return $filterInputComponents;
     }
 

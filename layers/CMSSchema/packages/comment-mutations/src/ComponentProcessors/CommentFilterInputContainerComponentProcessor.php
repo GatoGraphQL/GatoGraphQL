@@ -22,7 +22,7 @@ class CommentFilterInputContainerComponentProcessor extends UpstreamCommentFilte
         );
     }
 
-    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
+    public function getFilterInputComponents(Component $component): array
     {
         // Get the original config from above
         $targetModule = match ($component->name) {

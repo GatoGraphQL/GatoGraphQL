@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
 use PoPCMSSchema\Posts\ComponentProcessors\AbstractPostFilterInputContainerComponentProcessor;
 
@@ -25,7 +26,7 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
     /**
      * Retrieve the same elements as for Posts, and add the "status" filter
      */
-    public function getFilterInputComponents(\PoP\ComponentModel\Component\Component $component): array
+    public function getFilterInputComponents(Component $component): array
     {
         $targetModule = match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => self::COMPONENT_FILTERINPUTCONTAINER_POSTS,
@@ -33,7 +34,7 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
             default => null,
         };
         $filterInputComponents = parent::getFilterInputComponents($targetModule);
-        $filterInputComponents[] = new \PoP\ComponentModel\Component\Component(CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS);
+        $filterInputComponents[] = new Component(CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS);
         return $filterInputComponents;
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField;
@@ -149,7 +150,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return LeafComponentField[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFields(Component $component, array &$props): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -203,7 +204,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFields(Component $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -304,7 +305,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * @todo Remove all commented code below this function
      */
-    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getConditionalLeafComponentFields(Component $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];

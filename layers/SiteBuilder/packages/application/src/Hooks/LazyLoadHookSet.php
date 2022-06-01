@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ComponentFilters\Lazy;
 use PoP\Application\ComponentProcessors\DataloadingConstants;
@@ -66,7 +67,7 @@ class LazyLoadHookSet extends AbstractHookSet
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingComponentData(\PoP\ComponentModel\Component\Component $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
+    public function calculateDataloadingComponentData(Component $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 

@@ -15,7 +15,7 @@ trait FilterDataComponentProcessorTrait
      */
     protected array $activeDataloadQueryArgsFilteringComponents = [];
 
-    public function filterHeadcomponentDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$query, array $source = null): void
+    public function filterHeadcomponentDataloadQueryArgs(Component $component, array &$query, array $source = null): void
     {
         if ($activeDataloadQueryArgsFilteringComponents = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
             foreach ($activeDataloadQueryArgsFilteringComponents as $subcomponent) {
@@ -32,7 +32,7 @@ trait FilterDataComponentProcessorTrait
     /**
      * @return Component[]
      */
-    public function getActiveDataloadQueryArgsFilteringComponents(\PoP\ComponentModel\Component\Component $component, array $source = null): array
+    public function getActiveDataloadQueryArgsFilteringComponents(Component $component, array $source = null): array
     {
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
@@ -47,7 +47,7 @@ trait FilterDataComponentProcessorTrait
             // Check if if we're currently filtering by any filtercomponent
             $components = array_filter(
                 $dataloadQueryArgsFilteringComponents,
-                function (\PoP\ComponentModel\Component\Component $component) use ($source) {
+                function (Component $component) use ($source) {
                     /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
                     $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);
                     return $dataloadQueryArgsFilterInputComponentProcessor->isInputSetInSource($component, $source);
@@ -62,11 +62,11 @@ trait FilterDataComponentProcessorTrait
     /**
      * @return Component[]
      */
-    public function getDataloadQueryArgsFilteringComponents(\PoP\ComponentModel\Component\Component $component): array
+    public function getDataloadQueryArgsFilteringComponents(Component $component): array
     {
         return array_values(array_filter(
             $this->getDatasetcomponentTreeSectionFlattenedComponents($component),
-            fn (\PoP\ComponentModel\Component\Component $component) => $this->getComponentProcessorManager()->getProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface
+            fn (Component $component) => $this->getComponentProcessorManager()->getProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface
         ));
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\FilterDataComponentProcessorInterface;
 use PoP\ComponentModel\ComponentProcessors\FilterInputContainerComponentProcessorInterface;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
@@ -27,7 +28,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?\PoP\ComponentModel\Component\Component
+    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?Component
     {
         /** @var QueryableObjectTypeFieldSchemaDefinitionResolverInterface */
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
