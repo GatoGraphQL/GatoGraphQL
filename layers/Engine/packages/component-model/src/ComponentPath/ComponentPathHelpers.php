@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ComponentPath;
 
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Facades\ComponentPath\ComponentPathHelpersFacade;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\ComponentModel\Tokens\ComponentPath;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;

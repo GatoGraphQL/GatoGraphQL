@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Hooks\ComponentFilters;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\Engine\ComponentFilters\HeadComponent;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;

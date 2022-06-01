@@ -9,7 +9,7 @@ use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Constants\Props;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\Root\App;
 
 trait ComponentPathProcessorTrait
