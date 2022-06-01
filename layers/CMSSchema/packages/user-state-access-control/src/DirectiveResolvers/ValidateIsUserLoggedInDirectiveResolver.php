@@ -8,11 +8,22 @@ use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
 class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpointDirectiveResolver
 {
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+    }
+
     public function getDirectiveName(): string
     {
         return 'validateIsUserLoggedIn';
@@ -23,7 +34,9 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
      */
     protected function getValidationCheckpoints(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
+        return [
+            $this->getUserLoggedInCheckpoint(),
+        ];
     }
 
     protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution

@@ -6,10 +6,21 @@ namespace PoPCMSSchema\UserState\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 trait UserStateObjectTypeFieldResolverTrait
 {
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+    }
+
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
     protected function getValidationCheckpoints(
@@ -24,7 +35,7 @@ trait UserStateObjectTypeFieldResolverTrait
             $fieldName,
             $fieldArgs,
         );
-        $validationCheckpoints[] = UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
+        $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
         return $validationCheckpoints;
     }
 }
