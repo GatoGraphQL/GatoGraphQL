@@ -7,14 +7,9 @@ class PoPSystem_Dataload_Checkpoint extends AbstractCheckpoint
     public final const CHECKPOINT_SYSTEMACCESSKEYVALID = 'system-checkpoint-systemaccesskeyvalid';
     public final const CHECKPOINT_SYSTEMACCESSIPVALID = 'system-checkpoint-systemaccessipvalid';
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::CHECKPOINT_SYSTEMACCESSKEYVALID],
-            [self::class, self::CHECKPOINT_SYSTEMACCESSIPVALID],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {

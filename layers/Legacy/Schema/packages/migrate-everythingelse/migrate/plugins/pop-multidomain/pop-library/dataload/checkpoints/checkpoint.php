@@ -4,13 +4,9 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoP_MultiDomain_Dataload_Checkpoint extends AbstractCheckpoint
 {
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [PoP_Domain_Dataload_Checkpoint::class, PoP_Domain_Dataload_Checkpoint::CHECKPOINT_DOMAINVALID],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {

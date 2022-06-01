@@ -7,14 +7,9 @@ class PoPCore_Dataload_Checkpoint extends AbstractCheckpoint
     public final const CHECKPOINT_PROFILEACCESS = 'checkpoint-profileaccess';
     public final const CHECKPOINT_PROFILEACCESS_SUBMIT = 'checkpoint-profileaccess-submit';
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::CHECKPOINT_PROFILEACCESS],
-            [self::class, self::CHECKPOINT_PROFILEACCESS_SUBMIT],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {

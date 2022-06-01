@@ -6,13 +6,9 @@ class GD_WSL_Dataload_UserCheckpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_NONSOCIALLOGINUSER = 'wsl-checkpoint-nonsocialloginuser';
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::CHECKPOINT_NONSOCIALLOGINUSER],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {

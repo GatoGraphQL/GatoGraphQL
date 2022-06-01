@@ -8,14 +8,9 @@ class GD_ContentCreation_Dataload_UserCheckpoint extends AbstractCheckpoint
     public final const CHECKPOINT_USERCANEDIT = 'checkpoint-usercanedit';
     public final const CHECKPOINT_EDITPOSTNONCE = 'checkpoint-editpostnonce';
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::CHECKPOINT_USERCANEDIT],
-            [self::class, self::CHECKPOINT_EDITPOSTNONCE],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {

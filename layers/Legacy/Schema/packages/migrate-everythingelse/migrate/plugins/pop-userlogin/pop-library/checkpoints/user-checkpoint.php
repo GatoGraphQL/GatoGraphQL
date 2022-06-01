@@ -7,13 +7,9 @@ class GD_UserLogin_Dataload_UserCheckpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR = 'checkpoint-loggedinuser-isadministrator';
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {

@@ -10,15 +10,9 @@ class PoP_UserCommunities_Dataload_UserCheckpoint extends AbstractCheckpoint
     public final const CHECKPOINT_EDITINGCOMMUNITYMEMBER = 'checkpoint-editingcommunitymember';
     public final const CHECKPOINT_EDITMEMBERSHIPNONCE = 'checkpoint-editmembershipnonce';
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],
-            [self::class, self::CHECKPOINT_EDITINGCOMMUNITYMEMBER],
-            [self::class, self::CHECKPOINT_EDITMEMBERSHIPNONCE],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         $current_user_id = \PoP\Root\App::getState('current-user-id');

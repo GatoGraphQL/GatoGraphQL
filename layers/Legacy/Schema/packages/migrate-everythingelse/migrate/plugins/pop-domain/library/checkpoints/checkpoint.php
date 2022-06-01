@@ -6,13 +6,9 @@ class PoP_Domain_Dataload_Checkpoint extends AbstractCheckpoint
 {
     public final const CHECKPOINT_DOMAINVALID = 'checkpoint-domainvalid';
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::CHECKPOINT_DOMAINVALID],
-        );
-    }
-
+    /**
+     * @todo Migrate to not using $checkpoint
+     */
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
