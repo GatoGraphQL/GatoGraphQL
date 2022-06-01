@@ -1145,6 +1145,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getComponentPathHelpers()->getStringifiedModulePropagationCurrentPath($component);
     }
 
+    /**
+     * @return Component[]
+     */
     public function getComponentsToPropagateDataProperties(Component $component): array
     {
         return $this->getSubcomponentsByGroup(
