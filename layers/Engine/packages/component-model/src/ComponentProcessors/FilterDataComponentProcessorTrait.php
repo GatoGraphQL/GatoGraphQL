@@ -38,10 +38,10 @@ trait FilterDataComponentProcessorTrait
 
         $components = [];
         // Check if the component has any filtercomponent
-        if ($dataloadQueryArgsFilteringModules = $this->getDataloadQueryArgsFilteringComponents($component)) {
+        if ($dataloadQueryArgsFilteringComponents = $this->getDataloadQueryArgsFilteringComponents($component)) {
             // Check if if we're currently filtering by any filtercomponent
             $components = array_filter(
-                $dataloadQueryArgsFilteringModules,
+                $dataloadQueryArgsFilteringComponents,
                 function (\PoP\ComponentModel\Component\Component $component) use ($source) {
                     /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
                     $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);
