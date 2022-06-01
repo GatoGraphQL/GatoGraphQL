@@ -16,12 +16,14 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
      */
     private array $processors = [];
 
+    /**
+     * Return the ComponentProcessor that handles the Component
+     */
     public function getProcessor(Component $component): ComponentProcessorInterface
     {
         $componentProcessorClass = $component[0];
         $componentName = $component[1];
 
-        // Return the reference to the ItemProcessor instance, and created first if it doesn't exist
         if (!$this->hasItemBeenLoaded($component)) {
             // Get the instance from the InstanceManager
             $processorInstance = $this->getInstanceManager()->getInstance($componentProcessorClass);
