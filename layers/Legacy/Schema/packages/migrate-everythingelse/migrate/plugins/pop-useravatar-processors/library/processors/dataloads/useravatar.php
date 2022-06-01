@@ -114,8 +114,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 // Two different actions, handled through $componentAtts:
                 // 1. Upload the image to the S3 repository, when first accessing the page
                 // 2. Update the avatar, on the POST operation
-                $componentAtts = (count($component) >= 3) ? $component[2] : null;
-                if ($componentAtts && $componentAtts['executeupdate']) {
+                if ($component->atts['executeupdate'] ?? null) {
                     return $this->instanceManager->getInstance(UpdateUserAvatarMutationResolverBridge::class);
                 }
 
@@ -130,8 +129,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         // Always execute this action
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_USERAVATAR_UPDATE:
-                $componentAtts = (count($component) >= 3) ? $component[2] : null;
-                if (!$componentAtts || !$componentAtts['executeupdate']) {
+                if (!($component->atts['executeupdate'] ?? null)) {
                     return true;
                 }
                 break;

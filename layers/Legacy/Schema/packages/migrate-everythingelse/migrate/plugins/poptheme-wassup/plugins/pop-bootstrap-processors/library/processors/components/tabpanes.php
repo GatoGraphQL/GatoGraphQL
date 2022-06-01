@@ -19,13 +19,10 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
     {
         $ret = parent::getSubcomponents($component);
 
-        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 // If not told to be empty, then add the page subcomponent
-                $componentAtts = count($component) >= 3 ? $component[2] : null;
-                if (!($componentAtts && $componentAtts['empty'])) {
+                if (!($component->atts['empty'] ?? null)) {
                     $ret[] = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_ADDONS];
                 }
                 break;

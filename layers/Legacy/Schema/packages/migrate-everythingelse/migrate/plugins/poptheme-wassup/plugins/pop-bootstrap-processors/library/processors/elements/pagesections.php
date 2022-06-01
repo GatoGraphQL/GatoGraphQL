@@ -70,8 +70,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             case self::COMPONENT_PAGESECTION_BODYTABS:
             case self::COMPONENT_PAGESECTION_BODY:
                 // If not told to be empty, then add the page subcomponent
-                $componentAtts = count($component) >= 3 ? $component[2] : null;
-                if (!($componentAtts && $componentAtts['empty'])) {
+                if (!($component->atts['empty'] ?? null)) {
                     $subcomponents = array(
                         self::COMPONENT_PAGESECTION_QUICKVIEW => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_QUICKVIEW],
                         self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_QUICKVIEWSIDEINFO],
