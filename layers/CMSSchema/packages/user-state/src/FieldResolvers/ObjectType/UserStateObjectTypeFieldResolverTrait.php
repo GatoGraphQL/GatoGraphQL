@@ -12,19 +12,19 @@ trait UserStateObjectTypeFieldResolverTrait
 {
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
 
-    protected function getValidationCheckpointSets(
+    protected function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs
     ): array {
-        $validationCheckpointSets = parent::getValidationCheckpointSets(
+        $validationCheckpoints = parent::getValidationCheckpoints(
             $objectTypeResolver,
             $object,
             $fieldName,
             $fieldArgs,
         );
-        $validationCheckpointSets[] = UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
-        return $validationCheckpointSets;
+        $validationCheckpoints[] = UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
+        return $validationCheckpoints;
     }
 }

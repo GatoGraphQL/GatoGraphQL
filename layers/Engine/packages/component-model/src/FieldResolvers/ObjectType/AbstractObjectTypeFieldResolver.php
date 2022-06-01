@@ -1081,18 +1081,18 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @param array<string, mixed> $fieldArgs
      * @return array<array> A set of checkpoint sets
      */
-    protected function getValidationCheckpointSets(
+    protected function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
         array $fieldArgs
     ): array {
-        $validationCheckpointSets = [];
+        $validationCheckpoints = [];
         // Check that mutations can be executed
         if ($this->getFieldMutationResolver($objectTypeResolver, $fieldName) !== null) {
-            $validationCheckpointSets[] = CheckpointSets::CAN_EXECUTE_MUTATIONS;
+            $validationCheckpoints[] = CheckpointSets::CAN_EXECUTE_MUTATIONS;
         }
-        return $validationCheckpointSets;
+        return $validationCheckpoints;
     }
 
     /**
@@ -1106,19 +1106,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         // Can perform validation through checkpoints
-        if ($checkpointSets = $this->getValidationCheckpointSets($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
-            foreach ($checkpointSets as $checkpointSet) {
-                $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpointSet);
-                if ($feedbackItemResolution !== null) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            $feedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver
-                        )
-                    );
-                    return;
-                }
+        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
+            $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
+            if ($feedbackItemResolution !== null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $feedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver
+                    )
+                );
+                return;
             }
         }
 

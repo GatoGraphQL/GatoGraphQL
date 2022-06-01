@@ -13,7 +13,7 @@ class GD_WSL_Dataload_UserCheckpoint extends AbstractCheckpoint
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
+    public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_NONSOCIALLOGINUSER:

@@ -15,7 +15,7 @@ class PoPCore_Dataload_Checkpoint extends AbstractCheckpoint
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
+    public function validateCheckpoint(): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_PROFILEACCESS:

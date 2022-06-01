@@ -14,7 +14,7 @@ abstract class AbstractCheckpoint implements CheckpointInterface
     /**
      * By default there's no problem
      */
-    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
+    public function validateCheckpoint(): ?FeedbackItemResolution
     {
         return null;
     }

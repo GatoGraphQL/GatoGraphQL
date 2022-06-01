@@ -16,5 +16,5 @@ interface CheckpointInterface
     /**
      * @return FeedbackItemResolution|null `null` if successful, or FeedbackItemResolution with a descriptive error message and code otherwise
      */
-    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution;
+    public function validateCheckpoint(): ?FeedbackItemResolution;
 }

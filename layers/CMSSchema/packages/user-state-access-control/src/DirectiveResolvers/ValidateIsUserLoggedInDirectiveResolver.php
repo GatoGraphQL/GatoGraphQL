@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
@@ -17,7 +18,10 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
         return 'validateIsUserLoggedIn';
     }
 
-    protected function getValidationCheckpointSet(RelationalTypeResolverInterface $relationalTypeResolver): array
+    /**
+     * @return CheckpointInterface[]
+     */
+    protected function getValidationCheckpoints(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
         return UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
     }
