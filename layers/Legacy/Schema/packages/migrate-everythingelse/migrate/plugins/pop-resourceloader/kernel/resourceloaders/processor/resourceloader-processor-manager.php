@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
+use PoP\ConfigurationComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 use PoP\ComponentModel\ItemProcessors\ProcessorItemUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
