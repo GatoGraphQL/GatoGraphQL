@@ -11,28 +11,6 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
 {
     use BasicServiceTrait;
 
-    public function getProcessor(Component $component): ComponentProcessorInterface
-    {
-        $itemProcessorClass = $component[0];
-        $itemName = $component[1];
-
-        // Return the reference to the ItemProcessor instance, and created first if it doesn't exist
-        if (!$this->hasItemBeenLoaded($component)) {
-            // If this class was overriden, use that one instead. Priority goes like this:
-            // 1. Overriden
-            // 3. Same class as requested
-            if ($class = $this->overridingClasses[$itemProcessorClass][$itemName] ?? null) {
-                $itemProcessorClass = $class;
-            }
-
-            // Get the instance from the InstanceManager
-            $processorInstance = $this->getInstanceManager()->getInstance($itemProcessorClass);
-            $this->processors[$itemProcessorClass][$itemName] = $processorInstance;
-        }
-
-        return $this->processors[$itemProcessorClass][$itemName];
-    }
-
     /**
      * @var array<string, array>
      */
@@ -41,6 +19,28 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
      * @var array<string, array>
      */
     private array $overridingClasses = [];
+
+    public function getProcessor(Component $component): ComponentProcessorInterface
+    {
+        $componentProcessorClass = $component[0];
+        $componentName = $component[1];
+
+        // Return the reference to the ItemProcessor instance, and created first if it doesn't exist
+        if (!$this->hasItemBeenLoaded($component)) {
+            // If this class was overriden, use that one instead. Priority goes like this:
+            // 1. Overriden
+            // 3. Same class as requested
+            if ($class = $this->overridingClasses[$componentProcessorClass][$componentName] ?? null) {
+                $componentProcessorClass = $class;
+            }
+
+            // Get the instance from the InstanceManager
+            $processorInstance = $this->getInstanceManager()->getInstance($componentProcessorClass);
+            $this->processors[$componentProcessorClass][$componentName] = $processorInstance;
+        }
+
+        return $this->processors[$componentProcessorClass][$componentName];
+    }
 
     /**
      * @deprecated Use the Service Container instead
@@ -54,8 +54,8 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
 
     protected function hasItemBeenLoaded(Component $component): bool
     {
-        $itemProcessorClass = $component[0];
-        $itemName = $component[1];
-        return isset($this->processors[$itemProcessorClass][$itemName]);
+        $componentProcessorClass = $component[0];
+        $componentName = $component[1];
+        return isset($this->processors[$componentProcessorClass][$componentName]);
     }
 }
