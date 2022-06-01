@@ -1114,7 +1114,7 @@ class Engine implements EngineInterface
         $interreferenced_componentfullpaths = $this->getInterreferencedComponentFullPaths($root_component, $root_props);
 
         // Get the list of all modules which load data, as a list of the component path starting from the top element (the entry component)
-        $module_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
+        $component_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
@@ -1122,7 +1122,7 @@ class Engine implements EngineInterface
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
-        foreach ($module_fullpaths as $component_path) {
+        foreach ($component_fullpaths as $component_path) {
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($component_path);
