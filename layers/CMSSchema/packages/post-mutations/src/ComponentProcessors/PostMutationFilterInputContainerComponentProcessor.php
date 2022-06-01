@@ -7,6 +7,7 @@ namespace PoPCMSSchema\PostMutations\ComponentProcessors;
 use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
 use PoPCMSSchema\Posts\ComponentProcessors\AbstractPostFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Posts\ComponentProcessors\PostFilterInputContainerComponentProcessor;
 
 class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFilterInputContainerComponentProcessor
 {
