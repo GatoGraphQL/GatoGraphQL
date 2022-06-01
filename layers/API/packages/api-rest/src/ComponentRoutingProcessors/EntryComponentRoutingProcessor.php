@@ -17,7 +17,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<mixed[]>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

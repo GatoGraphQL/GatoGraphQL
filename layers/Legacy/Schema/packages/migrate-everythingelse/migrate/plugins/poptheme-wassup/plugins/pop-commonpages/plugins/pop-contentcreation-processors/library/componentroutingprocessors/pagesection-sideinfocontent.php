@@ -5,7 +5,7 @@ use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
 class PoPTheme_Wassup_CommonPages_ContentCreation_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP_Module_SideInfoContentPageSectionComponentRoutingProcessorBase
 {
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<mixed[]>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

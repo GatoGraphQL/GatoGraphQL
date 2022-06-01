@@ -31,7 +31,7 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionComponentRoutingProcessor 
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<mixed[]>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

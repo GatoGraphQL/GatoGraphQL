@@ -7,7 +7,7 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor extends PoP_Module_OnlyMainContentComponentRoutingProcessorBase
 {
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<mixed[]>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {

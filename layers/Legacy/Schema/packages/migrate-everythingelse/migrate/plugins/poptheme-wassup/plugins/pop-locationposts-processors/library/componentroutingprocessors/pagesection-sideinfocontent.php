@@ -46,7 +46,7 @@ class PoPTheme_Wassup_LocationPosts_Module_SideInfoContentPageSectionComponentRo
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<mixed[]>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
