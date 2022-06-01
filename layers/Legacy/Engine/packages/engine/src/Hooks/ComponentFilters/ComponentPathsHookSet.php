@@ -27,11 +27,11 @@ class ComponentPathsHookSet extends AbstractHookSet
     {
         App::addFilter(
             ModelInstance::HOOK_ELEMENTSFROMVARS_RESULT,
-            $this->maybeAddComponent(...)
+            $this->maybeAddElement(...)
         );
     }
     
-    public function maybeAddComponent(array $elements): array
+    public function maybeAddElement(array $elements): array
     {
         if (App::getState('componentFilter') === $this->componentPaths->getName()) {
             if ($componentPaths = App::getState('componentPaths')) {
