@@ -126,6 +126,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->componentHelpers ??= $this->instanceManager->getInstance(ComponentHelpersInterface::class);
     }
 
+    /**
+     * @return Component[]
+     */
     public function getSubcomponents(Component $component): array
     {
         return [];

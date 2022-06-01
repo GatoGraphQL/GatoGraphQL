@@ -11,6 +11,9 @@ trait DataloadComponentProcessorTrait
 {
     use FormattableModuleTrait;
 
+    /**
+     * @return Component[]
+     */
     public function getSubcomponents(Component $component): array
     {
         $ret = parent::getSubcomponents($component);

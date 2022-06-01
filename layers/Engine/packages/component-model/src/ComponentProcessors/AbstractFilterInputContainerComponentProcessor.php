@@ -12,6 +12,9 @@ abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFi
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
+    /**
+     * @return Component[]
+     */
     final public function getSubcomponents(Component $component): array
     {
         $filterInputComponents = $this->getFilterInputComponents($component);
