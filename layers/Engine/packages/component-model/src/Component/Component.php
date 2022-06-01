@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Component;
 final class Component
 {
     function __construct(
-        public readonly string $class,
+        public readonly string $processorClass,
         public readonly string $name,
         public readonly array $atts = [],
     ) {        
