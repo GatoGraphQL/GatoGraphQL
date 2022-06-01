@@ -718,9 +718,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     // Only components which do not load data
                     $subcomponent_components = array_filter(
                         $relationalComponentField->getNestedComponents(),
-                        function ($subcomponent) {
-                            return !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent);
-                        }
+                        fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent)
                     );
                     foreach ($subcomponent_components as $subcomponent_component) {
                         $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
@@ -729,9 +727,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Only components which do not load data
-            $subcomponents = array_filter($this->getSubcomponents($component), function ($subcomponent) {
-                return !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent);
-            });
+            $subcomponents = array_filter(
+                $this->getSubcomponents($component),
+                fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getProcessor($subcomponent)->startDataloadingSection($subcomponent)
+            );
             foreach ($subcomponents as $subcomponent) {
                 $this->getComponentProcessorManager()->getProcessor($subcomponent)->addToDatasetDatabaseKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
             }
