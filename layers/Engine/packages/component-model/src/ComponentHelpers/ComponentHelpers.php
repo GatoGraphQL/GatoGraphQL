@@ -44,23 +44,28 @@ class ComponentHelpers implements ComponentHelpersInterface
             return null;
         }
 
+        $processorClass = (string)$parts[0];
+        $name = (string)$parts[1];
+        $atts = [];
+
         // Does it have componentAtts? If so, unserialize them.
-        return (count($parts) >= 3) ?
-            [
-                $parts[0], // processorClass
-                $parts[1], // name
-                unserialize(
-                    // Just in case componentAtts contains the same SEPARATOR_PROCESSORCOMPONENTFULLNAME string inside of it, simply recalculate the whole componentAtts from the $componentFullName string
-                    substr(
-                        $componentFullName,
-                        strlen(
-                            $parts[0] . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . $parts[1] . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME
-                        )
+        if (isset($parts[2])) {
+            $atts = (array)unserialize(
+                // Just in case componentAtts contains the same SEPARATOR_PROCESSORCOMPONENTFULLNAME string inside of it, simply recalculate the whole componentAtts from the $componentFullName string
+                substr(
+                    $componentFullName,
+                    strlen(
+                        $processorClass . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . $name . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME
                     )
                 )
-            ] :
-            // Otherwise, the parts are already the item
-            $parts;
+            );
+        }
+        
+        return new Component(
+            $processorClass,
+            $name,
+            $atts
+        );
     }
 
     public function getComponentOutputName(Component $component): string
