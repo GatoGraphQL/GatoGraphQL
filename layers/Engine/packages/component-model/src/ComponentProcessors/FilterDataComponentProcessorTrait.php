@@ -58,7 +58,7 @@ trait FilterDataComponentProcessorTrait
     {
         return array_values(array_filter(
             $this->getDatasetcomponentTreeSectionFlattenedComponents($component),
-            function ($component) {
+            function (\PoP\ComponentModel\Component\Component $component) {
                 return $this->getComponentProcessorManager()->getProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface;
             }
         ));
