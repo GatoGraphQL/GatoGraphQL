@@ -78,22 +78,22 @@ class GenericCustomPostRelationalFieldDataloadComponentProcessor extends Abstrac
     {
         switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTLIST:
-                new Component(
+                return new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTLIST
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_GENERICCUSTOMPOSTCOUNT:
-                new Component(
+                return new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_GENERICCUSTOMPOSTCOUNT
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTLIST:
-                new Component(
+                return new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTLIST
                 );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINGENERICCUSTOMPOSTCOUNT:
-                new Component(
+                return new Component(
                     GenericCustomPostFilterInputContainerComponentProcessor::class,
                     GenericCustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINGENERICCUSTOMPOSTCOUNT
                 );
