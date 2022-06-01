@@ -13,9 +13,9 @@ class ModelInstance implements ModelInstanceInterface
 {
     use BasicServiceTrait;
 
-    public final const HOOK_COMPONENTS_RESULT = __CLASS__ . ':components:result';
-    public final const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':componentsFromVars:postOrGetChange';
-    public final const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':componentsFromVars:result';
+    public final const HOOK_COMPONENTS_RESULT = __CLASS__ . ':elements:result';
+    public final const HOOK_COMPONENTSFROMVARS_POSTORGETCHANGE = __CLASS__ . ':elementsFromVars:postOrGetChange';
+    public final const HOOK_COMPONENTSFROMVARS_RESULT = __CLASS__ . ':elementsFromVars:result';
 
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?DefinitionManagerInterface $definitionManager = null;
@@ -48,13 +48,13 @@ class ModelInstance implements ModelInstanceInterface
      */
     protected function getModelInstanceComponents(): array
     {
-        $components = array();
+        $elements = array();
 
         // Mix the information specific to the module, with that present in the application state
-        $components = (array)App::applyFilters(
+        $elements = (array)App::applyFilters(
             self::HOOK_COMPONENTS_RESULT,
             array_merge(
-                $components,
+                $elements,
                 $this->getModelInstanceComponentsFromAppState()
             )
         );
@@ -69,10 +69,10 @@ class ModelInstance implements ModelInstanceInterface
             foreach ($definitionResolvers as $group => $resolverInstance) {
                 $resolvers[] = $group . '-' . get_class($resolverInstance);
             }
-            $components[] = $this->__('definition resolvers:', 'component-model') . implode(',', $resolvers);
+            $elements[] = $this->__('definition resolvers:', 'component-model') . implode(',', $resolvers);
         }
 
-        return $components;
+        return $elements;
     }
 
     /**
@@ -80,23 +80,23 @@ class ModelInstance implements ModelInstanceInterface
      */
     protected function getModelInstanceComponentsFromAppState(): array
     {
-        $components = array();
+        $elements = array();
 
         // There will always be a nature. Add it.
         $nature = App::getState('nature');
         $route = App::getState('route');
-        $components[] = $this->__('nature:', 'component-model') . $nature;
-        $components[] = $this->__('route:', 'component-model') . $route;
+        $elements[] = $this->__('nature:', 'component-model') . $nature;
+        $elements[] = $this->__('route:', 'component-model') . $route;
 
         // Add the version, because otherwise there may be PHP errors happening from stale configuration that is not deleted, and still served, after a new version is deployed
-        $components[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
+        $elements[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
 
         // Other properties
         if ($actions = App::getState('actions')) {
-            $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
+            $elements[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }
         if ($componentFilter = App::getState('componentFilter')) {
-            $components[] = $this->__('component filter:', 'component-model') . $componentFilter;
+            $elements[] = $this->__('component filter:', 'component-model') . $componentFilter;
         }
 
         // Can the configuration change when doing a POST or GET?
@@ -106,30 +106,30 @@ class ModelInstance implements ModelInstanceInterface
                 false
             )
         ) {
-            $components[] = $this->__('operation:', 'component-model') . ('POST' === App::server('REQUEST_METHOD') ? 'post' : 'get');
+            $elements[] = $this->__('operation:', 'component-model') . ('POST' === App::server('REQUEST_METHOD') ? 'post' : 'get');
         }
         if ($mangled = App::getState('mangled')) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
             // so only in these exceptional cases the identifier will add this parameter
-            $components[] = $this->__('mangled:', 'component-model') . $mangled;
+            $elements[] = $this->__('mangled:', 'component-model') . $mangled;
         }
         if (App::getState('only-fieldname-as-outputkey')) {
-            $components[] = $this->__('only-fieldname-as-outputkey', 'component-model');
+            $elements[] = $this->__('only-fieldname-as-outputkey', 'component-model');
         }
         if ($versionConstraint = App::getState('version-constraint')) {
-            $components[] = $this->__('version-constraint:', 'component-model') . $versionConstraint;
+            $elements[] = $this->__('version-constraint:', 'component-model') . $versionConstraint;
         }
         if ($fieldVersionConstraints = App::getState('field-version-constraints')) {
-            $components[] = $this->__('field-version-constraints:', 'component-model') . json_encode($fieldVersionConstraints);
+            $elements[] = $this->__('field-version-constraints:', 'component-model') . json_encode($fieldVersionConstraints);
         }
         if ($directiveVersionConstraints = App::getState('directive-version-constraints')) {
-            $components[] = $this->__('directive-version-constraints:', 'component-model') . json_encode($directiveVersionConstraints);
+            $elements[] = $this->__('directive-version-constraints:', 'component-model') . json_encode($directiveVersionConstraints);
         }
 
         // Allow for plug-ins to add their own vars. Eg: URE source parameter
         return (array)App::applyFilters(
             self::HOOK_COMPONENTSFROMVARS_RESULT,
-            $components
+            $elements
         );
     }
 }
