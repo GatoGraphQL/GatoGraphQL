@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ComponentRoutingProcessors;
 
-use PoP_ConfigurationComponentModel_Module_Processor_Elements;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
+use PoP_ConfigurationComponentModel_Module_Processor_Elements;
 
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string, mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

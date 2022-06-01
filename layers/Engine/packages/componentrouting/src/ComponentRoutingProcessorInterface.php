@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
+use PoP\ComponentModel\Component\Component;
+
 interface ComponentRoutingProcessorInterface
 {
     /**
@@ -22,7 +24,7 @@ interface ComponentRoutingProcessorInterface
     public function getStatePropertiesToSelectComponentByNature(): array;
 
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string, mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProcessorInterface
@@ -35,7 +36,7 @@ abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProc
     }
 
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string, mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

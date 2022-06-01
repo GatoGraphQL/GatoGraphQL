@@ -1,9 +1,11 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
+
 class PoP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor
 {
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string, mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {
