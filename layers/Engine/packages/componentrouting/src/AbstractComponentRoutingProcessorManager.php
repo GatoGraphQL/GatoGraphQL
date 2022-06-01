@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentRouting\Helpers\Methods;
 use PoP\Root\App;
 
@@ -36,10 +37,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         return ComponentRoutingGroups::ENTRYCOMPONENT;
     }
 
-    /**
-     * @return string[]|null
-     */
-    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?array
+    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?Component
     {
         $group ??= $this->getDefaultGroup();
         $nature = App::getState('nature');
@@ -47,6 +45,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         $appState = App::getAppStateManager()->all();
 
         $processors = $this->getProcessors($group);
+        /** @var Component|false */
         $most_matching_component = false;
         $most_matching_properties_count = -1; // Start with -1, since 0 matches is possible
 
@@ -120,6 +119,6 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         }
 
         // If it is false, then return null
-        return $most_matching_component ? (array)$most_matching_component : null;
+        return $most_matching_component ? $most_matching_component : null;
     }
 }

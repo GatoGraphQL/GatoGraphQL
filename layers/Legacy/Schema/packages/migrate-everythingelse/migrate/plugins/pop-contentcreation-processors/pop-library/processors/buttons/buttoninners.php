@@ -7,18 +7,18 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
     public final const COMPONENT_BUTTONINNER_POSTVIEW = 'buttoninner-postview';
     public final const COMPONENT_BUTTONINNER_POSTPREVIEW = 'buttoninner-postpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONINNER_POSTEDIT],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTVIEW],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTPREVIEW],
+            self::COMPONENT_BUTTONINNER_POSTEDIT,
+            self::COMPONENT_BUTTONINNER_POSTVIEW,
+            self::COMPONENT_BUTTONINNER_POSTPREVIEW,
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTPREVIEW:
                 return 'fa-fw fa-eye';
             
@@ -32,9 +32,9 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTEDIT:
                 return TranslationAPIFacade::getInstance()->__('Edit', 'pop-coreprocessors');
             

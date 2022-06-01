@@ -4,18 +4,21 @@ class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners ex
 {
     public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK = 'vertical-sidebarinner-single-link';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK],
+            self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_LINK:
                 $ret = array_merge(
                     $ret,

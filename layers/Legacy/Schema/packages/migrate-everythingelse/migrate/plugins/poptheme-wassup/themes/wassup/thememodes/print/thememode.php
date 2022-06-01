@@ -37,11 +37,11 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
         return GD_THEMEMODE_WASSUP_PRINT;
     }
 
-    public function getPagesectionJsmethod($jsmethod, array $component)
+    public function getPagesectionJsmethod($jsmethod, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Remove all the scrollbars
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_BODY:
             case self::COMPONENT_OFFCANVAS_BODYSIDEINFO:
                 $this->removeJsmethod($jsmethod, 'scrollbarVertical');
@@ -49,7 +49,7 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
         }
 
         // Add the automatic print
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_BODY:
                 $this->addJsmethod($jsmethod, 'printWindow');
                 break;

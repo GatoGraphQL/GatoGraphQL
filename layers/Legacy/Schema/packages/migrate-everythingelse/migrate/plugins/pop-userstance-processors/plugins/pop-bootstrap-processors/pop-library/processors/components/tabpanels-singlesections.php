@@ -7,19 +7,19 @@ class UserStance_Module_Processor_SingleSectionTabPanelComponents extends PoP_Mo
     public final const COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'tabpanel-singlerelatedstancecontent-against';
     public final const COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'tabpanel-singlerelatedstancecontent-neutral';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT],
-            [self::class, self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
-            [self::class, self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
-            [self::class, self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
+            self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT,
+            self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO,
+            self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST,
+            self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
@@ -30,11 +30,11 @@ class UserStance_Module_Processor_SingleSectionTabPanelComponents extends PoP_Mo
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT:
                 $ret = array_merge(
                     $ret,
@@ -83,9 +83,9 @@ class UserStance_Module_Processor_SingleSectionTabPanelComponents extends PoP_Mo
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT:
                 $ret = array(
                     [

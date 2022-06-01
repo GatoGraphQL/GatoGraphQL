@@ -5,19 +5,22 @@ class Wassup_Module_Processor_ContentMultipleInners extends PoP_Module_Processor
     public final const COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS = 'contentinnerlayout-highlights';
     public final const COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE = 'contentinnerlayout-highlights-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS],
-            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE],
+            self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS,
+            self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS:
                 $ret[] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];
                 break;

@@ -12,18 +12,18 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     public final const COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS = 'carouselcontrols-authorevents';
     public final const COMPONENT_CAROUSELCONTROLS_TAGEVENTS = 'carouselcontrols-tagevents';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_EVENTS],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS],
+            self::COMPONENT_CAROUSELCONTROLS_EVENTS,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS,
+            self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS,
         );
     }
 
-    public function getControlClass(array $component)
+    public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
@@ -33,9 +33,9 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
         return parent::getControlClass($component);
     }
 
-    public function getTitleClass(array $component)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
@@ -44,9 +44,9 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
 
         return parent::getTitleClass($component);
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS:
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
@@ -59,11 +59,11 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
 
         return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_EVENTS:
                 return RouteUtils::getRouteURL(POP_EVENTS_ROUTE_EVENTS);
 
@@ -73,14 +73,14 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 $routes = array(
                     self::COMPONENT_CAROUSELCONTROLS_AUTHOREVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );
-                return RequestUtils::addRoute($url, $routes[$component[1]] ?? null);
+                return RequestUtils::addRoute($url, $routes[$component->name] ?? null);
 
             case self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS:
                 $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
                 $routes = array(
                     self::COMPONENT_CAROUSELCONTROLS_TAGEVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );
-                return RequestUtils::addRoute($url, $routes[$component[1]] ?? null);
+                return RequestUtils::addRoute($url, $routes[$component->name] ?? null);
         }
 
         return parent::getTitleLink($component, $props);

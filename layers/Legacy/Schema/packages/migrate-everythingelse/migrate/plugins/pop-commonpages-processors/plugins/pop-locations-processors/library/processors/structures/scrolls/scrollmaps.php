@@ -4,21 +4,21 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps exte
 {
     public final const COMPONENT_SCROLL_WHOWEARE_MAP = 'scroll-whoweare-map';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_MAP],
+            self::COMPONENT_SCROLL_WHOWEARE_MAP,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_WHOWEARE_MAP => [PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::class, PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_WHOWEARE_MAP],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

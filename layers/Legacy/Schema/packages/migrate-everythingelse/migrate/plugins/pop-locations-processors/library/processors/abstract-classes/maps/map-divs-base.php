@@ -3,12 +3,15 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_DIV];
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -22,12 +25,12 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -35,7 +38,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
 
         if ($inners = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $inners
             );
         }
@@ -43,7 +46,7 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -52,12 +55,12 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function openOnemarkerInfowindow(array $component, array &$props)
+    public function openOnemarkerInfowindow(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Open the infoWindow automatically when the map has only 1 marker?

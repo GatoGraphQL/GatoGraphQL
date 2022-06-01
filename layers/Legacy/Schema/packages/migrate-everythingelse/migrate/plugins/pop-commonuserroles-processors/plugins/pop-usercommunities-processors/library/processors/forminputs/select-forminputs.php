@@ -5,16 +5,16 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
 {
     public final const COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY = 'ure-cup-iscommunity';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY],
+            self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Does your organization accept members?', 'ure-popprocessors');
         }
@@ -22,9 +22,9 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return GD_FormInput_YesNo::class;
         }
@@ -32,9 +32,9 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
         return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return 'isCommunity';
         }

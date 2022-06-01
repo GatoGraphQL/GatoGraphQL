@@ -27,21 +27,21 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES,
         );
     }
 
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFilterInput::class, GD_URE_Module_Processor_MultiSelectFilterInput::URE_FILTERINPUT_INDIVIDUALINTERESTS],
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInput::class, GD_URE_Module_Processor_MultiSelectFilterInput::URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInput::class, GD_URE_Module_Processor_MultiSelectFilterInput::URE_FILTERINPUT_ORGANIZATIONTYPES],
@@ -49,9 +49,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
     //         case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
     //         case self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES:
@@ -61,9 +61,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
 
@@ -85,9 +85,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
 
@@ -101,9 +101,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return 'interests';
 
@@ -117,9 +117,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS => $this->stringScalarTypeResolver,
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $this->stringScalarTypeResolver,
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES => $this->stringScalarTypeResolver,
@@ -127,9 +127,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS,
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES
@@ -139,10 +139,10 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS => $translationAPI->__('', ''),
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $translationAPI->__('', ''),
             self::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES => $translationAPI->__('', ''),

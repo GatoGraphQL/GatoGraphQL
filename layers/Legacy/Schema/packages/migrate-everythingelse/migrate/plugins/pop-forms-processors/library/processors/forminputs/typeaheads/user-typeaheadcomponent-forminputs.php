@@ -9,16 +9,16 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_USERS = 'forminput-typeaheadcomponent-users';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_USERS],
+            self::COMPONENT_TYPEAHEAD_COMPONENT_USERS,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_USERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
         }
@@ -26,11 +26,11 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
         return parent::getLabelText($component, $props);
     }
 
-    // protected function getSourceFilter(array $component, array &$props)
+    // protected function getSourceFilter(\PoP\ComponentModel\Component\Component $component, array &$props)
     // {
     //     return POP_FILTER_USERS;
     // }
-    protected function getSourceFilterParams(array $component, array &$props)
+    protected function getSourceFilterParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSourceFilterParams($component, $props);
 
@@ -43,7 +43,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
 
         return $ret;
     }
-    protected function getRemoteUrl(array $component, array &$props)
+    protected function getRemoteUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = parent::getRemoteUrl($component, $props);
 
@@ -59,10 +59,10 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
         );
     }
 
-    protected function getTypeaheadDataloadSource(array $component, array &$props)
+    protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_USERS:
                 return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }

@@ -4,34 +4,34 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
 {
     public final const COMPONENT_FORMINNER_EVENTLINK = 'forminner-eventlink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
             [GD_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_EM_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_EVENTLINK],
         );
     }
 
-    protected function isLink(array $component)
+    protected function isLink(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return true;
         }
 
         return parent::isLink($component);
     }
-    protected function volunteering(array $component)
+    protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return true;
         }
 
         return parent::volunteering($component);
     }
-    protected function getLocationsInput(array $component)
+    protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP];
         }
@@ -39,7 +39,10 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -49,7 +52,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 return array_merge(
                     $ret,
@@ -60,12 +63,12 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EVENTLINK:
                 $this->setProp([PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::COMPONENT_FORMINPUT_DATERANGETIMEPICKER], $props, 'daterange-class', 'opens-left');
 

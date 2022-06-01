@@ -6,18 +6,18 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
     public final const COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW = 'block-mycontent-scroll-simpleviewpreview';
     public final const COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW = 'block-mycontent-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT],
-            [self::class, self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT,
+            self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT => POP_CONTENTCREATION_ROUTE_MYCONTENT,
@@ -25,7 +25,7 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT => [PoP_ContentCreation_Module_Processor_MySectionDataloads::class, PoP_ContentCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCONTENT_TABLE_EDIT],
@@ -33,12 +33,12 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
             self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW => [PoP_ContentCreation_Module_Processor_MySectionDataloads::class, PoP_ContentCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getSectionFilterComponent(array $component)
+    protected function getSectionFilterComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
@@ -51,9 +51,9 @@ class PoP_ContentCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pr
         return parent::getSectionFilterComponent($component);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_MYCONTENT_TABLE_EDIT:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_BLOCK_MYCONTENT_SCROLL_FULLVIEWPREVIEW:

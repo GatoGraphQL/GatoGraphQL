@@ -10,21 +10,21 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     public final const COMPONENT_FORMINPUT_CUP_YOUTUBE = 'forminput-cup-youtube';
     public final const COMPONENT_FORMINPUT_CUP_INSTAGRAM = 'forminput-cup-instagram';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION],
-            [self::class, self::COMPONENT_FORMINPUT_CUP_FACEBOOK],
-            [self::class, self::COMPONENT_FORMINPUT_CUP_TWITTER],
-            [self::class, self::COMPONENT_FORMINPUT_CUP_LINKEDIN],
-            [self::class, self::COMPONENT_FORMINPUT_CUP_YOUTUBE],
-            [self::class, self::COMPONENT_FORMINPUT_CUP_INSTAGRAM],
+            self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION,
+            self::COMPONENT_FORMINPUT_CUP_FACEBOOK,
+            self::COMPONENT_FORMINPUT_CUP_TWITTER,
+            self::COMPONENT_FORMINPUT_CUP_LINKEDIN,
+            self::COMPONENT_FORMINPUT_CUP_YOUTUBE,
+            self::COMPONENT_FORMINPUT_CUP_INSTAGRAM,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Short description', 'pop-coreprocessors');
 
@@ -47,9 +47,9 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
         return parent::getLabelText($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return 'shortDescription';
 
@@ -73,7 +73,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     }
 
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Remove the html code from the placeholder
         $placeholders = array(
@@ -83,7 +83,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
             self::COMPONENT_FORMINPUT_CUP_YOUTUBE => TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors'),
             self::COMPONENT_FORMINPUT_CUP_INSTAGRAM => TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors'),
         );
-        if ($placeholder = $placeholders[$component[1]] ?? null) {
+        if ($placeholder = $placeholders[$component->name] ?? null) {
             $this->setProp($component, $props, 'placeholder', $placeholder);
         }
 

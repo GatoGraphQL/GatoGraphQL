@@ -3,17 +3,17 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_SCRIPTCUSTOMIZATION_USER];
     }
 
-    public function getAvatarMarker(array $component)
+    public function getAvatarMarker(\PoP\ComponentModel\Component\Component $component)
     {
         return GD_AVATAR_SIZE_40;
     }
 
-    public function getAvatarInfowindow(array $component)
+    public function getAvatarInfowindow(\PoP\ComponentModel\Component\Component $component)
     {
         return GD_AVATAR_SIZE_64;
     }
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $data_fields = array('id', 'displayName', 'url', 'shortDescriptionFormatted');
 
@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
         return $data_fields;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

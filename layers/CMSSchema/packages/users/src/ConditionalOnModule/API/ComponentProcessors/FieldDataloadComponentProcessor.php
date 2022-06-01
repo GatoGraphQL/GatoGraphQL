@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\ConditionalOnModule\API\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
@@ -42,20 +43,20 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERCOUNT],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERCOUNT,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT,
         );
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -63,9 +64,9 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEUSER:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
@@ -75,9 +76,9 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
                 return $this->getListQueryInputOutputHandler();
@@ -86,17 +87,17 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(Component $component): ?Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST:
-                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_USERS];
+                return new Component(UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_USERS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_USERCOUNT:
-                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_USERCOUNT];
+                return new Component(UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_USERCOUNT);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS];
+                return new Component(UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT:
-                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT];
+                return new Component(UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT);
         }
 
         return parent::getFilterSubcomponent($component);

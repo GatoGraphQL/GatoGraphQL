@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_MySectionBlocksBase extends PoP_Module_Processor_SectionBlocksBase
 {
-    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }

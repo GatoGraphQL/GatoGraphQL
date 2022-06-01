@@ -5,25 +5,28 @@ class CommonPages_EM_Module_Processor_ControlGroups extends PoP_Module_Processor
 {
     public final const COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST = 'controlgroup-mylocationpostlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST],
+            self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST:
                 $addposts = array(
                     self::COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST => [CommonPages_EM_Module_Processor_ControlButtonGroups::class, CommonPages_EM_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_ADDLOCATIONPOST],
                 );
-                $ret[] = $addposts[$component[1]];
+                $ret[] = $addposts[$component->name];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;

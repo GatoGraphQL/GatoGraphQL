@@ -8,22 +8,25 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public final const COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO = 'dropdownbuttonquicklink-usercontactinfo';
     public final const COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE = 'dropdownbuttonquicklink-tagshare';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE],
-            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE],
-            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO],
-            [self::class, self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE],
+            self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE,
+            self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE,
+            self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO,
+            self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $components = array();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
@@ -55,9 +58,9 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getBtnClass(array $component)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
@@ -68,9 +71,9 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return parent::getBtnClass($component);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
@@ -83,9 +86,9 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return parent::getLabel($component, $props);
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
@@ -98,9 +101,9 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:

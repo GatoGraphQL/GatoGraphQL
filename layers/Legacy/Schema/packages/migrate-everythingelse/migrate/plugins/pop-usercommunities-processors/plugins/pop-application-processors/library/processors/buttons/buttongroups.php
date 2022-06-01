@@ -4,16 +4,16 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
 {
     public final const COMPONENT_BUTTONGROUP_MYUSERS = 'ure-buttongroup-myusers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONGROUP_MYUSERS],
+            self::COMPONENT_BUTTONGROUP_MYUSERS,
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONGROUP_MYUSERS:
                 return POP_URE_SCREEN_MYUSERS;
         }
@@ -21,7 +21,7 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
         return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataFormats(array $component, array &$props)
+    protected function getHeadersdataFormats(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen

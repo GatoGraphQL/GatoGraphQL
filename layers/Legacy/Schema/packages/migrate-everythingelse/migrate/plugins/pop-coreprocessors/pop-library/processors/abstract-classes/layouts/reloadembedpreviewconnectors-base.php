@@ -2,14 +2,14 @@
 
 abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP_Module_Processor_MarkersBase
 {
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'reloadEmbedPreview');
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Bind the Embed iframe and the input together. When the input value changes, the iframe
@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP
         parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Bind the Embed iframe and the input together. When the input value changes, the iframe

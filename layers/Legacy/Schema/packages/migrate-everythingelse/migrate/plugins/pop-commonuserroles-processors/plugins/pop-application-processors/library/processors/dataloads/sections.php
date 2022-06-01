@@ -19,29 +19,29 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST = 'dataload-organizations-scroll-list';
     public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST = 'dataload-individuals-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_ADDONS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
@@ -60,7 +60,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -96,12 +96,12 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_USER_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW:
@@ -120,23 +120,23 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
@@ -151,11 +151,11 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
@@ -180,9 +180,9 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
@@ -203,9 +203,9 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS:

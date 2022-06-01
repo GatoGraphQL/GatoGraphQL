@@ -5,17 +5,17 @@ class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_COMMENTFRAME_LIST = 'layout-commentframe-list';
     public final const COMPONENT_LAYOUT_COMMENTFRAME_ADD = 'layout-commentframe-add';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_COMMENTFRAME_LIST],
-            [self::class, self::COMPONENT_LAYOUT_COMMENTFRAME_ADD],
+            self::COMPONENT_LAYOUT_COMMENTFRAME_LIST,
+            self::COMPONENT_LAYOUT_COMMENTFRAME_ADD,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_COMMENTFRAME_LIST:
                 return [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::COMPONENT_LAYOUT_COMMENT_LIST];
 

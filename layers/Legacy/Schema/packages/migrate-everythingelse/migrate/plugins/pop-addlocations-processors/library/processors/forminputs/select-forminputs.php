@@ -5,16 +5,16 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
 {
     public final const COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY = 'forminput-locationcountry';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY],
+            self::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY:
                 return TranslationAPIFacade::getInstance()->__('Country', 'em-popprocessors');
         }
@@ -22,9 +22,9 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY:
                 return GD_FormInput_EM_LocationCountries::class;
         }
@@ -32,9 +32,9 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
         return parent::getInputClass($component);
     }
 
-    // function getName(array $component) {
+    // function getName(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //          // Names needed by EM to create the Location
     //         case self::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY:
@@ -45,9 +45,9 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
     //     return parent::getName($component);
     // }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EM_LOCATIONCOUNTRY:
                 $this->appendProp($component, $props, 'class', 'address-input');
                 break;

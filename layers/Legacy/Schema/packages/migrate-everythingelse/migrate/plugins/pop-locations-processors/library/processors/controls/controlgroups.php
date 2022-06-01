@@ -8,23 +8,26 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
     public final const COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST = 'controlgroup-blocktagmappostlist';
     public final const COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST = 'controlgroup-blockmapuserlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKMAPPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST],
+            self::COMPONENT_CONTROLGROUP_BLOCKMAPPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_BLOCKMAPPOSTLIST:
             case self::COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST:
                 $ret[] = [PoP_Locations_Module_Processor_CustomControlButtonGroups::class, PoP_Locations_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_TOGGLEMAP];

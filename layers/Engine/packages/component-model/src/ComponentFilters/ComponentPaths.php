@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentFilters;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 
@@ -56,7 +57,7 @@ class ComponentPaths extends AbstractComponentFilter
         return 'componentPaths';
     }
 
-    public function excludeSubcomponent(array $component, array &$props): bool
+    public function excludeSubcomponent(Component $component, array &$props): bool
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -83,7 +84,11 @@ class ComponentPaths extends AbstractComponentFilter
         return true;
     }
 
-    public function removeExcludedSubcomponents(array $component, array $subComponents): array
+    /**
+     * @param Component[] $subcomponents
+     * @return Component[]
+     */
+    public function removeExcludedSubcomponents(Component $component, array $subcomponents): array
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -91,13 +96,13 @@ class ComponentPaths extends AbstractComponentFilter
 
         // If there are no remaining path left, then everything goes in
         if (!$this->propagation_unsettled_paths) {
-            return $subComponents;
+            return $subcomponents;
         }
 
         // $component_unsettled_path: Start only from the specified component. It is passed under URL param "componentPaths", and it's the list of component paths
         // starting from the entry, and joined by ".", like this: componentPaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
         // This way, the component can interact with itself to fetch or post data, etc
-        $matching_subComponents = array();
+        $matching_subcomponents = array();
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
             // Validate that the current component is at the head of the path
             // This validation will work for the entry component only, since the array_intersect below will guarantee that only the path components are returned
@@ -105,24 +110,24 @@ class ComponentPaths extends AbstractComponentFilter
             if (count($unsettled_path) == 1) {
                 // We reached the end of the unsettled path => from now on, all components must be included
                 if ($unsettled_path_component == $component) {
-                    return $subComponents;
+                    return $subcomponents;
                 }
             } else {
-                // Then, check that the following element in the unsettled_path, which is the subComponent, is on the subComponents
-                $unsettled_path_subComponent = $unsettled_path[1];
-                if ($unsettled_path_component == $component && in_array($unsettled_path_subComponent, $subComponents) && !in_array($unsettled_path_subComponent, $matching_subComponents)) {
-                    $matching_subComponents[] = $unsettled_path_subComponent;
+                // Then, check that the following element in the unsettled_path, which is the subcomponent, is on the subcomponents
+                $unsettled_path_subcomponent = $unsettled_path[1];
+                if ($unsettled_path_component == $component && in_array($unsettled_path_subcomponent, $subcomponents) && !in_array($unsettled_path_subcomponent, $matching_subcomponents)) {
+                    $matching_subcomponents[] = $unsettled_path_subcomponent;
                 }
             }
         }
 
-        return $matching_subComponents;
+        return $matching_subcomponents;
     }
 
     /**
-     * The `prepare` function advances the componentPath one level down, when interating into the subComponents, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $component, array &$props): void
+    public function prepareForPropagation(Component $component, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -145,7 +150,7 @@ class ComponentPaths extends AbstractComponentFilter
             $this->propagation_unsettled_paths = $matching_unsettled_paths;
         }
     }
-    public function restoreFromPropagation(array $component, array &$props): void
+    public function restoreFromPropagation(Component $component, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();

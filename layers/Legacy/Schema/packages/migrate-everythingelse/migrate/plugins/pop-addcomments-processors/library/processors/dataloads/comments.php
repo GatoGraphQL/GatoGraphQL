@@ -12,26 +12,26 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
     public final const COMPONENT_DATALOAD_COMMENTS_SCROLL = 'dataload-comments-scroll';
     public final const COMPONENT_DATALOAD_ADDCOMMENT = 'dataload-addcomment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_COMMENTS_SCROLL],
-            [self::class, self::COMPONENT_DATALOAD_ADDCOMMENT],
+            self::COMPONENT_DATALOAD_COMMENTS_SCROLL,
+            self::COMPONENT_DATALOAD_ADDCOMMENT,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_ADDCOMMENT => POP_ADDCOMMENTS_ROUTE_ADDCOMMENT,
             self::COMPONENT_DATALOAD_COMMENTS_SCROLL => POP_BLOG_ROUTE_COMMENTS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -39,9 +39,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 return $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolverBridge::class);
         }
@@ -49,9 +49,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_CommentList::class);
         }
@@ -59,9 +59,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
                 return [PoP_Module_Processor_CommentFilters::class, PoP_Module_Processor_CommentFilters::COMPONENT_FILTER_COMMENTS];
         }
@@ -69,9 +69,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getFilterSubcomponent($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 return [PoP_Module_Processor_CommentsFeedbackMessages::class, PoP_Module_Processor_CommentsFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_ADDCOMMENT];
 
@@ -82,9 +82,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN];
         }
@@ -92,11 +92,11 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getCheckpointMessageComponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
                 $ret[] = [PoP_Module_Processor_CommentScrolls::class, PoP_Module_Processor_CommentScrolls::COMPONENT_SCROLL_COMMENTS_LIST];
                 break;
@@ -110,9 +110,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_COMMENTS_SCROLL:
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 return $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
@@ -121,11 +121,11 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(\PoP\ComponentModel\Component\Component $component, array &$props, array &$data_properties): void
     {
         parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 if ($comment_id = App::getMutationResolutionStore()->getResult($this->instanceManager->getInstance(AddCommentToCustomPostMutationResolverBridge::class))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($comment_id);
@@ -136,9 +136,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         }
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_ADDCOMMENT:
                 $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', TranslationAPIFacade::getInstance()->__('add a comment', 'poptheme-wassup'));
 

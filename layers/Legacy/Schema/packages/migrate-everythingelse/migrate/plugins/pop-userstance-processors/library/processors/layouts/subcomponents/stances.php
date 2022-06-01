@@ -5,17 +5,17 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
     public final const COMPONENT_SUBCOMPONENT_STANCES = 'subcomponent-stances';
     public final const COMPONENT_LAZYSUBCOMPONENT_STANCES = 'lazysubcomponent-stances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBCOMPONENT_STANCES],
-            [self::class, self::COMPONENT_LAZYSUBCOMPONENT_STANCES],
+            self::COMPONENT_SUBCOMPONENT_STANCES,
+            self::COMPONENT_LAZYSUBCOMPONENT_STANCES,
         );
     }
 
-    public function getSubcomponentField(array $component)
+    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
                 return 'stances';
 
@@ -24,11 +24,14 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         }
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
                 $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::COMPONENT_CONTENTLAYOUT_STANCES];
                 break;
@@ -41,9 +44,9 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         return $ret;
     }
 
-    public function isIndividual(array $component, array &$props)
+    public function isIndividual(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
             case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 return false;
@@ -52,9 +55,9 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         return parent::isIndividual($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:
             case self::COMPONENT_LAZYSUBCOMPONENT_STANCES:
                 $this->appendProp($component, $props, 'class', 'referencedby clearfix');

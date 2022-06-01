@@ -8,26 +8,26 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     public final const COMPONENT_DATALOAD_POST_UPDATE = 'dataload-post-update';
     public final const COMPONENT_DATALOAD_POST_CREATE = 'dataload-post-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_POST_UPDATE],
-            [self::class, self::COMPONENT_DATALOAD_POST_CREATE],
+            self::COMPONENT_DATALOAD_POST_UPDATE,
+            self::COMPONENT_DATALOAD_POST_CREATE,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_POST_CREATE => POP_POSTSCREATION_ROUTE_ADDPOST,
             self::COMPONENT_DATALOAD_POST_UPDATE => POP_POSTSCREATION_ROUTE_EDITPOST,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
@@ -35,7 +35,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -43,25 +43,25 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
             self::COMPONENT_DATALOAD_POST_UPDATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_POST],
             self::COMPONENT_DATALOAD_POST_CREATE => [PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostForms::COMPONENT_FORM_POST],
         );
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
         return $ret;
     }
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 return true;
         }
 
         return parent::isCreate($component);
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_UPDATE:
                 return true;
         }
@@ -69,9 +69,9 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
         return parent::isUpdate($component);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 return $this->instanceManager->getInstance(CreatePostMutationResolverBridge::class);
             case self::COMPONENT_DATALOAD_POST_UPDATE:
@@ -81,9 +81,9 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_M
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POST_UPDATE:
             case self::COMPONENT_DATALOAD_POST_CREATE:
                 $name = TranslationAPIFacade::getInstance()->__('Post', 'pop-postscreation-processors');

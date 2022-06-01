@@ -9,19 +9,19 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
     public final const COMPONENT_LATESTCOUNT_AUTHOR_CONTENT = 'latestcount-author-content';
     public final const COMPONENT_LATESTCOUNT_SINGLE_CONTENT = 'latestcount-single-content';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CONTENT],
-            [self::class, self::COMPONENT_LATESTCOUNT_CONTENT],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CONTENT],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_CONTENT],
+            self::COMPONENT_LATESTCOUNT_TAG_CONTENT,
+            self::COMPONENT_LATESTCOUNT_CONTENT,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CONTENT,
+            self::COMPONENT_LATESTCOUNT_SINGLE_CONTENT,
         );
     }
 
-    public function getClasses(array $component, array &$props)
+    public function getClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_CONTENT:
                 return array(
                     'tag'.\PoP\Root\App::getState(['routing', 'queried-object-id'])

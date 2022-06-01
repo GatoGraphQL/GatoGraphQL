@@ -4,14 +4,17 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
 {
     public final const COMPONENT_FORMINNER_POST = 'forminner-post';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_POST],
+            self::COMPONENT_FORMINNER_POST,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         // Comment Leo 03/04/2015: IMPORTANT!
         // For the _wpnonce and the pid, get the value from the queryhandler when editing
@@ -20,7 +23,7 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_POST:
                 return array_merge(
                     $ret,
@@ -31,12 +34,12 @@ class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wass
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_POST:
                 $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE];
                 $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE];

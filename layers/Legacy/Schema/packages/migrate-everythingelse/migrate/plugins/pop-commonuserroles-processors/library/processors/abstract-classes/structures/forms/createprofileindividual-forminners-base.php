@@ -3,7 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Module_Processor_CreateProfileIndividualFormInnersBase extends PoP_Module_Processor_CreateProfileFormInnersBase
 {
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -14,7 +17,7 @@ abstract class GD_URE_Module_Processor_CreateProfileIndividualFormInnersBase ext
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Change the title for the Individual Description

@@ -6,17 +6,17 @@ class PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners extends PoP_M
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW = 'viewcomponent-buttoninner-sendmessage-preview';
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL = 'viewcomponent-buttoninner-sidebar-sendmessage-full';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL],
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL,
         );
     }
     
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
                 return 'fa-fw fa-envelope-o';
@@ -25,9 +25,9 @@ class PoP_SocialNetwork_Module_Processor_ViewComponentButtonInners extends PoP_M
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_PREVIEW:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_SENDMESSAGE_FULL:
                 return TranslationAPIFacade::getInstance()->__('Send message', 'pop-coreprocessors');

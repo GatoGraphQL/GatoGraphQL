@@ -5,22 +5,22 @@ abstract class PoP_Module_Processor_ButtonGroupFormInputsBase extends PoP_Module
 
     // use PoP_Module_Processor_MultipleFormInputsTrait;
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_BUTTONGROUP];
     }
 
-    public function getInputbtnClass(array $component, array &$props)
+    public function getInputbtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-default';
     }
 
-    public function getInputbtnClasses(array $component, array &$props)
+    public function getInputbtnClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_ButtonGroupFormInputsBase extends PoP_Module
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'btn-class', $this->getInputbtnClass($component, $props));
         $this->setProp($component, $props, 'btn-classes', $this->getInputbtnClasses($component, $props));

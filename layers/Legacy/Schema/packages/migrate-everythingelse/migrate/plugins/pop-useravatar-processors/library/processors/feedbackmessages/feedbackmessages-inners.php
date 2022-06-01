@@ -4,14 +4,17 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners extend
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE = 'feedbackmessageinner-useravatar-update';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -19,7 +22,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageInners extend
             self::COMPONENT_FEEDBACKMESSAGEINNER_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

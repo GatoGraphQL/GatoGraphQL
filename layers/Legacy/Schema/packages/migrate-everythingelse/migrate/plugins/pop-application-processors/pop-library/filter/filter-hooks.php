@@ -19,7 +19,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
         );
     }
 
-    public function modifyPostFilterInputs($filterinputs, array $component)
+    public function modifyPostFilterInputs($filterinputs, \PoP\ComponentModel\Component\Component $component)
     {
         $is_post = in_array($component, [
             [PostFilterInners::class, PostFilterInners::COMPONENT_FILTERINPUTCONTAINER_POSTS],
@@ -89,7 +89,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
         return $filterinputs;
     }
 
-    public function modifyPostSimpleFilterInputs($filterinputs, array $component)
+    public function modifyPostSimpleFilterInputs($filterinputs, \PoP\ComponentModel\Component\Component $component)
     {
         $is_post = in_array($component, [
             [PostFilterInners::class, PostFilterInners::COMPONENT_FILTERINPUTCONTAINER_POSTS],

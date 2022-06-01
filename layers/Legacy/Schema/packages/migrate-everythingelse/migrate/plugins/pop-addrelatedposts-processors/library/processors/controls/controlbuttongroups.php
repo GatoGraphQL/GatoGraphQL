@@ -4,18 +4,21 @@ class PoP_AddRelatedPosts_Module_Processor_ControlButtonGroups extends PoP_Modul
 {
     public final const COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST = 'controlbuttongroup-addrelatedpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST],
+            self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_ADDRELATEDPOST:
                 $ret[] = [PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::class, PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls::COMPONENT_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST];
                 break;

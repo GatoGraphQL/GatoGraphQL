@@ -16,24 +16,24 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public final const COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT = 'buttoncontrol-stance-neutral-count';
     public final const COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT = 'buttoncontrol-stance-against-count';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT],
+            self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT,
+            self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT,
         );
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:
@@ -49,10 +49,10 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
         return parent::getTarget($component, $props);
     }
 
-    public function getMutableonrequestText(array $component, array &$props)
+    public function getMutableonrequestText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                     self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => $neutral,
                     self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT => $against,
                 );
-                $label = $labels[$component[1]];
+                $label = $labels[$component->name];
                 $cats = array(
                     self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT => POP_USERSTANCE_TERM_STANCE_PRO,
                     self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
@@ -91,19 +91,19 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 );
 
                 $general = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT],
+                    self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT,
                 );
                 $article = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT],
+                    self::COMPONENT_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT,
                 );
                 $combined = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT],
+                    self::COMPONENT_ANCHORCONTROL_STANCE_PRO_COUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT,
+                    self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT,
                 );
 
                 $query = array();
@@ -121,7 +121,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 // Override the category
                 $query['tax-query'][] = [
                     'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
-                    'terms'    => $cats[$component[1]],
+                    'terms'    => $cats[$component->name],
                 ];
 
                 // // All results
@@ -139,7 +139,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getMutableonrequestText($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT => POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL,
@@ -152,13 +152,13 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return getRouteIcon($route, false);
         }
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $routes = array(
@@ -172,15 +172,15 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return RouteUtils::getRouteURL($route);
         }
 
         return parent::getHref($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::COMPONENT_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:

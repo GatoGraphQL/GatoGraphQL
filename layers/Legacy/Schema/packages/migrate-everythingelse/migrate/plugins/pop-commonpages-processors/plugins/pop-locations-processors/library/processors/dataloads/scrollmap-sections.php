@@ -5,25 +5,25 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
 {
     public final const COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP = 'dataload-whoweare-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP],
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSections::COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function showFetchmore(array $component)
+    protected function showFetchmore(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return false;
         }
@@ -31,10 +31,10 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
         return parent::showFetchmore($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $maps = array(
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP],
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP,
         );
         if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
@@ -43,9 +43,9 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
         return $format ?? parent::getFormat($component);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
@@ -53,9 +53,9 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getDatasource(array $component, array &$props): string
+    public function getDatasource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
         }
@@ -63,9 +63,9 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends
         return parent::getDatasource($component, $props);
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP:
                 return getWhoweareCoreUserIds();
         }

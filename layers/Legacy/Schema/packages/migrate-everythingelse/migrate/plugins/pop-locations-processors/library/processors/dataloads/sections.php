@@ -7,36 +7,36 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD = 'dataload-locations-typeahead';
     public final const COMPONENT_DATALOAD_LOCATIONS_SCROLL = 'dataload-locations-scroll';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONS_SCROLL],
+            self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_LOCATIONS_SCROLL,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_LOCATIONS_SCROLL => POP_LOCATIONS_ROUTE_LOCATIONS,
             self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD => POP_LOCATIONS_ROUTE_LOCATIONS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD => [GD_EM_Module_Processor_LocationTypeaheadsComponentLayouts::class, GD_EM_Module_Processor_LocationTypeaheadsComponentLayouts::COMPONENT_LAYOUTLOCATION_TYPEAHEAD_COMPONENT],
             self::COMPONENT_DATALOAD_LOCATIONS_SCROLL => [PoP_Locations_Module_Processor_CustomScrolls::class, PoP_Locations_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONS_SCROLL:
             case self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD:
                 return [PoP_Locations_Module_Processor_CustomFilters::class, PoP_Locations_Module_Processor_CustomFilters::COMPONENT_FILTER_LOCATIONS];
@@ -45,12 +45,12 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD,
         );
         if (in_array($component, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
@@ -59,9 +59,9 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
         return $format ?? parent::getFormat($component);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONS_SCROLL:
             case self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD:
                 return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
@@ -70,9 +70,9 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONS_SCROLL:
             case self::COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('locations', 'poptheme-wassup'));

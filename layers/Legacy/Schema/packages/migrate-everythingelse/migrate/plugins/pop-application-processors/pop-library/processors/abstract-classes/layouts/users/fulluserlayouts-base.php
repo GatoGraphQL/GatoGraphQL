@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_CustomFullUserLayoutsBase extends PoP_Module_Processor_FullUserLayoutsBase
 {
-    public function getTitleSubcomponent(array $component)
+    public function getTitleSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow URE to Change it, to inject the (Organization / Organization+Members) links
@@ -14,14 +14,14 @@ abstract class PoP_Module_Processor_CustomFullUserLayoutsBase extends PoP_Module
         return [PoP_Module_Processor_CustomFullUserTitleLayouts::class, PoP_Module_Processor_CustomFullUserTitleLayouts::COMPONENT_LAYOUT_FULLUSERTITLE];
     }
 
-    public function showDescription(array $component, array &$props)
+    public function showDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Show the description only if configured to show in the body, otherwise it will be a widget
         return PoP_ApplicationProcessors_Utils::authorFulldescription();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

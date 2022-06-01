@@ -4,18 +4,21 @@ class PoP_Module_Processor_SettingsFormInners extends PoP_Module_Processor_FormI
 {
     public final const COMPONENT_FORMINNER_SETTINGS = 'forminner-settings';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_SETTINGS],
+            self::COMPONENT_FORMINNER_SETTINGS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_SETTINGS:
                 $ret[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::COMPONENT_FORMINPUT_BROWSERURL];
                 

@@ -6,18 +6,18 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
 {
     public final const COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP = 'getpopdemo-collapsecomponent-hometop';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP],
+            self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP,
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR];
@@ -29,9 +29,9 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return $ret;
     }
 
-    protected function lazyLoadInactivePanels(array $component, array &$props)
+    protected function lazyLoadInactivePanels(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return true;
         }
@@ -39,9 +39,9 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::lazyLoadInactivePanels($component, $props);
     }
 
-    public function getPanelHeaderType(array $component)
+    public function getPanelHeaderType(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'heading';
         }
@@ -49,9 +49,9 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::getPanelHeaderType($component);
     }
 
-    public function closeParent(array $component)
+    public function closeParent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return false;
         }
@@ -59,7 +59,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::closeParent($component);
     }
 
-    public function getPanelTitle(array $component)
+    public function getPanelTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $placeholder =
@@ -76,7 +76,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         '</div>'.
         '</div>';
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 $ret = array();
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
@@ -92,8 +92,8 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
                         TranslationAPIFacade::getInstance()->__('Events Map', 'getpopdemo-processors'),
                         TranslationAPIFacade::getInstance()->__('Or, if you prefer, you can browse the events by their location.', 'getpopdemo-processors')
                     );
-                    $ret[\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR])] = $events_title;
-                    $ret[\PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName([GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP])] = $map_title;
+                    $ret[\PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName([PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR])] = $events_title;
+                    $ret[\PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName([GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP])] = $map_title;
                 }
 
                 return $ret;
@@ -102,9 +102,9 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::getPanelTitle($component);
     }
 
-    public function getPaneltitleHtmltag(array $component)
+    public function getPaneltitleHtmltag(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'span';
         }
@@ -112,9 +112,9 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return parent::getPaneltitleHtmltag($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 $this->appendProp($component, $props, 'class', 'collapse-hometop');
 

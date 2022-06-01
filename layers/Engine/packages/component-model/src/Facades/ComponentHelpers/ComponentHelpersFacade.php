@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\Modules;
+namespace PoP\ComponentModel\Facades\ComponentHelpers;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 
 class ComponentHelpersFacade
 {

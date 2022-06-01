@@ -5,17 +5,17 @@ class PoP_Module_Processor_TagLayouts extends PoP_Module_Processor_TagLayoutsBas
     public final const COMPONENT_LAYOUT_TAG = 'layout-tag';
     public final const COMPONENT_LAYOUT_TAGH4 = 'layout-tagh4';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_TAG],
-            [self::class, self::COMPONENT_LAYOUT_TAGH4],
+            self::COMPONENT_LAYOUT_TAG,
+            self::COMPONENT_LAYOUT_TAGH4,
         );
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAGH4:
                 return 'h4';
         }

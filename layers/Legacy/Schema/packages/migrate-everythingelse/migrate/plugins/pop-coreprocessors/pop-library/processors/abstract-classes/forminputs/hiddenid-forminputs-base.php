@@ -2,12 +2,12 @@
 
 abstract class PoP_Module_Processor_HiddenIDTextFormInputsBase extends PoP_Module_Processor_TextFormInputsBase
 {
-    public function isHidden(array $component, array &$props)
+    public function isHidden(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return 'id';
     }

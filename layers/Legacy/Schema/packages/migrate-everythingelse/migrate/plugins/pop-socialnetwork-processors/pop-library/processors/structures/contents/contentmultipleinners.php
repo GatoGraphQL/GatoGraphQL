@@ -13,27 +13,30 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
     public final const COMPONENT_CONTENTINNER_DOWNVOTESPOSTS = 'contentinner-downvotesposts';
     public final const COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS = 'contentinner-undodownvotesposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_FOLLOWSUSERS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNFOLLOWSUSERS],
-            [self::class, self::COMPONENT_CONTENTINNER_RECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNRECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_SUBSCRIBESTOTAGS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNSUBSCRIBESFROMTAGS],
-            [self::class, self::COMPONENT_CONTENTINNER_UPVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNDOUPVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS],
-            [self::class, self::COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS],
+            self::COMPONENT_CONTENTINNER_FOLLOWSUSERS,
+            self::COMPONENT_CONTENTINNER_UNFOLLOWSUSERS,
+            self::COMPONENT_CONTENTINNER_RECOMMENDSPOSTS,
+            self::COMPONENT_CONTENTINNER_UNRECOMMENDSPOSTS,
+            self::COMPONENT_CONTENTINNER_SUBSCRIBESTOTAGS,
+            self::COMPONENT_CONTENTINNER_UNSUBSCRIBESFROMTAGS,
+            self::COMPONENT_CONTENTINNER_UPVOTESPOSTS,
+            self::COMPONENT_CONTENTINNER_UNDOUPVOTESPOSTS,
+            self::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS,
+            self::COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // When up-voting (and similar for down-voting), it must also do an undo down-vote had the post been down-voted
             case self::COMPONENT_CONTENTINNER_UPVOTESPOSTS:
                 $ret[] = [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_UPVOTEPOST_STYLES];
@@ -58,7 +61,7 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
                     // self::COMPONENT_CONTENTINNER_UPVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_UPVOTEPOST_STYLES],
                     // self::COMPONENT_CONTENTINNER_DOWNVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_DOWNVOTEPOST_STYLES],
                 );
-                if ($layout = $layouts[$component[1]] ?? null) {
+                if ($layout = $layouts[$component->name] ?? null) {
                     $ret[] = $layout;
                 }
                 break;

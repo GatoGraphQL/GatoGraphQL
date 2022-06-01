@@ -8,21 +8,24 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
     public final const COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW = 'widget-stances-appendtoscript-fullview';
     public final const COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS = 'widget-stances-appendtoscript-details';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_STANCETARGET],
-            [self::class, self::COMPONENT_WIDGET_STANCES],
-            [self::class, self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS],
+            self::COMPONENT_WIDGET_STANCETARGET,
+            self::COMPONENT_WIDGET_STANCES,
+            self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW,
+            self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCETARGET:
                 $ret[] = [PoP_Module_Processor_StanceTargetSubcomponentLayouts::class, PoP_Module_Processor_StanceTargetSubcomponentLayouts::COMPONENT_LAYOUT_STANCETARGET_ADDONS];
                 break;
@@ -40,7 +43,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $stances = PoP_UserStance_PostNameUtils::getNamesLc();
         $titles = array(
@@ -53,9 +56,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
             self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS => $stances,
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGET_STANCETARGET => 'fa-asterisk',
@@ -64,11 +67,11 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
             self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS => 'fa-commenting-o',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCES:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
@@ -77,9 +80,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCES:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
@@ -88,9 +91,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCES:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
@@ -99,9 +102,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getWidgetClass($component, $props);
     }
-    public function getTitleWrapperClass(array $component, array &$props)
+    public function getTitleWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCES:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
@@ -110,9 +113,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getTitleWrapperClass($component, $props);
     }
-    public function getTitleClass(array $component, array &$props)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCES:
                 // case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
                 // case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
@@ -122,9 +125,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubcomponent(array $component)
+    public function getQuicklinkgroupSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCES:
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
                 return [UserStance_Module_Processor_PostButtons::class, UserStance_Module_Processor_PostButtons::COMPONENT_BUTTON_STANCE_CREATE];
@@ -132,9 +135,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getQuicklinkgroupSubcomponent($component);
     }
-    public function collapsible(array $component, array &$props)
+    public function collapsible(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
                 return true;
         }

@@ -20,34 +20,34 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
     public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'block-authorlocationposts-scroll-list';
     public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST = 'block-taglocationposts-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
@@ -69,7 +69,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR],
@@ -91,12 +91,12 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
             self::COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW:
@@ -121,9 +121,9 @@ class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW:

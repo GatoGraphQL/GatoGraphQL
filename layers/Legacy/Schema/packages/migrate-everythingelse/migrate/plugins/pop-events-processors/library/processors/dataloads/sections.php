@@ -59,65 +59,65 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     public final const COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL = 'dataload-authorevents-carousel';
     public final const COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL = 'dataload-tagevents-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR],
+            self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_PASTEVENTS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_NAVIGATOR,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_ADDONS,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDAR],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDAR,
 
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL],
+            self::COMPONENT_DATALOAD_EVENTS_CAROUSEL,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL,
+            self::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW => POP_EVENTS_ROUTE_EVENTS,
@@ -169,7 +169,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -185,7 +185,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getPostmapInnerComponent(array $component)
+    protected function getPostmapInnerComponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::COMPONENT_CALENDAR_EVENTSMAP],
@@ -193,10 +193,10 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP => [PoP_Events_Locations_Module_Processor_Calendars::class, PoP_Events_Locations_Module_Processor_Calendars::COMPONENT_CALENDAR_EVENTSMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -253,8 +253,8 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_DETAILS],
             self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_PASTEVENTS_DETAILS],
 
-            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW],
-            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_PASTEVENTS_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_PASTEVENTS_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW,
 
             self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_AUTHOREVENTS_FULLVIEW],
             self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_AUTHORPASTEVENTS_FULLVIEW],
@@ -274,8 +274,8 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_DETAILS],
             self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_PASTEVENTS_DETAILS],
 
-            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW],
-            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_PASTEVENTS_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_PASTEVENTS_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW,
 
             self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_EVENTS_FULLVIEW],
             self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::COMPONENT_SCROLL_PASTEVENTS_FULLVIEW],
@@ -297,12 +297,12 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL => [GD_EM_Module_Processor_CustomCarousels::class, GD_EM_Module_Processor_CustomCarousels::COMPONENT_CAROUSEL_TAGEVENTS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getFeedbackmessagesPosition(array $component)
+    protected function getFeedbackmessagesPosition(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP:
             case self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP:
             case self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
@@ -320,9 +320,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return parent::getFeedbackmessagesPosition($component);
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW:
@@ -376,78 +376,78 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_DETAILS,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_LIST,
         );
         $calendarmaps = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP],
+            self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP,
         );
         $calendars = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDAR],
+            self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR,
+            self::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR,
+            self::COMPONENT_DATALOAD_TAGEVENTSCALENDAR_CALENDAR,
         );
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_PASTEVENTS_TYPEAHEAD,
         );
         $carousels = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL],
+            self::COMPONENT_DATALOAD_EVENTS_CAROUSEL,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_CAROUSEL,
+            self::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
@@ -473,9 +473,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
@@ -510,11 +510,11 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //     return parent::getNature($component);
     // }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Filter by the Profile/Community
             case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW:
@@ -552,9 +552,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_NAVIGATOR:
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR_ADDONS:
             case self::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR:
@@ -569,11 +569,11 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return parent::getQueryInputOutputHandler($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PASTEVENTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_ADDONS:
@@ -599,9 +599,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS:
@@ -655,9 +655,9 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS:
@@ -712,38 +712,38 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
         // Events: choose to only select past/future
         $past = array(
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_LIST,
         );
         $future = array(
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_LIST,
         );
         if (in_array($component, $past)) {
             $daterange_class = 'daterange-past opens-right';

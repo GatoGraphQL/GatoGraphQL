@@ -5,15 +5,15 @@ class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_
 {
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS = 'viewcomponent-buttoninner-locations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS],        );
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS,        );
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
 
                 return TranslationAPIFacade::getInstance()->__('Locations', 'em-popprocessors');
@@ -22,9 +22,9 @@ class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_
         return parent::getBtnTitle($component);
     }
 
-    public function getLocationComponent(array $component)
+    public function getLocationComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS:
                 return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONNAME];
         }

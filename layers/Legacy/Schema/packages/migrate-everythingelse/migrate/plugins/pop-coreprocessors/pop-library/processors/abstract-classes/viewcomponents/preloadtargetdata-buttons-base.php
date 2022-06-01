@@ -4,7 +4,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponen
 
 abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Module_Processor_ButtonsBase
 {
-    public function getTargetDynamicallyRenderedSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalComponentField[]
      */
-    public function getTargetDynamicallyRenderedSubcomponentSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getRelationalComponentFields($component);
 
@@ -36,7 +36,10 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -52,7 +55,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR

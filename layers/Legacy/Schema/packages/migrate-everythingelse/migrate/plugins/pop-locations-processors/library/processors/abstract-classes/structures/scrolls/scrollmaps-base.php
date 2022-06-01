@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_ScrollsBase
 {
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $placeholder = '<div class="bg-warning text-warning text-center row scroll-row"><small>%s</small></div>';
         $direction = $this->getProp($component, $props, 'direction');
@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'mapdetails');
 

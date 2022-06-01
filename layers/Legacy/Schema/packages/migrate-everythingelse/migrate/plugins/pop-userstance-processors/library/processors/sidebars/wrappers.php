@@ -11,25 +11,25 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
     public final const COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-opvotereferencedby-details';
     public final const COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'buttonwrapper-opvote-createorupdate';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCETARGET],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCES],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE],
-            [self::class, self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT],
-            [self::class, self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE],
-            [self::class, self::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT],
+            self::COMPONENT_WIDGETWRAPPER_STANCETARGET,
+            self::COMPONENT_WIDGETWRAPPER_STANCES,
+            self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW,
+            self::COMPONENT_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE,
+            self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT,
+            self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE,
+            self::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_STANCETARGET:
                 $ret[] = [UserStance_Module_Processor_Widgets::class, UserStance_Module_Processor_Widgets::COMPONENT_WIDGET_STANCETARGET];
                 break;
@@ -66,11 +66,11 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE:
                 $ret[] = [UserStance_Module_Processor_PostButtons::class, UserStance_Module_Processor_PostButtons::COMPONENT_BUTTON_STANCE_CREATE];
                 break;
@@ -84,9 +84,9 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_STANCETARGET:
                 $this->appendProp($component, $props, 'class', 'references');
                 break;
@@ -102,11 +102,11 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
                     self::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE => 'createorupdatestance',
                 );
                 $this->setProp($component, $props, 'appendable', true);
-                $this->setProp($component, $props, 'appendable-class', $classes[$component[1]] ?? null);
+                $this->setProp($component, $props, 'appendable-class', $classes[$component->name] ?? null);
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE:
             case self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
             case self::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE:
@@ -121,9 +121,9 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_STANCETARGET:
                 return 'hasStanceTarget';
 

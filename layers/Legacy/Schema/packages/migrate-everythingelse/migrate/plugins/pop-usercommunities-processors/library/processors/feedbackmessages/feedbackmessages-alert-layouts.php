@@ -6,16 +6,16 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Mod
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWMEMBERS = 'layout-feedbackmessagealert-invitemembers';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP = 'layout-feedbackmessagealert-editmembership';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWMEMBERS],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWMEMBERS,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES => [GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::class, GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],
@@ -23,7 +23,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Mod
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::class, GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

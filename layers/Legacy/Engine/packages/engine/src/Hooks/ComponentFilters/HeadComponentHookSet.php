@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Hooks\ComponentFilters;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\Engine\ComponentFilters\HeadComponent;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -35,18 +35,18 @@ class HeadComponentHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
-            $this->maybeAddComponent(...)
+            ModelInstance::HOOK_ELEMENTSFROMVARS_RESULT,
+            $this->maybeAddElement(...)
         );
     }
     
-    public function maybeAddComponent(array $components): array
+    public function maybeAddElement(array $elements): array
     {
         if (App::getState('componentFilter') === $this->headComponent->getName()) {
             if ($headComponent = App::getState('headComponent')) {
-                $components[] = $this->getTranslationAPI()->__('head component:', 'engine') . $this->getComponentHelpers()->getComponentFullName($headComponent);
+                $elements[] = $this->getTranslationAPI()->__('head component:', 'engine') . $this->getComponentHelpers()->getComponentFullName($headComponent);
             }
         }
-        return $components;
+        return $elements;
     }
 }

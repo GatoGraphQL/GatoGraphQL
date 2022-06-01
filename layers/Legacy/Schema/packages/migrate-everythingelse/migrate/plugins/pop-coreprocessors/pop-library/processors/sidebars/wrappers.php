@@ -7,21 +7,21 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
     public final const COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT = 'widgetwrapper-author-contact';
     public final const COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT = 'layoutwrapper-comments-appendtoscript';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE],
-            [self::class, self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT],
+            self::COMPONENT_WIDGETWRAPPER_REFERENCES,
+            self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE,
+            self::COMPONENT_WIDGETWRAPPER_AUTHOR_CONTACT,
+            self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
                 $ret[] = [PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::COMPONENT_WIDGET_REFERENCES];
                 break;
@@ -42,11 +42,11 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT:
                 $ret[] = [PoP_Module_Processor_CommentsFramesLayouts::class, PoP_Module_Processor_CommentsFramesLayouts::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT];
                 break;
@@ -55,9 +55,9 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
             case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
                 $this->appendProp($component, $props, 'class', 'references');
@@ -67,9 +67,9 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETWRAPPER_REFERENCES:
             case self::COMPONENT_WIDGETWRAPPER_REFERENCES_LINE:
                 return 'hasReferences';

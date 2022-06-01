@@ -38,7 +38,7 @@ function gdDataloadAllcontentCategories()
     return array();
 }
 
-function gdDataloadAllcontentComponents()
+function gdDataloadAllcontentElements()
 {
 
     // Calculate all the terms automatically, by querying the category-like taxonomies from all searchable post types,
@@ -46,31 +46,31 @@ function gdDataloadAllcontentComponents()
     $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
     $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
     $excluded_terms = getAllcontentExcludedTaxonomies();
-    $components = array();
+    $elements = array();
     foreach ($cmsapplicationpostsapi->getAllcontentPostTypes() as $post_type) {
-        $component = array(
+        $element = array(
             'postType' => $post_type,
         );
         if ($taxonomies = $taxonomyapi->getCustomPostTypeTaxonomies($post_type)) {
             foreach ($taxonomies as $taxonomy) {
                 // Only for Category-type taxonomies, not for term-like
                 if ($taxonomyapi->isTaxonomyHierarchical($taxonomy)) {
-                    $component['taxonomy'] = $taxonomy;
+                    $element['taxonomy'] = $taxonomy;
                     if ($terms = $taxonomyapi->getTaxonomyTerms($taxonomy, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                         if ($terms = array_diff(
                             $terms,
                             $excluded_terms[$taxonomy] ?? array()
                         )) {
-                            $component['terms'] = $terms;
+                            $element['terms'] = $terms;
                         }
                     }
                 }
             }
         }
 
-        $components[] = $component;
+        $elements[] = $element;
     }
 
-    return $components;
+    return $elements;
 }
 

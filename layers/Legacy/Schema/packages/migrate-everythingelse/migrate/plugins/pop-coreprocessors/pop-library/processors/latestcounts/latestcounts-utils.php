@@ -2,14 +2,14 @@
 
 class GD_LatestCounts_Utils
 {
-    public static function authorFilters($classes, array $component, array &$props)
+    public static function authorFilters($classes, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow URE to add Organization members
         return \PoP\Root\App::applyFilters('latestcounts:author:classes', $classes, $component, $props);
     }
 
-    public static function getAllcontentClasses(array $component, array &$props)
+    public static function getAllcontentClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = array();
 

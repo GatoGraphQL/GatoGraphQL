@@ -4,16 +4,16 @@ class PoP_Module_Processor_AnchorMenus extends PoP_Module_Processor_AnchorMenusB
 {
     public final const COMPONENT_ANCHORMENU = 'anchormenu';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORMENU],
+            self::COMPONENT_ANCHORMENU,
         );
     }
 
-    public function getItemClass(array $component, array &$props)
+    public function getItemClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORMENU:
                 return 'btn btn-default btn-block';
         }

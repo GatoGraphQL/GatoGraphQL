@@ -4,7 +4,7 @@
  * Add filtercomponents
  */
 \PoP\Root\App::addFilter('CommonUserRoles:FilterInnerComponentProcessor:inputComponents', 'gdUreAddFiltercomponent', 10, 2);
-function gdUreAddFiltercomponent($filterinputs, array $component)
+function gdUreAddFiltercomponent($filterinputs, \PoP\ComponentModel\Component\Component $component)
 {
 	if ($component == [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_INDIVIDUALS]) {
 	    array_splice(
@@ -35,7 +35,7 @@ function gdUreAddFiltercomponent($filterinputs, array $component)
     return $filterinputs;
 }
 \PoP\Root\App::addFilter('CommonUserRoles:SimpleFilterInners:inputComponents', 'gdUreAddSimpleFiltercomponent', 10, 2);
-function gdUreAddSimpleFiltercomponent($filterinputs, array $component)
+function gdUreAddSimpleFiltercomponent($filterinputs, \PoP\ComponentModel\Component\Component $component)
 {
 	if ($component == [PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_INDIVIDUALS]) {
 	    array_splice(

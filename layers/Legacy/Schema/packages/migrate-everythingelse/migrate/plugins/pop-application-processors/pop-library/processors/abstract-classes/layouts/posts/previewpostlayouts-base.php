@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Module_Processor_PreviewPostLayoutsBase
 {
-    protected function getDetailsfeedBottomSubcomponents(array $component)
+    protected function getDetailsfeedBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array();
 
@@ -22,17 +22,17 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
         return $layouts;
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Make the thumb image responsive if it is not the media layout

@@ -5,17 +5,17 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
     public final const COMPONENT_SUBCOMPONENT_HIGHLIGHTS = 'subcomponent-highlights';
     public final const COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS = 'lazysubcomponent-highlights';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS],
-            [self::class, self::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS],
+            self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS,
+            self::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS,
         );
     }
 
-    public function getSubcomponentField(array $component)
+    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS:
                 return 'highlights';
 
@@ -24,11 +24,14 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         }
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS:
                 $ret[] = [Wassup_Module_Processor_LayoutContents::class, Wassup_Module_Processor_LayoutContents::COMPONENT_CONTENTLAYOUT_HIGHLIGHTS];
                 break;
@@ -41,9 +44,9 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function isIndividual(array $component, array &$props)
+    public function isIndividual(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS:
             case self::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS:
                 return false;
@@ -52,9 +55,9 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         return parent::isIndividual($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS:
             case self::COMPONENT_LAZYSUBCOMPONENT_HIGHLIGHTS:
                 $this->appendProp($component, $props, 'class', 'referencedby clearfix');

@@ -9,21 +9,21 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
     public final const COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP = 'block-singledownvotedby-scrollmap';
     public final const COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP = 'block-tagsubscribers-scrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP],
+            self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP,
+            self::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP,
+            self::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP,
+            self::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWERS,
             self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS,
             self::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP => POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY,
@@ -34,7 +34,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
@@ -45,12 +45,12 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
             self::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
@@ -67,9 +67,9 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks 
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP:
             case self::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP:

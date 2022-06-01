@@ -9,23 +9,23 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
     public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-postsidebarlocations';
     public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-usersidebarlocations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS],
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS];
                 break;
@@ -54,9 +54,9 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:
@@ -69,11 +69,11 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return null;
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:

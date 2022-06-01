@@ -45,21 +45,21 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         return $this->nameFilterInput ??= $this->instanceManager->getInstance(NameFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_SEARCH],
-            [self::class, self::COMPONENT_FILTERINPUT_HASHTAGS],
-            [self::class, self::COMPONENT_FILTERINPUT_NAME],
+            self::COMPONENT_FILTERINPUT_SEARCH,
+            self::COMPONENT_FILTERINPUT_HASHTAGS,
+            self::COMPONENT_FILTERINPUT_NAME,
         );
     }
 
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_SEARCH => $this->getSearchFilterInput(),
             self::COMPONENT_FILTERINPUT_NAME => $this->getNameFilterInput(),
             self::COMPONENT_FILTERINPUT_HASHTAGS => [PoP_Module_Processor_FormsFilterInput::class, PoP_Module_Processor_FormsFilterInput::FILTERINPUT_HASHTAGS],
@@ -67,9 +67,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_SEARCH:
     //         case self::COMPONENT_FILTERINPUT_HASHTAGS:
     //         case self::COMPONENT_FILTERINPUT_NAME:
@@ -79,9 +79,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_SEARCH:
                 return TranslationAPIFacade::getInstance()->__('Search', 'pop-coreprocessors');
 
@@ -95,9 +95,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         return parent::getLabelText($component, $props);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_SEARCH:
             case self::COMPONENT_FILTERINPUT_HASHTAGS:
             case self::COMPONENT_FILTERINPUT_NAME:
@@ -107,15 +107,15 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
                     self::COMPONENT_FILTERINPUT_HASHTAGS => 'tags',
                     self::COMPONENT_FILTERINPUT_NAME => 'nombre',
                 );
-                return $names[$component[1]];
+                return $names[$component->name];
         }
 
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_SEARCH => $this->stringScalarTypeResolver,
             self::COMPONENT_FILTERINPUT_HASHTAGS => $this->stringScalarTypeResolver,
             self::COMPONENT_FILTERINPUT_NAME => $this->stringScalarTypeResolver,
@@ -123,10 +123,10 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_SEARCH => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_HASHTAGS => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_NAME => $translationAPI->__('', ''),

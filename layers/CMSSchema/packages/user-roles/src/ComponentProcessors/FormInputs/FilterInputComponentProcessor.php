@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\ComponentProcessors\FormInputs;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -47,44 +48,44 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->excludeUserRolesFilterInput ??= $this->instanceManager->getInstance(ExcludeUserRolesFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_USER_ROLES],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES],
+            self::COMPONENT_FILTERINPUT_USER_ROLES,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES,
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getUserRolesFilterInput(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getExcludeUserRolesFilterInput(),
             default => null,
         };
     }
 
-    public function getName(array $component): string
+    public function getName(Component $component): string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => 'roles',
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => 'excludeRoles',
             default => parent::getName($component),
         };
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->getStringScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES,
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
@@ -93,9 +94,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),
             self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'user-roles'),
             default => null,

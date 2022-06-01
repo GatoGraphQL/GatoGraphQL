@@ -7,17 +7,17 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
     public final const COMPONENT_BUTTONGROUP_AUTHORSTANCES = 'buttongroup-authorstances';
     public final const COMPONENT_BUTTONGROUP_TAGSTANCES = 'buttongroup-tagstances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONGROUP_STANCES],
-            [self::class, self::COMPONENT_BUTTONGROUP_MYSTANCES],
-            [self::class, self::COMPONENT_BUTTONGROUP_AUTHORSTANCES],
-            [self::class, self::COMPONENT_BUTTONGROUP_TAGSTANCES],
+            self::COMPONENT_BUTTONGROUP_STANCES,
+            self::COMPONENT_BUTTONGROUP_MYSTANCES,
+            self::COMPONENT_BUTTONGROUP_AUTHORSTANCES,
+            self::COMPONENT_BUTTONGROUP_TAGSTANCES,
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $screens = array(
             self::COMPONENT_BUTTONGROUP_STANCES => POP_USERSTANCE_SCREEN_STANCES,
@@ -25,14 +25,14 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
             self::COMPONENT_BUTTONGROUP_AUTHORSTANCES => POP_USERSTANCE_SCREEN_AUTHORSTANCES,
             self::COMPONENT_BUTTONGROUP_TAGSTANCES => POP_USERSTANCE_SCREEN_TAGSTANCES,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
         return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataFormats(array $component, array &$props)
+    protected function getHeadersdataFormats(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen

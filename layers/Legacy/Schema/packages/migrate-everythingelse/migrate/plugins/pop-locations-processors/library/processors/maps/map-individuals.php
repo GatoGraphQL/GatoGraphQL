@@ -7,19 +7,19 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
     public final const COMPONENT_MAP_INDIVIDUAL_POST = 'em-map-individual-post';
     public final const COMPONENT_MAP_INDIVIDUAL_USER = 'em-map-individual-user';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAP_INDIVIDUAL],
-            [self::class, self::COMPONENT_MAP_SIDEBARINDIVIDUAL],
-            [self::class, self::COMPONENT_MAP_INDIVIDUAL_POST],
-            [self::class, self::COMPONENT_MAP_INDIVIDUAL_USER],
+            self::COMPONENT_MAP_INDIVIDUAL,
+            self::COMPONENT_MAP_SIDEBARINDIVIDUAL,
+            self::COMPONENT_MAP_INDIVIDUAL_POST,
+            self::COMPONENT_MAP_INDIVIDUAL_USER,
         );
     }
 
-    public function getMapdivSubcomponent(array $component)
+    public function getMapdivSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_INDIVIDUAL_POST:
             case self::COMPONENT_MAP_INDIVIDUAL_USER:
             case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
@@ -29,9 +29,9 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
         return parent::getMapdivSubcomponent($component);
     }
 
-    public function getDrawmarkersSubcomponent(array $component)
+    public function getDrawmarkersSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_INDIVIDUAL_POST:
             case self::COMPONENT_MAP_INDIVIDUAL_USER:
             case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
@@ -41,9 +41,9 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
         return parent::getDrawmarkersSubcomponent($component);
     }
 
-    public function openOnemarkerInfowindow(array $component)
+    public function openOnemarkerInfowindow(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_SIDEBARINDIVIDUAL:
                 return false;
         }

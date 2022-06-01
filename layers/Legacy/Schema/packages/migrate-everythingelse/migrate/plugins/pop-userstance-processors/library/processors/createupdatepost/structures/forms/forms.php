@@ -4,29 +4,29 @@ class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Proce
 {
     public final const COMPONENT_FORM_STANCE = 'form-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_STANCE],
+            self::COMPONENT_FORM_STANCE,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FORM_STANCE => [UserStance_Module_Processor_CreateUpdatePostFormInners::class, UserStance_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_STANCE],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_STANCE:
                 // Make it horizontal? If set by above (most likely the block)
                 if ($this->getProp($component, $props, 'horizontal')) {

@@ -7,18 +7,18 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadCom
     public final const COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS = 'dataloadaction-system-activateplugins';
 
     // use PoP_SystemWP_WP_Module_Processor_SystemActionsTrait;
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS],
+            self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS,
         );
     }
 
-    public function shouldExecuteMutation(array $component, array &$props): bool
+    public function shouldExecuteMutation(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
 
         // The actionexecution is triggered directly
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
                 return true;
         }
@@ -26,9 +26,9 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadCom
         return parent::shouldExecuteMutation($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
                 return $this->instanceManager->getInstance(ActivatePluginsMutationResolverBridge::class);
         }

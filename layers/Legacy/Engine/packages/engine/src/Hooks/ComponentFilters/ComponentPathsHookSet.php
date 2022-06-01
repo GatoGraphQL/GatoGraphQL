@@ -26,12 +26,12 @@ class ComponentPathsHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
-            $this->maybeAddComponent(...)
+            ModelInstance::HOOK_ELEMENTSFROMVARS_RESULT,
+            $this->maybeAddElement(...)
         );
     }
     
-    public function maybeAddComponent(array $components): array
+    public function maybeAddElement(array $elements): array
     {
         if (App::getState('componentFilter') === $this->componentPaths->getName()) {
             if ($componentPaths = App::getState('componentPaths')) {
@@ -40,10 +40,10 @@ class ComponentPathsHookSet extends AbstractHookSet
                     fn ($componentPath) => $componentPathHelpers->stringifyComponentPath($componentPath),
                     $componentPaths
                 );
-                $components[] = $this->getTranslationAPI()->__('component paths:', 'engine') . implode(',', $paths);
+                $elements[] = $this->getTranslationAPI()->__('component paths:', 'engine') . implode(',', $paths);
             }
         }
 
-        return $components;
+        return $elements;
     }
 }

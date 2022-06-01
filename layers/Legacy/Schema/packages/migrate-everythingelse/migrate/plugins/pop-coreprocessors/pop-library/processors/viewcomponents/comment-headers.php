@@ -5,17 +5,17 @@ class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Proces
     public final const COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST = 'viewcomponent-header-commentpost';
     public final const COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL = 'viewcomponent-header-commentpost-url';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL],
+            self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST,
+            self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL,
         );
     }
 
-    public function getHeaderSubcomponent(array $component): ?array
+    public function getHeaderSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST:
                 return [PoP_Module_Processor_PostViewComponentHeaders::class, PoP_Module_Processor_PostViewComponentHeaders::COMPONENT_VIEWCOMPONENT_HEADER_POST];
 
@@ -26,9 +26,9 @@ class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Proces
         return parent::getHeaderSubcomponent($component);
     }
 
-    public function headerShowUrl(array $component, array &$props)
+    public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_HEADER_COMMENTPOST_URL:
                 return true;
         }

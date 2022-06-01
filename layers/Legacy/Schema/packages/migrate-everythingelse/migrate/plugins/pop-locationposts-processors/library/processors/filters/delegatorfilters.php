@@ -6,16 +6,16 @@ class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Modu
     public final const COMPONENT_DELEGATORFILTER_LOCATIONPOSTS = 'delegatorfilter-locationposts';
     public final const COMPONENT_DELEGATORFILTER_TAGLOCATIONPOSTS = 'delegatorfilter-taglocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORLOCATIONPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_LOCATIONPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGLOCATIONPOSTS],
+            self::COMPONENT_DELEGATORFILTER_AUTHORLOCATIONPOSTS,
+            self::COMPONENT_DELEGATORFILTER_LOCATIONPOSTS,
+            self::COMPONENT_DELEGATORFILTER_TAGLOCATIONPOSTS,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_AUTHORLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS],
@@ -23,7 +23,7 @@ class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Modu
             self::COMPONENT_DELEGATORFILTER_TAGLOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::class, PoP_LocationPosts_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLOCATIONPOSTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

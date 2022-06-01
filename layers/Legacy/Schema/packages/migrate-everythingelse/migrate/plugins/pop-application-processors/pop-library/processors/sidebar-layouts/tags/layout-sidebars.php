@@ -6,16 +6,16 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
     public final const COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL = 'layout-tagsidebar-horizontal';
     public final const COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL = 'layout-tagsidebar-compacthorizontal';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL],
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL],
+            self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL,
+            self::COMPONENT_LAYOUT_TAGSIDEBAR_HORIZONTAL,
+            self::COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL => [PoP_Module_Processor_CustomTagLayoutSidebarInners::class, PoP_Module_Processor_CustomTagLayoutSidebarInners::COMPONENT_LAYOUT_TAGSIDEBARINNER_VERTICAL],
@@ -23,16 +23,16 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
             self::COMPONENT_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL => [PoP_Module_Processor_CustomTagLayoutSidebarInners::class, PoP_Module_Processor_CustomTagLayoutSidebarInners::COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAGSIDEBAR_VERTICAL:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

@@ -38,12 +38,12 @@ class ModelInstanceHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTS_RESULT,
-            $this->getModelInstanceComponentsFromAppState(...)
+            ModelInstance::HOOK_ELEMENTS_RESULT,
+            $this->getModelInstanceElementsFromAppState(...)
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceElementsFromAppState(array $elements): array
     {
         $nature = App::getState('nature');
 
@@ -67,9 +67,9 @@ class ModelInstanceHookSet extends AbstractHookSet
                 foreach ($this->getPostCategoryTypeAPI()->getCustomPostCategories($postID) as $cat) {
                     $categories[] = $this->getPostCategoryTypeAPI()->getCategorySlug($cat) . $this->getPostCategoryTypeAPI()->getCategoryID($cat);
                 }
-                $components[] = $this->__('categories:', 'post-categories') . implode('.', $categories);
+                $elements[] = $this->__('categories:', 'post-categories') . implode('.', $categories);
             }
         }
-        return $components;
+        return $elements;
     }
 }

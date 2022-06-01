@@ -6,28 +6,28 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     public final const COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE = 'block-profileorganization-create';
     public final const COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE = 'block-profileindividual-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE],
-            [self::class, self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE],
+            self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE,
+            self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
             self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
                 $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE];
                 $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINPROMPT];
@@ -42,9 +42,9 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_CREATEACCOUNT];
@@ -53,9 +53,9 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::COMPONENT_SUBMENU_ACCOUNT];
@@ -64,11 +64,11 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return parent::getSubmenuSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 $this->setProp(

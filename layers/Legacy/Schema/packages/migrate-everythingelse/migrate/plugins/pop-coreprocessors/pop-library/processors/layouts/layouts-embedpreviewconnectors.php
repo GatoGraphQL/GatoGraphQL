@@ -4,10 +4,10 @@ class PoP_Module_Processor_ReloadEmbedPreviewConnectors extends PoP_Module_Proce
 {
     public final const COMPONENT_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR = 'layout-reloadembedpreviewconnector';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR],
+            self::COMPONENT_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR,
         );
     }
 }

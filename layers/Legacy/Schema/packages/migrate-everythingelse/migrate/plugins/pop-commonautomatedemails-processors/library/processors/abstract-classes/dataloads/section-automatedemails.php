@@ -2,7 +2,7 @@
 
 abstract class PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Do not show the filter

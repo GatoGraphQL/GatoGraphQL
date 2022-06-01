@@ -5,22 +5,22 @@ class PoP_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Module
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATEPROFILE = 'layout-feedbackmessagealert-createprofile';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEPROFILE = 'layout-feedbackmessagealert-updateprofile';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATEPROFILE],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEPROFILE],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATEPROFILE,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEPROFILE,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CREATEPROFILE => [PoP_Module_Processor_CreateProfileFeedbackMessageLayouts::class, PoP_Module_Processor_CreateProfileFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CREATEPROFILE],
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEPROFILE => [PoP_Module_Processor_UpdateProfileFeedbackMessageLayouts::class, PoP_Module_Processor_UpdateProfileFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_UPDATEPROFILE],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

@@ -23,35 +23,35 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
     public final const COMPONENT_TABPANEL_CATEGORYPOSTS18 = 'categoryposts18-tabpanel';
     public final const COMPONENT_TABPANEL_CATEGORYPOSTS19 = 'categoryposts19-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_TABPANEL_CATEGORYPOSTS19],
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS00,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS01,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS02,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS03,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS04,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS05,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS06,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS07,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS08,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS09,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS10,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS11,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS12,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS13,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS14,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS15,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS16,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS17,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS18,
+            self::COMPONENT_TABPANEL_CATEGORYPOSTS19,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_TABPANEL_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::COMPONENT_TABPANEL_CATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::COMPONENT_TABPANEL_CATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -76,11 +76,11 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
         };
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -345,9 +345,9 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS00:
                 return array(
                     [

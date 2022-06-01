@@ -79,85 +79,85 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     public final const COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST = 'dataload-authorcontent-scroll-fixedlist';
     public final const COMPONENT_DATALOAD_USERS_CAROUSEL = 'dataload-users-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_USERS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_TAGS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_TAGS_MENTIONS],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_MENTIONS],
-            [self::class, self::COMPONENT_DATALOAD_USERS_MENTIONS],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_CONTENT_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_USERS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_TAGS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_TAGS_MENTIONS,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_MENTIONS,
+            self::COMPONENT_DATALOAD_USERS_MENTIONS,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_USERS_CAROUSEL],
+            self::COMPONENT_DATALOAD_USERS_CAROUSEL,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
@@ -223,7 +223,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -328,12 +328,12 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::COMPONENT_DATALOAD_USERS_CAROUSEL => [PoP_Module_Processor_CustomCarousels::class, PoP_Module_Processor_CustomCarousels::COMPONENT_CAROUSEL_USERS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
@@ -413,111 +413,111 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
         $navigators = array(
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_NAVIGATOR],
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_NAVIGATOR,
         );
         $addons = array(
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_ADDONS],
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_ADDONS,
         );
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGS_SCROLL_DETAILS,
 
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_DETAILS,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_SIMPLEVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_FULLVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_FULLVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_THUMBNAIL,
 
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_THUMBNAIL,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_CONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_POSTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_USERS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_SEARCHUSERS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_USERS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORPOSTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_LIST,
         );
         $fixedlists = array(
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST,
         );
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_SEARCHCONTENT_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_CONTENT_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_USERS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_TAGS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_SEARCHCONTENT_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_CONTENT_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_USERS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_TAGS_TYPEAHEAD,
         );
         $mentions = array(
-            [self::class, self::COMPONENT_DATALOAD_TAGS_MENTIONS],
-            [self::class, self::COMPONENT_DATALOAD_SEARCHUSERS_MENTIONS],
-            [self::class, self::COMPONENT_DATALOAD_USERS_MENTIONS],
+            self::COMPONENT_DATALOAD_TAGS_MENTIONS,
+            self::COMPONENT_DATALOAD_SEARCHUSERS_MENTIONS,
+            self::COMPONENT_DATALOAD_USERS_MENTIONS,
         );
         $carousels = array(
-            [self::class, self::COMPONENT_DATALOAD_USERS_CAROUSEL],
+            self::COMPONENT_DATALOAD_USERS_CAROUSEL,
         );
         if (in_array($component, $navigators)) {
             $format = POP_FORMAT_NAVIGATOR;
@@ -544,9 +544,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW:
     //         case self::COMPONENT_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW:
@@ -584,11 +584,11 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     // }
 
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS:
@@ -652,7 +652,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         }
 
         $fixedlists = array(
-            [self::class, self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST],
+            self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST,
         );
 
         if (in_array($component, $fixedlists)) {
@@ -662,11 +662,11 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW:
@@ -701,9 +701,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_SIMPLEVIEW:
@@ -783,11 +783,11 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 // Don't bring anymore
                 $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
@@ -797,9 +797,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW:
@@ -824,9 +824,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         parent::initRequestProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_POSTS_SCROLL_DETAILS:

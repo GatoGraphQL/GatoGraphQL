@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
@@ -42,7 +43,7 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -209,7 +210,7 @@ class Engine implements EngineInterface
         $engineState->backgroundload_urls[$url] = $targets;
     }
 
-    public function getEntryComponent(): array
+    public function getEntryComponent(): Component
     {
         $engineState = App::getEngineState();
 
@@ -460,7 +461,7 @@ class Engine implements EngineInterface
         return $data;
     }
 
-    public function getModelPropsComponentTree(array $component): array
+    public function getModelPropsComponentTree(Component $component): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -489,7 +490,7 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
-    public function addRequestPropsComponentTree(array $component, array $props): array
+    public function addRequestPropsComponentTree(Component $component, array $props): array
     {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
@@ -635,7 +636,7 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getComponentDatasetSettings(array $component, $model_props, array &$props): array
+    public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array
     {
         $ret = [];
         /** @var ModuleConfiguration */
@@ -686,8 +687,9 @@ class Engine implements EngineInterface
     {
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
+        $entryComponent = $this->getEntryComponent();
         $meta = array(
-            Response::ENTRY_COMPONENT => $this->getEntryComponent()[1],
+            Response::ENTRY_COMPONENT => $entryComponent->name,
             Response::UNIQUE_ID => $moduleInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
@@ -884,7 +886,7 @@ class Engine implements EngineInterface
         $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
     }
 
-    protected function getInterreferencedComponentFullPaths(array $component, array &$props): array
+    protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
         $this->addInterreferencedComponentFullPaths($paths, [], $component, $props);
@@ -894,7 +896,7 @@ class Engine implements EngineInterface
     private function addInterreferencedComponentFullPaths(
         array &$paths,
         array $component_path,
-        array $component,
+        Component $component,
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
@@ -922,29 +924,36 @@ class Engine implements EngineInterface
             )
         );
 
-        // Propagate to its inner modules
-        $subComponents = $processor->getAllSubcomponents($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
+        // Propagate to its inner components
+        $subcomponents = $processor->getAllSubcomponents($component);
+        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
+        // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
-            $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+        foreach ($subcomponents as $subcomponent) {
+            $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function getDataloadingComponentFullPaths(array $component, array &$props): array
+    /**
+     * @return array<Component[]>
+     */
+    protected function getDataloadingComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
         $this->addDataloadingComponentFullPaths($paths, [], $component, $props);
         return $paths;
     }
 
+    /**
+     * @param array<Component[]> $paths
+     * @param Component[] $component_path
+     */
     private function addDataloadingComponentFullPaths(
         array &$paths,
         array $component_path,
-        array $component,
+        Component $component,
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
@@ -970,14 +979,14 @@ class Engine implements EngineInterface
             )
         );
 
-        // Propagate to its inner modules
-        $subComponents = $processor->getAllSubcomponents($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
+        // Propagate to its inner components
+        $subcomponents = $processor->getAllSubcomponents($component);
+        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
+        // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
-            $this->addDataloadingComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+        foreach ($subcomponents as $subcomponent) {
+            $this->addDataloadingComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -985,7 +994,7 @@ class Engine implements EngineInterface
     protected function assignValueForComponent(
         array &$array,
         array $component_path,
-        array $component,
+        Component $component,
         string $key,
         mixed $value,
     ): void {
@@ -993,9 +1002,9 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
         $array_pointer = &$array;
-        foreach ($component_path as $subComponent) {
+        foreach ($component_path as $subcomponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $componentOutputName
-            $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
+            $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subcomponent);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty])) {
@@ -1029,14 +1038,14 @@ class Engine implements EngineInterface
         return null;
     }
 
-    protected function getComponentPathKey(array $component_path, array $component): string
+    protected function getComponentPathKey(array $component_path, Component $component): string
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
         return $componentFullName . '-' . implode('.', $component_path);
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array
+    public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1109,19 +1118,19 @@ class Engine implements EngineInterface
             );
         }
 
-        // Get the list of all modules which calculate their data feedback using another component's results
+        // Get the list of all components which calculate their data feedback using another component's results
         $interreferenced_componentfullpaths = $this->getInterreferencedComponentFullPaths($root_component, $root_props);
 
-        // Get the list of all modules which load data, as a list of the component path starting from the top element (the entry component)
-        $module_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
+        // Get the list of all components which load data, as a list of the component path starting from the top element (the entry component)
+        $component_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
-        // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
+        // The components below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
-        foreach ($module_fullpaths as $component_path) {
+        foreach ($component_fullpaths as $component_path) {
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($component_path);
@@ -1132,8 +1141,8 @@ class Engine implements EngineInterface
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
-            foreach ($component_path as $subComponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
+            foreach ($component_path as $subcomponent) {
+                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
                 $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
@@ -1161,8 +1170,8 @@ class Engine implements EngineInterface
             // The $props is directly moving the array to the corresponding path
             $props = &$root_props;
             $model_props = &$root_model_props;
-            foreach ($component_path as $subComponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
+            foreach ($component_path as $subcomponent) {
+                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
                 $props = &$props[$subcomponentFullName][Props::SUBCOMPONENTS];
                 $model_props = &$model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
             }
@@ -1213,7 +1222,7 @@ class Engine implements EngineInterface
                     }
                 }
 
-                // Allow modules to change their data_properties based on the actionexecution of previous modules.
+                // Allow components to change their data_properties based on the actionexecution of previous components.
                 $processor->prepareDataPropertiesAfterMutationExecution($component, $component_props, $data_properties);
 
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
@@ -1322,15 +1331,15 @@ class Engine implements EngineInterface
             // Integrate the feedback into $componentdata
             $this->processAndAddComponentData($component_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
-            // Allow other modules to produce their own feedback using this component's data results
+            // Allow other components to produce their own feedback using this component's data results
             if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($component_path, array($component)))] ?? null) {
                 foreach ($referencer_componentfullpaths as $referencer_componentPath) {
                     $referencer_component = array_pop($referencer_componentPath);
 
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
-                    foreach ($referencer_componentPath as $subComponent) {
-                        $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
+                    foreach ($referencer_componentPath as $subcomponent) {
+                        $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
                         $referencer_props = &$referencer_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                         $referencer_model_props = &$referencer_model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                     }
@@ -2436,7 +2445,7 @@ class Engine implements EngineInterface
 
     protected function processAndAddComponentData(
         array $component_path,
-        array $component,
+        Component $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
@@ -2458,8 +2467,8 @@ class Engine implements EngineInterface
                 $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
                 // Advance the position of the array into the current component
-                foreach ($component_path as $subComponent) {
-                    $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
+                foreach ($component_path as $subcomponent) {
+                    $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subcomponent);
                     $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] = $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] ?? [];
                     $componentdata = &$componentdata[$subcomponentOutputName][$subcomponentsOutputProperty];
                 }

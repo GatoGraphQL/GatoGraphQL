@@ -4,29 +4,29 @@ class PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents extends 
 {
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES = 'formcomponent-selectabletypeaheadtrigger-references';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES],
+            self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES,
         );
     }
 
-    public function getTriggerSubcomponent(array $component): ?array
+    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:
                 $layouts = array(
                     self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES => [PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES],
                 );
-                return $layouts[$component[1]];
+                return $layouts[$component->name];
         }
 
         return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:
                 return 'references';
         }
@@ -34,9 +34,9 @@ class PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents extends 
         return parent::getDbobjectField($component);
     }
 
-    public function getUrlParam(array $component)
+    public function getUrlParam(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:
                 return POP_INPUTNAME_REFERENCES;
         }

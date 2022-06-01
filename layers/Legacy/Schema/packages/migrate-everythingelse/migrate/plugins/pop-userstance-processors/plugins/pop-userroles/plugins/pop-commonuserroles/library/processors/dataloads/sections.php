@@ -12,23 +12,23 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
     public final const COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL = 'dataload-stances-byorganizations-carousel';
     public final const COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL = 'dataload-stances-byindividuals-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
@@ -41,7 +41,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -64,12 +64,12 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL => [UserStance_Module_Processor_CustomCarousels::class, UserStance_Module_Processor_CustomCarousels::COMPONENT_CAROUSEL_STANCES_BYINDIVIDUALS],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:
@@ -82,23 +82,23 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST,
         );
         $carousels = array(
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL],
-            [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
+            self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL,
+            self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL,
         );
         if (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
@@ -113,11 +113,11 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
         //     case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
@@ -134,7 +134,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         //         break;
         // }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:
@@ -144,16 +144,16 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL:
             case self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL:
                 $organizations = array(
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL],
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW,
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL,
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST,
+                    self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL,
                 );
                 $individuals = array(
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
-                    [self::class, self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL],
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW,
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL,
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST,
+                    self::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL,
                 );
                 if (in_array($component, $organizations)) {
                     $role = GD_URE_ROLE_ORGANIZATION;
@@ -173,9 +173,9 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:
@@ -190,9 +190,9 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST:

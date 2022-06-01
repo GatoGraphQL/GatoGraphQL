@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\ConditionalOnModule\API\ComponentRoutingProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
@@ -31,13 +32,13 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
         $ret[CategoryRequestNature::CATEGORY][] = [
-            'component' => [PostCategoryFieldDataloadComponentProcessor::class, PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY],
+            'component' => new Component(PostCategoryFieldDataloadComponentProcessor::class, PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing' => [
@@ -49,7 +50,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     }
 
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
@@ -57,7 +58,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostCategoriesRoute() => [PostCategoryFieldDataloadComponentProcessor::class, PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
+            $moduleConfiguration->getPostCategoriesRoute() => new Component(PostCategoryFieldDataloadComponentProcessor::class, PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -70,7 +71,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostsRoute() => [CategoryPostFieldDataloadComponentProcessor::class, CategoryPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
+            $moduleConfiguration->getPostsRoute() => new Component(CategoryPostFieldDataloadComponentProcessor::class, CategoryPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST),
         );
         foreach ($routeComponents as $route => $component) {
             $ret[CategoryRequestNature::CATEGORY][$route][] = [

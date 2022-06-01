@@ -5,24 +5,24 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentComponent(array $component)
+    public function getFormcomponentComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return $this->getComponentSubcomponent($component);
     }
 
-    public function getComponentName(array $component)
+    public function getComponentName(\PoP\ComponentModel\Component\Component $component)
     {
         // Because this class is a FormComponentComponentProcessorInterface, input_name is the inner components input_name
         return $this->getInputName($component);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->metaFormcomponentInitModuleRequestProps($component, $props);
         parent::initRequestProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $component = $this->getComponentSubcomponent($component);
 

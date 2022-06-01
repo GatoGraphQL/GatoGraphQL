@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_InstantaneousFiltersBase extends PoP_Module_Processor_FiltersBase
 {
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-filterform-instantaneous');
 

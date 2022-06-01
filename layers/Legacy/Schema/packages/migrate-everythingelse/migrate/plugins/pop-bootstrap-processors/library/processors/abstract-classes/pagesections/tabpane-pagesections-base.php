@@ -4,21 +4,21 @@ use PoP\ComponentModel\Misc\RequestUtils;
 
 abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_PAGESECTION_TABPANE];
     }
 
-    public function getHeaderClass(array $component)
+    public function getHeaderClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getHeaderTitles(array $component)
+    public function getHeaderTitles(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         $this->mergeProp(
@@ -56,7 +56,7 @@ abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_P
         parent::initModelProps($component, $props);
     }
 
-    protected function getInitjsBlockbranches(array $component, array &$props)
+    protected function getInitjsBlockbranches(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getInitjsBlockbranches($component, $props);
 

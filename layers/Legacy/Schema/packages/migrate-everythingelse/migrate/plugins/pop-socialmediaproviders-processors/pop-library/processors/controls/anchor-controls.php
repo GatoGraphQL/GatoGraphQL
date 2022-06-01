@@ -12,21 +12,21 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
     public final const COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER = 'anchorcontrol-fixedshare-twitter';
     public final const COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN = 'anchorcontrol-fixedshare-linkedin';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_LINKEDIN],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN],
+            self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK,
+            self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER,
+            self::COMPONENT_ANCHORCONTROL_SHARE_LINKEDIN,
+            self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK,
+            self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER,
+            self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return TranslationAPIFacade::getInstance()->__('Facebook', 'pop-coreprocessors');
@@ -42,9 +42,9 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return 'fa-facebook';
@@ -61,11 +61,11 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER:
@@ -85,15 +85,15 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     $props,
                     'params',
                     array(
-                        'data-provider' => $providers[$component[1]],
+                        'data-provider' => $providers[$component->name],
                         'data-blocktarget' => $this->getProp($component, $props, 'control-target')
                     )
                 );
 
                 $fixed = array(
-                    [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER],
-                    [self::class, self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN],
+                    self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK,
+                    self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER,
+                    self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN,
                 );
                 if (in_array($component, $fixed)) {
                       // Share the website URL
@@ -121,11 +121,11 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::COMPONENT_ANCHORCONTROL_SHARE_TWITTER:

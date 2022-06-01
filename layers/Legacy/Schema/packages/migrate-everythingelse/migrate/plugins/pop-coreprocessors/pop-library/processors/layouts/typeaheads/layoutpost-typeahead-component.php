@@ -4,10 +4,10 @@ class PoP_Module_Processor_PostTypeaheadComponentLayouts extends PoP_Module_Proc
 {
     public final const COMPONENT_LAYOUTPOST_TYPEAHEAD_COMPONENT = 'layoutpost-typeahead-component';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTPOST_TYPEAHEAD_COMPONENT],
+            self::COMPONENT_LAYOUTPOST_TYPEAHEAD_COMPONENT,
         );
     }
 }

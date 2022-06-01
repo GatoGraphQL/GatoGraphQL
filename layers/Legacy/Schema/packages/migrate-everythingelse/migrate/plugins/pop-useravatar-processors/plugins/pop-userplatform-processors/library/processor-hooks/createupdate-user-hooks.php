@@ -12,9 +12,11 @@ class PoP_UserAvatarProcessors_UserPlatformProcessors_CreateUpdateUser_Hooks
         );
     }
 
-    public function getComponentSubcomponents($components, array $component, $processor)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getComponentSubcomponents(array $components, \PoP\ComponentModel\Component\Component $component, $processor): array
     {
-
         // Add After the email
         $extra_components = array(
             [PoP_Module_Processor_Dividers::class, PoP_Module_Processor_Dividers::COMPONENT_COLLAPSIBLEDIVIDER],

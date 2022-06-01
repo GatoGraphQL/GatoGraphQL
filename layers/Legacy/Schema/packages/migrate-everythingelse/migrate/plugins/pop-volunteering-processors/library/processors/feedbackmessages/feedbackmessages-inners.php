@@ -4,14 +4,17 @@ class PoP_Volunteering_Module_Processor_FeedbackMessageInners extends PoP_Module
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER = 'feedbackmessageinner-volunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -19,7 +22,7 @@ class PoP_Volunteering_Module_Processor_FeedbackMessageInners extends PoP_Module
             self::COMPONENT_FEEDBACKMESSAGEINNER_VOLUNTEER => [PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_VOLUNTEER],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

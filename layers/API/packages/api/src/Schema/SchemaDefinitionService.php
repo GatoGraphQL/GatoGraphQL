@@ -94,9 +94,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             // Use different caches for the normal and namespaced schemas, or
             // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
             $cacheType = CacheTypes::FULLSCHEMA_DEFINITION;
-            $cacheKeyComponents = CacheUtils::getSchemaCacheKeyComponents();
+            $cacheKeyElements = CacheUtils::getSchemaCacheKeyElements();
             // For the persistentCache, use a hash to remove invalid characters (such as "()")
-            $cacheKey = hash('md5', json_encode($cacheKeyComponents));
+            $cacheKey = hash('md5', json_encode($cacheKeyElements));
             if ($persistentCache->hasCache($cacheKey, $cacheType)) {
                 $schemaDefinition = $persistentCache->getCache($cacheKey, $cacheType);
             }

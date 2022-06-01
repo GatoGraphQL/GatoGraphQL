@@ -5,7 +5,7 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 
 abstract class GD_EM_Module_Processor_ScrollMapBlocksBase extends PoP_Module_Processor_SectionBlocksBase
 {
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

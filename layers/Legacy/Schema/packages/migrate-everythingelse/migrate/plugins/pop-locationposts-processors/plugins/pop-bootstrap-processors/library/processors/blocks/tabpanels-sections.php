@@ -4,30 +4,30 @@ class PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
 {
     public final const COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS = 'block-locationposts-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS,
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
         $inners = array(
             self::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_SectionTabPanelComponents::class, PoP_LocationPosts_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_LOCATIONPOSTS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_POSTLIST];
         }
@@ -35,9 +35,9 @@ class PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks extends PoP_Modul
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS:
                 return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::COMPONENT_FILTER_LOCATIONPOSTS];
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\Comments\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
@@ -26,49 +27,52 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
     public final const COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS = 'filterinputcontainer-custompost-admincomments';
     public final const COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT = 'filterinputcontainer-custompost-admincommentcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMENTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_RESPONSES],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_RESPONSECOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINRESPONSES],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_RESPONSES,
+            self::COMPONENT_FILTERINPUTCONTAINER_RESPONSECOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_COMMENTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINCOMMENTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINRESPONSES,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINRESPONSECOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT,
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    /**
+     * @return Component[]
+     */
+    public function getFilterInputComponents(Component $component): array
     {
         $responseFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_TYPES],
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH),
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_TYPES),
         ];
         $customPostCommentFilterInputComponents = [
             ...$responseFilterInputComponents,
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS],
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID),
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_IDS),
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS),
         ];
         $rootCommentFilterInputComponents = [
             ...$customPostCommentFilterInputComponents,
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_ID],
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS],
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS],
-            [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES],
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_ID),
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS),
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS),
+            new Component(CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES),
         ];
         $adminCommentFilterInputComponents = [
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS],
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_COMMENT_STATUS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputComponents,
             self::COMPONENT_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputComponents,

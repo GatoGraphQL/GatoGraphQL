@@ -8,15 +8,15 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
     public final const COMPONENT_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-subjugatedpostconclusionsidebar-horizontal';
     public final const COMPONENT_CONTENT_LATESTCOUNTS = 'content-latestcounts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_CONTENT_LATESTCOUNTS],
+            self::COMPONENT_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL,
+            self::COMPONENT_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL,
+            self::COMPONENT_CONTENT_LATESTCOUNTS,
         );
     }
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL => [PoPCore_Module_Processor_SingleContentInners::class, PoPCore_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL],
@@ -24,17 +24,17 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
             self::COMPONENT_CONTENT_LATESTCOUNTS => [PoPCore_Module_Processor_MultipleContentInners::class, PoPCore_Module_Processor_MultipleContentInners::COMPONENT_CONTENTINNER_LATESTCOUNTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
             case self::COMPONENT_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL:
                 $this->appendProp($component, $props, 'class', 'conclusion horizontal sidebar');

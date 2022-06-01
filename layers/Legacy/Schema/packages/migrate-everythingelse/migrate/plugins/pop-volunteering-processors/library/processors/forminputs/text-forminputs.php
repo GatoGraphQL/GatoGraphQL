@@ -5,16 +5,16 @@ class PoP_Volunteering_Module_Processor_TextFormInputs extends PoP_Module_Proces
 {
     public final const COMPONENT_FORMINPUT_PHONE = 'gf-field-phone';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_PHONE],
+            self::COMPONENT_FORMINPUT_PHONE,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_PHONE:
                 return TranslationAPIFacade::getInstance()->__('Your Phone number', 'pop-genericforms');
         }

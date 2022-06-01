@@ -6,16 +6,16 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
     public final const COMPONENT_FEEDBACKMESSAGE_CREATECONTENT = 'feedbackmessage-createcontent';
     public final const COMPONENT_FEEDBACKMESSAGE_UPDATECONTENT = 'feedbackmessage-updatecontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_FLAG],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT],
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_UPDATECONTENT],
+            self::COMPONENT_FEEDBACKMESSAGE_FLAG,
+            self::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT,
+            self::COMPONENT_FEEDBACKMESSAGE_UPDATECONTENT,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_FLAG => [PoP_ContentCreation_Module_Processor_FeedbackMessageInners::class, PoP_ContentCreation_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_FLAG],
@@ -23,7 +23,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
             self::COMPONENT_FEEDBACKMESSAGE_UPDATECONTENT => [PoP_ContentCreation_Module_Processor_FeedbackMessageInners::class, PoP_ContentCreation_Module_Processor_FeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

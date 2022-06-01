@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\ConditionalOnModule\API\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
@@ -29,18 +30,18 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT,
         );
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
@@ -48,9 +49,9 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return $this->getListQueryInputOutputHandler();
         }
@@ -58,13 +59,13 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(Component $component): ?Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES];
+                return new Component(CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES);
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
-                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT];
+                return new Component(CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT);
         }
 
         return parent::getFilterSubcomponent($component);

@@ -10,22 +10,25 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     public final const COMPONENT_FORMINNER_LOGOUT = 'forminner-logout';
     public final const COMPONENT_FORMINNER_USER_CHANGEPASSWORD = 'forminner-user-changepwd';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_LOGIN],
-            [self::class, self::COMPONENT_FORMINNER_LOSTPWD],
-            [self::class, self::COMPONENT_FORMINNER_LOSTPWDRESET],
-            [self::class, self::COMPONENT_FORMINNER_LOGOUT],
-            [self::class, self::COMPONENT_FORMINNER_USER_CHANGEPASSWORD],
+            self::COMPONENT_FORMINNER_LOGIN,
+            self::COMPONENT_FORMINNER_LOSTPWD,
+            self::COMPONENT_FORMINNER_LOSTPWDRESET,
+            self::COMPONENT_FORMINNER_LOGOUT,
+            self::COMPONENT_FORMINNER_USER_CHANGEPASSWORD,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOGIN:
                 $ret = array_merge(
                     $ret,
@@ -85,9 +88,9 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOSTPWDRESET:
                 // If loading the page straight, then set the value on the input directly
                 // Otherwise, use Javascript to fill in the value
@@ -103,9 +106,9 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         parent::initRequestProps($component, $props);
     }
 
-    // function initModelProps(array $component, array &$props) {
+    // function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINNER_LOSTPWDRESET:
 

@@ -26,7 +26,7 @@ class PoP_UserPlatform_CreateUpdateHooks
                 'linkedin' => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_LINKEDIN],
                 'youtube' => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_YOUTUBE],
                 'instagram' => [PoP_Module_Processor_CreateUpdateProfileTextFormInputs::class, PoP_Module_Processor_CreateUpdateProfileTextFormInputs::COMPONENT_FORMINPUT_CUP_INSTAGRAM],
-                // 'blog' => [self::class, self::COMPONENT_FORMINPUT_CUP_BLOG],
+                // 'blog' => self::COMPONENT_FORMINPUT_CUP_BLOG,
             )
         );
     }

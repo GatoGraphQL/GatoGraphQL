@@ -12,24 +12,24 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
     public final const COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES = 'layout-previewuser-community-communities';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR = 'layout-previewuser-community-postauthor';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR],
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR,
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER:
@@ -43,9 +43,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 return 'h3';
         }
@@ -53,9 +53,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:
@@ -70,11 +70,11 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowexcerptLayoutSubcomponents(array $component)
+    public function getBelowexcerptLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
                 break;
@@ -91,11 +91,11 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return $ret;
     }
 
-    public function getBelowavatarLayoutSubcomponents(array $component)
+    public function getBelowavatarLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowavatarLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
                 break;
@@ -104,10 +104,10 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return $ret;
     }
 
-    public function getUseravatarSubcomponent(array $component)
+    public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES:
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR:
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR:
@@ -131,9 +131,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
     }
 
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 return true;
         }
@@ -141,9 +141,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return parent::showExcerpt($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
                 return true;
         }
@@ -151,9 +151,9 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POPOVER:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_COMMUNITIES:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_POSTAUTHOR:
@@ -166,11 +166,11 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:
@@ -180,7 +180,7 @@ class GD_UserCommunities_Module_Processor_CustomPreviewUserLayouts extends PoP_M
                 $ret[GD_JS_CLASSES]['quicklinkgroup-bottom'] = 'icon-only pull-right';
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_THUMBNAIL:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_COMMUNITY_MAPDETAILS:

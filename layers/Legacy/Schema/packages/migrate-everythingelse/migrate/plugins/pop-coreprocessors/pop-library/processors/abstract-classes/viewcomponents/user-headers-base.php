@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_UserViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_USER];
     }
 
-    public function getAvatarSize(array $component, array &$props)
+    public function getAvatarSize(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_AVATAR_SIZE_40;
     }
@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_UserViewComponentHeadersBase extends PoPEngi
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $data_fields = array('id', 'displayName');
 
@@ -35,12 +35,12 @@ abstract class PoP_Module_Processor_UserViewComponentHeadersBase extends PoPEngi
         return $data_fields;
     }
 
-    public function headerShowUrl(array $component, array &$props)
+    public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
     

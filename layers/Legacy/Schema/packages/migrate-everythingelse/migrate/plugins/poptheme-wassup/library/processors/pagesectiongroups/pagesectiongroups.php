@@ -8,18 +8,21 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
     public final const COMPONENT_ENTRY_PRINT = 'entry-print';
     public final const COMPONENT_ENTRY_EMBED = 'entry-embed';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ENTRY_DEFAULT],
-            [self::class, self::COMPONENT_ENTRY_PRINT],
-            [self::class, self::COMPONENT_ENTRY_EMBED],
+            self::COMPONENT_ENTRY_DEFAULT,
+            self::COMPONENT_ENTRY_PRINT,
+            self::COMPONENT_ENTRY_EMBED,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ENTRY_DEFAULT:
                 return array(
                     [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::COMPONENT_OFFCANVAS_TOP],
@@ -59,9 +62,9 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
         return parent::getSubcomponents($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ENTRY_DEFAULT:
             case self::COMPONENT_ENTRY_PRINT:
             case self::COMPONENT_ENTRY_EMBED:
@@ -71,21 +74,21 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                     self::COMPONENT_ENTRY_DEFAULT => array('active-top', 'active-side'),
                     self::COMPONENT_ENTRY_EMBED => array('active-top'),
                 );
-                if ($active_pagesections[$component[1]] ?? null) {
-                    $this->appendProp($component, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$component[1]] ?? null)));
+                if ($active_pagesections[$component->name] ?? null) {
+                    $this->appendProp($component, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$component->name] ?? null)));
                 }
 
                 // When loading the whole site, only the main pageSection can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the widgets
                 $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-                $subComponents = array_diff(
+                $subcomponents = array_diff(
                     $this->getSubcomponents($component),
                     [
                         $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION)
                     ]
                 );
-                foreach ($subComponents as $subComponent) {
-                    $this->setProp($subComponent, $props, 'ignore-request-params', true);
+                foreach ($subcomponents as $subcomponent) {
+                    $this->setProp($subcomponent, $props, 'ignore-request-params', true);
                 }
                 break;
         }

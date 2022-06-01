@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -19,13 +20,13 @@ class ConditionalLeafComponentField extends LeafField implements ComponentFieldI
      * When the value of the field is `true`, load the conditional
      * extra modules under the current dataloading position.
      *
-     * @param array<array> $conditionalNestedModules
+     * @param Component[] $conditionalNestedComponents
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
     public function __construct(
         string $name,
-        protected array $conditionalNestedModules,
+        protected array $conditionalNestedComponents,
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
@@ -40,8 +41,11 @@ class ConditionalLeafComponentField extends LeafField implements ComponentFieldI
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getConditionalNestedComponents(): array
     {
-        return $this->conditionalNestedModules;
+        return $this->conditionalNestedComponents;
     }
 }

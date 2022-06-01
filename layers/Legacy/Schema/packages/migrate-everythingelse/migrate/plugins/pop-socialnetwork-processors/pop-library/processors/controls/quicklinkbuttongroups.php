@@ -8,22 +8,25 @@ class GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module
     public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE = 'quicklinkbuttongroup-postdownvoteundodownvote';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM = 'quicklinkbuttongroup-tagsubscribetounsubscribefrom';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM],
+            self::COMPONENT_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER:
                 $ret[] = [PoP_Module_Processor_FunctionButtons::class, PoP_Module_Processor_FunctionButtons::COMPONENT_BUTTON_FOLLOWUSER_PREVIEW];
                 $ret[] = [PoP_Module_Processor_FunctionButtons::class, PoP_Module_Processor_FunctionButtons::COMPONENT_BUTTON_UNFOLLOWUSER_PREVIEW];

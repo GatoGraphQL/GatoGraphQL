@@ -9,20 +9,20 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
     public final const COMPONENT_BUTTONINNER_POSTCOMMENTS = 'buttoninner-comments';
     public final const COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL = 'buttoninner-comments-label';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN],
-            [self::class, self::COMPONENT_BUTTONINNER_PRINT_SOCIALMEDIA],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTPERMALINK],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTCOMMENTS],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL],
+            self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN,
+            self::COMPONENT_BUTTONINNER_PRINT_SOCIALMEDIA,
+            self::COMPONENT_BUTTONINNER_POSTPERMALINK,
+            self::COMPONENT_BUTTONINNER_POSTCOMMENTS,
+            self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL,
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
                 return 'fa-fw fa-print';
 
@@ -40,9 +40,9 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
 
@@ -56,9 +56,9 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getBtnTitle($component);
     }
 
-    public function getTextField(array $component, array &$props)
+    public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS:
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return 'commentCount';
@@ -67,9 +67,9 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getTextField($component, $props);
     }
 
-    public function getTextfieldOpen(array $component, array &$props)
+    public function getTextfieldOpen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('(', 'pop-coreprocessors');
         }
@@ -77,9 +77,9 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         return parent::getTextfieldOpen($component, $props);
     }
 
-    public function getTextfieldClose(array $component, array &$props)
+    public function getTextfieldClose(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__(')', 'pop-coreprocessors');
         }

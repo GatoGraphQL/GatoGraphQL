@@ -3,17 +3,17 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_PostAuthorAvatarLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_AvatarWebPlatform_TemplateResourceLoaderProcessor::class, PoP_AvatarWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTPOST_AUTHORAVATAR];
     }
 
-    public function getUrlField(array $component, array &$props)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'url';
     }
 
-    public function getAvatarSize(array $component, array &$props)
+    public function getAvatarSize(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_AVATAR_SIZE_60;
     }
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_PostAuthorAvatarLayoutsBase extends PoPEngin
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
     
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_PostAuthorAvatarLayoutsBase extends PoPEngin
         );
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

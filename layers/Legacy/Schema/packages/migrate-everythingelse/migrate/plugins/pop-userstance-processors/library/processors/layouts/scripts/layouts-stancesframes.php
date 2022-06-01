@@ -5,17 +5,17 @@ class PoP_Module_Processor_StanceReferencesFramesLayouts extends PoP_Module_Proc
     public final const COMPONENT_LAYOUT_STANCES_APPENDTOSCRIPT = 'layout-stances-appendtoscript';
     public final const COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT = 'layout-stancesempty-appendtoscript';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_STANCES_APPENDTOSCRIPT],
-            [self::class, self::COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT],
+            self::COMPONENT_LAYOUT_STANCES_APPENDTOSCRIPT,
+            self::COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT,
         );
     }
 
-    public function doAppend(array $component)
+    public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT:
                 return false;
         }
@@ -23,9 +23,9 @@ class PoP_Module_Processor_StanceReferencesFramesLayouts extends PoP_Module_Proc
         return parent::doAppend($component);
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_STANCES_APPENDTOSCRIPT:
             case self::COMPONENT_LAYOUT_STANCESEMPTY_APPENDTOSCRIPT:
                 return [UserStance_Module_Processor_StanceReferencedbyLayouts::class, UserStance_Module_Processor_StanceReferencedbyLayouts::COMPONENT_SUBCOMPONENT_STANCES];

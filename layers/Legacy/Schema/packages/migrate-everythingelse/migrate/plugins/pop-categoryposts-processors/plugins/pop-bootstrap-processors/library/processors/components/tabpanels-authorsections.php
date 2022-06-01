@@ -23,37 +23,37 @@ class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
     public final const COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS18 = 'tabpanel-authorcategoryposts18';
     public final const COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS19 = 'tabpanel-authorcategoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS19],
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS00,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS01,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS02,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS03,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS04,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS05,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS06,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS07,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS08,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS09,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS10,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS11,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS12,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS13,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS14,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS15,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS16,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS17,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS18,
+            self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS19,
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -318,9 +318,9 @@ class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS00:
                 $ret = array(
                     [

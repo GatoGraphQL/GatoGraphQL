@@ -8,24 +8,24 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
 {
     public final const COMPONENT_PAGESECTION_ADDONS = 'pagesection-addons';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_PAGESECTION_ADDONS],
+            self::COMPONENT_PAGESECTION_ADDONS,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 // If not told to be empty, then add the page subcomponent
-                $componentAtts = count($component) >= 3 ? $component[2] : null;
-                if (!($componentAtts && $componentAtts['empty'])) {
+                if (!($component->atts['empty'] ?? null)) {
                     $ret[] = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_ADDONS];
                 }
                 break;
@@ -34,11 +34,11 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 $this->addJsmethod($ret, 'scrollbarVertical');
                 break;
@@ -47,11 +47,11 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    protected function getContentClass(array $component, array &$props)
+    protected function getContentClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getContentClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 $ret .= ' perfect-scrollbar-offsetreference';
                 break;
@@ -60,9 +60,9 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getID(array $component, array &$props): string
+    public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 return POP_COMPONENTID_PAGESECTIONCONTAINERID_ADDONS;
         }
@@ -70,11 +70,14 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return parent::getID($component, $props);
     }
 
-    public function getModelPropsForDescendantComponents(array $component, array &$props): array
+    /**
+     * @return array<string,mixed>
+     */
+    public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 // Override the style of all the form submit buttons
                 $ret['btn-submit-class'] = 'btn btn-warning btn-block';
@@ -101,14 +104,14 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadComponent` can work
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
         $component_props = array(
             $componentFullName => &$props[$componentFullName],
         );
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONS:
                 // // Override the style of all the form submit buttons
                 // $this->add_general_prop($ret, 'btn-submit-class', 'btn btn-warning btn-block');

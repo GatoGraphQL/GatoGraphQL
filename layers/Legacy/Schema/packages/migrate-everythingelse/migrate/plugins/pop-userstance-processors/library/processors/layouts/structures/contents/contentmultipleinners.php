@@ -5,19 +5,22 @@ class UserStance_Module_Processor_ContentMultipleInners extends PoP_Module_Proce
     public final const COMPONENT_LAYOUTCONTENTINNER_STANCES = 'contentinnerlayout-stances';
     public final const COMPONENT_LAYOUTCONTENTINNER_STANCES_APPENDABLE = 'contentinnerlayout-stances-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_STANCES],
-            [self::class, self::COMPONENT_LAYOUTCONTENTINNER_STANCES_APPENDABLE],
+            self::COMPONENT_LAYOUTCONTENTINNER_STANCES,
+            self::COMPONENT_LAYOUTCONTENTINNER_STANCES_APPENDABLE,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTCONTENTINNER_STANCES:
                 $ret[] = [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_STANCE_CONTENTAUTHORREFERENCED];
                 break;

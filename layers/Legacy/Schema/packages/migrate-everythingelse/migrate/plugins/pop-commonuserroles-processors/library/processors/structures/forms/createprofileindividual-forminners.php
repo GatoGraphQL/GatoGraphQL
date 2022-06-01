@@ -4,10 +4,10 @@ class GD_URE_Module_Processor_CreateProfileIndividualFormInners extends GD_URE_M
 {
     public final const COMPONENT_FORMINNER_PROFILEINDIVIDUAL_CREATE = 'forminner-profileindividual-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_PROFILEINDIVIDUAL_CREATE],
+            self::COMPONENT_FORMINNER_PROFILEINDIVIDUAL_CREATE,
         );
     }
 }

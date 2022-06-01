@@ -7,19 +7,19 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
     public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES = 'layout-marknotificationasunread-showelemstyles';
     public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES = 'layout-marknotificationasunread-hideelemstyles';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES],
-            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES],
-            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES],
-            [self::class, self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES],
+            self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES,
+            self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES,
+            self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES,
+            self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES,
         );
     }
 
-    public function getElemTarget(array $component, array &$props)
+    public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES:
                 return '.preview.notification-layout .pop-functional.'.AAL_CLASS_NOTIFICATION_MARKASREAD;
@@ -32,9 +32,9 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
         return parent::getElemTarget($component, $props);
     }
     
-    public function getElemStyles(array $component, array &$props)
+    public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:
             case self::COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES:
                 return array(

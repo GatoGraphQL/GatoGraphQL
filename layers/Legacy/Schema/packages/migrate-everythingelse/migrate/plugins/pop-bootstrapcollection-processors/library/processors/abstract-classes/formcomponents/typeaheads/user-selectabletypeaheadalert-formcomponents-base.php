@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponentsBase extends PoP_Module_Processor_SelectableTypeaheadAlertFormComponentsBase
 {
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
         
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponentsBa
         return $ret;
     }
 
-    public function getSelectedComponent(array $component)
+    public function getSelectedComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::COMPONENT_LAYOUTUSER_CARD];
     }

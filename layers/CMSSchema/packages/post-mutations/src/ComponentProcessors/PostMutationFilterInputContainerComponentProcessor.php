@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
 use PoPCMSSchema\Posts\ComponentProcessors\AbstractPostFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Posts\ComponentProcessors\PostFilterInputContainerComponentProcessor;
 
 class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFilterInputContainerComponentProcessor
 {
@@ -14,26 +16,28 @@ class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFil
     public final const COMPONENT_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
     public final const COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT = 'filterinputcontainer-mypostcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT,
         );
     }
 
     /**
      * Retrieve the same elements as for Posts, and add the "status" filter
+     *
+     * @return Component[]
      */
-    public function getFilterInputComponents(array $component): array
+    public function getFilterInputComponents(Component $component): array
     {
-        $targetModule = match ($component[1]) {
-            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
-            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT => [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
+        $targetComponent = match ($component->name) {
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => self::COMPONENT_FILTERINPUTCONTAINER_POSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTCOUNT => self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT,
             default => null,
         };
-        $filterInputComponents = parent::getFilterInputComponents($targetModule);
-        $filterInputComponents[] = [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS];
+        $filterInputComponents = parent::getFilterInputComponents(new Component(PostFilterInputContainerComponentProcessor::class, $targetComponent));
+        $filterInputComponents[] = new Component(CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS);
         return $filterInputComponents;
     }
 

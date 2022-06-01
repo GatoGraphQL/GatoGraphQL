@@ -24,38 +24,38 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
     public final const COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections-btngroup';
     public final const COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'filterinputgroup-postsections-btngroup';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_TITLE],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_CUP_STATUS],
-            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK],
-            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE],
-            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS],
-            [self::class, self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_APPLIESTO],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_CATEGORIES],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_HIGHLIGHTEDITOR],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_BUTTONGROUP_POSTSECTION],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_BUTTONGROUP_POSTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_LINKCATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_APPLIESTO],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_POSTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_LINKACCESS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS],
+            self::COMPONENT_FORMINPUTGROUP_CUP_TITLE,
+            self::COMPONENT_FORMINPUTGROUP_CUP_STATUS,
+            self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK,
+            self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE,
+            self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS,
+            self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES,
+            self::COMPONENT_FORMINPUTGROUP_APPLIESTO,
+            self::COMPONENT_FORMINPUTGROUP_CATEGORIES,
+            self::COMPONENT_FORMINPUTGROUP_HIGHLIGHTEDITOR,
+            self::COMPONENT_FORMINPUTGROUP_BUTTONGROUP_POSTSECTION,
+            self::COMPONENT_FORMINPUTGROUP_BUTTONGROUP_POSTSECTIONS,
+            self::COMPONENT_FILTERINPUTGROUP_LINKCATEGORIES,
+            self::COMPONENT_FILTERINPUTGROUP_APPLIESTO,
+            self::COMPONENT_FILTERINPUTGROUP_CATEGORIES,
+            self::COMPONENT_FILTERINPUTGROUP_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUTGROUP_POSTSECTIONS,
+            self::COMPONENT_FILTERINPUTGROUP_LINKACCESS,
+            self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CATEGORIES,
+            self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS,
         );
     }
 
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_LINKCATEGORIES:
             case self::COMPONENT_FILTERINPUTGROUP_APPLIESTO:
             case self::COMPONENT_FILTERINPUTGROUP_CATEGORIES:
@@ -71,11 +71,11 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_LINKCATEGORIES:
             case self::COMPONENT_FILTERINPUTGROUP_APPLIESTO:
             case self::COMPONENT_FILTERINPUTGROUP_CATEGORIES:
@@ -92,9 +92,9 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CUP_TITLE:
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE:
                 return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE];
@@ -157,9 +157,9 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CUP_STATUS:
                 return TranslationAPIFacade::getInstance()->__('\'Draft\': still editing, our website admin will not publish it yet. \'Finished editing\': our website admin will publish it (almost) immediately. \'Already published\': our website admin has published it, post is already online.', 'poptheme-wassup');
 
@@ -176,10 +176,10 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
         return parent::getInfo($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $component = $this->getComponentSubcomponent($component);
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK:
                 $this->setProp($component, $props, 'placeholder', 'https://...');
                 break;
@@ -207,9 +207,9 @@ class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Pr
         parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_HIGHLIGHTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Highlight:', 'poptheme-wassup');
         }

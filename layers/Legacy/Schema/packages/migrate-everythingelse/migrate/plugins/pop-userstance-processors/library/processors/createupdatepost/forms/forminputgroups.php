@@ -8,18 +8,18 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
     public final const COMPONENT_FORMINPUTGROUP_BUTTONGROUP_STANCE = 'forminputgroup-buttongroup-stance';
     public final const COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE = 'filterinputgroup-buttongroup-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_BUTTONGROUP_STANCE],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE],
+            self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR,
+            self::COMPONENT_FORMINPUTGROUP_BUTTONGROUP_STANCE,
+            self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE,
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
 
@@ -33,11 +33,11 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Write here...', 'pop-userstance-processors'));
@@ -47,9 +47,9 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         parent::initModelProps($component, $props);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 return TranslationAPIFacade::getInstance()->__('You can leave 1 general stance, and 1 stance for each article on the website. Your opinions can be edited any moment.', 'pop-userstance-processors');
         }
@@ -57,9 +57,9 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         return parent::getInfo($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_STANCEEDITOR:
                 return PoP_UserStanceProcessors_Utils::getWhatisyourvoteTitle();
 
@@ -73,11 +73,11 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
         return parent::getLabel($component, $props);
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE:
                 $ret .= ' col-sm-2';
                 break;
@@ -85,11 +85,11 @@ class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Mo
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_STANCE:
                 $ret .= ' col-sm-10';
                 break;

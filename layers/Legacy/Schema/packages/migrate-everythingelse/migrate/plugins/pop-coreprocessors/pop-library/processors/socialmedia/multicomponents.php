@@ -12,27 +12,30 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
     public final const COMPONENT_MULTICOMPONENT_USEROPTIONS = 'multicomponent-useroptions';
     public final const COMPONENT_MULTICOMPONENT_TAGOPTIONS = 'multicomponent-tagoptions';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA],
-            [self::class, self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA],
-            [self::class, self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_POSTOPTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USEROPTIONS],
-            [self::class, self::COMPONENT_MULTICOMPONENT_TAGOPTIONS],
+            self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA,
+            self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA,
+            self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA,
+            self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS,
+            self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS,
+            self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS,
+            self::COMPONENT_MULTICOMPONENT_POSTOPTIONS,
+            self::COMPONENT_MULTICOMPONENT_USEROPTIONS,
+            self::COMPONENT_MULTICOMPONENT_TAGOPTIONS,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $components = array();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:
@@ -51,18 +54,18 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
                 break;
 
             case self::COMPONENT_MULTICOMPONENT_POSTOPTIONS:
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA];
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS];
+                $components[] = self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA;
+                $components[] = self::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS;
                 break;
 
             case self::COMPONENT_MULTICOMPONENT_USEROPTIONS:
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA];
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS];
+                $components[] = self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA;
+                $components[] = self::COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS;
                 break;
 
             case self::COMPONENT_MULTICOMPONENT_TAGOPTIONS:
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA];
-                $components[] = [self::class, self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS];
+                $components[] = self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA;
+                $components[] = self::COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS;
                 break;
         }
 
@@ -80,9 +83,9 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:
@@ -99,8 +102,8 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
             case self::COMPONENT_MULTICOMPONENT_USEROPTIONS:
             case self::COMPONENT_MULTICOMPONENT_TAGOPTIONS:
                 $this->appendProp($component, $props, 'class', 'options-group');
-                foreach ($this->getSubcomponents($component) as $subComponent) {
-                    $this->appendProp([$subComponent], $props, 'class', 'inline');
+                foreach ($this->getSubcomponents($component) as $subcomponent) {
+                    $this->appendProp([$subcomponent], $props, 'class', 'inline');
                 }
                 break;
         }

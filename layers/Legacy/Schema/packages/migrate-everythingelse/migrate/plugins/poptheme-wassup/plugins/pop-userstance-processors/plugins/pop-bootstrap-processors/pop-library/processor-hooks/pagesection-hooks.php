@@ -12,17 +12,17 @@ class PoPTheme_UserStance_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $component, $props_in_array, $processor)
+    public function initModelPropsAddons(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
-                $subComponents = array(
+                $subcomponents = array(
                     [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_CREATE],
                     [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_STANCE_UPDATE],
                 );
-                foreach ($subComponents as $subComponent) {
-                    $processor->setProp($subComponent, $props, 'title', '');
+                foreach ($subcomponents as $subcomponent) {
+                    $processor->setProp($subcomponent, $props, 'title', '');
                 }
                 break;
         }

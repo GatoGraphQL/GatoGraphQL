@@ -13,25 +13,25 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
     public final const COMPONENT_BLOCK_DOWNVOTEPOST = 'block-downvotepost';
     public final const COMPONENT_BLOCK_UNDODOWNVOTEPOST = 'block-undodownvotepost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_FOLLOWUSER],
-            [self::class, self::COMPONENT_BLOCK_UNFOLLOWUSER],
-            [self::class, self::COMPONENT_BLOCK_RECOMMENDPOST],
-            [self::class, self::COMPONENT_BLOCK_UNRECOMMENDPOST],
-            [self::class, self::COMPONENT_BLOCK_SUBSCRIBETOTAG],
-            [self::class, self::COMPONENT_BLOCK_UNSUBSCRIBEFROMTAG],
-            [self::class, self::COMPONENT_BLOCK_UPVOTEPOST],
-            [self::class, self::COMPONENT_BLOCK_UNDOUPVOTEPOST],
-            [self::class, self::COMPONENT_BLOCK_DOWNVOTEPOST],
-            [self::class, self::COMPONENT_BLOCK_UNDODOWNVOTEPOST],
+            self::COMPONENT_BLOCK_FOLLOWUSER,
+            self::COMPONENT_BLOCK_UNFOLLOWUSER,
+            self::COMPONENT_BLOCK_RECOMMENDPOST,
+            self::COMPONENT_BLOCK_UNRECOMMENDPOST,
+            self::COMPONENT_BLOCK_SUBSCRIBETOTAG,
+            self::COMPONENT_BLOCK_UNSUBSCRIBEFROMTAG,
+            self::COMPONENT_BLOCK_UPVOTEPOST,
+            self::COMPONENT_BLOCK_UNDOUPVOTEPOST,
+            self::COMPONENT_BLOCK_DOWNVOTEPOST,
+            self::COMPONENT_BLOCK_UNDODOWNVOTEPOST,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
             self::COMPONENT_BLOCK_FOLLOWUSER => POP_SOCIALNETWORK_ROUTE_FOLLOWUSER,
             self::COMPONENT_BLOCK_RECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST,
@@ -46,7 +46,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -62,16 +62,16 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             self::COMPONENT_BLOCK_DOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::COMPONENT_DATALOADACTION_DOWNVOTEPOST],
             self::COMPONENT_BLOCK_UNDODOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::COMPONENT_DATALOADACTION_UNDODOWNVOTEPOST],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_FOLLOWUSER:
             case self::COMPONENT_BLOCK_UNFOLLOWUSER:
             case self::COMPONENT_BLOCK_RECOMMENDPOST:
@@ -108,9 +108,9 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_FOLLOWUSER:
             case self::COMPONENT_BLOCK_UNFOLLOWUSER:
             case self::COMPONENT_BLOCK_RECOMMENDPOST:

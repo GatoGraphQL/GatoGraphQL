@@ -10,22 +10,22 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getValueFormat(array $component, array &$props)
+    public function getValueFormat(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function isHidden(array $component, array &$props)
+    public function isHidden(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return $this->getLabelText($component, $props).($this->isMandatory($component, $props) ? GD_CONSTANT_MANDATORY : '');
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($this->getProp($component, $props, 'mandatory')) {
             return true;
@@ -38,12 +38,12 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
     // OTHER Functions (Organize!)
     //-------------------------------------------------
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function executeClearInput(array $component, array &$props)
+    public function executeClearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($this->getProp($component, $props, 'pop-form-clear')) {
             return true;
@@ -52,12 +52,12 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
         return $this->clearInput($component, $props);
     }
 
-    public function clearInput(array $component, array &$props)
+    public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -68,7 +68,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($this->isHidden($component, $props)) {
             $this->appendProp($component, $props, 'class', 'hidden');
@@ -87,7 +87,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
         parent::initModelProps($component, $props);
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
     //     return false;
     // }
@@ -97,14 +97,14 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
         $this->addMetaFormcomponentDataFields($ret, $component, $props);
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -129,7 +129,7 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataCo
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 

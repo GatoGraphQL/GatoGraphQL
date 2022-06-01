@@ -6,7 +6,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Processor_FullObjectLayoutsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_FULLVIEW];
     }
@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array_merge(
             parent::getLeafComponentFields($component, $props),
@@ -24,12 +24,15 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
         );
     }
 
-    public function titlePosition(array $component, array &$props)
+    public function titlePosition(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_CONSTANT_FULLVIEW_TITLEPOSITION_TOP;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -50,19 +53,19 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getAbovecontentSubcomponents(array $component)
+    public function getAbovecontentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getContentSubcomponents(array $component)
+    public function getContentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array(
             [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTFEED],
         );
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -76,14 +79,14 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
 
         if ($abovecontent_components = $this->getAbovecontentSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['abovecontent'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $abovecontent_components
             );
         }
 
         if ($content_components = $this->getContentSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['content'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $content_components
             );
         }
@@ -91,14 +94,14 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
         return $ret;
     }
 
-    // function getJsmethods(array $component, array &$props) {
+    // function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $ret = parent::getJsmethods($component, $props);
     //     $this->addJsmethod($ret, 'waypointsHistoryStateNew');
     //     return $ret;
     // }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Make it waypoint

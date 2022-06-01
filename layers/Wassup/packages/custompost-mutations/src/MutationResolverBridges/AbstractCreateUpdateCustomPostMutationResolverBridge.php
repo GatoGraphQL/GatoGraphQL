@@ -4,24 +4,25 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
-use PoP_Module_Processor_CreateUpdatePostTextFormInputs;
-use PoP_Module_Processor_CreateUpdatePostSelectFormInputs;
-use PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs;
-use PoP_Module_Processor_PostSelectableTypeaheadFormComponents;
-use PoP_ApplicationProcessors_Utils;
-use PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs;
-use GD_Custom_Module_Processor_SelectFormInputs;
-use PoP_Module_Processor_EditorFormInputs;
-use PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs;
-use PoP_Module_Processor_FeaturedImageFormComponents;
 use GD_CreateUpdate_Utils;
-use PoP\Root\App;
+use GD_Custom_Module_Processor_SelectFormInputs;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
 use PoP\EditPosts\HelperAPIFactory;
+use PoP\Root\App;
+use PoP_ApplicationProcessors_Utils;
+use PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs;
+use PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs;
+use PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs;
+use PoP_Module_Processor_CreateUpdatePostSelectFormInputs;
+use PoP_Module_Processor_CreateUpdatePostTextFormInputs;
+use PoP_Module_Processor_EditorFormInputs;
+use PoP_Module_Processor_FeaturedImageFormComponents;
+use PoP_Module_Processor_PostSelectableTypeaheadFormComponents;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Posts\Constants\InputNames;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
@@ -164,7 +165,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         // );
     }
 
-    protected function getCategoriesComponent()
+    protected function getCategoriesComponent(): ?Component
     {
         if ($this->showCategories()) {
             if ($this->canInputMultipleCategories()) {

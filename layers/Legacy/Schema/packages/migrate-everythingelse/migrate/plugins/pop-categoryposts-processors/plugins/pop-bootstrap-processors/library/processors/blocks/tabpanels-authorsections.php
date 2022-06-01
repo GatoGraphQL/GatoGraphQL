@@ -25,35 +25,35 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
     public final const COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 = 'block-tabpanel-authorcategoryposts18';
     public final const COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 = 'block-tabpanel-authorcategoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19],
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS03,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS04,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS05,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS06,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS07,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS08,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS09,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS10,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS11,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS12,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS13,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS14,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS15,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS16,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS17,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -78,14 +78,14 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($component[1]) {
+                switch ($component->name) {
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02:
@@ -134,16 +134,16 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 => [CPP_Module_Processor_AuthorSectionTabPanelComponents::class, CPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 => [CPP_Module_Processor_AuthorSectionTabPanelComponents::class, CPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02:

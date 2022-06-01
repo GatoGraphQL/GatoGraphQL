@@ -4,16 +4,16 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners ex
 {
     public final const COMPONENT_SCROLLINNER_WHOWEARE_MAP = 'scrollinner-whoweare-map';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_MAP],
+            self::COMPONENT_SCROLLINNER_WHOWEARE_MAP,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_WHOWEARE_MAP:
                 return array(
                     'row-items' => 1,
@@ -24,14 +24,17 @@ class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners ex
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
         $layouts = array(
             self::COMPONENT_SCROLLINNER_WHOWEARE_MAP => [GD_EM_Module_Processor_MultipleUserLayouts::class, GD_EM_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

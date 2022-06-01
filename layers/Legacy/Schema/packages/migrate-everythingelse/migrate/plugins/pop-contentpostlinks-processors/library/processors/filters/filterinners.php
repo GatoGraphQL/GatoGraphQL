@@ -6,16 +6,16 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilterInners extends PoP_Modul
     public final const COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS = 'filterinputcontainer-authorlinks';
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGLINKS = 'filterinputcontainer-taglinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_LINKS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGLINKS],
+            self::COMPONENT_FILTERINPUTCONTAINER_LINKS,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGLINKS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -41,7 +41,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilterInners extends PoP_Modul
             ],
         ];
         // Add the link access filter
-        if (($inputComponents[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputComponents[$component->name] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
 
             array_splice(
                 $ret,
@@ -57,7 +57,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilterInners extends PoP_Modul
         }
         if ($components = \PoP\Root\App::applyFilters(
             'Links:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -68,13 +68,13 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilterInners extends PoP_Modul
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_LINKS => POP_FILTER_LINKS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLINKS => POP_FILTER_AUTHORLINKS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

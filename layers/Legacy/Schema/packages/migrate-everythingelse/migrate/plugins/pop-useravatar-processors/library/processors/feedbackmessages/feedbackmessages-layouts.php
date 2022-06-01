@@ -5,18 +5,18 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts exten
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE = 'layout-feedbackmessage-useravatar-update';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE,
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Picture updated successfully.', 'pop-useravatar-processors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Such a good shot!', 'pop-useravatar-processors');

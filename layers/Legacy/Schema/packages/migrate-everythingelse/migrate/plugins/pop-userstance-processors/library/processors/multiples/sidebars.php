@@ -13,23 +13,23 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
     public final const COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR = 'multiple-author-stances-stance-sidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR = 'multiple-single-stance-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYSTANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_STANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR,
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -45,11 +45,11 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => [PoPVP_Module_Processor_CustomSectionSidebarInners::class, PoPVP_Module_Processor_CustomSectionSidebarInners::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR],
             self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_AUTHOR_STANCES_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR:
                 $ret = \PoP\Root\App::applyFilters(
@@ -62,7 +62,7 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR => POP_SCREEN_SECTION,
@@ -76,16 +76,16 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
             self::COMPONENT_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR => POP_SCREEN_SINGLE,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_STANCES_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR:
@@ -104,29 +104,29 @@ class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sideb
         return parent::getScreengroup($component);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR:
                 $inners = array(
                     self::COMPONENT_MULTIPLE_SINGLE_STANCE_SIDEBAR => [UserStance_Module_Processor_CustomSidebarDataloads::class, UserStance_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_STANCE_SIDEBAR],
                 );
-                $subComponent = $inners[$component[1]];
+                $subcomponent = $inners[$component->name];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
 
                 // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                $this->appendProp([$subComponent], $props, 'class', 'collapse');
+                $this->appendProp([$subcomponent], $props, 'class', 'collapse');
                 $this->mergeProp(
-                    [$subComponent],
+                    [$subcomponent],
                     $props,
                     'params',
                     array(
                         'data-collapse-target' => $mainblock_taget
                     )
                 );
-                $this->mergeJsmethodsProp([$subComponent], $props, array('waypointsToggleCollapse'));
+                $this->mergeJsmethodsProp([$subcomponent], $props, array('waypointsToggleCollapse'));
                 break;
         }
 

@@ -8,19 +8,19 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA = 'viewcomponent-buttoninner-api-socialmedia';
     public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-api-socialmedia-previewdropdown';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN,
         );
     }
     
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA:
                 return 'fa-fw fa-code fa-lg';
 
@@ -37,9 +37,9 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Embed', 'pop-coreprocessors');
 

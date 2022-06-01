@@ -5,16 +5,16 @@ class GD_URE_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
 {
     public final const COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP = 'ure-buttoninner-editmembership';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP],
+            self::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP,
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP:
                 return 'fa-fw fa-asterisk';
         }
@@ -22,9 +22,9 @@ class GD_URE_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonIn
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_BUTTONINNER_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'ure-popprocessors');
         }

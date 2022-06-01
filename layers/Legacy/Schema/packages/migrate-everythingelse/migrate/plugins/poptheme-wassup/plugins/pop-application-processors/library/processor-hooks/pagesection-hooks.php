@@ -12,26 +12,26 @@ class PoPTheme_Wassup_ApplicationProcessors_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $component, $props_in_array, $processor)
+    public function initModelPropsAddons(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
-                $subComponents = array(
+                $subcomponents = array(
                     [PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_HIGHLIGHT_CREATE],
                     [PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_HIGHLIGHT_UPDATE],
                 );
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $subComponents = array_merge(
-                        $subComponents,
+                    $subcomponents = array_merge(
+                        $subcomponents,
                         array(
                             [PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_POST_CREATE],
                             [PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_POST_UPDATE],
                         )
                     );
                 }
-                foreach ($subComponents as $subComponent) {
-                    $processor->setProp($subComponent, $props, 'title', '');
+                foreach ($subcomponents as $subcomponent) {
+                    $processor->setProp($subcomponent, $props, 'title', '');
                 }
                 break;
         }

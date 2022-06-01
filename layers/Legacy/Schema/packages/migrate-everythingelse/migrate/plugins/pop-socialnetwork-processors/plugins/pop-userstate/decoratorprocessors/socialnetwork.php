@@ -2,9 +2,9 @@
 
 class PoP_SocialNetwork_UserStateModuleDecoratorProcessor extends PoP_UserStateModuleDecoratorProcessor
 {
-    public function requiresUserState(array $component, array &$props)
+    public function requiresUserState(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case PoP_Module_Processor_FunctionsDataloads::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS:

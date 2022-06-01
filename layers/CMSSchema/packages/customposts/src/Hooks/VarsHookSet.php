@@ -15,12 +15,12 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTS_RESULT,
-            $this->getModelInstanceComponentsFromAppState(...)
+            ModelInstance::HOOK_ELEMENTS_RESULT,
+            $this->getModelInstanceElementsFromAppState(...)
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceElementsFromAppState(array $elements): array
     {
         $nature = App::getState('nature');
 
@@ -39,10 +39,10 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = App::getState(['routing', 'queried-object-post-type']);
-                    $components[] = $this->__('post type:', 'pop-engine') . $customPostType;
+                    $elements[] = $this->__('post type:', 'pop-engine') . $customPostType;
                 }
                 break;
         }
-        return $components;
+        return $elements;
     }
 }

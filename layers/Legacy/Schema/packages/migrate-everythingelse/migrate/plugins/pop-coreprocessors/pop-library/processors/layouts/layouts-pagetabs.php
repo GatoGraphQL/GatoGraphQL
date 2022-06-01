@@ -19,34 +19,34 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     public final const COMPONENT_LAYOUT_PAGETABS_AUTHOR = 'layout-pagetabs-author';
     public final const COMPONENT_LAYOUT_PAGETABS_404 = 'layout-pagetabs-404';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_HOME],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_TAG],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_PAGE],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_ROUTE],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_SINGLE],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_AUTHOR],
-            [self::class, self::COMPONENT_LAYOUT_PAGETABS_404],
+            self::COMPONENT_LAYOUT_PAGETABS_HOME,
+            self::COMPONENT_LAYOUT_PAGETABS_TAG,
+            self::COMPONENT_LAYOUT_PAGETABS_PAGE,
+            self::COMPONENT_LAYOUT_PAGETABS_ROUTE,
+            self::COMPONENT_LAYOUT_PAGETABS_SINGLE,
+            self::COMPONENT_LAYOUT_PAGETABS_AUTHOR,
+            self::COMPONENT_LAYOUT_PAGETABS_404,
         );
     }
 
-    protected function getFontawesome(array $component, array &$props)
+    protected function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_LAYOUT_PAGETABS_HOME => 'fa-home',
             self::COMPONENT_LAYOUT_PAGETABS_TAG => 'fa-hashtag',
             self::COMPONENT_LAYOUT_PAGETABS_404 => 'fa-exclamation-circle',
         );
-        if ($fontawesome = $fontawesomes[$component[1]] ?? null) {
+        if ($fontawesome = $fontawesomes[$component->name] ?? null) {
             return $fontawesome;
         }
         return parent::getFontawesome($component, $props);
     }
-    protected function getThumb(array $component, array &$props)
+    protected function getThumb(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PAGETABS_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $avatar = gdGetAvatar($author, GD_AVATAR_SIZE_16);
@@ -73,10 +73,10 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
         return parent::getThumb($component, $props);
     }
-    // protected function getPretitle(array $component, array &$props)
+    // protected function getPretitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     // {
     //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_LAYOUT_PAGETABS_AUTHOR:
     //         case self::COMPONENT_LAYOUT_PAGETABS_SINGLE:
     //             $natures = array(
@@ -86,7 +86,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
     //             // For the default page add the thumbnail. For the others, add the pretitle
     //             $page_id = RequestUtils::getRoute();
-    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$component[1]] ?? null)) {
+    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$component->name] ?? null)) {
     //                 return $cmsengineapi->getTitle($page_id);
     //             }
     //             break;
@@ -94,12 +94,12 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
     //     return parent::getPretitle($component, $props);
     // }
-    protected function getTitle(array $component, array &$props)
+    protected function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PAGETABS_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
@@ -122,7 +122,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
             self::COMPONENT_LAYOUT_PAGETABS_HOME => TranslationAPIFacade::getInstance()->__('Home', 'poptheme-wassup'),
             self::COMPONENT_LAYOUT_PAGETABS_404 => TranslationAPIFacade::getInstance()->__('Page not found!', 'poptheme-wassup'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
         return parent::getTitle($component, $props);

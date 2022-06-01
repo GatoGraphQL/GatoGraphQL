@@ -4,10 +4,10 @@ class PoP_Module_Processor_MapStaticImageURLParams extends PoP_Module_Processor_
 {
     public final const COMPONENT_MAP_STATICIMAGE_URLPARAM = 'em-map-staticimage-urlparam';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAP_STATICIMAGE_URLPARAM],
+            self::COMPONENT_MAP_STATICIMAGE_URLPARAM,
         );
     }
 }

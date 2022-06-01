@@ -4,19 +4,22 @@ class PoP_UserCommunities_Module_Processor_TableInners extends PoP_Module_Proces
 {
     public final const COMPONENT_TABLEINNER_MYMEMBERS = 'tableinner-mymembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLEINNER_MYMEMBERS],
+            self::COMPONENT_TABLEINNER_MYMEMBERS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLEINNER_MYMEMBERS:
                 $ret[] = [PoP_UserCommunities_Module_Processor_PreviewUserLayouts::class, PoP_UserCommunities_Module_Processor_PreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_EDITMEMBERS];
                 $ret[] = [GD_URE_Module_Processor_MemberStatusLayouts::class, GD_URE_Module_Processor_MemberStatusLayouts::COMPONENT_URE_LAYOUTUSER_MEMBERSTATUS];

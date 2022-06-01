@@ -4,18 +4,18 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
 {
     public final const COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD = 'notifications-buttonwrapper-notification-markasread';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD],
+            self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD,
         );
     }
 
-    // function getFailedLayouts(array $component) {
+    // function getFailedLayouts(\PoP\ComponentModel\Component\Component $component) {
 
     //     $ret = parent::getFailedLayouts($component);
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
 
@@ -26,11 +26,11 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     //     return $ret;
     // }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
                 $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD];
                 // $ret[] = [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD];
@@ -40,9 +40,9 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
                 return 'isStatusNotRead';
         }

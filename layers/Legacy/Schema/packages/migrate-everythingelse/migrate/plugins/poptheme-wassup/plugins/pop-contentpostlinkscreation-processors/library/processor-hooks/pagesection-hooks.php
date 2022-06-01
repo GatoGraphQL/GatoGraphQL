@@ -12,19 +12,19 @@ class PoPTheme_Wassup_ContentPostLinksProcessors_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $component, $props_in_array, $processor)
+    public function initModelPropsAddons(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_TabPanes::COMPONENT_PAGESECTION_ADDONS:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $subComponents = array(
+                    $subcomponents = array(
                         [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE],
                         [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE],
                     );
                 }
-                foreach ($subComponents as $subComponent) {
-                    $processor->setProp($subComponent, $props, 'title', '');
+                foreach ($subcomponents as $subcomponent) {
+                    $processor->setProp($subcomponent, $props, 'title', '');
                 }
                 break;
         }

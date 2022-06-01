@@ -3,26 +3,26 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CarouselComponentsBase extends PoP_Module_Processor_PanelBootstrapComponentsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BOOTSTRAPCOMPONENT_CAROUSEL];
     }
 
-    protected function isMandatoryActivePanel(array $component)
+    protected function isMandatoryActivePanel(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
 
-    public function getPanelHeaderType(array $component)
+    public function getPanelHeaderType(\PoP\ComponentModel\Component\Component $component)
     {
         return 'indicators';
     }
 
-    public function getCarouselClass(array $component)
+    public function getCarouselClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'slide';
     }
-    public function getCarouselParams(array $component)
+    public function getCarouselParams(\PoP\ComponentModel\Component\Component $component)
     {
         return array(
             'data-interval' => false,
@@ -31,17 +31,17 @@ abstract class PoP_Module_Processor_CarouselComponentsBase extends PoP_Module_Pr
         );
     }
 
-    public function getPanelactiveClass(array $component)
+    public function getPanelactiveClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'active';
     }
 
-    public function getBootstrapcomponentType(array $component)
+    public function getBootstrapcomponentType(\PoP\ComponentModel\Component\Component $component)
     {
         return 'carousel';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

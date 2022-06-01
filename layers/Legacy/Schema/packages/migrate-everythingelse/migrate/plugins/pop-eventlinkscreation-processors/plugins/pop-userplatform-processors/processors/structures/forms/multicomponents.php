@@ -5,14 +5,17 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents exte
 {
     public final const COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE = 'multicomponent-form-eventlink-rightside';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE],
+            self::COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -20,12 +23,12 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents exte
             [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :
             [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE:
                 $details = array(
                     self::COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE => [PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets::class, PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_EVENTLINKDETAILS],
                 );
-                $ret[] = $details[$component[1]];
+                $ret[] = $details[$component->name];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_FEATUREDIMAGE];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_METAINFORMATION];
                 $ret[] = $status;
@@ -35,11 +38,11 @@ class PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents exte
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE:
                 if (!($classs = $this->getProp($component, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
                     $classs = 'alert alert-info';

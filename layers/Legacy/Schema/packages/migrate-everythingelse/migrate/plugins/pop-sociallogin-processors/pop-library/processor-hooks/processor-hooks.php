@@ -50,7 +50,7 @@ class GD_WSL_ProcessorHooks
         return $hooks;
     }
 
-    public function setModelProps(array $component, &$props, $processor)
+    public function setModelProps(\PoP\ComponentModel\Component\Component $component, &$props, $processor)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         // Method called by the PoP_Module_Processor_LoginGroups::COMPONENT_GROUP_LOGIN processor to allow hooks to set $props

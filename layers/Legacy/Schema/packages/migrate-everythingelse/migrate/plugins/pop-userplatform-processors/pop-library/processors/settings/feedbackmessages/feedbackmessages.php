@@ -4,20 +4,20 @@ class PoP_Module_Processor_SettingsFeedbackMessages extends PoP_Module_Processor
 {
     public final const COMPONENT_FEEDBACKMESSAGE_SETTINGS = 'feedbackmessage-settings';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGE_SETTINGS],
+            self::COMPONENT_FEEDBACKMESSAGE_SETTINGS,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FEEDBACKMESSAGE_SETTINGS => [PoP_Module_Processor_SettingsFeedbackMessageInners::class, PoP_Module_Processor_SettingsFeedbackMessageInners::COMPONENT_FEEDBACKMESSAGEINNER_SETTINGS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

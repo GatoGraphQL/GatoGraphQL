@@ -12,23 +12,23 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
     public final const COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT = 'forminput-emailnotifications-subscribedtopic-createdcontent';
     public final const COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT = 'forminput-emailnotifications-subscribedtopic-addedcomment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT],
-            [self::class, self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT],
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT,
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST,
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER,
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC,
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT,
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST,
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT,
+            self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
                 return TranslationAPIFacade::getInstance()->__('Created content', 'pop-coreprocessors');
             
@@ -57,9 +57,9 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
         return parent::getLabelText($component, $props);
     }
 
-    public function getCheckboxValue(array $component, array &$props)
+    public function getCheckboxValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
             case self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
@@ -78,7 +78,7 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
                     self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT,
                     self::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
                 );
-                return $values[$component[1]];
+                return $values[$component->name];
         }
 
         return parent::getCheckboxValue($component, $props);

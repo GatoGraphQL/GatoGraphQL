@@ -5,17 +5,17 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
     public final const COMPONENT_TABPANEL_MYEVENTS = 'tabpanel-myevents';
     public final const COMPONENT_TABPANEL_MYPASTEVENTS = 'tabpanel-mypastevents';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_MYEVENTS],
-            [self::class, self::COMPONENT_TABPANEL_MYPASTEVENTS],
+            self::COMPONENT_TABPANEL_MYEVENTS,
+            self::COMPONENT_TABPANEL_MYPASTEVENTS,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYEVENTS:
             case self::COMPONENT_TABPANEL_MYPASTEVENTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
@@ -24,11 +24,11 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYEVENTS:
                 $ret = array_merge(
                     $ret,
@@ -55,9 +55,9 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_MYEVENTS:
                 return array(
                     [

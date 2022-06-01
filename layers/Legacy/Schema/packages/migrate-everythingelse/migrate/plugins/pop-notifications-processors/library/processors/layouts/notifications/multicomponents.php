@@ -6,21 +6,21 @@ class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor
 {
     public final const COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM = 'notifications-multicomponent-quicklinkgroup-bottom';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM],
+            self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM,
         );
     }
 
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalLeafComponentFields(array $component): array
+    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getConditionalLeafComponentFields($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM:
                 $ret = array_merge(
                     $ret,

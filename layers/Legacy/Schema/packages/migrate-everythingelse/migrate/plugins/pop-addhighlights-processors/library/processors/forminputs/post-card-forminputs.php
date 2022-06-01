@@ -4,16 +4,16 @@ class PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues ex
 {
     public final const COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST = 'card-highlightedpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST],
+            self::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST,
         );
     }
 
-    public function getTriggerSubcomponent(array $component): ?array
+    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST:
                 return [PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST];
         }
@@ -21,9 +21,9 @@ class PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues ex
         return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST:
                 return 'highlightedpost';
         }

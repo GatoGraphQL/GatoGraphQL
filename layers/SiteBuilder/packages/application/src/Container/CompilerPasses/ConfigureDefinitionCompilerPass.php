@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\Container\CompilerPasses;
 
-use PoP\ComponentModel\Modules\DefinitionGroups;
+use PoP\ComponentModel\ComponentHelpers\DefinitionGroups;
 use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Container\CompilerPasses\AbstractCompilerPass;
 use PoP\Root\Container\ContainerBuilderWrapperInterface;

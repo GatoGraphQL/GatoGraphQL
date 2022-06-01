@@ -11,7 +11,7 @@ class PoP_ResourceLoader_ProcessorHooks {
 		);
 	}
 
-	function getImmutableSettings($immutable_settings, array $component, array $props, $processor) {
+	function getImmutableSettings($immutable_settings, \PoP\ComponentModel\Component\Component $component, array $props, $processor) {
 
 		// Load the resources. Enable only if enabled by config
 		if (PoP_ResourceLoader_ServerUtils::includeResourcesInBody()) {

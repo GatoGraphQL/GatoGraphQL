@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class EngineState
@@ -50,7 +51,7 @@ class EngineState
          * @var array<string, mixed>
          */
         public array $outputData = [],
-        public ?array $entryComponent = null,
+        public ?Component $entryComponent = null,
         /**
          * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
          * @var array<string,array<string,mixed>>

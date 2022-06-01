@@ -4,18 +4,21 @@ class PoP_Module_Processor_CommentsFormInners extends PoP_Module_Processor_FormI
 {
     public final const COMPONENT_FORMINNER_ADDCOMMENT = 'forminner-addcomment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_ADDCOMMENT],
+            self::COMPONENT_FORMINNER_ADDCOMMENT,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_ADDCOMMENT:
                 $ret = array_merge(
                     $ret,

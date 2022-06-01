@@ -8,17 +8,17 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
     public final const COMPONENT_CONTENT_PAGECONTENT = 'content-pagecontent';
     public final const COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT = 'content-pagecontent-prettyprint';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENT_AUTHOR],
-            [self::class, self::COMPONENT_CONTENT_SINGLE],
-            [self::class, self::COMPONENT_CONTENT_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_CONTENT_PAGECONTENT],
-            [self::class, self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT],
+            self::COMPONENT_CONTENT_AUTHOR,
+            self::COMPONENT_CONTENT_SINGLE,
+            self::COMPONENT_CONTENT_USERPOSTINTERACTION,
+            self::COMPONENT_CONTENT_PAGECONTENT,
+            self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT,
         );
     }
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CONTENT_AUTHOR => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_AUTHOR],
@@ -26,20 +26,20 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
             self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT => [PoP_Module_Processor_MultipleContentInners::class, PoP_Module_Processor_MultipleContentInners::COMPONENT_CONTENTINNER_PAGECONTENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         $hookable = array(
-            [self::class, self::COMPONENT_CONTENT_SINGLE],
-            [self::class, self::COMPONENT_CONTENT_USERPOSTINTERACTION],
+            self::COMPONENT_CONTENT_SINGLE,
+            self::COMPONENT_CONTENT_USERPOSTINTERACTION,
         );
         if (in_array($component, $hookable)) {
             $inners = array(
                 self::COMPONENT_CONTENT_SINGLE => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_SINGLE],
                 self::COMPONENT_CONTENT_USERPOSTINTERACTION => [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::COMPONENT_CONTENTINNER_USERPOSTINTERACTION],
             );
-            $inner = $inners[$component[1]];
+            $inner = $inners[$component->name];
 
             return \PoP\Root\App::applyFilters('PoP_Module_Processor_Contents:inner_component', $inner, $component);
         }
@@ -47,11 +47,11 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT:
                 $this->addJsmethod($ret, 'prettyPrint');
                 break;
@@ -60,9 +60,9 @@ class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_SINGLE:
                 $this->appendProp($component, $props, 'class', 'content-single');
                 break;

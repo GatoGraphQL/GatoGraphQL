@@ -24,38 +24,38 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
     public final const COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR = 'multiple-single-post-recommendedbysidebar';
     public final const COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR = 'multiple-homesection-content-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_POSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_USERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_TAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLEPAGE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_POSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTION_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_POSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_USERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_TAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLEPAGE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_POSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR,
+            self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR,
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR:
             case self::COMPONENT_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR:
@@ -65,7 +65,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                     self::COMPONENT_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
                     self::COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR];
                 break;
 
@@ -81,7 +81,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                     self::COMPONENT_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
                     self::COMPONENT_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_TAG_SIDEBAR];
                 break;
 
@@ -100,7 +100,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                     self::COMPONENT_MULTIPLE_SINGLE_POST_SIDEBAR => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR],
                     self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
                 );
-                if ($inner = $inners[$component[1]] ?? null) {
+                if ($inner = $inners[$component->name] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -109,7 +109,7 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_SECTION_CONTENT_SIDEBAR => POP_SCREEN_SECTION,
@@ -134,16 +134,16 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
             self::COMPONENT_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR => POP_SCREEN_SINGLEUSERS,
             self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR => POP_SCREEN_HOMESECTION,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTION_CONTENT_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SECTION_POSTS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR:
@@ -173,35 +173,35 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
         return parent::getScreengroup($component);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR:
             case self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR:
-                if ($component == [self::class, self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]) {
+                if ($component == self::COMPONENT_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $target_components = array(
                         '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
                     );
-                } elseif ($component == [self::class, self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR]) {
+                } elseif ($component == self::COMPONENT_MULTIPLE_TAG_MAINCONTENT_SIDEBAR) {
                      // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $target_components = array(
                         '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR],
                         '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-tag > .blocksection-extensions > .pop-block.withfilter' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_TAG_SIDEBAR],
                     );
                 }
-                foreach ($target_components as $target => $subComponent) {
+                foreach ($target_components as $target => $subcomponent) {
                      // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                    $this->appendProp(array($subComponent), $props, 'class', 'collapse');
+                    $this->appendProp(array($subcomponent), $props, 'class', 'collapse');
                     $this->mergeProp(
-                        array($subComponent),
+                        array($subcomponent),
                         $props,
                         'params',
                         array(
                             'data-collapse-target' => $target
                         )
                     );
-                    $this->mergeJsmethodsProp(array($subComponent), $props, array('waypointsToggleCollapse'));
+                    $this->mergeJsmethodsProp(array($subcomponent), $props, array('waypointsToggleCollapse'));
                 }
                 break;
 
@@ -209,22 +209,22 @@ class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Sidebar
                 $inners = array(
                     self::COMPONENT_MULTIPLE_SINGLE_POST_SIDEBAR => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR],
                 );
-                $subComponent = $inners[$component[1]];
+                $subcomponent = $inners[$component->name];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
 
                 // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                $this->appendProp(array($subComponent), $props, 'class', 'collapse');
+                $this->appendProp(array($subcomponent), $props, 'class', 'collapse');
                 $this->mergeProp(
-                    array($subComponent),
+                    array($subcomponent),
                     $props,
                     'params',
                     array(
                         'data-collapse-target' => $mainblock_taget
                     )
                 );
-                $this->mergeJsmethodsProp(array($subComponent), $props, array('waypointsToggleCollapse'));
+                $this->mergeJsmethodsProp(array($subcomponent), $props, array('waypointsToggleCollapse'));
                 break;
         }
 

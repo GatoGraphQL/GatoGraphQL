@@ -13,17 +13,17 @@ class ApplicationStateHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
-            $this->maybeAddComponent(...)
+            ModelInstance::HOOK_ELEMENTSFROMVARS_RESULT,
+            $this->maybeAddElement(...)
         );
     }
 
-    public function maybeAddComponent(array $components): array
+    public function maybeAddElement(array $elements): array
     {
         if ($stratum = App::getState('stratum')) {
-            $components[] = $this->__('stratum:', 'component-model') . $stratum;
+            $elements[] = $this->__('stratum:', 'component-model') . $stratum;
         }
 
-        return $components;
+        return $elements;
     }
 }

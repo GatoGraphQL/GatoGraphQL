@@ -28,21 +28,21 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS,
         );
     }
 
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => [PoP_Module_Processor_UserPlatformFilterInput::class, PoP_Module_Processor_UserPlatformFilterInput::FILTERINPUT_BUTTONGROUP_CATEGORIES],
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInput::class, PoP_Module_Processor_UserPlatformFilterInput::FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_UserPlatformFilterInput::class, PoP_Module_Processor_UserPlatformFilterInput::FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
@@ -50,9 +50,9 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
     //         case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
     //         case self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
@@ -62,11 +62,11 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
             case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
             case self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
@@ -76,16 +76,16 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
                     self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_CONTENTSECTIONS],
                     self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_POSTSECTIONS],
                 );
-                $input = $inputs[$component[1]];
+                $input = $inputs[$component->name];
                 return $componentprocessor_manager->getProcessor($input)->getName($input);
         }
 
         return parent::getName($component);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
@@ -99,9 +99,9 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return parent::getInputClass($component);
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES:
             case self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
             case self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
@@ -111,9 +111,9 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         return parent::isMultiple($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => $this->idScalarTypeResolver,
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => $this->idScalarTypeResolver,
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => $this->idScalarTypeResolver,
@@ -121,9 +121,9 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES,
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS,
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS
@@ -133,10 +133,10 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CATEGORIES => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => $translationAPI->__('', ''),

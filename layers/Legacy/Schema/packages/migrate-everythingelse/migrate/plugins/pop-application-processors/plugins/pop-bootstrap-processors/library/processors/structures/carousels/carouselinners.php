@@ -6,16 +6,16 @@ class PoP_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_Car
 {
     public final const COMPONENT_CAROUSELINNER_USERS = 'carouselinner-users';
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELINNER_USERS],
+            self::COMPONENT_CAROUSELINNER_USERS,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_USERS:
                 return array(
                     'row-items' => 12,
@@ -28,11 +28,14 @@ class PoP_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_Car
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_USERS:
                 $ret[] = [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::COMPONENT_LAYOUT_POPOVER_USER_AVATAR];
                 break;

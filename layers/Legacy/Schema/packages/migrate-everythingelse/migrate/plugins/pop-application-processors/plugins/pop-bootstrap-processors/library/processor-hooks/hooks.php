@@ -24,14 +24,18 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         );
     }
 
-    public function getDropdownSubcomponents($subComponents, array $component)
+    /**
+     * @param \PoP\ComponentModel\Component\Component[] $subcomponents
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getDropdownSubcomponents(array $subcomponents, \PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
-                    $subComponents, 
+                    $subcomponents, 
                     array_search(
-                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents
+                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subcomponents
                     ), 
                     0, 
                     array(
@@ -42,9 +46,9 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
 
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_USERSHARE:
                 array_splice(
-                    $subComponents, 
+                    $subcomponents, 
                     array_search(
-                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents
+                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subcomponents
                     ), 
                     0, 
                     array(
@@ -55,9 +59,9 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
 
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 array_splice(
-                    $subComponents, 
+                    $subcomponents, 
                     array_search(
-                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents
+                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::COMPONENT_BUTTON_PRINT_PREVIEWDROPDOWN], $subcomponents
                     ), 
                     0, 
                     array(
@@ -67,44 +71,44 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
                 break;
         }
         
-        return $subComponents;
+        return $subcomponents;
     }
 
-    public function getSocialmediaSubcomponents($subComponents, array $component)
+    public function getSocialmediaSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA:
-                $subComponents[] = [PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::class, PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA];
+                $subcomponents[] = [PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::class, PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA];
                 break;
 
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA:
-                $subComponents[] = [PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::class, PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA];
+                $subcomponents[] = [PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::class, PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA];
                 break;
 
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA:
-                $subComponents[] = [PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA];
+                $subcomponents[] = [PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA];
                 break;
         }
         
-        return $subComponents;
+        return $subcomponents;
     }
 
-    public function getShareSubcomponents($subComponents, array $component)
+    public function getShareSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Insert before the Embed button
         array_splice(
-            $subComponents, 
+            $subcomponents, 
             array_search(
                 [GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_EMBED], 
-                $subComponents
+                $subcomponents
             ), 
             0, 
             array(
                 [PoPCore_GenericForms_Module_Processor_AnchorControls::class, PoPCore_GenericForms_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL]
             )
         );
-        return $subComponents;
+        return $subcomponents;
     }
 }
 

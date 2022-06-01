@@ -8,22 +8,25 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
     public final const COMPONENT_CONTENTINNER_USERPOSTINTERACTION = 'contentinner-userpostinteraction';
     public final const COMPONENT_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION = 'contentinner-userhighlightpostinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_AUTHOR],
-            [self::class, self::COMPONENT_CONTENTINNER_SINGLE],
-            [self::class, self::COMPONENT_CONTENTINNER_HIGHLIGHTSINGLE],
-            [self::class, self::COMPONENT_CONTENTINNER_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION],
+            self::COMPONENT_CONTENTINNER_AUTHOR,
+            self::COMPONENT_CONTENTINNER_SINGLE,
+            self::COMPONENT_CONTENTINNER_HIGHLIGHTSINGLE,
+            self::COMPONENT_CONTENTINNER_USERPOSTINTERACTION,
+            self::COMPONENT_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_AUTHOR:
                 $ret[] = [PoP_Module_Processor_AuthorContentLayouts::class, PoP_Module_Processor_AuthorContentLayouts::COMPONENT_LAYOUTAUTHOR_CONTENT];
                 break;
@@ -45,9 +48,9 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_HIGHLIGHTSINGLE:
                 // Highlights: it has a different set-up
                 $this->appendProp($component, $props, 'class', 'well');

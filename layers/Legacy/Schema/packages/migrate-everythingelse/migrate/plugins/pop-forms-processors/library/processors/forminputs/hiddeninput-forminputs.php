@@ -7,19 +7,19 @@ class PoP_Module_Processor_HiddenInputFormInputs extends PoP_Module_Processor_Hi
     public final const COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER = 'forminput-hiddeninput-user';
     public final const COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT = 'forminput-hiddeninput-comment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTPOST],
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST],
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER],
-            [self::class, self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT],
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTPOST,
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST,
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTUSER,
+            self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT,
         );
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTPOST:
             case self::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENTPOST:
                 return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;

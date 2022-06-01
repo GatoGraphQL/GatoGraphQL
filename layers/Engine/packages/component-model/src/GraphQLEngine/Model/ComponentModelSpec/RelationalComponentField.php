@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -16,13 +17,13 @@ class RelationalComponentField extends LeafField implements ComponentFieldInterf
     use ComponentFieldTrait;
 
     /**
-     * @param array<array> $nestedModules
+     * @param Component[] $nestedComponents
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
     public function __construct(
         string $name,
-        protected array $nestedModules,
+        protected array $nestedComponents,
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
@@ -40,15 +41,15 @@ class RelationalComponentField extends LeafField implements ComponentFieldInterf
     /**
      * Retrieve a new instance with all the properties from the RelationalField
      *
-     * @param array<array> $nestedModules
+     * @param Component[] $nestedComponents
      */
     public static function fromRelationalField(
         RelationalField $relationalField,
-        array $nestedModules,
+        array $nestedComponents,
     ): self {
         return new self(
             $relationalField->getName(),
-            $nestedModules,
+            $nestedComponents,
             $relationalField->getAlias(),
             $relationalField->getArguments(),
             $relationalField->getDirectives(),
@@ -56,8 +57,11 @@ class RelationalComponentField extends LeafField implements ComponentFieldInterf
         );
     }
 
+    /**
+     * @return Component[]
+     */
     public function getNestedComponents(): array
     {
-        return $this->nestedModules;
+        return $this->nestedComponents;
     }
 }

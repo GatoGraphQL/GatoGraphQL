@@ -2,52 +2,52 @@
 
 abstract class PoP_Module_Processor_CollapsePanelGroupComponentsBase extends PoP_Module_Processor_PanelBootstrapComponentsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BOOTSTRAPCOMPONENT_COLLAPSEPANELGROUP];
     }
 
-    public function getDropdownItems(array $component)
+    public function getDropdownItems(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getPanelactiveClass(array $component)
+    public function getPanelactiveClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'in';
     }
 
-    public function getBootstrapcomponentType(array $component)
+    public function getBootstrapcomponentType(\PoP\ComponentModel\Component\Component $component)
     {
         return 'collapse';
     }
 
-    public function getPaneltitleHtmltag(array $component)
+    public function getPaneltitleHtmltag(\PoP\ComponentModel\Component\Component $component)
     {
         return 'h3';
     }
 
-    public function getPaneltitleClass(array $component)
+    public function getPaneltitleClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'panel-title';
     }
 
-    public function getOuterpanelClass(array $component)
+    public function getOuterpanelClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'panel panel-default';
     }
 
-    public function getPanelbodyClass(array $component)
+    public function getPanelbodyClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'panel-body';
     }
 
-    public function closeParent(array $component)
+    public function closeParent(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

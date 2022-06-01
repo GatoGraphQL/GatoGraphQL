@@ -11,23 +11,23 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
     public final const COMPONENT_TAGSOCIALMEDIA = 'tag-socialmedia';
     public final const COMPONENT_TAGSOCIALMEDIA_COUNTER = 'tag-socialmedia-counter';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_COUNTER],
-            [self::class, self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA],
-            [self::class, self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_COUNTER],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_COUNTER],
+            self::COMPONENT_POSTSOCIALMEDIA,
+            self::COMPONENT_POSTSOCIALMEDIA_COUNTER,
+            self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA,
+            self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER,
+            self::COMPONENT_USERSOCIALMEDIA,
+            self::COMPONENT_USERSOCIALMEDIA_COUNTER,
+            self::COMPONENT_TAGSOCIALMEDIA,
+            self::COMPONENT_TAGSOCIALMEDIA_COUNTER,
         );
     }
 
-    public function useCounter(array $component)
+    public function useCounter(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_COUNTER:
             case self::COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER:
             case self::COMPONENT_USERSOCIALMEDIA_COUNTER:
@@ -37,9 +37,12 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
         return parent::useCounter($component);
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA:
             case self::COMPONENT_POSTSOCIALMEDIA_COUNTER:
                 return array(

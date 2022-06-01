@@ -5,30 +5,30 @@ class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_S
     public final const COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW = 'scroll-mylocationposts-fullviewpreview';
     public final const COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW = 'scroll-mylocationposts-simpleviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
             self::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW => [GD_EM_Custom_Module_Processor_CustomScrollInners::class, GD_EM_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes

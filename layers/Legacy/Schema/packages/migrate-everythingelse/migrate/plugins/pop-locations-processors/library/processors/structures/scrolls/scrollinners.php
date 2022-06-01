@@ -11,23 +11,23 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
     public final const COMPONENT_SCROLLINNER_PASTEVENTS_MAP = 'scrollinner-pastevents-map';
     public final const COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP = 'scrollinner-events-horizontalmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONS],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP],
+            self::COMPONENT_SCROLLINNER_USERS_MAP,
+            self::COMPONENT_SCROLLINNER_USER_MAP,
+            self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP,
+            self::COMPONENT_SCROLLINNER_LOCATIONS,
+            self::COMPONENT_SCROLLINNER_LOCATIONS_MAP,
+            self::COMPONENT_SCROLLINNER_EVENTS_MAP,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_MAP,
+            self::COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_USERS_MAP:
             case self::COMPONENT_SCROLLINNER_USER_MAP:
             case self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP:
@@ -44,14 +44,17 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
         $layouts = array(
             self::COMPONENT_SCROLLINNER_USERS_MAP => [GD_EM_Module_Processor_MultipleUserLayouts::class, GD_EM_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_MAPDETAILS],
             self::COMPONENT_SCROLLINNER_USER_MAP => [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_MAPDETAILS],
-            self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP => [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS],//[self::class, self::COMPONENT_LAYOUT_MULTIPLEUSER_HORIZONTALMAPDETAILS],
+            self::COMPONENT_SCROLLINNER_USERS_HORIZONTALMAP => [GD_EM_Module_Processor_CustomPreviewUserLayouts::class, GD_EM_Module_Processor_CustomPreviewUserLayouts::COMPONENT_LAYOUT_PREVIEWUSER_HORIZONTALMAPDETAILS],//self::COMPONENT_LAYOUT_MULTIPLEUSER_HORIZONTALMAPDETAILS,
 
             self::COMPONENT_SCROLLINNER_LOCATIONS => [GD_EM_Module_Processor_LocationLayouts::class, GD_EM_Module_Processor_LocationLayouts::COMPONENT_EM_LAYOUT_LOCATIONS],
 
@@ -60,7 +63,7 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
             self::COMPONENT_SCROLLINNER_PASTEVENTS_MAP => [PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::class, PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS],
             self::COMPONENT_SCROLLINNER_EVENTS_HORIZONTALMAP => [PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::class, PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

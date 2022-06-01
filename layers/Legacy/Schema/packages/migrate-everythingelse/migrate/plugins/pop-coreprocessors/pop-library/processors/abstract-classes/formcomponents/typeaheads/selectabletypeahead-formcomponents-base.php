@@ -3,22 +3,22 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_TypeaheadFormComponentsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMCOMPONENT_SELECTABLETYPEAHEAD];
     }
 
-    protected function upToOneSelection(array $component, array &$props)
+    protected function upToOneSelection(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return $this->getProp($component, $props, 'max-selected') === 1;
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
         return true;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -29,12 +29,12 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
 
         return $ret;
     }
-    public function getTypeaheadJsmethod(array $component, array &$props)
+    public function getTypeaheadJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'selectableTypeahead';
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -45,17 +45,20 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         return $ret;
     }
 
-    public function getFormcomponentComponent(array $component)
+    public function getFormcomponentComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return $this->getTriggerLayoutSubcomponent($component);
     }
 
-    public function getTriggerLayoutSubcomponent(array $component)
+    public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -64,7 +67,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
         $this->appendProp($trigger_layout, $props, 'class', GD_CLASS_TRIGGERLAYOUT);
@@ -86,7 +89,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         parent::initModelProps($component, $props);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         // Sortable only if maxSelected is not only 1
         if (!$this->upToOneSelection($component, $props)) {
@@ -97,14 +100,14 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $trigger_layout = $this->getTriggerLayoutSubcomponent($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($trigger_layout);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($trigger_layout);
 
         if ($maxSelected = $this->getProp($component, $props, 'max-selected')) {
             $ret['max-selected'] = $maxSelected;
@@ -113,7 +116,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
         return $ret;
     }
 
-    public function getComponentsToPropagateDataProperties(array $component): array
+    public function getComponentsToPropagateDataProperties(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getComponentsToPropagateDataProperties($component);
 

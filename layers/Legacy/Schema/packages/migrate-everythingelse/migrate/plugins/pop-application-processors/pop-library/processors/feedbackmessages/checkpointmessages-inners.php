@@ -4,14 +4,17 @@ class PoP_Application_Module_Processor_UserCheckpointMessageInners extends PoP_M
 {
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_DOMAIN = 'checkpointmessageinner-domain';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_DOMAIN],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_DOMAIN,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -19,7 +22,7 @@ class PoP_Application_Module_Processor_UserCheckpointMessageInners extends PoP_M
             self::COMPONENT_CHECKPOINTMESSAGEINNER_DOMAIN => [PoP_Application_Module_Processor_UserCheckpointMessageAlertLayouts::class, PoP_Application_Module_Processor_UserCheckpointMessageAlertLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_DOMAIN],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

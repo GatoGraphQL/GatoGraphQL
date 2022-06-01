@@ -6,17 +6,17 @@ class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMes
     public final const COMPONENT_MESSAGE_NOREFERENCES = 'message-noreferences';
     public final const COMPONENT_MESSAGE_NOCONTACT = 'message-nocontact';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MESSAGE_NOREFERENCES],
-            [self::class, self::COMPONENT_MESSAGE_NOCONTACT],
+            self::COMPONENT_MESSAGE_NOREFERENCES,
+            self::COMPONENT_MESSAGE_NOCONTACT,
         );
     }
 
-    public function getMessage(array $component)
+    public function getMessage(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MESSAGE_NOREFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Nothing here', 'pop-coreprocessors');
 

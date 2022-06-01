@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\SiteBuilderAPI\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPAPI\API\Schema\QueryInputs;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -12,7 +13,7 @@ use PoP\SiteBuilderAPI\Helpers\APIUtils;
 
 trait AddAPIQueryToSourcesComponentProcessorTrait
 {
-    public function addAPIQueryToSources(array $sources, array $component, array &$props): array
+    public function addAPIQueryToSources(array $sources, Component $component, array &$props): array
     {
         if (!$sources) {
             return [];

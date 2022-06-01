@@ -4,7 +4,7 @@ use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterf
 
 abstract class PoP_Module_Processor_NoLabelFormComponentGroupsBase extends PoP_Module_Processor_FormComponentGroupsBase implements FormComponentComponentProcessorInterface
 {
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $component = $this->getComponentSubcomponent($component);
 

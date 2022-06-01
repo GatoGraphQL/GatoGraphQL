@@ -6,7 +6,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 {
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -19,13 +19,13 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
             if ($this->getProp($component, $props, 'show-filter')) {
                 $ret['show-filter'] = true;
             }
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($filter_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['filter'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($filter_component);
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
@@ -58,7 +58,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
@@ -97,7 +97,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
     // PROTECTED Functions
     //-------------------------------------------------
 
-    protected function filterVisible(array $component)
+    protected function filterVisible(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }

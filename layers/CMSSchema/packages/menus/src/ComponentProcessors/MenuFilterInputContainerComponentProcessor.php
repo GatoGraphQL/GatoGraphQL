@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Menus\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
@@ -14,23 +15,26 @@ class MenuFilterInputContainerComponentProcessor extends AbstractFilterInputCont
     public final const COMPONENT_FILTERINPUTCONTAINER_MENUS = 'filterinputcontainer-menus';
     public final const COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT = 'filterinputcontainer-menucount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MENUS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_MENUS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MENUCOUNT,
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    /**
+     * @return Component[]
+     */
+    public function getFilterInputComponents(Component $component): array
     {
         $menuFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH),
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_MENUS => [
                 ...$menuFilterInputComponents,
                 ...$paginationFilterInputComponents,

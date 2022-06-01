@@ -10,26 +10,26 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE = 'dataload-profileorganization-create';
     public final const COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE = 'dataload-profileindividual-create';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE],
-            [self::class, self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE],
+            self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE,
+            self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
             self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE:
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
@@ -38,9 +38,9 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
                     return $this->instanceManager->getInstance(CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class);
@@ -57,11 +57,11 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE:
                 $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::COMPONENT_FORM_PROFILEORGANIZATION_CREATE];
                 break;

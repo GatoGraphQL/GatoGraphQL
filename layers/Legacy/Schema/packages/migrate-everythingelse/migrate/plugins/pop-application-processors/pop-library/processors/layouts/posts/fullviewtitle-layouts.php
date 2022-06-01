@@ -6,18 +6,18 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
     public final const COMPONENT_LAYOUT_PREVIEWPOSTTITLE = 'layout-previewposttitle';
     public final const COMPONENT_LAYOUT_POSTTITLE = 'layout-posttitle';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLVIEWTITLE],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE],
-            [self::class, self::COMPONENT_LAYOUT_POSTTITLE],
+            self::COMPONENT_LAYOUT_FULLVIEWTITLE,
+            self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE,
+            self::COMPONENT_LAYOUT_POSTTITLE,
         );
     }
 
-    public function getHtmlmarkup(array $component, array &$props)
+    public function getHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOSTTITLE:
                 return 'h4';
 

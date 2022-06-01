@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
+use PoP\Root\Routing\RequestNature;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
-use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
-use PoPCMSSchema\PostTags\Module;
-use PoPCMSSchema\PostTags\ModuleConfiguration;
 use PoPCMSSchema\PostTags\ConditionalOnModule\API\ComponentProcessors\PostTagFieldDataloadComponentProcessor;
 use PoPCMSSchema\PostTags\ConditionalOnModule\API\ComponentProcessors\TagPostFieldDataloadComponentProcessor;
+use PoPCMSSchema\PostTags\Module;
+use PoPCMSSchema\PostTags\ModuleConfiguration;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 
@@ -36,21 +37,21 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
         $ret[TagRequestNature::TAG][] = [
-            'component' => [
+            'component' => new Component(
                 PostTagFieldDataloadComponentProcessor::class,
                 PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAG,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                 ]
-            ],
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),
@@ -64,7 +65,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     }
 
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
@@ -76,9 +77,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 PostTagFieldDataloadComponentProcessor::class,
                 PostTagFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGLIST,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                 ]
             ],
         );
@@ -98,9 +99,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 TagPostFieldDataloadComponentProcessor::class,
                 TagPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                     ]
                 ],
         );

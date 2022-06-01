@@ -3,25 +3,28 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function addDownloadlinks(array $component)
+    public function addDownloadlinks(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
-    public function getDownloadlinksClass(array $component)
+    public function getDownloadlinksClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'pull-right';
     }
-    public function getSeparator(array $component, array &$props)
+    public function getSeparator(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '<br/>';
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_DATETIME];
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
@@ -32,7 +35,7 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
         return $ret;
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -40,7 +43,7 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
     
         if ($this->addDownloadlinks($component)) {
             $dropdownlinks_component = [GD_EM_Module_Processor_QuicklinkButtonGroups::class, GD_EM_Module_Processor_QuicklinkButtonGroups::COMPONENT_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN];
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-downloadlinks'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($dropdownlinks_component);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layout-downloadlinks'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($dropdownlinks_component);
 
             if ($downloadlinks_class = $this->getDownloadlinksClass($component)) {
                 $ret[GD_JS_CLASSES]['downloadlinks'] = $downloadlinks_class;
@@ -61,7 +64,7 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array('dates', 'times');
     }

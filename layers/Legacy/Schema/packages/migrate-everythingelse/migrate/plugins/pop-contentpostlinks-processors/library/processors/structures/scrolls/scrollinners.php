@@ -11,23 +11,23 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Modul
     public final const COMPONENT_SCROLLINNER_LINKS_THUMBNAIL = 'scrollinner-links-thumbnail';
     public final const COMPONENT_SCROLLINNER_LINKS_LIST = 'scrollinner-links-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_LINKS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_LINKS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_LINKS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_LINKS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_LINKS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_LINKS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_LINKS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORLINKS_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_LINKS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_LINKS_ADDONS,
+            self::COMPONENT_SCROLLINNER_LINKS_DETAILS,
+            self::COMPONENT_SCROLLINNER_LINKS_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_LINKS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_LINKS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_LINKS_LIST,
+            self::COMPONENT_SCROLLINNER_AUTHORLINKS_FULLVIEW,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_LINKS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -54,7 +54,10 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Modul
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -64,12 +67,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Modul
             self::COMPONENT_SCROLLINNER_LINKS_DETAILS => [PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS],
             self::COMPONENT_SCROLLINNER_LINKS_THUMBNAIL => [PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL],
             self::COMPONENT_SCROLLINNER_LINKS_LIST => [PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST],
-            self::COMPONENT_SCROLLINNER_LINKS_SIMPLEVIEW => [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW], //[self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_SIMPLEVIEW],
+            self::COMPONENT_SCROLLINNER_LINKS_SIMPLEVIEW => [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW], //self::COMPONENT_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_SIMPLEVIEW,
             self::COMPONENT_SCROLLINNER_LINKS_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_LINK],
             self::COMPONENT_SCROLLINNER_AUTHORLINKS_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::COMPONENT_AUTHORLAYOUT_FULLVIEW_LINK],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

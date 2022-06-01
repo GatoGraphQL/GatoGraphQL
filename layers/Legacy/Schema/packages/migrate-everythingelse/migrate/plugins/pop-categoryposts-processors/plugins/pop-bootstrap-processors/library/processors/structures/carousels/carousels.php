@@ -123,136 +123,136 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
     public final const COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT = 'carousel-tagcategoryposts18-content';
     public final const COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT = 'carousel-tagcategoryposts19-content';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS19],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS00_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS01_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS02_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS03_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS04_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS05_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS06_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS07_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS08_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS09_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS10_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS11_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS12_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS13_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS14_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS15_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS16_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS17_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS18_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_CATEGORYPOSTS19_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS19],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS00_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS01_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS02_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS03_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS04_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS05_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS06_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS07_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS08_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS09_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS10_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS11_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS12_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS13_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS14_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS15_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS16_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS17_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS18_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS19_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS00_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS01_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS02_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS03_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS04_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS05_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS06_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS07_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS08_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS09_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS10_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS11_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS12_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS13_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS14_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS15_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS16_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS17_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT],
-            [self::class, self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT],
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS00,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS01,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS02,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS03,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS04,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS05,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS06,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS07,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS08,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS09,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS10,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS11,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS12,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS13,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS14,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS15,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS16,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS17,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS18,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS19,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS00_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS01_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS02_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS03_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS04_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS05_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS06_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS07_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS08_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS09_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS10_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS11_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS12_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS13_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS14_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS15_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS16_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS17_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS18_CONTENT,
+            self::COMPONENT_CAROUSEL_CATEGORYPOSTS19_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS00,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS01,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS02,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS03,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS04,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS05,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS06,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS07,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS08,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS09,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS10,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS11,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS12,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS13,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS14,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS15,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS16,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS17,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS18,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS19,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS00_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS01_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS02_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS03_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS04_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS05_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS06_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS07_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS08_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS09_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS10_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS11_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS12_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS13_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS14_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS15_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS16_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS17_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS18_CONTENT,
+            self::COMPONENT_CAROUSEL_AUTHORCATEGORYPOSTS19_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS00,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS01,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS02,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS03,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS04,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS05,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS06,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS07,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS08,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS09,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS10,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS11,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS12,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS13,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS14,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS15,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS16,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS17,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS00_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS01_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS02_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS03_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS04_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS05_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS06_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS07_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS08_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS09_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS10_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS11_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS12_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS13_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS14_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS15_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS16_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS17_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT,
+            self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT,
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS00:
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS01:
@@ -385,7 +385,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CAROUSEL_CATEGORYPOSTS00 => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00],
@@ -509,17 +509,17 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_CATEGORYPOSTS18_CONTENT],
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT => [CPP_Module_Processor_CarouselInners::class, CPP_Module_Processor_CarouselInners::COMPONENT_CAROUSELINNER_CATEGORYPOSTS19_CONTENT],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getMode(array $component, array &$props)
+    public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS00:
         //     case self::COMPONENT_CAROUSEL_CATEGORYPOSTS01:
@@ -650,7 +650,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
     }
 
 
-    public function getControlsTopSubcomponent(array $component)
+    public function getControlsTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $controls = array(
             self::COMPONENT_CAROUSEL_CATEGORYPOSTS00 => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00],
@@ -774,7 +774,7 @@ class CPP_Module_Processor_Carousels extends PoP_Module_Processor_CarouselsBase
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS18_CONTENT => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18],
             self::COMPONENT_CAROUSEL_TAGCATEGORYPOSTS19_CONTENT => [CPP_Module_Processor_CarouselControls::class, CPP_Module_Processor_CarouselControls::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19],
         );
-        if ($control = $controls[$component[1]] ?? null) {
+        if ($control = $controls[$component->name] ?? null) {
             return $control;
         }
 

@@ -8,19 +8,19 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
     public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL = 'scroll-automatedemails-latestcontent-thumbnail';
     public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST = 'scroll-automatedemails-latestcontent-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL,
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS => [PoPTheme_Wassup_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],
@@ -30,31 +30,31 @@ class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_S
             self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST => [PoPTheme_Wassup_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_AE_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW],
+            self::COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW,
         );
 
         $extra_class = '';

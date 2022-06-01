@@ -17,25 +17,25 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     public final const COMPONENT_BLOCK_AUTHORSUMMARY = 'block-authorsummary';
     public final const COMPONENT_BLOCK_TAG = 'block-tag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_HOME],
-            [self::class, self::COMPONENT_BLOCK_404],
-            [self::class, self::COMPONENT_BLOCK_BACKGROUNDMENU],
-            [self::class, self::COMPONENT_BLOCK_SINGLEPOST],
-            [self::class, self::COMPONENT_BLOCK_AUTHOR],
-            [self::class, self::COMPONENT_BLOCK_AUTHORDESCRIPTION],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSUMMARY],
-            [self::class, self::COMPONENT_BLOCK_TAG],
+            self::COMPONENT_BLOCK_HOME,
+            self::COMPONENT_BLOCK_404,
+            self::COMPONENT_BLOCK_BACKGROUNDMENU,
+            self::COMPONENT_BLOCK_SINGLEPOST,
+            self::COMPONENT_BLOCK_AUTHOR,
+            self::COMPONENT_BLOCK_AUTHORDESCRIPTION,
+            self::COMPONENT_BLOCK_AUTHORSUMMARY,
+            self::COMPONENT_BLOCK_TAG,
         );
     }
 
-    protected function getControlgroupBottomSubcomponent(array $component)
+    protected function getControlgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -56,11 +56,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getControlgroupBottomSubcomponent($component);
     }
 
-    protected function getBlocksectionsClasses(array $component)
+    protected function getBlocksectionsClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBlocksectionsClasses($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_404:
             case self::COMPONENT_BLOCK_BACKGROUNDMENU:
                 $ret['blocksection-extensions'] = 'row';
@@ -77,10 +77,10 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
-        // switch ($component[1]) {
+        // switch ($component->name) {
 
         //     case self::COMPONENT_BLOCK_SINGLEPOST:
         //     case self::COMPONENT_BLOCK_AUTHOR:
@@ -98,7 +98,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         //         break;
         // }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HOME:
                 $this->appendProp($component, $props, 'class', 'blockgroup-home');
 
@@ -125,17 +125,17 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_404:
             case self::COMPONENT_BLOCK_BACKGROUNDMENU:
-                foreach ($this->getSubcomponents($component) as $subComponent) {
-                    $this->appendProp([$subComponent], $props, 'class', 'col-xs-12 col-sm-4');
+                foreach ($this->getSubcomponents($component) as $subcomponent) {
+                    $this->appendProp([$subcomponent], $props, 'class', 'col-xs-12 col-sm-4');
                 }
                 break;
 
             case self::COMPONENT_BLOCK_SINGLEPOST:
-                foreach ($this->getSubcomponents($component) as $subComponent) {
-                    $this->appendProp([$subComponent], $props, 'class', 'col-xs-12');
+                foreach ($this->getSubcomponents($component) as $subcomponent) {
+                    $this->appendProp([$subcomponent], $props, 'class', 'col-xs-12');
                 }
 
                 // Hide the Title, but not for the Comments
@@ -154,7 +154,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_BACKGROUNDMENU:
             case self::COMPONENT_BLOCK_404:
                 $subcomponent_descriptions = array(
@@ -172,7 +172,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                     ],
                 );
                 foreach ($subcomponent_descriptions as $subcomponent_description) {
-                    $subComponent = $subcomponent_description['subcomponent'];
+                    $subcomponent = $subcomponent_description['subcomponent'];
                     $description = sprintf(
                         '<h4>%s</h4>',
                         sprintf(
@@ -180,8 +180,8 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                             $subcomponent_description['description']
                         )
                     );
-                    $this->setProp([$subComponent], $props, 'title', '');
-                    $this->setProp([$subComponent], $props, 'description', $description);
+                    $this->setProp([$subcomponent], $props, 'title', '');
+                    $this->setProp([$subcomponent], $props, 'description', $description);
                 }
                 break;
 
@@ -192,14 +192,14 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
                 $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-                $subComponents = array_diff(
+                $subcomponents = array_diff(
                     $this->getSubcomponents($component),
                     [
                         $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_MAINCONTENT)
                     ]
                 );
-                foreach ($subComponents as $subComponent) {
-                    $this->setProp($subComponent, $props, 'ignore-request-params', true);
+                foreach ($subcomponents as $subcomponent) {
+                    $this->setProp($subcomponent, $props, 'ignore-request-params', true);
                 }
                 break;
         }
@@ -207,10 +207,10 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
@@ -223,9 +223,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         parent::initRequestProps($component, $props);
     }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLEPOST:
                 if ($submenu = PoP_Module_Processor_CustomSectionBlocksUtils::getSingleSubmenu()) {
                     return $submenu;
@@ -243,9 +243,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getSubmenuSubcomponent($component);
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_404:
                 return sprintf(
                     '<p>%s</p>',
@@ -256,11 +256,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getDescription($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_404:
                 return TranslationAPIFacade::getInstance()->__('Oops, this page doesn\'t exist!', 'poptheme-wassup');
 
@@ -281,13 +281,16 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return parent::getTitle($component, $props);
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HOME:
                 // Allow TPPDebate to override this
                 if ($top_components = \PoP\Root\App::applyFilters(

@@ -8,20 +8,20 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
     public final const COMPONENT_SCRIPT_REFERENCES = 'script-references';
     public final const COMPONENT_SCRIPT_REFERENCESEMPTY = 'script-referencesempty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCRIPT_SINGLECOMMENT],
-            [self::class, self::COMPONENT_SCRIPT_COMMENTS],
-            [self::class, self::COMPONENT_SCRIPT_COMMENTSEMPTY],
-            [self::class, self::COMPONENT_SCRIPT_REFERENCES],
-            [self::class, self::COMPONENT_SCRIPT_REFERENCESEMPTY],
+            self::COMPONENT_SCRIPT_SINGLECOMMENT,
+            self::COMPONENT_SCRIPT_COMMENTS,
+            self::COMPONENT_SCRIPT_COMMENTSEMPTY,
+            self::COMPONENT_SCRIPT_REFERENCES,
+            self::COMPONENT_SCRIPT_REFERENCESEMPTY,
         );
     }
 
-    public function doAppend(array $component)
+    public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_COMMENTSEMPTY:
             case self::COMPONENT_SCRIPT_REFERENCESEMPTY:
                 return false;
@@ -30,9 +30,9 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
         return parent::doAppend($component);
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_SINGLECOMMENT:
                 return [PoP_Module_Processor_AppendCommentLayouts::class, PoP_Module_Processor_AppendCommentLayouts::COMPONENT_SCRIPT_APPENDCOMMENT];
         }
@@ -40,11 +40,11 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
         return parent::getLayoutSubcomponent($component);
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCRIPT_SINGLECOMMENT:
             case self::COMPONENT_SCRIPT_COMMENTS:
             case self::COMPONENT_SCRIPT_COMMENTSEMPTY:
@@ -57,7 +57,7 @@ class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScr
                     self::COMPONENT_SCRIPT_REFERENCES => 'references',
                     self::COMPONENT_SCRIPT_REFERENCESEMPTY => 'references',
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component->name];
                 break;
         }
         

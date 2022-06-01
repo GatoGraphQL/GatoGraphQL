@@ -4,18 +4,21 @@ class GD_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_Contr
 {
     public final const COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION = 'notifications-quicklinkgroup-notification';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION],
+            self::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_QUICKLINKGROUP_NOTIFICATION:
                 $ret[] = [GD_AAL_Module_Processor_QuicklinkButtonGroups::class, GD_AAL_Module_Processor_QuicklinkButtonGroups::COMPONENT_AAL_QUICKLINKBUTTONGROUP_NOTIFICATION_MARKASREADUNREAD];
                 break;

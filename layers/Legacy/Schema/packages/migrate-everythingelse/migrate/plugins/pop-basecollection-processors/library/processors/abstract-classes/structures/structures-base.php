@@ -3,12 +3,15 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -20,12 +23,12 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
         return $ret;
     }
 
-    public function addFetchedData(array $component, array &$props)
+    public function addFetchedData(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function addWebPlatformModuleConfiguration(&$ret, array $component, array &$props)
+    public function addWebPlatformModuleConfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($inner = $this->getInnerSubcomponent($component)) {
             // Add 'pop-merge' + inside module classes, so the processBlock knows where to insert the new html code
@@ -35,20 +38,20 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
         }
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($inner = $this->getInnerSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inner'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($inner);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inner'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($inner);
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // // Make the inner module callback updatable

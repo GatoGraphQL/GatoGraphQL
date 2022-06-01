@@ -9,23 +9,26 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
     public final const COMPONENT_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT = 'sidebarmulticomponent-highlightright';
     public final const COMPONENT_SIDEBARMULTICOMPONENT_POST = 'sidebarmulticomponent-post';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_FEATUREDIMAGE],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_GENERIC],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_HIGHLIGHTLEFT],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_POST],
+            self::COMPONENT_SIDEBARMULTICOMPONENT_FEATUREDIMAGE,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_GENERIC,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_HIGHLIGHTLEFT,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_POST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_FEATUREDIMAGE:
                 // Allow TPP Debate to override, adding UserStance_Module_Processor_WidgetWrappers::COMPONENT_BUTTONGROUPWRAPPER_STANCECOUNT
                 $layouts = array();

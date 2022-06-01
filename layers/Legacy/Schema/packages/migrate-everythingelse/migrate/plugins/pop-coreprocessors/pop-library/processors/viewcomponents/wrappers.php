@@ -9,21 +9,21 @@ class PoP_Module_Processor_ViewComponentButtonWrappers extends PoP_Module_Proces
     public final const COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-postconclusionsidebar-horizontal';
     public final const COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-subjugatedpostconclusionsidebar-horizontal';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL],
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT,
+            self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG,
+            self::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL,
+            self::COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG:
                 $ret[] = [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG];
                 break;
@@ -44,9 +44,9 @@ class PoP_Module_Processor_ViewComponentButtonWrappers extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT:
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG:
             case self::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:

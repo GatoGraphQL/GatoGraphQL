@@ -6,16 +6,16 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
     public final const COMPONENT_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
     public final const COMPONENT_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTER_HIGHLIGHTS],
-            [self::class, self::COMPONENT_FILTER_AUTHORHIGHLIGHTS],
-            [self::class, self::COMPONENT_FILTER_MYHIGHLIGHTS],
+            self::COMPONENT_FILTER_HIGHLIGHTS,
+            self::COMPONENT_FILTER_AUTHORHIGHLIGHTS,
+            self::COMPONENT_FILTER_MYHIGHLIGHTS,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_FILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_HIGHLIGHTS],
@@ -23,7 +23,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
             self::COMPONENT_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_MYHIGHLIGHTS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

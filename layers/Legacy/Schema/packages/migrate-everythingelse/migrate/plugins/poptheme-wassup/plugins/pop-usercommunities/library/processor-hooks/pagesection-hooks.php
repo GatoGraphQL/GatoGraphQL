@@ -28,10 +28,10 @@ class PoPTheme_Wassup_UserCommunities_PageSectionHooks
     //     );
     // }
 
-    public function initModelProps(array $component, $props_in_array, $processor)
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_MODALS:
                 $processor->setProp([GD_URE_Module_Processor_ProfileBlocks::class, GD_URE_Module_Processor_ProfileBlocks::COMPONENT_BLOCK_INVITENEWMEMBERS], $props, 'title', '');
                 break;

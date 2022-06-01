@@ -25,24 +25,24 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
     }
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_FOLLOWSUSERS],
-            [self::class, self::COMPONENT_DATALOAD_RECOMMENDSPOSTS],
-            [self::class, self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS],
-            [self::class, self::COMPONENT_DATALOAD_UPVOTESPOSTS],
-            [self::class, self::COMPONENT_DATALOAD_DOWNVOTESPOSTS],
+            self::COMPONENT_DATALOAD_FOLLOWSUSERS,
+            self::COMPONENT_DATALOAD_RECOMMENDSPOSTS,
+            self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS,
+            self::COMPONENT_DATALOAD_UPVOTESPOSTS,
+            self::COMPONENT_DATALOAD_DOWNVOTESPOSTS,
         );
     }
 
-    // function getDataaccessCheckpointConfiguration(array $component, array &$props) {
+    // function getDataaccessCheckpointConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props) {
     /**
      * @return CheckpointInterface[]
      */
-    public function getDataAccessCheckpoints(array $component, array &$props): array
+    public function getDataAccessCheckpoints(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS:
@@ -55,11 +55,11 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getDataAccessCheckpoints($component, $props);
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_SUBSCRIBESTOTAGS:
@@ -73,11 +73,11 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         }
     }
 
-    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_UPVOTESPOSTS:
@@ -92,7 +92,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return $ret;
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -103,14 +103,14 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::COMPONENT_DATALOAD_UPVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::COMPONENT_CONTENT_UPVOTESPOSTS],
             self::COMPONENT_DATALOAD_DOWNVOTESPOSTS => [PoP_Module_Processor_FunctionsContents::class, PoP_Module_Processor_FunctionsContents::COMPONENT_CONTENT_DOWNVOTESPOSTS],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
         // All of these modules require the user to be logged in
         if (!\PoP\Root\App::getState('is-user-logged-in')) {
@@ -125,7 +125,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             self::COMPONENT_DATALOAD_DOWNVOTESPOSTS => GD_METAKEY_PROFILE_DOWNVOTESPOSTS,
         ];
 
-        if ($metaKey = $metaKeys[$component[1]] ?? null) {
+        if ($metaKey = $metaKeys[$component->name] ?? null) {
             $userID = \PoP\Root\App::getState('current-user-id');
             return \PoPCMSSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
@@ -133,9 +133,9 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
 
@@ -151,9 +151,9 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_FOLLOWSUSERS:
             case self::COMPONENT_DATALOAD_RECOMMENDSPOSTS:
             case self::COMPONENT_DATALOAD_UPVOTESPOSTS:

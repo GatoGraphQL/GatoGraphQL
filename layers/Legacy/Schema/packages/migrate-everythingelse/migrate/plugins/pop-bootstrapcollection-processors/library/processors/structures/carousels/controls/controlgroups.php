@@ -4,18 +4,21 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
 {
     public final const COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL = 'carouselcontrolgroup-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL],
+            self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL:
                 $ret[] = [PoP_Module_Processor_CarouselControlButtonGroups::class, PoP_Module_Processor_CarouselControlButtonGroups::COMPONENT_CAROUSELCONTROLBUTTONGROUP_CAROUSEL];
                 break;
@@ -24,13 +27,13 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL:
                 if ($target = $this->getProp($component, $props, 'carousel-target')) {
-                    foreach ($this->getSubcomponents($component) as $subComponent) {
-                        $this->setProp([$subComponent], $props, 'carousel-target', $target);
+                    foreach ($this->getSubcomponents($component) as $subcomponent) {
+                        $this->setProp([$subcomponent], $props, 'carousel-target', $target);
                     }
                 }
                 break;

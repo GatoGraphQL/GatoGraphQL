@@ -6,20 +6,23 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE = 'layout-postsidebarinner-horizontal-stance';
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE = 'layout-postsidebarinner-compacthorizontal-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE],
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_STANCE:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
                 $ret = array_merge(
@@ -39,9 +42,9 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
         return $ret;
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_STANCE:
                 return 'row';
@@ -50,9 +53,9 @@ class UserStance_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Modu
         return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_STANCE:
                 return 'col-xsm-4';
             

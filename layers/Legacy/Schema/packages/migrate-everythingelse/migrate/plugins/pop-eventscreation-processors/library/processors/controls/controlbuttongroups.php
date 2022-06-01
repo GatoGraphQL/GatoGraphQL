@@ -8,22 +8,25 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
     public final const COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS = 'customcontrolbuttongroup-tageventlinks';
     public final const COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS = 'customcontrolbuttongroup-myeventlinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_AUTHOREVENTLINKS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS],
-            [self::class, self::COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS],
+            self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT,
+            self::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS,
+            self::COMPONENT_CONTROLBUTTONGROUP_AUTHOREVENTLINKS,
+            self::COMPONENT_CONTROLBUTTONGROUP_TAGEVENTLINKS,
+            self::COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT];
                 if (defined('POP_EVENTLINKSCREATIONPROCESSORS_INITIALIZED')) {

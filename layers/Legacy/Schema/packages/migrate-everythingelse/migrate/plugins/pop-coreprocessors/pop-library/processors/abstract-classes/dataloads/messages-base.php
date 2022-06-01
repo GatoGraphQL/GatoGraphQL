@@ -5,12 +5,12 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getCustomPostTypes(array $component)
+    public function getCustomPostTypes(\PoP\ComponentModel\Component\Component $component)
     {
         return [];
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function addHeaddatasetcomponentDataProperties(&$ret, array $component, array &$props)
+    protected function addHeaddatasetcomponentDataProperties(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         parent::addHeaddatasetcomponentDataProperties($ret, $component, $props);
 
@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
         }
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
     }

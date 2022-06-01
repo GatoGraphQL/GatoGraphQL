@@ -12,14 +12,14 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     public final const COMPONENT_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
     public final const COMPONENT_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EXAMPLE_404],
-            [self::class, self::COMPONENT_EXAMPLE_HOMEWELCOME],
-            [self::class, self::COMPONENT_EXAMPLE_COMMENT],
-            [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
-            [self::class, self::COMPONENT_EXAMPLE_TAGPROPERTIES],
+            self::COMPONENT_EXAMPLE_404,
+            self::COMPONENT_EXAMPLE_HOMEWELCOME,
+            self::COMPONENT_EXAMPLE_COMMENT,
+            self::COMPONENT_EXAMPLE_AUTHORPROPERTIES,
+            self::COMPONENT_EXAMPLE_TAGPROPERTIES,
         );
     }
 
@@ -28,11 +28,11 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = 'content';
                 break;
@@ -58,16 +58,16 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     /**
      * @return RelationalComponentField[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getRelationalComponentFields($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = new RelationalComponentField(
                     'author',
                     [
-                        [self::class, self::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
+                        self::COMPONENT_EXAMPLE_AUTHORPROPERTIES,
                     ]
                 );
                 break;

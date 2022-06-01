@@ -4,18 +4,21 @@ class GD_URE_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_C
 {
     public final const COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE = 'ure-controlbuttongroup-contentsource';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE],
+            self::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_CONTROLBUTTONGROUP_CONTENTSOURCE:
                 $ret[] = [GD_URE_Module_Processor_AnchorControls::class, GD_URE_Module_Processor_AnchorControls::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY];
                 $ret[] = [GD_URE_Module_Processor_AnchorControls::class, GD_URE_Module_Processor_AnchorControls::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER];

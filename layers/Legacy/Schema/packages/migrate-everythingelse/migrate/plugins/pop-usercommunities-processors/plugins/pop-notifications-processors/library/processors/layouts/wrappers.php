@@ -6,19 +6,19 @@ class Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers extends PoP_Module
     public final const COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP = 'ure-aal-multicomponentactionwrapper-layoutuser-membership';
     public final const COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY = 'ure-aal-quicklinkgroupactionwrapper-user-joinedcommunity';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
-            [self::class, self::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY],
+            self::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP,
+            self::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP:
                 $ret[] = [Wassup_URE_AAL_Module_Processor_MultiMembership::class, Wassup_URE_AAL_Module_Processor_MultiMembership::COMPONENT_UREAAL_MULTICOMPONENT_LAYOUTUSER_MEMBERSHIP];
                 break;
@@ -31,9 +31,9 @@ class Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers extends PoP_Module
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isAction', ['action' => URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP]);
 

@@ -7,18 +7,18 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
     public final const COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION = 'multicomponent-userhighlightpostinteraction';
     public final const COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION = 'multicomponent-userpostinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION],
+            self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION,
+            self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION,
         );
     }
 
-    protected function getUserpostinteractionLayoutSubcomponents(array $component)
+    protected function getUserpostinteractionLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
-        switch ($component[1]) {
+        switch ($component->name) {
          // Highlights: it has a different set-up
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
                 $layouts = array(
@@ -57,11 +57,14 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
                 $ret = array_merge(
@@ -74,9 +77,9 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction-single');

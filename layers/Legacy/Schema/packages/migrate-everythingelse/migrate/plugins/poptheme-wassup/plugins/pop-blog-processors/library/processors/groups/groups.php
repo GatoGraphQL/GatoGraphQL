@@ -9,20 +9,20 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL = 'group-tagcontent-scroll-thumbnail';
     public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST = 'group-tagcontent-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST],
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
@@ -35,52 +35,55 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
                     self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
                     self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST],
                 );
-                return $inners[$component[1]];
+                return $inners[$component->name];
         }
 
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
-                $subComponent = $this->getInnerSubcomponent($component);
-                $this->setProp([$subComponent], $props, 'title-htmltag', 'h2');
+                $subcomponent = $this->getInnerSubcomponent($component);
+                $this->setProp([$subcomponent], $props, 'title-htmltag', 'h2');
                 break;
         }
 
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST:
-                $subComponent = $this->getInnerSubcomponent($component);
+                $subcomponent = $this->getInnerSubcomponent($component);
 
                 // Change the block title from the #hashtag to Latest, because this blockgroup will assume that name
                 $title = getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest content', 'poptheme-wassup');
-                $this->setProp([$subComponent], $props, 'title', $title);
+                $this->setProp([$subcomponent], $props, 'title', $title);
                 break;
         }
 
         parent::initRequestProps($component, $props);
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW:

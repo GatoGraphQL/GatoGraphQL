@@ -6,7 +6,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_FormsBase
 {
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function getFormType(array $component, array &$props)
+    public function getFormType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow the Block to set the form type (eg: to override FILTERBLOCK with FILTERBLOCKGROUP)
@@ -36,7 +36,7 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
         return GD_SUBMITFORMTYPE_FILTERBLOCK;
     }
 
-    public function getMethod(array $component, array &$props)
+    public function getMethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no PoP_WebPlatform_ServerUtils
@@ -52,20 +52,20 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
         return 'GET';
     }
     
-    public function fixedId(array $component, array &$props): bool
+    public function fixedId(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
 
         // So that it can be collapsed from the ControlGroup
         return true;
     }
 
-    // public function getFilterObject(array $component)
+    // public function getFilterObject(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubcomponent($component);
     //     return $componentprocessor_manager->getProcessor($filterinner)->getFilterObject($filterinner);
     // }
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubcomponent($component);

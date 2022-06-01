@@ -10,17 +10,17 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
     public final const COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY = 'ure-anchorcontrol-contentsourcecommunity';
     public final const COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER = 'ure-anchorcontrol-contentsourceuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY],
-            [self::class, self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER],
+            self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY,
+            self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Show Content from: Community + Members', 'ure-popprocessors');
 
@@ -30,9 +30,9 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
 
         return parent::getLabel($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
                 return
             '<i class="fa fa-fw fa-user-circle"></i>'.
@@ -45,16 +45,16 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
 
         return parent::getText($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 $sources = array(
                     self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
                     self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
                 );
-                $source = $sources[$component[1]];
+                $source = $sources[$component->name];
 
                 $requestHelperService = RequestHelperServiceFacade::getInstance();
                 $url = $requestHelperService->getCurrentURL();
@@ -66,18 +66,18 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
 
         return parent::getHref($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY:
             case self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER:
                 $sources = array(
                     self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCECOMMUNITY => GD_URLPARAM_URECONTENTSOURCE_COMMUNITY,
                     self::COMPONENT_URE_ANCHORCONTROL_CONTENTSOURCEUSER => GD_URLPARAM_URECONTENTSOURCE_USER,
                 );
-                $source = $sources[$component[1]];
+                $source = $sources[$component->name];
 
                 $this->appendProp($component, $props, 'class', 'btn btn-sm btn-default');
                 if ($source == \PoP\Root\App::getState('source')) {

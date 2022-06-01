@@ -6,18 +6,18 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
     public final const COMPONENT_CAROUSEL_AUTHORSTANCES = 'carousel-authorstances';
     public final const COMPONENT_CAROUSEL_TAGSTANCES = 'carousel-tagstances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSEL_STANCES],
-            [self::class, self::COMPONENT_CAROUSEL_AUTHORSTANCES],
-            [self::class, self::COMPONENT_CAROUSEL_TAGSTANCES],
+            self::COMPONENT_CAROUSEL_STANCES,
+            self::COMPONENT_CAROUSEL_AUTHORSTANCES,
+            self::COMPONENT_CAROUSEL_TAGSTANCES,
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES:
             case self::COMPONENT_CAROUSEL_AUTHORSTANCES:
             case self::COMPONENT_CAROUSEL_TAGSTANCES:
@@ -30,9 +30,9 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
         parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES:
                 return [UserStance_Module_Processor_CustomCarouselInners::class, UserStance_Module_Processor_CustomCarouselInners::COMPONENT_CAROUSELINNER_STANCES];
 
@@ -46,9 +46,9 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getMode(array $component, array &$props)
+    public function getMode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES:
             case self::COMPONENT_CAROUSEL_AUTHORSTANCES:
             case self::COMPONENT_CAROUSEL_TAGSTANCES:
@@ -59,9 +59,9 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
     }
 
 
-    public function getControlsTopSubcomponent(array $component)
+    public function getControlsTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSEL_STANCES:
                 return [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::COMPONENT_CAROUSELCONTROLS_STANCES];
 

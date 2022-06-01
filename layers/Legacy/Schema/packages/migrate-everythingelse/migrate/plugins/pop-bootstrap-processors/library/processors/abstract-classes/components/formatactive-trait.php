@@ -5,33 +5,33 @@ use PoP\ComponentModel\State\ApplicationState;
 
 trait FormatActiveTrait
 {
-    public function isSubcomponentActivePanel(array $component, $subComponent)
+    public function isSubcomponentActivePanel(\PoP\ComponentModel\Component\Component $component, $subcomponent)
     {
-        return \PoP\Root\App::getState('format') == $this->getSubcomponentFormat($component, $subComponent);
+        return \PoP\Root\App::getState('format') == $this->getSubcomponentFormat($component, $subcomponent);
     }
 
-    protected function getSubcomponentFormat(array $component, $subComponent)
+    protected function getSubcomponentFormat(\PoP\ComponentModel\Component\Component $component, $subcomponent)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($subComponent);
+        $processor = $componentprocessor_manager->getProcessor($subcomponent);
         if ($processor instanceof FormattableModuleInterface) {
-            return $processor->getFormat($subComponent);
+            return $processor->getFormat($subcomponent);
         }
     
         return null;
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getDefaultActivepanelSubcomponent(array $component)
+    public function getDefaultActivepanelSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if ($default_format = $this->getDefaultActivepanelFormat($component)) {
-            foreach ($this->getSubcomponents($component) as $subComponent) {
-                if ($default_format == $this->getSubcomponentFormat($component, $subComponent)) {
-                    return $subComponent;
+            foreach ($this->getSubcomponents($component) as $subcomponent) {
+                if ($default_format == $this->getSubcomponentFormat($component, $subcomponent)) {
+                    return $subcomponent;
                 }
             }
         }

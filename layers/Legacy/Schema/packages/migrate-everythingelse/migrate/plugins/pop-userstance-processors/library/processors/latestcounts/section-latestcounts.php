@@ -19,31 +19,31 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
     public final const COMPONENT_LATESTCOUNT_TAG_STANCES_NEUTRAL = 'latestcount-tag-stances-neutral';
     public final const COMPONENT_LATESTCOUNT_SINGLE_STANCES_NEUTRAL = 'latestcount-single-stances-neutral';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES],
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_PRO],
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_AGAINST],
-            [self::class, self::COMPONENT_LATESTCOUNT_STANCES_NEUTRAL],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_NEUTRAL],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_STANCES_NEUTRAL],
-            [self::class, self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_NEUTRAL],
+            self::COMPONENT_LATESTCOUNT_STANCES,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES,
+            self::COMPONENT_LATESTCOUNT_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_PRO,
+            self::COMPONENT_LATESTCOUNT_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_AGAINST,
+            self::COMPONENT_LATESTCOUNT_STANCES_NEUTRAL,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_NEUTRAL,
+            self::COMPONENT_LATESTCOUNT_TAG_STANCES_NEUTRAL,
+            self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_NEUTRAL,
         );
     }
 
-    public function getObjectName(array $component, array &$props)
+    public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
@@ -66,9 +66,9 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
         return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $component, array &$props)
+    public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
@@ -91,11 +91,11 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
         return parent::getObjectNames($component, $props);
     }
 
-    public function getSectionClasses(array $component, array &$props)
+    public function getSectionClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
@@ -130,9 +130,9 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
         return $ret;
     }
 
-    public function isAuthor(array $component, array &$props)
+    public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_PRO:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_STANCES_AGAINST:
@@ -143,9 +143,9 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
         return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $component, array &$props)
+    public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES_PRO:
             case self::COMPONENT_LATESTCOUNT_TAG_STANCES_AGAINST:
@@ -156,9 +156,9 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
         return parent::isTag($component, $props);
     }
 
-    public function isSingle(array $component, array &$props)
+    public function isSingle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_SINGLE_STANCES:
             case self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_PRO:
             case self::COMPONENT_LATESTCOUNT_SINGLE_STANCES_AGAINST:

@@ -7,18 +7,18 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public final const COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW = 'scroll-organizations-fullview';
     public final const COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW = 'scroll-individuals-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS,
+            self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS,
+            self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW,
+            self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_ORGANIZATIONS_DETAILS],
@@ -27,24 +27,24 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_DETAILS,
+            self::COMPONENT_SCROLL_INDIVIDUALS_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW],
+            self::COMPONENT_SCROLL_ORGANIZATIONS_FULLVIEW,
+            self::COMPONENT_SCROLL_INDIVIDUALS_FULLVIEW,
         );
 
         $extra_class = '';

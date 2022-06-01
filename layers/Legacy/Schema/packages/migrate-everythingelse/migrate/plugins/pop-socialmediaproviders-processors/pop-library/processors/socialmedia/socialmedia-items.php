@@ -23,33 +23,33 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public final const COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW = 'tag-socialmediaproviders-linkedin-preview';
     public final const COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW = 'user-socialmediaproviders-linkedin-preview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_FB],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_FB],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_FB],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_TWITTER],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_TWITTER],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_TWITTER],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_LINKEDIN],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW],
-            [self::class, self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW],
-            [self::class, self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW],
+            self::COMPONENT_POSTSOCIALMEDIA_FB,
+            self::COMPONENT_USERSOCIALMEDIA_FB,
+            self::COMPONENT_TAGSOCIALMEDIA_FB,
+            self::COMPONENT_POSTSOCIALMEDIA_FB_PREVIEW,
+            self::COMPONENT_USERSOCIALMEDIA_FB_PREVIEW,
+            self::COMPONENT_TAGSOCIALMEDIA_FB_PREVIEW,
+            self::COMPONENT_POSTSOCIALMEDIA_TWITTER,
+            self::COMPONENT_USERSOCIALMEDIA_TWITTER,
+            self::COMPONENT_TAGSOCIALMEDIA_TWITTER,
+            self::COMPONENT_POSTSOCIALMEDIA_TWITTER_PREVIEW,
+            self::COMPONENT_USERSOCIALMEDIA_TWITTER_PREVIEW,
+            self::COMPONENT_TAGSOCIALMEDIA_TWITTER_PREVIEW,
+            self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN,
+            self::COMPONENT_USERSOCIALMEDIA_LINKEDIN,
+            self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN,
+            self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN_PREVIEW,
+            self::COMPONENT_USERSOCIALMEDIA_LINKEDIN_PREVIEW,
+            self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN_PREVIEW,
         );
     }
 
-    public function getProvider(array $component)
+    public function getProvider(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -78,9 +78,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
         return parent::getProvider($component);
     }
 
-    public function getShareurlField(array $component, array &$props)
+    public function getShareurlField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -109,9 +109,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
         return parent::getTitleField($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -139,9 +139,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
 
         return parent::getName($component);
     }
-    public function getShortname(array $component)
+    public function getShortname(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -170,9 +170,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
 
         return parent::getShortname($component);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:
@@ -207,9 +207,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
         return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_FB:
             case self::COMPONENT_USERSOCIALMEDIA_FB:
             case self::COMPONENT_TAGSOCIALMEDIA_FB:

@@ -12,19 +12,19 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
     public final const COMPONENT_DATALOAD_LOSTPWDRESET = 'dataload-lostpwdreset';
     public final const COMPONENT_DATALOAD_LOGOUT = 'dataload-logout';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LOGIN],
-            [self::class, self::COMPONENT_DATALOAD_LOSTPWD],
-            [self::class, self::COMPONENT_DATALOAD_LOSTPWDRESET],
-            [self::class, self::COMPONENT_DATALOAD_LOGOUT],
+            self::COMPONENT_DATALOAD_LOGIN,
+            self::COMPONENT_DATALOAD_LOSTPWD,
+            self::COMPONENT_DATALOAD_LOSTPWDRESET,
+            self::COMPONENT_DATALOAD_LOGOUT,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
             self::COMPONENT_DATALOAD_LOSTPWD => POP_USERLOGIN_ROUTE_LOSTPWD,
             self::COMPONENT_DATALOAD_LOSTPWDRESET => POP_USERLOGIN_ROUTE_LOSTPWDRESET,
@@ -33,9 +33,9 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOGOUT:
             case self::COMPONENT_DATALOAD_LOSTPWD:
             case self::COMPONENT_DATALOAD_LOSTPWDRESET:
@@ -46,7 +46,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -57,16 +57,16 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
             self::COMPONENT_DATALOAD_LOGOUT => [GD_UserLogin_Module_Processor_UserForms::class, GD_UserLogin_Module_Processor_UserForms::COMPONENT_FORM_LOGOUT],
         );
 
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOGIN:
                 return $this->instanceManager->getInstance(LoginMutationResolverBridge::class);
 
@@ -83,9 +83,9 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOGIN:
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_LOGIN];
 
@@ -102,9 +102,9 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         return parent::getFeedbackMessageComponent($component);
     }
 
-    protected function getCheckpointMessageComponent(array $component)
+    protected function getCheckpointMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOSTPWD:
             case self::COMPONENT_DATALOAD_LOSTPWDRESET:
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::COMPONENT_CHECKPOINTMESSAGE_NOTLOGGEDIN];
@@ -113,9 +113,9 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         return parent::getCheckpointMessageComponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOGIN:
             case self::COMPONENT_DATALOAD_LOSTPWD:
             case self::COMPONENT_DATALOAD_LOSTPWDRESET:

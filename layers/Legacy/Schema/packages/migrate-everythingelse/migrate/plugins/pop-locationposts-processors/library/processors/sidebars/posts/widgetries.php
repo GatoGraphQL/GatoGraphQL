@@ -6,20 +6,23 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
     public final const COMPONENT_WIDGET_LOCATIONPOST_CATEGORIES = 'widget-locationpost-categories';
     public final const COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO = 'widgetcompact-locationpost-info';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_LOCATIONPOST_CATEGORIES],
+            self::COMPONENT_WIDGET_LOCATIONPOST_CATEGORIES,
 
-            [self::class, self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO],
+            self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_LOCATIONPOST_CATEGORIES:
                 $ret[] = [GD_Custom_EM_Module_Processor_WidgetWrappers::class, GD_Custom_EM_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES];
                 break;
@@ -38,7 +41,7 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $categories = TranslationAPIFacade::getInstance()->__('Categories', 'pop-locationposts-processors');
         $titles = array(
@@ -46,9 +49,9 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
             self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO => PoP_LocationPosts_PostNameUtils::getNameUc(),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $categories = 'fa-info-circle';
         $fontawesomes = array(
@@ -56,30 +59,30 @@ class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_Wid
             self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO => getRouteIcon(POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS, false),
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
                 return 'list-group list-group-sm';
         }
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO:
                 return 'panel panel-default panel-sm';
         }

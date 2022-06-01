@@ -7,19 +7,19 @@ trait FormComponentValueTrait
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return null;
     }
 
-    public function addMetaFormcomponentDataFields(&$ret, array $component, array &$props)
+    public function addMetaFormcomponentDataFields(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($field = $this->getDbobjectField($component)) {
             $ret[] = $field;
         }
     }
 
-    public function printValue(array $component, array &$props)
+    public function printValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Currently there is a bug: calling https://www.mesym.com/en/posts/?profiles[0]=1782&profiles[1]=1764&filter=posts
@@ -30,7 +30,7 @@ trait FormComponentValueTrait
         return true;
     }
 
-    public function addMetaFormcomponentModuleRuntimeconfiguration(&$ret, array $component, array &$props)
+    public function addMetaFormcomponentModuleRuntimeconfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Sometimes we do not want to print the value. Check the description in function `printValue`
@@ -56,7 +56,7 @@ trait FormComponentValueTrait
         }
     }
 
-    public function addMetaFormcomponentModuleConfiguration(&$ret, array $component, array &$props)
+    public function addMetaFormcomponentModuleConfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($field = $this->getDbobjectField($component)) {
             $ret['dbobject-field'] = $field;

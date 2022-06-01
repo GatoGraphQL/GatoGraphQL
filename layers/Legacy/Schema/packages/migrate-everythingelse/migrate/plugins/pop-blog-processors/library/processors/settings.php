@@ -7,6 +7,9 @@ use PoPCMSSchema\PostTags\ComponentProcessors\TagPostFieldDataloadComponentProce
 use PoPCMSSchema\Users\ComponentProcessors\FieldDataloadComponentProcessor as UserFieldDataloads;
 
 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
+/**
+ * @todo Use the ServiceContainer to override this class! (method `overrideProcessorClass` has been removed)
+ */
 $componentprocessor_manager->overrideProcessorClass(
     PostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
@@ -14,6 +17,9 @@ $componentprocessor_manager->overrideProcessorClass(
         PostFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST,
     ]
 );
+/**
+ * @todo Use the ServiceContainer to override this class! (method `overrideProcessorClass` has been removed)
+ */
 $componentprocessor_manager->overrideProcessorClass(
     UserFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
@@ -21,6 +27,9 @@ $componentprocessor_manager->overrideProcessorClass(
         UserFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_USERLIST,
     ]
 );
+/**
+ * @todo Use the ServiceContainer to override this class! (method `overrideProcessorClass` has been removed)
+ */
 $componentprocessor_manager->overrideProcessorClass(
     UserPostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
@@ -28,6 +37,9 @@ $componentprocessor_manager->overrideProcessorClass(
         UserPostFieldDataloads::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
     ]
 );
+/**
+ * @todo Use the ServiceContainer to override this class! (method `overrideProcessorClass` has been removed)
+ */
 $componentprocessor_manager->overrideProcessorClass(
     FieldDataloadComponentProcessor::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,

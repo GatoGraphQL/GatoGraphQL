@@ -6,11 +6,11 @@ define('GD_CONSTANT_REPLICATETYPE_SINGLE', 'single');
 
 trait PoP_Module_Processor_InterceptablePageSectionsTrait
 {
-    public function getComponentInterceptURLs(array $component, array &$props)
+    public function getComponentInterceptURLs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getComponentInterceptURLs($component, $props);
 
-        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
         // Intercept current page
         $requestHelperService = RequestHelperServiceFacade::getInstance();
@@ -20,7 +20,7 @@ trait PoP_Module_Processor_InterceptablePageSectionsTrait
         return $ret;
     }
     
-    public function getPagesectionJsmethod(array $component, array &$props)
+    public function getPagesectionJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getPagesectionJsmethod($component, $props);
 

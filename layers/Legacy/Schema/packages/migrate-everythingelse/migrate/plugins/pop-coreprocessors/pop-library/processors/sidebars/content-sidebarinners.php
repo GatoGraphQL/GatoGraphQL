@@ -5,17 +5,17 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
     public final const COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL = 'contentsidebarinner-horizontal';
     public final const COMPONENT_SIDEBARINNER_CONTENT_VERTICAL = 'contentsidebarinner-vertical';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL],
-            [self::class, self::COMPONENT_SIDEBARINNER_CONTENT_VERTICAL],
+            self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL,
+            self::COMPONENT_SIDEBARINNER_CONTENT_VERTICAL,
         );
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL:
                 return 'row';
         }
@@ -23,9 +23,9 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
         return parent::getWrapperClass($component);
     }
 
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARINNER_CONTENT_HORIZONTAL:
                 return 'col-xsm-4';
         }

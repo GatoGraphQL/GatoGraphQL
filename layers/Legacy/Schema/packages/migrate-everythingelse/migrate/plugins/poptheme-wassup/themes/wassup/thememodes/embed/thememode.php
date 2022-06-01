@@ -38,7 +38,7 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple
         return GD_THEMEMODE_WASSUP_EMBED;
     }
 
-    public function getFramepagesections($pagesections, array $component)
+    public function getFramepagesections($pagesections, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Same as ThemeMode Simple, however we don't need the Navigator

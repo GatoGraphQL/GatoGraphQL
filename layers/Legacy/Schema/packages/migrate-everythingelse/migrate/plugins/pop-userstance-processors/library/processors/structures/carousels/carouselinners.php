@@ -6,18 +6,18 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
     public final const COMPONENT_CAROUSELINNER_AUTHORSTANCES = 'carouselinner-authorstances';
     public final const COMPONENT_CAROUSELINNER_TAGSTANCES = 'carouselinner-tagstances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELINNER_STANCES],
-            [self::class, self::COMPONENT_CAROUSELINNER_AUTHORSTANCES],
-            [self::class, self::COMPONENT_CAROUSELINNER_TAGSTANCES],
+            self::COMPONENT_CAROUSELINNER_STANCES,
+            self::COMPONENT_CAROUSELINNER_AUTHORSTANCES,
+            self::COMPONENT_CAROUSELINNER_TAGSTANCES,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_STANCES:
             case self::COMPONENT_CAROUSELINNER_AUTHORSTANCES:
             case self::COMPONENT_CAROUSELINNER_TAGSTANCES:
@@ -31,11 +31,14 @@ class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Proces
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_STANCES:
             case self::COMPONENT_CAROUSELINNER_AUTHORSTANCES:
             case self::COMPONENT_CAROUSELINNER_TAGSTANCES:

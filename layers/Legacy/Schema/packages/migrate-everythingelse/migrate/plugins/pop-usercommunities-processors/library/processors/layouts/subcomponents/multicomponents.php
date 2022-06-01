@@ -4,18 +4,21 @@ class GD_URE_Module_Processor_MembersLayoutMultipleComponents extends PoP_Module
 {
     public final const COMPONENT_URE_MULTICOMPONENT_COMMUNITYMEMBERS = 'ure-multicomponent-communitymembers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_MULTICOMPONENT_COMMUNITYMEMBERS],
+            self::COMPONENT_URE_MULTICOMPONENT_COMMUNITYMEMBERS,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_MULTICOMPONENT_COMMUNITYMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_MembersLayouts::class, GD_URE_Module_Processor_MembersLayouts::COMPONENT_URE_LAYOUT_COMMUNITYMEMBERS];
                 break;
@@ -24,9 +27,9 @@ class GD_URE_Module_Processor_MembersLayoutMultipleComponents extends PoP_Module
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_MULTICOMPONENT_COMMUNITYMEMBERS:
                 $this->appendProp($component, $props, 'class', 'clearfix');
                 $this->appendProp([GD_URE_Module_Processor_MembersLayouts::class, GD_URE_Module_Processor_MembersLayouts::COMPONENT_URE_LAYOUT_COMMUNITYMEMBERS], $props, 'class', 'pull-left');

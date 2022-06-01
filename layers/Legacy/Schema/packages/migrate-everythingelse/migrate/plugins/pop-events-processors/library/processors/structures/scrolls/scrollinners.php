@@ -19,31 +19,31 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const COMPONENT_SCROLLINNER_EVENTS_LIST = 'scrollinner-events-list';
     public final const COMPONENT_SCROLLINNER_PASTEVENTS_LIST = 'scrollinner-pastevents-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_EVENTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_PASTEVENTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_EVENTS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_EVENTS_ADDONS,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_ADDONS,
+            self::COMPONENT_SCROLLINNER_EVENTS_DETAILS,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_DETAILS,
+            self::COMPONENT_SCROLLINNER_EVENTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_EVENTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_EVENTS_LIST,
+            self::COMPONENT_SCROLLINNER_PASTEVENTS_LIST,
+            self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_EVENTS_THUMBNAIL:
             case self::COMPONENT_SCROLLINNER_PASTEVENTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
@@ -78,7 +78,10 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -107,7 +110,7 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
             self::COMPONENT_SCROLLINNER_AUTHOREVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_EVENT],
             self::COMPONENT_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_PASTEVENT],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

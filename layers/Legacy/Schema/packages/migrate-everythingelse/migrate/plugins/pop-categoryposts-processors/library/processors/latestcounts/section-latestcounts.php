@@ -63,73 +63,73 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
     public final const COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18 = 'latestcount-tag-categoryposts18';
     public final const COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19 = 'latestcount-tag-categoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS19],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS19],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19],
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS01,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS02,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS03,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS04,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS05,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS06,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS07,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS08,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS09,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS10,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS11,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS12,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS13,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS14,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS15,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS16,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS17,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS18,
+            self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS19,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS01,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS02,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS03,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS04,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS05,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS06,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS07,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS08,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS09,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS10,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS11,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS12,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS13,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS14,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS15,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS16,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS17,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS18,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS19,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS00,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS01,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS02,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS03,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS04,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS05,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS06,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS07,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS08,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS09,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS10,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS11,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS12,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS13,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS14,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS15,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS16,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS17,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18,
+            self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19,
         );
     }
 
-    public function getObjectName(array $component, array &$props)
+    public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cats = array(
             self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -193,14 +193,14 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
         return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $component, array &$props)
+    public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cats = array(
             self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -264,16 +264,16 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$component[1]] ?? null) {
+        if ($cat = $cats[$component->name] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
         }
 
         return parent::getObjectNames($component, $props);
     }
 
-    public function isAuthor(array $component, array &$props)
+    public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS01:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS02:
@@ -300,9 +300,9 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $component, array &$props)
+    public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS01:
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS02:
@@ -329,11 +329,11 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         return parent::isTag($component, $props);
     }
 
-    public function getSectionClasses(array $component, array &$props)
+    public function getSectionClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::COMPONENT_LATESTCOUNT_TAG_CATEGORYPOSTS00:

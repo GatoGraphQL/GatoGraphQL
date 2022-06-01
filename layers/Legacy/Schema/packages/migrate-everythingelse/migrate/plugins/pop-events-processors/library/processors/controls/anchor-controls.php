@@ -13,19 +13,19 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public final const COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS = 'custombuttoncontrol-authorpastevents';
     public final const COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS = 'custombuttoncontrol-tagpastevents';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR],
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS],
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS],
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS],
+            self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR,
+            self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS,
+            self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS,
+            self::COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Calendar', 'poptheme-wassup');
 
@@ -37,9 +37,9 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
                 return getRouteIcon(POP_EVENTS_ROUTE_EVENTSCALENDAR, false);
 
@@ -51,18 +51,18 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
             case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
                 $routes = array(
                     self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR => POP_EVENTS_ROUTE_EVENTSCALENDAR,
                     self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS => POP_EVENTS_ROUTE_PASTEVENTS,
                 );
-                $route = $routes[$component[1]];
+                $route = $routes[$component->name];
 
                 return RouteUtils::getRouteURL($route);
 
@@ -85,9 +85,9 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
 
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_CALENDAR:
             case self::COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS:
             case self::COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:

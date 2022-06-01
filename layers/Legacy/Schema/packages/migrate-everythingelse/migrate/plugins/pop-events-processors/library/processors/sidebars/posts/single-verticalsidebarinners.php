@@ -5,19 +5,22 @@ class GD_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Modul
     public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT = 'vertical-sidebarinner-single-event';
     public final const COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT = 'vertical-sidebarinner-single-pastevent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT],
-            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT],
+            self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT,
+            self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_PASTEVENT,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_SINGLE_EVENT:
                 $ret = array_merge(
                     $ret,

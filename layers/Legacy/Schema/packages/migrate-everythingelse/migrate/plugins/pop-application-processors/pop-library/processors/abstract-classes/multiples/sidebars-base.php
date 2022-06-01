@@ -2,22 +2,22 @@
 
 abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Processor_MultiplesBase
 {
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    protected function getScreen(array $component)
+    protected function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    protected function getScreengroup(array $component)
+    protected function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    protected function getPermanentSubcomponents(array $component)
+    protected function getPermanentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
@@ -30,7 +30,10 @@ abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Proc
         );
     }
     
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 

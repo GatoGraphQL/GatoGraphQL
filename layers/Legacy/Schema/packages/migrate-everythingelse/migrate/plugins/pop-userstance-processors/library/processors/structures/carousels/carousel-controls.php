@@ -12,18 +12,18 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     public final const COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES = 'carouselcontrols-authorstances';
     public final const COMPONENT_CAROUSELCONTROLS_TAGSTANCES = 'carouselcontrols-tagstances';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_STANCES],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES],
+            self::COMPONENT_CAROUSELCONTROLS_STANCES,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES,
+            self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES,
         );
     }
 
-    public function getControlClass(array $component)
+    public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
             case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
@@ -33,9 +33,9 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
         return parent::getControlClass($component);
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
             case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
@@ -44,9 +44,9 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
         return parent::getTarget($component, $props);
     }
-    public function getTitleClass(array $component)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
             case self::COMPONENT_CAROUSELCONTROLS_AUTHORSTANCES:
             case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
@@ -55,11 +55,11 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
         return parent::getTitleClass($component);
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteTitle(POP_USERSTANCE_ROUTE_STANCES);
 
@@ -88,11 +88,11 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
         return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES);
 
@@ -106,7 +106,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 // Allow URE to override adding "+Members" param
                 return \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:authorstances:titlelink',
-                    RequestUtils::addRoute($url, $routes[$component[1]])
+                    RequestUtils::addRoute($url, $routes[$component->name])
                 );
 
             case self::COMPONENT_CAROUSELCONTROLS_TAGSTANCES:
@@ -117,7 +117,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
 
                 return \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:tagstances:titlelink',
-                    RequestUtils::addRoute($url, $routes[$component[1]])
+                    RequestUtils::addRoute($url, $routes[$component->name])
                 );
         }
 

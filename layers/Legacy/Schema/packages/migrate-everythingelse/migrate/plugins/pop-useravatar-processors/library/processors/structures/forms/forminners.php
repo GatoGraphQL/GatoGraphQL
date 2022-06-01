@@ -4,18 +4,21 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFormInners extends PoP_Modul
 {
     public final const COMPONENT_FORMINNER_USERAVATAR_UPDATE = 'forminner-useravatar-update';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_USERAVATAR_UPDATE],
+            self::COMPONENT_FORMINNER_USERAVATAR_UPDATE,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_USERAVATAR_UPDATE:
                 $ret = array_merge(
                     array(

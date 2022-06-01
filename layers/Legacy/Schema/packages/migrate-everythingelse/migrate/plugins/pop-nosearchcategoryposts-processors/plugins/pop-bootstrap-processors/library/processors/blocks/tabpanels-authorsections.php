@@ -25,40 +25,40 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
     public final const COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 = 'block-tabpanel-authornosearchcategoryposts18';
     public final const COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 = 'block-tabpanel-authornosearchcategoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19],
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS03,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS04,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS05,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS06,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS07,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS08,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS09,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS10,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS11,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS12,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS13,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS14,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS15,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS16,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS17,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18,
+            self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19,
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($component[1]) {
+                switch ($component->name) {
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01:
                     case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02:
@@ -107,16 +107,16 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02:

@@ -6,16 +6,16 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
 {
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET = 'formcomponentgroup-card-stancetarget';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET],
+            self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET,
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET];
         }
@@ -23,11 +23,11 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 $this->appendProp($component, $props, 'class', 'pop-uniqueornone-selectabletypeahead-formgroup');
 
@@ -45,9 +45,9 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
         parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET:
                 return '';
         }

@@ -10,24 +10,27 @@ class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_Co
     public final const COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL = 'quicklinkbuttongroup-comments-label';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE = 'quicklinkbuttongroup-tagshare';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPERMALINK],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE],
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTPERMALINK,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE:
                 $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE];
                 break;

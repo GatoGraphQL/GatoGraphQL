@@ -5,16 +5,16 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
 {
     public final const COMPONENT_FORMINPUT_EMBEDCODE = 'embedcode';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EMBEDCODE],
+            self::COMPONENT_FORMINPUT_EMBEDCODE,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMBEDCODE:
                 return TranslationAPIFacade::getInstance()->__('Embed code', 'pop-coreprocessors');
         }
@@ -22,11 +22,11 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         return parent::getLabelText($component, $props);
     }
 
-    public function getPagesectionJsmethod(array $component, array &$props)
+    public function getPagesectionJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getPagesectionJsmethod($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMBEDCODE:
                 // Because the method depends on modal.on('shown.bs.modal'), we need to run it before the modal is open for the first time
                 // (when it would initialize the JS, so then this first execution would be lost otherwise)
@@ -37,11 +37,11 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMBEDCODE:
                 // Needed for JS method `replaceCode`
                 $ret['replaceCode']['url-type'] = 'embed';
@@ -51,9 +51,9 @@ class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EMBEDCODE:
                 $placeholder = '<iframe width="100%" height="500" src="{0}" frameborder="0" allowfullscreen="true"></iframe>';
                 $this->mergeProp(

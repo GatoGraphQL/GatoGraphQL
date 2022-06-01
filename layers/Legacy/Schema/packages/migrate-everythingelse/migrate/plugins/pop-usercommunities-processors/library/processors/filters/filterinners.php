@@ -5,15 +5,15 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
     public final const COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS = 'filterinputcontainer-mymembers';
     public final const COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES = 'filterinputcontainer-communities';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -33,7 +33,7 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'UserCommunities:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -44,13 +44,13 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYMEMBERS => POP_FILTER_MYMEMBERS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_COMMUNITIES => POP_FILTER_COMMUNITIES,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

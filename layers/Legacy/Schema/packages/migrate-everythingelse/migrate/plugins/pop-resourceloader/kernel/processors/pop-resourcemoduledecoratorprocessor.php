@@ -19,7 +19,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     // PUBLIC Functions
     //-------------------------------------------------
 
-    function getResourcesMergedComponentTree(array $component, array &$props) {
+    function getResourcesMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         return array_unique(
             $this->executeOnSelfAndMergeWithComponents('getResources', __FUNCTION__, $component, $props, false),
@@ -27,7 +27,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         );
     }
 
-    function getResources(array $component, array &$props) {
+    function getResources(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         $processor = $this->getDecoratedcomponentProcessor($component);
 
@@ -52,11 +52,11 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         );
     }
 
-    // function getDynamicModulesResources(array $component, array &$props) {
-    function getDynamicResourcesMergedComponentTree(array $component, array &$props) {
+    // function getDynamicModulesResources(\PoP\ComponentModel\Component\Component $component, array &$props) {
+    function getDynamicResourcesMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
 
         // If the module path has been set to true, then from this module downwards all modules are dynamic
         if ($this->isDynamicModule($component, $props)) {
@@ -75,14 +75,14 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         // If not, then keep iterating down the road
         $ret = array();
 
-        $subComponents = $this->getDecoratedcomponentProcessor($component)->getAllSubcomponents($component);
-        $subComponents = $modulefilter_manager->removeExcludedSubcomponents($component, $subComponents);
+        $subcomponents = $this->getDecoratedcomponentProcessor($component)->getAllSubcomponents($component);
+        $subcomponents = $modulefilter_manager->removeExcludedSubcomponents($component, $subcomponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no subcomponents
         $modulefilter_manager->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
+        foreach ($subcomponents as $subcomponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicResourcesMergedComponentTree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subcomponent)->getDynamicResourcesMergedComponentTree($subcomponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -98,24 +98,24 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         return $ret;
     }
 
-    function isDynamicModule(array $component, array &$props) {
+    function isDynamicModule(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         // // By default: does it have a path?
         // return $this->getDecoratedcomponentProcessor($component)->getComponentPath($component, $props);
         return $this->getDecoratedcomponentProcessor($component)->getProp($component, $props, 'dynamic-component');
     }
 
-    // function getModulesResources(array $component, array &$props) {
+    // function getModulesResources(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     // Return initialized empty array at the last level
     //     $ret = array();
     //     if ($resources = $this->getResources($component, $props)) {
-    //         $ret[$component[1]] = $resources;
+    //         $ret[$component->name] = $resources;
     //     }
 
-    //     foreach ($this->getDecoratedcomponentProcessor($component)->get_descendant_components_to_propagate($component) as $subComponent) {
+    //     foreach ($this->getDecoratedcomponentProcessor($component)->get_descendant_components_to_propagate($component) as $subcomponent) {
 
-    //         if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getModulesResources($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+    //         if ($subcomponent_ret = $this->getComponentProcessordecorator($subcomponent)->getModulesResources($subcomponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
     //             $ret = array_merge(
     //                 $ret,
@@ -127,10 +127,10 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //     return $ret;
     // }
 
-    function getDynamicTemplateResourcesMergedComponentTree(array $component, array &$props) {
+    function getDynamicTemplateResourcesMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
         $processor = $this->getDecoratedcomponentProcessor($component);
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
@@ -151,14 +151,14 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         // If not, then keep iterating down the road
         $ret = array();
 
-        $subComponents = $processor->getAllSubcomponents($component);
-        $subComponents = $modulefilter_manager->removeExcludedSubcomponents($component, $subComponents);
+        $subcomponents = $processor->getAllSubcomponents($component);
+        $subcomponents = $modulefilter_manager->removeExcludedSubcomponents($component, $subcomponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no subcomponents
         $modulefilter_manager->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
+        foreach ($subcomponents as $subcomponent) {
 
-            if ($subcomponent_ret = $this->getComponentProcessordecorator($subComponent)->getDynamicTemplateResourcesMergedComponentTree($subComponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
+            if ($subcomponent_ret = $this->getComponentProcessordecorator($subcomponent)->getDynamicTemplateResourcesMergedComponentTree($subcomponent, $props[$componentFullName][ComponentModelModuleInfo::get('response-prop-subcomponents')])) {
 
                 $ret = array_unique(
                     array_merge(

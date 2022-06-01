@@ -102,7 +102,7 @@ class PoPTheme_WassupManager
         );
         return App::applyFilters($filtername, $routeConfigurations);
     }
-    public function getPagesectionjsmethod($jsmethod, array $component)
+    public function getPagesectionjsmethod($jsmethod, \PoP\ComponentModel\Component\Component $component)
     {
         $thememanager = \PoP\Theme\Themes\ThemeManagerFactory::getInstance();
         if (!($theme = $thememanager->getTheme())) {
@@ -116,7 +116,7 @@ class PoPTheme_WassupManager
         );
         return App::applyFilters($filtername, $jsmethod, $component);
     }
-    public function getBlockjsmethod($jsmethod, array $component)
+    public function getBlockjsmethod($jsmethod, \PoP\ComponentModel\Component\Component $component)
     {
         $thememanager = \PoP\Theme\Themes\ThemeManagerFactory::getInstance();
         if (!($theme = $thememanager->getTheme())) {

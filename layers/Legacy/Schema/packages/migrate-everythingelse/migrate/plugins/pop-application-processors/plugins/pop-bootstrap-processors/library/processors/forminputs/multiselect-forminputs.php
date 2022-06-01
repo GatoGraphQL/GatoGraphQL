@@ -6,17 +6,17 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
     public final const COMPONENT_FORMINPUT_APPLIESTO = 'forminput-appliesto';
     public final const COMPONENT_FORMINPUT_CATEGORIES = 'forminput-categories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_APPLIESTO],
-            [self::class, self::COMPONENT_FORMINPUT_CATEGORIES],
+            self::COMPONENT_FORMINPUT_APPLIESTO,
+            self::COMPONENT_FORMINPUT_CATEGORIES,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
 
@@ -27,9 +27,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
@@ -40,9 +40,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
         return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CATEGORIES:
                 return 'topics';
 

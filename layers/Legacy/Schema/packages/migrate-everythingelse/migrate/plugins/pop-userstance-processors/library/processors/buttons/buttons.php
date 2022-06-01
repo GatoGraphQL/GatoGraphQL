@@ -9,18 +9,18 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
     public final const COMPONENT_BUTTON_POSTSTANCES_NEUTRAL = 'button-poststances-neutral';
     public final const COMPONENT_BUTTON_POSTSTANCES_AGAINST = 'button-poststances-against';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_STANCEEDIT],
-            [self::class, self::COMPONENT_BUTTON_STANCEVIEW],
-            [self::class, self::COMPONENT_BUTTON_POSTSTANCES_PRO],
-            [self::class, self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL],
-            [self::class, self::COMPONENT_BUTTON_POSTSTANCES_AGAINST],
+            self::COMPONENT_BUTTON_STANCEEDIT,
+            self::COMPONENT_BUTTON_STANCEVIEW,
+            self::COMPONENT_BUTTON_POSTSTANCES_PRO,
+            self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL,
+            self::COMPONENT_BUTTON_POSTSTANCES_AGAINST,
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_BUTTON_STANCEEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTEDIT],
@@ -29,14 +29,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL],
             self::COMPONENT_BUTTON_POSTSTANCES_AGAINST => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         $fields = array(
             self::COMPONENT_BUTTON_STANCEEDIT => 'editURL',
@@ -44,14 +44,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL => 'postStancesNeutralURL',
             self::COMPONENT_BUTTON_POSTSTANCES_AGAINST => 'postStancesAgainstURL',
         );
-        if ($field = $fields[$component[1]] ?? null) {
+        if ($field = $fields[$component->name] ?? null) {
             return $field;
         }
 
         return parent::getUrlField($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_BUTTON_STANCEEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'pop-userstance-processors'),
@@ -60,16 +60,16 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::COMPONENT_BUTTON_POSTSTANCES_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::COMPONENT_BUTTON_POSTSTANCES_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 
         return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_STANCEEDIT:
                 return POP_TARGET_ADDONS;
 
@@ -82,11 +82,11 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_STANCEVIEW:
             case self::COMPONENT_BUTTON_STANCEEDIT:
                 $ret .= ' btn btn-xs btn-default';

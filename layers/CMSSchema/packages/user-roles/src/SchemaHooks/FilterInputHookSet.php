@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\SchemaHooks;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\UserRoles\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
@@ -21,13 +22,17 @@ class FilterInputHookSet extends AbstractHookSet
         );
     }
 
-    public function getFilterInputComponents(array $filterInputComponents, array $component): array
+    /**
+     * @param Component[] $filterInputComponents
+     * @return Component[]
+     */
+    public function getFilterInputComponents(array $filterInputComponents, Component $component): array
     {
         $adminComponentNames = [
             UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS,
             UserFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT,
         ];
-        if (in_array($component[1], $adminComponentNames)) {
+        if (in_array($component->name, $adminComponentNames)) {
             return [
                 ...$filterInputComponents,
                 ...$this->getUserFilterInputComponents(),
@@ -36,17 +41,20 @@ class FilterInputHookSet extends AbstractHookSet
         return $filterInputComponents;
     }
 
+    /**
+     * @return Component[]
+     */
     public function getUserFilterInputComponents(): array
     {
         return [
-            [
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_USER_ROLES
-            ],
-            [
+            ),
+            new Component(
                 FilterInputComponentProcessor::class,
                 FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES
-            ],
+            ),
         ];
     }
 }

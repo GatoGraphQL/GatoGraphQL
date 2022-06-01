@@ -6,17 +6,17 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
     public final const COMPONENT_FORMINPUT_DATERANGEPICKER = 'forminput-daterangepicker';
     public final const COMPONENT_FORMINPUT_DATERANGETIMEPICKER = 'forminput-daterangetimepicker';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_DATERANGEPICKER],
-            [self::class, self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER],
+            self::COMPONENT_FORMINPUT_DATERANGEPICKER,
+            self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER,
         );
     }
 
-    public function useTime(array $component)
+    public function useTime(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
@@ -24,9 +24,9 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
         return parent::useTime($component);
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DATERANGEPICKER:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
 
@@ -37,9 +37,9 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }

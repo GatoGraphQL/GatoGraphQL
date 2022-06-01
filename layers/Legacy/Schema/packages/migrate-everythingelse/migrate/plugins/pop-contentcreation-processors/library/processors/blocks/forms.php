@@ -4,26 +4,26 @@ class PoP_ContentCreation_Module_Processor_Blocks extends PoP_Module_Processor_F
 {
     public final const COMPONENT_BLOCK_FLAG = 'block-flag';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_FLAG],
+            self::COMPONENT_BLOCK_FLAG,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_FLAG => POP_CONTENTCREATION_ROUTE_FLAG,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_FLAG:
                 $ret[] = [PoP_ContentCreation_Module_Processor_Dataloads::class, PoP_ContentCreation_Module_Processor_Dataloads::COMPONENT_DATALOAD_FLAG];
                 break;

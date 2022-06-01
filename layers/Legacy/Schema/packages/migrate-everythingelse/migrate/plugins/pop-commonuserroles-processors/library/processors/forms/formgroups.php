@@ -12,26 +12,26 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
     public final const COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES = 'filterinputgroup-organizationcategories';
     public final const COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES = 'filterinputgroup-organizationtypes';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_CUP_LASTNAME],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONTYPES],
-            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON,
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER,
+            self::COMPONENT_URE_FORMINPUTGROUP_CUP_LASTNAME,
+            self::COMPONENT_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONTYPES,
+            self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES,
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -41,11 +41,11 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -56,7 +56,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON],
@@ -70,7 +70,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
             self::COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

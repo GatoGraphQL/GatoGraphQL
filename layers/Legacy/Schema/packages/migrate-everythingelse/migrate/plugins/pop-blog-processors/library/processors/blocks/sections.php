@@ -68,73 +68,73 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
     public final const COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST = 'block-authorcontent-scroll-fixedlist';
     public final const COMPONENT_BLOCK_USERS_CAROUSEL = 'block-users-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_POSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST],
-            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_USERS_CAROUSEL],
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_USERS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_USERS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_USERS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_USERS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_USERS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_LIST,
+            self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_LIST,
+            self::COMPONENT_BLOCK_CONTENT_SCROLL_LIST,
+            self::COMPONENT_BLOCK_POSTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_USERS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGCONTENT_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGPOSTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_USERS_CAROUSEL,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
             self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
@@ -192,7 +192,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_CONTENT_SCROLL_NAVIGATOR => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_CONTENT_SCROLL_NAVIGATOR],
@@ -255,12 +255,12 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::COMPONENT_BLOCK_USERS_CAROUSEL => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_USERS_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getSectionFilterComponent(array $component)
+    protected function getSectionFilterComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW:
@@ -312,10 +312,10 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         return parent::getSectionFilterComponent($component);
     }
 
-    protected function getDescriptionBottom(array $component, array &$props)
+    protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return sprintf(
@@ -328,9 +328,9 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         return parent::getDescriptionBottom($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
@@ -392,9 +392,9 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_HOMECONTENT_SCROLL_FULLVIEW:
@@ -439,9 +439,9 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         return parent::getLatestcountSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest Content', 'poptheme-wassup');
         }
@@ -449,11 +449,11 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
         return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_USERS_CAROUSEL:
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;

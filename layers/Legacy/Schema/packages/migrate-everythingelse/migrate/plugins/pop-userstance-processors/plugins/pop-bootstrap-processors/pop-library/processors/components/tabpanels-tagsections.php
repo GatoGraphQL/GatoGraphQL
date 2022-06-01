@@ -7,19 +7,19 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
     public final const COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL = 'tabpanel-tagstances-neutral';
     public final const COMPONENT_TABPANEL_TAGSTANCES_AGAINST = 'tabpanel-tagstances-against';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES],
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES_PRO],
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL],
-            [self::class, self::COMPONENT_TABPANEL_TAGSTANCES_AGAINST],
+            self::COMPONENT_TABPANEL_TAGSTANCES,
+            self::COMPONENT_TABPANEL_TAGSTANCES_PRO,
+            self::COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL,
+            self::COMPONENT_TABPANEL_TAGSTANCES_AGAINST,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGSTANCES:
             case self::COMPONENT_TABPANEL_TAGSTANCES_PRO:
             case self::COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL:
@@ -30,11 +30,11 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGSTANCES:
                 $ret = array_merge(
                     $ret,
@@ -83,9 +83,9 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGSTANCES:
                 $ret = array(
                     [

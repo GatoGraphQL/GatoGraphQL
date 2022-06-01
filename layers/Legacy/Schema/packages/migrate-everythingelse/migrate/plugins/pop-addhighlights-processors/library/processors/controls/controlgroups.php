@@ -4,18 +4,21 @@ class PoP_AddHighlights_Module_Processor_CustomControlGroups extends PoP_Module_
 {
     public final const COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST = 'controlgroup-myhighlightlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST],
+            self::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_MYHIGHLIGHTLIST:
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];

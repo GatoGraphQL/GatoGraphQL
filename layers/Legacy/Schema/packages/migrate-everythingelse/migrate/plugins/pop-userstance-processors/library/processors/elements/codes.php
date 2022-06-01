@@ -11,21 +11,21 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
     public final const COMPONENT_CODE_STANCECOUNT = 'code-stancecount';
     public final const COMPONENT_CODE_POSTSTANCE = 'code-poststance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_REFERENCEDAFTERREADING],
-            [self::class, self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING],
-            [self::class, self::COMPONENT_CODE_STANCECOUNT_GENERAL],
-            [self::class, self::COMPONENT_CODE_STANCECOUNT_ARTICLE],
-            [self::class, self::COMPONENT_CODE_STANCECOUNT],
-            [self::class, self::COMPONENT_CODE_POSTSTANCE],
+            self::COMPONENT_CODE_REFERENCEDAFTERREADING,
+            self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING,
+            self::COMPONENT_CODE_STANCECOUNT_GENERAL,
+            self::COMPONENT_CODE_STANCECOUNT_ARTICLE,
+            self::COMPONENT_CODE_STANCECOUNT,
+            self::COMPONENT_CODE_POSTSTANCE,
         );
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_REFERENCEDAFTERREADING:
                 return TranslationAPIFacade::getInstance()->__('After reading', 'pop-userstance-processors');
 
@@ -69,9 +69,9 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
         return parent::getCode($component, $props);
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_REFERENCEDAFTERREADING:
             case self::COMPONENT_CODE_AUTHORREFERENCEDAFTERREADING:
                 // case self::COMPONENT_CODE_STANCECOUNT_GENERAL:
@@ -84,11 +84,11 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
         return parent::getHtmlTag($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // case self::COMPONENT_CODE_STANCECOUNT_GENERAL:
          // case self::COMPONENT_CODE_STANCECOUNT_ARTICLE:
          // case self::COMPONENT_CODE_STANCECOUNT:
@@ -97,7 +97,7 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_STANCECOUNT:
                 $this->appendProp($component, $props, 'class', 'pop-stance-combined');
                 break;

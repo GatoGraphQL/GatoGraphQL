@@ -6,17 +6,17 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
     public final const COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES = 'ure-forminput-memberprivileges';
     public final const COMPONENT_URE_FORMINPUT_MEMBERTAGS = 'ure-forminput-membertags';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES],
-            [self::class, self::COMPONENT_URE_FORMINPUT_MEMBERTAGS],
+            self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES,
+            self::COMPONENT_URE_FORMINPUT_MEMBERTAGS,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return TranslationAPIFacade::getInstance()->__('Privileges', 'ure-popprocessors');
 
@@ -27,9 +27,9 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return GD_URE_FormInput_MemberPrivileges::class;
             
@@ -40,9 +40,9 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
         return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return 'memberprivileges';
 

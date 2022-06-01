@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Posts\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\AbstractCustomPostFilterInputContainerComponentProcessor;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
@@ -17,27 +18,30 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINPOSTCOUNT,
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    /**
+     * @return Component[]
+     */
+    public function getFilterInputComponents(Component $component): array
     {
         $postFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH),
         ];
         $statusFilterInputComponents = [
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_POSTS => [
                 ...$postFilterInputComponents,
                 ...$paginationFilterInputComponents,

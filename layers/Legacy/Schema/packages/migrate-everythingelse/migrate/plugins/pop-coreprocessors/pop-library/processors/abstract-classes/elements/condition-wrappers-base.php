@@ -4,7 +4,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafCom
 
 abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_CONDITIONWRAPPER];
     }
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     /**
      * @return ConditionalLeafComponentField[]
      */
-    public function getConditionalLeafComponentFields(array $component): array
+    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getConditionalLeafComponentFields($component);
 
@@ -37,17 +37,17 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function showDiv(array $component, array &$props)
+    public function showDiv(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = [];
         if ($conditionDataField = $this->getConditionField($component)) {
@@ -70,9 +70,9 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         return $ret;
     }
 
-    abstract public function getConditionField(array $component): ?string;
+    abstract public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string;
 
-    public function getNotConditionField(array $component)
+    public function getNotConditionField(\PoP\ComponentModel\Component\Component $component)
     {
         // Calculate the "not" data field for the conditionDataField
         if ($conditionDataField = $this->getConditionField($component)) {
@@ -104,23 +104,23 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         return null;
     }
 
-    public function getConditionMethod(array $component)
+    public function getConditionMethod(\PoP\ComponentModel\Component\Component $component)
     {
         // Allow to execute a JS function on the object field value
         return null;
     }
 
-    public function getConditionsucceededClass(array $component, array &$props)
+    public function getConditionsucceededClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getConditionfailedClass(array $component, array &$props)
+    public function getConditionfailedClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -146,14 +146,14 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
         if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $layouts
             );
         }
 
         if ($conditionfailed_layouts = $this->getConditionFailedSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['conditionfailed-layouts'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $conditionfailed_layouts
             );
         }

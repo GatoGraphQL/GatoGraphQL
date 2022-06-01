@@ -8,20 +8,20 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     public final const COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION = 'userstance-layoutwrapper-userpostinteraction';
     public final const COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION = 'userstance-layoutwrapper-userfullviewinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
-            [self::class, self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION],
+            self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION,
+            self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION,
+            self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
                 $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::COMPONENT_LAYOUT_USERSTANCEPOSTINTERACTION];
                 break;
@@ -38,9 +38,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
@@ -50,9 +50,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:

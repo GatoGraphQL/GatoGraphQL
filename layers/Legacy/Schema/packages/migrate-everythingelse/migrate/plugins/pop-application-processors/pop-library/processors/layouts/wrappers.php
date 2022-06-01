@@ -9,20 +9,20 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     public final const COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION = 'layoutwrapper-userhighlightpostinteraction';
     public final const COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER = 'codewrapper-lazyloadingspinner';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
-            [self::class, self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER],
+            self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION,
+            self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION,
+            self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
                 $ret[] = [Wassup_Module_Processor_UserPostInteractionLayouts::class, Wassup_Module_Processor_UserPostInteractionLayouts::COMPONENT_LAYOUT_USERPOSTINTERACTION];
                 break;
@@ -39,11 +39,11 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         return $ret;
     }
 
-    // function getConditionFailedSubcomponents(array $component) {
+    // function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component) {
 
     //     $ret = parent::getConditionFailedSubcomponents($component);
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
 
@@ -56,9 +56,9 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     //     return $ret;
     // }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
@@ -68,9 +68,9 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction clearfix');

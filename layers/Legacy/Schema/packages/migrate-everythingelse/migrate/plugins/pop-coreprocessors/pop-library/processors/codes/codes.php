@@ -6,18 +6,18 @@ class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesB
 {
     public final const COMPONENT_CODE_APPSHELL = 'code-appshell';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_APPSHELL],
+            self::COMPONENT_CODE_APPSHELL,
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_APPSHELL:
                 // This is all this block does: load the external url defined in parameter "url"
                 $this->addJsmethod($ret, 'fetchBrowserURL', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
@@ -27,9 +27,9 @@ class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesB
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_APPSHELL:
                 // Make it invisible, nothing to show
                 $this->appendProp($component, $props, 'class', 'hidden');

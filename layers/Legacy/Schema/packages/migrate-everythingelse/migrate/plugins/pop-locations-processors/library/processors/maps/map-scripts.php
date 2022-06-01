@@ -6,23 +6,23 @@ class PoP_Module_Processor_MapScripts extends PoP_Module_Processor_MapScriptsBas
     public final const COMPONENT_MAP_SCRIPT_POST = 'em-map-script-post';
     public final const COMPONENT_MAP_SCRIPT_USER = 'em-map-script-user';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAP_SCRIPT],
-            [self::class, self::COMPONENT_MAP_SCRIPT_POST],
-            [self::class, self::COMPONENT_MAP_SCRIPT_USER],
+            self::COMPONENT_MAP_SCRIPT,
+            self::COMPONENT_MAP_SCRIPT_POST,
+            self::COMPONENT_MAP_SCRIPT_USER,
         );
     }
 
-    public function getCustomizationSubcomponent(array $component)
+    public function getCustomizationSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $customizations = array(
             self::COMPONENT_MAP_SCRIPT_POST => [PoP_Module_Processor_PostMapScriptCustomizations::class, PoP_Module_Processor_PostMapScriptCustomizations::COMPONENT_MAP_SCRIPTCUSTOMIZATION_POST],
             self::COMPONENT_MAP_SCRIPT_USER => [PoP_Module_Processor_UserMapScriptCustomizations::class, PoP_Module_Processor_UserMapScriptCustomizations::COMPONENT_MAP_SCRIPTCUSTOMIZATION_USER],
         );
 
-        if ($customization = $customizations[$component[1]] ?? null) {
+        if ($customization = $customizations[$component->name] ?? null) {
             return $customization;
         }
 

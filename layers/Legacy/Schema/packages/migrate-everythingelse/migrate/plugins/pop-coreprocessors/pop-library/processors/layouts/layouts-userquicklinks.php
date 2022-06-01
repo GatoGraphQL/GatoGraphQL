@@ -4,10 +4,10 @@ class PoP_Module_Processor_UserQuickLinkLayouts extends PoP_Module_Processor_Use
 {
     public final const COMPONENT_LAYOUTUSER_QUICKLINKS = 'layoutuser-quicklinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTUSER_QUICKLINKS],
+            self::COMPONENT_LAYOUTUSER_QUICKLINKS,
         );
     }
 }

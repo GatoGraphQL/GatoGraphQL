@@ -6,16 +6,16 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
 {
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER = 'formcomponentgroup-card-contactuser';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER],
+            self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER,
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 return [PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_USER];
         }
@@ -23,11 +23,11 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
         return parent::getComponentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 $component = $this->getComponentSubcomponent($component);
 
@@ -43,9 +43,9 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
         parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 return '';
         }

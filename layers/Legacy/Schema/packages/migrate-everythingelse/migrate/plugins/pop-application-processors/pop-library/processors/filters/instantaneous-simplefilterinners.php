@@ -5,15 +5,15 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
     public final const COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS = 'instantaneousfilterinputcontainer-contentsections';
     public final const COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS = 'instantaneousfilterinputcontainer-postsections';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS],
+            self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS,
+            self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -27,7 +27,7 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Blog:InstantaneousFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -38,9 +38,9 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS:
     //             return POP_FILTER_INSTANTANEOUSCONTENTSECTIONS;
 
@@ -51,9 +51,9 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
     //     return parent::getFilter($component);
     // }
 
-    public function getTriggerInternaltarget(array $component, array &$props)
+    public function getTriggerInternaltarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS:
             case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS:
                 // Trigger when clicking on the labels inside the btn-group
@@ -63,16 +63,16 @@ class PoP_Module_Processor_InstantaneousSimpleFilterInners extends PoP_Module_Pr
         return parent::getTriggerInternaltarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS:
             case self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS:
                 $btngroups = array(
                     self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS => [PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::class, PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::COMPONENT_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS],
                     self::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS => [PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::class, PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS],
                 );
-                $btngroup = $btngroups[$component[1]];
+                $btngroup = $btngroups[$component->name];
 
                 // Add class so we can find the element to be clicked to submit the form
                 $this->appendProp($btngroup, $props, 'class', 'pop-filterinputcontainer-instantaneous');

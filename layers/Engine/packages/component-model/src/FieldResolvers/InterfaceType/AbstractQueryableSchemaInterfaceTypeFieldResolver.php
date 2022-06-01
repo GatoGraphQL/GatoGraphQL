@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 
@@ -22,7 +23,7 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function getFieldFilterInputContainerComponent(string $fieldName): ?array
+    public function getFieldFilterInputContainerComponent(string $fieldName): ?Component
     {
         /**
          * An interface may implement another interface which is not Queryable

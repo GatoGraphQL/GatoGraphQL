@@ -6,20 +6,20 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
     public final const COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT = 'forminputgroup-volunteersneeded';
     public final const COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT = 'filterinputgroup-volunteersneededmulti';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT],
+            self::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT,
+            self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT,
         );
     }
 
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
                 $ret .= ' col-sm-2';
                 break;
@@ -27,11 +27,11 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
                 $ret .= ' col-sm-10';
                 break;
@@ -40,9 +40,9 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
         return $ret;
     }
     
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT:
                 return TranslationAPIFacade::getInstance()->__('Do you need volunteers? Each time a user applies to volunteer, you will get a notification email with the volunteer\'s contact information.', 'poptheme-wassup');
         }
@@ -50,9 +50,9 @@ class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_F
         return parent::getInfo($component, $props);
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT:
                 return [PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs::class, PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs::COMPONENT_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT];
 

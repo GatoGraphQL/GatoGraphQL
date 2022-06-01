@@ -4,16 +4,16 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
 {
     public final const COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE = 'htmlcode-stanceslidestitle';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE],
+            self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE,
         );
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:
                 return 'h1';
         }
@@ -21,9 +21,9 @@ class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBa
         return parent::getHtmlTag($component, $props);
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE:
                 return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).PoP_UserStanceProcessors_Utils::getLatestvotesTitle();
         }

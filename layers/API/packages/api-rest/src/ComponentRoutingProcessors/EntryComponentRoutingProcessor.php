@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\RESTAPI\ComponentRoutingProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPAPI\API\ComponentProcessors\RootRelationalFieldDataloadComponentProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
@@ -17,22 +18,22 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 
         $ret[RequestNature::QUERY_ROOT][] = [
-            'component' => [
+            'component' => new Component(
                 RootRelationalFieldDataloadComponentProcessor::class,
                 RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ROOT,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query')
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
                         : $this->getRESTFields()
-                    ]
-                ],
+                ]
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getRestDataStructureFormatter()->getName(),

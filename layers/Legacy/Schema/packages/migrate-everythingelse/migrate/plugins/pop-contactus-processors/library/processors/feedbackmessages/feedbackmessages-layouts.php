@@ -5,18 +5,18 @@ class PoP_ContactUs_Module_Processor_FeedbackMessageLayouts extends PoP_Module_P
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUS = 'layout-feedbackmessage-contactus';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUS],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUS,
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUS:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Message sent successfully!', 'pop-genericforms');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Thanks for contacting us, we will get in touch with you shortly.', 'pop-genericforms');

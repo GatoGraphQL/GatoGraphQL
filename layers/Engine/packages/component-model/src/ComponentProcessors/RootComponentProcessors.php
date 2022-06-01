@@ -8,10 +8,10 @@ class RootComponentProcessors extends AbstractComponentProcessor
 {
     public final const COMPONENT_EMPTY = 'empty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EMPTY],
+            self::COMPONENT_EMPTY,
         );
     }
 }

@@ -8,19 +8,19 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
     public final const COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD = 'notifications-buttoninner-notification-markasread';
     public final const COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD = 'notifications-buttoninner-notification-markasunread';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK],
-            [self::class, self::COMPONENT_AAL_BUTTONINNER_USERVIEW],
-            [self::class, self::COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD],
-            [self::class, self::COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD],
+            self::COMPONENT_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK,
+            self::COMPONENT_AAL_BUTTONINNER_USERVIEW,
+            self::COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD,
+            self::COMPONENT_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD,
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTONINNER_USERVIEW:
                 return 'fa-fw fa-eye';
 
@@ -34,9 +34,9 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_BUTTONINNER_USERVIEW:
                 return TranslationAPIFacade::getInstance()->__('View', 'pop-notifications-processors');
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
@@ -20,34 +21,37 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST = 'filterinputcontainer-admincustompostlist';
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT = 'filterinputcontainer-admincustompostcount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT,
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    /**
+     * @return Component[]
+     */
+    public function getFilterInputComponents(Component $component): array
     {
         $customPostFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH),
         ];
         $unionCustomPostFilterInputComponents = [
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES],
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES),
         ];
         $adminCustomPostFilterInputComponents = [
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS],
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST => [
                 ...$customPostFilterInputComponents,
                 ...$unionCustomPostFilterInputComponents,

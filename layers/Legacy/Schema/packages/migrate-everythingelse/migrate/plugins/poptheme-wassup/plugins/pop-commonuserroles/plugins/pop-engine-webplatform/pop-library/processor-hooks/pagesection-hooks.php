@@ -12,16 +12,16 @@ class PoPTheme_Wassup_URE_PageSectionHooks
         );
     }
 
-    public function initModelPropsHover(array $component, $props_in_array, $processor)
+    public function initModelPropsHover(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
         
-        $subComponents = array(
+        $subcomponents = array(
             [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEORGANIZATION_CREATE],
             [GD_URE_Module_Processor_CreateProfileBlocks::class, GD_URE_Module_Processor_CreateProfileBlocks::COMPONENT_BLOCK_PROFILEINDIVIDUAL_CREATE],
         );
-        foreach ($subComponents as $subComponent) {
-            $processor->mergeJsmethodsProp($subComponent, $props, array('resetOnSuccess'));
+        foreach ($subcomponents as $subcomponent) {
+            $processor->mergeJsmethodsProp($subcomponent, $props, array('resetOnSuccess'));
         }
     }
 }

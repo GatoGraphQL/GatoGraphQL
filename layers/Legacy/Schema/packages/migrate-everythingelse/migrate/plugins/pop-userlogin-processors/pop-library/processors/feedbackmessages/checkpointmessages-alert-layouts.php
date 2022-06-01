@@ -7,17 +7,17 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts extends Po
     public final const COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT = 'layout-checkpointmessagealert-loggedincanedit';
     public final const COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN = 'layout-checkpointmessagealert-loggedinisadmin';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN],
-            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDIN],
-            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT],
-            [self::class, self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN],
+            self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN,
+            self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDIN,
+            self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT,
+            self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN],
@@ -26,7 +26,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts extends Po
             self::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

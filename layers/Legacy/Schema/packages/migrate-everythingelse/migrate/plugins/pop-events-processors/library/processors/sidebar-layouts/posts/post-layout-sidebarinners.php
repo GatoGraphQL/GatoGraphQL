@@ -9,23 +9,26 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT = 'layout-postsidebarinner-compacthorizontal-event';
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT = 'layout-postsidebarinner-compacthorizontal-pastevent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT],
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
                 $ret = array_merge(
@@ -60,9 +63,9 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT:
@@ -73,9 +76,9 @@ class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Pr
         return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT:
                 return 'col-xsm-4';

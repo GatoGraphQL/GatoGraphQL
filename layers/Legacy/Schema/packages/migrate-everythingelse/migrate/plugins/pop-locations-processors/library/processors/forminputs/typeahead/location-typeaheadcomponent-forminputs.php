@@ -6,16 +6,16 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS = 'forminput-typeaheadcomponent-locations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS],
+            self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS,
         );
     }
 
-    protected function getLimit(array $component, array &$props)
+    protected function getLimit(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return 8;
         }
@@ -23,10 +23,10 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
         return parent::getLimit($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $component, array &$props)
+    protected function getTypeaheadDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONS);
         }
@@ -34,11 +34,11 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
         return parent::getTypeaheadDataloadSource($component, $props);
     }
 
-    // protected function getSourceFilter(array $component, array &$props)
+    // protected function getSourceFilter(\PoP\ComponentModel\Component\Component $component, array &$props)
     // {
     //     return POP_FILTER_CONTENT;
     // }
-    protected function getRemoteUrl(array $component, array &$props)
+    protected function getRemoteUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = parent::getRemoteUrl($component, $props);
         

@@ -10,15 +10,15 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
     public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION],
-            [self::class, self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL],
+            self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION,
+            self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL,
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -34,16 +34,16 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
                 [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
         );
 
-        if ($block_inner = $block_inners[$component[1]] ?? null) {
+        if ($block_inner = $block_inners[$component->name] ?? null) {
             $ret[] = $block_inner;
         }
 
         return $ret;
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
     //         case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
     //             return UserRequestNature::USER;
@@ -52,9 +52,9 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     //     return parent::getNature($component);
     // }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return $this->getQueriedDBObjectID($component, $props, $data_properties);
@@ -64,9 +64,9 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     }
 
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);

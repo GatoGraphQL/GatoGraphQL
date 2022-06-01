@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     // PUBLIC Functions
     //-------------------------------------------------
 
-    // public function getFilterObject(array $component)
+    // public function getFilterObject(\PoP\ComponentModel\Component\Component $component)
     // {
     //     if ($filter = $this->getFilter($component)) {
     //         return \PoP\Engine\FilterManagerFactory::getInstance()->getFilter($filter);
@@ -20,12 +20,12 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     // PUBLIC Overriding Functions
     //-------------------------------------------------
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return [];
     }
 
-    protected function getFilteredInputSubcomponents(array $component)
+    protected function getFilteredInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         return \PoP\Root\App::applyFilters(
             'FilterInnerComponentProcessor:inputComponents',
@@ -34,7 +34,10 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -46,7 +49,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
             );
 
             // // Add the hidden input with the name of the filter
-            // $ret[] = [self::class, self::COMPONENT_FORMINPUT_FILTERNAME];
+            // $ret[] = self::COMPONENT_FORMINPUT_FILTERNAME;
         }
 
         if ($submitbtn = $this->getSubmitbtnComponent($component)) {
@@ -60,30 +63,30 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     // PROTECTED Functions
     //-------------------------------------------------
 
-    // public function getFilterComponent(array $component, $filtercomponent)
+    // public function getFilterComponent(\PoP\ComponentModel\Component\Component $component, $filtercomponent)
     // {
 
     //     // By default get the forminput. This can be overriden to get the getFilterinput for a simpler filter, as used in the sideinfo.
     //     return $filtercomponent->getForminput();
     // }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     return null;
     // }
 
-    public function getSubmitbtnComponent(array $component)
+    public function getSubmitbtnComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_FormGroups::class, PoP_Module_Processor_FormGroups::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH];
     }
 
-    // public function initModelProps(array $component, array &$props): void
+    // public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     // {
-    //     $this->setProp([[self::class, self::COMPONENT_FORMINPUT_FILTERNAME]], $props, 'filter', $this->getFilter($component));
+    //     $this->setProp([self::COMPONENT_FORMINPUT_FILTERNAME], $props, 'filter', $this->getFilter($component));
     //     parent::initModelProps($component, $props);
     // }
 
-    // function getComponentCBActions(array $component, array &$props) {
+    // function getComponentCBActions(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     // Comment Leo 23/08/2017: The filter must not be re-drawn after reloading/refreshing content,
     //     // it must not be affected by the data coming back from fetching json data, the filter is outside this scope

@@ -12,7 +12,7 @@ class PoPTheme_Wassup_Events_ResourceLoaderProcessor_Hooks
         );
     }
 
-    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources(array $resources, \PoP\ComponentModel\Component\Component $component, array $templateResource, string $template, array $props, $processor): array
     {
 
         // Artificial property added to identify the template when adding component-resources

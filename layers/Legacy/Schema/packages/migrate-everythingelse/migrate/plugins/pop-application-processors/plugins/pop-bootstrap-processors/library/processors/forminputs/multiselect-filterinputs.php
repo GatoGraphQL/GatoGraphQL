@@ -38,22 +38,22 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_APPLIESTO],
-            [self::class, self::COMPONENT_FILTERINPUT_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUT_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_FILTERINPUT_POSTSECTIONS],
+            self::COMPONENT_FILTERINPUT_APPLIESTO,
+            self::COMPONENT_FILTERINPUT_CATEGORIES,
+            self::COMPONENT_FILTERINPUT_CONTENTSECTIONS,
+            self::COMPONENT_FILTERINPUT_POSTSECTIONS,
         );
     }
 
     /**
      * @todo Migrate from [FilterInput::class, FilterInput::NAME] to FilterInputInterface
      */
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(\PoP\ComponentModel\Component\Component $component): ?FilterInputInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_POSTSECTIONS => [PoP_Module_Processor_CRUDMultiSelectFilterInput::class, PoP_Module_Processor_CRUDMultiSelectFilterInput::FILTERINPUT_POSTSECTIONS],
             self::COMPONENT_FILTERINPUT_CATEGORIES => [PoP_Module_Processor_CRUDMultiSelectFilterInput::class, PoP_Module_Processor_CRUDMultiSelectFilterInput::FILTERINPUT_CATEGORIES],
             self::COMPONENT_FILTERINPUT_CONTENTSECTIONS => [PoP_Module_Processor_CRUDMultiSelectFilterInput::class, PoP_Module_Processor_CRUDMultiSelectFilterInput::FILTERINPUT_CONTENTSECTIONS],
@@ -62,9 +62,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         };
     }
 
-    // public function isFiltercomponent(array $component)
+    // public function isFiltercomponent(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUT_CATEGORIES:
     //         case self::COMPONENT_FILTERINPUT_CONTENTSECTIONS:
     //         case self::COMPONENT_FILTERINPUT_POSTSECTIONS:
@@ -75,9 +75,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
     //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_CONTENTSECTIONS:
             case self::COMPONENT_FILTERINPUT_POSTSECTIONS:
                 return TranslationAPIFacade::getInstance()->__('Sections', 'poptheme-wassup');
@@ -89,9 +89,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
@@ -108,9 +108,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_CATEGORIES:
                 return 'appliesto';
 
@@ -125,9 +125,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(\PoP\ComponentModel\Component\Component $component): InputTypeResolverInterface
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_APPLIESTO => $this->stringScalarTypeResolver,
             self::COMPONENT_FILTERINPUT_CATEGORIES => $this->idScalarTypeResolver,
             self::COMPONENT_FILTERINPUT_CONTENTSECTIONS => $this->idScalarTypeResolver,
@@ -136,9 +136,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(\PoP\ComponentModel\Component\Component $component): int
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_FILTERINPUT_APPLIESTO,
             self::COMPONENT_FILTERINPUT_CATEGORIES,
             self::COMPONENT_FILTERINPUT_CONTENTSECTIONS,
@@ -149,10 +149,10 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_APPLIESTO => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_CATEGORIES => $translationAPI->__('', ''),
             self::COMPONENT_FILTERINPUT_CONTENTSECTIONS => $translationAPI->__('', ''),

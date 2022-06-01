@@ -9,17 +9,17 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA = 'viewcomponent-userbutton-api-socialmedia';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN = 'viewcomponent-userbutton-api-previewdropdown';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN,
         );
     }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
@@ -27,16 +27,16 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
             self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA],
             self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN => [GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::class, GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Embed', 'pop-coreprocessors');
@@ -49,11 +49,11 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
         return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-embed';
                 break;
@@ -66,9 +66,9 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
@@ -84,7 +84,7 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding component-resources
@@ -95,13 +95,13 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
         parent::initModelProps($component, $props);
     }
 
-    public function getUrl(array $component, array &$props)
+    public function getUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_SOCIALMEDIA:
                 case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_EMBED_PREVIEWDROPDOWN:
                 case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_SOCIALMEDIA:
@@ -113,7 +113,7 @@ class PoP_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor
                         self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_API_PREVIEWDROPDOWN => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_API],
                     );
 
-                    $modal = $modals[$component[1]];
+                    $modal = $modals[$component->name];
                     $modal_id = $componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props);
                     return '#'.PoP_Bootstrap_Utils::getFrontendId($modal_id, 'modal');
             }

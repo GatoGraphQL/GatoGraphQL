@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\Application\Hooks;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Application\Constants\Actions;
 use PoP\Application\ComponentFilters\Lazy;
 use PoP\Application\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -60,13 +62,13 @@ class LazyLoadHookSet extends AbstractHookSet
         );
     }
 
-    public function start($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
+    public function start(Component $root_component, array $root_model_props_in_array, array $root_props_in_array, array $helperCalculations_in_array): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingComponentData(array $component, $component_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
+    public function calculateDataloadingComponentData(Component $component, array $component_props_in_array, array $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, array $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 
@@ -76,7 +78,7 @@ class LazyLoadHookSet extends AbstractHookSet
         }
     }
 
-    public function end($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
+    public function end(Component $root_component, array $root_model_props_in_array, array $root_props_in_array, array $helperCalculations_in_array, EngineInterface $engine): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 

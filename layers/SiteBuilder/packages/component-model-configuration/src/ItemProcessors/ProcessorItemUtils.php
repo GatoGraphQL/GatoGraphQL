@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ItemProcessors;
+namespace PoP\ConfigurationComponentModel\ItemProcessors;
 
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 

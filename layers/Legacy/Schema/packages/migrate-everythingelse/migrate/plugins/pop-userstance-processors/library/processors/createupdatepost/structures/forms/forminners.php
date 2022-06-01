@@ -4,52 +4,52 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
 {
     public final const COMPONENT_FORMINNER_STANCE = 'forminner-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_STANCE],
+            self::COMPONENT_FORMINNER_STANCE,
         );
     }
 
-    protected function getFeaturedimageInput(array $component)
+    protected function getFeaturedimageInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
         return parent::getFeaturedimageInput($component);
     }
-    protected function getCoauthorsInput(array $component)
+    protected function getCoauthorsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
         return parent::getCoauthorsInput($component);
     }
-    protected function getTitleInput(array $component)
+    protected function getTitleInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_STANCE:
                 return null;
         }
 
         return parent::getTitleInput($component);
     }
-    protected function getEditorInput(array $component)
+    protected function getEditorInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_STANCE:
                 return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
         }
 
         return parent::getEditorInput($component);
     }
-    protected function getStatusInput(array $component)
+    protected function getStatusInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_STANCE:
                 // Stances are always published immediately, independently of value of GD_CONF_CREATEUPDATEPOST_MODERATE
                 return [PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT];
@@ -58,11 +58,14 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
         return parent::getStatusInput($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
         
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_STANCE:
                 return array_merge(
                     $ret,
@@ -73,7 +76,7 @@ class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Modu
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 }
 

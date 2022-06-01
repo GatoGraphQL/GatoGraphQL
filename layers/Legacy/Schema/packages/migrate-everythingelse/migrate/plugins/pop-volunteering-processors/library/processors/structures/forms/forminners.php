@@ -4,18 +4,21 @@ class PoP_Volunteering_Module_Processor_GFFormInners extends PoP_Module_Processo
 {
     public final const COMPONENT_FORMINNER_VOLUNTEER = 'forminner-volunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_VOLUNTEER],
+            self::COMPONENT_FORMINNER_VOLUNTEER,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_VOLUNTEER:
                 $ret = array_merge(
                     $ret,
@@ -55,7 +58,7 @@ class PoP_Volunteering_Module_Processor_GFFormInners extends PoP_Module_Processo
 
         return $ret;
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Allow Gravity Forms to set props on its added fields

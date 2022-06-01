@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_TalkingSpeechBubblesBase extends PoP_Module_Processor_SpeechBubblesBase
 {
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
     

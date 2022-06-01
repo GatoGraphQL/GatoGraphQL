@@ -142,7 +142,7 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
         );
         return App::applyFilters($filtername, $routeConfigurations);
     }
-    public function getPagesectionJsmethod($jsmethod, array $component)
+    public function getPagesectionJsmethod($jsmethod, \PoP\ComponentModel\Component\Component $component)
     {
 
         // Forward the filter to be processed by the ThemeMode

@@ -6,20 +6,20 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
     public final const COMPONENT_AUTHORLAYOUT_FULLVIEW_LINK = 'authorlayout-fullview-link';
     public final const COMPONENT_SINGLELAYOUT_FULLVIEW_LINK = 'singlelayout-fullview-link';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLVIEW_LINK],
-            [self::class, self::COMPONENT_AUTHORLAYOUT_FULLVIEW_LINK],
-            [self::class, self::COMPONENT_SINGLELAYOUT_FULLVIEW_LINK],
+            self::COMPONENT_LAYOUT_FULLVIEW_LINK,
+            self::COMPONENT_AUTHORLAYOUT_FULLVIEW_LINK,
+            self::COMPONENT_SINGLELAYOUT_FULLVIEW_LINK,
         );
     }
 
-    public function getFooterSubcomponents(array $component)
+    public function getFooterSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFooterSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_LINK:
             case self::COMPONENT_AUTHORLAYOUT_FULLVIEW_LINK:
             case self::COMPONENT_SINGLELAYOUT_FULLVIEW_LINK:
@@ -35,9 +35,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
         return $ret;
     }
 
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLVIEW_LINK:
             case self::COMPONENT_AUTHORLAYOUT_FULLVIEW_LINK:
             case self::COMPONENT_SINGLELAYOUT_FULLVIEW_LINK:
@@ -47,7 +47,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Mo
                     self::COMPONENT_SINGLELAYOUT_FULLVIEW_LINK => [PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars::class, PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebars::COMPONENT_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LINK],
                 );
 
-                return $sidebars[$component[1]];
+                return $sidebars[$component->name];
         }
 
         return parent::getSidebarSubcomponent($component);

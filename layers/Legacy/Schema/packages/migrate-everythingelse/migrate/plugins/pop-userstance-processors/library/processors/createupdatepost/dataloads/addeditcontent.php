@@ -18,19 +18,19 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_STANCE_CREATEORUPDATE = 'dataload-stance-createorupdate';
     public final const COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE = 'dataload-singlepoststance-createorupdate';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_STANCE_UPDATE],
-            [self::class, self::COMPONENT_DATALOAD_STANCE_CREATE],
-            [self::class, self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE],
-            [self::class, self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE],
+            self::COMPONENT_DATALOAD_STANCE_UPDATE,
+            self::COMPONENT_DATALOAD_STANCE_CREATE,
+            self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE,
+            self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
             self::COMPONENT_DATALOAD_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
             self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
@@ -39,9 +39,9 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
+    public function getRelevantRouteCheckpointTarget(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
@@ -51,23 +51,23 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         $feedbacks = array(
             self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT],
             self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::COMPONENT_FEEDBACKMESSAGE_CREATECONTENT],
         );
 
-        if ($feedback = $feedbacks[$component[1]] ?? null) {
+        if ($feedback = $feedbacks[$component->name] ?? null) {
             return $feedback;
         }
 
         return parent::getFeedbackMessageComponent($component);
     }
 
-    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
                 return $this->instanceManager->getInstance(CreateStanceMutationResolverBridge::class);
             case self::COMPONENT_DATALOAD_STANCE_UPDATE:
@@ -80,11 +80,11 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getComponentMutationResolverBridge($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_UPDATE:
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
@@ -96,18 +96,18 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    protected function isCreate(array $component)
+    protected function isCreate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
                 return true;
         }
 
         return parent::isCreate($component);
     }
-    protected function isUpdate(array $component)
+    protected function isUpdate(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_UPDATE:
                 return true;
         }
@@ -115,11 +115,11 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::isUpdate($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $this->addJsmethod($ret, 'deleteBlockFeedbackValueOnUserLoggedInOut');
@@ -130,9 +130,9 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 if (!\PoP\Root\App::getState('is-user-logged-in')) {
@@ -142,10 +142,10 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                     'status' => array(Status::PUBLISHED, Status::DRAFT),
                     'authors' => [\PoP\Root\App::getState('current-user-id')],
                 );
-                if ($component[1] == self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE) {
+                if ($component->name == self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE) {
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsGeneralstances($query);
                 }
-                elseif ($component[1] == self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE) {
+                elseif ($component->name == self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE) {
                     $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $post_id);
                 }
@@ -161,9 +161,9 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
@@ -173,9 +173,9 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_AddPost::class);
@@ -184,11 +184,11 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $ret['executeFetchBlockSuccess']['processblock-ifhasdata'] = true;
@@ -198,10 +198,10 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $name = PoP_UserStance_PostNameUtils::getNameUc();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_STANCE_CREATE:
             case self::COMPONENT_DATALOAD_STANCE_CREATEORUPDATE:
             case self::COMPONENT_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:

@@ -5,20 +5,23 @@ class AAL_PoPProcessors_Module_Processor_ControlGroups extends PoP_Module_Proces
 {
     public final const COMPONENT_AAL_CONTROLGROUP_NOTIFICATIONLIST = 'controlgroup-notificationlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_AAL_CONTROLGROUP_NOTIFICATIONLIST],
+            self::COMPONENT_AAL_CONTROLGROUP_NOTIFICATIONLIST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_AAL_CONTROLGROUP_NOTIFICATIONLIST:
                 $ret[] = [AAL_PoPProcessors_Module_Processor_ControlButtonGroups::class, AAL_PoPProcessors_Module_Processor_ControlButtonGroups::COMPONENT_AAL_CONTROLBUTTONGROUP_NOTIFICATIONS_MARKALLASREAD];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK];

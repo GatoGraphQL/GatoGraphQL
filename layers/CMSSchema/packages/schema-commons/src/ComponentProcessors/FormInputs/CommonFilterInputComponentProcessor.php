@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -205,30 +206,30 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_SORT],
-            [self::class, self::COMPONENT_FILTERINPUT_LIMIT],
-            [self::class, self::COMPONENT_FILTERINPUT_OFFSET],
-            [self::class, self::COMPONENT_FILTERINPUT_SEARCH],
-            [self::class, self::COMPONENT_FILTERINPUT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_ID],
-            [self::class, self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_PARENT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_PARENT_ID],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_SLUGS],
-            [self::class, self::COMPONENT_FILTERINPUT_SLUG],
-            [self::class, self::COMPONENT_FILTERINPUT_DATEFORMAT],
-            [self::class, self::COMPONENT_FILTERINPUT_GMT],
+            self::COMPONENT_FILTERINPUT_SORT,
+            self::COMPONENT_FILTERINPUT_LIMIT,
+            self::COMPONENT_FILTERINPUT_OFFSET,
+            self::COMPONENT_FILTERINPUT_SEARCH,
+            self::COMPONENT_FILTERINPUT_IDS,
+            self::COMPONENT_FILTERINPUT_ID,
+            self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS,
+            self::COMPONENT_FILTERINPUT_PARENT_IDS,
+            self::COMPONENT_FILTERINPUT_PARENT_ID,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS,
+            self::COMPONENT_FILTERINPUT_SLUGS,
+            self::COMPONENT_FILTERINPUT_SLUG,
+            self::COMPONENT_FILTERINPUT_DATEFORMAT,
+            self::COMPONENT_FILTERINPUT_GMT,
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInput(),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->getLimitFilterInput(),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->getOffsetFilterInput(),
@@ -248,9 +249,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_SORT:
                 return OrderFormInput::class;
             case self::COMPONENT_FILTERINPUT_IDS:
@@ -268,10 +269,10 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(Component $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        return match ((string) $component[1]) {
+        return match ((string) $component->name) {
             self::COMPONENT_FILTERINPUT_SORT => 'order',
             self::COMPONENT_FILTERINPUT_LIMIT => 'limit',
             self::COMPONENT_FILTERINPUT_OFFSET => 'offset',
@@ -291,9 +292,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->getIntScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->getIntScalarTypeResolver(),
@@ -313,9 +314,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_IDS,
             self::COMPONENT_FILTERINPUT_EXCLUDE_IDS,
             self::COMPONENT_FILTERINPUT_PARENT_IDS,
@@ -327,9 +328,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->__('Offset the results by how many positions', 'schema-commons'),

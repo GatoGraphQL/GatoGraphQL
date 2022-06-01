@@ -4,14 +4,14 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
 {
     public final const COMPONENT_FILTERINPUTCONTAINER_MYEVENTS = 'filterinputcontainer-myevents';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYEVENTS],
+            self::COMPONENT_FILTERINPUTCONTAINER_MYEVENTS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -30,7 +30,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Events:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -41,12 +41,12 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYEVENTS => POP_FILTER_MYEVENTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

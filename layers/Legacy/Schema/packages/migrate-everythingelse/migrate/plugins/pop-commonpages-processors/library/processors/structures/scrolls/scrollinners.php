@@ -7,19 +7,19 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
     public final const COMPONENT_SCROLLINNER_WHOWEARE_LIST = 'scrollinner-whoweare-list';
     public final const COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW = 'scrollinner-whoweare-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_WHOWEARE_DETAILS,
+            self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_WHOWEARE_LIST,
+            self::COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -42,11 +42,14 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_THUMBNAIL];
                 break;

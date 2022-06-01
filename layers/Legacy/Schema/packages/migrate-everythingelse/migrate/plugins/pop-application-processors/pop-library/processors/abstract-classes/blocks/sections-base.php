@@ -17,7 +17,7 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Processor_BlocksBase implements FormattableModuleInterface
 {
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
     //     if ($inner = $this->getInnerSubcomponent($component)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     //     return parent::getNature($component);
     // }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Add only if the current nature is the one expected by the block
@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return parent::getSubmenuSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Add only if the current nature is the one expected by the block
@@ -68,7 +68,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return parent::getTitle($component, $props);
     }
 
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($route = $this->getRelevantRoute($component, $props)) {
             $cmsService = CMSServiceFacade::getInstance();
@@ -98,7 +98,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return parent::getTitleLink($component, $props);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         if ($inner = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
@@ -111,7 +111,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // If the inner component is a DataloadingModule, then transfer dataloading properties to its contained component
         if ($inner_component = $this->getInnerSubcomponent($component)) {
@@ -175,7 +175,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         parent::initModelProps($component, $props);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -190,17 +190,17 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return $ret;
     }
 
-    protected function getSectionFilterComponent(array $component)
+    protected function getSectionFilterComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
+    public function getDataFeedbackInterreferencedComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
 
         // If the inner component is a DataloadingModule, then calculate the datafeedback of this component

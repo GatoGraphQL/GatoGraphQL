@@ -11,22 +11,22 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
     public final const COMPONENT_SCROLL_LINKS_THUMBNAIL = 'scroll-links-thumbnail';
     public final const COMPONENT_SCROLL_LINKS_LIST = 'scroll-links-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_LINKS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_LINKS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_LINKS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_LINKS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_LINKS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_LINKS_LIST],
-            [self::class, self::COMPONENT_SCROLL_AUTHORLINKS_FULLVIEW],
+            self::COMPONENT_SCROLL_LINKS_NAVIGATOR,
+            self::COMPONENT_SCROLL_LINKS_ADDONS,
+            self::COMPONENT_SCROLL_LINKS_DETAILS,
+            self::COMPONENT_SCROLL_LINKS_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_LINKS_FULLVIEW,
+            self::COMPONENT_SCROLL_LINKS_THUMBNAIL,
+            self::COMPONENT_SCROLL_LINKS_LIST,
+            self::COMPONENT_SCROLL_AUTHORLINKS_FULLVIEW,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_LINKS_NAVIGATOR => [PoP_ContentPostLinks_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinks_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_LINKS_NAVIGATOR],
@@ -39,38 +39,38 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
             self::COMPONENT_SCROLL_AUTHORLINKS_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinks_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORLINKS_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_THUMBNAIL],
+            self::COMPONENT_SCROLL_LINKS_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_LIST],
+            self::COMPONENT_SCROLL_LINKS_LIST,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_DETAILS],
+            self::COMPONENT_SCROLL_LINKS_DETAILS,
         );
         $navigators = array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_NAVIGATOR],
+            self::COMPONENT_SCROLL_LINKS_NAVIGATOR,
         );
         $addons = array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_ADDONS],
+            self::COMPONENT_SCROLL_LINKS_ADDONS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_LINKS_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_LINKS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTHORLINKS_FULLVIEW],
+            self::COMPONENT_SCROLL_LINKS_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTHORLINKS_FULLVIEW,
         );
 
         $extra_class = '';

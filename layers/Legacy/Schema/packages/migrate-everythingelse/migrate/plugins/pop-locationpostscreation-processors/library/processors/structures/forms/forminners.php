@@ -4,24 +4,24 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
 {
     public final const COMPONENT_FORMINNER_LOCATIONPOST = 'forminner-locationpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_LOCATIONPOST],
+            self::COMPONENT_FORMINNER_LOCATIONPOST,
         );
     }
-    protected function volunteering(array $component)
+    protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return true;
         }
 
         return parent::volunteering($component);
     }
-    protected function getLocationsInput(array $component)
+    protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP];
         }
@@ -29,7 +29,10 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -39,7 +42,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return array_merge(
                     $ret,
@@ -50,14 +53,14 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
-    protected function getEditorInitialvalue(array $component)
+    protected function getEditorInitialvalue(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow RIPESS Asia to set an initial value for the Add Project form
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 return \PoP\Root\App::applyFilters('GD_Custom_Module_Processor_CreateUpdatePostFormInners:editor_initialvalue', null, $component);
         }
@@ -65,9 +68,9 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         return parent::getEditorInitialvalue($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOST:
                 // Make it into left/right columns
                 $rightsides = array(
@@ -84,7 +87,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
                     $form_right_class = 'col-sm-4';
                 }
                 $this->appendProp($leftside, $props, 'class', $form_left_class);
-                $this->appendProp($rightsides[$component[1]], $props, 'class', $form_right_class);
+                $this->appendProp($rightsides[$component->name], $props, 'class', $form_right_class);
                 break;
         }
 

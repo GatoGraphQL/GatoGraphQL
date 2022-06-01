@@ -7,17 +7,17 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
     public final const COMPONENT_ANCHORCONTROL_INVITENEWUSERS = 'anchorcontrol-invitenewusers';
     public final const COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS = 'anchorcontrol-share-invitenewusers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS],
+            self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS,
+            self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return TranslationAPIFacade::getInstance()->__('Email', 'pop-coreprocessors');
 
@@ -27,9 +27,9 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return 'fa-envelope';
 
@@ -39,10 +39,10 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return RouteUtils::getRouteURL(POP_USERPLATFORM_ROUTE_INVITENEWUSERS);
@@ -51,9 +51,9 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
         return parent::getHref($component, $props);
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
             case self::COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS:
                 return POP_TARGET_MODALS;
@@ -62,9 +62,9 @@ class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Process
         return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_INVITENEWUSERS:
                 $this->appendProp($component, $props, 'class', 'btn btn-default btn-block btn-invitenewusers');
                 break;

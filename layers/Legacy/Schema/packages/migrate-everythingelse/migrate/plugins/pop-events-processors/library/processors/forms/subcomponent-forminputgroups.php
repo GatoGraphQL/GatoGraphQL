@@ -4,18 +4,18 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
 {
     public final const COMPONENT_FILTERINPUTGROUP_EVENTSCOPE = 'filterinputgroup-eventscope';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE],
+            self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE,
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE:
                 $ret .= ' col-sm-2';
                 break;
@@ -23,11 +23,11 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE:
                 $ret .= ' col-sm-10';
                 break;
@@ -36,9 +36,9 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         return $ret;
     }
 
-    public function getComponentSubname(array $component)
+    public function getComponentSubname(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE:
                 return 'readable';
         }
@@ -46,13 +46,13 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         return parent::getComponentSubname($component);
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FILTERINPUTGROUP_EVENTSCOPE => [PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::COMPONENT_FILTERINPUT_EVENTSCOPE],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

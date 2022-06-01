@@ -10,23 +10,23 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Modul
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGOUT = 'layout-feedbackmessage-logout';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'layout-feedbackmessage-user-changepassword';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWD],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGOUT],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWD,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGOUT,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD,
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Hurray, login successful!', 'pop-coreprocessors');
                 $addnew = '<i class="fa fa-fw fa-plus"></i>'.TranslationAPIFacade::getInstance()->__('Add', 'pop-coreprocessors');

@@ -7,18 +7,18 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
     public final const COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW = 'scroll-myevents-fullviewpreview';
     public final const COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW = 'scroll-mypastevents-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW],
@@ -26,24 +26,24 @@ class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Proce
             self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW],
             self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrollInners::class, PoP_EventsCreation_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
+            self::COMPONENT_SCROLL_MYEVENTS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW,
         );
 
         $extra_class = '';

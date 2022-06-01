@@ -6,7 +6,7 @@ abstract class PoP_Module_Processor_FormDataloadsBase extends PoP_Module_Process
 {
     
     // Comment Leo 12/01/2017: make it runtime instead of static, since it needs to validate if the user is logged in
-    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
     
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_FormDataloadsBase extends PoP_Module_Process
         return $ret;
     }
 
-    protected function validateCaptcha(array $component, array &$props)
+    protected function validateCaptcha(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }

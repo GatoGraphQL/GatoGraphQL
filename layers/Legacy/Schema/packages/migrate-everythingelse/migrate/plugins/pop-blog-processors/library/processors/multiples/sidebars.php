@@ -9,22 +9,22 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
     public final const COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR = 'multiple-authorposts-sidebar';
     public final const COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR = 'multiple-authorcategoryposts-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR],
+            self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR,
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
@@ -39,7 +39,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                     self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR],
                     self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
                 );
-                if ($filter = $filters[$component[1]] ?? null) {
+                if ($filter = $filters[$component->name] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -56,7 +56,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR => POP_SCREEN_AUTHOR,
@@ -65,16 +65,16 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
             self::COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_AUTHOR_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORCONTENT_SIDEBAR:
@@ -86,29 +86,29 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         return parent::getScreengroup($component);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
-                $subComponents = array_diff(
+                $subcomponents = array_diff(
                     $this->getSubcomponents($component),
                     $this->getPermanentSubcomponents($component)
                 );
-                foreach ($subComponents as $subComponent) {
+                foreach ($subcomponents as $subcomponent) {
                       // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $mainblock_taget = '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 
                     // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                    $this->appendProp([$subComponent], $props, 'class', 'collapse');
+                    $this->appendProp([$subcomponent], $props, 'class', 'collapse');
                     $this->mergeProp(
-                        [$subComponent],
+                        [$subcomponent],
                         $props,
                         'params',
                         array(
                             'data-collapse-target' => $mainblock_taget
                         )
                     );
-                    $this->mergeJsmethodsProp([$subComponent], $props, array('waypointsToggleCollapse'));
+                    $this->mergeJsmethodsProp([$subcomponent], $props, array('waypointsToggleCollapse'));
                 }
                 break;
         }

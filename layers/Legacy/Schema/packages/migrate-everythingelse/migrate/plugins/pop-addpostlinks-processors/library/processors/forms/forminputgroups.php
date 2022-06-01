@@ -5,16 +5,16 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
 {
     public final const COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-postlink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK],
+            self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK,
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 return [PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK];
         }
@@ -22,9 +22,9 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 return TranslationAPIFacade::getInstance()->__('The URL from an external webpage, directly referenced by this post.', 'poptheme-wassup');
         }
@@ -32,9 +32,9 @@ class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Proce
         return parent::getInfo($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK:
                 $component = $this->getComponentSubcomponent($component);
                 $this->setProp($component, $props, 'placeholder', 'https://...');

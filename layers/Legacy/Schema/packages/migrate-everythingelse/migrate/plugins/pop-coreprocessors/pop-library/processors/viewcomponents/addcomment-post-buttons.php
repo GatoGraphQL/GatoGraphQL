@@ -6,17 +6,17 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT = 'viewcomponent-postbutton-addcomment';
     public final const COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG = 'viewcomponent-postbutton-addcomment-big';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT],
-            [self::class, self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG],
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT,
+            self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG,
         );
     }
 
-    public function getTargetDynamicallyRenderedSubcomponents(array $component)
+    public function getTargetDynamicallyRenderedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 return array(
@@ -27,9 +27,9 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return parent::getTargetDynamicallyRenderedSubcomponents($component);
     }
 
-    // function headerShowUrl(array $component) {
+    // function headerShowUrl(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
     //         case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
@@ -40,25 +40,25 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
     //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubcomponent(array $component)
+    public function getButtoninnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $buttoninners = array(
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT],
             self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::COMPONENT_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL],
         );
 
-        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component->name] ?? null) {
             return $buttoninner;
         }
 
         return parent::getButtoninnerSubcomponent($component);
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBtnClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 $ret .= 'btn btn-success btn-block btn-important';
                 break;
@@ -71,9 +71,9 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 return TranslationAPIFacade::getInstance()->__('Write a comment', 'pop-coreprocessors');
@@ -82,9 +82,9 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 return 'addCommentURL';
@@ -92,9 +92,9 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
 
         return parent::getUrlField($component);
     }
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 return POP_TARGET_ADDONS;
@@ -103,9 +103,9 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         return parent::getLinktarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
                 $this->appendProp($component, $props, 'class', 'pop-hidden-print');

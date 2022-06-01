@@ -40,7 +40,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 		return $scripts;
 	}
 
-	function generateHelperCalculations($helper_calculations_in_array, array $component, $props_in_array) {
+	function generateHelperCalculations($helper_calculations_in_array, \PoP\ComponentModel\Component\Component $component, $props_in_array) {
 
 		if (RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 

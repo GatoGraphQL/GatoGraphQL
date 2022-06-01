@@ -7,21 +7,24 @@ class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_Conte
     public final const COMPONENT_CONTENTINNER_API = 'contentinner-api';
     public final const COMPONENT_CONTENTINNER_COPYSEARCHURL = 'contentinner-copysearchurl';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_EMBEDPREVIEW],
-            [self::class, self::COMPONENT_CONTENTINNER_EMBED],
-            [self::class, self::COMPONENT_CONTENTINNER_API],
-            [self::class, self::COMPONENT_CONTENTINNER_COPYSEARCHURL],
+            self::COMPONENT_CONTENTINNER_EMBEDPREVIEW,
+            self::COMPONENT_CONTENTINNER_EMBED,
+            self::COMPONENT_CONTENTINNER_API,
+            self::COMPONENT_CONTENTINNER_COPYSEARCHURL,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_EMBEDPREVIEW:
                 $ret[] = [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::COMPONENT_LAYOUT_EMBEDPREVIEW];
                 break;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\ComponentProcessors\FormInputs;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -57,26 +58,26 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return $this->emailOrEmailsFilterInput ??= $this->instanceManager->getInstance(EmailOrEmailsFilterInput::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_NAME],
-            [self::class, self::COMPONENT_FILTERINPUT_EMAILS],
+            self::COMPONENT_FILTERINPUT_NAME,
+            self::COMPONENT_FILTERINPUT_EMAILS,
         );
     }
 
-    public function getFilterInput(array $component): ?FilterInputInterface
+    public function getFilterInput(Component $component): ?FilterInputInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_NAME => $this->getNameFilterInput(),
             self::COMPONENT_FILTERINPUT_EMAILS => $this->getEmailOrEmailsFilterInput(),
             default => null,
         };
     }
 
-    public function getName(array $component): string
+    public function getName(Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_NAME:
             case self::COMPONENT_FILTERINPUT_EMAILS:
             // Add a nice name, so that the URL params when filtering make sense
@@ -84,32 +85,32 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
                     self::COMPONENT_FILTERINPUT_NAME => 'nombre',
                     self::COMPONENT_FILTERINPUT_EMAILS => 'emails',
                 );
-                return $names[$component[1]];
+                return $names[$component->name];
         }
 
         return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_NAME => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_EMAILS => $this->getEmailScalarTypeResolver(),
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_EMAILS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_NAME => $this->__('Search users whose name contains this string', 'pop-users'),
             self::COMPONENT_FILTERINPUT_EMAILS => $this->__('Search users with any of the provided emails', 'pop-users'),
             default => null,

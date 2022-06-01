@@ -12,20 +12,20 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     public final const COMPONENT_BLOCK_SINGLE_CONTENT = 'block-single-content';
     public final const COMPONENT_BLOCK_PAGE_CONTENT = 'block-pageabout-content';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_AUTHOR_CONTENT],
-            [self::class, self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT],
-            [self::class, self::COMPONENT_BLOCK_TAG_CONTENT],
-            [self::class, self::COMPONENT_BLOCK_SINGLE_CONTENT],
-            [self::class, self::COMPONENT_BLOCK_PAGE_CONTENT],
+            self::COMPONENT_BLOCK_AUTHOR_CONTENT,
+            self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT,
+            self::COMPONENT_BLOCK_TAG_CONTENT,
+            self::COMPONENT_BLOCK_SINGLE_CONTENT,
+            self::COMPONENT_BLOCK_PAGE_CONTENT,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             // The Page Content block uses whichever is the current page
             self::COMPONENT_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
             self::COMPONENT_BLOCK_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
@@ -34,10 +34,10 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         };
     }
 
-    protected function getDescriptionBottom(array $component, array &$props)
+    protected function getDescriptionBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
@@ -51,11 +51,11 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return parent::getDescriptionBottom($component, $props);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHOR_CONTENT:
             case self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -70,9 +70,9 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PAGE_CONTENT:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_SHARE];
         }
@@ -80,7 +80,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -91,16 +91,16 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
             self::COMPONENT_BLOCK_SINGLE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_SINGLE_CONTENT],
             self::COMPONENT_BLOCK_PAGE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::COMPONENT_DATALOAD_PAGE_CONTENT],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TAG_CONTENT:
                 $this->appendProp($component, $props, 'class', 'block-tag-content');
                 break;
@@ -121,10 +121,10 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_SINGLE_CONTENT:
                 
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
@@ -137,11 +137,11 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         parent::initRequestProps($component, $props);
     }
 
-    protected function getBlocksectionsClasses(array $component)
+    protected function getBlocksectionsClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBlocksectionsClasses($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PAGE_CONTENT:
                 $ret['blocksection-inners'] = 'row row-item';
                 break;
@@ -150,9 +150,9 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return $ret;
     }
 
-    // function getNature(array $component) {
+    // function getNature(\PoP\ComponentModel\Component\Component $component) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_BLOCK_AUTHOR_CONTENT:
     //         case self::COMPONENT_BLOCK_AUTHOR_SUMMARYCONTENT:

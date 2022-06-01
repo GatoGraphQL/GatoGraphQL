@@ -4,16 +4,16 @@ class PoP_Module_Processor_CommentHiddenInputAlertFormComponents extends PoP_Mod
 {
     public final const COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT = 'formcomponent-hiddeninputalert-layoutcomment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT],
+            self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT,
         );
     }
     
-    public function getHiddenInputComponent(array $component)
+    public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT:
                 return [PoP_Module_Processor_HiddenInputFormInputs::class, PoP_Module_Processor_HiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_LAYOUTCOMMENT];
         }

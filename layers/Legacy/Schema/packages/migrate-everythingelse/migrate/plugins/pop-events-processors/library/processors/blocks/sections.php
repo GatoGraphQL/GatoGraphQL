@@ -48,63 +48,63 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
     public final const COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL = 'block-authorevents-carousel';
     public final const COMPONENT_BLOCK_TAGEVENTS_CAROUSEL = 'block-tagevents-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR],
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_EVENTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_NAVIGATOR,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS,
+            self::COMPONENT_BLOCK_EVENTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_EVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_EVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_EVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_EVENTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR,
 
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR],
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR,
 
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTSCALENDAR_CALENDAR],
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP,
+            self::COMPONENT_BLOCK_TAGEVENTSCALENDAR_CALENDAR,
 
-            [self::class, self::COMPONENT_BLOCK_EVENTS_CAROUSEL],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL],
+            self::COMPONENT_BLOCK_EVENTS_CAROUSEL,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL,
+            self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_DETAILS => POP_EVENTS_ROUTE_EVENTS,
             self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW => POP_EVENTS_ROUTE_EVENTS,
@@ -154,7 +154,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDARMAP => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDARMAP],
@@ -179,8 +179,8 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTSCALENDAR_CALENDAR],
             self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS],
             self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS],
-            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW],
-            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW,
             self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW],
             self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
             self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL],
@@ -190,8 +190,8 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_AUTHOREVENTSCALENDAR_CALENDAR => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR],
             self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_DETAILS],
             self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS],
-            self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW],
-            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],//[self::class, self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW],
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHOREVENTS_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],//self::COMPONENT_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW,
             self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW],
             self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW],
             self::COMPONENT_BLOCK_TAGEVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL],
@@ -204,12 +204,12 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_PASTEVENTS_SCROLL_ADDONS:
             case self::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS:
             case self::COMPONENT_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
@@ -270,9 +270,9 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL:
@@ -282,9 +282,9 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL:

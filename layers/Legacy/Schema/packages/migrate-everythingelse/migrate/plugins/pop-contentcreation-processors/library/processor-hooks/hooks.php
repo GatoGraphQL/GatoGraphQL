@@ -18,26 +18,30 @@ class PoP_GenericFormsProcessors_Hooks
         );
     }
 
-    public function getDropdownSubcomponents($subComponents, array $component)
+    /**
+     * @param \PoP\ComponentModel\Component\Component[] $subcomponents
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getDropdownSubcomponents(array $subcomponents, \PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::COMPONENT_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-                $subComponents[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN];
+                $subcomponents[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN];
                 break;
         }
         
-        return $subComponents;
+        return $subcomponents;
     }
 
-    public function getSocialmediaSubcomponents($subComponents, array $component)
+    public function getSocialmediaSubcomponents($subcomponents, \PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS:
-                $subComponents[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA];
+                $subcomponents[] = [PoP_ContentCreation_Module_Processor_PostViewComponentButtons::class, PoP_ContentCreation_Module_Processor_PostViewComponentButtons::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA];
                 break;
         }
         
-        return $subComponents;
+        return $subcomponents;
     }
 }
 

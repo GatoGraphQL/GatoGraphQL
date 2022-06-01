@@ -4,10 +4,10 @@ class PoP_Module_Processor_StickyPostLayouts extends PoP_Module_Processor_FullVi
 {
     public final const COMPONENT_LAYOUT_FULLVIEW_STICKY = 'layout-fullview-sticky';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLVIEW_STICKY],
+            self::COMPONENT_LAYOUT_FULLVIEW_STICKY,
         );
     }
 }

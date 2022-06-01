@@ -3,12 +3,15 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_WIDGET];
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -25,67 +28,70 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    // function getSidebarcomponentInner(array $component) {
+    // function getSidebarcomponentInner(\PoP\ComponentModel\Component\Component $component) {
 
     //     return null;
     // }
 
 
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'panel panel-default';
     }
-    public function getTitleWrapperClass(array $component, array &$props)
+    public function getTitleWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'panel-heading';
     }
-    public function getTitleClass(array $component, array &$props)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'panel-title';
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // return 'panel-body';
         return 'list-group';
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // return null;
         return 'list-group-item';
     }
-    // function expand(array $component, array &$props) {
+    // function expand(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     return false;
     // }
-    public function showHeader(array $component, array &$props)
+    public function showHeader(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return true;
     }
-    public function getTitleHtmltag(array $component, array &$props)
+    public function getTitleHtmltag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'h4';
     }
-    public function getQuicklinkgroupSubcomponent(array $component)
+    public function getQuicklinkgroupSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function collapsible(array $component, array &$props)
+    public function collapsible(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // By default, return the general att, so it can be set always collapsible inside addons pageSection
@@ -98,7 +104,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
         // Default value
         return false;
     }
-    public function isCollapsibleOpen(array $component, array &$props)
+    public function isCollapsibleOpen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // By default, return the general att, so it can be set always collapsible inside addons pageSection
@@ -111,16 +117,16 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
         // Default value
         return true;
     }
-    public function getCollapselinkTitle(array $component, array &$props)
+    public function getCollapselinkTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '<i class="fa fa-fw fa-eye-slash"></i>';
     }
-    public function getCollapselinkClass(array $component, array &$props)
+    public function getCollapselinkClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'pull-right btn btn-link widget-collapselink';
     }
 
-    // function getJsmethods(array $component, array &$props) {
+    // function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $ret = parent::getJsmethods($component, $props);
 
@@ -131,7 +137,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
     //     return $ret;
     // }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // $sidebarcomponent_inner = $this->getSidebarcomponentInner($component);
@@ -163,7 +169,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
         parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -194,13 +200,13 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataCompo
 
         if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $layouts
             );
         }
         if ($quicklinkgroup = $this->getQuicklinkgroupSubcomponent($component)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup'] = 'sidebarwidget-quicklinkgroup pull-right';
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['quicklinkgroup'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($quicklinkgroup);
         }
 
         return $ret;

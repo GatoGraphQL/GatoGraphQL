@@ -4,14 +4,14 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
 {
     public final const COMPONENT_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS],
+            self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -24,7 +24,7 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Comments:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -35,9 +35,9 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_FILTERINPUTCONTAINER_COMMENTS:
     //             return POP_FILTER_COMMENTS;
     //     }

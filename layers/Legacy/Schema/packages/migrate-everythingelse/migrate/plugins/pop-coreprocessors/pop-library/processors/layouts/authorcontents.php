@@ -5,17 +5,17 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
     public final const COMPONENT_LAYOUTAUTHOR_CONTENT = 'layoutauthor-content';
     public final const COMPONENT_LAYOUTAUTHOR_LIMITEDCONTENT = 'layoutauthor-limitedcontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTAUTHOR_LIMITEDCONTENT],
-            [self::class, self::COMPONENT_LAYOUTAUTHOR_CONTENT],
+            self::COMPONENT_LAYOUTAUTHOR_LIMITEDCONTENT,
+            self::COMPONENT_LAYOUTAUTHOR_CONTENT,
         );
     }
 
-    public function getDescriptionMaxlength(array $component, array &$props)
+    public function getDescriptionMaxlength(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTAUTHOR_LIMITEDCONTENT:
                 return 300;
         }
@@ -23,9 +23,9 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
         return parent::getDescriptionMaxlength($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTAUTHOR_CONTENT:
                 $this->appendProp($component, $props, 'class', 'layoutauthor readable clearfix');
                 break;

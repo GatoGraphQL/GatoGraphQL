@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ObjectModels\Root;
@@ -24,28 +25,28 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_ROOT],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_ROOT,
         );
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
     {
         if (App::getState('does-api-query-have-errors')) {
             return null;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ROOT:
                 return Root::ID;
         }
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ROOT:
                 return $this->getSchemaDefinitionService()->getSchemaRootObjectTypeResolver();
         }

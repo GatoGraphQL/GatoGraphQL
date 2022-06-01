@@ -7,7 +7,10 @@ use PoP\SPA\ComponentFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 {
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         // If fetching a page, then load only the required pageSection modules and nothing else
         $instanceManager = InstanceManagerFacade::getInstance();
@@ -16,7 +19,7 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
         if (\PoP\Root\App::getState('componentFilter') == $page->getName()) {
             $ret = array();
 
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_ENTRY_DEFAULT:
                     $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                     if ($content_pagesection_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION)) {

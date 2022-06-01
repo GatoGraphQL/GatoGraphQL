@@ -3,7 +3,10 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
         if ($layouts = $this->getLayoutSubcomponents($component)) {
@@ -19,12 +22,15 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_USERPOSTINTERACTION];
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
@@ -38,19 +44,19 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return null;
     }
 
-    public function getStyleClass(array $component, array &$props)
+    public function getStyleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function addUseravatar(array $component, array &$props)
+    public function addUseravatar(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If the plugin to create avatar is defined, then enable it
         return PoP_Application_ConfigurationUtils::useUseravatar();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -58,13 +64,13 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
 
         if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $layouts
             );
         }
 
         if ($user_avatar = $this->getLoggedinUseravatarSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($user_avatar);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($user_avatar);
         }
 
         $ret['add-useravatar'] = $this->addUseravatar($component, $props);
@@ -72,7 +78,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -83,7 +89,7 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'frame-addcomment');
 

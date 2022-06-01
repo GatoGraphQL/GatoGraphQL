@@ -4,16 +4,16 @@ class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts extends 
 {
     public final const COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'postbutton-stance-createorupdate-appendtoscript';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT],
+            self::COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
                 return [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::COMPONENT_BUTTONWRAPPER_STANCE_CREATEORUPDATE];
         }
@@ -21,9 +21,9 @@ class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts extends 
         return parent::getLayoutSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
                 $this->appendProp($component, $props, 'class', 'inline');
                 break;

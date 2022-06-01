@@ -12,17 +12,17 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions
     //-------------------------------------------------
 
-    public function getJsmethodsComponentTree(array $component, array &$props): array
+    public function getJsmethodsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getProcessedJsmethods', __FUNCTION__, $component, $props);
     }
 
-    public function getPagesectionJsmethods(array $component, array &$props): array
+    public function getPagesectionJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getModulePagesectionJsmethods', __FUNCTION__, $component, $props);
     }
 
-    public function getImmutableSettings(array $component, array &$props): array
+    public function getImmutableSettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableSettings($component, $props);
 
@@ -48,7 +48,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         );
     }
 
-    public function getProcessedJsmethods(array $component, array &$props): array
+    public function getProcessedJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $jsmethods = $this->getJsmethods($component, $props);
 
@@ -77,7 +77,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         // return $methods;
     }
 
-    public function getModulePagesectionJsmethods(array $component, array &$props): array
+    public function getModulePagesectionJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $methods = array();
 
@@ -105,12 +105,12 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Static JS Settings
     //-------------------------------------------------
 
-    public function getImmutableJssettingsComponentTree(array $component, array &$props): array
+    public function getImmutableJssettingsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getImmutableJssettings', __FUNCTION__, $component, $props);
     }
 
-    public function getImmutableJssettings(array $component, array &$props): array
+    public function getImmutableJssettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -125,7 +125,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         if ($jsconfiguration = $this->getProp($component, $props, 'immutable-jsconfiguration')) {
             return $jsconfiguration;
@@ -134,7 +134,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         return array();
     }
 
-    public function getInitializationjsmethod(array $component, array &$props)
+    public function getInitializationjsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
@@ -143,12 +143,12 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Stateful JS Settings
     //-------------------------------------------------
 
-    public function getMutableonmodelJssettingsComponentTree(array $component, array &$props): array
+    public function getMutableonmodelJssettingsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelJssettings', __FUNCTION__, $component, $props);
     }
 
-    public function getMutableonmodelJssettings(array $component, array &$props): array
+    public function getMutableonmodelJssettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -159,7 +159,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         return $ret;
     }
 
-    public function getMutableonmodelJsconfiguration(array $component, array &$props): array
+    public function getMutableonmodelJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         if ($jsconfiguration = $this->getProp($component, $props, 'mutableonmodel-jsconfiguration')) {
             return $jsconfiguration;
@@ -172,12 +172,12 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Stateful Settings
     //-------------------------------------------------
 
-    public function getMutableonrequestJssettingsComponentTree(array $component, array &$props): array
+    public function getMutableonrequestJssettingsComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestJssettings', __FUNCTION__, $component, $props);
     }
 
-    public function getMutableonrequestJssettings(array $component, array &$props): array
+    public function getMutableonrequestJssettings(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
 
@@ -188,7 +188,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         return $ret;
     }
 
-    public function getMutableonrequestJsconfiguration(array $component, array &$props): array
+    public function getMutableonrequestJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         if ($jsconfiguration = $this->getProp($component, $props, 'mutableonrequest-jsconfiguration')) {
             return $jsconfiguration;
@@ -201,12 +201,12 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
 
-    public function getJsdataFeedbackDatasetcomponentTree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedbackDatasetcomponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         return $this->executeOnSelfAndPropagateToDatasetcomponents('getJsdataFeedbackComponentTree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
 
-    public function getJsdataFeedbackComponentTree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedbackComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = array();
 
@@ -217,12 +217,12 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         return $ret;
     }
 
-    public function getJsdataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         return array();
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -231,7 +231,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
             return $ret;
         }
 
-        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
         // The Intercept URLs are runtime instead of static, since they contains information
         // given through the URL, which cannot not cached in the static file
@@ -252,13 +252,13 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         );
     }
 
-    public function addWebPlatformModuleConfiguration(&$ret, array $component, array &$props)
+    public function addWebPlatformModuleConfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Do nothing. Override
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -311,12 +311,12 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // Intercept URLs
     //-------------------------------------------------
 
-    public function getIntercepturlsMergedComponentTree(array $component, array &$props)
+    public function getIntercepturlsMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return $this->executeOnSelfAndMergeWithComponents('getInterceptURLs', __FUNCTION__, $component, $props, false);
     }
 
-    public function getInterceptURLs(array $component, array &$props)
+    public function getInterceptURLs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($component_intercept_urls = $this->getComponentInterceptURLs($component, $props)) {
             return array_unique(array_values($component_intercept_urls));
@@ -324,32 +324,32 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         return array();
     }
-    public function getComponentInterceptURLs(array $component, array &$props)
+    public function getComponentInterceptURLs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    public function getComponentExtraInterceptURLs(array $component, array &$props)
+    public function getComponentExtraInterceptURLs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    public function getInterceptSettings(array $component, array &$props)
+    public function getInterceptSettings(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
-    public function getInterceptType(array $component, array &$props)
+    public function getInterceptType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'fullurl';
     }
-    public function getInterceptTarget(array $component, array &$props)
+    public function getInterceptTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getInterceptSkipstateupdate(array $component, array &$props)
+    public function getInterceptSkipstateupdate(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    // protected function setModuleWebPlatformProps(array $component, array &$props) {
+    // protected function setModuleWebPlatformProps(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	if ($this->getProp($component, $props, 'lazy-load')) {
 
@@ -357,7 +357,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // 	}
     // }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         // // Add the properties below either as static or mutableonrequest
         // if (in_array($this->getDatasource($component, $props), array(
@@ -369,7 +369,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         // }
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Validate that the platform level includes this one
         if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
@@ -380,7 +380,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         parent::initModelProps($component, $props);
     }
 
-    public function initWebPlatformRequestProps(array $component, array &$props)
+    public function initWebPlatformRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // // Add the properties below either as static or mutableonrequest
@@ -390,7 +390,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         // }
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Validate that the platform level includes this one
         if (in_array(POP_STRATUM_WEB, \PoP\Root\App::getState('strata'))) {
@@ -405,7 +405,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // PROTECTED Functions
     //-------------------------------------------------
 
-    protected function getPagesectionJsmethod(array $component, array &$props)
+    protected function getPagesectionJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = array();
         $priorities = array(
@@ -420,7 +420,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         return $ret;
     }
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = array();
         $priorities = array(
@@ -439,7 +439,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         return $ret;
     }
-    protected function getComponentFilteredPagesectionJsmethods(array $component, array &$props)
+    protected function getComponentFilteredPagesectionJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $jsmethod = $this->getPagesectionJsmethod($component, $props);
         $jsmethod = \PoP\Root\App::applyFilters(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, $jsmethod, $component);
@@ -451,25 +451,25 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     {
         PoPWebPlatform_ModuleManager_Utils::addJsmethod($ret, $method, $group, $unshift, $priority);
     }
-    public function mergePagesectionJsmethodProp(array $component, array &$props, $methods, $group = GD_JSMETHOD_GROUP_MAIN, $priority = null)
+    public function mergePagesectionJsmethodProp(\PoP\ComponentModel\Component\Component $component, array &$props, $methods, $group = GD_JSMETHOD_GROUP_MAIN, $priority = null)
     {
         $priority = $priority ?? POP_PROGRESSIVEBOOTING_NONCRITICAL;
         $this->mergeTargetJsmethodProp($component, $props, 'pagesection-jsmethod-'.$priority, $methods, $group);
     }
-    public function mergeJsmethodsProp(array $component, array &$props, $methods, $group = GD_JSMETHOD_GROUP_MAIN, $priority = null)
+    public function mergeJsmethodsProp(\PoP\ComponentModel\Component\Component $component, array &$props, $methods, $group = GD_JSMETHOD_GROUP_MAIN, $priority = null)
     {
         $priority = $priority ?? POP_PROGRESSIVEBOOTING_NONCRITICAL;
         $this->mergeTargetJsmethodProp($component, $props, 'jsmethods-'.$priority, $methods, $group);
     }
-    public function mergeImmutableJsconfigurationProp(array $component, array &$props, $jsconfiguration)
+    public function mergeImmutableJsconfigurationProp(\PoP\ComponentModel\Component\Component $component, array &$props, $jsconfiguration)
     {
         $this->mergeIterateKeyProp($component, $props, 'immutable-jsconfiguration', $jsconfiguration);
     }
-    public function mergeMutableonmodelJsconfigurationProp(array $component, array &$props, $jsconfiguration)
+    public function mergeMutableonmodelJsconfigurationProp(\PoP\ComponentModel\Component\Component $component, array &$props, $jsconfiguration)
     {
         $this->mergeIterateKeyProp($component, $props, 'mutableonmodel-jsconfiguration', $jsconfiguration);
     }
-    public function mergeMutableonrequestJsconfigurationProp(array $component, array &$props, $jsconfiguration)
+    public function mergeMutableonrequestJsconfigurationProp(\PoP\ComponentModel\Component\Component $component, array &$props, $jsconfiguration)
     {
         $this->mergeIterateKeyProp($component, $props, 'mutableonrequest-jsconfiguration', $jsconfiguration);
     }
@@ -478,7 +478,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
     // PRIVATE Functions
     //-------------------------------------------------
 
-    private function mergeTargetJsmethodProp(array $component, array &$props, $target_key, $methods, $group)
+    private function mergeTargetJsmethodProp(\PoP\ComponentModel\Component\Component $component, array &$props, $target_key, $methods, $group)
     {
         $group = $group ? $group : GD_JSMETHOD_GROUP_MAIN;
         // $this->merge_group_iterate_key_att(POP_PROPS_JSMETHODS, $component, $props, $target_key, array(

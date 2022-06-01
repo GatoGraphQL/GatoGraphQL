@@ -6,16 +6,16 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS = 'simplefilterinputcontainer-authorhighlights';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS = 'simplefilterinputcontainer-myhighlights';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -42,7 +42,7 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Highlights:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -53,14 +53,14 @@ class PoP_AddHighlights_Module_Processor_CustomSimpleFilterInners extends PoP_Mo
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_HIGHLIGHTS => POP_FILTER_HIGHLIGHTS,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORHIGHLIGHTS => POP_FILTER_AUTHORHIGHLIGHTS,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYHIGHLIGHTS => POP_FILTER_MYHIGHLIGHTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

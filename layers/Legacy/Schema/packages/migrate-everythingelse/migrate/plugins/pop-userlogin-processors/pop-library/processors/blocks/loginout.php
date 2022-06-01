@@ -10,19 +10,19 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
     public final const COMPONENT_BLOCK_LOSTPWDRESET = 'block-lostpwdreset';
     public final const COMPONENT_BLOCK_LOGOUT = 'block-logout';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_LOGIN],
-            [self::class, self::COMPONENT_BLOCK_LOSTPWD],
-            [self::class, self::COMPONENT_BLOCK_LOSTPWDRESET],
-            [self::class, self::COMPONENT_BLOCK_LOGOUT],
+            self::COMPONENT_BLOCK_LOGIN,
+            self::COMPONENT_BLOCK_LOSTPWD,
+            self::COMPONENT_BLOCK_LOSTPWDRESET,
+            self::COMPONENT_BLOCK_LOGOUT,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_LOGOUT => POP_USERLOGIN_ROUTE_LOGOUT,
             self::COMPONENT_BLOCK_LOSTPWD => POP_USERLOGIN_ROUTE_LOSTPWD,
             self::COMPONENT_BLOCK_LOSTPWDRESET => POP_USERLOGIN_ROUTE_LOSTPWDRESET,
@@ -31,9 +31,9 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         };
     }
 
-    public function getSubmenuSubcomponent(array $component)
+    public function getSubmenuSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOGIN:
             case self::COMPONENT_BLOCK_LOSTPWD:
             case self::COMPONENT_BLOCK_LOSTPWDRESET:
@@ -43,9 +43,9 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         return parent::getSubmenuSubcomponent($component);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOGIN:
             case self::COMPONENT_BLOCK_LOSTPWD:
             case self::COMPONENT_BLOCK_LOSTPWDRESET:
@@ -55,7 +55,7 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -66,21 +66,21 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
             self::COMPONENT_BLOCK_LOGOUT => [PoP_UserLogin_Module_Processor_Dataloads::class, PoP_UserLogin_Module_Processor_Dataloads::COMPONENT_DATALOAD_LOGOUT],
         );
 
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
-        if ($component == [self::class, self::COMPONENT_BLOCK_LOGIN]) {
+        if ($component == self::COMPONENT_BLOCK_LOGIN) {
             $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME];
         }
 
         return $ret;
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOGOUT:
                 // Notice that it works for the domain from wherever this block is being fetched from!
                 return sprintf(
@@ -93,9 +93,9 @@ class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksB
         return parent::getDescription($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOGIN:
                 $this->appendProp([[PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::COMPONENT_USERACCOUNT_USERLOGGEDINWELCOME]], $props, 'class', 'well');
                 break;

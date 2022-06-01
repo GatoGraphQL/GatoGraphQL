@@ -12,17 +12,17 @@ interface ComponentRoutingProcessorInterface
     public function getGroups(): array;
 
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array;
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array;
 
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array;
 }

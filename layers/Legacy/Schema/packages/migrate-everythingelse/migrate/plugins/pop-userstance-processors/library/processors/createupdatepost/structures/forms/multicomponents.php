@@ -5,19 +5,22 @@ class UserStance_Module_Processor_FormMultipleComponents extends PoP_Module_Proc
     public final const COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE = 'multicomponent-form-stance-maybeleftside';
     public final const COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE = 'multicomponent-form-stance-mayberightside';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE],
+            self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE,
+            self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE:
                 $ret[] = [UserStance_Module_Processor_FormComponentGroupsGroups::class, UserStance_Module_Processor_FormComponentGroupsGroups::COMPONENT_FORMCOMPONENTGROUP_CARD_STANCETARGET];
                 $ret[] = [UserStance_Module_Processor_CreateUpdatePostFormInputGroups::class, UserStance_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_STANCEEDITOR];

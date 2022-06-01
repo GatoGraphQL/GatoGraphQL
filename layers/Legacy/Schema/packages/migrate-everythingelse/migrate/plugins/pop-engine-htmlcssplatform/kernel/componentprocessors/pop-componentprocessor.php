@@ -7,7 +7,7 @@ use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends AbstractQueryDataComponentProcessor
 {
-    public function fixedId(array $component, array &$props): bool
+    public function fixedId(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
 
         // fixedId if false, it will add a counter at the end of the newly generated ID using {{#generateId}}
@@ -24,14 +24,14 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         return false;
     }
 
-    public function isFrontendIdUnique(array $component, array &$props): bool
+    public function isFrontendIdUnique(\PoP\ComponentModel\Component\Component $component, array &$props): bool
     {
 
         // If defined by $props, use it first. Otherwise, it's false
         return $this->getProp($component, $props, 'unique-frontend-id') ?? false;
     }
 
-    public function getFrontendId(array $component, array &$props)
+    public function getFrontendId(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow a parent component to set this value
@@ -52,9 +52,9 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         return $id;
     }
 
-    public function getID(array $component, array &$props): string
+    public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+        $componentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
         // if ($this->fixedId($component, $props)) {
         // 	$pagesection_settings_id = $props['pagesection-componentoutputname'];
         // 	$block_settings_id = $props['block-componentoutputname'];
@@ -64,7 +64,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         return $componentOutputName;
     }
 
-    public function getDbobjectParams(array $component): array
+    public function getDbobjectParams(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
@@ -74,7 +74,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getLeafComponentFields($component, $props);
 
@@ -88,12 +88,12 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         return $ret;
     }
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return null;
     }
 
-    public function getExtraTemplateResources(array $component, array &$props): array
+    public function getExtraTemplateResources(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
 
         // Load additional template sources to render the view
@@ -106,18 +106,18 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         return $ret;
     }
 
-    // function getComponentCB(array $component, array &$props) {
+    // function getComponentCB(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	// Allow to be set from upper modules. Eg: from the embed Modal to the embedPreview layout,
     // 	// so it knows it must refresh it value when it opens
     // 	return $this->getProp($component, $props, 'component-cb');
     // }
-    // function getComponentCBActions(array $component, array &$props) {
+    // function getComponentCBActions(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	return null;
     // }
 
-    // function getComponentPath(array $component, array &$props) {
+    // function getComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	// Allow to be set from upper modules. Eg: Datum Dynamic Layout can set it to its triggered component,
     // 	// which will need to be rendered dynamically on the htmlcssplatform on runtime
@@ -129,12 +129,12 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	return $this->getComponentCB($component, $props);
     // }
 
-    public function getTemplateResourcesMergedComponentTree(array $component, array &$props): array
+    public function getTemplateResourcesMergedComponentTree(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return $this->executeOnSelfAndMergeWithComponents('getTemplateResources', __FUNCTION__, $component, $props, false);
     }
 
-    public function getTemplateResources(array $component, array &$props): array
+    public function getTemplateResources(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
 
         // We must send always the template, even if it's similar to the component,
@@ -152,7 +152,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         );
     }
 
-    // function getModulesCbs(array $component, array &$props) {
+    // function getModulesCbs(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -171,12 +171,12 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 		// The cb applies to what actions
     // 		if ($module_cb_actions = $this->getComponentCBActions($component, $props)) {
 
-    // 			$ret['actions'][$component[1]] = $module_cb_actions;
+    // 			$ret['actions'][$component->name] = $module_cb_actions;
     // 		}
     // 	}
-    // 	foreach ($this->getSubcomponentsByGroup($component) as $subComponent) {
+    // 	foreach ($this->getSubcomponentsByGroup($component) as $subcomponent) {
 
-    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesCbs($subComponent, $props)) {
+    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subcomponent)->getModulesCbs($subcomponent, $props)) {
 
     // 			$ret['cbs'] = array_merge(
     // 				$ret['cbs'],
@@ -192,11 +192,11 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	return $ret;
     // }
 
-    // function getModulesPaths(array $component, array &$props) {
+    // function getModulesPaths(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-    // 	$componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+    // 	$componentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array();
@@ -205,14 +205,14 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // 	if ($component_path = $this->getComponentPath($component, $props)) {
 
     // 		// Key: component / Value: path to arrive to this component
-    // 		$ret[$component[1]] = array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $componentOutputName);
+    // 		$ret[$component->name] = array(ComponentModelModuleInfo::get('response-prop-subcomponents'), $componentOutputName);
     // 	}
 
     // 	// Add the path from this component to its components
-    // 	$subComponents = $this->getSubcomponentsByGroup($component);
-    // 	foreach ($subComponents as $subComponent) {
+    // 	$subcomponents = $this->getSubcomponentsByGroup($component);
+    // 	foreach ($subcomponents as $subcomponent) {
 
-    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subComponent)->getModulesPaths($subComponent, $props)) {
+    // 		if ($subcomponent_ret = $componentprocessor_manager->getProcessor($subcomponent)->getModulesPaths($subcomponent, $props)) {
 
     // 			// Add the extra path to the component
     // 			foreach ($subcomponent_ret as $subcomponent_component => $subcomponent_component_path) {
@@ -229,7 +229,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
     // }
 
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -259,13 +259,13 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         );
     }
 
-    public function addHTMLCSSPlatformModuleConfiguration(&$ret, array $component, array &$props)
+    public function addHTMLCSSPlatformModuleConfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Do nothing. Override
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -312,7 +312,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         if ($previousmodules_ids = $this->getProp($component, $props, 'previouscomponents-ids')) {
             // We receive entries of key => component, convert them to key => componentOutputName
             $ret[GD_JS_PREVIOUSCOMPONENTSIDS] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $previousmodules_ids
             );
         }
@@ -342,12 +342,12 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         );
     }
 
-    protected function addComponentNameAsClass(array $component, array &$props)
+    protected function addComponentNameAsClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function initHTMLCSSPlatformModelProps(array $component, array &$props)
+    public function initHTMLCSSPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($this->addComponentNameAsClass($component, $props)) {
             $this->appendProp($component, $props, 'class', DefinitionManagerFacade::getInstance()->getOriginalName($component));
@@ -363,7 +363,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         // }
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
@@ -378,7 +378,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         parent::initModelProps($component, $props);
     }
 
-    public function initHTMLCSSPlatformRequestProps(array $component, array &$props)
+    public function initHTMLCSSPlatformRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // // Add the properties below either as static or mutableonrequest
@@ -388,7 +388,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends Abstra
         // }
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {

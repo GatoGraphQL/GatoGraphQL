@@ -5,18 +5,18 @@ class PoP_Core_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Proces
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS = 'layout-feedbackmessage-inviteusers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS,
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_INVITENEWUSERS:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Invite successful!', 'pop-coreprocessors');
                 break;

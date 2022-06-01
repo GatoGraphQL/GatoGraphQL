@@ -6,17 +6,17 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
     public final const COMPONENT_FORMINPUT_COPYSEARCHURL = 'copysearchurl';
     public final const COMPONENT_FORMINPUT_API = 'api';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_COPYSEARCHURL],
-            [self::class, self::COMPONENT_FORMINPUT_API],
+            self::COMPONENT_FORMINPUT_COPYSEARCHURL,
+            self::COMPONENT_FORMINPUT_API,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COPYSEARCHURL:
                 return TranslationAPIFacade::getInstance()->__('Copy Search URL', 'pop-coreprocessors');
 
@@ -27,11 +27,11 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
         return parent::getLabelText($component, $props);
     }
 
-    public function getPagesectionJsmethod(array $component, array &$props)
+    public function getPagesectionJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getPagesectionJsmethod($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COPYSEARCHURL:
             case self::COMPONENT_FORMINPUT_API:
                 // Because the method depends on modal.on('shown.bs.modal'), we need to run it before the modal is open for the first time
@@ -43,11 +43,11 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_API:
                 // Needed for JS method `replaceCode`
                 $ret['replaceCode']['url-type'] = 'api';
@@ -57,9 +57,9 @@ class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_Text
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COPYSEARCHURL:
             case self::COMPONENT_FORMINPUT_API:
                 $this->mergeProp(

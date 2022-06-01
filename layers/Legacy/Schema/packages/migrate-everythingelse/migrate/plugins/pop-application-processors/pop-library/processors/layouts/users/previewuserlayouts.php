@@ -11,23 +11,23 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR = 'layout-previewuser-postauthor';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_HEADER = 'layout-previewuser-header';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_HEADER],
+            self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_HEADER,
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 // case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
@@ -41,9 +41,9 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 return 'h3';
         }
@@ -51,9 +51,9 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 // case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
@@ -67,11 +67,11 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowavatarLayoutSubcomponents(array $component)
+    public function getBelowavatarLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowavatarLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
@@ -82,11 +82,11 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getBelowexcerptLayoutSubcomponents(array $component)
+    public function getBelowexcerptLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
                 if (defined('POP_LOCATIONSPROCESSORS_INITIALIZED')) {
@@ -98,10 +98,10 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getUseravatarSubcomponent(array $component)
+    public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR:
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
@@ -123,9 +123,9 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::getUseravatarSubcomponent($component);
     }
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 return true;
         }
@@ -133,9 +133,9 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::showExcerpt($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
                 return true;
         }
@@ -143,9 +143,9 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_POPOVER:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
@@ -158,11 +158,11 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR:
                 // case self::COMPONENT_LAYOUT_PREVIEWUSER_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
@@ -171,7 +171,7 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
                 $ret[GD_JS_CLASSES]['quicklinkgroup-bottom'] = 'icon-only pull-right';
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL:
                 $ret[GD_JS_CLASSES]['belowavatar'] = 'bg-info text-info belowavatar';
@@ -181,9 +181,9 @@ class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_HEADER:
                 $this->appendProp($component, $props, 'class', 'alert alert-info alert-sm');
                 break;

@@ -4,16 +4,16 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
 {
     public final const COMPONENT_FORMCOMPONENT_CARD_STANCETARGET = 'formcomponent-card-stancetarget';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET],
+            self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET,
         );
     }
 
-    public function getTriggerSubcomponent(array $component): ?array
+    public function getTriggerSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET:
                 return [PoP_UserStance_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_UserStance_Module_Processor_PostHiddenInputAlertFormComponents::COMPONENT_FORMCOMPONENT_HIDDENINPUTALERT_STANCETARGET];
         }
@@ -21,9 +21,9 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
         return parent::getTriggerSubcomponent($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET:
                 return 'stancetarget';
         }
