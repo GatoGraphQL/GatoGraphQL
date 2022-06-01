@@ -9,9 +9,9 @@ use PoP\Definitions\DefinitionManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 class ComponentHelpers implements ComponentHelpersInterface
-{    
+{
     use BasicServiceTrait;
-    
+
     public final const SEPARATOR_PROCESSORCOMPONENTFULLNAME = "::";
 
     private ?DefinitionManagerInterface $definitionManager = null;
