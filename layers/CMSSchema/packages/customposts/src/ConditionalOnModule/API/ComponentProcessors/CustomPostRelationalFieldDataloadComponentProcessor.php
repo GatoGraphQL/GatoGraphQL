@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\ConditionalOnModule\API\ComponentProcessors;
 
-use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoPCMSSchema\CustomPosts\ComponentProcessors\CustomPostFilterInputContainerComponentProcessor;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
@@ -102,45 +103,45 @@ class CustomPostRelationalFieldDataloadComponentProcessor extends AbstractRelati
     {
         switch ($component[1]) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTLIST:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_UNIONCUSTOMPOSTCOUNT:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTLIST:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTLIST
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINUNIONCUSTOMPOSTCOUNT:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINUNIONCUSTOMPOSTCOUNT
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTLIST
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTCOUNT:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_CUSTOMPOSTLISTCOUNT
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTLIST:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST
-                ];
+                );
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINCUSTOMPOSTCOUNT:
-                return [
+                new Component(
                     CustomPostFilterInputContainerComponentProcessor::class,
                     CustomPostFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT
-                ];
+                );
         }
 
         return parent::getFilterSubcomponent($component);
