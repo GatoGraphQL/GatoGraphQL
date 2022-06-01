@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Checkpoints;
+namespace PoPCMSSchema\UserState\Checkpoints;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Checkpoints\AbstractCheckpoint;
-use PoP\Engine\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
+use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 
-class RequestCheckpoint extends AbstractCheckpoint
+class UserLoggedInCheckpoint extends AbstractCheckpoint
 {
-    public final const DOING_POST = 'doing-post';
-
     private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
 
     final public function setCheckpointErrorFeedbackItemProvider(CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider): void
@@ -24,24 +22,13 @@ class RequestCheckpoint extends AbstractCheckpoint
         return $this->checkpointErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(CheckpointErrorFeedbackItemProvider::class);
     }
 
-    public function getCheckpointsToProcess(): array
-    {
-        return array(
-            [self::class, self::DOING_POST],
-        );
-    }
-
     public function validateCheckpoint(): ?FeedbackItemResolution
     {
-        switch ($checkpoint[1]) {
-            case self::DOING_POST:
-                if ('POST' !== App::server('REQUEST_METHOD')) {
-                    return new FeedbackItemResolution(
-                        CheckpointErrorFeedbackItemProvider::class,
-                        CheckpointErrorFeedbackItemProvider::E1
-                    );
-                }
-                break;
+        if (!App::getState('is-user-logged-in')) {
+            return new FeedbackItemResolution(
+                CheckpointErrorFeedbackItemProvider::class,
+                CheckpointErrorFeedbackItemProvider::E1
+            );
         }
 
         return parent::validateCheckpoint();
