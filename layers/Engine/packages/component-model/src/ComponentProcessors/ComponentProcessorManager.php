@@ -23,20 +23,11 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
     {
         $componentProcessorClass = $component[0];
         $componentName = $component[1];
-
-        if (!$this->hasItemBeenLoaded($component)) {
-            // Get the instance from the InstanceManager
+        if (!isset($this->processors[$componentProcessorClass][$componentName])) {
             $processorInstance = $this->getInstanceManager()->getInstance($componentProcessorClass);
             $this->processors[$componentProcessorClass][$componentName] = $processorInstance;
         }
 
         return $this->processors[$componentProcessorClass][$componentName];
-    }
-
-    protected function hasItemBeenLoaded(Component $component): bool
-    {
-        $componentProcessorClass = $component[0];
-        $componentName = $component[1];
-        return isset($this->processors[$componentProcessorClass][$componentName]);
     }
 }
