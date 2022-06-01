@@ -102,7 +102,7 @@ class ComponentPaths extends AbstractComponentFilter
         // $component_unsettled_path: Start only from the specified component. It is passed under URL param "componentPaths", and it's the list of component paths
         // starting from the entry, and joined by ".", like this: componentPaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
         // This way, the component can interact with itself to fetch or post data, etc
-        $matching_subComponents = array();
+        $matching_subcomponents = array();
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
             // Validate that the current component is at the head of the path
             // This validation will work for the entry component only, since the array_intersect below will guarantee that only the path components are returned
@@ -113,19 +113,19 @@ class ComponentPaths extends AbstractComponentFilter
                     return $subcomponents;
                 }
             } else {
-                // Then, check that the following element in the unsettled_path, which is the subComponent, is on the subComponents
+                // Then, check that the following element in the unsettled_path, which is the subComponent, is on the subcomponents
                 $unsettled_path_subComponent = $unsettled_path[1];
-                if ($unsettled_path_component == $component && in_array($unsettled_path_subComponent, $subcomponents) && !in_array($unsettled_path_subComponent, $matching_subComponents)) {
-                    $matching_subComponents[] = $unsettled_path_subComponent;
+                if ($unsettled_path_component == $component && in_array($unsettled_path_subComponent, $subcomponents) && !in_array($unsettled_path_subComponent, $matching_subcomponents)) {
+                    $matching_subcomponents[] = $unsettled_path_subComponent;
                 }
             }
         }
 
-        return $matching_subComponents;
+        return $matching_subcomponents;
     }
 
     /**
-     * The `prepare` function advances the componentPath one level down, when interating into the subComponents, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
     public function prepareForPropagation(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
