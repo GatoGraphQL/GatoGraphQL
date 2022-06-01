@@ -28,7 +28,7 @@ class ComponentHelpers implements ComponentHelpersInterface
     {
         $componentFullName = $component->processorClass . self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . $component->name;
         if ($component->atts !== []) {
-            $componentFullName .= self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . serialize($component[2]);
+            $componentFullName .= self::SEPARATOR_PROCESSORCOMPONENTFULLNAME . serialize($component->atts);
         }
 
         return $componentFullName;
