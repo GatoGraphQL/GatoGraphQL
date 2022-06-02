@@ -887,14 +887,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 )
             )
         ) {
-            /**
-             * @todo Temporarily calling ->asQueryString, must work with AST directly!
-             */
-            $data_fields = [];
-            foreach ($astComponentFields as $astComponentField) {
-                $data_fields[] = $astComponentField->asFieldOutputQueryString();
-            }
-            $ret['data-fields'] = $data_fields;
+            $ret['data-fields'] = $astComponentFields;
         }
 
         // Propagate down to the components
