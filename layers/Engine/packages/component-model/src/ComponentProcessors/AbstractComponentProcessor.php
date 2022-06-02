@@ -1258,7 +1258,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                 // Move from "data-fields" to "conditional-data-fields"
                                 if ($subcomponent_ret['data-fields'] ?? null) {
                                     foreach ($subcomponent_ret['data-fields'] as $subcomponent_data_field) {
-                                        $ret['conditional-data-fields'][$conditionDataField][$subcomponent_data_field] = [];
+                                        /** @var ComponentFieldInterface $subcomponent_data_field */
+                                        $ret['conditional-data-fields'][$conditionDataField][$subcomponent_data_field->asFieldOutputQueryString()] = [];
                                     }
                                     unset($subcomponent_ret['data-fields']);
                                 }
