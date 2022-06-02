@@ -20,6 +20,10 @@ class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->menuTypeAPI ??= $this->instanceManager->getInstance(MenuTypeAPIInterface::class);
     }
 
+    /**
+     * @param array<string | int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         // If the menu doesn't exist, remove the `null` entry

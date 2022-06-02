@@ -10,6 +10,10 @@ use function get_role;
 
 class UserRoleTypeDataLoader extends AbstractObjectTypeDataLoader
 {
+    /**
+     * @param array<string | int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         return array_map(get_role(...), $ids);

@@ -20,6 +20,10 @@ class UserAvatarTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->userAvatarRuntimeRegistry ??= $this->instanceManager->getInstance(UserAvatarRuntimeRegistryInterface::class);
     }
 
+    /**
+     * @param array<string | int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         return array_map(

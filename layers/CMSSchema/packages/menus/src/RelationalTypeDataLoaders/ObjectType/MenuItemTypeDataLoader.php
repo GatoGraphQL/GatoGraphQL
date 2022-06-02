@@ -20,6 +20,10 @@ class MenuItemTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->menuItemRuntimeRegistry ??= $this->instanceManager->getInstance(MenuItemRuntimeRegistryInterface::class);
     }
 
+    /**
+     * @param array<string | int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         // Retrieve each item from the dynamic registry

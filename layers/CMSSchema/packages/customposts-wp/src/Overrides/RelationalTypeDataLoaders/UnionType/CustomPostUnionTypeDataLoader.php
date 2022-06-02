@@ -53,6 +53,10 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         return $this->getCustomPostTypeDataLoader()->executeQuery($query);
     }
 
+    /**
+     * @param array<string | int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         $customPosts = $this->getUpstreamObjects($ids);

@@ -88,6 +88,10 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         return array();
     }
 
+    /**
+     * @param array<string | int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         $query = $this->getQueryToRetrieveObjectsForIDs($ids);
