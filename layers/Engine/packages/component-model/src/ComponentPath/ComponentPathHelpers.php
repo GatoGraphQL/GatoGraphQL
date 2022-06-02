@@ -45,6 +45,9 @@ class ComponentPathHelpers implements ComponentPathHelpersInterface
         return $this->stringifyComponentPath($module_propagation_current_path);
     }
 
+    /**
+     * @param Component[] $componentPath
+     */
     public function stringifyComponentPath(array $componentPath): string
     {
         return implode(
