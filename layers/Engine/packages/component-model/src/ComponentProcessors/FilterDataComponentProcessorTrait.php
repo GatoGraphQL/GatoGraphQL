@@ -20,7 +20,7 @@ trait FilterDataComponentProcessorTrait
         if ($activeDataloadQueryArgsFilteringComponents = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
             foreach ($activeDataloadQueryArgsFilteringComponents as $subcomponent) {
                 /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subcomponent);
+                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($subcomponent);
                 $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subcomponent, $source);
                 if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subcomponent)) {
                     $filterInput->filterDataloadQueryArgs($query, $value);
@@ -49,7 +49,7 @@ trait FilterDataComponentProcessorTrait
                 $dataloadQueryArgsFilteringComponents,
                 function (Component $component) use ($source) {
                     /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                    $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);
+                    $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($component);
                     return $dataloadQueryArgsFilterInputComponentProcessor->isInputSetInSource($component, $source);
                 }
             );
@@ -66,7 +66,7 @@ trait FilterDataComponentProcessorTrait
     {
         return array_values(array_filter(
             $this->getDatasetcomponentTreeSectionFlattenedComponents($component),
-            fn (Component $component) => $this->getComponentProcessorManager()->getProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface
+            fn (Component $component) => $this->getComponentProcessorManager()->getComponentProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface
         ));
     }
 }

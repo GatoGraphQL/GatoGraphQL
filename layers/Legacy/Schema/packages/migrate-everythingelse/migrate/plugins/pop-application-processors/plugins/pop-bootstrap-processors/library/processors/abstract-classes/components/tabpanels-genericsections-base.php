@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
 
         $ret = array();
         foreach ($this->getSubcomponents($component) as $subcomponent) {
-            $processor = $componentprocessor_manager->getProcessor($subcomponent);
+            $processor = $componentprocessor_manager->getComponentProcessor($subcomponent);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($subcomponent);
                 if ($thumb = $format_thumbs[$format] ?? null) {
@@ -55,7 +55,7 @@ abstract class PoP_Module_Processor_GenericSectionTabPanelComponentsBase extends
 
         $ret = array();
         foreach ($this->getSubcomponents($component) as $subcomponent) {
-            $processor = $componentprocessor_manager->getProcessor($subcomponent);
+            $processor = $componentprocessor_manager->getComponentProcessor($subcomponent);
             if ($processor instanceof FormattableModuleInterface) {
                 $format = $processor->getFormat($subcomponent);
                 if ($title = $format_titles[$format] ?? null) {

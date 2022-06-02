@@ -55,7 +55,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                return $componentprocessor_manager->getProcessor($input)->getName($input);
+                return $componentprocessor_manager->getComponentProcessor($input)->getName($input);
         }
         
         return parent::getName($component);
@@ -68,7 +68,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                return $componentprocessor_manager->getProcessor($input)->isMultiple($input);
+                return $componentprocessor_manager->getComponentProcessor($input)->isMultiple($input);
         }
         
         return parent::isMultiple($component);

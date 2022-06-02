@@ -14,7 +14,7 @@ class FilterInputHelper
     {
         $componentProcessorManager = ComponentProcessorManagerFacade::getInstance();
         /** @var FilterInputComponentProcessorInterface */
-        $filterInputComponentProcessor = $componentProcessorManager->getProcessor($filterInputComponent);
+        $filterInputComponentProcessor = $componentProcessorManager->getComponentProcessor($filterInputComponent);
         return $filterInputComponentProcessor->getName($filterInputComponent);
     }
 }

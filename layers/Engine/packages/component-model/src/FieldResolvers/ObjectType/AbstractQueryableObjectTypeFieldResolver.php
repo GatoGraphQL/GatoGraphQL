@@ -80,7 +80,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         // If there is a filter, and it has many filterInputs, then by default we'd rather not enable ordering
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             /** @var FilterInputContainerComponentProcessorInterface */
-            $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($filterDataloadingModule);
+            $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingModule);
             if (count($filterDataComponentProcessor->getFilterInputComponents($filterDataloadingModule)) > 1) {
                 return false;
             }
@@ -110,7 +110,7 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
         $filteringQueryArgs = [];
         if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
             /** @var FilterDataComponentProcessorInterface */
-            $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($filterDataloadingModule);
+            $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingModule);
             $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingModule, $filteringQueryArgs, $fieldArgs);
         }
         // InputObjects can also provide filtering query values

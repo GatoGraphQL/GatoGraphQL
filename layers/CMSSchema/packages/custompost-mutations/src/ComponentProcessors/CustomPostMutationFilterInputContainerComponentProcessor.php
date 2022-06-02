@@ -37,7 +37,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
             default => null,
         };
         /** @var FilterInputContainerComponentProcessorInterface */
-        $targetComponentProcessor = $this->getComponentProcessorManager()->getProcessor($targetComponent);
+        $targetComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($targetComponent);
         $targetFilterInputComponents = $targetComponentProcessor->getFilterInputComponents($targetComponent);
         return array_merge(
             $targetFilterInputComponents,

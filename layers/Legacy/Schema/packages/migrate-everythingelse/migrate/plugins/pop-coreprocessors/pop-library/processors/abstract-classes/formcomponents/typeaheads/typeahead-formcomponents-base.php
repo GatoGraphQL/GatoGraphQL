@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         if ($props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]) {
             $subcomponent_props = &$props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS];
         }
-        return $componentprocessor_manager->getProcessor($input)->getLabel($input, $subcomponent_props);
+        return $componentprocessor_manager->getComponentProcessor($input)->getLabel($input, $subcomponent_props);
     }
 
     public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void

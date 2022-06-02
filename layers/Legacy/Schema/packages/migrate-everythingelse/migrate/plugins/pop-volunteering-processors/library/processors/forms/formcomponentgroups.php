@@ -31,7 +31,7 @@ class PoP_Volunteering_Module_Processor_FormComponentGroups extends PoP_Module_P
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_VOLUNTEER:
                 $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
+                $trigger = $componentprocessor_manager->getComponentProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('Volunteer for:', 'pop-application-processors')

@@ -31,7 +31,7 @@ class PoP_SocialNetwork_Module_Processor_FormComponentGroups extends PoP_Module_
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_CONTACTUSER:
                 $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
+                $trigger = $componentprocessor_manager->getComponentProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('Send message to:', 'pop-application-processors')

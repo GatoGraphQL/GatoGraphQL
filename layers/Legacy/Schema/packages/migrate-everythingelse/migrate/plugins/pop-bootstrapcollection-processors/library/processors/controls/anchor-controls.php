@@ -63,7 +63,7 @@ class GD_Core_Bootstrap_Module_Processor_AnchorControls extends PoP_Module_Proce
                         self::COMPONENT_ANCHORCONTROL_COPYSEARCHURL => [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::COMPONENT_MODAL_COPYSEARCHURL],
                     );
                     $modal = $modals[$component->name];
-                    return '#'.$componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
+                    return '#'.$componentprocessor_manager->getComponentProcessor($modal)->getFrontendId($modal, $props).'_modal';
             }
         }
 

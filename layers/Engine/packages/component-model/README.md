@@ -843,14 +843,14 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
 Once the ComponentProcessor class is instantiated, all of its defined components become available to be added to the component hirarchy.
 
-To access the properties of a component, we must reference its corresponding ComponentProcessor through function `getProcessor` from class `ComponentProcessor_Manager`:
+To access the properties of a component, we must reference its corresponding ComponentProcessor through function `getComponentProcessor` from class `ComponentProcessor_Manager`:
 
 ```php
 // Retrive the PoP_ComponentProcessor_Manager object from the factory
 $componentprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
 
 // Obtain the ComponentProcessor for component COMPONENT_SOMENAME
-$processor = $componentprocessor_manager->getProcessor(new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_SOMENAME));
+$processor = $componentprocessor_manager->getComponentProcessor(new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_SOMENAME));
 
 // Do something...
 // $processor->...

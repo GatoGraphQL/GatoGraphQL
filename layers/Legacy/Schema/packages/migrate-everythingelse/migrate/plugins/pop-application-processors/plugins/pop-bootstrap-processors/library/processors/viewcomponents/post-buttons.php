@@ -93,7 +93,7 @@ class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extend
                     );
 
                     $modal = $modals[$component->name];
-                    $modal_id = $componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props);
+                    $modal_id = $componentprocessor_manager->getComponentProcessor($modal)->getFrontendId($modal, $props);
                     return '#'.PoP_Bootstrap_Utils::getFrontendId($modal_id, 'modal');
             }
         }

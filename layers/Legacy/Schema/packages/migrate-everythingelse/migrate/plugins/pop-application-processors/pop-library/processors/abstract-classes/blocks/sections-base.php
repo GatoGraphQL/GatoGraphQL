@@ -21,7 +21,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     // {
     //     if ($inner = $this->getInnerSubcomponent($component)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-    //         $processor = $componentprocessor_manager->getProcessor($inner);
+    //         $processor = $componentprocessor_manager->getComponentProcessor($inner);
     //         return $processor->getNature($inner);
     //     }
 
@@ -102,7 +102,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
         if ($inner = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            $processor = $componentprocessor_manager->getProcessor($inner);
+            $processor = $componentprocessor_manager->getComponentProcessor($inner);
             if ($processor instanceof FormattableModuleInterface) {
                 return $processor->getFormat($inner);
             }
@@ -116,7 +116,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         // If the inner component is a DataloadingModule, then transfer dataloading properties to its contained component
         if ($inner_component = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            if ($componentprocessor_manager->getProcessor($inner_component) instanceof DataloadingModuleInterface) {
+            if ($componentprocessor_manager->getComponentProcessor($inner_component) instanceof DataloadingModuleInterface) {
 
                 $skip_data_load = $this->getProp($component, $props, 'skip-data-load');
                 if (!is_null($skip_data_load)) {
@@ -207,7 +207,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         // based on the results from the inner dataloading component. Then, can calculate "do-not-render-if-no-results"
         if ($inner = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            $processor = $componentprocessor_manager->getProcessor($inner);
+            $processor = $componentprocessor_manager->getComponentProcessor($inner);
             if ($processor instanceof DataloadingModuleInterface) {
                 $component_path_manager = ComponentPathManagerFacade::getInstance();
                 $component_propagation_current_path = $component_path_manager->getPropagationCurrentPath();

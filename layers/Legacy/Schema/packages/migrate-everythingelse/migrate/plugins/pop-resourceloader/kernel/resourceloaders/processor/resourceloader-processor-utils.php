@@ -709,7 +709,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
         $methods = array();
-        $entry_processor = $componentprocessor_manager->getProcessor($entryComponent);
+        $entry_processor = $componentprocessor_manager->getComponentProcessor($entryComponent);
         $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($entry_processor);
 
         // Get the Handlebars list of resources needed for that pageSection
@@ -742,7 +742,7 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function getJsmethodsFromComponent($addInitial, $entryComponent, $entry_model_props) {
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($entryComponent);
+        $processor = $componentprocessor_manager->getComponentProcessor($entryComponent);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
         $blockJSMethods = $processor->getJsmethodsComponentTree($entryComponent, $entry_model_props);
         return self::getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial);

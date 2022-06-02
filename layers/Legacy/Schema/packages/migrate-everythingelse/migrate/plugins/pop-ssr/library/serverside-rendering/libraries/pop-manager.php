@@ -269,7 +269,7 @@ class PoP_ServerSideManager
         // $psId = pageSection.attr('id');
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $props = array();
-        $psId = $componentprocessor_manager->getProcessor($componentName)->getID($componentName, $props);
+        $psId = $componentprocessor_manager->getComponentProcessor($componentName)->getID($componentName, $props);
 
         // Insert into the Runtime to generate the ID
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();

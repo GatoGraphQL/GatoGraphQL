@@ -43,7 +43,7 @@ class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Pr
                         self::COMPONENT_ANCHORCONTROL_SHAREBYEMAIL => [PoP_Module_Processor_GFModalComponents::class, PoP_Module_Processor_GFModalComponents::COMPONENT_MODAL_SHAREBYEMAIL],
                     );
                     $modal = $modals[$component->name];
-                    return '#'.$componentprocessor_manager->getProcessor($modal)->getFrontendId($modal, $props).'_modal';
+                    return '#'.$componentprocessor_manager->getComponentProcessor($modal)->getFrontendId($modal, $props).'_modal';
             }
         }
 

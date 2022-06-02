@@ -24,7 +24,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();
             $component = $engine->getEntryComponent();
-            $processor = $componentprocessor_manager->getProcessor($component);
+            $processor = $componentprocessor_manager->getComponentProcessor($component);
             $formatter = $dataStructureManager->getDataStructureFormatter();
             $request = $_GET;
 

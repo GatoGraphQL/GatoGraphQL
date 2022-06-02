@@ -67,7 +67,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
                 foreach ($inputs as $input) {
                     $this->mergeJsmethodsProp($input, $props, array('fillURLParamInput'));
 
-                    $input_name = $componentprocessor_manager->getProcessor($input)->getName($input);
+                    $input_name = $componentprocessor_manager->getComponentProcessor($input)->getName($input);
                     $this->mergeProp(
                         $input,
                         $props,

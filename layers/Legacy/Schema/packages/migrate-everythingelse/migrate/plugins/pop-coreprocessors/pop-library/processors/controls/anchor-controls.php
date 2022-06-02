@@ -122,7 +122,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                     // Comment Leo 26/03/2019: This must be re-implemented through Handlebars function `upcomingModuleId`
                     // // The Filter is set in the props
                     // if ($filter = $this->getProp($component, $props, 'filter-component')) {
-                    //     $filter_id = $componentprocessor_manager->getProcessor($filter)->getFrontendId($filter, $props);
+                    //     $filter_id = $componentprocessor_manager->getComponentProcessor($filter)->getFrontendId($filter, $props);
                     //     return '#'.$filter_id;
                     // }
                     return '#'; // This must be replaced! Not working now!

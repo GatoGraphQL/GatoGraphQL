@@ -13,7 +13,7 @@ trait FormatActiveTrait
     protected function getSubcomponentFormat(\PoP\ComponentModel\Component\Component $component, $subcomponent)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($subcomponent);
+        $processor = $componentprocessor_manager->getComponentProcessor($subcomponent);
         if ($processor instanceof FormattableModuleInterface) {
             return $processor->getFormat($subcomponent);
         }

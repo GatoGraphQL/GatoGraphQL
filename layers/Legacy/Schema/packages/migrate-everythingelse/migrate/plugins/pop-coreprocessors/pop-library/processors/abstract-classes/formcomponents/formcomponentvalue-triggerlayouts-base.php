@@ -220,7 +220,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             // The Typeahead set the data-settings under 'typeahead-trigger'
             $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
             $trigger_component = $this->getTriggerSubcomponent($component);
-            $trigger_data_properties = $componentprocessor_manager->getProcessor($trigger_component)->getDatasetcomponentTreeSectionFlattenedDataFields($trigger_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
+            $trigger_data_properties = $componentprocessor_manager->getComponentProcessor($trigger_component)->getDatasetcomponentTreeSectionFlattenedDataFields($trigger_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
 
             // Extend the dataload ids
             return array(

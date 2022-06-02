@@ -63,12 +63,12 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
     // {
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubcomponent($component);
-    //     return $componentprocessor_manager->getProcessor($filterinner)->getFilterObject($filterinner);
+    //     return $componentprocessor_manager->getComponentProcessor($filterinner)->getFilterObject($filterinner);
     // }
     // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubcomponent($component);
-    //     return $componentprocessor_manager->getProcessor($filterinner)->getFilter($filterinner);
+    //     return $componentprocessor_manager->getComponentProcessor($filterinner)->getFilter($filterinner);
     // }
 }

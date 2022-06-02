@@ -21,7 +21,7 @@ class Lazy extends AbstractComponentFilter
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
         /** @var ComponentProcessorInterface */
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         return !$processor->isLazyload($component, $props);
     }
 }

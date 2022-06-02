@@ -76,7 +76,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
                     // it doesn't even show any param being filtered (month or year not chosen in filter)
                     // Comment Leo 15/04/2015: do not show the filter even if filtering for EMBED and PRINT
                     if (\PoP\Root\App::applyFilters(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER, true)) {
-                        // if ($filter = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component)) {
+                        // if ($filter = $componentprocessor_manager->getComponentProcessor($filter_component)->getFilter($filter_component)) {
                         $filterVisible = $this->getProp($component, $props, 'filter-visible');
                         // if ($filterVisible || \PoP\Engine\FilterUtils::filteringBy($filter)) {
                         if ($filterVisible || $this->getActiveDataloadQueryArgsFilteringComponents($component)) {

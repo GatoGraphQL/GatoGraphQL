@@ -21,7 +21,7 @@ trait ComponentPathProcessorTrait
 
     protected function getComponentProcessor(Component $component)
     {
-        return $this->getComponentProcessorManager()->getProcessor($component);
+        return $this->getComponentProcessorManager()->getComponentProcessor($component);
     }
 
     protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)

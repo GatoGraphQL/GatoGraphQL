@@ -33,7 +33,7 @@ class UserStance_Module_Processor_FormComponentGroupsGroups extends PoP_Module_P
 
                 $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
+                $trigger = $componentprocessor_manager->getComponentProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('After reading...', 'pop-userstance-processors')

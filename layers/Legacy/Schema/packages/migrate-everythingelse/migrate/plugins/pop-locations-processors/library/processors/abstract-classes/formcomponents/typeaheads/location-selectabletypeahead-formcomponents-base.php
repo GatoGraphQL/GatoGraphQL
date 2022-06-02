@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBas
 
         // Set the typeahead id on all the controls from the input module
         $input = $this->getInputSubcomponent($component);
-        $controls = $componentprocessor_manager->getProcessor($input)->getControlSubcomponents($input);
+        $controls = $componentprocessor_manager->getComponentProcessor($input)->getControlSubcomponents($input);
         foreach ($controls as $control) {
             $this->mergeProp(
                 $control,

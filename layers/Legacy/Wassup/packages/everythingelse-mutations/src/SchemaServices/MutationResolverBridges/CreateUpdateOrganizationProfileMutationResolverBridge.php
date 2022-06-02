@@ -73,13 +73,13 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
-        $organizationtypes = $this->getComponentProcessorManager()->getProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
-        $organizationcategories = $this->getComponentProcessorManager()->getProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
+        $organizationtypes = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
+        $organizationcategories = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
         return array(
             'organizationtypes' => $organizationtypes ?? array(),
             'organizationcategories' => $organizationcategories ?? array(),
-            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
-            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
+            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
+            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
         );
     }
 }

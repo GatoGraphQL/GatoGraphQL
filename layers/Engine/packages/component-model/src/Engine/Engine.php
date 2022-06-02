@@ -466,7 +466,7 @@ class Engine implements EngineInterface
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
         // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
@@ -492,7 +492,7 @@ class Engine implements EngineInterface
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
     public function addRequestPropsComponentTree(Component $component, array $props): array
     {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
         $processor->initRequestPropsComponentTree($component, $props, [], []);
@@ -642,7 +642,7 @@ class Engine implements EngineInterface
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -899,7 +899,7 @@ class Engine implements EngineInterface
         Component $component,
         array &$props
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
@@ -956,7 +956,7 @@ class Engine implements EngineInterface
         Component $component,
         array &$props
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
@@ -1050,7 +1050,7 @@ class Engine implements EngineInterface
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $root_processor = $this->getComponentProcessorManager()->getProcessor($root_component);
+        $root_processor = $this->getComponentProcessorManager()->getComponentProcessor($root_component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -1191,7 +1191,7 @@ class Engine implements EngineInterface
                 $component_props = &$props;
             }
 
-            $processor = $this->getComponentProcessorManager()->getProcessor($component);
+            $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
 
             // The component path key is used for storing temporary results for later retrieval
             $component_path_key = $this->getComponentPathKey($component_path, $component);
@@ -2453,7 +2453,7 @@ class Engine implements EngineInterface
         $executed,
         $objectIDs
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $engineState = App::getEngineState();
 
         // Integrate the feedback into $componentdata

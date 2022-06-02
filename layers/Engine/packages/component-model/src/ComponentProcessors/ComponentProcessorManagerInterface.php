@@ -14,5 +14,5 @@ interface ComponentProcessorManagerInterface
      *
      * @throws ShouldNotHappenException
      */
-    public function getProcessor(Component $component): ComponentProcessorInterface;
+    public function getComponentProcessor(Component $component): ComponentProcessorInterface;
 }

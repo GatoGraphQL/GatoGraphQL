@@ -77,7 +77,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
                     self::COMPONENT_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => [PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs::COMPONENT_FILTERINPUT_POSTSECTIONS],
                 );
                 $input = $inputs[$component->name];
-                return $componentprocessor_manager->getProcessor($input)->getName($input);
+                return $componentprocessor_manager->getComponentProcessor($input)->getName($input);
         }
 
         return parent::getName($component);

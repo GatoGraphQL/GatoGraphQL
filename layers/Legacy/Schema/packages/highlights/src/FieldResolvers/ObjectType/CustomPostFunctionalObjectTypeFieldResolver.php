@@ -91,7 +91,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
 
                 // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 // $input = [PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST];
-                // $input_name = $componentprocessor_manager->getProcessor($input)->getName($input);
+                // $input_name = $componentprocessor_manager->getComponentProcessor($input)->getName($input);
                 $input_name = POP_INPUTNAME_HIGHLIGHTEDPOST;
                 return GeneralUtils::addQueryArgs([
                     $input_name => $objectTypeResolver->getID($post),

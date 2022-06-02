@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $component = $this->getComponentSubcomponent($component);
-        $component_processor = $componentprocessor_manager->getProcessor($component);
+        $component_processor = $componentprocessor_manager->getComponentProcessor($component);
         $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
         // Re-use the label from the component

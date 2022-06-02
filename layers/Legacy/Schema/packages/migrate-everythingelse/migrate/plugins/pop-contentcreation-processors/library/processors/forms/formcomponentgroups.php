@@ -31,7 +31,7 @@ class PoP_ContentCreation_Module_Processor_FormComponentGroups extends PoP_Modul
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_FLAG:
                 $component = $this->getComponentSubcomponent($component);
 
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
+                $trigger = $componentprocessor_manager->getComponentProcessor($component)->getTriggerSubcomponent($component);
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
                     TranslationAPIFacade::getInstance()->__('Flag as inappropriate:', 'pop-application-processors')

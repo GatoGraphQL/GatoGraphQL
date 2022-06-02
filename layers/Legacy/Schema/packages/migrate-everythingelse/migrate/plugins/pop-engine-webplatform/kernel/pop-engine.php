@@ -48,7 +48,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($component);
+        $processor = $componentprocessor_manager->getComponentProcessor($component);
 
         $cachemanager = null;
         if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
@@ -131,7 +131,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
         // Only add the extra information if the entry-component is of the right object class
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $root_processor = $componentprocessor_manager->getProcessor($root_component);
+        $root_processor = $componentprocessor_manager->getComponentProcessor($root_component);
 
         // Only add the extra information if the entry-component is of the right object class
         if ($root_processor instanceof PoP_WebPlatformQueryDataComponentProcessorBase) {
@@ -188,7 +188,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($component);
+        $processor = $componentprocessor_manager->getComponentProcessor($component);
 
         $datasource = $data_properties[DataloadingConstants::DATASOURCE];
 
@@ -348,7 +348,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	$json_settings = parent::getJsonModuleImmutableSettings($component, $props);
 
     // 	// Otherwise, get the dynamic configuration
-    // 	$processor = $componentprocessor_manager->getProcessor($component);
+    // 	$processor = $componentprocessor_manager->getComponentProcessor($component);
 
     // 	$json_settings['components-cbs'] = $processor->getModulesCbs($component, $props);
     // 	$json_settings['components-paths'] = $processor->getModulesPaths($component, $props);
@@ -375,7 +375,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	$json_runtimesettings = parent::getJsonModuleMutableonrequestSettings($component, $props);
 
     // 	// Otherwise, get the dynamic configuration
-    // 	$processor = $componentprocessor_manager->getProcessor($component);
+    // 	$processor = $componentprocessor_manager->getComponentProcessor($component);
 
     // 	$json_runtimesettings['js-settings'] = $processor->get_js_runtimesettings($component, $props);
 

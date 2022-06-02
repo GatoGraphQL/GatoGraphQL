@@ -41,7 +41,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                 );
 
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                $trigger = $componentprocessor_manager->getProcessor($component)->getTriggerSubcomponent($component);
+                $trigger = $componentprocessor_manager->getComponentProcessor($component)->getTriggerSubcomponent($component);
 
                 $descriptions = array(
                     self::COMPONENT_FORMCOMPONENTGROUP_CARD_COMMENTPOST => TranslationAPIFacade::getInstance()->__('Add a comment for:', 'pop-application-processors'),

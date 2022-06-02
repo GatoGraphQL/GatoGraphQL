@@ -67,9 +67,9 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
-        $individualinterests = $this->getComponentProcessorManager()->getProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
+        $individualinterests = $this->getComponentProcessorManager()->getComponentProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
         return array(
-            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
+            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
             'individualinterests' => $individualinterests ?? array(),
         );
     }

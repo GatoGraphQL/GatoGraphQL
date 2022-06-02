@@ -72,7 +72,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $inner = $this->getInnerSubcomponent($component);
-        $ret['calendar']['layouts'] = $componentprocessor_manager->getProcessor($inner)->getLayoutSubcomponents($inner);
+        $ret['calendar']['layouts'] = $componentprocessor_manager->getComponentProcessor($inner)->getLayoutSubcomponents($inner);
 
         if ($options = $this->getOptions($component, $props)) {
             $ret['calendar']['options'] = $options;
@@ -89,7 +89,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
             $inner = $this->getInnerSubcomponent($component);
-            $layouts = $componentprocessor_manager->getProcessor($inner)->getLayoutSubcomponents($inner);
+            $layouts = $componentprocessor_manager->getComponentProcessor($inner)->getLayoutSubcomponents($inner);
             foreach ($layouts as $layout) {
                 $this->setProp($layout, $props, 'needs-dynamic-data', true);
             }

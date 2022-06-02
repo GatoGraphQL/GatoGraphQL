@@ -173,7 +173,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         // Comment Leo 19/11/2018: Check this out: initially, this gets the title from the block, but since migrating blocks to dataloads, the processor may not have `getTitle` anymore and the code below explodes
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // return $componentprocessor_manager->getProcessor($subcomponent)->getTitle($subcomponent, $props);
+        // return $componentprocessor_manager->getComponentProcessor($subcomponent)->getTitle($subcomponent, $props);
         return array();
     }
     public function getPanelheaderClass(\PoP\ComponentModel\Component\Component $component)

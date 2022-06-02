@@ -20,7 +20,7 @@ class Page extends AbstractComponentFilter
      */
     public function excludeSubcomponent(Component $component, array &$props): bool
     {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         return !($processor instanceof PageComponentProcessorInterface);
     }
 }

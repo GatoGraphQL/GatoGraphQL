@@ -22,7 +22,7 @@ class ComponentProcessorManager implements ComponentProcessorManagerInterface
      *
      * @throws ShouldNotHappenException
      */
-    public function getProcessor(Component $component): ComponentProcessorInterface
+    public function getComponentProcessor(Component $component): ComponentProcessorInterface
     {
         if (!isset($this->componentProcessors[$component->processorClass][$component->name])) {
             /** @var ComponentProcessorInterface */

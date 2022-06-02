@@ -34,7 +34,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             $component = $componentValue['component'];
             $value = $componentValue['value'];
             /** @var FilterInputComponentProcessorInterface */
-            $componentProcessor = $this->getComponentProcessorManager()->getProcessor($component);
+            $componentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($component);
             $args[$componentProcessor->getName($component)] = $value;
         }
         return GeneralUtils::addQueryArgs($args, $url);

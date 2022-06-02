@@ -28,7 +28,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $form_data['newsletter'] = $componentprocessor_manager->getProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]);
+        $form_data['newsletter'] = $componentprocessor_manager->getComponentProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]);
         return $form_data;
     }
 

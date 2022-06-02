@@ -65,7 +65,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         // If it needs dynamic data then that's it, simply return the data properties
         if ($this->needsDynamicData($component, $props)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            return $componentprocessor_manager->getProcessor($component)->getDatasetcomponentTreeSectionFlattenedDataFields($component, $props);
+            return $componentprocessor_manager->getComponentProcessor($component)->getDatasetcomponentTreeSectionFlattenedDataFields($component, $props);
         }
 
         // Otherwise, propagate to the modules and subcomponents
@@ -111,7 +111,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //     if ($this->needsDynamicData($component, $props)) {
 
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-    //         return $componentprocessor_manager->getProcessor($component)->get_mutableonrequest_data_properties_datasetcomponentTree_section($component, $props);
+    //         return $componentprocessor_manager->getComponentProcessor($component)->get_mutableonrequest_data_properties_datasetcomponentTree_section($component, $props);
     //     }
 
     //     // Otherwise, propagate to the modules and subcomponents
@@ -138,11 +138,11 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $modulefilter_manager->prepareForPropagation($component, $props);
         if ($subcomponents = $processor->getComponentsToPropagateDataProperties($component)) {
             foreach ($subcomponents as $subcomponent) {
-                $subcomponent_processor = $componentprocessor_manager->getProcessor($subcomponent);
+                $subcomponent_processor = $componentprocessor_manager->getComponentProcessor($subcomponent);
 
                 // Propagate only if the subcomponent start a new dataloading section. If it does, this is the end of the data line
                 if (!$subcomponent_processor->startDataloadingSection($subcomponent, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
-                    if ($subcomponent_ret = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent))->$propagate_fn($subcomponent, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
+                    if ($subcomponent_ret = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getComponentProcessor($subcomponent))->$propagate_fn($subcomponent, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -178,7 +178,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 'subcomponents' => array()
             );
             foreach ($relationalComponentField->getNestedComponents() as $subcomponent_component) {
-                if ($subcomponent_component_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subcomponent_component))->$propagate_fn($subcomponent_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
+                if ($subcomponent_component_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getComponentProcessor($subcomponent_component))->$propagate_fn($subcomponent_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
                     $subcomponent_components_data_properties = array_merge_recursive(
                         $subcomponent_components_data_properties,
                         $subcomponent_component_data_properties
