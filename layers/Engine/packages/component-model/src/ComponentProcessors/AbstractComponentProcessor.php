@@ -878,7 +878,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
          */
         if (
             /** @var ComponentFieldInterface[] */
-            $astComponentFields = array_unique(
+            $componentFields = array_unique(
                 array_merge(
                     $this->getLeafComponentFields($component, $props),
                     $this->getRelationalComponentFields($component),
@@ -887,7 +887,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 )
             )
         ) {
-            $ret['data-fields'] = $astComponentFields;
+            $ret['data-fields'] = $componentFields;
         }
 
         // Propagate down to the components
