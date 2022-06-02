@@ -66,6 +66,7 @@
             "@symlink-vendor",
             "lando rebuild appserver -y"
         ],
+        "stop-server": "lando stop",
         "symlink-vendor": [
             "php -r \"copy('composer.json', 'composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php webservers/wassup/composer.local.json",
