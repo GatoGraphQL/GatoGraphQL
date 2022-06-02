@@ -14,7 +14,7 @@ abstract class AbstractUnionTypeDataLoader extends AbstractRelationalTypeDataLoa
     /**
      * Iterate through all unionTypes and delegate to each resolving the IDs each of them can resolve
      *
-     * @param array<string | int> $ids
+     * @param array<string|int> $ids
      * @return array<object|null>
      */
     public function getObjects(array $ids): array

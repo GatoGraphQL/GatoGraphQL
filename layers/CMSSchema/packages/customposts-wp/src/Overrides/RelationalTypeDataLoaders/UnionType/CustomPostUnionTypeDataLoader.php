@@ -54,7 +54,7 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     }
 
     /**
-     * @param array<string | int> $ids
+     * @param array<string|int> $ids
      * @return array<object|null>
      */
     public function getObjects(array $ids): array
