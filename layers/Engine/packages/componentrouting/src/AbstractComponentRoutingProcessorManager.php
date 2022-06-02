@@ -26,7 +26,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
     /**
      * @return ComponentRoutingProcessorInterface[]
      */
-    public function getProcessors(string $group = null): array
+    public function getComponentRoutingProcessors(string $group = null): array
     {
         $group ??= $this->getDefaultGroup();
         return $this->processors[$group] ?? array();
@@ -44,7 +44,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         $route = App::getState('route');
         $appState = App::getAppStateManager()->all();
 
-        $processors = $this->getProcessors($group);
+        $processors = $this->getComponentRoutingProcessors($group);
         /** @var Component|false */
         $most_matching_component = false;
         $most_matching_properties_count = -1; // Start with -1, since 0 matches is possible
