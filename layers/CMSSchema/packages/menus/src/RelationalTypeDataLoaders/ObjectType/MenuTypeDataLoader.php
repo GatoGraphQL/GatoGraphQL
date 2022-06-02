@@ -24,7 +24,7 @@ class MenuTypeDataLoader extends AbstractObjectTypeDataLoader
     {
         // If the menu doesn't exist, remove the `null` entry
         return array_values(array_filter(array_map(
-            fn (string | int $id) => $this->getMenuTypeAPI()->getMenu($id),
+            $this->getMenuTypeAPI()->getMenu(...),
             $ids
         )));
     }

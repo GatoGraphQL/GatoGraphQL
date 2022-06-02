@@ -176,7 +176,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         );
 
         return array_map(
-            fn (LeafField $leafField) => LeafComponentField::fromLeafField($leafField),
+            LeafComponentField::fromLeafField(...),
             $leafFields
         );
     }
@@ -349,7 +349,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         foreach ($fragmentModelListNameFields as $fragmentModelListName => $fragmentModelListFields) {
             $fragmentModels = $fragmentModelListNameItems[$fragmentModelListName];
             $fragmentModelListFieldIDs = array_map(
-                fn (FieldInterface $field) => $this->getFieldUniqueID($field),
+                $this->getFieldUniqueID(...),
                 $fragmentModelListFields,
             );
             $fragmentModelListNestedComponent = new Component(

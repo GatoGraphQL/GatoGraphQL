@@ -37,7 +37,7 @@ class ComponentPathsHookSet extends AbstractHookSet
             if ($componentPaths = App::getState('componentPaths')) {
                 $componentPathHelpers = ComponentPathHelpersFacade::getInstance();
                 $paths = array_map(
-                    fn ($componentPath) => $componentPathHelpers->stringifyComponentPath($componentPath),
+                    $componentPathHelpers->stringifyComponentPath(...),
                     $componentPaths
                 );
                 $elements[] = $this->getTranslationAPI()->__('component paths:', 'engine') . implode(',', $paths);

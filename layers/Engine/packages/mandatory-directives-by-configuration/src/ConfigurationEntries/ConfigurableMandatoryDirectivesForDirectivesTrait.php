@@ -45,7 +45,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
     final protected function getDirectiveResolvers(): array
     {
         return array_map(
-            fn (string $directiveResolverClass) => $this->getInstanceManager()->getInstance($directiveResolverClass),
+            $this->getInstanceManager()->getInstance(...),
             $this->getDirectiveResolverClasses()
         );
     }
@@ -70,7 +70,7 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
         if ($value) {
             return array_values(array_filter(
                 $entryList,
-                fn (array $entry) => ($entry[1] ?? null) == $value
+                fn (array $entry) => ($entry[1] ?? null) === $value
             ));
         }
         return $entryList;
