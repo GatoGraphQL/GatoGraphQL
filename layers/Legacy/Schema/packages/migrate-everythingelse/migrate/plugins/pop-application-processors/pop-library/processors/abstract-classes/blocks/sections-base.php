@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\ComponentPath\ComponentPathManagerFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\ComponentProcessors\DataloadingModuleInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingComponentInterface;
 use PoP\ComponentModel\ComponentProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
@@ -113,10 +113,10 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 
     public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        // If the inner component is a DataloadingModule, then transfer dataloading properties to its contained component
+        // If the inner component is a DataloadingComponent, then transfer dataloading properties to its contained component
         if ($inner_component = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            if ($componentprocessor_manager->getComponentProcessor($inner_component) instanceof DataloadingModuleInterface) {
+            if ($componentprocessor_manager->getComponentProcessor($inner_component) instanceof DataloadingComponentInterface) {
 
                 $skip_data_load = $this->getProp($component, $props, 'skip-data-load');
                 if (!is_null($skip_data_load)) {
@@ -203,12 +203,12 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     public function getDataFeedbackInterreferencedComponentPath(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
 
-        // If the inner component is a DataloadingModule, then calculate the datafeedback of this component
+        // If the inner component is a DataloadingComponent, then calculate the datafeedback of this component
         // based on the results from the inner dataloading component. Then, can calculate "do-not-render-if-no-results"
         if ($inner = $this->getInnerSubcomponent($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getComponentProcessor($inner);
-            if ($processor instanceof DataloadingModuleInterface) {
+            if ($processor instanceof DataloadingComponentInterface) {
                 $component_path_manager = ComponentPathManagerFacade::getInstance();
                 $component_propagation_current_path = $component_path_manager->getPropagationCurrentPath();
                 $component_propagation_current_path[] = $component;

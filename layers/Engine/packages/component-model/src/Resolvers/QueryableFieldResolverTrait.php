@@ -12,31 +12,31 @@ trait QueryableFieldResolverTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
 
-    protected function getFilterFieldArgNameTypeResolvers(Component $filterDataloadingModule): array
+    protected function getFilterFieldArgNameTypeResolvers(Component $filterDataloadingComponent): array
     {
         /** @var FilterInputContainerComponentProcessorInterface */
-        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingModule);
-        return $filterDataComponentProcessor->getFieldFilterInputNameTypeResolvers($filterDataloadingModule);
+        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingComponent);
+        return $filterDataComponentProcessor->getFieldFilterInputNameTypeResolvers($filterDataloadingComponent);
     }
 
-    protected function getFilterFieldArgDescription(Component $filterDataloadingModule, string $fieldArgName): ?string
+    protected function getFilterFieldArgDescription(Component $filterDataloadingComponent, string $fieldArgName): ?string
     {
         /** @var FilterInputContainerComponentProcessorInterface */
-        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingModule);
-        return $filterDataComponentProcessor->getFieldFilterInputDescription($filterDataloadingModule, $fieldArgName);
+        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingComponent);
+        return $filterDataComponentProcessor->getFieldFilterInputDescription($filterDataloadingComponent, $fieldArgName);
     }
 
-    protected function getFilterFieldArgDefaultValue(Component $filterDataloadingModule, string $fieldArgName): mixed
+    protected function getFilterFieldArgDefaultValue(Component $filterDataloadingComponent, string $fieldArgName): mixed
     {
         /** @var FilterInputContainerComponentProcessorInterface */
-        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingModule);
-        return $filterDataComponentProcessor->getFieldFilterInputDefaultValue($filterDataloadingModule, $fieldArgName);
+        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingComponent);
+        return $filterDataComponentProcessor->getFieldFilterInputDefaultValue($filterDataloadingComponent, $fieldArgName);
     }
 
-    protected function getFilterFieldArgTypeModifiers(Component $filterDataloadingModule, string $fieldArgName): int
+    protected function getFilterFieldArgTypeModifiers(Component $filterDataloadingComponent, string $fieldArgName): int
     {
         /** @var FilterInputContainerComponentProcessorInterface */
-        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingModule);
-        return $filterDataComponentProcessor->getFieldFilterInputTypeModifiers($filterDataloadingModule, $fieldArgName);
+        $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingComponent);
+        return $filterDataComponentProcessor->getFieldFilterInputTypeModifiers($filterDataloadingComponent, $fieldArgName);
     }
 }

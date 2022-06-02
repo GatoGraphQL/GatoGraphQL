@@ -42,32 +42,32 @@ abstract class AbstractQueryableSchemaInterfaceTypeFieldResolver extends Abstrac
 
     public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($fieldName)) {
-            return $this->getFilterFieldArgNameTypeResolvers($filterDataloadingModule);
+        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($fieldName)) {
+            return $this->getFilterFieldArgNameTypeResolvers($filterDataloadingComponent);
         }
         return parent::getFieldArgNameTypeResolvers($fieldName);
     }
 
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($fieldName)) {
-            return $this->getFilterFieldArgDescription($filterDataloadingModule, $fieldArgName);
+        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($fieldName)) {
+            return $this->getFilterFieldArgDescription($filterDataloadingComponent, $fieldArgName);
         }
         return parent::getFieldArgDescription($fieldName, $fieldArgName);
     }
 
     public function getFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($fieldName)) {
-            return $this->getFilterFieldArgDefaultValue($filterDataloadingModule, $fieldArgName);
+        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($fieldName)) {
+            return $this->getFilterFieldArgDefaultValue($filterDataloadingComponent, $fieldArgName);
         }
         return parent::getFieldArgDefaultValue($fieldName, $fieldArgName);
     }
 
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
-        if ($filterDataloadingModule = $this->getFieldFilterInputContainerComponent($fieldName)) {
-            return $this->getFilterFieldArgTypeModifiers($filterDataloadingModule, $fieldArgName);
+        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($fieldName)) {
+            return $this->getFilterFieldArgTypeModifiers($filterDataloadingComponent, $fieldArgName);
         }
         return parent::getFieldArgTypeModifiers($fieldName, $fieldArgName);
     }
