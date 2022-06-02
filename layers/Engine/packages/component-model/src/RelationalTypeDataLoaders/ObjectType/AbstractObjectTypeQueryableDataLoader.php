@@ -52,11 +52,11 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
     /**
      * @param array<string,mixed> $query_args
      */
-    protected function getLimitParam(array $query_args): string
+    protected function getLimitParam(array $query_args): int
     {
         return App::applyFilters(
             'GD_Dataloader_List:query:limit',
-            $query_args[PaginationParams::LIMIT]
+            (int)$query_args[PaginationParams::LIMIT]
         );
     }
 
