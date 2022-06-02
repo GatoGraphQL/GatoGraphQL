@@ -7,8 +7,7 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 trait ComponentFieldTrait
 {
     /**
-     * Allow doing `array_unique` based on the underlying Field,
-     * and having the AST object be added as index in the array
+     * Allow doing `array_unique` based on the underlying Field
      */
     public function __toString(): string
     {
