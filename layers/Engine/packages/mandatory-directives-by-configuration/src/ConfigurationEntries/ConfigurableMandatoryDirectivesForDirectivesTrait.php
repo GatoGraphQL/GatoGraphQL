@@ -52,6 +52,8 @@ trait ConfigurableMandatoryDirectivesForDirectivesTrait
 
     /**
      * Remove directiveName "translate" if the user is not logged in
+     *
+     * @return string[]
      */
     protected function getDirectiveResolverClasses(): array
     {
