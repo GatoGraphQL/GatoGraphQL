@@ -1367,10 +1367,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             if ($subcomponent_components_data_properties['conditional-data-fields'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'] ?? [];
                 foreach ($subcomponent_components_data_properties['conditional-data-fields'] as $conditionDataField => $conditionalDataFields) {
-                    $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField] = array_merge_recursive(
-                        $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField] ?? [],
-                        $conditionalDataFields
-                    );
+                    foreach ($conditionalDataFields as $subcomponentConditionDataField => $subcomponentConditionalDataFields) {
+                        // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
+                        $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField][$subcomponentConditionDataField] = array_merge(
+                            $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField][$subcomponentConditionDataField] ?? [],
+                            $subcomponentConditionalDataFields
+                        );
+                    }
                 }
             }
 

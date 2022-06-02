@@ -2343,9 +2343,12 @@ class Engine implements EngineInterface
                             );
                             $id_subcomponent_conditional_data_fields = [];
                             foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
-                                $id_subcomponent_conditional_data_fields[$conditionField] = Methods::arrayDiffRecursive(
-                                    $conditionalFields,
-                                    $subcomponent_already_loaded_data_fields
+                                // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
+                                $id_subcomponent_conditional_data_fields[$conditionField] = array_values(
+                                    array_diff(
+                                        $conditionalFields,
+                                        $subcomponent_already_loaded_data_fields
+                                    )
                                 );
                             }
                         } else {
