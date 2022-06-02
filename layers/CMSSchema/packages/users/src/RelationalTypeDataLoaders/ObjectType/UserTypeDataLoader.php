@@ -22,6 +22,10 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [

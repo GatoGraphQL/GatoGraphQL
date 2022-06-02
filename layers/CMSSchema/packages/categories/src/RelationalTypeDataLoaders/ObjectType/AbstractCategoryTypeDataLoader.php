@@ -13,6 +13,10 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryabl
 {
     abstract public function getCategoryTypeAPI(): CategoryTypeAPIInterface;
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [

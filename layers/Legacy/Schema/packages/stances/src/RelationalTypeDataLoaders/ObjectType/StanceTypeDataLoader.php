@@ -8,6 +8,10 @@ use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\AbstractCustom
 
 class StanceTypeDataLoader extends AbstractCustomPostTypeDataLoader
 {
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         $query = parent::getQueryToRetrieveObjectsForIDs($ids);

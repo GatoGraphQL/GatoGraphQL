@@ -13,6 +13,10 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
 {
     abstract public function getTagTypeAPI(): TagTypeAPIInterface;
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [

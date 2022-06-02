@@ -33,6 +33,10 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
         return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [

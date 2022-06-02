@@ -22,6 +22,10 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [

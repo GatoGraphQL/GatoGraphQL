@@ -50,6 +50,10 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return 'Dataloader_NotificationList:query';
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return array(
