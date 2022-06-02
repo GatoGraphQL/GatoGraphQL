@@ -39,7 +39,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesTrait
         if ($value) {
             $entryList = array_filter(
                 $entryList,
-                fn ($entry) => ($entry[1] ?? null) == $value
+                fn ($entry) => ($entry[1] ?? null) === $value
             );
         }
         /**
@@ -52,7 +52,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesTrait
             fn ($entry) =>
                 (
                     isset($entry[2])
-                    && $entry[2] == $individualControlSchemaMode
+                    && $entry[2] === $individualControlSchemaMode
                 )
                 || (
                     !isset($entry[2]) &&

@@ -155,7 +155,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 if ($blockName = $fieldArgs['blockName']) {
                     $block_metadata = array_filter(
                         $block_metadata,
-                        fn ($block) => $block['blockName'] == $blockName
+                        fn ($block) => $block['blockName'] === $blockName
                     );
                 }
                 if ($filterBy = $fieldArgs['filterBy']) {
