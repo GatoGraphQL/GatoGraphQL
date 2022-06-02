@@ -1274,7 +1274,7 @@ class Engine implements EngineInterface
                         );
                     }
                     foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {
-                         // Get the info for the subcomponent typeResolver
+                        // Get the info for the subcomponent typeResolver
                         $extend_data_fields = $extend_data_properties['data-fields'] ? $extend_data_properties['data-fields'] : [];
                         $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ? $extend_data_properties['conditional-data-fields'] : [];
                         $extend_ids = $extend_data_properties['ids'];
