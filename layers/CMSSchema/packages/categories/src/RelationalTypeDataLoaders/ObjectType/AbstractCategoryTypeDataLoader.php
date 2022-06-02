@@ -24,12 +24,12 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryabl
         ];
     }
 
-    protected function getOrderbyDefault()
+    protected function getOrderbyDefault(): string
     {
         return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:categories:count');
     }
 
-    protected function getOrderDefault()
+    protected function getOrderDefault(): string
     {
         return 'DESC';
     }
@@ -40,7 +40,11 @@ abstract class AbstractCategoryTypeDataLoader extends AbstractObjectTypeQueryabl
         return $categoryTypeAPI->getCategories($query, $options);
     }
 
-    public function executeQueryIDs($query): array
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string|int>
+     */
+    public function executeQueryIDs(array $query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

@@ -33,17 +33,17 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         ];
     }
 
-    protected function getOrderbyDefault()
+    protected function getOrderbyDefault(): string
     {
         return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:users:name');
     }
 
-    protected function getOrderDefault()
+    protected function getOrderDefault(): string
     {
         return 'ASC';
     }
 
-    protected function getQueryHookName()
+    protected function getQueryHookName(): string
     {
         // Get the role either from a provided attr, and allow PoP User Platform to set the default role
         return 'UserTypeDataLoader:query';
@@ -54,7 +54,11 @@ class UserTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->getUserTypeAPI()->getUsers($query, $options);
     }
 
-    public function executeQueryIDs($query): array
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string|int>
+     */
+    public function executeQueryIDs(array $query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
