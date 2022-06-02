@@ -21,7 +21,11 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return 'DESC';
     }
 
-    public function getQuery($query_args): array
+    /**
+     * @param array<string,mixed> $query_args
+     * @return array<string,mixed>
+     */
+    public function getQuery(array $query_args): array
     {
         $query = parent::getQuery($query_args);
 

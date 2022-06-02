@@ -116,7 +116,11 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         return 'Dataloader_ListTrait:query';
     }
 
-    public function getQuery($query_args): array
+    /**
+     * @param array<string,mixed> $query_args
+     * @return array<string,mixed>
+     */
+    public function getQuery(array $query_args): array
     {
         // Use all the query params already provided in the query args
         $query = $query_args;

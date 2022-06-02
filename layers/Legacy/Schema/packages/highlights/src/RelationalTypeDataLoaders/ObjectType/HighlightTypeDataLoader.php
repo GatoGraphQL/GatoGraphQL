@@ -20,9 +20,10 @@ class HighlightTypeDataLoader extends AbstractCustomPostTypeDataLoader
     }
 
     /**
-     * Function to override
+     * @param array<string,mixed> $query_args
+     * @return array<string,mixed>
      */
-    public function getQuery($query_args): array
+    public function getQuery(array $query_args): array
     {
         $query = parent::getQuery($query_args);
 
