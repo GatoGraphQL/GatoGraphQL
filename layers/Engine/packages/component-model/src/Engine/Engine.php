@@ -2556,14 +2556,21 @@ class Engine implements EngineInterface
                 if (isset($fieldData['conditional-data-fields'])) {
                     foreach ($fieldData['conditional-data-fields'] as $conditionDataField => $conditionalFields) {
                         $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
+                        /**
+                         * This will duplicate entries! But it can't be avoided,
+                         * because the ComponentField instances are different,
+                         * even if they have the same data, and calling
+                         * `SplObjectStorage->contains` always returns false,
+                         * so we can't find out if an object already exists or not.
+                         */
                         $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField]->addAll($conditionalFields);
                     }
                 }
                 if (isset($fieldData['data-fields'])) {
-                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] = array_merge(
+                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] = array_values(array_unique(array_merge(
                         $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] ?? [],
                         $fieldData['data-fields']
-                    );
+                    )));
                 }
                 if (isset($fieldData['subcomponents'])) {
                     $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] = array_merge_recursive(
