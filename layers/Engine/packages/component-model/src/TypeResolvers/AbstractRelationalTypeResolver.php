@@ -806,8 +806,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function getFieldsToEnqueueFillingObjectsFromIDs(array $data_fields)
     {
         $fields = $data_fields['direct'];
-        // Watch out: If there are conditional fields, these will be processed by this directive too
-        // Hence, collect all these fields, and add them as if they were direct
+        /**
+         * Watch out: If there are conditional fields,
+         * these will be processed by this directive too.
+         * Hence, collect all these fields, and add them
+         * as if they were direct
+         */
         $conditionalFields = FieldHelpers::extractConditionalFields($data_fields);
         return array_unique(array_merge(
             $fields,
