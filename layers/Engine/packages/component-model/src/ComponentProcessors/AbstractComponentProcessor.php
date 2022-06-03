@@ -1258,10 +1258,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                 // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                                 // Move from "data-fields" to "conditional-data-fields"
                                 if ($subcomponent_ret['data-fields'] ?? null) {
-                                    foreach ($subcomponent_ret['data-fields'] as $subcomponent_data_field) {
-                                        /** @var ComponentFieldInterface $subcomponent_data_field */
-                                        $ret['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
-                                        $ret['conditional-data-fields'][$conditionDataField][$subcomponent_data_field] ??= new SplObjectStorage();
+                                    $ret['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
+                                    /** @var ComponentFieldInterface[] */
+                                    $subcomponent_data_fields = $subcomponent_ret['data-fields'];
+                                    foreach ($subcomponent_data_fields as $subcomponent_data_field) {
+                                        $ret['conditional-data-fields'][$conditionDataField]->attach($subcomponent_data_field);
                                     }
                                     unset($subcomponent_ret['data-fields']);
                                 }
