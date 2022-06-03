@@ -2543,11 +2543,35 @@ class Engine implements EngineInterface
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary typeResolver, execute getData also on the subcomponent typeResolver
         if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
-            // Merge them into the data
-            $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = array_merge_recursive(
-                $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] ?? [],
-                $subcomponents_data_properties
-            );
+            /**
+             * Merge them into the data.
+             * Watch out! Can't do `array_merge_recursive` because:
+             *
+             *   - SplObjectStorage items (under 'conditional-data-fields') are all deleted!
+             *   - 'data-fields' items are duplicated
+             *
+             * So then iterate the 3 entries, and merge them individually
+             */
+            foreach ($subcomponents_data_properties as $field => $fieldData) {
+                if (isset($fieldData['conditional-data-fields'])) {
+                    foreach ($fieldData['conditional-data-fields'] as $conditionalDataField => $storage) {
+                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionalDataField] ??= new SplObjectStorage();
+                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionalDataField]->addAll($storage);
+                    }
+                }
+                if (isset($fieldData['data-fields'])) {
+                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] = array_merge(
+                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] ?? [],
+                        $fieldData['data-fields']
+                    );
+                }
+                if (isset($fieldData['subcomponents'])) {
+                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] = array_merge_recursive(
+                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] ?? [],
+                        $fieldData['subcomponents']
+                    );
+                }
+            }
         }
     }
 }
