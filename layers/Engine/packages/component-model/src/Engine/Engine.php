@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
@@ -35,6 +36,7 @@ use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -43,7 +45,6 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo;
-use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -762,13 +763,18 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @param ComponentFieldInterface[] $data_fields
+     * @param array<string,ComponentFieldInterface[]> $conditional_data_fields
+     */
     private function combineIDsDatafields(
         array &$relationalTypeOutputDBKeyIDsDataFields,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $relationalTypeOutputDBKey,
         array $ids,
         array $data_fields,
-        array $conditional_data_fields = []
+        array $conditional_data_fields
     ): void {
         $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey] ??= [
             'relationalTypeResolver' => $relationalTypeResolver,
