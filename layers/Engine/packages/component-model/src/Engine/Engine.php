@@ -1608,21 +1608,30 @@ class Engine implements EngineInterface
                 $engineIterationFeedbackStore,
             );
 
-            // Save in the database under the corresponding database-key
-            // (this way, different dataloaders, like 'list-users' and 'author',
-            // can both save their results under database key 'users'
-            // Plugin PoP User Login: Also save those results which depend on the logged-in user.
-            // These are treated separately because:
-            // 1: They contain personal information, so it must be erased from the front-end
-            // as soon as the user logs out
-            // 2: These results make the page state-full, so this page is not cacheable
-            // By splitting the results into state-full and state-less, we can split all functionality
-            // into cacheable and non-cacheable,
-            // thus caching most of the website even for logged-in users
+            /**
+             * Save in the database under the corresponding database-key
+             * (this way, different dataloaders, like 'list-users' and 'author',
+             * can both save their results under database key 'users'.
+             *
+             * Plugin PoP User Login: Also save those results which depend
+             * on the logged-in user. These are treated separately because:
+             *
+             *   1: They contain personal information, so it must be erased
+             *      from the front-end as soon as the user logs out
+             *   2: These results make the page state-full,
+             *      so this page is not cacheable
+             *
+             * By splitting the results into state-full and state-less,
+             * we can split all functionality into cacheable and non-cacheable,
+             * thus caching most of the website even for logged-in users
+             */
             if ($iterationDBItems) {
-                // Conditional data fields: Store the loaded IDs/fields in an object,
-                // to avoid fetching them again in later iterations on the same typeResolver
-                // To find out if they were loaded, validate against the DBObject, to see if it has those properties
+                /**
+                 * Conditional data fields: Store the loaded IDs/fields in an object,
+                 * to avoid fetching them again in later iterations on the same typeResolver
+                 * To find out if they were loaded, validate against the DBObject,
+                 * to see if it has those properties
+                 */
                 foreach ($ids_data_fields as $id => $data_fields) {
                     foreach ($data_fields['conditional'] as $conditionDataField => $conditionalDataFields) {
                         $iterationFields = array_keys($iterationDBItems[(string)$id]);
