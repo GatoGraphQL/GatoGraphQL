@@ -1013,7 +1013,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         if ($fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]['conditional'][$field] ?? null) {
                             $directiveIDFields[$id]['conditional'][$field] = $fieldConditionalFields;
                         } else {
-                            $directiveIDFields[$id]['conditional'] = $directiveIDFields[$id]['conditional'] ?? [];
+                            $directiveIDFields[$id]['conditional'] ??= [];
                         }
                     }
                 }
