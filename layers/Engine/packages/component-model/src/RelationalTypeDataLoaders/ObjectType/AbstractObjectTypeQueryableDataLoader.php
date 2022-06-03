@@ -48,7 +48,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
             (int)$query_args[PaginationParams::PAGE_NUMBER]
         );
     }
-    
+
     /**
      * @param array<string,mixed> $query_args
      */

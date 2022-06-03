@@ -37,7 +37,6 @@ use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
