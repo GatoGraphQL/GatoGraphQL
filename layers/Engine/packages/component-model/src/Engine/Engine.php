@@ -37,6 +37,7 @@ use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -1591,11 +1592,16 @@ class Engine implements EngineInterface
                     $data_fields['direct']
                 );
                 $ids_data_fields[$id]['conditional'] = [];
-                foreach ($data_fields['conditional'] as $conditionDataField => $conditionalDataFields) {
-                    $ids_data_fields[$id]['conditional'][$conditionDataField] = array_map(
-                        fn (ComponentFieldInterface $componentField) => $componentField->asFieldOutputQueryString(),
-                        $conditionalDataFields
-                    );
+                foreach ($data_fields['conditional'] as $conditionDataField => $relationalComponentFields) {
+                    // @todo Review this code!!!
+                    /** @var RelationalComponentField[] $relationalComponentFields */
+                    foreach ($relationalComponentFields as $relationalComponentField) {
+                        $ids_data_fields[$id]['conditional'][$conditionDataField][$relationalComponentField->asFieldOutputQueryString()] = [];
+                    }
+                    // $ids_data_fields[$id]['conditional'][$conditionDataField] = array_map(
+                    //     fn (ComponentFieldInterface $componentField) => $componentField->asFieldOutputQueryString(),
+                    //     $conditionalDataFields
+                    // );
                 }
             }
 
