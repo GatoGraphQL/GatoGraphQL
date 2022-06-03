@@ -2552,6 +2552,12 @@ class Engine implements EngineInterface
              * So then iterate the 3 entries, and merge them individually
              */
             foreach ($subcomponents_data_properties as $field => $fieldData) {
+                if (isset($fieldData['data-fields'])) {
+                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] = array_values(array_unique(array_merge(
+                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] ?? [],
+                        $fieldData['data-fields']
+                    )));
+                }
                 if (isset($fieldData['conditional-data-fields'])) {
                     foreach ($fieldData['conditional-data-fields'] as $conditionDataField => $conditionalFields) {
                         $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
@@ -2564,12 +2570,6 @@ class Engine implements EngineInterface
                          */
                         $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField]->addAll($conditionalFields);
                     }
-                }
-                if (isset($fieldData['data-fields'])) {
-                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] = array_values(array_unique(array_merge(
-                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] ?? [],
-                        $fieldData['data-fields']
-                    )));
                 }
                 if (isset($fieldData['subcomponents'])) {
                     $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] = array_merge_recursive(

@@ -1343,11 +1343,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // If it has subcomponent components, integrate them under 'subcomponents'
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($relationalSubcomponents as $subcomponent_data_field => $subcomponent_components) {
-            $subcomponent_components_data_properties = array(
-                'data-fields' => array(),
-                'conditional-data-fields' => array(),
-                'subcomponents' => array()
-            );
+            $subcomponent_components_data_properties = [
+                'data-fields' => [],
+                'conditional-data-fields' => [],
+                'subcomponents' => []
+            ];
             foreach ($subcomponent_components as $subcomponent_component) {
                 $subcomponent_processor = $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component);
                 if ($subcomponent_component_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS])) {
