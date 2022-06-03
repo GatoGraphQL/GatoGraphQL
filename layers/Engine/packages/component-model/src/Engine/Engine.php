@@ -56,6 +56,7 @@ use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
+use SplObjectStorage;
 
 class Engine implements EngineInterface
 {
@@ -788,10 +789,10 @@ class Engine implements EngineInterface
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
             $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] ??= [];
             foreach ($conditional_data_fields as $conditionDataField => $conditionalDataFields) {
-                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] = array_merge(
-                    $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] ?? [],
-                    $conditionalDataFields
-                );
+                /** @var SplObjectStorage $conditionalDataFields */
+                foreach ($conditionalDataFields as $componentField) {
+                    $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField][] = $componentField;
+                }
             }
         }
     }
