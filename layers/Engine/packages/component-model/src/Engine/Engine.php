@@ -1592,11 +1592,11 @@ class Engine implements EngineInterface
                     $data_fields['direct']
                 );
                 $ids_data_fields[$id]['conditional'] = [];
-                foreach ($data_fields['conditional'] as $conditionDataField => $relationalComponentFields) {
+                foreach ($data_fields['conditional'] as $conditionDataField => $componentFields) {
                     // @todo Review this code!!!
-                    /** @var RelationalComponentField[] $relationalComponentFields */
-                    foreach ($relationalComponentFields as $relationalComponentField) {
-                        $ids_data_fields[$id]['conditional'][$conditionDataField][$relationalComponentField->asFieldOutputQueryString()] = [];
+                    /** @var ComponentFieldInterface[] $componentFields */
+                    foreach ($componentFields as $componentField) {
+                        $ids_data_fields[$id]['conditional'][$conditionDataField][$componentField->asFieldOutputQueryString()] = [];
                     }
                     // $ids_data_fields[$id]['conditional'][$conditionDataField] = array_map(
                     //     fn (ComponentFieldInterface $componentField) => $componentField->asFieldOutputQueryString(),
