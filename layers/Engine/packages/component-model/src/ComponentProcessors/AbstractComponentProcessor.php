@@ -1381,7 +1381,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             if ($subcomponent_components_data_properties['subcomponents'] ?? null) {
-                $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
+                $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ??= [];
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
                     $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
                     $subcomponent_components_data_properties['subcomponents']
