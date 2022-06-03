@@ -2374,20 +2374,22 @@ class Engine implements EngineInterface
                         // Do not add again the IDs/Fields already loaded
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
                             $id_subcomponent_data_fields = array_values(
-                                array_diff(
+                                array_filter(
                                     $subcomponent_data_fields,
-                                    $subcomponent_already_loaded_data_fields
+                                    fn (ComponentFieldInterface $componentField) => !in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
                             $id_subcomponent_conditional_data_fields = [];
                             foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
-                                $id_subcomponent_conditional_data_fields[$conditionField] = array_values(
-                                    array_diff(
-                                        $conditionalFields,
-                                        $subcomponent_already_loaded_data_fields
-                                    )
-                                );
+                                /** @var SplObjectStorage $conditionalFields */
+                                foreach ($conditionalFields as $componentField) {
+                                    /** @var ComponentFieldInterface $componentField */
+                                    if (in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)) {
+                                        continue;
+                                    }
+                                    $id_subcomponent_conditional_data_fields[$conditionField][] = $componentField;
+                                }
                             }
                         } else {
                             $id_subcomponent_data_fields = $subcomponent_data_fields;
