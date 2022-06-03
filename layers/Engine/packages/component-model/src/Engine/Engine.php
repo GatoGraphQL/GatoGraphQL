@@ -2366,6 +2366,7 @@ class Engine implements EngineInterface
                 }
                 if ($field_ids) {
                     foreach ($field_ids as $field_id) {
+                        $id_subcomponent_conditional_data_fields = [];
                         // Do not add again the IDs/Fields already loaded
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
                             $id_subcomponent_data_fields = array_values(
@@ -2374,7 +2375,6 @@ class Engine implements EngineInterface
                                     fn (ComponentFieldInterface $componentField) => !in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
-                            $id_subcomponent_conditional_data_fields = [];
                             foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var SplObjectStorage $conditionalFields */
@@ -2383,7 +2383,8 @@ class Engine implements EngineInterface
                                     if (in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)) {
                                         continue;
                                     }
-                                    $id_subcomponent_conditional_data_fields[$conditionField][] = $componentField;
+                                    $id_subcomponent_conditional_data_fields[$conditionField] ??= new SplObjectStorage();
+                                    $id_subcomponent_conditional_data_fields[$conditionField]->attach($componentField);
                                 }
                             }
                         } else {
