@@ -2554,9 +2554,9 @@ class Engine implements EngineInterface
              */
             foreach ($subcomponents_data_properties as $field => $fieldData) {
                 if (isset($fieldData['conditional-data-fields'])) {
-                    foreach ($fieldData['conditional-data-fields'] as $conditionalDataField => $storage) {
-                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionalDataField] ??= new SplObjectStorage();
-                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionalDataField]->addAll($storage);
+                    foreach ($fieldData['conditional-data-fields'] as $conditionDataField => $conditionalFields) {
+                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
+                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField]->addAll($conditionalFields);
                     }
                 }
                 if (isset($fieldData['data-fields'])) {
