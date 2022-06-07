@@ -1325,12 +1325,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if (!$subcomponent_ret) {
                     continue;
                 }
-                
+
                 /**
                  * @todo Fix `array_merge_recursive` here, since `SplObjectStorage` entries
-                 * (under 'subcomponents' and 'conditional-data-fields') will not get merged.
-                 * This code is not being called for the GraphQL server, but will for the
-                 * SiteBuilder, so check and fix.
+                 *       (under 'subcomponents' and 'conditional-data-fields') will not get merged.
+                 *       This code is not being called for the GraphQL server, but will for the
+                 *       SiteBuilder, so check and fix.
                  */
                 // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                 $ret = array_merge_recursive(
