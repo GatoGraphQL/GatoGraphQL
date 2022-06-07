@@ -2563,16 +2563,17 @@ class Engine implements EngineInterface
             foreach ($subcomponents_data_properties as $field) {
                 /** @var FieldInterface $field */
                 $fieldData = $subcomponents_data_properties[$field];
+                $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$field];
                 if (isset($fieldData['data-fields'])) {
-                    $dbDataSubcomponentsSplObjectStorage[$field]['data-fields'] = array_values(array_unique(array_merge(
-                        $dbDataSubcomponentsSplObjectStorage[$field]['data-fields'] ?? [],
+                    $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] = array_values(array_unique(array_merge(
+                        $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] ?? [],
                         $fieldData['data-fields']
                     )));
                 }
                 if (isset($fieldData['conditional-data-fields'])) {
                     foreach ($fieldData['conditional-data-fields'] as $conditionDataField => $conditionalFields) {
                         /** @var SplObjectStorage $conditionalFields */
-                        $dbDataSubcomponentsSplObjectStorage[$field]['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
+                        $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
                         /**
                          * This will duplicate entries! But it can't be avoided,
                          * because the ComponentField instances are different,
@@ -2580,15 +2581,16 @@ class Engine implements EngineInterface
                          * `SplObjectStorage->contains` always returns false,
                          * so we can't find out if an object already exists or not.
                          */
-                        $dbDataSubcomponentsSplObjectStorage[$field]['conditional-data-fields'][$conditionDataField]->addAll($conditionalFields);
+                        $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField]->addAll($conditionalFields);
                     }
                 }
                 if (isset($fieldData['subcomponents'])) {
-                    $dbDataSubcomponentsSplObjectStorage[$field]['subcomponents'] ??= new SplObjectStorage();
+                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents'] ??= new SplObjectStorage();
                     /** @var SplObjectStorage */
                     $fieldDataSubcomponents = $fieldData['subcomponents'];
-                    $dbDataSubcomponentsSplObjectStorage[$field]['subcomponents']->addAll($fieldDataSubcomponents);
+                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents']->addAll($fieldDataSubcomponents);
                 }
+                $dbDataSubcomponentsSplObjectStorage[$field] = $dbDataSubcomponentsFieldSplObjectStorage;
             }
             $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = $dbDataSubcomponentsSplObjectStorage;
         }
