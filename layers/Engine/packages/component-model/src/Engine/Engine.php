@@ -803,7 +803,7 @@ class Engine implements EngineInterface
      * If any field must be retrieved always (eg: the object ID
      * must always be displayed in the client) then add it here.
      *
-     * @return string[]
+     * @return ComponentFieldInterface[]
      */
     protected function getDBObjectMandatoryFields(): array
     {

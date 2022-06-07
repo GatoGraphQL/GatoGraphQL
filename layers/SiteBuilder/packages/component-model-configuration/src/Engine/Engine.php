@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\Engine;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
@@ -202,14 +204,14 @@ class Engine extends UpstreamEngine implements EngineInterface
     }
 
     /**
-     * @return string[]
+     * @return ComponentFieldInterface[]
      */
     protected function getDBObjectMandatoryFields(): array
     {
         // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
         return [
             ...parent::getDBObjectMandatoryFields(),
-            'id',
+            new LeafComponentField('id'),
         ];
     }
 }
