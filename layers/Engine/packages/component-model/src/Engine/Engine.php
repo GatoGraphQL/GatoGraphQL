@@ -787,15 +787,20 @@ class Engine implements EngineInterface
                 $data_fields
             )));
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] ??= [];
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] ??= new SplObjectStorage();
+            $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'];
             foreach ($conditional_data_fields as $conditionField) {
                 /** @var FieldInterface $conditionField */
                 $conditionalDataFields = $conditional_data_fields[$conditionField];
                 /** @var SplObjectStorage $conditionalDataFields */
+                $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage[$conditionField] ??= [];
+                $relationalTypeOutputDBKeyIDsDataFieldsConditionFieldSplObjectStorage = $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage[$conditionField];
                 foreach ($conditionalDataFields as $componentField) {
-                    $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionField->asFieldOutputQueryString()][] = $componentField;
+                    $relationalTypeOutputDBKeyIDsDataFieldsConditionFieldSplObjectStorage[] = $componentField;
                 }
+                $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage[$conditionField] = $relationalTypeOutputDBKeyIDsDataFieldsConditionFieldSplObjectStorage;
             }
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] = $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage;
         }
     }
 
@@ -1593,10 +1598,14 @@ class Engine implements EngineInterface
                     $data_fields['direct']
                 );
                 $ids_data_fields[$id]['conditional'] = [];
-                foreach ($data_fields['conditional'] as $conditionDataField => $componentFields) {
+                /** @var SplObjectStorage */
+                $dataFieldsConditionalSplObjectStorage = $data_fields['conditional'];
+                foreach ($dataFieldsConditionalSplObjectStorage as $conditionField) {
+                    /** @var FieldInterface $conditionField */
+                    $componentFields = $dataFieldsConditionalSplObjectStorage[$conditionField];
                     /** @var ComponentFieldInterface[] $componentFields */
                     foreach ($componentFields as $componentField) {
-                        $ids_data_fields[$id]['conditional'][$conditionDataField][$componentField->asFieldOutputQueryString()] = [];
+                        $ids_data_fields[$id]['conditional'][$conditionField->asFieldOutputQueryString()][$componentField->asFieldOutputQueryString()] = [];
                     }
                 }
             }
