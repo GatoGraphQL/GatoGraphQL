@@ -39,7 +39,7 @@ abstract class AbstractComponentField extends AbstractAst implements ComponentFi
             $location ?? LocationHelper::getNonSpecificLocation(),
         );
     }
-    
+
     /**
      * Allow doing `array_unique` based on the underlying Field
      */
