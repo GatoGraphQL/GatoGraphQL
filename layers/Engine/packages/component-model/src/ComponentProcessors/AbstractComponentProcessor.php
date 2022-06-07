@@ -636,7 +636,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // @todo Pass the ComponentField directly, do not convert to string first
                 $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField)) {
+                if ($this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField) !== null) {
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
@@ -648,7 +648,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                     $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField)) {
+                    if ($this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField) !== null) {
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                         // @see https://github.com/leoloso/PoP/issues/1050
