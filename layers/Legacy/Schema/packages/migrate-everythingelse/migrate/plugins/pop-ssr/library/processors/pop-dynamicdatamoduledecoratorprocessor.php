@@ -175,7 +175,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
             $subcomponent_components_data_properties = array(
                 'data-fields' => array(),
-                'subcomponents' => array()
+                // @todo Migrate 'subcomponents' from array to SplObjectStorage
+                'subcomponents' => array(),
             );
             foreach ($relationalComponentField->getNestedComponents() as $subcomponent_component) {
                 if ($subcomponent_component_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getComponentProcessor($subcomponent_component))->$propagate_fn($subcomponent_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {

@@ -52,6 +52,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Helpers\Methods;
@@ -2267,7 +2268,7 @@ class Engine implements EngineInterface
         array $typeResolver_ids,
         string $component_path_key,
         array &$databases,
-        array &$subcomponents_data_properties,
+        SplObjectStorage $subcomponents_data_properties,
         array &$already_loaded_ids_data_fields,
         array &$unionDBKeyIDs,
         array &$combinedUnionDBKeyIDs,
@@ -2275,15 +2276,19 @@ class Engine implements EngineInterface
     ): void {
         $engineState = App::getEngineState();
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
-        foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_data_properties) {
+        foreach ($subcomponents_data_properties as $field) {
+            /** @var FieldInterface $field */
+            /** @var array<string,mixed> */
+            $subcomponent_data_properties = $subcomponents_data_properties[$field];
+            $subcomponent_data_field = $field->asFieldOutputQueryString();
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
+            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $field);
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
-                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
+                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $field);
             }
             if ($subcomponentTypeResolver === null) {
                 continue;
@@ -2528,7 +2533,7 @@ class Engine implements EngineInterface
             $dbdata[$relationalTypeOutputDBKey][$component_path_key] = array(
                 'ids' => [],
                 'data-fields' => [],
-                'subcomponents' => [],
+                'subcomponents' => new SplObjectStorage(),
             );
         }
     }
@@ -2542,6 +2547,8 @@ class Engine implements EngineInterface
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary typeResolver, execute getData also on the subcomponent typeResolver
         if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
+            /** @var SplObjectStorage $subcomponents_data_properties */
+            $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] ??= new SplObjectStorage();
             /**
              * Merge them into the data.
              * Watch out! Can't do `array_merge_recursive` because:
@@ -2551,7 +2558,9 @@ class Engine implements EngineInterface
              *
              * So then iterate the 3 entries, and merge them individually
              */
-            foreach ($subcomponents_data_properties as $field => $fieldData) {
+            foreach ($subcomponents_data_properties as $field) {
+                /** @var FieldInterface $field */
+                $fieldData = $subcomponents_data_properties[$field];
                 if (isset($fieldData['data-fields'])) {
                     $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] = array_values(array_unique(array_merge(
                         $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] ?? [],
@@ -2560,6 +2569,7 @@ class Engine implements EngineInterface
                 }
                 if (isset($fieldData['conditional-data-fields'])) {
                     foreach ($fieldData['conditional-data-fields'] as $conditionDataField => $conditionalFields) {
+                        /** @var SplObjectStorage $conditionalFields */
                         $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
                         /**
                          * This will duplicate entries! But it can't be avoided,
@@ -2572,10 +2582,10 @@ class Engine implements EngineInterface
                     }
                 }
                 if (isset($fieldData['subcomponents'])) {
-                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] = array_merge_recursive(
-                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] ?? [],
-                        $fieldData['subcomponents']
-                    );
+                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] ??= new SplObjectStorage();
+                    /** @var SplObjectStorage */
+                    $fieldDataSubcomponents = $fieldData['subcomponents'];
+                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents']->addAll($fieldDataSubcomponents);
                 }
             }
         }

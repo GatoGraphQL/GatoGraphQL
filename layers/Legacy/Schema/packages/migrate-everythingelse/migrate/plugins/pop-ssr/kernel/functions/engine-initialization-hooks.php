@@ -11,6 +11,7 @@ use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
@@ -209,8 +210,13 @@ class PoP_SSR_EngineInitialization_Hooks
             }
 
             // Call recursively to also copy the data from the subcomponents
-            if ($subcomponents = $data_properties['subcomponents']) {
-                foreach ($subcomponents as $subcomponent_data_field => $subcomponent_data_properties) {
+            if ($subcomponents = $data_properties['subcomponents'] ?? null) {
+                /** @var SplObjectStorage $subcomponents */
+                foreach ($subcomponents as $field) {
+                    /** @var FieldInterface $field */
+                    /** @var array<string,mixed> */
+                    $subcomponent_data_properties = $subcomponents[$field];
+                    $subcomponent_data_field = $field->asFieldOutputQueryString();
                     // Check if the subcomponent data fields lives under database or userstatedatabase
                     $sourcedb = null;
                     foreach ($data_fields as $dbname => $db_data_fields) {
@@ -225,7 +231,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
-                    if ($subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
+                    if ($subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $field)) {
                         $typeObjectIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDs);
                         if (is_null($typeObjectIDs)) {
                             $isUnionType = false;
