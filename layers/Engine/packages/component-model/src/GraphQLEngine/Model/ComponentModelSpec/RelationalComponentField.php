@@ -7,15 +7,11 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 use PoP\ComponentModel\Component\Component;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
-class RelationalComponentField extends LeafField implements ComponentFieldInterface
+class RelationalComponentField extends AbstractComponentField
 {
-    use ComponentFieldTrait;
-
     /**
      * @param Component[] $nestedComponents
      * @param Argument[] $arguments
@@ -34,7 +30,7 @@ class RelationalComponentField extends LeafField implements ComponentFieldInterf
             $alias,
             $arguments,
             $directives,
-            $location ?? LocationHelper::getNonSpecificLocation(),
+            $location,
         );
     }
 
