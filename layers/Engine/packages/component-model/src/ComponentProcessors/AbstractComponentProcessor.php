@@ -1390,17 +1390,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 }
                 if ($subcomponent_component_data_properties['data-fields'] ?? null) {
                     $subcomponent_components_data_properties['data-fields'] = array_merge(
-                        $subcomponent_components_data_properties['data-fields'] ?? [],
+                        $subcomponent_components_data_properties['data-fields'],
                         $subcomponent_component_data_properties['data-fields']
                     );
                 }
-                if ($subcomponent_component_data_properties['conditional-data-fields'] ?? null) {
-                    /** @var SplObjectStorage */
-                    $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'];
+                /** @var SplObjectStorage */
+                $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'];
+                if ($subcomponentConditionalDataFields->count() > 0) {
                     foreach ($subcomponentConditionalDataFields as $conditionField) {
                         /** @var FieldInterface $conditionField */
-                        /** @var SplObjectStorage */
                         $conditionalDataFields = $subcomponentConditionalDataFields[$conditionField];
+                        /** @var SplObjectStorage $conditionalDataFields */
                         $subcomponent_components_data_properties['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
                         $subcomponent_components_data_properties['conditional-data-fields'][$conditionField]->addAll($conditionalDataFields);
                     }
@@ -1408,7 +1408,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if ($subcomponent_component_data_properties['subcomponents'] ?? null) {
                     /** @var SplObjectStorage */
                     $splObjectStorage = $subcomponent_component_data_properties['subcomponents'];
-                    $subcomponent_components_data_properties['subcomponents'] ??= new SplObjectStorage();
                     $subcomponent_components_data_properties['subcomponents']->addAll($splObjectStorage);
                 }
             }
@@ -1416,28 +1415,28 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $ret['subcomponents'] ??= new SplObjectStorage();
             $ret['subcomponents'][$subcomponentField] ??= [];
             $subcomponentsSubcomponentField = $ret['subcomponents'][$subcomponentField];
-            if ($subcomponent_components_data_properties['data-fields'] ?? null) {
+            if ($subcomponent_components_data_properties['data-fields']) {
                 $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
                 $subcomponentsSubcomponentField['data-fields'] = array_values(array_unique(array_merge(
                     $subcomponentsSubcomponentField['data-fields'] ?? [],
                     $subcomponent_components_data_properties['data-fields']
                 )));
             }
-            if ($subcomponent_components_data_properties['conditional-data-fields'] ?? null) {
-                /** @var SplObjectStorage */
-                $subcomponentConditionalDataFields = $subcomponent_components_data_properties['conditional-data-fields'];
+            /** @var SplObjectStorage */
+            $subcomponentConditionalDataFields = $subcomponent_components_data_properties['conditional-data-fields'];
+            if ($subcomponentConditionalDataFields->count() > 0) {
                 $subcomponentsSubcomponentField['conditional-data-fields'] ??= new SplObjectStorage();
                 foreach ($subcomponentConditionalDataFields as $conditionField) {
                     /** @var FieldInterface $conditionField */
-                    /** @var SplObjectStorage */
                     $conditionalDataFields = $subcomponentConditionalDataFields[$conditionField];
+                    /** @var SplObjectStorage $conditionalDataFields */
                     $subcomponentsSubcomponentField['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
                     $subcomponentsSubcomponentField['conditional-data-fields'][$conditionField]->addAll($conditionalDataFields);
                 }
             }
-            if ($subcomponent_components_data_properties['subcomponents'] ?? null) {
-                /** @var SplObjectStorage */
-                $splObjectStorage = $subcomponent_components_data_properties['subcomponents'];
+            /** @var SplObjectStorage */
+            $splObjectStorage = $subcomponent_components_data_properties['subcomponents'];
+            if ($splObjectStorage->count() > 0) {
                 $subcomponentsSubcomponentField['subcomponents'] ??= new SplObjectStorage();
                 $subcomponentsSubcomponentField['subcomponents']->addAll($splObjectStorage);
             }

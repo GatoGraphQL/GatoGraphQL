@@ -790,8 +790,8 @@ class Engine implements EngineInterface
             $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] ??= [];
             foreach ($conditional_data_fields as $conditionField) {
                 /** @var FieldInterface $conditionField */
-                /** @var SplObjectStorage */
                 $conditionalDataFields = $conditional_data_fields[$conditionField];
+                /** @var SplObjectStorage $conditionalDataFields */
                 foreach ($conditionalDataFields as $componentField) {
                     $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionField->asFieldOutputQueryString()][] = $componentField;
                 }
@@ -2279,8 +2279,8 @@ class Engine implements EngineInterface
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
         foreach ($subcomponents_data_properties as $field) {
             /** @var FieldInterface $field */
-            /** @var array<string,mixed> */
             $subcomponent_data_properties = $subcomponents_data_properties[$field];
+            /** @var array<string,mixed> $subcomponent_data_properties */
             $subcomponent_data_field = $field->asFieldOutputQueryString();
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
@@ -2384,8 +2384,8 @@ class Engine implements EngineInterface
                             foreach ($subcomponent_conditional_data_fields as $conditionField) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var FieldInterface $conditionField */
-                                /** @var SplObjectStorage */
                                 $conditionalFields = $subcomponent_conditional_data_fields[$conditionField];
+                                /** @var SplObjectStorage $conditionalFields */
                                 foreach ($conditionalFields as $componentField) {
                                     /** @var ComponentFieldInterface $componentField */
                                     if (in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)) {
@@ -2582,8 +2582,8 @@ class Engine implements EngineInterface
                     $fieldDataConditionalDataFieldsSplObjectStorage = $fieldData['conditional-data-fields'];
                     foreach ($fieldDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
                         /** @var FieldInterface $conditionDataField */
-                        /** @var SplObjectStorage */
                         $conditionalFields = $fieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
+                        /** @var SplObjectStorage $conditionalFields */
                         $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage[$conditionDataField] ??= new SplObjectStorage();
                         /**
                          * This will duplicate entries! But it can't be avoided,
