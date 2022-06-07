@@ -7,14 +7,10 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 use PoP\ComponentModel\Component\Component;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
-class ConditionalLeafComponentField extends LeafField implements ComponentFieldInterface
+class ConditionalLeafComponentField extends AbstractComponentField
 {
-    use ComponentFieldTrait;
-
     /**
      * The condition must be satisfied on the implicit field.
      * When the value of the field is `true`, load the conditional
@@ -37,7 +33,7 @@ class ConditionalLeafComponentField extends LeafField implements ComponentFieldI
             $alias,
             $arguments,
             $directives,
-            $location ?? LocationHelper::getNonSpecificLocation(),
+            $location,
         );
     }
 
