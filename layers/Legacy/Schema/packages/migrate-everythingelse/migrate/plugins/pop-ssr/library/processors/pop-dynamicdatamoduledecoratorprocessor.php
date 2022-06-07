@@ -187,6 +187,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 }
             }
 
+            // @todo Must assign the SplObjectStorage to a variable, operate there, and then re-assign at the end
+            // @see https://stackoverflow.com/questions/20053269/indirect-modification-of-overloaded-element-of-splfixedarray-has-no-effect
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
             if ($subcomponent_components_data_properties['data-fields'] ?? null) {
                 $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
