@@ -2549,6 +2549,8 @@ class Engine implements EngineInterface
         if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
             /** @var SplObjectStorage $subcomponents_data_properties */
             $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] ??= new SplObjectStorage();
+            /** @var SplObjectStorage */
+            $dbDataSubcomponentsSplObjectStorage = $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'];
             /**
              * Merge them into the data.
              * Watch out! Can't do `array_merge_recursive` because:
@@ -2562,15 +2564,15 @@ class Engine implements EngineInterface
                 /** @var FieldInterface $field */
                 $fieldData = $subcomponents_data_properties[$field];
                 if (isset($fieldData['data-fields'])) {
-                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] = array_values(array_unique(array_merge(
-                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['data-fields'] ?? [],
+                    $dbDataSubcomponentsSplObjectStorage[$field]['data-fields'] = array_values(array_unique(array_merge(
+                        $dbDataSubcomponentsSplObjectStorage[$field]['data-fields'] ?? [],
                         $fieldData['data-fields']
                     )));
                 }
                 if (isset($fieldData['conditional-data-fields'])) {
                     foreach ($fieldData['conditional-data-fields'] as $conditionDataField => $conditionalFields) {
                         /** @var SplObjectStorage $conditionalFields */
-                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
+                        $dbDataSubcomponentsSplObjectStorage[$field]['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
                         /**
                          * This will duplicate entries! But it can't be avoided,
                          * because the ComponentField instances are different,
@@ -2578,16 +2580,17 @@ class Engine implements EngineInterface
                          * `SplObjectStorage->contains` always returns false,
                          * so we can't find out if an object already exists or not.
                          */
-                        $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['conditional-data-fields'][$conditionDataField]->addAll($conditionalFields);
+                        $dbDataSubcomponentsSplObjectStorage[$field]['conditional-data-fields'][$conditionDataField]->addAll($conditionalFields);
                     }
                 }
                 if (isset($fieldData['subcomponents'])) {
-                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents'] ??= new SplObjectStorage();
+                    $dbDataSubcomponentsSplObjectStorage[$field]['subcomponents'] ??= new SplObjectStorage();
                     /** @var SplObjectStorage */
                     $fieldDataSubcomponents = $fieldData['subcomponents'];
-                    $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'][$field]['subcomponents']->addAll($fieldDataSubcomponents);
+                    $dbDataSubcomponentsSplObjectStorage[$field]['subcomponents']->addAll($fieldDataSubcomponents);
                 }
             }
+            $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = $dbDataSubcomponentsSplObjectStorage;
         }
     }
 }
