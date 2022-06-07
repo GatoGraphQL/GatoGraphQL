@@ -1263,6 +1263,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                 // Move from "data-fields" to "conditional-data-fields"
                                 $ret['conditional-data-fields'] ??= new SplObjectStorage();
                                 $ret['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
+                                /** @var SplObjectStorage */
                                 $conditionalFieldSplObjectStorage = $ret['conditional-data-fields'][$conditionField];
                                 if ($subcomponent_ret['data-fields'] ?? null) {
                                     /** @var ComponentFieldInterface[] */
