@@ -1288,12 +1288,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                 }
                                 $ret['conditional-data-fields'][$conditionField] = $conditionalFieldSplObjectStorage;
 
-                                // @todo Fix `array_merge_recursive` here!
+                                if ($subcomponent_ret['subcomponents'] ?? null) {
+                                    /** @var SplObjectStorage */
+                                    $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'];
+                                    $ret['subcomponents'] ??= new SplObjectStorage();
+                                    $ret['subcomponents']->addAll($subcomponentSubcomponentsSplObjectStorage);
+                                }
                                 // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
-                                $ret = array_merge_recursive(
-                                    $ret,
-                                    $subcomponent_ret
-                                );
+                                // $ret = array_merge_recursive(
+                                //     $ret,
+                                //     $subcomponent_ret
+                                // );                                
                             }
                         }
                     }
@@ -1313,16 +1318,25 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $subcomponent_processor = $this->getComponentProcessorManager()->getComponentProcessor($subcomponent);
 
                 // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
-                if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
-                    if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS])) {
-                        // @todo Fix `array_merge_recursive` here!
-                        // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
-                        $ret = array_merge_recursive(
-                            $ret,
-                            $subcomponent_ret
-                        );
-                    }
+                if ($subcomponent_processor->startDataloadingSection($subcomponent)) {
+                    continue;
                 }
+                $subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+                if (!$subcomponent_ret) {
+                    continue;
+                }
+                
+                /**
+                 * @todo Fix `array_merge_recursive` here, since `SplObjectStorage` entries
+                 * (under 'subcomponents' and 'conditional-data-fields') will not get merged.
+                 * This code is not being called for the GraphQL server, but will for the
+                 * SiteBuilder, so check and fix.
+                 */
+                // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
+                $ret = array_merge_recursive(
+                    $ret,
+                    $subcomponent_ret
+                );
             }
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
