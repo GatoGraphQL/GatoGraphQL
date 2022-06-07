@@ -2563,6 +2563,7 @@ class Engine implements EngineInterface
             foreach ($subcomponents_data_properties as $field) {
                 /** @var FieldInterface $field */
                 $fieldData = $subcomponents_data_properties[$field];
+                $dbDataSubcomponentsSplObjectStorage[$field] ??= [];
                 $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$field];
                 if (isset($fieldData['data-fields'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] = array_values(array_unique(array_merge(
