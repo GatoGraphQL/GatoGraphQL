@@ -1220,15 +1220,22 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $conditionalRelationalComponentFields = $this->getConditionalRelationalComponentFields($component);
             if ($conditionalLeafComponentFields !== [] || $conditionalRelationalComponentFields !== []) {
                 $directSubcomponents = $this->getSubcomponents($component);
+                /** @var array<string,Component[]> */
                 $conditionalComponentFields = [];
+                /** @var array<string,FieldInterface> */
+                $queryStringFields = [];
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafComponentFields as $conditionalLeafComponentField) {
-                    $conditionDataField = $conditionalLeafComponentField->asFieldOutputQueryString();
+                    $conditionField = $conditionalLeafComponentField->getField();
+                    $conditionDataField = $conditionField->asFieldOutputQueryString();
+                    $queryStringFields[$conditionDataField] ??= $conditionField;
                     $conditionalSubcomponents = $conditionalLeafComponentField->getConditionalNestedComponents();
                     $conditionalComponentFields[$conditionDataField] = $conditionalSubcomponents;
                 }
                 foreach ($conditionalRelationalComponentFields as $conditionalRelationalComponentField) {
-                    $conditionDataField = $conditionalRelationalComponentField->asFieldOutputQueryString();
+                    $conditionField = $conditionalRelationalComponentField->getField();
+                    $conditionDataField = $conditionField->asFieldOutputQueryString();
+                    $queryStringFields[$conditionDataField] ??= $conditionField;
                     $conditionalComponentFields[$conditionDataField] = [];
                     foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $subConditionalRelationalComponentField) {
                         $conditionalSubcomponents = $subConditionalRelationalComponentField->getNestedComponents();
@@ -1239,6 +1246,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     }
                 }
                 foreach ($conditionalComponentFields as $conditionDataField => $conditionalSubcomponents) {
+                    $conditionField = $queryStringFields[$conditionDataField];
                     // Calculate those fields which are certainly to be propagated, and not part of the direct subcomponents
                     // Using this really ugly way because, for comparing components, using `array_diff` and `intersect` fail
                     for ($i = count($conditionalSubcomponents) - 1; $i >= 0; $i--) {
@@ -1255,25 +1263,32 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS])) {
                                 // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                                 // Move from "data-fields" to "conditional-data-fields"
+                                $ret['conditional-data-fields'] ??= new SplObjectStorage();
+                                $ret['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
+                                $conditionalFieldSplObjectStorage = $ret['conditional-data-fields'][$conditionField];
                                 if ($subcomponent_ret['data-fields'] ?? null) {
-                                    $ret['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
                                     /** @var ComponentFieldInterface[] */
                                     $subcomponent_data_fields = $subcomponent_ret['data-fields'];
                                     foreach ($subcomponent_data_fields as $subcomponent_data_field) {
-                                        $ret['conditional-data-fields'][$conditionDataField]->attach($subcomponent_data_field);
+                                        $conditionalFieldSplObjectStorage->attach($subcomponent_data_field);
                                     }
                                     unset($subcomponent_ret['data-fields']);
                                 }
                                 // Chain the conditional-data-fields at the end of the one from this component
                                 if ($subcomponent_ret['conditional-data-fields'] ?? null) {
-                                    foreach ($subcomponent_ret['conditional-data-fields'] as $subcomponent_condition_data_field => $subcomponent_conditional_data_fields) {
-                                        /** @var SplObjectStorage $subcomponent_conditional_data_fields */
-                                        $ret['conditional-data-fields'][$conditionDataField][$subcomponent_condition_data_field] ??= new SplObjectStorage();
-                                        $ret['conditional-data-fields'][$conditionDataField][$subcomponent_condition_data_field]->addAll($subcomponent_conditional_data_fields);
+                                    /** @var SplObjectStorage */
+                                    $subcomponentConditionalFieldSplObjectStorage = $subcomponent_ret['conditional-data-fields'];
+                                    foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentField) {
+                                        /** @var SplObjectStorage */
+                                        $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentField];
+                                        $conditionalFieldSplObjectStorage[$subcomponentField] ??= new SplObjectStorage();
+                                        $conditionalFieldSplObjectStorage[$subcomponentField]->addAll($subcomponent_conditional_data_fields);
                                     }
                                     unset($subcomponent_ret['conditional-data-fields']);
                                 }
+                                $ret['conditional-data-fields'][$conditionField] = $conditionalFieldSplObjectStorage;
 
+                                // @todo Fix `array_merge_recursive` here!
                                 // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                                 $ret = array_merge_recursive(
                                     $ret,
@@ -1300,6 +1315,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // Propagate only if the subcomponent doesn't load data. If it does, this is the end of the data line, and the subcomponent is the beginning of a new datasetcomponentTree
                 if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
                     if ($subcomponent_ret = $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS])) {
+                        // @todo Fix `array_merge_recursive` here!
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -1350,7 +1366,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $subcomponentField = $queryStringFields[$subcomponent_data_field];
             $subcomponent_components_data_properties = [
                 'data-fields' => [],
-                'conditional-data-fields' => [],
+                'conditional-data-fields' => new SplObjectStorage(),
                 'subcomponents' => new SplObjectStorage(),
             ];
             foreach ($subcomponent_components as $subcomponent_component) {
@@ -1366,10 +1382,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     );
                 }
                 if ($subcomponent_component_data_properties['conditional-data-fields'] ?? null) {
-                    foreach ($subcomponent_component_data_properties['conditional-data-fields'] as $conditionDataField => $conditionalDataFields) {
-                        /** @var SplObjectStorage $conditionalDataFields */
-                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
-                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionDataField]->addAll($conditionalDataFields);
+                    /** @var SplObjectStorage */
+                    $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'];
+                    foreach ($subcomponentConditionalDataFields as $conditionField) {
+                        /** @var FieldInterface $conditionField */
+                        /** @var SplObjectStorage */
+                        $conditionalDataFields = $subcomponentConditionalDataFields[$conditionField];
+                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
+                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionField]->addAll($conditionalDataFields);
                     }
                 }
                 if ($subcomponent_component_data_properties['subcomponents'] ?? null) {
@@ -1391,11 +1411,15 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 )));
             }
             if ($subcomponent_components_data_properties['conditional-data-fields'] ?? null) {
-                $subcomponentsSubcomponentField['conditional-data-fields'] ??= [];
-                foreach ($subcomponent_components_data_properties['conditional-data-fields'] as $conditionDataField => $conditionalDataFields) {
-                    /** @var SplObjectStorage $conditionalDataFields */
-                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionDataField] ??= new SplObjectStorage();
-                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionDataField]->addAll($conditionalDataFields);
+                /** @var SplObjectStorage */
+                $subcomponentConditionalDataFields = $subcomponent_components_data_properties['conditional-data-fields'];
+                $subcomponentsSubcomponentField['conditional-data-fields'] ??= new SplObjectStorage();
+                foreach ($subcomponentConditionalDataFields as $conditionField) {
+                    /** @var FieldInterface $conditionField */
+                    /** @var SplObjectStorage */
+                    $conditionalDataFields = $subcomponentConditionalDataFields[$conditionField];
+                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
+                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionField]->addAll($conditionalDataFields);
                 }
             }
             if ($subcomponent_components_data_properties['subcomponents'] ?? null) {
