@@ -9,11 +9,11 @@ use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
@@ -47,7 +47,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
      * ObjectTypeResolverInterface, to make it easy within the application to check
      * for this result without checking in advance what's the typeResolver
      */
-    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, RelationalComponentField $relationalComponentField): ?RelationalTypeResolverInterface
+    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface
     {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
@@ -63,7 +63,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         // If this field doesn't have a typeResolver, show a schema error
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
+        $subcomponent_data_field = $field->asFieldOutputQueryString();
         $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($subcomponent_data_field, $variables, $objectTypeFieldResolutionFeedbackStore);
         App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $subcomponent_data_field);
         if (

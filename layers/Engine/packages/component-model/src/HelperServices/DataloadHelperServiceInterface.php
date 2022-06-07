@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\HelperServices;
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface DataloadHelperServiceInterface
 {
-    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, RelationalComponentField $relationalComponentField): ?RelationalTypeResolverInterface;
+    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface;
 }

@@ -275,7 +275,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $this->setProp($subcomponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
-                if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField)) {
+                if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField())) {
                     foreach ($relationalComponentField->getNestedComponents() as $subcomponent_component) {
                         $this->setProp($subcomponent_component, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
                     }
@@ -288,7 +288,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
             foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
-                    if ($subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField)) {
+                    if ($subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField())) {
                         foreach ($relationalComponentField->getNestedComponents() as $conditionalSubcomponent) {
                             $this->setProp($conditionalSubcomponent, $props, 'succeeding-typeResolver', $subcomponentTypeResolver);
                         }
@@ -636,7 +636,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // @todo Pass the ComponentField directly, do not convert to string first
                 $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                if ($this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField) !== null) {
+                if ($this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField()) !== null) {
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
@@ -648,7 +648,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                     $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    if ($this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField) !== null) {
+                    if ($this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField()) !== null) {
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                         // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                         // @see https://github.com/leoloso/PoP/issues/1050
