@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
@@ -66,22 +67,22 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // Validate that the schema and the provided data match, eg: passing mandatory values
         // (Such as fieldArg "status" for field "isStatus")
         // Combine all the datafields under all IDs
-        $dataFields = $failedDataFields = [];
+        $fields = $failedFields = [];
         foreach ($idsDataFields as $id => $data_fields) {
-            $dataFields = array_values(array_unique(array_merge(
-                $dataFields,
-                $data_fields['direct']
+            $fields = array_values(array_unique(array_merge(
+                $fields,
+                $data_fields->direct
             )));
         }
-        $this->validateFields($relationalTypeResolver, $dataFields, $variables, $engineIterationFeedbackStore, $failedDataFields);
+        $this->validateFields($relationalTypeResolver, $fields, $variables, $engineIterationFeedbackStore, $failedFields);
 
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
-        if ($failedDataFields) {
+        if ($failedFields) {
             $idsDataFieldsToRemove = [];
             foreach ($idsDataFields as $id => $dataFields) {
                 $idsDataFieldsToRemove[(string)$id]['direct'] = array_intersect(
                     $dataFields['direct'],
-                    $failedDataFields
+                    $failedFields
                 );
             }
             $this->removeIDsDataFields(
@@ -102,20 +103,24 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // Since adding the Validate directive also when processing the conditional fields, there is no need to validate them now
         // They will be validated when it's their turn to be processed
         // // Validate conditional fields and, if they fail, already take them out from the `$idsDataFields` object
-        // $dataFields = $failedDataFields = [];
+        // $dataFields = $failedFields = [];
         // // Because on the leaves we encounter an empty array, all fields are conditional fields (even if they are on the leaves)
         // foreach ($idsDataFields as $id => $data_fields) {
         //     foreach ($data_fields['conditional'] as $conditionField => $conditionalFields) {
-        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]['conditional'], $dataFields, $variables, $failedDataFields);
+        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]['conditional'], $dataFields, $variables, $failedFields);
         //     }
         // }
     }
 
+    /**
+     * @param FieldInterface[] $fields
+     * @param FieldInterface[] $failedFields
+     */
     abstract protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $dataFields,
+        array $fields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$failedDataFields,
+        array &$failedFields,
     ): void;
 }
