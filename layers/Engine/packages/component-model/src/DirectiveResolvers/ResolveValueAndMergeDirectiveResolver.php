@@ -11,7 +11,6 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
@@ -125,10 +124,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $relationalTypeResolver,
                 $id,
                 $object,
-                array_map(
-                    fn (ComponentFieldInterface $componentField) => $componentField->getField(),
-                    $idsDataFields[(string)$id]->direct
-                ),
+                $idsDataFields[(string)$id]->direct,
                 $dbItems,
                 $previousDBItems,
                 $variables,

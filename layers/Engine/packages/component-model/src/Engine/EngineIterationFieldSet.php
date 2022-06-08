@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
 class EngineIterationFieldSet
 {
     /**
-     * @param ComponentFieldInterface[] $direct
+     * @param FieldInterface[] $direct
      */
     public function __construct(
         public array $direct = [],
@@ -19,7 +19,7 @@ class EngineIterationFieldSet
     }
 
     /**
-     * @param ComponentFieldInterface[] $directComponentFields
+     * @param FieldInterface[] $directComponentFields
      */
     public function addDirectComponentFields(array $directComponentFields): void
     {

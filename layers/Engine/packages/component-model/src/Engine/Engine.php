@@ -783,15 +783,26 @@ class Engine implements EngineInterface
         ];
         foreach ($ids as $id) {
             /** @var EngineIterationFieldSet */
-            $engineIterationFieldSet = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id] ?? new EngineIterationFieldSet($this->getDBObjectMandatoryFields());
-            $engineIterationFieldSet->addDirectComponentFields($data_fields);
+            $engineIterationFieldSet = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]
+                ?? new EngineIterationFieldSet(
+                    array_map(
+                        fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                        $this->getDBObjectMandatoryFields()
+                    )
+                );
+            $engineIterationFieldSet->addDirectComponentFields(
+                array_map(
+                    fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                    $data_fields
+                )
+            );
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
             foreach ($conditional_data_fields as $conditionField) {
                 /** @var FieldInterface $conditionField */
                 $conditionalDataFields = $conditional_data_fields[$conditionField];
                 /** @var SplObjectStorage $conditionalDataFields */
-                /** @var ComponentFieldInterface[] */
-                $engineIterationFieldSetConditionalFields = $engineIterationFieldSet->conditional[$conditionField] ?? [];
+                /** @var SplObjectStorage */
+                $engineIterationFieldSetConditionalFields = $engineIterationFieldSet->conditional[$conditionField] ?? new SplObjectStorage();
                 foreach ($conditionalDataFields as $componentField) {
                     /** @var ComponentFieldInterface $componentField */
                     $engineIterationFieldSetConditionalFields[] = $componentField;

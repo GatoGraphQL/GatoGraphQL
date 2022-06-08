@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
@@ -157,6 +157,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * including all directives, even if they don't apply to all fields
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
+     *
+     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
      */
     final public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void
     {
@@ -191,11 +193,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {
-            $componentFields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
-            $fields = array_map(
-                fn (ComponentFieldInterface $componentField) => $componentField->getField(),
-                $componentFields
-            );
+            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
 
             /**
              * This section is different from parent's implementation
