@@ -2421,15 +2421,18 @@ class Engine implements EngineInterface
                             foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var ComponentFieldInterface $conditionComponentField */
-                                $conditionalFields = $subcomponent_conditional_data_fields[$conditionComponentField];
-                                /** @var SplObjectStorage $conditionalFields */
-                                foreach ($conditionalFields as $componentField) {
+                                $conditionComponentFields = $subcomponent_conditional_data_fields[$conditionComponentField];
+                                /** @var SplObjectStorage $conditionComponentFields */
+                                foreach ($conditionComponentFields as $componentField) {
                                     /** @var ComponentFieldInterface $componentField */
                                     if (in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)) {
                                         continue;
                                     }
+                                    /** @var SplObjectStorage */
+                                    $conditionalComponentFields = $conditionComponentFields[$componentField];
                                     $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= new SplObjectStorage();
-                                    $id_subcomponent_conditional_data_fields[$conditionComponentField]->attach($componentField);
+                                    $id_subcomponent_conditional_data_fields[$conditionComponentField][$componentField] ??= new SplObjectStorage();
+                                    $id_subcomponent_conditional_data_fields[$conditionComponentField][$componentField]->addAll($conditionalComponentFields);
                                 }
                             }
                         } else {
