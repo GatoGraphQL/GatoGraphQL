@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
 {
@@ -64,6 +65,8 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * 1. the directiveResolverInstance
      * 2. its fieldDirective
      * 3. the fields it affects
+     *
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
      */
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,

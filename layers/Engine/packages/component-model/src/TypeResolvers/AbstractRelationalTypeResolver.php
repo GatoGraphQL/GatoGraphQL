@@ -154,6 +154,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * 1. the directiveResolverInstance
      * 2. its fieldDirective
      * 3. the fields it affects
+     *
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
      */
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
@@ -211,6 +213,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $pipelineData;
     }
 
+    /**
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     */
     protected function validateAndResolveInstances(
         array $fieldDirectives,
         array $fieldDirectiveFields,

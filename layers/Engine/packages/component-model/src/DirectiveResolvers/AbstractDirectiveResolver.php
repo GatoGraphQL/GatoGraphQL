@@ -174,6 +174,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return false;
     }
 
+    /**
+     * Extract and validate the directive arguments
+     *
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,

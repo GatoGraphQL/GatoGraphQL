@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
@@ -42,6 +43,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function getDirectiveKind(): string;
     /**
      * Extract and validate the directive arguments
+     *
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
      */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
