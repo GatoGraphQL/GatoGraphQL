@@ -796,21 +796,51 @@ class Engine implements EngineInterface
                     $data_fields
                 )
             );
+            
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
-            foreach ($conditional_data_fields as $conditionField) {
-                /** @var FieldInterface $conditionField */
-                $conditionalDataFields = $conditional_data_fields[$conditionField];
+            foreach ($conditional_data_fields as $conditionComponentField) {
+                /** @var ComponentFieldInterface $conditionComponentField */
+                $conditionalDataFields = $conditional_data_fields[$conditionComponentField];
                 /** @var SplObjectStorage $conditionalDataFields */
-                /** @var SplObjectStorage */
-                $engineIterationFieldSetConditionalFields = $engineIterationFieldSet->conditional[$conditionField] ?? new SplObjectStorage();
-                foreach ($conditionalDataFields as $componentField) {
-                    /** @var ComponentFieldInterface $componentField */
-                    $engineIterationFieldSetConditionalFields[] = $componentField;
-                }
-                $engineIterationFieldSet->conditional[$conditionField] = $engineIterationFieldSetConditionalFields;
+                $conditionField = $conditionComponentField->getField();
+                $conditionalComponentFields = $this->extractAllConditionalComponentFields($conditionalDataFields);
+                $engineIterationFieldSet->conditional[$conditionField] = array_merge(
+                    $engineIterationFieldSet->conditional[$conditionField] ??= [],
+                    array_map(
+                        fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                        $conditionalComponentFields
+                    )
+                );
             }
             $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id] = $engineIterationFieldSet;
         }
+    }
+
+    /**
+     * Extracts all the deep conditional fields as an array of unique elements
+     *
+     * @return ComponentFieldInterface[]
+     */
+    private function extractAllConditionalComponentFields(SplObjectStorage $conditional_data_fields): array
+    {
+        $conditionalComponentFields = [];
+        $heap = $conditional_data_fields;
+        while ($heap->count() > 0) {
+            // Obtain and remove first element (the conditionComponentField) from the heap
+            $heap->rewind();
+            /** @var ComponentFieldInterface */
+            $conditionalComponentField = $heap->current();
+            /** @var SplObjectStorage */
+            $fieldDependents = $heap[$conditionalComponentField];
+            $heap->detach($conditionalComponentField);
+
+            // Add the conditionComponentField to the array
+            $conditionalComponentFields[] = $conditionalComponentField;
+
+            // Add all conditionalComponentFields to the heap
+            $heap->addAll($fieldDependents);
+        }
+        return array_unique($conditionalComponentFields);
     }
 
     /**
