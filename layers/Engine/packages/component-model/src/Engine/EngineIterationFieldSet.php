@@ -13,8 +13,8 @@ class EngineIterationFieldSet
      * @param ComponentFieldInterface[] $direct
      */
     public function __construct(
-        public readonly array $direct = [],
-        public readonly SplObjectStorage $conditional = new SplObjectStorage(),
+        public array $direct = [],
+        public SplObjectStorage $conditional = new SplObjectStorage(),
     ) {        
     }
 
