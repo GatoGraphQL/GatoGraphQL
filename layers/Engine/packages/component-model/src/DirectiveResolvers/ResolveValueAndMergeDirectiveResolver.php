@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -41,6 +42,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return PipelinePositions::AFTER_RESOLVE;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idsDataFields,
@@ -70,6 +74,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     */
     private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $objectIDItems,

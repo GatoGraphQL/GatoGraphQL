@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\Directives\DirectiveKinds;
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\App;
 
@@ -31,6 +32,9 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         return true;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idsDataFields,
@@ -47,6 +51,9 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     */
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idsDataFields,
