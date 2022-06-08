@@ -1305,13 +1305,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             /** @var SplObjectStorage */
                             $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'];
                             $ret['subcomponents'] ??= new SplObjectStorage();
-                            foreach ($subcomponentSubcomponentsSplObjectStorage as $subcomponentSubcomponent) {
-                                /** @var SplObjectStorage */
-                                $subcomponentSubcomponentStorage = $subcomponentSubcomponentsSplObjectStorage[$subcomponentSubcomponent];
-                                /** @var ComponentFieldInterface $subcomponentSubcomponent */
-                                $ret['subcomponents'][$subcomponentSubcomponent] ??= new SplObjectStorage();
-                                $ret['subcomponents'][$subcomponentSubcomponent]->addAll($subcomponentSubcomponentStorage);
-                            }
+                            $ret['subcomponents']->addAll($subcomponentSubcomponentsSplObjectStorage);
                         }
                     }
 
@@ -1424,13 +1418,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if ($subcomponent_component_data_properties['subcomponents'] ?? null) {
                     /** @var SplObjectStorage */
                     $splObjectStorage = $subcomponent_component_data_properties['subcomponents'];
-                    foreach ($splObjectStorage as $subcomponentComponentComponentField) {
-                        /** @var SplObjectStorage */
-                        $subcomponentSplObjectStorage = $splObjectStorage[$subcomponentComponentComponentField];
-                        /** @var ComponentFieldInterface $subcomponentComponentComponentField */
-                        $subcomponent_components_data_properties['subcomponents'][$subcomponentComponentComponentField] ??= new SplObjectStorage();
-                        $subcomponent_components_data_properties['subcomponents'][$subcomponentComponentComponentField]->addAll($subcomponentSplObjectStorage);
-                    }
+                    $subcomponent_components_data_properties['subcomponents']->addAll($splObjectStorage);
                 }
             }
 
