@@ -1579,35 +1579,15 @@ class Engine implements EngineInterface
             $relationalTypeOutputDBKey = key($engineState->relationalTypeOutputDBKeyIDsDataFields);
             /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
-            $idsDataFields = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
+            $ids_data_fields = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
             unset($engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]);
 
             // If no ids to execute, then skip
-            if (empty($idsDataFields)) {
+            if (empty($ids_data_fields)) {
                 continue;
-            }
-
-            // @todo Undo temporary conversion from AST to string
-            $ids_data_fields = [];
-            foreach ($idsDataFields as $id => $data_fields) {
-                $ids_data_fields[$id]['direct'] = array_map(
-                    fn (ComponentFieldInterface $componentField) => $componentField->asFieldOutputQueryString(),
-                    $data_fields['direct']
-                );
-                $ids_data_fields[$id]['conditional'] = [];
-                /** @var SplObjectStorage */
-                $dataFieldsConditionalSplObjectStorage = $data_fields['conditional'];
-                foreach ($dataFieldsConditionalSplObjectStorage as $conditionField) {
-                    /** @var FieldInterface $conditionField */
-                    $componentFields = $dataFieldsConditionalSplObjectStorage[$conditionField];
-                    /** @var ComponentFieldInterface[] $componentFields */
-                    foreach ($componentFields as $componentField) {
-                        $ids_data_fields[$id]['conditional'][$conditionField->asFieldOutputQueryString()][$componentField->asFieldOutputQueryString()] = [];
-                    }
-                }
             }
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
