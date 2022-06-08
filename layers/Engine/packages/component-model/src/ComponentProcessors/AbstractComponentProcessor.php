@@ -1364,15 +1364,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $relationalSubcomponents[$relationalField] = $relationalComponentField->getNestedComponents();
         }
         foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
-            $conditionalRelationalSubcomponents = [];
             foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                 $relationalField = $relationalComponentField->getField();
-                $conditionalRelationalSubcomponents = array_merge(
-                    $conditionalRelationalSubcomponents,
+                $relationalSubcomponents[$relationalField] = array_merge(
+                    $relationalSubcomponents[$relationalField] ?? [],
                     $relationalComponentField->getNestedComponents()
                 );
             }
-            $relationalSubcomponents[$relationalField] = $conditionalRelationalSubcomponents;
         }
 
         // If it has subcomponent components, integrate them under 'subcomponents'
