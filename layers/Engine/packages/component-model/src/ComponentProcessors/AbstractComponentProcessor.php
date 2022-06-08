@@ -1424,7 +1424,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if ($subcomponent_component_data_properties['subcomponents'] ?? null) {
                     /** @var SplObjectStorage */
                     $splObjectStorage = $subcomponent_component_data_properties['subcomponents'];
-                    $subcomponent_components_data_properties['subcomponents']->addAll($splObjectStorage);
+                    foreach ($splObjectStorage as $subcomponentComponentComponentField) {
+                        /** @var SplObjectStorage */
+                        $subcomponentSplObjectStorage = $splObjectStorage[$subcomponentComponentComponentField];
+                        /** @var ComponentFieldInterface $subcomponentComponentComponentField */
+                        $subcomponent_components_data_properties['subcomponents'][$subcomponentComponentComponentField] ??= new SplObjectStorage();
+                        $subcomponent_components_data_properties['subcomponents'][$subcomponentComponentComponentField]->addAll($subcomponentSplObjectStorage);
+                    }
                 }
             }
 
