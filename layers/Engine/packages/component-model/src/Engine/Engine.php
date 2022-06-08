@@ -53,7 +53,6 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Helpers\Methods;
@@ -2315,19 +2314,19 @@ class Engine implements EngineInterface
     ): void {
         $engineState = App::getEngineState();
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
-        foreach ($subcomponents_data_properties as $field) {
-            /** @var FieldInterface $field */
-            $subcomponent_data_properties = $subcomponents_data_properties[$field];
+        foreach ($subcomponents_data_properties as $componentField) {
+            /** @var ComponentFieldInterface $componentField */
+            $subcomponent_data_properties = $subcomponents_data_properties[$componentField];
             /** @var array<string,mixed> $subcomponent_data_properties */
-            $subcomponent_data_field = $field->asFieldOutputQueryString();
+            $subcomponent_data_field = $componentField->asFieldOutputQueryString();
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $field);
+            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $componentField->getField());
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
-                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $field);
+                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $componentField->getField());
             }
             if ($subcomponentTypeResolver === null) {
                 continue;
@@ -2419,18 +2418,18 @@ class Engine implements EngineInterface
                                     fn (ComponentFieldInterface $componentField) => !in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
-                            foreach ($subcomponent_conditional_data_fields as $conditionField) {
+                            foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
-                                /** @var FieldInterface $conditionField */
-                                $conditionalFields = $subcomponent_conditional_data_fields[$conditionField];
+                                /** @var ComponentFieldInterface $conditionComponentField */
+                                $conditionalFields = $subcomponent_conditional_data_fields[$conditionComponentField];
                                 /** @var SplObjectStorage $conditionalFields */
                                 foreach ($conditionalFields as $componentField) {
                                     /** @var ComponentFieldInterface $componentField */
                                     if (in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)) {
                                         continue;
                                     }
-                                    $id_subcomponent_conditional_data_fields[$conditionField] ??= new SplObjectStorage();
-                                    $id_subcomponent_conditional_data_fields[$conditionField]->attach($componentField);
+                                    $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= new SplObjectStorage();
+                                    $id_subcomponent_conditional_data_fields[$conditionComponentField]->attach($componentField);
                                 }
                             }
                         } else {
