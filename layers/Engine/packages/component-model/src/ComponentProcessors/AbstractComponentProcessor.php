@@ -1361,7 +1361,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $relationalSubcomponents = new SplObjectStorage();
         foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
             $relationalField = $relationalComponentField->getField();
-            $relationalSubcomponents[$relationalField] = $relationalComponentField->getNestedComponents();
+            $relationalSubcomponents[$relationalField] = array_merge(
+                $relationalSubcomponents[$relationalField] ?? [],
+                $relationalComponentField->getNestedComponents()
+            );
         }
         foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
             foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
