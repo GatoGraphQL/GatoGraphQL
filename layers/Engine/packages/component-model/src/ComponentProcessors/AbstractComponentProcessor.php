@@ -1297,7 +1297,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                 // $ret = array_merge_recursive(
                                 //     $ret,
                                 //     $subcomponent_ret
-                                // );                                
+                                // );
                             }
                         }
                     }

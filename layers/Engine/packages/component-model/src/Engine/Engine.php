@@ -2381,7 +2381,7 @@ class Engine implements EngineInterface
                 }
                 if ($field_ids) {
                     foreach ($field_ids as $field_id) {
-                        $id_subcomponent_conditional_data_fields = new SplObjectStorage;
+                        $id_subcomponent_conditional_data_fields = new SplObjectStorage();
                         // Do not add again the IDs/Fields already loaded
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
                             $id_subcomponent_data_fields = array_values(
