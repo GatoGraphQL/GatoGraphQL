@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -55,6 +56,8 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
 
     /**
      * Calculate the max-age involving also the composed fields
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
