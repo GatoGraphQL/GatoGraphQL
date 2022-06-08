@@ -25,6 +25,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
 {
@@ -1015,7 +1016,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
             // From the fields, reconstitute the $idsDataFields for each directive,
             // and build the array to pass to the pipeline, for each directive (stage)
-            $directiveResolverInstances = $pipelineIDsDataFields = [];
+            $directiveResolverInstances = [];
+            /** @var array<array<string|int,EngineIterationFieldSet>> */
+            $pipelineIDsDataFields = [];
             foreach ($directivePipelineData as $pipelineStageData) {
                 $directiveResolverInstance = $pipelineStageData['instance'];
                 $fieldDirective = $pipelineStageData['fieldDirective'];
@@ -1031,16 +1034,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $schemaErrorFailingFields
                 );
                 // From the fields, reconstitute the $idsDataFields for each directive, and build the array to pass to the pipeline, for each directive (stage)
+                /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveIDFields = [];
                 foreach ($directiveDirectFields as $field) {
                     $ids = $fieldDirectiveFieldIDs[$fieldDirective][$field];
                     foreach ($ids as $id) {
-                        $directiveIDFields[$id]['direct'][] = $field;
-                        if ($fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]['conditional'][$field] ?? null) {
-                            $directiveIDFields[$id]['conditional'][$field] = $fieldConditionalFields;
-                        } else {
-                            $directiveIDFields[$id]['conditional'] ??= [];
+                        /** @var EngineIterationFieldSet */
+                        $directiveIDFields[$id] ??= new EngineIterationFieldSet();
+                        $directiveIDFields[$id]->direct[] = $field;
+                        /** @var SplObjectStorage|null */
+                        $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]['conditional'][$field] ?? null;
+                        if ($fieldConditionalFields === null || $fieldConditionalFields->count() === 0) {
+                            continue;
                         }
+                        $directiveIDFields[$id]->conditional[$field] = $fieldConditionalFields;
                     }
                 }
                 $pipelineIDsDataFields[] = $directiveIDFields;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectivePipeline;
 
 use League\Pipeline\PipelineInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -15,6 +16,9 @@ class DirectivePipelineDecorator
     ) {
     }
 
+    /**
+     * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDsDataFields
+     */
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$pipelineIDsDataFields,
