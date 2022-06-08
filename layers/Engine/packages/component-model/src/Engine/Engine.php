@@ -2602,25 +2602,25 @@ class Engine implements EngineInterface
              *
              * So then iterate the 3 entries, and merge them individually
              */
-            foreach ($subcomponents_data_properties as $field) {
-                /** @var FieldInterface $field */
-                $fieldData = $subcomponents_data_properties[$field];
-                $dbDataSubcomponentsSplObjectStorage[$field] ??= [];
-                $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$field];
-                if (isset($fieldData['data-fields'])) {
+            foreach ($subcomponents_data_properties as $componentField) {
+                /** @var ComponentFieldInterface $componentField */
+                $componentFieldData = $subcomponents_data_properties[$componentField];
+                $dbDataSubcomponentsSplObjectStorage[$componentField] ??= [];
+                $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentField];
+                if (isset($componentFieldData['data-fields'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] = array_values(array_unique(array_merge(
                         $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] ?? [],
-                        $fieldData['data-fields']
+                        $componentFieldData['data-fields']
                     )));
                 }
-                if (isset($fieldData['conditional-data-fields'])) {
+                if (isset($componentFieldData['conditional-data-fields'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] ??= new SplObjectStorage();
                     $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage = $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'];
                     /** @var SplObjectStorage */
-                    $fieldDataConditionalDataFieldsSplObjectStorage = $fieldData['conditional-data-fields'];
-                    foreach ($fieldDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
-                        /** @var FieldInterface $conditionDataField */
-                        $conditionalFields = $fieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
+                    $componentFieldDataConditionalDataFieldsSplObjectStorage = $componentFieldData['conditional-data-fields'];
+                    foreach ($componentFieldDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
+                        /** @var ComponentFieldInterface $conditionDataField */
+                        $conditionalFields = $componentFieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
                         /** @var SplObjectStorage $conditionalFields */
                         $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage[$conditionDataField] ??= new SplObjectStorage();
                         /**
@@ -2634,13 +2634,13 @@ class Engine implements EngineInterface
                     }
                     $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] = $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage;
                 }
-                if (isset($fieldData['subcomponents'])) {
+                if (isset($componentFieldData['subcomponents'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['subcomponents'] ??= new SplObjectStorage();
                     /** @var SplObjectStorage */
-                    $fieldDataSubcomponents = $fieldData['subcomponents'];
-                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents']->addAll($fieldDataSubcomponents);
+                    $componentFieldDataSubcomponents = $componentFieldData['subcomponents'];
+                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents']->addAll($componentFieldDataSubcomponents);
                 }
-                $dbDataSubcomponentsSplObjectStorage[$field] = $dbDataSubcomponentsFieldSplObjectStorage;
+                $dbDataSubcomponentsSplObjectStorage[$componentField] = $dbDataSubcomponentsFieldSplObjectStorage;
             }
             $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = $dbDataSubcomponentsSplObjectStorage;
         }
