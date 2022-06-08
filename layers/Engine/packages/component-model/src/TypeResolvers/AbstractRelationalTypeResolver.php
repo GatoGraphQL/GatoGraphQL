@@ -807,18 +807,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @return FieldInterface[]
      */
-    protected function getFieldsToEnqueueFillingObjectsFromIDs(EngineIterationFieldSet $data_fields): array
+    protected function getFieldsToEnqueueFillingObjectsFromIDs(EngineIterationFieldSet $engineIterationFieldSet): array
     {
-        $fields = $data_fields->direct;
         /**
          * Watch out: If there are conditional fields,
          * these will be processed by this directive too.
          * Hence, collect all these fields, and add them
          * as if they were direct
          */
-        $conditionalFields = FieldHelpers::extractConditionalFields($data_fields);
+        $conditionalFields = [];
+        foreach ($engineIterationFieldSet->conditional as $conditionField) {
+            $conditionalField = $engineIterationFieldSet->conditional[$conditionField];
+            $conditionalFields[] = $conditionalField;
+        }
         return array_unique(array_merge(
-            $fields,
+            $engineIterationFieldSet->direct,
             $conditionalFields
         ));
     }
@@ -930,11 +933,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
                     $fieldDirectiveDirectFields = array_merge(
                         $fieldDirectiveDirectFields,
-                        $dataFields['direct']
+                        $dataFields->direct
                     );
-                    $conditionalFields = FieldHelpers::extractConditionalFields($dataFields);
+                    $conditionalFields = [];
+                    foreach ($dataFields->conditional as $conditionField) {
+                        $conditionalField = $dataFields->conditional[$conditionField];
+                        $conditionalFields[] = $conditionalField;
+                    }
                     $idFieldDirectiveIDFields = array_unique(array_merge(
-                        $dataFields['direct'],
+                        $dataFields->direct,
                         $conditionalFields
                     ));
                     $fieldDirectiveFields[$fieldDirective] = array_merge(
