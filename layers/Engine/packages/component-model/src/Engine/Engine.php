@@ -792,7 +792,7 @@ class Engine implements EngineInterface
                 );
             
             // Add the 'direct' fields
-            $engineIterationFieldSet->addDirectComponentFields(
+            $engineIterationFieldSet->addDirectFields(
                 array_map(
                     fn (ComponentFieldInterface $componentField) => $componentField->getField(),
                     $data_fields

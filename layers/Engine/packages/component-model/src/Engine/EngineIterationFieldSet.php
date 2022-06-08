@@ -19,18 +19,18 @@ class EngineIterationFieldSet
     }
 
     /**
-     * @param FieldInterface[] $directComponentFields
+     * @param FieldInterface[] $directFields
      */
-    public function addDirectComponentFields(array $directComponentFields): void
+    public function addDirectFields(array $directFields): void
     {
         $this->direct = array_values(array_unique(array_merge(
             $this->direct,
-            $directComponentFields
+            $directFields
         )));
     }
 
-    public function addConditionalComponentFields(SplObjectStorage $conditionalComponentFields): void
+    public function addConditionalFields(SplObjectStorage $conditionalFields): void
     {
-        $this->conditional->addAll($conditionalComponentFields);
+        $this->conditional->addAll($conditionalFields);
     }
 }
