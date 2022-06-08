@@ -51,11 +51,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected ?array $succeedingMandatoryDirectivesForDirectives = null;
 
     /**
-     * @var array<string, array>
+     * @var array<string,array<string|int,EngineIterationFieldSet>>
      */
     private array $fieldDirectiveIDFields = [];
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private array $fieldDirectivesFromFieldCache = [];
     /**
@@ -855,7 +855,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
-            if (!isset($this->fieldDirectivesFromFieldCache[$field])) {
+            if (!isset($this->fieldDirectivesFromFieldCache[$field->asFieldOutputQueryString()])) {
                 // Get the directives from the field
                 $directives = $this->getFieldQueryInterpreter()->getDirectives($field->asFieldOutputQueryString());
 
@@ -895,10 +895,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     )
                 );
                 // Assign in the cache
-                $this->fieldDirectivesFromFieldCache[$field] = $fieldDirectives;
+                $this->fieldDirectivesFromFieldCache[$field->asFieldOutputQueryString()] = $fieldDirectives;
             }
             // Extract all the directives, and store which fields they process
-            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field]) as $fieldDirective) {
+            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field->asFieldOutputQueryString()]) as $fieldDirective) {
+                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id] ??= new EngineIterationFieldSet();
                 // Watch out! Directives can be repeated, and then they must be executed multiple times
                 // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
                 // However, because we are adding the $idsDataFields under key $fieldDirective, when the 2nd occurrence of the directive is found,
@@ -913,16 +914,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 // Store which ID/field this directive must process
                 if (in_array($field, $data_fields->direct)) {
-                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'][] = $field;
+                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->direct[] = $field;
                 }
-                if ($conditionalFields = $data_fields->conditional[$field] ?? null) {
-                    // Make sure there's always a 'direct' alongside a 'conditional'
-                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'] ??= [];
-                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] = array_merge_recursive(
-                        $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] ?? [],
-                        $conditionalFields
-                    );
+                /** @var SplObjectStorage|null */
+                $conditionalFields = $data_fields->conditional[$field] ?? null;
+                if ($conditionalFields === null || $conditionalFields->count() === 0) {
+                    continue;
                 }
+                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->addConditionalFields($conditionalFields);
             }
         }
     }
@@ -1049,7 +1048,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $directiveIDFields[$id] ??= new EngineIterationFieldSet();
                         $directiveIDFields[$id]->direct[] = $field;
                         /** @var SplObjectStorage|null */
-                        $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]['conditional'][$field] ?? null;
+                        $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]->conditional[$field] ?? null;
                         if ($fieldConditionalFields === null || $fieldConditionalFields->count() === 0) {
                             continue;
                         }
