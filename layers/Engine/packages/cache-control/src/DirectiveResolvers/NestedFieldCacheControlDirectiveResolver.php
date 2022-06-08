@@ -9,6 +9,9 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
@@ -111,7 +114,26 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 $nestedFields,
                 array_map(
                     // To evaluate on the root fields, we must remove the fieldArgs, to avoid a loop
-                    [$this->getFieldQueryInterpreter(), 'getFieldName'],
+                    function (FieldInterface $field): FieldInterface {
+                        if ($field instanceof RelationalField) {
+                            return new RelationalField(
+                                $field->getName(),
+                                $field->getAlias(),
+                                [],
+                                $field->getFieldsOrFragmentBonds(),
+                                $field->getDirectives(),
+                                $field->getLocation(),
+                            );
+                        }
+                        /** @var LeafField $field */
+                        return new LeafField(
+                            $field->getName(),
+                            $field->getAlias(),
+                            [],
+                            $field->getDirectives(),
+                            $field->getLocation(),
+                        );
+                    },
                     $fields
                 )
             ));
