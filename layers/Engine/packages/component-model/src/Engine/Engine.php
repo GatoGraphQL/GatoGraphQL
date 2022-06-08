@@ -782,25 +782,23 @@ class Engine implements EngineInterface
             'idsDataFields' => [],
         ];
         foreach ($ids as $id) {
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
-                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ?? $this->getDBObjectMandatoryFields(),
-                $data_fields
-            )));
+            /** @var EngineIterationFieldSet */
+            $engineIterationFieldSet = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id] ?? new EngineIterationFieldSet($this->getDBObjectMandatoryFields());
+            $engineIterationFieldSet->addDirectComponentFields($data_fields);
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] ??= new SplObjectStorage();
-            $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'];
             foreach ($conditional_data_fields as $conditionField) {
                 /** @var FieldInterface $conditionField */
                 $conditionalDataFields = $conditional_data_fields[$conditionField];
                 /** @var SplObjectStorage $conditionalDataFields */
-                $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage[$conditionField] ??= [];
-                $relationalTypeOutputDBKeyIDsDataFieldsConditionFieldSplObjectStorage = $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage[$conditionField];
+                /** @var ComponentFieldInterface[] */
+                $engineIterationFieldSetConditionalFields = $engineIterationFieldSet->conditional[$conditionField] ?? [];
                 foreach ($conditionalDataFields as $componentField) {
-                    $relationalTypeOutputDBKeyIDsDataFieldsConditionFieldSplObjectStorage[] = $componentField;
+                    /** @var ComponentFieldInterface $componentField */
+                    $engineIterationFieldSetConditionalFields[] = $componentField;
                 }
-                $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage[$conditionField] = $relationalTypeOutputDBKeyIDsDataFieldsConditionFieldSplObjectStorage;
+                $engineIterationFieldSet->conditional[$conditionField] = $engineIterationFieldSetConditionalFields;
             }
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] = $relationalTypeOutputDBKeyIDsDataFieldsConditionalSplObjectStorage;
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id] = $engineIterationFieldSet;
         }
     }
 
