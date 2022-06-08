@@ -53,6 +53,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Helpers\Methods;
@@ -1644,7 +1645,7 @@ class Engine implements EngineInterface
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
                     $data_fields['direct'],
-                    array_keys($data_fields['conditional'])
+                    iterator_to_array($data_fields->conditional)
                 );
             }
 
@@ -1689,7 +1690,10 @@ class Engine implements EngineInterface
                  * to see if it has those properties
                  */
                 foreach ($ids_data_fields as $id => $data_fields) {
-                    foreach ($data_fields['conditional'] as $conditionDataField => $conditionalDataFields) {
+                    foreach ($data_fields->conditional as $conditionDataField) {
+                        /** @var FieldInterface $conditionDataField */
+                        $conditionalDataFields = $data_fields->conditional[$conditionDataField];
+                        /** @var FieldInterface[] $conditionalDataFields */
                         $iterationFields = array_keys($iterationDBItems[(string)$id]);
                         $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
                             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],

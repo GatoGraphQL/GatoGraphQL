@@ -107,8 +107,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // $dataFields = $failedFields = [];
         // // Because on the leaves we encounter an empty array, all fields are conditional fields (even if they are on the leaves)
         // foreach ($idsDataFields as $id => $data_fields) {
-        //     foreach ($data_fields['conditional'] as $conditionField => $conditionalFields) {
-        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]['conditional'], $dataFields, $variables, $failedFields);
+        //     foreach ($data_fields->conditional as $conditionField => $conditionalFields) {
+        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]->conditional, $dataFields, $variables, $failedFields);
         //     }
         // }
     }
