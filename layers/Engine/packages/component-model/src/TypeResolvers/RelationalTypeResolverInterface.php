@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
@@ -29,7 +30,10 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @return string|int|array<string|int>
      */
     public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;
-    public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void;
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     */
+    public function enqueueFillingObjectsFromIDs(array $idsDataFields): void;
     public function fillObjects(
         array $ids_data_fields,
         array $unionDBKeyIDs,

@@ -108,13 +108,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
      */
-    final public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void
+    final public function enqueueFillingObjectsFromIDs(array $idsDataFields): void
     {
         $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
-        foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
-            $this->doEnqueueFillingObjectsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
+        foreach ($idsDataFields as $id => $dataFields) {
+            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($dataFields);
+            $this->doEnqueueFillingObjectsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $dataFields);
         }
     }
 

@@ -88,6 +88,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /** @var array<string|int,EngineIterationFieldSet> */
         $enqueueFillingObjectsFromIDs = [];
         foreach ($idsDataFields as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
@@ -134,31 +135,31 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
-            foreach (array_filter($idsDataFields[$id]['conditional']) as $conditionDataField => $conditionalDataFields) {
+            foreach ($idsDataFields[$id]->conditional as $conditionDataField) {
+                /** @var FieldInterface $conditionDataField */
+                $conditionalDataFields = $idsDataFields[$id]->conditional[$conditionDataField];
+                /** @var FieldInterface[] $conditionalDataFields */
+                if ($conditionalDataFields === []) {
+                    continue;
+                }
+
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $conditionDataField, $object);
+                $conditionFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $conditionDataField->asFieldOutputQueryString(), $object);
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
                     $conditionSatisfied = false;
                 }
-                if ($conditionSatisfied) {
-                    $enqueueFillingObjectsFromIDs[(string)$id]['direct'] = array_unique(array_merge(
-                        $enqueueFillingObjectsFromIDs[(string)$id]['direct'] ?? [],
-                        array_keys($conditionalDataFields)
-                    ));
-                    foreach (array_filter($conditionalDataFields) as $nextConditionDataField => $nextConditionalDataFields) {
-                        $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] = array_merge_recursive(
-                            $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] ?? [],
-                            $nextConditionalDataFields
-                        );
-                    }
+                if (!$conditionSatisfied) {
+                    continue;
                 }
+                $enqueueFillingObjectsFromIDs[(string)$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditional);
+                $enqueueFillingObjectsFromIDs[(string)$id]->addDirectComponentFields($conditionalDataFields);
             }
         }
         // Enqueue items for the next iteration
-        if ($enqueueFillingObjectsFromIDs) {
+        if ($enqueueFillingObjectsFromIDs !== []) {
             $relationalTypeResolver->enqueueFillingObjectsFromIDs($enqueueFillingObjectsFromIDs);
         }
     }
