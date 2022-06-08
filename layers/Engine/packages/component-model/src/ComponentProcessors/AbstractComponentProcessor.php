@@ -1305,7 +1305,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             /** @var SplObjectStorage */
                             $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'];
                             $ret['subcomponents'] ??= new SplObjectStorage();
-                            $ret['subcomponents']->addAll($subcomponentSubcomponentsSplObjectStorage);
+                            foreach ($subcomponentSubcomponentsSplObjectStorage as $subcomponentSubcomponent) {
+                                /** @var SplObjectStorage */
+                                $subcomponentSubcomponentStorage = $subcomponentSubcomponentsSplObjectStorage[$subcomponentSubcomponent];
+                                /** @var ComponentFieldInterface $subcomponentSubcomponent */
+                                $ret['subcomponents'][$subcomponentSubcomponent] ??= new SplObjectStorage();
+                                $ret['subcomponents'][$subcomponentSubcomponent]->addAll($subcomponentSubcomponentStorage);
+                            }
                         }
                     }
 
