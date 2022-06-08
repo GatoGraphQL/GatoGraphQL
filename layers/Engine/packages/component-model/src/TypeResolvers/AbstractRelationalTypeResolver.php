@@ -5,24 +5,27 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
 {
@@ -802,10 +805,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
+     *
+     * @return ComponentFieldInterface[]
      */
-    protected function getFieldsToEnqueueFillingObjectsFromIDs(array $data_fields)
+    protected function getFieldsToEnqueueFillingObjectsFromIDs(EngineIterationFieldSet $data_fields): array
     {
-        $fields = $data_fields['direct'];
+        $fields = $data_fields->direct;
         /**
          * Watch out: If there are conditional fields,
          * these will be processed by this directive too.
@@ -821,6 +826,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
+     *
+     * @param FieldInterface[] $fields
      */
     public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, array $data_fields): void
     {
@@ -828,10 +835,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($fields as $field) {
             if (!isset($this->fieldDirectivesFromFieldCache[$field])) {
                 // Get the directives from the field
-                $directives = $this->getFieldQueryInterpreter()->getDirectives($field);
+                $directives = $this->getFieldQueryInterpreter()->getDirectives($field->asFieldOutputQueryString());
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
-                $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+                $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
                 if (
                     $mandatoryDirectivesForField = array_merge(
                         $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],

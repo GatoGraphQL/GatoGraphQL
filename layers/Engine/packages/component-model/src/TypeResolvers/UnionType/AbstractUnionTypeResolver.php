@@ -5,21 +5,22 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
@@ -190,7 +191,11 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
+            $componentFields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
+            $fields = array_map(
+                fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                $componentFields
+            );
 
             /**
              * This section is different from parent's implementation

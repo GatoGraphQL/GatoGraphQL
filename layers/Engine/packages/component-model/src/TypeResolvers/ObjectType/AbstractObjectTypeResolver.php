@@ -17,6 +17,7 @@ use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
@@ -110,7 +111,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $mandatoryDirectivesForFields = $this->getAllMandatoryDirectivesForFields();
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
         foreach ($ids_data_fields as $id => $data_fields) {
-            $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
+            $componentFields = $this->getFieldsToEnqueueFillingObjectsFromIDs($data_fields);
+            $fields = array_map(
+                fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                $componentFields
+            );
             $this->doEnqueueFillingObjectsFromIDs($fields, $mandatoryDirectivesForFields, $mandatorySystemDirectives, $id, $data_fields);
         }
     }
