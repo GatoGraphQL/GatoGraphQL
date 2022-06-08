@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFieldsToRemove
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     */
     protected function removeIDsDataFields(
         array $idsDataFieldsToRemove,
         array &$succeedingPipelineIDsDataFields

@@ -932,7 +932,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
-            /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDsDataFields,
             $dbItems,
             $variables,
@@ -941,8 +940,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore,
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
+        /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDsDataFields */
+
         // Extract the head, keep passing down the rest
-        /** @var array<string|int,EngineIterationFieldSet> */
         $idsDataFields = $pipelineIDsDataFields[0];
         array_shift($pipelineIDsDataFields);
         // The $pipelineDirectiveResolverInstances is the series of directives executed in the pipeline
@@ -1081,6 +1081,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * or show an error and remove the fields from the directive pipeline for further execution
      *
      * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
