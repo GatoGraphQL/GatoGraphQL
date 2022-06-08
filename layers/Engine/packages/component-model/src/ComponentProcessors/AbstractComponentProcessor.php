@@ -1392,7 +1392,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if (!$subcomponent_component_data_properties) {
                     continue;
                 }
-                
+
                 if ($subcomponent_component_data_properties['data-fields'] ?? null) {
                     $subcomponent_components_data_properties['data-fields'] = array_merge(
                         $subcomponent_components_data_properties['data-fields'],
