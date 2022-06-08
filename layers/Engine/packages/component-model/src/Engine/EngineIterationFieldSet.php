@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
 use SplObjectStorage;
 
 class EngineIterationFieldSet
 {
     /**
-     * @param FieldInterface[] $direct
+     * @param ComponentFieldInterface[] $direct
      */
     public function __construct(
-        public array $direct,
-        public SplObjectStorage $conditional,
+        public array $direct = [],
+        public SplObjectStorage $conditional = new SplObjectStorage(),
     ) {        
     }
 }
