@@ -75,6 +75,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
     /**
+     * @param FieldInterface[] $fieldDirectiveFields
      * @return array<string,DirectiveResolverInterface>|null
      */
     public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array;
