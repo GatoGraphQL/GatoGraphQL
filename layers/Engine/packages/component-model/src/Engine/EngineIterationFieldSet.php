@@ -17,4 +17,17 @@ class EngineIterationFieldSet
         public SplObjectStorage $conditional = new SplObjectStorage(),
     ) {        
     }
+
+    public function addDirectComponentFields(array $directComponentFields): void
+    {
+        $this->direct = array_values(array_unique(array_merge(
+            $this->direct,
+            $directComponentFields
+        )));
+    }
+
+    public function addConditionalComponentFields(SplObjectStorage $conditionalComponentFields): void
+    {
+        $this->conditional->addAll($conditionalComponentFields);
+    }
 }
