@@ -2622,8 +2622,8 @@ class Engine implements EngineInterface
                     $componentFieldDataConditionalDataFieldsSplObjectStorage = $componentFieldData['conditional-data-fields'];
                     foreach ($componentFieldDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
                         /** @var ComponentFieldInterface $conditionDataField */
-                        $conditionalFields = $componentFieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
-                        /** @var SplObjectStorage $conditionalFields */
+                        $conditionalComponentFields = $componentFieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
+                        /** @var SplObjectStorage $conditionalComponentFields */
                         $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage[$conditionDataField] ??= new SplObjectStorage();
                         /**
                          * This will duplicate entries! But it can't be avoided,
@@ -2632,7 +2632,7 @@ class Engine implements EngineInterface
                          * `SplObjectStorage->contains` always returns false,
                          * so we can't find out if an object already exists or not.
                          */
-                        $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage[$conditionDataField]->addAll($conditionalFields);
+                        $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage[$conditionDataField]->addAll($conditionalComponentFields);
                     }
                     $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] = $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage;
                 }
