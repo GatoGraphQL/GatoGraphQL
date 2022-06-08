@@ -780,6 +780,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ];
     }
 
+    /**
+     * @param string[] $fields
+     */
     public function extractDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
