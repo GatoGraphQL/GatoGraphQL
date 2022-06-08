@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectivePipeline;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class DirectivePipelineUtils
 {
+    /**
+     * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDsDataFields
+     */
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $pipelineDirectiveResolverInstances,

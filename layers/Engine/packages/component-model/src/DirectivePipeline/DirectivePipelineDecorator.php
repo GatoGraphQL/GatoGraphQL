@@ -51,6 +51,7 @@ class DirectivePipelineDecorator
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
+            /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDsDataFields,
             $dbItems,
             $variables,

@@ -932,6 +932,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
+            /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDsDataFields,
             $dbItems,
             $variables,
@@ -941,6 +942,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         // Extract the head, keep passing down the rest
+        /** @var array<string|int,EngineIterationFieldSet> */
         $idsDataFields = $pipelineIDsDataFields[0];
         array_shift($pipelineIDsDataFields);
         // The $pipelineDirectiveResolverInstances is the series of directives executed in the pipeline
