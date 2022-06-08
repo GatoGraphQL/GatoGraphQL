@@ -136,6 +136,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      * Get the cache control for this field, and set it on the Engine
      *
      * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,

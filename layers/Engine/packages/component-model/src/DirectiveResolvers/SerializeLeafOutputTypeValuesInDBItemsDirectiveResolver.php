@@ -42,6 +42,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
