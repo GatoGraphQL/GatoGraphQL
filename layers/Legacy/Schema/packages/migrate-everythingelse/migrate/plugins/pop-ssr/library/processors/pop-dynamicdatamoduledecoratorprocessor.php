@@ -171,11 +171,11 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($component, $props);
         foreach ($processor->getRelationalComponentFields($component) as $relationalComponentField) {
-            // @todo Pass the ComponentField directly, do not convert to string first
             $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
             $subcomponent_components_data_properties = array(
                 'data-fields' => array(),
-                'subcomponents' => array()
+                // @todo Migrate 'subcomponents' from array to SplObjectStorage
+                'subcomponents' => array(),
             );
             foreach ($relationalComponentField->getNestedComponents() as $subcomponent_component) {
                 if ($subcomponent_component_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getComponentProcessor($subcomponent_component))->$propagate_fn($subcomponent_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
@@ -186,6 +186,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                 }
             }
 
+            // @todo Must assign the SplObjectStorage to a variable, operate there, and then re-assign at the end
+            // @see https://stackoverflow.com/questions/20053269/indirect-modification-of-overloaded-element-of-splfixedarray-has-no-effect
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
             if ($subcomponent_components_data_properties['data-fields'] ?? null) {
                 $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);

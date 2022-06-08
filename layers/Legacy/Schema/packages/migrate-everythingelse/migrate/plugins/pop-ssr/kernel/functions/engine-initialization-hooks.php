@@ -1,15 +1,17 @@
 <?php
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
@@ -199,16 +201,22 @@ class PoP_SSR_EngineInitialization_Hooks
                 // Copy to the dynamic database
                 foreach ($databases as $dbname => $database) {
                     foreach ($data_fields[$dbname] as $data_field) {
-                        if (isset($database[$database_key][$object_id][$data_field])) {
-                            $dynamicdatabases[$dbname][$database_key][$object_id][$data_field] = $database[$database_key][$object_id][$data_field];
+                        /** @var ComponentFieldInterface $data_field */
+                        if (isset($database[$database_key][$object_id][$data_field->asFieldOutputQueryString()])) {
+                            $dynamicdatabases[$dbname][$database_key][$object_id][$data_field->asFieldOutputQueryString()] = $database[$database_key][$object_id][$data_field->asFieldOutputQueryString()];
                         }
                     }
                 }
             }
 
             // Call recursively to also copy the data from the subcomponents
-            if ($subcomponents = $data_properties['subcomponents']) {
-                foreach ($subcomponents as $subcomponent_data_field => $subcomponent_data_properties) {
+            if ($subcomponents = $data_properties['subcomponents'] ?? null) {
+                /** @var SplObjectStorage $subcomponents */
+                foreach ($subcomponents as $field) {
+                    /** @var FieldInterface $field */
+                    /** @var array<string,mixed> */
+                    $subcomponent_data_properties = $subcomponents[$field];
+                    $subcomponent_data_field = $field->asFieldOutputQueryString();
                     // Check if the subcomponent data fields lives under database or userstatedatabase
                     $sourcedb = null;
                     foreach ($data_fields as $dbname => $db_data_fields) {
@@ -223,7 +231,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
-                    if ($subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
+                    if ($subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $field)) {
                         $typeObjectIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDs);
                         if (is_null($typeObjectIDs)) {
                             $isUnionType = false;

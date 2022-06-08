@@ -140,7 +140,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                         $enqueueFillingObjectsFromIDs[(string)$id]['direct'] ?? [],
                         array_keys($conditionalDataFields)
                     ));
-                    foreach ($conditionalDataFields as $nextConditionDataField => $nextConditionalDataFields) {
+                    foreach (array_filter($conditionalDataFields) as $nextConditionDataField => $nextConditionalDataFields) {
                         $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] = array_merge_recursive(
                             $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] ?? [],
                             $nextConditionalDataFields
