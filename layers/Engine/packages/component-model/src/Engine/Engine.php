@@ -790,14 +790,22 @@ class Engine implements EngineInterface
                         $this->getDBObjectMandatoryFields()
                     )
                 );
+            
+            // Add the 'direct' fields
             $engineIterationFieldSet->addDirectComponentFields(
                 array_map(
                     fn (ComponentFieldInterface $componentField) => $componentField->getField(),
                     $data_fields
                 )
             );
-            
-            // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
+
+            /**
+             * Add the 'conditional' fields, as an array with this format:
+             *
+             *   Key: condition field
+             *   Value: the list of conditional fields to load
+             *          if the condition one is successful (eg: if it's `true`)
+             */
             foreach ($conditional_data_fields as $conditionComponentField) {
                 /** @var ComponentFieldInterface $conditionComponentField */
                 $conditionalDataFields = $conditional_data_fields[$conditionComponentField];
