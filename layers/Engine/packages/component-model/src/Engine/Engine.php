@@ -25,6 +25,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
@@ -1626,6 +1627,7 @@ class Engine implements EngineInterface
             $relationalTypeOutputDBKey = key($engineState->relationalTypeOutputDBKeyIDsDataFields);
             /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
+            /** @var array<string|int,EngineIterationFieldSet> */
             $ids_data_fields = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore

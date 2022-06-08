@@ -514,6 +514,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return array_keys($ids_data_fields);
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     */
     public function fillObjects(
         array $ids_data_fields,
         array $unionDBKeyIDs,

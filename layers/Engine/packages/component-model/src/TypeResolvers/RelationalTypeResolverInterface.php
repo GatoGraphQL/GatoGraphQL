@@ -34,6 +34,9 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @param array<string|int,EngineIterationFieldSet> $idsDataFields
      */
     public function enqueueFillingObjectsFromIDs(array $idsDataFields): void;
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     */
     public function fillObjects(
         array $ids_data_fields,
         array $unionDBKeyIDs,
