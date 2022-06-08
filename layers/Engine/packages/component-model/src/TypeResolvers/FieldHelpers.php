@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 class FieldHelpers
 {
@@ -17,22 +18,21 @@ class FieldHelpers
     public static function extractConditionalFields(EngineIterationFieldSet $dataFields): array
     {
         $conditionalFields = [];
-        $heap = $dataFields['conditional'] ?? [];
-        while (!empty($heap)) {
+        $heap = $dataFields->conditional;
+        while ($heap->count() > 0) {
             // Obtain and remove first element (the conditionField) from the heap
-            reset($heap);
-            $key = key($heap);
-            $keyDataitems = $heap[$key];
-            unset($heap[$key]);
+            $heap->rewind();
+            /** @var FieldInterface */
+            $conditionalField = $heap->current();
+            /** @var SplObjectStorage */
+            $fieldDependents = $heap[$conditionalField];
+            $heap->detach($conditionalField);
 
             // Add the conditionField to the array
-            $conditionalFields[] = $key;
+            $conditionalFields[] = $conditionalField;
 
             // Add all conditionalFields to the heap
-            $heap = array_merge(
-                $heap,
-                $keyDataitems
-            );
+            $heap->addAll($fieldDependents);
         }
         return array_unique($conditionalFields);
     }
