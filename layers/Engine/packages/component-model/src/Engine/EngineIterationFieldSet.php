@@ -18,6 +18,9 @@ class EngineIterationFieldSet
     ) {        
     }
 
+    /**
+     * @param ComponentFieldInterface[] $directComponentFields
+     */
     public function addDirectComponentFields(array $directComponentFields): void
     {
         $this->direct = array_values(array_unique(array_merge(
