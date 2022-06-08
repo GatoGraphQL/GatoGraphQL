@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Tracing;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class Trace implements TraceInterface
 {
@@ -16,7 +17,7 @@ class Trace implements TraceInterface
         /** @var array<string|int,string[]> */
         protected ?array $idFields = null,
         protected ?RelationalTypeResolverInterface $relationalTypeResolver = null,
-        protected ?string $field = null,
+        protected ?FieldInterface $field = null,
         protected string|int|null $objectID = null,
     ) {
     }
@@ -52,7 +53,7 @@ class Trace implements TraceInterface
         return $this->relationalTypeResolver;
     }
 
-    public function getField(): ?string
+    public function getField(): ?FieldInterface
     {
         return $this->field;
     }
