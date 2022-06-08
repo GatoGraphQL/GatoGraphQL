@@ -32,6 +32,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
@@ -232,6 +233,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $directiveArgs;
     }
 
+    /**
+     * @param FieldInterface[] $fields
+     */
     public function dissectAndValidateDirectiveForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
@@ -244,7 +248,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $validDirective,
             $directiveName,
             $directiveArgs,
-        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $fields, $this->directive, $variables, $expressions, $engineIterationFeedbackStore);
+        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject(
+            $this,
+            $relationalTypeResolver,
+            $object,
+            array_map(
+                fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                $fields
+            ),
+            $this->directive,
+            $variables,
+            $expressions,
+            $engineIterationFeedbackStore
+        );
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);
