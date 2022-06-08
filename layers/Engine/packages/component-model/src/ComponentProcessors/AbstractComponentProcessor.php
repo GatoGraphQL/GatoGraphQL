@@ -1218,33 +1218,28 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $conditionalRelationalComponentFields = $this->getConditionalRelationalComponentFields($component);
             if ($conditionalLeafComponentFields !== [] || $conditionalRelationalComponentFields !== []) {
                 $directSubcomponents = $this->getSubcomponents($component);
-                /** @var array<string,Component[]> */
-                $conditionalComponentFields = [];
-                /** @var array<string,FieldInterface> */
-                $queryStringFields = [];
+                $conditionalComponentFields = new SplObjectStorage();
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafComponentFields as $conditionalLeafComponentField) {
                     $conditionField = $conditionalLeafComponentField->getField();
-                    $conditionDataField = $conditionField->asFieldOutputQueryString();
-                    $queryStringFields[$conditionDataField] ??= $conditionField;
-                    $conditionalSubcomponents = $conditionalLeafComponentField->getConditionalNestedComponents();
-                    $conditionalComponentFields[$conditionDataField] = $conditionalSubcomponents;
+                    $conditionalComponentFields[$conditionField] = $conditionalLeafComponentField->getConditionalNestedComponents();
                 }
                 foreach ($conditionalRelationalComponentFields as $conditionalRelationalComponentField) {
                     $conditionField = $conditionalRelationalComponentField->getField();
-                    $conditionDataField = $conditionField->asFieldOutputQueryString();
-                    $queryStringFields[$conditionDataField] ??= $conditionField;
-                    $conditionalComponentFields[$conditionDataField] = [];
+                    $subconditionalComponentFields = [];
                     foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $subConditionalRelationalComponentField) {
                         $conditionalSubcomponents = $subConditionalRelationalComponentField->getNestedComponents();
-                        $conditionalComponentFields[$conditionDataField] = array_merge(
-                            $conditionalComponentFields[$conditionDataField],
+                        $subconditionalComponentFields = array_merge(
+                            $subconditionalComponentFields,
                             $conditionalSubcomponents
                         );
                     }
+                    $conditionalComponentFields[$conditionField] = $subconditionalComponentFields;
                 }
-                foreach ($conditionalComponentFields as $conditionDataField => $conditionalSubcomponents) {
-                    $conditionField = $queryStringFields[$conditionDataField];
+                foreach ($conditionalComponentFields as $conditionField) {
+                    /** @var FieldInterface $conditionField */
+                    $conditionalSubcomponents = $conditionalComponentFields[$conditionField];
+                    /** @var Component[] $conditionalSubcomponents */
                     // Calculate those fields which are certainly to be propagated, and not part of the direct subcomponents
                     // Using this really ugly way because, for comparing components, using `array_diff` and `intersect` fail
                     for ($i = count($conditionalSubcomponents) - 1; $i >= 0; $i--) {
@@ -1351,32 +1346,29 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // Combine the direct and conditionalOnDataField components all together to iterate below
-        /** @var array<string,Component[]> */
-        $relationalSubcomponents = [];
-        /** @var array<string,FieldInterface> */
-        $queryStringFields = [];
+        $relationalSubcomponents = new SplObjectStorage();
         foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
             $relationalField = $relationalComponentField->getField();
-            $subcomponent_data_field = $relationalField->asFieldOutputQueryString();
-            $queryStringFields[$subcomponent_data_field] ??= $relationalField;
-            $relationalSubcomponents[$subcomponent_data_field] = $relationalComponentField->getNestedComponents();
+            $relationalSubcomponents[$relationalField] = $relationalComponentField->getNestedComponents();
         }
         foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
+            $conditionalRelationalSubcomponents = [];
             foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                 $relationalField = $relationalComponentField->getField();
-                $conditionalDataField = $relationalField->asFieldOutputQueryString();
-                $queryStringFields[$conditionalDataField] ??= $relationalField;
-                $relationalSubcomponents[$conditionalDataField] = array_values(array_unique(array_merge(
-                    $relationalSubcomponents[$conditionalDataField] ?? [],
+                $conditionalRelationalSubcomponents = array_merge(
+                    $conditionalRelationalSubcomponents,
                     $relationalComponentField->getNestedComponents()
-                )));
+                );
             }
+            $relationalSubcomponents[$relationalField] = $conditionalRelationalSubcomponents;
         }
 
         // If it has subcomponent components, integrate them under 'subcomponents'
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($relationalSubcomponents as $subcomponent_data_field => $subcomponent_components) {
-            $subcomponentField = $queryStringFields[$subcomponent_data_field];
+        foreach ($relationalSubcomponents as $subcomponentField) {
+            /** @var FieldInterface $subcomponentField */
+            $subcomponent_components = $relationalSubcomponents[$subcomponentField];
+            /** @var Component[] $subcomponent_components */
             $subcomponent_components_data_properties = [
                 'data-fields' => [],
                 'conditional-data-fields' => new SplObjectStorage(),
