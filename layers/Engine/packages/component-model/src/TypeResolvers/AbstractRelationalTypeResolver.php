@@ -507,11 +507,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
+     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
      * @return mixed[]
      */
     protected function getIDsToQuery(array $ids_data_fields): array
     {
         return array_keys($ids_data_fields);
+    }
+
+    /**
+     * @param array<string|int> $objectIDs
+     * @return array<string|int>
+     */
+    protected function getResolvedObjectIDs(array $objectIDs): array
+    {
+        return $objectIDs;
     }
 
     /**
@@ -546,7 +556,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $dbItems[$objectID] ??= [];
         }
         // Show an error for all objects that couldn't be processed
-        $resolvedObjectIDs = $this->getIDsToQuery($objectIDItems);
+        $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($objectIDItems));
         $unresolvedObjectIDs = [];
         $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {

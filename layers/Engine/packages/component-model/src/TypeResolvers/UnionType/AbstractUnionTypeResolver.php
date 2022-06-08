@@ -48,16 +48,28 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     /**
      * Remove the type from the ID to resolve the objects through `getObjects` (check parent class)
      *
+     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
      * @return mixed[]
      */
     protected function getIDsToQuery(array $ids_data_fields): array
     {
-        $ids = parent::getIDsToQuery($ids_data_fields);
-
         // Each ID contains the type (added in function `getID`). Remove it
         return array_map(
             UnionTypeHelpers::extractDBObjectID(...),
-            $ids
+            parent::getIDsToQuery($ids_data_fields)
+        );
+    }
+
+    /**
+     * @param array<string|int> $objectIDs
+     * @return array<string|int>
+     */
+    protected function getResolvedObjectIDs(array $objectIDs): array
+    {
+        // Each ID contains the type (added in function `getID`). Remove it
+        return array_map(
+            UnionTypeHelpers::extractDBObjectID(...),
+            parent::getResolvedObjectIDs($objectIDs)
         );
     }
 
