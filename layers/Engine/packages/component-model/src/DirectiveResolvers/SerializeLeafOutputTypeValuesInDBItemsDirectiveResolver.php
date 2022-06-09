@@ -82,7 +82,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             if ($isUnionTypeResolver) {
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             }
-            foreach ($dataFields['direct'] as $field) {
+            foreach ($dataFields->direct as $field) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
@@ -103,7 +103,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                 $fieldLeafOutputTypeResolver = $fieldTypeResolver;
                 $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByObjectTypeResolver(
                     $targetObjectTypeResolver,
-                    $field,
+                    $field->asFieldOutputQueryString(),
                 );
                 $value = $dbItems[(string)$id][$fieldOutputKey] ?? null;
                 if ($value === null) {

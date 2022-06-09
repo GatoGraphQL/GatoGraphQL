@@ -1143,7 +1143,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // Show the failureMessage either as error or as warning
         if ($setFailingFieldResponseAsNull) {
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields['direct'] as $failedField) {
+                foreach ($dataFields->direct as $failedField) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
@@ -1164,7 +1164,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             // }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields['direct'] as $failedField) {
+                foreach ($dataFields->direct as $failedField) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
@@ -1194,7 +1194,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
             // }
             // foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-            //     foreach ($dataFields['direct'] as $failedField) {
+            //     foreach ($dataFields->direct as $failedField) {
             //         $objectWarnings[(string)$id][] = [
             //             Tokens::PATH => [$failedField, $this->directive],
             //             Tokens::MESSAGE => sprintf(

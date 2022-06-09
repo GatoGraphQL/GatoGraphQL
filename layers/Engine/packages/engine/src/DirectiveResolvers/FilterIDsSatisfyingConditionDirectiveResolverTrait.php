@@ -35,7 +35,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
                 $objectValidDirective,
                 $objectDirectiveName,
                 $objectDirectiveArgs
-            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $dataFields['direct'], $variables, $expressions, $engineIterationFeedbackStore);
+            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $dataFields->direct, $variables, $expressions, $engineIterationFeedbackStore);
             // Check that the directive is valid. If it is not, $objectErrors will have the error already added
             if (is_null($objectValidDirective)) {
                 continue;

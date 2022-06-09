@@ -568,7 +568,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
-            $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
+            $failedFields = $ids_data_fields[$unresolvedObjectID]->direct ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaFeedbackStore->addError(
@@ -1008,11 +1008,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
                         $object = $objectIDItems[$id];
                         $failingFields = array_intersect(
-                            $dataFields['direct'],
+                            $dataFields->direct,
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
-                            $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($this, $field, $object);
+                            $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($this, $field->asFieldOutputQueryString(), $object);
                             $dbItems[(string)$id][$fieldOutputKey] = null;
                         }
                     }

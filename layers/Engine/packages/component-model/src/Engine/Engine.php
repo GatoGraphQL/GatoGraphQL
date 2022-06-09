@@ -1644,7 +1644,7 @@ class Engine implements EngineInterface
             foreach ($ids_data_fields as $id => $data_fields) {
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
-                    $data_fields['direct'],
+                    $data_fields->direct,
                     iterator_to_array($data_fields->conditional)
                 );
             }

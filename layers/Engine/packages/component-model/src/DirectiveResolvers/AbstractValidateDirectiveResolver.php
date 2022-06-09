@@ -79,10 +79,11 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
 
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedFields) {
+            /** @var array<string|int,EngineIterationFieldSet> */
             $idsDataFieldsToRemove = [];
             foreach ($idsDataFields as $id => $dataFields) {
-                $idsDataFieldsToRemove[(string)$id]['direct'] = array_intersect(
-                    $dataFields['direct'],
+                $idsDataFieldsToRemove[(string)$id]->direct = array_intersect(
+                    $dataFields->direct,
                     $failedFields
                 );
             }
