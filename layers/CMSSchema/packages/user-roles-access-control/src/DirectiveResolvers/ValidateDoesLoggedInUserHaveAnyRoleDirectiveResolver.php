@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserRolesAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserRolesAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
@@ -53,6 +54,9 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         return !empty(array_intersect($roles, $userRoles));
     }
 
+    /**
+     * @param FieldInterface[] $failedDataFields
+     */
     protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
     {
         $roles = $this->directiveArgsForSchema['roles'];
@@ -71,7 +75,10 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
                 ),
                 implode(
                     $this->__('\', \''),
-                    $failedDataFields
+                    array_map(
+                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        $failedDataFields
+                    )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),
             ]
