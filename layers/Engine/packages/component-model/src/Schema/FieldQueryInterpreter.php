@@ -1544,26 +1544,28 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
-        if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            // Execute as field
-            // It is important to force the validation, because if a needed argument is provided with an error, it needs to be validated, casted and filtered out,
-            // and if this wrong param is not "dynamic", then the validation would not take place
-            $options = [
-                AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
-            ];
-            $resolvedValue = $relationalTypeResolver->resolveValue(
-                $object,
-                (string)$fieldArgValue,
-                $variables,
-                $expressions,
-                $objectTypeFieldResolutionFeedbackStore,
-                $options
-            );
-            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                return null;
-            }
-            return $resolvedValue;
-        }
+        
+        // @todo Watch out! Commented logic because composable fields are not used anymore, and didn't want to migrate $objectTypeResolver->collectFieldValidationErrors( using FieldInterface
+        // if ($this->isFieldArgumentValueAField($fieldArgValue)) {
+        //     // Execute as field
+        //     // It is important to force the validation, because if a needed argument is provided with an error, it needs to be validated, casted and filtered out,
+        //     // and if this wrong param is not "dynamic", then the validation would not take place
+        //     $options = [
+        //         AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
+        //     ];
+        //     $resolvedValue = $relationalTypeResolver->resolveValue(
+        //         $object,
+        //         (string)$fieldArgValue,
+        //         $variables,
+        //         $expressions,
+        //         $objectTypeFieldResolutionFeedbackStore,
+        //         $options
+        //     );
+        //     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        //         return null;
+        //     }
+        //     return $resolvedValue;
+        // }
 
         return $fieldArgValue;
     }
