@@ -148,22 +148,22 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         /** @var Field */
-        $field = $object;
+        $fieldObject = $object;
         switch ($fieldName) {
             case 'name':
-                return $field->getName();
+                return $fieldObject->getName();
             case 'description':
-                return $field->getDescription();
+                return $fieldObject->getDescription();
             case 'args':
-                return $field->getArgIDs();
+                return $fieldObject->getArgIDs();
             case 'type':
-                return $field->getTypeID();
+                return $fieldObject->getTypeID();
             case 'isDeprecated':
-                return $field->isDeprecated();
+                return $fieldObject->isDeprecated();
             case 'deprecationReason':
-                return $field->getDeprecationMessage();
+                return $fieldObject->getDeprecationMessage();
             case 'extensions':
-                return $field->getExtensions()->getID();
+                return $fieldObject->getExtensions()->getID();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
