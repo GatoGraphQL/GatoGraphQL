@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -163,10 +164,13 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             }
             // Iterate through all the directives, and simply resolve each
             foreach ($directiveResolverInstanceFieldsDataItems as $instanceID => $directiveResolverInstanceFieldsDataItem) {
+                /** @var DirectiveResolverInterface */
                 $directiveResolverInstance = $directiveResolverInstanceFieldsDataItem['instance'];
+                /** @var FieldInterface[] */
                 $directiveResolverFields = $directiveResolverInstanceFieldsDataItem['fields'];
 
                 // Regenerate the $idsDataFields for each directive
+                /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveResolverIDDataFields = [];
                 foreach (array_keys($idsDataFields) as $id) {
                     $directiveResolverIDDataFields[(string)$id] = new EngineIterationFieldSet($directiveResolverFields);
