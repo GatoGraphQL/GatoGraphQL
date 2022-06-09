@@ -1691,6 +1691,7 @@ class Engine implements EngineInterface
                  */
                 foreach ($ids_data_fields as $id => $data_fields) {
                     foreach ($data_fields->conditional as $conditionDataField) {
+                        // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalDataFields is FieldInterface
                         /** @var FieldInterface $conditionDataField */
                         $conditionalDataFields = $data_fields->conditional[$conditionDataField];
                         /** @var FieldInterface[] $conditionalDataFields */
