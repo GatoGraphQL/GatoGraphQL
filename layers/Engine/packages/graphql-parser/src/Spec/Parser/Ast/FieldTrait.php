@@ -78,4 +78,13 @@ trait FieldTrait
      * @return Argument[]
      */
     abstract public function getArguments(): array;
+
+    /**
+     * Take the Location into consideration to indicate
+     * that 2 Fields are the same
+     */
+    public function __toString(): string
+    {
+        return $this->getUniqueID();
+    }
 }

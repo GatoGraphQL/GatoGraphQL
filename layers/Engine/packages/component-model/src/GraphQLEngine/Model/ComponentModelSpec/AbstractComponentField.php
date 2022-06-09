@@ -45,7 +45,7 @@ abstract class AbstractComponentField extends AbstractAst implements ComponentFi
      */
     public function __toString(): string
     {
-        return $this->asFieldOutputQueryString();
+        return $this->getUniqueID();
     }
 
     public function getField(): FieldInterface
