@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
@@ -15,6 +14,10 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 
 class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -278,11 +281,21 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             case 'isTypeOrImplements':
                 $isObjectType = $objectTypeResolver->resolveValue(
                     $object,
-                    $this->getFieldQueryInterpreter()->getField(
+                    new LeafField(
                         'isObjectType',
+                        null,
                         [
-                            'type' => $fieldArgs['typeOrInterface'],
-                        ]
+                            new Argument(
+                                'type',
+                                new Literal(
+                                    $fieldArgs['typeOrInterface'],
+                                    $field->getLocation()
+                                ),
+                                $field->getLocation()
+                            ),
+                        ],
+                        [],
+                        $field->getLocation()
                     ),
                     $variables,
                     $expressions,
@@ -297,11 +310,21 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 }
                 $implements = $objectTypeResolver->resolveValue(
                     $object,
-                    $this->getFieldQueryInterpreter()->getField(
+                    new LeafField(
                         'implements',
+                        null,
                         [
-                            'interface' => $fieldArgs['typeOrInterface'],
-                        ]
+                            new Argument(
+                                'interface',
+                                new Literal(
+                                    $fieldArgs['typeOrInterface'],
+                                    $field->getLocation()
+                                ),
+                                $field->getLocation()
+                            ),
+                        ],
+                        [],
+                        $field->getLocation()
                     ),
                     $variables,
                     $expressions,
@@ -316,11 +339,21 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 }
                 $isInUnionType = $objectTypeResolver->resolveValue(
                     $object,
-                    $this->getFieldQueryInterpreter()->getField(
+                    new LeafField(
                         'isInUnionType',
+                        null,
                         [
-                            'type' => $fieldArgs['typeOrInterface'],
-                        ]
+                            new Argument(
+                                'type',
+                                new Literal(
+                                    $fieldArgs['typeOrInterface'],
+                                    $field->getLocation()
+                                ),
+                                $field->getLocation()
+                            ),
+                        ],
+                        [],
+                        $field->getLocation()
                     ),
                     $variables,
                     $expressions,
@@ -339,11 +372,21 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 foreach ($fieldArgs['typesOrInterfaces'] as $typeOrInterface) {
                     $isTypeOrInterface = $objectTypeResolver->resolveValue(
                         $object,
-                        $this->getFieldQueryInterpreter()->getField(
+                        new LeafField(
                             'isTypeOrImplements',
+                            null,
                             [
-                                'typeOrInterface' => $typeOrInterface,
-                            ]
+                                new Argument(
+                                    'typeOrInterface',
+                                    new Literal(
+                                        $typeOrInterface,
+                                        $field->getLocation()
+                                    ),
+                                    $field->getLocation()
+                                ),
+                            ],
+                            [],
+                            $field->getLocation()
                         ),
                         $variables,
                         $expressions,
