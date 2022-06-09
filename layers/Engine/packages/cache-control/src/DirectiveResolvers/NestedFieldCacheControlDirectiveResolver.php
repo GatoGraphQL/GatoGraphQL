@@ -155,7 +155,8 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             }
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
             $directiveResolverInstanceFieldsDataItems = [];
-            foreach ($fieldDirectiveResolverInstances as $field => $directiveResolverInstance) {
+            foreach ($fieldDirectiveResolverInstances as $field) {
+                $directiveResolverInstance = $fieldDirectiveResolverInstances[$field];
                 $instanceID = get_class($directiveResolverInstance);
                 if (!isset($directiveResolverInstanceFieldsDataItems[$instanceID])) {
                     $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolverInstance;
