@@ -14,7 +14,7 @@ class Trace implements TraceInterface
         /** @var array<string,mixed> */
         protected array $data = [],
         protected ?string $directive = null,
-        /** @var array<string|int,FieldInterface[]> */
+        /** @var array<string|int,FieldInterface[]>|null */
         protected ?array $idFields = null,
         protected ?RelationalTypeResolverInterface $relationalTypeResolver = null,
         protected ?FieldInterface $field = null,

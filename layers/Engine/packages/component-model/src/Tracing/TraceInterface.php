@@ -15,7 +15,7 @@ interface TraceInterface
      */
     public function getData(): array;
     /**
-     * @return array<string|int,string[]>|null
+     * @return array<string|int,FieldInterface[]>|null
      */
     public function getIDFields(): ?array;
     public function getDirective(): ?string;
