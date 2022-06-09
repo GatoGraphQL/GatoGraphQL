@@ -97,7 +97,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
     /**
-     * @param string[] $fields
+     * @param FieldInterface[] $fields
      */
     public function extractDirectiveArgumentsForObject(
         DirectiveResolverInterface $directiveResolver,

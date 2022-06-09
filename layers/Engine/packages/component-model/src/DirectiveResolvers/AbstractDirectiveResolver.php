@@ -257,10 +257,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this,
             $relationalTypeResolver,
             $object,
-            array_map(
-                fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                $fields
-            ),
+            $fields,
             $this->directive,
             $variables,
             $expressions,
