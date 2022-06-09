@@ -101,7 +101,7 @@ class EngineState
         $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        return array_key_exists($field->asFieldOutputQueryString(), $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID] ?? []);
+        return array_key_exists($field->getUniqueID(), $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID] ?? []);
     }
 
     /**
@@ -118,7 +118,7 @@ class EngineState
         $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        return $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->asFieldOutputQueryString()];
+        return $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->getUniqueID()];
     }
 
     /**
@@ -136,7 +136,7 @@ class EngineState
         $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->asFieldOutputQueryString()] = $value;
+        $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->getUniqueID()] = $value;
     }
 
     protected function getDataHash(array $data): string
