@@ -14,7 +14,7 @@ class Trace implements TraceInterface
         /** @var array<string,mixed> */
         protected array $data = [],
         protected ?string $directive = null,
-        /** @var array<string|int,string[]> */
+        /** @var array<string|int,FieldInterface[]> */
         protected ?array $idFields = null,
         protected ?RelationalTypeResolverInterface $relationalTypeResolver = null,
         protected ?FieldInterface $field = null,
@@ -41,7 +41,7 @@ class Trace implements TraceInterface
     }
 
     /**
-     * @return array<string|int,string[]>|null
+     * @return array<string|int,FieldInterface[]>|null
      */
     public function getIDFields(): ?array
     {
