@@ -22,4 +22,22 @@ interface FieldInterface extends AstInterface, LocatableInterface, WithDirective
     public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface;
 
     public function asFieldOutputQueryString(): string;
+
+    /**
+     * This function uniquely identifies the field in the query.
+     * In this query:
+     *
+     *   { queryType { name } mutationType { name } }
+     *
+     * fields `name` are different fields (even if under the same type).
+     *
+     * To enforce this, they must include the location in the query.
+     *
+     * This is important to enable the SiteBuilder to process the same
+     * field added by different components all together. Created on runtime,
+     * these will all have location `LocationHelper::getNonSpecificLocation()`
+     * => (1x1), hence even if the Location objects are different, they will
+     * be treated as the same one, and all their IDs can be processed together.
+     */
+    public function getUniqueID(): string;
 }

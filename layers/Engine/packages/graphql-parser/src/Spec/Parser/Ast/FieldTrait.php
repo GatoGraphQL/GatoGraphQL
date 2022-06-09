@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\Spec\Parser\Location;
+
 trait FieldTrait
 {
     public function asFieldOutputQueryString(): string
@@ -27,6 +29,16 @@ trait FieldTrait
             $this->getName(),
             $strFieldArguments,
         );
+    }
+
+    /**
+     * Print the field as string, and attach the location as a GraphQL comment
+     */
+    public function getUniqueID(): string
+    {
+        $location = $this->getLocation();
+        $locationComment = ' # Location: ' . $location->getLine() . 'x' . $location->getColumn();
+        return $this->asFieldOutputQueryString() . $locationComment;
     }
 
     public function asQueryString(): string
@@ -54,6 +66,8 @@ trait FieldTrait
     abstract public function getName(): string;
 
     abstract public function getAlias(): ?string;
+    
+    abstract public function getLocation(): Location;
 
     /**
      * @return Directive[]
