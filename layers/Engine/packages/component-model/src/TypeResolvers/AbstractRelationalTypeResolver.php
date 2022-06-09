@@ -59,7 +59,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private array $fieldDirectivesFromFieldCache = [];
     /**
-     * @var array<string, array<string, DirectiveResolverInterface>>
+     * @var array<string,array<string,DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
 
@@ -490,6 +490,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Calculate directives per field
+        /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
         $fieldDirectiveResolverInstances = new SplObjectStorage();
         foreach ($fieldDirectiveFields as $field) {
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
