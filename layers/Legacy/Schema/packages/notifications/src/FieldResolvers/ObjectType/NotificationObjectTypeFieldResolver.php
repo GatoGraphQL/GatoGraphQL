@@ -4,26 +4,27 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\Route\RouteUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
+use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\IPScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
-use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
-use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -325,11 +326,37 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $value;
 
             case 'isStatusRead':
-                $status = $objectTypeResolver->resolveValue($object, 'status', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $status = $objectTypeResolver->resolveValue(
+                    $object,
+                    new LeafField(
+                        'status',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 return ($status == AAL_POP_STATUS_READ);
 
             case 'isStatusNotRead':
-                $is_read = $objectTypeResolver->resolveValue($object, 'isStatusRead', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $is_read = $objectTypeResolver->resolveValue(
+                    $object,
+                    new LeafField(
+                        'isStatusRead',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 return !$is_read;
 
             case 'markAsReadURL':

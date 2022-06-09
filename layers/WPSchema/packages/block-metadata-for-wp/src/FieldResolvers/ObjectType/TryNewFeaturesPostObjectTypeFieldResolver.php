@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -92,7 +93,13 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
                 unset($fieldArgs['project']);
                 return $objectTypeResolver->resolveValue(
                     $object,
-                    $this->getFieldQueryInterpreter()->getField('blockMetadata', $fieldArgs),
+                    new LeafField(
+                        'blockMetadata',
+                        null,
+                        $field->getArguments(),
+                        [],
+                        $field->getLocation()
+                    ),
                     $variables,
                     $expressions,
                     $objectTypeFieldResolutionFeedbackStore,

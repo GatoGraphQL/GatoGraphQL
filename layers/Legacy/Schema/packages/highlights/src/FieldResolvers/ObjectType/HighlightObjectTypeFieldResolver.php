@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -12,6 +11,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -133,7 +134,20 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return Utils::getCustomPostMeta($objectTypeResolver->getID($highlight), GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
 
             case 'highlightedPostURL':
-                $highlightedPost = $objectTypeResolver->resolveValue($highlight, 'highlightedpost', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $highlightedPost = $objectTypeResolver->resolveValue(
+                    $highlight,
+                    new LeafField(
+                        'highlightedpost',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $highlightedPost;
                 }

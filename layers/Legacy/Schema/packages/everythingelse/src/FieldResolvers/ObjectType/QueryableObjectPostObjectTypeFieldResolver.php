@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
@@ -75,7 +76,22 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     ): mixed {
         switch ($fieldName) {
             case 'endpoint':
-                return APIUtils::getEndpoint($objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
+                return APIUtils::getEndpoint(
+                    $objectTypeResolver->resolveValue(
+                        $object,
+                        new LeafField(
+                            'url',
+                            null,
+                            [],
+                            [],
+                            $field->getLocation()
+                        ),
+                        $variables,
+                        $expressions,
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $options
+                    )
+                );
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);

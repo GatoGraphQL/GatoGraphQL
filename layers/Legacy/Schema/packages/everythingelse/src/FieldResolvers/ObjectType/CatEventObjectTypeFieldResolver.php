@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -12,6 +11,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPCMSSchema\EventTags\Facades\EventTagTypeAPIFacade;
@@ -101,7 +102,20 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $value;
 
             case 'catName':
-                $cat = $objectTypeResolver->resolveValue($event, 'mainCategory', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $cat = $objectTypeResolver->resolveValue(
+                    $event,
+                    new LeafField(
+                        'mainCategory',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $cat;
                 } elseif ($cat) {
