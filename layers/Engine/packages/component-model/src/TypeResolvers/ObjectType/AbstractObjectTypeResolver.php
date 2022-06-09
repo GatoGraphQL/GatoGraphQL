@@ -1052,7 +1052,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         //     $fieldName,
         //     $fieldArgs,
         // ) = $this->dissectFieldForSchema($field);
-        $fieldName = $this->getFieldQueryInterpreter()->getFieldName($fieldName);
         $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldName);
 
         $objectTypeFieldResolvers = [];
