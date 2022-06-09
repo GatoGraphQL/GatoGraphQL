@@ -956,9 +956,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectives = array_keys($fieldDirectiveIDFields);
 
             // Calculate all the fields on which the directive will be applied.
-            $fieldDirectiveFields = $fieldDirectiveFieldIDs = [];
+            $fieldDirectiveFields = [];
+            /** @var array<string,SplObjectStorage<FieldInterface,array<string|int>>> */
+            $fieldDirectiveFieldIDs = [];
             $fieldDirectiveDirectFields = [];
             foreach ($fieldDirectives as $fieldDirective) {
+                $fieldDirectiveFieldIDs[$fieldDirective] = new SplObjectStorage();
                 foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
                     $fieldDirectiveDirectFields = array_merge(
                         $fieldDirectiveDirectFields,
