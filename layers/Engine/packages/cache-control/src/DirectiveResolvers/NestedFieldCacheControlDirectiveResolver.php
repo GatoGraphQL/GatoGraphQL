@@ -144,7 +144,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 $variables
             );
             // Nothing to do, there's some error
-            if (is_null($fieldDirectiveResolverInstances)) {
+            if ($fieldDirectiveResolverInstances === null) {
                 return;
             }
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
@@ -164,9 +164,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 // Regenerate the $idsDataFields for each directive
                 $directiveResolverIDDataFields = [];
                 foreach (array_keys($idsDataFields) as $id) {
-                    $directiveResolverIDDataFields[(string)$id] = [
-                        'direct' => $directiveResolverFields,
-                    ];
+                    $directiveResolverIDDataFields[(string)$id] = new EngineIterationFieldSet($directiveResolverFields);
                 }
                 $directiveResolverInstance->resolveDirective(
                     $relationalTypeResolver,
