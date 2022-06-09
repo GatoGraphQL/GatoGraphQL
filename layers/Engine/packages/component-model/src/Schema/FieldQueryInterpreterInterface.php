@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\FieldQueryInterpreterInterface as UpstreamFieldQueryInterpreterInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
@@ -61,7 +62,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
      */
     public function extractFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array;
@@ -74,7 +75,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
     ): array;
     public function extractFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
@@ -90,7 +91,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
     public function extractFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $field,
+        FieldInterface $field,
         array $variables,
         array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

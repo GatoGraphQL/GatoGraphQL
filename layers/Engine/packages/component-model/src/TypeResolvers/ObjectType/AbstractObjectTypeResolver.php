@@ -351,7 +351,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final protected function dissectFieldForSchema(FieldInterface $field, array $variables, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): array
     {
-        return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field->asFieldOutputQueryString(), $variables, $objectTypeFieldResolutionFeedbackStore);
+        return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
