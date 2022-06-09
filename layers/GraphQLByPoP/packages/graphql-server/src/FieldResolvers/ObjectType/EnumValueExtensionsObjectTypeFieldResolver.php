@@ -78,7 +78,7 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
         $enumValueExtensions = $object;
         return match ($fieldName) {
             'isAdminElement' => $enumValueExtensions->isAdminElement(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options),
         };
     }
 

@@ -78,7 +78,7 @@ class InputValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFiel
         $inputValueExtensions = $object;
         return match ($fieldName) {
             'isAdminElement' => $inputValueExtensions->isAdminElement(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options),
         };
     }
 
