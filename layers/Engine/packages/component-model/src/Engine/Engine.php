@@ -791,7 +791,7 @@ class Engine implements EngineInterface
                         $this->getDBObjectMandatoryFields()
                     )
                 );
-            
+
             // Add the 'direct' fields
             $engineIterationFieldSet->addDirectFields(
                 array_map(

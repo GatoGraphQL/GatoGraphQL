@@ -15,7 +15,7 @@ class EngineIterationFieldSet
     public function __construct(
         public array $direct = [],
         public SplObjectStorage $conditional = new SplObjectStorage(),
-    ) {        
+    ) {
     }
 
     /**
