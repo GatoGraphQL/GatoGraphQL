@@ -539,7 +539,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         // Iterate all the elements, and extract them into the array
-        $fieldArgumentNameTypeResolvers = $this->getFieldArgumentNameTypeResolvers($objectTypeResolver, $field->asFieldOutputQueryString());
+        $fieldArgumentNameTypeResolvers = $this->getFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
         if ($fieldArgumentNameTypeResolvers === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
@@ -551,7 +551,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return null;
         }
         /** @var array */
-        $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($objectTypeResolver, $field->asFieldOutputQueryString());
+        $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($objectTypeResolver, $field);
         if ($fieldArgElems = QueryHelpers::getFieldArgElements($this->getFieldArgs($field->asFieldOutputQueryString()))) {
             /** @var array */
             $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
@@ -611,7 +611,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field->asFieldOutputQueryString(), $fieldArgs, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field->asFieldOutputQueryString(), $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
         // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
@@ -764,7 +764,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field->asFieldOutputQueryString(), $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedField = null;
@@ -892,7 +892,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function castFieldArguments(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
+        FieldInterface $field,
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $forSchema
@@ -901,7 +901,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($fieldArgSchemaDefinition === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getNoFieldErrorFeedbackItemResolution($objectTypeResolver, $field),
+                    $this->getNoFieldErrorFeedbackItemResolution($objectTypeResolver, $field->asFieldOutputQueryString()),
                     LocationHelper::getNonSpecificLocation(),
                     $objectTypeResolver,
                 )
@@ -1081,7 +1081,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function castFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
+        FieldInterface $field,
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
@@ -1100,7 +1100,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function castFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
+        FieldInterface $field,
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
@@ -1168,7 +1168,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $directiveArgNameDefaultValues;
     }
 
-    protected function getFieldArgsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
+    protected function getFieldArgsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): ?array
     {
         $objectTypeResolverClass = get_class($objectTypeResolver);
         if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass] ?? [])) {
@@ -1197,21 +1197,21 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     /**
      * @return array<string, InputTypeResolverInterface>|null
      */
-    protected function getFieldArgumentNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
+    protected function getFieldArgumentNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): ?array
     {
         $objectTypeResolverClass = get_class($objectTypeResolver);
-        if (!array_key_exists($field, $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass] ?? [])) {
-            $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass][$field] = $this->doGetFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
+        if (!array_key_exists($field->asFieldOutputQueryString(), $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass] ?? [])) {
+            $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass][$field->asFieldOutputQueryString()] = $this->doGetFieldArgumentNameTypeResolvers($objectTypeResolver, $field);
         }
         /** @var array<string, InputTypeResolverInterface>|null */
-        $fieldArgumentNameTypeResolvers = $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass][$field];
+        $fieldArgumentNameTypeResolvers = $this->fieldArgumentNameTypeResolversCache[$objectTypeResolverClass][$field->asFieldOutputQueryString()];
         return $fieldArgumentNameTypeResolvers;
     }
 
     /**
      * @return array<string, InputTypeResolverInterface>|null
      */
-    protected function doGetFieldArgumentNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
+    protected function doGetFieldArgumentNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): ?array
     {
         // Get the field argument types, to know to what type it will cast the value
         $fieldArgsSchemaDefinition = $this->getFieldArgsSchemaDefinition($objectTypeResolver, $field);
@@ -1225,16 +1225,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldArgNameTypeResolvers;
     }
 
-    protected function getFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
+    protected function getFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): ?array
     {
         $objectTypeResolverClass = get_class($objectTypeResolver);
-        if (!array_key_exists($field, $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass] ?? [])) {
-            $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass][$field] = $this->doGetFieldArgumentNameDefaultValues($objectTypeResolver, $field);
+        if (!array_key_exists($field->asFieldOutputQueryString(), $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass] ?? [])) {
+            $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass][$field->asFieldOutputQueryString()] = $this->doGetFieldArgumentNameDefaultValues($objectTypeResolver, $field);
         }
-        return $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass][$field];
+        return $this->fieldArgumentNameDefaultValuesCache[$objectTypeResolverClass][$field->asFieldOutputQueryString()];
     }
 
-    protected function doGetFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, string $field): ?array
+    protected function doGetFieldArgumentNameDefaultValues(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): ?array
     {
         // Get the field arguments which have a default value
         // Set the missing InputObject as {} to give it a chance to set its default input field values
@@ -1281,7 +1281,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function castAndValidateFieldArgumentsForSchema(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
+        FieldInterface $field,
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
@@ -1318,7 +1318,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function castAndValidateFieldArgumentsForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
+        FieldInterface $field,
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): ?array {
