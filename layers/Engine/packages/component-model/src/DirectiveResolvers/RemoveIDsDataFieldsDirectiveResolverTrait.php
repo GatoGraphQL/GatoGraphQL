@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
@@ -37,6 +38,9 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
 
     /**
      * For GraphQL, set the response for the failing field as null
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFieldsToSetAsNull
+     * @param array<string|int,object> $objectIDItems
      */
     protected function setIDsDataFieldsAsNull(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -46,9 +50,9 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
     ): void {
         foreach (array_keys($idsDataFieldsToSetAsNull) as $id) {
             $object = $objectIDItems[$id];
-            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[(string)$id]['direct'];
+            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[(string)$id]->direct;
             foreach ($fieldsToSetAsNullForID as $field) {
-                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field->asFieldOutputQueryString(), $object);
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         }

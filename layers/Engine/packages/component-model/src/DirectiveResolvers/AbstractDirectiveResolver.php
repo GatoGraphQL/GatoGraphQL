@@ -1114,8 +1114,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $idsDataFieldsToRemove = [];
             // Calculate which fields to remove
             foreach ($idsDataFields as $id => $data_fields) {
-                $idsDataFieldsToRemove[(string)$id]['direct'] = array_intersect(
-                    $data_fields['direct'],
+                $idsDataFieldsToRemove[(string)$id]->direct = array_intersect(
+                    $data_fields->direct,
                     $failedFields
                 );
             }
