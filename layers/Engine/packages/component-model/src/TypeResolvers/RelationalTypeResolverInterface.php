@@ -55,7 +55,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      */
     public function resolveValue(
         object $object,
-        string $field,
+        FieldInterface $field,
         array $variables,
         array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

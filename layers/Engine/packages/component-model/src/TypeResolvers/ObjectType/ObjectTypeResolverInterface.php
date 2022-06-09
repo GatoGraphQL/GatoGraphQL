@@ -10,42 +10,43 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, OutputTypeResolverInterface
 {
-    public function getFieldSchemaDefinition(string $field): ?array;
-    public function hasObjectTypeFieldResolversForField(string $field): bool;
+    public function getFieldSchemaDefinition(FieldInterface $field): ?array;
+    public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool;
     public function collectFieldValidationErrors(
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): void;
     public function collectFieldValidationWarnings(
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     public function collectFieldDeprecations(
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     public function getFieldTypeResolver(
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?ConcreteTypeResolverInterface;
     public function getFieldTypeModifiers(
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?int;
     public function getFieldMutationResolver(
-        string $field,
+        FieldInterface $field,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface;
-    public function isFieldAMutation(string $field): ?bool;
+    public function isFieldAMutation(FieldInterface $field): ?bool;
     public function getAllMandatoryDirectivesForFields(): array;
     /**
      * The "executable" FieldResolver is the first one in the list
