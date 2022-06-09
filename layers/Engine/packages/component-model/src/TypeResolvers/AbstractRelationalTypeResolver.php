@@ -916,11 +916,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // adding data would just override the previous entry, and we can't keep track that it's another iteration
                 // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
                 // in which the "|" symbol could not be part of the field naturally
-                if (isset($fieldDirectiveCounter[$field][(string)$id][$fieldDirective])) {
+                if (isset($fieldDirectiveCounter[$field->asFieldOutputQueryString()][(string)$id][$fieldDirective])) {
                     // Increase counter and add to $fieldDirective
-                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field][(string)$id][$fieldDirective]);
+                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field->asFieldOutputQueryString()][(string)$id][$fieldDirective]);
                 } else {
-                    $fieldDirectiveCounter[$field][(string)$id][$fieldDirective] = 0;
+                    $fieldDirectiveCounter[$field->asFieldOutputQueryString()][(string)$id][$fieldDirective] = 0;
                 }
                 // Store which ID/field this directive must process
                 if (in_array($field, $data_fields->direct)) {
