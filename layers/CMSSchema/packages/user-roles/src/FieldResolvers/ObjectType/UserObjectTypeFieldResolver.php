@@ -213,6 +213,6 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return !empty(array_intersect($fieldArgs['capabilities'], $userCapabilities));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

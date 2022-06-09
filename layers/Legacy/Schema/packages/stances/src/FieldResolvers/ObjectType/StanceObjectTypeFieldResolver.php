@@ -192,6 +192,6 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $objectTypeResolver->resolveValue($object, 'stancetarget', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

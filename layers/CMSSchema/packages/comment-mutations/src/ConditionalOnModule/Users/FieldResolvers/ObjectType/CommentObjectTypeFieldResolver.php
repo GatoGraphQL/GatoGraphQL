@@ -111,6 +111,6 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
                 return $this->getUserTypeAPI()->getUserEmail($commentUserID);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
