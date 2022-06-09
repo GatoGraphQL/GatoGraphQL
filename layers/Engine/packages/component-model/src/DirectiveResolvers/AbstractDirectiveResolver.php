@@ -597,8 +597,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function hasIDsDataFields(array $idsDataFields): bool
     {
-        foreach ($idsDataFields as $id => &$data_fields) {
-            if ($data_fields['direct'] ?? null) {
+        foreach ($idsDataFields as $id => $data_fields) {
+            if ($data_fields->direct !== []) {
                 // If there's data-fields to fetch for any ID, that's it, there's data
                 return true;
             }
