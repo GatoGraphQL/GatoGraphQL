@@ -2419,7 +2419,7 @@ class Engine implements EngineInterface
                             $id_subcomponent_data_fields = array_values(
                                 array_filter(
                                     $subcomponent_data_fields,
-                                    fn (ComponentFieldInterface $componentField) => !in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)
+                                    fn (ComponentFieldInterface $componentField) => !in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
                             foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
