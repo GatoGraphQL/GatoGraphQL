@@ -1002,7 +1002,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
-                        foreach ($dataFields['direct'] as $field) {
+                        foreach ($dataFields->direct as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
                                 new ObjectFeedback(
                                     new FeedbackItemResolution(
@@ -1103,17 +1103,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // Remove all fields
             $idsDataFieldsToRemove = $idsDataFields;
             // Calculate which fields are being removed, to add to the error
-            foreach ($idsDataFields as $id => &$data_fields) {
+            foreach ($idsDataFields as $id => $data_fields) {
                 $failedFields = array_merge(
                     $failedFields,
-                    $data_fields['direct']
+                    $data_fields->direct
                 );
             }
             $failedFields = array_values(array_unique($failedFields));
         } else {
             $idsDataFieldsToRemove = [];
             // Calculate which fields to remove
-            foreach ($idsDataFields as $id => &$data_fields) {
+            foreach ($idsDataFields as $id => $data_fields) {
                 $idsDataFieldsToRemove[(string)$id]['direct'] = array_intersect(
                     $data_fields['direct'],
                     $failedFields
