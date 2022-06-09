@@ -426,7 +426,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    protected function addPropGroupField(string $group, array|Component $component_or_componentPath, array &$props, $property, $value, array $starting_from_componentPath = array(), array $options = array()): void
+    protected function addPropGroupField(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array(), array $options = array()): void
     {
         // Iterate down to the subcomponent, which must be an array of components
         if ($starting_from_componentPath) {
@@ -551,42 +551,42 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    protected function addGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    protected function addGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function setProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function setProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->addGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('append' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function appendProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->appendGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'merge' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
@@ -601,21 +601,21 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'merge-iterate-key' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
         $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'push' => true));
     }
