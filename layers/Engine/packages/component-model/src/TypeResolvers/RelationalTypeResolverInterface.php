@@ -11,6 +11,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
 {
@@ -76,7 +77,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     ): array;
     /**
      * @param FieldInterface[] $fieldDirectiveFields
-     * @return array<string,DirectiveResolverInterface>|null
+     * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
     public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array;
     /**

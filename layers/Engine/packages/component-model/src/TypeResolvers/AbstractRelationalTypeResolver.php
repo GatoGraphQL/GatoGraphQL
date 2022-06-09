@@ -467,7 +467,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * @param FieldInterface[] $fieldDirectiveFields
-     * @return array<string,DirectiveResolverInterface>|null
+     * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
     public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array
     {
@@ -481,7 +481,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Calculate directives per field
-        $fieldDirectiveResolverInstances = [];
+        $fieldDirectiveResolverInstances = new SplObjectStorage();
         foreach ($fieldDirectiveFields as $field) {
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
             $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
