@@ -79,18 +79,19 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         if ($idsDataFields) {
             // Iterate through all the arguments, calculate the maxAge for each of them,
             // and then return the minimum value from all of them and the directiveName for this field
+            /** @var FieldInterface[] */
             $fields = [];
             foreach ($idsDataFields as $id => $dataFields) {
                 $fields = array_merge(
                     $fields,
-                    $dataFields['direct']
+                    $dataFields->direct
                 );
             }
             $fields = array_values(array_unique($fields));
             // Extract all the field arguments which are fields or have fields themselves
             $fieldArgElems = array_unique(GeneralUtils::arrayFlatten(array_map(
-                function ($field) {
-                    if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field)) {
+                function (FieldInterface $field) {
+                    if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field->asFieldOutputQueryString())) {
                         return QueryHelpers::getFieldArgElements($fieldArgs);
                     }
                     return [];
