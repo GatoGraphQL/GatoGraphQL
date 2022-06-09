@@ -1054,7 +1054,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($directiveDirectFields as $field) {
                     $ids = $fieldDirectiveFieldIDs[$fieldDirective][$field];
                     foreach ($ids as $id) {
-                        /** @var EngineIterationFieldSet */
                         $directiveIDFields[$id] ??= new EngineIterationFieldSet();
                         $directiveIDFields[$id]->direct[] = $field;
                         /** @var SplObjectStorage|null */
