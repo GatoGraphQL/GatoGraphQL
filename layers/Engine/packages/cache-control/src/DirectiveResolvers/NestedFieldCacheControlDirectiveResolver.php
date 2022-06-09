@@ -26,9 +26,14 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     /**
      * If any argument is a field, then this directive will involve them to calculate the minimum max-age
      */
-    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
-    {
-        if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field)) {
+    public function resolveCanProcess(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directiveName,
+        array $directiveArgs,
+        FieldInterface $field,
+        array &$variables
+    ): bool {
+        if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field->asFieldOutputQueryString())) {
             $fieldArgElems = QueryHelpers::getFieldArgElements($fieldArgs);
             return $this->isFieldArgumentValueAFieldOrAnArrayWithAField($fieldArgElems, $variables);
         }

@@ -9,6 +9,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 /**
@@ -263,7 +264,7 @@ trait AliasSchemaDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        string $field,
+        FieldInterface $field,
         array &$variables
     ): bool {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();

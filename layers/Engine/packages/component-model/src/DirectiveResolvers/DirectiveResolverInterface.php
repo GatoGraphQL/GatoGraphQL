@@ -86,7 +86,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        string $field,
+        FieldInterface $field,
         array &$variables
     ): bool;
     /**

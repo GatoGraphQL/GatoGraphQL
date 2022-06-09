@@ -328,8 +328,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * By default, the directiveResolver instance can process the directive
      * This function can be overriden to force certain value on the directive args before it can be executed
      */
-    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
-    {
+    public function resolveCanProcess(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directiveName,
+        array $directiveArgs,
+        FieldInterface $field,
+        array &$variables
+    ): bool {
         /** Check if to validate the version */
         if (
             Environment::enableSemanticVersionConstraints()
