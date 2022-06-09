@@ -508,6 +508,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $fieldArgs,
                     $variables,
                     $expressions,
+                    $field,
                     $objectTypeFieldResolutionFeedbackStore,
                     $options
                 );
