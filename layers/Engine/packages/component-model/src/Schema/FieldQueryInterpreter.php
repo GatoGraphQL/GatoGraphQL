@@ -1617,25 +1617,26 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return;
         }
 
-        // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
-        // and is not wrapped with quotes, then it is a field. Validate it and resolve it
-        if (!empty($fieldArgValue) && is_string($fieldArgValue) && !is_numeric($fieldArgValue) && !$this->isFieldArgumentValueWrappedWithStringSymbols((string) $fieldArgValue)) {
-            $fieldArgValue = (string)$fieldArgValue;
-            // If it has the fieldArg brackets, and the last bracket is at the end, then it's a field!
-            list(
-                $fieldArgsOpeningSymbolPos,
-                $fieldArgsClosingSymbolPos
-            ) = QueryHelpers::listFieldArgsSymbolPositions($fieldArgValue);
+        // @todo Watch out! Commented logic because composable fields are not used anymore, and didn't want to migrate $objectTypeResolver->collectFieldValidationErrors( using FieldInterface
+        // // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
+        // // and is not wrapped with quotes, then it is a field. Validate it and resolve it
+        // if (!empty($fieldArgValue) && is_string($fieldArgValue) && !is_numeric($fieldArgValue) && !$this->isFieldArgumentValueWrappedWithStringSymbols((string) $fieldArgValue)) {
+        //     $fieldArgValue = (string)$fieldArgValue;
+        //     // If it has the fieldArg brackets, and the last bracket is at the end, then it's a field!
+        //     list(
+        //         $fieldArgsOpeningSymbolPos,
+        //         $fieldArgsClosingSymbolPos
+        //     ) = QueryHelpers::listFieldArgsSymbolPositions($fieldArgValue);
 
-            // If there is no "(" or ")", or if the ")" is not at the end, of if the "(" is at the beginning, then it's simply a string
-            if ($fieldArgsClosingSymbolPos !== (strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING)) || $fieldArgsOpeningSymbolPos === false || $fieldArgsOpeningSymbolPos === 0) {
-                return;
-            }
+        //     // If there is no "(" or ")", or if the ")" is not at the end, of if the "(" is at the beginning, then it's simply a string
+        //     if ($fieldArgsClosingSymbolPos !== (strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING)) || $fieldArgsOpeningSymbolPos === false || $fieldArgsOpeningSymbolPos === 0) {
+        //         return;
+        //     }
 
-            // If it reached here, it's a field! Validate it, or show an error
-            $objectTypeResolver->collectFieldValidationErrors($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-            return;
-        }
+        //     // If it reached here, it's a field! Validate it, or show an error
+        //     $objectTypeResolver->collectFieldValidationErrors($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+        //     return;
+        // }
     }
 
     protected function collectFieldArgumentValueWarningQualifiedEntriesForSchema(
@@ -1652,11 +1653,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return;
         }
 
-        // If the result fieldArgValue is a field, then validate it and resolve it
-        if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            $objectTypeResolver->collectFieldValidationWarnings($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-            return;
-        }
+        // @todo Watch out! Commented logic because composable fields are not used anymore, and didn't want to migrate $objectTypeResolver->collectFieldValidationErrors( using FieldInterface
+        // // If the result fieldArgValue is a field, then validate it and resolve it
+        // if ($this->isFieldArgumentValueAField($fieldArgValue)) {
+        //     $objectTypeResolver->collectFieldValidationWarnings($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+        //     return;
+        // }
     }
 
     protected function collectFieldArgumentValueDeprecationQualifiedEntriesForSchema(
@@ -1673,11 +1675,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             return;
         }
 
-        // If the result fieldArgValue is a field, then validate it and resolve it
-        if ($this->isFieldArgumentValueAField($fieldArgValue)) {
-            $objectTypeResolver->collectFieldDeprecations($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
-            return;
-        }
+        // @todo Watch out! Commented logic because composable fields are not used anymore, and didn't want to migrate $objectTypeResolver->collectFieldValidationErrors( using FieldInterface
+        // // If the result fieldArgValue is a field, then validate it and resolve it
+        // if ($this->isFieldArgumentValueAField($fieldArgValue)) {
+        //     $objectTypeResolver->collectFieldDeprecations($fieldArgValue, $variables, $objectTypeFieldResolutionFeedbackStore);
+        //     return;
+        // }
     }
 
     protected function getNoAliasFieldOutputKey(string $field): string
