@@ -274,7 +274,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
 
-            if (empty($fieldDirectiveResolverInstances)) {
+            if ($fieldDirectiveResolverInstances->count() === 0) {
                 foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -313,7 +313,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 [
                                     $directiveName,
                                     json_encode($directiveArgs),
-                                    $field,
+                                    $field->asFieldOutputQueryString(),
                                 ]
                             ),
                             LocationHelper::getNonSpecificLocation(),
@@ -443,7 +443,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     ErrorFeedbackItemProvider::E23,
                                     [
                                         $fieldDirective,
-                                        implode('\', \'', $alreadyProcessingFields),
+                                        implode(
+                                            '\', \'',
+                                            array_map(
+                                                fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                                                $alreadyProcessingFields
+                                            )
+                                        ),
                                     ]
                                 ),
                                 LocationHelper::getNonSpecificLocation(),
