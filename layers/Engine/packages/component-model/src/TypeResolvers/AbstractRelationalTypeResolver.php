@@ -868,7 +868,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
-            if (!isset($this->fieldDirectivesFromFieldCache[$field->asFieldOutputQueryString()])) {
+            if (!isset($this->fieldDirectivesFromFieldCache[$field->getUniqueID()])) {
                 // Get the directives from the field
                 $directives = $this->getFieldQueryInterpreter()->getDirectives($field->asFieldOutputQueryString());
 
@@ -908,10 +908,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     )
                 );
                 // Assign in the cache
-                $this->fieldDirectivesFromFieldCache[$field->asFieldOutputQueryString()] = $fieldDirectives;
+                $this->fieldDirectivesFromFieldCache[$field->getUniqueID()] = $fieldDirectives;
             }
             // Extract all the directives, and store which fields they process
-            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field->asFieldOutputQueryString()]) as $fieldDirective) {
+            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field->getUniqueID()]) as $fieldDirective) {
                 $this->fieldDirectiveIDFields[$fieldDirective][(string)$id] ??= new EngineIterationFieldSet();
                 // Watch out! Directives can be repeated, and then they must be executed multiple times
                 // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
@@ -919,11 +919,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // adding data would just override the previous entry, and we can't keep track that it's another iteration
                 // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
                 // in which the "|" symbol could not be part of the field naturally
-                if (isset($fieldDirectiveCounter[$field->asFieldOutputQueryString()][(string)$id][$fieldDirective])) {
+                if (isset($fieldDirectiveCounter[$field->getUniqueID()][(string)$id][$fieldDirective])) {
                     // Increase counter and add to $fieldDirective
-                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field->asFieldOutputQueryString()][(string)$id][$fieldDirective]);
+                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field->getUniqueID()][(string)$id][$fieldDirective]);
                 } else {
-                    $fieldDirectiveCounter[$field->asFieldOutputQueryString()][(string)$id][$fieldDirective] = 0;
+                    $fieldDirectiveCounter[$field->getUniqueID()][(string)$id][$fieldDirective] = 0;
                 }
                 // Store which ID/field this directive must process
                 if (in_array($field, $data_fields->direct)) {
