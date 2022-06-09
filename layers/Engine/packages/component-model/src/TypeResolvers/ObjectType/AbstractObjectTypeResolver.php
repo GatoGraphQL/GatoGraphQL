@@ -427,7 +427,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
-            $field,
+            $validatedField,
             $fieldName,
             $fieldArgs,
         ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
@@ -464,7 +464,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Once again, the $validField becomes the $field
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
-            $field,
+            $validatedField,
             $fieldName,
             $fieldArgs,
         ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
@@ -604,7 +604,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * All other conditions, check them when enabled by configuration.
              */
             if ($value === null) {
-                $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field);
+                $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $fieldName);
                 $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
                 if ($fieldTypeIsNonNullable) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
