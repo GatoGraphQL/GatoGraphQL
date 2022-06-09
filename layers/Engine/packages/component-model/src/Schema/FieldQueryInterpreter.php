@@ -1171,15 +1171,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     protected function getFieldArgsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): ?array
     {
         $objectTypeResolverClass = get_class($objectTypeResolver);
-        if (!array_key_exists($field, $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass] ?? [])) {
+        if (!array_key_exists($field->asFieldOutputQueryString(), $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass] ?? [])) {
             $fieldArgsSchemaDefinition = null;
             $fieldSchemaDefinition = $objectTypeResolver->getFieldSchemaDefinition($field);
             if ($fieldSchemaDefinition !== null) {
                 $fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
             }
-            $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field] = $fieldArgsSchemaDefinition;
+            $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field->asFieldOutputQueryString()] = $fieldArgsSchemaDefinition;
         }
-        return $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field];
+        return $this->fieldSchemaDefinitionArgsCache[$objectTypeResolverClass][$field->asFieldOutputQueryString()];
     }
 
     protected function getDirectiveSchemaDefinitionArgs(DirectiveResolverInterface $directiveResolver, RelationalTypeResolverInterface $relationalTypeResolver): array
