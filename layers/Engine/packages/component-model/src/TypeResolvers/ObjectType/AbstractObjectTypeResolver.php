@@ -107,7 +107,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      *
-     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
      */
     final public function enqueueFillingObjectsFromIDs(array $idsDataFields): void
     {
