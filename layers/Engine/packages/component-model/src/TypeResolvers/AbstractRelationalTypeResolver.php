@@ -286,7 +286,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     json_encode($directiveArgs),
                                     implode(
                                         $this->__('\', \'', 'component-model'),
-                                        $fieldDirectiveFields[$fieldDirective]
+                                        array_map(
+                                            fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                                            $fieldDirectiveFields[$fieldDirective]
+                                        )
                                     ),
                                 ]
                             ),
@@ -469,7 +472,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param FieldInterface[] $fieldDirectiveFields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array
+    public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?SplObjectStorage
     {
         $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
         $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
