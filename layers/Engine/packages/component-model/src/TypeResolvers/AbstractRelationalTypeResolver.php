@@ -845,14 +845,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          * Hence, collect all these fields, and add them
          * as if they were direct
          */
-        $conditionalFields = [];
+        $allConditionalFields = [];
         foreach ($engineIterationFieldSet->conditional as $conditionField) {
-            $conditionalField = $engineIterationFieldSet->conditional[$conditionField];
-            $conditionalFields[] = $conditionalField;
+            $conditionalFields = $engineIterationFieldSet->conditional[$conditionField];
+            $allConditionalFields = array_merge(
+                $allConditionalFields,
+                $conditionalFields
+            );
         }
         return array_unique(array_merge(
             $engineIterationFieldSet->direct,
-            $conditionalFields
+            $allConditionalFields
         ));
     }
 
