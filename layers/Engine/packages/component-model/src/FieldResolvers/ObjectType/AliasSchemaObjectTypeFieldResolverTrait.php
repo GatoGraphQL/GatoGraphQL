@@ -8,6 +8,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 /**
  * Create an alias of a fieldName (or fieldNames), to use when:
@@ -455,6 +456,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         array $fieldArgs,
         array $variables,
         array $expressions,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
@@ -466,6 +468,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
             $fieldArgs,
             $variables,
             $expressions,
+            $field,
             $objectTypeFieldResolutionFeedbackStore,
             $options
         );
