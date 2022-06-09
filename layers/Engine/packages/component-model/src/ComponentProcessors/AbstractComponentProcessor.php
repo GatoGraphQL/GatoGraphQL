@@ -426,7 +426,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    protected function addPropGroupField(string $group, array|Component $component_or_componentPath, array &$props, $field, $value, array $starting_from_componentPath = array(), array $options = array()): void
+    protected function addPropGroupField(string $group, array|Component $component_or_componentPath, array &$props, $property, $value, array $starting_from_componentPath = array(), array $options = array()): void
     {
         // Iterate down to the subcomponent, which must be an array of components
         if ($starting_from_componentPath) {
@@ -491,35 +491,35 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $component_props[$attComponentFullName][$group] = $component_props[$attComponentFullName][$group] ?? array();
 
         if ($options['append'] ?? null) {
-            $component_props[$attComponentFullName][$group][$field] = $component_props[$attComponentFullName][$group][$field] ?? '';
-            $component_props[$attComponentFullName][$group][$field] .= ' ' . $value;
+            $component_props[$attComponentFullName][$group][$property] = $component_props[$attComponentFullName][$group][$property] ?? '';
+            $component_props[$attComponentFullName][$group][$property] .= ' ' . $value;
         } elseif ($options['array'] ?? null) {
-            $component_props[$attComponentFullName][$group][$field] = $component_props[$attComponentFullName][$group][$field] ?? array();
+            $component_props[$attComponentFullName][$group][$property] = $component_props[$attComponentFullName][$group][$property] ?? array();
             if ($options['merge'] ?? null) {
-                $component_props[$attComponentFullName][$group][$field] = array_merge(
-                    $component_props[$attComponentFullName][$group][$field],
+                $component_props[$attComponentFullName][$group][$property] = array_merge(
+                    $component_props[$attComponentFullName][$group][$property],
                     $value
                 );
             } elseif ($options['merge-iterate-key'] ?? null) {
                 foreach ($value as $value_key => $value_value) {
-                    if (!$component_props[$attComponentFullName][$group][$field][$value_key]) {
-                        $component_props[$attComponentFullName][$group][$field][$value_key] = array();
+                    if (!$component_props[$attComponentFullName][$group][$property][$value_key]) {
+                        $component_props[$attComponentFullName][$group][$property][$value_key] = array();
                     }
                     // Doing array_unique, because in the NotificationPreviewLayout, different layouts might impose a JS down the road, many times, and these get duplicated
-                    $component_props[$attComponentFullName][$group][$field][$value_key] = array_unique(
+                    $component_props[$attComponentFullName][$group][$property][$value_key] = array_unique(
                         array_merge(
-                            $component_props[$attComponentFullName][$group][$field][$value_key],
+                            $component_props[$attComponentFullName][$group][$property][$value_key],
                             $value_value
                         )
                     );
                 }
             } elseif ($options['push'] ?? null) {
-                array_push($component_props[$attComponentFullName][$group][$field], $value);
+                array_push($component_props[$attComponentFullName][$group][$property], $value);
             }
         } else {
             // If already set, then do nothing
-            if (!isset($component_props[$attComponentFullName][$group][$field])) {
-                $component_props[$attComponentFullName][$group][$field] = $value;
+            if (!isset($component_props[$attComponentFullName][$group][$property])) {
+                $component_props[$attComponentFullName][$group][$property] = $value;
             }
         }
 
@@ -528,10 +528,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $props = $current_props;
         }
     }
-    protected function getPropGroupField(string $group, Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    protected function getPropGroupField(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
         $group = $this->getPropGroup($group, $component, $props, $starting_from_componentPath);
-        return $group[$field] ?? null;
+        return $group[$property] ?? null;
     }
     protected function getPropGroup(string $group, Component $component, array &$props, array $starting_from_componentPath = array()): array
     {
@@ -551,73 +551,73 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    protected function addGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    protected function addGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function setProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function setProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->addGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('append' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('append' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function appendProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->appendGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->appendGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'merge' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'merge' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
-    public function getGroupProp(string $group, Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    public function getGroupProp(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getPropGroupField($group, $component, $props, $field, $starting_from_componentPath);
+        return $this->getPropGroupField($group, $component, $props, $property, $starting_from_componentPath);
     }
-    public function getProp(Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    public function getProp(Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $field, $starting_from_componentPath);
-    }
-    /**
-     * @param Component[]|Component $component_or_componentPath
-     */
-    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
-    {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'merge-iterate-key' => true));
+        return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $property, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'merge-iterate-key' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'push' => true));
+        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
+    }
+    /**
+     * @param Component[]|Component $component_or_componentPath
+     */
+    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, $value, array $starting_from_componentPath = array()): void
+    {
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'push' => true));
     }
 
     //-------------------------------------------------
