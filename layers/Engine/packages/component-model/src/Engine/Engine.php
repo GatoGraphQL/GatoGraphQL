@@ -2247,8 +2247,8 @@ class Engine implements EngineInterface
         return [
             Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
             Tokens::PATH => $directive !== null
-                ? [$objectOrSchemaFeedback->getField(), $directive]
-                : [$objectOrSchemaFeedback->getField()],
+                ? [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString(), $directive]
+                : [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString()],
             Tokens::LOCATIONS => [$objectOrSchemaFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
