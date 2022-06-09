@@ -2429,7 +2429,7 @@ class Engine implements EngineInterface
                                 /** @var SplObjectStorage $conditionComponentFields */
                                 foreach ($conditionComponentFields as $componentField) {
                                     /** @var ComponentFieldInterface $componentField */
-                                    if (in_array($componentField->asFieldOutputQueryString(), $subcomponent_already_loaded_data_fields)) {
+                                    if (in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)) {
                                         continue;
                                     }
                                     /** @var SplObjectStorage */
