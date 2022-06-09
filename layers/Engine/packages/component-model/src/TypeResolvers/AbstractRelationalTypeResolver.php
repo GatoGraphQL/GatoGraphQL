@@ -982,6 +982,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     );
                     // Also transpose the array to match field to IDs later on
                     foreach ($idFieldDirectiveIDFields as $field) {
+                        $fieldDirectiveFieldIDs[$fieldDirective][$field] ??= [];
                         $fieldDirectiveFieldIDs[$fieldDirective][$field][] = $id;
                     }
                 }
