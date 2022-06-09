@@ -18,6 +18,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -418,7 +419,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      */
     public function resolveValue(
         object $object,
-        string $field,
+        FieldInterface $field,
         array $variables,
         array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

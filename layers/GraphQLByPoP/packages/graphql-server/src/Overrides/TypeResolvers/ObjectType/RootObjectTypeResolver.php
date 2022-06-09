@@ -13,7 +13,7 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver as UpstreamRootOb
 class RootObjectTypeResolver extends UpstreamRootObjectTypeResolver
 {
     // @todo Review! It was commented because global fields should be also found (eg: "objectAddEntry")
-    // protected function calculateObjectTypeFieldResolversForFieldName(string $field): array
+    // protected function calculateObjectTypeFieldResolversForFieldName(string $fieldName): array
     // {
     //     $enableNestedMutations = App::getState('nested-mutations-enabled');
     //     /**
