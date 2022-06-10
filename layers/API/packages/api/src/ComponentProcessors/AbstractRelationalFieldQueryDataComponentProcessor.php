@@ -35,7 +35,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * @var array<string,LeafField>
      */
-    private array $fieldCache = [];
+    private array $fieldInstanceContainer = [];
 
     /**
      * @return FieldFragmentModelsTuple[]
@@ -403,8 +403,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              * and it's different objects, even if with the same properties,
              * it doesn't retrieve it.
              */
-            if (!isset($this->fieldCache[$alias])) {
-                $this->fieldCache[$alias] = new LeafField(
+            if (!isset($this->fieldInstanceContainer[$alias])) {
+                $this->fieldInstanceContainer[$alias] = new LeafField(
                     'isTypeOrImplementsAll',
                     $alias,
                     [
@@ -421,7 +421,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                     LocationHelper::getNonSpecificLocation()
                 );
             }
-            $leafField = $this->fieldCache[$alias];
+            $leafField = $this->fieldInstanceContainer[$alias];
 
             /**
              * Create a new field that will evaluate if the fragment
