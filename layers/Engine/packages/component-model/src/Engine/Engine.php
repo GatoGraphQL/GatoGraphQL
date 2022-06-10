@@ -2402,6 +2402,8 @@ class Engine implements EngineInterface
                                 )
                             );
                             foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
+                                $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= new SplObjectStorage();
+                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentField];
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var ComponentFieldInterface $conditionComponentField */
                                 $conditionComponentFields = $subcomponent_conditional_data_fields[$conditionComponentField];
@@ -2413,12 +2415,10 @@ class Engine implements EngineInterface
                                     }
                                     /** @var SplObjectStorage */
                                     $conditionalComponentFields = $conditionComponentFields[$componentField];
-                                    $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= new SplObjectStorage();
-                                    $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentField];
                                     $id_subcomponent_conditional_data_fields_storage[$componentField] ??= new SplObjectStorage();
                                     $id_subcomponent_conditional_data_fields_storage[$componentField]->addAll($conditionalComponentFields);
-                                    $id_subcomponent_conditional_data_fields[$conditionComponentField] = $id_subcomponent_conditional_data_fields_storage;
                                 }
+                                $id_subcomponent_conditional_data_fields[$conditionComponentField] = $id_subcomponent_conditional_data_fields_storage;
                             }
                         } else {
                             $id_subcomponent_data_fields = $subcomponent_data_fields;
