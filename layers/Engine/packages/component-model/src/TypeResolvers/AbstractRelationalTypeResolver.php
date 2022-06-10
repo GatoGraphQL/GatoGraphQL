@@ -912,7 +912,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             // Extract all the directives, and store which fields they process
             foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field->getUniqueID()]) as $fieldDirective) {
-                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id] ??= new EngineIterationFieldSet();
                 // Watch out! Directives can be repeated, and then they must be executed multiple times
                 // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
                 // However, because we are adding the $idsDataFields under key $fieldDirective, when the 2nd occurrence of the directive is found,
@@ -925,6 +924,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 } else {
                     $fieldDirectiveCounter[$field->getUniqueID()][(string)$id][$fieldDirective] = 0;
                 }
+                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
                 if (in_array($field, $data_fields->direct)) {
                     $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->direct[] = $field;
