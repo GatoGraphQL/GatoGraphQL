@@ -148,7 +148,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final public function getFieldSchemaDefinition(FieldInterface $field): ?array
     {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -172,7 +172,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
         if ($executableObjectTypeFieldResolver === null) {
             /**
              * If the error happened from requesting a version that doesn't exist, show an appropriate error message
@@ -215,7 +215,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
         if ($executableObjectTypeFieldResolver === null) {
             return;
         }
@@ -252,7 +252,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
         if ($executableObjectTypeFieldResolver === null) {
             return;
         }
@@ -279,7 +279,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?ConcreteTypeResolverInterface {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -298,7 +298,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?int {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -317,7 +317,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -331,20 +331,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
     }
 
-    final public function isFieldAMutation(FieldInterface $field): ?bool
+    final public function isFieldAMutation(string $fieldName): ?bool
     {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldName);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
 
-        // @todo Hack to provide needed vars
-        $variables = [];
-        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        list(
-            $validField,
-            $fieldName,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         $fieldMutationResolver = $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
         return $fieldMutationResolver !== null;
     }
@@ -1014,9 +1007,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Get the first FieldResolver that resolves the field
      */
-    final protected function getExecutableObjectTypeFieldResolverForField(FieldInterface $field): ?ObjectTypeFieldResolverInterface
+    final protected function getExecutableObjectTypeFieldResolverForField(string $fieldName): ?ObjectTypeFieldResolverInterface
     {
-        $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForFieldName($field->getName());
+        $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForFieldName($fieldName);
         if ($objectTypeFieldResolversForField === []) {
             return null;
         }
