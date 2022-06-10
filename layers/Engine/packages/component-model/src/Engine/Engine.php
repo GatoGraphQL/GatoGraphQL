@@ -1623,7 +1623,8 @@ class Engine implements EngineInterface
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
                     $data_fields->direct,
-                    iterator_to_array($data_fields->conditional)
+                    // Conditional items must also be in direct, so no need to check to cache them
+                    // iterator_to_array($data_fields->conditional)
                 );
             }
 
