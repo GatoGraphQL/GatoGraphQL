@@ -148,7 +148,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final public function getFieldSchemaDefinition(FieldInterface $field): ?array
     {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -172,7 +172,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             /**
              * If the error happened from requesting a version that doesn't exist, show an appropriate error message
@@ -215,7 +215,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return;
         }
@@ -252,7 +252,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return;
         }
@@ -279,7 +279,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?ConcreteTypeResolverInterface {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -298,7 +298,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?int {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -317,7 +317,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field->getName());
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
         }
@@ -388,7 +388,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
-        $objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForFieldName($field->getName());
+        $objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field);
         if ($objectTypeFieldResolvers === []) {
             /**
              * Return an error to indicate that no fieldResolver processes this field,
@@ -910,7 +910,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     // If using an ACL to remove a field from an interface,
                     // getting the ObjectTypeFieldResolvers for that field will be empty
                     // Then ignore adding the field, it must not be added to the schema
-                    $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForFieldName($fieldName);
+                    $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($fieldName);
                     if (!$objectTypeFieldResolversForField) {
                         continue;
                     }
@@ -1007,9 +1007,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Get the first FieldResolver that resolves the field
      */
-    final protected function getExecutableObjectTypeFieldResolverForField(string $fieldName): ?ObjectTypeFieldResolverInterface
+    final protected function getExecutableObjectTypeFieldResolverForField(FieldInterface|string $fieldOrFieldName): ?ObjectTypeFieldResolverInterface
     {
-        $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForFieldName($fieldName);
+        $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($fieldOrFieldName);
         if ($objectTypeFieldResolversForField === []) {
             return null;
         }
@@ -1019,34 +1019,40 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @return ObjectTypeFieldResolverInterface[]
      */
-    final protected function getObjectTypeFieldResolversForFieldName(string $fieldName): array
+    final protected function getObjectTypeFieldResolversForField(FieldInterface|string $fieldOrFieldName): array
     {
+        if ($fieldOrFieldName instanceof FieldInterface) {
+            $field = $fieldOrFieldName;
+            $fieldQueryString = $field->asFieldOutputQueryString();
+        } else {
+            $fieldQueryString = $fieldOrFieldName;
+        }
         // Calculate the fieldResolver to process this field if not already in the cache
         // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
-        if (!isset($this->objectTypeFieldResolversForFieldCache[$fieldName])) {
-            $this->objectTypeFieldResolversForFieldCache[$fieldName] = $this->calculateObjectTypeFieldResolversForFieldName($fieldName);
+        if (!isset($this->objectTypeFieldResolversForFieldCache[$fieldQueryString])) {
+            $this->objectTypeFieldResolversForFieldCache[$fieldQueryString] = $this->calculateObjectTypeFieldResolversForFieldName($fieldOrFieldName);
         }
 
-        return $this->objectTypeFieldResolversForFieldCache[$fieldName];
+        return $this->objectTypeFieldResolversForFieldCache[$fieldQueryString];
     }
 
     final public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool
     {
-        return !empty($this->getObjectTypeFieldResolversForFieldName($field->getName()));
+        return !empty($this->getObjectTypeFieldResolversForField($field));
     }
 
-    protected function calculateObjectTypeFieldResolversForFieldName(string $fieldName): array
+    protected function calculateObjectTypeFieldResolversForFieldName(FieldInterface|string $fieldOrFieldName): array
     {
-        // Important: here we CAN'T use `dissectFieldForSchema` to get the fieldArgs, because it will attempt to validate them
-        // To validate them, the fieldQueryInterpreter needs to know the schema, so it once again calls functions from this typeResolver
-        // Generating an infinite loop
-        // Then, just to find out which ObjectTypeFieldResolvers will process this field, crudely obtain the fieldArgs, with NO schema-based validation!
-        // list(
-        //     $field,
-        //     $fieldName,
-        //     $fieldArgs,
-        // ) = $this->dissectFieldForSchema($field);
-        $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldName);
+        $fieldArgs = [];
+        if ($fieldOrFieldName instanceof FieldInterface) {
+            $field = $fieldOrFieldName;
+            $fieldName = $field->getName();
+            $fieldQueryString = $field->asFieldOutputQueryString();
+            $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldQueryString);
+        } else {
+            $fieldName = $fieldOrFieldName;
+        }        
+        // $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldName);
 
         $objectTypeFieldResolvers = [];
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
