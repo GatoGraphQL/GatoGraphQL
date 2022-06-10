@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use PoP\ComponentModel\Misc\GeneralUtils;
+
 abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
     /**
@@ -23,7 +25,10 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
         if ($params !== []) {
+            $params = $this->maybeAddXDebugTriggerParam($params);
             $options['query'] = $params;
+        } else {
+            $endpointURL = $this->maybeAddXDebugTriggerParam($endpointURL);
         }
         $body = '';
         if ($query !== '' || $variables !== [] || $operationName !== '') {
@@ -48,6 +53,27 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         if ($expectedResponseBody !== null) {
             $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
         }
+    }
+
+    protected static function maybeAddXDebugTriggerParam(string|array $urlOrParams): string|array
+    {
+        if (getenv('XDEBUG_TRIGGER') === false) {
+            return $urlOrParams;
+        }
+        $xdebugParams = [
+            'XDEBUG_TRIGGER' => getenv('XDEBUG_TRIGGER'),
+        ];
+        if (is_array($urlOrParams)) {
+            /** @var array */
+            $params = $urlOrParams;
+            return array_merge(
+                $params,
+                $xdebugParams
+            );
+        }
+        /** @var string */
+        $url = $urlOrParams;
+        return GeneralUtils::addQueryArgs($xdebugParams, $url);
     }
 
     /**
