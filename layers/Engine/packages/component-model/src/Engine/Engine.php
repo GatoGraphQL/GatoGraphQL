@@ -812,7 +812,11 @@ class Engine implements EngineInterface
                 $conditionalDataFields = $conditional_data_fields[$conditionComponentField];
                 /** @var SplObjectStorage $conditionalDataFields */
                 $conditionField = $conditionComponentField->getField();
-                $conditionalComponentFields = $this->extractAllConditionalComponentFields($conditionalDataFields);
+                $conditionalComponentFields = [];
+                foreach ($conditionalDataFields as $conditionalDataField) {
+                    /** @var ComponentFieldInterface $conditionalDataField */
+                    $conditionalComponentFields[] = $conditionalDataField;
+                }
                 $engineIterationFieldSet->conditional[$conditionField] = array_merge(
                     $engineIterationFieldSet->conditional[$conditionField] ??= [],
                     array_map(
@@ -823,33 +827,6 @@ class Engine implements EngineInterface
             }
             $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id] = $engineIterationFieldSet;
         }
-    }
-
-    /**
-     * Extracts all the deep conditional fields as an array of unique elements
-     *
-     * @return ComponentFieldInterface[]
-     */
-    private function extractAllConditionalComponentFields(SplObjectStorage $conditional_data_fields): array
-    {
-        $conditionalComponentFields = [];
-        $heap = $conditional_data_fields;
-        while ($heap->count() > 0) {
-            // Obtain and remove first element (the conditionComponentField) from the heap
-            $heap->rewind();
-            /** @var ComponentFieldInterface */
-            $conditionalComponentField = $heap->current();
-            /** @var SplObjectStorage */
-            $fieldDependents = $heap[$conditionalComponentField];
-            $heap->detach($conditionalComponentField);
-
-            // Add the conditionComponentField to the array
-            $conditionalComponentFields[] = $conditionalComponentField;
-
-            // Add all conditionalComponentFields to the heap
-            $heap->addAll($fieldDependents);
-        }
-        return array_unique($conditionalComponentFields);
     }
 
     /**
