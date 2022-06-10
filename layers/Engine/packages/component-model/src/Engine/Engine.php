@@ -2357,6 +2357,7 @@ class Engine implements EngineInterface
                 }
                 // }
 
+                /** @var array<string|int> */
                 $field_ids = [];
                 foreach ($subcomponentIDs as $dbname => $dbkey_id_database_field_ids) {
                     foreach ($dbkey_id_database_field_ids as $database_key => $id_database_field_ids) {
@@ -2367,9 +2368,7 @@ class Engine implements EngineInterface
                             // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
-                                function ($field_id) use ($typedSubcomponentIDs) {
-                                    return $typedSubcomponentIDs[$field_id];
-                                },
+                                fn (string|int $field_id) => $typedSubcomponentIDs[$field_id],
                                 $database_field_ids
                             );
                             if ($subcomponentIsUnionTypeResolver) {
