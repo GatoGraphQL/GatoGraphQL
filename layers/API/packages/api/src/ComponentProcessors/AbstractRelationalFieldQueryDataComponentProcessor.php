@@ -390,6 +390,16 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              *   date
              * }
              * ```
+             *
+             * It's also important for the location of each field
+             * to be part of the alias, to make sure that,
+             * if the same group of fields are applied under different
+             * types (evidenced by their location on the GraphQL query)
+             * then these are treated differently.
+             *
+             * An example of the generated alias is:
+             *
+             *   "_kind13x5_name14x5_isTypeOrImplementsAll___Type_"
              */
             $alias = sprintf(
                 '_%s_%s_%s_',
