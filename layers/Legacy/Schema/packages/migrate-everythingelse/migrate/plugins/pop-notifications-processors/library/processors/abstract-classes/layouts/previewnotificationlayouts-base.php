@@ -1,8 +1,9 @@
 <?php
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -76,7 +77,13 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
 
         if ($components) {
             $ret[] = new RelationalComponentField(
-                'userID',
+                new LeafField(
+                    'userID',
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                ),
                 $components
             );
         }
@@ -159,7 +166,13 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             'is-comment-notification-and-loading-latest'
         );
         $ret[] = new ConditionalLeafComponentField(
-            $field,
+            new LeafField(
+                $field,
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            ),
             [
                 [PoP_Module_Processor_NotificationSubcomponentLayouts::class, PoP_Module_Processor_NotificationSubcomponentLayouts::COMPONENT_SUBCOMPONENT_NOTIFICATIONCOMMENT],
             ]
@@ -188,8 +201,6 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
-
-        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // if ($this->addUrl($component, $props)) {
 

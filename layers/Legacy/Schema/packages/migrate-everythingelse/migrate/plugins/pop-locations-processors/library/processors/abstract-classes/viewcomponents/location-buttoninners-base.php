@@ -1,5 +1,7 @@
 <?php
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extends PoP_Module_Processor_ButtonInnersBase
@@ -47,7 +49,13 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
         if ($location_component = $this->getLocationComponent($component)) {
             return [
                 new RelationalComponentField(
-                    'locations',
+                    new LeafField(
+                        'locations',
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     [
                         $location_component,
                     ]

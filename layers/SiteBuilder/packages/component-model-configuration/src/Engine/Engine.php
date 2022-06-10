@@ -20,6 +20,8 @@ use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
 use PoP\Engine\Exception\ContractNotSatisfiedException;
 use PoP\Engine\FunctionAPIFactory;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -211,7 +213,15 @@ class Engine extends UpstreamEngine implements EngineInterface
         // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
         return [
             ...parent::getDBObjectMandatoryFields(),
-            new LeafComponentField('id'),
+            new LeafComponentField(
+                new LeafField(
+                    'id',
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                )
+            ),
         ];
     }
 }

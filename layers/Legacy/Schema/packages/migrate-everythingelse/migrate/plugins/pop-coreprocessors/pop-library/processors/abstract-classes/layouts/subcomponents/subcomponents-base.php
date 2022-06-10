@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 
 abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -9,10 +10,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_SUBCOMPONENT];
     }
 
-    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
-    {
-        return '';
-    }
+    abstract public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component): LeafField;
 
     /**
      * @return \PoP\ComponentModel\Component\Component[]

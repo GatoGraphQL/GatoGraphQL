@@ -15,11 +15,7 @@ class LeafComponentField extends AbstractComponentField
         LeafField $leafField,
     ): self {
         return new self(
-            $leafField->getName(),
-            $leafField->getAlias(),
-            $leafField->getArguments(),
-            $leafField->getDirectives(),
-            $leafField->getLocation(),
+            $leafField,
         );
     }
 }

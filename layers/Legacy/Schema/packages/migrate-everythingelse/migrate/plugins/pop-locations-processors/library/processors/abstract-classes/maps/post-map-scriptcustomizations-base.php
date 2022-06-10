@@ -2,6 +2,8 @@
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -46,7 +48,13 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         if ($authors_component = $this->getAuthorsComponent($component)) {
             return [
                 new RelationalComponentField(
-                    'author',
+                    new LeafField(
+                        'author',
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     [
                         $authors_component,
                     ]

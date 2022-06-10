@@ -346,6 +346,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * the data for all nested modules)
          */
         $conditionalLeafComponentFields = [];
+        $fieldCache = [];
         foreach ($fragmentModelListNameFields as $fragmentModelListName => $fragmentModelListFields) {
             $fragmentModels = $fragmentModelListNameItems[$fragmentModelListName];
             $fragmentModelListFieldIDs = array_map(
@@ -365,49 +366,65 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $fragmentModelListFields,
             );
             /**
+             * Create a unique alias to avoid conflicts.
+             *
+             * Embedded in the alias are the required fragment models
+             * to satisfy, and all the fields that depend on it,
+             * so that if two fields have the same dependency,
+             * this field is resolved once, not twice.
+             *
+             * Eg: 2 fields on the same fragment will have the same
+             * dependency, and will re-use it:
+             *
+             * ```graphql
+             * fragment PostData on Post {
+             *   title
+             *   date
+             * }
+             * ```
+             */
+            $alias = sprintf(
+                '_%s_%s_%s_',
+                implode('_', $fragmentModelListFieldAliasFriendlyIDs),
+                'isTypeOrImplementsAll',
+                $fragmentModelListName
+            );
+            /**
+             * Important! The `FieldInterface` instance must always be the same!
+             * Because it will be placed on the SplObjectStorage,
+             * and it's different objects, even if with the same properties,
+             * it doesn't retrieve it.
+             */
+            if (!isset($fieldCache[$alias])) {
+                $fieldCache[$alias] = new LeafField(
+                    'isTypeOrImplementsAll',
+                    $alias,
+                    [
+                        new Argument(
+                            'typesOrInterfaces',
+                            new InputList(
+                                $fragmentModels,
+                                LocationHelper::getNonSpecificLocation()
+                            ),
+                            LocationHelper::getNonSpecificLocation()
+                        ),
+                    ],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                );
+            }
+            $leafField = $fieldCache[$alias];
+
+            /**
              * Create a new field that will evaluate if the fragment
              * must be applied or not. If applied, only then
              * the field within the fragment will be resolved
              */
             $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
-                'isTypeOrImplementsAll',
+                $leafField,
                 [
                     $fragmentModelListNestedComponent,
                 ],
-                /**
-                 * Create a unique alias to avoid conflicts.
-                 *
-                 * Embedded in the alias are the required fragment models
-                 * to satisfy, and all the fields that depend on it,
-                 * so that if two fields have the same dependency,
-                 * this field is resolved once, not twice.
-                 *
-                 * Eg: 2 fields on the same fragment will have the same
-                 * dependency, and will re-use it:
-                 *
-                 * ```graphql
-                 * fragment PostData on Post {
-                 *   title
-                 *   date
-                 * }
-                 * ```
-                 */
-                sprintf(
-                    '_%s_%s_%s_',
-                    implode('_', $fragmentModelListFieldAliasFriendlyIDs),
-                    'isTypeOrImplementsAll',
-                    $fragmentModelListName
-                ),
-                [
-                    new Argument(
-                        'typesOrInterfaces',
-                        new InputList(
-                            $fragmentModels,
-                            LocationHelper::getNonSpecificLocation()
-                        ),
-                        LocationHelper::getNonSpecificLocation()
-                    ),
-                ]
             );
         }
         return $conditionalLeafComponentFields;

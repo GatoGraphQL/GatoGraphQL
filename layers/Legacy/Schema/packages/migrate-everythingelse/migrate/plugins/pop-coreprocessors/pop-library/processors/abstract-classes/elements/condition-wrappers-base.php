@@ -1,6 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -19,7 +21,13 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         if ($conditionDataField = $this->getConditionField($component)) {
             if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
                 $ret[] = new ConditionalLeafComponentField(
-                    $conditionDataField,
+                    new LeafField(
+                        $conditionDataField,
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     $layouts
                 );
             }
@@ -28,7 +36,13 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
                 // Calculate the "not" data field for the conditionDataField
                 $notConditionDataField = $this->getNotConditionField($component);
                 $ret[] = new ConditionalLeafComponentField(
-                    $notConditionDataField,
+                    new LeafField(
+                        $notConditionDataField,
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     $conditionfailed_layouts
                 );
             }

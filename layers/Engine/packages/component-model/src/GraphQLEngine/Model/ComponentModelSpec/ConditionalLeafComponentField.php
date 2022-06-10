@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
 use PoP\ComponentModel\Component\Component;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class ConditionalLeafComponentField extends AbstractComponentField
 {
@@ -17,23 +15,13 @@ class ConditionalLeafComponentField extends AbstractComponentField
      * extra modules under the current dataloading position.
      *
      * @param Component[] $conditionalNestedComponents
-     * @param Argument[] $arguments
-     * @param Directive[] $directives
      */
     public function __construct(
-        string $name,
+        FieldInterface $field,
         protected array $conditionalNestedComponents,
-        ?string $alias = null,
-        array $arguments = [],
-        array $directives = [],
-        ?Location $location = null,
     ) {
         parent::__construct(
-            $name,
-            $alias,
-            $arguments,
-            $directives,
-            $location,
+            $field,
         );
     }
 

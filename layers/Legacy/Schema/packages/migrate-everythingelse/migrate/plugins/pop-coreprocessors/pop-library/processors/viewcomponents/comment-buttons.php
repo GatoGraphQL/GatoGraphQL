@@ -1,6 +1,8 @@
 <?php
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Processor_CommentViewComponentButtonsBase
 {
@@ -34,7 +36,13 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return [
                     new RelationalComponentField(
-                        'customPost',
+                        new LeafField(
+                            'customPost',
+                            null,
+                            [],
+                            [],
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                         [
                             [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_POST],
                         ],
