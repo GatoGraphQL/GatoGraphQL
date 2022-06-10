@@ -2430,10 +2430,10 @@ class Engine implements EngineInterface
                         $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $component_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_merge(
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_values(array_unique(array_merge(
                         $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] ?? [],
                         $field_ids
-                    );
+                    )));
                     $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $component_path_key);
                 }
 
