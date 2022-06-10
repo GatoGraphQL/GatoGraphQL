@@ -810,9 +810,10 @@ class Engine implements EngineInterface
             foreach ($conditional_data_fields as $conditionComponentField) {
                 /** @var ComponentFieldInterface $conditionComponentField */
                 $conditionalDataFields = $conditional_data_fields[$conditionComponentField];
-                /** @var SplObjectStorage $conditionalDataFields */
+                /** @var SplObjectStorage<ComponentFieldInterface> $conditionalDataFields */
                 $conditionField = $conditionComponentField->getField();
-                $conditionalComponentFields = [];
+                // @todo Test if this line works, if so use instead of foreach
+                // $conditionalComponentFields = iterator_to_array($conditionalDataFields);
                 foreach ($conditionalDataFields as $conditionalDataField) {
                     /** @var ComponentFieldInterface $conditionalDataField */
                     $conditionalComponentFields[] = $conditionalDataField;
