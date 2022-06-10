@@ -1276,7 +1276,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         $subcomponent_data_fields = $subcomponent_ret['data-fields'] ?? null;
                         if ($subcomponent_data_fields !== null) {                            
                             foreach ($subcomponent_data_fields as $subcomponent_data_field) {
-                                $conditionalFieldSplObjectStorage[$subcomponent_data_field] ??= new SplObjectStorage();
+                                $conditionalFieldSplObjectStorage->attach($subcomponent_data_field);
                             }
                             unset($subcomponent_ret['data-fields']);
                         }
@@ -1290,14 +1290,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                 $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentField];
                                 $conditionalFieldSplObjectStorage[$subcomponentComponentField] ??= new SplObjectStorage();
                                 /** @var SplObjectStorage */
-                                $conditionalFieldSubcomponentSplObjectStorage = $conditionalFieldSplObjectStorage[$subcomponentComponentField];
                                 foreach ($subcomponent_conditional_data_fields as $subcomponent_conditional_data_field) {
                                     /** @var SplObjectStorage */
                                     $subcomponent_conditional_data_fields_storage = $subcomponent_conditional_data_fields[$subcomponent_conditional_data_field];
-                                    $conditionalFieldSubcomponentSplObjectStorage[$subcomponent_conditional_data_field] ??= new SplObjectStorage();
-                                    $conditionalFieldSubcomponentSplObjectStorage[$subcomponent_conditional_data_field]->addAll($subcomponent_conditional_data_fields_storage);
+                                    $conditionalFieldSplObjectStorage[$subcomponentComponentField]->addAll($subcomponent_conditional_data_fields_storage);
                                 }
-                                $conditionalFieldSplObjectStorage[$subcomponentComponentField] = $conditionalFieldSubcomponentSplObjectStorage;
                             }
                             unset($subcomponent_ret['conditional-data-fields']);
                         }
