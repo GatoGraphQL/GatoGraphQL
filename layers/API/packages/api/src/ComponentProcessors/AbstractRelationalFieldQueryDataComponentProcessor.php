@@ -29,6 +29,15 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     protected const COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS = 'ignoreConditionalFields';
 
     /**
+     * Because fields are stored in SplObjectStorage,
+     * the same instance must be retrieved in every case.
+     * Then, cache and reuse every created field
+     *
+     * @var array<string,LeafField>
+     */
+    private array $fieldCache = [];
+
+    /**
      * @return FieldFragmentModelsTuple[]
      */
     protected function getFieldFragmentModelsTuples(array $componentAtts): array
@@ -346,7 +355,6 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * the data for all nested modules)
          */
         $conditionalLeafComponentFields = [];
-        $fieldCache = [];
         foreach ($fragmentModelListNameFields as $fragmentModelListName => $fragmentModelListFields) {
             $fragmentModels = $fragmentModelListNameItems[$fragmentModelListName];
             $fragmentModelListFieldIDs = array_map(
@@ -395,8 +403,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              * and it's different objects, even if with the same properties,
              * it doesn't retrieve it.
              */
-            if (!isset($fieldCache[$alias])) {
-                $fieldCache[$alias] = new LeafField(
+            if (!isset($this->fieldCache[$alias])) {
+                $this->fieldCache[$alias] = new LeafField(
                     'isTypeOrImplementsAll',
                     $alias,
                     [
@@ -413,7 +421,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                     LocationHelper::getNonSpecificLocation()
                 );
             }
-            $leafField = $fieldCache[$alias];
+            $leafField = $this->fieldCache[$alias];
 
             /**
              * Create a new field that will evaluate if the fragment
