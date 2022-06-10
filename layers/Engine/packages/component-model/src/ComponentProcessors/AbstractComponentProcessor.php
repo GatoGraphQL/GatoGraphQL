@@ -1398,9 +1398,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         $subcomponent_component_data_properties['data-fields']
                     );
                 }
-                if ($subcomponent_component_data_properties['conditional-data-fields'] ?? null) {
-                    /** @var SplObjectStorage */
-                    $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'];
+                /** @var SplObjectStorage|null */
+                $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'] ?? null;
+                if ($subcomponentConditionalDataFields !== null) {
                     foreach ($subcomponentConditionalDataFields as $conditionComponentField) {
                         /** @var ComponentFieldInterface $conditionComponentField */
                         $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentField];
@@ -1415,9 +1415,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         }
                     }
                 }
-                if ($subcomponent_component_data_properties['subcomponents'] ?? null) {
-                    /** @var SplObjectStorage */
-                    $splObjectStorage = $subcomponent_component_data_properties['subcomponents'];
+                /** @var SplObjectStorage|null */
+                $splObjectStorage = $subcomponent_component_data_properties['subcomponents'] ?? null;
+                if ($splObjectStorage !== null) {
                     $subcomponent_components_data_properties['subcomponents']->addAll($splObjectStorage);
                 }
             }
