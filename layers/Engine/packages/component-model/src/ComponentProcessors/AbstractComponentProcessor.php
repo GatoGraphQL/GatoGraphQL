@@ -1405,14 +1405,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         /** @var ComponentFieldInterface $conditionComponentField */
                         $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentField];
                         /** @var SplObjectStorage $conditionalDataFields */
-                        foreach ($conditionalDataFields as $conditionalDataField) {
-                            /** @var ComponentFieldInterface $conditionalDataField */
-                            $conditionalDataFieldStorage = $conditionalDataFields[$conditionalDataField];
-                            $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField] ??= new SplObjectStorage();
-                            $subcomponentConditionalDataFieldStorage = $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField];
-                            $subcomponentConditionalDataFieldStorage[$conditionalDataField] = $conditionalDataFieldStorage;
-                            $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField] = $subcomponentConditionalDataFieldStorage;
-                        }
+                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField] ??= new SplObjectStorage();
+                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField]->addAll($conditionalDataFields);
                     }
                 }
                 /** @var SplObjectStorage|null */
