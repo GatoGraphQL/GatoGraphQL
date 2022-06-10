@@ -992,7 +992,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $fieldDirectiveFieldIDs[$fieldDirective][$field] = $fieldSplObjectStorage;
                     }
                 }
-                
+
                 /**
                  * @todo `array_unique` makes similar FieldInterfaces not to be processed,
                  *       only the first one will. For instance, doing:

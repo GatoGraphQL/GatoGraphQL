@@ -2398,8 +2398,8 @@ class Engine implements EngineInterface
                                 array_filter(
                                     $subcomponent_data_fields,
                                     fn (ComponentFieldInterface $componentField) => !in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)
-                                    )
-                                );
+                                )
+                            );
                             $id_subcomponent_conditional_data_fields = new SplObjectStorage();
                             foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`

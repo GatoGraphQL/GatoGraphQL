@@ -66,7 +66,7 @@ trait FieldTrait
     abstract public function getName(): string;
 
     abstract public function getAlias(): ?string;
-    
+
     abstract public function getLocation(): Location;
 
     /**

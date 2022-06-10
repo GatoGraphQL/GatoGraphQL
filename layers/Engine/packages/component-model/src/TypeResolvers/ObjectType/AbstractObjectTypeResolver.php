@@ -1051,7 +1051,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldQueryString);
         } else {
             $fieldName = $fieldOrFieldName;
-        }        
+        }
         // $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldName);
 
         $objectTypeFieldResolvers = [];
