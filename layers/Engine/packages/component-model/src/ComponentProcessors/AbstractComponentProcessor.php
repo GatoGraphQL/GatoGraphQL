@@ -1272,9 +1272,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         $ret['conditional-data-fields'][$conditionComponentField] ??= new SplObjectStorage();
                         /** @var SplObjectStorage */
                         $conditionalFieldSplObjectStorage = $ret['conditional-data-fields'][$conditionComponentField];
-                        if ($subcomponent_ret['data-fields'] ?? null) {
-                            /** @var ComponentFieldInterface[] */
-                            $subcomponent_data_fields = $subcomponent_ret['data-fields'];
+                        /** @var ComponentFieldInterface[]|null */
+                        $subcomponent_data_fields = $subcomponent_ret['data-fields'] ?? null;
+                        if ($subcomponent_data_fields !== null) {                            
                             foreach ($subcomponent_data_fields as $subcomponent_data_field) {
                                 $conditionalFieldSplObjectStorage[$subcomponent_data_field] ??= new SplObjectStorage();
                             }
@@ -1282,9 +1282,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         }
 
                         // Chain the conditional-data-fields at the end of the one from this component
-                        if ($subcomponent_ret['conditional-data-fields'] ?? null) {
-                            /** @var SplObjectStorage */
-                            $subcomponentConditionalFieldSplObjectStorage = $subcomponent_ret['conditional-data-fields'];
+                        /** @var SplObjectStorage|null */
+                        $subcomponentConditionalFieldSplObjectStorage = $subcomponent_ret['conditional-data-fields'] ?? null;
+                        if ($subcomponentConditionalFieldSplObjectStorage !== null) {
                             foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentComponentField) {
                                 /** @var SplObjectStorage */
                                 $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentField];
@@ -1303,9 +1303,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         }
                         $ret['conditional-data-fields'][$conditionComponentField] = $conditionalFieldSplObjectStorage;
 
-                        if ($subcomponent_ret['subcomponents'] ?? null) {
-                            /** @var SplObjectStorage */
-                            $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'];
+                        /** @var SplObjectStorage|null */
+                        $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'] ?? null;
+                        if ($subcomponentSubcomponentsSplObjectStorage !== null) {
                             $ret['subcomponents'] ??= new SplObjectStorage();
                             $ret['subcomponents']->addAll($subcomponentSubcomponentsSplObjectStorage);
                         }
