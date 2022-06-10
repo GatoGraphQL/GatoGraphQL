@@ -929,12 +929,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 if (in_array($field, $data_fields->direct)) {
                     $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->direct[] = $field;
                 }
-                /** @var SplObjectStorage|null */
+                /** @var FieldInterface[]|null */
                 $conditionalFields = $data_fields->conditional[$field] ?? null;
-                if ($conditionalFields === null || $conditionalFields->count() === 0) {
+                if ($conditionalFields === null || $conditionalFields === []) {
                     continue;
                 }
-                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->addConditionalFields($conditionalFields);
+                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->addConditionalFields($field, $conditionalFields);
             }
         }
     }
@@ -972,8 +972,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     );
                     $conditionalFields = [];
                     foreach ($dataFields->conditional as $conditionField) {
-                        $conditionalField = $dataFields->conditional[$conditionField];
-                        $conditionalFields[] = $conditionalField;
+                        $conditionalFields = array_merge(
+                            $conditionalFields,
+                            $dataFields->conditional[$conditionField]
+                        );
                     }
                     $idFieldDirectiveIDFields = array_unique(array_merge(
                         $dataFields->direct,
@@ -1076,9 +1078,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     foreach ($ids as $id) {
                         $directiveIDFields[$id] ??= new EngineIterationFieldSet();
                         $directiveIDFields[$id]->direct[] = $field;
-                        /** @var SplObjectStorage|null */
+                        /** @var FieldInterface[]|null */
                         $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]->conditional[$field] ?? null;
-                        if ($fieldConditionalFields === null || $fieldConditionalFields->count() === 0) {
+                        if ($fieldConditionalFields === null || $fieldConditionalFields === []) {
                             continue;
                         }
                         $directiveIDFields[$id]->conditional[$field] = $fieldConditionalFields;
