@@ -2392,31 +2392,28 @@ class Engine implements EngineInterface
                 }
                 if ($field_ids) {
                     foreach ($field_ids as $field_id) {
-                        $id_subcomponent_conditional_data_fields = new SplObjectStorage();
                         // Do not add again the IDs/Fields already loaded
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
                             $id_subcomponent_data_fields = array_values(
                                 array_filter(
                                     $subcomponent_data_fields,
                                     fn (ComponentFieldInterface $componentField) => !in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)
-                                )
-                            );
+                                    )
+                                );
+                            $id_subcomponent_conditional_data_fields = new SplObjectStorage();
                             foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
-                                $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= new SplObjectStorage();
-                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentField];
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var ComponentFieldInterface $conditionComponentField */
                                 $conditionComponentFields = $subcomponent_conditional_data_fields[$conditionComponentField];
-                                /** @var SplObjectStorage $conditionComponentFields */
+                                /** @var ComponentFieldInterface[] $conditionComponentFields */
+                                $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= [];
+                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentField];
                                 foreach ($conditionComponentFields as $componentField) {
                                     /** @var ComponentFieldInterface $componentField */
                                     if (in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)) {
                                         continue;
                                     }
-                                    /** @var SplObjectStorage */
-                                    $conditionalComponentFields = $conditionComponentFields[$componentField];
-                                    $id_subcomponent_conditional_data_fields_storage[$componentField] ??= new SplObjectStorage();
-                                    $id_subcomponent_conditional_data_fields_storage[$componentField]->addAll($conditionalComponentFields);
+                                    $id_subcomponent_conditional_data_fields_storage[] = $componentField;
                                 }
                                 $id_subcomponent_conditional_data_fields[$conditionComponentField] = $id_subcomponent_conditional_data_fields_storage;
                             }
@@ -2600,24 +2597,17 @@ class Engine implements EngineInterface
                 }
                 if (isset($componentFieldData['conditional-data-fields'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] ??= new SplObjectStorage();
-                    $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage = $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'];
-                    /** @var SplObjectStorage */
+                    /** @var SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> */
                     $componentFieldDataConditionalDataFieldsSplObjectStorage = $componentFieldData['conditional-data-fields'];
                     foreach ($componentFieldDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
                         /** @var ComponentFieldInterface $conditionDataField */
                         $conditionalComponentFields = $componentFieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
-                        /** @var SplObjectStorage $conditionalComponentFields */
-                        $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage[$conditionDataField] ??= new SplObjectStorage();
-                        /**
-                         * This will duplicate entries! But it can't be avoided,
-                         * because the ComponentField instances are different,
-                         * even if they have the same data, and calling
-                         * `SplObjectStorage->contains` always returns false,
-                         * so we can't find out if an object already exists or not.
-                         */
-                        $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage[$conditionDataField]->addAll($conditionalComponentFields);
+                        /** @var ComponentFieldInterface[] $conditionalComponentFields */
+                        $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] = array_merge(
+                            $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] ?? [],
+                            $conditionalComponentFields
+                        );
                     }
-                    $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] = $dbDataSubcomponentsConditionalDataFieldsFieldSplObjectStorage;
                 }
                 if (isset($componentFieldData['subcomponents'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['subcomponents'] ??= new SplObjectStorage();
