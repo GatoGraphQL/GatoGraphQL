@@ -992,18 +992,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $fieldDirectiveFieldIDs[$fieldDirective][$field] = $fieldSplObjectStorage;
                     }
                 }
-
-                /**
-                 * @todo `array_unique` makes similar FieldInterfaces not to be processed,
-                 *       only the first one will. For instance, doing:
-                 *
-                 *           { queryType { name } mutationType { name } }
-                 *
-                 *       makes the 2nd `name` not be processed.
-                 *       The solution is to add the FieldLocation as part of the
-                 *       field's ID, under __toString().
-                 *       Fix and remove this comment.
-                 */
                 $fieldDirectiveFields[$fieldDirective] = array_unique($fieldDirectiveFields[$fieldDirective]);
             }
             $fieldDirectiveDirectFields = array_unique($fieldDirectiveDirectFields);
