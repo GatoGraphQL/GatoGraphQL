@@ -31,7 +31,7 @@ class EngineIterationFieldSet
     }
 
     /**
-     * @param FieldInterface[] $directFields
+     * @param FieldInterface[] $conditionalFields
      */
     public function addConditionalFields(FieldInterface $conditionField, array $conditionalFields): void
     {

@@ -769,6 +769,7 @@ class Engine implements EngineInterface
     /**
      * @param array<string|int> $ids
      * @param ComponentFieldInterface[] $data_fields
+     * @param SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> $conditional_data_fields
      */
     private function combineIDsDatafields(
         array &$relationalTypeOutputDBKeyIDsDataFields,
@@ -810,10 +811,9 @@ class Engine implements EngineInterface
             foreach ($conditional_data_fields as $conditionComponentField) {
                 /** @var ComponentFieldInterface $conditionComponentField */
                 $conditionalDataFields = $conditional_data_fields[$conditionComponentField];
-                /** @var SplObjectStorage<ComponentFieldInterface> $conditionalDataFields */
+                /** @var ComponentFieldInterface[] $conditionalDataFields */
                 $conditionField = $conditionComponentField->getField();
-                // @todo Test if this line works, if so use instead of foreach
-                // $conditionalComponentFields = iterator_to_array($conditionalDataFields);
+                $conditionalComponentFields = [];
                 foreach ($conditionalDataFields as $conditionalDataField) {
                     /** @var ComponentFieldInterface $conditionalDataField */
                     $conditionalComponentFields[] = $conditionalDataField;
