@@ -854,6 +854,20 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         if ($this->isStringWrappedInQuotes($value) || $this->isFieldArgumentValueDynamic($value)) {
             return $value;
         }
+
+        /**
+         * If it is an ENUM, don't add quotes.
+         *
+         * Because we don't know if it is or not, just assume that
+         * it's an ENUM if it's a single word where all chars
+         * are UPPERCASE or "_" (so horrible!!!!)
+         *
+         * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
+         */
+        if (preg_match('/^[A-Z][A-Z_]+$/', $value)) {
+            return $value;
+        }
+
         return $this->wrapStringInQuotes($value);
     }
 

@@ -1,6 +1,8 @@
 <?php
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class GD_URE_AAL_CustomMultipleLayoutHooks
 {
@@ -24,7 +26,13 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     {
         // Add layout for action "updated_user_membership"
         $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
-            'isUserNotification',
+            new LeafField(
+                'isUserNotification',
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            ),
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
             ]
@@ -40,7 +48,13 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     {
         // Add layout for action "joined_community"
         $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
-            'isUserNotification',
+            new LeafField(
+                'isUserNotification',
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            ),
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
             ]

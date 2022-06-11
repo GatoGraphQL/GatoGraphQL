@@ -10,6 +10,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResolver;
 
 class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -76,6 +78,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         array $fieldArgs,
         array $variables,
         array $expressions,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
@@ -83,13 +86,39 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // If multiple-layouts, then we need 'objectType' and 'action' data-fields
-                $object_type = $objectTypeResolver->resolveValue($notification, 'objectType', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $action = $objectTypeResolver->resolveValue($notification, 'action', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $object_type = $objectTypeResolver->resolveValue(
+                    $notification,
+                    new LeafField(
+                        'objectType',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
+                $action = $objectTypeResolver->resolveValue(
+                    $notification,
+                    new LeafField(
+                        'action',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 return array(
                     $object_type . '-' . $action,
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

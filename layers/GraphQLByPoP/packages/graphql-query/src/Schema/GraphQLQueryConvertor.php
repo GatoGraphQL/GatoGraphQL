@@ -26,6 +26,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -239,6 +240,10 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * then replace it with an expression, so its value can be computed on runtime
              */
             return QueryHelpers::getExpressionQuery($value->getName());
+        }
+
+        if ($value instanceof Enum) {
+            return $value->getValue();
         }
 
         if ($value instanceof Literal) {

@@ -11,6 +11,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPCMSSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
@@ -92,19 +94,46 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         array $fieldArgs,
         array $variables,
         array $expressions,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
             case 'hasLocation':
-                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $locations = $objectTypeResolver->resolveValue(
+                    $object,
+                    new LeafField(
+                        'locations',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $locations;
                 }
                 return !empty($locations);
 
             case 'location':
-                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $locations = $objectTypeResolver->resolveValue(
+                    $object,
+                    new LeafField(
+                        'locations',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $locations;
                 }
@@ -114,6 +143,6 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

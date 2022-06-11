@@ -12,7 +12,6 @@ use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
 {

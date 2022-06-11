@@ -50,6 +50,7 @@ class PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends Ab
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
@@ -60,7 +61,7 @@ class PoP_UserAvatar_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends Ab
                 return GD_FileUpload_Picture_Utils::getFileuploadUrl($objectTypeResolver->resolveValue($object, 'id', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

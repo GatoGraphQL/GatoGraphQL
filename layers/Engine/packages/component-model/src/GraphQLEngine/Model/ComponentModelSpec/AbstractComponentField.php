@@ -10,34 +10,15 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class AbstractComponentField extends AbstractAst implements ComponentFieldInterface
 {
-    protected FieldInterface $field;
-
-    /**
-     * @param Argument[] $arguments
-     * @param Directive[] $directives
-     */
     public function __construct(
-        string $name,
-        ?string $alias = null,
-        array $arguments = [],
-        array $directives = [],
-        ?Location $location = null,
+        protected FieldInterface $field,
     ) {
-        $this->field = new LeafField(
-            $name,
-            $alias,
-            $arguments,
-            $directives,
-            $location ?? LocationHelper::getNonSpecificLocation(),
-        );
     }
 
     /**
@@ -45,7 +26,7 @@ abstract class AbstractComponentField extends AbstractAst implements ComponentFi
      */
     public function __toString(): string
     {
-        return $this->asFieldOutputQueryString();
+        return $this->getUniqueID();
     }
 
     public function getField(): FieldInterface
@@ -89,6 +70,16 @@ abstract class AbstractComponentField extends AbstractAst implements ComponentFi
     public function asFieldOutputQueryString(): string
     {
         return $this->field->asFieldOutputQueryString();
+    }
+
+    public function getUniqueID(): string
+    {
+        return $this->field->getUniqueID();
+    }
+
+    public function getOutputKey(): string
+    {
+        return $this->field->getOutputKey();
     }
 
     public function asQueryString(): string

@@ -55,6 +55,7 @@ class GD_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldRe
         array $fieldArgs,
         array $variables,
         array $expressions,
+        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
@@ -71,7 +72,7 @@ class GD_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObjectTypeFieldRe
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

@@ -23,7 +23,6 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -427,7 +426,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    protected function addPropGroupField(string $group, array|Component $component_or_componentPath, array &$props, $field, $value, array $starting_from_componentPath = array(), array $options = array()): void
+    protected function addPropGroupField(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array(), array $options = array()): void
     {
         // Iterate down to the subcomponent, which must be an array of components
         if ($starting_from_componentPath) {
@@ -492,35 +491,35 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $component_props[$attComponentFullName][$group] = $component_props[$attComponentFullName][$group] ?? array();
 
         if ($options['append'] ?? null) {
-            $component_props[$attComponentFullName][$group][$field] = $component_props[$attComponentFullName][$group][$field] ?? '';
-            $component_props[$attComponentFullName][$group][$field] .= ' ' . $value;
+            $component_props[$attComponentFullName][$group][$property] = $component_props[$attComponentFullName][$group][$property] ?? '';
+            $component_props[$attComponentFullName][$group][$property] .= ' ' . $value;
         } elseif ($options['array'] ?? null) {
-            $component_props[$attComponentFullName][$group][$field] = $component_props[$attComponentFullName][$group][$field] ?? array();
+            $component_props[$attComponentFullName][$group][$property] = $component_props[$attComponentFullName][$group][$property] ?? array();
             if ($options['merge'] ?? null) {
-                $component_props[$attComponentFullName][$group][$field] = array_merge(
-                    $component_props[$attComponentFullName][$group][$field],
+                $component_props[$attComponentFullName][$group][$property] = array_merge(
+                    $component_props[$attComponentFullName][$group][$property],
                     $value
                 );
             } elseif ($options['merge-iterate-key'] ?? null) {
                 foreach ($value as $value_key => $value_value) {
-                    if (!$component_props[$attComponentFullName][$group][$field][$value_key]) {
-                        $component_props[$attComponentFullName][$group][$field][$value_key] = array();
+                    if (!$component_props[$attComponentFullName][$group][$property][$value_key]) {
+                        $component_props[$attComponentFullName][$group][$property][$value_key] = array();
                     }
                     // Doing array_unique, because in the NotificationPreviewLayout, different layouts might impose a JS down the road, many times, and these get duplicated
-                    $component_props[$attComponentFullName][$group][$field][$value_key] = array_unique(
+                    $component_props[$attComponentFullName][$group][$property][$value_key] = array_unique(
                         array_merge(
-                            $component_props[$attComponentFullName][$group][$field][$value_key],
+                            $component_props[$attComponentFullName][$group][$property][$value_key],
                             $value_value
                         )
                     );
                 }
             } elseif ($options['push'] ?? null) {
-                array_push($component_props[$attComponentFullName][$group][$field], $value);
+                array_push($component_props[$attComponentFullName][$group][$property], $value);
             }
         } else {
             // If already set, then do nothing
-            if (!isset($component_props[$attComponentFullName][$group][$field])) {
-                $component_props[$attComponentFullName][$group][$field] = $value;
+            if (!isset($component_props[$attComponentFullName][$group][$property])) {
+                $component_props[$attComponentFullName][$group][$property] = $value;
             }
         }
 
@@ -529,10 +528,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $props = $current_props;
         }
     }
-    protected function getPropGroupField(string $group, Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    protected function getPropGroupField(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
         $group = $this->getPropGroup($group, $component, $props, $starting_from_componentPath);
-        return $group[$field] ?? null;
+        return $group[$property] ?? null;
     }
     protected function getPropGroup(string $group, Component $component, array &$props, array $starting_from_componentPath = array()): array
     {
@@ -552,73 +551,73 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    protected function addGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    protected function addGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function setProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function setProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->addGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->addGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('append' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('append' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function appendProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->appendGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->appendGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'merge' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'merge' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
     }
-    public function getGroupProp(string $group, Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    public function getGroupProp(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getPropGroupField($group, $component, $props, $field, $starting_from_componentPath);
+        return $this->getPropGroupField($group, $component, $props, $property, $starting_from_componentPath);
     }
-    public function getProp(Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
+    public function getProp(Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $field, $starting_from_componentPath);
-    }
-    /**
-     * @param Component[]|Component $component_or_componentPath
-     */
-    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
-    {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'merge-iterate-key' => true));
+        return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $property, $starting_from_componentPath);
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'merge-iterate-key' => true));
     }
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
+    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'push' => true));
+        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath);
+    }
+    /**
+     * @param Component[]|Component $component_or_componentPath
+     */
+    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void
+    {
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $property, $value, $starting_from_componentPath, array('array' => true, 'push' => true));
     }
 
     //-------------------------------------------------
@@ -647,7 +646,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
-                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
                 $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
             }
             foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
@@ -661,7 +660,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
+                    $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
                     $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $conditionalDataField);
                 }
             }
@@ -714,8 +713,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
-                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
                 // Only components which do not load data
                 $subcomponent_components = array_filter(
                     $relationalComponentField->getNestedComponents(),
@@ -729,10 +727,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
             foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
-                    $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
+                    $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
                     // Only components which do not load data
                     $subcomponent_components = array_filter(
                         $relationalComponentField->getNestedComponents(),
@@ -923,7 +920,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * @param Component[] $ret
-     * @return void
      */
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void
     {
@@ -1230,11 +1226,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $conditionalComponentFields = new SplObjectStorage();
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafComponentFields as $conditionalLeafComponentField) {
-                    $conditionField = $conditionalLeafComponentField->getField();
-                    $conditionalComponentFields[$conditionField] = $conditionalLeafComponentField->getConditionalNestedComponents();
+                    $conditionalComponentFields[$conditionalLeafComponentField] = $conditionalLeafComponentField->getConditionalNestedComponents();
                 }
                 foreach ($conditionalRelationalComponentFields as $conditionalRelationalComponentField) {
-                    $conditionField = $conditionalRelationalComponentField->getField();
                     $subconditionalComponentFields = [];
                     foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $subConditionalRelationalComponentField) {
                         $conditionalSubcomponents = $subConditionalRelationalComponentField->getNestedComponents();
@@ -1243,11 +1237,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             $conditionalSubcomponents
                         );
                     }
-                    $conditionalComponentFields[$conditionField] = $subconditionalComponentFields;
+                    $conditionalComponentFields[$conditionalRelationalComponentField] = $subconditionalComponentFields;
                 }
-                foreach ($conditionalComponentFields as $conditionField) {
-                    /** @var FieldInterface $conditionField */
-                    $conditionalSubcomponents = $conditionalComponentFields[$conditionField];
+                foreach ($conditionalComponentFields as $conditionComponentField) {
+                    /** @var ComponentFieldInterface $conditionComponentField */
+                    $conditionalSubcomponents = $conditionalComponentFields[$conditionComponentField];
                     /** @var Component[] $conditionalSubcomponents */
                     // Calculate those fields which are certainly to be propagated, and not part of the direct subcomponents
                     // Using this really ugly way because, for comparing components, using `array_diff` and `intersect` fail
@@ -1273,35 +1267,37 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                         // Move from "data-fields" to "conditional-data-fields"
                         $ret['conditional-data-fields'] ??= new SplObjectStorage();
-                        $ret['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
-                        /** @var SplObjectStorage */
-                        $conditionalFieldSplObjectStorage = $ret['conditional-data-fields'][$conditionField];
-                        if ($subcomponent_ret['data-fields'] ?? null) {
-                            /** @var ComponentFieldInterface[] */
-                            $subcomponent_data_fields = $subcomponent_ret['data-fields'];
-                            foreach ($subcomponent_data_fields as $subcomponent_data_field) {
-                                $conditionalFieldSplObjectStorage->attach($subcomponent_data_field);
-                            }
+                        /** @var SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> */
+                        $conditionalDataFields = $ret['conditional-data-fields'];
+                        /** @var ComponentFieldInterface[]|null */
+                        $subcomponent_data_fields = $subcomponent_ret['data-fields'] ?? null;
+                        if ($subcomponent_data_fields !== null) {
+                            $conditionalDataFields[$conditionComponentField] = array_merge(
+                                $conditionalDataFields[$conditionComponentField] ?? [],
+                                $subcomponent_data_fields
+                            );
                             unset($subcomponent_ret['data-fields']);
                         }
 
                         // Chain the conditional-data-fields at the end of the one from this component
-                        if ($subcomponent_ret['conditional-data-fields'] ?? null) {
-                            /** @var SplObjectStorage */
-                            $subcomponentConditionalFieldSplObjectStorage = $subcomponent_ret['conditional-data-fields'];
-                            foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentField) {
-                                /** @var SplObjectStorage */
-                                $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentField];
-                                $conditionalFieldSplObjectStorage[$subcomponentField] ??= new SplObjectStorage();
-                                $conditionalFieldSplObjectStorage[$subcomponentField]->addAll($subcomponent_conditional_data_fields);
+                        /** @var SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]>|null */
+                        $subcomponentConditionalFieldSplObjectStorage = $subcomponent_ret['conditional-data-fields'] ?? null;
+                        if ($subcomponentConditionalFieldSplObjectStorage !== null) {
+                            foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentComponentField) {
+                                /** @var ComponentFieldInterface[] */
+                                $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentField];
+                                $conditionalDataFields[$subcomponentComponentField] = array_merge(
+                                    $conditionalDataFields[$subcomponentComponentField] ?? [],
+                                    $subcomponent_conditional_data_fields
+                                );
                             }
                             unset($subcomponent_ret['conditional-data-fields']);
                         }
-                        $ret['conditional-data-fields'][$conditionField] = $conditionalFieldSplObjectStorage;
+                        $ret['conditional-data-fields'] = $conditionalDataFields;
 
-                        if ($subcomponent_ret['subcomponents'] ?? null) {
-                            /** @var SplObjectStorage */
-                            $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'];
+                        /** @var SplObjectStorage|null */
+                        $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'] ?? null;
+                        if ($subcomponentSubcomponentsSplObjectStorage !== null) {
                             $ret['subcomponents'] ??= new SplObjectStorage();
                             $ret['subcomponents']->addAll($subcomponentSubcomponentsSplObjectStorage);
                         }
@@ -1360,17 +1356,15 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Combine the direct and conditionalOnDataField components all together to iterate below
         $relationalSubcomponents = new SplObjectStorage();
         foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
-            $relationalField = $relationalComponentField->getField();
-            $relationalSubcomponents[$relationalField] = array_merge(
-                $relationalSubcomponents[$relationalField] ?? [],
+            $relationalSubcomponents[$relationalComponentField] = array_merge(
+                $relationalSubcomponents[$relationalComponentField] ?? [],
                 $relationalComponentField->getNestedComponents()
             );
         }
         foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
             foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
-                $relationalField = $relationalComponentField->getField();
-                $relationalSubcomponents[$relationalField] = array_merge(
-                    $relationalSubcomponents[$relationalField] ?? [],
+                $relationalSubcomponents[$relationalComponentField] = array_merge(
+                    $relationalSubcomponents[$relationalComponentField] ?? [],
                     $relationalComponentField->getNestedComponents()
                 );
             }
@@ -1378,9 +1372,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // If it has subcomponent components, integrate them under 'subcomponents'
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($relationalSubcomponents as $subcomponentField) {
-            /** @var FieldInterface $subcomponentField */
-            $subcomponent_components = $relationalSubcomponents[$subcomponentField];
+        foreach ($relationalSubcomponents as $subcomponentComponentField) {
+            /** @var ComponentFieldInterface $subcomponentComponentField */
+            $subcomponent_components = $relationalSubcomponents[$subcomponentComponentField];
             /** @var Component[] $subcomponent_components */
             $subcomponent_components_data_properties = [
                 'data-fields' => [],
@@ -1400,27 +1394,29 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         $subcomponent_component_data_properties['data-fields']
                     );
                 }
-                if ($subcomponent_component_data_properties['conditional-data-fields'] ?? null) {
-                    /** @var SplObjectStorage */
-                    $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'];
-                    foreach ($subcomponentConditionalDataFields as $conditionField) {
-                        /** @var FieldInterface $conditionField */
-                        $conditionalDataFields = $subcomponentConditionalDataFields[$conditionField];
-                        /** @var SplObjectStorage $conditionalDataFields */
-                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
-                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionField]->addAll($conditionalDataFields);
+                /** @var SplObjectStorage|null */
+                $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'] ?? null;
+                if ($subcomponentConditionalDataFields !== null) {
+                    foreach ($subcomponentConditionalDataFields as $conditionComponentField) {
+                        /** @var ComponentFieldInterface $conditionComponentField */
+                        $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentField];
+                        /** @var ComponentFieldInterface[] $conditionalDataFields */
+                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField] = array_merge(
+                            $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField] ?? [],
+                            $conditionalDataFields
+                        );
                     }
                 }
-                if ($subcomponent_component_data_properties['subcomponents'] ?? null) {
-                    /** @var SplObjectStorage */
-                    $splObjectStorage = $subcomponent_component_data_properties['subcomponents'];
+                /** @var SplObjectStorage|null */
+                $splObjectStorage = $subcomponent_component_data_properties['subcomponents'] ?? null;
+                if ($splObjectStorage !== null) {
                     $subcomponent_components_data_properties['subcomponents']->addAll($splObjectStorage);
                 }
             }
 
             $ret['subcomponents'] ??= new SplObjectStorage();
-            $ret['subcomponents'][$subcomponentField] ??= [];
-            $subcomponentsSubcomponentField = $ret['subcomponents'][$subcomponentField];
+            $ret['subcomponents'][$subcomponentComponentField] ??= [];
+            $subcomponentsSubcomponentField = $ret['subcomponents'][$subcomponentComponentField];
             if ($subcomponent_components_data_properties['data-fields']) {
                 $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
                 $subcomponentsSubcomponentField['data-fields'] = array_values(array_unique(array_merge(
@@ -1432,12 +1428,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $subcomponentConditionalDataFields = $subcomponent_components_data_properties['conditional-data-fields'];
             if ($subcomponentConditionalDataFields->count() > 0) {
                 $subcomponentsSubcomponentField['conditional-data-fields'] ??= new SplObjectStorage();
-                foreach ($subcomponentConditionalDataFields as $conditionField) {
-                    /** @var FieldInterface $conditionField */
-                    $conditionalDataFields = $subcomponentConditionalDataFields[$conditionField];
-                    /** @var SplObjectStorage $conditionalDataFields */
-                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionField] ??= new SplObjectStorage();
-                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionField]->addAll($conditionalDataFields);
+                foreach ($subcomponentConditionalDataFields as $conditionComponentField) {
+                    /** @var ComponentFieldInterface $conditionComponentField */
+                    $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentField];
+                    /** @var ComponentFieldInterface[] $conditionalDataFields */
+                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentField] = array_merge(
+                        $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentField] ?? [],
+                        $conditionalDataFields
+                    );
                 }
             }
             /** @var SplObjectStorage */
@@ -1446,7 +1444,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $subcomponentsSubcomponentField['subcomponents'] ??= new SplObjectStorage();
                 $subcomponentsSubcomponentField['subcomponents']->addAll($splObjectStorage);
             }
-            $ret['subcomponents'][$subcomponentField] = $subcomponentsSubcomponentField;
+            $ret['subcomponents'][$subcomponentComponentField] = $subcomponentsSubcomponentField;
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }

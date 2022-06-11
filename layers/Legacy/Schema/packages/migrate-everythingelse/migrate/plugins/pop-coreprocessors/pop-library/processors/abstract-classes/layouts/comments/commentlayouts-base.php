@@ -1,6 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -76,7 +78,13 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         }
 
         $ret[] = new RelationalComponentField(
-            'author',
+            new LeafField(
+                'author',
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            ),
             $components
         );
 

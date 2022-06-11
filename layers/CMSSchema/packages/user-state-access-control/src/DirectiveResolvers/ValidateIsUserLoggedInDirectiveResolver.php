@@ -7,6 +7,7 @@ namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\FeedbackItemProvider;
@@ -39,6 +40,9 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
         ];
     }
 
+    /**
+     * @param FieldInterface[] $failedDataFields
+     */
     protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
@@ -47,7 +51,10 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
             [
                 implode(
                     $this->__('\', \''),
-                    $failedDataFields
+                    array_map(
+                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        $failedDataFields
+                    )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),
             ]

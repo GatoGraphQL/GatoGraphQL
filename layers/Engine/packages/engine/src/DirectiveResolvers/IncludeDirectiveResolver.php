@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -39,6 +40,10 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idsDataFields,

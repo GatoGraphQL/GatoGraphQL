@@ -29,6 +29,15 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     protected const COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS = 'ignoreConditionalFields';
 
     /**
+     * Because fields are stored in SplObjectStorage,
+     * the same instance must be retrieved in every case.
+     * Then, cache and reuse every created field
+     *
+     * @var array<string,LeafField>
+     */
+    private array $fieldInstanceContainer = [];
+
+    /**
      * @return FieldFragmentModelsTuple[]
      */
     protected function getFieldFragmentModelsTuples(array $componentAtts): array
@@ -365,49 +374,75 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $fragmentModelListFields,
             );
             /**
+             * Create a unique alias to avoid conflicts.
+             *
+             * Embedded in the alias are the required fragment models
+             * to satisfy, and all the fields that depend on it,
+             * so that if two fields have the same dependency,
+             * this field is resolved once, not twice.
+             *
+             * Eg: 2 fields on the same fragment will have the same
+             * dependency, and will re-use it:
+             *
+             * ```graphql
+             * fragment PostData on Post {
+             *   title
+             *   date
+             * }
+             * ```
+             *
+             * It's also important for the location of each field
+             * to be part of the alias, to make sure that,
+             * if the same group of fields are applied under different
+             * types (evidenced by their location on the GraphQL query)
+             * then these are treated differently.
+             *
+             * An example of the generated alias is:
+             *
+             *   "_kind13x5_name14x5_isTypeOrImplementsAll___Type_"
+             */
+            $alias = sprintf(
+                '_%s_%s_%s_',
+                implode('_', $fragmentModelListFieldAliasFriendlyIDs),
+                'isTypeOrImplementsAll',
+                $fragmentModelListName
+            );
+            /**
+             * Important! The `FieldInterface` instance must always be the same!
+             * Because it will be placed on the SplObjectStorage,
+             * and it's different objects, even if with the same properties,
+             * it doesn't retrieve it.
+             */
+            if (!isset($this->fieldInstanceContainer[$alias])) {
+                $this->fieldInstanceContainer[$alias] = new LeafField(
+                    'isTypeOrImplementsAll',
+                    $alias,
+                    [
+                        new Argument(
+                            'typesOrInterfaces',
+                            new InputList(
+                                $fragmentModels,
+                                LocationHelper::getNonSpecificLocation()
+                            ),
+                            LocationHelper::getNonSpecificLocation()
+                        ),
+                    ],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                );
+            }
+            $leafField = $this->fieldInstanceContainer[$alias];
+
+            /**
              * Create a new field that will evaluate if the fragment
              * must be applied or not. If applied, only then
              * the field within the fragment will be resolved
              */
             $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
-                'isTypeOrImplementsAll',
+                $leafField,
                 [
                     $fragmentModelListNestedComponent,
                 ],
-                /**
-                 * Create a unique alias to avoid conflicts.
-                 *
-                 * Embedded in the alias are the required fragment models
-                 * to satisfy, and all the fields that depend on it,
-                 * so that if two fields have the same dependency,
-                 * this field is resolved once, not twice.
-                 *
-                 * Eg: 2 fields on the same fragment will have the same
-                 * dependency, and will re-use it:
-                 *
-                 * ```graphql
-                 * fragment PostData on Post {
-                 *   title
-                 *   date
-                 * }
-                 * ```
-                 */
-                sprintf(
-                    '_%s_%s_%s_',
-                    implode('_', $fragmentModelListFieldAliasFriendlyIDs),
-                    'isTypeOrImplementsAll',
-                    $fragmentModelListName
-                ),
-                [
-                    new Argument(
-                        'typesOrInterfaces',
-                        new InputList(
-                            $fragmentModels,
-                            LocationHelper::getNonSpecificLocation()
-                        ),
-                        LocationHelper::getNonSpecificLocation()
-                    ),
-                ]
             );
         }
         return $conditionalLeafComponentFields;

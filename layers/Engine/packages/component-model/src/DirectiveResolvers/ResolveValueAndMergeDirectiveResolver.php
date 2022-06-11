@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -41,6 +43,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         return PipelinePositions::AFTER_RESOLVE;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idsDataFields,
@@ -70,6 +76,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     */
     private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $objectIDItems,
@@ -80,6 +89,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /** @var array<string|int,EngineIterationFieldSet> */
         $enqueueFillingObjectsFromIDs = [];
         foreach ($idsDataFields as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
@@ -87,7 +97,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                foreach ($dataFields['direct'] as $field) {
+                foreach ($dataFields->direct as $field) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             new FeedbackItemResolution(
@@ -116,7 +126,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $relationalTypeResolver,
                 $id,
                 $object,
-                $idsDataFields[(string)$id]['direct'],
+                $idsDataFields[(string)$id]->direct,
                 $dbItems,
                 $previousDBItems,
                 $variables,
@@ -126,35 +136,38 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
-            foreach (array_filter($idsDataFields[$id]['conditional']) as $conditionDataField => $conditionalDataFields) {
+            foreach ($idsDataFields[$id]->conditional as $conditionDataField) {
+                /** @var FieldInterface $conditionDataField */
+                $conditionalDataFields = $idsDataFields[$id]->conditional[$conditionDataField];
+                /** @var FieldInterface[] $conditionalDataFields */
+                if ($conditionalDataFields === []) {
+                    continue;
+                }
+
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $conditionDataField, $object);
+                $conditionFieldOutputKey = $conditionDataField->getOutputKey();
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
                     $conditionSatisfied = false;
                 }
-                if ($conditionSatisfied) {
-                    $enqueueFillingObjectsFromIDs[(string)$id]['direct'] = array_unique(array_merge(
-                        $enqueueFillingObjectsFromIDs[(string)$id]['direct'] ?? [],
-                        array_keys($conditionalDataFields)
-                    ));
-                    foreach (array_filter($conditionalDataFields) as $nextConditionDataField => $nextConditionalDataFields) {
-                        $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] = array_merge_recursive(
-                            $enqueueFillingObjectsFromIDs[(string)$id]['conditional'][$nextConditionDataField] ?? [],
-                            $nextConditionalDataFields
-                        );
-                    }
+                if (!$conditionSatisfied) {
+                    continue;
                 }
+                $enqueueFillingObjectsFromIDs[(string)$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditional);
+                $enqueueFillingObjectsFromIDs[(string)$id]->addDirectFields($conditionalDataFields);
             }
         }
         // Enqueue items for the next iteration
-        if ($enqueueFillingObjectsFromIDs) {
+        if ($enqueueFillingObjectsFromIDs !== []) {
             $relationalTypeResolver->enqueueFillingObjectsFromIDs($enqueueFillingObjectsFromIDs);
         }
     }
 
+    /**
+     * @param FieldInterface[] $dataFields
+     */
     private function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
@@ -185,7 +198,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
-        string $field,
+        FieldInterface $field,
         array &$dbItems,
         array $previousDBItems,
         array &$variables,
@@ -212,11 +225,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
 
         // 3. Add the output in the DB
-        $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
-            $relationalTypeResolver,
-            $field,
-            $object,
-        );
+        $fieldOutputKey = $field->getOutputKey();
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
             /** @var ModuleConfiguration */

@@ -2,6 +2,8 @@
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\Engine\Route\RouteUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP_Module_Processor_ViewComponentButtonsBase
@@ -66,7 +68,13 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             if ($components) {
                 return [
                     new RelationalComponentField(
-                        'locations',
+                        new LeafField(
+                            'locations',
+                            null,
+                            [],
+                            [],
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                         $components
                     ),
                 ];

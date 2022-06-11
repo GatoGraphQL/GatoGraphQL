@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFieldsToRemove
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     */
     protected function removeIDsDataFields(
         array $idsDataFieldsToRemove,
         array &$succeedingPipelineIDsDataFields
@@ -19,12 +24,12 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
                 if (!array_key_exists((string)$id, $pipelineStageIDsDataFields)) {
                     continue;
                 }
-                $pipelineStageIDsDataFields[(string)$id]['direct'] = array_diff(
-                    $pipelineStageIDsDataFields[(string)$id]['direct'],
-                    $dataFields['direct']
+                $pipelineStageIDsDataFields[(string)$id]->direct = array_diff(
+                    $pipelineStageIDsDataFields[(string)$id]->direct,
+                    $dataFields->direct
                 );
-                foreach ($dataFields['direct'] as $removeField) {
-                    unset($pipelineStageIDsDataFields[(string)$id]['conditional'][$removeField]);
+                foreach ($dataFields->direct as $removeField) {
+                    $pipelineStageIDsDataFields[(string)$id]->conditional->detach($removeField);
                 }
             }
         }
@@ -32,6 +37,9 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
 
     /**
      * For GraphQL, set the response for the failing field as null
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFieldsToSetAsNull
+     * @param array<string|int,object> $objectIDItems
      */
     protected function setIDsDataFieldsAsNull(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -40,10 +48,9 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
         array &$dbItems,
     ): void {
         foreach (array_keys($idsDataFieldsToSetAsNull) as $id) {
-            $object = $objectIDItems[$id];
-            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[(string)$id]['direct'];
+            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[(string)$id]->direct;
             foreach ($fieldsToSetAsNullForID as $field) {
-                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+                $fieldOutputKey = $field->getOutputKey();
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }
         }

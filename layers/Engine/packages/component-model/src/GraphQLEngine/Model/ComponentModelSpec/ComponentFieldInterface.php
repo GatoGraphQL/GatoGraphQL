@@ -8,4 +8,5 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface ComponentFieldInterface extends FieldInterface
 {
+    public function getField(): FieldInterface;
 }

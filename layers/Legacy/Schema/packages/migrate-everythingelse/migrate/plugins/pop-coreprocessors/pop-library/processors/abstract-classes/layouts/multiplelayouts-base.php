@@ -1,6 +1,8 @@
 <?php
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -44,7 +46,13 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         // It must be converted to value => [$subcomponent]
         foreach ($this->getMultipleLayoutSubcomponents($component) as $conditionDataField => $conditionalSubcomponent) {
             $ret[] = new ConditionalLeafComponentField(
-                $conditionDataField,
+                new LeafField(
+                    $conditionDataField,
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                ),
                 [
                     $conditionalSubcomponent,
                 ]

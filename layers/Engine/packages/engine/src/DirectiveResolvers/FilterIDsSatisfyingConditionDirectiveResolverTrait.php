@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -13,6 +14,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
     use RemoveIDsDataFieldsDirectiveResolverTrait;
 
     /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
      * @return array<string|int>
      */
     protected function getIDsSatisfyingCondition(
@@ -33,7 +35,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
                 $objectValidDirective,
                 $objectDirectiveName,
                 $objectDirectiveArgs
-            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $dataFields['direct'], $variables, $expressions, $engineIterationFeedbackStore);
+            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $dataFields->direct, $variables, $expressions, $engineIterationFeedbackStore);
             // Check that the directive is valid. If it is not, $objectErrors will have the error already added
             if (is_null($objectValidDirective)) {
                 continue;
@@ -46,6 +48,9 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         return $idsSatisfyingCondition;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     */
     protected function removeDataFieldsForIDs(array $idsDataFields, array &$idsToRemove, array &$succeedingPipelineIDsDataFields)
     {
         // Calculate the $idsDataFields that must be removed from all the upcoming stages of the pipeline

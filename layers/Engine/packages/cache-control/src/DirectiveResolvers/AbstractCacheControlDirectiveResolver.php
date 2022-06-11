@@ -8,10 +8,11 @@ use PoP\CacheControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
@@ -133,6 +134,9 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
 
     /**
      * Get the cache control for this field, and set it on the Engine
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,

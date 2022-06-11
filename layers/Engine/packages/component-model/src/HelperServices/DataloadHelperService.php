@@ -63,9 +63,8 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         // If this field doesn't have a typeResolver, show a schema error
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $subcomponent_data_field = $field->asFieldOutputQueryString();
-        $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($subcomponent_data_field, $variables, $objectTypeFieldResolutionFeedbackStore);
-        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $subcomponent_data_field);
+        $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $field);
         if (
             $subcomponentFieldTypeResolver === null
             || !($subcomponentFieldTypeResolver instanceof RelationalTypeResolverInterface)
@@ -74,9 +73,9 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             // Otherwise, there will appear 2 error messages:
             // 1. No ObjectTypeFieldResolver
             // 2. No FieldDefaultTypeDataLoader
-            if ($objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
+            if ($objectTypeResolver->hasObjectTypeFieldResolversForField($field)) {
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $field->getOutputKey();
                 App::getFeedbackStore()->schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         new FeedbackItemResolution(
@@ -88,7 +87,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                         ),
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
-                        $subcomponent_data_field,
+                        $field,
                     )
                 );
             }

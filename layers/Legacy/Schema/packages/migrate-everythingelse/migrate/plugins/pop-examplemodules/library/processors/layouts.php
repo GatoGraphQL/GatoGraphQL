@@ -1,8 +1,10 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class ComponentProcessor_Layouts extends AbstractComponentProcessor
 {
@@ -65,7 +67,13 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
         switch ($component->name) {
             case self::COMPONENT_EXAMPLE_COMMENT:
                 $ret[] = new RelationalComponentField(
-                    'author',
+                    new LeafField(
+                        'author',
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     [
                         self::COMPONENT_EXAMPLE_AUTHORPROPERTIES,
                     ]

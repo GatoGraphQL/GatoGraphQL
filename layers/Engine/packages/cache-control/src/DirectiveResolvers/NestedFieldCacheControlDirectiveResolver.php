@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirectiveResolver
 {
@@ -22,9 +27,14 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     /**
      * If any argument is a field, then this directive will involve them to calculate the minimum max-age
      */
-    public function resolveCanProcess(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, string $field, array &$variables): bool
-    {
-        if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field)) {
+    public function resolveCanProcess(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directiveName,
+        array $directiveArgs,
+        FieldInterface $field,
+        array &$variables
+    ): bool {
+        if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field->asFieldOutputQueryString())) {
             $fieldArgElems = QueryHelpers::getFieldArgElements($fieldArgs);
             return $this->isFieldArgumentValueAFieldOrAnArrayWithAField($fieldArgElems, $variables);
         }
@@ -55,6 +65,9 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
 
     /**
      * Calculate the max-age involving also the composed fields
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -72,18 +85,19 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         if ($idsDataFields) {
             // Iterate through all the arguments, calculate the maxAge for each of them,
             // and then return the minimum value from all of them and the directiveName for this field
+            /** @var FieldInterface[] */
             $fields = [];
             foreach ($idsDataFields as $id => $dataFields) {
                 $fields = array_merge(
                     $fields,
-                    $dataFields['direct']
+                    $dataFields->direct
                 );
             }
             $fields = array_values(array_unique($fields));
             // Extract all the field arguments which are fields or have fields themselves
             $fieldArgElems = array_unique(GeneralUtils::arrayFlatten(array_map(
-                function ($field) {
-                    if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field)) {
+                function (FieldInterface $field) {
+                    if ($fieldArgs = $this->getFieldQueryInterpreter()->getFieldArgs($field->asFieldOutputQueryString())) {
                         return QueryHelpers::getFieldArgElements($fieldArgs);
                     }
                     return [];
@@ -107,7 +121,26 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 $nestedFields,
                 array_map(
                     // To evaluate on the root fields, we must remove the fieldArgs, to avoid a loop
-                    [$this->getFieldQueryInterpreter(), 'getFieldName'],
+                    function (FieldInterface $field): FieldInterface {
+                        if ($field instanceof RelationalField) {
+                            return new RelationalField(
+                                $field->getName(),
+                                $field->getAlias(),
+                                [],
+                                $field->getFieldsOrFragmentBonds(),
+                                $field->getDirectives(),
+                                $field->getLocation(),
+                            );
+                        }
+                        /** @var LeafField $field */
+                        return new LeafField(
+                            $field->getName(),
+                            $field->getAlias(),
+                            [],
+                            $field->getDirectives(),
+                            $field->getLocation(),
+                        );
+                    },
                     $fields
                 )
             ));
@@ -117,12 +150,13 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 $variables
             );
             // Nothing to do, there's some error
-            if (is_null($fieldDirectiveResolverInstances)) {
+            if ($fieldDirectiveResolverInstances === null) {
                 return;
             }
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
             $directiveResolverInstanceFieldsDataItems = [];
-            foreach ($fieldDirectiveResolverInstances as $field => $directiveResolverInstance) {
+            foreach ($fieldDirectiveResolverInstances as $field) {
+                $directiveResolverInstance = $fieldDirectiveResolverInstances[$field];
                 $instanceID = get_class($directiveResolverInstance);
                 if (!isset($directiveResolverInstanceFieldsDataItems[$instanceID])) {
                     $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolverInstance;
@@ -131,15 +165,16 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             }
             // Iterate through all the directives, and simply resolve each
             foreach ($directiveResolverInstanceFieldsDataItems as $instanceID => $directiveResolverInstanceFieldsDataItem) {
+                /** @var DirectiveResolverInterface */
                 $directiveResolverInstance = $directiveResolverInstanceFieldsDataItem['instance'];
+                /** @var FieldInterface[] */
                 $directiveResolverFields = $directiveResolverInstanceFieldsDataItem['fields'];
 
                 // Regenerate the $idsDataFields for each directive
+                /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveResolverIDDataFields = [];
                 foreach (array_keys($idsDataFields) as $id) {
-                    $directiveResolverIDDataFields[(string)$id] = [
-                        'direct' => $directiveResolverFields,
-                    ];
+                    $directiveResolverIDDataFields[(string)$id] = new EngineIterationFieldSet($directiveResolverFields);
                 }
                 $directiveResolverInstance->resolveDirective(
                     $relationalTypeResolver,

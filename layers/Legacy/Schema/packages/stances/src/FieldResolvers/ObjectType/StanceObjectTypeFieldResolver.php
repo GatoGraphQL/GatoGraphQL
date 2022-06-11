@@ -13,13 +13,15 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -139,6 +141,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $fieldArgs,
         array $variables,
         array $expressions,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
@@ -166,7 +169,20 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'stance':
                 // The stance is the category
-                return $objectTypeResolver->resolveValue($object, 'mainCategory', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                return $objectTypeResolver->resolveValue(
+                    $object,
+                    new LeafField(
+                        'mainCategory',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
 
             // The Stance has no title, so return the excerpt instead.
             // Needed for when adding a comment on the Stance, where it will say: Add comment for...
@@ -187,9 +203,22 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
             case 'hasStanceTarget':
                 // Cannot use !is_null because getCustomPostMeta returns "" when there's no entry, instead of null
-                return $objectTypeResolver->resolveValue($object, 'stancetarget', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                return $objectTypeResolver->resolveValue(
+                    $object,
+                    new LeafField(
+                        'stancetarget',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

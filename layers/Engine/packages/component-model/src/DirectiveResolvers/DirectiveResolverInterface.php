@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
 {
@@ -41,6 +43,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function getDirectiveKind(): string;
     /**
      * Extract and validate the directive arguments
+     *
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
      */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -82,7 +86,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        string $field,
+        FieldInterface $field,
         array &$variables
     ): bool;
     /**
@@ -95,6 +99,9 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function needsIDsDataFieldsToExecute(): bool;
     /**
      * Execute the directive
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,

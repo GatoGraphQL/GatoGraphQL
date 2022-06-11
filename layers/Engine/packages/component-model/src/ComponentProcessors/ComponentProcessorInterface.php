@@ -49,37 +49,37 @@ interface ComponentProcessorInterface
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function setProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
+    public function setProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
+    public function appendGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function appendProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
+    public function appendProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
+    public function mergeGroupProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
-    public function getGroupProp(string $group, Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed;
-    public function getProp(Component $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed;
+    public function mergeProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
+    public function getGroupProp(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed;
+    public function getProp(Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed;
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
+    public function mergeGroupIterateKeyProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
+    public function mergeIterateKeyProp(array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
      * @param Component[]|Component $component_or_componentPath
      */
-    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void;
+    public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     public function getDatabaseKeys(Component $component, array &$props): array;
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDatasetsettings(Component $component, array &$props): array;

@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -39,6 +40,10 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
         return PipelinePositions::END;
     }
 
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idsDataFields,
@@ -77,7 +82,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             if ($isUnionTypeResolver) {
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             }
-            foreach ($dataFields['direct'] as $field) {
+            foreach ($dataFields->direct as $field) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
                 $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
@@ -98,7 +103,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                 $fieldLeafOutputTypeResolver = $fieldTypeResolver;
                 $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByObjectTypeResolver(
                     $targetObjectTypeResolver,
-                    $field,
+                    $field->asFieldOutputQueryString(),
                 );
                 $value = $dbItems[(string)$id][$fieldOutputKey] ?? null;
                 if ($value === null) {

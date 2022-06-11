@@ -1,6 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -35,7 +37,13 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
     {
         return [
             new RelationalComponentField(
-                'locations',
+                new LeafField(
+                    'locations',
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                ),
                 [
                     [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::COMPONENT_MAP_SCRIPT_MARKERS],
                 ]

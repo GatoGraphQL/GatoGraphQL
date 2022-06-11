@@ -5,6 +5,8 @@ define('GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT', 'belowcontent');
 
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
@@ -96,7 +98,13 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
         if ($components) {
             $ret[] = new RelationalComponentField(
-                'authors',
+                new LeafField(
+                    'authors',
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                ),
                 $components
             );
         }

@@ -1,6 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -22,7 +24,13 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         if ($header = $this->getHeaderSubcomponent($component)) {
             return [
                 new RelationalComponentField(
-                    'customPost',
+                    new LeafField(
+                        'customPost',
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     [
                         $header,
                     ]

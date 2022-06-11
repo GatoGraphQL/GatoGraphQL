@@ -1,8 +1,10 @@
 <?php
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
-use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends PoPEngine_QueryDataComponentProcessorBase implements FormComponentComponentProcessorInterface
 {
@@ -160,7 +162,13 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         if ($field = $this->getDbobjectField($component)) {
             return [
                 new RelationalComponentField(
-                    $field,
+                    new LeafField(
+                        $field,
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     [
                         $this->getTriggerSubcomponent($component),
                     ]

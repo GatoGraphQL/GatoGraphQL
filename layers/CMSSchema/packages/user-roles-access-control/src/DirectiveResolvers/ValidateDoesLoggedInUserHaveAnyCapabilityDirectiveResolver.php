@@ -9,6 +9,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserRolesAccessControl\FeedbackItemProviders\FeedbackItemProvider;
@@ -53,6 +54,9 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
         return !empty(array_intersect($capabilities, $userCapabilities));
     }
 
+    /**
+     * @param FieldInterface[] $failedDataFields
+     */
     protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
     {
         $capabilities = $this->directiveArgsForSchema['capabilities'];
@@ -71,7 +75,10 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
                 ),
                 implode(
                     $this->__('\', \''),
-                    $failedDataFields
+                    array_map(
+                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        $failedDataFields
+                    )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),
             ]

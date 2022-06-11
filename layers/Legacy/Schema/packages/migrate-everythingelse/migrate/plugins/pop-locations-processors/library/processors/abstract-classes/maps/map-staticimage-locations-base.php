@@ -1,6 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -17,7 +19,13 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
         $urlparam = $this->getUrlparamSubcomponent($component);
         return [
             new RelationalComponentField(
-                'locations',
+                new LeafField(
+                    'locations',
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                ),
                 [
                     $urlparam,
                 ]
