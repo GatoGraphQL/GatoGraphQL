@@ -854,7 +854,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         if ($this->isStringWrappedInQuotes($value) || $this->isFieldArgumentValueDynamic($value)) {
             return $value;
         }
-        
+
         /**
          * If it is an ENUM, don't add quotes.
          *
