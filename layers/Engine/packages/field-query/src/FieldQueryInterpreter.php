@@ -863,7 +863,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
          *
          * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
          */
-        if (preg_match('/^[A-Z\s_]+$/', $value)) {
+        if (preg_match('/^[A-Z][A-Z_]+$/', $value)) {
             return $value;
         }
 
