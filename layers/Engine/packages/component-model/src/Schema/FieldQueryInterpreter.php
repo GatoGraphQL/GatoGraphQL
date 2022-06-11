@@ -234,7 +234,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
          * Eg:
          *   /?query=post(id:1).id|title
          */
-        $field = $this->removeSkipOuputIfNullFromField($field);
+        $field = $this->removeSkipOuputIfNullFromField($field); /** @phpstan-ignore-line */
         // If a fieldOutputKey has already been created for this field, retrieve it
         if ($fieldOutputKey = $this->fieldOutputKeysByTypeAndField[$typeOutputDBKey][$field] ?? null) {
             return $fieldOutputKey;
