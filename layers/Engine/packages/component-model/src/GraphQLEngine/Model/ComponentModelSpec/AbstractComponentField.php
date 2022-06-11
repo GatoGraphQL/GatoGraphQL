@@ -77,6 +77,11 @@ abstract class AbstractComponentField extends AbstractAst implements ComponentFi
         return $this->field->getUniqueID();
     }
 
+    public function getOutputKey(): string
+    {
+        return $this->field->getOutputKey();
+    }
+
     public function asQueryString(): string
     {
         return $this->field->asQueryString();

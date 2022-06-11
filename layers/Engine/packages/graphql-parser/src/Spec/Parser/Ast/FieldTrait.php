@@ -87,4 +87,9 @@ trait FieldTrait
     {
         return $this->getUniqueID();
     }
+
+    public function getOutputKey(): string
+    {
+        return $this->getAlias() ?? $this->getName();
+    }
 }

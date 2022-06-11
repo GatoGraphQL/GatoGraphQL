@@ -40,4 +40,13 @@ interface FieldInterface extends AstInterface, LocatableInterface, WithDirective
      * be treated as the same one, and all their IDs can be processed together.
      */
     public function getUniqueID(): string;
+
+    /**
+     * The entry in the JSON output for the field.
+     * If the alias is set, use it. Otherwise, use the name,
+     * discarding the args.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Field-Alias
+     */
+    public function getOutputKey(): string;
 }
