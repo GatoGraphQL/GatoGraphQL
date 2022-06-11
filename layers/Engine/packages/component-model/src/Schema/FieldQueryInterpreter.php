@@ -216,6 +216,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     public function getUniqueFieldOutputKeyByTypeOutputDBKey(string $typeOutputDBKey, string $field): string
     {
         /**
+         * This function caches state across PHPUnit tests! Then, running a
+         * test independently might succeed, but running it after some
+         * other one might fail! So avoid all code below by doing an early return.
+         *
+         * @todo Completely remove this function!!!!
+         */
+        return $this->getFieldOutputKey($field);
+        /**
          * Watch out! The conditional field symbol `?` must be ignored!
          * Otherwise the same field, with and without ?, will be considered different,
          * but they are the same:
