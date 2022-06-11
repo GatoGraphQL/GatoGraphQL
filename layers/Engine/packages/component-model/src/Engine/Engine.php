@@ -2302,7 +2302,6 @@ class Engine implements EngineInterface
             /** @var ComponentFieldInterface $componentField */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentField];
             /** @var array<string,mixed> $subcomponent_data_properties */
-            $subcomponent_data_field = $componentField->asFieldOutputQueryString();
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
@@ -2329,8 +2328,7 @@ class Engine implements EngineInterface
                 }
                 $subcomponentIDs = [];
                 foreach ($typeResolver_ids as $id) {
-                    $object = $objectIDItems[$id];
-                    $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
+                    $subcomponent_data_field_outputkey = $componentField->getOutputKey();
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbname => $database) {
@@ -2375,8 +2373,7 @@ class Engine implements EngineInterface
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
-                            $object = $objectIDItems[$id];
-                            $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
+                            $subcomponent_data_field_outputkey = $componentField->getOutputKey();
                             // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                             $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
                             $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];

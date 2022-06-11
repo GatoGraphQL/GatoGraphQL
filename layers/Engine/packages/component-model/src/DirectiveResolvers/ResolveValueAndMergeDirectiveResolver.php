@@ -146,7 +146,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $conditionDataField->asFieldOutputQueryString(), $object);
+                $conditionFieldOutputKey = $conditionDataField->getOutputKey();
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
@@ -225,11 +225,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
 
         // 3. Add the output in the DB
-        $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
-            $relationalTypeResolver,
-            $field->asFieldOutputQueryString(),
-            $object,
-        );
+        $fieldOutputKey = $field->getOutputKey();
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
             /** @var ModuleConfiguration */

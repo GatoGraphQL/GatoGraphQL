@@ -1026,13 +1026,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Set those fields as null
                 foreach ($fieldDirectives as $fieldDirective) {
                     foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
-                        $object = $objectIDItems[$id];
                         $failingFields = array_intersect(
                             $dataFields->direct,
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
-                            $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($this, $field->asFieldOutputQueryString(), $object);
+                            $fieldOutputKey = $field->getOutputKey();
                             $dbItems[(string)$id][$fieldOutputKey] = null;
                         }
                     }
