@@ -76,9 +76,9 @@ use PoPCMSSchema\Users\Environment as UsersEnvironment;
  */
 class PluginInitializationConfiguration extends AbstractMainPluginInitializationConfiguration
 {
-    protected function isCachingEnabled(): bool
+    protected function isContainerCachingEnabled(): bool
     {
-        return PluginEnvironment::isCachingEnabled();
+        return PluginEnvironment::isContainerCachingEnabled();
     }
 
     /**
