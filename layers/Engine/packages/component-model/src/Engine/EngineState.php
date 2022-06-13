@@ -57,7 +57,7 @@ class EngineState
          * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
          * @var array<string,array<string,mixed>>
          */
-        public array $relationalTypeOutputDBKeyIDsDataFields = [],
+        public array $relationalTypeOutputDBKeyIDFieldSets = [],
         /**
          * After executing `resolveValue` on the Object/UnionTypeResolver,
          * store the results to re-use for subsequent calls for same object/field.
