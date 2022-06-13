@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
@@ -55,7 +56,7 @@ class EngineState
         public ?Component $entryComponent = null,
         /**
          * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
-         * @var array<string,array<string,mixed>>
+         * @var array<string,array<string,array<string|int,EngineIterationFieldSet>>>
          */
         public array $relationalTypeOutputDBKeyIDFieldSets = [],
         /**
