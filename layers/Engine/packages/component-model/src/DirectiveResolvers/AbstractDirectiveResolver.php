@@ -929,7 +929,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function resolveDirectivePipelinePayload(array $payload): array
     {
         // 1. Extract the arguments from the payload
-        // $pipelineIDsDataFields is an array containing all stages of the pipe
+        // $pipelineIDFieldSet is an array containing all stages of the pipe
         // The one corresponding to the current stage is at the head. Take it out from there,
         // and keep passing down the rest of the array to the next stages
         list(
@@ -939,7 +939,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
-            $pipelineIDsDataFields,
+            $pipelineIDFieldSet,
             $dbItems,
             $variables,
             $messages,
@@ -947,11 +947,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $engineIterationFeedbackStore,
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
-        /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDsDataFields */
+        /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet */
 
         // Extract the head, keep passing down the rest
-        $idFieldSet = $pipelineIDsDataFields[0];
-        array_shift($pipelineIDsDataFields);
+        $idFieldSet = $pipelineIDFieldSet[0];
+        array_shift($pipelineIDFieldSet);
         // The $pipelineDirectiveResolverInstances is the series of directives executed in the pipeline
         // The current stage is at the head. Remove it
         array_shift($pipelineDirectiveResolverInstances);
@@ -960,7 +960,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // $this->validateDirective(
         //     $relationalTypeResolver,
         //     $idFieldSet,
-        //     $pipelineIDsDataFields,
+        //     $pipelineIDFieldSet,
         //     $pipelineDirectiveResolverInstances,
         //     $objectIDItems,
         //     $dbItems,
@@ -985,7 +985,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $objectIDItems,
                     $unionDBKeyIDs,
                     $previousDBItems,
-                    $pipelineIDsDataFields,
+                    $pipelineIDFieldSet,
                     $dbItems,
                     $variables,
                     $messages,
@@ -1060,7 +1060,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $feedbackItemResolution,
                     [],
                     $idFieldSet,
-                    $pipelineIDsDataFields,
+                    $pipelineIDFieldSet,
                     $objectIDItems,
                     $dbItems,
                     $engineIterationFeedbackStore,
@@ -1075,7 +1075,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
-            $pipelineIDsDataFields,
+            $pipelineIDFieldSet,
             $dbItems,
             $variables,
             $messages,

@@ -1042,7 +1042,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // and build the array to pass to the pipeline, for each directive (stage)
             $directiveResolverInstances = [];
             /** @var array<array<string|int,EngineIterationFieldSet>> */
-            $pipelineIDsDataFields = [];
+            $pipelineIDFieldSet = [];
             foreach ($directivePipelineData as $pipelineStageData) {
                 $directiveResolverInstance = $pipelineStageData['instance'];
                 $fieldDirective = $pipelineStageData['fieldDirective'];
@@ -1073,7 +1073,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $directiveIDFieldSet[$id]->conditionalFields[$field] = $fieldConditionalFields;
                     }
                 }
-                $pipelineIDsDataFields[] = $directiveIDFieldSet;
+                $pipelineIDFieldSet[] = $directiveIDFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
 
@@ -1081,7 +1081,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($directiveResolverInstances);
             $directivePipeline->resolveDirectivePipeline(
                 $this,
-                $pipelineIDsDataFields,
+                $pipelineIDFieldSet,
                 $directiveResolverInstances,
                 $objectIDItems,
                 $unionDBKeyIDs,

@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 class DirectivePipelineUtils
 {
     /**
-     * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet
      */
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -19,7 +19,7 @@ class DirectivePipelineUtils
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$pipelineIDsDataFields,
+        array &$pipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
@@ -31,7 +31,7 @@ class DirectivePipelineUtils
             'objectIDItems' => &$objectIDItems,
             'unionDBKeyIDs' => &$unionDBKeyIDs,
             'previousDBItems' => &$previousDBItems,
-            'pipelineIDsDataFields' => &$pipelineIDsDataFields,
+            'pipelineIDFieldSet' => &$pipelineIDFieldSet,
             'dbItems' => &$dbItems,
             'variables' => &$variables,
             'messages' => &$messages,
@@ -47,7 +47,7 @@ class DirectivePipelineUtils
             &$payload['objectIDItems'],
             &$payload['unionDBKeyIDs'],
             &$payload['previousDBItems'],
-            &$payload['pipelineIDsDataFields'],
+            &$payload['pipelineIDFieldSet'],
             &$payload['dbItems'],
             &$payload['variables'],
             &$payload['messages'],
