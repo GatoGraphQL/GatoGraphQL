@@ -1210,7 +1210,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    protected function flattenDatasetcomponentTreeDataProperties($propagate_fn, &$ret, Component $component, array &$props): void
+    protected function flattenDatasetcomponentTreeDataProperties(string $propagate_fn, array &$ret, Component $component, array &$props): void
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
@@ -1349,7 +1349,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, Component $component, array &$props): void
+    protected function flattenRelationalDBObjectDataProperties(string $propagate_fn, array &$ret, Component $component, array &$props): void
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 

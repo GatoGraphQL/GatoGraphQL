@@ -126,7 +126,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //     return $ret;
     // }
 
-    protected function flattenDatasetcomponentTreeDataProperties($propagate_fn, &$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
+    protected function flattenDatasetcomponentTreeDataProperties(string $propagate_fn, array &$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         global $pop_component_processordynamicdatadecorator_manager;
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
@@ -160,7 +160,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $modulefilter_manager->restoreFromPropagation($component, $props);
     }
 
-    protected function flattenRelationaldbobjectDataProperties($propagate_fn, &$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
+    protected function flattenRelationaldbobjectDataProperties(string $propagate_fn, array &$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         global $pop_component_processordynamicdatadecorator_manager;
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
