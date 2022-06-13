@@ -1732,7 +1732,7 @@ class Engine implements EngineInterface
 
                 // Check if it has subcomponents, and then bring this data
                 if ($subcomponents_data_properties = $typeResolver_data['subcomponents']) {
-                    $typeResolver_ids = $typeResolver_data[DataProperties::IDS];
+                    $typeResolverIDs = $typeResolver_data[DataProperties::IDS];
                     // The unionTypeResolver doesn't know how to resolver the subcomponents, since the fields
                     // (eg: "authors") are attached to the target typeResolver, not to the unionTypeResolver
                     // Then, iterate through all the target typeResolvers, and have each of them process their data
@@ -1745,7 +1745,7 @@ class Engine implements EngineInterface
                         // may have been stored, so cast it always to string
                         $targetObjectIDItems = [];
                         $objectTypeResolver_ids = [];
-                        foreach ($typeResolver_ids as $composedID) {
+                        foreach ($typeResolverIDs as $composedID) {
                             list(
                                 $database_key,
                                 $id
@@ -1778,7 +1778,7 @@ class Engine implements EngineInterface
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $objectIDItems);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $objectIDItems);
                     }
                 }
             }
@@ -2293,7 +2293,7 @@ class Engine implements EngineInterface
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeResolverInterface $targetObjectTypeResolver,
-        array $typeResolver_ids,
+        array $typeResolverIDs,
         string $component_path_key,
         array &$databases,
         SplObjectStorage $subcomponents_data_properties,
@@ -2333,7 +2333,7 @@ class Engine implements EngineInterface
                     $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey];
                 }
                 $subcomponentIDs = [];
-                foreach ($typeResolver_ids as $id) {
+                foreach ($typeResolverIDs as $id) {
                     $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
