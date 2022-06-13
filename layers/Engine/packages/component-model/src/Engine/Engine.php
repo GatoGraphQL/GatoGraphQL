@@ -1296,8 +1296,8 @@ class Engine implements EngineInterface
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
                     $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputDBKey, $component_path_key);
-                    $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]['ids'] = array_merge(
-                        $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]['ids'],
+                    $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key][DataProperties::IDS] = array_merge(
+                        $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key][DataProperties::IDS],
                         $typeDBObjectIDs
                     );
 
@@ -1318,7 +1318,7 @@ class Engine implements EngineInterface
                         // Get the info for the subcomponent typeResolver
                         $extend_data_fields = $extend_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [];
                         $extend_conditional_data_fields = $extend_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
-                        $extend_ids = $extend_data_properties['ids'];
+                        $extend_ids = $extend_data_properties[DataProperties::IDS];
                         $extend_typeResolver = $extend_data_properties['resolver'];
 
                         $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
@@ -1732,7 +1732,7 @@ class Engine implements EngineInterface
 
                 // Check if it has subcomponents, and then bring this data
                 if ($subcomponents_data_properties = $typeResolver_data['subcomponents']) {
-                    $typeResolver_ids = $typeResolver_data['ids'];
+                    $typeResolver_ids = $typeResolver_data[DataProperties::IDS];
                     // The unionTypeResolver doesn't know how to resolver the subcomponents, since the fields
                     // (eg: "authors") are attached to the target typeResolver, not to the unionTypeResolver
                     // Then, iterate through all the target typeResolvers, and have each of them process their data
@@ -2431,15 +2431,15 @@ class Engine implements EngineInterface
                         $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $component_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_merge(
-                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] ?? [],
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS] = array_merge(
+                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS] ?? [],
                         $field_ids
                     );
                     $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $component_path_key);
                 }
 
                 if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key] ?? null) {
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids']);
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS]);
                     $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
                 }
             }
@@ -2558,7 +2558,7 @@ class Engine implements EngineInterface
     ): void {
         if (!isset($dbdata[$relationalTypeOutputDBKey][$component_path_key])) {
             $dbdata[$relationalTypeOutputDBKey][$component_path_key] = array(
-                'ids' => [],
+                DataProperties::IDS => [],
                 DataProperties::DIRECT_COMPONENT_FIELD_NODES => [],
                 'subcomponents' => new SplObjectStorage(),
             );

@@ -234,7 +234,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             // Extend the dataload ids
             return array(
                 $this->getTriggerRelationalTypeResolver($component)->getTypeName() => array(
-                    'ids' => $value,
+                    DataProperties::IDS => $value,
                     DataProperties::DIRECT_COMPONENT_FIELD_NODES => $trigger_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES],
                 ),
             );
