@@ -599,8 +599,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function hasIDsDataFields(array $idFieldSet): bool
     {
-        foreach ($idFieldSet as $id => $data_fields) {
-            if ($data_fields->fields !== []) {
+        foreach ($idFieldSet as $id => $fieldSet) {
+            if ($fieldSet->fields !== []) {
                 // If there's data-fields to fetch for any ID, that's it, there's data
                 return true;
             }
@@ -1105,20 +1105,20 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // Remove all fields
             $idsDataFieldsToRemove = $idFieldSet;
             // Calculate which fields are being removed, to add to the error
-            foreach ($idFieldSet as $id => $data_fields) {
+            foreach ($idFieldSet as $id => $fieldSet) {
                 $failedFields = array_merge(
                     $failedFields,
-                    $data_fields->fields
+                    $fieldSet->fields
                 );
             }
             $failedFields = array_values(array_unique($failedFields));
         } else {
             $idsDataFieldsToRemove = [];
             // Calculate which fields to remove
-            foreach ($idFieldSet as $id => $data_fields) {
+            foreach ($idFieldSet as $id => $fieldSet) {
                 $idsDataFieldsToRemove[$id] = new EngineIterationFieldSet(
                     array_intersect(
-                        $data_fields->fields,
+                        $fieldSet->fields,
                         $failedFields
                     )
                 );

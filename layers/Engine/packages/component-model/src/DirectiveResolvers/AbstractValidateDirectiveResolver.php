@@ -69,10 +69,10 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // (Such as fieldArg "status" for field "isStatus")
         // Combine all the datafields under all IDs
         $fields = $failedFields = [];
-        foreach ($idFieldSet as $id => $data_fields) {
+        foreach ($idFieldSet as $id => $fieldSet) {
             $fields = array_values(array_unique(array_merge(
                 $fields,
-                $data_fields->fields
+                $fieldSet->fields
             )));
         }
         $this->validateFields($relationalTypeResolver, $fields, $variables, $engineIterationFeedbackStore, $failedFields);

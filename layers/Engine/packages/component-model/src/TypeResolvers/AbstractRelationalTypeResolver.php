@@ -864,7 +864,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @param FieldInterface[] $fields
      */
-    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $data_fields): void
+    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
     {
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
@@ -926,11 +926,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $this->fieldDirectiveIDFields[$fieldDirective][$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
-                if (in_array($field, $data_fields->fields)) {
+                if (in_array($field, $fieldSet->fields)) {
                     $this->fieldDirectiveIDFields[$fieldDirective][$id]->fields[] = $field;
                 }
                 /** @var FieldInterface[]|null */
-                $conditionalFields = $data_fields->conditionalFields[$field] ?? null;
+                $conditionalFields = $fieldSet->conditionalFields[$field] ?? null;
                 if ($conditionalFields === null || $conditionalFields === []) {
                     continue;
                 }
