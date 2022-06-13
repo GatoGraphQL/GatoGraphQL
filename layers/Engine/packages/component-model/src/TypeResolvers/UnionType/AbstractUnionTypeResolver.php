@@ -139,7 +139,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     ];
                     $targetTypeResolverNameDataItems[$targetObjectTypeName]['objectIDs'][] = $objectID;
                 } else {
-                    $objectIDTargetTypeResolvers[(string)$objectID] = null;
+                    $objectIDTargetTypeResolvers[$objectID] = null;
                 }
             }
             foreach ($targetTypeResolverNameDataItems as $targetObjectTypeName => $targetTypeResolverDataItems) {
@@ -150,14 +150,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     $objectIDs
                 );
                 foreach ($targetObjectIDTargetTypeResolvers as $targetObjectID => $targetObjectTypeResolver) {
-                    $objectIDTargetTypeResolvers[(string)$targetObjectID] = $targetObjectTypeResolver;
+                    $objectIDTargetTypeResolvers[$targetObjectID] = $targetObjectTypeResolver;
                 }
             }
         } else {
             /** @var ObjectTypeResolverInterface */
             $objectTypeResolver = $relationalTypeResolver;
             foreach ($ids as $objectID) {
-                $objectIDTargetTypeResolvers[(string)$objectID] = $objectTypeResolver;
+                $objectIDTargetTypeResolvers[$objectID] = $objectTypeResolver;
             }
         }
         return $objectIDTargetTypeResolvers;

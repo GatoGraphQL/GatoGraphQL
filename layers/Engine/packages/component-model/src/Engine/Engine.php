@@ -2109,7 +2109,7 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $objectFeedbackEntries[(string)$objectFeedback->getObjectID()][] = $entry;
+        $objectFeedbackEntries[$objectFeedback->getObjectID()][] = $entry;
     }
 
     private function transferSchemaFeedback(
@@ -2469,8 +2469,8 @@ class Engine implements EngineInterface
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
                     foreach ($database as $database_key => $dbItems) {
                         foreach ($dbItems as $dbobject_id => $dbobject_values) {
-                            $combined_databases[$database_key][(string)$dbobject_id] = array_merge(
-                                $combined_databases[$database_key][(string)$dbobject_id] ?? [],
+                            $combined_databases[$database_key][$dbobject_id] = array_merge(
+                                $combined_databases[$database_key][$dbobject_id] ?? [],
                                 // If field "id" for this type has been disabled (eg: by ACL),
                                 // then $dbObject may be `null`
                                 $dbobject_values ?? []
