@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-trait RemoveIDsDataFieldsDirectiveResolverTrait
+trait RemoveIDFieldSetDirectiveResolverTrait
 {
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSetToRemove

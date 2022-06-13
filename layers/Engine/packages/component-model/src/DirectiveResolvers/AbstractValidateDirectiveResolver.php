@@ -15,7 +15,7 @@ use PoP\Root\App;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    use RemoveIDsDataFieldsDirectiveResolverTrait;
+    use RemoveIDFieldSetDirectiveResolverTrait;
 
     /**
      * Validations are by default a "Schema" type directive

@@ -43,7 +43,7 @@ use PoP\Root\Services\BasicServiceTrait;
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
     use AttachableExtensionTrait;
-    use RemoveIDsDataFieldsDirectiveResolverTrait;
+    use RemoveIDFieldSetDirectiveResolverTrait;
     use FieldOrDirectiveResolverTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;

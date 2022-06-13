@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
-use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
+use PoP\ComponentModel\DirectiveResolvers\RemoveIDFieldSetDirectiveResolverTrait;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait FilterIDsSatisfyingConditionDirectiveResolverTrait
 {
-    use RemoveIDsDataFieldsDirectiveResolverTrait;
+    use RemoveIDFieldSetDirectiveResolverTrait;
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
