@@ -1487,37 +1487,26 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             );
         }
 
-        $ret = array();
+        $components = array();
 
         if (in_array(self::COMPONENTELEMENT_SUBCOMPONENTS, $elements)) {
-            // Modules are arrays, comparing them through the default SORT_STRING fails
-            $ret = array_unique(
-                $this->getSubcomponents($component),
-                SORT_REGULAR
-            );
+            $components = $this->getSubcomponents($component);
         }
 
         if (in_array(self::COMPONENTELEMENT_RELATIONALSUBCOMPONENTS, $elements)) {
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                $ret = array_values(array_unique(
-                    array_merge(
-                        $relationalComponentFieldNode->getNestedComponents(),
-                        $ret
-                    ),
-                    SORT_REGULAR
-                ));
+                $components = array_merge(
+                    $components,
+                    $relationalComponentFieldNode->getNestedComponents(),
+                );
             }
         }
 
         if (in_array(self::COMPONENTELEMENT_CONDITIONALONDATAFIELDSUBCOMPONENTS, $elements)) {
-            // Modules are arrays, comparing them through the default SORT_STRING fails
             foreach ($this->getConditionalLeafComponentFieldNodes($component) as $conditionalLeafComponentFieldNode) {
-                $ret = array_unique(
-                    array_merge(
-                        $ret,
-                        $conditionalLeafComponentFieldNode->getConditionalNestedComponents()
-                    ),
-                    SORT_REGULAR
+                $components = array_merge(
+                    $components,
+                    $conditionalLeafComponentFieldNode->getConditionalNestedComponents()
                 );
             }
         }
@@ -1525,19 +1514,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if (in_array(self::COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $elements)) {
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    $ret = array_values(
-                        array_unique(
-                            array_merge(
-                                $relationalComponentFieldNode->getNestedComponents(),
-                                $ret
-                            ),
-                            SORT_REGULAR
-                        )
+                    $components = array_merge(
+                        $components,
+                        $relationalComponentFieldNode->getNestedComponents(),
                     );
                 }
             }
         }
 
-        return $ret;
+        return array_values(array_unique($components, SORT_REGULAR));
     }
 }
