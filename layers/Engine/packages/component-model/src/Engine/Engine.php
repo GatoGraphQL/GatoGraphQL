@@ -1731,7 +1731,7 @@ class Engine implements EngineInterface
                 unset($engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]);
 
                 // Check if it has subcomponents, and then bring this data
-                if ($subcomponents_data_properties = $typeResolver_data['subcomponents']) {
+                if ($subcomponents_data_properties = $typeResolver_data[DataProperties::SUBCOMPONENTS]) {
                     $typeResolverIDs = $typeResolver_data[DataProperties::IDS];
                     // The unionTypeResolver doesn't know how to resolver the subcomponents, since the fields
                     // (eg: "authors") are attached to the target typeResolver, not to the unionTypeResolver
@@ -2560,7 +2560,7 @@ class Engine implements EngineInterface
             $dbdata[$relationalTypeOutputDBKey][$component_path_key] = array(
                 DataProperties::IDS => [],
                 DataProperties::DIRECT_COMPONENT_FIELD_NODES => [],
-                'subcomponents' => new SplObjectStorage(),
+                DataProperties::SUBCOMPONENTS => new SplObjectStorage(),
             );
         }
     }
@@ -2573,11 +2573,11 @@ class Engine implements EngineInterface
     ): void {
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary typeResolver, execute getData also on the subcomponent typeResolver
-        if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
+        if ($subcomponents_data_properties = $data_properties[DataProperties::SUBCOMPONENTS] ?? null) {
             /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties */
-            $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] ??= new SplObjectStorage();
+            $dbdata[$relationalTypeOutputDBKey][$component_path_key][DataProperties::SUBCOMPONENTS] ??= new SplObjectStorage();
             /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> */
-            $dbDataSubcomponentsSplObjectStorage = $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'];
+            $dbDataSubcomponentsSplObjectStorage = $dbdata[$relationalTypeOutputDBKey][$component_path_key][DataProperties::SUBCOMPONENTS];
             /**
              * Merge them into the data.
              * Watch out! Can't do `array_merge_recursive` because:
@@ -2612,15 +2612,15 @@ class Engine implements EngineInterface
                         );
                     }
                 }
-                if (isset($componentFieldNodeData['subcomponents'])) {
-                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents'] ??= new SplObjectStorage();
+                if (isset($componentFieldNodeData[DataProperties::SUBCOMPONENTS])) {
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::SUBCOMPONENTS] ??= new SplObjectStorage();
                     /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> */
-                    $componentFieldNodeDataSubcomponents = $componentFieldNodeData['subcomponents'];
-                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents']->addAll($componentFieldNodeDataSubcomponents);
+                    $componentFieldNodeDataSubcomponents = $componentFieldNodeData[DataProperties::SUBCOMPONENTS];
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::SUBCOMPONENTS]->addAll($componentFieldNodeDataSubcomponents);
                 }
                 $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] = $dbDataSubcomponentsFieldSplObjectStorage;
             }
-            $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = $dbDataSubcomponentsSplObjectStorage;
+            $dbdata[$relationalTypeOutputDBKey][$component_path_key][DataProperties::SUBCOMPONENTS] = $dbDataSubcomponentsSplObjectStorage;
         }
     }
 }
