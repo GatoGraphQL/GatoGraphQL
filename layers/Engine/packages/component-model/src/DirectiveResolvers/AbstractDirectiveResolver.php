@@ -601,7 +601,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         foreach ($idFieldSet as $id => $fieldSet) {
             if ($fieldSet->fields !== []) {
-                // If there's data-fields to fetch for any ID, that's it, there's data
+                // If there's direct-fields to fetch for any ID, that's it, there's data
                 return true;
             }
         }

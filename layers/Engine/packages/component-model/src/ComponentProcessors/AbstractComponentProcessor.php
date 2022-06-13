@@ -1211,7 +1211,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         if ($subcomponents = $this->getComponentsToPropagateDataProperties($component)) {
             // Calculate in 2 steps:
-            // First step: The conditional-on-data-field-subcomponents must have their data-fields added under entry "conditional-data-fields"
+            // First step: The conditional-on-data-field-subcomponents must have their data-fields added under entry "conditional-fields"
             $conditionalLeafComponentFieldNodes = $this->getConditionalLeafComponentFieldNodes($component);
             $conditionalRelationalComponentFieldNodes = $this->getConditionalRelationalComponentFieldNodes($component);
             if ($conditionalLeafComponentFieldNodes !== [] || $conditionalRelationalComponentFieldNodes !== []) {
@@ -1257,8 +1257,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             continue;
                         }
 
-                        // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
-                        // Move from "data-fields" to "conditional-data-fields"
+                        // Chain the "direct-fields" from the sublevels under the current "conditional-fields"
+                        // Move from "direct-fields" to "conditional-fields"
                         $ret['conditional-fields'] ??= new SplObjectStorage();
                         /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                         $conditionalDataFields = $ret['conditional-fields'];
@@ -1272,7 +1272,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             unset($subcomponent_ret['direct-fields']);
                         }
 
-                        // Chain the conditional-data-fields at the end of the one from this component
+                        // Chain the conditional-fields at the end of the one from this component
                         /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]>|null */
                         $subcomponentConditionalFieldSplObjectStorage = $subcomponent_ret['conditional-fields'] ?? null;
                         if ($subcomponentConditionalFieldSplObjectStorage !== null) {
