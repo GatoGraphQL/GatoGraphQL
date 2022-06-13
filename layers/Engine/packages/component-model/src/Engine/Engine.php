@@ -768,16 +768,16 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string|int> $ids
-     * @param ComponentFieldNodeInterface[] $data_fields
-     * @param SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> $conditional_data_fields
+     * @param ComponentFieldNodeInterface[] $directComponentFieldNodes
+     * @param SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> $conditionalComponentFieldNodesSplObjectStorage
      */
     private function combineIDsDatafields(
         array &$relationalTypeOutputDBKeyIDsDataFields,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $relationalTypeOutputDBKey,
         array $ids,
-        array $data_fields,
-        SplObjectStorage $conditional_data_fields
+        array $directComponentFieldNodes,
+        SplObjectStorage $conditionalComponentFieldNodesSplObjectStorage
     ): void {
         $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey] ??= [
             'relationalTypeResolver' => $relationalTypeResolver,
@@ -797,7 +797,7 @@ class Engine implements EngineInterface
             $engineIterationFieldSet->addFields(
                 array_map(
                     fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
-                    $data_fields
+                    $directComponentFieldNodes
                 )
             );
 
@@ -808,9 +808,9 @@ class Engine implements EngineInterface
              *   Value: the list of conditional fields to load
              *          if the condition one is successful (eg: if it's `true`)
              */
-            foreach ($conditional_data_fields as $conditionComponentFieldNode) {
+            foreach ($conditionalComponentFieldNodesSplObjectStorage as $conditionComponentFieldNode) {
                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                $conditionalDataFields = $conditional_data_fields[$conditionComponentFieldNode];
+                $conditionalDataFields = $conditionalComponentFieldNodesSplObjectStorage[$conditionComponentFieldNode];
                 /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
                 $conditionField = $conditionComponentFieldNode->getField();
                 $conditionalComponentFieldNodes = [];
@@ -1619,12 +1619,12 @@ class Engine implements EngineInterface
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ??= [];
-            foreach ($ids_data_fields as $id => $data_fields) {
+            foreach ($ids_data_fields as $id => $fieldSet) {
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
-                    $data_fields->fields,
+                    $fieldSet->fields,
                     // Conditional items must also be in direct, so no need to check to cache them
-                    // iterator_to_array($data_fields->conditionalFields)
+                    // iterator_to_array($fieldSet->conditionalFields)
                 );
             }
 
@@ -1668,11 +1668,11 @@ class Engine implements EngineInterface
                  * To find out if they were loaded, validate against the DBObject,
                  * to see if it has those properties
                  */
-                foreach ($ids_data_fields as $id => $data_fields) {
-                    foreach ($data_fields->conditionalFields as $conditionDataField) {
+                foreach ($ids_data_fields as $id => $fieldSet) {
+                    foreach ($fieldSet->conditionalFields as $conditionDataField) {
                         // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalDataFields is FieldInterface
                         /** @var FieldInterface $conditionDataField */
-                        $conditionalDataFields = $data_fields->conditionalFields[$conditionDataField];
+                        $conditionalDataFields = $fieldSet->conditionalFields[$conditionDataField];
                         // If it failed to load the item, it will be null
                         $dbItem = $iterationDBItems[$id];
                         if ($dbItem === null) {
