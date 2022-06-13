@@ -7,7 +7,7 @@ namespace PoP\SiteBuilderAPI\ComponentProcessors;
 use PoP\ComponentModel\Component\Component;
 use PoPAPI\API\Schema\QueryInputs;
 use PoP\ComponentModel\Constants\DataOutputItems;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
@@ -38,7 +38,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
                     $apiFields[] = $key . implode(
                         QuerySyntax::SYMBOL_FIELDPROPERTIES_SEPARATOR,
                         array_map(
-                            fn (ComponentFieldInterface $componentField) => $componentField->asFieldOutputQueryString(),
+                            fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField()->asFieldOutputQueryString(),
                             array_values(array_unique(array_filter($key_datafields)))
                         )
                     );

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -31,12 +31,12 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
         return [
-            new RelationalComponentField(
+            new RelationalComponentFieldNode(
                 new LeafField(
                     'locations',
                     null,

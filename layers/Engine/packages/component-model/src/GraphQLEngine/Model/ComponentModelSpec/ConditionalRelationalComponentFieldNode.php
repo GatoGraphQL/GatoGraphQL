@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-class ConditionalLeafComponentField extends AbstractComponentField
+class ConditionalRelationalComponentFieldNode extends AbstractComponentFieldNode
 {
     /**
      * The condition must be satisfied on the implicit field.
      * When the value of the field is `true`, load the conditional
-     * extra modules under the current dataloading position.
+     * domain switching fields.
      *
-     * @param Component[] $conditionalNestedComponents
+     * @param RelationalComponentFieldNode[] $relationalComponentFieldNodes
      */
     public function __construct(
         FieldInterface $field,
-        protected array $conditionalNestedComponents,
+        protected array $relationalComponentFieldNodes,
     ) {
         parent::__construct(
             $field,
@@ -26,10 +25,10 @@ class ConditionalLeafComponentField extends AbstractComponentField
     }
 
     /**
-     * @return Component[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getConditionalNestedComponents(): array
+    public function getRelationalComponentFieldNodes(): array
     {
-        return $this->conditionalNestedComponents;
+        return $this->relationalComponentFieldNodes;
     }
 }

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Component\Component;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
-class RelationalComponentField extends AbstractComponentField
+class RelationalComponentFieldNode extends AbstractComponentFieldNode
 {
     /**
      * @param Component[] $nestedComponents

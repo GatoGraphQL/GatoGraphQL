@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-interface ComponentFieldInterface extends FieldInterface
+interface ComponentFieldNodeInterface
 {
     public function getField(): FieldInterface;
 }

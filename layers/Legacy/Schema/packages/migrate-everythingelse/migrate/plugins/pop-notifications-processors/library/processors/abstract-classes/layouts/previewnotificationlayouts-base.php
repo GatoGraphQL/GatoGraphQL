@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -60,11 +60,11 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
-        $ret = parent::getRelationalComponentFields($component);
+        $ret = parent::getRelationalComponentFieldNodes($component);
 
         $components = array();
 
@@ -76,7 +76,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($components) {
-            $ret[] = new RelationalComponentField(
+            $ret[] = new RelationalComponentFieldNode(
                 new LeafField(
                     'userID',
                     null,
@@ -97,13 +97,13 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
 
         // From the combination of object_type and action, we obtain the layout to use for the notification
         // $ret[] = 'objectType';
@@ -135,11 +135,11 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     }
 
     /**
-     * @return ConditionalLeafComponentField[]
+     * @return ConditionalLeafComponentFieldNode[]
      */
-    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getConditionalLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
-        $ret = parent::getConditionalLeafComponentFields($component);
+        $ret = parent::getConditionalLeafComponentFieldNodes($component);
 
         return array_merge(
             $ret,
@@ -148,7 +148,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     }
 
     /**
-     * @return ConditionalLeafComponentField[]
+     * @return ConditionalLeafComponentFieldNode[]
      */
     public function getConditionalBottomSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
@@ -165,7 +165,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             ],
             'is-comment-notification-and-loading-latest'
         );
-        $ret[] = new ConditionalLeafComponentField(
+        $ret[] = new ConditionalLeafComponentFieldNode(
             new LeafField(
                 $field,
                 null,
@@ -232,12 +232,12 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $this->getBottomSubcomponents($component)
             );
-            foreach ($this->getConditionalBottomSubcomponents($component) as $conditionalLeafComponentField) {
+            foreach ($this->getConditionalBottomSubcomponents($component) as $conditionalLeafComponentFieldNode) {
                 $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'] = array_merge(
                     $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['bottom'],
                     array_map(
                         \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
-                        $conditionalLeafComponentField->getConditionalNestedComponents()
+                        $conditionalLeafComponentFieldNode->getConditionalNestedComponents()
                     )
                 );
             }
