@@ -13,7 +13,7 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
      * @param array<string|int,EngineIterationFieldSet> $idsDataFieldsToRemove
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
-    protected function removeIDsDataFields(
+    protected function removeIDFieldSet(
         array $idsDataFieldsToRemove,
         array &$succeedingPipelineIDFieldSet
     ): void {

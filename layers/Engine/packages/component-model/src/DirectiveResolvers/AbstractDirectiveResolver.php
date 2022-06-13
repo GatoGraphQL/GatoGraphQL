@@ -1129,7 +1129,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $removeFieldIfDirectiveFailed = $moduleConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
-            $this->removeIDsDataFields(
+            $this->removeIDFieldSet(
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDFieldSet
             );

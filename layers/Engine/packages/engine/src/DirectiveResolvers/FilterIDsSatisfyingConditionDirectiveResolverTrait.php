@@ -59,7 +59,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
             fn (int | string $id) => in_array($id, $idsToRemove),
             ARRAY_FILTER_USE_KEY
         );
-        $this->removeIDsDataFields(
+        $this->removeIDFieldSet(
             $idsDataFieldsToRemove,
             $succeedingPipelineIDFieldSet
         );

@@ -89,7 +89,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                     )
                 );
             }
-            $this->removeIDsDataFields(
+            $this->removeIDFieldSet(
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDFieldSet
             );
