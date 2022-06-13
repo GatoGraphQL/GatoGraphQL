@@ -1673,8 +1673,13 @@ class Engine implements EngineInterface
                         // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalDataFields is FieldInterface
                         /** @var FieldInterface $conditionDataField */
                         $conditionalDataFields = $data_fields->conditional[$conditionDataField];
+                        // If it failed to load the item, it will be null
+                        $dbItem = $iterationDBItems[(string)$id];
+                        if ($dbItem === null) {
+                            continue;
+                        }
                         /** @var FieldInterface[] $conditionalDataFields */
-                        $iterationFields = array_keys($iterationDBItems[(string)$id]);
+                        $iterationFields = array_keys($dbItem);
                         $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
                             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
