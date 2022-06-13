@@ -38,7 +38,8 @@ class ModuleConfiguration extends AbstractModuleConfiguration
          *
          * @see https://github.com/leoloso/PoP/issues/1614
          */
-        return false; /** @phpstan-ignore-next-line */
+        return false;
+        /** @phpstan-ignore-next-line */
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
