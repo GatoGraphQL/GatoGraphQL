@@ -232,7 +232,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then we deal with 2 variables:
             // 1. $fieldDirective: the actual directive
             // 2. $enqueuedFieldDirective: how it was added to the array
-            // For retrieving the idsDataFields for the directive, we'll use $enqueuedFieldDirective, since under this entry we stored all the data in the previous functions
+            // For retrieving the idFieldSet for the directive, we'll use $enqueuedFieldDirective, since under this entry we stored all the data in the previous functions
             // For everything else, we use $fieldDirective
             $enqueuedFieldDirective = $fieldDirectives[$i];
             // Check if it is a repeated directive: if it has the "|" symbol
