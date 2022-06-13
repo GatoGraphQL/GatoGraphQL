@@ -21,7 +21,7 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
         foreach ($idsDataFieldsToRemove as $id => $fieldSet) {
             foreach ($succeedingPipelineIDFieldSet as &$pipelineStageIDFieldSet) {
                 // The next stage may or may not deal with this ID
-                if (!array_key_exists((string)$id, $pipelineStageIDFieldSet)) {
+                if (!array_key_exists($id, $pipelineStageIDFieldSet)) {
                     continue;
                 }
                 $pipelineStageIDFieldSet[$id]->fields = array_diff(
