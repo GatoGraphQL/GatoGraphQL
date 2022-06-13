@@ -584,7 +584,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Indicate if the directive needs to be passed $idsDataFields filled with data to be able to execute
+     * Indicate if the directive needs to be passed $idFieldSet filled with data to be able to execute
      * Because most commonly it will need, the default value is `true`
      */
     public function needsIDsDataFieldsToExecute(): bool
@@ -593,13 +593,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Indicate that there is data in variable $idsDataFields
+     * Indicate that there is data in variable $idFieldSet
      *
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    protected function hasIDsDataFields(array $idsDataFields): bool
+    protected function hasIDsDataFields(array $idFieldSet): bool
     {
-        foreach ($idsDataFields as $id => $data_fields) {
+        foreach ($idFieldSet as $id => $data_fields) {
             if ($data_fields->fields !== []) {
                 // If there's data-fields to fetch for any ID, that's it, there's data
                 return true;
@@ -950,7 +950,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDsDataFields */
 
         // Extract the head, keep passing down the rest
-        $idsDataFields = $pipelineIDsDataFields[0];
+        $idFieldSet = $pipelineIDsDataFields[0];
         array_shift($pipelineIDsDataFields);
         // The $pipelineDirectiveResolverInstances is the series of directives executed in the pipeline
         // The current stage is at the head. Remove it
@@ -959,7 +959,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // // 2. Validate operation
         // $this->validateDirective(
         //     $relationalTypeResolver,
-        //     $idsDataFields,
+        //     $idFieldSet,
         //     $pipelineIDsDataFields,
         //     $pipelineDirectiveResolverInstances,
         //     $objectIDItems,
@@ -973,14 +973,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // First check that if the validation took away the elements, and so the directive can't execute anymore
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
-        if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
+        if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idFieldSet)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
-                    $idsDataFields,
+                    $idFieldSet,
                     $pipelineDirectiveResolverInstances,
                     $objectIDItems,
                     $unionDBKeyIDs,
@@ -1003,7 +1003,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
-                    foreach ($idsDataFields as $id => $dataFields) {
+                    foreach ($idFieldSet as $id => $dataFields) {
                         foreach ($dataFields->fields as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
                                 new ObjectFeedback(
@@ -1059,7 +1059,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $relationalTypeResolver,
                     $feedbackItemResolution,
                     [],
-                    $idsDataFields,
+                    $idFieldSet,
                     $pipelineIDsDataFields,
                     $objectIDItems,
                     $dbItems,
@@ -1087,14 +1087,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Depending on environment configuration, either show a warning,
      * or show an error and remove the fields from the directive pipeline for further execution
      *
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FeedbackItemResolution $feedbackItemResolution,
         array $failedFields,
-        array $idsDataFields,
+        array $idFieldSet,
         array &$succeedingPipelineIDsDataFields,
         array $objectIDItems,
         array &$dbItems,
@@ -1103,9 +1103,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {
             // Remove all fields
-            $idsDataFieldsToRemove = $idsDataFields;
+            $idsDataFieldsToRemove = $idFieldSet;
             // Calculate which fields are being removed, to add to the error
-            foreach ($idsDataFields as $id => $data_fields) {
+            foreach ($idFieldSet as $id => $data_fields) {
                 $failedFields = array_merge(
                     $failedFields,
                     $data_fields->fields
@@ -1115,7 +1115,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         } else {
             $idsDataFieldsToRemove = [];
             // Calculate which fields to remove
-            foreach ($idsDataFields as $id => $data_fields) {
+            foreach ($idFieldSet as $id => $data_fields) {
                 $idsDataFieldsToRemove[$id] = new EngineIterationFieldSet(
                     array_intersect(
                         $data_fields->fields,

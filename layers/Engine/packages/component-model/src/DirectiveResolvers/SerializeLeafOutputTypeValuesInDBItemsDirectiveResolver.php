@@ -41,12 +41,12 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
@@ -71,7 +71,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             $targetObjectTypeResolver = $relationalTypeResolver;
         }
 
-        foreach ($idsDataFields as $id => $dataFields) {
+        foreach ($idFieldSet as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object

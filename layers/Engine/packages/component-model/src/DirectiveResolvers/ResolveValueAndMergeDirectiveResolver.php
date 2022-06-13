@@ -44,12 +44,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
@@ -67,7 +67,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $this->resolveValueForObjects(
             $relationalTypeResolver,
             $objectIDItems,
-            $idsDataFields,
+            $idFieldSet,
             $dbItems,
             $previousDBItems,
             $variables,
@@ -77,12 +77,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $objectIDItems,
-        array $idsDataFields,
+        array $idFieldSet,
         array &$dbItems,
         array $previousDBItems,
         array &$variables,
@@ -91,7 +91,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         /** @var array<string|int,EngineIterationFieldSet> */
         $enqueueFillingObjectsFromIDs = [];
-        foreach ($idsDataFields as $id => $dataFields) {
+        foreach ($idFieldSet as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
@@ -126,7 +126,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $relationalTypeResolver,
                 $id,
                 $object,
-                $idsDataFields[$id]->fields,
+                $idFieldSet[$id]->fields,
                 $dbItems,
                 $previousDBItems,
                 $variables,
@@ -136,9 +136,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
-            foreach ($idsDataFields[$id]->conditionalFields as $conditionDataField) {
+            foreach ($idFieldSet[$id]->conditionalFields as $conditionDataField) {
                 /** @var FieldInterface $conditionDataField */
-                $conditionalDataFields = $idsDataFields[$id]->conditionalFields[$conditionDataField];
+                $conditionalDataFields = $idFieldSet[$id]->conditionalFields[$conditionDataField];
                 /** @var FieldInterface[] $conditionalDataFields */
                 if ($conditionalDataFields === []) {
                     continue;
@@ -155,7 +155,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 if (!$conditionSatisfied) {
                     continue;
                 }
-                $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditionalFields);
+                $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idFieldSet[$id]->conditionalFields);
                 $enqueueFillingObjectsFromIDs[$id]->addFields($conditionalDataFields);
             }
         }

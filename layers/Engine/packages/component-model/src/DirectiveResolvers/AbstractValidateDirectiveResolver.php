@@ -34,12 +34,12 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
@@ -50,15 +50,15 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
+        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array &$succeedingPipelineIDsDataFields,
         array $objectIDItems,
         array &$dbItems,
@@ -69,7 +69,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // (Such as fieldArg "status" for field "isStatus")
         // Combine all the datafields under all IDs
         $fields = $failedFields = [];
-        foreach ($idsDataFields as $id => $data_fields) {
+        foreach ($idFieldSet as $id => $data_fields) {
             $fields = array_values(array_unique(array_merge(
                 $fields,
                 $data_fields->fields
@@ -81,7 +81,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         if ($failedFields) {
             /** @var array<string|int,EngineIterationFieldSet> */
             $idsDataFieldsToRemove = [];
-            foreach ($idsDataFields as $id => $dataFields) {
+            foreach ($idFieldSet as $id => $dataFields) {
                 $idsDataFieldsToRemove[$id] = new EngineIterationFieldSet(
                     array_intersect(
                         $dataFields->fields,

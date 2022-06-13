@@ -66,12 +66,12 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     /**
      * Calculate the max-age involving also the composed fields
      *
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
@@ -82,12 +82,12 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        if ($idsDataFields) {
+        if ($idFieldSet) {
             // Iterate through all the arguments, calculate the maxAge for each of them,
             // and then return the minimum value from all of them and the directiveName for this field
             /** @var FieldInterface[] */
             $fields = [];
-            foreach ($idsDataFields as $id => $dataFields) {
+            foreach ($idFieldSet as $id => $dataFields) {
                 $fields = array_merge(
                     $fields,
                     $dataFields->fields
@@ -170,10 +170,10 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 /** @var FieldInterface[] */
                 $directiveResolverFields = $directiveResolverInstanceFieldsDataItem['fields'];
 
-                // Regenerate the $idsDataFields for each directive
+                // Regenerate the $idFieldSet for each directive
                 /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveResolverIDDataFields = [];
-                foreach (array_keys($idsDataFields) as $id) {
+                foreach (array_keys($idFieldSet) as $id) {
                     $directiveResolverIDDataFields[$id] = new EngineIterationFieldSet($directiveResolverFields);
                 }
                 $directiveResolverInstance->resolveDirective(
@@ -197,7 +197,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         // Otherwise, let the parent process it
         parent::resolveDirective(
             $relationalTypeResolver,
-            $idsDataFields,
+            $idFieldSet,
             $succeedingPipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,

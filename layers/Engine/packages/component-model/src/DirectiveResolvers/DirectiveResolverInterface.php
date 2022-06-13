@@ -94,18 +94,18 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function isRepeatable(): bool;
     /**
-     * Indicate if the directive needs to be passed $idsDataFields filled with data to be able to execute
+     * Indicate if the directive needs to be passed $idFieldSet filled with data to be able to execute
      */
     public function needsIDsDataFieldsToExecute(): bool;
     /**
      * Execute the directive
      *
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,

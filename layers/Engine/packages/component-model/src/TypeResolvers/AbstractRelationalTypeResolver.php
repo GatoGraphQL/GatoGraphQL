@@ -914,7 +914,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field->getUniqueID()]) as $fieldDirective) {
                 // Watch out! Directives can be repeated, and then they must be executed multiple times
                 // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
-                // However, because we are adding the $idsDataFields under key $fieldDirective, when the 2nd occurrence of the directive is found,
+                // However, because we are adding the $idFieldSet under key $fieldDirective, when the 2nd occurrence of the directive is found,
                 // adding data would just override the previous entry, and we can't keep track that it's another iteration
                 // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
                 // in which the "|" symbol could not be part of the field naturally
@@ -1038,7 +1038,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
             }
 
-            // From the fields, reconstitute the $idsDataFields for each directive,
+            // From the fields, reconstitute the $idFieldSet for each directive,
             // and build the array to pass to the pipeline, for each directive (stage)
             $directiveResolverInstances = [];
             /** @var array<array<string|int,EngineIterationFieldSet>> */
@@ -1057,7 +1057,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveDirectFields,
                     $schemaErrorFailingFields
                 );
-                // From the fields, reconstitute the $idsDataFields for each directive, and build the array to pass to the pipeline, for each directive (stage)
+                // From the fields, reconstitute the $idFieldSet for each directive, and build the array to pass to the pipeline, for each directive (stage)
                 /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveIDFields = [];
                 foreach ($directiveDirectFields as $field) {
