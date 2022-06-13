@@ -96,7 +96,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
-                $this->setIDsDataFieldsAsNull(
+                $this->setIDFieldSetAsNull(
                     $relationalTypeResolver,
                     $idFieldSetToRemove,
                     $objectIDItems,
