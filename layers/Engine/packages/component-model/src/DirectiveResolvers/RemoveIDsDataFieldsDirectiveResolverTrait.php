@@ -19,17 +19,17 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
     ): void {
         // For each combination of ID and field, remove them from the upcoming pipeline stages
         foreach ($idsDataFieldsToRemove as $id => $fieldSet) {
-            foreach ($succeedingPipelineIDFieldSet as &$pipelineStageIDsDataFields) {
+            foreach ($succeedingPipelineIDFieldSet as &$pipelineStageIDFieldSet) {
                 // The next stage may or may not deal with this ID
-                if (!array_key_exists((string)$id, $pipelineStageIDsDataFields)) {
+                if (!array_key_exists((string)$id, $pipelineStageIDFieldSet)) {
                     continue;
                 }
-                $pipelineStageIDsDataFields[$id]->fields = array_diff(
-                    $pipelineStageIDsDataFields[$id]->fields,
+                $pipelineStageIDFieldSet[$id]->fields = array_diff(
+                    $pipelineStageIDFieldSet[$id]->fields,
                     $fieldSet->fields
                 );
                 foreach ($fieldSet->fields as $removeField) {
-                    $pipelineStageIDsDataFields[$id]->conditionalFields->detach($removeField);
+                    $pipelineStageIDFieldSet[$id]->conditionalFields->detach($removeField);
                 }
             }
         }
