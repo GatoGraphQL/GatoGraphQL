@@ -36,7 +36,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
+    public function getSubcomponentFieldNode(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_POSTCOMMENTS:
@@ -49,7 +49,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
                 return 'noheadercommentsLazy';
         }
 
-        return parent::getSubcomponentField($component);
+        return parent::getSubcomponentFieldNode($component);
     }
 
     public function isIndividual(\PoP\ComponentModel\Component\Component $component, array &$props)

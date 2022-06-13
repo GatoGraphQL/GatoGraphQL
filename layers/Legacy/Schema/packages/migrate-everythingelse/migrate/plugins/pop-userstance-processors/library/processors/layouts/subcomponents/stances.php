@@ -13,7 +13,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         );
     }
 
-    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
+    public function getSubcomponentFieldNode(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_STANCES:

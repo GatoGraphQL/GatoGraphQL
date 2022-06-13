@@ -63,11 +63,11 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         // If this field doesn't have a typeResolver, show a schema error
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $field);
         if (
-            $subcomponentFieldTypeResolver === null
-            || !($subcomponentFieldTypeResolver instanceof RelationalTypeResolverInterface)
+            $subcomponentFieldNodeTypeResolver === null
+            || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
         ) {
             // But if there are no ObjectTypeFieldResolvers, then skip adding an error here, since that error will have been added already
             // Otherwise, there will appear 2 error messages:
@@ -93,6 +93,6 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             }
             return null;
         }
-        return $subcomponentFieldTypeResolver;
+        return $subcomponentFieldNodeTypeResolver;
     }
 }

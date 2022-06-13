@@ -38,7 +38,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
                     $apiFields[] = $key . implode(
                         QuerySyntax::SYMBOL_FIELDPROPERTIES_SEPARATOR,
                         array_map(
-                            fn (ComponentFieldNodeInterface $componentField) => $componentField->getField()->asFieldOutputQueryString(),
+                            fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField()->asFieldOutputQueryString(),
                             array_values(array_unique(array_filter($key_datafields)))
                         )
                     );

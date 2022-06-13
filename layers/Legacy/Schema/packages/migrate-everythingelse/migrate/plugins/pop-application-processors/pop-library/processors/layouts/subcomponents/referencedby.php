@@ -17,7 +17,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
         );
     }
 
-    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
+    public function getSubcomponentFieldNode(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS:
@@ -29,7 +29,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
                 return 'referencedbyLazy';
         }
 
-        return parent::getSubcomponentField($component);
+        return parent::getSubcomponentFieldNode($component);
     }
 
     /**

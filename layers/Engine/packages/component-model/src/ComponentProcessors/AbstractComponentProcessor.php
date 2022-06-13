@@ -880,7 +880,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
          */
         if (
             /** @var ComponentFieldNodeInterface[] */
-            $componentFields = array_unique(
+            $componentFieldNodes = array_unique(
                 array_merge(
                     $this->getLeafComponentFieldNodes($component, $props),
                     $this->getRelationalComponentFieldNodes($component),
@@ -889,7 +889,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 )
             )
         ) {
-            $ret['data-fields'] = $componentFields;
+            $ret['data-fields'] = $componentFieldNodes;
         }
 
         // Propagate down to the components
@@ -1416,24 +1416,24 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
             $ret['subcomponents'] ??= new SplObjectStorage();
             $ret['subcomponents'][$subcomponentComponentFieldNode] ??= [];
-            $subcomponentsSubcomponentField = $ret['subcomponents'][$subcomponentComponentFieldNode];
+            $subcomponentsSubcomponentFieldNode = $ret['subcomponents'][$subcomponentComponentFieldNode];
             if ($subcomponent_components_data_properties['data-fields']) {
                 $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
-                $subcomponentsSubcomponentField['data-fields'] = array_values(array_unique(array_merge(
-                    $subcomponentsSubcomponentField['data-fields'] ?? [],
+                $subcomponentsSubcomponentFieldNode['data-fields'] = array_values(array_unique(array_merge(
+                    $subcomponentsSubcomponentFieldNode['data-fields'] ?? [],
                     $subcomponent_components_data_properties['data-fields']
                 )));
             }
             /** @var SplObjectStorage */
             $subcomponentConditionalDataFields = $subcomponent_components_data_properties['conditional-data-fields'];
             if ($subcomponentConditionalDataFields->count() > 0) {
-                $subcomponentsSubcomponentField['conditional-data-fields'] ??= new SplObjectStorage();
+                $subcomponentsSubcomponentFieldNode['conditional-data-fields'] ??= new SplObjectStorage();
                 foreach ($subcomponentConditionalDataFields as $conditionComponentFieldNode) {
                     /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
                     $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
                     /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
-                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentFieldNode] = array_merge(
-                        $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentFieldNode] ?? [],
+                    $subcomponentsSubcomponentFieldNode['conditional-data-fields'][$conditionComponentFieldNode] = array_merge(
+                        $subcomponentsSubcomponentFieldNode['conditional-data-fields'][$conditionComponentFieldNode] ?? [],
                         $conditionalDataFields
                     );
                 }
@@ -1441,10 +1441,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             /** @var SplObjectStorage */
             $splObjectStorage = $subcomponent_components_data_properties['subcomponents'];
             if ($splObjectStorage->count() > 0) {
-                $subcomponentsSubcomponentField['subcomponents'] ??= new SplObjectStorage();
-                $subcomponentsSubcomponentField['subcomponents']->addAll($splObjectStorage);
+                $subcomponentsSubcomponentFieldNode['subcomponents'] ??= new SplObjectStorage();
+                $subcomponentsSubcomponentFieldNode['subcomponents']->addAll($splObjectStorage);
             }
-            $ret['subcomponents'][$subcomponentComponentFieldNode] = $subcomponentsSubcomponentField;
+            $ret['subcomponents'][$subcomponentComponentFieldNode] = $subcomponentsSubcomponentFieldNode;
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
