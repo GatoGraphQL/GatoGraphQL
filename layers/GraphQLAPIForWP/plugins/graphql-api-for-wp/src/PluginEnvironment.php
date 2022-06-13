@@ -9,7 +9,7 @@ use PoP\Root\Environment as RootEnvironment;
 
 class PluginEnvironment
 {
-    public final const DISABLE_CACHING = 'DISABLE_CACHING';
+    public final const DISABLE_CONTAINER_CACHING = 'DISABLE_CONTAINER_CACHING';
     public final const CACHE_DIR = 'CACHE_DIR';
     public final const ENABLE_UNSAFE_DEFAULTS = 'ENABLE_UNSAFE_DEFAULTS';
 
@@ -18,14 +18,14 @@ class PluginEnvironment
      * or constant in wp-config.php, use it.
      * By default, do cache (also for DEV)
      */
-    public static function isCachingEnabled(): bool
+    public static function isContainerCachingEnabled(): bool
     {
-        if (getenv(self::DISABLE_CACHING) !== false) {
-            return strtolower(getenv(self::DISABLE_CACHING)) != "true";
+        if (getenv(self::DISABLE_CONTAINER_CACHING) !== false) {
+            return strtolower(getenv(self::DISABLE_CONTAINER_CACHING)) !== "true";
         }
 
-        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::DISABLE_CACHING)) {
-            return !PluginEnvironmentHelpers::getWPConfigConstantValue(self::DISABLE_CACHING);
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::DISABLE_CONTAINER_CACHING)) {
+            return !PluginEnvironmentHelpers::getWPConfigConstantValue(self::DISABLE_CONTAINER_CACHING);
         }
 
         return true;
