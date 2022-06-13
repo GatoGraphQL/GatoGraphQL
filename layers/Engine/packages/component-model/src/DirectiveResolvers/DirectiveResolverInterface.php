@@ -101,7 +101,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * Execute the directive
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -110,7 +110,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,

@@ -35,7 +35,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -44,13 +44,13 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
+        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
     }
 
     /**
@@ -59,7 +59,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array $objectIDItems,
         array &$dbItems,
         array &$variables,
@@ -91,7 +91,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             }
             $this->removeIDsDataFields(
                 $idsDataFieldsToRemove,
-                $succeedingPipelineIDsDataFields
+                $succeedingPipelineIDFieldSet
             );
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

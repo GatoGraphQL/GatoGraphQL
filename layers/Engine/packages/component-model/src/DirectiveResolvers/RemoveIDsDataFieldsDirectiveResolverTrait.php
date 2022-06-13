@@ -11,15 +11,15 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
     /**
      * @param array<string|int,EngineIterationFieldSet> $idsDataFieldsToRemove
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     protected function removeIDsDataFields(
         array $idsDataFieldsToRemove,
-        array &$succeedingPipelineIDsDataFields
+        array &$succeedingPipelineIDFieldSet
     ): void {
         // For each combination of ID and field, remove them from the upcoming pipeline stages
         foreach ($idsDataFieldsToRemove as $id => $fieldSet) {
-            foreach ($succeedingPipelineIDsDataFields as &$pipelineStageIDsDataFields) {
+            foreach ($succeedingPipelineIDFieldSet as &$pipelineStageIDsDataFields) {
                 // The next stage may or may not deal with this ID
                 if (!array_key_exists((string)$id, $pipelineStageIDsDataFields)) {
                     continue;

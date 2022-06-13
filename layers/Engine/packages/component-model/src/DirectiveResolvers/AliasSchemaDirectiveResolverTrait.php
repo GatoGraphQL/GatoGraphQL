@@ -299,7 +299,7 @@ trait AliasSchemaDirectiveResolverTrait
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -308,7 +308,7 @@ trait AliasSchemaDirectiveResolverTrait
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
@@ -322,7 +322,7 @@ trait AliasSchemaDirectiveResolverTrait
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
-            $succeedingPipelineIDsDataFields,
+            $succeedingPipelineIDFieldSet,
             $dbItems,
             $variables,
             $messages,

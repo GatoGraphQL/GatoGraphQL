@@ -1088,14 +1088,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * or show an error and remove the fields from the directive pipeline for further execution
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FeedbackItemResolution $feedbackItemResolution,
         array $failedFields,
         array $idFieldSet,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array $objectIDItems,
         array &$dbItems,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -1131,7 +1131,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
                 $idsDataFieldsToRemove,
-                $succeedingPipelineIDsDataFields
+                $succeedingPipelineIDFieldSet
             );
         }
         $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();

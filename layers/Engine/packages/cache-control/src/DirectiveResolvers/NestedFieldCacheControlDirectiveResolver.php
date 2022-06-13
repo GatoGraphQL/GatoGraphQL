@@ -67,7 +67,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
      * Calculate the max-age involving also the composed fields
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -76,7 +76,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
@@ -183,7 +183,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     $objectIDItems,
                     $unionDBKeyIDs,
                     $previousDBItems,
-                    $succeedingPipelineIDsDataFields,
+                    $succeedingPipelineIDFieldSet,
                     $dbItems,
                     $variables,
                     $messages,
@@ -202,7 +202,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
-            $succeedingPipelineIDsDataFields,
+            $succeedingPipelineIDFieldSet,
             $dbItems,
             $variables,
             $messages,
