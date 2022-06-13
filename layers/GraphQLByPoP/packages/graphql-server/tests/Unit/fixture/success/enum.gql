@@ -1,0 +1,10 @@
+query {
+  __schema {
+    withoutQuotes: directives(ofKinds: [QUERY]) {
+      name
+    }
+    withQuotes: directives(ofKinds: ["QUERY"]) {
+      name
+    }
+  }
+}

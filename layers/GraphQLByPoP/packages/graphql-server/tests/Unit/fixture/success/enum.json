@@ -1,0 +1,22 @@
+{
+    "data": {
+        "__schema": {
+            "withoutQuotes": [
+                {
+                    "name": "include"
+                },
+                {
+                    "name": "skip"
+                }
+            ],
+            "withQuotes": [
+                {
+                    "name": "include"
+                },
+                {
+                    "name": "skip"
+                }
+            ]
+        }
+    }
+}
