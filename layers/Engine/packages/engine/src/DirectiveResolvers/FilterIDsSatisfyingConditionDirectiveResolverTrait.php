@@ -51,7 +51,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    protected function removeDataFieldsForIDs(array $idFieldSet, array &$idsToRemove, array &$succeedingPipelineIDFieldSet)
+    protected function removeFieldSetForIDs(array $idFieldSet, array &$idsToRemove, array &$succeedingPipelineIDFieldSet)
     {
         // Calculate the $idFieldSet that must be removed from all the upcoming stages of the pipeline
         $idFieldSetToRemove = array_filter(
