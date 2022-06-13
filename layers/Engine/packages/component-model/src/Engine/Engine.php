@@ -1319,7 +1319,7 @@ class Engine implements EngineInterface
                         $extend_data_fields = $extend_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [];
                         $extend_conditional_data_fields = $extend_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
                         $extend_ids = $extend_data_properties[DataProperties::IDS];
-                        $extend_typeResolver = $extend_data_properties['resolver'];
+                        $extend_typeResolver = $extend_data_properties[DataProperties::RESOLVER];
 
                         $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
