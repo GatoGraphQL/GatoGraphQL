@@ -71,6 +71,7 @@ class Engine implements EngineInterface
     public final const CACHETYPE_PROPS = 'props';
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
+    protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
 
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
@@ -784,11 +785,11 @@ class Engine implements EngineInterface
     ): void {
         $relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey] ??= [
             self::DATA_PROP_RELATIONAL_TYPE_RESOLVER => $relationalTypeResolver,
-            'idFieldSet' => [],
+            self::DATA_PROP_ID_FIELD_SET => [],
         ];
         foreach ($ids as $id) {
             /** @var EngineIterationFieldSet */
-            $engineIterationFieldSet = $relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey]['idFieldSet'][$id]
+            $engineIterationFieldSet = $relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey][self::DATA_PROP_ID_FIELD_SET][$id]
                 ?? new EngineIterationFieldSet(
                     array_map(
                         fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
@@ -829,7 +830,7 @@ class Engine implements EngineInterface
                     )
                 );
             }
-            $relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey]['idFieldSet'][$id] = $engineIterationFieldSet;
+            $relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey][self::DATA_PROP_ID_FIELD_SET][$id] = $engineIterationFieldSet;
         }
     }
 
@@ -1609,7 +1610,7 @@ class Engine implements EngineInterface
             /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey][self::DATA_PROP_RELATIONAL_TYPE_RESOLVER];
             /** @var array<string|int,EngineIterationFieldSet> */
-            $idFieldSet = $engineState->relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey]['idFieldSet'];
+            $idFieldSet = $engineState->relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey][self::DATA_PROP_ID_FIELD_SET];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
