@@ -2328,7 +2328,7 @@ class Engine implements EngineInterface
                 }
                 $subcomponentIDs = [];
                 foreach ($typeResolver_ids as $id) {
-                    $subcomponent_data_field_outputkey = $componentField->getOutputKey();
+                    $subcomponent_data_field_outputkey = $componentField->getField()->getOutputKey();
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbname => $database) {
@@ -2373,7 +2373,7 @@ class Engine implements EngineInterface
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
-                            $subcomponent_data_field_outputkey = $componentField->getOutputKey();
+                            $subcomponent_data_field_outputkey = $componentField->getField()->getOutputKey();
                             // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                             $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
                             $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];

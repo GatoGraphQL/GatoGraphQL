@@ -645,13 +645,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field = $relationalComponentField->asFieldOutputQueryString();
-                $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
+                $subcomponent_data_field = $relationalComponentField->getField()->asFieldOutputQueryString();
+                $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
                 $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
             }
             foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
-                    $conditionalDataField = $relationalComponentField->asFieldOutputQueryString();
+                    $conditionalDataField = $relationalComponentField->getField()->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
                     $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField());
                     if ($typeResolver === null) {
@@ -660,7 +660,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
+                    $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
                     $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $conditionalDataField);
                 }
             }
@@ -713,7 +713,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
+                $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
                 // Only components which do not load data
                 $subcomponent_components = array_filter(
                     $relationalComponentField->getNestedComponents(),
@@ -729,7 +729,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $relationalComponentField->getOutputKey();
+                    $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
                     // Only components which do not load data
                     $subcomponent_components = array_filter(
                         $relationalComponentField->getNestedComponents(),
