@@ -27,7 +27,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
     ): array {
         // Check the condition field. If it is satisfied, then skip those fields
         $idsSatisfyingCondition = [];
-        foreach ($idFieldSet as $id => $dataFields) {
+        foreach ($idFieldSet as $id => $fieldSet) {
             // Validate directive args for the object
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
             $object = $objectIDItems[$id];
@@ -35,7 +35,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
                 $objectValidDirective,
                 $objectDirectiveName,
                 $objectDirectiveArgs
-            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $dataFields->fields, $variables, $expressions, $engineIterationFeedbackStore);
+            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $fieldSet->fields, $variables, $expressions, $engineIterationFeedbackStore);
             // Check that the directive is valid. If it is not, $objectErrors will have the error already added
             if (is_null($objectValidDirective)) {
                 continue;

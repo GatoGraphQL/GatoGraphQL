@@ -965,20 +965,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectiveDirectFields = [];
             foreach ($fieldDirectives as $fieldDirective) {
                 $fieldDirectiveFieldIDs[$fieldDirective] = new SplObjectStorage();
-                foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
+                foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
                     $fieldDirectiveDirectFields = array_merge(
                         $fieldDirectiveDirectFields,
-                        $dataFields->fields
+                        $fieldSet->fields
                     );
                     $conditionalFields = [];
-                    foreach ($dataFields->conditionalFields as $conditionField) {
+                    foreach ($fieldSet->conditionalFields as $conditionField) {
                         $conditionalFields = array_merge(
                             $conditionalFields,
-                            $dataFields->conditionalFields[$conditionField]
+                            $fieldSet->conditionalFields[$conditionField]
                         );
                     }
                     $idFieldDirectiveIDFields = array_unique(array_merge(
-                        $dataFields->fields,
+                        $fieldSet->fields,
                         $conditionalFields
                     ));
                     $fieldDirectiveFields[$fieldDirective] = array_merge(
@@ -1025,9 +1025,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
                 foreach ($fieldDirectives as $fieldDirective) {
-                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
+                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
                         $failingFields = array_intersect(
-                            $dataFields->fields,
+                            $fieldSet->fields,
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {

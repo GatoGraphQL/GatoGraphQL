@@ -91,13 +91,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         /** @var array<string|int,EngineIterationFieldSet> */
         $enqueueFillingObjectsFromIDs = [];
-        foreach ($idFieldSet as $id => $dataFields) {
+        foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                foreach ($dataFields->fields as $field) {
+                foreach ($fieldSet->fields as $field) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             new FeedbackItemResolution(
@@ -166,20 +166,20 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     /**
-     * @param FieldInterface[] $dataFields
+     * @param FieldInterface[] $fieldSet
      */
     private function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
-        array $dataFields,
+        array $fieldSet,
         array &$dbItems,
         array $previousDBItems,
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        foreach ($dataFields as $field) {
+        foreach ($fieldSet as $field) {
             $this->resolveValueForObject(
                 $relationalTypeResolver,
                 $id,

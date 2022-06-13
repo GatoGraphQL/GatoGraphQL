@@ -87,10 +87,10 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             // and then return the minimum value from all of them and the directiveName for this field
             /** @var FieldInterface[] */
             $fields = [];
-            foreach ($idFieldSet as $id => $dataFields) {
+            foreach ($idFieldSet as $id => $fieldSet) {
                 $fields = array_merge(
                     $fields,
-                    $dataFields->fields
+                    $fieldSet->fields
                 );
             }
             $fields = array_values(array_unique($fields));

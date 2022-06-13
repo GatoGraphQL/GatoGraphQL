@@ -1003,8 +1003,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
-                    foreach ($idFieldSet as $id => $dataFields) {
-                        foreach ($dataFields->fields as $field) {
+                    foreach ($idFieldSet as $id => $fieldSet) {
+                        foreach ($fieldSet->fields as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
                                 new ObjectFeedback(
                                     new FeedbackItemResolution(
@@ -1146,8 +1146,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
         // Show the failureMessage either as error or as warning
         if ($setFailingFieldResponseAsNull) {
-            foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields->fields as $failedField) {
+            foreach ($idsDataFieldsToRemove as $id => $fieldSet) {
+                foreach ($fieldSet->fields as $failedField) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
@@ -1167,8 +1167,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // } else {
             //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             // }
-            foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields->fields as $failedField) {
+            foreach ($idsDataFieldsToRemove as $id => $fieldSet) {
+                foreach ($fieldSet->fields as $failedField) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
@@ -1197,8 +1197,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // } else {
             //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
             // }
-            // foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-            //     foreach ($dataFields->fields as $failedField) {
+            // foreach ($idsDataFieldsToRemove as $id => $fieldSet) {
+            //     foreach ($fieldSet->fields as $failedField) {
             //         $objectWarnings[$id][] = [
             //             Tokens::PATH => [$failedField, $this->directive],
             //             Tokens::MESSAGE => sprintf(
