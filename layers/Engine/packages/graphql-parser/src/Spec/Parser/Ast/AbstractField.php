@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 abstract class AbstractField extends AbstractAst implements FieldInterface
@@ -14,27 +14,54 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
 
     protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
 
-    public function asFieldOutputQueryString(): string
-    {
-        // Generate the string for arguments
-        $strFieldArguments = '';
-        if ($this->getArguments() !== []) {
-            $strArguments = [];
-            foreach ($this->getArguments() as $argument) {
-                $strArguments[] = $argument->asQueryString();
-            }
-            $strFieldArguments = sprintf(
-                '(%s)',
-                implode(', ', $strArguments)
-            );
-        }
+    /**
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
+     */
+    public function __construct(
+        protected readonly string $name,
+        protected readonly ?string $alias,
+        array $arguments,
+        array $directives,
+        Location $location,
+    ) {
+        parent::__construct($location);
+        $this->setArguments($arguments);
+        $this->setDirectives($directives);
+    }
 
-        return sprintf(
-            '%s%s%s',
-            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
-            $this->getName(),
-            $strFieldArguments,
-        );
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getAlias(): ?string
+    {
+        return $this->alias;
+    }
+
+    public function getOutputKey(): string
+    {
+        return $this->getAlias() ?? $this->getName();
+    }
+
+    public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
+    {
+        $this->parent = $parent;
+    }
+
+    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Take the Location into consideration to indicate
+     * that 2 Fields are the same
+     */
+    public function __toString(): string
+    {
+        return $this->getUniqueID();
     }
 
     /**
@@ -69,33 +96,63 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         );
     }
 
-    abstract public function getName(): string;
-
-    abstract public function getAlias(): ?string;
-
-    abstract public function getLocation(): Location;
-
-    /**
-     * @return Directive[]
-     */
-    abstract public function getDirectives(): array;
-
-    /**
-     * @return Argument[]
-     */
-    abstract public function getArguments(): array;
-
-    /**
-     * Take the Location into consideration to indicate
-     * that 2 Fields are the same
-     */
-    public function __toString(): string
+    public function asFieldOutputQueryString(): string
     {
-        return $this->getUniqueID();
+        // Generate the string for arguments
+        $strFieldArguments = '';
+        if ($this->getArguments() !== []) {
+            $strArguments = [];
+            foreach ($this->getArguments() as $argument) {
+                $strArguments[] = $argument->asQueryString();
+            }
+            $strFieldArguments = sprintf(
+                '(%s)',
+                implode(', ', $strArguments)
+            );
+        }
+
+        /**
+         * @todo Temporarily calling ->asQueryString, must work with AST directly!
+         */
+        $strFieldDirectives = $this->getDirectivesQueryString($this->getDirectives());
+        return sprintf(
+            '%s%s%s%s',
+            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
+            $this->getName(),
+            $strFieldArguments,
+            $strFieldDirectives,
+        );
+        /** @phpstan-ignore-next-line */
+        return sprintf(
+            '%s%s%s',
+            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
+            $this->getName(),
+            $strFieldArguments,
+        );
     }
 
-    public function getOutputKey(): string
+    /**
+     * @todo Temporarily calling ->asQueryString, must work with AST directly!
+     * @todo Completely remove this function!!!!
+     * @param Directive[] $directives
+     */
+    private function getDirectivesQueryString(array $directives): string
     {
-        return $this->getAlias() ?? $this->getName();
+        $strFieldDirectives = '';
+        if ($directives !== []) {
+            $directiveQueryStrings = [];
+            foreach ($directives as $directive) {
+                // Remove the initial "@"
+                $directiveQueryString = substr($directive->asQueryString(), 1);
+                if ($directive instanceof MetaDirective) {
+                    /** @var MetaDirective */
+                    $metaDirective = $directive;
+                    $directiveQueryString .= $this->getDirectivesQueryString($metaDirective->getNestedDirectives());
+                }
+                $directiveQueryStrings[] = $directiveQueryString;
+            }
+            $strFieldDirectives .= '<' . implode(', ', $directiveQueryStrings) . '>';
+        }
+        return $strFieldDirectives;
     }
 }

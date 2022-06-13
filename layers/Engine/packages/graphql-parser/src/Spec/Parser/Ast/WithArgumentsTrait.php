@@ -48,7 +48,7 @@ trait WithArgumentsTrait
     /**
      * @param Argument[] $arguments
      */
-    private function setArguments(array $arguments): void
+    protected function setArguments(array $arguments): void
     {
         $this->keyValueArguments = null;
         $this->arguments = $arguments;
