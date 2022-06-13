@@ -19,7 +19,7 @@ class Literal extends AbstractAst implements ArgumentValueAstInterface
         parent::__construct($location);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         return $this->getGraphQLQueryStringFormatter()->getLiteralAsQueryString($this->value);
     }

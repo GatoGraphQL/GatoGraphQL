@@ -44,7 +44,7 @@ class Variable extends AbstractAst implements WithValueInterface
         parent::__construct($location);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         $strType = $this->type;
         if ($this->isArray) {

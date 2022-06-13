@@ -26,7 +26,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         // Generate the string for variables
         $strOperationVariables = '';

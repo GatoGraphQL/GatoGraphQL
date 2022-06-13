@@ -14,7 +14,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
     use FieldTrait {
-        FieldTrait::asQueryString as upstreamAsQueryString;
+        FieldTrait::doAsQueryString as upstreamDoAsQueryString;
     }
 
     protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
@@ -38,7 +38,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
         $this->setDirectives($directives);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         // Generate the string for the body of the operation
         $strFieldFieldsOrFragmentBonds = '';
@@ -55,7 +55,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
 
         return sprintf(
             '%s {%s}',
-            $this->upstreamAsQueryString(),
+            $this->upstreamDoAsQueryString(),
             $strFieldFieldsOrFragmentBonds,
         );
     }
