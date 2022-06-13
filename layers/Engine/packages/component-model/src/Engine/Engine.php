@@ -1289,7 +1289,7 @@ class Engine implements EngineInterface
                     $typeDBObjectIDs = is_array($typeDBObjectIDOrIDs) ? $typeDBObjectIDOrIDs : array($typeDBObjectIDOrIDs);
 
                     // Store the ids under $data under key dataload_name => id
-                    $data_fields = $data_properties['data-fields'] ?? [];
+                    $data_fields = $data_properties['direct-fields'] ?? [];
                     $conditional_data_fields = $data_properties['conditional-data-fields'] ?? new SplObjectStorage();
                     $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
 
@@ -1315,7 +1315,7 @@ class Engine implements EngineInterface
                     }
                     foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {
                         // Get the info for the subcomponent typeResolver
-                        $extend_data_fields = $extend_data_properties['data-fields'] ?? [];
+                        $extend_data_fields = $extend_data_properties['direct-fields'] ?? [];
                         $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ?? new SplObjectStorage();
                         $extend_ids = $extend_data_properties['ids'];
                         $extend_typeResolver = $extend_data_properties['resolver'];
@@ -2321,7 +2321,7 @@ class Engine implements EngineInterface
             }
             $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
             // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-            $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
+            $subcomponent_data_fields = array_unique($subcomponent_data_properties['direct-fields'] ?? []);
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
             $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? new SplObjectStorage();
             if ($subcomponent_data_fields || $subcomponent_conditional_data_fields->count() > 0) {
@@ -2439,7 +2439,7 @@ class Engine implements EngineInterface
 
                 if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key] ?? null) {
                     $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids']);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['data-fields'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['data-fields']);
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['direct-fields'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['direct-fields']);
                 }
             }
         }
@@ -2558,7 +2558,7 @@ class Engine implements EngineInterface
         if (!isset($dbdata[$relationalTypeOutputDBKey][$component_path_key])) {
             $dbdata[$relationalTypeOutputDBKey][$component_path_key] = array(
                 'ids' => [],
-                'data-fields' => [],
+                'direct-fields' => [],
                 'subcomponents' => new SplObjectStorage(),
             );
         }
@@ -2582,7 +2582,7 @@ class Engine implements EngineInterface
              * Watch out! Can't do `array_merge_recursive` because:
              *
              *   - SplObjectStorage items (under 'conditional-data-fields') are all deleted!
-             *   - 'data-fields' items are duplicated
+             *   - 'direct-fields' items are duplicated
              *
              * So then iterate the 3 entries, and merge them individually
              */
@@ -2591,10 +2591,10 @@ class Engine implements EngineInterface
                 $componentFieldNodeData = $subcomponents_data_properties[$componentFieldNode];
                 $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] ??= [];
                 $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentFieldNode];
-                if (isset($componentFieldNodeData['data-fields'])) {
-                    $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] = array_values(array_unique(array_merge(
-                        $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] ?? [],
-                        $componentFieldNodeData['data-fields']
+                if (isset($componentFieldNodeData['direct-fields'])) {
+                    $dbDataSubcomponentsFieldSplObjectStorage['direct-fields'] = array_values(array_unique(array_merge(
+                        $dbDataSubcomponentsFieldSplObjectStorage['direct-fields'] ?? [],
+                        $componentFieldNodeData['direct-fields']
                     )));
                 }
                 if (isset($componentFieldNodeData['conditional-data-fields'])) {

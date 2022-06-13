@@ -154,7 +154,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                         $suggestions_typeResolver->getTypeOutputDBKey() => array(
                             'resolver' => $suggestions_typeResolver,
                             'ids' => $suggestions,
-                            'data-fields' => $data_properties['data-fields'],
+                            'direct-fields' => $data_properties['direct-fields'],
                         ),
                     );
                 }
