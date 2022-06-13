@@ -117,7 +117,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 }
                 // This is currently pointing to NULL and returning this entry in the database. Remove it
                 // (this will also avoid errors in the Engine, which expects this result to be an array and can't be null)
-                unset($dbItems[(string)$id]);
+                unset($dbItems[$id]);
                 continue;
             }
 
@@ -126,7 +126,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $relationalTypeResolver,
                 $id,
                 $object,
-                $idsDataFields[(string)$id]->direct,
+                $idsDataFields[$id]->direct,
                 $dbItems,
                 $previousDBItems,
                 $variables,
@@ -155,8 +155,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 if (!$conditionSatisfied) {
                     continue;
                 }
-                $enqueueFillingObjectsFromIDs[(string)$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditional);
-                $enqueueFillingObjectsFromIDs[(string)$id]->addDirectFields($conditionalDataFields);
+                $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditional);
+                $enqueueFillingObjectsFromIDs[$id]->addDirectFields($conditionalDataFields);
             }
         }
         // Enqueue items for the next iteration
@@ -231,12 +231,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
-                $dbItems[(string)$id][$fieldOutputKey] = null;
+                $dbItems[$id][$fieldOutputKey] = null;
             }
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-        $dbItems[(string)$id][$fieldOutputKey] = $value;
+        $dbItems[$id][$fieldOutputKey] = $value;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

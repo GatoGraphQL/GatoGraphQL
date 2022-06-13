@@ -174,7 +174,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveResolverIDDataFields = [];
                 foreach (array_keys($idsDataFields) as $id) {
-                    $directiveResolverIDDataFields[(string)$id] = new EngineIterationFieldSet($directiveResolverFields);
+                    $directiveResolverIDDataFields[$id] = new EngineIterationFieldSet($directiveResolverFields);
                 }
                 $directiveResolverInstance->resolveDirective(
                     $relationalTypeResolver,

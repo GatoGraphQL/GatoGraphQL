@@ -785,7 +785,7 @@ class Engine implements EngineInterface
         ];
         foreach ($ids as $id) {
             /** @var EngineIterationFieldSet */
-            $engineIterationFieldSet = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]
+            $engineIterationFieldSet = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][$id]
                 ?? new EngineIterationFieldSet(
                     array_map(
                         fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
@@ -826,7 +826,7 @@ class Engine implements EngineInterface
                     )
                 );
             }
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id] = $engineIterationFieldSet;
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][$id] = $engineIterationFieldSet;
         }
     }
 
@@ -862,8 +862,8 @@ class Engine implements EngineInterface
          * so then we must do a foreach instead
          */
         foreach ($dataitems as $id => $dbobject_values) {
-            $database[$dbKey][(string)$id] = array_merge(
-                $database[$dbKey][(string)$id] ?? [],
+            $database[$dbKey][$id] = array_merge(
+                $database[$dbKey][$id] ?? [],
                 $dbobject_values
             );
         }
@@ -1620,8 +1620,8 @@ class Engine implements EngineInterface
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ??= [];
             foreach ($ids_data_fields as $id => $data_fields) {
-                $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
-                    $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
+                $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
+                    $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
                     $data_fields->direct,
                     // Conditional items must also be in direct, so no need to check to cache them
                     // iterator_to_array($data_fields->conditional)
@@ -1674,14 +1674,14 @@ class Engine implements EngineInterface
                         /** @var FieldInterface $conditionDataField */
                         $conditionalDataFields = $data_fields->conditional[$conditionDataField];
                         // If it failed to load the item, it will be null
-                        $dbItem = $iterationDBItems[(string)$id];
+                        $dbItem = $iterationDBItems[$id];
                         if ($dbItem === null) {
                             continue;
                         }
                         /** @var FieldInterface[] $conditionalDataFields */
                         $iterationFields = array_keys($dbItem);
-                        $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
-                            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
+                        $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
+                            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
                                 $conditionalDataFields,
                                 $iterationFields
@@ -1761,7 +1761,7 @@ class Engine implements EngineInterface
                         $iterationObjectTypeResolverNameDataItems = [];
                         foreach ($objectTypeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
-                            if ($targetObjectTypeResolver = $targetObjectTypeResolvers[(string)$id] ?? null) {
+                            if ($targetObjectTypeResolver = $targetObjectTypeResolvers[$id] ?? null) {
                                 $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
                                 $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
                                     'targetObjectTypeResolver' => $targetObjectTypeResolver,
@@ -2337,9 +2337,9 @@ class Engine implements EngineInterface
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbname => $database) {
-                        if ($database_field_ids = $database[$database_key][(string)$id][$subcomponent_data_field_outputkey] ?? null) {
-                            $subcomponentIDs[$dbname][$database_key][(string)$id] = array_merge(
-                                $subcomponentIDs[$dbname][$database_key][(string)$id] ?? [],
+                        if ($database_field_ids = $database[$database_key][$id][$subcomponent_data_field_outputkey] ?? null) {
+                            $subcomponentIDs[$dbname][$database_key][$id] = array_merge(
+                                $subcomponentIDs[$dbname][$database_key][$id] ?? [],
                                 is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
                             );
                         }
@@ -2380,9 +2380,9 @@ class Engine implements EngineInterface
                             }
                             $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                             // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
-                            $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            $combinedUnionDBKeyIDs[$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $entryIsArray = $databases[$dbname][$database_key][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][$id][$subcomponent_data_field_outputkey]);
+                            $unionDBKeyIDs[$dbname][$database_key][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionDBKeyIDs[$database_key][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(

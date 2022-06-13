@@ -105,7 +105,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                     $targetObjectTypeResolver,
                     $field->asFieldOutputQueryString(),
                 );
-                $value = $dbItems[(string)$id][$fieldOutputKey] ?? null;
+                $value = $dbItems[$id][$fieldOutputKey] ?? null;
                 if ($value === null) {
                     continue;
                 }
@@ -125,7 +125,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $dbItems
-                $dbItems[(string)$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
+                $dbItems[$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
                     $value,
                     $fieldLeafOutputTypeResolver,
                     $fieldLeafOutputTypeIsArrayOfArrays,

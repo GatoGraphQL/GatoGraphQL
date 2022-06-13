@@ -918,23 +918,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // adding data would just override the previous entry, and we can't keep track that it's another iteration
                 // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
                 // in which the "|" symbol could not be part of the field naturally
-                if (isset($fieldDirectiveCounter[$field->getUniqueID()][(string)$id][$fieldDirective])) {
+                if (isset($fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective])) {
                     // Increase counter and add to $fieldDirective
-                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field->getUniqueID()][(string)$id][$fieldDirective]);
+                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective]);
                 } else {
-                    $fieldDirectiveCounter[$field->getUniqueID()][(string)$id][$fieldDirective] = 0;
+                    $fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective] = 0;
                 }
-                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id] ??= new EngineIterationFieldSet();
+                $this->fieldDirectiveIDFields[$fieldDirective][$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
                 if (in_array($field, $data_fields->direct)) {
-                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->direct[] = $field;
+                    $this->fieldDirectiveIDFields[$fieldDirective][$id]->direct[] = $field;
                 }
                 /** @var FieldInterface[]|null */
                 $conditionalFields = $data_fields->conditional[$field] ?? null;
                 if ($conditionalFields === null || $conditionalFields === []) {
                     continue;
                 }
-                $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]->addConditionalFields($field, $conditionalFields);
+                $this->fieldDirectiveIDFields[$fieldDirective][$id]->addConditionalFields($field, $conditionalFields);
             }
         }
     }
@@ -1032,7 +1032,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         );
                         foreach ($failingFields as $field) {
                             $fieldOutputKey = $field->getOutputKey();
-                            $dbItems[(string)$id][$fieldOutputKey] = null;
+                            $dbItems[$id][$fieldOutputKey] = null;
                         }
                     }
                 }

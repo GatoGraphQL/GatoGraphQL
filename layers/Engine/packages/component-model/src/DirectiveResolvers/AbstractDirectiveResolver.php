@@ -487,7 +487,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // Otherwise it can't, since the fieldResolver doesn't have access to either $dbItems
         return array_merge(
             $variables,
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id] ?? []
+            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id] ?? []
         );
     }
 
@@ -540,29 +540,29 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         return array_merge(
             $this->getExpressionsForObject($id, $variables, $messages),
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey] ?? []
+            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey] ?? []
         );
     }
 
     protected function addExpressionForObject(int | string $id, string $key, mixed $value, array &$messages): void
     {
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id][$key] = $value;
+        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
     }
 
     protected function addExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, mixed $value, array &$messages): void
     {
         $this->addExpressionForObject($id, $key, $value, $messages);
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] = $value;
+        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey][$key] = $value;
     }
 
     protected function getExpressionForObject(int | string $id, string $key, array $messages): mixed
     {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id][$key] ?? null;
+        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] ?? null;
     }
 
     protected function getExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, array $messages): mixed
     {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] ?? $this->getExpressionForObject($id, $key, $messages);
+        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey][$key] ?? $this->getExpressionForObject($id, $key, $messages);
     }
 
     /**
@@ -1116,7 +1116,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $idsDataFieldsToRemove = [];
             // Calculate which fields to remove
             foreach ($idsDataFields as $id => $data_fields) {
-                $idsDataFieldsToRemove[(string)$id] = new EngineIterationFieldSet(
+                $idsDataFieldsToRemove[$id] = new EngineIterationFieldSet(
                     array_intersect(
                         $data_fields->direct,
                         $failedFields
@@ -1180,7 +1180,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         )
                     );
                     // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
-                    // $objectErrors[(string)$id][] = [
+                    // $objectErrors[$id][] = [
                     //     Tokens::PATH => [$failedField, $this->directive],
                     //     Tokens::MESSAGE => sprintf(
                     //         $message,
@@ -1199,7 +1199,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // }
             // foreach ($idsDataFieldsToRemove as $id => $dataFields) {
             //     foreach ($dataFields->direct as $failedField) {
-            //         $objectWarnings[(string)$id][] = [
+            //         $objectWarnings[$id][] = [
             //             Tokens::PATH => [$failedField, $this->directive],
             //             Tokens::MESSAGE => sprintf(
             //                 $message,
