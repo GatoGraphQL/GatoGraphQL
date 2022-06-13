@@ -136,9 +136,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
-            foreach ($idFieldSet[$id]->conditionalFields as $conditionDataField) {
-                /** @var FieldInterface $conditionDataField */
-                $conditionalDataFields = $idFieldSet[$id]->conditionalFields[$conditionDataField];
+            foreach ($idFieldSet[$id]->conditionalFields as $conditionField) {
+                /** @var FieldInterface $conditionField */
+                $conditionalDataFields = $idFieldSet[$id]->conditionalFields[$conditionField];
                 /** @var FieldInterface[] $conditionalDataFields */
                 if ($conditionalDataFields === []) {
                     continue;
@@ -146,7 +146,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $conditionDataField->getOutputKey();
+                $conditionFieldOutputKey = $conditionField->getOutputKey();
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {

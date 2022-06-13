@@ -1670,10 +1670,10 @@ class Engine implements EngineInterface
                  * to see if it has those properties
                  */
                 foreach ($idFieldSet as $id => $fieldSet) {
-                    foreach ($fieldSet->conditionalFields as $conditionDataField) {
+                    foreach ($fieldSet->conditionalFields as $conditionField) {
                         // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalDataFields is FieldInterface
-                        /** @var FieldInterface $conditionDataField */
-                        $conditionalDataFields = $fieldSet->conditionalFields[$conditionDataField];
+                        /** @var FieldInterface $conditionField */
+                        $conditionalDataFields = $fieldSet->conditionalFields[$conditionField];
                         // If it failed to load the item, it will be null
                         $dbItem = $iterationDBItems[$id];
                         if ($dbItem === null) {
@@ -2602,12 +2602,12 @@ class Engine implements EngineInterface
                     $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
                     /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                     $componentFieldNodeDataConditionalDataFieldsSplObjectStorage = $componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
-                    foreach ($componentFieldNodeDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
-                        /** @var ComponentFieldNodeInterface $conditionDataField */
-                        $conditionalComponentFieldNodes = $componentFieldNodeDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
+                    foreach ($componentFieldNodeDataConditionalDataFieldsSplObjectStorage as $conditionField) {
+                        /** @var ComponentFieldNodeInterface $conditionField */
+                        $conditionalComponentFieldNodes = $componentFieldNodeDataConditionalDataFieldsSplObjectStorage[$conditionField];
                         /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldNodes */
-                        $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionDataField] = array_merge(
-                            $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionDataField] ?? [],
+                        $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionField] = array_merge(
+                            $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionField] ?? [],
                             $conditionalComponentFieldNodes
                         );
                     }
