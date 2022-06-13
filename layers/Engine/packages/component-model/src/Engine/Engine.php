@@ -1290,7 +1290,7 @@ class Engine implements EngineInterface
 
                     // Store the ids under $data under key dataload_name => id
                     $data_fields = $data_properties['direct-fields'] ?? [];
-                    $conditional_data_fields = $data_properties['conditional-data-fields'] ?? new SplObjectStorage();
+                    $conditional_data_fields = $data_properties['conditional-fields'] ?? new SplObjectStorage();
                     $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
@@ -1316,7 +1316,7 @@ class Engine implements EngineInterface
                     foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {
                         // Get the info for the subcomponent typeResolver
                         $extend_data_fields = $extend_data_properties['direct-fields'] ?? [];
-                        $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ?? new SplObjectStorage();
+                        $extend_conditional_data_fields = $extend_data_properties['conditional-fields'] ?? new SplObjectStorage();
                         $extend_ids = $extend_data_properties['ids'];
                         $extend_typeResolver = $extend_data_properties['resolver'];
 
@@ -2323,7 +2323,7 @@ class Engine implements EngineInterface
             // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
             $subcomponent_data_fields = array_unique($subcomponent_data_properties['direct-fields'] ?? []);
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
-            $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? new SplObjectStorage();
+            $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-fields'] ?? new SplObjectStorage();
             if ($subcomponent_data_fields || $subcomponent_conditional_data_fields->count() > 0) {
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
@@ -2581,7 +2581,7 @@ class Engine implements EngineInterface
              * Merge them into the data.
              * Watch out! Can't do `array_merge_recursive` because:
              *
-             *   - SplObjectStorage items (under 'conditional-data-fields') are all deleted!
+             *   - SplObjectStorage items (under 'conditional-fields') are all deleted!
              *   - 'direct-fields' items are duplicated
              *
              * So then iterate the 3 entries, and merge them individually
@@ -2597,16 +2597,16 @@ class Engine implements EngineInterface
                         $componentFieldNodeData['direct-fields']
                     )));
                 }
-                if (isset($componentFieldNodeData['conditional-data-fields'])) {
-                    $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] ??= new SplObjectStorage();
+                if (isset($componentFieldNodeData['conditional-fields'])) {
+                    $dbDataSubcomponentsFieldSplObjectStorage['conditional-fields'] ??= new SplObjectStorage();
                     /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
-                    $componentFieldNodeDataConditionalDataFieldsSplObjectStorage = $componentFieldNodeData['conditional-data-fields'];
+                    $componentFieldNodeDataConditionalDataFieldsSplObjectStorage = $componentFieldNodeData['conditional-fields'];
                     foreach ($componentFieldNodeDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
                         /** @var ComponentFieldNodeInterface $conditionDataField */
                         $conditionalComponentFieldNodes = $componentFieldNodeDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
                         /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldNodes */
-                        $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] = array_merge(
-                            $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] ?? [],
+                        $dbDataSubcomponentsFieldSplObjectStorage['conditional-fields'][$conditionDataField] = array_merge(
+                            $dbDataSubcomponentsFieldSplObjectStorage['conditional-fields'][$conditionDataField] ?? [],
                             $conditionalComponentFieldNodes
                         );
                     }
