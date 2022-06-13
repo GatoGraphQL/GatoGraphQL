@@ -2322,7 +2322,7 @@ class Engine implements EngineInterface
             $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
             // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
             $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
-            /** @var SplObjectStorage */
+            /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
             $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? new SplObjectStorage();
             if ($subcomponent_data_fields || $subcomponent_conditional_data_fields->count() > 0) {
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
@@ -2573,9 +2573,9 @@ class Engine implements EngineInterface
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary typeResolver, execute getData also on the subcomponent typeResolver
         if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
-            /** @var SplObjectStorage $subcomponents_data_properties */
+            /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties */
             $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] ??= new SplObjectStorage();
-            /** @var SplObjectStorage */
+            /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> */
             $dbDataSubcomponentsSplObjectStorage = $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'];
             /**
              * Merge them into the data.
@@ -2613,7 +2613,7 @@ class Engine implements EngineInterface
                 }
                 if (isset($componentFieldNodeData['subcomponents'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['subcomponents'] ??= new SplObjectStorage();
-                    /** @var SplObjectStorage */
+                    /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> */
                     $componentFieldNodeDataSubcomponents = $componentFieldNodeData['subcomponents'];
                     $dbDataSubcomponentsFieldSplObjectStorage['subcomponents']->addAll($componentFieldNodeDataSubcomponents);
                 }

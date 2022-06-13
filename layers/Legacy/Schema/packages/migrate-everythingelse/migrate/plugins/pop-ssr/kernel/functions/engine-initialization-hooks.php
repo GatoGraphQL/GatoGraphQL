@@ -210,7 +210,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
             // Call recursively to also copy the data from the subcomponents
             if ($subcomponents = $data_properties['subcomponents'] ?? null) {
-                /** @var SplObjectStorage $subcomponents */
+                /** @var SplObjectStorage<FieldInterface,array<string,mixed>> $subcomponents */
                 foreach ($subcomponents as $field) {
                     /** @var FieldInterface $field */
                     /** @var array<string,mixed> */
