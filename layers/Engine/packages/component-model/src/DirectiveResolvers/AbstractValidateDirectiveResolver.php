@@ -104,16 +104,6 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 );
             }
         }
-        // Since adding the Validate directive also when processing the conditional fields, there is no need to validate them now
-        // They will be validated when it's their turn to be processed
-        // // Validate conditional fields and, if they fail, already take them out from the `$idsDataFields` object
-        // $dataFields = $failedFields = [];
-        // // Because on the leaves we encounter an empty array, all fields are conditional fields (even if they are on the leaves)
-        // foreach ($idsDataFields as $id => $data_fields) {
-        //     foreach ($data_fields->conditional as $conditionField => $conditionalFields) {
-        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]->conditional, $dataFields, $variables, $failedFields);
-        //     }
-        // }
     }
 
     /**
