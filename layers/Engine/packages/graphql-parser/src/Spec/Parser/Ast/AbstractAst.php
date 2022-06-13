@@ -41,7 +41,7 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
         return $this->location;
     }
 
-    public function asQueryString(): string
+    final public function asQueryString(): string
     {
         if ($this->queryString === null) {
             $this->queryString = $this->doAsQueryString();
