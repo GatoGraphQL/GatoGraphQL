@@ -1388,11 +1388,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     );
                 }
                 /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]>|null */
-                $subcomponentConditionalDataFields = $subcomponent_component_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? null;
-                if ($subcomponentConditionalDataFields !== null) {
-                    foreach ($subcomponentConditionalDataFields as $conditionComponentFieldNode) {
+                $subcomponentConditionalFields = $subcomponent_component_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? null;
+                if ($subcomponentConditionalFields !== null) {
+                    foreach ($subcomponentConditionalFields as $conditionComponentFieldNode) {
                         /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                        $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
+                        $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalFields[$conditionComponentFieldNode];
                         /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldSplObjectStorage */
                         $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] = array_merge(
                             $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] ?? [],
@@ -1420,12 +1420,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 )));
             }
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
-            $subcomponentConditionalDataFields = $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
-            if ($subcomponentConditionalDataFields->count() > 0) {
+            $subcomponentConditionalFields = $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
+            if ($subcomponentConditionalFields->count() > 0) {
                 $subcomponentsSubcomponentFieldNode[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
-                foreach ($subcomponentConditionalDataFields as $conditionComponentFieldNode) {
+                foreach ($subcomponentConditionalFields as $conditionComponentFieldNode) {
                     /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                    $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
+                    $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalFields[$conditionComponentFieldNode];
                     /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldSplObjectStorage */
                     $subcomponentsSubcomponentFieldNode[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] = array_merge(
                         $subcomponentsSubcomponentFieldNode[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] ?? [],
