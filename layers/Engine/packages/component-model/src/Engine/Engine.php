@@ -2605,10 +2605,10 @@ class Engine implements EngineInterface
                 if (isset($componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES])) {
                     $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
                     /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
-                    $componentFieldNodeDataConditionalDataFieldsSplObjectStorage = $componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
-                    foreach ($componentFieldNodeDataConditionalDataFieldsSplObjectStorage as $conditionField) {
+                    $componentFieldNodeConditionalFieldsSplObjectStorage = $componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
+                    foreach ($componentFieldNodeConditionalFieldsSplObjectStorage as $conditionField) {
                         /** @var ComponentFieldNodeInterface $conditionField */
-                        $conditionalComponentFieldNodes = $componentFieldNodeDataConditionalDataFieldsSplObjectStorage[$conditionField];
+                        $conditionalComponentFieldNodes = $componentFieldNodeConditionalFieldsSplObjectStorage[$conditionField];
                         /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldNodes */
                         $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionField] = array_merge(
                             $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionField] ?? [],
