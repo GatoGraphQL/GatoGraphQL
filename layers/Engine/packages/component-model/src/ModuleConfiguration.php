@@ -32,6 +32,14 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             return false;
         }
 
+        /**
+         * Component Model Cache is currently broken,
+         * hence do not enable this functionality.
+         *
+         * @see https://github.com/leoloso/PoP/issues/1614
+         */
+        return false;
+
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
