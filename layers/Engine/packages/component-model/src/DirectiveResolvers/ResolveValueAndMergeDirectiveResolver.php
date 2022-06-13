@@ -135,12 +135,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             );
 
             // Add the conditional data fields
-            // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
+            // If the conditionalFields are empty, we already reached the end of the tree. Nothing else to do
             foreach ($idFieldSet[$id]->conditionalFields as $conditionField) {
                 /** @var FieldInterface $conditionField */
-                $conditionalDataFields = $idFieldSet[$id]->conditionalFields[$conditionField];
-                /** @var FieldInterface[] $conditionalDataFields */
-                if ($conditionalDataFields === []) {
+                $conditionalFields = $idFieldSet[$id]->conditionalFields[$conditionField];
+                /** @var FieldInterface[] $conditionalFields */
+                if ($conditionalFields === []) {
                     continue;
                 }
 
@@ -156,7 +156,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                     continue;
                 }
                 $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idFieldSet[$id]->conditionalFields);
-                $enqueueFillingObjectsFromIDs[$id]->addFields($conditionalDataFields);
+                $enqueueFillingObjectsFromIDs[$id]->addFields($conditionalFields);
             }
         }
         // Enqueue items for the next iteration
