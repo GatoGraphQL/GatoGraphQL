@@ -1535,12 +1535,12 @@ class Engine implements EngineInterface
 
         // Allow to inject what data fields must be placed under what dbNames
         // Array of key: dbName, values: data-fields
-        $dbname_datafields = App::applyFilters(
+        $dbNameToFieldNames = App::applyFilters(
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
             [],
             $relationalTypeResolver
         );
-        foreach ($dbname_datafields as $dbname => $data_fields) {
+        foreach ($dbNameToFieldNames as $dbname => $data_fields) {
             // Move these data fields under "meta" DB name
             if ($entryHasId) {
                 foreach ($dbname_entries['primary'] as $id => $dbObject) {
