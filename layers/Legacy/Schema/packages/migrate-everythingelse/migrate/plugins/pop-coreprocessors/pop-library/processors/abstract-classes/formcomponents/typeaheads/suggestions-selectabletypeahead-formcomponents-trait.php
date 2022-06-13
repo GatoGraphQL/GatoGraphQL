@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -154,7 +155,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                         $suggestions_typeResolver->getTypeOutputDBKey() => array(
                             'resolver' => $suggestions_typeResolver,
                             'ids' => $suggestions,
-                            'direct-component-field-nodes' => $data_properties['direct-component-field-nodes'],
+                            DataProperties::DIRECT_COMPONENT_FIELD_NODES => $data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES],
                         ),
                     );
                 }

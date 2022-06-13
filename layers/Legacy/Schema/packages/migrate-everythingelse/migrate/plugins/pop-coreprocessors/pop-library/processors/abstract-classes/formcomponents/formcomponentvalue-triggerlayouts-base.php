@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -234,7 +235,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             return array(
                 $this->getTriggerRelationalTypeResolver($component)->getTypeName() => array(
                     'ids' => $value,
-                    'direct-component-field-nodes' => $trigger_data_properties['direct-component-field-nodes'],
+                    DataProperties::DIRECT_COMPONENT_FIELD_NODES => $trigger_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES],
                 ),
             );
         }

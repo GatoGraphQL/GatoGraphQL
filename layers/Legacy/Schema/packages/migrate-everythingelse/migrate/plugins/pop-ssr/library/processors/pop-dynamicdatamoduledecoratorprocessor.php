@@ -1,7 +1,8 @@
 <?php
+use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Facades\ComponentFiltering\ComponentFilterManagerFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
 
 class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor
 {
@@ -153,8 +154,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             }
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
-            if ($ret['direct-component-field-nodes'] ?? null) {
-                $ret['direct-component-field-nodes'] = array_values(array_unique($ret['direct-component-field-nodes']));
+            if ($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
+                $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES]));
             }
         }
         $modulefilter_manager->restoreFromPropagation($component, $props);
@@ -173,7 +174,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         foreach ($processor->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
             $subcomponent_data_field = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
             $subcomponent_components_data_properties = array(
-                'direct-component-field-nodes' => array(),
+                DataProperties::DIRECT_COMPONENT_FIELD_NODES => array(),
                 // @todo Migrate 'subcomponents' from array to SplObjectStorage
                 'subcomponents' => array(),
             );
@@ -189,14 +190,14 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             // @todo Must assign the SplObjectStorage to a variable, operate there, and then re-assign at the end
             // @see https://stackoverflow.com/questions/20053269/indirect-modification-of-overloaded-element-of-splfixedarray-has-no-effect
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_components_data_properties['direct-component-field-nodes'] ?? null) {
-                $subcomponent_components_data_properties['direct-component-field-nodes'] = array_unique($subcomponent_components_data_properties['direct-component-field-nodes']);
+            if ($subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
+                $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
 
-                $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'] = $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'] ?? array();
-                $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'] = array_unique(
+                $ret['subcomponents'][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = $ret['subcomponents'][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? array();
+                $ret['subcomponents'][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique(
                     array_merge(
-                        $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'],
-                        $subcomponent_components_data_properties['direct-component-field-nodes']
+                        $ret['subcomponents'][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES],
+                        $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
                     )
                 );
             }
