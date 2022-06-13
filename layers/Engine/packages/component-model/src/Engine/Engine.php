@@ -70,6 +70,8 @@ class Engine implements EngineInterface
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
     public final const CACHETYPE_PROPS = 'props';
 
+    protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
+
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
@@ -781,7 +783,7 @@ class Engine implements EngineInterface
         SplObjectStorage $conditionalComponentFieldNodesSplObjectStorage
     ): void {
         $relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey] ??= [
-            'relationalTypeResolver' => $relationalTypeResolver,
+            self::DATA_PROP_RELATIONAL_TYPE_RESOLVER => $relationalTypeResolver,
             'idFieldSet' => [],
         ];
         foreach ($ids as $id) {
@@ -1605,7 +1607,7 @@ class Engine implements EngineInterface
             reset($engineState->relationalTypeOutputDBKeyIDFieldSets);
             $relationalTypeOutputDBKey = key($engineState->relationalTypeOutputDBKeyIDFieldSets);
             /** @var RelationalTypeResolverInterface */
-            $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey]['relationalTypeResolver'];
+            $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey][self::DATA_PROP_RELATIONAL_TYPE_RESOLVER];
             /** @var array<string|int,EngineIterationFieldSet> */
             $idFieldSet = $engineState->relationalTypeOutputDBKeyIDFieldSets[$relationalTypeOutputDBKey]['idFieldSet'];
 
