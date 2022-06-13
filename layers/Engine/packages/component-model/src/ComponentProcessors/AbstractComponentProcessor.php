@@ -1260,12 +1260,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         // Move from "direct-fields" to "conditional-fields"
                         $ret['conditional-fields'] ??= new SplObjectStorage();
                         /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
-                        $conditionalDataFields = $ret['conditional-fields'];
+                        $conditionalComponentFieldSplObjectStorage = $ret['conditional-fields'];
                         /** @var ComponentFieldNodeInterface[]|null */
                         $subcomponent_data_fields = $subcomponent_ret['direct-fields'] ?? null;
                         if ($subcomponent_data_fields !== null) {
-                            $conditionalDataFields[$conditionComponentFieldNode] = array_merge(
-                                $conditionalDataFields[$conditionComponentFieldNode] ?? [],
+                            $conditionalComponentFieldSplObjectStorage[$conditionComponentFieldNode] = array_merge(
+                                $conditionalComponentFieldSplObjectStorage[$conditionComponentFieldNode] ?? [],
                                 $subcomponent_data_fields
                             );
                             unset($subcomponent_ret['direct-fields']);
@@ -1278,14 +1278,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentComponentFieldNode) {
                                 /** @var ComponentFieldNodeInterface[] */
                                 $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentFieldNode];
-                                $conditionalDataFields[$subcomponentComponentFieldNode] = array_merge(
-                                    $conditionalDataFields[$subcomponentComponentFieldNode] ?? [],
+                                $conditionalComponentFieldSplObjectStorage[$subcomponentComponentFieldNode] = array_merge(
+                                    $conditionalComponentFieldSplObjectStorage[$subcomponentComponentFieldNode] ?? [],
                                     $subcomponent_conditional_data_fields
                                 );
                             }
                             unset($subcomponent_ret['conditional-fields']);
                         }
-                        $ret['conditional-fields'] = $conditionalDataFields;
+                        $ret['conditional-fields'] = $conditionalComponentFieldSplObjectStorage;
 
                         /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>>|null */
                         $subcomponentSubcomponentsSplObjectStorage = $subcomponent_ret['subcomponents'] ?? null;
@@ -1391,11 +1391,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if ($subcomponentConditionalDataFields !== null) {
                     foreach ($subcomponentConditionalDataFields as $conditionComponentFieldNode) {
                         /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                        $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
-                        /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
+                        $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
+                        /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldSplObjectStorage */
                         $subcomponent_components_data_properties['conditional-fields'][$conditionComponentFieldNode] = array_merge(
                             $subcomponent_components_data_properties['conditional-fields'][$conditionComponentFieldNode] ?? [],
-                            $conditionalDataFields
+                            $conditionalComponentFieldSplObjectStorage
                         );
                     }
                 }
@@ -1424,11 +1424,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $subcomponentsSubcomponentFieldNode['conditional-fields'] ??= new SplObjectStorage();
                 foreach ($subcomponentConditionalDataFields as $conditionComponentFieldNode) {
                     /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                    $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
-                    /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
+                    $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
+                    /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldSplObjectStorage */
                     $subcomponentsSubcomponentFieldNode['conditional-fields'][$conditionComponentFieldNode] = array_merge(
                         $subcomponentsSubcomponentFieldNode['conditional-fields'][$conditionComponentFieldNode] ?? [],
-                        $conditionalDataFields
+                        $conditionalComponentFieldSplObjectStorage
                     );
                 }
             }
