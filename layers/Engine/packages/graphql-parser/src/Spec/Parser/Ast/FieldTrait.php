@@ -41,7 +41,7 @@ trait FieldTrait
         return $this->asFieldOutputQueryString() . $locationComment;
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         // Generate the string for directives
         $strFieldDirectives = '';

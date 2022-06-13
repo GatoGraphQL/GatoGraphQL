@@ -22,7 +22,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
         parent::__construct($location);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         return $this->getGraphQLQueryStringFormatter()->getObjectAsQueryString($this->object);
     }

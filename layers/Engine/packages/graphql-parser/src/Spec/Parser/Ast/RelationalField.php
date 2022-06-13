@@ -38,7 +38,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
         $this->setDirectives($directives);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         // Generate the string for the body of the operation
         $strFieldFieldsOrFragmentBonds = '';

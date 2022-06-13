@@ -28,7 +28,7 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
         $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         // Generate the string for directives
         $strInlineFragmentDirectives = '';

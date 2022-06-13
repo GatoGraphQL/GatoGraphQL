@@ -27,7 +27,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
         $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         // Generate the string for directives
         $strFragmentDirectives = '';
