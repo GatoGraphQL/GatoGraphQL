@@ -597,7 +597,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    protected function hasIDsDataFields(array $idFieldSet): bool
+    protected function hasSomeIDField(array $idFieldSet): bool
     {
         foreach ($idFieldSet as $id => $fieldSet) {
             if ($fieldSet->fields !== []) {
@@ -973,7 +973,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // First check that if the validation took away the elements, and so the directive can't execute anymore
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
-        if (!$this->needsSomeIDFieldToExecute() || $this->hasIDsDataFields($idFieldSet)) {
+        if (!$this->needsSomeIDFieldToExecute() || $this->hasSomeIDField($idFieldSet)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;
