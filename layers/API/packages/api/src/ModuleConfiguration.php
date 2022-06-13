@@ -17,7 +17,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         // First check that the Component Model cache is enabled
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        if (!$moduleConfiguration->useComponentModelCache()) {
+        if (!$moduleConfiguration->enableComponentModelCache()) {
             return false;
         }
 
