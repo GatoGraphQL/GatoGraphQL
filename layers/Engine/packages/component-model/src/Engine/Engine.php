@@ -818,8 +818,8 @@ class Engine implements EngineInterface
                     /** @var ComponentFieldNodeInterface $conditionalDataField */
                     $conditionalComponentFieldNodes[] = $conditionalDataField;
                 }
-                $engineIterationFieldSet->conditional[$conditionField] = array_merge(
-                    $engineIterationFieldSet->conditional[$conditionField] ??= [],
+                $engineIterationFieldSet->conditionalFields[$conditionField] = array_merge(
+                    $engineIterationFieldSet->conditionalFields[$conditionField] ??= [],
                     array_map(
                         fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
                         $conditionalComponentFieldNodes
@@ -1624,7 +1624,7 @@ class Engine implements EngineInterface
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
                     $data_fields->direct,
                     // Conditional items must also be in direct, so no need to check to cache them
-                    // iterator_to_array($data_fields->conditional)
+                    // iterator_to_array($data_fields->conditionalFields)
                 );
             }
 
@@ -1669,10 +1669,10 @@ class Engine implements EngineInterface
                  * to see if it has those properties
                  */
                 foreach ($ids_data_fields as $id => $data_fields) {
-                    foreach ($data_fields->conditional as $conditionDataField) {
+                    foreach ($data_fields->conditionalFields as $conditionDataField) {
                         // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalDataFields is FieldInterface
                         /** @var FieldInterface $conditionDataField */
-                        $conditionalDataFields = $data_fields->conditional[$conditionDataField];
+                        $conditionalDataFields = $data_fields->conditionalFields[$conditionDataField];
                         // If it failed to load the item, it will be null
                         $dbItem = $iterationDBItems[$id];
                         if ($dbItem === null) {

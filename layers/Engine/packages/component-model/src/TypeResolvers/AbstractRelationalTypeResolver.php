@@ -846,8 +846,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          * as if they were direct
          */
         $allConditionalFields = [];
-        foreach ($engineIterationFieldSet->conditional as $conditionField) {
-            $conditionalFields = $engineIterationFieldSet->conditional[$conditionField];
+        foreach ($engineIterationFieldSet->conditionalFields as $conditionField) {
+            $conditionalFields = $engineIterationFieldSet->conditionalFields[$conditionField];
             $allConditionalFields = array_merge(
                 $allConditionalFields,
                 $conditionalFields
@@ -930,7 +930,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $this->fieldDirectiveIDFields[$fieldDirective][$id]->direct[] = $field;
                 }
                 /** @var FieldInterface[]|null */
-                $conditionalFields = $data_fields->conditional[$field] ?? null;
+                $conditionalFields = $data_fields->conditionalFields[$field] ?? null;
                 if ($conditionalFields === null || $conditionalFields === []) {
                     continue;
                 }
@@ -971,10 +971,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $dataFields->direct
                     );
                     $conditionalFields = [];
-                    foreach ($dataFields->conditional as $conditionField) {
+                    foreach ($dataFields->conditionalFields as $conditionField) {
                         $conditionalFields = array_merge(
                             $conditionalFields,
-                            $dataFields->conditional[$conditionField]
+                            $dataFields->conditionalFields[$conditionField]
                         );
                     }
                     $idFieldDirectiveIDFields = array_unique(array_merge(
@@ -1066,11 +1066,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $directiveIDFields[$id] ??= new EngineIterationFieldSet();
                         $directiveIDFields[$id]->direct[] = $field;
                         /** @var FieldInterface[]|null */
-                        $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]->conditional[$field] ?? null;
+                        $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]->conditionalFields[$field] ?? null;
                         if ($fieldConditionalFields === null || $fieldConditionalFields === []) {
                             continue;
                         }
-                        $directiveIDFields[$id]->conditional[$field] = $fieldConditionalFields;
+                        $directiveIDFields[$id]->conditionalFields[$field] = $fieldConditionalFields;
                     }
                 }
                 $pipelineIDsDataFields[] = $directiveIDFields;

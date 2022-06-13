@@ -136,9 +136,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
-            foreach ($idsDataFields[$id]->conditional as $conditionDataField) {
+            foreach ($idsDataFields[$id]->conditionalFields as $conditionDataField) {
                 /** @var FieldInterface $conditionDataField */
-                $conditionalDataFields = $idsDataFields[$id]->conditional[$conditionDataField];
+                $conditionalDataFields = $idsDataFields[$id]->conditionalFields[$conditionDataField];
                 /** @var FieldInterface[] $conditionalDataFields */
                 if ($conditionalDataFields === []) {
                     continue;
@@ -155,7 +155,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 if (!$conditionSatisfied) {
                     continue;
                 }
-                $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditional);
+                $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditionalFields);
                 $enqueueFillingObjectsFromIDs[$id]->addDirectFields($conditionalDataFields);
             }
         }

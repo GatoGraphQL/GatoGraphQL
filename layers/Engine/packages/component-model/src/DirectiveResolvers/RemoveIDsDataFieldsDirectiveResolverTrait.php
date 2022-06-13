@@ -29,7 +29,7 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
                     $dataFields->direct
                 );
                 foreach ($dataFields->direct as $removeField) {
-                    $pipelineStageIDsDataFields[$id]->conditional->detach($removeField);
+                    $pipelineStageIDsDataFields[$id]->conditionalFields->detach($removeField);
                 }
             }
         }

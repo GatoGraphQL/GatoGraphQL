@@ -11,11 +11,11 @@ class EngineIterationFieldSet
 {
     /**
      * @param FieldInterface[] $direct
-     * @param SplObjectStorage<FieldInterface,FieldInterface[]> $conditional
+     * @param SplObjectStorage<FieldInterface,FieldInterface[]> $conditionalFields
      */
     public function __construct(
         public array $direct = [],
-        public SplObjectStorage $conditional = new SplObjectStorage(),
+        public SplObjectStorage $conditionalFields = new SplObjectStorage(),
     ) {
     }
 
@@ -35,8 +35,8 @@ class EngineIterationFieldSet
      */
     public function addConditionalFields(FieldInterface $conditionField, array $conditionalFields): void
     {
-        $this->conditional[$conditionField] = array_values(array_unique(array_merge(
-            $this->conditional[$conditionField] ?? [],
+        $this->conditionalFields[$conditionField] = array_values(array_unique(array_merge(
+            $this->conditionalFields[$conditionField] ?? [],
             $conditionalFields
         )));
     }
