@@ -1414,7 +1414,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $ret['subcomponents'][$subcomponentComponentFieldNode] ??= [];
             $subcomponentsSubcomponentFieldNode = $ret['subcomponents'][$subcomponentComponentFieldNode];
             if ($subcomponent_components_data_properties['data-fields']) {
-                $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
                 $subcomponentsSubcomponentFieldNode['data-fields'] = array_values(array_unique(array_merge(
                     $subcomponentsSubcomponentFieldNode['data-fields'] ?? [],
                     $subcomponent_components_data_properties['data-fields']
