@@ -60,11 +60,11 @@ abstract class GD_EM_Module_Processor_DateTimeLayoutsBase extends PoPEngine_Quer
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array('dates', 'times');
     }

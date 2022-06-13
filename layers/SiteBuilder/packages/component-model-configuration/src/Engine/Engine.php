@@ -9,8 +9,8 @@ use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
@@ -206,14 +206,14 @@ class Engine extends UpstreamEngine implements EngineInterface
     }
 
     /**
-     * @return ComponentFieldInterface[]
+     * @return ComponentFieldNodeInterface[]
      */
     protected function getDBObjectMandatoryFields(): array
     {
         // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
         return [
             ...parent::getDBObjectMandatoryFields(),
-            new LeafComponentField(
+            new LeafComponentFieldNode(
                 new LeafField(
                     'id',
                     null,

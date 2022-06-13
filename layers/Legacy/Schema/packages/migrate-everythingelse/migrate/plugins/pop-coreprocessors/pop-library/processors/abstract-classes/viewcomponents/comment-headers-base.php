@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -17,13 +17,13 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($header = $this->getHeaderSubcomponent($component)) {
             return [
-                new RelationalComponentField(
+                new RelationalComponentFieldNode(
                     new LeafField(
                         'customPost',
                         null,
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
             ];
         }
 
-        return parent::getRelationalComponentFields($component);
+        return parent::getRelationalComponentFieldNodes($component);
     }
 
     public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)

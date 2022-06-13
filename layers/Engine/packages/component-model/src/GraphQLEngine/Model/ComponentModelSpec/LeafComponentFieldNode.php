@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 
-class LeafComponentField extends AbstractComponentField
+class LeafComponentFieldNode extends AbstractComponentFieldNode
 {
     /**
      * Retrieve a new instance with all the properties from the LeafField

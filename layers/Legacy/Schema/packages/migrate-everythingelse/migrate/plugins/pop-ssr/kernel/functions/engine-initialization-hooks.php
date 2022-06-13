@@ -5,7 +5,7 @@ use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
@@ -200,7 +200,7 @@ class PoP_SSR_EngineInitialization_Hooks
                 // Copy to the dynamic database
                 foreach ($databases as $dbname => $database) {
                     foreach ($data_fields[$dbname] as $data_field) {
-                        /** @var ComponentFieldInterface $data_field */
+                        /** @var ComponentFieldNodeInterface $data_field */
                         if (isset($database[$database_key][$object_id][$data_field->asFieldOutputQueryString()])) {
                             $dynamicdatabases[$dbname][$database_key][$object_id][$data_field->asFieldOutputQueryString()] = $database[$database_key][$object_id][$data_field->asFieldOutputQueryString()];
                         }

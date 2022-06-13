@@ -13,7 +13,7 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         );
     }
 
-    public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component)
+    public function getSubcomponentFieldNode(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component->name) {
             case self::COMPONENT_SUBCOMPONENT_HIGHLIGHTS:

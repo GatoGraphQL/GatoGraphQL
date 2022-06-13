@@ -37,7 +37,7 @@ use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -768,8 +768,8 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string|int> $ids
-     * @param ComponentFieldInterface[] $data_fields
-     * @param SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> $conditional_data_fields
+     * @param ComponentFieldNodeInterface[] $data_fields
+     * @param SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> $conditional_data_fields
      */
     private function combineIDsDatafields(
         array &$relationalTypeOutputDBKeyIDsDataFields,
@@ -788,7 +788,7 @@ class Engine implements EngineInterface
             $engineIterationFieldSet = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]
                 ?? new EngineIterationFieldSet(
                     array_map(
-                        fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                        fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
                         $this->getDBObjectMandatoryFields()
                     )
                 );
@@ -796,7 +796,7 @@ class Engine implements EngineInterface
             // Add the 'direct' fields
             $engineIterationFieldSet->addDirectFields(
                 array_map(
-                    fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                    fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
                     $data_fields
                 )
             );
@@ -808,21 +808,21 @@ class Engine implements EngineInterface
              *   Value: the list of conditional fields to load
              *          if the condition one is successful (eg: if it's `true`)
              */
-            foreach ($conditional_data_fields as $conditionComponentField) {
-                /** @var ComponentFieldInterface $conditionComponentField */
-                $conditionalDataFields = $conditional_data_fields[$conditionComponentField];
-                /** @var ComponentFieldInterface[] $conditionalDataFields */
-                $conditionField = $conditionComponentField->getField();
-                $conditionalComponentFields = [];
+            foreach ($conditional_data_fields as $conditionComponentFieldNode) {
+                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                $conditionalDataFields = $conditional_data_fields[$conditionComponentFieldNode];
+                /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
+                $conditionField = $conditionComponentFieldNode->getField();
+                $conditionalComponentFieldNodes = [];
                 foreach ($conditionalDataFields as $conditionalDataField) {
-                    /** @var ComponentFieldInterface $conditionalDataField */
-                    $conditionalComponentFields[] = $conditionalDataField;
+                    /** @var ComponentFieldNodeInterface $conditionalDataField */
+                    $conditionalComponentFieldNodes[] = $conditionalDataField;
                 }
                 $engineIterationFieldSet->conditional[$conditionField] = array_merge(
                     $engineIterationFieldSet->conditional[$conditionField] ??= [],
                     array_map(
-                        fn (ComponentFieldInterface $componentField) => $componentField->getField(),
-                        $conditionalComponentFields
+                        fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
+                        $conditionalComponentFieldNodes
                     )
                 );
             }
@@ -834,7 +834,7 @@ class Engine implements EngineInterface
      * If any field must be retrieved always (eg: the object ID
      * must always be displayed in the client) then add it here.
      *
-     * @return ComponentFieldInterface[]
+     * @return ComponentFieldNodeInterface[]
      */
     protected function getDBObjectMandatoryFields(): array
     {
@@ -2298,18 +2298,18 @@ class Engine implements EngineInterface
     ): void {
         $engineState = App::getEngineState();
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
-        foreach ($subcomponents_data_properties as $componentField) {
-            /** @var ComponentFieldInterface $componentField */
-            $subcomponent_data_properties = $subcomponents_data_properties[$componentField];
+        foreach ($subcomponents_data_properties as $componentFieldNode) {
+            /** @var ComponentFieldNodeInterface $componentFieldNode */
+            $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
             /** @var array<string,mixed> $subcomponent_data_properties */
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
             // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $componentField->getField());
+            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $componentFieldNode->getField());
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
-                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $componentField->getField());
+                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $componentFieldNode->getField());
             }
             if ($subcomponentTypeResolver === null) {
                 continue;
@@ -2328,7 +2328,7 @@ class Engine implements EngineInterface
                 }
                 $subcomponentIDs = [];
                 foreach ($typeResolver_ids as $id) {
-                    $subcomponent_data_field_outputkey = $componentField->getOutputKey();
+                    $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbname => $database) {
@@ -2373,7 +2373,7 @@ class Engine implements EngineInterface
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
-                            $subcomponent_data_field_outputkey = $componentField->getOutputKey();
+                            $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                             // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                             $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
                             $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
@@ -2394,25 +2394,25 @@ class Engine implements EngineInterface
                             $id_subcomponent_data_fields = array_values(
                                 array_filter(
                                     $subcomponent_data_fields,
-                                    fn (ComponentFieldInterface $componentField) => !in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)
+                                    fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
                             $id_subcomponent_conditional_data_fields = new SplObjectStorage();
-                            foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
+                            foreach ($subcomponent_conditional_data_fields as $conditionComponentFieldNode) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
-                                /** @var ComponentFieldInterface $conditionComponentField */
-                                $conditionComponentFields = $subcomponent_conditional_data_fields[$conditionComponentField];
-                                /** @var ComponentFieldInterface[] $conditionComponentFields */
-                                $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= [];
-                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentField];
-                                foreach ($conditionComponentFields as $componentField) {
-                                    /** @var ComponentFieldInterface $componentField */
-                                    if (in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)) {
+                                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                                $conditionComponentFieldNodes = $subcomponent_conditional_data_fields[$conditionComponentFieldNode];
+                                /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
+                                $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] ??= [];
+                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode];
+                                foreach ($conditionComponentFieldNodes as $componentFieldNode) {
+                                    /** @var ComponentFieldNodeInterface $componentFieldNode */
+                                    if (in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)) {
                                         continue;
                                     }
-                                    $id_subcomponent_conditional_data_fields_storage[] = $componentField;
+                                    $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;
                                 }
-                                $id_subcomponent_conditional_data_fields[$conditionComponentField] = $id_subcomponent_conditional_data_fields_storage;
+                                $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
                             }
                         } else {
                             $id_subcomponent_data_fields = $subcomponent_data_fields;
@@ -2581,38 +2581,38 @@ class Engine implements EngineInterface
              *
              * So then iterate the 3 entries, and merge them individually
              */
-            foreach ($subcomponents_data_properties as $componentField) {
-                /** @var ComponentFieldInterface $componentField */
-                $componentFieldData = $subcomponents_data_properties[$componentField];
-                $dbDataSubcomponentsSplObjectStorage[$componentField] ??= [];
-                $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentField];
-                if (isset($componentFieldData['data-fields'])) {
+            foreach ($subcomponents_data_properties as $componentFieldNode) {
+                /** @var ComponentFieldNodeInterface $componentFieldNode */
+                $componentFieldNodeData = $subcomponents_data_properties[$componentFieldNode];
+                $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] ??= [];
+                $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentFieldNode];
+                if (isset($componentFieldNodeData['data-fields'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] = array_values(array_unique(array_merge(
                         $dbDataSubcomponentsFieldSplObjectStorage['data-fields'] ?? [],
-                        $componentFieldData['data-fields']
+                        $componentFieldNodeData['data-fields']
                     )));
                 }
-                if (isset($componentFieldData['conditional-data-fields'])) {
+                if (isset($componentFieldNodeData['conditional-data-fields'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] ??= new SplObjectStorage();
-                    /** @var SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> */
-                    $componentFieldDataConditionalDataFieldsSplObjectStorage = $componentFieldData['conditional-data-fields'];
-                    foreach ($componentFieldDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
-                        /** @var ComponentFieldInterface $conditionDataField */
-                        $conditionalComponentFields = $componentFieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
-                        /** @var ComponentFieldInterface[] $conditionalComponentFields */
+                    /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
+                    $componentFieldNodeDataConditionalDataFieldsSplObjectStorage = $componentFieldNodeData['conditional-data-fields'];
+                    foreach ($componentFieldNodeDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
+                        /** @var ComponentFieldNodeInterface $conditionDataField */
+                        $conditionalComponentFieldNodes = $componentFieldNodeDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
+                        /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldNodes */
                         $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] = array_merge(
                             $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] ?? [],
-                            $conditionalComponentFields
+                            $conditionalComponentFieldNodes
                         );
                     }
                 }
-                if (isset($componentFieldData['subcomponents'])) {
+                if (isset($componentFieldNodeData['subcomponents'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['subcomponents'] ??= new SplObjectStorage();
                     /** @var SplObjectStorage */
-                    $componentFieldDataSubcomponents = $componentFieldData['subcomponents'];
-                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents']->addAll($componentFieldDataSubcomponents);
+                    $componentFieldNodeDataSubcomponents = $componentFieldNodeData['subcomponents'];
+                    $dbDataSubcomponentsFieldSplObjectStorage['subcomponents']->addAll($componentFieldNodeDataSubcomponents);
                 }
-                $dbDataSubcomponentsSplObjectStorage[$componentField] = $dbDataSubcomponentsFieldSplObjectStorage;
+                $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] = $dbDataSubcomponentsFieldSplObjectStorage;
             }
             $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = $dbDataSubcomponentsSplObjectStorage;
         }

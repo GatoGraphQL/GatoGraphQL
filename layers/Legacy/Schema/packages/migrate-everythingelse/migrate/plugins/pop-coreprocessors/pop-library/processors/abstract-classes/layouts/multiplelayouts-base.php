@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -36,16 +36,16 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     }
 
     /**
-     * @return ConditionalLeafComponentField[]
+     * @return ConditionalLeafComponentFieldNode[]
      */
-    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getConditionalLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
-        $ret = parent::getConditionalLeafComponentFields($component);
+        $ret = parent::getConditionalLeafComponentFieldNodes($component);
 
         // The function below returns an array with value => $subcomponent.
         // It must be converted to value => [$subcomponent]
         foreach ($this->getMultipleLayoutSubcomponents($component) as $conditionDataField => $conditionalSubcomponent) {
-            $ret[] = new ConditionalLeafComponentField(
+            $ret[] = new ConditionalLeafComponentFieldNode(
                 new LeafField(
                     $conditionDataField,
                     null,

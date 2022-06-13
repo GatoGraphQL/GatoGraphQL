@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -12,15 +12,15 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     }
 
     /**
-     * @return ConditionalLeafComponentField[]
+     * @return ConditionalLeafComponentFieldNode[]
      */
-    public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getConditionalLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
-        $ret = parent::getConditionalLeafComponentFields($component);
+        $ret = parent::getConditionalLeafComponentFieldNodes($component);
 
         if ($conditionDataField = $this->getConditionField($component)) {
             if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
-                $ret[] = new ConditionalLeafComponentField(
+                $ret[] = new ConditionalLeafComponentFieldNode(
                     new LeafField(
                         $conditionDataField,
                         null,
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
             if ($conditionfailed_layouts = $this->getConditionFailedSubcomponents($component)) {
                 // Calculate the "not" data field for the conditionDataField
                 $notConditionDataField = $this->getNotConditionField($component);
-                $ret[] = new ConditionalLeafComponentField(
+                $ret[] = new ConditionalLeafComponentFieldNode(
                     new LeafField(
                         $notConditionDataField,
                         null,
@@ -67,11 +67,11 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = [];
         if ($conditionDataField = $this->getConditionField($component)) {

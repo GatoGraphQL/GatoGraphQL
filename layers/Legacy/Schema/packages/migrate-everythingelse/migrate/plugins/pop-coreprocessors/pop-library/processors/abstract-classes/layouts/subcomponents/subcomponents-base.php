@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 
 abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_SUBCOMPONENT];
     }
 
-    abstract public function getSubcomponentField(\PoP\ComponentModel\Component\Component $component): LeafField;
+    abstract public function getSubcomponentFieldNode(\PoP\ComponentModel\Component\Component $component): LeafField;
 
     /**
      * @return \PoP\ComponentModel\Component\Component[]
@@ -21,13 +21,13 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
         return [
-            new RelationalComponentField(
-                $this->getSubcomponentField($component),
+            new RelationalComponentFieldNode(
+                $this->getSubcomponentFieldNode($component),
                 $this->getLayoutSubcomponents($component)
             ),
         ];
@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret['subcomponent-field'] = $this->getSubcomponentField($component);
+        $ret['subcomponent-field'] = $this->getSubcomponentFieldNode($component);
         if ($layouts = $this->getLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['layouts'] = array_map(
                 \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),

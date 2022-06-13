@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -127,13 +127,13 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
         $this->addMetaFormcomponentDataFields($ret, $component, $props);
         return $ret;
     }
@@ -155,13 +155,13 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($field = $this->getDbobjectField($component)) {
             return [
-                new RelationalComponentField(
+                new RelationalComponentFieldNode(
                     new LeafField(
                         $field,
                         null,
@@ -176,7 +176,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             ];
         }
 
-        return parent::getRelationalComponentFields($component);
+        return parent::getRelationalComponentFieldNodes($component);
     }
 
     public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
