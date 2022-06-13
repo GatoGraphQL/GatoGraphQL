@@ -1290,8 +1290,8 @@ class Engine implements EngineInterface
 
                     // Store the ids under $data under key dataload_name => id
                     $directComponentFieldNodes = $data_properties['direct-fields'] ?? [];
-                    $conditional_data_fields = $data_properties['conditional-fields'] ?? new SplObjectStorage();
-                    $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $directComponentFieldNodes, $conditional_data_fields);
+                    $conditionalComponentFieldNodesSplObjectStorage = $data_properties['conditional-fields'] ?? new SplObjectStorage();
+                    $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $directComponentFieldNodes, $conditionalComponentFieldNodesSplObjectStorage);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
                     $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputDBKey, $component_path_key);
