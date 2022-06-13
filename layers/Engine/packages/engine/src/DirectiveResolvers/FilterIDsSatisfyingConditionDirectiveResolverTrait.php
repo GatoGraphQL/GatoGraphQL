@@ -54,13 +54,13 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
     protected function removeDataFieldsForIDs(array $idFieldSet, array &$idsToRemove, array &$succeedingPipelineIDFieldSet)
     {
         // Calculate the $idFieldSet that must be removed from all the upcoming stages of the pipeline
-        $idsDataFieldsToRemove = array_filter(
+        $idFieldSetToRemove = array_filter(
             $idFieldSet,
             fn (int | string $id) => in_array($id, $idsToRemove),
             ARRAY_FILTER_USE_KEY
         );
         $this->removeIDFieldSet(
-            $idsDataFieldsToRemove,
+            $idFieldSetToRemove,
             $succeedingPipelineIDFieldSet
         );
     }

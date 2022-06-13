@@ -10,15 +10,15 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 trait RemoveIDsDataFieldsDirectiveResolverTrait
 {
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFieldsToRemove
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSetToRemove
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     protected function removeIDFieldSet(
-        array $idsDataFieldsToRemove,
+        array $idFieldSetToRemove,
         array &$succeedingPipelineIDFieldSet
     ): void {
         // For each combination of ID and field, remove them from the upcoming pipeline stages
-        foreach ($idsDataFieldsToRemove as $id => $fieldSet) {
+        foreach ($idFieldSetToRemove as $id => $fieldSet) {
             foreach ($succeedingPipelineIDFieldSet as &$pipelineStageIDFieldSet) {
                 // The next stage may or may not deal with this ID
                 if (!array_key_exists($id, $pipelineStageIDFieldSet)) {
