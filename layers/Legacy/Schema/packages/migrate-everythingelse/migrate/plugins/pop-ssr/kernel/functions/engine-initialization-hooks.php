@@ -192,7 +192,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $database_key = $relationalTypeResolver->getTypeOutputDBKey();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
-            // The hook below can modify the list of datafields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
+            // The hook below can modify the list of fields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
             $engine = EngineFacade::getInstance();
             $data_fields = $engine->moveEntriesUnderDBName($data_properties['direct-fields'], true, $relationalTypeResolver);
 

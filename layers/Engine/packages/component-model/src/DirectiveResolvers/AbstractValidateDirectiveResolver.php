@@ -67,7 +67,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     ): void {
         // Validate that the schema and the provided data match, eg: passing mandatory values
         // (Such as fieldArg "status" for field "isStatus")
-        // Combine all the datafields under all IDs
+        // Combine all the fields under all IDs
         $fields = $failedFields = [];
         foreach ($idFieldSet as $id => $fieldSet) {
             $fields = array_values(array_unique(array_merge(
