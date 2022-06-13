@@ -13,6 +13,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
     use WithDirectivesTrait;
 
     protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
+    protected ?string $uniqueID = null;
 
     /**
      * @param Argument[] $arguments
@@ -67,11 +68,14 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
     /**
      * Print the field as string, and attach the location as a GraphQL comment
      */
-    public function getUniqueID(): string
+    final public function getUniqueID(): string
     {
-        $location = $this->getLocation();
-        $locationComment = ' # Location: ' . $location->getLine() . 'x' . $location->getColumn();
-        return $this->asFieldOutputQueryString() . $locationComment;
+        if ($this->uniqueID === null) {
+            $location = $this->getLocation();
+            $locationComment = ' # Location: ' . $location->getLine() . 'x' . $location->getColumn();
+            $this->uniqueID = $this->asFieldOutputQueryString() . $locationComment;
+        }
+        return $this->uniqueID;
     }
 
     protected function doAsQueryString(): string
