@@ -156,7 +156,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                     continue;
                 }
                 $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditionalFields);
-                $enqueueFillingObjectsFromIDs[$id]->addDirectFields($conditionalDataFields);
+                $enqueueFillingObjectsFromIDs[$id]->addFields($conditionalDataFields);
             }
         }
         // Enqueue items for the next iteration

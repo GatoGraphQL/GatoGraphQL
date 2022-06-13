@@ -20,13 +20,13 @@ class EngineIterationFieldSet
     }
 
     /**
-     * @param FieldInterface[] $directFields
+     * @param FieldInterface[] $fields
      */
-    public function addDirectFields(array $directFields): void
+    public function addFields(array $fields): void
     {
         $this->fields = array_values(array_unique(array_merge(
             $this->fields,
-            $directFields
+            $fields
         )));
     }
 
