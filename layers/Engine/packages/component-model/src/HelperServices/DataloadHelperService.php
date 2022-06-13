@@ -47,7 +47,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
      * ObjectTypeResolverInterface, to make it easy within the application to check
      * for this result without checking in advance what's the typeResolver
      */
-    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface
+    public function getTypeResolverFromSubcomponentField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface
     {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used

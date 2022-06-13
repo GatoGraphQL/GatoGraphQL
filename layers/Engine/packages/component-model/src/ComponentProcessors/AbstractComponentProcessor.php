@@ -275,7 +275,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $this->setProp($subcomponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                $subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                $subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                 if (!$subcomponent_typeResolver) {
                     continue;
                 }
@@ -290,7 +290,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                    $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                     if (!$subcomponentTypeResolver) {
                         continue;
                     }
@@ -638,7 +638,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                 if ($typeResolver === null) {
                     continue;
                 }
@@ -653,7 +653,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
                     $conditionalDataField = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                     if ($typeResolver === null) {
                         continue;
                     }
