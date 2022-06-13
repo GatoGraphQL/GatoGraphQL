@@ -815,13 +815,13 @@ class Engine implements EngineInterface
              */
             foreach ($conditionalComponentFieldNodesSplObjectStorage as $conditionComponentFieldNode) {
                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                $conditionalDataFields = $conditionalComponentFieldNodesSplObjectStorage[$conditionComponentFieldNode];
-                /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
+                $conditionalFields = $conditionalComponentFieldNodesSplObjectStorage[$conditionComponentFieldNode];
+                /** @var ComponentFieldNodeInterface[] $conditionalFields */
                 $conditionField = $conditionComponentFieldNode->getField();
                 $conditionalComponentFieldNodes = [];
-                foreach ($conditionalDataFields as $conditionalDataField) {
-                    /** @var ComponentFieldNodeInterface $conditionalDataField */
-                    $conditionalComponentFieldNodes[] = $conditionalDataField;
+                foreach ($conditionalFields as $conditionalField) {
+                    /** @var ComponentFieldNodeInterface $conditionalField */
+                    $conditionalComponentFieldNodes[] = $conditionalField;
                 }
                 $engineIterationFieldSet->conditionalFields[$conditionField] = array_merge(
                     $engineIterationFieldSet->conditionalFields[$conditionField] ??= [],
@@ -1675,20 +1675,20 @@ class Engine implements EngineInterface
                  */
                 foreach ($idFieldSet as $id => $fieldSet) {
                     foreach ($fieldSet->conditionalFields as $conditionField) {
-                        // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalDataFields is FieldInterface
+                        // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalFields is FieldInterface
                         /** @var FieldInterface $conditionField */
-                        $conditionalDataFields = $fieldSet->conditionalFields[$conditionField];
+                        $conditionalFields = $fieldSet->conditionalFields[$conditionField];
                         // If it failed to load the item, it will be null
                         $dbItem = $iterationDBItems[$id];
                         if ($dbItem === null) {
                             continue;
                         }
-                        /** @var FieldInterface[] $conditionalDataFields */
+                        /** @var FieldInterface[] $conditionalFields */
                         $iterationFields = array_keys($dbItem);
                         $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
                             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
-                                $conditionalDataFields,
+                                $conditionalFields,
                                 $iterationFields
                             ) ?? []
                         );
