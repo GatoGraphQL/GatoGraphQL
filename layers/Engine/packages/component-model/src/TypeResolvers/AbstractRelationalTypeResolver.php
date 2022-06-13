@@ -524,12 +524,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return mixed[]
      */
-    protected function getIDsToQuery(array $ids_data_fields): array
+    protected function getIDsToQuery(array $idFieldSet): array
     {
-        return array_keys($ids_data_fields);
+        return array_keys($idFieldSet);
     }
 
     /**
@@ -542,10 +542,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     public function fillObjects(
-        array $ids_data_fields,
+        array $idFieldSet,
         array $unionDBKeyIDs,
         array $previousDBItems,
         array &$dbItems,
@@ -555,7 +555,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     ): array {
         // Obtain the data for the required object IDs
         $objectIDItems = [];
-        $ids = $this->getIDsToQuery($ids_data_fields);
+        $ids = $this->getIDsToQuery($idFieldSet);
         $typeDataLoader = $this->getRelationalTypeDataLoader();
         // If any ID cannot be resolved, the object will be null
         $objects = array_filter($typeDataLoader->getObjects($ids));
@@ -578,7 +578,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
-            $failedFields = $ids_data_fields[$unresolvedObjectID]->fields ?? [];
+            $failedFields = $idFieldSet[$unresolvedObjectID]->fields ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaFeedbackStore->addError(
@@ -595,20 +595,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $unresolvedObjectIDs[] = $unresolvedObjectID;
         }
         // Remove all the IDs that failed from the elements to process, so it doesn't show a "Corrupted Data" error
-        // Because these are IDs (eg: 223) and $ids_data_fields contains qualified or typed IDs (eg: post/223), we must convert them first
+        // Because these are IDs (eg: 223) and $idFieldSet contains qualified or typed IDs (eg: post/223), we must convert them first
         if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
                 $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
             }
-            $ids_data_fields = array_filter(
-                $ids_data_fields,
+            $idFieldSet = array_filter(
+                $idFieldSet,
                 fn (int | string $id) => !in_array($id, $unresolvedObjectIDs),
                 ARRAY_FILTER_USE_KEY
             );
         }
 
         // Enqueue the items
-        $this->enqueueFillingObjectsFromIDs($ids_data_fields);
+        $this->enqueueFillingObjectsFromIDs($idFieldSet);
 
         // Process them
         $this->processFillingObjectsFromIDs(

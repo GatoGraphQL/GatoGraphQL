@@ -49,15 +49,15 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     /**
      * Remove the type from the ID to resolve the objects through `getObjects` (check parent class)
      *
-     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return mixed[]
      */
-    protected function getIDsToQuery(array $ids_data_fields): array
+    protected function getIDsToQuery(array $idFieldSet): array
     {
         // Each ID contains the type (added in function `getID`). Remove it
         return array_map(
             UnionTypeHelpers::extractDBObjectID(...),
-            parent::getIDsToQuery($ids_data_fields)
+            parent::getIDsToQuery($idFieldSet)
         );
     }
 
@@ -171,9 +171,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * Eg: id|title<skip>|excerpt<translate> will produce a pipeline [Skip, Translate] where they apply
      * to different fields. After producing the pipeline, add the mandatory items
      *
-     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
-    final public function enqueueFillingObjectsFromIDs(array $ids_data_fields): void
+    final public function enqueueFillingObjectsFromIDs(array $idFieldSet): void
     {
         /**
          * This section is different from parent's implementation
@@ -200,12 +200,12 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 ) = UnionTypeHelpers::extractDBObjectTypeAndID($composedID);
                 return $id;
             },
-            array_keys($ids_data_fields)
+            array_keys($idFieldSet)
         );
         $objectIDTargetTypeResolvers = $this->getObjectIDTargetTypeResolvers($objectIDs);
 
         $mandatorySystemDirectives = $this->getMandatoryDirectives();
-        foreach ($ids_data_fields as $id => $fieldSet) {
+        foreach ($idFieldSet as $id => $fieldSet) {
             $fields = $this->getFieldsToEnqueueFillingObjectsFromIDs($fieldSet);
 
             /**

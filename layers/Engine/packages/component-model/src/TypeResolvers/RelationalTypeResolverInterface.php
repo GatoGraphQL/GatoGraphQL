@@ -37,10 +37,10 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      */
     public function enqueueFillingObjectsFromIDs(array $idFieldSet): void;
     /**
-     * @param array<string|int,EngineIterationFieldSet> $ids_data_fields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     public function fillObjects(
-        array $ids_data_fields,
+        array $idFieldSet,
         array $unionDBKeyIDs,
         array $previousDBItems,
         array &$dbItems,

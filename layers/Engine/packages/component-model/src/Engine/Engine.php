@@ -1606,20 +1606,20 @@ class Engine implements EngineInterface
             /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
             /** @var array<string|int,EngineIterationFieldSet> */
-            $ids_data_fields = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idFieldSet'];
+            $idFieldSet = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idFieldSet'];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
             unset($engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]);
 
             // If no ids to execute, then skip
-            if (empty($ids_data_fields)) {
+            if (empty($idFieldSet)) {
                 continue;
             }
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ??= [];
-            foreach ($ids_data_fields as $id => $fieldSet) {
+            foreach ($idFieldSet as $id => $fieldSet) {
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
                     $fieldSet->fields,
@@ -1635,7 +1635,7 @@ class Engine implements EngineInterface
             $iterationDBItems = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $objectIDItems = $relationalTypeResolver->fillObjects(
-                $ids_data_fields,
+                $idFieldSet,
                 $combinedUnionDBKeyIDs,
                 $previousDBItems,
                 $iterationDBItems,
@@ -1668,7 +1668,7 @@ class Engine implements EngineInterface
                  * To find out if they were loaded, validate against the DBObject,
                  * to see if it has those properties
                  */
-                foreach ($ids_data_fields as $id => $fieldSet) {
+                foreach ($idFieldSet as $id => $fieldSet) {
                     foreach ($fieldSet->conditionalFields as $conditionDataField) {
                         // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalDataFields is FieldInterface
                         /** @var FieldInterface $conditionDataField */
