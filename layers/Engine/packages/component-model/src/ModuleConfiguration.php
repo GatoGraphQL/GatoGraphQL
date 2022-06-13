@@ -13,12 +13,25 @@ use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
-    /**
-     * Access layer to the environment variable, enabling to override its value
-     * Indicate if to use the cache
-     */
+    public function enableComponentModelCache(): bool
+    {
+        $envVariable = Environment::ENABLE_COMPONENT_MODEL_CACHE;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function useComponentModelCache(): bool
     {
+        if (!$this->enableComponentModelCache()) {
+            return false;
+        }
+
         $envVariable = Environment::USE_COMPONENT_MODEL_CACHE;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
@@ -33,7 +46,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
-            Environment::USE_COMPONENT_MODEL_CACHE => false,
+            Environment::ENABLE_COMPONENT_MODEL_CACHE,
+            Environment::USE_COMPONENT_MODEL_CACHE
+                => false,
             default => parent::enableHook($envVariable),
         };
     }
