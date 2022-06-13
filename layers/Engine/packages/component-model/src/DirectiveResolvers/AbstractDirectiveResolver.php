@@ -587,7 +587,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Indicate if the directive needs to be passed $idFieldSet filled with data to be able to execute
      * Because most commonly it will need, the default value is `true`
      */
-    public function needsIDsDataFieldsToExecute(): bool
+    public function needsSomeIDFieldToExecute(): bool
     {
         return true;
     }
@@ -973,7 +973,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // First check that if the validation took away the elements, and so the directive can't execute anymore
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
-        if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idFieldSet)) {
+        if (!$this->needsSomeIDFieldToExecute() || $this->hasIDsDataFields($idFieldSet)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;
@@ -1321,7 +1321,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // @todo Implement "admin" directive, if needed
             SchemaDefinition::IS_ADMIN_ELEMENT => false,
             SchemaDefinition::DIRECTIVE_PIPELINE_POSITION => $this->getPipelinePosition(),
-            SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
+            SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsSomeIDFieldToExecute(),
         ];
     }
 

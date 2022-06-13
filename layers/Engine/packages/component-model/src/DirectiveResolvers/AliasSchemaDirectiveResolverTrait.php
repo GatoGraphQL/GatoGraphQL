@@ -289,10 +289,10 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function needsIDsDataFieldsToExecute(): bool
+    public function needsSomeIDFieldToExecute(): bool
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->needsIDsDataFieldsToExecute();
+        return $aliasedDirectiveResolver->needsSomeIDFieldToExecute();
     }
 
     /**

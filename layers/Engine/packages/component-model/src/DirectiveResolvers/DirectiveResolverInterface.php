@@ -96,7 +96,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * Indicate if the directive needs to be passed $idFieldSet filled with data to be able to execute
      */
-    public function needsIDsDataFieldsToExecute(): bool;
+    public function needsSomeIDFieldToExecute(): bool;
     /**
      * Execute the directive
      *

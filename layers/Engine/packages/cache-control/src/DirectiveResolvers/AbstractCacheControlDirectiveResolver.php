@@ -44,7 +44,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     /**
      * Set the cache even when there are no elements: they might've been removed due to some validation, and this caching maxAge must be respected!
      */
-    public function needsIDsDataFieldsToExecute(): bool
+    public function needsSomeIDFieldToExecute(): bool
     {
         return false;
     }
