@@ -872,21 +872,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         /**
          * Calculate the data-fields from merging them with the
          * subcomponent components' keys, which are data-fields too.
-         *
-         * Doing `array_unique` works because the ComponentFieldNodes
-         * implement __toString() as the fieldOutputQueryString,
-         * so if two fields are the same, we need to process
-         * one AST element only.
          */
         if (
             /** @var ComponentFieldNodeInterface[] */
-            $componentFieldNodes = array_unique(
-                array_merge(
-                    $this->getLeafComponentFieldNodes($component, $props),
-                    $this->getRelationalComponentFieldNodes($component),
-                    $this->getConditionalLeafComponentFieldNodes($component),
-                    $this->getConditionalRelationalComponentFieldNodes($component),
-                )
+            $componentFieldNodes = array_merge(
+                $this->getLeafComponentFieldNodes($component, $props),
+                $this->getRelationalComponentFieldNodes($component),
+                $this->getConditionalLeafComponentFieldNodes($component),
+                $this->getConditionalRelationalComponentFieldNodes($component),
             )
         ) {
             $ret['data-fields'] = $componentFieldNodes;
@@ -1421,7 +1414,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $ret['subcomponents'][$subcomponentComponentFieldNode] ??= [];
             $subcomponentsSubcomponentFieldNode = $ret['subcomponents'][$subcomponentComponentFieldNode];
             if ($subcomponent_components_data_properties['data-fields']) {
-                $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
                 $subcomponentsSubcomponentFieldNode['data-fields'] = array_values(array_unique(array_merge(
                     $subcomponentsSubcomponentFieldNode['data-fields'] ?? [],
                     $subcomponent_components_data_properties['data-fields']
