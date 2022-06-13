@@ -15,7 +15,7 @@ use PoP\Root\App;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
-    use RemoveIDsDataFieldsDirectiveResolverTrait;
+    use RemoveIDFieldSetDirectiveResolverTrait;
 
     /**
      * Validations are by default a "Schema" type directive
@@ -34,32 +34,32 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idsDataFields, $succeedingPipelineIDsDataFields, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
+        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
-        array &$succeedingPipelineIDsDataFields,
+        array $idFieldSet,
+        array &$succeedingPipelineIDFieldSet,
         array $objectIDItems,
         array &$dbItems,
         array &$variables,
@@ -67,12 +67,12 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     ): void {
         // Validate that the schema and the provided data match, eg: passing mandatory values
         // (Such as fieldArg "status" for field "isStatus")
-        // Combine all the datafields under all IDs
+        // Combine all the fields under all IDs
         $fields = $failedFields = [];
-        foreach ($idsDataFields as $id => $data_fields) {
+        foreach ($idFieldSet as $id => $fieldSet) {
             $fields = array_values(array_unique(array_merge(
                 $fields,
-                $data_fields->direct
+                $fieldSet->fields
             )));
         }
         $this->validateFields($relationalTypeResolver, $fields, $variables, $engineIterationFeedbackStore, $failedFields);
@@ -80,40 +80,30 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedFields) {
             /** @var array<string|int,EngineIterationFieldSet> */
-            $idsDataFieldsToRemove = [];
-            foreach ($idsDataFields as $id => $dataFields) {
-                $idsDataFieldsToRemove[$id] = new EngineIterationFieldSet(
+            $idFieldSetToRemove = [];
+            foreach ($idFieldSet as $id => $fieldSet) {
+                $idFieldSetToRemove[$id] = new EngineIterationFieldSet(
                     array_intersect(
-                        $dataFields->direct,
+                        $fieldSet->fields,
                         $failedFields
                     )
                 );
             }
-            $this->removeIDsDataFields(
-                $idsDataFieldsToRemove,
-                $succeedingPipelineIDsDataFields
+            $this->removeIDFieldSet(
+                $idFieldSetToRemove,
+                $succeedingPipelineIDFieldSet
             );
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
-                $this->setIDsDataFieldsAsNull(
+                $this->setIDFieldSetAsNull(
                     $relationalTypeResolver,
-                    $idsDataFieldsToRemove,
+                    $idFieldSetToRemove,
                     $objectIDItems,
                     $dbItems,
                 );
             }
         }
-        // Since adding the Validate directive also when processing the conditional fields, there is no need to validate them now
-        // They will be validated when it's their turn to be processed
-        // // Validate conditional fields and, if they fail, already take them out from the `$idsDataFields` object
-        // $dataFields = $failedFields = [];
-        // // Because on the leaves we encounter an empty array, all fields are conditional fields (even if they are on the leaves)
-        // foreach ($idsDataFields as $id => $data_fields) {
-        //     foreach ($data_fields->conditional as $conditionField => $conditionalFields) {
-        //         $this->validateAndFilterConditionalFields($relationalTypeResolver, $conditionField, $idsDataFields[$id]->conditional, $dataFields, $variables, $failedFields);
-        //     }
-        // }
     }
 
     /**

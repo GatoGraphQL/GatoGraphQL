@@ -31,12 +31,12 @@ class DBEntriesHookSet extends AbstractHookSet
         );
     }
 
-    public function moveEntriesUnderDBName(array $dbname_datafields): array
+    public function moveEntriesUnderDBName(array $dbNameToFieldNames): array
     {
-        $dbname_datafields['userstate'] = App::applyFilters(
+        $dbNameToFieldNames['userstate'] = App::applyFilters(
             'PoPCMSSchema\UserState\DataloaderHooks:metaFields',
             $this->getGlobalObjectTypeFieldResolver()->getFieldNamesToResolve()
         );
-        return $dbname_datafields;
+        return $dbNameToFieldNames;
     }
 }

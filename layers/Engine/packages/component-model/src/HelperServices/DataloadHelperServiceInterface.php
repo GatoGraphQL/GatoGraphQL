@@ -9,5 +9,5 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface DataloadHelperServiceInterface
 {
-    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface;
+    public function getTypeResolverFromSubcomponentField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface;
 }

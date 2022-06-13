@@ -1,7 +1,8 @@
 <?php
+use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Facades\ComponentFiltering\ComponentFilterManagerFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
 
 class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor
 {
@@ -65,7 +66,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         // If it needs dynamic data then that's it, simply return the data properties
         if ($this->needsDynamicData($component, $props)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            return $componentprocessor_manager->getComponentProcessor($component)->getDatasetcomponentTreeSectionFlattenedDataFields($component, $props);
+            return $componentprocessor_manager->getComponentProcessor($component)->getDatasetComponentTreeSectionFlattenedDataProperties($component, $props);
         }
 
         // Otherwise, propagate to the modules and subcomponents
@@ -153,8 +154,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             }
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
-            if ($ret['data-fields'] ?? null) {
-                $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
+            if ($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
+                $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES]));
             }
         }
         $modulefilter_manager->restoreFromPropagation($component, $props);
@@ -173,9 +174,9 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         foreach ($processor->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
             $subcomponent_data_field = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
             $subcomponent_components_data_properties = array(
-                'data-fields' => array(),
+                DataProperties::DIRECT_COMPONENT_FIELD_NODES => array(),
                 // @todo Migrate 'subcomponents' from array to SplObjectStorage
-                'subcomponents' => array(),
+                DataProperties::SUBCOMPONENTS => array(),
             );
             foreach ($relationalComponentFieldNode->getNestedComponents() as $subcomponent_component) {
                 if ($subcomponent_component_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getComponentProcessor($subcomponent_component))->$propagate_fn($subcomponent_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
@@ -188,23 +189,23 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
             // @todo Must assign the SplObjectStorage to a variable, operate there, and then re-assign at the end
             // @see https://stackoverflow.com/questions/20053269/indirect-modification-of-overloaded-element-of-splfixedarray-has-no-effect
-            $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_components_data_properties['data-fields'] ?? null) {
-                $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
+            $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field] = $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field] ?? array();
+            if ($subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
+                $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
 
-                $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['data-fields'] ?? array();
-                $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = array_unique(
+                $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? array();
+                $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique(
                     array_merge(
-                        $ret['subcomponents'][$subcomponent_data_field]['data-fields'],
-                        $subcomponent_components_data_properties['data-fields']
+                        $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::DIRECT_COMPONENT_FIELD_NODES],
+                        $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
                     )
                 );
             }
-            if ($subcomponent_components_data_properties['subcomponents'] ?? null) {
-                $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
-                $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
-                    $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
-                    $subcomponent_components_data_properties['subcomponents']
+            if ($subcomponent_components_data_properties[DataProperties::SUBCOMPONENTS] ?? null) {
+                $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::SUBCOMPONENTS] = $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::SUBCOMPONENTS] ?? array();
+                $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::SUBCOMPONENTS] = array_merge_recursive(
+                    $ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][DataProperties::SUBCOMPONENTS],
+                    $subcomponent_components_data_properties[DataProperties::SUBCOMPONENTS]
                 );
             }
         }
@@ -214,29 +215,29 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     // protected function removeEmptyEntries(&$ret) {
 
     //     // If after the propagation, we have entries of 'subcomponents' empty, then remove them
-    //     if ($ret['subcomponents'] ?? null) {
+    //     if ($ret[DataProperties::SUBCOMPONENTS] ?? null) {
 
     //         // Iterate through all the data_field => dataloaders
-    //         $subcomponent_data_fields = array_keys($ret['subcomponents']);
+    //         $subcomponent_data_fields = array_keys($ret[DataProperties::SUBCOMPONENTS]);
     //         foreach ($subcomponent_data_fields as $subcomponent_data_field) {
 
-    //             $subcomponent_typeResolvers = array_keys($ret['subcomponents'][$subcomponent_data_field]);
+    //             $subcomponent_typeResolvers = array_keys($ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field]);
     //             foreach ($subcomponent_typeResolvers as $subcomponent_typeResolver) {
-    //                 if (empty($ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver])) {
+    //                 if (empty($ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][$subcomponent_typeResolver])) {
 
-    //                     unset($ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver]);
+    //                     unset($ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field][$subcomponent_typeResolver]);
     //                 }
     //             }
 
-    //             if (empty($ret['subcomponents'][$subcomponent_data_field])) {
+    //             if (empty($ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field])) {
 
-    //                 unset($ret['subcomponents'][$subcomponent_data_field]);
+    //                 unset($ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field]);
     //             }
     //         }
 
-    //         if (empty($ret['subcomponents'])) {
+    //         if (empty($ret[DataProperties::SUBCOMPONENTS])) {
 
-    //             unset($ret['subcomponents']);
+    //             unset($ret[DataProperties::SUBCOMPONENTS]);
     //         }
     //     }
 

@@ -19,23 +19,23 @@ class DBEntriesHookSet extends AbstractHookSet
         );
     }
 
-    public function moveEntriesUnderDBName(array $dbname_datafields): array
+    public function moveEntriesUnderDBName(array $dbNameToFieldNames): array
     {
         // Enable to add all fields starting with "__" (such as "__schema") as meta
-        $dbname_datafields['meta'] = App::applyFilters(
+        $dbNameToFieldNames['meta'] = App::applyFilters(
             'PoPAPI\API\DataloaderHooks:metaFields',
             [
                 'fullSchema',
                 'typeName',
             ]
         );
-        $dbname_datafields['context'] = App::applyFilters(
+        $dbNameToFieldNames['context'] = App::applyFilters(
             'PoPAPI\API\DataloaderHooks:contextFields',
             [
                 'var',
                 'context',
             ]
         );
-        return $dbname_datafields;
+        return $dbNameToFieldNames;
     }
 }

@@ -41,9 +41,9 @@ class ValidateIsUserNotLoggedInDirectiveResolver extends AbstractValidateCheckpo
     }
 
     /**
-     * @param FieldInterface[] $failedDataFields
+     * @param FieldInterface[] $failedFields
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             FeedbackItemProvider::class,
@@ -53,7 +53,7 @@ class ValidateIsUserNotLoggedInDirectiveResolver extends AbstractValidateCheckpo
                     $this->__('\', \''),
                     array_map(
                         fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $failedDataFields
+                        $failedFields
                     )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),

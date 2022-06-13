@@ -44,17 +44,17 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
@@ -67,7 +67,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $this->resolveValueForObjects(
             $relationalTypeResolver,
             $objectIDItems,
-            $idsDataFields,
+            $idFieldSet,
             $dbItems,
             $previousDBItems,
             $variables,
@@ -77,12 +77,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     /**
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $objectIDItems,
-        array $idsDataFields,
+        array $idFieldSet,
         array &$dbItems,
         array $previousDBItems,
         array &$variables,
@@ -91,13 +91,13 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     ): void {
         /** @var array<string|int,EngineIterationFieldSet> */
         $enqueueFillingObjectsFromIDs = [];
-        foreach ($idsDataFields as $id => $dataFields) {
+        foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                foreach ($dataFields->direct as $field) {
+                foreach ($fieldSet->fields as $field) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             new FeedbackItemResolution(
@@ -126,7 +126,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $relationalTypeResolver,
                 $id,
                 $object,
-                $idsDataFields[$id]->direct,
+                $idFieldSet[$id]->fields,
                 $dbItems,
                 $previousDBItems,
                 $variables,
@@ -135,18 +135,18 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             );
 
             // Add the conditional data fields
-            // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
-            foreach ($idsDataFields[$id]->conditional as $conditionDataField) {
-                /** @var FieldInterface $conditionDataField */
-                $conditionalDataFields = $idsDataFields[$id]->conditional[$conditionDataField];
-                /** @var FieldInterface[] $conditionalDataFields */
-                if ($conditionalDataFields === []) {
+            // If the conditionalFields are empty, we already reached the end of the tree. Nothing else to do
+            foreach ($idFieldSet[$id]->conditionalFields as $conditionField) {
+                /** @var FieldInterface $conditionField */
+                $conditionalFields = $idFieldSet[$id]->conditionalFields[$conditionField];
+                /** @var FieldInterface[] $conditionalFields */
+                if ($conditionalFields === []) {
                     continue;
                 }
 
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
-                $conditionFieldOutputKey = $conditionDataField->getOutputKey();
+                $conditionFieldOutputKey = $conditionField->getOutputKey();
                 if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
                     $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
                 } else {
@@ -155,8 +155,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 if (!$conditionSatisfied) {
                     continue;
                 }
-                $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idsDataFields[$id]->conditional);
-                $enqueueFillingObjectsFromIDs[$id]->addDirectFields($conditionalDataFields);
+                $enqueueFillingObjectsFromIDs[$id] ??= new EngineIterationFieldSet([], $idFieldSet[$id]->conditionalFields);
+                $enqueueFillingObjectsFromIDs[$id]->addFields($conditionalFields);
             }
         }
         // Enqueue items for the next iteration
@@ -166,20 +166,20 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     }
 
     /**
-     * @param FieldInterface[] $dataFields
+     * @param FieldInterface[] $fieldSet
      */
     private function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
-        array $dataFields,
+        array $fieldSet,
         array &$dbItems,
         array $previousDBItems,
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        foreach ($dataFields as $field) {
+        foreach ($fieldSet as $field) {
             $this->resolveValueForObject(
                 $relationalTypeResolver,
                 $id,

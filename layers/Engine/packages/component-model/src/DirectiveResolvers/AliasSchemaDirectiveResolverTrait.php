@@ -289,26 +289,26 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function needsIDsDataFieldsToExecute(): bool
+    public function needsSomeIDFieldToExecute(): bool
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->needsIDsDataFieldsToExecute();
+        return $aliasedDirectiveResolver->needsSomeIDFieldToExecute();
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      *
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
@@ -317,12 +317,12 @@ trait AliasSchemaDirectiveResolverTrait
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         $aliasedDirectiveResolver->resolveDirective(
             $relationalTypeResolver,
-            $idsDataFields,
+            $idFieldSet,
             $succeedingPipelineDirectiveResolverInstances,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousDBItems,
-            $succeedingPipelineIDsDataFields,
+            $succeedingPipelineIDFieldSet,
             $dbItems,
             $variables,
             $messages,

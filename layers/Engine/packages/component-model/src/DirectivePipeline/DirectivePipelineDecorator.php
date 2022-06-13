@@ -17,11 +17,11 @@ class DirectivePipelineDecorator
     }
 
     /**
-     * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDsDataFields
+     * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet
      */
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$pipelineIDsDataFields,
+        array &$pipelineIDFieldSet,
         array $pipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
@@ -38,7 +38,7 @@ class DirectivePipelineDecorator
                 $objectIDItems,
                 $unionDBKeyIDs,
                 $previousDBItems,
-                $pipelineIDsDataFields,
+                $pipelineIDFieldSet,
                 $dbItems,
                 $variables,
                 $messages,
@@ -52,7 +52,7 @@ class DirectivePipelineDecorator
             $unionDBKeyIDs,
             $previousDBItems,
             /** @var array<array<string|int,EngineIterationFieldSet>> */
-            $pipelineIDsDataFields,
+            $pipelineIDFieldSet,
             $dbItems,
             $variables,
             $messages,

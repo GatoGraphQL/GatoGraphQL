@@ -44,10 +44,10 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
 
         // The function below returns an array with value => $subcomponent.
         // It must be converted to value => [$subcomponent]
-        foreach ($this->getMultipleLayoutSubcomponents($component) as $conditionDataField => $conditionalSubcomponent) {
+        foreach ($this->getMultipleLayoutSubcomponents($component) as $conditionField => $conditionalSubcomponent) {
             $ret[] = new ConditionalLeafComponentFieldNode(
                 new LeafField(
-                    $conditionDataField,
+                    $conditionField,
                     null,
                     [],
                     [],

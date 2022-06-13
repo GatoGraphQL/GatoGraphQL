@@ -302,7 +302,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * load relational fields does not work, because the component to
      * process entry "author" is added twice
      * (once "ignoreConditionalFields" => true, once => false) and both
-     * of them will add their entry "author" under 'conditional-data-fields',
+     * of them will add their entry "author" under 'conditional-component-field-nodes',
      * so it tries to retrieve field "author" from type "User", which is an error.
      *
      * As a solution, also treat "author" as a leaf, which works well:

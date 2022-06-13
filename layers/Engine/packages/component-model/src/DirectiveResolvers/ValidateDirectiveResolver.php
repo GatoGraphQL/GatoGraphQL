@@ -47,13 +47,14 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
     /**
      * @param FieldInterface[] $fields
+     * @param FieldInterface[] $failedFields
      */
     protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$failedDataFields,
+        array &$failedFields,
     ): void {
         foreach ($fields as $field) {
             $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
@@ -70,7 +71,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                 $this->directive
             );
             if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                $failedDataFields[] = $field;
+                $failedFields[] = $field;
             }
         }
     }

@@ -55,9 +55,9 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
     }
 
     /**
-     * @param FieldInterface[] $failedDataFields
+     * @param FieldInterface[] $failedFields
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
         $roles = $this->directiveArgsForSchema['roles'];
         $isValidatingDirective = $this->isValidatingDirective();
@@ -77,7 +77,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
                     $this->__('\', \''),
                     array_map(
                         fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $failedDataFields
+                        $failedFields
                     )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),

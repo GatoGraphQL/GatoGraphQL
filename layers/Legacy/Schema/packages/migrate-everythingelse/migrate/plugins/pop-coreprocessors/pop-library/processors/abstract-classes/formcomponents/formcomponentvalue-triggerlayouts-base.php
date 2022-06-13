@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -228,13 +229,13 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             // The Typeahead set the data-settings under 'typeahead-trigger'
             $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
             $trigger_component = $this->getTriggerSubcomponent($component);
-            $trigger_data_properties = $componentprocessor_manager->getComponentProcessor($trigger_component)->getDatasetcomponentTreeSectionFlattenedDataFields($trigger_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
+            $trigger_data_properties = $componentprocessor_manager->getComponentProcessor($trigger_component)->getDatasetComponentTreeSectionFlattenedDataProperties($trigger_component, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
 
             // Extend the dataload ids
             return array(
                 $this->getTriggerRelationalTypeResolver($component)->getTypeName() => array(
-                    'ids' => $value,
-                    'data-fields' => $trigger_data_properties['data-fields'],
+                    DataProperties::IDS => $value,
+                    DataProperties::DIRECT_COMPONENT_FIELD_NODES => $trigger_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES],
                 ),
             );
         }

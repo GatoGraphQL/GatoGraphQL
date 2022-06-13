@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -184,7 +185,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
     protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, RelationalTypeResolverInterface $relationalTypeResolver, array $data_properties)
     {
-        if ($data_properties['data-fields'] ?? null) {
+        if ($data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
             // Data to be copied can come from either the database or the userstatedatabase
             $databases = $data['dbData'];
 
@@ -192,9 +193,9 @@ class PoP_SSR_EngineInitialization_Hooks
             $database_key = $relationalTypeResolver->getTypeOutputDBKey();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
-            // The hook below can modify the list of datafields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
+            // The hook below can modify the list of fields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
             $engine = EngineFacade::getInstance();
-            $data_fields = $engine->moveEntriesUnderDBName($data_properties['data-fields'], true, $relationalTypeResolver);
+            $data_fields = $engine->moveEntriesUnderDBName($data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES], true, $relationalTypeResolver);
 
             foreach ($dbobjectids as $object_id) {
                 // Copy to the dynamic database
@@ -209,7 +210,7 @@ class PoP_SSR_EngineInitialization_Hooks
             }
 
             // Call recursively to also copy the data from the subcomponents
-            if ($subcomponents = $data_properties['subcomponents'] ?? null) {
+            if ($subcomponents = $data_properties[DataProperties::SUBCOMPONENTS] ?? null) {
                 /** @var SplObjectStorage<FieldInterface,array<string,mixed>> $subcomponents */
                 foreach ($subcomponents as $field) {
                     /** @var FieldInterface $field */
@@ -230,7 +231,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
-                    if ($subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $field)) {
+                    if ($subcomponentTypeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentField($relationalTypeResolver, $field)) {
                         $typeObjectIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDs);
                         if (is_null($typeObjectIDs)) {
                             $isUnionType = false;

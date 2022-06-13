@@ -18,11 +18,11 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     {
         $ret = parent::getConditionalLeafComponentFieldNodes($component);
 
-        if ($conditionDataField = $this->getConditionField($component)) {
+        if ($conditionField = $this->getConditionField($component)) {
             if ($layouts = $this->getConditionSucceededSubcomponents($component)) {
                 $ret[] = new ConditionalLeafComponentFieldNode(
                     new LeafField(
-                        $conditionDataField,
+                        $conditionField,
                         null,
                         [],
                         [],
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
             }
 
             if ($conditionfailed_layouts = $this->getConditionFailedSubcomponents($component)) {
-                // Calculate the "not" data field for the conditionDataField
+                // Calculate the "not" data field for the conditionField
                 $notConditionDataField = $this->getNotConditionField($component);
                 $ret[] = new ConditionalLeafComponentFieldNode(
                     new LeafField(
@@ -74,8 +74,8 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = [];
-        if ($conditionDataField = $this->getConditionField($component)) {
-            $ret[] = $conditionDataField;
+        if ($conditionField = $this->getConditionField($component)) {
+            $ret[] = $conditionField;
         }
         if (!empty($this->getConditionFailedSubcomponents($component))) {
             $ret[] = $this->getNotConditionField($component);
@@ -88,8 +88,8 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
     public function getNotConditionField(\PoP\ComponentModel\Component\Component $component)
     {
-        // Calculate the "not" data field for the conditionDataField
-        if ($conditionDataField = $this->getConditionField($component)) {
+        // Calculate the "not" data field for the conditionField
+        if ($conditionField = $this->getConditionField($component)) {
             $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
             list(
                 $fieldName,
@@ -97,7 +97,7 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
                 $fieldAlias,
                 $skipIfOutputNull,
                 $fieldDirectives,
-            ) = $fieldQueryInterpreter->listField($conditionDataField);
+            ) = $fieldQueryInterpreter->listField($conditionField);
             if (!is_null($fieldAlias)) {
                 $notFieldAlias = 'not-'.$fieldAlias;
             }

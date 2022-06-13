@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -144,7 +145,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
 
                     // The Typeahead set the data-settings under 'typeahead-trigger'
                     $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
-                    $data_properties = $componentprocessor_manager->getComponentProcessor($trigger_layout)->getDatasetcomponentTreeSectionFlattenedDataFields($trigger_layout, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
+                    $data_properties = $componentprocessor_manager->getComponentProcessor($trigger_layout)->getDatasetComponentTreeSectionFlattenedDataProperties($trigger_layout, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
                     /** @var \PoP_Module_Processor_TriggerLayoutFormComponentValuesBase */
                     $triggerComponentProcessor = $componentprocessor_manager->getComponentProcessor($trigger_layout);
                     $suggestions_typeResolver = $triggerComponentProcessor->getTriggerRelationalTypeResolver($trigger_layout);
@@ -152,9 +153,9 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     // Extend the dataload ids
                     return array(
                         $suggestions_typeResolver->getTypeOutputDBKey() => array(
-                            'resolver' => $suggestions_typeResolver,
-                            'ids' => $suggestions,
-                            'data-fields' => $data_properties['data-fields'],
+                            DataProperties::RESOLVER => $suggestions_typeResolver,
+                            DataProperties::IDS => $suggestions,
+                            DataProperties::DIRECT_COMPONENT_FIELD_NODES => $data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES],
                         ),
                     );
                 }

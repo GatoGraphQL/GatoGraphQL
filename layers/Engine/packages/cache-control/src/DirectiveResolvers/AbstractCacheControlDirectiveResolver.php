@@ -44,7 +44,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     /**
      * Set the cache even when there are no elements: they might've been removed due to some validation, and this caching maxAge must be respected!
      */
-    public function needsIDsDataFieldsToExecute(): bool
+    public function needsSomeIDFieldToExecute(): bool
     {
         return false;
     }
@@ -135,17 +135,17 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     /**
      * Get the cache control for this field, and set it on the Engine
      *
-     * @param array<string|int,EngineIterationFieldSet> $idsDataFields
-     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDsDataFields
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
+        array $idFieldSet,
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
+        array &$succeedingPipelineIDFieldSet,
         array &$dbItems,
         array &$variables,
         array &$messages,
