@@ -600,7 +600,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function hasIDsDataFields(array $idsDataFields): bool
     {
         foreach ($idsDataFields as $id => $data_fields) {
-            if ($data_fields->direct !== []) {
+            if ($data_fields->fields !== []) {
                 // If there's data-fields to fetch for any ID, that's it, there's data
                 return true;
             }
@@ -1004,7 +1004,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
-                        foreach ($dataFields->direct as $field) {
+                        foreach ($dataFields->fields as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
                                 new ObjectFeedback(
                                     new FeedbackItemResolution(
@@ -1108,7 +1108,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             foreach ($idsDataFields as $id => $data_fields) {
                 $failedFields = array_merge(
                     $failedFields,
-                    $data_fields->direct
+                    $data_fields->fields
                 );
             }
             $failedFields = array_values(array_unique($failedFields));
@@ -1118,7 +1118,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             foreach ($idsDataFields as $id => $data_fields) {
                 $idsDataFieldsToRemove[$id] = new EngineIterationFieldSet(
                     array_intersect(
-                        $data_fields->direct,
+                        $data_fields->fields,
                         $failedFields
                     )
                 );
@@ -1147,7 +1147,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // Show the failureMessage either as error or as warning
         if ($setFailingFieldResponseAsNull) {
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields->direct as $failedField) {
+                foreach ($dataFields->fields as $failedField) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
@@ -1168,7 +1168,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             // }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields->direct as $failedField) {
+                foreach ($dataFields->fields as $failedField) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
@@ -1198,7 +1198,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
             // }
             // foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-            //     foreach ($dataFields->direct as $failedField) {
+            //     foreach ($dataFields->fields as $failedField) {
             //         $objectWarnings[$id][] = [
             //             Tokens::PATH => [$failedField, $this->directive],
             //             Tokens::MESSAGE => sprintf(

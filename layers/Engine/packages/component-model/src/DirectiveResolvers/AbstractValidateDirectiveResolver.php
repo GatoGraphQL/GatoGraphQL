@@ -72,7 +72,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         foreach ($idsDataFields as $id => $data_fields) {
             $fields = array_values(array_unique(array_merge(
                 $fields,
-                $data_fields->direct
+                $data_fields->fields
             )));
         }
         $this->validateFields($relationalTypeResolver, $fields, $variables, $engineIterationFeedbackStore, $failedFields);
@@ -84,7 +84,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
             foreach ($idsDataFields as $id => $dataFields) {
                 $idsDataFieldsToRemove[$id] = new EngineIterationFieldSet(
                     array_intersect(
-                        $dataFields->direct,
+                        $dataFields->fields,
                         $failedFields
                     )
                 );

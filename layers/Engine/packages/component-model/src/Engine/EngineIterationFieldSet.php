@@ -10,11 +10,11 @@ use SplObjectStorage;
 class EngineIterationFieldSet
 {
     /**
-     * @param FieldInterface[] $direct
+     * @param FieldInterface[] $fields
      * @param SplObjectStorage<FieldInterface,FieldInterface[]> $conditionalFields
      */
     public function __construct(
-        public array $direct = [],
+        public array $fields = [],
         public SplObjectStorage $conditionalFields = new SplObjectStorage(),
     ) {
     }
@@ -24,8 +24,8 @@ class EngineIterationFieldSet
      */
     public function addDirectFields(array $directFields): void
     {
-        $this->direct = array_values(array_unique(array_merge(
-            $this->direct,
+        $this->fields = array_values(array_unique(array_merge(
+            $this->fields,
             $directFields
         )));
     }

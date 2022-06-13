@@ -578,7 +578,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
-            $failedFields = $ids_data_fields[$unresolvedObjectID]->direct ?? [];
+            $failedFields = $ids_data_fields[$unresolvedObjectID]->fields ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaFeedbackStore->addError(
@@ -854,7 +854,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             );
         }
         return array_unique(array_merge(
-            $engineIterationFieldSet->direct,
+            $engineIterationFieldSet->fields,
             $allConditionalFields
         ));
     }
@@ -926,8 +926,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $this->fieldDirectiveIDFields[$fieldDirective][$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
-                if (in_array($field, $data_fields->direct)) {
-                    $this->fieldDirectiveIDFields[$fieldDirective][$id]->direct[] = $field;
+                if (in_array($field, $data_fields->fields)) {
+                    $this->fieldDirectiveIDFields[$fieldDirective][$id]->fields[] = $field;
                 }
                 /** @var FieldInterface[]|null */
                 $conditionalFields = $data_fields->conditionalFields[$field] ?? null;
@@ -968,7 +968,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
                     $fieldDirectiveDirectFields = array_merge(
                         $fieldDirectiveDirectFields,
-                        $dataFields->direct
+                        $dataFields->fields
                     );
                     $conditionalFields = [];
                     foreach ($dataFields->conditionalFields as $conditionField) {
@@ -978,7 +978,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         );
                     }
                     $idFieldDirectiveIDFields = array_unique(array_merge(
-                        $dataFields->direct,
+                        $dataFields->fields,
                         $conditionalFields
                     ));
                     $fieldDirectiveFields[$fieldDirective] = array_merge(
@@ -1027,7 +1027,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 foreach ($fieldDirectives as $fieldDirective) {
                     foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
                         $failingFields = array_intersect(
-                            $dataFields->direct,
+                            $dataFields->fields,
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
@@ -1064,7 +1064,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $ids = $fieldDirectiveFieldIDs[$fieldDirective][$field];
                     foreach ($ids as $id) {
                         $directiveIDFields[$id] ??= new EngineIterationFieldSet();
-                        $directiveIDFields[$id]->direct[] = $field;
+                        $directiveIDFields[$id]->fields[] = $field;
                         /** @var FieldInterface[]|null */
                         $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]->conditionalFields[$field] ?? null;
                         if ($fieldConditionalFields === null || $fieldConditionalFields === []) {

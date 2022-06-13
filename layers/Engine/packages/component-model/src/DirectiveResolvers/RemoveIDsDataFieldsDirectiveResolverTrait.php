@@ -24,11 +24,11 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
                 if (!array_key_exists((string)$id, $pipelineStageIDsDataFields)) {
                     continue;
                 }
-                $pipelineStageIDsDataFields[$id]->direct = array_diff(
-                    $pipelineStageIDsDataFields[$id]->direct,
-                    $dataFields->direct
+                $pipelineStageIDsDataFields[$id]->fields = array_diff(
+                    $pipelineStageIDsDataFields[$id]->fields,
+                    $dataFields->fields
                 );
-                foreach ($dataFields->direct as $removeField) {
+                foreach ($dataFields->fields as $removeField) {
                     $pipelineStageIDsDataFields[$id]->conditionalFields->detach($removeField);
                 }
             }
@@ -48,7 +48,7 @@ trait RemoveIDsDataFieldsDirectiveResolverTrait
         array &$dbItems,
     ): void {
         foreach (array_keys($idsDataFieldsToSetAsNull) as $id) {
-            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[$id]->direct;
+            $fieldsToSetAsNullForID = $idsDataFieldsToSetAsNull[$id]->fields;
             foreach ($fieldsToSetAsNullForID as $field) {
                 $fieldOutputKey = $field->getOutputKey();
                 $dbItems[$id][$fieldOutputKey] = null;

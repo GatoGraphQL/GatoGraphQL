@@ -90,7 +90,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             foreach ($idsDataFields as $id => $dataFields) {
                 $fields = array_merge(
                     $fields,
-                    $dataFields->direct
+                    $dataFields->fields
                 );
             }
             $fields = array_values(array_unique($fields));

@@ -1622,7 +1622,7 @@ class Engine implements EngineInterface
             foreach ($ids_data_fields as $id => $data_fields) {
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
-                    $data_fields->direct,
+                    $data_fields->fields,
                     // Conditional items must also be in direct, so no need to check to cache them
                     // iterator_to_array($data_fields->conditionalFields)
                 );

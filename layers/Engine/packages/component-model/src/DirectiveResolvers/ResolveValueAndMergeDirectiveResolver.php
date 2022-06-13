@@ -97,7 +97,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                foreach ($dataFields->direct as $field) {
+                foreach ($dataFields->fields as $field) {
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             new FeedbackItemResolution(
@@ -126,7 +126,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $relationalTypeResolver,
                 $id,
                 $object,
-                $idsDataFields[$id]->direct,
+                $idsDataFields[$id]->fields,
                 $dbItems,
                 $previousDBItems,
                 $variables,
