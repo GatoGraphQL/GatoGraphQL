@@ -58,8 +58,8 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Check the condition field. If it is satisfied, then keep those fields, otherwise remove them from the $idFieldSet in the upcoming stages of the pipeline
-        $includeDataFieldsForIds = $this->getIDsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
-        $idsToRemove = array_diff(array_keys($idFieldSet), $includeDataFieldsForIds);
+        $includeDataFieldsForIDs = $this->getIDsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
+        $idsToRemove = array_diff(array_keys($idFieldSet), $includeDataFieldsForIDs);
         $this->removeDataFieldsForIDs($idFieldSet, $idsToRemove, $succeedingPipelineIDFieldSet);
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
