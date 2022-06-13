@@ -853,7 +853,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Load the data-fields from all components inside this section
             // And then, only for the top node, add its extra properties
             $properties = array_merge(
-                $this->getDatasetcomponentTreeSectionFlattenedDataFields($component, $props),
+                $this->getDatasetComponentTreeSectionFlattenedDataProperties($component, $props),
                 $this->getImmutableHeaddatasetcomponentDataProperties($component, $props)
             );
 
@@ -865,7 +865,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDatasetcomponentTreeSectionFlattenedDataFields(Component $component, array &$props): array
+    public function getDatasetComponentTreeSectionFlattenedDataProperties(Component $component, array &$props): array
     {
         $ret = array();
 

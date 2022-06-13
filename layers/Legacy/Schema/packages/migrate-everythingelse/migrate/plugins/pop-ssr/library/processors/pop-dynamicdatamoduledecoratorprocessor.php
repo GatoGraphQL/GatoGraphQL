@@ -65,7 +65,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         // If it needs dynamic data then that's it, simply return the data properties
         if ($this->needsDynamicData($component, $props)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            return $componentprocessor_manager->getComponentProcessor($component)->getDatasetcomponentTreeSectionFlattenedDataFields($component, $props);
+            return $componentprocessor_manager->getComponentProcessor($component)->getDatasetComponentTreeSectionFlattenedDataProperties($component, $props);
         }
 
         // Otherwise, propagate to the modules and subcomponents
