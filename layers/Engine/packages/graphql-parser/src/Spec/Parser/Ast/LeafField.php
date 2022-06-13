@@ -6,5 +6,4 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 class LeafField extends AbstractField
 {
-     
 }

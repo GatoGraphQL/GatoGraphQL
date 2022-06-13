@@ -9,7 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class RelationalField extends AbstractField implements WithFieldsOrFragmentBondsInterface
 {
     use WithFieldsOrFragmentBondsTrait;
-    
+
     /**
      * @param Argument[] $arguments
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
