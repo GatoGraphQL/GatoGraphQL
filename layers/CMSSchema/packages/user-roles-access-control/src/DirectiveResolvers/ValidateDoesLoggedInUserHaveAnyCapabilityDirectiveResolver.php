@@ -55,9 +55,9 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
     }
 
     /**
-     * @param FieldInterface[] $failedDataFields
+     * @param FieldInterface[] $failedFields
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
         $capabilities = $this->directiveArgsForSchema['capabilities'];
         $isValidatingDirective = $this->isValidatingDirective();
@@ -77,7 +77,7 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
                     $this->__('\', \''),
                     array_map(
                         fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $failedDataFields
+                        $failedFields
                     )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),

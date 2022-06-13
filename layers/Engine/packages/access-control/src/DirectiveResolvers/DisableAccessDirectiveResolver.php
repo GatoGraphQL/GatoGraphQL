@@ -23,9 +23,9 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
     }
 
     /**
-     * @param FieldInterface[] $failedDataFields
+     * @param FieldInterface[] $failedFields
      */
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             FeedbackItemProvider::class,
@@ -35,7 +35,7 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
                     $this->__('\', \''),
                     array_map(
                         fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                        $failedDataFields
+                        $failedFields
                     )
                 ),
             ]
