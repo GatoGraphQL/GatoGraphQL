@@ -6,18 +6,18 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-class ConditionalRelationalComponentField extends AbstractComponentField
+class ConditionalRelationalComponentFieldNode extends AbstractComponentFieldNode
 {
     /**
      * The condition must be satisfied on the implicit field.
      * When the value of the field is `true`, load the conditional
      * domain switching fields.
      *
-     * @param RelationalComponentField[] $relationalComponentFields
+     * @param RelationalComponentFieldNode[] $relationalComponentFieldNodes
      */
     public function __construct(
         FieldInterface $field,
-        protected array $relationalComponentFields,
+        protected array $relationalComponentFieldNodes,
     ) {
         parent::__construct(
             $field,
@@ -25,10 +25,10 @@ class ConditionalRelationalComponentField extends AbstractComponentField
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(): array
+    public function getRelationalComponentFieldNodes(): array
     {
-        return $this->relationalComponentFields;
+        return $this->relationalComponentFieldNodes;
     }
 }

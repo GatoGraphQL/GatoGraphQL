@@ -6,10 +6,10 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -90,21 +90,21 @@ interface ComponentProcessorInterface
     public function getComponentMutationResolverBridge(Component $component): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(Component $component, array &$props, array &$data_properties): void;
     /**
-     * @return LeafComponentField[]
+     * @return LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(Component $component, array &$props): array;
+    public function getLeafComponentFieldNodes(Component $component, array &$props): array;
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(Component $component): array;
+    public function getRelationalComponentFieldNodes(Component $component): array;
     /**
-     * @return ConditionalLeafComponentField[]
+     * @return ConditionalLeafComponentFieldNode[]
      */
-    public function getConditionalLeafComponentFields(Component $component): array;
+    public function getConditionalLeafComponentFieldNodes(Component $component): array;
     /**
-     * @return ConditionalRelationalComponentField[]
+     * @return ConditionalRelationalComponentFieldNode[]
      */
-    public function getConditionalRelationalComponentFields(Component $component): array;
+    public function getConditionalRelationalComponentFieldNodes(Component $component): array;
     public function getImmutableDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
     public function getDatasetcomponentTreeSectionFlattenedDataFields(Component $component, array &$props): array;

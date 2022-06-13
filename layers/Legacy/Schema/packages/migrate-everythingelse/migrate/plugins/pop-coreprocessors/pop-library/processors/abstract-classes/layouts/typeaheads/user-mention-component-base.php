@@ -9,11 +9,11 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
     }
     
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         // Can't use "user-nicename", because @Mentions plugin does not store the "-" in the html attribute, so it would
         // save the entry as data-usernicename. To avoid conflicts, just remove the "-"

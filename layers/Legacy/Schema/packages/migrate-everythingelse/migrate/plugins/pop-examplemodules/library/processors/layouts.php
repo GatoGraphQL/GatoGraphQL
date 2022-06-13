@@ -2,7 +2,7 @@
 namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -26,13 +26,13 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
 
         switch ($component->name) {
             case self::COMPONENT_EXAMPLE_COMMENT:
@@ -58,15 +58,15 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
-        $ret = parent::getRelationalComponentFields($component);
+        $ret = parent::getRelationalComponentFieldNodes($component);
 
         switch ($component->name) {
             case self::COMPONENT_EXAMPLE_COMMENT:
-                $ret[] = new RelationalComponentField(
+                $ret[] = new RelationalComponentFieldNode(
                     new LeafField(
                         'author',
                         null,

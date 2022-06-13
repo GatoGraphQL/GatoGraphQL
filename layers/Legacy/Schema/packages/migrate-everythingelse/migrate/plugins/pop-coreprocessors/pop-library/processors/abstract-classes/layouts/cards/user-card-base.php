@@ -32,13 +32,13 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
     }
     
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
 
         // Important: the TYPEAHEAD_COMPONENT should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
         // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetcomponentTreeSectionFlattenedDataFields

@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 use PoP\ComponentModel\Component\Component;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-class ConditionalLeafComponentField extends AbstractComponentField
+class ConditionalLeafComponentFieldNode extends AbstractComponentFieldNode
 {
     /**
      * The condition must be satisfied on the implicit field.

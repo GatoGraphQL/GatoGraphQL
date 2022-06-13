@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
@@ -42,13 +42,13 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($location_component = $this->getLocationComponent($component)) {
             return [
-                new RelationalComponentField(
+                new RelationalComponentFieldNode(
                     new LeafField(
                         'locations',
                         null,
@@ -62,6 +62,6 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
                 ),
             ];
         }
-        return parent::getRelationalComponentFields($component);
+        return parent::getRelationalComponentFieldNodes($component);
     }
 }

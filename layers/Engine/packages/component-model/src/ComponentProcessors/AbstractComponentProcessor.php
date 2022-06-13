@@ -13,11 +13,11 @@ use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Props;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
@@ -274,27 +274,27 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             foreach ($this->getSubcomponents($component) as $subcomponent) {
                 $this->setProp($subcomponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
-            foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
-                $subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField());
+            foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
+                $subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                 if (!$subcomponent_typeResolver) {
                     continue;
                 }
-                foreach ($relationalComponentField->getNestedComponents() as $subcomponent_component) {
+                foreach ($relationalComponentFieldNode->getNestedComponents() as $subcomponent_component) {
                     $this->setProp($subcomponent_component, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
                 }
             }
-            foreach ($this->getConditionalLeafComponentFields($component) as $conditionalLeafComponentField) {
-                foreach ($conditionalLeafComponentField->getConditionalNestedComponents() as $conditionalSubcomponent) {
+            foreach ($this->getConditionalLeafComponentFieldNodes($component) as $conditionalLeafComponentFieldNode) {
+                foreach ($conditionalLeafComponentFieldNode->getConditionalNestedComponents() as $conditionalSubcomponent) {
                     $this->setProp($conditionalSubcomponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
                 }
             }
-            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
-                foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
-                    $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField());
+            foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
+                foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
+                    $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                     if (!$subcomponentTypeResolver) {
                         continue;
                     }
-                    foreach ($relationalComponentField->getNestedComponents() as $conditionalSubcomponent) {
+                    foreach ($relationalComponentFieldNode->getNestedComponents() as $conditionalSubcomponent) {
                         $this->setProp($conditionalSubcomponent, $props, 'succeeding-typeResolver', $subcomponentTypeResolver);
                     }
                 }
@@ -636,31 +636,31 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // This prop is set for both dataloading and non-dataloading components
         if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
-            foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
+            foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField());
+                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                 if ($typeResolver === null) {
                     continue;
                 }
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field = $relationalComponentField->getField()->asFieldOutputQueryString();
-                $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
+                $subcomponent_data_field = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
+                $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
                 $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
             }
-            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
-                foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
-                    $conditionalDataField = $relationalComponentField->getField()->asFieldOutputQueryString();
+            foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
+                foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
+                    $conditionalDataField = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentField->getField());
+                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $relationalComponentFieldNode->getField());
                     if ($typeResolver === null) {
                         continue;
                     }
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
+                    $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
                     $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $conditionalDataField);
                 }
             }
@@ -710,13 +710,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         if ($this->getProp($component, $props, 'succeeding-typeResolver') !== null) {
             $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-            foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
+            foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
+                $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
                 // Only components which do not load data
                 $subcomponent_components = array_filter(
-                    $relationalComponentField->getNestedComponents(),
+                    $relationalComponentFieldNode->getNestedComponents(),
                     function ($subcomponent) {
                         return !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
                     }
@@ -725,14 +725,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
-            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
-                foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
+            foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
+                foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $relationalComponentField->getField()->getOutputKey();
+                    $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
                     // Only components which do not load data
                     $subcomponent_components = array_filter(
-                        $relationalComponentField->getNestedComponents(),
+                        $relationalComponentFieldNode->getNestedComponents(),
                         fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
                     );
                     foreach ($subcomponent_components as $subcomponent_component) {
@@ -767,7 +767,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function getDatasource(Component $component, array &$props): string
     {
         // Each component can only return one piece of data, and it must be indicated if it static or mutableonrequest
-        // Retrieving only 1 piece is needed so that its children do not get confused what data their getLeafComponentFields applies to
+        // Retrieving only 1 piece is needed so that its children do not get confused what data their getLeafComponentFieldNodes applies to
         return DataSources::MUTABLEONREQUEST;
     }
 
@@ -802,33 +802,33 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
 
     /**
-     * @return LeafComponentField[]
+     * @return LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(Component $component, array &$props): array
     {
         return [];
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(Component $component): array
+    public function getRelationalComponentFieldNodes(Component $component): array
     {
         return [];
     }
 
     /**
-     * @return ConditionalLeafComponentField[]
+     * @return ConditionalLeafComponentFieldNode[]
      */
-    public function getConditionalLeafComponentFields(Component $component): array
+    public function getConditionalLeafComponentFieldNodes(Component $component): array
     {
         return [];
     }
 
     /**
-     * @return ConditionalRelationalComponentField[]
+     * @return ConditionalRelationalComponentFieldNode[]
      */
-    public function getConditionalRelationalComponentFields(Component $component): array
+    public function getConditionalRelationalComponentFieldNodes(Component $component): array
     {
         return [];
     }
@@ -873,19 +873,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
          * Calculate the data-fields from merging them with the
          * subcomponent components' keys, which are data-fields too.
          *
-         * Doing `array_unique` works because the ComponentFields
+         * Doing `array_unique` works because the ComponentFieldNodes
          * implement __toString() as the fieldOutputQueryString,
          * so if two fields are the same, we need to process
          * one AST element only.
          */
         if (
-            /** @var ComponentFieldInterface[] */
+            /** @var ComponentFieldNodeInterface[] */
             $componentFields = array_unique(
                 array_merge(
-                    $this->getLeafComponentFields($component, $props),
-                    $this->getRelationalComponentFields($component),
-                    $this->getConditionalLeafComponentFields($component),
-                    $this->getConditionalRelationalComponentFields($component),
+                    $this->getLeafComponentFieldNodes($component, $props),
+                    $this->getRelationalComponentFieldNodes($component),
+                    $this->getConditionalLeafComponentFieldNodes($component),
+                    $this->getConditionalRelationalComponentFieldNodes($component),
                 )
             )
         ) {
@@ -1219,29 +1219,29 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if ($subcomponents = $this->getComponentsToPropagateDataProperties($component)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-subcomponents must have their data-fields added under entry "conditional-data-fields"
-            $conditionalLeafComponentFields = $this->getConditionalLeafComponentFields($component);
-            $conditionalRelationalComponentFields = $this->getConditionalRelationalComponentFields($component);
-            if ($conditionalLeafComponentFields !== [] || $conditionalRelationalComponentFields !== []) {
+            $conditionalLeafComponentFieldNodes = $this->getConditionalLeafComponentFieldNodes($component);
+            $conditionalRelationalComponentFieldNodes = $this->getConditionalRelationalComponentFieldNodes($component);
+            if ($conditionalLeafComponentFieldNodes !== [] || $conditionalRelationalComponentFieldNodes !== []) {
                 $directSubcomponents = $this->getSubcomponents($component);
-                $conditionalComponentFields = new SplObjectStorage();
+                $conditionalComponentFieldNodes = new SplObjectStorage();
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
-                foreach ($conditionalLeafComponentFields as $conditionalLeafComponentField) {
-                    $conditionalComponentFields[$conditionalLeafComponentField] = $conditionalLeafComponentField->getConditionalNestedComponents();
+                foreach ($conditionalLeafComponentFieldNodes as $conditionalLeafComponentFieldNode) {
+                    $conditionalComponentFieldNodes[$conditionalLeafComponentFieldNode] = $conditionalLeafComponentFieldNode->getConditionalNestedComponents();
                 }
-                foreach ($conditionalRelationalComponentFields as $conditionalRelationalComponentField) {
-                    $subconditionalComponentFields = [];
-                    foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $subConditionalRelationalComponentField) {
-                        $conditionalSubcomponents = $subConditionalRelationalComponentField->getNestedComponents();
-                        $subconditionalComponentFields = array_merge(
-                            $subconditionalComponentFields,
+                foreach ($conditionalRelationalComponentFieldNodes as $conditionalRelationalComponentFieldNode) {
+                    $subconditionalComponentFieldNodes = [];
+                    foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $subConditionalRelationalComponentFieldNode) {
+                        $conditionalSubcomponents = $subConditionalRelationalComponentFieldNode->getNestedComponents();
+                        $subconditionalComponentFieldNodes = array_merge(
+                            $subconditionalComponentFieldNodes,
                             $conditionalSubcomponents
                         );
                     }
-                    $conditionalComponentFields[$conditionalRelationalComponentField] = $subconditionalComponentFields;
+                    $conditionalComponentFieldNodes[$conditionalRelationalComponentFieldNode] = $subconditionalComponentFieldNodes;
                 }
-                foreach ($conditionalComponentFields as $conditionComponentField) {
-                    /** @var ComponentFieldInterface $conditionComponentField */
-                    $conditionalSubcomponents = $conditionalComponentFields[$conditionComponentField];
+                foreach ($conditionalComponentFieldNodes as $conditionComponentFieldNode) {
+                    /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                    $conditionalSubcomponents = $conditionalComponentFieldNodes[$conditionComponentFieldNode];
                     /** @var Component[] $conditionalSubcomponents */
                     // Calculate those fields which are certainly to be propagated, and not part of the direct subcomponents
                     // Using this really ugly way because, for comparing components, using `array_diff` and `intersect` fail
@@ -1267,27 +1267,27 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                         // Move from "data-fields" to "conditional-data-fields"
                         $ret['conditional-data-fields'] ??= new SplObjectStorage();
-                        /** @var SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> */
+                        /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                         $conditionalDataFields = $ret['conditional-data-fields'];
-                        /** @var ComponentFieldInterface[]|null */
+                        /** @var ComponentFieldNodeInterface[]|null */
                         $subcomponent_data_fields = $subcomponent_ret['data-fields'] ?? null;
                         if ($subcomponent_data_fields !== null) {
-                            $conditionalDataFields[$conditionComponentField] = array_merge(
-                                $conditionalDataFields[$conditionComponentField] ?? [],
+                            $conditionalDataFields[$conditionComponentFieldNode] = array_merge(
+                                $conditionalDataFields[$conditionComponentFieldNode] ?? [],
                                 $subcomponent_data_fields
                             );
                             unset($subcomponent_ret['data-fields']);
                         }
 
                         // Chain the conditional-data-fields at the end of the one from this component
-                        /** @var SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]>|null */
+                        /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]>|null */
                         $subcomponentConditionalFieldSplObjectStorage = $subcomponent_ret['conditional-data-fields'] ?? null;
                         if ($subcomponentConditionalFieldSplObjectStorage !== null) {
-                            foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentComponentField) {
-                                /** @var ComponentFieldInterface[] */
-                                $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentField];
-                                $conditionalDataFields[$subcomponentComponentField] = array_merge(
-                                    $conditionalDataFields[$subcomponentComponentField] ?? [],
+                            foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentComponentFieldNode) {
+                                /** @var ComponentFieldNodeInterface[] */
+                                $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentFieldNode];
+                                $conditionalDataFields[$subcomponentComponentFieldNode] = array_merge(
+                                    $conditionalDataFields[$subcomponentComponentFieldNode] ?? [],
                                     $subcomponent_conditional_data_fields
                                 );
                             }
@@ -1355,26 +1355,26 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // Combine the direct and conditionalOnDataField components all together to iterate below
         $relationalSubcomponents = new SplObjectStorage();
-        foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
-            $relationalSubcomponents[$relationalComponentField] = array_merge(
-                $relationalSubcomponents[$relationalComponentField] ?? [],
-                $relationalComponentField->getNestedComponents()
+        foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
+            $relationalSubcomponents[$relationalComponentFieldNode] = array_merge(
+                $relationalSubcomponents[$relationalComponentFieldNode] ?? [],
+                $relationalComponentFieldNode->getNestedComponents()
             );
         }
-        foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
-            foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
-                $relationalSubcomponents[$relationalComponentField] = array_merge(
-                    $relationalSubcomponents[$relationalComponentField] ?? [],
-                    $relationalComponentField->getNestedComponents()
+        foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
+            foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
+                $relationalSubcomponents[$relationalComponentFieldNode] = array_merge(
+                    $relationalSubcomponents[$relationalComponentFieldNode] ?? [],
+                    $relationalComponentFieldNode->getNestedComponents()
                 );
             }
         }
 
         // If it has subcomponent components, integrate them under 'subcomponents'
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($relationalSubcomponents as $subcomponentComponentField) {
-            /** @var ComponentFieldInterface $subcomponentComponentField */
-            $subcomponent_components = $relationalSubcomponents[$subcomponentComponentField];
+        foreach ($relationalSubcomponents as $subcomponentComponentFieldNode) {
+            /** @var ComponentFieldNodeInterface $subcomponentComponentFieldNode */
+            $subcomponent_components = $relationalSubcomponents[$subcomponentComponentFieldNode];
             /** @var Component[] $subcomponent_components */
             $subcomponent_components_data_properties = [
                 'data-fields' => [],
@@ -1397,12 +1397,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 /** @var SplObjectStorage|null */
                 $subcomponentConditionalDataFields = $subcomponent_component_data_properties['conditional-data-fields'] ?? null;
                 if ($subcomponentConditionalDataFields !== null) {
-                    foreach ($subcomponentConditionalDataFields as $conditionComponentField) {
-                        /** @var ComponentFieldInterface $conditionComponentField */
-                        $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentField];
-                        /** @var ComponentFieldInterface[] $conditionalDataFields */
-                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField] = array_merge(
-                            $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentField] ?? [],
+                    foreach ($subcomponentConditionalDataFields as $conditionComponentFieldNode) {
+                        /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                        $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
+                        /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
+                        $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentFieldNode] = array_merge(
+                            $subcomponent_components_data_properties['conditional-data-fields'][$conditionComponentFieldNode] ?? [],
                             $conditionalDataFields
                         );
                     }
@@ -1415,8 +1415,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             $ret['subcomponents'] ??= new SplObjectStorage();
-            $ret['subcomponents'][$subcomponentComponentField] ??= [];
-            $subcomponentsSubcomponentField = $ret['subcomponents'][$subcomponentComponentField];
+            $ret['subcomponents'][$subcomponentComponentFieldNode] ??= [];
+            $subcomponentsSubcomponentField = $ret['subcomponents'][$subcomponentComponentFieldNode];
             if ($subcomponent_components_data_properties['data-fields']) {
                 $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
                 $subcomponentsSubcomponentField['data-fields'] = array_values(array_unique(array_merge(
@@ -1428,12 +1428,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $subcomponentConditionalDataFields = $subcomponent_components_data_properties['conditional-data-fields'];
             if ($subcomponentConditionalDataFields->count() > 0) {
                 $subcomponentsSubcomponentField['conditional-data-fields'] ??= new SplObjectStorage();
-                foreach ($subcomponentConditionalDataFields as $conditionComponentField) {
-                    /** @var ComponentFieldInterface $conditionComponentField */
-                    $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentField];
-                    /** @var ComponentFieldInterface[] $conditionalDataFields */
-                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentField] = array_merge(
-                        $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentField] ?? [],
+                foreach ($subcomponentConditionalDataFields as $conditionComponentFieldNode) {
+                    /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                    $conditionalDataFields = $subcomponentConditionalDataFields[$conditionComponentFieldNode];
+                    /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
+                    $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentFieldNode] = array_merge(
+                        $subcomponentsSubcomponentField['conditional-data-fields'][$conditionComponentFieldNode] ?? [],
                         $conditionalDataFields
                     );
                 }
@@ -1444,7 +1444,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $subcomponentsSubcomponentField['subcomponents'] ??= new SplObjectStorage();
                 $subcomponentsSubcomponentField['subcomponents']->addAll($splObjectStorage);
             }
-            $ret['subcomponents'][$subcomponentComponentField] = $subcomponentsSubcomponentField;
+            $ret['subcomponents'][$subcomponentComponentFieldNode] = $subcomponentsSubcomponentField;
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -1503,10 +1503,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         if (in_array(self::COMPONENTELEMENT_RELATIONALSUBCOMPONENTS, $elements)) {
-            foreach ($this->getRelationalComponentFields($component) as $relationalComponentField) {
+            foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
                 $ret = array_values(array_unique(
                     array_merge(
-                        $relationalComponentField->getNestedComponents(),
+                        $relationalComponentFieldNode->getNestedComponents(),
                         $ret
                     ),
                     SORT_REGULAR
@@ -1516,11 +1516,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         if (in_array(self::COMPONENTELEMENT_CONDITIONALONDATAFIELDSUBCOMPONENTS, $elements)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
-            foreach ($this->getConditionalLeafComponentFields($component) as $conditionalLeafComponentField) {
+            foreach ($this->getConditionalLeafComponentFieldNodes($component) as $conditionalLeafComponentFieldNode) {
                 $ret = array_unique(
                     array_merge(
                         $ret,
-                        $conditionalLeafComponentField->getConditionalNestedComponents()
+                        $conditionalLeafComponentFieldNode->getConditionalNestedComponents()
                     ),
                     SORT_REGULAR
                 );
@@ -1528,12 +1528,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         if (in_array(self::COMPONENTELEMENT_CONDITIONALONDATAFIELDRELATIONALSUBCOMPONENTS, $elements)) {
-            foreach ($this->getConditionalRelationalComponentFields($component) as $conditionalRelationalComponentField) {
-                foreach ($conditionalRelationalComponentField->getRelationalComponentFields() as $relationalComponentField) {
+            foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
+                foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
                     $ret = array_values(
                         array_unique(
                             array_merge(
-                                $relationalComponentField->getNestedComponents(),
+                                $relationalComponentFieldNode->getNestedComponents(),
                                 $ret
                             ),
                             SORT_REGULAR

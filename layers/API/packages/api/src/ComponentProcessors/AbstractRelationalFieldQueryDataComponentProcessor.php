@@ -6,9 +6,9 @@ namespace PoPAPI\API\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
@@ -157,9 +157,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
 
     /**
-     * @return LeafComponentField[]
+     * @return LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(Component $component, array &$props): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -185,7 +185,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         );
 
         return array_map(
-            LeafComponentField::fromLeafField(...),
+            LeafComponentFieldNode::fromLeafField(...),
             $leafFields
         );
     }
@@ -211,9 +211,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(Component $component): array
+    public function getRelationalComponentFieldNodes(Component $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -272,7 +272,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                     self::COMPONENT_ATTS_FIELD_IDS => $nestedFieldIDs,
                 ]
             );
-            $ret[] = RelationalComponentField::fromRelationalField(
+            $ret[] = RelationalComponentFieldNode::fromRelationalField(
                 $relationalField,
                 [
                     $nestedComponent,
@@ -298,7 +298,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * Watch out! This function loads both leaf fields (eg: "date") and
      * relational fields (eg: "author").
      *
-     * Using `getConditionalRelationalComponentFields` to
+     * Using `getConditionalRelationalComponentFieldNodes` to
      * load relational fields does not work, because the component to
      * process entry "author" is added twice
      * (once "ignoreConditionalFields" => true, once => false) and both
@@ -310,11 +310,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * author(ignoreConditionalFields=>false), so there's no domain
      * switching required.
      *
-     * @return ConditionalLeafComponentField[]
+     * @return ConditionalLeafComponentFieldNode[]
      *
      * @todo Remove all commented code below this function
      */
-    public function getConditionalLeafComponentFields(Component $component): array
+    public function getConditionalLeafComponentFieldNodes(Component $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -354,7 +354,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
          * and with a single conditional field (to be used for retrieving
          * the data for all nested modules)
          */
-        $conditionalLeafComponentFields = [];
+        $conditionalLeafComponentFieldNodes = [];
         foreach ($fragmentModelListNameFields as $fragmentModelListName => $fragmentModelListFields) {
             $fragmentModels = $fragmentModelListNameItems[$fragmentModelListName];
             $fragmentModelListFieldIDs = array_map(
@@ -438,19 +438,19 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
              * must be applied or not. If applied, only then
              * the field within the fragment will be resolved
              */
-            $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
+            $conditionalLeafComponentFieldNodes[] = new ConditionalLeafComponentFieldNode(
                 $leafField,
                 [
                     $fragmentModelListNestedComponent,
                 ],
             );
         }
-        return $conditionalLeafComponentFields;
+        return $conditionalLeafComponentFieldNodes;
     }
     // /**
-    //  * @return ConditionalLeafComponentField[]
+    //  * @return ConditionalLeafComponentFieldNode[]
     //  */
-    // public function getConditionalLeafComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    // public function getConditionalLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     // {
     //     if (!$this->ignoreConditionalFields($component->atts)) {
     //         return [];
@@ -466,7 +466,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
     //     );
 
-    //     $conditionalLeafComponentFields = [];
+    //     $conditionalLeafComponentFieldNodes = [];
     //     foreach ($leafFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
     //         $field = $fieldFragmentModelsTuple->getField();
     //         $location = $field->getLocation();
@@ -483,7 +483,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //          * must be applied or not. If applied, only then
     //          * the field within the fragment will be resolved
     //          */
-    //         $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
+    //         $conditionalLeafComponentFieldNodes[] = new ConditionalLeafComponentFieldNode(
     //             'isTypeOrImplementsAll',
     //             [
     //                 $nestedComponent
@@ -506,12 +506,12 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //             ]
     //         );
     //     }
-    //     return $conditionalLeafComponentFields;
+    //     return $conditionalLeafComponentFieldNodes;
     // }
     // /**
-    //  * @return ConditionalRelationalComponentField[]
+    //  * @return ConditionalRelationalComponentFieldNode[]
     //  */
-    // public function getConditionalRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    // public function getConditionalRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     // {
     //     if (!$this->ignoreConditionalFields($component->atts)) {
     //         return [];
@@ -527,7 +527,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
     //     );
 
-    //     $conditionalRelationalComponentFields = [];
+    //     $conditionalRelationalComponentFieldNodes = [];
     //     foreach ($relationalFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
     //         /** @var RelationalField */
     //         $relationalField = $fieldFragmentModelsTuple->getField();
@@ -540,7 +540,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //                 self::COMPONENT_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
     //             ]
     //         );
-    //         $nestedRelationalComponentField = RelationalComponentField::fromRelationalField(
+    //         $nestedRelationalComponentFieldNode = RelationalComponentFieldNode::fromRelationalField(
     //             $relationalField,
     //             [
     //                 $nestedComponent
@@ -551,10 +551,10 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //          * must be applied or not. If applied, only then
     //          * the field within the fragment will be resolved
     //          */
-    //         $conditionalRelationalComponentFields[] = new ConditionalRelationalComponentField(
+    //         $conditionalRelationalComponentFieldNodes[] = new ConditionalRelationalComponentFieldNode(
     //             'isTypeOrImplementsAll',
     //             [
-    //                 $nestedRelationalComponentField
+    //                 $nestedRelationalComponentFieldNode
     //             ],
     //             // Create a unique alias to avoid conflicts
     //             sprintf(
@@ -574,7 +574,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //             ]
     //         );
     //     }
-    //     return $conditionalRelationalComponentFields;
+    //     return $conditionalRelationalComponentFieldNodes;
     // }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -41,13 +41,13 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($authors_component = $this->getAuthorsComponent($component)) {
             return [
-                new RelationalComponentField(
+                new RelationalComponentFieldNode(
                     new LeafField(
                         'author',
                         null,
@@ -62,7 +62,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
             ];
         }
 
-        return parent::getRelationalComponentFields($component);
+        return parent::getRelationalComponentFieldNodes($component);
     }
 
     public function getThumbField(\PoP\ComponentModel\Component\Component $component, array &$props)
@@ -90,11 +90,11 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $thumb = $this->getThumbField($component, $props);
         return array('id', 'title', $thumb, 'url');

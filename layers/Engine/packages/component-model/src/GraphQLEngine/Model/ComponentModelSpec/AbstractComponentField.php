@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-abstract class AbstractComponentField implements ComponentFieldInterface
+abstract class AbstractComponentFieldNode implements ComponentFieldNodeInterface
 {
     public function __construct(
         protected FieldInterface $field,

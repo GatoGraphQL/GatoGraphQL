@@ -2,7 +2,7 @@
 namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -117,18 +117,18 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(\PoP\ComponentModel\Component\Component $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
-        $ret = parent::getRelationalComponentFields($component);
+        $ret = parent::getRelationalComponentFieldNodes($component);
 
         switch ($component->name) {
             case self::COMPONENT_EXAMPLE_SINGLE:
             case self::COMPONENT_EXAMPLE_LATESTPOSTS:
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
             case self::COMPONENT_EXAMPLE_TAGLATESTPOSTS:
-                $ret[] = new RelationalComponentField(
+                $ret[] = new RelationalComponentFieldNode(
                     new LeafField(
                         'author',
                         null,
@@ -140,7 +140,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
                         [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
                     ]
                 );
-                $ret[] = new RelationalComponentField(
+                $ret[] = new RelationalComponentFieldNode(
                     new LeafField(
                         'comments',
                         null,
@@ -159,11 +159,11 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(\PoP\ComponentModel\Component\Component $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $data_fields = array(
             self::COMPONENT_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
@@ -174,7 +174,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
             self::COMPONENT_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
         );
         return array_merge(
-            parent::getLeafComponentFields($component, $props),
+            parent::getLeafComponentFieldNodes($component, $props),
             $data_fields[$component->name] ?? array()
         );
     }

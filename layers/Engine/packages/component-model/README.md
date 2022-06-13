@@ -1372,12 +1372,12 @@ Starting from a dataloading component, and including itself, any descendant comp
 
 ##### Defining the Data-Fields
 
-"Data fields", which are the properties to be required from the loaded database object, are defined through function `getLeafComponentFields`:
+"Data fields", which are the properties to be required from the loaded database object, are defined through function `getLeafComponentFieldNodes`:
 
 ```php
-function getLeafComponentFields($component, $props) 
+function getLeafComponentFieldNodes($component, $props) 
 {
-  $ret = parent::getLeafComponentFields($component, $props);
+  $ret = parent::getLeafComponentFieldNodes($component, $props);
 
   switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
@@ -1400,12 +1400,12 @@ Consider the image below: Starting from the object type "post", and moving down 
 
 ![Changing the DB object from one domain to another](https://uploads.getpop.org/wp-content/uploads/2018/12/loading-data-at-intervals-relational.jpg)
 
-Switching domins is accomplished through function `getRelationalComponentFields`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the components to use:
+Switching domins is accomplished through function `getRelationalComponentFieldNodes`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the components to use:
 
 ```php
-function getRelationalComponentFields($component) 
+function getRelationalComponentFieldNodes($component) 
 {
-  $ret = parent::getRelationalComponentFields($component);
+  $ret = parent::getRelationalComponentFieldNodes($component);
 
   switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
@@ -1432,9 +1432,9 @@ function getRelationalComponentFields($component)
 Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [ObjectTypeFieldResolver](#ObjectTypeFieldResolver). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
 
 ```php
-function getRelationalComponentFields($component) 
+function getRelationalComponentFieldNodes($component) 
 {
-  $ret = parent::getRelationalComponentFields($component);
+  $ret = parent::getRelationalComponentFieldNodes($component);
 
   switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
@@ -1645,7 +1645,7 @@ class ObjectTypeFieldResolver_Posts extends \PoP\Engine\AbstractObjectTypeFieldR
 }
 ```
 
-The ObjectTypeFieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getRelationalComponentFields` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
+The ObjectTypeFieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getRelationalComponentFieldNodes` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
 
 ```php
 function getFieldDefaultDataloader($field) 

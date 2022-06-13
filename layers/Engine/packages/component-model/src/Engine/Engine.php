@@ -37,7 +37,7 @@ use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -768,8 +768,8 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string|int> $ids
-     * @param ComponentFieldInterface[] $data_fields
-     * @param SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> $conditional_data_fields
+     * @param ComponentFieldNodeInterface[] $data_fields
+     * @param SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> $conditional_data_fields
      */
     private function combineIDsDatafields(
         array &$relationalTypeOutputDBKeyIDsDataFields,
@@ -788,7 +788,7 @@ class Engine implements EngineInterface
             $engineIterationFieldSet = $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]
                 ?? new EngineIterationFieldSet(
                     array_map(
-                        fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                        fn (ComponentFieldNodeInterface $componentField) => $componentField->getField(),
                         $this->getDBObjectMandatoryFields()
                     )
                 );
@@ -796,7 +796,7 @@ class Engine implements EngineInterface
             // Add the 'direct' fields
             $engineIterationFieldSet->addDirectFields(
                 array_map(
-                    fn (ComponentFieldInterface $componentField) => $componentField->getField(),
+                    fn (ComponentFieldNodeInterface $componentField) => $componentField->getField(),
                     $data_fields
                 )
             );
@@ -808,21 +808,21 @@ class Engine implements EngineInterface
              *   Value: the list of conditional fields to load
              *          if the condition one is successful (eg: if it's `true`)
              */
-            foreach ($conditional_data_fields as $conditionComponentField) {
-                /** @var ComponentFieldInterface $conditionComponentField */
-                $conditionalDataFields = $conditional_data_fields[$conditionComponentField];
-                /** @var ComponentFieldInterface[] $conditionalDataFields */
-                $conditionField = $conditionComponentField->getField();
-                $conditionalComponentFields = [];
+            foreach ($conditional_data_fields as $conditionComponentFieldNode) {
+                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                $conditionalDataFields = $conditional_data_fields[$conditionComponentFieldNode];
+                /** @var ComponentFieldNodeInterface[] $conditionalDataFields */
+                $conditionField = $conditionComponentFieldNode->getField();
+                $conditionalComponentFieldNodes = [];
                 foreach ($conditionalDataFields as $conditionalDataField) {
-                    /** @var ComponentFieldInterface $conditionalDataField */
-                    $conditionalComponentFields[] = $conditionalDataField;
+                    /** @var ComponentFieldNodeInterface $conditionalDataField */
+                    $conditionalComponentFieldNodes[] = $conditionalDataField;
                 }
                 $engineIterationFieldSet->conditional[$conditionField] = array_merge(
                     $engineIterationFieldSet->conditional[$conditionField] ??= [],
                     array_map(
-                        fn (ComponentFieldInterface $componentField) => $componentField->getField(),
-                        $conditionalComponentFields
+                        fn (ComponentFieldNodeInterface $componentField) => $componentField->getField(),
+                        $conditionalComponentFieldNodes
                     )
                 );
             }
@@ -834,7 +834,7 @@ class Engine implements EngineInterface
      * If any field must be retrieved always (eg: the object ID
      * must always be displayed in the client) then add it here.
      *
-     * @return ComponentFieldInterface[]
+     * @return ComponentFieldNodeInterface[]
      */
     protected function getDBObjectMandatoryFields(): array
     {
@@ -2299,7 +2299,7 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
         foreach ($subcomponents_data_properties as $componentField) {
-            /** @var ComponentFieldInterface $componentField */
+            /** @var ComponentFieldNodeInterface $componentField */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentField];
             /** @var array<string,mixed> $subcomponent_data_properties */
             // Retrieve the subcomponent typeResolver from the current typeResolver
@@ -2394,25 +2394,25 @@ class Engine implements EngineInterface
                             $id_subcomponent_data_fields = array_values(
                                 array_filter(
                                     $subcomponent_data_fields,
-                                    fn (ComponentFieldInterface $componentField) => !in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)
+                                    fn (ComponentFieldNodeInterface $componentField) => !in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
                             $id_subcomponent_conditional_data_fields = new SplObjectStorage();
-                            foreach ($subcomponent_conditional_data_fields as $conditionComponentField) {
+                            foreach ($subcomponent_conditional_data_fields as $conditionComponentFieldNode) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
-                                /** @var ComponentFieldInterface $conditionComponentField */
-                                $conditionComponentFields = $subcomponent_conditional_data_fields[$conditionComponentField];
-                                /** @var ComponentFieldInterface[] $conditionComponentFields */
-                                $id_subcomponent_conditional_data_fields[$conditionComponentField] ??= [];
-                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentField];
-                                foreach ($conditionComponentFields as $componentField) {
-                                    /** @var ComponentFieldInterface $componentField */
+                                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                                $conditionComponentFieldNodes = $subcomponent_conditional_data_fields[$conditionComponentFieldNode];
+                                /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
+                                $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] ??= [];
+                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode];
+                                foreach ($conditionComponentFieldNodes as $componentField) {
+                                    /** @var ComponentFieldNodeInterface $componentField */
                                     if (in_array($componentField->getField(), $subcomponent_already_loaded_data_fields)) {
                                         continue;
                                     }
                                     $id_subcomponent_conditional_data_fields_storage[] = $componentField;
                                 }
-                                $id_subcomponent_conditional_data_fields[$conditionComponentField] = $id_subcomponent_conditional_data_fields_storage;
+                                $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
                             }
                         } else {
                             $id_subcomponent_data_fields = $subcomponent_data_fields;
@@ -2582,7 +2582,7 @@ class Engine implements EngineInterface
              * So then iterate the 3 entries, and merge them individually
              */
             foreach ($subcomponents_data_properties as $componentField) {
-                /** @var ComponentFieldInterface $componentField */
+                /** @var ComponentFieldNodeInterface $componentField */
                 $componentFieldData = $subcomponents_data_properties[$componentField];
                 $dbDataSubcomponentsSplObjectStorage[$componentField] ??= [];
                 $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentField];
@@ -2594,15 +2594,15 @@ class Engine implements EngineInterface
                 }
                 if (isset($componentFieldData['conditional-data-fields'])) {
                     $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'] ??= new SplObjectStorage();
-                    /** @var SplObjectStorage<ComponentFieldInterface,ComponentFieldInterface[]> */
+                    /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                     $componentFieldDataConditionalDataFieldsSplObjectStorage = $componentFieldData['conditional-data-fields'];
                     foreach ($componentFieldDataConditionalDataFieldsSplObjectStorage as $conditionDataField) {
-                        /** @var ComponentFieldInterface $conditionDataField */
-                        $conditionalComponentFields = $componentFieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
-                        /** @var ComponentFieldInterface[] $conditionalComponentFields */
+                        /** @var ComponentFieldNodeInterface $conditionDataField */
+                        $conditionalComponentFieldNodes = $componentFieldDataConditionalDataFieldsSplObjectStorage[$conditionDataField];
+                        /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldNodes */
                         $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] = array_merge(
                             $dbDataSubcomponentsFieldSplObjectStorage['conditional-data-fields'][$conditionDataField] ?? [],
-                            $conditionalComponentFields
+                            $conditionalComponentFieldNodes
                         );
                     }
                 }

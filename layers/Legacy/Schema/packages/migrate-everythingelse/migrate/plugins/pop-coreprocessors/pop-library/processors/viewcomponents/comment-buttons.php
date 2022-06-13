@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
@@ -28,14 +28,14 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
     public function getTargetDynamicallyRenderedSubcomponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return [
-                    new RelationalComponentField(
+                    new RelationalComponentFieldNode(
                         new LeafField(
                             'customPost',
                             null,
