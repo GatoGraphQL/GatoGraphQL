@@ -33,7 +33,7 @@ trait AddAPIQueryToSourcesComponentProcessorTrait
             foreach ($key_dataitems as &$key_data) {
                 // If there are data fields, add them separated by "|"
                 // If not, and we're inside a subcomponent, there is no need to add the subcomponent's key alone, since the engine already includes this field as a data-field (so it was added in the previous iteration)
-                if ($key_datafields = $key_data['direct-component-fields']) {
+                if ($key_datafields = $key_data['direct-component-field-nodes']) {
                     // Make sure the fields are not repeated, and no empty values
                     $apiFields[] = $key . implode(
                         QuerySyntax::SYMBOL_FIELDPROPERTIES_SEPARATOR,

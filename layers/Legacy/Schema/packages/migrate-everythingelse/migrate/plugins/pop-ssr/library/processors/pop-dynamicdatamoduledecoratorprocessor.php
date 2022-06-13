@@ -153,8 +153,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             }
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
-            if ($ret['direct-component-fields'] ?? null) {
-                $ret['direct-component-fields'] = array_values(array_unique($ret['direct-component-fields']));
+            if ($ret['direct-component-field-nodes'] ?? null) {
+                $ret['direct-component-field-nodes'] = array_values(array_unique($ret['direct-component-field-nodes']));
             }
         }
         $modulefilter_manager->restoreFromPropagation($component, $props);
@@ -173,7 +173,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         foreach ($processor->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
             $subcomponent_data_field = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
             $subcomponent_components_data_properties = array(
-                'direct-component-fields' => array(),
+                'direct-component-field-nodes' => array(),
                 // @todo Migrate 'subcomponents' from array to SplObjectStorage
                 'subcomponents' => array(),
             );
@@ -189,14 +189,14 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             // @todo Must assign the SplObjectStorage to a variable, operate there, and then re-assign at the end
             // @see https://stackoverflow.com/questions/20053269/indirect-modification-of-overloaded-element-of-splfixedarray-has-no-effect
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_components_data_properties['direct-component-fields'] ?? null) {
-                $subcomponent_components_data_properties['direct-component-fields'] = array_unique($subcomponent_components_data_properties['direct-component-fields']);
+            if ($subcomponent_components_data_properties['direct-component-field-nodes'] ?? null) {
+                $subcomponent_components_data_properties['direct-component-field-nodes'] = array_unique($subcomponent_components_data_properties['direct-component-field-nodes']);
 
-                $ret['subcomponents'][$subcomponent_data_field]['direct-component-fields'] = $ret['subcomponents'][$subcomponent_data_field]['direct-component-fields'] ?? array();
-                $ret['subcomponents'][$subcomponent_data_field]['direct-component-fields'] = array_unique(
+                $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'] = $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'] ?? array();
+                $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'] = array_unique(
                     array_merge(
-                        $ret['subcomponents'][$subcomponent_data_field]['direct-component-fields'],
-                        $subcomponent_components_data_properties['direct-component-fields']
+                        $ret['subcomponents'][$subcomponent_data_field]['direct-component-field-nodes'],
+                        $subcomponent_components_data_properties['direct-component-field-nodes']
                     )
                 );
             }

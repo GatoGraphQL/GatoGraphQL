@@ -234,7 +234,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
             return array(
                 $this->getTriggerRelationalTypeResolver($component)->getTypeName() => array(
                     'ids' => $value,
-                    'direct-component-fields' => $trigger_data_properties['direct-component-fields'],
+                    'direct-component-field-nodes' => $trigger_data_properties['direct-component-field-nodes'],
                 ),
             );
         }
