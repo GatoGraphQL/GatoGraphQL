@@ -16,26 +16,25 @@ class PluginDataSource
     public function getPluginConfigEntries(): array
     {
         return [
-            // @todo Commented temporarily for faster testing; Uncomment!
-            // // GraphQL API for WordPress
-            // [
-            //     'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
-            //     'zip_file' => 'graphql-api',
-            //     'main_file' => 'graphql-api.php',
-            //     'exclude_files' => 'dev-helpers/\* docs/images/\*',
-            //     'dist_repo_organization' => 'GraphQLAPI',
-            //     'dist_repo_name' => 'graphql-api-for-wp-dist',
-            //     'additional_rector_configs' => [
-            //         $this->rootDir . '/config/rector/downgrade/graphql-api/chained-rules/rector-cacheitem.php',
-            //         $this->rootDir . '/config/rector/downgrade/graphql-api/chained-rules/rector-arrowfunction-mixedtype.php',
-            //         $this->rootDir . '/config/rector/downgrade/graphql-api/chained-rules/rector-arrowfunction-uniontype.php',
-            //     ],
-            //     'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/graphql-api/rector.php',
-            //     'scoping' => [
-            //         'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-graphql-api.inc.php',
-            //         'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-graphql-api.php',
-            //     ],
-            // ],
+            // GraphQL API for WordPress
+            [
+                'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
+                'zip_file' => 'graphql-api',
+                'main_file' => 'graphql-api.php',
+                'exclude_files' => 'dev-helpers/\* docs/images/\*',
+                'dist_repo_organization' => 'GraphQLAPI',
+                'dist_repo_name' => 'graphql-api-for-wp-dist',
+                'additional_rector_configs' => [
+                    $this->rootDir . '/config/rector/downgrade/graphql-api/chained-rules/rector-cacheitem.php',
+                    $this->rootDir . '/config/rector/downgrade/graphql-api/chained-rules/rector-arrowfunction-mixedtype.php',
+                    $this->rootDir . '/config/rector/downgrade/graphql-api/chained-rules/rector-arrowfunction-uniontype.php',
+                ],
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/graphql-api/rector.php',
+                'scoping' => [
+                    'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-graphql-api.inc.php',
+                    'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-graphql-api.php',
+                ],
+            ],
             // GraphQL API - Testing <= To run integration tests with InstaWP
             [
                 'path' => 'layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing',
