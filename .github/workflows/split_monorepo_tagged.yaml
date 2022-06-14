@@ -1,4 +1,4 @@
-name: Split Monorepo Tagged
+name: Split monorepo - tagged
 
 on:
     push:
