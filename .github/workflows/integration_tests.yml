@@ -4,7 +4,6 @@ on:
     workflows: [Generate plugins]
     types:
       - completed
-    branches: [*]
 env:
     CHECKOUT_SUBMODULES: ""
 
