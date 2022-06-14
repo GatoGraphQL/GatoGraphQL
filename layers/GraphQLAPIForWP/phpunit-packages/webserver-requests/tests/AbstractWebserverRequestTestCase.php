@@ -44,9 +44,6 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
             self::$skipTestsReason = 'Test skipped for Continuous Integration';
-            // Temporary `var_dump`
-            $testingDomain = static::getWebserverDomain();
-            self::$skipTestsReason = 'Testing domain: ' . $testingDomain . ' - valid: ' . static::isValidTestingDomain($testingDomain);
             return;
         }
 
