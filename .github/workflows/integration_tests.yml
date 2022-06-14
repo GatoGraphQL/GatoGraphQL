@@ -1,0 +1,57 @@
+name: Integration tests
+on:
+  workflow_run:
+    workflows: [Generate Installable Plugin, Upload as Artifact, and (maybe) Upload as Release Asset]
+    types:
+      - completed
+env:
+    CHECKOUT_SUBMODULES: ""
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve artifact URLs
+        uses: actions/github-script@v6
+        id: artifact-url
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
+              return artifact.url.replace('https://api.github.com', 'https://nightly.link')
+            });
+            let artifactURL = artifactURLs.concat(',');
+            return artifactURL;
+          result-encoding: string
+      - name: InstaWP URL
+        run: echo InstaWP URL: ${{ steps.artifact-url.outputs.result }}
+        shell: bash
+      - name: Create InstaWP instance
+        uses: instawp/wordpress-testing-automation@main
+        id: create-instawp
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
+          INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
+          INSTAWP_TEMPLATE_SLUG: vendor
+          REPO_ID: 4
+          INSTAWP_ACTION: create-site-template
+          ARTIFACT_URL: ${{steps.artifact-url.outputs.result}}
+
+  destroy-wp-after-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: instawp/wordpress-testing-automation@main
+        if: github.event.action == 'closed' || github.event.action == 'merged'
+        id: detroy-instawp
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
+          INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
+          INSTAWP_TEMPLATE_SLUG: vendor
+          REPO_ID: 4
+          INSTAWP_ACTION: destroy-site
