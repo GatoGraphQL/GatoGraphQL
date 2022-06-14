@@ -35,6 +35,15 @@ class PluginDataSource
                     'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-graphql-api.php',
                 ],
             ],
+            // GraphQL API - Testing <= To run integration tests with InstaWP
+            [
+                'path' => 'layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing',
+                'zip_file' => 'graphql-api-testing.zip',
+                'main_file' => 'graphql-api-testing.php',
+                'dist_repo_organization' => 'GraphQLAPI',
+                'dist_repo_name' => 'graphql-api-testing-dist',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing/rector.php',
+            ],
             // GraphQL API - Extension Demo
             [
                 'path' => 'layers/GraphQLAPIForWP/plugins/extension-demo',
