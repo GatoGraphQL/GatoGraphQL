@@ -9,6 +9,7 @@ env:
 
 jobs:
   retrieve-artifact-url:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Retrieve the artifact URL
     runs-on: ubuntu-latest
     steps:
@@ -54,9 +55,9 @@ jobs:
 
       - name: InstaWP instance URL
         run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
-        shell: bash
-    outputs:
-    
+        shell: bash        
+        
+    outputs:    
       instawp-url: ${{ steps.create-instawp.outputs.instawp_url }}
 
   execute-integration-tests:
