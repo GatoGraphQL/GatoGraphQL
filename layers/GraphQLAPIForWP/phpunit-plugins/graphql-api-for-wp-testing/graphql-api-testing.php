@@ -39,7 +39,7 @@ add_action(
         $enablePlugin = RootEnvironment::isApplicationEnvironmentDev();
         if (!$enablePlugin) {
             $validTestingDomains = [
-                'instawp.io',
+                'instawp.xyz',
             ];
             // Calculate the top level domain (app.site.com => site.com)
             $hostNames = array_reverse(explode('.', $_SERVER['HTTP_HOST']));
