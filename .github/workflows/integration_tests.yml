@@ -92,7 +92,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   uses: instawp/wordpress-testing-automation@main
-                if: ${{ github.event.action == 'closed' || github.event.action == 'merged' }}
                 id: detroy-instawp
                 with:
                     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
