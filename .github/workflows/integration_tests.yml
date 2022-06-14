@@ -1,10 +1,9 @@
 name: Integration tests
 on:
   workflow_run:
-    # workflows: [Generate plugins]
-    workflows: [Monorepo validation]
+    workflows: [Generate plugins]
     types:
-      - requested
+      - completed
 env:
     CHECKOUT_SUBMODULES: ""
 
