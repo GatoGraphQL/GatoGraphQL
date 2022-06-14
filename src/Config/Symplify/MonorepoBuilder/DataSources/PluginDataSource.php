@@ -38,7 +38,7 @@ class PluginDataSource
             // GraphQL API - Testing <= To run integration tests with InstaWP
             [
                 'path' => 'layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing',
-                'zip_file' => 'graphql-api-testing.zip',
+                'zip_file' => 'graphql-api-testing',
                 'main_file' => 'graphql-api-testing.php',
                 'dist_repo_organization' => 'GraphQLAPI',
                 'dist_repo_name' => 'graphql-api-testing-dist',
