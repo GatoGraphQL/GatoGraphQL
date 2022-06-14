@@ -19,7 +19,7 @@ class PluginDataSource
             // GraphQL API for WordPress
             [
                 'path' => 'layers/GraphQLAPIForWP/plugins/graphql-api-for-wp',
-                'zip_file' => 'graphql-api.zip',
+                'zip_file' => 'graphql-api',
                 'main_file' => 'graphql-api.php',
                 'exclude_files' => 'dev-helpers/\* docs/images/\*',
                 'dist_repo_organization' => 'GraphQLAPI',
@@ -38,7 +38,7 @@ class PluginDataSource
             // GraphQL API - Extension Demo
             [
                 'path' => 'layers/GraphQLAPIForWP/plugins/extension-demo',
-                'zip_file' => 'graphql-api-extension-demo.zip',
+                'zip_file' => 'graphql-api-extension-demo',
                 'main_file' => 'graphql-api-extension-demo.php',
                 'exclude_files' => 'docs/images/\*',
                 'dist_repo_organization' => 'GraphQLAPI',
