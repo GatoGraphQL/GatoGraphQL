@@ -4,7 +4,7 @@ on:
     # workflows: [Generate plugins]
     workflows: [Monorepo validation]
     types:
-      - completed
+      - requested
 env:
     CHECKOUT_SUBMODULES: ""
 
