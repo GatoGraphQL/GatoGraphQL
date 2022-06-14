@@ -85,18 +85,18 @@ jobs:
             -   name: Run tests
                 run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-url }} vendor/bin/phpunit --filter=Integration/
 
-    destroy-instawp-after-testing:
-        needs: execute-integration-tests
-        if: ${{ always() }}
-        name: Destroy InstaWP instance
-        runs-on: ubuntu-latest
-        steps:
-            -   uses: instawp/wordpress-testing-automation@main
-                id: destroy-instawp
-                with:
-                    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-                    INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
-                    INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
-                    INSTAWP_TEMPLATE_SLUG: integration-tests
-                    REPO_ID: 30
-                    INSTAWP_ACTION: destroy-site
+    # destroy-instawp-after-testing:
+    #     needs: execute-integration-tests
+    #     if: ${{ always() }}
+    #     name: Destroy InstaWP instance
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         -   uses: instawp/wordpress-testing-automation@main
+    #             id: destroy-instawp
+    #             with:
+    #                 GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    #                 INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
+    #                 INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
+    #                 INSTAWP_TEMPLATE_SLUG: integration-tests
+    #                 REPO_ID: 30
+    #                 INSTAWP_ACTION: destroy-site
