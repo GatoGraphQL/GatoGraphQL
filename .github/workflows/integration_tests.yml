@@ -1,103 +1,101 @@
 name: Integration tests
 on:
-  workflow_run:
-    workflows: ["Generate plugins"]
-    types:
-      - completed
-    branches:
-      - '**'
+    workflow_run:
+        workflows: ["Generate plugins"]
+        types:
+            - completed
 env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-  retrieve-artifact-url:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    name: Retrieve the artifact URL
-    runs-on: ubuntu-latest
-    steps:
-      - name: Retrieve artifact URLs from GitHub workflow
-        uses: actions/github-script@v6
-        id: artifact-url
-        with:
-          script: |
-            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               run_id: context.payload.workflow_run.id,
-            });
-            let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
-              return artifact.url.replace('https://api.github.com', 'https://nightly.link')
-            });
-            let artifactURL = artifactURLs.concat(',');
-            return artifactURL;
-          result-encoding: string
+    retrieve-artifact-url:
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        name: Retrieve the artifact URL
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Retrieve artifact URLs from GitHub workflow
+                uses: actions/github-script@v6
+                id: artifact-url
+                with:
+                    script: |
+                        let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            run_id: context.payload.workflow_run.id,
+                        });
+                        let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
+                            return artifact.url.replace('https://api.github.com', 'https://nightly.link')
+                        });
+                        let artifactURL = artifactURLs.concat(',');
+                        return artifactURL;
+                    result-encoding: string
 
-      - name: Artifact URL for InstaWP
-        run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
-        shell: bash
+            -   name: Artifact URL for InstaWP
+                run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
+                shell: bash
 
-    outputs:
-      artifact-url: ${{ steps.artifact-url.outputs.result }}
+        outputs:
+            artifact-url: ${{ steps.artifact-url.outputs.result }}
 
-  launch-instawp-instance:
-    needs: retrieve-artifact-url
-    name: Launch InstaWP instance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create InstaWP instance
-        uses: instawp/wordpress-testing-automation@main
-        id: create-instawp
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
-          INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
-          INSTAWP_TEMPLATE_SLUG: graphql-api-integration-tests
-          INSTAWP_ACTION: create-site-template
-          ARTIFACT_URL: ${{ needs.retrieve-artifact-url.outputs.artifact-url }}
+    launch-instawp-instance:
+        needs: retrieve-artifact-url
+        name: Launch InstaWP instance
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Create InstaWP instance
+                uses: instawp/wordpress-testing-automation@main
+                id: create-instawp
+                with:
+                    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                    INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
+                    INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
+                    INSTAWP_TEMPLATE_SLUG: graphql-api-integration-tests
+                    INSTAWP_ACTION: create-site-template
+                    ARTIFACT_URL: ${{ needs.retrieve-artifact-url.outputs.artifact-url }}
 
-      - name: InstaWP instance URL
-        run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
-        shell: bash        
+            -   name: InstaWP instance URL
+                run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
+                shell: bash
 
-    outputs:    
-      instawp-url: ${{ steps.create-instawp.outputs.instawp_url }}
+        outputs:
+            instawp-url: ${{ steps.create-instawp.outputs.instawp_url }}
 
-  execute-integration-tests:
-    needs: launch-instawp-instance
-    name: Execute integration tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: ${{ env.CHECKOUT_SUBMODULES }}
+    execute-integration-tests:
+        needs: launch-instawp-instance
+        name: Execute integration tests
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
-      - name: Set-up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-          coverage: none
-        env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   name: Set-up PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v1"
+            -   name: Install Composer dependencies
+                uses: "ramsey/composer-install@v1"
 
-      - name: Run tests
-        run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-url }} vendor/bin/phpunit --filter=Integration/
+            -   name: Run tests
+                run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-url }} vendor/bin/phpunit --filter=Integration/
 
-  destroy-instawp-after-testing:
-    needs: execute-integration-tests
-    if: ${{ always() }}
-    name: Destroy InstaWP instance
-    runs-on: ubuntu-latest
-    steps:
-      - uses: instawp/wordpress-testing-automation@main
-        if: github.event.action == 'closed' || github.event.action == 'merged'
-        id: detroy-instawp
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
-          INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
-          INSTAWP_TEMPLATE_SLUG: graphql-api-integration-tests
-          INSTAWP_ACTION: destroy-site
+    destroy-instawp-after-testing:
+        needs: execute-integration-tests
+        if: ${{ always() }}
+        name: Destroy InstaWP instance
+        runs-on: ubuntu-latest
+        steps:
+            - uses: instawp/wordpress-testing-automation@main
+                if: github.event.action == 'closed' || github.event.action == 'merged'
+                id: detroy-instawp
+                with:
+                    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                    INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
+                    INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
+                    INSTAWP_TEMPLATE_SLUG: graphql-api-integration-tests
+                    INSTAWP_ACTION: destroy-site
