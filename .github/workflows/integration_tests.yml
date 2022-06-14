@@ -9,6 +9,7 @@ env:
 
 jobs:
   retrieve-artifact-url:
+    name: Retrieve the artifact URL
     runs-on: ubuntu-latest
     steps:
       - name: Retrieve artifact URLs from GitHub workflow
@@ -37,6 +38,7 @@ jobs:
 
   launch-instawp-instance:
     needs: retrieve-artifact-url
+    name: Launch InstaWP instance
     runs-on: ubuntu-latest
     steps:
       - name: Create InstaWP instance
@@ -83,6 +85,8 @@ jobs:
         run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-url }} vendor/bin/phpunit --filter=Integration/
 
   destroy-instawp-after-testing:
+    needs: execute-integration-tests
+    name: Destroy InstaWP instance
     runs-on: ubuntu-latest
     steps:
       - uses: instawp/wordpress-testing-automation@main
