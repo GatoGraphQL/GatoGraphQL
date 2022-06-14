@@ -1,4 +1,4 @@
-name: PHP Coding Standards
+name: PHP coding standards
 on:
     push:
         branches:
