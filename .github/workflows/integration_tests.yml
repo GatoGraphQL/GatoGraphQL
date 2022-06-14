@@ -26,7 +26,7 @@ jobs:
                         let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
                             return artifact.url.replace('https://api.github.com', 'https://nightly.link')
                         });
-                        let artifactURL = artifactURLs.concat(',');
+                        let artifactURL = artifactURLs.filter(url => url !== '').concat(',');
                         return artifactURL;
                     result-encoding: string
 
