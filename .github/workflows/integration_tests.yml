@@ -49,7 +49,7 @@ jobs:
 
   execute-integration-tests:
     needs: launch-instawp-instance
-    name: Execute Integration tests
+    name: Execute integration tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
