@@ -85,6 +85,7 @@ jobs:
             -   name: Run tests
                 run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-url }} vendor/bin/phpunit --filter=Integration/
 
+    # @todo Uncomment when ARTIFACT_URL plugins are being installed
     # destroy-instawp-after-testing:
     #     needs: execute-integration-tests
     #     if: ${{ always() }}
