@@ -30,7 +30,7 @@ jobs:
           result-encoding: string
 
       - name: Artifact URL for InstaWP
-        run: echo "Artifact URL for InstaWP: ${{ steps.artifact-url.outputs.result }}"
+        run: echo "Artifact URL for InstaWP - ${{ steps.artifact-url.outputs.result }}"
         shell: bash
 
     outputs:
@@ -54,7 +54,7 @@ jobs:
           ARTIFACT_URL: ${{ needs.retrieve-artifact-url.outputs.artifact-url }}
 
       - name: InstaWP instance URL
-        run: echo "InstaWP instance URL: ${{ steps.create-instawp.outputs.instawp_url }}"
+        run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
         shell: bash
     outputs:
     
