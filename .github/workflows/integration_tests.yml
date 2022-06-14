@@ -49,7 +49,8 @@ jobs:
                     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
                     INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
                     INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
-                    INSTAWP_TEMPLATE_SLUG: graphql-api-integration-tests
+                    INSTAWP_TEMPLATE_SLUG: integration-tests
+                    REPO_ID: 30
                     INSTAWP_ACTION: create-site-template
                     ARTIFACT_URL: ${{ needs.retrieve-artifact-url.outputs.artifact-url }}
 
@@ -97,5 +98,6 @@ jobs:
                     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
                     INSTAWP_TOKEN: ${{secrets.INSTAWP_TOKEN}}
                     INSTAWP_DOMAIN: ${{secrets.INSTAWP_DOMAIN}}
-                    INSTAWP_TEMPLATE_SLUG: graphql-api-integration-tests
+                    INSTAWP_TEMPLATE_SLUG: integration-tests
+                    REPO_ID: 30
                     INSTAWP_ACTION: destroy-site
