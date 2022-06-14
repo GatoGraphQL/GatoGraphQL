@@ -127,7 +127,29 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function skipTestsInContinuousIntegration(): bool
     {
-        return true;
+        $testingDomain = static::getWebserverDomain();
+        if ($testingDomain === '') {
+            return true;
+        }
+        return !static::isValidTestingDomain($testingDomain);
+    }
+
+    /**
+     * Indicate if the testing webserver is on a whitelist
+     * of approved domains. If so, the GitHub workflow is executing
+     * the test against some service (eg: InstaWP)
+     */
+    protected static function isValidTestingDomain(string $testingDomain): bool
+    {
+        // Remove the protocol
+        $testingDomain = preg_replace('#^https?://#', '', $testingDomain);;
+        $validTestingDomains = [
+            'instawp.xyz',
+        ];
+        // Calculate the top level domain (app.site.com => site.com)
+        $hostNames = array_reverse(explode('.', $testingDomain));
+        $host = $hostNames[1] . '.' . $hostNames[0];
+        return in_array($host, $validTestingDomains);
     }
 
     protected static function getWebserverPingURL(): string
