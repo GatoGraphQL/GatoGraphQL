@@ -188,7 +188,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 with:
                     name: ${{ matrix.pluginConfig.zip_file }}
-                    path: build/dist-plugin/${{ matrix.pluginConfig.zip_file }}
+                    path: build/dist-plugin/
                     retention-days: ${{ needs.provide_data.outputs.retention_days }}
 
     ###########################################################################
