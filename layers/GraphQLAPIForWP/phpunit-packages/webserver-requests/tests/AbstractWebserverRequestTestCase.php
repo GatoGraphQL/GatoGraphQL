@@ -44,6 +44,9 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
             self::$skipTestsReason = 'Test skipped for Continuous Integration';
+            // Temporary `var_dump`
+            $testingDomain = static::getWebserverDomain();
+            self::$skipTestsReason = 'Testing domain: ' . $testingDomain . ' - valid: ' . static::isValidTestingDomain($testingDomain);
             return;
         }
 
@@ -128,8 +131,6 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function skipTestsInContinuousIntegration(): bool
     {
         $testingDomain = static::getWebserverDomain();
-        var_dump('Testing domain: ' . $testingDomain);
-        var_dump('Valid testing domain: ' . static::isValidTestingDomain($testingDomain));
         if ($testingDomain === '') {
             return true;
         }
