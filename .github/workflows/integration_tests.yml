@@ -8,7 +8,7 @@ env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-  launch-instawp-instance:
+  retrieve-artifact-url:
     runs-on: ubuntu-latest
     steps:
       - name: Retrieve artifact URLs from GitHub workflow
@@ -27,9 +27,18 @@ jobs:
             let artifactURL = artifactURLs.concat(',');
             return artifactURL;
           result-encoding: string
-      - name: Echo Artifact URL for InstaWP
+
+      - name: Artifact URL for InstaWP
         run: echo Artifact URL for InstaWP: ${{ steps.artifact-url.outputs.result }}
         shell: bash
+
+    outputs:
+      artifact-url: ${{ steps.artifact-url.outputs.result }}
+
+  launch-instawp-instance:
+    needs: retrieve-artifact-url
+    runs-on: ubuntu-latest
+    steps:
       - name: Create InstaWP instance
         uses: instawp/wordpress-testing-automation@main
         id: create-instawp
@@ -40,11 +49,13 @@ jobs:
           INSTAWP_TEMPLATE_SLUG: vendor
           REPO_ID: 4
           INSTAWP_ACTION: create-site-template
-          ARTIFACT_URL: ${{steps.artifact-url.outputs.result}}
-      - name: Echo InstaWP instance URL
+          ARTIFACT_URL: ${{ needs.retrieve-artifact-url.outputs.artifact-url }}
+
+      - name: InstaWP instance URL
         run: echo InstaWP instance URL ${{ steps.create-instawp.outputs.instawp_url }}
         shell: bash
     outputs:
+    
       instawp-url: ${{ steps.create-instawp.outputs.instawp_url }}
 
   execute-integration-tests:
