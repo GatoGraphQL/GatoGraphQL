@@ -23,10 +23,10 @@ jobs:
                             repo: context.repo.repo,
                             run_id: context.payload.workflow_run.id,
                         });
-                        let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
-                            return artifact.url.replace('https://api.github.com', 'https://nightly.link')
+                        let artifactURLs = allArtifacts.data.artifacts.filter(artifact => artifact.url !== '').map((artifact) => {
+                            return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link').concat('.zip')
                         });
-                        let artifactURL = artifactURLs.filter(url => url !== '').concat(',');
+                        let artifactURL = artifactURLs.concat(',');
                         return artifactURL;
                     result-encoding: string
 
