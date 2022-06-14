@@ -9,7 +9,7 @@ env:
 
 jobs:
     main:
-        name: Execute PHPUnit tests
+        name: Execute unit tests
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
