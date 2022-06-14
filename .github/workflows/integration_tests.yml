@@ -58,8 +58,14 @@ jobs:
                 run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
                 shell: bash
 
+            -   name: Extract InstaWP domain
+                id: extract-instawp-domain                
+                run: |
+                    instawp_domain="$(echo "${{ steps.create-instawp.outputs.instawp_url }}" | sed -e s#https://##)"
+                    echo "::set-output name=instawp-domain::$(echo $instawp_domain)"
+
         outputs:
-            instawp-url: ${{ steps.create-instawp.outputs.instawp_url }}
+            instawp-domain: ${{ steps.extract-instawp-domain.outputs.instawp-domain }}
 
     execute-integration-tests:
         needs: launch-instawp-instance
@@ -83,8 +89,9 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run tests
-                run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-url }} vendor/bin/phpunit --filter=Integration/
+                run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-domain }} vendor/bin/phpunit --filter=Integration/
 
+    # @todo Uncomment when ARTIFACT_URL plugins are being installed
     # destroy-instawp-after-testing:
     #     needs: execute-integration-tests
     #     if: ${{ always() }}

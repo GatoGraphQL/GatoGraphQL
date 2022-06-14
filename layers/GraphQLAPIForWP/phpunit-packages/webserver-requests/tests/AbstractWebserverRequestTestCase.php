@@ -141,8 +141,6 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function isValidTestingDomain(string $testingDomain): bool
     {
-        // Remove the protocol
-        $testingDomain = preg_replace('#^https?://#', '', $testingDomain);;
         $validTestingDomains = [
             'instawp.xyz',
         ];
