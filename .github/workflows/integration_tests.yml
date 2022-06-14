@@ -4,6 +4,7 @@ on:
     workflows: [Generate plugins]
     types:
       - completed
+    branches: [*]
 env:
     CHECKOUT_SUBMODULES: ""
 
@@ -56,7 +57,7 @@ jobs:
       - name: InstaWP instance URL
         run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
         shell: bash        
-        
+
     outputs:    
       instawp-url: ${{ steps.create-instawp.outputs.instawp_url }}
 
