@@ -86,6 +86,7 @@ jobs:
 
   destroy-instawp-after-testing:
     needs: execute-integration-tests
+    if: ${{ always() }}
     name: Destroy InstaWP instance
     runs-on: ubuntu-latest
     steps:
