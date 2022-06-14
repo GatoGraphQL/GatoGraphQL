@@ -1,11 +1,9 @@
 name: Integration tests
 on:
     workflow_run:
-        workflows: [Generate plugins]
+        workflows: [Monorepo validation]
         types:
             - completed
-env:
-    CHECKOUT_SUBMODULES: ""
 
 jobs:
     retrieve-artifact-url:
