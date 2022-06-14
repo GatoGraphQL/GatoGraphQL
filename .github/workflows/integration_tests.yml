@@ -44,8 +44,34 @@ jobs:
       - name: Echo InstaWP instance URL
         run: echo InstaWP instance URL ${{ steps.create-instawp.outputs.instawp_url }}
         shell: bash
+    outputs:
+      instawp-url: ${{ steps.create-instawp.outputs.instawp_url }}
 
-  destroy-wp-after-testing:
+  execute-integration-tests:
+    needs: launch-instawp-instance
+    name: Execute Integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: ${{ env.CHECKOUT_SUBMODULES }}
+
+      - name: Set-up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          coverage: none
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v1"
+
+      - name: Run tests
+        run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-url }} vendor/bin/phpunit --filter=Integration/
+
+  destroy-instawp-after-testing:
     runs-on: ubuntu-latest
     steps:
       - uses: instawp/wordpress-testing-automation@main
