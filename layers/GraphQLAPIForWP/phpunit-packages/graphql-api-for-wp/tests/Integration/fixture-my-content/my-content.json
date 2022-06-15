@@ -6,6 +6,13 @@
                 "title": "Working on flat chain syntax next"
             }
         ],
+        "myCustomPosts": [
+            {
+                "__typename": "Post",
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            }
+        ],
         "me": {
             "id": 4
         }
