@@ -1,0 +1,13 @@
+{
+    "data": {
+        "myPosts": [
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            }
+        ],
+        "me": {
+            "id": 4
+        }
+    }
+}

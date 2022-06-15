@@ -1,0 +1,9 @@
+{
+  myPosts {
+    id
+    title
+  }
+  me {
+    id
+  }
+}
