@@ -567,7 +567,7 @@
 		<dc:creator><![CDATA[blogger]]></dc:creator>
 		<guid isPermaLink="false">https://graphql-api.lndo.site/?post_type=graphql-query&#038;p=237</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetUserAccountData(\n  $userID: ID!\n  $limit: Int\n) {\n  user(by: {\n    id: $userID\n  }) {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022userID\u0022: 1,\n  \u0022limit\u0022: 2\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetUserAccountData(\n  $userID: ID!\n  $limit: Int\n) {\n  user(by: {\n    id: $userID\n  }) {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022userID\u0022: 2,\n  \u0022limit\u0022: 2\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration /-->
 
