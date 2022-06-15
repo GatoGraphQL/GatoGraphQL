@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use function getenv;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
+use PHPUnitForGraphQLAPI\WebserverRequests\Exception\WebserverNotRunningException;
+
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
-
-use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
@@ -42,7 +43,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
 
         // Skip running tests in Continuous Integration?
-        if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
+        $isContinuousIntegration = static::isContinuousIntegration();
+        if ($isContinuousIntegration && static::skipTestsInContinuousIntegration()) {
             self::$skipTestsReason = 'Test skipped for Continuous Integration';
             return;
         }
@@ -79,10 +81,18 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             // The webserver is down
         }
 
-        self::$skipTestsReason = sprintf(
+        /**
+         * If the testing webserver is not running, it's an error during CI,
+         * but a "skip test" in the localhost
+         */
+        $message = sprintf(
             'Webserver under "%s" is not running',
             static::getWebserverDomain()
         );
+        if ($isContinuousIntegration) {
+            throw new WebserverNotRunningException($message);
+        }
+        self::$skipTestsReason = $message;
     }
 
     /**
