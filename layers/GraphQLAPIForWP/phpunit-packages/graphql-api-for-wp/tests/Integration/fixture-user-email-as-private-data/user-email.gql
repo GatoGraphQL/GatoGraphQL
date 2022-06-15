@@ -1,5 +1,5 @@
 {
-  user(by: {id: 1}) {
+  user(by: {id: 2}) {
     name
     email
   }
