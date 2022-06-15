@@ -2,7 +2,7 @@
 
 PoP is a monorepo containing several projects.
 
-![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg)
+![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg) ![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg)
 
 ## The GraphQL API for WordPress plugin
 
