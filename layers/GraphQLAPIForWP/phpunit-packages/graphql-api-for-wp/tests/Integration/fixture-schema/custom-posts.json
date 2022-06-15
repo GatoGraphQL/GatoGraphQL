@@ -76,8 +76,8 @@
                 "url": "https:\/\/graphql-api.lndo.site\/released-v0-6-check-it-out\/",
                 "urlAbsolutePath": "\/released-v0-6-check-it-out\/",
                 "author": {
-                    "id": 2,
-                    "name": "Blogger Davenport"
+                    "id": 3,
+                    "name": "Subscriber Bennett"
                 },
                 "comments": [
                     {
@@ -86,7 +86,7 @@
                 ],
                 "featuredImage": {
                     "id": 361,
-                    "src": "http:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-api-header-5.png"
+                    "src": "http:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-api-header-6.png"
                 }
             }
         ],
@@ -122,21 +122,6 @@
                 "__typename": "Post",
                 "id": 21,
                 "title": "Customize the schema for each client"
-            },
-            {
-                "__typename": "Post",
-                "id": 19,
-                "title": "Nested mutations are a must have"
-            },
-            {
-                "__typename": "Post",
-                "id": 16,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "__typename": "Post",
-                "id": 13,
-                "title": "Released v0.6, check it out"
             }
         ],
         "customPostsByCustomPostTypes": [
@@ -171,6 +156,11 @@
             },
             {
                 "__typename": "Post",
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "__typename": "Post",
                 "id": 25,
                 "title": "Public or Private API mode, for extra security"
             },
@@ -188,11 +178,6 @@
                 "__typename": "Post",
                 "id": 19,
                 "title": "Nested mutations are a must have"
-            },
-            {
-                "__typename": "Post",
-                "id": 16,
-                "title": "Working on flat chain syntax next"
             },
             {
                 "__typename": "Post",
