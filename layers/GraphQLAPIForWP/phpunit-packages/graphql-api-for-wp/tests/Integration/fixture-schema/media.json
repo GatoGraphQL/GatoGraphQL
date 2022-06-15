@@ -19,8 +19,8 @@
                 "urlAbsolutePath": "/graphql-api-search-results/",
                 "width": 2048,
                 "author": {
-                    "id": 1,
-                    "name": "admin"
+                    "id": 2,
+                    "name": "Blogger Davenport"
                 }
             },
             {
@@ -41,8 +41,8 @@
                 "urlAbsolutePath": "/graphql-api-header/",
                 "width": 1935,
                 "author": {
-                    "id": 1,
-                    "name": "admin"
+                    "id": 2,
+                    "name": "Blogger Davenport"
                 }
             }
         ],
@@ -65,7 +65,7 @@
                 "urlAbsolutePath": "/license/",
                 "width": null,
                 "author": {
-                    "id": 4,
+                    "id": 5,
                     "name": "Author Marquez"
                 }
             },
@@ -87,8 +87,8 @@
                 "urlAbsolutePath": "/graphql-api-search-results/",
                 "width": 2048,
                 "author": {
-                    "id": 1,
-                    "name": "admin"
+                    "id": 2,
+                    "name": "Blogger Davenport"
                 }
             },
             {
@@ -109,8 +109,8 @@
                 "urlAbsolutePath": "/graphql-api-header/",
                 "width": 1935,
                 "author": {
-                    "id": 1,
-                    "name": "admin"
+                    "id": 2,
+                    "name": "Blogger Davenport"
                 }
             }
         ],

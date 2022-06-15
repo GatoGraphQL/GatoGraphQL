@@ -52,7 +52,7 @@ query {
     id
     title
   }
-  postsByAuthorSlug: posts(filter: { authorSlug: "admin" }) {
+  postsByAuthorSlug: posts(filter: { authorSlug: "blogger" }) {
     id
     title
   }

@@ -48,7 +48,7 @@ query {
     id
     title
   }
-  pagesByAuthorSlug: pages(filter: { authorSlug: "admin" }) {
+  pagesByAuthorSlug: pages(filter: { authorSlug: "blogger" }) {
     id
     title
   }

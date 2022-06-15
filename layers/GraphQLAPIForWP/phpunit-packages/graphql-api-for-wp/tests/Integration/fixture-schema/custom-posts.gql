@@ -44,7 +44,7 @@ query {
       title
     }
   }
-  customPostsByAuthorSlug: customPosts(filter: { authorSlug: "admin" }) {
+  customPostsByAuthorSlug: customPosts(filter: { authorSlug: "blogger" }) {
     __typename
     ...on IsCustomPost {
       id

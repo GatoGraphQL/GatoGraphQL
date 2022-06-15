@@ -47,7 +47,7 @@
                 "hasAnyRole": true,
                 "hasCapability": false,
                 "hasRole": false,
-                "id": 5,
+                "id": 6,
                 "lastName": "Smith",
                 "locale": "en_US",
                 "metaValue": "editor",
@@ -101,7 +101,7 @@
                 "hasAnyRole": false,
                 "hasCapability": false,
                 "hasRole": false,
-                "id": 4,
+                "id": 5,
                 "lastName": "Marquez",
                 "locale": "en_US",
                 "metaValue": "author",
@@ -161,7 +161,7 @@
                 "hasAnyRole": false,
                 "hasCapability": false,
                 "hasRole": false,
-                "id": 3,
+                "id": 4,
                 "lastName": "Johnson",
                 "locale": "en_US",
                 "metaValue": "contributor",
@@ -196,97 +196,97 @@
         ],
         "usersByExcludeIDs": [
             {
-                "id": 5,
+                "id": 6,
                 "name": "Editor Smith"
             },
             {
-                "id": 4,
+                "id": 5,
                 "name": "Author Marquez"
             },
             {
-                "id": 3,
+                "id": 4,
                 "name": "Contributor Johnson"
             },
             {
-                "id": 2,
+                "id": 3,
                 "name": "Subscriber Bennett"
             }
         ],
         "usersByExcludeRoles": [
             {
-                "id": 5,
+                "id": 6,
                 "name": "Editor Smith"
             },
             {
-                "id": 4,
+                "id": 5,
                 "name": "Author Marquez"
             },
             {
-                "id": 3,
+                "id": 4,
                 "name": "Contributor Johnson"
             },
             {
-                "id": 2,
+                "id": 3,
                 "name": "Subscriber Bennett"
             }
         ],
         "usersByIds": [
             {
-                "id": 2,
+                "id": 3,
                 "name": "Subscriber Bennett"
             },
             {
-                "id": 1,
-                "name": "admin"
+                "id": 2,
+                "name": "Blogger Davenport"
             }
         ],
         "usersByMetaQuery": [
             {
-                "id": 1,
-                "name": "admin"
+                "id": 2,
+                "name": "Blogger Davenport"
             }
         ],
         "usersByRoles": [
             {
-                "id": 4,
+                "id": 5,
                 "name": "Author Marquez"
             },
             {
-                "id": 3,
+                "id": 4,
                 "name": "Contributor Johnson"
             }
         ],
         "usersBySearchBy": [
             {
-                "id": 4,
+                "id": 5,
                 "name": "Author Marquez"
             }
         ],
         "usersSortedASC": [
             {
-                "id": 1,
-                "name": "admin"
+                "id": 2,
+                "name": "Blogger Davenport"
             },
             {
-                "id": 4,
+                "id": 5,
                 "name": "Author Marquez"
             },
             {
-                "id": 3,
+                "id": 4,
                 "name": "Contributor Johnson"
             }
         ],
         "usersSortedDESC": [
             {
-                "id": 2,
+                "id": 3,
                 "name": "Subscriber Bennett"
             },
             {
-                "id": 5,
+                "id": 6,
                 "name": "Editor Smith"
             },
             {
-                "id": 3,
+                "id": 4,
                 "name": "Contributor Johnson"
             }
         ]

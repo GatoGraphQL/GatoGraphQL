@@ -6,9 +6,9 @@
                 "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "title": "Hello world!",
                 "author": {
-                    "id": 1,
-                    "username": "admin",
-                    "url": "https:\/\/graphql-api.lndo.site\/author\/admin\/"
+                    "id": 2,
+                    "username": "blogger",
+                    "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/"
                 }
             },
             {
@@ -16,7 +16,7 @@
                 "url": "https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
                 "title": "HTTP caching improves performance",
                 "author": {
-                    "id": 4,
+                    "id": 5,
                     "username": "author",
                     "url": "https:\/\/graphql-api.lndo.site\/author\/author\/"
                 }
@@ -26,9 +26,9 @@
                 "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
                 "title": "Public or Private API mode, for extra security",
                 "author": {
-                    "id": 1,
-                    "username": "admin",
-                    "url": "https:\/\/graphql-api.lndo.site\/author\/admin\/"
+                    "id": 2,
+                    "username": "blogger",
+                    "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/"
                 }
             }
         ]

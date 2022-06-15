@@ -10,7 +10,7 @@ query {
     id
     title
   }
-  mediaItemsByAuthorSlug: mediaItems(filter: { authorSlug: "admin", mimeTypes: "*" }) {
+  mediaItemsByAuthorSlug: mediaItems(filter: { authorSlug: "blogger", mimeTypes: "*" }) {
     id
     title
   }
