@@ -25,6 +25,10 @@ final class Option
     /**
      * @var string
      */
+    public final const ADDITIONAL_INTEGRATION_TEST_PLUGINS = 'additional-integration-test-plugins';
+    /**
+     * @var string
+     */
     public final const ENVIRONMENT_VARIABLES = 'environment-variables';
     /**
      * @var string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Symplify\MonorepoBuilder\Configurators;
 
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\AdditionalIntegrationTestPluginsDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\EnvironmentVariablesDataSource;
@@ -82,6 +83,17 @@ class ContainerConfigurationService
         }
 
         /**
+         * Additional plugins to install in the webserver (eg: InstaWP)
+         * for executing integration tests
+         */
+        if ($additionalIntegrationTestPluginsConfig = $this->getAdditionalIntegrationTestPluginsDataSource($this->rootDirectory)) {
+            $parameters->set(
+                CustomOption::ADDITIONAL_INTEGRATION_TEST_PLUGINS,
+                $additionalIntegrationTestPluginsConfig->getAdditionalIntegrationTestPlugins()
+            );
+        }
+
+        /**
          * Environment variables
          */
         if ($environmentVariablesConfig = $this->getEnvironmentVariablesDataSource()) {
@@ -154,6 +166,11 @@ class ContainerConfigurationService
     protected function getDowngradeRectorDataSource(): ?DowngradeRectorDataSource
     {
         return new DowngradeRectorDataSource($this->rootDirectory);
+    }
+
+    protected function getAdditionalIntegrationTestPluginsDataSource(): ?AdditionalIntegrationTestPluginsDataSource
+    {
+        return new AdditionalIntegrationTestPluginsDataSource($this->rootDirectory);
     }
 
     protected function getEnvironmentVariablesDataSource(): ?EnvironmentVariablesDataSource
