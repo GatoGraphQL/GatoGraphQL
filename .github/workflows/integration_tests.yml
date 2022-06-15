@@ -69,7 +69,7 @@ jobs:
             artifact-url: ${{ steps.artifact-url.outputs.result }}
 
     launch_instawp_instance:
-        needs: retrieve_artifact_url
+        needs: [provide_data, retrieve_artifact_url]
         name: Launch InstaWP instance
         runs-on: ubuntu-latest
         steps:
