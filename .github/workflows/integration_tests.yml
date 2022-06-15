@@ -43,19 +43,18 @@ jobs:
                 id: artifact-url
                 with:
                     script: |
-                        let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+                        const allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
                             owner: context.repo.owner,
                             repo: context.repo.repo,
                             run_id: context.payload.workflow_run.id,
                         });
-                        let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
-                            // Use Nightly Link as it allows InstaWP to access the artifacts, i.e. without having to be logged-in to GitHub
-                            // @see https://nightly.link
-                            return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link') + '.zip'
-                        });
+                        // Use Nightly Link as it allows InstaWP to access the artifacts, i.e. without having to be logged-in to GitHub
+                        // @see https://nightly.link
                         // Allow installing additional plugins, set via the monorepo configuration
-                        let artifactURL = artifactURLs.concat(${{ needs.provide_data.outputs.additional_integration_test_plugins }}).filter(url => url !== '').concat(',');
-                        return artifactURL;
+                        const artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
+                            return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link') + '.zip'
+                        }).concat(${{ needs.provide_data.outputs.additional_integration_test_plugins }});
+                        return artifactURLs.join(',');
                     result-encoding: string
 
             -   name: Artifact URL for InstaWP
