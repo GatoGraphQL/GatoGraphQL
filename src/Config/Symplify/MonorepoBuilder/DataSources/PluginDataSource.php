@@ -45,15 +45,16 @@ class PluginDataSource
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing/rector.php',
             ],
             // GraphQL API - Extension Demo
-            [
-                'path' => 'layers/GraphQLAPIForWP/plugins/extension-demo',
-                'zip_file' => 'graphql-api-extension-demo',
-                'main_file' => 'graphql-api-extension-demo.php',
-                'exclude_files' => 'docs/images/\*',
-                'dist_repo_organization' => 'GraphQLAPI',
-                'dist_repo_name' => 'graphql-api-extension-demo-dist',
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/extension-demo/rector.php',
-            ],
+            // @todo Re-enable when the demo is actually complete
+            // [
+            //     'path' => 'layers/GraphQLAPIForWP/plugins/extension-demo',
+            //     'zip_file' => 'graphql-api-extension-demo',
+            //     'main_file' => 'graphql-api-extension-demo.php',
+            //     'exclude_files' => 'docs/images/\*',
+            //     'dist_repo_organization' => 'GraphQLAPI',
+            //     'dist_repo_name' => 'graphql-api-extension-demo-dist',
+            //     'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/extension-demo/rector.php',
+            // ],
         ];
     }
 }
