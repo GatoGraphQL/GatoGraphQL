@@ -18,7 +18,7 @@ query {
     id
     title
   }
-  mediaItemsByExcludeAuthorIDs: mediaItems(filter: { excludeAuthorIDs: 1, mimeTypes: "*" }) {
+  mediaItemsByExcludeAuthorIDs: mediaItems(filter: { excludeAuthorIDs: 2, mimeTypes: "*" }) {
     id
     title
   }

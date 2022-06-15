@@ -64,7 +64,7 @@ query {
     id
     title
   }
-  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 4 }) {
+  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 5 }) {
     id
     title
   }
