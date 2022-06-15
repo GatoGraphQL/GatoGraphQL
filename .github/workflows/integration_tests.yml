@@ -24,9 +24,9 @@ jobs:
                             run_id: context.payload.workflow_run.id,
                         });
                         let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
-                            return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link')
+                            return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link') + '.zip'
                         });
-                        let artifactURL = artifactURLs.filter(url => url !== '').map(url => url + '.zip').concat(',');
+                        let artifactURL = artifactURLs.filter(url => url !== '').concat(',');
                         return artifactURL;
                     result-encoding: string
 
