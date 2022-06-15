@@ -38,7 +38,7 @@
                     "edit_private_pages",
                     "read_private_pages"
                 ],
-                "customPostCount": 0,
+                "customPostCount": 1,
                 "description": "",
                 "displayName": "Editor Smith",
                 "email": "editor@test.com",
@@ -54,24 +54,35 @@
                 "name": "Editor Smith",
                 "nicename": "editor",
                 "nickname": "editor",
-                "postCount": 0,
+                "postCount": 1,
                 "registeredDate": "1982-06-29T17:48:26+00:00",
                 "registeredDateStr": "June 29",
                 "roleNames": [
                     "editor"
                 ],
                 "slug": "editor",
-                "url": "https://graphql-api.lndo.site/author/editor/",
-                "urlAbsolutePath": "/author/editor/",
+                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
+                "urlAbsolutePath": "\/author\/editor\/",
                 "username": "editor",
                 "websiteURL": "",
                 "avatar": {
                     "id": "da83a02a60e209782d40d3feb41e00c5",
                     "size": 96,
-                    "src": "https://secure.gravatar.com/avatar/00941d24f33655ec9e5e6b2f448004b5?s=96&#038;d=mm&#038;r=g"
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/00941d24f33655ec9e5e6b2f448004b5?s=96&#038;d=mm&#038;r=g"
                 },
-                "customPosts": [],
-                "posts": [],
+                "customPosts": [
+                    {
+                        "__typename": "Post",
+                        "id": 19,
+                        "title": "Nested mutations are a must have"
+                    }
+                ],
+                "posts": [
+                    {
+                        "id": 19,
+                        "title": "Nested mutations are a must have"
+                    }
+                ],
                 "roles": [
                     {
                         "id": "editor",
@@ -115,14 +126,14 @@
                     "author"
                 ],
                 "slug": "author",
-                "url": "https://graphql-api.lndo.site/author/author/",
-                "urlAbsolutePath": "/author/author/",
+                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
+                "urlAbsolutePath": "\/author\/author\/",
                 "username": "author",
                 "websiteURL": "",
                 "avatar": {
                     "id": "4519654833ec6920a78b689fd4295f9f",
                     "size": 96,
-                    "src": "https://secure.gravatar.com/avatar/b7a8ba9684cc5c1a4a035b34ff2fcb04?s=96&#038;d=mm&#038;r=g"
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/b7a8ba9684cc5c1a4a035b34ff2fcb04?s=96&#038;d=mm&#038;r=g"
                 },
                 "customPosts": [
                     {
@@ -152,7 +163,7 @@
                     "level_0",
                     "delete_posts"
                 ],
-                "customPostCount": 0,
+                "customPostCount": 1,
                 "description": "",
                 "displayName": "Contributor Johnson",
                 "email": "contributor@test.com",
@@ -168,24 +179,35 @@
                 "name": "Contributor Johnson",
                 "nicename": "contributor",
                 "nickname": "contributor",
-                "postCount": 0,
+                "postCount": 1,
                 "registeredDate": "1982-06-29T17:48:24+00:00",
                 "registeredDateStr": "June 29",
                 "roleNames": [
                     "contributor"
                 ],
                 "slug": "contributor",
-                "url": "https://graphql-api.lndo.site/author/contributor/",
-                "urlAbsolutePath": "/author/contributor/",
+                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
+                "urlAbsolutePath": "\/author\/contributor\/",
                 "username": "contributor",
                 "websiteURL": "",
                 "avatar": {
                     "id": "c311c5482bb63499b8cc002fd51b5d6b",
                     "size": 96,
-                    "src": "https://secure.gravatar.com/avatar/9ba43933f8e0c00e3345109d69ac948f?s=96&#038;d=mm&#038;r=g"
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/9ba43933f8e0c00e3345109d69ac948f?s=96&#038;d=mm&#038;r=g"
                 },
-                "customPosts": [],
-                "posts": [],
+                "customPosts": [
+                    {
+                        "__typename": "Post",
+                        "id": 16,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "posts": [
+                    {
+                        "id": 16,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
                 "roles": [
                     {
                         "id": "contributor",
@@ -210,6 +232,10 @@
             {
                 "id": 3,
                 "name": "Subscriber Bennett"
+            },
+            {
+                "id": 2,
+                "name": "Blogger Davenport"
             }
         ],
         "usersByExcludeRoles": [
@@ -228,16 +254,20 @@
             {
                 "id": 3,
                 "name": "Subscriber Bennett"
-            }
-        ],
-        "usersByIds": [
-            {
-                "id": 3,
-                "name": "Subscriber Bennett"
             },
             {
                 "id": 2,
                 "name": "Blogger Davenport"
+            }
+        ],
+        "usersByIds": [
+            {
+                "id": 2,
+                "name": "Blogger Davenport"
+            },
+            {
+                "id": 1,
+                "name": "admin"
             }
         ],
         "usersByMetaQuery": [
@@ -264,16 +294,16 @@
         ],
         "usersSortedASC": [
             {
-                "id": 2,
-                "name": "Blogger Davenport"
+                "id": 1,
+                "name": "admin"
             },
             {
                 "id": 5,
                 "name": "Author Marquez"
             },
             {
-                "id": 4,
-                "name": "Contributor Johnson"
+                "id": 2,
+                "name": "Blogger Davenport"
             }
         ],
         "usersSortedDESC": [
