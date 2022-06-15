@@ -64,7 +64,7 @@ query {
     key: "nickname",
     compareBy: {
       stringValue: {
-        value: "admin"
+        value: "blogger"
         operator: EQUALS
       }
     }

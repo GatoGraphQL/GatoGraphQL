@@ -48,11 +48,11 @@ query {
     urlAbsolutePath
   }
 
-  postsByAuthorIDs: posts(filter: { authorIDs: 4 }) {
+  postsByAuthorIDs: posts(filter: { authorIDs: 5 }) {
     id
     title
   }
-  postsByAuthorSlug: posts(filter: { authorSlug: "admin" }) {
+  postsByAuthorSlug: posts(filter: { authorSlug: "blogger" }) {
     id
     title
   }
@@ -64,7 +64,7 @@ query {
     id
     title
   }
-  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 4 }) {
+  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 5 }) {
     id
     title
   }

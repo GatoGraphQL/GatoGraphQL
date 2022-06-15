@@ -1,5 +1,5 @@
 {
-  user(by: {id: 2}) {
+  user(by: {id: 3}) {
     id
     nickname: metaValue(key: "nickname")
     firstname: metaValue(key: "first_name")

@@ -90,9 +90,9 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                             "title": "Hello world!",
                             "tags": [],
                             "author": {
-                                "displayName": "admin",
-                                "url": "https://graphql-api.lndo.site/author/admin/",
-                                "id": 1
+                                "displayName": "Blogger Davenport",
+                                "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/",
+                                "id": 2
                             }
                         },
                         {
@@ -102,9 +102,9 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                             "title": "HTTP caching improves performance",
                             "tags": [],
                             "author": {
-                                "displayName": "admin",
-                                "url": "https://graphql-api.lndo.site/author/admin/",
-                                "id": 1
+                                "displayName": "Blogger Davenport",
+                                "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/",
+                                "id": 2
                             }
                         },
                         {
@@ -121,9 +121,9 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                                 }
                             ],
                             "author": {
-                                "displayName": "admin",
-                                "url": "https://graphql-api.lndo.site/author/admin/",
-                                "id": 1
+                                "displayName": "Blogger Davenport",
+                                "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/",
+                                "id": 2
                             }
                         }
                     ]
@@ -145,9 +145,9 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                         "title": "Hello world!",
                         "tags": [],
                         "author": {
-                            "displayName": "admin",
-                            "url": "https:\/\/graphql-api.lndo.site\/author\/admin\/",
-                            "id": 1
+                            "displayName": "Blogger Davenport",
+                            "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/",
+                            "id": 2
                         }
                     },
                     {
@@ -159,7 +159,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                         "author": {
                             "displayName": "Author Marquez",
                             "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
-                            "id": 4
+                            "id": 5
                         }
                     }
                 ]

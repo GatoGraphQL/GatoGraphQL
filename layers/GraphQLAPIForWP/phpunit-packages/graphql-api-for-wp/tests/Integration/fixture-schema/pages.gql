@@ -44,11 +44,11 @@ query {
     urlAbsolutePath
   }
 
-  pagesByAuthorIDs: pages(filter: { authorIDs: 1 }) {
+  pagesByAuthorIDs: pages(filter: { authorIDs: 2 }) {
     id
     title
   }
-  pagesByAuthorSlug: pages(filter: { authorSlug: "admin" }) {
+  pagesByAuthorSlug: pages(filter: { authorSlug: "blogger" }) {
     id
     title
   }
@@ -56,7 +56,7 @@ query {
     id
     title
   }
-  pagesByExcludeAuthorIDs: pages(filter: { excludeAuthorIDs: 1 }) {
+  pagesByExcludeAuthorIDs: pages(filter: { excludeAuthorIDs: 2 }) {
     id
     title
   }

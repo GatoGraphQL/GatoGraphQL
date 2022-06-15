@@ -4,9 +4,9 @@
             "comments": [
                 {
                     "approved": true,
-                    "authorEmail": "admin@example.com",
+                    "authorEmail": "blogger@test.com",
                     "authorIP": "172.20.0.2",
-                    "authorName": "admin",
+                    "authorName": "blogger",
                     "authorURL": "http://graphql-api-nginx.lndo.site",
                     "content": "<p>How many endpoints can create?</p>\n",
                     "customPostID": 21,
@@ -20,8 +20,8 @@
                     "status": "approve",
                     "type": "comment",
                     "author": {
-                        "id": 1,
-                        "name": "admin"
+                        "id": 2,
+                        "name": "blogger"
                     },
                     "customPost": {
                         "id": 21,
@@ -31,9 +31,9 @@
                     "responses": [
                         {
                             "approved": true,
-                            "authorEmail": "admin@example.com",
+                            "authorEmail": "blogger@test.com",
                             "authorIP": "172.20.0.2",
-                            "authorName": "admin",
+                            "authorName": "blogger",
                             "authorURL": "http://graphql-api-nginx.lndo.site",
                             "content": "<p>As many as you want!</p>\n",
                             "customPostID": 21,
@@ -47,8 +47,8 @@
                             "status": "approve",
                             "type": "comment",
                             "author": {
-                                "id": 1,
-                                "name": "admin"
+                                "id": 2,
+                                "name": "Blogger Davenport"
                             },
                             "customPost": {
                                 "id": 21,
@@ -62,9 +62,9 @@
                 },
                 {
                     "approved": true,
-                    "authorEmail": "admin@example.com",
+                    "authorEmail": "blogger@test.com",
                     "authorIP": "172.20.0.2",
-                    "authorName": "admin",
+                    "authorName": "blogger",
                     "authorURL": "http://graphql-api-nginx.lndo.site",
                     "content": "<p>Will the fields be shown or hidden when the user is denied access?</p>\n",
                     "customPostID": 21,
@@ -78,8 +78,8 @@
                     "status": "approve",
                     "type": "comment",
                     "author": {
-                        "id": 1,
-                        "name": "admin"
+                        "id": 2,
+                        "name": "Blogger Davenport"
                     },
                     "customPost": {
                         "id": 21,
@@ -89,9 +89,9 @@
                     "responses": [
                         {
                             "approved": true,
-                            "authorEmail": "admin@example.com",
+                            "authorEmail": "blogger@test.com",
                             "authorIP": "172.20.0.2",
-                            "authorName": "admin",
+                            "authorName": "blogger",
                             "authorURL": "http://graphql-api-nginx.lndo.site",
                             "content": "<p>That can be configured, as either &#8220;public&#8221; or &#8220;private&#8221; API mode</p>\n",
                             "customPostID": 21,
@@ -105,8 +105,8 @@
                             "status": "approve",
                             "type": "comment",
                             "author": {
-                                "id": 1,
-                                "name": "admin"
+                                "id": 2,
+                                "name": "Blogger Davenport"
                             },
                             "customPost": {
                                 "id": 21,

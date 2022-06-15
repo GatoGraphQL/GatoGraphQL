@@ -137,7 +137,7 @@
                 "websiteURL": "",
                 "nicename": "editor",
                 "self": {
-                    "id": 5
+                    "id": 6
                 }
             },
             {
@@ -152,7 +152,7 @@
                 "websiteURL": "",
                 "nicename": "author",
                 "self": {
-                    "id": 4
+                    "id": 5
                 }
             },
             {
@@ -167,21 +167,11 @@
                 "websiteURL": "",
                 "nicename": "contributor",
                 "self": {
-                    "id": 3
+                    "id": 4
                 }
             }
         ],
-        "myPosts": [
-            {
-                "id": 1
-            },
-            {
-                "id": 25
-            },
-            {
-                "id": 23
-            }
-        ],
+        "myPosts": [],
         "me": {
             "id": 1
         }

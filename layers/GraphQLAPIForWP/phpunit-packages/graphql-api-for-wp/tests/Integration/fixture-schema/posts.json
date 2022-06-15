@@ -29,8 +29,8 @@
                 "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "urlAbsolutePath": "\/hello-world\/",
                 "author": {
-                    "id": 1,
-                    "name": "admin"
+                    "id": 2,
+                    "name": "Blogger Davenport"
                 },
                 "categories": [
                     {
@@ -70,7 +70,7 @@
                 "url": "https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
                 "urlAbsolutePath": "\/http-caching-improves-performance\/",
                 "author": {
-                    "id": 4,
+                    "id": 5,
                     "name": "Author Marquez"
                 },
                 "categories": [
@@ -120,8 +120,8 @@
                 "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
                 "urlAbsolutePath": "\/public-or-private-api-mode-for-extra-security\/",
                 "author": {
-                    "id": 1,
-                    "name": "admin"
+                    "id": 2,
+                    "name": "Blogger Davenport"
                 },
                 "categories": [
                     {
@@ -147,7 +147,7 @@
                 ],
                 "featuredImage": {
                     "id": 362,
-                    "src": "http:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-api-search-results-5.png"
+                    "src": "http:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-api-search-results-6.png"
                 },
                 "tags": [
                     {
@@ -183,18 +183,6 @@
             {
                 "id": 21,
                 "title": "Customize the schema for each client"
-            },
-            {
-                "id": 19,
-                "title": "Nested mutations are a must have"
-            },
-            {
-                "id": 16,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 13,
-                "title": "Released v0.6, check it out"
             }
         ],
         "postsByCategoryIDs": [
