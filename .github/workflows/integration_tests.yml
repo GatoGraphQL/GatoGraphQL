@@ -8,8 +8,33 @@ env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-    retrieve_artifact_url:
+    provide_data:
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        name: Provide configuration data
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   uses: "ramsey/composer-install@v1"
+
+            -   id: output_data
+                run: |
+                    echo "::set-output name=additional_integration_test_plugins::$(vendor/bin/monorepo-builder additional-integration-test-plugins --config=config/monorepo-builder/additional-integration-test-plugins.php)"
+            
+        outputs:
+            additional_integration_test_plugins: ${{ steps.output_data.outputs.additional_integration_test_plugins }}
+    
+    retrieve_artifact_url:
+        needs: provide_data
         name: Retrieve the artifact URL
         runs-on: ubuntu-latest
         steps:
@@ -24,9 +49,12 @@ jobs:
                             run_id: context.payload.workflow_run.id,
                         });
                         let artifactURLs = allArtifacts.data.artifacts.map((artifact) => {
+                            // Use Nightly Link as it allows InstaWP to access the artifacts, i.e. without having to be logged-in to GitHub
+                            // @see https://nightly.link
                             return artifact.url.replace('https://api.github.com/repos', 'https://nightly.link') + '.zip'
                         });
-                        let artifactURL = artifactURLs.filter(url => url !== '').concat(',');
+                        // Allow installing additional plugins, set via the monorepo configuration
+                        let artifactURL = artifactURLs.concat(${{ needs.provide_data.outputs.additional_integration_test_plugins }}).filter(url => url !== '').concat(',');
                         return artifactURL;
                     result-encoding: string
 
