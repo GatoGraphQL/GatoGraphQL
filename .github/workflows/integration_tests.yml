@@ -123,7 +123,7 @@ jobs:
                     INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch_instawp_instance.outputs.instawp-domain }} \
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME=${{ secrets.INSTAWP_ADMIN_USER_USERNAME }} \
                     INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD=${{ secrets.INSTAWP_ADMIN_USER_PASSWORD }} \
-                    vendor/bin/phpunit --filter=Integration/
+                    vendor/bin/phpunit --filter=Integration
 
     # @todo Uncomment when ARTIFACT_URL plugins are being installed
     # destroy_instawp_after_testing:
