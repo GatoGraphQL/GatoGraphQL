@@ -29,5 +29,5 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run tests
-                run: vendor/bin/phpunit
+                run: vendor/bin/phpunit --filter='/^((?!Integration).)*$/'
 
