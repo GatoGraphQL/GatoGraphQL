@@ -75,7 +75,6 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_DOMAIN: ${{ secrets.INSTAWP_DOMAIN }}
                     INSTAWP_TEMPLATE_SLUG: ${{ secrets.INSTAWP_TEMPLATE_SLUG }}
                     REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
                     INSTAWP_ACTION: create-site-template
@@ -130,7 +129,6 @@ jobs:
     #             with:
     #                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #                 INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-    #                 INSTAWP_DOMAIN: ${{ secrets.INSTAWP_DOMAIN }}
     #                 INSTAWP_TEMPLATE_SLUG: ${{ secrets.INSTAWP_TEMPLATE_SLUG }}
     #                 REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
     #                 INSTAWP_ACTION: destroy-site
