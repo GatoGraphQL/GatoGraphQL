@@ -8,8 +8,6 @@ class EnvironmentVariablesDataSource
 {
     public final const GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE = 'GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE';
     public final const RETENTION_DAYS_FOR_GENERATED_PLUGINS = 'RETENTION_DAYS_FOR_GENERATED_PLUGINS';
-    public final const INSTAWP_TEMPLATE_SLUG = 'INSTAWP_TEMPLATE_SLUG';
-    public final const INSTAWP_REPO_ID = 'INSTAWP_REPO_ID';
 
     /**
      * @return array<string,string>
@@ -19,8 +17,6 @@ class EnvironmentVariablesDataSource
         return [
             self::GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE => false,
             self::RETENTION_DAYS_FOR_GENERATED_PLUGINS => 30,
-            self::INSTAWP_TEMPLATE_SLUG => 'integration-tests',
-            self::INSTAWP_REPO_ID => 30,
         ];
     }
 }

@@ -29,13 +29,9 @@ jobs:
             -   id: output_data
                 run: |
                     echo "::set-output name=additional_integration_test_plugins::$(vendor/bin/monorepo-builder additional-integration-test-plugins --config=config/monorepo-builder/additional-integration-test-plugins.php)"
-                    echo "::set-output name=instawp_template_slug::$(vendor/bin/monorepo-builder env-var INSTAWP_TEMPLATE_SLUG --config=config/monorepo-builder/env-var.php)"
-                    echo "::set-output name=instawp_repo_id::$(vendor/bin/monorepo-builder env-var INSTAWP_REPO_ID --config=config/monorepo-builder/env-var.php)"
             
         outputs:
             additional_integration_test_plugins: ${{ steps.output_data.outputs.additional_integration_test_plugins }}
-            instawp_template_slug: ${{ steps.output_data.outputs.instawp_template_slug }}
-            instawp_repo_id: ${{ steps.output_data.outputs.instawp_repo_id }}
     
     retrieve_artifact_url:
         needs: provide_data
@@ -69,7 +65,7 @@ jobs:
             artifact-url: ${{ steps.artifact-url.outputs.result }}
 
     launch_instawp_instance:
-        needs: [provide_data, retrieve_artifact_url]
+        needs: retrieve_artifact_url
         name: Launch InstaWP instance
         runs-on: ubuntu-latest
         steps:
@@ -79,8 +75,8 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-                    INSTAWP_TEMPLATE_SLUG: ${{ needs.provide_data.outputs.instawp_template_slug }}
-                    REPO_ID: ${{ needs.provide_data.outputs.instawp_repo_id }}
+                    INSTAWP_TEMPLATE_SLUG: ${{ secrets.INSTAWP_TEMPLATE_SLUG }}
+                    REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
                     INSTAWP_ACTION: create-site-template
                     ARTIFACT_URL: ${{ needs.retrieve_artifact_url.outputs.artifact-url }}
 
@@ -133,6 +129,6 @@ jobs:
     #             with:
     #                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #                 INSTAWP_TOKEN: ${{ secrets.INSTAWP_TOKEN }}
-    #                 INSTAWP_TEMPLATE_SLUG: ${{ needs.provide_data.outputs.instawp_template_slug }}
-    #                 REPO_ID: ${{ needs.provide_data.outputs.instawp_repo_id }}
+    #                 INSTAWP_TEMPLATE_SLUG: ${{ secrets.INSTAWP_TEMPLATE_SLUG }}
+    #                 REPO_ID: ${{ secrets.INSTAWP_REPO_ID }}
     #                 INSTAWP_ACTION: destroy-site
