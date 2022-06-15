@@ -253,18 +253,19 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         parent::setUp();
 
+        if (static::$enableTests) {
+            return;
+        }
+        
         /**
          * If the webserver is down:
          *
          * - In localhost: Skip the tests
          * - In CI: throw error
          */
-        if (!static::$enableTests) {
-            if (static::isContinuousIntegration()) {
-                throw new IntegrationTestApplicationNotAvailableException(self::$skipTestsReason);
-            }
-            
-            $this->markTestSkipped(self::$skipTestsReason);
-        }
+        if (static::isContinuousIntegration()) {
+            throw new IntegrationTestApplicationNotAvailableException(self::$skipTestsReason);
+        }        
+        $this->markTestSkipped(self::$skipTestsReason);
     }
 }
