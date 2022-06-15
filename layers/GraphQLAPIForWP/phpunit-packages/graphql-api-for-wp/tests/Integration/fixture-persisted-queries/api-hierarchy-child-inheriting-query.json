@@ -18,10 +18,6 @@
                 {
                     "id": 21,
                     "title": "Customize the schema for each client"
-                },
-                {
-                    "id": 19,
-                    "title": "Nested mutations are a must have"
                 }
             ]
         }
