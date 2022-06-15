@@ -21,7 +21,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static ?Client $client = null;
     protected static ?CookieJar $cookieJar = null;
     protected static bool $enableTests = false;
-    protected static string $skipTestsReason = '';
+    protected static string $skipOrFailTestsReason = '';
 
     public static function setUpBeforeClass(): void
     {
@@ -38,13 +38,13 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         // Skip running tests if the domain has not been configured
         if (static::getWebserverDomain() === '') {
-            self::$skipTestsReason = 'Webserver domain not configured';
+            self::$skipOrFailTestsReason = 'Webserver domain not configured';
             return;
         }
 
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
-            self::$skipTestsReason = 'Test skipped for Continuous Integration';
+            self::$skipOrFailTestsReason = 'Test skipped for Continuous Integration';
             return;
         }
 
@@ -80,7 +80,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             // The webserver is down
         }
 
-        self::$skipTestsReason = sprintf(
+        self::$skipOrFailTestsReason = sprintf(
             'Webserver under "%s" is not running',
             static::getWebserverDomain()
         );
@@ -264,8 +264,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
          * - In CI: throw error
          */
         if (static::isContinuousIntegration()) {
-            throw new IntegrationTestApplicationNotAvailableException(self::$skipTestsReason);
+            throw new IntegrationTestApplicationNotAvailableException(self::$skipOrFailTestsReason);
         }        
-        $this->markTestSkipped(self::$skipTestsReason);
+        $this->markTestSkipped(self::$skipOrFailTestsReason);
     }
 }
