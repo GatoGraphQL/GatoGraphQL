@@ -6,6 +6,6 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests\Exception;
 
 use Exception;
 
-final class WebserverNotRunningException extends Exception
+final class IntegrationTestApplicationNotAvailableException extends Exception
 {
 }

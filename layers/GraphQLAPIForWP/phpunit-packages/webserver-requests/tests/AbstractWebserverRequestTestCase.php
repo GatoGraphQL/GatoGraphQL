@@ -10,8 +10,8 @@ use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
+use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
-use PHPUnitForGraphQLAPI\WebserverRequests\Exception\WebserverNotRunningException;
 
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -43,8 +43,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
 
         // Skip running tests in Continuous Integration?
-        $isContinuousIntegration = static::isContinuousIntegration();
-        if ($isContinuousIntegration && static::skipTestsInContinuousIntegration()) {
+        if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
             self::$skipTestsReason = 'Test skipped for Continuous Integration';
             return;
         }
@@ -81,18 +80,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             // The webserver is down
         }
 
-        /**
-         * If the testing webserver is not running, it's an error during CI,
-         * but a "skip test" in the localhost
-         */
-        $message = sprintf(
+        self::$skipTestsReason = sprintf(
             'Webserver under "%s" is not running',
             static::getWebserverDomain()
         );
-        if ($isContinuousIntegration) {
-            throw new WebserverNotRunningException($message);
-        }
-        self::$skipTestsReason = $message;
     }
 
     /**
@@ -263,9 +254,16 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         parent::setUp();
 
         /**
-         * Skip the tests if the webserver is down.
+         * If the webserver is down:
+         *
+         * - In localhost: Skip the tests
+         * - In CI: throw error
          */
         if (!static::$enableTests) {
+            if (static::isContinuousIntegration()) {
+                throw new IntegrationTestApplicationNotAvailableException(self::$skipTestsReason);
+            }
+            
             $this->markTestSkipped(self::$skipTestsReason);
         }
     }
