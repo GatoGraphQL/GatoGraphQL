@@ -1,7 +1,7 @@
 mutation {
   loginUser(by: {
     credentials: {
-      usernameOrEmail: "blogger",
+      usernameOrEmail: "admin",
       password: "somepass"
     }
   }) {
