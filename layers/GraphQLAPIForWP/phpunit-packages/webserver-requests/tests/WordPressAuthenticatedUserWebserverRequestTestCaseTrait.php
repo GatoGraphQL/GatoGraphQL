@@ -73,7 +73,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
         if ($username === '' || static::getLoginPassword() === '') {
             return 'The credentials to authenticate the user are incomplete or missing';
         }
-        return sprintf('Authentication of user "%s" did not succeed', $username);
+        return 'Authentication of the admin user did not succeed';
     }
 
     /**
