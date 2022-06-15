@@ -8,7 +8,7 @@ env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-    retrieve-artifact-url:
+    retrieve_artifact_url:
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         name: Retrieve the artifact URL
         runs-on: ubuntu-latest
@@ -37,8 +37,8 @@ jobs:
         outputs:
             artifact-url: ${{ steps.artifact-url.outputs.result }}
 
-    launch-instawp-instance:
-        needs: retrieve-artifact-url
+    launch_instawp_instance:
+        needs: retrieve_artifact_url
         name: Launch InstaWP instance
         runs-on: ubuntu-latest
         steps:
@@ -52,7 +52,7 @@ jobs:
                     INSTAWP_TEMPLATE_SLUG: integration-tests
                     REPO_ID: 30
                     INSTAWP_ACTION: create-site-template
-                    ARTIFACT_URL: ${{ needs.retrieve-artifact-url.outputs.artifact-url }}
+                    ARTIFACT_URL: ${{ needs.retrieve_artifact_url.outputs.artifact-url }}
 
             -   name: InstaWP instance URL
                 run: echo "InstaWP instance URL - ${{ steps.create-instawp.outputs.instawp_url }}"
@@ -67,8 +67,8 @@ jobs:
         outputs:
             instawp-domain: ${{ steps.extract-instawp-domain.outputs.instawp-domain }}
 
-    execute-integration-tests:
-        needs: launch-instawp-instance
+    execute_integration_tests:
+        needs: launch_instawp_instance
         name: Execute integration tests
         runs-on: ubuntu-latest
         steps:
@@ -89,11 +89,11 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run tests
-                run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch-instawp-instance.outputs.instawp-domain }} vendor/bin/phpunit --filter=Integration/
+                run: INTEGRATION_TESTS_WEBSERVER_DOMAIN=${{ needs.launch_instawp_instance.outputs.instawp-domain }} vendor/bin/phpunit --filter=Integration/
 
     # @todo Uncomment when ARTIFACT_URL plugins are being installed
-    # destroy-instawp-after-testing:
-    #     needs: execute-integration-tests
+    # destroy_instawp_after_testing:
+    #     needs: execute_integration_tests
     #     if: ${{ always() }}
     #     name: Destroy InstaWP instance
     #     runs-on: ubuntu-latest
