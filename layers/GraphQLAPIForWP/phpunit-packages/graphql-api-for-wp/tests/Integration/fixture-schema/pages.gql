@@ -44,7 +44,7 @@ query {
     urlAbsolutePath
   }
 
-  pagesByAuthorIDs: pages(filter: { authorIDs: 1 }) {
+  pagesByAuthorIDs: pages(filter: { authorIDs: 2 }) {
     id
     title
   }

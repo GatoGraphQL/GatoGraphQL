@@ -48,7 +48,7 @@ query {
     urlAbsolutePath
   }
 
-  postsByAuthorIDs: posts(filter: { authorIDs: 4 }) {
+  postsByAuthorIDs: posts(filter: { authorIDs: 5 }) {
     id
     title
   }

@@ -6,7 +6,7 @@ query {
     ...MediaItemData
   }
 
-  mediaItemsByAuthorIDs: mediaItems(filter: { authorIDs: 1, mimeTypes: "*" }) {
+  mediaItemsByAuthorIDs: mediaItems(filter: { authorIDs: 2, mimeTypes: "*" }) {
     id
     title
   }
