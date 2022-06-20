@@ -213,7 +213,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * By keeping a registry of fields to fieldOutputNames, we can always provide
      * a unique name, and avoid overriding the value.
      */
-    public function getUniqueFieldOutputKeyByTypeOutputKey(string $typeOutputDBKey, string $field): string
+    public function getUniqueFieldOutputKeyByTypeOutputKey(string $typeOutputKey, string $field): string
     {
         /**
          * This function caches state across PHPUnit tests! Then, running a
@@ -236,24 +236,24 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
          */
         $field = $this->removeSkipOuputIfNullFromField($field); /** @phpstan-ignore-line */
         // If a fieldOutputKey has already been created for this field, retrieve it
-        if ($fieldOutputKey = $this->fieldOutputKeysByTypeAndField[$typeOutputDBKey][$field] ?? null) {
+        if ($fieldOutputKey = $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] ?? null) {
             return $fieldOutputKey;
         }
         $fieldOutputKey = $this->getFieldOutputKey($field);
-        if (!isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputDBKey][$fieldOutputKey])) {
-            $this->fieldsByTypeAndFieldOutputKey[$typeOutputDBKey][$fieldOutputKey] = $field;
-            $this->fieldOutputKeysByTypeAndField[$typeOutputDBKey][$field] = $fieldOutputKey;
+        if (!isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey])) {
+            $this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey] = $field;
+            $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] = $fieldOutputKey;
             return $fieldOutputKey;
         }
         // This fieldOutputKey already exists for a different field,
         // then create a counter and iterate until it doesn't exist anymore
         $counter = 0;
-        while (isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputDBKey][$fieldOutputKey . '-' . $counter])) {
+        while (isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey . '-' . $counter])) {
             $counter++;
         }
         $fieldOutputKey = $fieldOutputKey . '-' . $counter;
-        $this->fieldsByTypeAndFieldOutputKey[$typeOutputDBKey][$fieldOutputKey] = $field;
-        $this->fieldOutputKeysByTypeAndField[$typeOutputDBKey][$field] = $fieldOutputKey;
+        $this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey] = $field;
+        $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] = $fieldOutputKey;
         return $fieldOutputKey;
     }
 
