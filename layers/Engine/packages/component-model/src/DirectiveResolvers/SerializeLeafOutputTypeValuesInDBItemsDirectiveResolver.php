@@ -37,7 +37,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
      */
     public function getPipelinePosition(): string
     {
-        return PipelinePositions::END;
+        return PipelinePositions::AFTER_SERIALIZE;
     }
 
     /**
