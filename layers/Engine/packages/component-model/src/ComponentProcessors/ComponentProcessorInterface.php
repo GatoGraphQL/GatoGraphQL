@@ -80,10 +80,10 @@ interface ComponentProcessorInterface
      * @param Component[]|Component $component_or_componentPath
      */
     public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
-    public function getDatabaseKeys(Component $component, array &$props): array;
+    public function getFieldOutputKeys(Component $component, array &$props): array;
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDatasetsettings(Component $component, array &$props): array;
-    public function getDatasetDatabaseKeys(Component $component, array &$props): array;
+    public function getDatasetOutputKeys(Component $component, array &$props): array;
     public function getDatasource(Component $component, array &$props): string;
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null;
     public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;
@@ -119,9 +119,9 @@ interface ComponentProcessorInterface
     public function getMutableonrequestDataPropertiesDatasetcomponentTree(Component $component, array &$props): array;
     public function getMutableonrequestDataPropertiesDatasetcomponentTreeFullsection(Component $component, array &$props): array;
     public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array;
-    public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
-    public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
-    public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array;
+    public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
+    public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
     public function getDataFeedbackInterreferencedComponentPath(Component $component, array &$props): ?array;
     public function getBackgroundurlsMergeddatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
     public function getBackgroundurls(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array;
@@ -142,6 +142,6 @@ interface ComponentProcessorInterface
     public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array;
     public function doesComponentLoadData(Component $component): bool;
     public function startDataloadingSection(Component $component): bool;
-    public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void;
+    public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void;
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void;
 }

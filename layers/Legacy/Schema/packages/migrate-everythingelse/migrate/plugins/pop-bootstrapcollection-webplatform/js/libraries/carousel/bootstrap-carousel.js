@@ -281,7 +281,7 @@ window.pop.BootstrapCarouselControls = {
 	handleReload : function(domain, pageSection, block, carouselControls) {
 	
 		var that = this;
-		var dbobjectids = pop.Manager.getDataset(domain, pageSection, block);
+		var objectIDs = pop.Manager.getDataset(domain, pageSection, block);
 
 		// Set controls enabled / disabled
 		that.setEnabledDisabled(pageSection, block, carouselControls);
@@ -290,7 +290,7 @@ window.pop.BootstrapCarouselControls = {
 		// if (!blockFeedback.msg && that.getControlState(pageSection, block) == 'loading') {
 
 		// Only if there are results, and if the last state from the control was 'next'
-		if (dbobjectids && dbobjectids.length && that.getControlState(pageSection, block) == 'loading') {
+		if (objectIDs && objectIDs.length && that.getControlState(pageSection, block) == 'loading') {
 		
 			var carousel = that.getCarousel(carouselControls);
 			var controlNext = carouselControls.children('.pop-carousel-control.right');

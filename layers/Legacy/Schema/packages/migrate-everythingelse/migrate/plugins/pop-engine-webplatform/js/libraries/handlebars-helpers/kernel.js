@@ -90,12 +90,12 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var pss = prevContext.pss;
 	var bs = prevContext.bs;
 	var dbObject = prevContext.dbObject;
-	var dbObjectDBKey = prevContext.dbObjectDBKey;
+	var dbObjectTypeOutputKey = prevContext.dbObjectTypeOutputKey;
 	var ignorePSRuntimeId = prevContext.ignorePSRuntimeId;
 	var feedbackObject = prevContext.feedbackObject;
 	
 	// The following values, if passed as a param, then these take priority. Otherwise, use them from the previous context
-	var dbKey = (typeof options.hash.dbKey != 'undefined') ? options.hash.dbKey : prevContext.dbKey;
+	var typeOutputKey = (typeof options.hash.typeOutputKey != 'undefined') ? options.hash.typeOutputKey : prevContext.typeOutputKey;
 	var dbObjectIDs = (typeof options.hash.dbObjectIDs != 'undefined') ? options.hash.dbObjectIDs : prevContext.dbObjectIDs;
 	if (jQuery.type(dbObjectIDs) === "array" && !dbObjectIDs.length) {
 		dbObjectIDs = null;
@@ -104,8 +104,8 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	// Add all these vars to the context for this component
 	var extend = {
 		dbObject: dbObject, 
-		dbObjectDBKey: dbObjectDBKey, 
-		dbKey: dbKey, 
+		dbObjectTypeOutputKey: dbObjectTypeOutputKey, 
+		typeOutputKey: typeOutputKey, 
 		dbObjectIDs: dbObjectIDs, 
 		tls: tls, 
 		pss: pss, 
@@ -127,7 +127,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	// Do it after extending with getRuntimeConfiguration, so that these keys are also expanded
 	pop.Manager.expandJSKeys(context);
 
-	// DBObjectId could be passed as an array ('dbobjectids' is an array), so if it's the case, and it's empty, then nullify it
+	// DBObjectId could be passed as an array ('objectIDs' is an array), so if it's the case, and it's empty, then nullify it
 	var objectID = options.hash.objectID;
 	if (jQuery.type(objectID) === "array") {
 		
@@ -143,46 +143,46 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		}
 	}
 
-	if (options.hash.dbKey && objectID) {
+	if (options.hash.typeOutputKey && objectID) {
 
-		dbKey = options.hash.dbKey;
-		dbObject = pop.Manager.getDBObject(domain, dbKey, objectID);
+		typeOutputKey = options.hash.typeOutputKey;
+		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 		extend.dbObject = dbObject;
-		extend.dbObjectDBKey = dbKey;
-		extend.dbKey = dbKey;
+		extend.dbObjectTypeOutputKey = typeOutputKey;
+		extend.typeOutputKey = typeOutputKey;
 		extend.dbObjectIDs = [objectID];
 	}
-	else if (options.hash.dbKey && dbObjectIDs) {
+	else if (options.hash.typeOutputKey && dbObjectIDs) {
 
-		extend.dbKey = options.hash.dbKey;
+		extend.typeOutputKey = options.hash.typeOutputKey;
 		extend.dbObjectIDs = dbObjectIDs;
 	}
 	else if (options.hash.subcomponent && objectID) {
 
-		dbKey = bs.dbkeys[options.hash.subcomponent];
-		dbObject = pop.Manager.getDBObject(domain, dbKey, objectID);
+		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
+		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 		extend.dbObject = dbObject;
-		extend.dbObjectDBKey = dbKey;
-		extend.dbKey = dbKey;
+		extend.dbObjectTypeOutputKey = typeOutputKey;
+		extend.typeOutputKey = typeOutputKey;
 		extend.dbObjectIDs = [objectID];
 	}
 	else if (options.hash.subcomponent && dbObjectIDs) {
 
-		dbKey = bs.dbkeys[options.hash.subcomponent];
-		extend.dbKey = dbKey;
+		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
+		extend.typeOutputKey = typeOutputKey;
 		extend.dbObjectIDs = dbObjectIDs;
 	}
 	else if (dbObjectIDs) {
 
 		extend.dbObjectIDs = dbObjectIDs;
 	}
-	else if (options.hash.dbKey) {
+	else if (options.hash.typeOutputKey) {
 
-		// If only the dbKey has value, it means the other value passes (objectID or dbObjectIDs) is null
+		// If only the typeOutputKey has value, it means the other value passes (objectID or dbObjectIDs) is null
 		// So then put everything to null
-		extend.dbKey = options.hash.dbKey;
+		extend.typeOutputKey = options.hash.typeOutputKey;
 		extend.dbObject = null;
-		extend.dbObjectDBKey = null;
+		extend.dbObjectTypeOutputKey = null;
 		extend.dbObjectIDs = null;
 	}
 

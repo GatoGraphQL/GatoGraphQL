@@ -49,7 +49,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
         array $idFieldSet,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
-        array $unionDBKeyIDs,
+        array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
         array &$resolvedIDFieldValues,

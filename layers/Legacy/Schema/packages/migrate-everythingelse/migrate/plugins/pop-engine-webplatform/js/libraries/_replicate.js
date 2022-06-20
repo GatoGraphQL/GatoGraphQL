@@ -185,12 +185,12 @@
             var target = pop.Manager.getFrameTarget(pageSection);
             var replicableMemory = pop.Manager.getReplicableMemory(interceptUrl, target);
         
-            // Override the feedback, dbobjectids, params to the initial values
+            // Override the feedback, objectIDs, params to the initial values
             // (otherwise: sequence: click Add Project, submit with errors, Add a Project again, it will also draw the validation error, we gotta clear the feedbackmessage)
             // $.extend(memory.statefuldata.feedback.pagesection, replicableMemory.feedback.pagesection);
             // $.each(replicableMemory.feedback.block, function(ipssId, ipsFeedback) {
             //     $.extend(memory.statefuldata.feedback.block[ipssId], ipsFeedback);
-            //     $.extend(memory.statefuldata.dbobjectids[ipssId], replicableMemory.dbobjectids[ipssId]);
+            //     $.extend(memory.statefuldata.objectIDs[ipssId], replicableMemory.objectIDs[ipssId]);
             //     $.extend(memory.statefuldata.querystate.sharedbydomains[ipssId], replicableMemory.querystate.sharedbydomains[ipssId]);
             //     $.extend(memory.statefuldata.querystate.uniquetodomain[ipssId], replicableMemory.querystate.uniquetodomain[ipssId]);
             // });

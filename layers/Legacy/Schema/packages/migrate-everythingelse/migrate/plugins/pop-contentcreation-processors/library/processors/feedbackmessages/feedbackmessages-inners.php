@@ -42,9 +42,9 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         switch ($component->name) {
             case self::COMPONENT_FEEDBACKMESSAGEINNER_CREATECONTENT:
@@ -54,7 +54,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
                     if ($executed[ResponseConstants::SUCCESS]) {
                         // If the post was not just created but actually updated (created first and then on that same page updated it)
                         // then change the success code
-                        $pid = $dbobjectids[0];
+                        $pid = $objectIDs[0];
                         if ($pid === App::query(\PoPCMSSchema\Posts\Constants\InputNames::POST_ID)) {
                             $ret['msgs'][0]['header']['code'] = 'update-success-header';
                         }

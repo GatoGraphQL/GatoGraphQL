@@ -114,9 +114,9 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         return false;
     }
 
-    public function getJsdataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         if ($this->showDisabledLayer($component, $props) && $this->showDisabledLayerIfCheckpointFailed($component, $props)) {
             $ret['blockHandleDisabledLayer']['checkpoint-failed'] = $dataaccess_checkpoint_validation !== null || $actionexecution_checkpoint_validation !== null;
@@ -260,9 +260,9 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
         if ($dataaccess_checkpoint_validation !== null || $actionexecution_checkpoint_validation !== null) {
             $ret['checkpoint-failed'] = true;
         }

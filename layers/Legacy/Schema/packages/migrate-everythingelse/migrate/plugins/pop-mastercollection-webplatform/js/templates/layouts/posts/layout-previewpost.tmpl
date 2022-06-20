@@ -22,7 +22,7 @@
 				{{#each authors}}
 					{{#if @index}}{{{../../authors-sep}}}{{/if}}
 					{{#withModule ../../. "authors"}}
-						{{enterModule ../../../. dbKey=../../../bs.dbkeys.authors objectID=../this}}
+						{{enterModule ../../../. typeOutputKey=../../../bs.outputKeys.authors objectID=../this}}
 					{{/withModule}}
 				{{/each}}
 				{{{../titles.afterauthors.abovethumb}}}
@@ -37,7 +37,7 @@
 				{{/withModule}}
 				{{#withModule ../. "author-avatar"}}
 					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">					
-						{{enterModule ../../. dbKey=../../bs.dbkeys.authors objectID=../authors}}
+						{{enterModule ../../. typeOutputKey=../../bs.outputKeys.authors objectID=../authors}}
 					</div>
 				{{/withModule}}
 				{{#if ../subcomponentoutputnames.belowthumb}}
@@ -73,7 +73,7 @@
 						{{#each authors}}
 							{{#if @index}}{{{../../authors-sep}}}{{/if}}
 							{{#withModule ../../. "authors"}}
-								{{enterModule ../../../. dbKey=../../../bs.dbkeys.authors objectID=../this}}
+								{{enterModule ../../../. typeOutputKey=../../../bs.outputKeys.authors objectID=../this}}
 							{{/withModule}}
 						{{/each}}
 						{{{../titles.afterauthors.abovetitle}}}
@@ -113,7 +113,7 @@
 						{{#each authors}}
 							{{#if @index}}{{{../../authors-sep}}}{{/if}}
 							{{#withModule ../../. "authors"}}
-								{{enterModule ../../../. dbKey=../../../bs.dbkeys.authors objectID=../this}}
+								{{enterModule ../../../. typeOutputKey=../../../bs.outputKeys.authors objectID=../this}}
 							{{/withModule}}
 						{{/each}}
 						{{{../titles.afterauthors.belowcontent}}}

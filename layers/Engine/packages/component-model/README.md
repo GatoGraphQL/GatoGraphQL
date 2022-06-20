@@ -142,7 +142,7 @@ For instance, if fetching the data for blog posts with titles "Hello World!" and
 }
 ```
 
-Each component knows which are its queried objects from section `datasetcomponentdata`, which provides the IDs of the queried objects under property `dbobjectids` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `componentsettings`, which indicates to what type each object belongs under property `dbkeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
+Each component knows which are its queried objects from section `datasetcomponentdata`, which provides the IDs of the queried objects under property `objectIDs` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `componentsettings`, which indicates to what type each object belongs under property `outputKeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
 
 ```javascript
 {
@@ -150,7 +150,7 @@ Each component knows which are its queried objects from section `datasetcomponen
     "page": {
       components: {
         "post-feed": {
-          dbkeys: {
+          outputKeys: {
             id: "posts",
             author: "users"
           }
@@ -162,7 +162,7 @@ Each component knows which are its queried objects from section `datasetcomponen
     "page": {
       components: {
         "post-feed": {
-          dbobjectids: [4, 9]
+          objectIDs: [4, 9]
         }
       }
     }
@@ -420,24 +420,24 @@ Every component can interact with itself from client to server just by adding it
 
 This is accomplished by allowing to select what component paths (i.e. the path to a specific component starting from the top-most component) will be included in the response, so as to load data only starting from that level, and ignore anything above that level. This is done through adding parameters `componentFilter=componentpaths` and `componentpaths[]=path-to-the-component` to the URL (we use `componentpaths[]` instead of `componentpaths` for versatility, so that we can include more than one component path in a single request). The value for the `componentpaths[]` parameter is a list of components separated by dots. Hence, fetching data for component "component5", located under `component1 => component2 => component5`, is done by adding parameter `componentpaths[]=component1.component2.component5` to the URL. 
 
-For instance, in the following component hierarchy every component is loading data, hence every level has an entry `dbobjectids`:
+For instance, in the following component hierarchy every component is loading data, hence every level has an entry `objectIDs`:
 
 ```javascript
 "component1"
-  dbobjectids: [...]
+  objectIDs: [...]
   components
     "component2"
-      dbobjectids: [...]
+      objectIDs: [...]
       components
         "component3"
-          dbobjectids: [...]
+          objectIDs: [...]
         "component4"
-          dbobjectids: [...]
+          objectIDs: [...]
         "component5"
-          dbobjectids: [...]
+          objectIDs: [...]
           components
             "component6"
-              dbobjectids: [...]
+              objectIDs: [...]
 ```
 
 Then requesting the webpage URL adding parameters `componentFilter=componentpaths` and `componentpaths[]=component1.component2.component5` will produce the following response:
@@ -448,10 +448,10 @@ Then requesting the webpage URL adding parameters `componentFilter=componentpath
     "component2"
       components
         "component5"
-          dbobjectids: [...]
+          objectIDs: [...]
           components
             "component6"
-              dbobjectids: [...]
+              objectIDs: [...]
 ```
 
 In essence, the API starts loading data starting from component1 => component2 => component5, that's why "component6", which comes under "component5", also brings its data, but "component3" and "component4" do not.
@@ -602,18 +602,18 @@ Having the component-based structure, we can now add the actual information requ
   },
   datasetcomponentdata: {
     "top-component": {
-      dbobjectids: [...],
+      objectIDs: [...],
       ...,
       components: {
         "component-level1": {
-          dbobjectids: [...],
+          objectIDs: [...],
           ...,
           components: {
             "component-level11": {
               repeat...
             },
             "component-level12": {
-              dbobjectids: [...],
+              objectIDs: [...],
               ...,
               components: {
                 "component-level121": {
@@ -624,7 +624,7 @@ Having the component-based structure, we can now add the actual information requ
           }
         },
         "component-level2": {
-          dbobjectids: [...],
+          objectIDs: [...],
           ...,
           components: {
             "component-level21": {
@@ -723,8 +723,8 @@ Database object data is retrieved and placed under a shared section called `data
 
 For instance, the API response below contains a component hierarchy with two components, `"page" => "post-feed"`, where component `"post-feed"` fetches blog posts. Please notice the following:
 
-- Each component knows which are its queried objects from property `dbobjectids` (IDs 4 and 9 for the blog posts)
-- Each component knows the object type for its queried objects from property `dbkeys` (each post's data is found under "posts", and the post's author data, corresponding to the author with the ID given under the post's property "author", is found under "users"):
+- Each component knows which are its queried objects from property `objectIDs` (IDs 4 and 9 for the blog posts)
+- Each component knows the object type for its queried objects from property `outputKeys` (each post's data is found under "posts", and the post's author data, corresponding to the author with the ID given under the post's property "author", is found under "users"):
 - Because the database object data is relational, property "author" contains the ID to the author object instead of printing the author data directly
 
 ```javascript
@@ -733,7 +733,7 @@ For instance, the API response below contains a component hierarchy with two com
     "page": {
       components: {
         "post-feed": {
-          dbobjectids: [4, 9]
+          objectIDs: [4, 9]
         }
       }
     }
@@ -742,7 +742,7 @@ For instance, the API response below contains a component hierarchy with two com
     "page": {
       components: {
         "post-feed": {
-          dbkeys: {
+          outputKeys: {
             id: "posts",
             author: "users"
           }
@@ -1721,7 +1721,7 @@ The QueryInputOutputHandler is an object that synchronizes the state of the quer
 
 Before fetching data from the database, function `prepareQueryArgs` populates the `$query_args` object used passed to the dataloader to fetch data. It can get values from the request (eg: set through the application in the client) or define default values.
 
-After fecthing data from the database, functions `getQueryState`, `getQueryParams` and `getQueryResult`, all of them receiving parameters `$data_properties, $checkpoint_validation, $executed, $dbobjectids`, send information about the executed query back to the client: state values (eg: are there more results?), parameter values (eg: how many results to bring each time) and result values (eg: was execution successful?) correspondingly.
+After fecthing data from the database, functions `getQueryState`, `getQueryParams` and `getQueryResult`, all of them receiving parameters `$data_properties, $checkpoint_validation, $executed, $objectIDs`, send information about the executed query back to the client: state values (eg: are there more results?), parameter values (eg: how many results to bring each time) and result values (eg: was execution successful?) correspondingly.
 
 ### ActionExecuter
 

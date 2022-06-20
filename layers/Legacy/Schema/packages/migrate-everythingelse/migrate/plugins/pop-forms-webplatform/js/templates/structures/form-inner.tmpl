@@ -1,5 +1,5 @@
 {{#each subcomponentoutputnames.layouts}}
 	{{#withModule ../. this}}
-		{{enterModule ../../. dbKey=../../dbKey objectID=../../dbObjectIDs}}
+		{{enterModule ../../. typeOutputKey=../../typeOutputKey objectID=../../dbObjectIDs}}
 	{{/withModule}}
 {{/each}}

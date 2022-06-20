@@ -625,13 +625,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getDatabaseKeys(Component $component, array &$props): array
+    public function getFieldOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
-            if ($dbkey = $relationalTypeResolver->getTypeOutputDBKey()) {
+            if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
                 // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
-                $ret['id'] = $dbkey;
+                $ret['id'] = $typeOutputKey;
             }
         }
 
@@ -685,23 +685,23 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $ret = array();
 
-        if ($database_keys = $this->getDatasetDatabaseKeys($component, $props)) {
-            $ret['dbkeys'] = $database_keys;
+        if ($outputKeys = $this->getDatasetOutputKeys($component, $props)) {
+            $ret['outputKeys'] = $outputKeys;
         }
 
         return $ret;
     }
 
-    public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void
+    public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void
     {
-        // Add the current component's dbkeys
+        // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
-            $dbkeys = $this->getDatabaseKeys($component, $props);
-            foreach ($dbkeys as $field => $dbkey) {
+            $fieldOutputKeys = $this->getFieldOutputKeys($component, $props);
+            foreach ($fieldOutputKeys as $field => $outputKey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);
-                $ret[implode('.', array_merge($path, [$field_outputkey]))] = $dbkey;
+                $ret[implode('.', array_merge($path, [$field_outputkey]))] = $outputKey;
             }
         }
 
@@ -722,7 +722,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     }
                 );
                 foreach ($subcomponent_components as $subcomponent_component) {
-                    $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
@@ -736,7 +736,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
                     );
                     foreach ($subcomponent_components as $subcomponent_component) {
-                        $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                        $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                     }
                 }
             }
@@ -747,16 +747,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
             );
             foreach ($subcomponents as $subcomponent) {
-                $this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->addToDatasetDatabaseKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
+                $this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->addToDatasetOutputKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
     }
 
-    public function getDatasetDatabaseKeys(Component $component, array &$props): array
+    public function getDatasetOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
-        $this->addToDatasetDatabaseKeys($component, $props, array(), $ret);
+        $this->addToDatasetOutputKeys($component, $props, array(), $ret);
         return $ret;
     }
 
@@ -1114,26 +1114,26 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return array<string,mixed>
      */
-    public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackDatasetcomponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        return $this->executeOnSelfAndPropagateToDatasetComponents('getDataFeedbackComponentTree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        return $this->executeOnSelfAndPropagateToDatasetComponents('getDataFeedbackComponentTree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
     }
 
     /**
      * @return array<string,mixed>
      */
-    public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackComponentTree(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         $ret = array();
 
-        if ($feedback = $this->getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
+        if ($feedback = $this->getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
             $ret[DataLoading::FEEDBACK] = $feedback;
         }
 
         return $ret;
     }
 
-    public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return [];
     }

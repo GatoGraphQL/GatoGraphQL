@@ -189,15 +189,15 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $targetObjectTypeResolverClass = get_class($targetObjectTypeResolver);
             $targetObjectTypeResolverClassMandatoryDirectivesForFields[$targetObjectTypeResolverClass] = $targetObjectTypeResolver->getAllMandatoryDirectivesForFields();
         }
-        // If the type data resolver is union, the dbKey where the value is stored
-        // is contained in the ID itself, with format dbKey/ID.
+        // If the type data resolver is union, the typeOutputKey where the value is stored
+        // is contained in the ID itself, with format typeOutputKey/ID.
         // Remove this information, and get purely the ID
         $objectIDs = array_map(
             function ($composedID) {
                 list(
-                    $dbKey,
+                    $typeOutputKey,
                     $id
-                ) = UnionTypeHelpers::extractDBObjectTypeAndID($composedID);
+                ) = UnionTypeHelpers::extractObjectTypeAndID($composedID);
                 return $id;
             },
             array_keys($idFieldSet)
@@ -212,9 +212,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
              * This section is different from parent's implementation
              */
             list(
-                $dbKey,
+                $typeOutputKey,
                 $objectID
-            ) = UnionTypeHelpers::extractDBObjectTypeAndID($id);
+            ) = UnionTypeHelpers::extractObjectTypeAndID($id);
             $objectIDTargetTypeResolver = $objectIDTargetTypeResolvers[$objectID];
             $mandatoryDirectivesForFields = $targetObjectTypeResolverClassMandatoryDirectivesForFields[get_class($objectIDTargetTypeResolver)];
 

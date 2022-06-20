@@ -117,10 +117,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function reformatObjectEntries($entries)
     {
         $ret = [];
-        foreach ($entries as $dbKey => $id_items) {
+        foreach ($entries as $typeOutputKey => $id_items) {
             foreach ($id_items as $id => $items) {
                 foreach ($items as $item) {
-                    $ret[] = $this->getObjectEntry($dbKey, $id, $item);
+                    $ret[] = $this->getObjectEntry($typeOutputKey, $id, $item);
                 }
             }
         }
@@ -135,7 +135,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
-    protected function getObjectEntry(string $dbKey, string | int $id, array $item): array
+    protected function getObjectEntry(string $typeOutputKey, string | int $id, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
@@ -150,7 +150,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
-                $this->getObjectEntryExtensions($dbKey, $id, $item),
+                $this->getObjectEntryExtensions($typeOutputKey, $id, $item),
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
@@ -178,11 +178,11 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $extensions;
     }
 
-    protected function getObjectEntryExtensions(string $dbKey, int | string $id, array $item): array
+    protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
     {
         return [
             'type' => 'dataObject',
-            'entityDBKey' => $dbKey,
+            'entityTypeOutputKey' => $typeOutputKey,
             'id' => $id,
             'path' => $item[Tokens::PATH] ?? [],
         ];
@@ -191,15 +191,15 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function reformatSchemaEntries($entries)
     {
         $ret = [];
-        foreach ($entries as $dbKey => $items) {
+        foreach ($entries as $typeOutputKey => $items) {
             foreach ($items as $item) {
-                $ret[] = $this->getSchemaEntry($dbKey, $item);
+                $ret[] = $this->getSchemaEntry($typeOutputKey, $item);
             }
         }
         return $ret;
     }
 
-    protected function getSchemaEntry(string $dbKey, array $item): array
+    protected function getSchemaEntry(string $typeOutputKey, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
@@ -214,7 +214,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
-                $this->getSchemaEntryExtensions($dbKey, $item),
+                $this->getSchemaEntryExtensions($typeOutputKey, $item),
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
@@ -224,11 +224,11 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $entry;
     }
 
-    protected function getSchemaEntryExtensions(string $dbKey, array $item): array
+    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
         return [
             'type' => 'schema',
-            'entityDBKey' => $dbKey,
+            'entityTypeOutputKey' => $typeOutputKey,
             'path' => $item[Tokens::PATH] ?? [],
         ];
     }

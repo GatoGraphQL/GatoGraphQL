@@ -17,7 +17,7 @@
 	{{/if}}
 	{{#withModule . "inner"}}
 		<tbody class="{{../class-merge}} table-inner" id="{{lastGeneratedId context=../.}}-merge">
-			{{enterModule ../. dbKey=../dbKey dbObjectIDs=../dbObjectIDs}}
+			{{enterModule ../. typeOutputKey=../typeOutputKey dbObjectIDs=../dbObjectIDs}}
 		</tbody>
 	{{/withModule}}	
 </table>

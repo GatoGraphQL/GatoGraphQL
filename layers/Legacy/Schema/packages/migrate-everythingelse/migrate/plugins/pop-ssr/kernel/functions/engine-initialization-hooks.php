@@ -79,12 +79,12 @@ class PoP_SSR_EngineInitialization_Hooks
             // If we are using serverside-rendering, and set the config to remove the database code,
             // then do not send the data to the front-end (most likely there is no need, since the HTML has already been produced)
             if (PoP_SSR_ServerUtils::removeDatabasesFromOutput()) {
-                // Improvements: remove the database, the dbobjectids, and the configuration
-                // Do it in this order, since the dbobjectids is still needed for removing the database
+                // Improvements: remove the database, the objectIDs, and the configuration
+                // Do it in this order, since the objectIDs is still needed for removing the database
                 $this->removeDatabases($data, $engine);
                 $this->removeConfiguration($data, $engine);
 
-                // Removing the dbobjectids is too much of a trouble, since pop.Manager currently expects the keys for pageSection/block to be set, so that keeping them,
+                // Removing the objectIDs is too much of a trouble, since pop.Manager currently expects the keys for pageSection/block to be set, so that keeping them,
                 // and just removing the IDs, is not worth the trouble. In addition, the IDs may be needed dynamically, eg: in function pop.Manager.processBlock
                 // $this->removeDataset($data, $engine);
             }
@@ -95,18 +95,18 @@ class PoP_SSR_EngineInitialization_Hooks
 
     // protected function removeDataset(&$data, $engine) {
 
-    //     // Simply set the dbobjectids as empty
-    //     $data['dbobjectids'] = array();
+    //     // Simply set the objectIDs as empty
+    //     $data['objectIDs'] = array();
 
-    //     // // Set the pageSection => block entries of the dbobjectids as empty (it still expects these entries on the webplatform, so we can't just unset them)
-    //     // $dbobjectids = $data['dbobjectids'];
-    //     // $data['dbobjectids'] = array();
-    //     // foreach ($dbobjectids as $pagesection_settings_id => $block_settings_id_dataset) {
+    //     // // Set the pageSection => block entries of the objectIDs as empty (it still expects these entries on the webplatform, so we can't just unset them)
+    //     // $objectIDs = $data['objectIDs'];
+    //     // $data['objectIDs'] = array();
+    //     // foreach ($objectIDs as $pagesection_settings_id => $block_settings_id_dataset) {
 
-    //     //     $data['dbobjectids'][$pagesection_settings_id] = array();
+    //     //     $data['objectIDs'][$pagesection_settings_id] = array();
     //     //     foreach ($block_settings_id_dataset as $block_settings_id => $block_dataset) {
 
-    //     //         $data['dbobjectids'][$pagesection_settings_id][$block_settings_id] = array();
+    //     //         $data['objectIDs'][$pagesection_settings_id][$block_settings_id] = array();
     //     //     }
     //     // }
     // }
@@ -120,7 +120,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
     protected function removeDatabases(&$data, $engine)
     {
-        if (!$data['dbData']) {
+        if (!$data['databases']) {
             return;
         }
 
@@ -130,8 +130,8 @@ class PoP_SSR_EngineInitialization_Hooks
         // Calculate the Dynamic Databases
         $dynamicdatabases = array();
 
-        // From the dbobjectids, we obtain the needed data only for the required IDs and nothing else
-        $dbobjectids = $data['datasetcomponentdata']['combinedstate']['dbobjectids'];
+        // From the objectIDs, we obtain the needed data only for the required IDs and nothing else
+        $objectIDs = $data['datasetcomponentdata']['combinedstate']['objectIDs'];
 
         // Calculate the dynamic data settings
         $entryComponent = $engine->getEntryComponent();
@@ -166,7 +166,7 @@ class PoP_SSR_EngineInitialization_Hooks
             foreach ($pagesection_data_properties[ComponentModelModuleInfo::get('response-prop-subcomponents')] as $block_settings_id => $block_settings_id_data_properties) {
                 // If the block has no typeResolver, it will be empty
                 if ($block_typeResolver_data_properties = $block_settings_id_data_properties[POP_CONSTANT_DYNAMICDATAPROPERTIES]) {
-                    $block_dataset = $dbobjectids[$entryComponentOutputName][$pagesection_settings_id][$block_settings_id];
+                    $block_dataset = $objectIDs[$entryComponentOutputName][$pagesection_settings_id][$block_settings_id];
 
                     // The data_properties has a unique key as the typeResolver
                     reset($block_typeResolver_data_properties);
@@ -180,30 +180,30 @@ class PoP_SSR_EngineInitialization_Hooks
         }
 
         // Replace the DBs with the ones with dynamic data
-        $data['dbData'] = $dynamicdatabases;
+        $data['databases'] = $dynamicdatabases;
     }
 
-    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, RelationalTypeResolverInterface $relationalTypeResolver, array $data_properties)
+    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $objectIDs, RelationalTypeResolverInterface $relationalTypeResolver, array $data_properties)
     {
         if ($data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
             // Data to be copied can come from either the database or the userstatedatabase
-            $databases = $data['dbData'];
+            $databases = $data['databases'];
 
             // Obtain the data from the database, copy it to the dynamic database
-            $database_key = $relationalTypeResolver->getTypeOutputDBKey();
+            $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
-            // The hook below can modify the list of fields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
+            // The hook below can modify the list of fields to be added under "primary", and add those fields directly into $databaseitems under another dbName ("userstate")
             $engine = EngineFacade::getInstance();
             $data_fields = $engine->moveEntriesUnderDBName($data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES], true, $relationalTypeResolver);
 
-            foreach ($dbobjectids as $object_id) {
+            foreach ($objectIDs as $object_id) {
                 // Copy to the dynamic database
-                foreach ($databases as $dbname => $database) {
-                    foreach ($data_fields[$dbname] as $data_field) {
+                foreach ($databases as $dbName => $database) {
+                    foreach ($data_fields[$dbName] as $data_field) {
                         /** @var ComponentFieldNodeInterface $data_field */
-                        if (isset($database[$database_key][$object_id][$data_field->asFieldOutputQueryString()])) {
-                            $dynamicdatabases[$dbname][$database_key][$object_id][$data_field->asFieldOutputQueryString()] = $database[$database_key][$object_id][$data_field->asFieldOutputQueryString()];
+                        if (isset($database[$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()])) {
+                            $dynamicdatabases[$dbName][$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()] = $database[$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()];
                         }
                     }
                 }
@@ -219,15 +219,15 @@ class PoP_SSR_EngineInitialization_Hooks
                     $subcomponent_data_field = $field->asFieldOutputQueryString();
                     // Check if the subcomponent data fields lives under database or userstatedatabase
                     $sourcedb = null;
-                    foreach ($data_fields as $dbname => $db_data_fields) {
+                    foreach ($data_fields as $dbName => $db_data_fields) {
                         if (in_array($subcomponent_data_field, $db_data_fields)) {
-                            $sourcedb = &$databases[$dbname];
+                            $sourcedb = &$databases[$dbName];
                             break;
                         }
                     }
-                    // From the $subcomponent_data_field we obtain the subcomponent dbobjectids IDs, fetching the corresponding values from the DB
+                    // From the $subcomponent_data_field we obtain the subcomponent objectIDs IDs, fetching the corresponding values from the DB
                     $subcomponent_dataset = array();
-                    $objectIDs = array_keys($sourcedb[$database_key]);
+                    $objectIDs = array_keys($sourcedb[$typeOutputKey]);
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
@@ -243,16 +243,16 @@ class PoP_SSR_EngineInitialization_Hooks
                         foreach ($typeObjectIDs as $object_id) {
                             if ($isUnionType) {
                                 list(
-                                    $database_key,
+                                    $typeOutputKey,
                                     $object_id
-                                ) = UnionTypeHelpers::extractDBObjectTypeAndID($object_id);
+                                ) = UnionTypeHelpers::extractObjectTypeAndID($object_id);
                             }
                             // This value may be an array (eg: 'locations' => array(123, 343)) or a single value (eg: 'author' => 432)
                             // So convert to array, to deal with all cases
-                            $subcomponent_resultitem_ids = $sourcedb[$database_key][$object_id][$subcomponent_data_field];
+                            $subcomponent_resultitem_ids = $sourcedb[$typeOutputKey][$object_id][$subcomponent_data_field];
                             $subcomponent_resultitem_ids = is_array($subcomponent_resultitem_ids) ? $subcomponent_resultitem_ids : array($subcomponent_resultitem_ids);
 
-                            // Add these IDs to the sucomponent's dbobjectids
+                            // Add these IDs to the sucomponent's objectIDs
                             $subcomponent_dataset = array_merge(
                                 $subcomponent_dataset,
                                 $subcomponent_resultitem_ids

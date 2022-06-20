@@ -38,7 +38,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      */
     protected ?array $not_excluded_component_sets_as_string;
     /**
-     * When targeting components in pop-engine.php (eg: when doing ->get_dbobjectids())
+     * When targeting components in pop-engine.php (eg: when doing ->getObjectIDs())
      * those components are already and always included, so no need to check
      * for their ancestors or anything
      */

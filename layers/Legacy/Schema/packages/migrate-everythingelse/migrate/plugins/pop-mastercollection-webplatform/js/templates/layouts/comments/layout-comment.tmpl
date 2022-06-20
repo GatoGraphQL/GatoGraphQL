@@ -5,7 +5,7 @@
 				{{#withModule ../. "authoravatar"}}
 					<div class="media-left">
 						<div class="comment-author-avatar">					
-							{{enterModule ../../. dbKey=../../bs.dbkeys.author objectID=../author}}
+							{{enterModule ../../. typeOutputKey=../../bs.outputKeys.author objectID=../author}}
 						</div>
 					</div>
 				{{/withModule}}
@@ -19,7 +19,7 @@
 						{{#withModule ../. "authorname"}}
 							<div class="comment-author">
 								<div class="item">
-									{{enterModule ../../. dbKey=../../bs.dbkeys.author objectID=../author}}
+									{{enterModule ../../. typeOutputKey=../../bs.outputKeys.author objectID=../author}}
 								</div>
 								<div class="item comment-date">
 									<small><em>{{../date}}</em></small>

@@ -49,7 +49,7 @@ class PoP_ServerSideManager
     public function &getDatabases($domain)
     {
         $datastore = PoP_ServerSide_LibrariesFactory::getDatastoreInstance();
-        $databases =& $datastore->store[$domain]['dbData'] ?? array();
+        $databases =& $datastore->store[$domain]['databases'] ?? array();
         return $databases;
     }
 
@@ -81,7 +81,7 @@ class PoP_ServerSideManager
 
         // Databases and stateless data can be integrated straight
         $datastore->store[$domain] = $datastore->store[$domain] ?? array();
-        $datastore->store[$domain]['dbData'] = $json['dbData'];
+        $datastore->store[$domain]['databases'] = $json['databases'];
         $datastore->store[$domain]['statelessdata'] = $json['statelessdata'];
 
         // Stateful data is to be integrated under the corresponding URL
@@ -125,7 +125,7 @@ class PoP_ServerSideManager
             //                 'configuration' => array(),
             //                 'js-settings' => array(),
             //             ),
-            //             'dbobjectids' => array(),
+            //             'objectIDs' => array(),
             //             'feedback' => array(
             //                 'block' => array(),
             //                 'pagesection' => array(),
@@ -136,7 +136,7 @@ class PoP_ServerSideManager
             //                 'uniquetodomain' => array(),
             //             ),
             //         ),
-            //         'dbData' => array(
+            //         'databases' => array(
             //             'primary' => array(),
             //             'userstate' => array(),
             //         ),
@@ -183,8 +183,8 @@ class PoP_ServerSideManager
             if ($context[ComponentModelModuleInfo::get('response-prop-subcomponents')] ?? null) {
                 $context['components'] = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')];
             }
-            if ($context['bs']['dbkeys'] ?? null) {
-                $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
+            if ($context['bs']['outputKeys'] ?? null) {
+                $context['bs']['outputKeys'] = $context['bs']['outputKeys'];
             }
             if ($context[GD_JS_COMPONENT] ?? null) {
                 $context['component'] = $context[GD_JS_COMPONENT];
@@ -421,8 +421,8 @@ class PoP_ServerSideManager
     public function getBlockSettings($domain, $blockTLDomain, $pssId, $bsId, $psId, $bId)
     {
         $blockSettings = array(
-            'dbkeys' => $this->getDatabaseKeys($domain, $pssId, $bsId),
-            'dbobjectids' => $this->getDataset($domain, $pssId, $bsId),
+            'outputKeys' => $this->getFieldOutputKeys($domain, $pssId, $bsId),
+            'objectIDs' => $this->getDataset($domain, $pssId, $bsId),
             'feedback' => $this->getBlockFeedback($domain, $pssId, $bsId),
             'bsId' => $bsId,
             'bId' => $bId,
@@ -439,7 +439,7 @@ class PoP_ServerSideManager
         $bsId = $this->getSettingsId($block);
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $url = $requestHelperService->getCurrentURL();
-        return $this->getStatefulData($domain, $url)['dbobjectids'][$pssId][$bsId];
+        return $this->getStatefulData($domain, $url)['objectIDs'][$pssId][$bsId];
     }
 
     public function getBlockFeedback($domain, $pageSection, $block)
@@ -482,9 +482,9 @@ class PoP_ServerSideManager
         return $this->getStatefulData($domain, $url)['settings'][$item][$pssId][$targetId];
     }
 
-    public function getDatabaseKeys($domain, $pageSection, $block)
+    public function getFieldOutputKeys($domain, $pageSection, $block)
     {
-        return $this->getStatelessSettings($domain, $pageSection, $block, 'dbkeys');
+        return $this->getStatelessSettings($domain, $pageSection, $block, 'outputKeys');
     }
 
     public function getDestroyUrl($url)
@@ -550,16 +550,16 @@ class PoP_ServerSideManager
         return '';
     }
 
-    public function getDBObject($domain, $dbKey, $ojectID)
+    public function getDBObject($domain, $typeOutputKey, $ojectID)
     {
         $userItem = $item = array();
         $userstatedatabase = $this->getUserStateDatabase($domain);
         $primarydatabase = $this->getPrimaryDatabase($domain);
-        if ($userstatedatabase[$dbKey] && $userstatedatabase[$dbKey][$ojectID]) {
-            $userItem = $userstatedatabase[$dbKey][$ojectID];
+        if ($userstatedatabase[$typeOutputKey] && $userstatedatabase[$typeOutputKey][$ojectID]) {
+            $userItem = $userstatedatabase[$typeOutputKey][$ojectID];
         }
-        if ($primarydatabase[$dbKey] && $primarydatabase[$dbKey][$ojectID]) {
-            $item = $primarydatabase[$dbKey][$ojectID];
+        if ($primarydatabase[$typeOutputKey] && $primarydatabase[$typeOutputKey][$ojectID]) {
+            $item = $primarydatabase[$typeOutputKey][$ojectID];
         }
         return array_merge(
             $userItem,
