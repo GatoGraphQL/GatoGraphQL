@@ -1091,6 +1091,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,

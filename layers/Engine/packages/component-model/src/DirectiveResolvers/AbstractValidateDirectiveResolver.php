@@ -38,6 +38,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -57,6 +58,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
