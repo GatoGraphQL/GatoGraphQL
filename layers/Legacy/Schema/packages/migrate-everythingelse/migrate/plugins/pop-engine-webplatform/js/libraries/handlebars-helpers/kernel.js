@@ -90,7 +90,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var pss = prevContext.pss;
 	var bs = prevContext.bs;
 	var dbObject = prevContext.dbObject;
-	var dbObjectDBKey = prevContext.dbObjectDBKey;
+	var dbObjectTypeOutputKey = prevContext.dbObjectTypeOutputKey;
 	var ignorePSRuntimeId = prevContext.ignorePSRuntimeId;
 	var feedbackObject = prevContext.feedbackObject;
 	
@@ -104,7 +104,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	// Add all these vars to the context for this component
 	var extend = {
 		dbObject: dbObject, 
-		dbObjectDBKey: dbObjectDBKey, 
+		dbObjectTypeOutputKey: dbObjectTypeOutputKey, 
 		typeOutputKey: typeOutputKey, 
 		dbObjectIDs: dbObjectIDs, 
 		tls: tls, 
@@ -148,7 +148,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		typeOutputKey = options.hash.typeOutputKey;
 		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 		extend.dbObject = dbObject;
-		extend.dbObjectDBKey = typeOutputKey;
+		extend.dbObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
 		extend.dbObjectIDs = [objectID];
 	}
@@ -162,7 +162,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
 		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 		extend.dbObject = dbObject;
-		extend.dbObjectDBKey = typeOutputKey;
+		extend.dbObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
 		extend.dbObjectIDs = [objectID];
 	}
@@ -182,7 +182,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		// So then put everything to null
 		extend.typeOutputKey = options.hash.typeOutputKey;
 		extend.dbObject = null;
-		extend.dbObjectDBKey = null;
+		extend.dbObjectTypeOutputKey = null;
 		extend.dbObjectIDs = null;
 	}
 

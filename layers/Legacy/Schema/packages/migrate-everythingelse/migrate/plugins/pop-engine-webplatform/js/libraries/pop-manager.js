@@ -3670,7 +3670,7 @@ window.pop.Manager = {
 			if (objectID) {
 
 				var dbObject = that.getDBObject(domain, typeOutputKey, objectID);
-				$.extend(context, {dbObject: dbObject, dbObjectDBKey: typeOutputKey});
+				$.extend(context, {dbObject: dbObject, dbObjectTypeOutputKey: typeOutputKey});
 			}
 		}
 	},
