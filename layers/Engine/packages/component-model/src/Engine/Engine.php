@@ -1637,6 +1637,7 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
+            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> */
             $iterationResolvedIDFieldValues = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $idObjects = $relationalTypeResolver->fillObjects(
@@ -1684,7 +1685,7 @@ class Engine implements EngineInterface
                             continue;
                         }
                         /** @var FieldInterface[] $conditionalFields */
-                        $iterationFields = array_keys($resolvedIDFieldValue);
+                        $iterationFields = iterator_to_array($resolvedIDFieldValue);
                         $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
                             $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
