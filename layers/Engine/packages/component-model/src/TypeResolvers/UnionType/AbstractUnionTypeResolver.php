@@ -195,7 +195,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $objectIDs = array_map(
             function ($composedID) {
                 list(
-                    $dbKey,
+                    $typeOutputKey,
                     $id
                 ) = UnionTypeHelpers::extractDBObjectTypeAndID($composedID);
                 return $id;
@@ -212,7 +212,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
              * This section is different from parent's implementation
              */
             list(
-                $dbKey,
+                $typeOutputKey,
                 $objectID
             ) = UnionTypeHelpers::extractDBObjectTypeAndID($id);
             $objectIDTargetTypeResolver = $objectIDTargetTypeResolvers[$objectID];

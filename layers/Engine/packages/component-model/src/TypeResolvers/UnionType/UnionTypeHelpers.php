@@ -22,7 +22,7 @@ class UnionTypeHelpers
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,
             $composedDBKeyObjectID
         );
-        // If the object could not be loaded, $composedDBKeyObjectID will be all ID, with no $dbKey
+        // If the object could not be loaded, $composedDBKeyObjectID will be all ID, with no $typeOutputKey
         if (count($parts) === 1) {
             return ['', $parts[0]];
         }

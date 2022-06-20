@@ -4,7 +4,7 @@
  */
 class PoP_ServerSide_DBObjectHelpers
 {
-    public function withDBObject($dbKey, $objectID, $options)
+    public function withDBObject($typeOutputKey, $objectID, $options)
     {
         $context = $options['hash']['context'] ?? $options['_this'];
         $tls = $context['tls'];
@@ -12,7 +12,7 @@ class PoP_ServerSide_DBObjectHelpers
 
         // Replace the context with only the dbObject
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
-        $context = $popManager->getDBObject($domain, $dbKey, $objectID);
+        $context = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
         
         return $options['fn']($context);
     }

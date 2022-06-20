@@ -51,7 +51,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
     ): string;
-    public function getUniqueFieldOutputKeyByTypeOutputDBKey(string $dbKey, string $field): string;
+    public function getUniqueFieldOutputKeyByTypeOutputDBKey(string $typeOutputKey, string $field): string;
     /**
      * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
      */

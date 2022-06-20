@@ -848,7 +848,7 @@ class Engine implements EngineInterface
 
     private function doAddDatasetToDatabase(
         array &$database,
-        string $dbKey,
+        string $typeOutputKey,
         array $dataitems
     ): void {
         /**
@@ -856,8 +856,8 @@ class Engine implements EngineInterface
          * This way, different dataloaders, like 'list-users' and 'author',
          * can both save their results under database key 'users'
          */
-        if (!isset($database[$dbKey])) {
-            $database[$dbKey] = $dataitems;
+        if (!isset($database[$typeOutputKey])) {
+            $database[$typeOutputKey] = $dataitems;
             return;
         }
 
@@ -867,8 +867,8 @@ class Engine implements EngineInterface
          * so then we must do a foreach instead
          */
         foreach ($dataitems as $id => $dbobject_values) {
-            $database[$dbKey][$id] = array_merge(
-                $database[$dbKey][$id] ?? [],
+            $database[$typeOutputKey][$id] = array_merge(
+                $database[$typeOutputKey][$id] ?? [],
                 $dbobject_values
             );
         }
@@ -877,7 +877,7 @@ class Engine implements EngineInterface
     private function addDatasetToDatabase(
         array &$database,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $dbKey,
+        string $typeOutputKey,
         array $dataitems,
         array $idObjects,
         bool $addEntryIfError = false
@@ -924,11 +924,11 @@ class Engine implements EngineInterface
             }
             // Add the errors under the UnionTypeResolver key
             if ($noTargetObjectTypeResolverDataItems) {
-                $this->doAddDatasetToDatabase($database, $dbKey, $noTargetObjectTypeResolverDataItems);
+                $this->doAddDatasetToDatabase($database, $typeOutputKey, $noTargetObjectTypeResolverDataItems);
             }
             return;
         }
-        $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
+        $this->doAddDatasetToDatabase($database, $typeOutputKey, $dataitems);
     }
 
     protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
