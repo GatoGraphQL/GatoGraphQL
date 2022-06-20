@@ -50,7 +50,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionDBKeyIDs,
-        array $previousResolvedIDFieldValues,
+        array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
         array &$resolvedIDFieldValues,
         array &$variables,
