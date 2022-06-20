@@ -482,6 +482,9 @@ class PoP_ServerSideManager
         return $this->getStatefulData($domain, $url)['settings'][$item][$pssId][$targetId];
     }
 
+    /**
+     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     */
     public function getFieldOutputKeyToTypeOutputKeys($domain, $pageSection, $block)
     {
         return $this->getStatelessSettings($domain, $pageSection, $block, 'outputKeys');

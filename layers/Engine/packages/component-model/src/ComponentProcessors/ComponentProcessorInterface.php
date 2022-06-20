@@ -80,6 +80,9 @@ interface ComponentProcessorInterface
      * @param Component[]|Component $component_or_componentPath
      */
     public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
+    /**
+     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     */
     public function getFieldOutputKeyToTypeOutputKeys(Component $component, array &$props): array;
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDatasetsettings(Component $component, array &$props): array;

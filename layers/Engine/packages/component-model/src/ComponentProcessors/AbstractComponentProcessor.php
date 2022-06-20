@@ -625,6 +625,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
+    /**
+     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     */
     public function getFieldOutputKeyToTypeOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
