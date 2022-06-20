@@ -34,6 +34,6 @@ class PipelinePositions
     public final const BEGINNING = 'beginning';
     public final const BEFORE_VALIDATE = 'before-validate';
     public final const AFTER_VALIDATE_BEFORE_RESOLVE = 'after-validate-before-resolve';
-    public final const AFTER_RESOLVE = 'after-resolve';
+    public final const AFTER_RESOLVE_BEFORE_SERIALIZE = 'after-resolve-before-serialize';
     public final const END = 'end';
 }

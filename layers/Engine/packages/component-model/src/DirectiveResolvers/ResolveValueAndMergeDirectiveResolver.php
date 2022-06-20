@@ -40,7 +40,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      */
     public function getPipelinePosition(): string
     {
-        return PipelinePositions::AFTER_RESOLVE;
+        return PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE;
     }
 
     /**
