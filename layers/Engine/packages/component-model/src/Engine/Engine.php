@@ -2362,7 +2362,10 @@ class Engine implements EngineInterface
                  * for the relationship under this other object.
                  */
                 $typedSubcomponentIDs = [];
-                // Get the types for all of the IDs all at once. Flatten 3 levels: dbName => typeOutputKey => id => ...
+                /**
+                 * Get the types for all of the IDs all at once.
+                 * Flatten 3 levels: dbName => typeOutputKey => id => ...
+                 */
                 $allSubcomponentIDs = array_values(array_unique(
                     GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
                 ));
