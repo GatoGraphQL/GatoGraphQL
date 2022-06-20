@@ -83,7 +83,7 @@ interface ComponentProcessorInterface
     public function getOutputKeys(Component $component, array &$props): array;
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDatasetsettings(Component $component, array &$props): array;
-    public function getDatasetDatabaseKeys(Component $component, array &$props): array;
+    public function getDatasetOutputKeys(Component $component, array &$props): array;
     public function getDatasource(Component $component, array &$props): string;
     public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null;
     public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface;

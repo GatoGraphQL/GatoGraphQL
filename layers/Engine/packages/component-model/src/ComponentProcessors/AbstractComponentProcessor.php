@@ -685,7 +685,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $ret = array();
 
-        if ($outputKeys = $this->getDatasetDatabaseKeys($component, $props)) {
+        if ($outputKeys = $this->getDatasetOutputKeys($component, $props)) {
             $ret['outputKeys'] = $outputKeys;
         }
 
@@ -753,7 +753,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
     }
 
-    public function getDatasetDatabaseKeys(Component $component, array &$props): array
+    public function getDatasetOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
         $this->addToDatasetDatabaseKeys($component, $props, array(), $ret);
