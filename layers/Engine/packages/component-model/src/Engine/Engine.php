@@ -2342,12 +2342,14 @@ class Engine implements EngineInterface
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbname => $database) {
-                        if ($database_field_ids = $database[$database_key][$id][$subcomponent_data_field_outputkey] ?? null) {
-                            $subcomponentIDs[$dbname][$database_key][$id] = array_merge(
-                                $subcomponentIDs[$dbname][$database_key][$id] ?? [],
-                                is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
-                            );
+                        $database_field_ids = $database[$database_key][$id][$subcomponent_data_field_outputkey] ?? null;
+                        if ($database_field_ids === null) {
+                            continue;
                         }
+                        $subcomponentIDs[$dbname][$database_key][$id] = array_merge(
+                            $subcomponentIDs[$dbname][$database_key][$id] ?? [],
+                            is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
+                        );
                     }
                 }
                 // We don't want to store the dbKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
