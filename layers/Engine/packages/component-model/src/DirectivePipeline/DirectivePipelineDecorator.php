@@ -21,6 +21,7 @@ class DirectivePipelineDecorator
     /**
      * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -56,6 +57,7 @@ class DirectivePipelineDecorator
             $previouslyResolvedIDFieldValues,
             /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDFieldSet,
+            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> */
             $resolvedIDFieldValues,
             $variables,
             $messages,
