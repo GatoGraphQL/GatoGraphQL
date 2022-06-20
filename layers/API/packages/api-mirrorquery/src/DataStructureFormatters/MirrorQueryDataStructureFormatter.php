@@ -24,20 +24,25 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     public function getFormattedData(array $data): array
     {
-        // Re-create the shape of the query by iterating through all objectIDs and all required fields,
-        // getting the data from the corresponding typeOutputKeyPath
-        $ret = [];
-        if ($fields = $this->getFields()) {
-            $databases = $data['databases'] ?? [];
-            $unionTypeOutputKeyIDs = $data['unionTypeOutputKeyIDs'] ?? [];
-            $datasetComponentData = $data['datasetcomponentdata'] ?? [];
-            foreach ($datasetComponentData as $componentName => $componentData) {
-                $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
-                $objectIDorIDs = $componentData['objectIDs'];
-                $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
-            }
+        $fields = $this->getFields();
+        if (!$fields) {
+            return [];
         }
 
+        /**
+         * Re-create the shape of the query by iterating through all objectIDs
+         * and all required fields, getting the data from the corresponding
+         * typeOutputKeyPath
+         */
+        $ret = [];
+        $databases = $data['databases'] ?? [];
+        $unionTypeOutputKeyIDs = $data['unionTypeOutputKeyIDs'] ?? [];
+        $datasetComponentData = $data['datasetcomponentdata'] ?? [];
+        foreach ($datasetComponentData as $componentName => $componentData) {
+            $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
+            $objectIDorIDs = $componentData['objectIDs'];
+            $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
+        }
         return $ret;
     }
 
