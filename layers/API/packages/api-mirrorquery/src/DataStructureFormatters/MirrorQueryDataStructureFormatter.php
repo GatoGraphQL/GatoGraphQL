@@ -55,9 +55,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string,array<string|int,array<string,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string|int>|string|integer $objectIDorIDs
-     * @param string $objectKeyPath
      * @param array<string> $typeOutputKeyPaths
-     * @param boolean $concatenateField
      */
     protected function addData(array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
@@ -89,7 +87,20 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         $this->addObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
     }
 
-    protected function addObjectData(&$resolvedObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
+    /**
+     * Undocumented function
+     *
+     * @param array<string,mixed> $resolvedObjectRet
+     * @param array<string> $propertyFields
+     * @param array<string,array<string>> $nestedFields
+     * @param array<string,array<string|int,array<string,mixed>>> $databases
+     * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
+     * @param string|integer $objectID
+     * @param string $objectKeyPath
+     * @param array<string> $typeOutputKeyPaths
+     * @param boolean $concatenateField
+     */
+    protected function addObjectData(array &$resolvedObjectRet, array $propertyFields, array $nestedFields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
         // Otherwise, it could throw an error on `extractObjectTypeAndID`
