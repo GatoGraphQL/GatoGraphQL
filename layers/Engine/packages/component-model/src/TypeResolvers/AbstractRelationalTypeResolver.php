@@ -167,13 +167,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /**
          * All directives are placed somewhere in the pipeline.
          *
-         * There are 5 positions:
-         *
-         *   1. At the beginning
+         *   1. At the very beginning
          *   2. Before Validate directive
          *   3. Between the Validate and Resolve directives
-         *   4. After the ResolveAndMerge directive
-         *   5. At the end
+         *   4. Between the Resolve and Serialize directives
+         *   5. After the Serialize directive
+         *   6. At the very end
          */
         $directiveInstancesByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
