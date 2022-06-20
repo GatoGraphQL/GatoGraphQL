@@ -33,7 +33,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
 
     /**
-     * Place it after the validation and before it's added to $dbItems in the resolveAndMerge directive
+     * Place it after the validation and before it's added to $resolvedIDFieldValues in the resolveAndMerge directive
      */
     public function getPipelinePosition(): string
     {
@@ -52,7 +52,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         array $unionDBKeyIDs,
         array $previousDBItems,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,

@@ -1696,12 +1696,12 @@ class Engine implements EngineInterface
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
-                $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
-                foreach ($dbItems as $dbname => $entries) {
+                $resolvedIDFieldValues = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
+                foreach ($resolvedIDFieldValues as $dbname => $entries) {
                     $databases[$dbname] ??= [];
                     $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems);
 
-                    // Populate the $previousDBItems, pointing to the newly fetched dbItems (but without the dbname!)
+                    // Populate the $previousDBItems, pointing to the newly fetched resolvedIDFieldValues (but without the dbname!)
                     // Save the reference to the values, instead of the values, to save memory
                     // Passing $previousDBItems instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
                     // the modification is done on $previousDBItems, so it carries no risks
@@ -2472,8 +2472,8 @@ class Engine implements EngineInterface
                 $combined_databases = [];
                 foreach ($entries as $database_name => $database) {
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
-                    foreach ($database as $database_key => $dbItems) {
-                        foreach ($dbItems as $dbobject_id => $dbobject_values) {
+                    foreach ($database as $database_key => $resolvedIDFieldValues) {
+                        foreach ($resolvedIDFieldValues as $dbobject_id => $dbobject_values) {
                             $combined_databases[$database_key][$dbobject_id] = array_merge(
                                 $combined_databases[$database_key][$dbobject_id] ?? [],
                                 // If field "id" for this type has been disabled (eg: by ACL),

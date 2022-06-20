@@ -45,13 +45,13 @@ trait RemoveIDFieldSetDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSetToSetAsNull,
         array $objectIDItems,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
     ): void {
         foreach (array_keys($idFieldSetToSetAsNull) as $id) {
             $fieldsToSetAsNullForID = $idFieldSetToSetAsNull[$id]->fields;
             foreach ($fieldsToSetAsNullForID as $field) {
                 $fieldOutputKey = $field->getOutputKey();
-                $dbItems[$id][$fieldOutputKey] = null;
+                $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
             }
         }
     }

@@ -43,7 +43,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array $idFieldSet,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,

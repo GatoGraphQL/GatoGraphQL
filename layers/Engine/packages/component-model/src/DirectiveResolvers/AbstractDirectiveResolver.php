@@ -482,9 +482,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function getExpressionsForObject(int | string $id, array $variables, array $messages): array
     {
-        // Create a custom $variables containing all the properties from $dbItems for this object
+        // Create a custom $variables containing all the properties from $resolvedIDFieldValues for this object
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
-        // Otherwise it can't, since the fieldResolver doesn't have access to either $dbItems
+        // Otherwise it can't, since the fieldResolver doesn't have access to either $resolvedIDFieldValues
         return array_merge(
             $variables,
             $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id] ?? []
@@ -566,7 +566,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * By default, place the directive after the ResolveAndMerge directive, so the property will be in $dbItems by then
+     * By default, place the directive after the ResolveAndMerge directive, so the property will be in $resolvedIDFieldValues by then
      */
     public function getPipelinePosition(): string
     {
@@ -940,7 +940,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $unionDBKeyIDs,
             $previousDBItems,
             $pipelineIDFieldSet,
-            $dbItems,
+            $resolvedIDFieldValues,
             $variables,
             $messages,
             /** @var EngineIterationFeedbackStore */
@@ -963,7 +963,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $pipelineIDFieldSet,
         //     $pipelineDirectiveResolverInstances,
         //     $objectIDItems,
-        //     $dbItems,
+        //     $resolvedIDFieldValues,
         //     $previousDBItems,
         //     $variables,
         //     $messages,
@@ -986,7 +986,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $unionDBKeyIDs,
                     $previousDBItems,
                     $pipelineIDFieldSet,
-                    $dbItems,
+                    $resolvedIDFieldValues,
                     $variables,
                     $messages,
                     $engineIterationFeedbackStore,
@@ -1062,7 +1062,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $idFieldSet,
                     $pipelineIDFieldSet,
                     $objectIDItems,
-                    $dbItems,
+                    $resolvedIDFieldValues,
                     $engineIterationFeedbackStore,
                 );
             }
@@ -1076,7 +1076,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $unionDBKeyIDs,
             $previousDBItems,
             $pipelineIDFieldSet,
-            $dbItems,
+            $resolvedIDFieldValues,
             $variables,
             $messages,
             $engineIterationFeedbackStore,
@@ -1097,7 +1097,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $idFieldSet,
         array &$succeedingPipelineIDFieldSet,
         array $objectIDItems,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $allFieldsFailed = empty($failedFields);
@@ -1140,7 +1140,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $relationalTypeResolver,
                 $idFieldSetToRemove,
                 $objectIDItems,
-                $dbItems,
+                $resolvedIDFieldValues,
             );
         }
 

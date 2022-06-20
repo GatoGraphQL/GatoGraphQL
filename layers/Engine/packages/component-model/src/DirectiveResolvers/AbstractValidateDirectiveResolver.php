@@ -45,12 +45,12 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $unionDBKeyIDs,
         array $previousDBItems,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
+        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $objectIDItems, $resolvedIDFieldValues, $variables, $engineIterationFeedbackStore);
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $idFieldSet,
         array &$succeedingPipelineIDFieldSet,
         array $objectIDItems,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -100,7 +100,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                     $relationalTypeResolver,
                     $idFieldSetToRemove,
                     $objectIDItems,
-                    $dbItems,
+                    $resolvedIDFieldValues,
                 );
             }
         }

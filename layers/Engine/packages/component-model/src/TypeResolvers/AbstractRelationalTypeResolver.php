@@ -548,7 +548,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array $idFieldSet,
         array $unionDBKeyIDs,
         array $previousDBItems,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -570,7 +570,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * If no fields are queried, the entry will be null.
              * Initialize it to [] to simplify typing/null-checking
              */
-            $dbItems[$objectID] ??= [];
+            $resolvedIDFieldValues[$objectID] ??= [];
         }
         // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($objectIDItems));
@@ -615,7 +615,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $unionDBKeyIDs,
             $objectIDItems,
             $previousDBItems,
-            $dbItems,
+            $resolvedIDFieldValues,
             $variables,
             $messages,
             $engineIterationFeedbackStore,
@@ -943,7 +943,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array $unionDBKeyIDs,
         array $objectIDItems,
         array $previousDBItems,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -1032,7 +1032,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         );
                         foreach ($failingFields as $field) {
                             $fieldOutputKey = $field->getOutputKey();
-                            $dbItems[$id][$fieldOutputKey] = null;
+                            $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
                         }
                     }
                 }
@@ -1086,7 +1086,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $objectIDItems,
                 $unionDBKeyIDs,
                 $previousDBItems,
-                $dbItems,
+                $resolvedIDFieldValues,
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
