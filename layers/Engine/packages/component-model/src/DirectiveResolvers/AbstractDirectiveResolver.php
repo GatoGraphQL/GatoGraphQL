@@ -549,10 +549,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
     }
 
-    protected function addExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, mixed $value, array &$messages): void
+    protected function addExpressionForObjectAndField(int | string $id, FieldInterface $field, string $key, mixed $value, array &$messages): void
     {
         $this->addExpressionForObject($id, $key, $value, $messages);
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey][$key] = $value;
+        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] = $value;
     }
 
     protected function getExpressionForObject(int | string $id, string $key, array $messages): mixed
