@@ -131,7 +131,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
      *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeScalarTypeValuesInDBItems: to serialize Scalar Type values
+     *   3. SerializeLeafOutputTypeValuesInDBItems: to serialize Scalar Type values
      *
      * Additionally to these 3, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
@@ -165,13 +165,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         /**
-        * All directives are placed somewhere in the pipeline. There are 5 positions:
-        * 1. At the beginning
-        * 2. Before Validate directive
-        * 3. Between the Validate and Resolve directives
-        * 4. After the ResolveAndMerge directive
-        * 4. At the end
-        */
+         * All directives are placed somewhere in the pipeline.
+         *
+         * There are 5 positions:
+         *
+         *   1. At the beginning
+         *   2. Before Validate directive
+         *   3. Between the Validate and Resolve directives
+         *   4. After the ResolveAndMerge directive
+         *   5. At the end
+         */
         $directiveInstancesByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
             PipelinePositions::BEFORE_VALIDATE => [],

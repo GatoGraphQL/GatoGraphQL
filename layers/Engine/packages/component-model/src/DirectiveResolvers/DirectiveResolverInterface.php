@@ -70,17 +70,18 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      *
      *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
      *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeScalarTypeValuesInDBItems: to serialize Scalar Type values
+     *   3. SerializeLeafOutputTypeValuesInDBItems: to serialize Scalar Type values
      * 
      * All other directives must indicate where to position themselves,
      * using these 3 directives as anchors.
      *
-     * There are 4 positions:
+     * There are 5 positions:
      *
-     *   1. At the beginning, before the Validate pipeline
-     *   2. Between the Validate and Resolve directives
-     *   3. Between the Resolve and SerializeScalar directives
-     *   4. At the end, after the SerializeScalar directive
+     *   1. At the beginning
+     *   2. Before Validate directive
+     *   3. Between the Validate and Resolve directives
+     *   4. After the ResolveAndMerge directive
+     *   5. At the end
      */
     public function getPipelinePosition(): string;
 
