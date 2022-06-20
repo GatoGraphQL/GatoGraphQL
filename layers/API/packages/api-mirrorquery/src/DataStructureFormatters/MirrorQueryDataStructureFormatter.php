@@ -64,17 +64,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         // Property fields have numeric key only. From them, obtain the fields to print for the object
         $propertyFields = array_filter(
             $fields,
-            function ($key) {
-                return is_numeric($key);
-            },
+            fn (string|int $key) =>  is_numeric($key),
             ARRAY_FILTER_USE_KEY
         );
+
         // All other fields must be nested, to keep fetching data for the object relationships
         $nestedFields = array_filter(
             $fields,
-            function ($key) {
-                return !is_numeric($key);
-            },
+            fn (string|int $key) => !is_numeric($key),
             ARRAY_FILTER_USE_KEY
         );
 
