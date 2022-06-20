@@ -48,7 +48,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         array $succeedingPipelineDirectiveResolvers,
-        array $objectIDItems,
+        array $idObjects,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
@@ -57,7 +57,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        if (!$objectIDItems) {
+        if (!$idObjects) {
             return;
         }
         $unionTypeResolver = null;
@@ -73,7 +73,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
 
         foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
-            $object = $objectIDItems[$id];
+            $object = $idObjects[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {

@@ -125,7 +125,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         array $succeedingPipelineDirectiveResolvers,
-        array $objectIDItems,
+        array $idObjects,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,

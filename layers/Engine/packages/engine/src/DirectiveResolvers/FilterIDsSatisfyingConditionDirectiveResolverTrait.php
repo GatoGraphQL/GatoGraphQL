@@ -19,7 +19,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
      */
     protected function getIDsSatisfyingCondition(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $objectIDItems,
+        array $idObjects,
         array $idFieldSet,
         array &$variables,
         array &$messages,
@@ -30,7 +30,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         foreach ($idFieldSet as $id => $fieldSet) {
             // Validate directive args for the object
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-            $object = $objectIDItems[$id];
+            $object = $idObjects[$id];
             list(
                 $objectValidDirective,
                 $objectDirectiveName,

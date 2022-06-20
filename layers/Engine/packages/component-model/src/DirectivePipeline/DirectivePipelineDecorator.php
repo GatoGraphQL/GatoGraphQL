@@ -23,7 +23,7 @@ class DirectivePipelineDecorator
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$pipelineIDFieldSet,
         array $pipelineDirectiveResolvers,
-        array $objectIDItems,
+        array $idObjects,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
@@ -35,7 +35,7 @@ class DirectivePipelineDecorator
             DirectivePipelineUtils::convertArgumentsToPayload(
                 $relationalTypeResolver,
                 $pipelineDirectiveResolvers,
-                $objectIDItems,
+                $idObjects,
                 $unionDBKeyIDs,
                 $previousResolvedIDFieldValues,
                 $pipelineIDFieldSet,
@@ -48,7 +48,7 @@ class DirectivePipelineDecorator
         list(
             $relationalTypeResolver,
             $pipelineDirectiveResolvers,
-            $objectIDItems,
+            $idObjects,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,
             /** @var array<array<string|int,EngineIterationFieldSet>> */

@@ -558,7 +558,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // Obtain the data for the required object IDs
-        $objectIDItems = [];
+        $idObjects = [];
         $ids = $this->getIDsToQuery($idFieldSet);
         $typeDataLoader = $this->getRelationalTypeDataLoader();
         // If any ID cannot be resolved, the object will be null
@@ -569,7 +569,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             if ($objectID === null) {
                 continue;
             }
-            $objectIDItems[$objectID] = $object;
+            $idObjects[$objectID] = $object;
             /**
              * If no fields are queried, the entry will be null.
              * Initialize it to [] to simplify typing/null-checking
@@ -577,7 +577,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $resolvedIDFieldValues[$objectID] ??= [];
         }
         // Show an error for all objects that couldn't be processed
-        $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($objectIDItems));
+        $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($idObjects));
         $unresolvedObjectIDs = [];
         $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
@@ -617,7 +617,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Process them
         $this->processFillingObjectsFromIDs(
             $unionDBKeyIDs,
-            $objectIDItems,
+            $idObjects,
             $previousResolvedIDFieldValues,
             $resolvedIDFieldValues,
             $variables,
@@ -625,7 +625,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $engineIterationFeedbackStore,
         );
 
-        return $objectIDItems;
+        return $idObjects;
     }
 
     protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
@@ -962,7 +962,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected function processFillingObjectsFromIDs(
         array $unionDBKeyIDs,
-        array $objectIDItems,
+        array $idObjects,
         array $previousResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
         array &$variables,
@@ -1104,7 +1104,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $this,
                 $pipelineIDFieldSet,
                 $directiveResolverInstances,
-                $objectIDItems,
+                $idObjects,
                 $unionDBKeyIDs,
                 $previousResolvedIDFieldValues,
                 $resolvedIDFieldValues,

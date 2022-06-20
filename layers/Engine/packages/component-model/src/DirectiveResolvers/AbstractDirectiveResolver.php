@@ -937,7 +937,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver,
             $pipelineDirectiveResolvers,
-            $objectIDItems,
+            $idObjects,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,
             $pipelineIDFieldSet,
@@ -963,7 +963,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $idFieldSet,
         //     $pipelineIDFieldSet,
         //     $pipelineDirectiveResolvers,
-        //     $objectIDItems,
+        //     $idObjects,
         //     $resolvedIDFieldValues,
         //     $previousResolvedIDFieldValues,
         //     $variables,
@@ -983,7 +983,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $relationalTypeResolver,
                     $idFieldSet,
                     $pipelineDirectiveResolvers,
-                    $objectIDItems,
+                    $idObjects,
                     $unionDBKeyIDs,
                     $previousResolvedIDFieldValues,
                     $pipelineIDFieldSet,
@@ -1062,7 +1062,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     [],
                     $idFieldSet,
                     $pipelineIDFieldSet,
-                    $objectIDItems,
+                    $idObjects,
                     $resolvedIDFieldValues,
                     $engineIterationFeedbackStore,
                 );
@@ -1073,7 +1073,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return DirectivePipelineUtils::convertArgumentsToPayload(
             $relationalTypeResolver,
             $pipelineDirectiveResolvers,
-            $objectIDItems,
+            $idObjects,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,
             $pipelineIDFieldSet,
@@ -1097,7 +1097,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         array $failedFields,
         array $idFieldSet,
         array &$succeedingPipelineIDFieldSet,
-        array $objectIDItems,
+        array $idObjects,
         array &$resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -1140,7 +1140,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this->setIDFieldSetAsNull(
                 $relationalTypeResolver,
                 $idFieldSetToRemove,
-                $objectIDItems,
+                $idObjects,
                 $resolvedIDFieldValues,
             );
         }

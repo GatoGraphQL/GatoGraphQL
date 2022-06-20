@@ -48,7 +48,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         array $succeedingPipelineDirectiveResolvers,
-        array $objectIDItems,
+        array $idObjects,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
@@ -58,7 +58,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Check the condition field. If it is satisfied, then skip those fields
-        $idsToRemove = $this->getIDsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
+        $idsToRemove = $this->getIDsSatisfyingCondition($relationalTypeResolver, $idObjects, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
         $this->removeFieldSetForIDs($idFieldSet, $idsToRemove, $succeedingPipelineIDFieldSet);
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

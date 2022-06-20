@@ -39,12 +39,12 @@ trait RemoveIDFieldSetDirectiveResolverTrait
      * For GraphQL, set the response for the failing field as null
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSetToSetAsNull
-     * @param array<string|int,object> $objectIDItems
+     * @param array<string|int,object> $idObjects
      */
     protected function setIDFieldSetAsNull(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSetToSetAsNull,
-        array $objectIDItems,
+        array $idObjects,
         array &$resolvedIDFieldValues,
     ): void {
         foreach (array_keys($idFieldSetToSetAsNull) as $id) {
