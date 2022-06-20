@@ -2410,20 +2410,20 @@ class Engine implements EngineInterface
                     foreach ($field_ids as $field_id) {
                         // Do not add again the IDs/Fields already loaded
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
-                            $id_subcomponent_data_fields = array_values(
+                            $id_subcomponent_direct_fields = array_values(
                                 array_filter(
                                     $subcomponent_direct_fields,
                                     fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
-                            $id_subcomponent_conditional_data_fields = new SplObjectStorage();
+                            $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
                             foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
                                 $conditionComponentFieldNodes = $subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
                                 /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
-                                $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] ??= [];
-                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode];
+                                $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] ??= [];
+                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
                                 foreach ($conditionComponentFieldNodes as $componentFieldNode) {
                                     /** @var ComponentFieldNodeInterface $componentFieldNode */
                                     if (in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)) {
@@ -2431,17 +2431,17 @@ class Engine implements EngineInterface
                                     }
                                     $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;
                                 }
-                                $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
+                                $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
                             }
                         } else {
-                            $id_subcomponent_data_fields = $subcomponent_direct_fields;
-                            $id_subcomponent_conditional_data_fields = $subcomponent_conditional_fields_storage;
+                            $id_subcomponent_direct_fields = $subcomponent_direct_fields;
+                            $id_subcomponent_conditional_fields_storage = $subcomponent_conditional_fields_storage;
                         }
-                        // Important: do ALWAYS execute the lines below, even if $id_subcomponent_data_fields is empty
+                        // Important: do ALWAYS execute the lines below, even if $id_subcomponent_direct_fields is empty
                         // That is because we can load additional data for an object that was already loaded in a previous iteration
                         // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                         // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $subcomponentTypeResolver, $subcomponentTypeOutputKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $subcomponentTypeResolver, $subcomponentTypeOutputKey, array($field_id), $id_subcomponent_direct_fields, $id_subcomponent_conditional_fields_storage);
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
                     $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
