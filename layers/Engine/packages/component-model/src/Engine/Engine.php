@@ -1552,7 +1552,7 @@ class Engine implements EngineInterface
     }
 
     /**
-     * By default place everything under "primary"
+     * Place all entries under dbName "primary"
      *
      * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
      * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
@@ -1560,7 +1560,6 @@ class Engine implements EngineInterface
     protected function getEntriesUnderPrimaryDBName(
         array|SplObjectStorage $entries,
     ): array {
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
         return [
             self::PRIMARY_DBNAME => $entries,
         ];
