@@ -62,16 +62,28 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
+
     /**
      * Define where to place the directive in the directive execution pipeline
-     * 2 directives are mandatory: Validate and ResolveAndMerge, which are executed in this order.
-     * All other directives must indicate where to position themselves, using these 2 directives as anchors.
-     * There are 3 positions:
-     * 1. At the beginning, before the Validate pipeline
-     * 2. In the middle, between the Validate and Resolve directives
-     * 3. At the end, after the ResolveAndMerge directive
+     *
+     * 3 directives are mandatory, and executed in this order:
+     *
+     *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
+     *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
+     *   3. SerializeScalarTypeValuesInDBItems: to serialize Scalar Type values
+     * 
+     * All other directives must indicate where to position themselves,
+     * using these 3 directives as anchors.
+     *
+     * There are 4 positions:
+     *
+     *   1. At the beginning, before the Validate pipeline
+     *   2. Between the Validate and Resolve directives
+     *   3. Between the Resolve and SerializeScalar directives
+     *   4. At the end, after the SerializeScalar directive
      */
     public function getPipelinePosition(): string;
+
     /**
      * This is the equivalent to `__invoke` in League\Pipeline\StageInterface
      *
