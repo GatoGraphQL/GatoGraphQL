@@ -75,13 +75,18 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * All other directives must indicate where to position themselves,
      * using these 3 directives as anchors.
      *
-     * There are 5 positions:
+     * There are 6 positions:
      *
-     *   1. At the beginning
+     *   1. At the very beginning
      *   2. Before Validate directive
      *   3. Between the Validate and Resolve directives
-     *   4. After the ResolveAndMerge directive
-     *   5. At the end
+     *   4. Between the Resolve and Serialize directives
+     *   5. After the Serialize directive
+     *   6. At the very end
+     *
+     * In the "serialize" step, the directive takes the objects
+     * stored in $resolvedIDFieldValues, such as a DateTime object,
+     * and converts them to string for printing in the response.
      */
     public function getPipelinePosition(): string;
 
