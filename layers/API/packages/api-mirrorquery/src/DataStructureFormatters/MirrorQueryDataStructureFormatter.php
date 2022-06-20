@@ -16,7 +16,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         return 'mirrorquery';
     }
 
-    protected function getFields()
+    /**
+     * @return array<string|int,string>
+     */
+    protected function getFields(): array
     {
         // Allow REST to override with default fields
         return App::getState('requested-query') ?? App::getState('executable-query') ?? [];
