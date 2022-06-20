@@ -17,11 +17,11 @@
 			{{#each locations}}
 				{{#if @index}}{{{../../each-separator}}}{{/if}}
 				{{#withModule ../../. "location-layout"}}
-					{{enterModule ../../../. dbKey=../../../bs.dbkeys.locations objectID=../this}}
+					{{enterModule ../../../. dbKey=../../../bs.outputKeys.locations objectID=../this}}
 				{{/withModule}}
 				{{#withModule ../../. "location-complement"}}
 					{{{../../../complement-separator}}}
-					{{enterModule ../../../. dbKey=../../../bs.dbkeys.locations objectID=../this}}
+					{{enterModule ../../../. dbKey=../../../bs.outputKeys.locations objectID=../this}}
 				{{/withModule}}
 			{{/each}}	
 		{{/if}}

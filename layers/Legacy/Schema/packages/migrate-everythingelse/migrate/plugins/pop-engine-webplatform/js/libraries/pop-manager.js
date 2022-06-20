@@ -3954,7 +3954,7 @@ window.pop.Manager = {
 		// again the /log-in preloading settings, which will override the ones from the log-in window that is open, making it lose the dbKey,
 		// which is needed by the content-inner component.
 		if (!context.dbKey) {
-			context.dbKey = bs.dbkeys.id;
+			context.dbKey = bs.outputKeys.id;
 		}
 	},
 
@@ -4114,7 +4114,7 @@ window.pop.Manager = {
 	
 		var that = this;
 		var blockSettings = {
-			dbkeys: that.getOutputKeys(domain, pssId, bsId),
+			outputKeys: that.getOutputKeys(domain, pssId, bsId),
 			dbobjectids: that.getDataset(domain, pssId, bsId),
 			feedback: that.getBlockFeedback(domain, pssId, bsId),
 			bsId: bsId,
@@ -4242,7 +4242,7 @@ window.pop.Manager = {
 	getOutputKeys : function(domain, pageSection, block) {
 	
 		var that = this;
-		return that.getStatelessSettings(domain, pageSection, block, 'dbkeys');
+		return that.getStatelessSettings(domain, pageSection, block, 'outputKeys');
 	},
 
 	getBlockFilteringUrl : function(domain, pageSection, block, use_pageurl) {

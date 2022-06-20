@@ -159,7 +159,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	}
 	else if (options.hash.subcomponent && objectID) {
 
-		dbKey = bs.dbkeys[options.hash.subcomponent];
+		dbKey = bs.outputKeys[options.hash.subcomponent];
 		dbObject = pop.Manager.getDBObject(domain, dbKey, objectID);
 		extend.dbObject = dbObject;
 		extend.dbObjectDBKey = dbKey;
@@ -168,7 +168,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	}
 	else if (options.hash.subcomponent && dbObjectIDs) {
 
-		dbKey = bs.dbkeys[options.hash.subcomponent];
+		dbKey = bs.outputKeys[options.hash.subcomponent];
 		extend.dbKey = dbKey;
 		extend.dbObjectIDs = dbObjectIDs;
 	}

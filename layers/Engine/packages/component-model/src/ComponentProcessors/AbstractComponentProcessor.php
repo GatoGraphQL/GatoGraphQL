@@ -686,7 +686,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $ret = array();
 
         if ($database_keys = $this->getDatasetDatabaseKeys($component, $props)) {
-            $ret['dbkeys'] = $database_keys;
+            $ret['outputKeys'] = $database_keys;
         }
 
         return $ret;
@@ -694,10 +694,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void
     {
-        // Add the current component's dbkeys
+        // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
-            $dbkeys = $this->getOutputKeys($component, $props);
-            foreach ($dbkeys as $field => $dbkey) {
+            $outputKeys = $this->getOutputKeys($component, $props);
+            foreach ($outputKeys as $field => $dbkey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);

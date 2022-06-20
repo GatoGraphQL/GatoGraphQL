@@ -17,7 +17,7 @@
 				{{/withModule}}
 				{{#withModule ../. "user-avatar"}}
 					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">					
-						{{enterModule ../../. dbKey=../../bs.dbkeys.user-id objectID=../user-id}}
+						{{enterModule ../../. dbKey=../../bs.outputKeys.user-id objectID=../user-id}}
 					</div>
 				{{/withModule}}
 			</div>

@@ -142,7 +142,7 @@ For instance, if fetching the data for blog posts with titles "Hello World!" and
 }
 ```
 
-Each component knows which are its queried objects from section `datasetcomponentdata`, which provides the IDs of the queried objects under property `dbobjectids` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `componentsettings`, which indicates to what type each object belongs under property `dbkeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
+Each component knows which are its queried objects from section `datasetcomponentdata`, which provides the IDs of the queried objects under property `dbobjectids` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `componentsettings`, which indicates to what type each object belongs under property `outputKeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
 
 ```javascript
 {
@@ -150,7 +150,7 @@ Each component knows which are its queried objects from section `datasetcomponen
     "page": {
       components: {
         "post-feed": {
-          dbkeys: {
+          outputKeys: {
             id: "posts",
             author: "users"
           }
@@ -724,7 +724,7 @@ Database object data is retrieved and placed under a shared section called `data
 For instance, the API response below contains a component hierarchy with two components, `"page" => "post-feed"`, where component `"post-feed"` fetches blog posts. Please notice the following:
 
 - Each component knows which are its queried objects from property `dbobjectids` (IDs 4 and 9 for the blog posts)
-- Each component knows the object type for its queried objects from property `dbkeys` (each post's data is found under "posts", and the post's author data, corresponding to the author with the ID given under the post's property "author", is found under "users"):
+- Each component knows the object type for its queried objects from property `outputKeys` (each post's data is found under "posts", and the post's author data, corresponding to the author with the ID given under the post's property "author", is found under "users"):
 - Because the database object data is relational, property "author" contains the ID to the author object instead of printing the author data directly
 
 ```javascript
@@ -742,7 +742,7 @@ For instance, the API response below contains a component hierarchy with two com
     "page": {
       components: {
         "post-feed": {
-          dbkeys: {
+          outputKeys: {
             id: "posts",
             author: "users"
           }

@@ -183,8 +183,8 @@ class PoP_ServerSideManager
             if ($context[ComponentModelModuleInfo::get('response-prop-subcomponents')] ?? null) {
                 $context['components'] = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')];
             }
-            if ($context['bs']['dbkeys'] ?? null) {
-                $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
+            if ($context['bs']['outputKeys'] ?? null) {
+                $context['bs']['outputKeys'] = $context['bs']['outputKeys'];
             }
             if ($context[GD_JS_COMPONENT] ?? null) {
                 $context['component'] = $context[GD_JS_COMPONENT];
@@ -421,7 +421,7 @@ class PoP_ServerSideManager
     public function getBlockSettings($domain, $blockTLDomain, $pssId, $bsId, $psId, $bId)
     {
         $blockSettings = array(
-            'dbkeys' => $this->getOutputKeys($domain, $pssId, $bsId),
+            'outputKeys' => $this->getOutputKeys($domain, $pssId, $bsId),
             'dbobjectids' => $this->getDataset($domain, $pssId, $bsId),
             'feedback' => $this->getBlockFeedback($domain, $pssId, $bsId),
             'bsId' => $bsId,
@@ -484,7 +484,7 @@ class PoP_ServerSideManager
 
     public function getOutputKeys($domain, $pageSection, $block)
     {
-        return $this->getStatelessSettings($domain, $pageSection, $block, 'dbkeys');
+        return $this->getStatelessSettings($domain, $pageSection, $block, 'outputKeys');
     }
 
     public function getDestroyUrl($url)

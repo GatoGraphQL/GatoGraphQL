@@ -167,14 +167,14 @@ class PoP_ServerSide_KernelHelpers
             $extend['dbKey'] = $options['hash']['dbKey'];
             $extend['objectIDs'] = $options['hash']['objectIDs'];
         } elseif (isset($options['hash']['subcomponent']) && $objectID) {
-            $dbKey = $bs['dbkeys'][$options['hash']['subcomponent']];
+            $dbKey = $bs['outputKeys'][$options['hash']['subcomponent']];
             $dbObject = $popManager->getDBObject($domain, $dbKey, $objectID);
             $extend['dbObject'] = $dbObject;
             $extend['dbObjectDBKey'] = $dbKey;
             $extend['dbKey'] = $dbKey;
             $extend['objectIDs'] = array($objectID);
         } elseif (isset($options['hash']['subcomponent']) && $options['hash']['objectIDs']) {
-            $dbKey = $bs['dbkeys'][$options['hash']['subcomponent']];
+            $dbKey = $bs['outputKeys'][$options['hash']['subcomponent']];
             $extend['dbKey'] = $dbKey;
             $extend['objectIDs'] = $options['hash']['objectIDs'];
         } elseif (isset($options['hash']['objectIDs'])) {
