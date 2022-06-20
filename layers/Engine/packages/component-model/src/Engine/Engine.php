@@ -1579,7 +1579,7 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionTypeOutputKeyIDs = $combinedUnionDBKeyIDs = $previouslyResolvedIDFieldValues = [];
+        $databases = $unionTypeOutputKeyIDs = $combinedUnionTypeOutputKeyIDs = $previouslyResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
             FeedbackCategories::ERROR => [],
             FeedbackCategories::WARNING => [],
@@ -1641,7 +1641,7 @@ class Engine implements EngineInterface
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $idObjects = $relationalTypeResolver->fillObjects(
                 $idFieldSet,
-                $combinedUnionDBKeyIDs,
+                $combinedUnionTypeOutputKeyIDs,
                 $previouslyResolvedIDFieldValues,
                 $iterationResolvedIDFieldValues,
                 $variables,
@@ -1778,11 +1778,11 @@ class Engine implements EngineInterface
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionDBKeyIDs, $idObjects);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects);
                     }
                 }
             }
@@ -2303,7 +2303,7 @@ class Engine implements EngineInterface
         SplObjectStorage $subcomponents_data_properties,
         array &$already_loaded_ids_data_fields,
         array &$unionTypeOutputKeyIDs,
-        array &$combinedUnionDBKeyIDs,
+        array &$combinedUnionTypeOutputKeyIDs,
         array $idObjects,
     ): void {
         $engineState = App::getEngineState();
@@ -2389,7 +2389,7 @@ class Engine implements EngineInterface
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                             $entryIsArray = $databases[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey]);
                             $unionTypeOutputKeyIDs[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            $combinedUnionDBKeyIDs[$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(
