@@ -1679,12 +1679,12 @@ class Engine implements EngineInterface
                         /** @var FieldInterface $conditionField */
                         $conditionalFields = $fieldSet->conditionalFields[$conditionField];
                         // If it failed to load the item, it will be null
-                        $dbItem = $iterationResolvedIDFieldValues[$id];
-                        if ($dbItem === null) {
+                        $resolvedIDFieldValue = $iterationResolvedIDFieldValues[$id];
+                        if ($resolvedIDFieldValue === null) {
                             continue;
                         }
                         /** @var FieldInterface[] $conditionalFields */
-                        $iterationFields = array_keys($dbItem);
+                        $iterationFields = array_keys($resolvedIDFieldValue);
                         $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
                             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
