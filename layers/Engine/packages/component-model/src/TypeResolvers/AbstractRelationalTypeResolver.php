@@ -950,9 +950,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * The data under variable $resolvedIDFieldValues will undergo
      * 2 stages:
      *
-     *   1. Resolve the field (for each ID), which may produce an object
-     *      (eg: DateTime for `Post.date`)
+     *   1. Resolve the field (for each ID) via ObjectTypeFieldResolvers,
+     *      which may produce an object (eg: DateTime for `Post.date`)
      *   2. Serialize the leaf values, to print the response
+     *      (via directive SerializeLeafOutputTypeValuesInDBItems, executed at the end of the pipeline)
      *
      * Hence, the type of this variable can change throughout the
      * lifecycle of this script, and its type is then declared as `mixed`.
