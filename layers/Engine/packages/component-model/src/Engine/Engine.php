@@ -1275,7 +1275,7 @@ class Engine implements EngineInterface
                 if ($load_data) {
                     $relationalTypeResolver = $processor->getRelationalTypeResolver($component);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-                    $relationalTypeOutputDBKey = $relationalTypeResolver->getTypeOutputDBKey();
+                    $relationalTypeOutputDBKey = $relationalTypeResolver->getTypeOutputKey();
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
@@ -1633,7 +1633,7 @@ class Engine implements EngineInterface
                 );
             }
 
-            $database_key = $relationalTypeResolver->getTypeOutputDBKey();
+            $database_key = $relationalTypeResolver->getTypeOutputKey();
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
@@ -2307,7 +2307,7 @@ class Engine implements EngineInterface
         array $idObjects,
     ): void {
         $engineState = App::getEngineState();
-        $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
+        $database_key = $targetObjectTypeResolver->getTypeOutputKey();
         foreach ($subcomponents_data_properties as $componentFieldNode) {
             /** @var ComponentFieldNodeInterface $componentFieldNode */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
@@ -2324,7 +2324,7 @@ class Engine implements EngineInterface
             if ($subcomponentTypeResolver === null) {
                 continue;
             }
-            $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
+            $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputKey();
             // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
             $subcomponent_data_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */

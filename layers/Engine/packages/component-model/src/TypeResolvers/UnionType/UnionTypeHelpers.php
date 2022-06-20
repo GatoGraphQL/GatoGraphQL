@@ -49,7 +49,7 @@ class UnionTypeHelpers
     public static function getObjectComposedTypeAndID(RelationalTypeResolverInterface $relationalTypeResolver, int | string $id): string
     {
         return
-            $relationalTypeResolver->getTypeOutputDBKey() .
+            $relationalTypeResolver->getTypeOutputKey() .
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR .
             (string) $id;
     }

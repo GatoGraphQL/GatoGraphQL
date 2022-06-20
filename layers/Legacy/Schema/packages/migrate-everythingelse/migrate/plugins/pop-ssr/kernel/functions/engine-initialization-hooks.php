@@ -190,7 +190,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $databases = $data['dbData'];
 
             // Obtain the data from the database, copy it to the dynamic database
-            $database_key = $relationalTypeResolver->getTypeOutputDBKey();
+            $database_key = $relationalTypeResolver->getTypeOutputKey();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
             // The hook below can modify the list of fields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
