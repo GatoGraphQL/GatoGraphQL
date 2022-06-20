@@ -576,7 +576,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * If no fields are queried, the entry will be null.
              * Initialize it to [] to simplify typing/null-checking
              */
-            $resolvedIDFieldValues[$objectID] ??= [];
+            $resolvedIDFieldValues[$objectID] ??= new SplObjectStorage();
         }
         // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($idObjects));
