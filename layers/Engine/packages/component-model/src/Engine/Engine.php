@@ -2324,7 +2324,7 @@ class Engine implements EngineInterface
             if ($subcomponentTypeResolver === null) {
                 continue;
             }
-            $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputKey();
+            $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
             // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
             $subcomponent_data_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
@@ -2333,8 +2333,8 @@ class Engine implements EngineInterface
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
                 $subcomponent_already_loaded_ids_data_fields = [];
-                if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey] ?? null)) {
-                    $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey];
+                if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeOutputKey] ?? null)) {
+                    $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputKey];
                 }
                 $subcomponentIDs = [];
                 foreach ($typeResolverIDs as $id) {
@@ -2434,19 +2434,19 @@ class Engine implements EngineInterface
                         // That is because we can load additional data for an object that was already loaded in a previous iteration
                         // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                         // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDFieldSets, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                        $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDFieldSets, $subcomponentTypeResolver, $subcomponentTypeOutputKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
                     }
-                    $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $component_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS] = array_merge(
-                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS] ?? [],
+                    $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] ?? [],
                         $field_ids
                     );
-                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $component_path_key);
+                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputKey, $component_path_key);
                 }
 
-                if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key] ?? null) {
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::IDS]);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
+                if ($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key] ?? null) {
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS]);
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
                 }
             }
         }
