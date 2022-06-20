@@ -891,7 +891,7 @@ class Engine implements EngineInterface
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             // Get the actual type for each entity, and add the entry there
-            $targetObjectTypeResolverNameTypeResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameDBKeys = [];
+            $targetObjectTypeResolverNameTypeResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameTypeOutputKeys = [];
             $noTargetObjectTypeResolverDataItems = [];
             foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
@@ -902,13 +902,13 @@ class Engine implements EngineInterface
                         $exists = true;
                         // The ID will contain the type. Remove it
                         list(
-                            $objectDBKey,
+                            $objectTypeOutputKey,
                             $objectID
                         ) = UnionTypeHelpers::extractObjectTypeAndID($objectID);
 
                         $targetObjectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
                         $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
-                        $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName] = $objectDBKey;
+                        $targetObjectTypeResolverNameTypeOutputKeys[$targetObjectTypeResolverName] = $objectTypeOutputKey;
                         $targetObjectTypeResolverNameDataItems[$targetObjectTypeResolverName][$objectID] = $dataItem;
                     }
                 }
@@ -919,8 +919,8 @@ class Engine implements EngineInterface
             }
             foreach ($targetObjectTypeResolverNameDataItems as $targetObjectTypeResolverName => $convertedDataItems) {
                 $targetObjectTypeResolver = $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName];
-                $targetObjectTypeDBKey = $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName];
-                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeDBKey, $convertedDataItems, $idObjects, $addEntryIfError);
+                $targetObjectTypeOutputKey = $targetObjectTypeResolverNameTypeOutputKeys[$targetObjectTypeResolverName];
+                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeOutputKey, $convertedDataItems, $idObjects, $addEntryIfError);
             }
             // Add the errors under the UnionTypeResolver key
             if ($noTargetObjectTypeResolverDataItems) {

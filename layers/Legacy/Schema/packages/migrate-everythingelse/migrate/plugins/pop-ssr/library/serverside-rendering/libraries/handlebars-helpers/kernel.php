@@ -106,7 +106,7 @@ class PoP_ServerSide_KernelHelpers
         $pss = $prevContext['pss'];
         $bs = $prevContext['bs'];
         $dbObject = $prevContext['dbObject'];
-        $dbObjectDBKey = $prevContext['dbObjectDBKey'];
+        $dbObjectTypeOutputKey = $prevContext['dbObjectTypeOutputKey'];
         $ignorePSRuntimeId = $prevContext['ignorePSRuntimeId'];
         $feedbackObject = $prevContext['feedbackObject'];
 
@@ -117,7 +117,7 @@ class PoP_ServerSide_KernelHelpers
         // Add all these vars to the context for this component
         $extend = array(
             'dbObject' => $dbObject,
-            'dbObjectDBKey' => $dbObjectDBKey,
+            'dbObjectTypeOutputKey' => $dbObjectTypeOutputKey,
             'typeOutputKey' => $typeOutputKey,
             'objectIDs' => $objectIDs,
             'tls' => $tls,
@@ -160,7 +160,7 @@ class PoP_ServerSide_KernelHelpers
             $typeOutputKey = $options['hash']['typeOutputKey'];
             $dbObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
             $extend['dbObject'] = $dbObject;
-            $extend['dbObjectDBKey'] = $typeOutputKey;
+            $extend['dbObjectTypeOutputKey'] = $typeOutputKey;
             $extend['typeOutputKey'] = $typeOutputKey;
             $extend['objectIDs'] = array($objectID);
         } elseif (isset($options['hash']['typeOutputKey']) && $options['hash']['objectIDs']) {
@@ -170,7 +170,7 @@ class PoP_ServerSide_KernelHelpers
             $typeOutputKey = $bs['outputKeys'][$options['hash']['subcomponent']];
             $dbObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
             $extend['dbObject'] = $dbObject;
-            $extend['dbObjectDBKey'] = $typeOutputKey;
+            $extend['dbObjectTypeOutputKey'] = $typeOutputKey;
             $extend['typeOutputKey'] = $typeOutputKey;
             $extend['objectIDs'] = array($objectID);
         } elseif (isset($options['hash']['subcomponent']) && $options['hash']['objectIDs']) {
@@ -184,7 +184,7 @@ class PoP_ServerSide_KernelHelpers
             // So then put everything to null
             $extend['typeOutputKey'] = $options['hash']['typeOutputKey'];
             $extend['dbObject'] = null;
-            $extend['dbObjectDBKey'] = null;
+            $extend['dbObjectTypeOutputKey'] = null;
             $extend['objectIDs'] = null;
         }
 

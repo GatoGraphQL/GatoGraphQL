@@ -13,7 +13,7 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as U
 /**
  * Change the properties printed for the standard GraphQL response:
  *
- * - extension "entityDBKey" is renamed as "type"
+ * - extension "entityTypeOutputKey" is renamed as "type"
  * - extension "fields" (or "field" if there's one item) instead of "path",
  *   because there are no composable fields
  * - move "location" up from under "extensions"
