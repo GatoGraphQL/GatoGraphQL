@@ -22,7 +22,7 @@ class DirectivePipelineDecorator
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$pipelineIDFieldSet,
-        array $pipelineDirectiveResolverInstances,
+        array $pipelineDirectiveResolvers,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
@@ -34,7 +34,7 @@ class DirectivePipelineDecorator
         $payload = $this->pipeline->__invoke(
             DirectivePipelineUtils::convertArgumentsToPayload(
                 $relationalTypeResolver,
-                $pipelineDirectiveResolverInstances,
+                $pipelineDirectiveResolvers,
                 $objectIDItems,
                 $unionDBKeyIDs,
                 $previousResolvedIDFieldValues,
@@ -47,7 +47,7 @@ class DirectivePipelineDecorator
         );
         list(
             $relationalTypeResolver,
-            $pipelineDirectiveResolverInstances,
+            $pipelineDirectiveResolvers,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,

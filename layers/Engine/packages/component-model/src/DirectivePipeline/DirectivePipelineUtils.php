@@ -15,7 +15,7 @@ class DirectivePipelineUtils
      */
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $pipelineDirectiveResolverInstances,
+        array $pipelineDirectiveResolvers,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
@@ -27,7 +27,7 @@ class DirectivePipelineUtils
     ): array {
         return [
             'typeResolver' => &$relationalTypeResolver,
-            'pipelineDirectiveResolverInstances' => &$pipelineDirectiveResolverInstances,
+            'pipelineDirectiveResolvers' => &$pipelineDirectiveResolvers,
             'objectIDItems' => &$objectIDItems,
             'unionDBKeyIDs' => &$unionDBKeyIDs,
             'previousResolvedIDFieldValues' => &$previousResolvedIDFieldValues,
@@ -43,7 +43,7 @@ class DirectivePipelineUtils
     {
         return [
             &$payload['typeResolver'],
-            &$payload['pipelineDirectiveResolverInstances'],
+            &$payload['pipelineDirectiveResolvers'],
             &$payload['objectIDItems'],
             &$payload['unionDBKeyIDs'],
             &$payload['previousResolvedIDFieldValues'],

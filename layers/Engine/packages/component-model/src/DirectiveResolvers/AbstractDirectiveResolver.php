@@ -936,7 +936,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         list(
             /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver,
-            $pipelineDirectiveResolverInstances,
+            $pipelineDirectiveResolvers,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,
@@ -953,16 +953,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // Extract the head, keep passing down the rest
         $idFieldSet = $pipelineIDFieldSet[0];
         array_shift($pipelineIDFieldSet);
-        // The $pipelineDirectiveResolverInstances is the series of directives executed in the pipeline
+        // The $pipelineDirectiveResolvers is the series of directives executed in the pipeline
         // The current stage is at the head. Remove it
-        array_shift($pipelineDirectiveResolverInstances);
+        array_shift($pipelineDirectiveResolvers);
 
         // // 2. Validate operation
         // $this->validateDirective(
         //     $relationalTypeResolver,
         //     $idFieldSet,
         //     $pipelineIDFieldSet,
-        //     $pipelineDirectiveResolverInstances,
+        //     $pipelineDirectiveResolvers,
         //     $objectIDItems,
         //     $resolvedIDFieldValues,
         //     $previousResolvedIDFieldValues,
@@ -982,7 +982,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->resolveDirective(
                     $relationalTypeResolver,
                     $idFieldSet,
-                    $pipelineDirectiveResolverInstances,
+                    $pipelineDirectiveResolvers,
                     $objectIDItems,
                     $unionDBKeyIDs,
                     $previousResolvedIDFieldValues,
@@ -1072,7 +1072,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // 3. Re-create the payload from the modified variables
         return DirectivePipelineUtils::convertArgumentsToPayload(
             $relationalTypeResolver,
-            $pipelineDirectiveResolverInstances,
+            $pipelineDirectiveResolvers,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,
