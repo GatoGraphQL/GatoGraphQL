@@ -51,7 +51,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     /**
      * @param array<string,mixed> $ret
-     * @param array<string|int,string> $fields
+     * @param array<string|int,string|array<string>> $fields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string|int>|string|integer $objectIDorIDs
