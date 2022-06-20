@@ -147,7 +147,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $field
             );
         }
-        return $this->getUniqueFieldOutputKeyByTypeOutputDBKey(
+        return $this->getUniqueFieldOutputKeyByTypeOutputKey(
             $relationalTypeResolver->getTypeOutputKey(),
             $field
         );
@@ -186,7 +186,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
     ): string {
-        return $this->getUniqueFieldOutputKeyByTypeOutputDBKey(
+        return $this->getUniqueFieldOutputKeyByTypeOutputKey(
             $objectTypeResolver->getTypeOutputKey(),
             $field
         );
@@ -213,7 +213,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      * By keeping a registry of fields to fieldOutputNames, we can always provide
      * a unique name, and avoid overriding the value.
      */
-    public function getUniqueFieldOutputKeyByTypeOutputDBKey(string $typeOutputDBKey, string $field): string
+    public function getUniqueFieldOutputKeyByTypeOutputKey(string $typeOutputDBKey, string $field): string
     {
         /**
          * This function caches state across PHPUnit tests! Then, running a

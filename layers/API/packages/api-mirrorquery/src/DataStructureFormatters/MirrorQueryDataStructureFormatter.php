@@ -108,7 +108,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
-            $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputDBKey($typeOutputKey, $propertyField);
+            $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $propertyField);
             if (array_key_exists($uniquePropertyFieldOutputKey, $dbObject)) {
                 $dbObjectRet[$propertyFieldOutputKey] = $dbObject[$uniquePropertyFieldOutputKey];
             }
@@ -117,7 +117,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         // Add the nested levels
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
             $nestedFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($nestedField);
-            $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputDBKey($typeOutputKey, $nestedField);
+            $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $nestedField);
 
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
             if (!array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
