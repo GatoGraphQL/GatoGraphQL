@@ -1557,7 +1557,7 @@ class Engine implements EngineInterface
      * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
      * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
-    public function getEntriesUnderDefaultDBName(
+    protected function getEntriesUnderPrimaryDBName(
         array|SplObjectStorage $entries,
     ): array {
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
@@ -1579,7 +1579,7 @@ class Engine implements EngineInterface
         }
 
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
-        $dbname_entries = $this->getEntriesUnderDefaultDBName($entries);
+        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
         // Move these data fields under "meta" DB name
         foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
@@ -1620,7 +1620,7 @@ class Engine implements EngineInterface
 
         // By default place everything under "primary"
         /** @var array<string,SplObjectStorage<FieldInterface,mixed>> */
-        $dbname_entries = $this->getEntriesUnderDefaultDBName($entries);
+        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
         $fields = iterator_to_array($entries);
         foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
