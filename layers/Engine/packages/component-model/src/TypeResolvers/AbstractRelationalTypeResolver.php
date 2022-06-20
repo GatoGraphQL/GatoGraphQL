@@ -131,7 +131,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
      *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeLeafOutputTypeValuesInDBItems: to serialize Scalar Type values
+     *   3. SerializeLeafOutputTypeValuesInDBItems: to serialize Scalar and Enum Type values
      *
      * Additionally to these 3, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
