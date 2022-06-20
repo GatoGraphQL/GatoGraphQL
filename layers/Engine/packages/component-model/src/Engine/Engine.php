@@ -1637,13 +1637,13 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = [];
+            $iterationResolvedIDFieldValues = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $idFieldSet,
                 $combinedUnionDBKeyIDs,
                 $previousResolvedIDFieldValues,
-                $iterationDBItems,
+                $iterationResolvedIDFieldValues,
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
@@ -1666,7 +1666,7 @@ class Engine implements EngineInterface
              * we can split all functionality into cacheable and non-cacheable,
              * thus caching most of the website even for logged-in users
              */
-            if ($iterationDBItems) {
+            if ($iterationResolvedIDFieldValues) {
                 /**
                  * Conditional data fields: Store the loaded IDs/fields in an object,
                  * to avoid fetching them again in later iterations on the same typeResolver
@@ -1679,7 +1679,7 @@ class Engine implements EngineInterface
                         /** @var FieldInterface $conditionField */
                         $conditionalFields = $fieldSet->conditionalFields[$conditionField];
                         // If it failed to load the item, it will be null
-                        $dbItem = $iterationDBItems[$id];
+                        $dbItem = $iterationResolvedIDFieldValues[$id];
                         if ($dbItem === null) {
                             continue;
                         }
@@ -1696,7 +1696,7 @@ class Engine implements EngineInterface
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
-                $resolvedIDFieldValues = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
+                $resolvedIDFieldValues = $this->moveEntriesUnderDBName($iterationResolvedIDFieldValues, true, $relationalTypeResolver);
                 foreach ($resolvedIDFieldValues as $dbname => $entries) {
                     $databases[$dbname] ??= [];
                     $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems);
