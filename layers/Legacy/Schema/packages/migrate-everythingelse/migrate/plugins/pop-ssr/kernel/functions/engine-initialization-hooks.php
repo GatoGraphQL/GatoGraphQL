@@ -120,7 +120,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
     protected function removeDatabases(&$data, $engine)
     {
-        if (!$data['dbData']) {
+        if (!$data['databases']) {
             return;
         }
 
@@ -180,14 +180,14 @@ class PoP_SSR_EngineInitialization_Hooks
         }
 
         // Replace the DBs with the ones with dynamic data
-        $data['dbData'] = $dynamicdatabases;
+        $data['databases'] = $dynamicdatabases;
     }
 
     protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $objectIDs, RelationalTypeResolverInterface $relationalTypeResolver, array $data_properties)
     {
         if ($data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
             // Data to be copied can come from either the database or the userstatedatabase
-            $databases = $data['dbData'];
+            $databases = $data['databases'];
 
             // Obtain the data from the database, copy it to the dynamic database
             $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();

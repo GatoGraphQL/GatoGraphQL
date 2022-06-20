@@ -49,7 +49,7 @@ class PoP_ServerSideManager
     public function &getDatabases($domain)
     {
         $datastore = PoP_ServerSide_LibrariesFactory::getDatastoreInstance();
-        $databases =& $datastore->store[$domain]['dbData'] ?? array();
+        $databases =& $datastore->store[$domain]['databases'] ?? array();
         return $databases;
     }
 
@@ -81,7 +81,7 @@ class PoP_ServerSideManager
 
         // Databases and stateless data can be integrated straight
         $datastore->store[$domain] = $datastore->store[$domain] ?? array();
-        $datastore->store[$domain]['dbData'] = $json['dbData'];
+        $datastore->store[$domain]['databases'] = $json['databases'];
         $datastore->store[$domain]['statelessdata'] = $json['statelessdata'];
 
         // Stateful data is to be integrated under the corresponding URL
@@ -136,7 +136,7 @@ class PoP_ServerSideManager
             //                 'uniquetodomain' => array(),
             //             ),
             //         ),
-            //         'dbData' => array(
+            //         'databases' => array(
             //             'primary' => array(),
             //             'userstate' => array(),
             //         ),

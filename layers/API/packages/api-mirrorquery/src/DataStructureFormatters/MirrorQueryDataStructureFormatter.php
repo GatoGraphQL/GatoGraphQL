@@ -27,7 +27,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         // getting the data from the corresponding typeOutputKeyPath
         $ret = [];
         if ($fields = $this->getFields()) {
-            $databases = $data['dbData'] ?? [];
+            $databases = $data['databases'] ?? [];
             $unionTypeOutputKeyIDs = $data['unionTypeOutputKeyIDs'] ?? [];
             $datasetComponentData = $data['datasetcomponentdata'] ?? [];
             foreach ($datasetComponentData as $componentName => $objectIDs) {

@@ -1797,7 +1797,7 @@ class Engine implements EngineInterface
 
         // Print data into the output
         $ret = [];
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'databases', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);
 
         // Add the feedback (errors, warnings, deprecations, notices, etc) into the output
