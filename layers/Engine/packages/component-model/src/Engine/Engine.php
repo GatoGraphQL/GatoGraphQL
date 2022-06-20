@@ -65,6 +65,8 @@ class Engine implements EngineInterface
 {
     use BasicServiceTrait;
 
+    public const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
+
     public final const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public final const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
@@ -1539,7 +1541,7 @@ class Engine implements EngineInterface
     ): array {
         if ($this->dbNameFieldNames === null) {
             $this->dbNameFieldNames = App::applyFilters(
-                'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
+                self::HOOK_DBNAME_TO_FIELDNAMES,
                 [],
                 $relationalTypeResolver
             );
