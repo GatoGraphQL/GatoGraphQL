@@ -190,7 +190,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $databases = $data['dbData'];
 
             // Obtain the data from the database, copy it to the dynamic database
-            $database_key = $relationalTypeResolver->getTypeOutputKey();
+            $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
             // The hook below can modify the list of fields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
@@ -202,8 +202,8 @@ class PoP_SSR_EngineInitialization_Hooks
                 foreach ($databases as $dbname => $database) {
                     foreach ($data_fields[$dbname] as $data_field) {
                         /** @var ComponentFieldNodeInterface $data_field */
-                        if (isset($database[$database_key][$object_id][$data_field->asFieldOutputQueryString()])) {
-                            $dynamicdatabases[$dbname][$database_key][$object_id][$data_field->asFieldOutputQueryString()] = $database[$database_key][$object_id][$data_field->asFieldOutputQueryString()];
+                        if (isset($database[$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()])) {
+                            $dynamicdatabases[$dbname][$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()] = $database[$typeOutputKey][$object_id][$data_field->asFieldOutputQueryString()];
                         }
                     }
                 }
@@ -227,7 +227,7 @@ class PoP_SSR_EngineInitialization_Hooks
                     }
                     // From the $subcomponent_data_field we obtain the subcomponent dbobjectids IDs, fetching the corresponding values from the DB
                     $subcomponent_dataset = array();
-                    $objectIDs = array_keys($sourcedb[$database_key]);
+                    $objectIDs = array_keys($sourcedb[$typeOutputKey]);
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
@@ -243,13 +243,13 @@ class PoP_SSR_EngineInitialization_Hooks
                         foreach ($typeObjectIDs as $object_id) {
                             if ($isUnionType) {
                                 list(
-                                    $database_key,
+                                    $typeOutputKey,
                                     $object_id
                                 ) = UnionTypeHelpers::extractDBObjectTypeAndID($object_id);
                             }
                             // This value may be an array (eg: 'locations' => array(123, 343)) or a single value (eg: 'author' => 432)
                             // So convert to array, to deal with all cases
-                            $subcomponent_resultitem_ids = $sourcedb[$database_key][$object_id][$subcomponent_data_field];
+                            $subcomponent_resultitem_ids = $sourcedb[$typeOutputKey][$object_id][$subcomponent_data_field];
                             $subcomponent_resultitem_ids = is_array($subcomponent_resultitem_ids) ? $subcomponent_resultitem_ids : array($subcomponent_resultitem_ids);
 
                             // Add these IDs to the sucomponent's dbobjectids

@@ -98,7 +98,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         // if ($this->getProp($component, $props, 'replicable')) {
 
         if ($triggerTypeResolver = $this->getTriggerRelationalTypeResolver($component)) {
-            $database_key = $triggerTypeResolver->getTypeOutputKey();
+            $typeOutputKey = $triggerTypeResolver->getTypeOutputKey();
 
             // Needed to execute fillInput on the typeahead input to get the value from the request
             $this->mergeProp(
@@ -106,7 +106,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
                 $props,
                 'params',
                 array(
-                    'data-database-key' => $database_key,
+                    'data-database-key' => $typeOutputKey,
                     'data-urlparam' => $this->getUrlParam($component),
                 )
             );
