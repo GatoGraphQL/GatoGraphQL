@@ -131,7 +131,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
      *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeLeafOutputTypeValuesInDBItems: to serialize Scalar and Enum Type values
+     *   3. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
      *
      * Additionally to these 3, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
@@ -953,7 +953,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *   1. Resolve the field (for each ID) via ObjectTypeFieldResolvers,
      *      which may produce an object (eg: DateTime for `Post.date`)
      *   2. Serialize the leaf values, to print the response
-     *      (via directive SerializeLeafOutputTypeValuesInDBItems, executed at the end of the pipeline)
+     *      (via directive SerializeLeafOutputTypeValues, executed at the end of the pipeline)
      *
      * Hence, the type of this variable can change throughout the
      * lifecycle of this script, and its type is then declared as `mixed`.
