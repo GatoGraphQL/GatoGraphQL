@@ -685,8 +685,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         $ret = array();
 
-        if ($database_keys = $this->getDatasetDatabaseKeys($component, $props)) {
-            $ret['outputKeys'] = $database_keys;
+        if ($outputKeys = $this->getDatasetDatabaseKeys($component, $props)) {
+            $ret['outputKeys'] = $outputKeys;
         }
 
         return $ret;

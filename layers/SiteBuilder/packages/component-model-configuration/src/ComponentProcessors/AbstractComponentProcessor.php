@@ -34,8 +34,8 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
             $ret['configuration'] = $configuration;
         }
 
-        if ($database_keys = $this->getOutputKeys($component, $props)) {
-            $ret['outputKeys'] = $database_keys;
+        if ($outputKeys = $this->getOutputKeys($component, $props)) {
+            $ret['outputKeys'] = $outputKeys;
         }
 
         return $ret;
