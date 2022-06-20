@@ -141,7 +141,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
+        array $succeedingPipelineDirectiveResolvers,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,

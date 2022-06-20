@@ -47,7 +47,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
+        array $succeedingPipelineDirectiveResolvers,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,

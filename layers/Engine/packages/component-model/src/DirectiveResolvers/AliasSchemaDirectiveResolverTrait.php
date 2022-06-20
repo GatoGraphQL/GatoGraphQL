@@ -304,7 +304,7 @@ trait AliasSchemaDirectiveResolverTrait
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
+        array $succeedingPipelineDirectiveResolvers,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
@@ -318,7 +318,7 @@ trait AliasSchemaDirectiveResolverTrait
         $aliasedDirectiveResolver->resolveDirective(
             $relationalTypeResolver,
             $idFieldSet,
-            $succeedingPipelineDirectiveResolverInstances,
+            $succeedingPipelineDirectiveResolvers,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,

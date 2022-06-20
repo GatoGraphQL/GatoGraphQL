@@ -72,7 +72,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
+        array $succeedingPipelineDirectiveResolvers,
         array $objectIDItems,
         array $unionDBKeyIDs,
         array $previousResolvedIDFieldValues,
@@ -179,7 +179,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 $directiveResolverInstance->resolveDirective(
                     $relationalTypeResolver,
                     $directiveResolverIDFieldSet,
-                    $succeedingPipelineDirectiveResolverInstances,
+                    $succeedingPipelineDirectiveResolvers,
                     $objectIDItems,
                     $unionDBKeyIDs,
                     $previousResolvedIDFieldValues,
@@ -198,7 +198,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         parent::resolveDirective(
             $relationalTypeResolver,
             $idFieldSet,
-            $succeedingPipelineDirectiveResolverInstances,
+            $succeedingPipelineDirectiveResolvers,
             $objectIDItems,
             $unionDBKeyIDs,
             $previousResolvedIDFieldValues,
