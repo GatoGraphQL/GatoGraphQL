@@ -7,7 +7,7 @@
 					<i class="fa {{../suggestions-fontawesome}}"></i>
 				{{/if}}
 				{{#withModule ../. "suggestions-layout"}}
-					{{enterModule ../../. dbKey=../../outputKeys.suggestions objectID=../.}}
+					{{enterModule ../../. typeOutputKey=../../outputKeys.suggestions objectID=../.}}
 				{{/withModule}}
 			</a>
 		{{/each}}

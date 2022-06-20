@@ -33,11 +33,11 @@ class PoP_ServerSide_MultiLayoutHelpers
         // Render the content from this layout
         $layoutContext = $context[ComponentModelModuleInfo::get('response-prop-subcomponents')][$layout];
 
-        // Add dbKey and objectID back into the context
+        // Add typeOutputKey and objectID back into the context
         $layoutContext = array_merge(
             $layoutContext,
             array(
-                'dbKey' => $typeOutputKey,
+                'typeOutputKey' => $typeOutputKey,
                 'objectID' => $objectID,
             )
         );

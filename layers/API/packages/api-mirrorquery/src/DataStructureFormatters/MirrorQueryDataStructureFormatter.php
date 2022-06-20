@@ -83,7 +83,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
         // Execute for all fields other than the first one, "root", for both UnionTypeResolvers and non-union ones
-        // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+        // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
         // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
         if ($concatenateField) {
             list(
@@ -99,7 +99,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             // Add all properties requested from the object
             $typeOutputKey = $dbKeyPaths[$objectKeyPath];
         }
-        // If there is no dbKey, it is an error (eg: requesting posts.cats.saranga)
+        // If there is no typeOutputKey, it is an error (eg: requesting posts.cats.saranga)
         if (!$typeOutputKey) {
             return;
         }

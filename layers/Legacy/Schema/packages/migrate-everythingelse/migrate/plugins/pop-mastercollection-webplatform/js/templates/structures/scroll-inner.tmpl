@@ -5,7 +5,7 @@
 	<div class="pop-elem {{../class}} blockinner-elem {{!../layout-grid.class}}" style="{{../style}}">
 		{{#each ../subcomponentoutputnames.layouts}}
 			{{#withModule ../../. this}}
-				{{enterModule ../../../. dbKey=../../../dbKey objectID=../../.}}
+				{{enterModule ../../../. typeOutputKey=../../../typeOutputKey objectID=../../.}}
 			{{/withModule}}
 		{{/each}}
 	</div>

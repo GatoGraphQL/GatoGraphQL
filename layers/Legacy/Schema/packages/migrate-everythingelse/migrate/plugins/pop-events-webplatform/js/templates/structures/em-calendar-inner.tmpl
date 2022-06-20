@@ -6,7 +6,7 @@
 	var events_data = [];
 	
 	{{#each dbObjectIDs}}
-		{{#withDBObject ../dbKey this context=../.}}
+		{{#withDBObject ../typeOutputKey this context=../.}}
 			events_data.push({
 				id: "{{id}}",
 				title: "{{title}}",

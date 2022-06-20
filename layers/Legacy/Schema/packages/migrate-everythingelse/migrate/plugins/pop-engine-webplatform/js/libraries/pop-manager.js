@@ -3329,10 +3329,10 @@ window.pop.Manager = {
 	// 	var that = this;
 
 	// 	// Integrate the response Database into the database
-	// 	$.each(responsedb, function(dbKey, dbObjectIDAttributes) {
+	// 	$.each(responsedb, function(typeOutputKey, dbObjectIDAttributes) {
 
 	// 		// Initialize DB entry
-	// 		database[dbKey] = database[dbKey] || {};
+	// 		database[typeOutputKey] = database[typeOutputKey] || {};
 
 	// 		// When there are no elements in dbObjectIDAttributes, the object will appear not as an object but as an array
 	// 		// In that case, it will be empty, so skip
@@ -3343,10 +3343,10 @@ window.pop.Manager = {
 	// 		// Extend with new values
 	// 		$.each(dbObjectIDAttributes, function(objectID, dbObjectAttributes) {
 
-	// 			if (!database[dbKey][objectID]) {
-	// 				database[dbKey][objectID] = {};
+	// 			if (!database[typeOutputKey][objectID]) {
+	// 				database[typeOutputKey][objectID] = {};
 	// 			}
-	// 			$.extend(database[dbKey][objectID], dbObjectAttributes);
+	// 			$.extend(database[typeOutputKey][objectID], dbObjectAttributes);
 	// 		});
 	// 	});
 	// },
@@ -3629,7 +3629,7 @@ window.pop.Manager = {
 		return targetConfiguration;
 	},
 
-	getComponentHTML : function(domain, pageSection, target, componentName, options, dbKey, objectID) {
+	getComponentHTML : function(domain, pageSection, target, componentName, options, typeOutputKey, objectID) {
 
 		var that = this;
 		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, componentName);
@@ -3642,7 +3642,7 @@ window.pop.Manager = {
 		if (componentPath.length) {
 			var block = that.getBlock(target);
 			that.initContextSettings(domain, pageSection, block, targetContext);
-			that.extendContext(targetContext, domain, dbKey, objectID);
+			that.extendContext(targetContext, domain, typeOutputKey, objectID);
 		}
 
 		// extendContext: don't keep the overriding in the configuration. This way, we can use the preloading without having to reset
@@ -3655,7 +3655,7 @@ window.pop.Manager = {
 		return that.getHtml(domain, componentName, targetContext);
 	},
 
-	extendContext : function(context, domain, dbKey, objectID, override) {
+	extendContext : function(context, domain, typeOutputKey, objectID, override) {
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
 		// Also used from within function enterModules to create the context to pass to each component
@@ -3664,13 +3664,13 @@ window.pop.Manager = {
 		$.extend(context, override);
 
 		// Load dbObject?
-		if (dbKey) {
+		if (typeOutputKey) {
 
-			$.extend(context, {dbKey: dbKey});
+			$.extend(context, {typeOutputKey: typeOutputKey});
 			if (objectID) {
 
-				var dbObject = that.getDBObject(domain, dbKey, objectID);
-				$.extend(context, {dbObject: dbObject, dbObjectDBKey: dbKey});
+				var dbObject = that.getDBObject(domain, typeOutputKey, objectID);
+				$.extend(context, {dbObject: dbObject, dbObjectDBKey: typeOutputKey});
 			}
 		}
 	},
@@ -3948,13 +3948,13 @@ window.pop.Manager = {
 		// Expand the JS Keys for the configuration
 		that.expandJSKeys(context);
 
-		// If there's no dbKey, also add it
-		// This is because there is a bug: first loading /log-in/, it will generate the settings adding dbKey when rendering
+		// If there's no typeOutputKey, also add it
+		// This is because there is a bug: first loading /log-in/, it will generate the settings adding typeOutputKey when rendering
 		// the component down the path. However, it then calls /loaders/initial-frames?target=main, and it will bring 
-		// again the /log-in preloading settings, which will override the ones from the log-in window that is open, making it lose the dbKey,
+		// again the /log-in preloading settings, which will override the ones from the log-in window that is open, making it lose the typeOutputKey,
 		// which is needed by the content-inner component.
-		if (!context.dbKey) {
-			context.dbKey = bs.outputKeys.id;
+		if (!context.typeOutputKey) {
+			context.typeOutputKey = bs.outputKeys.id;
 		}
 	},
 
@@ -4575,17 +4575,17 @@ window.pop.Manager = {
 		return '';
 	},
 
-	getDBObject : function(domain, dbKey, objectID) {
+	getDBObject : function(domain, typeOutputKey, objectID) {
 
 		var that = this;
 		var userItem = {}, item = {};
 		var userdatabase = that.getUserDatabase(domain);
 		var database = that.getDatabase(domain);
-		if (userdatabase[dbKey] && userdatabase[dbKey][objectID]) {
-			userItem = userdatabase[dbKey][objectID];
+		if (userdatabase[typeOutputKey] && userdatabase[typeOutputKey][objectID]) {
+			userItem = userdatabase[typeOutputKey][objectID];
 		}
-		if (database[dbKey] && database[dbKey][objectID]) {
-			item = database[dbKey][objectID];
+		if (database[typeOutputKey] && database[typeOutputKey][objectID]) {
+			item = database[typeOutputKey][objectID];
 		}
 		return $.extend({}, userItem, item);
 	},

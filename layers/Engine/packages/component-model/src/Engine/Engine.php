@@ -1741,10 +1741,10 @@ class Engine implements EngineInterface
                     // (eg: "authors") are attached to the target typeResolver, not to the unionTypeResolver
                     // Then, iterate through all the target typeResolvers, and have each of them process their data
                     if ($isUnionTypeResolver) {
-                        // If the type data resolver is union, the dbKey where the value is stored
-                        // is contained in the ID itself, with format dbKey/ID.
-                        // We must extract this information: assign the dbKey to $typeOutputKey,
-                        // and remove the dbKey from the ID.
+                        // If the type data resolver is union, the typeOutputKey where the value is stored
+                        // is contained in the ID itself, with format typeOutputKey/ID.
+                        // We must extract this information: assign the typeOutputKey to $typeOutputKey,
+                        // and remove the typeOutputKey from the ID.
                         // If the Dataloader failed loading the object, the original ID as int
                         // may have been stored, so cast it always to string
                         $targetObjectIDItems = [];
@@ -2352,8 +2352,8 @@ class Engine implements EngineInterface
                         );
                     }
                 }
-                // We don't want to store the dbKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
-                // So, instead, we store the dbKey/ID values in another object "$unionTypeOutputKeyIDs"
+                // We don't want to store the typeOutputKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
+                // So, instead, we store the typeOutputKey/ID values in another object "$unionTypeOutputKeyIDs"
                 // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
                 $typedSubcomponentIDs = [];
                 // if ($subcomponentIsUnionTypeResolver) {
@@ -2375,7 +2375,7 @@ class Engine implements EngineInterface
                         foreach ($id_database_field_ids as $id => $database_field_ids) {
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
-                            // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
                             // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(

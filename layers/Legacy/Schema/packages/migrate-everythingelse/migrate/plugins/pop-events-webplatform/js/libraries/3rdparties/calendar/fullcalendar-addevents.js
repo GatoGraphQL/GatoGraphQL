@@ -41,7 +41,7 @@ window.pop.FullCalendarAddEvents = {
 			if (!that.isEventLoaded(pageSection, block, event_data.domain, event_data.id)) {
 
 				// mempage.eventData[event_data.id] = {
-					// dbKey: dbKey
+					// typeOutputKey: typeOutputKey
 				// };
 
 				events_data_to_add.push(event_data);

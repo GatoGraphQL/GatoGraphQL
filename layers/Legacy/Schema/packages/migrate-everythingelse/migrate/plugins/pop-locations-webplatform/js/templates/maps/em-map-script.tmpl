@@ -6,6 +6,6 @@
 
 {{#each dbObject.locations}}
 	{{#withModule ../. "map-script-markers"}}
-		{{enterModule ../../. dbKey=../../bs.outputKeys.locations objectID=../.}}
+		{{enterModule ../../. typeOutputKey=../../bs.outputKeys.locations objectID=../.}}
 	{{/withModule}}
 {{/each}}

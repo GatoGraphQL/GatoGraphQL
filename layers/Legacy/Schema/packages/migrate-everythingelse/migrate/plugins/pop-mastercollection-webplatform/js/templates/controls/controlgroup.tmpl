@@ -1,6 +1,6 @@
 <div {{#generateId}}{{id}}{{/generateId}} class="controls {{class}}" style="{{style}}">	
 	{{#each subcomponents}}
-		{{! Comment Leo: the dbKey/dbObject below might be null (controlgroup) or have a value (quicklinkgroup)}}
+		{{! Comment Leo: the typeOutputKey/dbObject below might be null (controlgroup) or have a value (quicklinkgroup)}}
 		{{enterModule ../.}}
 	{{/each}}
 </div>

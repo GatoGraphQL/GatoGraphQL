@@ -11,7 +11,7 @@
 			var block = pop.Manager.getBlock(typeahead);
 			var pageSection = pop.Manager.getPageSection(block);
 			var domain = '{{../tls.domain}}';
-			var location = pop.Manager.getDBObject(domain, '{{../dbKey}}', '{{id}}');
+			var location = pop.Manager.getDBObject(domain, '{{../typeOutputKey}}', '{{id}}');
 			pop.DynamicRender.renderDBObjectLayoutFromDatum(domain, pageSection, block, trigger, location);
 		});
 	})(jQuery);
