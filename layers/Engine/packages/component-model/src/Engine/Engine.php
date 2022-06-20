@@ -1545,7 +1545,7 @@ class Engine implements EngineInterface
             [],
             $relationalTypeResolver
         );
-        foreach ($dbNameToFieldNames as $dbname => $data_fields) {
+        foreach ($dbNameToFieldNames as $dbName => $data_fields) {
             // Move these data fields under "meta" DB name
             if ($entryHasId) {
                 foreach ($dbname_entries['primary'] as $id => $dbObject) {
@@ -1556,7 +1556,7 @@ class Engine implements EngineInterface
                         $data_fields
                     );
                     foreach ($entry_data_fields_to_move as $data_field) {
-                        $dbname_entries[$dbname][$id][$data_field] = $dbname_entries['primary'][$id][$data_field];
+                        $dbname_entries[$dbName][$id][$data_field] = $dbname_entries['primary'][$id][$data_field];
                         unset($dbname_entries['primary'][$id][$data_field]);
                     }
                 }
@@ -1567,7 +1567,7 @@ class Engine implements EngineInterface
                 $data_fields
             );
             foreach ($entry_data_fields_to_move as $data_field) {
-                $dbname_entries[$dbname][$data_field] = $dbname_entries['primary'][$data_field];
+                $dbname_entries[$dbName][$data_field] = $dbname_entries['primary'][$data_field];
                 unset($dbname_entries['primary'][$data_field]);
             }
         }
@@ -1697,11 +1697,11 @@ class Engine implements EngineInterface
 
                 // If the type is union, then add the type corresponding to each object on its ID
                 $resolvedIDFieldValues = $this->moveEntriesUnderDBName($iterationResolvedIDFieldValues, true, $relationalTypeResolver);
-                foreach ($resolvedIDFieldValues as $dbname => $entries) {
-                    $databases[$dbname] ??= [];
-                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
+                foreach ($resolvedIDFieldValues as $dbName => $entries) {
+                    $databases[$dbName] ??= [];
+                    $this->addDatasetToDatabase($databases[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
 
-                    // Populate the $previouslyResolvedIDFieldValues, pointing to the newly fetched resolvedIDFieldValues (but without the dbname!)
+                    // Populate the $previouslyResolvedIDFieldValues, pointing to the newly fetched resolvedIDFieldValues (but without the dbName!)
                     // Save the reference to the values, instead of the values, to save memory
                     // Passing $previouslyResolvedIDFieldValues instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
                     // the modification is done on $previouslyResolvedIDFieldValues, so it carries no risks
@@ -1942,9 +1942,9 @@ class Engine implements EngineInterface
         }
 
         $dbNameEntries = $this->moveEntriesUnderDBName($entries, true, $relationalTypeResolver);
-        foreach ($dbNameEntries as $dbname => $entries) {
-            $destination[$dbname] ??= [];
-            $this->addDatasetToDatabase($destination[$dbname], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
+        foreach ($dbNameEntries as $dbName => $entries) {
+            $destination[$dbName] ??= [];
+            $this->addDatasetToDatabase($destination[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
         }
     }
 
@@ -1959,9 +1959,9 @@ class Engine implements EngineInterface
         }
 
         $dbNameEntries = $this->moveEntriesUnderDBName($entries, false, $relationalTypeResolver);
-        foreach ($dbNameEntries as $dbname => $entries) {
-            $destination[$dbname][$typeOutputKey] = array_merge(
-                $destination[$dbname][$typeOutputKey] ?? [],
+        foreach ($dbNameEntries as $dbName => $entries) {
+            $destination[$dbName][$typeOutputKey] = array_merge(
+                $destination[$dbName][$typeOutputKey] ?? [],
                 $entries
             );
         }
@@ -2341,13 +2341,13 @@ class Engine implements EngineInterface
                     $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
-                    foreach ($databases as $dbname => $database) {
+                    foreach ($databases as $dbName => $database) {
                         $database_field_ids = $database[$typeOutputKey][$id][$subcomponent_data_field_outputkey] ?? null;
                         if ($database_field_ids === null) {
                             continue;
                         }
-                        $subcomponentIDs[$dbname][$typeOutputKey][$id] = array_merge(
-                            $subcomponentIDs[$dbname][$typeOutputKey][$id] ?? [],
+                        $subcomponentIDs[$dbName][$typeOutputKey][$id] = array_merge(
+                            $subcomponentIDs[$dbName][$typeOutputKey][$id] ?? [],
                             is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
                         );
                     }
@@ -2357,7 +2357,7 @@ class Engine implements EngineInterface
                 // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
                 $typedSubcomponentIDs = [];
                 // if ($subcomponentIsUnionTypeResolver) {
-                    // Get the types for all of the IDs all at once. Flatten 3 levels: dbname => typeOutputKey => id => ...
+                    // Get the types for all of the IDs all at once. Flatten 3 levels: dbName => typeOutputKey => id => ...
                     $allSubcomponentIDs = array_values(array_unique(
                         GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
                     ));
@@ -2370,7 +2370,7 @@ class Engine implements EngineInterface
 
                 /** @var array<string|int> */
                 $field_ids = [];
-                foreach ($subcomponentIDs as $dbname => $typeOutputKey_id_database_field_ids) {
+                foreach ($subcomponentIDs as $dbName => $typeOutputKey_id_database_field_ids) {
                     foreach ($typeOutputKey_id_database_field_ids as $typeOutputKey => $id_database_field_ids) {
                         foreach ($id_database_field_ids as $id => $database_field_ids) {
                             // Transform the IDs, adding their type
@@ -2387,8 +2387,8 @@ class Engine implements EngineInterface
                             }
                             $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey]);
-                            $unionTypeOutputKeyIDs[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey]);
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
                             $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
