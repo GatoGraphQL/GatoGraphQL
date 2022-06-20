@@ -16,7 +16,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         return 'mirrorquery';
     }
 
-    protected function getFields()
+    /**
+     * @return array<string|int,string>
+     */
+    protected function getFields(): array
     {
         // Allow REST to override with default fields
         return App::getState('requested-query') ?? App::getState('executable-query') ?? [];
@@ -46,22 +49,27 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         return $ret;
     }
 
-    protected function addData(&$ret, $fields, &$databases, &$unionTypeOutputKeyIDs, $objectIDorIDs, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField = true)
+    /**
+     * @param array<string,mixed>|null $ret
+     * @param array<string|int,string|array<string>> $fields
+     * @param array<string,array<string|int,array<string,mixed>>> $databases
+     * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
+     * @param array<string|int>|string|integer $objectIDorIDs
+     * @param array<string> $typeOutputKeyPaths
+     */
+    protected function addData(?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
         // Property fields have numeric key only. From them, obtain the fields to print for the object
         $propertyFields = array_filter(
             $fields,
-            function ($key) {
-                return is_numeric($key);
-            },
+            fn (string|int $key) =>  is_numeric($key),
             ARRAY_FILTER_USE_KEY
         );
+
         // All other fields must be nested, to keep fetching data for the object relationships
         $nestedFields = array_filter(
             $fields,
-            function ($key) {
-                return !is_numeric($key);
-            },
+            fn (string|int $key) => !is_numeric($key),
             ARRAY_FILTER_USE_KEY
         );
 
@@ -73,13 +81,26 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $resolvedObjectRet = &$ret[count($ret) - 1];
                 $this->addObjectData($resolvedObjectRet, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
-        } else {
-            $objectID = $objectIDorIDs;
-            $this->addObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+            return;
         }
+        $objectID = $objectIDorIDs;
+        $this->addObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
     }
 
-    protected function addObjectData(&$resolvedObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
+    /**
+     * Undocumented function
+     *
+     * @param array<string,mixed>|null $resolvedObjectRet
+     * @param array<string> $propertyFields
+     * @param array<string,array<string>> $nestedFields
+     * @param array<string,array<string|int,array<string,mixed>>> $databases
+     * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
+     * @param string|integer $objectID
+     * @param string $objectKeyPath
+     * @param array<string> $typeOutputKeyPaths
+     * @param boolean $concatenateField
+     */
+    protected function addObjectData(?array &$resolvedObjectRet, array $propertyFields, array $nestedFields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
         // Otherwise, it could throw an error on `extractObjectTypeAndID`
