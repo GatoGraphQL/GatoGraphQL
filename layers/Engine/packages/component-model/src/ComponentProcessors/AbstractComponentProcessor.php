@@ -1263,11 +1263,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                         $conditionalComponentFieldSplObjectStorage = $ret[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
                         /** @var ComponentFieldNodeInterface[]|null */
-                        $subcomponent_data_fields = $subcomponent_ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null;
-                        if ($subcomponent_data_fields !== null) {
+                        $subcomponent_direct_fields = $subcomponent_ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null;
+                        if ($subcomponent_direct_fields !== null) {
                             $conditionalComponentFieldSplObjectStorage[$conditionComponentFieldNode] = array_merge(
                                 $conditionalComponentFieldSplObjectStorage[$conditionComponentFieldNode] ?? [],
-                                $subcomponent_data_fields
+                                $subcomponent_direct_fields
                             );
                             unset($subcomponent_ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
                         }
@@ -1278,10 +1278,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         if ($subcomponentConditionalFieldSplObjectStorage !== null) {
                             foreach ($subcomponentConditionalFieldSplObjectStorage as $subcomponentComponentFieldNode) {
                                 /** @var ComponentFieldNodeInterface[] */
-                                $subcomponent_conditional_data_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentFieldNode];
+                                $subcomponent_conditional_fields = $subcomponentConditionalFieldSplObjectStorage[$subcomponentComponentFieldNode];
                                 $conditionalComponentFieldSplObjectStorage[$subcomponentComponentFieldNode] = array_merge(
                                     $conditionalComponentFieldSplObjectStorage[$subcomponentComponentFieldNode] ?? [],
-                                    $subcomponent_conditional_data_fields
+                                    $subcomponent_conditional_fields
                                 );
                             }
                             unset($subcomponent_ret[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES]);

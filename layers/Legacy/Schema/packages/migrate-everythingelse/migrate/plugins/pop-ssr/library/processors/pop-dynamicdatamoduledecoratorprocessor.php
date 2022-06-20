@@ -218,8 +218,8 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //     if ($ret[DataProperties::SUBCOMPONENTS] ?? null) {
 
     //         // Iterate through all the data_field => dataloaders
-    //         $subcomponent_data_fields = array_keys($ret[DataProperties::SUBCOMPONENTS]);
-    //         foreach ($subcomponent_data_fields as $subcomponent_data_field) {
+    //         $subcomponent_direct_fields = array_keys($ret[DataProperties::SUBCOMPONENTS]);
+    //         foreach ($subcomponent_direct_fields as $subcomponent_data_field) {
 
     //             $subcomponent_typeResolvers = array_keys($ret[DataProperties::SUBCOMPONENTS][$subcomponent_data_field]);
     //             foreach ($subcomponent_typeResolvers as $subcomponent_typeResolver) {

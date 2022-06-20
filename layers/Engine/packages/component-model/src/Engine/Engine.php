@@ -2326,10 +2326,10 @@ class Engine implements EngineInterface
             }
             $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
             // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-            $subcomponent_data_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
+            $subcomponent_direct_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
-            $subcomponent_conditional_data_fields = $subcomponent_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
-            if ($subcomponent_data_fields || $subcomponent_conditional_data_fields->count() > 0) {
+            $subcomponent_conditional_fields_storage = $subcomponent_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
+            if ($subcomponent_direct_fields || $subcomponent_conditional_fields_storage->count() > 0) {
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
                 $subcomponent_already_loaded_id_fields = [];
@@ -2412,15 +2412,15 @@ class Engine implements EngineInterface
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
                             $id_subcomponent_data_fields = array_values(
                                 array_filter(
-                                    $subcomponent_data_fields,
+                                    $subcomponent_direct_fields,
                                     fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
                             $id_subcomponent_conditional_data_fields = new SplObjectStorage();
-                            foreach ($subcomponent_conditional_data_fields as $conditionComponentFieldNode) {
+                            foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
                                 // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                                $conditionComponentFieldNodes = $subcomponent_conditional_data_fields[$conditionComponentFieldNode];
+                                $conditionComponentFieldNodes = $subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
                                 /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
                                 $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] ??= [];
                                 $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode];
@@ -2434,8 +2434,8 @@ class Engine implements EngineInterface
                                 $id_subcomponent_conditional_data_fields[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
                             }
                         } else {
-                            $id_subcomponent_data_fields = $subcomponent_data_fields;
-                            $id_subcomponent_conditional_data_fields = $subcomponent_conditional_data_fields;
+                            $id_subcomponent_data_fields = $subcomponent_direct_fields;
+                            $id_subcomponent_conditional_data_fields = $subcomponent_conditional_fields_storage;
                         }
                         // Important: do ALWAYS execute the lines below, even if $id_subcomponent_data_fields is empty
                         // That is because we can load additional data for an object that was already loaded in a previous iteration
