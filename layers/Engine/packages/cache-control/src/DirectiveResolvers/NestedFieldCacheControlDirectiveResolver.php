@@ -144,19 +144,19 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     $fields
                 )
             ));
-            $fieldDirectiveResolverInstances = $relationalTypeResolver->getDirectiveResolverInstancesForDirective(
+            $fieldDirectiveResolvers = $relationalTypeResolver->getDirectiveResolverInstancesForDirective(
                 $this->directive,
                 $fieldDirectiveFields,
                 $variables
             );
             // Nothing to do, there's some error
-            if ($fieldDirectiveResolverInstances === null) {
+            if ($fieldDirectiveResolvers === null) {
                 return;
             }
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
             $directiveResolverInstanceFieldsDataItems = [];
-            foreach ($fieldDirectiveResolverInstances as $field) {
-                $directiveResolverInstance = $fieldDirectiveResolverInstances[$field];
+            foreach ($fieldDirectiveResolvers as $field) {
+                $directiveResolverInstance = $fieldDirectiveResolvers[$field];
                 $instanceID = get_class($directiveResolverInstance);
                 if (!isset($directiveResolverInstanceFieldsDataItems[$instanceID])) {
                     $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolverInstance;
