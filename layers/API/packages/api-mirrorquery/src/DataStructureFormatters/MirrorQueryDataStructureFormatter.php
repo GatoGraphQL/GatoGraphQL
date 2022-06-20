@@ -28,19 +28,19 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         $ret = [];
         if ($fields = $this->getFields()) {
             $databases = $data['dbData'] ?? [];
-            $unionDBKeyIDs = $data['unionDBKeyIDs'] ?? [];
+            $unionTypeOutputKeyIDs = $data['unionTypeOutputKeyIDs'] ?? [];
             $datasetComponentData = $data['datasetcomponentdata'] ?? [];
             foreach ($datasetComponentData as $componentName => $objectIDs) {
                 $dbKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
                 $objectIDorIDs = $objectIDs['dbobjectids'];
-                $this->addData($ret, $fields, $databases, $unionDBKeyIDs, $objectIDorIDs, 'id', $dbKeyPaths, false);
+                $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, 'id', $dbKeyPaths, false);
             }
         }
 
         return $ret;
     }
 
-    protected function addData(&$ret, $fields, &$databases, &$unionDBKeyIDs, $objectIDorIDs, $objectKeyPath, &$dbKeyPaths, $concatenateField = true)
+    protected function addData(&$ret, $fields, &$databases, &$unionTypeOutputKeyIDs, $objectIDorIDs, $objectKeyPath, &$dbKeyPaths, $concatenateField = true)
     {
         // Property fields have numeric key only. From them, obtain the fields to print for the object
         $propertyFields = array_filter(
@@ -65,15 +65,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
                 $dbObjectRet = &$ret[count($ret) - 1];
-                $this->addDBObjectData($dbObjectRet, $propertyFields, $nestedFields, $databases, $unionDBKeyIDs, $objectID, $objectKeyPath, $dbKeyPaths, $concatenateField);
+                $this->addDBObjectData($dbObjectRet, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $dbKeyPaths, $concatenateField);
             }
         } else {
             $objectID = $objectIDorIDs;
-            $this->addDBObjectData($ret, $propertyFields, $nestedFields, $databases, $unionDBKeyIDs, $objectID, $objectKeyPath, $dbKeyPaths, $concatenateField);
+            $this->addDBObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $dbKeyPaths, $concatenateField);
         }
     }
 
-    protected function addDBObjectData(&$dbObjectRet, $propertyFields, $nestedFields, &$databases, &$unionDBKeyIDs, $objectID, $objectKeyPath, &$dbKeyPaths, $concatenateField): void
+    protected function addDBObjectData(&$dbObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$dbKeyPaths, $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
         // Otherwise, it could throw an error on `extractDBObjectTypeAndID`
@@ -133,8 +133,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             // The first field, "id", needs not be concatenated. All the others do need
             $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
 
-            // The type with ID may be stored under $unionDBKeyIDs
-            $unionDBKeyID = $unionDBKeyIDs[$dbKey][$objectID][$uniqueNestedFieldOutputKey] ?? null;
+            // The type with ID may be stored under $unionTypeOutputKeyIDs
+            $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$dbKey][$objectID][$uniqueNestedFieldOutputKey] ?? null;
 
             // Add a new subarray for the nested property
             $dbObjectNestedPropertyRet = &$dbObjectRet[$nestedFieldOutputKey];
@@ -162,7 +162,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     }
                 }
             }
-            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionDBKeyIDs, $unionDBKeyID ?? $dbObject[$uniqueNestedFieldOutputKey], $nextField, $dbKeyPaths);
+            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $dbObject[$uniqueNestedFieldOutputKey], $nextField, $dbKeyPaths);
         }
     }
 }

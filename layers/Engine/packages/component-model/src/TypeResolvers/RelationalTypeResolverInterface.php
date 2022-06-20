@@ -41,7 +41,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      */
     public function fillObjects(
         array $idFieldSet,
-        array $unionDBKeyIDs,
+        array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
         array &$variables,

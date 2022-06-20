@@ -52,7 +52,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $idFieldSet,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
-        array $unionDBKeyIDs,
+        array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
         array &$resolvedIDFieldValues,

@@ -1579,7 +1579,7 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previouslyResolvedIDFieldValues = [];
+        $databases = $unionTypeOutputKeyIDs = $combinedUnionDBKeyIDs = $previouslyResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
             FeedbackCategories::ERROR => [],
             FeedbackCategories::WARNING => [],
@@ -1778,11 +1778,11 @@ class Engine implements EngineInterface
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $idObjects);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionDBKeyIDs, $idObjects);
                     }
                 }
             }
@@ -1798,7 +1798,7 @@ class Engine implements EngineInterface
         // Print data into the output
         $ret = [];
         $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);
 
         // Add the feedback (errors, warnings, deprecations, notices, etc) into the output
         $this->combineAndAddFeedbackEntries($ret, $objectFeedbackEntries, $schemaFeedbackEntries);
@@ -2302,7 +2302,7 @@ class Engine implements EngineInterface
         array &$databases,
         SplObjectStorage $subcomponents_data_properties,
         array &$already_loaded_ids_data_fields,
-        array &$unionDBKeyIDs,
+        array &$unionTypeOutputKeyIDs,
         array &$combinedUnionDBKeyIDs,
         array $idObjects,
     ): void {
@@ -2314,8 +2314,8 @@ class Engine implements EngineInterface
             /** @var array<string,mixed> $subcomponent_data_properties */
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
-            // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
-            // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
+            // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionTypeOutputKeyIDs"
+            // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionTypeOutputKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
             $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $componentFieldNode->getField());
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
@@ -2353,7 +2353,7 @@ class Engine implements EngineInterface
                     }
                 }
                 // We don't want to store the dbKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
-                // So, instead, we store the dbKey/ID values in another object "$unionDBKeyIDs"
+                // So, instead, we store the dbKey/ID values in another object "$unionTypeOutputKeyIDs"
                 // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
                 $typedSubcomponentIDs = [];
                 // if ($subcomponentIsUnionTypeResolver) {
@@ -2386,9 +2386,9 @@ class Engine implements EngineInterface
                                 $database_field_ids = $typed_database_field_ids;
                             }
                             $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
-                            // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
+                            // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                             $entryIsArray = $databases[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey]);
-                            $unionDBKeyIDs[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $unionTypeOutputKeyIDs[$dbname][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
                             $combinedUnionDBKeyIDs[$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
