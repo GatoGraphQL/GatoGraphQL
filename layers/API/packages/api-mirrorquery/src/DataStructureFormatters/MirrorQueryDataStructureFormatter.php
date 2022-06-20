@@ -49,7 +49,17 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         return $ret;
     }
 
-    protected function addData(&$ret, $fields, &$databases, &$unionTypeOutputKeyIDs, $objectIDorIDs, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField = true)
+    /**
+     * @param array<string,mixed> $ret
+     * @param array<string|int,string> $fields
+     * @param array<string,array<string|int,array<string,mixed>>> $databases
+     * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
+     * @param array<string|int>|string|integer $objectIDorIDs
+     * @param string $objectKeyPath
+     * @param array<string> $typeOutputKeyPaths
+     * @param boolean $concatenateField
+     */
+    protected function addData(array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
         // Property fields have numeric key only. From them, obtain the fields to print for the object
         $propertyFields = array_filter(
