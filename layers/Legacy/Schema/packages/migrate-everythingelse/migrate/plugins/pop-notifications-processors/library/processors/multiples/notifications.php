@@ -65,15 +65,15 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         return parent::getDataFeedbackInterreferencedComponentPath($component, $props);
     }
 
-    public function getJsdataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         switch ($component->name) {
             case self::COMPONENT_MULTIPLE_LATESTNOTIFICATIONS:
                 // Only add if the count is > 0
-                if ($dbobjectids) {
-                    if ($count = count($dbobjectids)) {
+                if ($objectIDs) {
+                    if ($count = count($objectIDs)) {
                         $ret['displayBlockDatasetCount']['count'] = $count;
                     }
                 }

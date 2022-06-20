@@ -11,7 +11,7 @@ window.pop.Manager = {
 		general: {},
 		url: {}
 	},
-	// // Used to override the dbobjectids/feedback/params when resetting the block
+	// // Used to override the objectIDs/feedback/params when resetting the block
 	// initialBlockMemory : {},
 	firstLoad : {},
 	documentTitle : null, // We keep a copy of the document title, so we can add the notification number in it
@@ -117,7 +117,7 @@ window.pop.Manager = {
 		// 			configuration: {},
 		// 			'js-settings': {},
 		// 		},
-		// 		dbobjectids: {},
+		// 		objectIDs: {},
 		// 		feedback: {
 		// 			block: {},
 		// 			pagesection: {},
@@ -199,7 +199,7 @@ window.pop.Manager = {
 	// 	var url = response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_URL];
 	// 	if (!that.initialBlockMemory[url]) {
 	// 		that.initialBlockMemory[url] = {
-	// 			dbobjectids: {},
+	// 			objectIDs: {},
 	// 			feedback: {
 	// 				block: {},
 	// 			},
@@ -218,19 +218,19 @@ window.pop.Manager = {
 	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT]) {
 	// 			initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 			initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
-	// 			initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
+	// 			initialMemory.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 			initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 		}
 	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]) {
 	// 			initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 			initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 			// initialMemory.runtimesettings.configuration[pssId] = {};
-	// 			initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
+	// 			initialMemory.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 			initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 		}
 	// 		$.extend(initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 	// 		$.extend(initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
-	// 		$.extend(initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
+	// 		$.extend(initialMemory.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 	// 		$.extend(initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 	// 	});
 	// },
@@ -2506,9 +2506,9 @@ window.pop.Manager = {
 		// var bsId = that.getSettingsId(block);
 		// var memory = that.getMemory(domain);
 
-		// Add 'dbObjectIDs' from the dbobjectids, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
+		// Add 'dbObjectIDs' from the objectIDs, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
 		options.extendContext = {
-			// dbObjectIDs: memory.statefuldata.dbobjectids[pssId][bsId],
+			// dbObjectIDs: memory.statefuldata.objectIDs[pssId][bsId],
 			dbObjectIDs: that.getDataset(domain, pageSection, block),
 			ignorePSRuntimeId: true
 		};
@@ -3094,7 +3094,7 @@ window.pop.Manager = {
 
 	// 				memory.statefuldata.querystate.sharedbydomains[rpssId] = {};
 	// 				memory.statefuldata.querystate.uniquetodomain[rpssId] = {};
-	// 				memory.statefuldata.dbobjectids[rpssId] = {};
+	// 				memory.statefuldata.objectIDs[rpssId] = {};
 
 	// 				memory.statelessdata.settings['js-settings'][rpssId] = {};
 	// 				memory.statefuldata.settings['js-settings'][rpssId] = {};
@@ -3136,7 +3136,7 @@ window.pop.Manager = {
 
 	// 					memory.statefuldata.querystate.sharedbydomains[rpssId][rbsId] = $.extend({}, localMemory.querystate.sharedbydomains[rpssId][rbsId]);
 	// 					memory.statefuldata.querystate.uniquetodomain[rpssId][rbsId] = $.extend({}, localMemory.querystate.uniquetodomain[rpssId][rbsId]);
-	// 					memory.statefuldata.dbobjectids[rpssId][rbsId] = $.extend({}, localMemory.dbobjectids[rpssId][rbsId]);
+	// 					memory.statefuldata.objectIDs[rpssId][rbsId] = $.extend({}, localMemory.objectIDs[rpssId][rbsId]);
 
 	// 					memory.statefuldata.settings['js-settings'][rpssId][rbsId] = $.extend({}, localMemory.settings['js-settings'][rpssId][rbsId]);
 	// 					memory.statelessdata.settings['js-settings'][rpssId][rbsId] = $.extend({}, localMemory.settings['js-settings'][rpssId][rbsId]);
@@ -3234,10 +3234,10 @@ window.pop.Manager = {
 			// 	memory.statefuldata.feedback.block[rpssId] = {};
 			// }
 			// $.extend(memory.statefuldata.feedback.block[rpssId], response.statefuldata.feedback.block[rpssId]);
-			// if (!memory.statefuldata.dbobjectids[rpssId]) {
-			// 	memory.statefuldata.dbobjectids[rpssId] = {};
+			// if (!memory.statefuldata.objectIDs[rpssId]) {
+			// 	memory.statefuldata.objectIDs[rpssId] = {};
 			// }
-			// $.extend(memory.statefuldata.dbobjectids[rpssId], response.statefuldata.dbobjectids[rpssId]);
+			// $.extend(memory.statefuldata.objectIDs[rpssId], response.statefuldata.objectIDs[rpssId]);
 			// if (!memory.statefuldata.querystate.sharedbydomains[rpssId]) {
 			// 	memory.statefuldata.querystate.sharedbydomains[rpssId] = {};
 			// }
@@ -3267,7 +3267,7 @@ window.pop.Manager = {
 					if (process_actions.indexOf(action) > -1) {
 
 						var jsSettings = that.getJsSettings(domain, rPageSection, rBlock);
-						if (jsSettings['processblock-ifhasdata'] && !response.statefuldata.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][rpssId][rbsId].length) {
+						if (jsSettings['processblock-ifhasdata'] && !response.statefuldata.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][rpssId][rbsId].length) {
 							return;	
 						}
 					}
@@ -4017,7 +4017,7 @@ window.pop.Manager = {
 	// 		// // (this is only needed since adding support for multicomponent, since their response may involve a pageSection which had never been initialized)
 	// 		// memory.statefuldata.querystate.sharedbydomains[pssId] = memory.statefuldata.querystate.sharedbydomains[pssId] || {};
 	// 		// memory.statefuldata.querystate.uniquetodomain[pssId] = memory.statefuldata.querystate.uniquetodomain[pssId] || {};
-	// 		// memory.statefuldata.dbobjectids[pssId] = memory.statefuldata.dbobjectids[pssId] || {};
+	// 		// memory.statefuldata.objectIDs[pssId] = memory.statefuldata.objectIDs[pssId] || {};
 	// 		// memory.statefuldata.feedback.pagesection[pssId] = memory.statefuldata.feedback.pagesection[pssId] || {};
 	// 		// memory.statefuldata.feedback.block[pssId] = memory.statefuldata.feedback.block[pssId] || {};
 	// 		// memory.statefuldata.settings['js-settings'][pssId] = memory.statefuldata.settings['js-settings'][pssId] || {};
@@ -4032,7 +4032,7 @@ window.pop.Manager = {
 
 	// 		// $.extend(memory.statefuldata.querystate.sharedbydomains[pssId], response.statefuldata.querystate.sharedbydomains[pssId]);
 	// 		// $.extend(memory.statefuldata.querystate.uniquetodomain[pssId], response.statefuldata.querystate.uniquetodomain[pssId]);
-	// 		// $.extend(memory.statefuldata.dbobjectids[pssId], response.statefuldata.dbobjectids[pssId]);
+	// 		// $.extend(memory.statefuldata.objectIDs[pssId], response.statefuldata.objectIDs[pssId]);
 	// 		// $.extend(memory.statefuldata.feedback.pagesection[pssId], response.statefuldata.feedback.pagesection[pssId]);
 	// 		// $.extend(memory.statefuldata.feedback.block[pssId], response.statefuldata.feedback.block[pssId]);
 
@@ -4115,7 +4115,7 @@ window.pop.Manager = {
 		var that = this;
 		var blockSettings = {
 			outputKeys: that.getFieldOutputKeys(domain, pssId, bsId),
-			dbobjectids: that.getDataset(domain, pssId, bsId),
+			objectIDs: that.getDataset(domain, pssId, bsId),
 			feedback: that.getBlockFeedback(domain, pssId, bsId),
 			bsId: bsId,
 			bId: bId,
@@ -4134,10 +4134,10 @@ window.pop.Manager = {
 		var bsId = that.getSettingsId(block);
 		var url = that.getBlockTopLevelURL(domain, block);
 		
-		// return that.getMemory(domain).statefuldata.dbobjectids[pssId][bsId];
-		that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
-		that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] = that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] || {};
-		return that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
+		// return that.getMemory(domain).statefuldata.objectIDs[pssId][bsId];
+		that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] = that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] || {};
+		return that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 	},
 
 	getBlockFeedback : function(domain, pageSection, block) {
@@ -4384,7 +4384,7 @@ window.pop.Manager = {
 	// 	// var queryState = that.getRuntimeMemoryPage(pageSection, block, options)['querystate'];
 	// 	// querystate.sharedbydomains = $.extend(that.getBlockDefaultParams(), initialMemory.querystate.sharedbydomains[pssId][bsId]);
 
-	// 	// var dbobjectids = initialMemory.dbobjectids[pssId][bsId];
+	// 	// var objectIDs = initialMemory.objectIDs[pssId][bsId];
 	// 	// var query_urls = that.getQueryMultiDomainUrls(pageSection, block);
 	// 	// $.each(query_urls, function(domain, query_url) {
 			
@@ -4393,13 +4393,13 @@ window.pop.Manager = {
 	// 	// 	var memory = that.getMemory(domain);
 	// 	// 	memory.statefuldata.feedback.block[pssId][bsId] = $.extend({}, initialMemory.feedback.block[pssId][bsId]);
 
-	// 	// 	// If the initialMemory dbobjectids is empty and the memory one is not, then the extend fails to override
+	// 	// 	// If the initialMemory objectIDs is empty and the memory one is not, then the extend fails to override
 	// 	// 	// So ask for that case explicitly
-	// 	// 	if (dbobjectids.length) {
-	// 	// 		$.extend(memory.statefuldata.dbobjectids[pssId][bsId], dbobjectids);
+	// 	// 	if (objectIDs.length) {
+	// 	// 		$.extend(memory.statefuldata.objectIDs[pssId][bsId], objectIDs);
 	// 	// 	}
 	// 	// 	else {
-	// 	// 		memory.statefuldata.dbobjectids[pssId][bsId] = [];
+	// 	// 		memory.statefuldata.objectIDs[pssId][bsId] = [];
 	// 	// 	}
 	// 	// });
 	// },

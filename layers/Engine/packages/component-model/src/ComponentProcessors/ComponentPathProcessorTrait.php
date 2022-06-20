@@ -24,7 +24,7 @@ trait ComponentPathProcessorTrait
         return $this->getComponentProcessorManager()->getComponentProcessor($component);
     }
 
-    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndPropagateToDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs)
     {
         $ret = [];
         $key = $this->getComponentHelpers()->getComponentOutputName($component);
@@ -32,7 +32,7 @@ trait ComponentPathProcessorTrait
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
-            if ($component_ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
+            if ($component_ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
                 $ret[$key] = $component_ret;
             }
         }
@@ -49,7 +49,7 @@ trait ComponentPathProcessorTrait
         foreach ($subcomponents as $subcomponent) {
             $subcomponents_ret = array_merge(
                 $subcomponents_ret,
-                $this->getComponentProcessor($subcomponent)->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subcomponent)->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)
             );
         }
         if ($subcomponents_ret) {
@@ -63,13 +63,13 @@ trait ComponentPathProcessorTrait
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndMergeWithDatasetComponents($eval_self_fn, $propagate_fn, Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs)
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeSubcomponent($component, $props)) {
-            $ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+            $ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
         } else {
             $ret = [];
         }
@@ -85,7 +85,7 @@ trait ComponentPathProcessorTrait
         foreach ($subcomponents as $subcomponent) {
             $ret = array_merge_recursive(
                 $ret,
-                $this->getComponentProcessor($subcomponent)->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subcomponent)->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)
             );
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);

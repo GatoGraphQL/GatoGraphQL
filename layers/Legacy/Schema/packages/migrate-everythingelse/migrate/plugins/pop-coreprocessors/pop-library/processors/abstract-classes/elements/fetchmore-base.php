@@ -67,9 +67,9 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataCom
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
         
         // If it is lazy load, no need to calculate stop-fetching
         // If loading static data, then that's it
@@ -79,7 +79,7 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataCom
         }
 
         // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
-        $stopFetching = Utils::stopFetching($dbobjectids, $data_properties);
+        $stopFetching = Utils::stopFetching($objectIDs, $data_properties);
         $ret['stop-fetching'] = $stopFetching;
 
         if (!$stopFetching && ($data_properties[DataloadingConstants::SOURCE] ?? null)) {

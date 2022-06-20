@@ -1,6 +1,6 @@
 <ul class="nav navbar-nav navbar-right visiblesearch-visible-right" role="menu">
 	{{#withModule . "block-oursponsors"}}
-		{{#if bs.dbobjectids}}
+		{{#if bs.objectIDs}}
 			<li class="dropdown nav-sponsors nav-dropdown visiblesearch-visible">
 				<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId component=../component group="void-link"}}{{../id}}-sponsors{{/generateId}} title="{{../titles.sponsors}}">
 					<span class="glyphicon {{../icons.sponsors}}"></span>

@@ -552,7 +552,7 @@ class Engine implements EngineInterface
         // That is because calculating the data may need the values from the settings. Eg: for the resourceLoader,
         // calculating $loadingframe_resources needs to know all the Handlebars templates from the sitemapping as to generate file "resources.js",
         // which is done through an action, called through getData()
-        // Data = dbobjectids (data-ids) + feedback + database
+        // Data = objectIDs (data-ids) + feedback + database
         if (
             in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems)
             || in_array(DataOutputItems::DATABASES, $dataoutputitems)
@@ -1358,8 +1358,8 @@ class Engine implements EngineInterface
                 $engineState->componentdata = &$mutableonrequest_componentdata;
             }
 
-            // Integrate the dbobjectids into $datasetcomponentdata
-            // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading component, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous component when iterating down
+            // Integrate the objectIDs into $datasetcomponentdata
+            // ALWAYS print the $objectIDs, even if its an empty array. This to indicate that this is a dataloading component, so the application in the webplatform knows if to load a new batch of objectIDs, or reuse the ones from the previous component when iterating down
             if ($datasetcomponentdata !== null) {
                 $this->assignValueForComponent($datasetcomponentdata, $component_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }

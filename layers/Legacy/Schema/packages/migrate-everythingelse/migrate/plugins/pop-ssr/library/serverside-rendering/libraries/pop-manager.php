@@ -125,7 +125,7 @@ class PoP_ServerSideManager
             //                 'configuration' => array(),
             //                 'js-settings' => array(),
             //             ),
-            //             'dbobjectids' => array(),
+            //             'objectIDs' => array(),
             //             'feedback' => array(
             //                 'block' => array(),
             //                 'pagesection' => array(),
@@ -422,7 +422,7 @@ class PoP_ServerSideManager
     {
         $blockSettings = array(
             'outputKeys' => $this->getFieldOutputKeys($domain, $pssId, $bsId),
-            'dbobjectids' => $this->getDataset($domain, $pssId, $bsId),
+            'objectIDs' => $this->getDataset($domain, $pssId, $bsId),
             'feedback' => $this->getBlockFeedback($domain, $pssId, $bsId),
             'bsId' => $bsId,
             'bId' => $bId,
@@ -439,7 +439,7 @@ class PoP_ServerSideManager
         $bsId = $this->getSettingsId($block);
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         $url = $requestHelperService->getCurrentURL();
-        return $this->getStatefulData($domain, $url)['dbobjectids'][$pssId][$bsId];
+        return $this->getStatefulData($domain, $url)['objectIDs'][$pssId][$bsId];
     }
 
     public function getBlockFeedback($domain, $pageSection, $block)

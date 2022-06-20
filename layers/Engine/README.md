@@ -158,7 +158,7 @@ The output from requesting a URL can contain several layers: At its core it is a
 The data layer represents data in the following way:
 
 - Database data is retrieved through a relational structure under section `databases`
-- The IDs which are the results for each component are indicated through entry `dbobjectids` (under section `datasetcomponentdata`)
+- The IDs which are the results for each component are indicated through entry `objectIDs` (under section `datasetcomponentdata`)
 - Where to find those results in the database is indicated through entry `outputKeys` (under section `componentsettings`)
 - All database data is normalized (i.e. not repeated)
 
@@ -207,10 +207,10 @@ The API response looks like this:
     "topcomponent": {
       components: {
         "datacomponent1": {
-          dbobjectids: [1], 
+          objectIDs: [1], 
         },
         "datacomponent2": {
-          dbobjectids: [2], 
+          objectIDs: [2], 
         }
       }
     }

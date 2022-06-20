@@ -30,7 +30,7 @@
 			<div class="dataload-inners clearfix">
 				{{#each subcomponentoutputnames.inners}}
 					{{#withModule ../. this}}
-						{{enterModule ../../. typeOutputKey=../../bs.outputKeys.id dbObjectIDs=../../bs.dbobjectids}}
+						{{enterModule ../../. typeOutputKey=../../bs.outputKeys.id dbObjectIDs=../../bs.objectIDs}}
 					{{/withModule}}
 				{{/each}}
 			</div>

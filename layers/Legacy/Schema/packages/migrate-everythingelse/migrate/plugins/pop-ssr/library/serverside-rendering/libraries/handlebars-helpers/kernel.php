@@ -144,7 +144,7 @@ class PoP_ServerSide_KernelHelpers
         // Do it after extending with getRuntimeConfiguration, so that these keys are also expanded
         $popManager->expandJSKeys($context);
 
-        // DBObjectId could be passed as an array ('dbobjectids' is an array), so if it's the case, and it's empty, then nullify it
+        // DBObjectId could be passed as an array ('objectIDs' is an array), so if it's the case, and it's empty, then nullify it
         $objectID = $options['hash']['objectID'];
         if (is_array($objectID)) {
             if (count($objectID)) {
