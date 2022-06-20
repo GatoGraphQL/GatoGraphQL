@@ -2,7 +2,7 @@
 	{{{description}}}
 	<div class="form-inner {{class-merge}} clearfix">
 		{{#withModule . "inner"}}
-			{{enterModule ../. typeOutputKey=../typeOutputKey objectID=../dbObjectIDs dbObjectIDs=../dbObjectIDs}}
+			{{enterModule ../. typeOutputKey=../typeOutputKey objectID=../resolvedObjectIDs resolvedObjectIDs=../resolvedObjectIDs}}
 		{{/withModule}}
 	</div>
 	{{{description-bottom}}}

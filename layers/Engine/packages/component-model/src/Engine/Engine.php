@@ -1243,7 +1243,7 @@ class Engine implements EngineInterface
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
             $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
-            $mutation_checkpoint_validation = $executed = $dbObjectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputKey = null;
+            $mutation_checkpoint_validation = $executed = $resolvedObjectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputKey = null;
             if ($load_data) {
                 // ------------------------------------------
                 // Action Executers
@@ -1280,17 +1280,17 @@ class Engine implements EngineInterface
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
                     // Execute and get the ids and the meta
-                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($component, $component_props, $data_properties);
+                    $resolvedObjectIDOrIDs = $processor->getObjectIDOrIDs($component, $component_props, $data_properties);
                     // To simplify the logic, deal with arrays only
-                    if ($dbObjectIDOrIDs === null) {
-                        $dbObjectIDOrIDs = [];
+                    if ($resolvedObjectIDOrIDs === null) {
+                        $resolvedObjectIDOrIDs = [];
                     }
                     // If the type is union, we must add the type to each object
                     $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
-                        $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
-                        : $dbObjectIDOrIDs;
+                        $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($resolvedObjectIDOrIDs)
+                        : $resolvedObjectIDOrIDs;
 
-                    $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);
+                    $objectIDs = is_array($resolvedObjectIDOrIDs) ? $resolvedObjectIDOrIDs : array($resolvedObjectIDOrIDs);
                     $typeDBObjectIDs = is_array($typeDBObjectIDOrIDs) ? $typeDBObjectIDOrIDs : array($typeDBObjectIDOrIDs);
 
                     // Store the ids under $data under key dataload_name => id
@@ -1367,7 +1367,7 @@ class Engine implements EngineInterface
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
                 if (!is_null($datasetcomponentmeta)) {
-                    if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+                    if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $resolvedObjectIDOrIDs)) {
                         $this->assignValueForComponent($datasetcomponentmeta, $component_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
@@ -1421,7 +1421,7 @@ class Engine implements EngineInterface
                 $dataaccess_checkpoint_validation,
                 $mutation_checkpoint_validation,
                 $executed,
-                $dbObjectIDOrIDs,
+                $resolvedObjectIDOrIDs,
                 array(&$engineState->helperCalculations),
                 $this
             );

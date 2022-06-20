@@ -90,23 +90,23 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var pss = prevContext.pss;
 	var bs = prevContext.bs;
 	var resolvedObject = prevContext.resolvedObject;
-	var dbObjectTypeOutputKey = prevContext.dbObjectTypeOutputKey;
+	var resolvedObjectTypeOutputKey = prevContext.resolvedObjectTypeOutputKey;
 	var ignorePSRuntimeId = prevContext.ignorePSRuntimeId;
 	var feedbackObject = prevContext.feedbackObject;
 	
 	// The following values, if passed as a param, then these take priority. Otherwise, use them from the previous context
 	var typeOutputKey = (typeof options.hash.typeOutputKey != 'undefined') ? options.hash.typeOutputKey : prevContext.typeOutputKey;
-	var dbObjectIDs = (typeof options.hash.dbObjectIDs != 'undefined') ? options.hash.dbObjectIDs : prevContext.dbObjectIDs;
-	if (jQuery.type(dbObjectIDs) === "array" && !dbObjectIDs.length) {
-		dbObjectIDs = null;
+	var resolvedObjectIDs = (typeof options.hash.resolvedObjectIDs != 'undefined') ? options.hash.resolvedObjectIDs : prevContext.resolvedObjectIDs;
+	if (jQuery.type(resolvedObjectIDs) === "array" && !resolvedObjectIDs.length) {
+		resolvedObjectIDs = null;
 	}
 	
 	// Add all these vars to the context for this component
 	var extend = {
 		resolvedObject: resolvedObject, 
-		dbObjectTypeOutputKey: dbObjectTypeOutputKey, 
+		resolvedObjectTypeOutputKey: resolvedObjectTypeOutputKey, 
 		typeOutputKey: typeOutputKey, 
-		dbObjectIDs: dbObjectIDs, 
+		resolvedObjectIDs: resolvedObjectIDs, 
 		tls: tls, 
 		pss: pss, 
 		bs: bs, 
@@ -148,48 +148,48 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		typeOutputKey = options.hash.typeOutputKey;
 		resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 		extend.resolvedObject = resolvedObject;
-		extend.dbObjectTypeOutputKey = typeOutputKey;
+		extend.resolvedObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
-		extend.dbObjectIDs = [objectID];
+		extend.resolvedObjectIDs = [objectID];
 	}
-	else if (options.hash.typeOutputKey && dbObjectIDs) {
+	else if (options.hash.typeOutputKey && resolvedObjectIDs) {
 
 		extend.typeOutputKey = options.hash.typeOutputKey;
-		extend.dbObjectIDs = dbObjectIDs;
+		extend.resolvedObjectIDs = resolvedObjectIDs;
 	}
 	else if (options.hash.subcomponent && objectID) {
 
 		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
 		resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 		extend.resolvedObject = resolvedObject;
-		extend.dbObjectTypeOutputKey = typeOutputKey;
+		extend.resolvedObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
-		extend.dbObjectIDs = [objectID];
+		extend.resolvedObjectIDs = [objectID];
 	}
-	else if (options.hash.subcomponent && dbObjectIDs) {
+	else if (options.hash.subcomponent && resolvedObjectIDs) {
 
 		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
 		extend.typeOutputKey = typeOutputKey;
-		extend.dbObjectIDs = dbObjectIDs;
+		extend.resolvedObjectIDs = resolvedObjectIDs;
 	}
-	else if (dbObjectIDs) {
+	else if (resolvedObjectIDs) {
 
-		extend.dbObjectIDs = dbObjectIDs;
+		extend.resolvedObjectIDs = resolvedObjectIDs;
 	}
 	else if (options.hash.typeOutputKey) {
 
-		// If only the typeOutputKey has value, it means the other value passes (objectID or dbObjectIDs) is null
+		// If only the typeOutputKey has value, it means the other value passes (objectID or resolvedObjectIDs) is null
 		// So then put everything to null
 		extend.typeOutputKey = options.hash.typeOutputKey;
 		extend.resolvedObject = null;
-		extend.dbObjectTypeOutputKey = null;
-		extend.dbObjectIDs = null;
+		extend.resolvedObjectTypeOutputKey = null;
+		extend.resolvedObjectIDs = null;
 	}
 
-	// Make sure the dbObjectIDs are an array
-	if (extend.dbObjectIDs) {
-		if (jQuery.type(extend.dbObjectIDs) !== "array") {
-			extend.dbObjectIDs = [extend.dbObjectIDs];
+	// Make sure the resolvedObjectIDs are an array
+	if (extend.resolvedObjectIDs) {
+		if (jQuery.type(extend.resolvedObjectIDs) !== "array") {
+			extend.resolvedObjectIDs = [extend.resolvedObjectIDs];
 		}
 	}
 

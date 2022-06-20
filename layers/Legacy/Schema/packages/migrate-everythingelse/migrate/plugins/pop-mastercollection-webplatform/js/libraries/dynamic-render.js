@@ -49,7 +49,7 @@ window.pop.DynamicRender = {
 			var targetContainer = pop.Manager.getMergeTarget(target, moduleName);
 			that.render(domain, pageSection, block, moduleName, targetContainer, context);
 			
-			target.triggerHandler('dbObjectLayoutRendered', [domain, pageSection, block, target, datum]);
+			target.triggerHandler('resolvedObjectLayoutRendered', [domain, pageSection, block, target, datum]);
 		}
 	},
 };

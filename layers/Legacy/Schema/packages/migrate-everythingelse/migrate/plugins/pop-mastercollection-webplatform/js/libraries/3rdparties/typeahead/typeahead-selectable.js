@@ -23,7 +23,7 @@ window.pop.TypeaheadSelectable = {
 			pop.TypeaheadValidate.validateMaxSelected(pageSection, block, typeahead);
 
 			// Whenever a new item is rendered in the typeahead, validate its max-selected
-			trigger.on('dbObjectLayoutRendered', function() {
+			trigger.on('resolvedObjectLayoutRendered', function() {
 
 				// Count how many items, and if we reach the max, disable the typeahead
 				pop.TypeaheadValidate.validateMaxSelected(pageSection, block, typeahead);

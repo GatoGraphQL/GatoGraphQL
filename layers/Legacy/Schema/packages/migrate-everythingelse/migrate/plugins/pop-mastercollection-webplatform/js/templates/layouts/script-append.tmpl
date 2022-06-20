@@ -3,7 +3,7 @@
 	(function($){
 		{{! Use append => newer posts show at the bottom}}
 		$(document).one('component:merged', function() {
-			var destination = $('div.pop-append-{{../dbObjectTypeOutputKey}}-{{id}}.{{../classes.appendable}}');
+			var destination = $('div.pop-append-{{../resolvedObjectTypeOutputKey}}-{{id}}.{{../classes.appendable}}');
 			var controlClass = 'pop-appended-{{../typeOutputKey}}-{{id}}';
 			destination = destination.not('.'+controlClass);
 			{{#if ../do-append}}

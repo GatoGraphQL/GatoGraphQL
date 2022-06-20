@@ -48,7 +48,7 @@ trait FormComponentValueTrait
             }
         }
 
-        // After {{value}} and {{resolvedObject[dbObjectField]}} both fail, print {{default-value}}
+        // After {{value}} and {{resolvedObject[resolvedObjectField]}} both fail, print {{default-value}}
         // The value can also be the boolean false, so check for the !is_null condition
         $default_value = $this->getDefaultValue($component, $props);
         if (!is_null($default_value)) {

@@ -68,7 +68,7 @@ class LazyLoadHookSet extends AbstractHookSet
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingComponentData(Component $component, array $component_props_in_array, array $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, array $helperCalculations_in_array): void
+    public function calculateDataloadingComponentData(Component $component, array $component_props_in_array, array $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $resolvedObjectIDOrIDs, array $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 

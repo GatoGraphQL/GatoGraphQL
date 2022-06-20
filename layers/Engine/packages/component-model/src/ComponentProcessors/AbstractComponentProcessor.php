@@ -1161,7 +1161,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Dataset Meta
     //-------------------------------------------------
 
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $resolvedObjectIDOrIDs): array
     {
         return [];
     }

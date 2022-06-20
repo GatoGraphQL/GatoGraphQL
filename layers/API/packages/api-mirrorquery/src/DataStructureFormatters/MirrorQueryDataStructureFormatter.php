@@ -137,7 +137,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$uniqueNestedFieldOutputKey] ?? null;
 
             // Add a new subarray for the nested property
-            $dbObjectNestedPropertyRet = &$resolvedObjectRet[$nestedFieldOutputKey];
+            $resolvedObjectNestedPropertyRet = &$resolvedObjectRet[$nestedFieldOutputKey];
 
             // If it is an empty array, then directly add an empty array as the result
             if (is_array($resolvedObject[$uniqueNestedFieldOutputKey]) && empty($resolvedObject[$uniqueNestedFieldOutputKey])) {
@@ -145,11 +145,11 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 continue;
             }
 
-            if (!empty($dbObjectNestedPropertyRet)) {
+            if (!empty($resolvedObjectNestedPropertyRet)) {
                 // 1. If we load a relational property as its ID, and then load properties on the corresponding object, then it will fail because it will attempt to add a property to a non-array element
                 // Eg: /posts/api/graphql/?query=id|author,author.name will first return "author => 1" and on the "1" element add property "name"
                 // Then, if this situation happens, simply override the ID (which is a scalar value, such as an int or string) with an object with the 'id' property
-                if (!is_array($dbObjectNestedPropertyRet)) {
+                if (!is_array($resolvedObjectNestedPropertyRet)) {
                     $resolvedObjectRet[$nestedFieldOutputKey] = [
                         'id' => $resolvedObjectRet[$nestedFieldOutputKey],
                     ];
@@ -162,7 +162,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     }
                 }
             }
-            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$uniqueNestedFieldOutputKey], $nextField, $typeOutputKeyPaths);
+            $this->addData($resolvedObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$uniqueNestedFieldOutputKey], $nextField, $typeOutputKeyPaths);
         }
     }
 }

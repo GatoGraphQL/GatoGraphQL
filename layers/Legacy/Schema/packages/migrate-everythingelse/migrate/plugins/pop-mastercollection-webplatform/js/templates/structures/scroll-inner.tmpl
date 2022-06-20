@@ -1,4 +1,4 @@
-{{#each dbObjectIDs}}
+{{#each resolvedObjectIDs}}
 	{{#if ../layout-grid.row-items}}
 		{{#mod @index ../layout-grid.row-items}}<div class="pop-blockinner-row blockinner-row scroll-row {{../extend-class}} {{../tls.domain-id}} {{!../layout-grid.wrapper-class}} {{../classes.layoutgrid-wrapper}} pop-structureinner" style="{{../styles.layoutgrid-wrapper}}">{{/mod}}
 	{{/if}}
@@ -13,8 +13,8 @@
 		{{#mod @index ../layout-grid.row-items offset=1}}</div>{{/mod}}
 	{{/if}}
 {{/each}}
-{{#if dbObjectIDs}}
+{{#if resolvedObjectIDs}}
 	{{#if layout-grid.row-items}}
-		{{#mod dbObjectIDs.length layout-grid.row-items}}{{else}}</div>{{/mod}}
+		{{#mod resolvedObjectIDs.length layout-grid.row-items}}{{else}}</div>{{/mod}}
 	{{/if}}
 {{/if}}

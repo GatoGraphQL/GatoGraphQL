@@ -1,5 +1,5 @@
 "use strict";
-Handlebars.registerHelper('formcomponentValue', function(value, resolvedObject, dbObjectField, defaultValue, options) {
+Handlebars.registerHelper('formcomponentValue', function(value, resolvedObject, resolvedObjectField, defaultValue, options) {
 
 	// If the value has been set, return that value already, even if it is empty
 	if (typeof value !== 'undefined') {
@@ -8,9 +8,9 @@ Handlebars.registerHelper('formcomponentValue', function(value, resolvedObject, 
 	}
 
 	// If the field has been provided and is not empty, and the resolvedObject exists (aka it has been set in the context), then return that field from the resolvedObject
-	if (resolvedObject && dbObjectField) {
+	if (resolvedObject && resolvedObjectField) {
 
-		return apply_formcomponentvalue_options(resolvedObject[dbObjectField], options);
+		return apply_formcomponentvalue_options(resolvedObject[resolvedObjectField], options);
 	}
 
 	// If there is a default value, use it next

@@ -10,7 +10,7 @@
 					{{/each}}
 				{{else}}
 					<{{../../../../html-tag}} class="{{../../../../class}}" style="{{../../../../style}}" {{#each ../../../../previouscomponents-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../. component=this}}"{{/each}}>
-						{{enterModule ../../../../. subcomponent=../../../../subcomponent-field dbObjectIDs=../../.}}
+						{{enterModule ../../../../. subcomponent=../../../../subcomponent-field resolvedObjectIDs=../../.}}
 					</{{../../../../html-tag}}>
 				{{/if}}
 			{{/withModule}}

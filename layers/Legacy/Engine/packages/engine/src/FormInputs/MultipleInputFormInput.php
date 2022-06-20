@@ -35,7 +35,7 @@ class MultipleInputFormInput extends MultipleSelectFormInput
             }
         }
 
-        // Only if there is any subfield value we assign it to $this->selected. Otherwise, it must keep the null value, as to obtain the value from resolvedObject[dbObjectField] in formcomponentValue
+        // Only if there is any subfield value we assign it to $this->selected. Otherwise, it must keep the null value, as to obtain the value from resolvedObject[resolvedObjectField] in formcomponentValue
         if ($value) {
             return $value;
         }

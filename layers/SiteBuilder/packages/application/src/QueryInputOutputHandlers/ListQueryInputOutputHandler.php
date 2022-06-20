@@ -42,9 +42,9 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:limit'));
     }
 
-    public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getQueryState(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $resolvedObjectIDOrIDs): array
     {
-        $ret = parent::getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
+        $ret = parent::getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $resolvedObjectIDOrIDs);
 
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
@@ -64,14 +64,14 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
             return $ret;
         }
 
-        $ret[GD_URLPARAM_STOPFETCHING] = Utils::stopFetching($dbObjectIDOrIDs, $data_properties);
+        $ret[GD_URLPARAM_STOPFETCHING] = Utils::stopFetching($resolvedObjectIDOrIDs, $data_properties);
 
         return $ret;
     }
 
-    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $resolvedObjectIDOrIDs): array
     {
-        $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
+        $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $resolvedObjectIDOrIDs);
 
         // If data is not to be loaded, then "stop-fetching" as to not show the Load More button
         if (($data_properties[DataloadingConstants::SKIPDATALOAD] ?? null) || (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] != DataSources::MUTABLEONREQUEST)) {
@@ -85,7 +85,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         }
 
         $pagenumber = $query_args[PaginationParams::PAGE_NUMBER];
-        if (!Utils::stopFetching($dbObjectIDOrIDs, $data_properties)) {
+        if (!Utils::stopFetching($resolvedObjectIDOrIDs, $data_properties)) {
             // When loading latest, we need to return the same $pagenumber as we got, because it must not alter the params
             $nextpagenumber = (App::hasState('loading-latest') && App::getState('loading-latest')) ? $pagenumber : $pagenumber + 1;
         }

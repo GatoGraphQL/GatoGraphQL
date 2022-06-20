@@ -2,7 +2,7 @@
 
 Handlebars.registerHelper('formatValue', function(value, format, options) {
 
-	// If the value is null, don't do anything, since it must be coming from failing both value and resolvedObject[dbObjectField] in formcomponentValue
+	// If the value is null, don't do anything, since it must be coming from failing both value and resolvedObject[resolvedObjectField] in formcomponentValue
 	if (value === null) {
 		return value;
 	}
