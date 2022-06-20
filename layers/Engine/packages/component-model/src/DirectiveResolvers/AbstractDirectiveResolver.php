@@ -566,7 +566,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * By default, place the directive after the ResolveAndMerge directive, so the property will be in $resolvedIDFieldValues by then
+     * By default, place the directive after the ResolveAndMerge directive,
+     * so the property will be in $resolvedIDFieldValues by then
      */
     public function getPipelinePosition(): string
     {
