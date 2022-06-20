@@ -1050,13 +1050,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Set those fields as null
                 foreach ($fieldDirectives as $fieldDirective) {
                     foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
+                        $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
                         $failingFields = array_intersect(
                             $fieldSet->fields,
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
-                            $fieldOutputKey = $field->getOutputKey();
-                            $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
+                            $resolvedIDFieldValues[$id][$field] = null;
                         }
                     }
                 }
