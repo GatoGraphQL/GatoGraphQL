@@ -2307,7 +2307,7 @@ class Engine implements EngineInterface
         array $idObjects,
     ): void {
         $engineState = App::getEngineState();
-        $typeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
+        $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
         foreach ($subcomponents_data_properties as $componentFieldNode) {
             /** @var ComponentFieldNodeInterface $componentFieldNode */
             $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
@@ -2342,12 +2342,12 @@ class Engine implements EngineInterface
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
-                        $database_field_ids = $database[$typeOutputKey][$id][$subcomponent_data_field_outputkey] ?? null;
+                        $database_field_ids = $database[$targetTypeOutputKey][$id][$subcomponent_data_field_outputkey] ?? null;
                         if (!$database_field_ids) {
                             continue;
                         }
-                        $subcomponentIDs[$dbName][$typeOutputKey][$id] = array_merge(
-                            $subcomponentIDs[$dbName][$typeOutputKey][$id] ?? [],
+                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] = array_merge(
+                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ?? [],
                             is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
                         );
                     }
@@ -2371,7 +2371,7 @@ class Engine implements EngineInterface
                 /** @var array<string|int> */
                 $field_ids = [];
                 foreach ($subcomponentIDs as $dbName => $typeOutputKey_id_database_field_ids) {
-                    foreach ($typeOutputKey_id_database_field_ids as $subcomponentTypeOutputKey => $id_database_field_ids) {
+                    foreach ($typeOutputKey_id_database_field_ids as $typeOutputKey => $id_database_field_ids) {
                         foreach ($id_database_field_ids as $id => $database_field_ids) {
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
@@ -2387,9 +2387,9 @@ class Engine implements EngineInterface
                             }
                             $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbName][$subcomponentTypeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbName][$subcomponentTypeOutputKey][$id][$subcomponent_data_field_outputkey]);
-                            $unionTypeOutputKeyIDs[$dbName][$subcomponentTypeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            $combinedUnionTypeOutputKeyIDs[$subcomponentTypeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey]);
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(
