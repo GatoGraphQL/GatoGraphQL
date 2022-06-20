@@ -137,7 +137,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *   - setSelfAsExpression
      *   - cacheControl
      *
-     * Because it may be more convenient to add the directive or the class, there are 2 methods
+     * Because it may be more convenient to add the directive or the class,
+     * there are 2 methods.
      */
     protected function getMandatoryDirectives()
     {
