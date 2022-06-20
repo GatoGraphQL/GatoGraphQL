@@ -2352,9 +2352,15 @@ class Engine implements EngineInterface
                         );
                     }
                 }
-                // We don't want to store the typeOutputKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
-                // So, instead, we store the typeOutputKey/ID values in another object "$unionTypeOutputKeyIDs"
-                // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
+                /**
+                 * We don't want to store the typeOutputKey/ID inside the relationalID,
+                 * because that can lead to problems when dealing with the relations
+                 * in the application (better keep it only to the ID).
+                 * So, instead, we store the typeOutputKey/ID values in another object
+                 * "$unionTypeOutputKeyIDs".
+                 * Then, whenever it's a union type data resolver, we obtain the values
+                 * for the relationship under this other object.
+                 */
                 $typedSubcomponentIDs = [];
                 // if ($subcomponentIsUnionTypeResolver) {
                     // Get the types for all of the IDs all at once. Flatten 3 levels: dbName => typeOutputKey => id => ...
