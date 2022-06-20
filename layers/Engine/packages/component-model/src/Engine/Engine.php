@@ -1524,6 +1524,10 @@ class Engine implements EngineInterface
         return $ret;
     }
 
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>>
+     */
     public function moveEntriesUnderDBName(
         array $entries,
         bool $entryHasId,

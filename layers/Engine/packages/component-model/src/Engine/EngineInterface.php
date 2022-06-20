@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 interface EngineInterface
 {
@@ -29,5 +31,9 @@ interface EngineInterface
      */
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution;
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array;
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>>
+     */
     public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }
