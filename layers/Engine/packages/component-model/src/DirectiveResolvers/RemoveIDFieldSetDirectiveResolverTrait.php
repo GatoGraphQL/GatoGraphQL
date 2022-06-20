@@ -51,7 +51,6 @@ trait RemoveIDFieldSetDirectiveResolverTrait
         foreach (array_keys($idFieldSetToSetAsNull) as $id) {
             $fieldsToSetAsNullForID = $idFieldSetToSetAsNull[$id]->fields;
             foreach ($fieldsToSetAsNullForID as $field) {
-                $fieldOutputKey = $field->getOutputKey();
                 $resolvedIDFieldValues[$id][$field] = null;
             }
         }
