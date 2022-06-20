@@ -33,7 +33,7 @@ interface EngineInterface
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array;
     /**
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
-     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>>
+     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
-    public function moveEntriesUnderDBName(array $entries, bool $entryHasId, RelationalTypeResolverInterface $relationalTypeResolver): array;
+    public function moveEntriesWithIDUnderDBName(array $entries, RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

@@ -1525,54 +1525,102 @@ class Engine implements EngineInterface
     }
 
     /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
-     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>>
+     * Allow to inject what data fields must be placed under what dbNames
+     *
+     * @return array<string,string[]> Array of key: dbName, values: field names
      */
-    public function moveEntriesUnderDBName(
+    public function getDBNameFieldNames(
+        RelationalTypeResolverInterface $relationalTypeResolver
+    ): array {
+        return App::applyFilters(
+            'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
+            [],
+            $relationalTypeResolver
+        );
+    }
+
+    /**
+     * By default place everything under "primary"
+     *
+     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     */
+    public function getEntriesUnderDefaultDBName(
+        array|SplObjectStorage $entries,
+    ): array {
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
+        return [
+            'primary' => $entries,
+        ];
+    }
+
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     */
+    public function moveEntriesWithIDUnderDBName(
         array $entries,
-        bool $entryHasId,
         RelationalTypeResolverInterface $relationalTypeResolver
     ): array {
         if (!$entries) {
             return [];
         }
 
-        // By default place everything under "primary"
-        $dbname_entries = [
-            'primary' => $entries,
-        ];
-
-        // Allow to inject what data fields must be placed under what dbNames
-        // Array of key: dbName, values: data-fields
-        $dbNameToFieldNames = App::applyFilters(
-            'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
-            [],
-            $relationalTypeResolver
-        );
-        foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
-            // Move these data fields under "meta" DB name
-            if ($entryHasId) {
-                foreach ($dbname_entries['primary'] as $id => $resolvedObject) {
-                    $entry_fieldNames_to_move = array_intersect(
-                        // If field "id" for this type has been disabled (eg: by ACL),
-                        // then $resolvedObject may be `null`
-                        array_keys($resolvedObject ?? []),
-                        $fieldNames
-                    );
-                    foreach ($entry_fieldNames_to_move as $fieldName) {
-                        $dbname_entries[$dbName][$id][$fieldName] = $dbname_entries['primary'][$id][$fieldName];
-                        unset($dbname_entries['primary'][$id][$fieldName]);
-                    }
-                }
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
+        $dbname_entries = $this->getEntriesUnderDefaultDBName($entries);
+        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
+        // Move these data fields under "meta" DB name
+        foreach ($dbname_entries['primary'] as $id => $fieldValues) {
+            /**
+             * If field "id" for this type has been disabled (eg: by ACL),
+             * then $fieldValues may be `null`
+             */
+            if ($fieldValues === null || $fieldValues->count() === 0) {
                 continue;
             }
-            $entry_fieldNames_to_move = array_intersect(
-                array_keys($dbname_entries['primary']),
-                $fieldNames
+            $fields = iterator_to_array($fieldValues);
+            foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
+                $fields_to_move = array_filter(
+                    $fields,
+                    fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
+                );
+                foreach ($fields_to_move as $field) {
+                    $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
+                    $dbname_entries[$dbName][$id][$field] = $dbname_entries['primary'][$id][$field];
+                    $dbname_entries['primary'][$id]->detach($field);
+                }
+            }
+        }
+        return $dbname_entries;
+    }
+
+    /**
+     * @param SplObjectStorage<FieldInterface,mixed> $entries
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>
+     */
+    public function moveEntriesWithoutIDUnderDBName(
+        SplObjectStorage $entries,
+        RelationalTypeResolverInterface $relationalTypeResolver
+    ): array {
+        if ($entries->count() === 0) {
+            return [];
+        }
+
+        // By default place everything under "primary"
+        /** @var array<string,SplObjectStorage<FieldInterface,mixed>> */
+        $dbname_entries = $this->getEntriesUnderDefaultDBName($entries);
+        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
+        $fields = iterator_to_array($entries);
+        foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
+            // Move these data fields under "meta" DB name
+            $fields_to_move = array_filter(
+                $fields,
+                fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
             );
-            foreach ($entry_fieldNames_to_move as $fieldName) {
-                $dbname_entries[$dbName][$fieldName] = $dbname_entries['primary'][$fieldName];
-                unset($dbname_entries['primary'][$fieldName]);
+            foreach ($fields_to_move as $field) {
+                $dbname_entries[$dbName] ??= new SplObjectStorage();
+                $dbname_entries[$dbName][$field] = $dbname_entries['primary'][$field];
+                $dbname_entries['primary']->detach($field);
             }
         }
         return $dbname_entries;
@@ -1701,7 +1749,7 @@ class Engine implements EngineInterface
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
-                $resolvedIDFieldValues = $this->moveEntriesUnderDBName($iterationResolvedIDFieldValues, true, $relationalTypeResolver);
+                $resolvedIDFieldValues = $this->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
                 foreach ($resolvedIDFieldValues as $dbName => $entries) {
                     $databases[$dbName] ??= [];
                     $this->addDatasetToDatabase($databases[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
@@ -1946,15 +1994,18 @@ class Engine implements EngineInterface
             return;
         }
 
-        $dbNameEntries = $this->moveEntriesUnderDBName($entries, true, $relationalTypeResolver);
+        $dbNameEntries = $this->moveEntriesWithIDUnderDBName($entries, $relationalTypeResolver);
         foreach ($dbNameEntries as $dbName => $entries) {
             $destination[$dbName] ??= [];
             $this->addDatasetToDatabase($destination[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
         }
     }
 
+    /**
+     * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
+     */
     protected function addSchemaEntriesToDestinationArray(
-        array &$entries,
+        array|SplObjectStorage &$entries,
         array &$destination,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $typeOutputKey,
@@ -1963,12 +2014,12 @@ class Engine implements EngineInterface
             return;
         }
 
-        $dbNameEntries = $this->moveEntriesUnderDBName($entries, false, $relationalTypeResolver);
+        $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $relationalTypeResolver);
         foreach ($dbNameEntries as $dbName => $entries) {
-            $destination[$dbName][$typeOutputKey] = array_merge(
-                $destination[$dbName][$typeOutputKey] ?? [],
-                $entries
-            );
+            /** @var SplObjectStorage<FieldInterface,mixed> */
+            $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
+            $destinationSplObjectStorage->addAll($entries);
+            $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
         }
     }
 
