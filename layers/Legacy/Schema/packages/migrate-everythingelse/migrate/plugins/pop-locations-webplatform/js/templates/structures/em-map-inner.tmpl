@@ -2,7 +2,7 @@
 	{{enterModule ../.}}
 {{/withModule}}
 
-{{#each dbObjectIDs}}
+{{#each objectIDs}}
 	{{#each ../subcomponentoutputnames.layouts}}
 		{{#withModule ../../. this}}
 			{{enterModule ../../../. typeOutputKey=../../../typeOutputKey objectID=../../.}}

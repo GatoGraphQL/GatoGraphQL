@@ -19,13 +19,13 @@ window.pop.TypeaheadMapSelectable = {
 			var moduleName = typeaheadMap.data('addmarker-component');
 			var trigger = pop.TypeaheadSelectable.getTypeaheadTrigger(typeahead);
 
-			trigger.on('dbObjectLayoutRendered', function(e, targetDomain, targetPageSection, targetBlock, target, datum) {
+			trigger.on('resolvedObjectLayoutRendered', function(e, targetDomain, targetPageSection, targetBlock, target, datum) {
 
 				var markerId = pop.MapRuntime.getMarkerId(domain, datum.id);
 				if (!pop.Map.hasMarker(pageSection, block, markerId)) {
 
 					// Add it to DOM => Execute it => the markerData will be added to pop.Map.markers
-					var context = {dbObject: datum};
+					var context = {resolvedObject: datum};
 					pop.DynamicRender.render(domain, pageSection, block, moduleName, typeaheadMap, context);
 				}
 

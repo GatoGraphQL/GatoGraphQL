@@ -421,7 +421,7 @@ class PoP_ServerSideManager
     public function getBlockSettings($domain, $blockTLDomain, $pssId, $bsId, $psId, $bId)
     {
         $blockSettings = array(
-            'outputKeys' => $this->getFieldOutputKeys($domain, $pssId, $bsId),
+            'outputKeys' => $this->getFieldOutputKeyToTypeOutputKeys($domain, $pssId, $bsId),
             'objectIDs' => $this->getDataset($domain, $pssId, $bsId),
             'feedback' => $this->getBlockFeedback($domain, $pssId, $bsId),
             'bsId' => $bsId,
@@ -482,7 +482,10 @@ class PoP_ServerSideManager
         return $this->getStatefulData($domain, $url)['settings'][$item][$pssId][$targetId];
     }
 
-    public function getFieldOutputKeys($domain, $pageSection, $block)
+    /**
+     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     */
+    public function getFieldOutputKeyToTypeOutputKeys($domain, $pageSection, $block)
     {
         return $this->getStatelessSettings($domain, $pageSection, $block, 'outputKeys');
     }

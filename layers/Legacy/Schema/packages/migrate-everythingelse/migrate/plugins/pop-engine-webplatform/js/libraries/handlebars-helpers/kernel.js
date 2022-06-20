@@ -89,24 +89,24 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var tls = prevContext.tls;
 	var pss = prevContext.pss;
 	var bs = prevContext.bs;
-	var dbObject = prevContext.dbObject;
-	var dbObjectTypeOutputKey = prevContext.dbObjectTypeOutputKey;
+	var resolvedObject = prevContext.resolvedObject;
+	var resolvedObjectTypeOutputKey = prevContext.resolvedObjectTypeOutputKey;
 	var ignorePSRuntimeId = prevContext.ignorePSRuntimeId;
 	var feedbackObject = prevContext.feedbackObject;
 	
 	// The following values, if passed as a param, then these take priority. Otherwise, use them from the previous context
 	var typeOutputKey = (typeof options.hash.typeOutputKey != 'undefined') ? options.hash.typeOutputKey : prevContext.typeOutputKey;
-	var dbObjectIDs = (typeof options.hash.dbObjectIDs != 'undefined') ? options.hash.dbObjectIDs : prevContext.dbObjectIDs;
-	if (jQuery.type(dbObjectIDs) === "array" && !dbObjectIDs.length) {
-		dbObjectIDs = null;
+	var objectIDs = (typeof options.hash.objectIDs != 'undefined') ? options.hash.objectIDs : prevContext.objectIDs;
+	if (jQuery.type(objectIDs) === "array" && !objectIDs.length) {
+		objectIDs = null;
 	}
 	
 	// Add all these vars to the context for this component
 	var extend = {
-		dbObject: dbObject, 
-		dbObjectTypeOutputKey: dbObjectTypeOutputKey, 
+		resolvedObject: resolvedObject, 
+		resolvedObjectTypeOutputKey: resolvedObjectTypeOutputKey, 
 		typeOutputKey: typeOutputKey, 
-		dbObjectIDs: dbObjectIDs, 
+		objectIDs: objectIDs, 
 		tls: tls, 
 		pss: pss, 
 		bs: bs, 
@@ -138,58 +138,58 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		else {
 
 			objectID = null;
-			dbObject = null;
-			extend.dbObject = dbObject;
+			resolvedObject = null;
+			extend.resolvedObject = resolvedObject;
 		}
 	}
 
 	if (options.hash.typeOutputKey && objectID) {
 
 		typeOutputKey = options.hash.typeOutputKey;
-		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
-		extend.dbObject = dbObject;
-		extend.dbObjectTypeOutputKey = typeOutputKey;
+		resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
+		extend.resolvedObject = resolvedObject;
+		extend.resolvedObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
-		extend.dbObjectIDs = [objectID];
+		extend.objectIDs = [objectID];
 	}
-	else if (options.hash.typeOutputKey && dbObjectIDs) {
+	else if (options.hash.typeOutputKey && objectIDs) {
 
 		extend.typeOutputKey = options.hash.typeOutputKey;
-		extend.dbObjectIDs = dbObjectIDs;
+		extend.objectIDs = objectIDs;
 	}
 	else if (options.hash.subcomponent && objectID) {
 
 		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
-		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
-		extend.dbObject = dbObject;
-		extend.dbObjectTypeOutputKey = typeOutputKey;
+		resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
+		extend.resolvedObject = resolvedObject;
+		extend.resolvedObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
-		extend.dbObjectIDs = [objectID];
+		extend.objectIDs = [objectID];
 	}
-	else if (options.hash.subcomponent && dbObjectIDs) {
+	else if (options.hash.subcomponent && objectIDs) {
 
 		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
 		extend.typeOutputKey = typeOutputKey;
-		extend.dbObjectIDs = dbObjectIDs;
+		extend.objectIDs = objectIDs;
 	}
-	else if (dbObjectIDs) {
+	else if (objectIDs) {
 
-		extend.dbObjectIDs = dbObjectIDs;
+		extend.objectIDs = objectIDs;
 	}
 	else if (options.hash.typeOutputKey) {
 
-		// If only the typeOutputKey has value, it means the other value passes (objectID or dbObjectIDs) is null
+		// If only the typeOutputKey has value, it means the other value passes (objectID or objectIDs) is null
 		// So then put everything to null
 		extend.typeOutputKey = options.hash.typeOutputKey;
-		extend.dbObject = null;
-		extend.dbObjectTypeOutputKey = null;
-		extend.dbObjectIDs = null;
+		extend.resolvedObject = null;
+		extend.resolvedObjectTypeOutputKey = null;
+		extend.objectIDs = null;
 	}
 
-	// Make sure the dbObjectIDs are an array
-	if (extend.dbObjectIDs) {
-		if (jQuery.type(extend.dbObjectIDs) !== "array") {
-			extend.dbObjectIDs = [extend.dbObjectIDs];
+	// Make sure the objectIDs are an array
+	if (extend.objectIDs) {
+		if (jQuery.type(extend.objectIDs) !== "array") {
+			extend.objectIDs = [extend.objectIDs];
 		}
 	}
 

@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	{{#ifget . ../condition-field method=../condition-method context=../.}}
 		{{#each ../subcomponentoutputnames.layouts}}
 			{{#withModule ../../. this}}

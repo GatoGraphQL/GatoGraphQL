@@ -625,12 +625,15 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getFieldOutputKeys(Component $component, array &$props): array
+    /**
+     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     */
+    public function getFieldOutputKeyToTypeOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
-                // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
+                // Place it under "id" because it is for fetching the current object from the DB, which is found through resolvedObject.id
                 $ret['id'] = $typeOutputKey;
             }
         }
@@ -696,12 +699,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
-            $fieldOutputKeys = $this->getFieldOutputKeys($component, $props);
-            foreach ($fieldOutputKeys as $field => $outputKey) {
-                // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                // @see https://github.com/leoloso/PoP/issues/1050
-                $field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);
-                $ret[implode('.', array_merge($path, [$field_outputkey]))] = $outputKey;
+            $fieldOutputKeyToTypeOutputKeys = $this->getFieldOutputKeyToTypeOutputKeys($component, $props);
+            foreach ($fieldOutputKeyToTypeOutputKeys as $fieldOutputKey => $typeOutputKey) {
+                $ret[implode('.', array_merge($path, [$fieldOutputKey]))] = $typeOutputKey;
             }
         }
 
@@ -1161,7 +1161,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Dataset Meta
     //-------------------------------------------------
 
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
         return [];
     }

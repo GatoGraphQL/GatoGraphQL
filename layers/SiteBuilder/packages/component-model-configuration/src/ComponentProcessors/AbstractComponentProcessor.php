@@ -34,7 +34,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
             $ret['configuration'] = $configuration;
         }
 
-        if ($outputKeys = $this->getFieldOutputKeys($component, $props)) {
+        if ($outputKeys = $this->getFieldOutputKeyToTypeOutputKeys($component, $props)) {
             $ret['outputKeys'] = $outputKeys;
         }
 
@@ -159,9 +159,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         return $ret;
     }
 
-    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
-        $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
+        $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
         if ($dataload_source = $data_properties[DataloadingConstants::SOURCE] ?? null) {
             $ret['dataloadsource'] = $dataload_source;

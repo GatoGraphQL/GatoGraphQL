@@ -28,10 +28,10 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      */
     public function getImplementedInterfaceTypeResolvers(): array;
     /**
-     * @param string|int|array<string|int> $dbObjectIDOrIDs
+     * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array;
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array;
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */

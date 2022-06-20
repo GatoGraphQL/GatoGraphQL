@@ -2506,10 +2506,10 @@ window.pop.Manager = {
 		// var bsId = that.getSettingsId(block);
 		// var memory = that.getMemory(domain);
 
-		// Add 'dbObjectIDs' from the objectIDs, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
+		// Add 'objectIDs' from the objectIDs, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
 		options.extendContext = {
-			// dbObjectIDs: memory.statefuldata.objectIDs[pssId][bsId],
-			dbObjectIDs: that.getDataset(domain, pageSection, block),
+			// objectIDs: memory.statefuldata.objectIDs[pssId][bsId],
+			objectIDs: that.getDataset(domain, pageSection, block),
 			ignorePSRuntimeId: true
 		};
 
@@ -3329,24 +3329,24 @@ window.pop.Manager = {
 	// 	var that = this;
 
 	// 	// Integrate the response Database into the database
-	// 	$.each(responsedb, function(typeOutputKey, dbObjectIDAttributes) {
+	// 	$.each(responsedb, function(typeOutputKey, objectIDAttributes) {
 
 	// 		// Initialize DB entry
 	// 		database[typeOutputKey] = database[typeOutputKey] || {};
 
-	// 		// When there are no elements in dbObjectIDAttributes, the object will appear not as an object but as an array
+	// 		// When there are no elements in objectIDAttributes, the object will appear not as an object but as an array
 	// 		// In that case, it will be empty, so skip
-	// 		if ($.type(dbObjectIDAttributes) == 'array') {
+	// 		if ($.type(objectIDAttributes) == 'array') {
 	// 			return;
 	// 		}
 
 	// 		// Extend with new values
-	// 		$.each(dbObjectIDAttributes, function(objectID, dbObjectAttributes) {
+	// 		$.each(objectIDAttributes, function(objectID, resolvedObjectAttributes) {
 
 	// 			if (!database[typeOutputKey][objectID]) {
 	// 				database[typeOutputKey][objectID] = {};
 	// 			}
-	// 			$.extend(database[typeOutputKey][objectID], dbObjectAttributes);
+	// 			$.extend(database[typeOutputKey][objectID], resolvedObjectAttributes);
 	// 		});
 	// 	});
 	// },
@@ -3663,14 +3663,14 @@ window.pop.Manager = {
 		override = override || {};
 		$.extend(context, override);
 
-		// Load dbObject?
+		// Load resolvedObject?
 		if (typeOutputKey) {
 
 			$.extend(context, {typeOutputKey: typeOutputKey});
 			if (objectID) {
 
-				var dbObject = that.getDBObject(domain, typeOutputKey, objectID);
-				$.extend(context, {dbObject: dbObject, dbObjectTypeOutputKey: typeOutputKey});
+				var resolvedObject = that.getDBObject(domain, typeOutputKey, objectID);
+				$.extend(context, {resolvedObject: resolvedObject, resolvedObjectTypeOutputKey: typeOutputKey});
 			}
 		}
 	},
@@ -4114,7 +4114,7 @@ window.pop.Manager = {
 	
 		var that = this;
 		var blockSettings = {
-			outputKeys: that.getFieldOutputKeys(domain, pssId, bsId),
+			outputKeys: that.getFieldOutputKeyToTypeOutputKeys(domain, pssId, bsId),
 			objectIDs: that.getDataset(domain, pssId, bsId),
 			feedback: that.getBlockFeedback(domain, pssId, bsId),
 			bsId: bsId,
@@ -4239,7 +4239,7 @@ window.pop.Manager = {
 	// 	return configuration[elsId] || {};
 	// },
 
-	getFieldOutputKeys : function(domain, pageSection, block) {
+	getFieldOutputKeyToTypeOutputKeys : function(domain, pageSection, block) {
 	
 		var that = this;
 		return that.getStatelessSettings(domain, pageSection, block, 'outputKeys');

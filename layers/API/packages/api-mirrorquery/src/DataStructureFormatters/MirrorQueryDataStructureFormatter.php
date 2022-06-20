@@ -30,9 +30,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $databases = $data['databases'] ?? [];
             $unionTypeOutputKeyIDs = $data['unionTypeOutputKeyIDs'] ?? [];
             $datasetComponentData = $data['datasetcomponentdata'] ?? [];
-            foreach ($datasetComponentData as $componentName => $objectIDs) {
+            foreach ($datasetComponentData as $componentName => $componentData) {
                 $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
-                $objectIDorIDs = $objectIDs['objectIDs'];
+                $objectIDorIDs = $componentData['objectIDs'];
                 $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, 'id', $typeOutputKeyPaths, false);
             }
         }
@@ -64,16 +64,16 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             foreach ($objectIDorIDs as $objectID) {
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
-                $dbObjectRet = &$ret[count($ret) - 1];
-                $this->addDBObjectData($dbObjectRet, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+                $resolvedObjectRet = &$ret[count($ret) - 1];
+                $this->addObjectData($resolvedObjectRet, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
         } else {
             $objectID = $objectIDorIDs;
-            $this->addDBObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+            $this->addObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
         }
     }
 
-    protected function addDBObjectData(&$dbObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
+    protected function addObjectData(&$resolvedObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
         // Otherwise, it could throw an error on `extractObjectTypeAndID`
@@ -83,7 +83,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
         // Execute for all fields other than the first one, "root", for both UnionTypeResolvers and non-union ones
-        // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+        // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
         // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
         if ($concatenateField) {
             list(
@@ -104,13 +104,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
-        $dbObject = $databases[$typeOutputKey][$objectID] ?? [];
+        $resolvedObject = $databases[$typeOutputKey][$objectID] ?? [];
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
             $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $propertyField);
-            if (array_key_exists($uniquePropertyFieldOutputKey, $dbObject)) {
-                $dbObjectRet[$propertyFieldOutputKey] = $dbObject[$uniquePropertyFieldOutputKey];
+            if (array_key_exists($uniquePropertyFieldOutputKey, $resolvedObject)) {
+                $resolvedObjectRet[$propertyFieldOutputKey] = $resolvedObject[$uniquePropertyFieldOutputKey];
             }
         }
 
@@ -120,13 +120,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $nestedField);
 
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
-            if (!array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
+            if (!array_key_exists($uniqueNestedFieldOutputKey, $resolvedObject)) {
                 continue;
             }
 
             // If it's null, directly assign the null to the result
-            if ($dbObject[$uniqueNestedFieldOutputKey] === null) {
-                $dbObjectRet[$nestedFieldOutputKey] = null;
+            if ($resolvedObject[$uniqueNestedFieldOutputKey] === null) {
+                $resolvedObjectRet[$nestedFieldOutputKey] = null;
                 continue;
             }
 
@@ -137,32 +137,32 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$uniqueNestedFieldOutputKey] ?? null;
 
             // Add a new subarray for the nested property
-            $dbObjectNestedPropertyRet = &$dbObjectRet[$nestedFieldOutputKey];
+            $resolvedObjectNestedPropertyRet = &$resolvedObjectRet[$nestedFieldOutputKey];
 
             // If it is an empty array, then directly add an empty array as the result
-            if (is_array($dbObject[$uniqueNestedFieldOutputKey]) && empty($dbObject[$uniqueNestedFieldOutputKey])) {
-                $dbObjectRet[$nestedFieldOutputKey] = [];
+            if (is_array($resolvedObject[$uniqueNestedFieldOutputKey]) && empty($resolvedObject[$uniqueNestedFieldOutputKey])) {
+                $resolvedObjectRet[$nestedFieldOutputKey] = [];
                 continue;
             }
 
-            if (!empty($dbObjectNestedPropertyRet)) {
+            if (!empty($resolvedObjectNestedPropertyRet)) {
                 // 1. If we load a relational property as its ID, and then load properties on the corresponding object, then it will fail because it will attempt to add a property to a non-array element
                 // Eg: /posts/api/graphql/?query=id|author,author.name will first return "author => 1" and on the "1" element add property "name"
                 // Then, if this situation happens, simply override the ID (which is a scalar value, such as an int or string) with an object with the 'id' property
-                if (!is_array($dbObjectNestedPropertyRet)) {
-                    $dbObjectRet[$nestedFieldOutputKey] = [
-                        'id' => $dbObjectRet[$nestedFieldOutputKey],
+                if (!is_array($resolvedObjectNestedPropertyRet)) {
+                    $resolvedObjectRet[$nestedFieldOutputKey] = [
+                        'id' => $resolvedObjectRet[$nestedFieldOutputKey],
                     ];
                 } else {
                     // 2. If the previous iteration loaded an array of IDs, then override this value with an empty array and initialize the ID again to this object, through adding property 'id' on the next iteration
                     // Eg: /api/graphql/?query=tags,tags.name
-                    $dbObjectRet[$nestedFieldOutputKey] = [];
+                    $resolvedObjectRet[$nestedFieldOutputKey] = [];
                     if (!in_array('id', $nestedPropertyFields)) {
                         array_unshift($nestedPropertyFields, 'id');
                     }
                 }
             }
-            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $dbObject[$uniqueNestedFieldOutputKey], $nextField, $typeOutputKeyPaths);
+            $this->addData($resolvedObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$uniqueNestedFieldOutputKey], $nextField, $typeOutputKeyPaths);
         }
     }
 }

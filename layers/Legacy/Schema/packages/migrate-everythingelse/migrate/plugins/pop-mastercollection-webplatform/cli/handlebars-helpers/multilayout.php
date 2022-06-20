@@ -10,10 +10,10 @@ class PoP_ServerSide_MultiLayoutHelperCallers
         return $pop_serverside_multilayouthelpers->withConditionalOnDataFieldModule($typeOutputKey, $objectID, $conditionDataFieldModules, $defaultModule, $context, $options);
     }
 
-    public static function layoutLabel($typeOutputKey, $dbObject, $options)
+    public static function layoutLabel($typeOutputKey, $resolvedObject, $options)
     {
         global $pop_serverside_multilayouthelpers;
-        return $pop_serverside_multilayouthelpers->layoutLabel($typeOutputKey, $dbObject, $options);
+        return $pop_serverside_multilayouthelpers->layoutLabel($typeOutputKey, $resolvedObject, $options);
     }
 }
 

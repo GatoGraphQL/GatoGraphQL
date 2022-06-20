@@ -1,7 +1,7 @@
 {{#withModule . "map-div"}}
 	{{enterModule ../.}}
 {{/withModule}}
-{{#with dbObject}}
+{{#with resolvedObject}}
 	{{#withModule ../. "map-script-resetmarkers"}}
 		{{enterModule ../../.}}
 	{{/withModule}}

@@ -43,13 +43,13 @@ window.pop.DynamicRender = {
 		
 			var pssId = pop.Manager.getSettingsId(pageSection);
 			var bsId = pop.Manager.getSettingsId(block);
-			var context = {dbObject: datum};
+			var context = {resolvedObject: datum};
 
 			// Generate the code and append
 			var targetContainer = pop.Manager.getMergeTarget(target, moduleName);
 			that.render(domain, pageSection, block, moduleName, targetContainer, context);
 			
-			target.triggerHandler('dbObjectLayoutRendered', [domain, pageSection, block, target, datum]);
+			target.triggerHandler('resolvedObjectLayoutRendered', [domain, pageSection, block, target, datum]);
 		}
 	},
 };

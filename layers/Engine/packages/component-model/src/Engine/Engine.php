@@ -1243,7 +1243,7 @@ class Engine implements EngineInterface
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
             $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
-            $mutation_checkpoint_validation = $executed = $dbObjectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputKey = null;
+            $mutation_checkpoint_validation = $executed = $objectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputKey = null;
             if ($load_data) {
                 // ------------------------------------------
                 // Action Executers
@@ -1280,17 +1280,17 @@ class Engine implements EngineInterface
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
                     // Execute and get the ids and the meta
-                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($component, $component_props, $data_properties);
+                    $objectIDOrIDs = $processor->getObjectIDOrIDs($component, $component_props, $data_properties);
                     // To simplify the logic, deal with arrays only
-                    if ($dbObjectIDOrIDs === null) {
-                        $dbObjectIDOrIDs = [];
+                    if ($objectIDOrIDs === null) {
+                        $objectIDOrIDs = [];
                     }
                     // If the type is union, we must add the type to each object
                     $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
-                        $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
-                        : $dbObjectIDOrIDs;
+                        $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDOrIDs)
+                        : $objectIDOrIDs;
 
-                    $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);
+                    $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : array($objectIDOrIDs);
                     $typeDBObjectIDs = is_array($typeDBObjectIDOrIDs) ? $typeDBObjectIDOrIDs : array($typeDBObjectIDOrIDs);
 
                     // Store the ids under $data under key dataload_name => id
@@ -1367,7 +1367,7 @@ class Engine implements EngineInterface
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
                 if (!is_null($datasetcomponentmeta)) {
-                    if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+                    if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDOrIDs)) {
                         $this->assignValueForComponent($datasetcomponentmeta, $component_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
@@ -1421,7 +1421,7 @@ class Engine implements EngineInterface
                 $dataaccess_checkpoint_validation,
                 $mutation_checkpoint_validation,
                 $executed,
-                $dbObjectIDOrIDs,
+                $objectIDOrIDs,
                 array(&$engineState->helperCalculations),
                 $this
             );
@@ -1548,11 +1548,11 @@ class Engine implements EngineInterface
         foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
             // Move these data fields under "meta" DB name
             if ($entryHasId) {
-                foreach ($dbname_entries['primary'] as $id => $dbObject) {
+                foreach ($dbname_entries['primary'] as $id => $resolvedObject) {
                     $entry_fieldNames_to_move = array_intersect(
                         // If field "id" for this type has been disabled (eg: by ACL),
-                        // then $dbObject may be `null`
-                        array_keys($dbObject ?? []),
+                        // then $resolvedObject may be `null`
+                        array_keys($resolvedObject ?? []),
                         $fieldNames
                     );
                     foreach ($entry_fieldNames_to_move as $fieldName) {
@@ -2382,7 +2382,7 @@ class Engine implements EngineInterface
                         foreach ($id_database_field_ids as $id => $database_field_ids) {
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
-                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
                             // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
@@ -2486,7 +2486,7 @@ class Engine implements EngineInterface
                             $combined_databases[$typeOutputKey][$dbobject_id] = array_merge(
                                 $combined_databases[$typeOutputKey][$dbobject_id] ?? [],
                                 // If field "id" for this type has been disabled (eg: by ACL),
-                                // then $dbObject may be `null`
+                                // then $resolvedObject may be `null`
                                 $dbobject_values ?? []
                             );
                         }

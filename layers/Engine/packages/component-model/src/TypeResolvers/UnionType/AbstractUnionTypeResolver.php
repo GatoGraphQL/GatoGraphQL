@@ -75,12 +75,12 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     }
 
     /**
-     * @param string|int|array<string|int> $dbObjectIDOrIDs
+     * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array
     {
-        $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
+        $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : [$objectIDOrIDs];
         $objectIDTargetObjectTypeResolvers = $this->getObjectIDTargetTypeResolvers($objectIDs);
         $typeDBObjectIDOrIDs = [];
         foreach ($objectIDs as $objectID) {
@@ -95,7 +95,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 $typeDBObjectIDOrIDs[] = $objectID;
             }
         }
-        if (!is_array($dbObjectIDOrIDs)) {
+        if (!is_array($objectIDOrIDs)) {
             return $typeDBObjectIDOrIDs[0];
         }
         return $typeDBObjectIDOrIDs;
@@ -445,7 +445,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         }
 
         // Delegate to that typeResolver to obtain the value
-        // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
+        // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each resolvedObject, indicate that it must be done in resolveValue
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
         return $targetObjectTypeResolver->resolveValue(
             $object,
