@@ -2357,7 +2357,7 @@ class Engine implements EngineInterface
                 // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
                 $typedSubcomponentIDs = [];
                 // if ($subcomponentIsUnionTypeResolver) {
-                    // Get the types for all of the IDs all at once. Flatten 3 levels: dbname => dbkey => id => ...
+                    // Get the types for all of the IDs all at once. Flatten 3 levels: dbname => typeOutputKey => id => ...
                     $allSubcomponentIDs = array_values(array_unique(
                         GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
                     ));
@@ -2370,8 +2370,8 @@ class Engine implements EngineInterface
 
                 /** @var array<string|int> */
                 $field_ids = [];
-                foreach ($subcomponentIDs as $dbname => $dbkey_id_database_field_ids) {
-                    foreach ($dbkey_id_database_field_ids as $typeOutputKey => $id_database_field_ids) {
+                foreach ($subcomponentIDs as $dbname => $typeOutputKey_id_database_field_ids) {
+                    foreach ($typeOutputKey_id_database_field_ids as $typeOutputKey => $id_database_field_ids) {
                         foreach ($id_database_field_ids as $id => $database_field_ids) {
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
