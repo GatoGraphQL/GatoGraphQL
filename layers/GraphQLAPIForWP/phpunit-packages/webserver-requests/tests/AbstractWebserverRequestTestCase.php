@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use function getenv;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
@@ -12,7 +13,6 @@ use PHPUnit\Framework\TestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
-
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
@@ -256,7 +256,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         if (static::$enableTests) {
             return;
         }
-        
+
         /**
          * If the webserver is down:
          *
@@ -265,7 +265,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
          */
         if (static::isContinuousIntegration()) {
             throw new IntegrationTestApplicationNotAvailableException(self::$skipOrFailTestsReason);
-        }        
+        }
         $this->markTestSkipped(self::$skipOrFailTestsReason);
     }
 }

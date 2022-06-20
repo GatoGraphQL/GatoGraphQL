@@ -10,7 +10,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
 class MyContentQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-    
+
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-my-content';
