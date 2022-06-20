@@ -4,9 +4,9 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputH
 
 class GD_DataLoad_QueryInputOutputHandler_EditMembership extends ActionExecutionQueryInputOutputHandler
 {
-    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $resolvedObjectIDOrIDs): array
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
-        $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $resolvedObjectIDOrIDs);
+        $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
         $uid = \PoP\Root\App::query(\PoPCMSSchema\Users\Constants\InputNames::USER_ID);
         $ret[\PoPCMSSchema\Users\Constants\InputNames::USER_ID] = $uid;

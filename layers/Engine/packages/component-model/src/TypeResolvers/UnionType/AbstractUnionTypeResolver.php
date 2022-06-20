@@ -75,12 +75,12 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     }
 
     /**
-     * @param string|int|array<string|int> $resolvedObjectIDOrIDs
+     * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $resolvedObjectIDOrIDs): string | int | array
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array
     {
-        $objectIDs = is_array($resolvedObjectIDOrIDs) ? $resolvedObjectIDOrIDs : [$resolvedObjectIDOrIDs];
+        $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : [$objectIDOrIDs];
         $objectIDTargetObjectTypeResolvers = $this->getObjectIDTargetTypeResolvers($objectIDs);
         $typeDBObjectIDOrIDs = [];
         foreach ($objectIDs as $objectID) {
@@ -95,7 +95,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 $typeDBObjectIDOrIDs[] = $objectID;
             }
         }
-        if (!is_array($resolvedObjectIDOrIDs)) {
+        if (!is_array($objectIDOrIDs)) {
             return $typeDBObjectIDOrIDs[0];
         }
         return $typeDBObjectIDOrIDs;

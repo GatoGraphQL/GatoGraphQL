@@ -6,9 +6,9 @@ use PoP\Root\App;
 
 class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryInputOutputHandler
 {
-    public function getQueryParams($data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $resolvedObjectIDOrIDs): array
+    public function getQueryParams($data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
-        $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $resolvedObjectIDOrIDs);
+        $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
         // Empty params needed for initialBlockMemory:
         // We must send these params empty at the beginning. That way, when clicking on "Reset", it will override
@@ -29,7 +29,7 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
             // Check if there are errors or if it was successful, and add corresponding messages.
             // $data = $this->getFormExecutedResponse($executed);
             if ($executed[ResponseConstants::SUCCESS]) {
-                $objectIDs = $resolvedObjectIDOrIDs;
+                $objectIDs = $objectIDOrIDs;
                 $pid = $objectIDs[0];
                 $nonce = $pid ? gdCreateNonce(GD_NONCE_EDITURL, $pid) : '';
                 $ret[\PoPCMSSchema\Posts\Constants\InputNames::POST_ID] = $pid;

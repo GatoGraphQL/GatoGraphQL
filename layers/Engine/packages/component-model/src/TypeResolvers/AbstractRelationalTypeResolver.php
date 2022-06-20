@@ -104,13 +104,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @param string|int|array<string|int> $resolvedObjectIDOrIDs
+     * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $resolvedObjectIDOrIDs): string | int | array
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array
     {
         // Add the type before the ID
-        $objectIDs = is_array($resolvedObjectIDOrIDs) ? $resolvedObjectIDOrIDs : [$resolvedObjectIDOrIDs];
+        $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : [$objectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
             fn (int | string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
                 $this,
@@ -118,7 +118,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             ),
             $objectIDs
         );
-        return is_array($resolvedObjectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
+        return is_array($objectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
     }
 
     public function qualifyDBObjectIDsToRemoveFromErrors(): bool
