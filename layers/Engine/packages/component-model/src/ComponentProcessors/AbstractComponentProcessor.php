@@ -625,7 +625,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getFieldOutputKeys(Component $component, array &$props): array
+    public function getFieldOutputKeyToTypeOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
@@ -696,7 +696,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
-            $fieldOutputKeys = $this->getFieldOutputKeys($component, $props);
+            $fieldOutputKeys = $this->getFieldOutputKeyToTypeOutputKeys($component, $props);
             foreach ($fieldOutputKeys as $field => $outputKey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
