@@ -245,7 +245,7 @@ class PoP_SSR_EngineInitialization_Hooks
                                 list(
                                     $typeOutputKey,
                                     $object_id
-                                ) = UnionTypeHelpers::extractDBObjectTypeAndID($object_id);
+                                ) = UnionTypeHelpers::extractObjectTypeAndID($object_id);
                             }
                             // This value may be an array (eg: 'locations' => array(123, 343)) or a single value (eg: 'author' => 432)
                             // So convert to array, to deal with all cases

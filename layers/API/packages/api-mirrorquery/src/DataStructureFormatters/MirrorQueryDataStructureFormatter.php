@@ -76,7 +76,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     protected function addDBObjectData(&$dbObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
-        // Otherwise, it could throw an error on `extractDBObjectTypeAndID`
+        // Otherwise, it could throw an error on `extractObjectTypeAndID`
         // because it only has the ID and not the name of the type
         // Eg: When a validation on the last field fails, such as: /?query=posts.id(
         if (!$propertyFields && !$nestedFields) {
@@ -89,7 +89,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             list(
                 $typeOutputKey,
                 $objectID
-            ) = UnionTypeHelpers::extractDBObjectTypeAndID(
+            ) = UnionTypeHelpers::extractObjectTypeAndID(
                 // If the object could not be loaded, $objectID will be all ID, with no $typeOutputKey
                 // Since that could be an int, the strict typing would throw an error,
                 // so make sure to type it as a string

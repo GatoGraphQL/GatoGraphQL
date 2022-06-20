@@ -197,7 +197,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 list(
                     $typeOutputKey,
                     $id
-                ) = UnionTypeHelpers::extractDBObjectTypeAndID($composedID);
+                ) = UnionTypeHelpers::extractObjectTypeAndID($composedID);
                 return $id;
             },
             array_keys($idFieldSet)
@@ -214,7 +214,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             list(
                 $typeOutputKey,
                 $objectID
-            ) = UnionTypeHelpers::extractDBObjectTypeAndID($id);
+            ) = UnionTypeHelpers::extractObjectTypeAndID($id);
             $objectIDTargetTypeResolver = $objectIDTargetTypeResolvers[$objectID];
             $mandatoryDirectivesForFields = $targetObjectTypeResolverClassMandatoryDirectivesForFields[get_class($objectIDTargetTypeResolver)];
 

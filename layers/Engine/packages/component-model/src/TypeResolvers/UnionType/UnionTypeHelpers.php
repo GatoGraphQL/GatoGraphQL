@@ -16,7 +16,7 @@ class UnionTypeHelpers
     /**
      * Extracts the DB key and ID from the object ID
      */
-    public static function extractDBObjectTypeAndID(string $composedDBKeyObjectID): array
+    public static function extractObjectTypeAndID(string $composedDBKeyObjectID): array
     {
         $parts = explode(
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,

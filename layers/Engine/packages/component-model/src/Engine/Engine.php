@@ -904,7 +904,7 @@ class Engine implements EngineInterface
                         list(
                             $objectDBKey,
                             $objectID
-                        ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
+                        ) = UnionTypeHelpers::extractObjectTypeAndID($objectID);
 
                         $targetObjectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
                         $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
@@ -1753,7 +1753,7 @@ class Engine implements EngineInterface
                             list(
                                 $typeOutputKey,
                                 $id
-                            ) = UnionTypeHelpers::extractDBObjectTypeAndID((string)$composedID);
+                            ) = UnionTypeHelpers::extractObjectTypeAndID((string)$composedID);
                             // It's null if the Dataloader couldn't load the item with the given ID
                             $targetObjectIDItems[$id] = $idObjects[$composedID] ?? null;
                             $objectTypeResolver_ids[] = $id;
