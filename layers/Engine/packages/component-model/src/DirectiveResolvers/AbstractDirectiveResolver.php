@@ -536,11 +536,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @return mixed[]
      */
-    protected function getExpressionsForObjectAndField(int | string $id, string $fieldOutputKey, array $variables, array $messages): array
+    protected function getExpressionsForObjectAndField(int | string $id, FieldInterface $field, array $variables, array $messages): array
     {
         return array_merge(
             $this->getExpressionsForObject($id, $variables, $messages),
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey] ?? []
+            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()] ?? []
         );
     }
 
