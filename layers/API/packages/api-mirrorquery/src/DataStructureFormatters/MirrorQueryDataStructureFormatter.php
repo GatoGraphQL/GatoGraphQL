@@ -83,10 +83,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $resolvedObjectRet = &$ret[count($ret) - 1];
                 $this->addObjectData($resolvedObjectRet, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
-        } else {
-            $objectID = $objectIDorIDs;
-            $this->addObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+            return;
         }
+        $objectID = $objectIDorIDs;
+        $this->addObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
     }
 
     protected function addObjectData(&$resolvedObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
