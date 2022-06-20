@@ -67,6 +67,8 @@ class Engine implements EngineInterface
 
     public const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
 
+    public const PRIMARY_DBNAME = 'primary';
+
     public final const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public final const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
@@ -1560,7 +1562,7 @@ class Engine implements EngineInterface
     ): array {
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
         return [
-            'primary' => $entries,
+            self::PRIMARY_DBNAME => $entries,
         ];
     }
 
@@ -1580,7 +1582,7 @@ class Engine implements EngineInterface
         $dbname_entries = $this->getEntriesUnderDefaultDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
         // Move these data fields under "meta" DB name
-        foreach ($dbname_entries['primary'] as $id => $fieldValues) {
+        foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
             /**
              * If field "id" for this type has been disabled (eg: by ACL),
              * then $fieldValues may be `null`
@@ -1596,8 +1598,8 @@ class Engine implements EngineInterface
                 );
                 foreach ($fields_to_move as $field) {
                     $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
-                    $dbname_entries[$dbName][$id][$field] = $dbname_entries['primary'][$id][$field];
-                    $dbname_entries['primary'][$id]->detach($field);
+                    $dbname_entries[$dbName][$id][$field] = $dbname_entries[self::PRIMARY_DBNAME][$id][$field];
+                    $dbname_entries[self::PRIMARY_DBNAME][$id]->detach($field);
                 }
             }
         }
@@ -1629,8 +1631,8 @@ class Engine implements EngineInterface
             );
             foreach ($fields_to_move as $field) {
                 $dbname_entries[$dbName] ??= new SplObjectStorage();
-                $dbname_entries[$dbName][$field] = $dbname_entries['primary'][$field];
-                $dbname_entries['primary']->detach($field);
+                $dbname_entries[$dbName][$field] = $dbname_entries[self::PRIMARY_DBNAME][$field];
+                $dbname_entries[self::PRIMARY_DBNAME]->detach($field);
             }
         }
         return $dbname_entries;

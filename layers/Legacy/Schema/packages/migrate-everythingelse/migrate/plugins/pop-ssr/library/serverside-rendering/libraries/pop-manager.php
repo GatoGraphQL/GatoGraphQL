@@ -1,4 +1,6 @@
 <?php
+
+use PoP\ComponentModel\Engine\Engine;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
@@ -55,8 +57,7 @@ class PoP_ServerSideManager
 
     public function &getPrimaryDatabase($domain)
     {
-        $datastore = PoP_ServerSide_LibrariesFactory::getDatastoreInstance();
-        $primarydatabase =& $this->getDatabases($domain)['primary'] ?? array();
+        $primarydatabase =& $this->getDatabases($domain)[Engine::PRIMARY_DBNAME] ?? array();
         return $primarydatabase;
     }
 
