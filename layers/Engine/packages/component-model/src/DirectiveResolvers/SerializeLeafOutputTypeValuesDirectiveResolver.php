@@ -111,10 +111,6 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
 
                 /** @var LeafOutputTypeResolverInterface */
                 $fieldLeafOutputTypeResolver = $fieldTypeResolver;
-                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByObjectTypeResolver(
-                    $targetObjectTypeResolver,
-                    $field->asFieldOutputQueryString(),
-                );
                 $value = $resolvedIDFieldValues[$id][$field] ?? null;
                 if ($value === null) {
                     continue;

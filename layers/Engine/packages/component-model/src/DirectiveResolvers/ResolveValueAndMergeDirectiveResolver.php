@@ -151,9 +151,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $resolvedIDFieldValues
-                $conditionFieldOutputKey = $conditionField->getOutputKey();
-                if (isset($resolvedIDFieldValues[$id]) && array_key_exists($conditionFieldOutputKey, $resolvedIDFieldValues[$id])) {
-                    $conditionSatisfied = (bool)$resolvedIDFieldValues[$id][$conditionFieldOutputKey];
+                if (isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($conditionField)) {
+                    $conditionSatisfied = (bool)$resolvedIDFieldValues[$id][$conditionField];
                 } else {
                     $conditionSatisfied = false;
                 }
