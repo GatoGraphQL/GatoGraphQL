@@ -943,6 +943,22 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
     }
 
+    /**
+     * Execute the directive pipeline to resolve the data
+     * for all IDs and fields.
+     *
+     * The data under variable $resolvedIDFieldValues will undergo
+     * 2 stages:
+     *
+     *   1. Resolve the field (for each ID), which may produce an object
+     *      (eg: DateTime for `Post.date`)
+     *   2. Serialize the leaf values, to print the response
+     *
+     * Hence, the type of this variable can change throughout the
+     * lifecycle of this script, and its type is then declared as `mixed`.
+     *
+     * @param array<string|int,array<string,mixed>> $resolvedIDFieldValues
+     */
     protected function processFillingObjectsFromIDs(
         array $unionDBKeyIDs,
         array $objectIDItems,
