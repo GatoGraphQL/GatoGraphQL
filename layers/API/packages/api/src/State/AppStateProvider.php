@@ -59,7 +59,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // For the API, the response is always JSON
         $state['output'] = Outputs::JSON;
 
-        // Fetch datasetcomponentsettings: needed to obtain the dbKeyPath to know where to find the database entries
+        // Fetch datasetcomponentsettings: needed to obtain the typeOutputKeyPath to know where to find the database entries
         $state['dataoutputitems'] = [
             DataOutputItems::DATASET_COMPONENT_SETTINGS,
             DataOutputItems::COMPONENT_DATA,
@@ -69,7 +69,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // dataoutputmode => Combined: there is no need to split the sources, then already combined them
         $state['dataoutputmode'] = DataOutputModes::COMBINED;
 
-        // dboutputmode => Combined: needed since we don't know under what database does the dbKeyPath point to. Then simply integrate all of them
+        // dboutputmode => Combined: needed since we don't know under what database does the typeOutputKeyPath point to. Then simply integrate all of them
         // Also, needed for REST/GraphQL APIs since all their data comes bundled all together
         $state['dboutputmode'] = DatabasesOutputModes::COMBINED;
 

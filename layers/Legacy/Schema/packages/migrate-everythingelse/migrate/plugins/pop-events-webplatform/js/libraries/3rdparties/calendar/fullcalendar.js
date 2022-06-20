@@ -181,8 +181,8 @@ window.pop.FullCalendar = {
 
 			var options = {}
 			
-			var dbKeys = pop.Manager.getFieldOutputKeys(domain, pageSection, block);
-			var typeOutputKey = dbKeys.id;
+			var typeOutputKeys = pop.Manager.getFieldOutputKeys(domain, pageSection, block);
+			var typeOutputKey = typeOutputKeys.id;
 			html = '';
 			pop.JSRuntimeManager.setBlockURL(domain, block);
 			$.each(layouts, function(index, layout) {
