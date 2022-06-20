@@ -1762,11 +1762,19 @@ class Engine implements EngineInterface
                     $databases[$dbName] ??= [];
                     $this->addDatasetToDatabase($databases[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
 
-                    // Populate the $previouslyResolvedIDFieldValues, pointing to the newly fetched resolvedIDFieldValues (but without the dbName!)
-                    // Save the reference to the values, instead of the values, to save memory
-                    // Passing $previouslyResolvedIDFieldValues instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
-                    // the modification is done on $previouslyResolvedIDFieldValues, so it carries no risks
+                    /**
+                     * Populate the $previouslyResolvedIDFieldValues, pointing to the newly
+                     * fetched resolvedIDFieldValues (but without the dbName!)
+                     *
+                     * Save the reference to the values, instead of the values, to save memory
+                     *
+                     * Passing $previouslyResolvedIDFieldValues instead of $databases
+                     * makes it read-only: Directives can only read the values...
+                     * if they want to modify them, the modification is done on
+                     * $previouslyResolvedIDFieldValues, so it carries no risks
+                     */
                     foreach ($entries as $id => $fieldValues) {
+                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id] ??= new SplObjectStorage();
                         foreach ($fieldValues as $field => &$entryFieldValues) {
                             $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = &$entryFieldValues;
                         }
