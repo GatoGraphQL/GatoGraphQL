@@ -1592,7 +1592,7 @@ class Engine implements EngineInterface
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
-        $already_loaded_ids_data_fields = [];
+        $already_loaded_id_fields = [];
 
         /**
          * The variables initially come from the AppState, but then they
@@ -1623,10 +1623,10 @@ class Engine implements EngineInterface
             }
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
-            $already_loaded_ids_data_fields[$relationalTypeOutputKey] ??= [];
+            $already_loaded_id_fields[$relationalTypeOutputKey] ??= [];
             foreach ($idFieldSet as $id => $fieldSet) {
-                $already_loaded_ids_data_fields[$relationalTypeOutputKey][$id] = array_merge(
-                    $already_loaded_ids_data_fields[$relationalTypeOutputKey][$id] ?? [],
+                $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
+                    $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
                     $fieldSet->fields,
                     // Conditional items must also be in direct, so no need to check to cache them
                     // iterator_to_array($fieldSet->conditionalFields)
@@ -1685,8 +1685,8 @@ class Engine implements EngineInterface
                         }
                         /** @var FieldInterface[] $conditionalFields */
                         $iterationFields = array_keys($resolvedIDFieldValue);
-                        $already_loaded_ids_data_fields[$relationalTypeOutputKey][$id] = array_merge(
-                            $already_loaded_ids_data_fields[$relationalTypeOutputKey][$id] ?? [],
+                        $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
+                            $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
                                 $conditionalFields,
                                 $iterationFields
@@ -1778,11 +1778,11 @@ class Engine implements EngineInterface
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects);
                     }
                 }
             }
@@ -2301,7 +2301,7 @@ class Engine implements EngineInterface
         string $component_path_key,
         array &$databases,
         SplObjectStorage $subcomponents_data_properties,
-        array &$already_loaded_ids_data_fields,
+        array &$already_loaded_id_fields,
         array &$unionTypeOutputKeyIDs,
         array &$combinedUnionTypeOutputKeyIDs,
         array $idObjects,
@@ -2332,9 +2332,9 @@ class Engine implements EngineInterface
             if ($subcomponent_data_fields || $subcomponent_conditional_data_fields->count() > 0) {
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
-                $subcomponent_already_loaded_ids_data_fields = [];
-                if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeOutputKey] ?? null)) {
-                    $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputKey];
+                $subcomponent_already_loaded_id_fields = [];
+                if ($already_loaded_id_fields && ($already_loaded_id_fields[$subcomponentTypeOutputKey] ?? null)) {
+                    $subcomponent_already_loaded_id_fields = $already_loaded_id_fields[$subcomponentTypeOutputKey];
                 }
                 $subcomponentIDs = [];
                 foreach ($typeResolverIDs as $id) {
@@ -2402,7 +2402,7 @@ class Engine implements EngineInterface
                 if ($field_ids) {
                     foreach ($field_ids as $field_id) {
                         // Do not add again the IDs/Fields already loaded
-                        if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
+                        if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
                             $id_subcomponent_data_fields = array_values(
                                 array_filter(
                                     $subcomponent_data_fields,
