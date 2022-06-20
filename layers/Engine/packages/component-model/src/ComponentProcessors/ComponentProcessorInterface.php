@@ -142,6 +142,6 @@ interface ComponentProcessorInterface
     public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array;
     public function doesComponentLoadData(Component $component): bool;
     public function startDataloadingSection(Component $component): bool;
-    public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void;
+    public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void;
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void;
 }

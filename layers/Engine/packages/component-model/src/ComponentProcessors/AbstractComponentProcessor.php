@@ -692,7 +692,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function addToDatasetDatabaseKeys(Component $component, array &$props, array $path, array &$ret): void
+    public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void
     {
         // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
@@ -722,7 +722,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     }
                 );
                 foreach ($subcomponent_components as $subcomponent_component) {
-                    $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
@@ -736,7 +736,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
                     );
                     foreach ($subcomponent_components as $subcomponent_component) {
-                        $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                        $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                     }
                 }
             }
@@ -747,7 +747,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
             );
             foreach ($subcomponents as $subcomponent) {
-                $this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->addToDatasetDatabaseKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
+                $this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->addToDatasetOutputKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
@@ -756,7 +756,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function getDatasetOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
-        $this->addToDatasetDatabaseKeys($component, $props, array(), $ret);
+        $this->addToDatasetOutputKeys($component, $props, array(), $ret);
         return $ret;
     }
 
