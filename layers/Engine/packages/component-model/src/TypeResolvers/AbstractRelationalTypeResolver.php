@@ -960,8 +960,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Hence, the type of this variable can change throughout the
      * lifecycle of this script, and its type is then declared as `mixed`.
      *
-     * @param array<string|int,array<string,mixed>> $resolvedIDFieldValues
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     protected function processFillingObjectsFromIDs(
         array $unionTypeOutputKeyIDs,
