@@ -2343,7 +2343,7 @@ class Engine implements EngineInterface
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
                         $database_field_ids = $database[$typeOutputKey][$id][$subcomponent_data_field_outputkey] ?? null;
-                        if ($database_field_ids === null) {
+                        if (!$database_field_ids) {
                             continue;
                         }
                         $subcomponentIDs[$dbName][$typeOutputKey][$id] = array_merge(
