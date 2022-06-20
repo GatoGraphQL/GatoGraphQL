@@ -700,11 +700,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
             $fieldOutputKeyToTypeOutputKeys = $this->getFieldOutputKeyToTypeOutputKeys($component, $props);
-            foreach ($fieldOutputKeyToTypeOutputKeys as $field => $outputKey) {
-                // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                // @see https://github.com/leoloso/PoP/issues/1050
-                $field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($field);
-                $ret[implode('.', array_merge($path, [$field_outputkey]))] = $outputKey;
+            foreach ($fieldOutputKeyToTypeOutputKeys as $fieldOutputKey => $typeOutputKey) {
+                $ret[implode('.', array_merge($path, [$fieldOutputKey]))] = $typeOutputKey;
             }
         }
 
