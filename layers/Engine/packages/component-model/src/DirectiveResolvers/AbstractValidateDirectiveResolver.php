@@ -43,7 +43,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previousResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
         array &$resolvedIDFieldValues,
         array &$variables,

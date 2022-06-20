@@ -144,7 +144,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previousResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
         array &$resolvedIDFieldValues,
         array &$variables,

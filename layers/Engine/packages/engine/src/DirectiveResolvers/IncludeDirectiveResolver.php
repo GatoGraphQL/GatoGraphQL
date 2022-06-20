@@ -50,7 +50,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
         array $succeedingPipelineDirectiveResolverInstances,
         array $objectIDItems,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previousResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
         array &$resolvedIDFieldValues,
         array &$variables,

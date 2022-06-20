@@ -547,7 +547,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function fillObjects(
         array $idFieldSet,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previousResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
@@ -614,7 +614,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $this->processFillingObjectsFromIDs(
             $unionDBKeyIDs,
             $objectIDItems,
-            $previousDBItems,
+            $previousResolvedIDFieldValues,
             $resolvedIDFieldValues,
             $variables,
             $messages,
@@ -942,7 +942,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function processFillingObjectsFromIDs(
         array $unionDBKeyIDs,
         array $objectIDItems,
-        array $previousDBItems,
+        array $previousResolvedIDFieldValues,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
@@ -1085,7 +1085,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directiveResolverInstances,
                 $objectIDItems,
                 $unionDBKeyIDs,
-                $previousDBItems,
+                $previousResolvedIDFieldValues,
                 $resolvedIDFieldValues,
                 $variables,
                 $messages,

@@ -1579,7 +1579,7 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = [];
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
             FeedbackCategories::ERROR => [],
             FeedbackCategories::WARNING => [],
@@ -1642,7 +1642,7 @@ class Engine implements EngineInterface
             $objectIDItems = $relationalTypeResolver->fillObjects(
                 $idFieldSet,
                 $combinedUnionDBKeyIDs,
-                $previousDBItems,
+                $previousResolvedIDFieldValues,
                 $iterationDBItems,
                 $variables,
                 $messages,
@@ -1701,13 +1701,13 @@ class Engine implements EngineInterface
                     $databases[$dbname] ??= [];
                     $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems);
 
-                    // Populate the $previousDBItems, pointing to the newly fetched resolvedIDFieldValues (but without the dbname!)
+                    // Populate the $previousResolvedIDFieldValues, pointing to the newly fetched resolvedIDFieldValues (but without the dbname!)
                     // Save the reference to the values, instead of the values, to save memory
-                    // Passing $previousDBItems instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
-                    // the modification is done on $previousDBItems, so it carries no risks
+                    // Passing $previousResolvedIDFieldValues instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
+                    // the modification is done on $previousResolvedIDFieldValues, so it carries no risks
                     foreach ($entries as $id => $fieldValues) {
                         foreach ($fieldValues as $field => &$entryFieldValues) {
-                            $previousDBItems[$database_key][$id][$field] = &$entryFieldValues;
+                            $previousResolvedIDFieldValues[$database_key][$id][$field] = &$entryFieldValues;
                         }
                     }
                 }
