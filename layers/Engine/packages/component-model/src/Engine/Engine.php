@@ -1639,7 +1639,9 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionTypeOutputKeyIDs = $combinedUnionTypeOutputKeyIDs = $previouslyResolvedIDFieldValues = [];
+        $databases = $unionTypeOutputKeyIDs = $combinedUnionTypeOutputKeyIDs = [];
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
+        $previouslyResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
             FeedbackCategories::ERROR => [],
             FeedbackCategories::WARNING => [],
