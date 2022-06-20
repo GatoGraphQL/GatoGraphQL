@@ -50,14 +50,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     }
 
     /**
-     * @param array<string,mixed> $ret
+     * @param array<string,mixed>|null $ret
      * @param array<string|int,string|array<string>> $fields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string|int>|string|integer $objectIDorIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addData(array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
+    protected function addData(?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
         // Property fields have numeric key only. From them, obtain the fields to print for the object
         $propertyFields = array_filter(
@@ -90,7 +90,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     /**
      * Undocumented function
      *
-     * @param array<string,mixed> $resolvedObjectRet
+     * @param array<string,mixed>|null $resolvedObjectRet
      * @param array<string> $propertyFields
      * @param array<string,array<string>> $nestedFields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
@@ -100,7 +100,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string> $typeOutputKeyPaths
      * @param boolean $concatenateField
      */
-    protected function addObjectData(array &$resolvedObjectRet, array $propertyFields, array $nestedFields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
+    protected function addObjectData(?array &$resolvedObjectRet, array $propertyFields, array $nestedFields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
         // Otherwise, it could throw an error on `extractObjectTypeAndID`
