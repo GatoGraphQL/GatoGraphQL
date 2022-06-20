@@ -156,17 +156,17 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
             $directiveResolverInstanceFieldsDataItems = [];
             foreach ($fieldDirectiveResolvers as $field) {
-                $directiveResolverInstance = $fieldDirectiveResolvers[$field];
-                $instanceID = get_class($directiveResolverInstance);
+                $directiveResolver = $fieldDirectiveResolvers[$field];
+                $instanceID = get_class($directiveResolver);
                 if (!isset($directiveResolverInstanceFieldsDataItems[$instanceID])) {
-                    $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolverInstance;
+                    $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolver;
                 }
                 $directiveResolverInstanceFieldsDataItems[$instanceID]['fields'][] = $field;
             }
             // Iterate through all the directives, and simply resolve each
             foreach ($directiveResolverInstanceFieldsDataItems as $instanceID => $directiveResolverInstanceFieldsDataItem) {
                 /** @var DirectiveResolverInterface */
-                $directiveResolverInstance = $directiveResolverInstanceFieldsDataItem['instance'];
+                $directiveResolver = $directiveResolverInstanceFieldsDataItem['instance'];
                 /** @var FieldInterface[] */
                 $directiveResolverFields = $directiveResolverInstanceFieldsDataItem['fields'];
 
@@ -176,7 +176,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 foreach (array_keys($idFieldSet) as $id) {
                     $directiveResolverIDFieldSet[$id] = new EngineIterationFieldSet($directiveResolverFields);
                 }
-                $directiveResolverInstance->resolveDirective(
+                $directiveResolver->resolveDirective(
                     $relationalTypeResolver,
                     $directiveResolverIDFieldSet,
                     $succeedingPipelineDirectiveResolvers,
