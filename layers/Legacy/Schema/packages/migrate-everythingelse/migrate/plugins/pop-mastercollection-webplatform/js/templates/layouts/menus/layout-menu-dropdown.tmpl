@@ -4,7 +4,7 @@
 (function($){
 
 	var item = '', submenus = {};
-	{{#each dbObject.itemDataEntries}}
+	{{#each resolvedObject.itemDataEntries}}
 
 		item = '<li id="menu-item-{{lastGeneratedId context=../.}}-{{id}}" class="{{classes}}">';
 		{{#compare title "divider"}}

@@ -255,7 +255,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         /**
          * @todo Temporary addition to match `asQueryString` in the AST
-         * Print again the variable, don't resolve it yet, so the fieldName is found on $dbObject
+         * Print again the variable, don't resolve it yet, so the fieldName is found on $resolvedObject
          */
         if ($value instanceof VariableReference) {
             return '$' . $value->getName();

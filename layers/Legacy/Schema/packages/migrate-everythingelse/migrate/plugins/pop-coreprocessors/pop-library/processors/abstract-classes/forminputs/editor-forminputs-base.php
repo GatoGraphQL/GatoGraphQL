@@ -118,7 +118,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
 
         // For the replicate functionality, we need to replace the ComponentModelModuleInfo::get('unique-id') bit from the IDs (generated on html load) with the newly
         // generated unique-id from the feedback
-        // In addition, allow others to also add their own replacements. Eg: in forms we can add the dbObject value to edit in the wp-editor
+        // In addition, allow others to also add their own replacements. Eg: in forms we can add the resolvedObject value to edit in the wp-editor
         // This replacement below must be done always
         $ret['unique-id'] = ComponentModelModuleInfo::get('unique-id');
 

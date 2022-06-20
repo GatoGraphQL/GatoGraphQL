@@ -83,7 +83,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
         // Execute for all fields other than the first one, "root", for both UnionTypeResolvers and non-union ones
-        // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+        // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
         // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
         if ($concatenateField) {
             list(
@@ -104,13 +104,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
-        $dbObject = $databases[$typeOutputKey][$objectID] ?? [];
+        $resolvedObject = $databases[$typeOutputKey][$objectID] ?? [];
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
             $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $propertyField);
-            if (array_key_exists($uniquePropertyFieldOutputKey, $dbObject)) {
-                $dbObjectRet[$propertyFieldOutputKey] = $dbObject[$uniquePropertyFieldOutputKey];
+            if (array_key_exists($uniquePropertyFieldOutputKey, $resolvedObject)) {
+                $dbObjectRet[$propertyFieldOutputKey] = $resolvedObject[$uniquePropertyFieldOutputKey];
             }
         }
 
@@ -120,12 +120,12 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $nestedField);
 
             // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
-            if (!array_key_exists($uniqueNestedFieldOutputKey, $dbObject)) {
+            if (!array_key_exists($uniqueNestedFieldOutputKey, $resolvedObject)) {
                 continue;
             }
 
             // If it's null, directly assign the null to the result
-            if ($dbObject[$uniqueNestedFieldOutputKey] === null) {
+            if ($resolvedObject[$uniqueNestedFieldOutputKey] === null) {
                 $dbObjectRet[$nestedFieldOutputKey] = null;
                 continue;
             }
@@ -140,7 +140,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $dbObjectNestedPropertyRet = &$dbObjectRet[$nestedFieldOutputKey];
 
             // If it is an empty array, then directly add an empty array as the result
-            if (is_array($dbObject[$uniqueNestedFieldOutputKey]) && empty($dbObject[$uniqueNestedFieldOutputKey])) {
+            if (is_array($resolvedObject[$uniqueNestedFieldOutputKey]) && empty($resolvedObject[$uniqueNestedFieldOutputKey])) {
                 $dbObjectRet[$nestedFieldOutputKey] = [];
                 continue;
             }
@@ -162,7 +162,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     }
                 }
             }
-            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $dbObject[$uniqueNestedFieldOutputKey], $nextField, $typeOutputKeyPaths);
+            $this->addData($dbObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$uniqueNestedFieldOutputKey], $nextField, $typeOutputKeyPaths);
         }
     }
 }

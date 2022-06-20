@@ -89,7 +89,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	var tls = prevContext.tls;
 	var pss = prevContext.pss;
 	var bs = prevContext.bs;
-	var dbObject = prevContext.dbObject;
+	var resolvedObject = prevContext.resolvedObject;
 	var dbObjectTypeOutputKey = prevContext.dbObjectTypeOutputKey;
 	var ignorePSRuntimeId = prevContext.ignorePSRuntimeId;
 	var feedbackObject = prevContext.feedbackObject;
@@ -103,7 +103,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	
 	// Add all these vars to the context for this component
 	var extend = {
-		dbObject: dbObject, 
+		resolvedObject: resolvedObject, 
 		dbObjectTypeOutputKey: dbObjectTypeOutputKey, 
 		typeOutputKey: typeOutputKey, 
 		dbObjectIDs: dbObjectIDs, 
@@ -138,16 +138,16 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		else {
 
 			objectID = null;
-			dbObject = null;
-			extend.dbObject = dbObject;
+			resolvedObject = null;
+			extend.resolvedObject = resolvedObject;
 		}
 	}
 
 	if (options.hash.typeOutputKey && objectID) {
 
 		typeOutputKey = options.hash.typeOutputKey;
-		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
-		extend.dbObject = dbObject;
+		resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
+		extend.resolvedObject = resolvedObject;
 		extend.dbObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
 		extend.dbObjectIDs = [objectID];
@@ -160,8 +160,8 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	else if (options.hash.subcomponent && objectID) {
 
 		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
-		dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
-		extend.dbObject = dbObject;
+		resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
+		extend.resolvedObject = resolvedObject;
 		extend.dbObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
 		extend.dbObjectIDs = [objectID];
@@ -181,7 +181,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		// If only the typeOutputKey has value, it means the other value passes (objectID or dbObjectIDs) is null
 		// So then put everything to null
 		extend.typeOutputKey = options.hash.typeOutputKey;
-		extend.dbObject = null;
+		extend.resolvedObject = null;
 		extend.dbObjectTypeOutputKey = null;
 		extend.dbObjectIDs = null;
 	}

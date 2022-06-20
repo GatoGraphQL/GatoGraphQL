@@ -3663,14 +3663,14 @@ window.pop.Manager = {
 		override = override || {};
 		$.extend(context, override);
 
-		// Load dbObject?
+		// Load resolvedObject?
 		if (typeOutputKey) {
 
 			$.extend(context, {typeOutputKey: typeOutputKey});
 			if (objectID) {
 
-				var dbObject = that.getDBObject(domain, typeOutputKey, objectID);
-				$.extend(context, {dbObject: dbObject, dbObjectTypeOutputKey: typeOutputKey});
+				var resolvedObject = that.getDBObject(domain, typeOutputKey, objectID);
+				$.extend(context, {resolvedObject: resolvedObject, dbObjectTypeOutputKey: typeOutputKey});
 			}
 		}
 	},

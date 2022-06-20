@@ -6,13 +6,13 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(typeOutpu
 	var domain = tls.domain;
 
 	// Obtain the key composed as: 'post_type'-'mainCategory'
-	var dbObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
+	var resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 
 	// Fetch the layout for that particular configuration
 	var layout = '';
 	jQuery.each(conditionDataFieldModules, function(conditionField, componentOutputName) {
 		// Check if the property evals to `true`. If so, use the corresponding module
-		if (dbObject[conditionField]) {
+		if (resolvedObject[conditionField]) {
 			layout = componentOutputName;
 			return false;
 		}
@@ -38,12 +38,12 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(typeOutpu
 	return options.fn(layoutContext);
 });
 
-Handlebars.registerHelper('layoutLabel', function(typeOutputKey, dbObject, options) {
+Handlebars.registerHelper('layoutLabel', function(typeOutputKey, resolvedObject, options) {
 
 	var label = '';
-	jQuery.each(dbObject['multilayoutKeys'], function(index, key) {
+	jQuery.each(resolvedObject['multilayoutKeys'], function(index, key) {
 
-		label = pop.c.MULTILAYOUT_LABELS[dbObject[key]];
+		label = pop.c.MULTILAYOUT_LABELS[resolvedObject[key]];
 		if (label) {
 			return -1;
 		}

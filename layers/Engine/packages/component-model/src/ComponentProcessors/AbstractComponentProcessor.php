@@ -633,7 +633,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
-                // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
+                // Place it under "id" because it is for fetching the current object from the DB, which is found through resolvedObject.id
                 $ret['id'] = $typeOutputKey;
             }
         }

@@ -25,7 +25,7 @@ window.pop.TypeaheadMapSelectable = {
 				if (!pop.Map.hasMarker(pageSection, block, markerId)) {
 
 					// Add it to DOM => Execute it => the markerData will be added to pop.Map.markers
-					var context = {dbObject: datum};
+					var context = {resolvedObject: datum};
 					pop.DynamicRender.render(domain, pageSection, block, moduleName, typeaheadMap, context);
 				}
 

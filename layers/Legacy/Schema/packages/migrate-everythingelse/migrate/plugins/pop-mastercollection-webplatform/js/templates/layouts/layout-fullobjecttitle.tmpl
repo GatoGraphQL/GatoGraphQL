@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<{{../html-markup}} class="{{../classes.title}}" style="{{../styles.title}}">
 		{{#ifget . ../title-condition-field}}
 			<a href="{{get . ../url-field}}" {{#if ../titleattr-field}}title="{{{get . ../titleattr-field}}}"{{/if}}>{{{get . ../title-field}}}</a>

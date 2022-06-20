@@ -6,7 +6,7 @@ Handlebars.registerHelper('withDBObject', function(typeOutputKey, objectID, opti
 	var tls = context.tls;
 	var domain = tls.domain;
 
-	// Replace the context with only the dbObject
+	// Replace the context with only the resolvedObject
 	var context = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 	
 	return options.fn(context);

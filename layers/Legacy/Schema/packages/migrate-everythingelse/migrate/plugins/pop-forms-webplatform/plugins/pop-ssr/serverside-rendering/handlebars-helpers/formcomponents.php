@@ -4,16 +4,16 @@
  */
 class PoP_Forms_ServerSide_FormcomponentsHelpers
 {
-    public function formcomponentValue($value, $dbObject, $dbObjectField, $defaultValue, $options)
+    public function formcomponentValue($value, $resolvedObject, $dbObjectField, $defaultValue, $options)
     {
         // If the value has been set, return that value already, even if it is empty
         if (!is_null($value)) {
             return $this->applyFormfieldvalueOptions($value, $options);
         }
 
-        // If the field has been provided and is not empty, and the dbObject exists (aka it has been set in the context), then return that field from the dbObject
-        if ($dbObject && $dbObjectField) {
-            return $this->applyFormfieldvalueOptions($dbObject[$dbObjectField], $options);
+        // If the field has been provided and is not empty, and the resolvedObject exists (aka it has been set in the context), then return that field from the resolvedObject
+        if ($resolvedObject && $dbObjectField) {
+            return $this->applyFormfieldvalueOptions($resolvedObject[$dbObjectField], $options);
         }
 
         // If there is a default value, use it next

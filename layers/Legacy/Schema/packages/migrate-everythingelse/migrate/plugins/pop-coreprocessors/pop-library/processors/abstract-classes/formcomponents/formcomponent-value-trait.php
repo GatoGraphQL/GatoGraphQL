@@ -26,7 +26,7 @@ trait FormComponentValueTrait
         // produces each hiddeninput to have value "1782,1764"
         // This is because the value is set by a parent formcomponent, the selectable trigger typeahead, which can have an array of values
         // and since all formcomponents share the same name, then they also share the value, creating an issue in this case
-        // The solution is to simply not print the value in the formcomponent, which will then be printed from the dbObject in function formcomponentValue
+        // The solution is to simply not print the value in the formcomponent, which will then be printed from the resolvedObject in function formcomponentValue
         return true;
     }
 
@@ -41,14 +41,14 @@ trait FormComponentValueTrait
             // $filter = $this->getProp($component, $props, 'filter');
             $value = $this->getValue($component);
 
-            // If it is null, then fetch value from the dbObject
-            // If it is empty, then it's a valid value, it takes priority over dbObject
+            // If it is null, then fetch value from the resolvedObject
+            // If it is empty, then it's a valid value, it takes priority over resolvedObject
             if (!is_null($value)) {
                 $ret['value'] = $value;
             }
         }
 
-        // After {{value}} and {{dbObject[dbObjectField]}} both fail, print {{default-value}}
+        // After {{value}} and {{resolvedObject[dbObjectField]}} both fail, print {{default-value}}
         // The value can also be the boolean false, so check for the !is_null condition
         $default_value = $this->getDefaultValue($component, $props);
         if (!is_null($default_value)) {

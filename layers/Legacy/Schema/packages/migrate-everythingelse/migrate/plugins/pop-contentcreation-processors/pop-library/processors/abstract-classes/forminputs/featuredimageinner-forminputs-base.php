@@ -74,7 +74,7 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
         // For function addDomainClass
         $ret['addDomainClass']['prefix'] = 'featuredimage-';
 
-        // Send the dbObject structure to the webplatform, to recreate it with dynamic data
+        // Send the resolvedObject structure to the webplatform, to recreate it with dynamic data
         $datum_placeholder = array(
             'featuredImage' => '{0}',
             'featuredImageAttrs' => array(

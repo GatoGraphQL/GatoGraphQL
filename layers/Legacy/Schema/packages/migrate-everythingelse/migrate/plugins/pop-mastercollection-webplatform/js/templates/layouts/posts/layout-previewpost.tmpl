@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<div class="layout post-layout preview {{../class}} {{post-type}} {{#each cat-slugs}} {{.}}{{/each}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
 		{{#withModule ../. "quicklinkgroup-top"}}
 			<div class="quicklinkgroup quicklinkgroup-top {{../../classes.quicklinkgroup-top}}" style="{{../../styles.quicklinkgroup-top}}">

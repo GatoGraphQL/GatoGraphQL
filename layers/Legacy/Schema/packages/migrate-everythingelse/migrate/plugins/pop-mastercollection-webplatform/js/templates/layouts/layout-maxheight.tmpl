@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="js-dynamic-height {{../class}}" style="{{../style}}" data-maxheight="{{../maxheight}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}}>
 		<div class="inner dynamic-height-wrap">
 			{{#each ../subcomponentoutputnames.inners}}

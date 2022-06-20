@@ -5,7 +5,7 @@
 (function($){
 
 	var item = '', submenus = {};
-	{{#each dbObject.itemDataEntries}}
+	{{#each resolvedObject.itemDataEntries}}
 
 		{{!Check if the menu item has a parent, if so add below it, if not, add under the menu}}
 		{{#compare menu-item-parent 0 operator=">"}}

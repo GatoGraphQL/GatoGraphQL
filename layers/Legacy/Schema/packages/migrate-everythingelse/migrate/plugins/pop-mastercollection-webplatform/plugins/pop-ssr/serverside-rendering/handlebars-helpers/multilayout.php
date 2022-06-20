@@ -10,13 +10,13 @@ class PoP_ServerSide_MultiLayoutHelpers
         $domain = $tls['domain'];
 
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
-        $dbObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
+        $resolvedObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
 
         // Fetch the layout for that particular configuration
         $layout = '';
         foreach ($conditionDataFieldModules as $conditionField => $componentOutputName) {
             // Check if the property evals to `true`. If so, use the corresponding component
-            if ($dbObject[$conditionField]) {
+            if ($resolvedObject[$conditionField]) {
                 $layout = $componentOutputName;
                 break;
             }
@@ -48,13 +48,13 @@ class PoP_ServerSide_MultiLayoutHelpers
         return $options['fn']($layoutContext);
     }
 
-    public function layoutLabel($typeOutputKey, $dbObject, $options)
+    public function layoutLabel($typeOutputKey, $resolvedObject, $options)
     {
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
 
         $label = '';
-        foreach ($dbObject['multilayoutKeys'] as $key) {
-            $label = $multilayout_labels[$dbObject[$key]];
+        foreach ($resolvedObject['multilayoutKeys'] as $key) {
+            $label = $multilayout_labels[$resolvedObject[$key]];
             if ($label) {
                 break;
             }

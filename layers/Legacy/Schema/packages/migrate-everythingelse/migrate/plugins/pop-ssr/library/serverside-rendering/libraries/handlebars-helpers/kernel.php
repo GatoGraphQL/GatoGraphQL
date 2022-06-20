@@ -105,7 +105,7 @@ class PoP_ServerSide_KernelHelpers
         $tls = $prevContext['tls'];
         $pss = $prevContext['pss'];
         $bs = $prevContext['bs'];
-        $dbObject = $prevContext['dbObject'];
+        $resolvedObject = $prevContext['resolvedObject'];
         $dbObjectTypeOutputKey = $prevContext['dbObjectTypeOutputKey'];
         $ignorePSRuntimeId = $prevContext['ignorePSRuntimeId'];
         $feedbackObject = $prevContext['feedbackObject'];
@@ -116,7 +116,7 @@ class PoP_ServerSide_KernelHelpers
 
         // Add all these vars to the context for this component
         $extend = array(
-            'dbObject' => $dbObject,
+            'resolvedObject' => $resolvedObject,
             'dbObjectTypeOutputKey' => $dbObjectTypeOutputKey,
             'typeOutputKey' => $typeOutputKey,
             'objectIDs' => $objectIDs,
@@ -151,15 +151,15 @@ class PoP_ServerSide_KernelHelpers
                 $objectID = $objectID[0];
             } else {
                 $objectID = null;
-                $dbObject = null;
-                $extend['dbObject'] = $dbObject;
+                $resolvedObject = null;
+                $extend['resolvedObject'] = $resolvedObject;
             }
         }
 
         if (isset($options['hash']['typeOutputKey']) && $objectID) {
             $typeOutputKey = $options['hash']['typeOutputKey'];
-            $dbObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
-            $extend['dbObject'] = $dbObject;
+            $resolvedObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
+            $extend['resolvedObject'] = $resolvedObject;
             $extend['dbObjectTypeOutputKey'] = $typeOutputKey;
             $extend['typeOutputKey'] = $typeOutputKey;
             $extend['objectIDs'] = array($objectID);
@@ -168,8 +168,8 @@ class PoP_ServerSide_KernelHelpers
             $extend['objectIDs'] = $options['hash']['objectIDs'];
         } elseif (isset($options['hash']['subcomponent']) && $objectID) {
             $typeOutputKey = $bs['outputKeys'][$options['hash']['subcomponent']];
-            $dbObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
-            $extend['dbObject'] = $dbObject;
+            $resolvedObject = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
+            $extend['resolvedObject'] = $resolvedObject;
             $extend['dbObjectTypeOutputKey'] = $typeOutputKey;
             $extend['typeOutputKey'] = $typeOutputKey;
             $extend['objectIDs'] = array($objectID);
@@ -183,7 +183,7 @@ class PoP_ServerSide_KernelHelpers
             // If only the typeOutputKey has value, it means the other value passes (objectID or objectIDs) is null
             // So then put everything to null
             $extend['typeOutputKey'] = $options['hash']['typeOutputKey'];
-            $extend['dbObject'] = null;
+            $extend['resolvedObject'] = null;
             $extend['dbObjectTypeOutputKey'] = null;
             $extend['objectIDs'] = null;
         }

@@ -1548,11 +1548,11 @@ class Engine implements EngineInterface
         foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
             // Move these data fields under "meta" DB name
             if ($entryHasId) {
-                foreach ($dbname_entries['primary'] as $id => $dbObject) {
+                foreach ($dbname_entries['primary'] as $id => $resolvedObject) {
                     $entry_fieldNames_to_move = array_intersect(
                         // If field "id" for this type has been disabled (eg: by ACL),
-                        // then $dbObject may be `null`
-                        array_keys($dbObject ?? []),
+                        // then $resolvedObject may be `null`
+                        array_keys($resolvedObject ?? []),
                         $fieldNames
                     );
                     foreach ($entry_fieldNames_to_move as $fieldName) {
@@ -2382,7 +2382,7 @@ class Engine implements EngineInterface
                         foreach ($id_database_field_ids as $id => $database_field_ids) {
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
-                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
                             // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
@@ -2486,7 +2486,7 @@ class Engine implements EngineInterface
                             $combined_databases[$typeOutputKey][$dbobject_id] = array_merge(
                                 $combined_databases[$typeOutputKey][$dbobject_id] ?? [],
                                 // If field "id" for this type has been disabled (eg: by ACL),
-                                // then $dbObject may be `null`
+                                // then $resolvedObject may be `null`
                                 $dbobject_values ?? []
                             );
                         }

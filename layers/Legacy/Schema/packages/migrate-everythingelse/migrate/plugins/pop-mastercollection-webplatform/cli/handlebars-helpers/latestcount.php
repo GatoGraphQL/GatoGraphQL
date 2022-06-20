@@ -4,10 +4,10 @@
 */
 class PoP_ServerSide_LatestCountHelperCallers
 {
-    public static function latestCountTargets($dbObject, $options)
+    public static function latestCountTargets($resolvedObject, $options)
     {
         global $pop_serverside_latestcounthelpers;
-        return $pop_serverside_latestcounthelpers->latestCountTargets($dbObject, $options);
+        return $pop_serverside_latestcounthelpers->latestCountTargets($resolvedObject, $options);
     }
 }
 

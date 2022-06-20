@@ -10,7 +10,7 @@ class PoP_ServerSide_DBObjectHelpers
         $tls = $context['tls'];
         $domain = $tls['domain'];
 
-        // Replace the context with only the dbObject
+        // Replace the context with only the resolvedObject
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $context = $popManager->getDBObject($domain, $typeOutputKey, $objectID);
         

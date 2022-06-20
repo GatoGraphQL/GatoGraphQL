@@ -4,28 +4,28 @@
  */
 class PoP_ServerSide_LatestCountHelpers
 {
-    public function latestCountTargets($dbObject, $options)
+    public function latestCountTargets($resolvedObject, $options)
     {
 
-        // Build the notification prompt targets, based on the data on the dbObject
+        // Build the notification prompt targets, based on the data on the resolvedObject
         $targets = array();
         $selector = '.pop-block.'.GD_JS_INITIALIZED.' > .blocksection-latestcount > .pop-latestcount';
 
         // By Sections (post type . categories)
-        $trigger_values = $dbObject['latestcountsTriggerValues'] ?? array();
+        $trigger_values = $resolvedObject['latestcountsTriggerValues'] ?? array();
         foreach ($trigger_values as $trigger_value) {
             // trigger_value will be translated to 'postType'+'mainCategory' attribute
             $targets[] = $selector.'.'.$trigger_value;
         }
 
         // By Tags
-        foreach ($dbObject['tags'] as $tag) {
+        foreach ($resolvedObject['tags'] as $tag) {
             $target = $selector.'.tag'.$tag;
             $targets[] = $target;
         }
 
         // By author pages
-        foreach ($dbObject['authors'] as $author) {
+        foreach ($resolvedObject['authors'] as $author) {
             $target = $selector.'.author'.$author;
 
             // ... combined with Categories
@@ -39,7 +39,7 @@ class PoP_ServerSide_LatestCountHelpers
         }
 
         // By single relatedto posts
-        foreach ($dbObject['references'] as $post_id) {
+        foreach ($resolvedObject['references'] as $post_id) {
             $target = $selector.'.single'.$post_id;
 
             // ... combined with Categories
