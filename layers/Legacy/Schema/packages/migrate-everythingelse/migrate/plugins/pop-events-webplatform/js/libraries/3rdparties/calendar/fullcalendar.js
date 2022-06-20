@@ -181,7 +181,7 @@ window.pop.FullCalendar = {
 
 			var options = {}
 			
-			var dbKeys = pop.Manager.getDatabaseKeys(domain, pageSection, block);
+			var dbKeys = pop.Manager.getOutputKeys(domain, pageSection, block);
 			var dbKey = dbKeys.id;
 			html = '';
 			pop.JSRuntimeManager.setBlockURL(domain, block);
