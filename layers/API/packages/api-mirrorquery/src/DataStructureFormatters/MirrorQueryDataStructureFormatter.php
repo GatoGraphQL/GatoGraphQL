@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 
-use PoP\Root\App;
+use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\Root\App;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {
@@ -33,7 +34,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             foreach ($datasetComponentData as $componentName => $componentData) {
                 $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
                 $objectIDorIDs = $componentData['objectIDs'];
-                $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, 'id', $typeOutputKeyPaths, false);
+                $this->addData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
             }
         }
 
@@ -151,14 +152,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 // Then, if this situation happens, simply override the ID (which is a scalar value, such as an int or string) with an object with the 'id' property
                 if (!is_array($resolvedObjectNestedPropertyRet)) {
                     $resolvedObjectRet[$nestedFieldOutputKey] = [
-                        'id' => $resolvedObjectRet[$nestedFieldOutputKey],
+                        FieldOutputKeys::ID => $resolvedObjectRet[$nestedFieldOutputKey],
                     ];
                 } else {
                     // 2. If the previous iteration loaded an array of IDs, then override this value with an empty array and initialize the ID again to this object, through adding property 'id' on the next iteration
                     // Eg: /api/graphql/?query=tags,tags.name
                     $resolvedObjectRet[$nestedFieldOutputKey] = [];
-                    if (!in_array('id', $nestedPropertyFields)) {
-                        array_unshift($nestedPropertyFields, 'id');
+                    if (!in_array(FieldOutputKeys::ID, $nestedPropertyFields)) {
+                        array_unshift($nestedPropertyFields, FieldOutputKeys::ID);
                     }
                 }
             }

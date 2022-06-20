@@ -13,6 +13,7 @@ use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
@@ -633,8 +634,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $ret = array();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
-                // Place it under "id" because it is for fetching the current object from the DB, which is found through resolvedObject.id
-                $ret['id'] = $typeOutputKey;
+                /**
+                 * Place it under "id" because it is for fetching the current object
+                 * from the DB, which is found through resolvedObject.id
+                 */
+                $ret[FieldOutputKeys::ID] = $typeOutputKey;
             }
         }
 
