@@ -1545,30 +1545,30 @@ class Engine implements EngineInterface
             [],
             $relationalTypeResolver
         );
-        foreach ($dbNameToFieldNames as $dbName => $data_fields) {
+        foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
             // Move these data fields under "meta" DB name
             if ($entryHasId) {
                 foreach ($dbname_entries['primary'] as $id => $dbObject) {
-                    $entry_data_fields_to_move = array_intersect(
+                    $entry_fieldNames_to_move = array_intersect(
                         // If field "id" for this type has been disabled (eg: by ACL),
                         // then $dbObject may be `null`
                         array_keys($dbObject ?? []),
-                        $data_fields
+                        $fieldNames
                     );
-                    foreach ($entry_data_fields_to_move as $data_field) {
-                        $dbname_entries[$dbName][$id][$data_field] = $dbname_entries['primary'][$id][$data_field];
-                        unset($dbname_entries['primary'][$id][$data_field]);
+                    foreach ($entry_fieldNames_to_move as $fieldName) {
+                        $dbname_entries[$dbName][$id][$fieldName] = $dbname_entries['primary'][$id][$fieldName];
+                        unset($dbname_entries['primary'][$id][$fieldName]);
                     }
                 }
                 continue;
             }
-            $entry_data_fields_to_move = array_intersect(
+            $entry_fieldNames_to_move = array_intersect(
                 array_keys($dbname_entries['primary']),
-                $data_fields
+                $fieldNames
             );
-            foreach ($entry_data_fields_to_move as $data_field) {
-                $dbname_entries[$dbName][$data_field] = $dbname_entries['primary'][$data_field];
-                unset($dbname_entries['primary'][$data_field]);
+            foreach ($entry_fieldNames_to_move as $fieldName) {
+                $dbname_entries[$dbName][$fieldName] = $dbname_entries['primary'][$fieldName];
+                unset($dbname_entries['primary'][$fieldName]);
             }
         }
         return $dbname_entries;
