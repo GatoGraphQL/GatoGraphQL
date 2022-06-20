@@ -10,13 +10,13 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 class DirectivePipelineService implements DirectivePipelineServiceInterface
 {
     /**
-     * @param DirectiveResolverInterface[] $directiveResolverInstances
+     * @param DirectiveResolverInterface[] $directiveResolvers
      */
-    public function getDirectivePipeline(array $directiveResolverInstances): DirectivePipelineDecorator
+    public function getDirectivePipeline(array $directiveResolvers): DirectivePipelineDecorator
     {
         // From the ordered directives, create the pipeline
         $pipelineBuilder = new PipelineBuilder();
-        foreach ($directiveResolverInstances as $directiveResolverInstance) {
+        foreach ($directiveResolvers as $directiveResolverInstance) {
             // This is the method to be invoked,
             // equivalent to `__invoke` in League\Pipeline\StageInterface
             $pipelineBuilder->add([$directiveResolverInstance, 'resolveDirectivePipelinePayload']);

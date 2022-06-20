@@ -72,12 +72,12 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -144,29 +144,29 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     $fields
                 )
             ));
-            $fieldDirectiveResolverInstances = $relationalTypeResolver->getDirectiveResolverInstancesForDirective(
+            $fieldDirectiveResolvers = $relationalTypeResolver->getDirectiveResolversForDirective(
                 $this->directive,
                 $fieldDirectiveFields,
                 $variables
             );
             // Nothing to do, there's some error
-            if ($fieldDirectiveResolverInstances === null) {
+            if ($fieldDirectiveResolvers === null) {
                 return;
             }
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
             $directiveResolverInstanceFieldsDataItems = [];
-            foreach ($fieldDirectiveResolverInstances as $field) {
-                $directiveResolverInstance = $fieldDirectiveResolverInstances[$field];
-                $instanceID = get_class($directiveResolverInstance);
+            foreach ($fieldDirectiveResolvers as $field) {
+                $directiveResolver = $fieldDirectiveResolvers[$field];
+                $instanceID = get_class($directiveResolver);
                 if (!isset($directiveResolverInstanceFieldsDataItems[$instanceID])) {
-                    $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolverInstance;
+                    $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolver;
                 }
                 $directiveResolverInstanceFieldsDataItems[$instanceID]['fields'][] = $field;
             }
             // Iterate through all the directives, and simply resolve each
             foreach ($directiveResolverInstanceFieldsDataItems as $instanceID => $directiveResolverInstanceFieldsDataItem) {
                 /** @var DirectiveResolverInterface */
-                $directiveResolverInstance = $directiveResolverInstanceFieldsDataItem['instance'];
+                $directiveResolver = $directiveResolverInstanceFieldsDataItem['instance'];
                 /** @var FieldInterface[] */
                 $directiveResolverFields = $directiveResolverInstanceFieldsDataItem['fields'];
 
@@ -176,15 +176,15 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 foreach (array_keys($idFieldSet) as $id) {
                     $directiveResolverIDFieldSet[$id] = new EngineIterationFieldSet($directiveResolverFields);
                 }
-                $directiveResolverInstance->resolveDirective(
+                $directiveResolver->resolveDirective(
                     $relationalTypeResolver,
                     $directiveResolverIDFieldSet,
-                    $succeedingPipelineDirectiveResolverInstances,
-                    $objectIDItems,
+                    $succeedingPipelineDirectiveResolvers,
+                    $idObjects,
                     $unionDBKeyIDs,
-                    $previousDBItems,
+                    $previouslyResolvedIDFieldValues,
                     $succeedingPipelineIDFieldSet,
-                    $dbItems,
+                    $resolvedIDFieldValues,
                     $variables,
                     $messages,
                     $engineIterationFeedbackStore,
@@ -198,12 +198,12 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         parent::resolveDirective(
             $relationalTypeResolver,
             $idFieldSet,
-            $succeedingPipelineDirectiveResolverInstances,
-            $objectIDItems,
+            $succeedingPipelineDirectiveResolvers,
+            $idObjects,
             $unionDBKeyIDs,
-            $previousDBItems,
+            $previouslyResolvedIDFieldValues,
             $succeedingPipelineIDFieldSet,
-            $dbItems,
+            $resolvedIDFieldValues,
             $variables,
             $messages,
             $engineIterationFeedbackStore,

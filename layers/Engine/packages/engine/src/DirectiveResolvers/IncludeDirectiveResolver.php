@@ -33,7 +33,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
 
     /**
-     * Place it after the validation and before it's added to $dbItems in the resolveAndMerge directive
+     * Place it after the validation and before it's added to $resolvedIDFieldValues in the resolveAndMerge directive
      */
     public function getPipelinePosition(): string
     {
@@ -47,18 +47,18 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Check the condition field. If it is satisfied, then keep those fields, otherwise remove them from the $idFieldSet in the upcoming stages of the pipeline
-        $includeFieldSetForIDs = $this->getIDsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
+        $includeFieldSetForIDs = $this->getIDsSatisfyingCondition($relationalTypeResolver, $idObjects, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
         $idsToRemove = array_diff(array_keys($idFieldSet), $includeFieldSetForIDs);
         $this->removeFieldSetForIDs($idFieldSet, $idsToRemove, $succeedingPipelineIDFieldSet);
     }

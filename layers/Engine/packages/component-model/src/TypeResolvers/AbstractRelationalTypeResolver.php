@@ -131,13 +131,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
      *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeScalarTypeValuesInDBItems: to serialize Scalar Type values
+     *   3. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
      *
      * Additionally to these 3, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
      *   - cacheControl
      *
-     * Because it may be more convenient to add the directive or the class, there are 2 methods
+     * Because it may be more convenient to add the directive or the class,
+     * there are 2 methods.
      */
     protected function getMandatoryDirectives()
     {
@@ -164,18 +165,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         /**
-        * All directives are placed somewhere in the pipeline. There are 5 positions:
-        * 1. At the beginning
-        * 2. Before Validate directive
-        * 3. Between the Validate and Resolve directives
-        * 4. After the ResolveAndMerge directive
-        * 4. At the end
-        */
+         * All directives are placed somewhere in the pipeline.
+         *
+         *   1. At the very beginning
+         *   2. Before Validate directive
+         *   3. Between the Validate and Resolve directives
+         *   4. Between the Resolve and Serialize directives
+         *   5. After the Serialize directive
+         *   6. At the very end
+         */
         $directiveInstancesByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
             PipelinePositions::BEFORE_VALIDATE => [],
             PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE => [],
-            PipelinePositions::AFTER_RESOLVE => [],
+            PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE => [],
+            PipelinePositions::AFTER_SERIALIZE => [],
             PipelinePositions::END => [],
         ];
 
@@ -250,7 +254,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldDirective = $enqueuedFieldDirective;
             }
 
-            $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstancesForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
+            $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
             $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolverInstances === null) {
@@ -478,7 +482,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param FieldInterface[] $fieldDirectiveFields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?SplObjectStorage
+    public function getDirectiveResolversForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?SplObjectStorage
     {
         $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
         $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
@@ -547,14 +551,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function fillObjects(
         array $idFieldSet,
         array $unionDBKeyIDs,
-        array $previousDBItems,
-        array &$dbItems,
+        array $previouslyResolvedIDFieldValues,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // Obtain the data for the required object IDs
-        $objectIDItems = [];
+        $idObjects = [];
         $ids = $this->getIDsToQuery($idFieldSet);
         $typeDataLoader = $this->getRelationalTypeDataLoader();
         // If any ID cannot be resolved, the object will be null
@@ -565,15 +569,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             if ($objectID === null) {
                 continue;
             }
-            $objectIDItems[$objectID] = $object;
+            $idObjects[$objectID] = $object;
             /**
              * If no fields are queried, the entry will be null.
              * Initialize it to [] to simplify typing/null-checking
              */
-            $dbItems[$objectID] ??= [];
+            $resolvedIDFieldValues[$objectID] ??= [];
         }
         // Show an error for all objects that couldn't be processed
-        $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($objectIDItems));
+        $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($idObjects));
         $unresolvedObjectIDs = [];
         $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
@@ -613,15 +617,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Process them
         $this->processFillingObjectsFromIDs(
             $unionDBKeyIDs,
-            $objectIDItems,
-            $previousDBItems,
-            $dbItems,
+            $idObjects,
+            $previouslyResolvedIDFieldValues,
+            $resolvedIDFieldValues,
             $variables,
             $messages,
             $engineIterationFeedbackStore,
         );
 
-        return $objectIDItems;
+        return $idObjects;
     }
 
     protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
@@ -939,11 +943,28 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
     }
 
+    /**
+     * Execute the directive pipeline to resolve the data
+     * for all IDs and fields.
+     *
+     * The data under variable $resolvedIDFieldValues will undergo
+     * 2 stages:
+     *
+     *   1. Resolve the field (for each ID) via ObjectTypeFieldResolvers,
+     *      which may produce an object (eg: DateTime for `Post.date`)
+     *   2. Serialize the leaf values, to print the response
+     *      (via directive SerializeLeafOutputTypeValues, executed at the end of the pipeline)
+     *
+     * Hence, the type of this variable can change throughout the
+     * lifecycle of this script, and its type is then declared as `mixed`.
+     *
+     * @param array<string|int,array<string,mixed>> $resolvedIDFieldValues
+     */
     protected function processFillingObjectsFromIDs(
         array $unionDBKeyIDs,
-        array $objectIDItems,
-        array $previousDBItems,
-        array &$dbItems,
+        array $idObjects,
+        array $previouslyResolvedIDFieldValues,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -1032,7 +1053,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         );
                         foreach ($failingFields as $field) {
                             $fieldOutputKey = $field->getOutputKey();
-                            $dbItems[$id][$fieldOutputKey] = null;
+                            $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
                         }
                     }
                 }
@@ -1083,10 +1104,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $this,
                 $pipelineIDFieldSet,
                 $directiveResolverInstances,
-                $objectIDItems,
+                $idObjects,
                 $unionDBKeyIDs,
-                $previousDBItems,
-                $dbItems,
+                $previouslyResolvedIDFieldValues,
+                $resolvedIDFieldValues,
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,

@@ -16,11 +16,11 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
+final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     public function getDirectiveName(): string
     {
-        return 'serializeLeafOutputTypeValuesInDBItems';
+        return 'serializeLeafOutputTypeValues';
     }
 
     /**
@@ -37,7 +37,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
      */
     public function getPipelinePosition(): string
     {
-        return PipelinePositions::END;
+        return PipelinePositions::AFTER_SERIALIZE;
     }
 
     /**
@@ -47,17 +47,17 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        if (!$objectIDItems) {
+        if (!$idObjects) {
             return;
         }
         $unionTypeResolver = null;
@@ -73,9 +73,15 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
 
         foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
-            $object = $objectIDItems[$id];
-            // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
-            // In that case, simply return a dbError, and set the result as an empty array
+            $object = $idObjects[$id];
+            /**
+             * It could be that the object is NULL. In that case,
+             * simply return a dbError, and set the result as an empty array.
+             *
+             * For instance: a post has a location stored a meta value,
+             * and the corresponding location object was deleted,
+             * so the ID is pointing to a non-existing object.
+             */
             if ($object === null) {
                 continue;
             }
@@ -105,7 +111,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                     $targetObjectTypeResolver,
                     $field->asFieldOutputQueryString(),
                 );
-                $value = $dbItems[$id][$fieldOutputKey] ?? null;
+                $value = $resolvedIDFieldValues[$id][$fieldOutputKey] ?? null;
                 if ($value === null) {
                     continue;
                 }
@@ -124,8 +130,8 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                 }
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
-                // Serialize the scalar/enum value stored in $dbItems
-                $dbItems[$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
+                // Serialize the scalar/enum value stored in $resolvedIDFieldValues
+                $resolvedIDFieldValues[$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
                     $value,
                     $fieldLeafOutputTypeResolver,
                     $fieldLeafOutputTypeIsArrayOfArrays,

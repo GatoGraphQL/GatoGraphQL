@@ -40,17 +40,17 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $objectIDItems, $dbItems, $variables, $engineIterationFeedbackStore);
+        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $idObjects, $resolvedIDFieldValues, $variables, $engineIterationFeedbackStore);
     }
 
     /**
@@ -60,8 +60,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
         array &$succeedingPipelineIDFieldSet,
-        array $objectIDItems,
-        array &$dbItems,
+        array $idObjects,
+        array &$resolvedIDFieldValues,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
@@ -99,8 +99,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $this->setIDFieldSetAsNull(
                     $relationalTypeResolver,
                     $idFieldSetToRemove,
-                    $objectIDItems,
-                    $dbItems,
+                    $idObjects,
+                    $resolvedIDFieldValues,
                 );
             }
         }

@@ -40,7 +40,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      */
     public function getPipelinePosition(): string
     {
-        return PipelinePositions::AFTER_RESOLVE;
+        return PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE;
     }
 
     /**
@@ -50,26 +50,26 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Iterate data, extract into final results
-        if (!$objectIDItems) {
+        if (!$idObjects) {
             return;
         }
         $this->resolveValueForObjects(
             $relationalTypeResolver,
-            $objectIDItems,
+            $idObjects,
             $idFieldSet,
-            $dbItems,
-            $previousDBItems,
+            $resolvedIDFieldValues,
+            $previouslyResolvedIDFieldValues,
             $variables,
             $messages,
             $engineIterationFeedbackStore,
@@ -81,10 +81,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
      */
     private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $objectIDItems,
+        array $idObjects,
         array $idFieldSet,
-        array &$dbItems,
-        array $previousDBItems,
+        array &$resolvedIDFieldValues,
+        array $previouslyResolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -93,7 +93,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $enqueueFillingObjectsFromIDs = [];
         foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
-            $object = $objectIDItems[$id];
+            $object = $idObjects[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
@@ -117,7 +117,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 }
                 // This is currently pointing to NULL and returning this entry in the database. Remove it
                 // (this will also avoid errors in the Engine, which expects this result to be an array and can't be null)
-                unset($dbItems[$id]);
+                unset($resolvedIDFieldValues[$id]);
                 continue;
             }
 
@@ -127,8 +127,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $id,
                 $object,
                 $idFieldSet[$id]->fields,
-                $dbItems,
-                $previousDBItems,
+                $resolvedIDFieldValues,
+                $previouslyResolvedIDFieldValues,
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
@@ -145,10 +145,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 }
 
                 // Check if the condition field has value `true`
-                // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $dbItems
+                // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $resolvedIDFieldValues
                 $conditionFieldOutputKey = $conditionField->getOutputKey();
-                if (isset($dbItems[$id]) && array_key_exists($conditionFieldOutputKey, $dbItems[$id])) {
-                    $conditionSatisfied = (bool)$dbItems[$id][$conditionFieldOutputKey];
+                if (isset($resolvedIDFieldValues[$id]) && array_key_exists($conditionFieldOutputKey, $resolvedIDFieldValues[$id])) {
+                    $conditionSatisfied = (bool)$resolvedIDFieldValues[$id][$conditionFieldOutputKey];
                 } else {
                     $conditionSatisfied = false;
                 }
@@ -173,8 +173,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         string | int $id,
         object $object,
         array $fieldSet,
-        array &$dbItems,
-        array $previousDBItems,
+        array &$resolvedIDFieldValues,
+        array $previouslyResolvedIDFieldValues,
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -185,8 +185,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $id,
                 $object,
                 $field,
-                $dbItems,
-                $previousDBItems,
+                $resolvedIDFieldValues,
+                $previouslyResolvedIDFieldValues,
                 $variables,
                 $expressions,
                 $engineIterationFeedbackStore,
@@ -199,8 +199,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         string | int $id,
         object $object,
         FieldInterface $field,
-        array &$dbItems,
-        array $previousDBItems,
+        array &$resolvedIDFieldValues,
+        array $previouslyResolvedIDFieldValues,
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -231,12 +231,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
-                $dbItems[$id][$fieldOutputKey] = null;
+                $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
             }
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-        $dbItems[$id][$fieldOutputKey] = $value;
+        $resolvedIDFieldValues[$id][$fieldOutputKey] = $value;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

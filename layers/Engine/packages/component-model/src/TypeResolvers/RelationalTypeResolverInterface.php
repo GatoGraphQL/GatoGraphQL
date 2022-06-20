@@ -42,8 +42,8 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
     public function fillObjects(
         array $idFieldSet,
         array $unionDBKeyIDs,
-        array $previousDBItems,
-        array &$dbItems,
+        array $previouslyResolvedIDFieldValues,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -79,7 +79,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @param FieldInterface[] $fieldDirectiveFields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?SplObjectStorage;
+    public function getDirectiveResolversForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?SplObjectStorage;
     /**
      * Array of directive name => resolver
      *

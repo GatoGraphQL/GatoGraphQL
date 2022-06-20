@@ -33,7 +33,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
 
     /**
-     * Place it after the validation and before it's added to $dbItems in the resolveAndMerge directive
+     * Place it after the validation and before it's added to $resolvedIDFieldValues in the resolveAndMerge directive
      */
     public function getPipelinePosition(): string
     {
@@ -47,18 +47,18 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
         array $unionDBKeyIDs,
-        array $previousDBItems,
+        array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
-        array &$dbItems,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Check the condition field. If it is satisfied, then skip those fields
-        $idsToRemove = $this->getIDsSatisfyingCondition($relationalTypeResolver, $objectIDItems, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
+        $idsToRemove = $this->getIDsSatisfyingCondition($relationalTypeResolver, $idObjects, $idFieldSet, $variables, $messages, $engineIterationFeedbackStore);
         $this->removeFieldSetForIDs($idFieldSet, $idsToRemove, $succeedingPipelineIDFieldSet);
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

@@ -879,7 +879,7 @@ class Engine implements EngineInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $dbKey,
         array $dataitems,
-        array $objectIDItems,
+        array $idObjects,
         bool $addEntryIfError = false
     ): void {
         // Do not create the database key entry when there are no items, or it produces an error when deep merging the database object in the webplatform with that from the response
@@ -896,7 +896,7 @@ class Engine implements EngineInterface
             foreach ($dataitems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
-                if ($object = $objectIDItems[$objectID] ?? null) {
+                if ($object = $idObjects[$objectID] ?? null) {
                     $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
                     if ($targetObjectTypeResolver !== null) {
                         $exists = true;
@@ -920,7 +920,7 @@ class Engine implements EngineInterface
             foreach ($targetObjectTypeResolverNameDataItems as $targetObjectTypeResolverName => $convertedDataItems) {
                 $targetObjectTypeResolver = $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName];
                 $targetObjectTypeDBKey = $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName];
-                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
+                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeDBKey, $convertedDataItems, $idObjects, $addEntryIfError);
             }
             // Add the errors under the UnionTypeResolver key
             if ($noTargetObjectTypeResolverDataItems) {
@@ -1579,7 +1579,7 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = [];
+        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previouslyResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
             FeedbackCategories::ERROR => [],
             FeedbackCategories::WARNING => [],
@@ -1637,13 +1637,13 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = [];
+            $iterationResolvedIDFieldValues = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-            $objectIDItems = $relationalTypeResolver->fillObjects(
+            $idObjects = $relationalTypeResolver->fillObjects(
                 $idFieldSet,
                 $combinedUnionDBKeyIDs,
-                $previousDBItems,
-                $iterationDBItems,
+                $previouslyResolvedIDFieldValues,
+                $iterationResolvedIDFieldValues,
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
@@ -1666,7 +1666,7 @@ class Engine implements EngineInterface
              * we can split all functionality into cacheable and non-cacheable,
              * thus caching most of the website even for logged-in users
              */
-            if ($iterationDBItems) {
+            if ($iterationResolvedIDFieldValues) {
                 /**
                  * Conditional data fields: Store the loaded IDs/fields in an object,
                  * to avoid fetching them again in later iterations on the same typeResolver
@@ -1679,12 +1679,12 @@ class Engine implements EngineInterface
                         /** @var FieldInterface $conditionField */
                         $conditionalFields = $fieldSet->conditionalFields[$conditionField];
                         // If it failed to load the item, it will be null
-                        $dbItem = $iterationDBItems[$id];
-                        if ($dbItem === null) {
+                        $resolvedIDFieldValue = $iterationResolvedIDFieldValues[$id];
+                        if ($resolvedIDFieldValue === null) {
                             continue;
                         }
                         /** @var FieldInterface[] $conditionalFields */
-                        $iterationFields = array_keys($dbItem);
+                        $iterationFields = array_keys($resolvedIDFieldValue);
                         $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] = array_merge(
                             $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
@@ -1696,18 +1696,18 @@ class Engine implements EngineInterface
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
-                $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
-                foreach ($dbItems as $dbname => $entries) {
+                $resolvedIDFieldValues = $this->moveEntriesUnderDBName($iterationResolvedIDFieldValues, true, $relationalTypeResolver);
+                foreach ($resolvedIDFieldValues as $dbname => $entries) {
                     $databases[$dbname] ??= [];
-                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems);
+                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $idObjects);
 
-                    // Populate the $previousDBItems, pointing to the newly fetched dbItems (but without the dbname!)
+                    // Populate the $previouslyResolvedIDFieldValues, pointing to the newly fetched resolvedIDFieldValues (but without the dbname!)
                     // Save the reference to the values, instead of the values, to save memory
-                    // Passing $previousDBItems instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
-                    // the modification is done on $previousDBItems, so it carries no risks
+                    // Passing $previouslyResolvedIDFieldValues instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
+                    // the modification is done on $previouslyResolvedIDFieldValues, so it carries no risks
                     foreach ($entries as $id => $fieldValues) {
                         foreach ($fieldValues as $field => &$entryFieldValues) {
-                            $previousDBItems[$database_key][$id][$field] = &$entryFieldValues;
+                            $previouslyResolvedIDFieldValues[$database_key][$id][$field] = &$entryFieldValues;
                         }
                     }
                 }
@@ -1720,7 +1720,7 @@ class Engine implements EngineInterface
             $this->transferFeedback(
                 $relationalTypeResolver,
                 $database_key,
-                $objectIDItems,
+                $idObjects,
                 $engineIterationFeedbackStore,
                 $objectFeedbackEntries,
                 $schemaFeedbackEntries,
@@ -1755,7 +1755,7 @@ class Engine implements EngineInterface
                                 $id
                             ) = UnionTypeHelpers::extractDBObjectTypeAndID((string)$composedID);
                             // It's null if the Dataloader couldn't load the item with the given ID
-                            $targetObjectIDItems[$id] = $objectIDItems[$composedID] ?? null;
+                            $targetObjectIDItems[$id] = $idObjects[$composedID] ?? null;
                             $objectTypeResolver_ids[] = $id;
                         }
 
@@ -1782,7 +1782,7 @@ class Engine implements EngineInterface
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $objectIDItems);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $idObjects);
                     }
                 }
             }
@@ -1935,7 +1935,7 @@ class Engine implements EngineInterface
         array &$destination,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $database_key,
-        array $objectIDItems,
+        array $idObjects,
     ): void {
         if ($entries === []) {
             return;
@@ -1944,7 +1944,7 @@ class Engine implements EngineInterface
         $dbNameEntries = $this->moveEntriesUnderDBName($entries, true, $relationalTypeResolver);
         foreach ($dbNameEntries as $dbname => $entries) {
             $destination[$dbname] ??= [];
-            $this->addDatasetToDatabase($destination[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
+            $this->addDatasetToDatabase($destination[$dbname], $relationalTypeResolver, $database_key, $entries, $idObjects, true);
         }
     }
 
@@ -1970,7 +1970,7 @@ class Engine implements EngineInterface
     private function transferFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $database_key,
-        array $objectIDItems,
+        array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectFeedbackEntries,
         array &$schemaFeedbackEntries,
@@ -1978,7 +1978,7 @@ class Engine implements EngineInterface
         $this->transferObjectFeedback(
             $relationalTypeResolver,
             $database_key,
-            $objectIDItems,
+            $idObjects,
             $engineIterationFeedbackStore->objectFeedbackStore,
             $objectFeedbackEntries,
         );
@@ -2005,7 +2005,7 @@ class Engine implements EngineInterface
     private function transferObjectFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $database_key,
-        array $objectIDItems,
+        array $idObjects,
         ObjectFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
@@ -2021,7 +2021,7 @@ class Engine implements EngineInterface
             $objectFeedbackEntries[FeedbackCategories::ERROR],
             $relationalTypeResolver,
             $database_key,
-            $objectIDItems
+            $idObjects
         );
 
         $iterationObjectWarnings = [];
@@ -2036,7 +2036,7 @@ class Engine implements EngineInterface
             $objectFeedbackEntries[FeedbackCategories::WARNING],
             $relationalTypeResolver,
             $database_key,
-            $objectIDItems
+            $idObjects
         );
 
         $iterationObjectDeprecations = [];
@@ -2051,7 +2051,7 @@ class Engine implements EngineInterface
             $objectFeedbackEntries[FeedbackCategories::DEPRECATION],
             $relationalTypeResolver,
             $database_key,
-            $objectIDItems
+            $idObjects
         );
 
         $iterationObjectNotices = [];
@@ -2066,7 +2066,7 @@ class Engine implements EngineInterface
             $objectFeedbackEntries[FeedbackCategories::NOTICE],
             $relationalTypeResolver,
             $database_key,
-            $objectIDItems
+            $idObjects
         );
 
         $iterationObjectSuggestions = [];
@@ -2081,7 +2081,7 @@ class Engine implements EngineInterface
             $objectFeedbackEntries[FeedbackCategories::SUGGESTION],
             $relationalTypeResolver,
             $database_key,
-            $objectIDItems
+            $idObjects
         );
 
         $iterationObjectLogs = [];
@@ -2096,7 +2096,7 @@ class Engine implements EngineInterface
             $objectFeedbackEntries[FeedbackCategories::LOG],
             $relationalTypeResolver,
             $database_key,
-            $objectIDItems
+            $idObjects
         );
     }
 
@@ -2304,7 +2304,7 @@ class Engine implements EngineInterface
         array &$already_loaded_ids_data_fields,
         array &$unionDBKeyIDs,
         array &$combinedUnionDBKeyIDs,
-        array $objectIDItems,
+        array $idObjects,
     ): void {
         $engineState = App::getEngineState();
         $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
@@ -2472,8 +2472,8 @@ class Engine implements EngineInterface
                 $combined_databases = [];
                 foreach ($entries as $database_name => $database) {
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
-                    foreach ($database as $database_key => $dbItems) {
-                        foreach ($dbItems as $dbobject_id => $dbobject_values) {
+                    foreach ($database as $database_key => $resolvedIDFieldValues) {
+                        foreach ($resolvedIDFieldValues as $dbobject_id => $dbobject_values) {
                             $combined_databases[$database_key][$dbobject_id] = array_merge(
                                 $combined_databases[$database_key][$dbobject_id] ?? [],
                                 // If field "id" for this type has been disabled (eg: by ACL),
