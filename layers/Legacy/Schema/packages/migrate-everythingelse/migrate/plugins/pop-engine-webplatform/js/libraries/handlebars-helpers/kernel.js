@@ -96,9 +96,9 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 	
 	// The following values, if passed as a param, then these take priority. Otherwise, use them from the previous context
 	var typeOutputKey = (typeof options.hash.typeOutputKey != 'undefined') ? options.hash.typeOutputKey : prevContext.typeOutputKey;
-	var resolvedObjectIDs = (typeof options.hash.resolvedObjectIDs != 'undefined') ? options.hash.resolvedObjectIDs : prevContext.resolvedObjectIDs;
-	if (jQuery.type(resolvedObjectIDs) === "array" && !resolvedObjectIDs.length) {
-		resolvedObjectIDs = null;
+	var objectIDs = (typeof options.hash.objectIDs != 'undefined') ? options.hash.objectIDs : prevContext.objectIDs;
+	if (jQuery.type(objectIDs) === "array" && !objectIDs.length) {
+		objectIDs = null;
 	}
 	
 	// Add all these vars to the context for this component
@@ -106,7 +106,7 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		resolvedObject: resolvedObject, 
 		resolvedObjectTypeOutputKey: resolvedObjectTypeOutputKey, 
 		typeOutputKey: typeOutputKey, 
-		resolvedObjectIDs: resolvedObjectIDs, 
+		objectIDs: objectIDs, 
 		tls: tls, 
 		pss: pss, 
 		bs: bs, 
@@ -150,12 +150,12 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		extend.resolvedObject = resolvedObject;
 		extend.resolvedObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
-		extend.resolvedObjectIDs = [objectID];
+		extend.objectIDs = [objectID];
 	}
-	else if (options.hash.typeOutputKey && resolvedObjectIDs) {
+	else if (options.hash.typeOutputKey && objectIDs) {
 
 		extend.typeOutputKey = options.hash.typeOutputKey;
-		extend.resolvedObjectIDs = resolvedObjectIDs;
+		extend.objectIDs = objectIDs;
 	}
 	else if (options.hash.subcomponent && objectID) {
 
@@ -164,32 +164,32 @@ Handlebars.registerHelper('enterModule', function(prevContext, options){
 		extend.resolvedObject = resolvedObject;
 		extend.resolvedObjectTypeOutputKey = typeOutputKey;
 		extend.typeOutputKey = typeOutputKey;
-		extend.resolvedObjectIDs = [objectID];
+		extend.objectIDs = [objectID];
 	}
-	else if (options.hash.subcomponent && resolvedObjectIDs) {
+	else if (options.hash.subcomponent && objectIDs) {
 
 		typeOutputKey = bs.outputKeys[options.hash.subcomponent];
 		extend.typeOutputKey = typeOutputKey;
-		extend.resolvedObjectIDs = resolvedObjectIDs;
+		extend.objectIDs = objectIDs;
 	}
-	else if (resolvedObjectIDs) {
+	else if (objectIDs) {
 
-		extend.resolvedObjectIDs = resolvedObjectIDs;
+		extend.objectIDs = objectIDs;
 	}
 	else if (options.hash.typeOutputKey) {
 
-		// If only the typeOutputKey has value, it means the other value passes (objectID or resolvedObjectIDs) is null
+		// If only the typeOutputKey has value, it means the other value passes (objectID or objectIDs) is null
 		// So then put everything to null
 		extend.typeOutputKey = options.hash.typeOutputKey;
 		extend.resolvedObject = null;
 		extend.resolvedObjectTypeOutputKey = null;
-		extend.resolvedObjectIDs = null;
+		extend.objectIDs = null;
 	}
 
-	// Make sure the resolvedObjectIDs are an array
-	if (extend.resolvedObjectIDs) {
-		if (jQuery.type(extend.resolvedObjectIDs) !== "array") {
-			extend.resolvedObjectIDs = [extend.resolvedObjectIDs];
+	// Make sure the objectIDs are an array
+	if (extend.objectIDs) {
+		if (jQuery.type(extend.objectIDs) !== "array") {
+			extend.objectIDs = [extend.objectIDs];
 		}
 	}
 

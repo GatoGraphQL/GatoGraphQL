@@ -9,7 +9,7 @@
 	{{/withModule}}
 	{{#withModule . "inner"}}
 		<div class="carousel-inner {{../class-merge}} clearfix">		
-			{{enterModule ../. typeOutputKey=../typeOutputKey resolvedObjectIDs=../resolvedObjectIDs}}
+			{{enterModule ../. typeOutputKey=../typeOutputKey objectIDs=../objectIDs}}
 		</div>
 	{{/withModule}}
 	{{#withModule . "controls-bottom"}}

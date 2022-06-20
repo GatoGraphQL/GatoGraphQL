@@ -2506,10 +2506,10 @@ window.pop.Manager = {
 		// var bsId = that.getSettingsId(block);
 		// var memory = that.getMemory(domain);
 
-		// Add 'resolvedObjectIDs' from the objectIDs, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
+		// Add 'objectIDs' from the objectIDs, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
 		options.extendContext = {
-			// resolvedObjectIDs: memory.statefuldata.objectIDs[pssId][bsId],
-			resolvedObjectIDs: that.getDataset(domain, pageSection, block),
+			// objectIDs: memory.statefuldata.objectIDs[pssId][bsId],
+			objectIDs: that.getDataset(domain, pageSection, block),
 			ignorePSRuntimeId: true
 		};
 
@@ -3329,19 +3329,19 @@ window.pop.Manager = {
 	// 	var that = this;
 
 	// 	// Integrate the response Database into the database
-	// 	$.each(responsedb, function(typeOutputKey, resolvedObjectIDAttributes) {
+	// 	$.each(responsedb, function(typeOutputKey, objectIDAttributes) {
 
 	// 		// Initialize DB entry
 	// 		database[typeOutputKey] = database[typeOutputKey] || {};
 
-	// 		// When there are no elements in resolvedObjectIDAttributes, the object will appear not as an object but as an array
+	// 		// When there are no elements in objectIDAttributes, the object will appear not as an object but as an array
 	// 		// In that case, it will be empty, so skip
-	// 		if ($.type(resolvedObjectIDAttributes) == 'array') {
+	// 		if ($.type(objectIDAttributes) == 'array') {
 	// 			return;
 	// 		}
 
 	// 		// Extend with new values
-	// 		$.each(resolvedObjectIDAttributes, function(objectID, resolvedObjectAttributes) {
+	// 		$.each(objectIDAttributes, function(objectID, resolvedObjectAttributes) {
 
 	// 			if (!database[typeOutputKey][objectID]) {
 	// 				database[typeOutputKey][objectID] = {};
