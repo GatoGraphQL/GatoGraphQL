@@ -65,15 +65,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
                 $resolvedObjectRet = &$ret[count($ret) - 1];
-                $this->addDBObjectData($resolvedObjectRet, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+                $this->addObjectData($resolvedObjectRet, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
         } else {
             $objectID = $objectIDorIDs;
-            $this->addDBObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+            $this->addObjectData($ret, $propertyFields, $nestedFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
         }
     }
 
-    protected function addDBObjectData(&$resolvedObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
+    protected function addObjectData(&$resolvedObjectRet, $propertyFields, $nestedFields, &$databases, &$unionTypeOutputKeyIDs, $objectID, $objectKeyPath, &$typeOutputKeyPaths, $concatenateField): void
     {
         // If there are no property fields and no nestedFields, then do nothing.
         // Otherwise, it could throw an error on `extractObjectTypeAndID`
