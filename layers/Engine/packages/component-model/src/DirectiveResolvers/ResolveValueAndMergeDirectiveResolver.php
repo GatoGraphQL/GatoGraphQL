@@ -242,12 +242,12 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
-                $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
+                $resolvedIDFieldValues[$id][$field] = null;
             }
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-        $resolvedIDFieldValues[$id][$fieldOutputKey] = $value;
+        $resolvedIDFieldValues[$id][$field] = $value;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

@@ -115,7 +115,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
                     $targetObjectTypeResolver,
                     $field->asFieldOutputQueryString(),
                 );
-                $value = $resolvedIDFieldValues[$id][$fieldOutputKey] ?? null;
+                $value = $resolvedIDFieldValues[$id][$field] ?? null;
                 if ($value === null) {
                     continue;
                 }
@@ -135,7 +135,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $resolvedIDFieldValues
-                $resolvedIDFieldValues[$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
+                $resolvedIDFieldValues[$id][$field] = $this->serializeLeafOutputTypeValue(
                     $value,
                     $fieldLeafOutputTypeResolver,
                     $fieldLeafOutputTypeIsArrayOfArrays,

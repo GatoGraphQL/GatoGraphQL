@@ -52,7 +52,7 @@ trait RemoveIDFieldSetDirectiveResolverTrait
             $fieldsToSetAsNullForID = $idFieldSetToSetAsNull[$id]->fields;
             foreach ($fieldsToSetAsNullForID as $field) {
                 $fieldOutputKey = $field->getOutputKey();
-                $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
+                $resolvedIDFieldValues[$id][$field] = null;
             }
         }
     }
