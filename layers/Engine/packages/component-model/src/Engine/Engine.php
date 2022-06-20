@@ -2362,17 +2362,15 @@ class Engine implements EngineInterface
                  * for the relationship under this other object.
                  */
                 $typedSubcomponentIDs = [];
-                // if ($subcomponentIsUnionTypeResolver) {
-                    // Get the types for all of the IDs all at once. Flatten 3 levels: dbName => typeOutputKey => id => ...
-                    $allSubcomponentIDs = array_values(array_unique(
-                        GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
-                    ));
-                    $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
-                    // Create a map, from ID to TypedID
+                // Get the types for all of the IDs all at once. Flatten 3 levels: dbName => typeOutputKey => id => ...
+                $allSubcomponentIDs = array_values(array_unique(
+                    GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
+                ));
+                $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
+                // Create a map, from ID to TypedID
                 for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
                     $typedSubcomponentIDs[$allSubcomponentIDs[$i]] = $qualifiedSubcomponentIDs[$i];
                 }
-                // }
 
                 /** @var array<string|int> */
                 $field_ids = [];
