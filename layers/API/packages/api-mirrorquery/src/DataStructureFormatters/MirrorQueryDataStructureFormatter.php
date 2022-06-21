@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 
+use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -193,8 +194,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 continue;
             }
 
-            // The first field, "id", needs not be concatenated. All the others do need
-            $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $nestedFieldOutputKey;
+            /**
+             * The first field, "id", needs not be concatenated. All the others do need.
+             *
+             * This is legacy code: this variable is calculated but will not be used,
+             * since the Type from which to retrieve the data is already codified
+             * under the objectID for all fields other than the "root", and this one
+             * has its field hardcoded as "id".
+             */
+            $nextField = ($concatenateField ? $objectKeyPath . Constants::RELATIONAL_FIELD_PATH_SEPARATOR : '') . $nestedFieldOutputKey;
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$nestedFieldInstance] ?? null;

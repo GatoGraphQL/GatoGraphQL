@@ -10,6 +10,7 @@ use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\ComponentFilters\ComponentPaths;
 use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
+use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Constants\DataSources;
@@ -725,7 +726,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 fn (FieldInterface $field) => $field->getOutputKey(),
                 $selfPathFields
             );
-            $ret[implode('.', $selfPathFieldOutputKeys)] = $relationalTypeResolver->getTypeOutputKey();
+            $ret[implode(Constants::RELATIONAL_FIELD_PATH_SEPARATOR, $selfPathFieldOutputKeys)] = $relationalTypeResolver->getTypeOutputKey();
         }
 
         // This prop is set for both dataloading and non-dataloading components
@@ -742,7 +743,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     fn (FieldInterface $field) => $field->getOutputKey(),
                     $relationalPathFields
                 );
-                $ret[implode('.', $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
+                $ret[implode(Constants::RELATIONAL_FIELD_PATH_SEPARATOR, $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
@@ -757,7 +758,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         fn (FieldInterface $field) => $field->getOutputKey(),
                         $relationalPathFields
                     );
-                    $ret[implode('.', $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
+                    $ret[implode(Constants::RELATIONAL_FIELD_PATH_SEPARATOR, $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
                 }
             }
         }
