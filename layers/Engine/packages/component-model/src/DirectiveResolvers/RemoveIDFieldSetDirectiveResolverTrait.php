@@ -6,6 +6,8 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 trait RemoveIDFieldSetDirectiveResolverTrait
 {
