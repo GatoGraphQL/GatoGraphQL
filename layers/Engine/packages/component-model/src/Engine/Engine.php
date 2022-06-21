@@ -1792,7 +1792,9 @@ class Engine implements EngineInterface
                         foreach ($fieldValues as $field) {
                             /** @var FieldInterface $field */
                             $value = $fieldValues[$field];
-                            $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = &$value;
+                            // @todo Check why by reference doesn't work
+                            // $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = &$value;
+                            $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = $value;
                         }
                     }
                 }
@@ -2040,12 +2042,12 @@ class Engine implements EngineInterface
      * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
      */
     protected function addSchemaEntriesToDestinationArray(
-        array|SplObjectStorage &$entries,
+        SplObjectStorage &$entries,
         array &$destination,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $typeOutputKey,
     ): void {
-        if ($entries === []) {
+        if ($entries->count() === 0) {
             return;
         }
 
@@ -2214,6 +2216,8 @@ class Engine implements EngineInterface
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {
+        // @todo Temporarily return until fixing method
+        return;
         $iterationSchemaErrors = [];
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
