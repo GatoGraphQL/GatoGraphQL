@@ -1584,13 +1584,6 @@ class Engine implements EngineInterface
         $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
         foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
-            /**
-             * If field "id" for this type has been disabled (eg: by ACL),
-             * then $fieldValues may be `null`
-             */
-            if ($fieldValues === null || $fieldValues->count() === 0) {
-                continue;
-            }
             $fields = iterator_to_array($fieldValues);
             foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
                 $fields_to_move = array_filter(
