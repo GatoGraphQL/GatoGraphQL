@@ -69,8 +69,6 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             $avatar_size = $this->getAvatarSize($component, $props);
             $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);

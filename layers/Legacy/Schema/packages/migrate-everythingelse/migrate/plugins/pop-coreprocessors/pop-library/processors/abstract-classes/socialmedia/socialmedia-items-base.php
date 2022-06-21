@@ -49,8 +49,6 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
 
     public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $title = sprintf(TranslationAPIFacade::getInstance()->__('Share on %s', 'pop-coreprocessors'), $this->getName($component));
