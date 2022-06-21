@@ -10,7 +10,6 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoP\Root\Translation\TranslationAPIInterface;
-use SplObjectStorage;
 
 /**
  * Keep a reference to the global, shared state by the App
@@ -112,24 +111,6 @@ class AppStateManager implements AppStateManagerInterface
     {
         $state = &$this->state;
         foreach ($path as $pathItem) {
-            /**
-             * The expected state can be an array, but also SplObjectStorage:
-             * Directive @setSelfInAppState will store the current and previous
-             * resolvedIDFieldValues, containing Field instances stored on SplObjectStorage
-             */
-            if ($state instanceof SplObjectStorage) {
-                // Check if there is any Field with the passed property as alias or name
-                foreach ($state as $stateItem) {
-                    $this->assertIsSupportedSplObjectStorageItem($stateItem);
-                    /** @var FieldInterface */
-                    $field = $stateItem;
-                    if ($field->getOutputKey() === $pathItem) {
-                        $state = &$state[$field];
-                        continue(2);
-                    }
-                }
-                $this->throwAppStateNotExistsException($path);
-            }
             if (!is_array($state) || !array_key_exists($pathItem, $state)) {
                 $this->throwAppStateNotExistsException($path);
             }
@@ -180,24 +161,6 @@ class AppStateManager implements AppStateManagerInterface
         foreach ($path as $pathItem) {
             if ($state === null) {
                 // Iterating to a subentry that is not defined?
-                return false;
-            }
-            /**
-             * The expected state can be an array, but also SplObjectStorage:
-             * Directive @setSelfInAppState will store the current and previous
-             * resolvedIDFieldValues, containing Field instances stored on SplObjectStorage
-             */
-            if ($state instanceof SplObjectStorage) {
-                // Check if there is any Field with the passed property as alias or name
-                foreach ($state as $stateItem) {
-                    $this->assertIsSupportedSplObjectStorageItem($stateItem);
-                    /** @var FieldInterface */
-                    $field = $stateItem;
-                    if ($field->getOutputKey() === $pathItem) {
-                        $state = &$state[$field];
-                        continue(2);
-                    }
-                }
                 return false;
             }
             if (!is_array($state) || !array_key_exists($pathItem, $state)) {
