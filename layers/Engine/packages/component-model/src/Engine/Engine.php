@@ -1786,8 +1786,10 @@ class Engine implements EngineInterface
                      * $previouslyResolvedIDFieldValues, so it carries no risks
                      */
                     foreach ($entries as $id => $fieldValues) {
-                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id] ??= new SplObjectStorage();
-                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id]->addAll($fieldValues);
+                        /** @var SplObjectStorage<FieldInterface,mixed> */
+                        $previouslyResolvedFieldValues = $previouslyResolvedIDFieldValues[$typeOutputKey][$id] ?? new SplObjectStorage();
+                        $previouslyResolvedFieldValues->addAll($fieldValues);
+                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id] = $previouslyResolvedFieldValues;
                     }
                 }
             }
