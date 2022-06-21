@@ -2216,9 +2216,7 @@ class Engine implements EngineInterface
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {
-        // @todo Temporarily return until fixing method
-        return;
-        $iterationSchemaErrors = [];
+        $iterationSchemaErrors = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackError,
@@ -2232,7 +2230,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaWarnings = [];
+        $iterationSchemaWarnings = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackWarning,
@@ -2246,7 +2244,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaDeprecations = [];
+        $iterationSchemaDeprecations = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
@@ -2260,7 +2258,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaNotices = [];
+        $iterationSchemaNotices = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackNotice,
@@ -2274,7 +2272,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaSuggestions = [];
+        $iterationSchemaSuggestions = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getSuggestions() as $schemaFeedbackSuggestion) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackSuggestion,
@@ -2288,7 +2286,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaLogs = [];
+        $iterationSchemaLogs = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getLogs() as $schemaFeedbackLog) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackLog,
@@ -2305,7 +2303,7 @@ class Engine implements EngineInterface
 
     private function transferSchemaFeedbackEntries(
         SchemaFeedbackInterface $schemaFeedback,
-        array &$schemaFeedbackEntries
+        SplObjectStorage &$schemaFeedbackEntries
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
         if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
@@ -2317,7 +2315,9 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $schemaFeedbackEntries[] = $entry;
+        $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$schemaFeedback->getField()] ?? [];
+        $fieldSchemaFeedbackEntries[] = $entry;
+        $schemaFeedbackEntries[$schemaFeedback->getField()] = $fieldSchemaFeedbackEntries;
     }
 
     /**

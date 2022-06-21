@@ -11,6 +11,7 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoP\Root\App;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use SplObjectStorage;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
@@ -27,7 +28,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
-            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? new SplObjectStorage()),
             $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
         );
         if ($errors !== []) {
@@ -188,12 +189,20 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         ];
     }
 
-    protected function reformatSchemaEntries($entries)
+    /**
+     * @param array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> $entries
+     */
+    protected function reformatSchemaEntries(array $entries): array
     {
         $ret = [];
-        foreach ($entries as $typeOutputKey => $items) {
-            foreach ($items as $item) {
-                $ret[] = $this->getSchemaEntry($typeOutputKey, $item);
+        foreach ($entries as $typeOutputKey => $storage) {
+            foreach ($storage as $field) {
+                /** @var FieldInterface $field */
+                $items = $storage[$field];
+                /** @var array<string,mixed> $items */
+                foreach ($items as $item) {
+                    $ret[] = $this->getSchemaEntry($typeOutputKey, $item);
+                }
             }
         }
         return $ret;
