@@ -39,6 +39,7 @@ use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
+use SplObjectStorage;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
