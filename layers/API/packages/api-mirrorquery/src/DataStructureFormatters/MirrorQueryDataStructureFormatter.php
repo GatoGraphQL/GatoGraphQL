@@ -7,6 +7,7 @@ namespace PoPAPI\APIMirrorQuery\DataStructureFormatters;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
@@ -145,14 +146,35 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
             $nestedFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($nestedField);
             $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $nestedField);
+            
+            // @todo Re-do this logic, by passing the FieldInterface directly
+            /** @var FieldInterface|null */
+            $nestedFieldInstance = null;
+            /** @var FieldInterface[] */
+            $resolvedObjectFields = iterator_to_array($resolvedObject);
+            foreach ($resolvedObjectFields as $resolvedObjectField) {
+                if ($resolvedObjectField->getOutputKey() === $uniqueNestedFieldOutputKey) {
+                    $nestedFieldInstance = $resolvedObjectField;
+                    break;
+                }
+            }
+            if ($nestedFieldInstance === null) {
+                continue;
+            }
 
-            // If the key doesn't exist, then do nothing. This supports the "skip output if null" behaviour: if it is to be skipped, there will be no value (which is different than a null)
-            if (!array_key_exists($uniqueNestedFieldOutputKey, $resolvedObject)) {
+            /**
+             * If the key doesn't exist, then do nothing.
+             *
+             * This supports the "skip output if null" behaviour:
+             * if it is to be skipped, there will be no value
+             * (which is different than a null)
+             */
+            if (!$resolvedObject->contains($nestedFieldInstance)) {
                 continue;
             }
 
             // If it's null, directly assign the null to the result
-            if ($resolvedObject[$uniqueNestedFieldOutputKey] === null) {
+            if ($resolvedObject[$nestedFieldInstance] === null) {
                 $resolvedObjectRet[$nestedFieldOutputKey] = null;
                 continue;
             }
@@ -161,13 +183,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
-            $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$uniqueNestedFieldOutputKey] ?? null;
+            $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$nestedFieldInstance] ?? null;
 
             // Add a new subarray for the nested property
             $resolvedObjectNestedPropertyRet = &$resolvedObjectRet[$nestedFieldOutputKey];
 
             // If it is an empty array, then directly add an empty array as the result
-            if (is_array($resolvedObject[$uniqueNestedFieldOutputKey]) && empty($resolvedObject[$uniqueNestedFieldOutputKey])) {
+            if (is_array($resolvedObject[$nestedFieldInstance]) && empty($resolvedObject[$nestedFieldInstance])) {
                 $resolvedObjectRet[$nestedFieldOutputKey] = [];
                 continue;
             }
@@ -189,7 +211,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     }
                 }
             }
-            $this->addData($resolvedObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$uniqueNestedFieldOutputKey], $nextField, $typeOutputKeyPaths);
+            $this->addData($resolvedObjectNestedPropertyRet, $nestedPropertyFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$nestedFieldInstance], $nextField, $typeOutputKeyPaths);
         }
     }
 }
