@@ -148,8 +148,8 @@ interface ComponentProcessorInterface
     public function doesComponentLoadData(Component $component): bool;
     public function startDataloadingSection(Component $component): bool;
     /**
-     * @param FieldInterface[] $path
+     * @param FieldInterface[] $pathFields
      */
-    public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void;
+    public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void;
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void;
 }

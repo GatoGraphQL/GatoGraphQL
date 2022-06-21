@@ -709,9 +709,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     }
 
     /**
-     * @param FieldInterface[] $path
+     * @param FieldInterface[] $pathFields
      */
-    public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void
+    public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
         // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
@@ -720,7 +720,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 /** @var FieldInterface $field */
                 $typeOutputKey = $fieldToTypeOutputKeys[$field];
                 /** @var string $typeOutputKey */
-                $ret[implode('.', array_merge($path, [$field]))] = $typeOutputKey;
+                /** @var FieldInterface[] */
+                $selfPathFields = array_merge($pathFields, [$field]);
+                $selfPathFieldOutputKeys = array_map(
+                    fn (FieldInterface $field) => $field->getOutputKey(),
+                    $selfPathFields
+                );
+                $ret[implode('.', $selfPathFieldOutputKeys)] = $typeOutputKey;
             }
         }
 
@@ -730,9 +736,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if ($this->getProp($component, $props, 'succeeding-typeResolver') !== null) {
             $this->getComponentFilterManager()->prepareForPropagation($component, $props);
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
                 // Only components which do not load data
                 $subcomponent_components = array_filter(
                     $relationalComponentFieldNode->getNestedComponents(),
@@ -740,22 +743,23 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                         return !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
                     }
                 );
+                /** @var FieldInterface[] */
+                $subcomponentPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
                 foreach ($subcomponent_components as $subcomponent_component) {
-                    $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], $subcomponentPathFields, $ret);
                 }
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                    // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
                     // Only components which do not load data
                     $subcomponent_components = array_filter(
                         $relationalComponentFieldNode->getNestedComponents(),
                         fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
                     );
+                    /** @var FieldInterface[] */
+                    $subcomponentPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
                     foreach ($subcomponent_components as $subcomponent_component) {
-                        $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                        $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], $subcomponentPathFields, $ret);
                     }
                 }
             }
@@ -766,7 +770,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
             );
             foreach ($subcomponents as $subcomponent) {
-                $this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->addToDatasetOutputKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $path, $ret);
+                $this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->addToDatasetOutputKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $pathFields, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
