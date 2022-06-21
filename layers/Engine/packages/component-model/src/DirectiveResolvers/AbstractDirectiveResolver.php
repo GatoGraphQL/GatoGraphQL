@@ -950,7 +950,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet */
-        /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues */
+        /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues */
 
         // Extract the head, keep passing down the rest
         $idFieldSet = $pipelineIDFieldSet[0];
