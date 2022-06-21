@@ -2382,6 +2382,9 @@ class Engine implements EngineInterface
         return $output;
     }
 
+    /**
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeResolverInterface $targetObjectTypeResolver,
