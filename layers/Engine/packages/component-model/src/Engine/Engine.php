@@ -855,6 +855,10 @@ class Engine implements EngineInterface
         return [];
     }
 
+    /**
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataitems
+     */
     private function doAddDatasetToDatabase(
         array &$database,
         string $typeOutputKey,
@@ -870,26 +874,25 @@ class Engine implements EngineInterface
             return;
         }
 
-        /**
-         * array_merge_recursive doesn't work as expected:
-         * It merges 2 hashmap arrays into an array,
-         * so then we must do a foreach instead
-         */
         foreach ($dataitems as $id => $dbobject_values) {
-            $database[$typeOutputKey][$id] = array_merge(
-                $database[$typeOutputKey][$id] ?? [],
-                $dbobject_values
-            );
+            /** @var SplObjectStorage<FieldInterface,mixed> */
+            $dbIDFieldValues = $database[$typeOutputKey][$id] ?? new SplObjectStorage();
+            $dbIDFieldValues->addAll($dbobject_values);
+            $database[$typeOutputKey][$id] = $dbIDFieldValues;
         }
     }
 
+    /**
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataitems
+     */
     private function addDatasetToDatabase(
         array &$database,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $typeOutputKey,
         array $dataitems,
         array $idObjects,
-        bool $addEntryIfError = false
+        bool $addEntryIfError = false,
     ): void {
         // Do not create the database key entry when there are no items, or it produces an error when deep merging the database object in the webplatform with that from the response
         if (!$dataitems) {
@@ -1642,7 +1645,10 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionTypeOutputKeyIDs = $combinedUnionTypeOutputKeyIDs = [];
+        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
+        $databases = [];
+        $unionTypeOutputKeyIDs = $combinedUnionTypeOutputKeyIDs = [];
+
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
         $previouslyResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
@@ -2006,6 +2012,9 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
+     */
     protected function addObjectEntriesToDestinationArray(
         array &$entries,
         array &$destination,
