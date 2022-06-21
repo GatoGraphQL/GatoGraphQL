@@ -9,6 +9,7 @@ use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatte
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
+use SplObjectStorage;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
 {
@@ -94,7 +95,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string,mixed>|null $resolvedObjectRet
      * @param array<string> $propertyFields
      * @param array<string,array<string>> $nestedFields
-     * @param array<string,array<string|int,array<string,mixed>>> $databases
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param string|integer $objectID
      * @param string $objectKeyPath
@@ -132,7 +133,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return;
         }
 
-        $resolvedObject = $databases[$typeOutputKey][$objectID] ?? [];
+        /** @var SplObjectStorage<FieldInterface,mixed> */
+        $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage;
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
