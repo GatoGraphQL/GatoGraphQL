@@ -1647,7 +1647,10 @@ class Engine implements EngineInterface
         // Save all database elements here, under typeResolver
         /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
         $databases = [];
-        $unionTypeOutputKeyIDs = $combinedUnionTypeOutputKeyIDs = [];
+        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
+        $unionTypeOutputKeyIDs = [];
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
+        $combinedUnionTypeOutputKeyIDs = [];
 
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
         $previouslyResolvedIDFieldValues = [];
@@ -2384,6 +2387,8 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
      */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
