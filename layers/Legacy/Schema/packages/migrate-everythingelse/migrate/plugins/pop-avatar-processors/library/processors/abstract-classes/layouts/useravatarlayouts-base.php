@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_UserAvatarLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_UserAvatarLayoutsBase extends PoPEngine_Quer
 
         $ret['url-field'] = $this->getUrlField($component);
         $ret['avatar'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+            'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
                 $avatar_field // @todo Fix: pass LeafField
             ),

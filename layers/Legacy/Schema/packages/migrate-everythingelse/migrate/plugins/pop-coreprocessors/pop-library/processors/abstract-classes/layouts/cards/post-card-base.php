@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_PostCardLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -48,7 +49,7 @@ abstract class PoP_Module_Processor_PostCardLayoutsBase extends PoPEngine_QueryD
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $ret['thumb'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+            'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
                 $this->getThumbField($component, $props) // @todo Fix: pass LeafField
             ),
