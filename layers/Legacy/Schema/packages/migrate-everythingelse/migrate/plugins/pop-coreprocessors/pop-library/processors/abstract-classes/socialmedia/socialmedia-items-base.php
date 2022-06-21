@@ -1,6 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_QueryDataComponentProcessorBase
@@ -58,7 +57,7 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         $ret[GD_JS_TITLES]['share'] = $title;
         $ret[GD_JS_FONTAWESOME] = $this->getFontawesome($component, $props);
         
-        $ret['shareurl-field'] = FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+        $ret['shareurl-field'] = TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
             $this->getProp($component, $props, 'succeeding-typeResolver'),
             $this->getShareurlField($component, $props) // @todo Fix: pass LeafField
         );

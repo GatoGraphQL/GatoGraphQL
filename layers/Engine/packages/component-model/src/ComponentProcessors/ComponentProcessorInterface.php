@@ -82,10 +82,6 @@ interface ComponentProcessorInterface
      * @param Component[]|Component $component_or_componentPath
      */
     public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
-    /**
-     * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
-     */
-    public function getFieldToTypeOutputKeys(Component $component, array &$props): SplObjectStorage;
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDatasetsettings(Component $component, array &$props): array;
     public function getDatasetOutputKeys(Component $component, array &$props): array;

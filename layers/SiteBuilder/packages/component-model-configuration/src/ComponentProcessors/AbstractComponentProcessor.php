@@ -4,20 +4,34 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\ComponentProcessors;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor as UpstreamAbstractComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Constants\DataLoading;
+use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Params;
+use PoP\ConfigurationComponentModel\HelperServices\TypeResolverHelperServiceInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProcessor implements ComponentProcessorInterface
 {
+    final public function setTypeResolverHelperService(TypeResolverHelperServiceInterface $typeResolverHelperService): void
+    {
+        $this->typeResolverHelperService = $typeResolverHelperService;
+    }
+    final protected function getTypeResolverHelperService(): TypeResolverHelperServiceInterface
+    {
+        return $this->typeResolverHelperService ??= $this->instanceManager->getInstance(TypeResolverHelperServiceInterface::class);
+    }
+    
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
@@ -37,6 +51,64 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
         // @todo Fix: this method now returns a SplObjectStorage, yet not adapted here
         if ($outputKeys = $this->getFieldToTypeOutputKeys($component, $props)) {
             $ret['outputKeys'] = $outputKeys;
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Watch out: this function messes up PHPStan! It was moved here from upstream
+     * and not finished, as it's not required for GraphQL.
+     *
+     * Notice this is a duplicate of `maybeAddIDFieldToDatasetOutputKeys`,
+     * attempt to reunify these functions as DRY!?
+     *
+     * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
+     *
+     * @todo Finish/adapt this function, fix the types for PHPStan
+     */
+    public function getFieldToTypeOutputKeys(Component $component, array &$props): SplObjectStorage
+    {
+        /** @var SplObjectStorage<FieldInterface,string> */
+        $ret = new SplObjectStorage();
+        
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
+            if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
+                /**
+                 * Place it under "id" because it is for fetching the current object
+                 * from the DB, which is found through resolvedObject.id
+                 */
+                $idField = new LeafField(
+                    FieldOutputKeys::ID,
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation(),
+                );
+                $ret[$idField] = $typeOutputKey;
+            }
+        }
+
+        // This prop is set for both dataloading and non-dataloading components
+        if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
+            foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
+                // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
+                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                if ($typeResolver === null) {
+                    continue;
+                }
+                $ret[$relationalComponentFieldNode->getField()] = $this->getTypeResolverHelperService()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
+            }
+            foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
+                foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
+                    // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
+                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                    if ($typeResolver === null) {
+                        continue;
+                    }
+                    $ret[$relationalComponentFieldNode->getField()] = $this->getTypeResolverHelperService()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                }
+            }
         }
 
         return $ret;

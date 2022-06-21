@@ -1,6 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
@@ -74,7 +73,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
             $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);
 
             $ret['avatar'] = array(
-                'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+                'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                     $this->getProp($component, $props, 'succeeding-typeResolver'),
                     $avatar_field // @todo Fix: pass LeafField
                 ),

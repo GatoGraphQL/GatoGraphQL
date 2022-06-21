@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -51,14 +51,14 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
 
             $ret['avatars'] = array(
                 'sm' => array(
-                    'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+                    'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($component, $props, 'succeeding-typeResolver'),
                         $avatar_field_sm // @todo Fix: pass LeafField
                     ),
                     'size' => $avatar_size_sm
                 ),
                 'md' => array(
-                    'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+                    'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($component, $props, 'succeeding-typeResolver'),
                         $avatar_field_md // @todo Fix: pass LeafField
                     ),
