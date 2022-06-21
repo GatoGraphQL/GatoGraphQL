@@ -42,7 +42,7 @@ trait RemoveIDFieldSetDirectiveResolverTrait
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSetToSetAsNull
      * @param array<string|int,object> $idObjects
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     protected function setIDFieldSetAsNull(
         RelationalTypeResolverInterface $relationalTypeResolver,
