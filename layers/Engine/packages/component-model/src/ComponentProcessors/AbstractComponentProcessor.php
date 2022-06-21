@@ -629,59 +629,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    /**
-     * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
-     */
-    public function getFieldToTypeOutputKeys(Component $component, array &$props): SplObjectStorage
-    {
-        /** @var SplObjectStorage<FieldInterface,string> */
-        $ret = new SplObjectStorage();
-        if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
-            if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
-                /**
-                 * Place it under "id" because it is for fetching the current object
-                 * from the DB, which is found through resolvedObject.id
-                 */
-                $idField = new LeafField(
-                    FieldOutputKeys::ID,
-                    null,
-                    [],
-                    [],
-                    LocationHelper::getNonSpecificLocation(),
-                );
-                $ret[$idField] = $typeOutputKey;
-            }
-        }
-
-        // This prop is set for both dataloading and non-dataloading components
-        if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
-            foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
-                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
-                if ($typeResolver === null) {
-                    continue;
-                }
-                $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
-            }
-            foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
-                foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
-                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
-                    if ($typeResolver === null) {
-                        continue;
-                    }
-                    $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
-                }
-            }
-        }
-
-        return $ret;
-    }
-
-    //-------------------------------------------------
-    // New PUBLIC Functions: Model Static Settings
-    //-------------------------------------------------
-
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array
     {
         $options = array(
@@ -707,21 +654,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
         // Add the current component's outputKeys
-        if ($this->getRelationalTypeResolver($component) !== null) {
-            $fieldToTypeOutputKeys = $this->getFieldToTypeOutputKeys($component, $props);
-            foreach ($fieldToTypeOutputKeys as $field) {
-                /** @var FieldInterface $field */
-                $typeOutputKey = $fieldToTypeOutputKeys[$field];
-                /** @var string $typeOutputKey */
-                /** @var FieldInterface[] */
-                $selfPathFields = array_merge($pathFields, [$field]);
-                $selfPathFieldOutputKeys = array_map(
-                    fn (FieldInterface $field) => $field->getOutputKey(),
-                    $selfPathFields
-                );
-                $ret[implode('.', $selfPathFieldOutputKeys)] = $typeOutputKey;
-            }
-        }
+        $this->maybeAddIDFieldToDatasetOutputKeys($component, $pathFields, $ret);
 
         // Propagate to all subcomponents which have no typeResolver
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -767,6 +700,36 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
+    }
+
+    /**
+     * @param FieldInterface[] $pathFields
+     */
+    protected function maybeAddIDFieldToDatasetOutputKeys(Component $component, array $pathFields, array &$ret): void
+    {
+        $relationalTypeResolver = $this->getRelationalTypeResolver($component);
+        if ($relationalTypeResolver === null) {
+            return;
+        }
+        $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();
+        /**
+         * Place it under "id" because it is for fetching the current object
+         * from the DB, which is found through resolvedObject.id
+         */
+        $field = new LeafField(
+            FieldOutputKeys::ID,
+            null,
+            [],
+            [],
+            LocationHelper::getNonSpecificLocation(),
+        );
+        /** @var FieldInterface[] */
+        $selfPathFields = array_merge($pathFields, [$field]);
+        $selfPathFieldOutputKeys = array_map(
+            fn (FieldInterface $field) => $field->getOutputKey(),
+            $selfPathFields
+        );
+        $ret[implode('.', $selfPathFieldOutputKeys)] = $typeOutputKey;
     }
 
     public function getDatasetOutputKeys(Component $component, array &$props): array
