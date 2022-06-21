@@ -760,7 +760,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function getDatasetOutputKeys(Component $component, array &$props): array
     {
         $ret = array();
-        $this->addToDatasetOutputKeys($component, $props, array(), $ret);
+        $this->addToDatasetOutputKeys($component, $props, [], $ret);
         return $ret;
     }
 
