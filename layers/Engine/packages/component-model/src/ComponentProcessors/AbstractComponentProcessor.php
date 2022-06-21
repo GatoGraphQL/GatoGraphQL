@@ -642,8 +642,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                  * Place it under "id" because it is for fetching the current object
                  * from the DB, which is found through resolvedObject.id
                  */
-                // @todo Remove this line and/or cache the new LeafField
-                // $ret[FieldOutputKeys::ID] = $typeOutputKey;
                 $idField = new LeafField(
                     FieldOutputKeys::ID,
                     null,
