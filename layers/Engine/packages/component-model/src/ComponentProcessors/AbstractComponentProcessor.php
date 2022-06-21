@@ -654,7 +654,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
         // Add the current component's outputKeys
-        $this->maybeAddIDFieldToDatasetOutputKeys($component, $pathFields, $ret);
+        $this->addFieldsToDatasetOutputKeys($component, $props, $pathFields, $ret);
 
         // Propagate to all subcomponents which have no typeResolver
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
@@ -705,31 +705,62 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @param FieldInterface[] $pathFields
      */
-    protected function maybeAddIDFieldToDatasetOutputKeys(Component $component, array $pathFields, array &$ret): void
+    protected function addFieldsToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
-        $relationalTypeResolver = $this->getRelationalTypeResolver($component);
-        if ($relationalTypeResolver === null) {
-            return;
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
+            /**
+             * Place it under "id" because it is for fetching the current object
+             * from the DB, which is found through resolvedObject.id
+             */
+            $field = new LeafField(
+                FieldOutputKeys::ID,
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation(),
+            );
+            /** @var FieldInterface[] */
+            $selfPathFields = array_merge($pathFields, [$field]);
+            $selfPathFieldOutputKeys = array_map(
+                fn (FieldInterface $field) => $field->getOutputKey(),
+                $selfPathFields
+            );
+            $ret[implode('.', $selfPathFieldOutputKeys)] = $relationalTypeResolver->getTypeOutputKey();
         }
-        $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();
-        /**
-         * Place it under "id" because it is for fetching the current object
-         * from the DB, which is found through resolvedObject.id
-         */
-        $field = new LeafField(
-            FieldOutputKeys::ID,
-            null,
-            [],
-            [],
-            LocationHelper::getNonSpecificLocation(),
-        );
-        /** @var FieldInterface[] */
-        $selfPathFields = array_merge($pathFields, [$field]);
-        $selfPathFieldOutputKeys = array_map(
-            fn (FieldInterface $field) => $field->getOutputKey(),
-            $selfPathFields
-        );
-        $ret[implode('.', $selfPathFieldOutputKeys)] = $typeOutputKey;
+
+        // This prop is set for both dataloading and non-dataloading components
+        if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
+            foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
+                // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
+                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                if ($typeResolver === null) {
+                    continue;
+                }
+                /** @var FieldInterface[] */
+                $relationalPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
+                $relationalPathFieldOutputKeys = array_map(
+                    fn (FieldInterface $field) => $field->getOutputKey(),
+                    $relationalPathFields
+                );
+                $ret[implode('.', $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
+            }
+            foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
+                foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
+                    // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
+                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                    if ($typeResolver === null) {
+                        continue;
+                    }
+                    /** @var FieldInterface[] */
+                    $relationalPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
+                    $relationalPathFieldOutputKeys = array_map(
+                        fn (FieldInterface $field) => $field->getOutputKey(),
+                        $relationalPathFields
+                    );
+                    $ret[implode('.', $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
+                }
+            }
+        }
     }
 
     public function getDatasetOutputKeys(Component $component, array &$props): array
