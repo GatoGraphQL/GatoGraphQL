@@ -4114,7 +4114,7 @@ window.pop.Manager = {
 	
 		var that = this;
 		var blockSettings = {
-			outputKeys: that.getFieldOutputKeyToTypeOutputKeys(domain, pssId, bsId),
+			outputKeys: that.getFieldToTypeOutputKeys(domain, pssId, bsId),
 			objectIDs: that.getDataset(domain, pssId, bsId),
 			feedback: that.getBlockFeedback(domain, pssId, bsId),
 			bsId: bsId,
@@ -4239,7 +4239,7 @@ window.pop.Manager = {
 	// 	return configuration[elsId] || {};
 	// },
 
-	getFieldOutputKeyToTypeOutputKeys : function(domain, pageSection, block) {
+	getFieldToTypeOutputKeys : function(domain, pageSection, block) {
 	
 		var that = this;
 		return that.getStatelessSettings(domain, pageSection, block, 'outputKeys');

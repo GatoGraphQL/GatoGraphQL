@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 interface ComponentProcessorInterface
 {
@@ -81,9 +83,9 @@ interface ComponentProcessorInterface
      */
     public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
-     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
      */
-    public function getFieldOutputKeyToTypeOutputKeys(Component $component, array &$props): array;
+    public function getFieldToTypeOutputKeys(Component $component, array &$props): SplObjectStorage;
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDatasetsettings(Component $component, array &$props): array;
     public function getDatasetOutputKeys(Component $component, array &$props): array;
@@ -145,6 +147,9 @@ interface ComponentProcessorInterface
     public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array;
     public function doesComponentLoadData(Component $component): bool;
     public function startDataloadingSection(Component $component): bool;
-    public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void;
+    /**
+     * @param FieldInterface[] $pathFields
+     */
+    public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void;
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void;
 }

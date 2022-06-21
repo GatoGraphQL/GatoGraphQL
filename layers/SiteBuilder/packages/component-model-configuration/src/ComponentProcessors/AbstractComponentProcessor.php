@@ -34,7 +34,8 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
             $ret['configuration'] = $configuration;
         }
 
-        if ($outputKeys = $this->getFieldOutputKeyToTypeOutputKeys($component, $props)) {
+        // @todo Fix: this method now returns a SplObjectStorage, yet not adapted here
+        if ($outputKeys = $this->getFieldToTypeOutputKeys($component, $props)) {
             $ret['outputKeys'] = $outputKeys;
         }
 
