@@ -1557,7 +1557,7 @@ class Engine implements EngineInterface
     /**
      * Place all entries under dbName "primary"
      *
-     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
      * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
     protected function getEntriesUnderPrimaryDBName(
@@ -1569,7 +1569,7 @@ class Engine implements EngineInterface
     }
 
     /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
      * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
     public function moveEntriesWithIDUnderDBName(
@@ -1580,7 +1580,7 @@ class Engine implements EngineInterface
             return [];
         }
 
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
         $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
         // Move these data fields under "meta" DB name
@@ -1711,7 +1711,7 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
-            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> */
+            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
             $iterationResolvedIDFieldValues = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $idObjects = $relationalTypeResolver->fillObjects(

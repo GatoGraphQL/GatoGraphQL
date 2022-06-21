@@ -57,7 +57,7 @@ class DirectivePipelineDecorator
             $previouslyResolvedIDFieldValues,
             /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDFieldSet,
-            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> */
+            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
             $resolvedIDFieldValues,
             $variables,
             $messages,
