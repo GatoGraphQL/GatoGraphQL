@@ -62,7 +62,7 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         
         $ret['shareurl-field'] = FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
             $this->getProp($component, $props, 'succeeding-typeResolver'),
-            $this->getShareurlField($component, $props)
+            $this->getShareurlField($component, $props) // @todo Fix: pass LeafField
         );
 
         if ($provider = $this->getProvider($component)) {

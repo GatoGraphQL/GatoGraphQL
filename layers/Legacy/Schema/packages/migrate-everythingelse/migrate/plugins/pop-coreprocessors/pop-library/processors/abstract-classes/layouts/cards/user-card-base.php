@@ -78,7 +78,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
             $ret['avatar'] = array(
                 'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                     $this->getProp($component, $props, 'succeeding-typeResolver'),
-                    $avatar_field
+                    $avatar_field // @todo Fix: pass LeafField
                 ),
                 'size' => $avatar_size
             );

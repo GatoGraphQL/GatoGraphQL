@@ -32,7 +32,8 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentLayoutsBase extends Po
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $thumb),
+                $thumb // @todo Fix: pass LeafField
+            ),
         );
         
         return $ret;

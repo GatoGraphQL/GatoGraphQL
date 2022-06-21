@@ -44,8 +44,9 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
 
             $ret['avatar'] = array(
                 'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $avatar_field),
+                    $this->getProp($component, $props, 'succeeding-typeResolver'),
+                    $avatar_field // @todo Fix: pass LeafField
+                ),
                 'size' => $avatar_size
             );
         }

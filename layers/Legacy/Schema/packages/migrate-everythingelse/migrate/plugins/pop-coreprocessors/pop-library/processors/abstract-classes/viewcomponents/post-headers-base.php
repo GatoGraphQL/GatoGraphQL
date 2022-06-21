@@ -65,7 +65,8 @@ abstract class PoP_Module_Processor_PostViewComponentHeadersBase extends PoPEngi
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($component, $props))
+                $this->getThumbField($component, $props) // @todo Fix: pass LeafField
+            )
         );
         
         return $ret;
