@@ -561,9 +561,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] ?? null;
     }
 
-    protected function getExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, array $messages): mixed
+    protected function getExpressionForObjectAndField(int | string $id, FieldInterface $field, string $key, array $messages): mixed
     {
-        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey][$key] ?? $this->getExpressionForObject($id, $key, $messages);
+        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] ?? $this->getExpressionForObject($id, $key, $messages);
     }
 
     /**
