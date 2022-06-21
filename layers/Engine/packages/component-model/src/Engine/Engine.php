@@ -1583,7 +1583,6 @@ class Engine implements EngineInterface
         /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
         $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
-        // Move these data fields under "meta" DB name
         foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
             /**
              * If field "id" for this type has been disabled (eg: by ACL),
