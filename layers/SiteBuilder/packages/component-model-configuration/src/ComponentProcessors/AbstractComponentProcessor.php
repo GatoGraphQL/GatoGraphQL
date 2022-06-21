@@ -13,6 +13,7 @@ use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Params;
+use PoP\ConfigurationComponentModel\HelperServices\TypeResolverHelperServiceInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -22,6 +23,15 @@ use SplObjectStorage;
 
 abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProcessor implements ComponentProcessorInterface
 {
+    final public function setTypeResolverHelperService(TypeResolverHelperServiceInterface $typeResolverHelperService): void
+    {
+        $this->typeResolverHelperService = $typeResolverHelperService;
+    }
+    final protected function getTypeResolverHelperService(): TypeResolverHelperServiceInterface
+    {
+        return $this->typeResolverHelperService ??= $this->instanceManager->getInstance(TypeResolverHelperServiceInterface::class);
+    }
+    
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
@@ -87,7 +97,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
                 if ($typeResolver === null) {
                     continue;
                 }
-                $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                $ret[$relationalComponentFieldNode->getField()] = $this->getTypeResolverHelperService()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
@@ -96,7 +106,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
                     if ($typeResolver === null) {
                         continue;
                     }
-                    $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
+                    $ret[$relationalComponentFieldNode->getField()] = $this->getTypeResolverHelperService()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
                 }
             }
         }
