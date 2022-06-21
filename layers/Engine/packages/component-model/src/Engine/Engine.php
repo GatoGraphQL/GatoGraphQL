@@ -2599,7 +2599,7 @@ class Engine implements EngineInterface
                             //     continue;
                             // }
                             /** @var SplObjectStorage<FieldInterface,mixed> */
-                            $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage;
+                            $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage();
                             $combinedDatabasesSplObjectStorage->addAll($fieldValues);
                             $combined_databases[$typeOutputKey][$dbobject_id] = $combinedDatabasesSplObjectStorage;
                         }

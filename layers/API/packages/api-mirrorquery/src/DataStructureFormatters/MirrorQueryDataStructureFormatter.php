@@ -134,12 +134,12 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         }
 
         /** @var SplObjectStorage<FieldInterface,mixed> */
-        $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage;
+        $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
             $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $propertyField);
-            
+
             // @todo Re-do this logic, by passing the FieldInterface directly
             /** @var FieldInterface|null */
             $propertyFieldInstance = null;
@@ -161,7 +161,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
             $nestedFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($nestedField);
             $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $nestedField);
-            
+
             // @todo Re-do this logic, by passing the FieldInterface directly
             /** @var FieldInterface|null */
             $nestedFieldInstance = null;
