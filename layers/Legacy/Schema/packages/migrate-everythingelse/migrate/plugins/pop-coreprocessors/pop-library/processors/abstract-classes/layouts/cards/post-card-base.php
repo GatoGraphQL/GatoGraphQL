@@ -50,7 +50,7 @@ abstract class PoP_Module_Processor_PostCardLayoutsBase extends PoPEngine_QueryD
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($component, $props)
+                $this->getThumbField($component, $props) // @todo Fix: pass LeafField
             ),
         );
 

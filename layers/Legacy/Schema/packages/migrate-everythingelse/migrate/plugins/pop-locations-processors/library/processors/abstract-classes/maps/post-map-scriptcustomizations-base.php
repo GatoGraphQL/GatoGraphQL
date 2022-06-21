@@ -104,12 +104,11 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($component, $props)),
+                $this->getThumbField($component, $props) // @todo Fix: pass LeafField
+            ),
         );
 
         if ($authors_component = $this->getAuthorsComponent($component)) {

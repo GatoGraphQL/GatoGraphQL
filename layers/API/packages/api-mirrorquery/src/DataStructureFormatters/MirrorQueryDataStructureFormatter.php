@@ -138,7 +138,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($propertyFields as $propertyField) {
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
-            $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $propertyField);
 
             // @todo Re-do this logic, by passing the FieldInterface directly
             /** @var FieldInterface|null */
@@ -146,7 +145,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             /** @var FieldInterface[] */
             $resolvedObjectFields = iterator_to_array($resolvedObject);
             foreach ($resolvedObjectFields as $resolvedObjectField) {
-                if ($resolvedObjectField->getOutputKey() === $uniquePropertyFieldOutputKey) {
+                if ($resolvedObjectField->getOutputKey() === $propertyFieldOutputKey) {
                     $propertyFieldInstance = $resolvedObjectField;
                     break;
                 }
@@ -160,7 +159,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         // Add the nested levels
         foreach ($nestedFields as $nestedField => $nestedPropertyFields) {
             $nestedFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($nestedField);
-            $uniqueNestedFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $nestedField);
+        
 
             // @todo Re-do this logic, by passing the FieldInterface directly
             /** @var FieldInterface|null */
@@ -168,7 +167,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             /** @var FieldInterface[] */
             $resolvedObjectFields = iterator_to_array($resolvedObject);
             foreach ($resolvedObjectFields as $resolvedObjectField) {
-                if ($resolvedObjectField->getOutputKey() === $uniqueNestedFieldOutputKey) {
+                if ($resolvedObjectField->getOutputKey() === $nestedFieldOutputKey) {
                     $nestedFieldInstance = $resolvedObjectField;
                     break;
                 }
@@ -195,7 +194,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             }
 
             // The first field, "id", needs not be concatenated. All the others do need
-            $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $uniqueNestedFieldOutputKey;
+            $nextField = ($concatenateField ? $objectKeyPath . '.' : '') . $nestedFieldOutputKey;
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$nestedFieldInstance] ?? null;

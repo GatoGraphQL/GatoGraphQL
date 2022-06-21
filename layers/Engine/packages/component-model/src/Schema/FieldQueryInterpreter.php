@@ -75,15 +75,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
-    /**
-     * @var array<string,array<string,string>>
-     */
-    private array $fieldOutputKeysByTypeAndField = [];
-    /**
-     * @var array<string,array<string,string>>
-     */
-    private array $fieldsByTypeAndFieldOutputKey = [];
-
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
@@ -114,46 +105,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     }
 
     /**
-     * If two different fields for the same type have the same fieldOutputKey, then
-     * add a counter to the second one, so each of them is unique.
-     * That is to avoid overriding the previous value, as when doing:
-     *
-     *   ?query=posts.title|self.excerpt@title
-     *
-     * In this case, the value of the excerpt would override the value of the title,
-     * since they both have fieldOutputKey "title".
-     *
-     * If the TypeResolver is of Union type, because the data for the object
-     * is stored under the target ObjectTypeResolver, then the unique field name
-     * must be retrieved against the target ObjectTypeResolver
-     */
-    final public function getUniqueFieldOutputKey(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $field,
-        object $object,
-    ): string {
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
-            if ($targetObjectTypeResolver === null) {
-                throw new SchemaReferenceException(
-                    sprintf(
-                        $this->__('The Union Type \'%s\' does not provide a target ObjectTypeResolver for the object', 'component-model'),
-                        $relationalTypeResolver->getMaybeNamespacedTypeName()
-                    )
-                );
-            }
-            return $this->getUniqueFieldOutputKeyByObjectTypeResolver(
-                $targetObjectTypeResolver,
-                $field
-            );
-        }
-        return $this->getUniqueFieldOutputKeyByTypeOutputKey(
-            $relationalTypeResolver->getTypeOutputKey(),
-            $field
-        );
-    }
-
-    /**
      * If the TypeResolver is of Union type, and we don't have the object
      * (eg: when printing the configuration), then generate a list of the
      * unique field outputs for all the target ObjectTypeResolvers.
@@ -165,7 +116,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     final public function getTargetObjectTypeUniqueFieldOutputKeys(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $field,
+        FieldInterface $field,
     ): array {
         $uniqueFieldOutputKeys = [];
         /** @var ObjectTypeResolverInterface[] */
@@ -174,87 +125,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             : [$relationalTypeResolver];
 
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
-            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName()] = $this->getUniqueFieldOutputKeyByObjectTypeResolver(
-                $targetObjectTypeResolver,
-                $field
-            );
+            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName()] = $field->getOutputKey();
         }
         return $uniqueFieldOutputKeys;
-    }
-
-    final public function getUniqueFieldOutputKeyByObjectTypeResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
-    ): string {
-        return $this->getUniqueFieldOutputKeyByTypeOutputKey(
-            $objectTypeResolver->getTypeOutputKey(),
-            $field
-        );
-    }
-
-    /**
-     * Obtain a unique fieldOutputKey for the field, for the type.
-     * This is to avoid overriding a previous value with the same alias,
-     * but placed on a different iteration:
-     *
-     *   ```graphql
-     *   {
-     *     posts {
-     *       title
-     *       self {
-     *         title: excerpt
-     *       }
-     *     }
-     *   ```
-     *
-     * In this query, the field "excerpt" has alias "title", and would override
-     * the title value from the previous iteration.
-     *
-     * By keeping a registry of fields to fieldOutputNames, we can always provide
-     * a unique name, and avoid overriding the value.
-     */
-    public function getUniqueFieldOutputKeyByTypeOutputKey(string $typeOutputKey, string $field): string
-    {
-        /**
-         * This function caches state across PHPUnit tests! Then, running a
-         * test independently might succeed, but running it after some
-         * other one might fail! So avoid all code below by doing an early return.
-         *
-         * @todo Completely remove this function!!!!
-         */
-        return $this->getFieldOutputKey($field);
-        /**
-         * Watch out! The conditional field symbol `?` must be ignored!
-         * Otherwise the same field, with and without ?, will be considered different,
-         * but they are the same:
-         *
-         * - the field without "?" is used to resolve the field
-         * - the field with "?" is used to retrieve the value to print in the response
-         *
-         * Eg:
-         *   /?query=post(id:1).id|title
-         */
-        $field = $this->removeSkipOuputIfNullFromField($field); /** @phpstan-ignore-line */
-        // If a fieldOutputKey has already been created for this field, retrieve it
-        if ($fieldOutputKey = $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] ?? null) {
-            return $fieldOutputKey;
-        }
-        $fieldOutputKey = $this->getFieldOutputKey($field);
-        if (!isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey])) {
-            $this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey] = $field;
-            $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] = $fieldOutputKey;
-            return $fieldOutputKey;
-        }
-        // This fieldOutputKey already exists for a different field,
-        // then create a counter and iterate until it doesn't exist anymore
-        $counter = 0;
-        while (isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey . '-' . $counter])) {
-            $counter++;
-        }
-        $fieldOutputKey = $fieldOutputKey . '-' . $counter;
-        $this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey] = $field;
-        $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] = $fieldOutputKey;
-        return $fieldOutputKey;
     }
 
     /**

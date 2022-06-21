@@ -49,8 +49,6 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
 
     public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $title = sprintf(TranslationAPIFacade::getInstance()->__('Share on %s', 'pop-coreprocessors'), $this->getName($component));
@@ -62,7 +60,7 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         
         $ret['shareurl-field'] = FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
             $this->getProp($component, $props, 'succeeding-typeResolver'),
-            $this->getShareurlField($component, $props)
+            $this->getShareurlField($component, $props) // @todo Fix: pass LeafField
         );
 
         if ($provider = $this->getProvider($component)) {

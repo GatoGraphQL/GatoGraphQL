@@ -53,14 +53,14 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
                 'sm' => array(
                     'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($component, $props, 'succeeding-typeResolver'),
-                        $avatar_field_sm
+                        $avatar_field_sm // @todo Fix: pass LeafField
                     ),
                     'size' => $avatar_size_sm
                 ),
                 'md' => array(
                     'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($component, $props, 'succeeding-typeResolver'),
-                        $avatar_field_md
+                        $avatar_field_md // @todo Fix: pass LeafField
                     ),
                     'size' => $avatar_size_md
                 )
