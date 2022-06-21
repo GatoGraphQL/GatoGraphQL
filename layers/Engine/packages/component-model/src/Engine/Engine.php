@@ -2548,6 +2548,10 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string,array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>>> $ret
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $entries
+     */
     protected function maybeCombineAndAddDatabaseEntries(array &$ret, string $name, array $entries): void
     {
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
@@ -2567,17 +2571,21 @@ class Engine implements EngineInterface
         if ($dboutputmode == DatabasesOutputModes::COMBINED) {
             // Filter to make sure there are entries
             if ($entries = array_filter($entries)) {
+                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
                 $combined_databases = [];
                 foreach ($entries as $database_name => $database) {
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
                     foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
                         foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
-                            $combined_databases[$typeOutputKey][$dbobject_id] = array_merge(
-                                $combined_databases[$typeOutputKey][$dbobject_id] ?? [],
-                                // If field "id" for this type has been disabled (eg: by ACL),
-                                // then $resolvedObject may be `null`
-                                $fieldValues ?? []
-                            );
+                            // If field "id" for this type has been disabled (eg: by ACL),
+                            // then $resolvedObject may be `null`
+                            if ($fieldValues === null) {
+                                continue;
+                            }
+                            /** @var SplObjectStorage<FieldInterface,mixed> */
+                            $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage;
+                            $combinedDatabasesSplObjectStorage->addAll($fieldValues);
+                            $combined_databases[$typeOutputKey][$dbobject_id] = $combinedDatabasesSplObjectStorage;
                         }
                     }
                 }
