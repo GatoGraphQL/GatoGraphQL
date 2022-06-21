@@ -1742,24 +1742,16 @@ class Engine implements EngineInterface
                  */
                 foreach ($idFieldSet as $id => $fieldSet) {
                     // If it failed to load the item, it will be null
-                    $resolvedIDFieldValue = $iterationResolvedIDFieldValues[$id];
-                    if ($resolvedIDFieldValue === null) {
+                    $iterationResolvedFieldValues = $iterationResolvedIDFieldValues[$id];
+                    if ($iterationResolvedFieldValues === null) {
                         continue;
                     }
-                    foreach ($fieldSet->conditionalFields as $conditionField) {
-                        // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalFields is FieldInterface
-                        /** @var FieldInterface $conditionField */
-                        $conditionalFields = $fieldSet->conditionalFields[$conditionField];
-                        /** @var FieldInterface[] $conditionalFields */
-                        $iterationFields = iterator_to_array($resolvedIDFieldValue);
-                        $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
-                            $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
-                            Methods::arrayIntersectAssocRecursive(
-                                $conditionalFields,
-                                $iterationFields
-                            ) ?? []
-                        );
-                    }
+                    /** @var FieldInterface[] $conditionalFields */
+                    $resolvedDirectFields = iterator_to_array($iterationResolvedFieldValues);
+                    $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
+                        $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
+                        $resolvedDirectFields
+                    );
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
