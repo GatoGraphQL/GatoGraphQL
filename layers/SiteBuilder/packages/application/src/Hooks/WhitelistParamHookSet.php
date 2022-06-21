@@ -6,7 +6,7 @@ namespace PoP\Application\Hooks;
 
 use PoP\Root\App;
 use PoP\Application\Constants\Response;
-use PoP\ComponentModel\ComponentProcessors\Constants;
+use PoP\ComponentModel\Constants\HookNames;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class WhitelistParamHookSet extends AbstractHookSet
@@ -14,7 +14,7 @@ class WhitelistParamHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
+            HookNames::HOOK_QUERYDATA_WHITELISTEDPARAMS,
             $this->getWhitelistedParams(...)
         );
     }

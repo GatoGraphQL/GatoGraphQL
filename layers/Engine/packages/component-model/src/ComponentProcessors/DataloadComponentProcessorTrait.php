@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\Constants\HookNames;
 use PoP\Root\App;
 
 trait DataloadComponentProcessorTrait
@@ -51,7 +52,7 @@ trait DataloadComponentProcessorTrait
          * Allow to add more stuff
          */
         App::doAction(
-            Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
+            HookNames::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
             $component,
             $this

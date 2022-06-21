@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\Constants\HookNames;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
@@ -91,7 +92,7 @@ trait QueryDataComponentProcessorTrait
             // Merge with $_POST/$_GET, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = (array)App::applyFilters(
-                Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
+                HookNames::HOOK_QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     PaginationParams::PAGE_NUMBER,
                     PaginationParams::LIMIT,
