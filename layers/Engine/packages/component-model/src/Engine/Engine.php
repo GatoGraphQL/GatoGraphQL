@@ -2582,11 +2582,12 @@ class Engine implements EngineInterface
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
                     foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
                         foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
-                            // If field "id" for this type has been disabled (eg: by ACL),
-                            // then $resolvedObject may be `null`
-                            if ($fieldValues === null) {
-                                continue;
-                            }
+                            // @todo Temporarily commented due to PHPStan, decide if to allow `null` in type!
+                            // // If field "id" for this type has been disabled (eg: by ACL),
+                            // // then $resolvedObject may be `null`
+                            // if ($fieldValues === null) {
+                            //     continue;
+                            // }
                             /** @var SplObjectStorage<FieldInterface,mixed> */
                             $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage;
                             $combinedDatabasesSplObjectStorage->addAll($fieldValues);
