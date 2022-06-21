@@ -2429,11 +2429,10 @@ class Engine implements EngineInterface
                 }
                 $subcomponentIDs = [];
                 foreach ($typeResolverIDs as $id) {
-                    $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
-                        $database_field_ids = $database[$targetTypeOutputKey][$id][$subcomponent_data_field_outputkey] ?? null;
+                        $database_field_ids = $database[$targetTypeOutputKey][$id][$componentFieldNode->getField()] ?? null;
                         if (!$database_field_ids) {
                             continue;
                         }
@@ -2483,11 +2482,10 @@ class Engine implements EngineInterface
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
-                            $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey]);
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] && is_array($databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()]);
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(
