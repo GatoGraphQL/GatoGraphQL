@@ -2207,7 +2207,11 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $objectFeedbackEntries[$objectFeedback->getObjectID()][] = $entry;
+        $objectFeedbackEntriesStorage = $objectFeedbackEntries[$objectFeedback->getObjectID()] ?? new SplObjectStorage();
+        $fieldObjectFeedbackEntries = $objectFeedbackEntries[$objectFeedback->getObjectID()][$objectFeedback->getField()] ?? [];
+        $fieldObjectFeedbackEntries[] = $entry;
+        $objectFeedbackEntriesStorage[$objectFeedback->getField()] = $fieldObjectFeedbackEntries;
+        $objectFeedbackEntries[$objectFeedback->getObjectID()] = $objectFeedbackEntriesStorage;
     }
 
     private function transferSchemaFeedback(

@@ -115,13 +115,18 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
-    protected function reformatObjectEntries($entries)
+    protected function reformatObjectEntries($entries): array
     {
         $ret = [];
-        foreach ($entries as $typeOutputKey => $id_items) {
-            foreach ($id_items as $id => $items) {
-                foreach ($items as $item) {
-                    $ret[] = $this->getObjectEntry($typeOutputKey, $id, $item);
+        foreach ($entries as $typeOutputKey => $id_storage) {
+            foreach ($id_storage as $id => $storage) {
+                foreach ($storage as $field) {
+                    /** @var FieldInterface $field */
+                    $items = $storage[$field];
+                    /** @var array<string,mixed> $items */
+                    foreach ($items as $item) {
+                        $ret[] = $this->getObjectEntry($typeOutputKey, $id, $item);
+                    }
                 }
             }
         }
