@@ -195,7 +195,7 @@ class PoP_SSR_EngineInitialization_Hooks
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
             // The hook below can modify the list of fields to be added under "primary", and add those fields directly into $databaseitems under another dbName ("userstate")
             $engine = EngineFacade::getInstance();
-            $data_fields = $engine->moveEntriesUnderDBName($data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES], true, $relationalTypeResolver);
+            $data_fields = $engine->moveEntriesWithIDUnderDBName($data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES], $relationalTypeResolver);
 
             foreach ($objectIDs as $object_id) {
                 // Copy to the dynamic database

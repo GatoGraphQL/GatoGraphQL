@@ -11,6 +11,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -43,6 +45,8 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,

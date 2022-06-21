@@ -15,6 +15,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -43,6 +45,8 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -107,11 +111,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
 
                 /** @var LeafOutputTypeResolverInterface */
                 $fieldLeafOutputTypeResolver = $fieldTypeResolver;
-                $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByObjectTypeResolver(
-                    $targetObjectTypeResolver,
-                    $field->asFieldOutputQueryString(),
-                );
-                $value = $resolvedIDFieldValues[$id][$fieldOutputKey] ?? null;
+                $value = $resolvedIDFieldValues[$id][$field] ?? null;
                 if ($value === null) {
                     continue;
                 }
@@ -131,7 +131,7 @@ final class SerializeLeafOutputTypeValuesDirectiveResolver extends AbstractGloba
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $resolvedIDFieldValues
-                $resolvedIDFieldValues[$id][$fieldOutputKey] = $this->serializeLeafOutputTypeValue(
+                $resolvedIDFieldValues[$id][$field] = $this->serializeLeafOutputTypeValue(
                     $value,
                     $fieldLeafOutputTypeResolver,
                     $fieldLeafOutputTypeIsArrayOfArrays,

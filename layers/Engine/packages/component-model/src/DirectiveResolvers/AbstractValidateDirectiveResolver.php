@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
+use SplObjectStorage;
 
 abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirectiveResolver
 {
@@ -36,6 +37,8 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -55,6 +58,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,

@@ -547,6 +547,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function fillObjects(
         array $idFieldSet,
@@ -574,7 +576,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * If no fields are queried, the entry will be null.
              * Initialize it to [] to simplify typing/null-checking
              */
-            $resolvedIDFieldValues[$objectID] ??= [];
+            $resolvedIDFieldValues[$objectID] ??= new SplObjectStorage();
         }
         // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($idObjects));
@@ -958,7 +960,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Hence, the type of this variable can change throughout the
      * lifecycle of this script, and its type is then declared as `mixed`.
      *
-     * @param array<string|int,array<string,mixed>> $resolvedIDFieldValues
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     protected function processFillingObjectsFromIDs(
         array $unionTypeOutputKeyIDs,
@@ -1047,13 +1050,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Set those fields as null
                 foreach ($fieldDirectives as $fieldDirective) {
                     foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
+                        $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
                         $failingFields = array_intersect(
                             $fieldSet->fields,
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
-                            $fieldOutputKey = $field->getOutputKey();
-                            $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
+                            $resolvedIDFieldValues[$id][$field] = null;
                         }
                     }
                 }

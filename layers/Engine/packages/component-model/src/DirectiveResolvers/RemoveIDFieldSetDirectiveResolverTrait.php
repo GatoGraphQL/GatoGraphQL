@@ -6,6 +6,8 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 trait RemoveIDFieldSetDirectiveResolverTrait
 {
@@ -40,6 +42,7 @@ trait RemoveIDFieldSetDirectiveResolverTrait
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSetToSetAsNull
      * @param array<string|int,object> $idObjects
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     protected function setIDFieldSetAsNull(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -50,8 +53,7 @@ trait RemoveIDFieldSetDirectiveResolverTrait
         foreach (array_keys($idFieldSetToSetAsNull) as $id) {
             $fieldsToSetAsNullForID = $idFieldSetToSetAsNull[$id]->fields;
             foreach ($fieldsToSetAsNullForID as $field) {
-                $fieldOutputKey = $field->getOutputKey();
-                $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
+                $resolvedIDFieldValues[$id][$field] = null;
             }
         }
     }

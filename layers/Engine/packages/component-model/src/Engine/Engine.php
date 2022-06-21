@@ -65,6 +65,10 @@ class Engine implements EngineInterface
 {
     use BasicServiceTrait;
 
+    public const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
+
+    public const PRIMARY_DBNAME = 'primary';
+
     public final const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public final const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
@@ -72,6 +76,11 @@ class Engine implements EngineInterface
 
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
+
+    /**
+     * @var array<string,string[]>|null
+     */
+    protected ?array $dbNameFieldNames = null;
 
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
@@ -846,6 +855,10 @@ class Engine implements EngineInterface
         return [];
     }
 
+    /**
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataitems
+     */
     private function doAddDatasetToDatabase(
         array &$database,
         string $typeOutputKey,
@@ -861,26 +874,25 @@ class Engine implements EngineInterface
             return;
         }
 
-        /**
-         * array_merge_recursive doesn't work as expected:
-         * It merges 2 hashmap arrays into an array,
-         * so then we must do a foreach instead
-         */
         foreach ($dataitems as $id => $dbobject_values) {
-            $database[$typeOutputKey][$id] = array_merge(
-                $database[$typeOutputKey][$id] ?? [],
-                $dbobject_values
-            );
+            /** @var SplObjectStorage<FieldInterface,mixed> */
+            $dbIDFieldValues = $database[$typeOutputKey][$id] ?? new SplObjectStorage();
+            $dbIDFieldValues->addAll($dbobject_values);
+            $database[$typeOutputKey][$id] = $dbIDFieldValues;
         }
     }
 
+    /**
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataitems
+     */
     private function addDatasetToDatabase(
         array &$database,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $typeOutputKey,
         array $dataitems,
         array $idObjects,
-        bool $addEntryIfError = false
+        bool $addEntryIfError = false,
     ): void {
         // Do not create the database key entry when there are no items, or it produces an error when deep merging the database object in the webplatform with that from the response
         if (!$dataitems) {
@@ -1524,51 +1536,105 @@ class Engine implements EngineInterface
         return $ret;
     }
 
-    public function moveEntriesUnderDBName(
+    /**
+     * Allow to inject what data fields must be placed under what dbNames
+     *
+     * @return array<string,string[]> Array of key: dbName, values: field names
+     */
+    public function getDBNameFieldNames(
+        RelationalTypeResolverInterface $relationalTypeResolver
+    ): array {
+        if ($this->dbNameFieldNames === null) {
+            $this->dbNameFieldNames = App::applyFilters(
+                self::HOOK_DBNAME_TO_FIELDNAMES,
+                [],
+                $relationalTypeResolver
+            );
+        }
+        return $this->dbNameFieldNames;
+    }
+
+    /**
+     * Place all entries under dbName "primary"
+     *
+     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     */
+    protected function getEntriesUnderPrimaryDBName(
+        array|SplObjectStorage $entries,
+    ): array {
+        return [
+            self::PRIMARY_DBNAME => $entries,
+        ];
+    }
+
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     */
+    public function moveEntriesWithIDUnderDBName(
         array $entries,
-        bool $entryHasId,
         RelationalTypeResolverInterface $relationalTypeResolver
     ): array {
         if (!$entries) {
             return [];
         }
 
-        // By default place everything under "primary"
-        $dbname_entries = [
-            'primary' => $entries,
-        ];
-
-        // Allow to inject what data fields must be placed under what dbNames
-        // Array of key: dbName, values: data-fields
-        $dbNameToFieldNames = App::applyFilters(
-            'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
-            [],
-            $relationalTypeResolver
-        );
-        foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
-            // Move these data fields under "meta" DB name
-            if ($entryHasId) {
-                foreach ($dbname_entries['primary'] as $id => $resolvedObject) {
-                    $entry_fieldNames_to_move = array_intersect(
-                        // If field "id" for this type has been disabled (eg: by ACL),
-                        // then $resolvedObject may be `null`
-                        array_keys($resolvedObject ?? []),
-                        $fieldNames
-                    );
-                    foreach ($entry_fieldNames_to_move as $fieldName) {
-                        $dbname_entries[$dbName][$id][$fieldName] = $dbname_entries['primary'][$id][$fieldName];
-                        unset($dbname_entries['primary'][$id][$fieldName]);
-                    }
-                }
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
+        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
+        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
+        // Move these data fields under "meta" DB name
+        foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
+            /**
+             * If field "id" for this type has been disabled (eg: by ACL),
+             * then $fieldValues may be `null`
+             */
+            if ($fieldValues === null || $fieldValues->count() === 0) {
                 continue;
             }
-            $entry_fieldNames_to_move = array_intersect(
-                array_keys($dbname_entries['primary']),
-                $fieldNames
+            $fields = iterator_to_array($fieldValues);
+            foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
+                $fields_to_move = array_filter(
+                    $fields,
+                    fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
+                );
+                foreach ($fields_to_move as $field) {
+                    $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
+                    $dbname_entries[$dbName][$id][$field] = $dbname_entries[self::PRIMARY_DBNAME][$id][$field];
+                    $dbname_entries[self::PRIMARY_DBNAME][$id]->detach($field);
+                }
+            }
+        }
+        return $dbname_entries;
+    }
+
+    /**
+     * @param SplObjectStorage<FieldInterface,mixed> $entries
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>
+     */
+    public function moveEntriesWithoutIDUnderDBName(
+        SplObjectStorage $entries,
+        RelationalTypeResolverInterface $relationalTypeResolver
+    ): array {
+        if ($entries->count() === 0) {
+            return [];
+        }
+
+        // By default place everything under "primary"
+        /** @var array<string,SplObjectStorage<FieldInterface,mixed>> */
+        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
+        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
+        $fields = iterator_to_array($entries);
+        foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
+            // Move these data fields under "meta" DB name
+            $fields_to_move = array_filter(
+                $fields,
+                fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
             );
-            foreach ($entry_fieldNames_to_move as $fieldName) {
-                $dbname_entries[$dbName][$fieldName] = $dbname_entries['primary'][$fieldName];
-                unset($dbname_entries['primary'][$fieldName]);
+            foreach ($fields_to_move as $field) {
+                $dbname_entries[$dbName] ??= new SplObjectStorage();
+                $dbname_entries[$dbName][$field] = $dbname_entries[self::PRIMARY_DBNAME][$field];
+                $dbname_entries[self::PRIMARY_DBNAME]->detach($field);
             }
         }
         return $dbname_entries;
@@ -1579,7 +1645,15 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionTypeOutputKeyIDs = $combinedUnionTypeOutputKeyIDs = $previouslyResolvedIDFieldValues = [];
+        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
+        $databases = [];
+        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
+        $unionTypeOutputKeyIDs = [];
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
+        $combinedUnionTypeOutputKeyIDs = [];
+
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
+        $previouslyResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
             FeedbackCategories::ERROR => [],
             FeedbackCategories::WARNING => [],
@@ -1637,6 +1711,7 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
+            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> */
             $iterationResolvedIDFieldValues = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $idObjects = $relationalTypeResolver->fillObjects(
@@ -1684,7 +1759,7 @@ class Engine implements EngineInterface
                             continue;
                         }
                         /** @var FieldInterface[] $conditionalFields */
-                        $iterationFields = array_keys($resolvedIDFieldValue);
+                        $iterationFields = iterator_to_array($resolvedIDFieldValue);
                         $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
                             $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
                             Methods::arrayIntersectAssocRecursive(
@@ -1696,18 +1771,30 @@ class Engine implements EngineInterface
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
-                $resolvedIDFieldValues = $this->moveEntriesUnderDBName($iterationResolvedIDFieldValues, true, $relationalTypeResolver);
+                $resolvedIDFieldValues = $this->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
                 foreach ($resolvedIDFieldValues as $dbName => $entries) {
                     $databases[$dbName] ??= [];
                     $this->addDatasetToDatabase($databases[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
 
-                    // Populate the $previouslyResolvedIDFieldValues, pointing to the newly fetched resolvedIDFieldValues (but without the dbName!)
-                    // Save the reference to the values, instead of the values, to save memory
-                    // Passing $previouslyResolvedIDFieldValues instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
-                    // the modification is done on $previouslyResolvedIDFieldValues, so it carries no risks
+                    /**
+                     * Populate the $previouslyResolvedIDFieldValues, pointing to the newly
+                     * fetched resolvedIDFieldValues (but without the dbName!)
+                     *
+                     * Save the reference to the values, instead of the values, to save memory
+                     *
+                     * Passing $previouslyResolvedIDFieldValues instead of $databases
+                     * makes it read-only: Directives can only read the values...
+                     * if they want to modify them, the modification is done on
+                     * $previouslyResolvedIDFieldValues, so it carries no risks
+                     */
                     foreach ($entries as $id => $fieldValues) {
-                        foreach ($fieldValues as $field => &$entryFieldValues) {
-                            $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = &$entryFieldValues;
+                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id] ??= new SplObjectStorage();
+                        foreach ($fieldValues as $field) {
+                            /** @var FieldInterface $field */
+                            $value = $fieldValues[$field];
+                            // @todo Check why by reference doesn't work
+                            // $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = &$value;
+                            $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = $value;
                         }
                     }
                 }
@@ -1930,6 +2017,9 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
+     */
     protected function addObjectEntriesToDestinationArray(
         array &$entries,
         array &$destination,
@@ -1941,29 +2031,32 @@ class Engine implements EngineInterface
             return;
         }
 
-        $dbNameEntries = $this->moveEntriesUnderDBName($entries, true, $relationalTypeResolver);
+        $dbNameEntries = $this->moveEntriesWithIDUnderDBName($entries, $relationalTypeResolver);
         foreach ($dbNameEntries as $dbName => $entries) {
             $destination[$dbName] ??= [];
             $this->addDatasetToDatabase($destination[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
         }
     }
 
+    /**
+     * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
+     */
     protected function addSchemaEntriesToDestinationArray(
-        array &$entries,
+        SplObjectStorage &$entries,
         array &$destination,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $typeOutputKey,
     ): void {
-        if ($entries === []) {
+        if ($entries->count() === 0) {
             return;
         }
 
-        $dbNameEntries = $this->moveEntriesUnderDBName($entries, false, $relationalTypeResolver);
+        $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $relationalTypeResolver);
         foreach ($dbNameEntries as $dbName => $entries) {
-            $destination[$dbName][$typeOutputKey] = array_merge(
-                $destination[$dbName][$typeOutputKey] ?? [],
-                $entries
-            );
+            /** @var SplObjectStorage<FieldInterface,mixed> */
+            $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
+            $destinationSplObjectStorage->addAll($entries);
+            $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
         }
     }
 
@@ -2114,7 +2207,11 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $objectFeedbackEntries[$objectFeedback->getObjectID()][] = $entry;
+        $objectFeedbackEntriesStorage = $objectFeedbackEntries[$objectFeedback->getObjectID()] ?? new SplObjectStorage();
+        $fieldObjectFeedbackEntries = $objectFeedbackEntries[$objectFeedback->getObjectID()][$objectFeedback->getField()] ?? [];
+        $fieldObjectFeedbackEntries[] = $entry;
+        $objectFeedbackEntriesStorage[$objectFeedback->getField()] = $fieldObjectFeedbackEntries;
+        $objectFeedbackEntries[$objectFeedback->getObjectID()] = $objectFeedbackEntriesStorage;
     }
 
     private function transferSchemaFeedback(
@@ -2123,7 +2220,7 @@ class Engine implements EngineInterface
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {
-        $iterationSchemaErrors = [];
+        $iterationSchemaErrors = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackError,
@@ -2137,7 +2234,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaWarnings = [];
+        $iterationSchemaWarnings = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackWarning,
@@ -2151,7 +2248,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaDeprecations = [];
+        $iterationSchemaDeprecations = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
@@ -2165,7 +2262,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaNotices = [];
+        $iterationSchemaNotices = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackNotice,
@@ -2179,7 +2276,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaSuggestions = [];
+        $iterationSchemaSuggestions = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getSuggestions() as $schemaFeedbackSuggestion) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackSuggestion,
@@ -2193,7 +2290,7 @@ class Engine implements EngineInterface
             $typeOutputKey,
         );
 
-        $iterationSchemaLogs = [];
+        $iterationSchemaLogs = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getLogs() as $schemaFeedbackLog) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackLog,
@@ -2210,7 +2307,7 @@ class Engine implements EngineInterface
 
     private function transferSchemaFeedbackEntries(
         SchemaFeedbackInterface $schemaFeedback,
-        array &$schemaFeedbackEntries
+        SplObjectStorage &$schemaFeedbackEntries
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
         if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
@@ -2222,7 +2319,9 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $schemaFeedbackEntries[] = $entry;
+        $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$schemaFeedback->getField()] ?? [];
+        $fieldSchemaFeedbackEntries[] = $entry;
+        $schemaFeedbackEntries[$schemaFeedback->getField()] = $fieldSchemaFeedbackEntries;
     }
 
     /**
@@ -2294,6 +2393,11 @@ class Engine implements EngineInterface
         return $output;
     }
 
+    /**
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
+     */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeResolverInterface $targetObjectTypeResolver,
@@ -2338,11 +2442,10 @@ class Engine implements EngineInterface
                 }
                 $subcomponentIDs = [];
                 foreach ($typeResolverIDs as $id) {
-                    $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
-                        $database_field_ids = $database[$targetTypeOutputKey][$id][$subcomponent_data_field_outputkey] ?? null;
+                        $database_field_ids = $database[$targetTypeOutputKey][$id][$componentFieldNode->getField()] ?? null;
                         if (!$database_field_ids) {
                             continue;
                         }
@@ -2392,11 +2495,12 @@ class Engine implements EngineInterface
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
-                            $subcomponent_data_field_outputkey = $componentFieldNode->getField()->getOutputKey();
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey]);
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($componentFieldNode->getField()) && is_array($databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()]);
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id] ??= new SplObjectStorage();
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id] ??= new SplObjectStorage();
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(
@@ -2459,6 +2563,10 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string,array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>>> $ret
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $entries
+     */
     protected function maybeCombineAndAddDatabaseEntries(array &$ret, string $name, array $entries): void
     {
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
@@ -2478,17 +2586,22 @@ class Engine implements EngineInterface
         if ($dboutputmode == DatabasesOutputModes::COMBINED) {
             // Filter to make sure there are entries
             if ($entries = array_filter($entries)) {
+                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
                 $combined_databases = [];
                 foreach ($entries as $database_name => $database) {
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
                     foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
-                        foreach ($resolvedIDFieldValues as $dbobject_id => $dbobject_values) {
-                            $combined_databases[$typeOutputKey][$dbobject_id] = array_merge(
-                                $combined_databases[$typeOutputKey][$dbobject_id] ?? [],
-                                // If field "id" for this type has been disabled (eg: by ACL),
-                                // then $resolvedObject may be `null`
-                                $dbobject_values ?? []
-                            );
+                        foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
+                            // @todo Temporarily commented due to PHPStan, decide if to allow `null` in type!
+                            // // If field "id" for this type has been disabled (eg: by ACL),
+                            // // then $resolvedObject may be `null`
+                            // if ($fieldValues === null) {
+                            //     continue;
+                            // }
+                            /** @var SplObjectStorage<FieldInterface,mixed> */
+                            $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage();
+                            $combinedDatabasesSplObjectStorage->addAll($fieldValues);
+                            $combined_databases[$typeOutputKey][$dbobject_id] = $combinedDatabasesSplObjectStorage;
                         }
                     }
                 }

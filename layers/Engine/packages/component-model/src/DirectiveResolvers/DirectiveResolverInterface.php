@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
 {
@@ -120,6 +121,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,

@@ -39,6 +39,7 @@ use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
+use SplObjectStorage;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
@@ -536,11 +537,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @return mixed[]
      */
-    protected function getExpressionsForObjectAndField(int | string $id, string $fieldOutputKey, array $variables, array $messages): array
+    protected function getExpressionsForObjectAndField(int | string $id, FieldInterface $field, array $variables, array $messages): array
     {
         return array_merge(
             $this->getExpressionsForObject($id, $variables, $messages),
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey] ?? []
+            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()] ?? []
         );
     }
 
@@ -549,10 +550,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][$id][$key] = $value;
     }
 
-    protected function addExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, mixed $value, array &$messages): void
+    protected function addExpressionForObjectAndField(int | string $id, FieldInterface $field, string $key, mixed $value, array &$messages): void
     {
         $this->addExpressionForObject($id, $key, $value, $messages);
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$fieldOutputKey][$key] = $value;
+        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][$id][$field->getOutputKey()][$key] = $value;
     }
 
     protected function getExpressionForObject(int | string $id, string $key, array $messages): mixed
@@ -949,6 +950,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet */
+        /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues */
 
         // Extract the head, keep passing down the rest
         $idFieldSet = $pipelineIDFieldSet[0];
@@ -1090,6 +1092,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,

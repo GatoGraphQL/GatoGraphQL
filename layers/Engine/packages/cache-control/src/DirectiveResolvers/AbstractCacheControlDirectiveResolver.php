@@ -12,7 +12,9 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
@@ -137,6 +139,8 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,

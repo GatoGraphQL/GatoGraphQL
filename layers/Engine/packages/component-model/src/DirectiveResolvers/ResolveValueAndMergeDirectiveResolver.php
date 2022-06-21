@@ -19,6 +19,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -46,6 +47,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -78,6 +81,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -146,9 +151,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $resolvedIDFieldValues
-                $conditionFieldOutputKey = $conditionField->getOutputKey();
-                if (isset($resolvedIDFieldValues[$id]) && array_key_exists($conditionFieldOutputKey, $resolvedIDFieldValues[$id])) {
-                    $conditionSatisfied = (bool)$resolvedIDFieldValues[$id][$conditionFieldOutputKey];
+                if (isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($conditionField)) {
+                    $conditionSatisfied = (bool)$resolvedIDFieldValues[$id][$conditionField];
                 } else {
                     $conditionSatisfied = false;
                 }
@@ -167,6 +171,8 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
 
     /**
      * @param FieldInterface[] $fieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
      */
     private function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -194,6 +200,10 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
     }
 
+    /**
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
+     */
     private function resolveValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
@@ -225,18 +235,17 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         );
 
         // 3. Add the output in the DB
-        $fieldOutputKey = $field->getOutputKey();
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
-                $resolvedIDFieldValues[$id][$fieldOutputKey] = null;
+                $resolvedIDFieldValues[$id][$field] = null;
             }
             return;
         }
         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-        $resolvedIDFieldValues[$id][$fieldOutputKey] = $value;
+        $resolvedIDFieldValues[$id][$field] = $value;
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
