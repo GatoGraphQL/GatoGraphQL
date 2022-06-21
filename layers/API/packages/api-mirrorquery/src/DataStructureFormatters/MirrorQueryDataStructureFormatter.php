@@ -137,8 +137,21 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             // Only if the property has been set (in case of dbError it is not set)
             $propertyFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($propertyField);
             $uniquePropertyFieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKeyByTypeOutputKey($typeOutputKey, $propertyField);
-            if (array_key_exists($uniquePropertyFieldOutputKey, $resolvedObject)) {
-                $resolvedObjectRet[$propertyFieldOutputKey] = $resolvedObject[$uniquePropertyFieldOutputKey];
+            
+            // @todo Re-do this logic, by passing the FieldInterface directly
+            /** @var FieldInterface|null */
+            $propertyFieldInstance = null;
+            /** @var FieldInterface[] */
+            $resolvedObjectFields = iterator_to_array($resolvedObject);
+            foreach ($resolvedObjectFields as $resolvedObjectField) {
+                if ($resolvedObjectField->getOutputKey() === $uniquePropertyFieldOutputKey) {
+                    $propertyFieldInstance = $resolvedObjectField;
+                    break;
+                }
+            }
+
+            if ($propertyFieldInstance !== null) {
+                $resolvedObjectRet[$propertyFieldOutputKey] = $resolvedObject[$propertyFieldInstance];
             }
         }
 
