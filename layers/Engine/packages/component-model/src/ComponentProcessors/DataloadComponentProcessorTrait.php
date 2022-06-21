@@ -52,7 +52,7 @@ trait DataloadComponentProcessorTrait
          * Allow to add more stuff
          */
         App::doAction(
-            HookNames::HOOK_DATALOAD_INIT_MODEL_PROPS,
+            HookNames::DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
             $component,
             $this

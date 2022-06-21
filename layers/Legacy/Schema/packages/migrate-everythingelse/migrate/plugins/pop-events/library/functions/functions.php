@@ -52,7 +52,7 @@ function gdEmPosticonImpl($icon, $post_id)
 }
 
 \PoP\Root\App::addFilter(
-    HookNames::HOOK_QUERYDATA_WHITELISTEDPARAMS,
+    HookNames::QUERYDATA_WHITELISTEDPARAMS,
     function($params) {
         $params[] = GD_URLPARAM_YEAR;
         $params[] = GD_URLPARAM_MONTH;
