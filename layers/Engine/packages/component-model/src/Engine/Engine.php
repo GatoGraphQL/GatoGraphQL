@@ -1597,8 +1597,8 @@ class Engine implements EngineInterface
                     $fields,
                     fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
                 );
+                $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
                 foreach ($fields_to_move as $field) {
-                    $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
                     $dbname_entries[$dbName][$id][$field] = $dbname_entries[self::PRIMARY_DBNAME][$id][$field];
                     $dbname_entries[self::PRIMARY_DBNAME][$id]->detach($field);
                 }
