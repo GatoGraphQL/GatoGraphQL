@@ -75,15 +75,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $directiveSchemaDefinitionArgsCache = [];
 
-    /**
-     * @var array<string,array<string,string>>
-     */
-    private array $fieldOutputKeysByTypeAndField = [];
-    /**
-     * @var array<string,array<string,string>>
-     */
-    private array $fieldsByTypeAndFieldOutputKey = [];
-
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
@@ -147,10 +138,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $field
             );
         }
-        return $this->getUniqueFieldOutputKeyByTypeOutputKey(
-            $relationalTypeResolver->getTypeOutputKey(),
-            $field
-        );
+        return $this->getFieldOutputKey($field);
     }
 
     /**
@@ -186,75 +174,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeResolverInterface $objectTypeResolver,
         string $field,
     ): string {
-        return $this->getUniqueFieldOutputKeyByTypeOutputKey(
-            $objectTypeResolver->getTypeOutputKey(),
-            $field
-        );
-    }
-
-    /**
-     * Obtain a unique fieldOutputKey for the field, for the type.
-     * This is to avoid overriding a previous value with the same alias,
-     * but placed on a different iteration:
-     *
-     *   ```graphql
-     *   {
-     *     posts {
-     *       title
-     *       self {
-     *         title: excerpt
-     *       }
-     *     }
-     *   ```
-     *
-     * In this query, the field "excerpt" has alias "title", and would override
-     * the title value from the previous iteration.
-     *
-     * By keeping a registry of fields to fieldOutputNames, we can always provide
-     * a unique name, and avoid overriding the value.
-     */
-    public function getUniqueFieldOutputKeyByTypeOutputKey(string $typeOutputKey, string $field): string
-    {
-        /**
-         * This function caches state across PHPUnit tests! Then, running a
-         * test independently might succeed, but running it after some
-         * other one might fail! So avoid all code below by doing an early return.
-         *
-         * @todo Completely remove this function!!!!
-         */
         return $this->getFieldOutputKey($field);
-        /**
-         * Watch out! The conditional field symbol `?` must be ignored!
-         * Otherwise the same field, with and without ?, will be considered different,
-         * but they are the same:
-         *
-         * - the field without "?" is used to resolve the field
-         * - the field with "?" is used to retrieve the value to print in the response
-         *
-         * Eg:
-         *   /?query=post(id:1).id|title
-         */
-        $field = $this->removeSkipOuputIfNullFromField($field); /** @phpstan-ignore-line */
-        // If a fieldOutputKey has already been created for this field, retrieve it
-        if ($fieldOutputKey = $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] ?? null) {
-            return $fieldOutputKey;
-        }
-        $fieldOutputKey = $this->getFieldOutputKey($field);
-        if (!isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey])) {
-            $this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey] = $field;
-            $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] = $fieldOutputKey;
-            return $fieldOutputKey;
-        }
-        // This fieldOutputKey already exists for a different field,
-        // then create a counter and iterate until it doesn't exist anymore
-        $counter = 0;
-        while (isset($this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey . '-' . $counter])) {
-            $counter++;
-        }
-        $fieldOutputKey = $fieldOutputKey . '-' . $counter;
-        $this->fieldsByTypeAndFieldOutputKey[$typeOutputKey][$fieldOutputKey] = $field;
-        $this->fieldOutputKeysByTypeAndField[$typeOutputKey][$field] = $fieldOutputKey;
-        return $fieldOutputKey;
     }
 
     /**
