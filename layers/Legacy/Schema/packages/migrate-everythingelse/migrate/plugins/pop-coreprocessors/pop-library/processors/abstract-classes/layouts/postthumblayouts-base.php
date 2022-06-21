@@ -102,7 +102,8 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($component, $props)) // @todo Fix: pass LeafField
+                $this->getThumbField($component, $props) // @todo Fix: pass LeafField
+            )
         );
         if ($target = $this->getLinktarget($component, $props)) {
             $ret['link-target'] = $target;
