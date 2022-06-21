@@ -857,12 +857,12 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataitems
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataItems
      */
     private function doAddDatasetToDatabase(
         array &$database,
         string $typeOutputKey,
-        array $dataitems
+        array $dataItems
     ): void {
         /**
          * Save in the database under the corresponding database-key.
@@ -870,11 +870,11 @@ class Engine implements EngineInterface
          * can both save their results under database key 'users'
          */
         if (!isset($database[$typeOutputKey])) {
-            $database[$typeOutputKey] = $dataitems;
+            $database[$typeOutputKey] = $dataItems;
             return;
         }
 
-        foreach ($dataitems as $id => $dbobject_values) {
+        foreach ($dataItems as $id => $dbobject_values) {
             /** @var SplObjectStorage<FieldInterface,mixed> */
             $dbIDFieldValues = $database[$typeOutputKey][$id] ?? new SplObjectStorage();
             $dbIDFieldValues->addAll($dbobject_values);
@@ -884,18 +884,18 @@ class Engine implements EngineInterface
 
     /**
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataitems
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataItems
      */
     private function addDatasetToDatabase(
         array &$database,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $typeOutputKey,
-        array $dataitems,
+        array $dataItems,
         array $idObjects,
         bool $addEntryIfError = false,
     ): void {
         // Do not create the database key entry when there are no items, or it produces an error when deep merging the database object in the webplatform with that from the response
-        if (!$dataitems) {
+        if (!$dataItems) {
             return;
         }
 
@@ -905,7 +905,7 @@ class Engine implements EngineInterface
             // Get the actual type for each entity, and add the entry there
             $targetObjectTypeResolverNameTypeResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameTypeOutputKeys = [];
             $noTargetObjectTypeResolverDataItems = [];
-            foreach ($dataitems as $objectID => $dataItem) {
+            foreach ($dataItems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
                 if ($object = $idObjects[$objectID] ?? null) {
@@ -940,7 +940,7 @@ class Engine implements EngineInterface
             }
             return;
         }
-        $this->doAddDatasetToDatabase($database, $typeOutputKey, $dataitems);
+        $this->doAddDatasetToDatabase($database, $typeOutputKey, $dataItems);
     }
 
     protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
