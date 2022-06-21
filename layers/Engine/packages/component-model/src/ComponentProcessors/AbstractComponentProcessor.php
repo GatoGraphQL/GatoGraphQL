@@ -661,10 +661,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if ($typeResolver === null) {
                     continue;
                 }
-                // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                // @see https://github.com/leoloso/PoP/issues/1050
-                $subcomponent_data_field = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
-                $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
+                $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
@@ -673,9 +670,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     if ($typeResolver === null) {
                         continue;
                     }
-                    // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
-                    // @see https://github.com/leoloso/PoP/issues/1050
-                    $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField()->asFieldOutputQueryString());
+                    $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField());
                 }
             }
         }

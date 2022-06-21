@@ -116,7 +116,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     final public function getTargetObjectTypeUniqueFieldOutputKeys(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $field,
+        FieldInterface $field,
     ): array {
         $uniqueFieldOutputKeys = [];
         /** @var ObjectTypeResolverInterface[] */
@@ -125,7 +125,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             : [$relationalTypeResolver];
 
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
-            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName()] = $this->getFieldOutputKey($field);
+            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName()] = $field->getOutputKey();
         }
         return $uniqueFieldOutputKeys;
     }
