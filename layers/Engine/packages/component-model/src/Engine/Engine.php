@@ -2500,7 +2500,6 @@ class Engine implements EngineInterface
                             );
                             $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
                             foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
-                                // @todo Test here, then remove! Code before: `Methods::arrayDiffRecursive` and `array_merge_recursive`
                                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
                                 $conditionComponentFieldNodes = $subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
                                 /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
