@@ -50,6 +50,9 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
      * Watch out: this function messes up PHPStan! It was moved here from upstream
      * and not finished, as it's not required for GraphQL.
      *
+     * Notice this is a duplicate of `maybeAddIDFieldToDatasetOutputKeys`,
+     * attempt to reunify these functions as DRY!?
+     *
      * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
      *
      * @todo Finish/adapt this function, fix the types for PHPStan
