@@ -1237,7 +1237,7 @@
 			<wp:comment_content><![CDATA[That can be configured, as either "public" or "private" API mode]]></wp:comment_content>
 			<wp:comment_approved><![CDATA[1]]></wp:comment_approved>
 			<wp:comment_type><![CDATA[comment]]></wp:comment_type>
-			<wp:comment_parent>5</wp:comment_parent>
+			<wp:comment_parent>4</wp:comment_parent>
 			<wp:comment_user_id>2</wp:comment_user_id>
 							</wp:comment>
 					<wp:comment>
