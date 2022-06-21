@@ -950,7 +950,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet */
-        /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues */
+        /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues */
 
         // Extract the head, keep passing down the rest
         $idFieldSet = $pipelineIDFieldSet[0];
@@ -1092,7 +1092,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,

@@ -32,7 +32,7 @@ interface EngineInterface
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution;
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array;
     /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
      * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
     public function moveEntriesWithIDUnderDBName(array $entries, RelationalTypeResolverInterface $relationalTypeResolver): array;

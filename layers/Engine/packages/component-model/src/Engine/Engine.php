@@ -1557,7 +1557,7 @@ class Engine implements EngineInterface
     /**
      * Place all entries under dbName "primary"
      *
-     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
      * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
     protected function getEntriesUnderPrimaryDBName(
@@ -1569,7 +1569,7 @@ class Engine implements EngineInterface
     }
 
     /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $entries
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
      * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
      */
     public function moveEntriesWithIDUnderDBName(
@@ -1580,26 +1580,18 @@ class Engine implements EngineInterface
             return [];
         }
 
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>|null>> */
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
         $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
         $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
-        // Move these data fields under "meta" DB name
         foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
-            /**
-             * If field "id" for this type has been disabled (eg: by ACL),
-             * then $fieldValues may be `null`
-             */
-            if ($fieldValues === null || $fieldValues->count() === 0) {
-                continue;
-            }
             $fields = iterator_to_array($fieldValues);
             foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
                 $fields_to_move = array_filter(
                     $fields,
                     fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
                 );
+                $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
                 foreach ($fields_to_move as $field) {
-                    $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
                     $dbname_entries[$dbName][$id][$field] = $dbname_entries[self::PRIMARY_DBNAME][$id][$field];
                     $dbname_entries[self::PRIMARY_DBNAME][$id]->detach($field);
                 }
@@ -1711,7 +1703,7 @@ class Engine implements EngineInterface
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
-            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>|null> */
+            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
             $iterationResolvedIDFieldValues = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
             $idObjects = $relationalTypeResolver->fillObjects(
@@ -2586,12 +2578,6 @@ class Engine implements EngineInterface
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
                     foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
                         foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
-                            // @todo Temporarily commented due to PHPStan, decide if to allow `null` in type!
-                            // // If field "id" for this type has been disabled (eg: by ACL),
-                            // // then $resolvedObject may be `null`
-                            // if ($fieldValues === null) {
-                            //     continue;
-                            // }
                             /** @var SplObjectStorage<FieldInterface,mixed> */
                             $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage();
                             $combinedDatabasesSplObjectStorage->addAll($fieldValues);

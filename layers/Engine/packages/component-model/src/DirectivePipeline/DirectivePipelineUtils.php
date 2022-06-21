@@ -15,7 +15,7 @@ class DirectivePipelineUtils
     /**
      * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>|null> $resolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
