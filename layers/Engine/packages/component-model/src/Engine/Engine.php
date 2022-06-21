@@ -2571,12 +2571,12 @@ class Engine implements EngineInterface
                 foreach ($entries as $database_name => $database) {
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
                     foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
-                        foreach ($resolvedIDFieldValues as $dbobject_id => $dbobject_values) {
+                        foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
                             $combined_databases[$typeOutputKey][$dbobject_id] = array_merge(
                                 $combined_databases[$typeOutputKey][$dbobject_id] ?? [],
                                 // If field "id" for this type has been disabled (eg: by ACL),
                                 // then $resolvedObject may be `null`
-                                $dbobject_values ?? []
+                                $fieldValues ?? []
                             );
                         }
                     }
