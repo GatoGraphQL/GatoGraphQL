@@ -14,6 +14,7 @@ use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeIn
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 interface ComponentProcessorInterface
 {
@@ -82,9 +83,9 @@ interface ComponentProcessorInterface
      */
     public function pushProp(string $group, array|Component $component_or_componentPath, array &$props, string $property, mixed $value, array $starting_from_componentPath = array()): void;
     /**
-     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
      */
-    public function getFieldOutputKeyToTypeOutputKeys(Component $component, array &$props): array;
+    public function getFieldToTypeOutputKeys(Component $component, array &$props): SplObjectStorage;
     public function getImmutableSettingsDatasetcomponentTree(Component $component, array &$props): array;
     public function getImmutableDatasetsettings(Component $component, array &$props): array;
     public function getDatasetOutputKeys(Component $component, array &$props): array;

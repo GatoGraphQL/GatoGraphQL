@@ -26,6 +26,8 @@ use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeIn
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -628,18 +630,28 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //-------------------------------------------------
 
     /**
-     * @return array<string,string> Key: field output key, Value: self object or relational type output key
+     * @return SplObjectStorage<FieldInterface,string> Key: field output key, Value: self object or relational type output key
      */
-    public function getFieldOutputKeyToTypeOutputKeys(Component $component, array &$props): array
+    public function getFieldToTypeOutputKeys(Component $component, array &$props): SplObjectStorage
     {
-        $ret = array();
+        /** @var SplObjectStorage<FieldInterface,string> */
+        $ret = new SplObjectStorage();
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
                 /**
                  * Place it under "id" because it is for fetching the current object
                  * from the DB, which is found through resolvedObject.id
                  */
-                $ret[FieldOutputKeys::ID] = $typeOutputKey;
+                // @todo Remove this line and/or cache the new LeafField
+                // $ret[FieldOutputKeys::ID] = $typeOutputKey;
+                $idField = new LeafField(
+                    FieldOutputKeys::ID,
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation(),
+                );
+                $ret[$idField] = $typeOutputKey;
             }
         }
 
@@ -651,12 +663,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 if ($typeResolver === null) {
                     continue;
                 }
-                // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $subcomponent_data_field = $relationalComponentFieldNode->getField()->asFieldOutputQueryString();
-                $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
-                $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
+                $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
@@ -665,11 +675,9 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     if ($typeResolver === null) {
                         continue;
                     }
-                    // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
-                    $subcomponent_data_field_outputkey = $relationalComponentFieldNode->getField()->getOutputKey();
-                    $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField()->asFieldOutputQueryString());
+                    $ret[$relationalComponentFieldNode->getField()] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $relationalComponentFieldNode->getField()->asFieldOutputQueryString());
                 }
             }
         }
@@ -707,7 +715,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
-            $fieldOutputKeyToTypeOutputKeys = $this->getFieldOutputKeyToTypeOutputKeys($component, $props);
+            $fieldOutputKeyToTypeOutputKeys = $this->getFieldToTypeOutputKeys($component, $props);
             foreach ($fieldOutputKeyToTypeOutputKeys as $fieldOutputKey => $typeOutputKey) {
                 $ret[implode('.', array_merge($path, [$fieldOutputKey]))] = $typeOutputKey;
             }
