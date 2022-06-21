@@ -715,9 +715,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         // Add the current component's outputKeys
         if ($this->getRelationalTypeResolver($component) !== null) {
-            $fieldOutputKeyToTypeOutputKeys = $this->getFieldToTypeOutputKeys($component, $props);
-            foreach ($fieldOutputKeyToTypeOutputKeys as $fieldOutputKey => $typeOutputKey) {
-                $ret[implode('.', array_merge($path, [$fieldOutputKey]))] = $typeOutputKey;
+            $fieldToTypeOutputKeys = $this->getFieldToTypeOutputKeys($component, $props);
+            foreach ($fieldToTypeOutputKeys as $field) {
+                /** @var FieldInterface $field */
+                $typeOutputKey = $fieldToTypeOutputKeys[$field];
+                /** @var string $typeOutputKey */
+                $ret[implode('.', array_merge($path, [$field]))] = $typeOutputKey;
             }
         }
 
