@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ComponentProcessorInterface
@@ -145,6 +146,9 @@ interface ComponentProcessorInterface
     public function getMutableonrequestSupplementaryDbobjectdata(Component $component, array &$props): array;
     public function doesComponentLoadData(Component $component): bool;
     public function startDataloadingSection(Component $component): bool;
+    /**
+     * @param FieldInterface[] $path
+     */
     public function addToDatasetOutputKeys(Component $component, array &$props, array $path, array &$ret): void;
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void;
 }
