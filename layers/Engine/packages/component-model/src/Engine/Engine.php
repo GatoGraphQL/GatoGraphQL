@@ -1787,11 +1787,7 @@ class Engine implements EngineInterface
                      */
                     foreach ($entries as $id => $fieldValues) {
                         $previouslyResolvedIDFieldValues[$typeOutputKey][$id] ??= new SplObjectStorage();
-                        foreach ($fieldValues as $field) {
-                            /** @var FieldInterface $field */
-                            $value = $fieldValues[$field];
-                            $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field] = $value;
-                        }
+                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id]->addAll($fieldValues);
                     }
                 }
             }
