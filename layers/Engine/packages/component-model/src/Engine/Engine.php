@@ -1741,15 +1741,15 @@ class Engine implements EngineInterface
                  * to see if it has those properties
                  */
                 foreach ($idFieldSet as $id => $fieldSet) {
+                    // If it failed to load the item, it will be null
+                    $resolvedIDFieldValue = $iterationResolvedIDFieldValues[$id];
+                    if ($resolvedIDFieldValue === null) {
+                        continue;
+                    }
                     foreach ($fieldSet->conditionalFields as $conditionField) {
                         // @todo Fix this logic, not working now! Because $iterationFields is string, and $conditionalFields is FieldInterface
                         /** @var FieldInterface $conditionField */
                         $conditionalFields = $fieldSet->conditionalFields[$conditionField];
-                        // If it failed to load the item, it will be null
-                        $resolvedIDFieldValue = $iterationResolvedIDFieldValues[$id];
-                        if ($resolvedIDFieldValue === null) {
-                            continue;
-                        }
                         /** @var FieldInterface[] $conditionalFields */
                         $iterationFields = iterator_to_array($resolvedIDFieldValue);
                         $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
