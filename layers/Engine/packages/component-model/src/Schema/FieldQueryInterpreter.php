@@ -125,19 +125,9 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             : [$relationalTypeResolver];
 
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
-            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName()] = $this->getUniqueFieldOutputKeyByObjectTypeResolver(
-                $targetObjectTypeResolver,
-                $field
-            );
+            $uniqueFieldOutputKeys[$targetObjectTypeResolver->getTypeName()] = $this->getFieldOutputKey($field);
         }
         return $uniqueFieldOutputKeys;
-    }
-
-    final public function getUniqueFieldOutputKeyByObjectTypeResolver(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        string $field,
-    ): string {
-        return $this->getFieldOutputKey($field);
     }
 
     /**
