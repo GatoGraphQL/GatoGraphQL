@@ -46,8 +46,6 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
         $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
 
-        $state['only-fieldname-as-outputkey'] = false;
-
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
