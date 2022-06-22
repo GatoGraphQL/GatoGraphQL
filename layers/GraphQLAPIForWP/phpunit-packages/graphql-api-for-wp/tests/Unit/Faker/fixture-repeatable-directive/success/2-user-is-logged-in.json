@@ -17,10 +17,10 @@
   ],
   "data": {
     "id": "root",
-    "hi": null,
     "self": {
       "id": "root",
       "cool": "Cool!"
-    }
+    },
+    "hi": null
   }
 }
