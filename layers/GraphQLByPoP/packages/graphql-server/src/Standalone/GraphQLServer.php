@@ -98,10 +98,6 @@ class GraphQLServer implements GraphQLServerInterface
     {
         return App::getContainer()->get(GraphQLDataStructureFormatter::class);
     }
-    protected function getParser(): ParserInterface
-    {
-        return App::getContainer()->get(ParserInterface::class);
-    }
 
     /**
      * The basic state for executing GraphQL queries is already set.
@@ -133,7 +129,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         // @todo Fix: this code is duplicated! It's also in api/src/State/AppStateProvider.php, keep DRY!
         try {
-            $executableDocument = $this->parseGraphQLQuery(
+            $executableDocument = GraphQLServerHelpers::parseGraphQLQuery(
                 $query,
                 $variables,
                 $operationName
@@ -159,25 +155,5 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Return the Response, so the client can retrieve content and headers
         return App::getResponse();
-    }
-
-    /**
-     * @throws SyntaxErrorException
-     * @throws InvalidRequestException
-     */
-    protected function parseGraphQLQuery(
-        string $query,
-        array $variableValues,
-        ?string $operationName,
-    ): ExecutableDocument {
-        $document = $this->getParser()->parse($query)->setAncestorsInAST();
-        /** @var ExecutableDocument */
-        $executableDocument = (
-            new ExecutableDocument(
-                $document,
-                new Context($operationName, $variableValues)
-            )
-        )->validateAndInitialize();
-        return $executableDocument;
     }
 }
