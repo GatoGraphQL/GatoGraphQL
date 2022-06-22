@@ -57,7 +57,6 @@ use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 

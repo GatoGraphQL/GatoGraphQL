@@ -16,7 +16,7 @@ class CustomPostHookSet extends AbstractRESTHookSet
     {
         return HookHelpers::getHookName(AbstractCustomPostRESTEntryComponentRoutingProcessor::class);
     }
-    
+
     protected function getGraphQLFieldsToAppend(): string
     {
         return self::AUTHOR_RESTFIELDS;

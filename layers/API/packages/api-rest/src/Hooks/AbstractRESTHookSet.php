@@ -18,7 +18,7 @@ abstract class AbstractRESTHookSet extends AbstractHookSet
     }
 
     abstract protected function getHookName(): string;
-    
+
     public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
     {
         // @todo Use `preg_replace_callback` to match `query {` or `query{` or `query    {` or any combination of these

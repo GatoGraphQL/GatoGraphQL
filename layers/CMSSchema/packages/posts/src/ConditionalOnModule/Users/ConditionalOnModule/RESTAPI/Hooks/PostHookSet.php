@@ -16,7 +16,7 @@ class PostHookSet extends AbstractRESTHookSet
     {
         return HookHelpers::getHookName(EntryComponentRoutingProcessor::class);
     }
-    
+
     protected function getGraphQLFieldsToAppend(): string
     {
         return self::USER_RESTFIELDS;
