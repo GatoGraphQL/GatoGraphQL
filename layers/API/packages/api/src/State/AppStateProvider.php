@@ -44,7 +44,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
-        $state['graphql-operation-name'] = EngineRequest::getQueryOperationName($enableModifyingEngineBehaviorViaRequest);
+        $state['graphql-operation-name'] = EngineRequest::getOperationName($enableModifyingEngineBehaviorViaRequest);
     }
 
     public function consolidate(array &$state): void
