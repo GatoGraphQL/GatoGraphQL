@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\State;
 
+use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
@@ -38,6 +40,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         $state['executable-document-ast'] = null;
         $state['does-api-query-have-errors'] = null;
+        $state['graphql-operation-type'] = null;
 
         // Passing the query via URL param?
         /** @var ComponentModelModuleConfiguration */
@@ -115,6 +118,20 @@ class AppStateProvider extends AbstractAppStateProvider
                 $operationName
             );
             $state['executable-document-ast'] = $executableDocument;
+
+            /**
+             * Set the operation type and, based on it, if mutations are supported.
+             * Because with Multiple Query Execution the document can contain multiple
+             * operations, use the type from the selected one, which is only one.
+             */
+            $requestedOperations = $executableDocument->getRequestedOperations();
+            /** @var OperationInterface */
+            $requestedOperation = count($requestedOperations) === 1
+                ? $requestedOperations[0]
+                : array_filter($requestedOperations, fn (OperationInterface $operation) => $operation->getName() === $operationName)[0];
+
+            $state['graphql-operation-type'] = $requestedOperation->getOperationType();
+            $state['are-mutations-enabled'] = $requestedOperation->getOperationType() === OperationTypes::MUTATION;
         } catch (SyntaxErrorException | InvalidRequestException $e) {
             // @todo Show GraphQL error in client
             // ...
