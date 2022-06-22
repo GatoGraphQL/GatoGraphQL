@@ -17,11 +17,11 @@ class PostHookSet extends AbstractHookSet
     {
         App::addFilter(
             HookHelpers::getHookName(EntryComponentRoutingProcessor::class),
-            $this->getGraphQLQueryToResolveRESTEndpoint(...)
+            $this->hookGraphQLQueryToResolveRESTEndpoint(...)
         );
     }
 
-    public function getGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
+    public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
     {
         return $restEndpointGraphQLQuery . ',' . self::CATEGORY_RESTFIELDS;
     }

@@ -22,7 +22,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
     {
         if ($this->restEndpointGraphQLQuery === null) {
             $this->restEndpointGraphQLQuery = str_replace(
-                ',' . CustomPostHookSet::AUTHOR_RESTFIELDS,
+                CustomPostHookSet::AUTHOR_RESTFIELDS,
                 '',
                 parent::getGraphQLQueryToResolveRESTEndpoint()
             );
