@@ -125,6 +125,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
         $appStateManager->override('graphql-operation-type', null);
+        $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
 
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
