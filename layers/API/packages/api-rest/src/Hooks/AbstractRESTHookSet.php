@@ -21,8 +21,13 @@ abstract class AbstractRESTHookSet extends AbstractHookSet
 
     public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
     {
-        // @todo Use `preg_replace_callback` to match `query {` or `query{` or `query    {` or any combination of these
-        return str_replace('query {', 'query { ' . $this->getGraphQLFieldsToAppend() . ' ', $restEndpointGraphQLQuery);
+        // Find the position of the last `}` and append the new fields before it
+        $pos = strrpos($restEndpointGraphQLQuery, '}');
+        if ($pos === false) {
+            // GraphQL query has error!?
+            return $restEndpointGraphQLQuery;
+        }
+        return substr($restEndpointGraphQLQuery, 0, $pos) . ' ' . $this->getGraphQLFieldsToAppend() . ' ' . substr($restEndpointGraphQLQuery, $pos);
     }
 
     abstract protected function getGraphQLFieldsToAppend(): string;
