@@ -46,7 +46,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                 [
                     'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                     ]
                 ],
         );

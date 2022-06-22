@@ -35,7 +35,7 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
         return $this->fieldQueryConvertor ??= $this->instanceManager->getInstance(FieldQueryConvertorInterface::class);
     }
 
-    public function getRESTFields(): array
+    public function getGraphQLQueryToResolveRESTEndpoint(): array
     {
         if (is_null($this->restFields)) {
             $restFields = $this->getRESTFieldsQuery();
