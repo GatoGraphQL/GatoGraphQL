@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\State;
 
-use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
@@ -14,7 +13,6 @@ use PoP\Root\State\AbstractAppStateProvider;
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
-    private ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
 
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
@@ -23,14 +21,6 @@ class AppStateProvider extends AbstractAppStateProvider
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
-    }
-    final public function setGraphQLQueryConvertor(GraphQLQueryConvertorInterface $graphQLQueryConvertor): void
-    {
-        $this->graphQLQueryConvertor = $graphQLQueryConvertor;
-    }
-    final protected function getGraphQLQueryConvertor(): GraphQLQueryConvertorInterface
-    {
-        return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
 
     public function initialize(array &$state): void
