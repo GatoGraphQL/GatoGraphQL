@@ -59,7 +59,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['graphql-introspection-enabled'] = $enableGraphQLIntrospection ?? $standardGraphQL;
     }
 
-    public function consolidate(array &$state): void
+    public function compute(array &$state): void
     {
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
             return;
