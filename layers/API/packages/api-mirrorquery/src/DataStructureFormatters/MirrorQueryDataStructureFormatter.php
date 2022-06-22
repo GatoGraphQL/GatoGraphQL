@@ -294,13 +294,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                         FieldOutputKeys::ID => $resolvedObjectRet[$relationalFieldOutputKey],
                     ];
                 } else {
-                    // 2. If the previous iteration loaded an array of IDs, then override this value with an empty array and initialize the ID again to this object, through adding property 'id' on the next iteration
-                    // Eg: /api/graphql/?query=tags,tags.name
+                    // 2. If the previous iteration loaded an array of IDs, then override this value with an empty array
                     $resolvedObjectRet[$relationalFieldOutputKey] = [];
-                    // @todo Validate this commented code is not needed, then remove
-                    // if (!in_array(FieldOutputKeys::ID, $relationalNestedFields)) {
-                    //     array_unshift($relationalNestedFields, FieldOutputKeys::ID);
-                    // }
                 }
             }
             /**
