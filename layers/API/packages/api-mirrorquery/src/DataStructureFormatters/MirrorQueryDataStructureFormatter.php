@@ -165,47 +165,30 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      */
     protected function addData(?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
     {
-        // Property fields have numeric key only. From them, obtain the fields to print for the object
-        $leafFields = array_filter(
-            $fields,
-            fn (FieldInterface $field) => $field instanceof LeafField
-        );
-
-        // All other fields must be nested, to keep fetching data for the object relationships
-        $relationalFields = array_filter(
-            $fields,
-            fn (FieldInterface $field) => $field instanceof RelationalField
-        );
-
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
             foreach ($objectIDorIDs as $objectID) {
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
                 $resolvedObjectRet = &$ret[count($ret) - 1];
-                $this->addObjectData($resolvedObjectRet, $leafFields, $relationalFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+                $this->addObjectData($resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
             return;
         }
         $objectID = $objectIDorIDs;
-        $this->addObjectData($ret, $leafFields, $relationalFields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+        $this->addObjectData($ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
     }
 
     /**
      * @param array<string,mixed>|null $resolvedObjectRet
-     * @param LeafField[] $leafFields
-     * @param RelationalField[] $relationalFields
+     * @param FieldInterface[] $fields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string> $typeOutputKeyPaths
      */
-    protected function addObjectData(?array &$resolvedObjectRet, array $leafFields, array $relationalFields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
+    protected function addObjectData(?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
-        // If there are no property fields and no relationalFields, then do nothing.
-        // Otherwise, it could throw an error on `extractObjectTypeAndID`
-        // because it only has the ID and not the name of the type
-        // Eg: When a validation on the last field fails, such as: /?query=posts.id(
-        if (!$leafFields && !$relationalFields) {
+        if (!$fields) {
             return;
         }
 
@@ -233,18 +216,23 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
-        foreach ($leafFields as $leafField) {
-            /**
-             * If the key doesn't exist, then do nothing.
-             */
-            if (!$resolvedObject->contains($leafField)) {
+        foreach ($fields as $field) {
+            if ($field instanceof LeafField) {
+                /** @var LeafField */
+                $leafField = $field;
+                /**
+                 * If the key doesn't exist, then do nothing.
+                 */
+                if (!$resolvedObject->contains($leafField)) {
+                    continue;
+                }
+                $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
                 continue;
             }
-            $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
-        }
 
-        // Add the nested levels
-        foreach ($relationalFields as $relationalField) {
+            /** @var RelationalField */
+            $relationalField = $field;
+
             /**
              * If the key doesn't exist, then do nothing.
              */
