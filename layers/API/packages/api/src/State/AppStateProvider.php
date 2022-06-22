@@ -9,13 +9,11 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
-use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
-use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
@@ -23,17 +21,6 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?ParserInterface $parser = null;
-
-    final public function setParser(ParserInterface $parser): void
-    {
-        $this->parser = $parser;
-    }
-    final protected function getParser(): ParserInterface
-    {
-        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
-    }
-
     public function initialize(array &$state): void
     {
         $state['executable-document-ast'] = null;
@@ -96,7 +83,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $operationName = $state['operation-name'];
 
         try {
-            $executableDocument = $this->parseGraphQLQuery(
+            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variableValues,
                 $operationName
@@ -107,25 +94,5 @@ class AppStateProvider extends AbstractAppStateProvider
             // ...
             $state['does-api-query-have-errors'] = true;
         }
-    }
-
-    /**
-     * @throws SyntaxErrorException
-     * @throws InvalidRequestException
-     */
-    protected function parseGraphQLQuery(
-        string $query,
-        array $variableValues,
-        ?string $operationName,
-    ): ExecutableDocument {
-        $document = $this->getParser()->parse($query)->setAncestorsInAST();
-        /** @var ExecutableDocument */
-        $executableDocument = (
-            new ExecutableDocument(
-                $document,
-                new Context($operationName, $variableValues)
-            )
-        )->validateAndInitialize();
-        return $executableDocument;
     }
 }

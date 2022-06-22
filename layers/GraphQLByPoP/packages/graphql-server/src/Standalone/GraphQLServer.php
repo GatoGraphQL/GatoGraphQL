@@ -6,15 +6,16 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
 use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Response\Schemes;
@@ -98,10 +99,6 @@ class GraphQLServer implements GraphQLServerInterface
     {
         return App::getContainer()->get(GraphQLDataStructureFormatter::class);
     }
-    protected function getParser(): ParserInterface
-    {
-        return App::getContainer()->get(ParserInterface::class);
-    }
 
     /**
      * The basic state for executing GraphQL queries is already set.
@@ -131,9 +128,8 @@ class GraphQLServer implements GraphQLServerInterface
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
 
-        // @todo Fix: this code is duplicated! It's also in api/src/State/AppStateProvider.php, keep DRY!
         try {
-            $executableDocument = $this->parseGraphQLQuery(
+            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variables,
                 $operationName
@@ -159,25 +155,5 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Return the Response, so the client can retrieve content and headers
         return App::getResponse();
-    }
-
-    /**
-     * @throws SyntaxErrorException
-     * @throws InvalidRequestException
-     */
-    protected function parseGraphQLQuery(
-        string $query,
-        array $variableValues,
-        ?string $operationName,
-    ): ExecutableDocument {
-        $document = $this->getParser()->parse($query)->setAncestorsInAST();
-        /** @var ExecutableDocument */
-        $executableDocument = (
-            new ExecutableDocument(
-                $document,
-                new Context($operationName, $variableValues)
-            )
-        )->validateAndInitialize();
-        return $executableDocument;
     }
 }
