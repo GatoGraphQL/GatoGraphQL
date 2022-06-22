@@ -44,7 +44,7 @@ class AppStateProvider extends AbstractAppStateProvider
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['nested-mutations-enabled'] = $moduleConfiguration->enableNestedMutations();
-        $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection();
+        $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection() ?? true;
     }
 
     public function compute(array &$state): void
