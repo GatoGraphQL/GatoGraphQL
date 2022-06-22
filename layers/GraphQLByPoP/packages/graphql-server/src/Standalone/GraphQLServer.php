@@ -15,7 +15,6 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
-use PoPAPI\API\Facades\FieldQueryConvertorFacade;
 use PoPAPI\API\Response\Schemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;

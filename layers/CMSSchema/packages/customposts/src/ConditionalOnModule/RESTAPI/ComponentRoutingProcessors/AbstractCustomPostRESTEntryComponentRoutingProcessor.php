@@ -10,22 +10,30 @@ use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingP
 
 class AbstractCustomPostRESTEntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
-        return 'id|title|date|url|content';
+        return <<<GRAPHQL
+            query {
+                id
+                title
+                date
+                url
+                content
+            }
+        GRAPHQL;
     }
 
     /**
      * Add an additional hook on this abstract class
      */
-    public function getRESTFieldsQuery(): string
+    public function getGraphQLQueryToResolveRESTEndpoint(): string
     {
-        if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = (string) App::applyFilters(
+        if ($this->restEndpointGraphQLQuery === null) {
+            $this->restEndpointGraphQLQuery = (string) App::applyFilters(
                 HookHelpers::getHookName(__CLASS__),
-                parent::getRESTFieldsQuery()
+                parent::getGraphQLQueryToResolveRESTEndpoint()
             );
         }
-        return $this->restFieldsQuery;
+        return $this->restEndpointGraphQLQuery;
     }
 }

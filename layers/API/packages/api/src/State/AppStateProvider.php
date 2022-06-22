@@ -19,8 +19,6 @@ use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
-use PoPAPI\API\Facades\FieldQueryConvertorFacade;
-use PoPAPI\API\PersistedQueries\PersistedQueryUtils;
 use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider

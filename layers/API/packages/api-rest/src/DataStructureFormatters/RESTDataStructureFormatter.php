@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace PoPAPI\RESTAPI\DataStructureFormatters;
 
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
+use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     private ?EngineInterface $engine = null;
+    private ?ParserInterface $parser = null;
 
     final public function setEngine(EngineInterface $engine): void
     {
@@ -19,6 +26,14 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     final protected function getEngine(): EngineInterface
     {
         return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
+    }
+    final public function setParser(ParserInterface $parser): void
+    {
+        $this->parser = $parser;
+    }
+    final protected function getParser(): ParserInterface
+    {
+        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
     }
 
     public function getName(): string
@@ -34,10 +49,41 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function getFields(): array
     {
         $entryComponent = $this->getEngine()->getEntryComponent();
-        if ($fields = $entryComponent->atts['fields'] ?? null) {
-            return $fields;
+        $query = $entryComponent->atts['query'] ?? null;
+        if ($query === null || $query === '') {
+            return parent::getFields();
         }
 
-        return parent::getFields();
+        // Parse the GraphQL query
+        $variableValues = App::getState('variables');
+
+        try {
+            $executableDocument = $this->parseGraphQLQuery(
+                $query,
+                $variableValues,
+            );
+        } catch (SyntaxErrorException | InvalidRequestException $e) {
+            return [];
+        }
+        return $this->getFieldsFromExecutableDocument($executableDocument);
+    }
+
+    /**
+     * @throws SyntaxErrorException
+     * @throws InvalidRequestException
+     */
+    protected function parseGraphQLQuery(
+        string $query,
+        array $variableValues,
+    ): ExecutableDocument {
+        $document = $this->getParser()->parse($query)->setAncestorsInAST();
+        /** @var ExecutableDocument */
+        $executableDocument = (
+            new ExecutableDocument(
+                $document,
+                new Context(null, $variableValues)
+            )
+        )->validateAndInitialize();
+        return $executableDocument;
     }
 }

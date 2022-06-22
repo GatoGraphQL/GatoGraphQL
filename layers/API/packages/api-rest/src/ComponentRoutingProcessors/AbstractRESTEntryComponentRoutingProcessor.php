@@ -5,18 +5,15 @@ declare(strict_types=1);
 namespace PoPAPI\RESTAPI\ComponentRoutingProcessors;
 
 use PoP\Root\App;
-use PoPAPI\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
 
 abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
-    protected ?string $restFieldsQuery = null;
-    protected ?array $restFields = null;
+    protected ?string $restEndpointGraphQLQuery = null;
 
     private ?RESTDataStructureFormatter $restDataStructureFormatter = null;
-    private ?FieldQueryConvertorInterface $fieldQueryConvertor = null;
 
     final public function setRESTDataStructureFormatter(RESTDataStructureFormatter $restDataStructureFormatter): void
     {
@@ -26,35 +23,17 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
     {
         return $this->restDataStructureFormatter ??= $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
     }
-    final public function setFieldQueryConvertor(FieldQueryConvertorInterface $fieldQueryConvertor): void
-    {
-        $this->fieldQueryConvertor = $fieldQueryConvertor;
-    }
-    final protected function getFieldQueryConvertor(): FieldQueryConvertorInterface
-    {
-        return $this->fieldQueryConvertor ??= $this->instanceManager->getInstance(FieldQueryConvertorInterface::class);
-    }
 
-    public function getRESTFields(): array
+    public function getGraphQLQueryToResolveRESTEndpoint(): string
     {
-        if (is_null($this->restFields)) {
-            $restFields = $this->getRESTFieldsQuery();
-            $fieldQuerySet = $this->getFieldQueryConvertor()->convertAPIQuery($restFields);
-            $this->restFields = $fieldQuerySet->getRequestedFieldQuery();
-        }
-        return $this->restFields;
-    }
-
-    public function getRESTFieldsQuery(): string
-    {
-        if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = (string) App::applyFilters(
+        if ($this->restEndpointGraphQLQuery === null) {
+            $this->restEndpointGraphQLQuery = (string) App::applyFilters(
                 HookHelpers::getHookName(get_called_class()),
-                $this->getInitialRESTFields()
+                $this->doGetGraphQLQueryToResolveRESTEndpoint()
             );
         }
-        return $this->restFieldsQuery;
+        return $this->restEndpointGraphQLQuery;
     }
 
-    abstract protected function getInitialRESTFields(): string;
+    abstract protected function doGetGraphQLQueryToResolveRESTEndpoint(): string;
 }
