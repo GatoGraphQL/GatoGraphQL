@@ -16,6 +16,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDa
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Symplify\MonorepoBuilder\Config\MBConfig;
+use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
 
 class ContainerConfigurationService
@@ -38,8 +39,19 @@ class ContainerConfigurationService
                 CustomOption::PACKAGE_ORGANIZATIONS,
                 $packageOrganizationConfig->getPackagePathOrganizations()
             );
-            $this->mbConfig->packageDirectories($packageOrganizationConfig->getPackageDirectories());
-            $this->mbConfig->packageDirectoriesExcludes($packageOrganizationConfig->getPackageDirectoryExcludes());
+
+            // @todo Check error: "[ERROR] The file "graphql-api-for-wp/wordpress" does not exist."
+            // Then remove deprecated 
+            // $this->mbConfig->packageDirectories($packageOrganizationConfig->getPackageDirectories());
+            // $this->mbConfig->packageDirectoriesExcludes($packageOrganizationConfig->getPackageDirectoryExcludes());
+            $parameters->set(
+                Option::PACKAGE_DIRECTORIES,
+                $packageOrganizationConfig->getPackageDirectories()
+            );
+            $parameters->set(
+                Option::PACKAGE_DIRECTORIES_EXCLUDES,
+                $packageOrganizationConfig->getPackageDirectoryExcludes()
+            );
         }
 
         /**
