@@ -34,8 +34,8 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function getFields(): array
     {
         $entryComponent = $this->getEngine()->getEntryComponent();
-        if ($fields = $entryComponent->atts['fields'] ?? null) {
-            return $fields;
+        if ($query = $entryComponent->atts['query'] ?? null) {
+            return $query;
         }
 
         return parent::getFields();
