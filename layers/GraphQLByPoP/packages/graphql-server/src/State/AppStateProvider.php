@@ -70,19 +70,10 @@ class AppStateProvider extends AbstractAppStateProvider
             return;
         }
 
-        $operationName = $state['graphql-operation-name'];
-
         /**
          * Set the operation type and, based on it, if mutations are supported.
-         * Because with Multiple Query Execution the document can contain multiple
-         * operations, use the type from the selected one, which is only one.
          */
-        $requestedOperations = $executableDocument->getRequestedOperations();
-        /** @var OperationInterface */
-        $requestedOperation = count($requestedOperations) === 1
-            ? $requestedOperations[0]
-            : array_filter($requestedOperations, fn (OperationInterface $operation) => $operation->getName() === $operationName)[0];
-
+        $requestedOperation = $executableDocument->getRequestedOperation();
         $state['graphql-operation-type'] = $requestedOperation->getOperationType();
         $state['are-mutations-enabled'] = $requestedOperation->getOperationType() === OperationTypes::MUTATION;
     }

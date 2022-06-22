@@ -127,6 +127,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('graphql-operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
         $appStateManager->override('graphql-operation-type', null);
+
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
@@ -142,15 +143,8 @@ class GraphQLServer implements GraphQLServerInterface
 
             /**
              * Set the operation type and, based on it, if mutations are supported.
-             * Because with Multiple Query Execution the document can contain multiple
-             * operations, use the type from the selected one, which is only one.
              */
-            $requestedOperations = $executableDocument->getRequestedOperations();
-            /** @var OperationInterface */
-            $requestedOperation = count($requestedOperations) === 1
-                ? $requestedOperations[0]
-                : array_filter($requestedOperations, fn (OperationInterface $operation) => $operation->getName() === $operationName)[0];
-
+            $requestedOperation = $executableDocument->getRequestedOperation();
             $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
         } catch (SyntaxErrorException | InvalidRequestException $e) {
