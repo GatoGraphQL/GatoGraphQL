@@ -37,7 +37,7 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
 
     public function getGraphQLQueryToResolveRESTEndpoint(): array
     {
-        if (is_null($this->restEndpointGraphQLQuery)) {
+        if ($this->restEndpointGraphQLQuery === null) {
             $restEndpointGraphQLQuery = $this->getRESTFieldsQuery();
             $fieldQuerySet = $this->getFieldQueryConvertor()->convertAPIQuery($restEndpointGraphQLQuery);
             $this->restEndpointGraphQLQuery = $fieldQuerySet->getRequestedFieldQuery();
@@ -47,7 +47,7 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
 
     public function getRESTFieldsQuery(): string
     {
-        if (is_null($this->restFieldsQuery)) {
+        if ($this->restFieldsQuery === null) {
             $this->restFieldsQuery = (string) App::applyFilters(
                 HookHelpers::getHookName(get_called_class()),
                 $this->getInitialRESTFields()
