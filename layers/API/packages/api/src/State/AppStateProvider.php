@@ -39,7 +39,6 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         $state['executable-document-ast'] = null;
-        $state['requested-query'] = null;
         $state['does-api-query-have-errors'] = null;
 
         // Passing the query via URL param?
