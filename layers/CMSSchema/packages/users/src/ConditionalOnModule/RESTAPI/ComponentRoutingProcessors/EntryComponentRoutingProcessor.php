@@ -20,7 +20,13 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
 {
     protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
-        return 'id|name|url';
+        return <<<GRAPHQL
+            query {
+                id
+                name
+                url
+            }
+        GRAPHQL;
     }
 
     /**

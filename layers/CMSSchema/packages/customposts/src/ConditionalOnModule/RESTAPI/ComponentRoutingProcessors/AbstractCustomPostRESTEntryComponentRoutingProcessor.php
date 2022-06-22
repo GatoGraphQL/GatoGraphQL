@@ -12,7 +12,15 @@ class AbstractCustomPostRESTEntryComponentRoutingProcessor extends AbstractRESTE
 {
     protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
-        return 'id|title|date|url|content';
+        return <<<GRAPHQL
+            query {
+                id
+                title
+                date
+                url
+                content
+            }
+        GRAPHQL;
     }
 
     /**
