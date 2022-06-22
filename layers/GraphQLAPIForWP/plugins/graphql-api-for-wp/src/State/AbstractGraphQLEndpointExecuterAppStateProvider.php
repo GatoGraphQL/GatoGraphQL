@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\State;
 
 use GraphQLAPI\GraphQLAPI\Services\EndpointExecuters\GraphQLEndpointExecuterInterface;
-use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\App;
@@ -14,7 +13,6 @@ use PoP\Root\State\AbstractAppStateProvider;
 abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractAppStateProvider
 {
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
-    private ?GraphQLQueryConvertorInterface $graphQLQueryConvertor = null;
 
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
     {
@@ -23,14 +21,6 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
-    }
-    final public function setGraphQLQueryConvertor(GraphQLQueryConvertorInterface $graphQLQueryConvertor): void
-    {
-        $this->graphQLQueryConvertor = $graphQLQueryConvertor;
-    }
-    final protected function getGraphQLQueryConvertor(): GraphQLQueryConvertorInterface
-    {
-        return $this->graphQLQueryConvertor ??= $this->instanceManager->getInstance(GraphQLQueryConvertorInterface::class);
     }
 
     abstract protected function getGraphQLEndpointExecuter(): GraphQLEndpointExecuterInterface;

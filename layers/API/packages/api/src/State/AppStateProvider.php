@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPAPI\API\State;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
@@ -44,6 +44,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
+        $state['operation-name'] = EngineRequest::getOperationName($enableModifyingEngineBehaviorViaRequest);
     }
 
     public function consolidate(array &$state): void
@@ -76,20 +77,6 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = false;
     }
 
-    /**
-     * The query must be converted to array, which has 2 outputs:
-     *
-     *   1. The actual requested query
-     *   2. The executable query, created by doing transformations on the requested query
-     *
-     * For instance, when doing query batching, fields in the executable query
-     * will be prepended with "self" to have the operations be executed in stric order.
-     *
-     * The executable query is the one needed to load data, so it's saved under "query".
-     * The requested query is used to display the data, for instance for GraphQL.
-     * It's saved under "requested-query" in $state, and it's optional: if empty,
-     * requested = executable => the executable query from $state['query'] can be used
-     */
     public function compute(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {
@@ -106,7 +93,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         $variableValues = $state['variables'];
-        $operationName = $state['graphql-operation-name'];
+        $operationName = $state['operation-name'];
 
         try {
             $executableDocument = $this->parseGraphQLQuery(

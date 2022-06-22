@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Module;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Response\Schemes;
@@ -122,8 +124,13 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
-        $appStateManager->override('graphql-operation-name', $operationName);
+        $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
+        $appStateManager->override('graphql-operation-type', null);
+
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
 
         // @todo Fix: this code is duplicated! It's also in api/src/State/AppStateProvider.php, keep DRY!
         try {
@@ -133,20 +140,19 @@ class GraphQLServer implements GraphQLServerInterface
                 $operationName
             );
             $appStateManager->override('executable-document-ast', $executableDocument);
+
+            /**
+             * Set the operation type and, based on it, if mutations are supported.
+             */
+            /** @var OperationInterface */
+            $requestedOperation = $executableDocument->getRequestedOperation();
+            $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
+            $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
         } catch (SyntaxErrorException | InvalidRequestException $e) {
             // @todo Show GraphQL error in client
             // ...
             $appStateManager->override('does-api-query-have-errors', true);
         }
-
-        // Convert the query to AST and set on the state
-        [$operationType, $fieldQuery] = GraphQLQueryConvertorFacade::getInstance()->convertFromGraphQLToFieldQuery(
-            $query,
-            $variables,
-            $operationName,
-        );
-        $appStateManager->override('graphql-operation-type', $operationType);
-        $appStateManager->override('are-mutations-enabled', $operationType === OperationTypes::MUTATION);
 
         // Generate the data, print the response to buffer, and send headers
         $engine = EngineFacade::getInstance();

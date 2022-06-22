@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\State;
 
+use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
+use GraphQLByPoP\GraphQLServer\Configuration\Request;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
-use GraphQLByPoP\GraphQLServer\Module;
-use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
-use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
+use PoPAPI\API\Response\Schemes as APISchemes;
+use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
@@ -36,6 +39,8 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['edit-schema'] = null;
         }
 
+        $state['graphql-operation-type'] = null;
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
@@ -52,5 +57,25 @@ class AppStateProvider extends AbstractAppStateProvider
         // By default, Standard GraphQL has introspection enabled, and PQL is not
         $enableGraphQLIntrospection = $moduleConfiguration->enableGraphQLIntrospection();
         $state['graphql-introspection-enabled'] = $enableGraphQLIntrospection ?? $standardGraphQL;
+    }
+
+    public function compute(array &$state): void
+    {
+        if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
+            return;
+        }
+
+        $executableDocument = $state['executable-document-ast'];
+        if ($executableDocument === null) {
+            return;
+        }
+
+        /**
+         * Set the operation type and, based on it, if mutations are supported.
+         */
+        /** @var OperationInterface */
+        $requestedOperation = $executableDocument->getRequestedOperation();
+        $state['graphql-operation-type'] = $requestedOperation->getOperationType();
+        $state['are-mutations-enabled'] = $requestedOperation->getOperationType() === OperationTypes::MUTATION;
     }
 }

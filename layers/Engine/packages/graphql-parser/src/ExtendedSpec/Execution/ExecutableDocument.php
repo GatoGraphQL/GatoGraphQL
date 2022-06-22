@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
-use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
@@ -62,5 +63,24 @@ class ExecutableDocument extends UpstreamExecutableDocument
                 $variableReference->setContext($context);
             }
         }
+    }
+
+    /**
+     * Override: If no operationName was provided, then it's assigned to __ALL
+     */
+    public function getRequestedOperation(): ?OperationInterface
+    {
+        $requestedOperations = $this->getRequestedOperations();
+        if (count($requestedOperations) === 1 || !empty($this->context->getOperationName())) {
+            return parent::getRequestedOperation();
+        }
+
+        /**
+         * Multiple operations, and no operationName requested => use __ALL
+         */
+        return $this->getMatchingRequestedOperation(
+            $this->document->getOperations(),
+            QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
+        );
     }
 }
