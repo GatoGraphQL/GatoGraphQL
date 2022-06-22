@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\ConditionalOnModule\RESTAPI\Hooks\RESTFields;
 
-use PoP\Root\App;
-use PoP\Root\Hooks\AbstractHookSet;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
+use PoPAPI\RESTAPI\Hooks\AbstractRESTHookSet;
 use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\AbstractCustomPostRESTEntryComponentRoutingProcessor;
 
-class CustomPostHookSet extends AbstractHookSet
+class CustomPostHookSet extends AbstractRESTHookSet
 {
     const COMMENT_RESTFIELDS = 'comments { id content }';
 
-    protected function init(): void
+    protected function getHookName(): string
     {
-        App::addFilter(
-            HookHelpers::getHookName(AbstractCustomPostRESTEntryComponentRoutingProcessor::class),
-            $this->hookGraphQLQueryToResolveRESTEndpoint(...)
-        );
+        return HookHelpers::getHookName(AbstractCustomPostRESTEntryComponentRoutingProcessor::class);
     }
-
-    public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
+    
+    protected function getGraphQLFieldsToAppend(): string
     {
-        return str_replace('query {', 'query { ' . self::COMMENT_RESTFIELDS . ' ', $restEndpointGraphQLQuery);
+        return self::COMMENT_RESTFIELDS;
     }
 }

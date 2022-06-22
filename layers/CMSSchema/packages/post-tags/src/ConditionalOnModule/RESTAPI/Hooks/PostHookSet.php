@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\ConditionalOnModule\RESTAPI\Hooks;
 
-use PoP\Root\App;
-use PoP\Root\Hooks\AbstractHookSet;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
+use PoPAPI\RESTAPI\Hooks\AbstractRESTHookSet;
 use PoPCMSSchema\Posts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\EntryComponentRoutingProcessor;
 
-class PostHookSet extends AbstractHookSet
+class PostHookSet extends AbstractRESTHookSet
 {
     const TAG_RESTFIELDS = 'tags { id name url }';
 
-    protected function init(): void
+    protected function getHookName(): string
     {
-        App::addFilter(
-            HookHelpers::getHookName(EntryComponentRoutingProcessor::class),
-            $this->hookGraphQLQueryToResolveRESTEndpoint(...)
-        );
+        return HookHelpers::getHookName(EntryComponentRoutingProcessor::class);
     }
-
-    public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
+    
+    protected function getGraphQLFieldsToAppend(): string
     {
-        return str_replace('query {', 'query { ' . self::TAG_RESTFIELDS . ' ', $restEndpointGraphQLQuery);
+        return self::TAG_RESTFIELDS;
     }
 }
