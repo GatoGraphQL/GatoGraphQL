@@ -13,7 +13,7 @@ use PoPAPI\RESTAPI\Helpers\HookHelpers;
 abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     protected ?string $restFieldsQuery = null;
-    protected ?array $restFields = null;
+    protected ?array $restEndpointGraphQLQuery = null;
 
     private ?RESTDataStructureFormatter $restDataStructureFormatter = null;
     private ?FieldQueryConvertorInterface $fieldQueryConvertor = null;
@@ -37,12 +37,12 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
 
     public function getGraphQLQueryToResolveRESTEndpoint(): array
     {
-        if (is_null($this->restFields)) {
-            $restFields = $this->getRESTFieldsQuery();
-            $fieldQuerySet = $this->getFieldQueryConvertor()->convertAPIQuery($restFields);
-            $this->restFields = $fieldQuerySet->getRequestedFieldQuery();
+        if (is_null($this->restEndpointGraphQLQuery)) {
+            $restEndpointGraphQLQuery = $this->getRESTFieldsQuery();
+            $fieldQuerySet = $this->getFieldQueryConvertor()->convertAPIQuery($restEndpointGraphQLQuery);
+            $this->restEndpointGraphQLQuery = $fieldQuerySet->getRequestedFieldQuery();
         }
-        return $this->restFields;
+        return $this->restEndpointGraphQLQuery;
     }
 
     public function getRESTFieldsQuery(): string

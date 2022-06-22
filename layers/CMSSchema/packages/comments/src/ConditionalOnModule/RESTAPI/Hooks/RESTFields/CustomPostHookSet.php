@@ -21,8 +21,8 @@ class CustomPostHookSet extends AbstractHookSet
         );
     }
 
-    public function getGraphQLQueryToResolveRESTEndpoint($restFields): string
+    public function getGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
     {
-        return $restFields . ',' . self::COMMENT_RESTFIELDS;
+        return $restEndpointGraphQLQuery . ',' . self::COMMENT_RESTFIELDS;
     }
 }
