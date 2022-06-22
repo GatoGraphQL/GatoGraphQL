@@ -35,7 +35,6 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        $state['graphql-operation-name'] = null;
         $state['standard-graphql'] = true;
     }
 
