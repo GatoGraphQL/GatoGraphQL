@@ -117,8 +117,8 @@ class ContainerConfigurationService
          * Libraries that must always be required (or removed) in composer.json
          */
         if ($dataToAppendAndRemoveConfig = $this->getDataToAppendAndRemoveDataSource()) {
-            $parameters->dataToAppend($dataToAppendAndRemoveConfig->getDataToAppend());
-            $parameters->dataToRemove($dataToAppendAndRemoveConfig->getDataToRemove());
+            $this->mbConfig->dataToAppend($dataToAppendAndRemoveConfig->getDataToAppend());
+            $this->mbConfig->dataToRemove($dataToAppendAndRemoveConfig->getDataToRemove());
         }
 
         /**
