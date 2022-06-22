@@ -238,7 +238,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
         foreach ($leafFields as $leafField) {
             // Only if the property has been set (in case of dbError it is not set)
-            $leaftFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($leafField);
+            $leafFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($leafField);
 
             // @todo Re-do this logic, by passing the FieldInterface directly
             /** @var FieldInterface|null */
@@ -246,14 +246,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             /** @var FieldInterface[] */
             $resolvedObjectFields = iterator_to_array($resolvedObject);
             foreach ($resolvedObjectFields as $resolvedObjectField) {
-                if ($resolvedObjectField->getOutputKey() === $leaftFieldOutputKey) {
+                if ($resolvedObjectField->getOutputKey() === $leafFieldOutputKey) {
                     $leafFieldInstance = $resolvedObjectField;
                     break;
                 }
             }
 
             if ($leafFieldInstance !== null) {
-                $resolvedObjectRet[$leaftFieldOutputKey] = $resolvedObject[$leafFieldInstance];
+                $resolvedObjectRet[$leafFieldOutputKey] = $resolvedObject[$leafFieldInstance];
             }
         }
 
