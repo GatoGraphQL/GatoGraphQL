@@ -14,6 +14,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\App;
 use SplObjectStorage;
 
@@ -155,7 +157,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     /**
      * @param array<string,mixed>|null $ret
-     * @param array<string|int,string|array<string>> $fields
+     * @param FieldInterface[] $fields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string|int>|string|integer $objectIDorIDs
@@ -166,15 +168,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         // Property fields have numeric key only. From them, obtain the fields to print for the object
         $leafFields = array_filter(
             $fields,
-            fn (string|int $key) =>  is_numeric($key),
-            ARRAY_FILTER_USE_KEY
+            fn (FieldInterface $field) => $field instanceof LeafField
         );
 
         // All other fields must be nested, to keep fetching data for the object relationships
         $relationalFields = array_filter(
             $fields,
-            fn (string|int $key) => !is_numeric($key),
-            ARRAY_FILTER_USE_KEY
+            fn (FieldInterface $field) => $field instanceof RelationalField
         );
 
         // The results can be a single ID or value, or an array of IDs
@@ -192,11 +192,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     }
 
     /**
-     * Undocumented function
-     *
      * @param array<string,mixed>|null $resolvedObjectRet
-     * @param array<string> $leafFields
-     * @param array<string,array<string>> $relationalFields
+     * @param FieldInterface[]> $leafFields
+     * @param FieldInterface[] $relationalFields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param string|integer $objectID
@@ -213,6 +211,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         if (!$leafFields && !$relationalFields) {
             return;
         }
+
         // Execute for all fields other than the first one, "root", for both UnionTypeResolvers and non-union ones
         // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
         // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
