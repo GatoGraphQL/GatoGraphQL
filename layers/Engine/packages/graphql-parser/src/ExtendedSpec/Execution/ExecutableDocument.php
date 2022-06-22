@@ -68,7 +68,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     /**
      * Override: If no operationName was provided, then it's assigned to __ALL
      */
-    public function getRequestedOperation(): OperationInterface
+    public function getRequestedOperation(): ?OperationInterface
     {
         $requestedOperations = $this->getRequestedOperations();
         if (count($requestedOperations) === 1 || !empty($this->context->getOperationName())) {

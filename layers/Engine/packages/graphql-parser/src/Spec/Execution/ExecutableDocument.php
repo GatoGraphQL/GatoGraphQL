@@ -195,7 +195,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
      *
      * @throws InvalidRequestException
      */
-    public function getRequestedOperation(): OperationInterface
+    public function getRequestedOperation(): ?OperationInterface
     {
         $requestedOperations = $this->getRequestedOperations();
         if (count($requestedOperations) === 1) {
@@ -209,13 +209,16 @@ class ExecutableDocument implements ExecutableDocumentInterface
         return $this->getMatchingRequestedOperation($this->context->getOperationName());
     }
 
-    protected function getMatchingRequestedOperation(string $operationName): OperationInterface
+    protected function getMatchingRequestedOperation(string $operationName): ?OperationInterface
     {
         $requestedOperations = $this->getRequestedOperations();
         $matchingOperations = array_values(array_filter(
             $requestedOperations,
             fn (OperationInterface $operation) => $operation->getName() === $operationName
         ));
+        if ($matchingOperations === []) {
+            return null;
+        }
         return $matchingOperations[0];
     }
 }

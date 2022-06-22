@@ -34,7 +34,7 @@ interface ExecutableDocumentInterface
      *
      * @throws InvalidRequestException
      */
-    public function getRequestedOperation(): OperationInterface;
+    public function getRequestedOperation(): ?OperationInterface;
 
     public function getDocument(): Document;
     public function getContext(): Context;
