@@ -11,7 +11,7 @@ use PoPAPI\RESTAPI\Helpers\HookHelpers;
 
 abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
-    protected ?array $restEndpointGraphQLQuery = null;
+    protected ?string $restEndpointGraphQLQuery = null;
 
     private ?RESTDataStructureFormatter $restDataStructureFormatter = null;
 
