@@ -149,15 +149,6 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('graphql-operation-type', $operationType);
         $appStateManager->override('are-mutations-enabled', $operationType === OperationTypes::MUTATION);
 
-        $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($fieldQuery);
-        $appStateManager->override('executable-query', $fieldQuerySet->getExecutableFieldQuery());
-        if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
-            $appStateManager->override('requested-query', $fieldQuerySet->getRequestedFieldQuery());
-        } else {
-            $appStateManager->override('requested-query', null);
-        }
-
         // Generate the data, print the response to buffer, and send headers
         $engine = EngineFacade::getInstance();
         $engine->generateDataAndPrepareResponse();

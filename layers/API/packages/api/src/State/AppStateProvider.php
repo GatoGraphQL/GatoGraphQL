@@ -39,8 +39,6 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         $state['executable-document-ast'] = null;
-        $state['executable-query'] = null;
-        $state['requested-query'] = null;
         $state['does-api-query-have-errors'] = null;
 
         // Passing the query via URL param?
@@ -123,20 +121,6 @@ class AppStateProvider extends AbstractAppStateProvider
             // @todo Show GraphQL error in client
             // ...
             $state['does-api-query-have-errors'] = true;
-        }
-
-        // @todo Remove all code below!!!
-
-        // If the query starts with "!", then it is the query name to a persisted query
-        $fieldQuery = $state['field-query'];
-        $fieldQuery = PersistedQueryUtils::maybeGetPersistedQuery($fieldQuery);
-
-        // Parse the query from string into the format needed to work with it
-        $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($fieldQuery);
-        $state['executable-query'] = $fieldQuerySet->getExecutableFieldQuery();
-        if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
-            $state['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
         }
     }
 

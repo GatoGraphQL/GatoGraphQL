@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPAPI\RESTAPI\DataStructureFormatters;
 
-use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 use PoP\ComponentModel\Engine\EngineInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
@@ -26,11 +27,12 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
 
     /**
-     * @return array<string|int,string>
+     * If provided, get the fields from the entry component atts.
+     *
+     * @return FieldInterface[]
      */
     protected function getFields(): array
     {
-        // Get the fields from the entry component atts
         $entryComponent = $this->getEngine()->getEntryComponent();
         if ($fields = $entryComponent->atts['fields'] ?? null) {
             return $fields;
