@@ -4,14 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugsFilterInput;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 
 abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?ParentIDFilterInput $parentIDFilterInput = null;
+    private ?SearchFilterInput $searchFilterInput = null;
+    private ?SlugsFilterInput $slugsFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -20,6 +26,30 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
+    {
+        $this->parentIDFilterInput = $parentIDFilterInput;
+    }
+    final protected function getParentIDFilterInput(): ParentIDFilterInput
+    {
+        return $this->parentIDFilterInput ??= $this->instanceManager->getInstance(ParentIDFilterInput::class);
+    }
+    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
+    {
+        $this->searchFilterInput = $searchFilterInput;
+    }
+    final protected function getSearchFilterInput(): SearchFilterInput
+    {
+        return $this->searchFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
+    }
+    final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
+    {
+        $this->slugsFilterInput = $slugsFilterInput;
+    }
+    final protected function getSlugsFilterInput(): SlugsFilterInput
+    {
+        return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
     }
 
     abstract protected function addParentIDInputField(): bool;
@@ -56,12 +86,12 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'search' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SEARCH],
-            'slugs' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_SLUGS],
-            'parentID' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_PARENT_ID],
+            'search' => $this->getSearchFilterInput(),
+            'slugs' => $this->getSlugsFilterInput(),
+            'parentID' => $this->getParentIDFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

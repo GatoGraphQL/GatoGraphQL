@@ -4,21 +4,25 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\SchemaHooks;
 
-use PoP\Root\App;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostsFilterInputObjectTypeResolverInterface;
-use PoPCMSSchema\Tags\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Tags\FilterInputs\TagIDsFilterInput;
+use PoPCMSSchema\Tags\FilterInputs\TagSlugsFilterInput;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?TagSlugsFilterInput $tagSlugsFilterInput = null;
+    private ?TagIDsFilterInput $tagIDsFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -35,6 +39,22 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setTagSlugsFilterInput(TagSlugsFilterInput $tagSlugsFilterInput): void
+    {
+        $this->tagSlugsFilterInput = $tagSlugsFilterInput;
+    }
+    final protected function getTagSlugsFilterInput(): TagSlugsFilterInput
+    {
+        return $this->tagSlugsFilterInput ??= $this->instanceManager->getInstance(TagSlugsFilterInput::class);
+    }
+    final public function setTagIDsFilterInput(TagIDsFilterInput $tagIDsFilterInput): void
+    {
+        $this->tagIDsFilterInput = $tagIDsFilterInput;
+    }
+    final protected function getTagIDsFilterInput(): TagIDsFilterInput
+    {
+        return $this->tagIDsFilterInput ??= $this->instanceManager->getInstance(TagIDsFilterInput::class);
     }
 
     protected function init(): void
@@ -117,16 +137,16 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?array {
+    ): ?FilterInputInterface {
         if (!($inputObjectTypeResolver instanceof PostsFilterInputObjectTypeResolverInterface)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'tagIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_IDS],
-            'tagSlugs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_TAG_SLUGS],
+            'tagIDs' => $this->getTagIDsFilterInput(),
+            'tagSlugs' => $this->getTagSlugsFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

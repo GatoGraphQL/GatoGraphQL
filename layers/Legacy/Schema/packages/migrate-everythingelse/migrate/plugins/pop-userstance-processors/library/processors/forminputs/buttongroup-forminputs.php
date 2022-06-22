@@ -4,16 +4,16 @@ class UserStance_Module_Processor_ButtonGroupFormInputs extends PoP_Module_Proce
 {
     public final const COMPONENT_FORMINPUT_BUTTONGROUP_STANCE = 'forminput-buttongroup-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE],
+            self::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE,
         );
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE:
                 return GD_FormInput_Stance::class;
         }
@@ -21,9 +21,9 @@ class UserStance_Module_Processor_ButtonGroupFormInputs extends PoP_Module_Proce
         return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_BUTTONGROUP_STANCE:
                 return 'stance';
         }

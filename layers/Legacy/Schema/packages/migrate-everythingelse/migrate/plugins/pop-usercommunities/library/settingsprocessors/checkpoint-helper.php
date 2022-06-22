@@ -1,22 +1,22 @@
 <?php
-use PoP\Engine\CheckpointProcessors\RequestCheckpointProcessor;
-use PoPCMSSchema\UserState\CheckpointProcessors\UserStateCheckpointProcessor;
+use PoP\Engine\Checkpoints\RequestCheckpoint;
+use PoPCMSSchema\UserState\Checkpoints\UserStateCheckpoint;
 
 const POPUSERCOMMUNITIES_CHECKPOINTCONFIGURATION_PROFILECOMMUNITY_STATIC = array(
-    [RequestCheckpointProcessor::class, RequestCheckpointProcessor::DOING_POST],
-    [UserStateCheckpointProcessor::class, UserStateCheckpointProcessor::USERLOGGEDIN],
-    [PoPCore_Dataload_CheckpointProcessor::class, PoPCore_Dataload_CheckpointProcessor::CHECKPOINT_PROFILEACCESS],
-    [PoP_UserCommunities_Dataload_UserCheckpointProcessor::class, PoP_UserCommunities_Dataload_UserCheckpointProcessor::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],
+    [RequestCheckpoint::class, RequestCheckpoint::DOING_POST],
+    [UserStateCheckpoint::class, UserStateCheckpoint::USERLOGGEDIN],
+    [PoPCore_Dataload_Checkpoint::class, PoPCore_Dataload_Checkpoint::CHECKPOINT_PROFILEACCESS],
+    [PoP_UserCommunities_Dataload_UserCheckpoint::class, PoP_UserCommunities_Dataload_UserCheckpoint::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],
 );
 const POPUSERCOMMUNITIES_CHECKPOINTCONFIGURATION_PROFILECOMMUNITY_DATAFROMSERVER = array(
-    [UserStateCheckpointProcessor::class, UserStateCheckpointProcessor::USERLOGGEDIN],
-    [PoPCore_Dataload_CheckpointProcessor::class, PoPCore_Dataload_CheckpointProcessor::CHECKPOINT_PROFILEACCESS],
-    [PoP_UserCommunities_Dataload_UserCheckpointProcessor::class, PoP_UserCommunities_Dataload_UserCheckpointProcessor::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],
+    [UserStateCheckpoint::class, UserStateCheckpoint::USERLOGGEDIN],
+    [PoPCore_Dataload_Checkpoint::class, PoPCore_Dataload_Checkpoint::CHECKPOINT_PROFILEACCESS],
+    [PoP_UserCommunities_Dataload_UserCheckpoint::class, PoP_UserCommunities_Dataload_UserCheckpoint::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],
 );
 const POPUSERCOMMUNITIES_CHECKPOINTCONFIGURATION_EDITMEMBERSHIP_DATAFROMSERVER = array(
-    [UserStateCheckpointProcessor::class, UserStateCheckpointProcessor::USERLOGGEDIN],
-    [PoPCore_Dataload_CheckpointProcessor::class, PoPCore_Dataload_CheckpointProcessor::CHECKPOINT_PROFILEACCESS],
-    [PoP_UserCommunities_Dataload_UserCheckpointProcessor::class, PoP_UserCommunities_Dataload_UserCheckpointProcessor::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],
-    [PoP_UserCommunities_Dataload_UserCheckpointProcessor::class, PoP_UserCommunities_Dataload_UserCheckpointProcessor::CHECKPOINT_EDITMEMBERSHIPNONCE],
-    [PoP_UserCommunities_Dataload_UserCheckpointProcessor::class, PoP_UserCommunities_Dataload_UserCheckpointProcessor::CHECKPOINT_EDITINGCOMMUNITYMEMBER],
+    [UserStateCheckpoint::class, UserStateCheckpoint::USERLOGGEDIN],
+    [PoPCore_Dataload_Checkpoint::class, PoPCore_Dataload_Checkpoint::CHECKPOINT_PROFILEACCESS],
+    [PoP_UserCommunities_Dataload_UserCheckpoint::class, PoP_UserCommunities_Dataload_UserCheckpoint::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY],
+    [PoP_UserCommunities_Dataload_UserCheckpoint::class, PoP_UserCommunities_Dataload_UserCheckpoint::CHECKPOINT_EDITMEMBERSHIPNONCE],
+    [PoP_UserCommunities_Dataload_UserCheckpoint::class, PoP_UserCommunities_Dataload_UserCheckpoint::CHECKPOINT_EDITINGCOMMUNITYMEMBER],
 );

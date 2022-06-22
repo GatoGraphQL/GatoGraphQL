@@ -5,15 +5,18 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners extends P
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEORGANIZATION = 'checkpointmessageinner-profileorganization';
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEINDIVIDUAL = 'checkpointmessageinner-profileindividual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEORGANIZATION],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEINDIVIDUAL],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEORGANIZATION,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEINDIVIDUAL,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -22,7 +25,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners extends P
             self::COMPONENT_CHECKPOINTMESSAGEINNER_PROFILEINDIVIDUAL => [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageAlertLayouts::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageAlertLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_PROFILEINDIVIDUAL],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

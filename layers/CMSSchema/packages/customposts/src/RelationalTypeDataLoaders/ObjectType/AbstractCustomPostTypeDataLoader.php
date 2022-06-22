@@ -33,6 +33,10 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
         return $this->filterCustomPostStatusEnumTypeResolver ??= $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
@@ -46,17 +50,21 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
         return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
-    protected function getOrderbyDefault()
+    protected function getOrderbyDefault(): string
     {
         return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date');
     }
 
-    protected function getOrderDefault()
+    protected function getOrderDefault(): string
     {
         return 'DESC';
     }
 
-    public function executeQueryIDs($query): array
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string|int>
+     */
+    public function executeQueryIDs(array $query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
@@ -64,7 +72,10 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
         return $this->executeQuery($query, $options);
     }
 
-    protected function getLimitParam($query_args)
+    /**
+     * @param array<string,mixed> $query_args
+     */
+    protected function getLimitParam(array $query_args): int
     {
         return App::applyFilters(
             'CustomPostTypeDataLoader:query:limit',
@@ -72,7 +83,7 @@ abstract class AbstractCustomPostTypeDataLoader extends AbstractObjectTypeQuerya
         );
     }
 
-    protected function getQueryHookName()
+    protected function getQueryHookName(): string
     {
         // Allow to add the timestamp for loadingLatest
         return 'CustomPostTypeDataLoader:query';

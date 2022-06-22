@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+
 trait PoP_CommonAutomatedEmails_Module_SettingsProcessor_Trait
 {
     public function routesToProcess()
@@ -12,8 +14,10 @@ trait PoP_CommonAutomatedEmails_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTCONTENT_WEEKLY => POPSYSTEM_CHECKPOINTCONFIGURATION_SYSTEMACCESSVALID,//PoPSystem_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPSYSTEM_CHECKPOINTCONFIGURATION_SYSTEMACCESSVALID),

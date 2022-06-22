@@ -3,37 +3,37 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LatestCountsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LATESTCOUNT];
     }
 
-    public function getClasses(array $component, array &$props)
+    public function getClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
 
-    public function getLinkClass(array $component, array &$props)
+    public function getLinkClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-link';
     }
 
-    public function getWrapperClass(array $component, array &$props)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'text-center alert alert-info alert-sm';
     }
 
-    public function getObjectName(array $component, array &$props)
+    public function getObjectName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return TranslationAPIFacade::getInstance()->__('post', 'pop-coreprocessors');
     }
 
-    public function getObjectNames(array $component, array &$props)
+    public function getObjectNames(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return TranslationAPIFacade::getInstance()->__('posts', 'pop-coreprocessors');
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return
         '<i class="fa fa-fw fa-eye"></i>'.
@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_LatestCountsBase extends PoPEngine_QueryData
         );
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_LatestCountsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -67,7 +67,7 @@ abstract class PoP_Module_Processor_LatestCountsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -76,7 +76,7 @@ abstract class PoP_Module_Processor_LatestCountsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Initially hidden

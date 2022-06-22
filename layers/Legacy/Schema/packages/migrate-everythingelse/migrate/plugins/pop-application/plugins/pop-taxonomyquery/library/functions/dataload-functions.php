@@ -18,17 +18,17 @@ function gdDataloadAllcontentTaxqueryItems()
             );
 
             // Allow to add the taxonomies for all custom types
-            return \PoP\Root\App::applyFilters('pop_component:allcontent:tax_query_items', $tax_query_items);
+            return \PoP\Root\App::applyFilters('pop_element:allcontent:tax_query_items', $tax_query_items);
         }
 
         // Calculate all the terms automatically, by querying the category-like taxonomies from all searchable post types,
         // and getting all the terms (categories) within
-        $components = gdDataloadAllcontentComponents();
-        foreach ($components as $component) {
+        $elements = gdDataloadAllcontentElements();
+        foreach ($elements as $element) {
             $tax_query_items[] = array(
                 array(
-                    'taxonomy' => $component['taxonomy'],
-                    'terms' => $component['terms'],
+                    'taxonomy' => $element['taxonomy'],
+                    'terms' => $element['terms'],
                 ),
             );
         }

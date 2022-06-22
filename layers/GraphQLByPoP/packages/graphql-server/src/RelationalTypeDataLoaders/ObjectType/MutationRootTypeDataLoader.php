@@ -20,6 +20,10 @@ class MutationRootTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->mutationRoot ??= $this->instanceManager->getInstance(MutationRoot::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         return [

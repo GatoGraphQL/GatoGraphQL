@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_FormFeedbackMessageLayoutsBase extends PoP_Module_Processor_FeedbackMessageLayoutsBase
 {
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
         $ret['error-header'] = $this->getProp($component, $props, 'error-header');
@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_FormFeedbackMessageLayoutsBase extends PoP_M
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'error-header', TranslationAPIFacade::getInstance()->__('Oops, there were some problems:', 'pop-coreprocessors'));
         $this->setProp($component, $props, 'success-header', TranslationAPIFacade::getInstance()->__('Success!', 'pop-coreprocessors'));

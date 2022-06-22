@@ -10,19 +10,19 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
     public final const COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL = 'buttoninner-poststance-neutral';
     public final const COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST = 'buttoninner-poststance-against';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONINNER_STANCE_CREATE],
-            [self::class, self::COMPONENT_BUTTONINNER_STANCE_UPDATE],
-            [self::class, self::COMPONENT_LAZYBUTTONINNER_STANCE_CREATEORUPDATE],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTSTANCE_PRO],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL],
-            [self::class, self::COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST],
+            self::COMPONENT_BUTTONINNER_STANCE_CREATE,
+            self::COMPONENT_BUTTONINNER_STANCE_UPDATE,
+            self::COMPONENT_LAZYBUTTONINNER_STANCE_CREATEORUPDATE,
+            self::COMPONENT_BUTTONINNER_POSTSTANCE_PRO,
+            self::COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL,
+            self::COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST,
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_BUTTONINNER_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
@@ -32,14 +32,14 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
             self::COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
 
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow Events to have a different title
@@ -59,16 +59,16 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
             self::COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 
         return parent::getBtnTitle($component);
     }
 
-    public function getTextField(array $component, array &$props)
+    public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONINNER_POSTSTANCE_PRO:
                 return 'stanceProCount';
 

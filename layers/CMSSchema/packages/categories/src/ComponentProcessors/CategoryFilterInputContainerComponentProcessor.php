@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
@@ -16,28 +17,31 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
     public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
     public final const COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES,
+            self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORIES,
+            self::COMPONENT_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT,
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    /**
+     * @return Component[]
+     */
+    public function getFilterInputComponents(Component $component): array
     {
         $categoryFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH],
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS],
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SEARCH),
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUGS),
         ];
         $topLevelCategoryFilterInputComponents = [
-            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID],
+            new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_PARENT_ID),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_CATEGORIES => [
                 ...$categoryFilterInputComponents,
                 ...$topLevelCategoryFilterInputComponents,

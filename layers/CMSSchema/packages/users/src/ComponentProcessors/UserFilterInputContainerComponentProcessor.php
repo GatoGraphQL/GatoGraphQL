@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
 use PoPCMSSchema\Users\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 
@@ -16,27 +17,30 @@ class UserFilterInputContainerComponentProcessor extends AbstractFilterInputCont
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS = 'filterinputcontainer-adminusers';
     public final const COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT = 'filterinputcontainer-adminusercount';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_USERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_USERCOUNT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT],
+            self::COMPONENT_FILTERINPUTCONTAINER_USERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_USERCOUNT,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_ADMINUSERCOUNT,
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    /**
+     * @return Component[]
+     */
+    public function getFilterInputComponents(Component $component): array
     {
         $userFilterInputComponents = [
             ...$this->getIDFilterInputComponents(),
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_NAME],
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_NAME),
         ];
         $adminUserFilterInputComponents = [
-            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EMAILS],
+            new Component(FilterInputComponentProcessor::class, FilterInputComponentProcessor::COMPONENT_FILTERINPUT_EMAILS),
         ];
         $paginationFilterInputComponents = $this->getPaginationFilterInputComponents();
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_USERS => [
                 ...$userFilterInputComponents,
                 ...$paginationFilterInputComponents,

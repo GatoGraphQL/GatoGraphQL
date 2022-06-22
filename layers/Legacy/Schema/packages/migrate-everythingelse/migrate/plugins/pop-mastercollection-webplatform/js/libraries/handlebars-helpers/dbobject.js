@@ -1,13 +1,13 @@
 "use strict";
 
-Handlebars.registerHelper('withDBObject', function(dbKey, objectID, options) {
+Handlebars.registerHelper('withDBObject', function(typeOutputKey, objectID, options) {
 
 	var context = options.hash.context || this;
 	var tls = context.tls;
 	var domain = tls.domain;
 
-	// Replace the context with only the dbObject
-	var context = pop.Manager.getDBObject(domain, dbKey, objectID);
+	// Replace the context with only the resolvedObject
+	var context = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 	
 	return options.fn(context);
 });

@@ -11,7 +11,7 @@ class PoP_AddComments_UserState_Module_SettingsProcessor extends \PoPCMSSchema\U
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => false,

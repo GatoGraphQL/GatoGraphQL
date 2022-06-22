@@ -1,14 +1,15 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engine
 {
@@ -37,7 +38,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         );
     }
 
-    public function getComponentSettings(array $component, $model_props, array &$props)
+    public function getComponentSettings(\PoP\ComponentModel\Component\Component $component, $model_props, array &$props)
     {
         $ret = parent::getComponentSettings($component, $model_props, $props);
 
@@ -47,7 +48,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($component);
+        $processor = $componentprocessor_manager->getComponentProcessor($component);
 
         $cachemanager = null;
         if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
@@ -124,13 +125,13 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array
+    public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
         $ret = parent::getComponentData($root_component, $root_model_props, $root_props);
 
         // Only add the extra information if the entry-component is of the right object class
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $root_processor = $componentprocessor_manager->getProcessor($root_component);
+        $root_processor = $componentprocessor_manager->getComponentProcessor($root_component);
 
         // Only add the extra information if the entry-component is of the right object class
         if ($root_processor instanceof PoP_WebPlatformQueryDataComponentProcessorBase) {
@@ -171,7 +172,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
     protected function processAndAddComponentData(
         array $component_path,
-        array $component,
+        \PoP\ComponentModel\Component\Component $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
@@ -187,7 +188,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($component);
+        $processor = $componentprocessor_manager->getComponentProcessor($component);
 
         $datasource = $data_properties[DataloadingConstants::DATASOURCE];
 
@@ -207,8 +208,8 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             if ($feedback = $processor->getJsdataFeedbackDatasetcomponentTree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
 
                 // Advance the position of the array into the current component
-                foreach ($component_path as $subComponent) {
-                    $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subComponent);
+                foreach ($component_path as $subcomponent) {
+                    $subcomponentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
                     $componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')] = $componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')] ?? array();
                     $componentjsdata = &$componentjsdata[$subcomponentOutputName][ComponentModelModuleInfo::get('response-prop-subcomponents')];
                 }
@@ -340,14 +341,14 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
     }
 
-    // protected function getJsonModuleImmutableSettings(array $component, array &$props) {
+    // protected function getJsonModuleImmutableSettings(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	$json_settings = parent::getJsonModuleImmutableSettings($component, $props);
 
     // 	// Otherwise, get the dynamic configuration
-    // 	$processor = $componentprocessor_manager->getProcessor($component);
+    // 	$processor = $componentprocessor_manager->getComponentProcessor($component);
 
     // 	$json_settings['components-cbs'] = $processor->getModulesCbs($component, $props);
     // 	$json_settings['components-paths'] = $processor->getModulesPaths($component, $props);
@@ -367,14 +368,14 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	);
     // }
 
-    // protected function getJsonModuleMutableonrequestSettings(array $component, array &$props) {
+    // protected function getJsonModuleMutableonrequestSettings(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	$json_runtimesettings = parent::getJsonModuleMutableonrequestSettings($component, $props);
 
     // 	// Otherwise, get the dynamic configuration
-    // 	$processor = $componentprocessor_manager->getProcessor($component);
+    // 	$processor = $componentprocessor_manager->getComponentProcessor($component);
 
     // 	$json_runtimesettings['js-settings'] = $processor->get_js_runtimesettings($component, $props);
 

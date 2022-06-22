@@ -7,15 +7,15 @@ abstract class PoP_Module_Processor_SubmitButtonsBase extends PoP_Module_Process
     // OTHER Functions (Organize!)
     //-------------------------------------------------
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'fa-paper-plane';
     }
-    public function getType(array $component)
+    public function getType(\PoP\ComponentModel\Component\Component $component)
     {
         return 'submit';
     }
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // If the class was already set by any parent module, then use that already
@@ -26,17 +26,17 @@ abstract class PoP_Module_Processor_SubmitButtonsBase extends PoP_Module_Process
 
         return 'btn btn-primary btn-block';
     }
-    public function getTextClass(array $component)
+    public function getTextClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
 
-    public function getLoadingText(array $component, array &$props)
+    public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -50,7 +50,7 @@ abstract class PoP_Module_Processor_SubmitButtonsBase extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($loading_text = $this->getLoadingText($component, $props)) {
             $this->mergeProp(

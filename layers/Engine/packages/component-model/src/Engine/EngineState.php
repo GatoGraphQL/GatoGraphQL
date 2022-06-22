@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class EngineState
 {
@@ -50,12 +54,12 @@ class EngineState
          * @var array<string, mixed>
          */
         public array $outputData = [],
-        public ?array $entryComponent = null,
+        public ?Component $entryComponent = null,
         /**
          * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
-         * @var array<string,array<string,mixed>>
+         * @var array<string,array<string,RelationalTypeResolverInterface|array<string|int,EngineIterationFieldSet>>>
          */
-        public array $relationalTypeOutputDBKeyIDsDataFields = [],
+        public array $relationalTypeOutputKeyIDFieldSets = [],
         /**
          * After executing `resolveValue` on the Object/UnionTypeResolver,
          * store the results to re-use for subsequent calls for same object/field.
@@ -92,14 +96,14 @@ class EngineState
     public function hasObjectTypeResolvedValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $field,
+        FieldInterface $field,
         array $variables,
         array $expressions,
     ): bool {
         $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        return array_key_exists($field, $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID] ?? []);
+        return array_key_exists($field->getUniqueID(), $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID] ?? []);
     }
 
     /**
@@ -109,14 +113,14 @@ class EngineState
     public function getObjectTypeResolvedValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $field,
+        FieldInterface $field,
         array $variables,
         array $expressions,
     ): mixed {
         $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        return $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field];
+        return $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->getUniqueID()];
     }
 
     /**
@@ -126,7 +130,7 @@ class EngineState
     public function setObjectTypeResolvedValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $field,
+        FieldInterface $field,
         array $variables,
         array $expressions,
         mixed $value,
@@ -134,7 +138,7 @@ class EngineState
         $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field] = $value;
+        $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->getUniqueID()] = $value;
     }
 
     protected function getDataHash(array $data): string

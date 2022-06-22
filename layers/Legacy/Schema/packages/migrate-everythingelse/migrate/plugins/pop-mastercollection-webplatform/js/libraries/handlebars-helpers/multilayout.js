@@ -1,18 +1,18 @@
 "use strict";
 
-Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, objectID, conditionDataFieldModules, $defaultModule, context, options) {
+Handlebars.registerHelper('withConditionalOnDataFieldModule', function(typeOutputKey, objectID, conditionDataFieldModules, $defaultModule, context, options) {
 
 	var tls = context.tls;
 	var domain = tls.domain;
 
 	// Obtain the key composed as: 'post_type'-'mainCategory'
-	var dbObject = pop.Manager.getDBObject(domain, dbKey, objectID);
+	var resolvedObject = pop.Manager.getDBObject(domain, typeOutputKey, objectID);
 
 	// Fetch the layout for that particular configuration
 	var layout = '';
 	jQuery.each(conditionDataFieldModules, function(conditionField, componentOutputName) {
 		// Check if the property evals to `true`. If so, use the corresponding module
-		if (dbObject[conditionField]) {
+		if (resolvedObject[conditionField]) {
 			layout = componentOutputName;
 			return false;
 		}
@@ -29,8 +29,8 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, ob
 	// Render the content from this layout
 	var layoutContext = context[pop.c.JS_SUBCOMPONENTS][layout];
 
-	// Add dbKey and objectID back into the context
-	jQuery.extend(layoutContext, {dbKey: dbKey, objectID: objectID});
+	// Add typeOutputKey and objectID back into the context
+	jQuery.extend(layoutContext, {typeOutputKey: typeOutputKey, objectID: objectID});
 
 	// Expand the JS Keys
 	pop.Manager.expandJSKeys(layoutContext);
@@ -38,12 +38,12 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, ob
 	return options.fn(layoutContext);
 });
 
-Handlebars.registerHelper('layoutLabel', function(dbKey, dbObject, options) {
+Handlebars.registerHelper('layoutLabel', function(typeOutputKey, resolvedObject, options) {
 
 	var label = '';
-	jQuery.each(dbObject['multilayoutKeys'], function(index, key) {
+	jQuery.each(resolvedObject['multilayoutKeys'], function(index, key) {
 
-		label = pop.c.MULTILAYOUT_LABELS[dbObject[key]];
+		label = pop.c.MULTILAYOUT_LABELS[resolvedObject[key]];
 		if (label) {
 			return -1;
 		}

@@ -17,30 +17,33 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
     public final const COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'widget-referencedby-appendtoscript-simpleview';
     public final const COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'widget-referencedby-appendtoscript-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_FULLVIEW],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW],
+            self::COMPONENT_WIDGET_HIGHLIGHTS,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW,
+            self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_WIDGET_REFERENCEDBY_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_REFERENCEDBY_FULLVIEW,
+            self::COMPONENT_WIDGET_REFERENCEDBY_DETAILS,
+            self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW,
+            self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS:
                 $ret[] = [PoP_Module_Processor_HighlightedPostSubcomponentLayouts::class, PoP_Module_Processor_HighlightedPostSubcomponentLayouts::COMPONENT_LAYOUT_HIGHLIGHTEDPOST_ADDONS];
                 break;
@@ -85,7 +88,7 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $extracts = TranslationAPIFacade::getInstance()->__('Highlights', 'poptheme-wassup');
         $additionals = TranslationAPIFacade::getInstance()->__('Responses', 'pop-coreprocessors');
@@ -105,9 +108,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW => $additionals,
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGET_HIGHLIGHTS => 'fa-asterisk',
@@ -125,11 +128,11 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
             self::COMPONENT_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW => 'fa-asterisk',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS:
@@ -149,9 +152,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS:
@@ -169,9 +172,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS:
@@ -189,9 +192,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getWidgetClass($component, $props);
     }
-    public function getTitleWrapperClass(array $component, array &$props)
+    public function getTitleWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS:
@@ -204,9 +207,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getTitleWrapperClass($component, $props);
     }
-    public function getTitleClass(array $component, array &$props)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS:
@@ -218,9 +221,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubcomponent(array $component)
+    public function getQuicklinkgroupSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_SIMPLEVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_FULLVIEW:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
@@ -236,9 +239,9 @@ class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 
         return parent::getQuicklinkgroupSubcomponent($component);
     }
-    public function collapsible(array $component, array &$props)
+    public function collapsible(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_HIGHLIGHTS_DETAILS:
             case self::COMPONENT_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
             case self::COMPONENT_WIDGET_REFERENCEDBY_DETAILS:

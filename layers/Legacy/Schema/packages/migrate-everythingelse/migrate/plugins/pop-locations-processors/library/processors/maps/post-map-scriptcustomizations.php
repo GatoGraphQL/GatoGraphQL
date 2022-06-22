@@ -4,10 +4,10 @@ class PoP_Module_Processor_PostMapScriptCustomizations extends PoP_Module_Proces
 {
     public final const COMPONENT_MAP_SCRIPTCUSTOMIZATION_POST = 'em-map-scriptcustomization-post';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAP_SCRIPTCUSTOMIZATION_POST],
+            self::COMPONENT_MAP_SCRIPTCUSTOMIZATION_POST,
         );
     }
 }

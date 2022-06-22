@@ -6,16 +6,16 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
     public final const COMPONENT_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'filterinputcontainer-authorlocationposts';
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'filterinputcontainer-taglocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_LOCATIONPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS],
+            self::COMPONENT_FILTERINPUTCONTAINER_LOCATIONPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -42,7 +42,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Locations:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -53,14 +53,14 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_LOCATIONPOSTS => POP_FILTER_LOCATIONPOSTS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS => POP_FILTER_AUTHORLOCATIONPOSTS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS => POP_FILTER_TAGLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

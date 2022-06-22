@@ -2,7 +2,7 @@
 
 abstract class GD_WSL_Module_Processor_NetworkLinkBlocksBase extends PoP_Module_Processor_BlocksBase
 {
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -10,7 +10,7 @@ abstract class GD_WSL_Module_Processor_NetworkLinkBlocksBase extends PoP_Module_
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -20,7 +20,7 @@ abstract class GD_WSL_Module_Processor_NetworkLinkBlocksBase extends PoP_Module_
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Visible only if the user not logged in

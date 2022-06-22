@@ -1,19 +1,19 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
     
         /* FIX THIS: 'url' */
@@ -21,7 +21,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
         $data_fields = array('displayName', 'url', 'isCommunity');
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             // Important: the TYPEAHEAD_COMPONENT should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
-            // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetcomponentTreeSectionFlattenedDataFields
+            // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetComponentTreeSectionFlattenedDataProperties
             // To fix this, in self::COMPONENT_FORMINPUT_TYPEAHEAD data_properties we stop spreading down, so it never reaches below there to get further data-fields
 
             // Important: for Component the size is fixed! It can't be changed from 'avatar-40', because it is hardcoded
@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
         return $data_fields;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -43,9 +43,10 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
             $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);
 
             $ret['avatar'] = array(
-                'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $avatar_field),
+                'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+                    $this->getProp($component, $props, 'succeeding-typeResolver'),
+                    $avatar_field // @todo Fix: pass LeafField
+                ),
                 'size' => $avatar_size
             );
         }

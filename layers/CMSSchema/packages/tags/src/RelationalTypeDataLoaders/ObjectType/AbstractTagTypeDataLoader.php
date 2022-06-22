@@ -13,6 +13,10 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
 {
     abstract public function getTagTypeAPI(): TagTypeAPIInterface;
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
@@ -20,12 +24,12 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
         ];
     }
 
-    protected function getOrderbyDefault()
+    protected function getOrderbyDefault(): string
     {
         return $this->getNameResolver()->getName('popcms:dbcolumn:orderby:tags:count');
     }
 
-    protected function getOrderDefault()
+    protected function getOrderDefault(): string
     {
         return 'DESC';
     }
@@ -36,7 +40,11 @@ abstract class AbstractTagTypeDataLoader extends AbstractObjectTypeQueryableData
         return $tagTypeAPI->getTags($query, $options);
     }
 
-    public function executeQueryIDs($query): array
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string|int>
+     */
+    public function executeQueryIDs(array $query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

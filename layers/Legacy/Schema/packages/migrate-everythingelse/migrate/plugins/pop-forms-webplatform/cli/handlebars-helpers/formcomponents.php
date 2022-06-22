@@ -4,10 +4,10 @@
  */
 class PoP_Forms_ServerSide_FormcomponentsHelperCallers
 {
-    public static function formcomponentValue($value, $dbObject, $dbObjectField, $defaultValue, $options)
+    public static function formcomponentValue($value, $resolvedObject, $resolvedObjectField, $defaultValue, $options)
     {
         global $pop_serverside_formcomponentshelpers;
-        return $pop_serverside_formcomponentshelpers->formcomponentValue($value, $dbObject, $dbObjectField, $defaultValue, $options);
+        return $pop_serverside_formcomponentshelpers->formcomponentValue($value, $resolvedObject, $resolvedObjectField, $defaultValue, $options);
     }
 }
 

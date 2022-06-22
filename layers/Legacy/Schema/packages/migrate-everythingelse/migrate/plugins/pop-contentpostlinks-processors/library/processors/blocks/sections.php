@@ -20,32 +20,32 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
     public final const COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST = 'block-authorlinks-scroll-list';
     public final const COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST = 'block-taglinks-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_LINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_LINKS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_LINKS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_LIST => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
@@ -66,7 +66,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_LINKS_SCROLL_NAVIGATOR => [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_LINKS_SCROLL_NAVIGATOR],
@@ -88,12 +88,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
             self::COMPONENT_BLOCK_TAGLINKS_SCROLL_LIST => [PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::class, PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW:
@@ -118,9 +118,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Modu
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LINKS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_LINKS_SCROLL_SIMPLEVIEW:
             case self::COMPONENT_BLOCK_LINKS_SCROLL_FULLVIEW:

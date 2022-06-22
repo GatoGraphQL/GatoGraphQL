@@ -5,17 +5,17 @@ class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAv
     public final const COMPONENT_LAYOUT_USERAVATAR_60 = 'layout-useravatar-60';
     public final const COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE = 'layout-useravatar-60-responsive';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_60],
-            [self::class, self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE],
+            self::COMPONENT_LAYOUT_USERAVATAR_60,
+            self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE,
         );
     }
 
-    public function getAvatarSize(array $component)
+    public function getAvatarSize(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERAVATAR_60:
             case self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE:
                 return GD_AVATAR_SIZE_60;
@@ -24,9 +24,9 @@ class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAv
         return parent::getAvatarSize($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERAVATAR_60_RESPONSIVE:
                 $this->appendProp($component, $props, 'class', 'img-responsive');
                 break;

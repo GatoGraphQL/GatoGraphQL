@@ -1,0 +1,22 @@
+##############################
+# Test that querying a same field twice,
+# for the same type and ID twice, works.
+#
+# To take into account are:
+#
+# - Caching: are the fields re-calculated, or taken from a cache?
+# - Uniqueness: are the fields considered the same, or different?
+#   (They are placed in different locations)
+# - Serialization: The object (eg: DateTime) must be converted
+#   to string for the output. Is this done OK on the second field?
+##############################
+{
+  post(by:{ id: 1724 }) {
+    title # Type: String
+    date # Type: DateTime <= requires serialization
+  }
+  again: post(by:{ id: 1724 }) {
+    title
+    date
+  }
+}

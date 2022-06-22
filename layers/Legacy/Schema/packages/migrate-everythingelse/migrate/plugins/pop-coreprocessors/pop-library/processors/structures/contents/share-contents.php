@@ -8,19 +8,19 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
     public final const COMPONENT_CONTENT_API = 'content-api';
     public final const COMPONENT_CONTENT_COPYSEARCHURL = 'content-copysearchurl';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENT_EMBEDPREVIEW],
-            [self::class, self::COMPONENT_CONTENT_EMBED],
-            [self::class, self::COMPONENT_CONTENT_API],
-            [self::class, self::COMPONENT_CONTENT_COPYSEARCHURL],
+            self::COMPONENT_CONTENT_EMBEDPREVIEW,
+            self::COMPONENT_CONTENT_EMBED,
+            self::COMPONENT_CONTENT_API,
+            self::COMPONENT_CONTENT_COPYSEARCHURL,
         );
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_EMBEDPREVIEW:
                 return sprintf(
                     '<h4><i class="fa fa-fw fa-eye"></i>%s</h4>',
@@ -44,9 +44,9 @@ class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBa
         return parent::getDescription($component, $props);
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENT_EMBEDPREVIEW:
                 return [PoP_Module_Processor_ShareContentInners::class, PoP_Module_Processor_ShareContentInners::COMPONENT_CONTENTINNER_EMBEDPREVIEW];
 

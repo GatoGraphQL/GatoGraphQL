@@ -5,16 +5,16 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
 {
     public final const COMPONENT_FORMINPUT_CUU_DESCRIPTION = 'forminput-cuu-description';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_CUU_DESCRIPTION],
+            self::COMPONENT_FORMINPUT_CUU_DESCRIPTION,
         );
     }
 
-    public function getRows(array $component, array &$props)
+    public function getRows(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_DESCRIPTION:
                 return 10;
         }
@@ -22,9 +22,9 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
         return parent::getRows($component, $props);
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_DESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Description', 'pop-coreprocessors');
         }
@@ -32,9 +32,9 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
         return parent::getLabelText($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUU_DESCRIPTION:
                 return 'description';
         }

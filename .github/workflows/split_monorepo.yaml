@@ -1,4 +1,4 @@
-name: Split Monorepo Dev-Master
+name: Split monorepo - dev-master
 
 on:
     push:

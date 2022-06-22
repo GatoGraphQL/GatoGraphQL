@@ -7,17 +7,17 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
     public final const COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION = 'contentinner-userstancepostinteraction';
     public final const COMPONENT_CONTENTINNER_STANCESINGLE = 'contentinner-stancesingle';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION],
-            [self::class, self::COMPONENT_CONTENTINNER_STANCESINGLE],
+            self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION,
+            self::COMPONENT_CONTENTINNER_STANCESINGLE,
         );
     }
 
-    protected function getCommentssingleLayouts(array $component)
+    protected function getCommentssingleLayouts(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $layouts = array(
                     [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
@@ -30,11 +30,14 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $ret = array_merge(
                     $ret,
@@ -51,9 +54,9 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $this->appendProp($component, $props, 'class', 'userpostinteraction-single');
                 break;
@@ -66,10 +69,10 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_STANCESINGLE:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if (POP_USERSTANCE_TERM_STANCE_PRO && $taxonomyapi->hasTerm(POP_USERSTANCE_TERM_STANCE_PRO, POP_USERSTANCE_TAXONOMY_STANCE, $post_id)) {

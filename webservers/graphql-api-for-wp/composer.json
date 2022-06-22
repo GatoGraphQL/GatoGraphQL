@@ -49,6 +49,10 @@
             "lando start"
         ],
         "destroy-server": "lando destroy -y",
+        "reset-db": [
+            "lando wp db reset --yes --path=wordpress",
+            "@install-site"
+        ],
         "install-site": "lando composer install-site-within-container",
         "install-site-within-container": "/bin/sh /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
@@ -65,6 +69,7 @@
             "@update-deps",
             "lando rebuild appserver -y"
         ],
+        "stop-server": "lando stop",
         "symlink-vendor-for-graphql-api-for-wp-plugin": [
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', '../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json",

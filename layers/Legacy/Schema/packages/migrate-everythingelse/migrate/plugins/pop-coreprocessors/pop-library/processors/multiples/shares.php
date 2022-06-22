@@ -6,20 +6,23 @@ class PoP_Module_Processor_ShareMultiples extends PoP_Module_Processor_Multiples
     public final const COMPONENT_MULTIPLE_API = 'multiple-api';
     public final const COMPONENT_MULTIPLE_COPYSEARCHURL = 'multiple-copysearchurl';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_EMBED],
-            [self::class, self::COMPONENT_MULTIPLE_API],
-            [self::class, self::COMPONENT_MULTIPLE_COPYSEARCHURL],
+            self::COMPONENT_MULTIPLE_EMBED,
+            self::COMPONENT_MULTIPLE_API,
+            self::COMPONENT_MULTIPLE_COPYSEARCHURL,
         );
     }
     
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_EMBED:
                 $ret[] = [PoP_Module_Processor_ShareContents::class, PoP_Module_Processor_ShareContents::COMPONENT_CONTENT_EMBED];
                 $ret[] = [PoP_Module_Processor_ShareContents::class, PoP_Module_Processor_ShareContents::COMPONENT_CONTENT_EMBEDPREVIEW];

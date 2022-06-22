@@ -4,10 +4,10 @@ class PoP_Module_Processor_AuthorContactLayouts extends PoP_Module_Processor_Aut
 {
     public final const COMPONENT_LAYOUT_AUTHOR_CONTACT = 'layout-author-contact';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_AUTHOR_CONTACT],
+            self::COMPONENT_LAYOUT_AUTHOR_CONTACT,
         );
     }
 }

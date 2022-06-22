@@ -5,21 +5,21 @@ class GD_CommonPages_Module_Processor_PageCodes extends PoP_Module_Processor_HTM
     public final const COMPONENT_PAGECODE_ADDCONTENTFAQ = 'pagecode-addcontentfaq';
     public final const COMPONENT_PAGECODE_ACCOUNTFAQ = 'pagecode-accountfaq';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_PAGECODE_ADDCONTENTFAQ],
-            [self::class, self::COMPONENT_PAGECODE_ACCOUNTFAQ],
+            self::COMPONENT_PAGECODE_ADDCONTENTFAQ,
+            self::COMPONENT_PAGECODE_ACCOUNTFAQ,
         );
     }
 
-    public function getPageId(array $component)
+    public function getPageId(\PoP\ComponentModel\Component\Component $component)
     {
         $page_ids = array(
             self::COMPONENT_PAGECODE_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
             self::COMPONENT_PAGECODE_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
         );
-        if ($page_id = $page_ids[$component[1]] ?? null) {
+        if ($page_id = $page_ids[$component->name] ?? null) {
             return $page_id;
         }
 

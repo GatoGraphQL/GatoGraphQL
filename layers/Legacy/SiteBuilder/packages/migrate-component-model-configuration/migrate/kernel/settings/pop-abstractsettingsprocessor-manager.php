@@ -31,7 +31,7 @@ abstract class AbstractSettingsProcessorManager
         $this->processors = array();
     }
 
-    public function getProcessor($route)
+    public function getComponentProcessor($route)
     {
         if ($this->processors[$route] ?? null) {
             return $this->processors[$route];

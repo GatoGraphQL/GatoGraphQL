@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Application\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ConfigurationComponentModel\ComponentProcessors\ComponentProcessorInterface as UpstreamComponentProcessorInterface;
 
 interface ComponentProcessorInterface extends UpstreamComponentProcessorInterface
 {
-    public function getDataloadMultidomainSources(array $component, array &$props): array;
-    public function getDataloadMultidomainQuerySources(array $component, array &$props): array;
-    public function queriesExternalDomain(array $component, array &$props): bool;
-    public function isMultidomain(array $component, array &$props): bool;
-    public function isLazyload(array $component, array &$props): bool;
+    public function getDataloadMultidomainSources(Component $component, array &$props): array;
+    public function getDataloadMultidomainQuerySources(Component $component, array &$props): array;
+    public function queriesExternalDomain(Component $component, array &$props): bool;
+    public function isMultidomain(Component $component, array &$props): bool;
+    public function isLazyload(Component $component, array &$props): bool;
 }

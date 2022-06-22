@@ -9,19 +9,19 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
     public final const COMPONENT_DELEGATORFILTER_EVENTS = 'delegatorfilter-events';
     public final const COMPONENT_DELEGATORFILTER_EVENTSCALENDAR = 'delegatorfilter-eventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DELEGATORFILTER_EVENTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHOREVENTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGEVENTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_EVENTSCALENDAR],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHOREVENTSCALENDAR],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGEVENTSCALENDAR],
+            self::COMPONENT_DELEGATORFILTER_EVENTS,
+            self::COMPONENT_DELEGATORFILTER_AUTHOREVENTS,
+            self::COMPONENT_DELEGATORFILTER_TAGEVENTS,
+            self::COMPONENT_DELEGATORFILTER_EVENTSCALENDAR,
+            self::COMPONENT_DELEGATORFILTER_AUTHOREVENTSCALENDAR,
+            self::COMPONENT_DELEGATORFILTER_TAGEVENTSCALENDAR,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_EVENTS => [PoP_Events_Module_Processor_CustomSimpleFilterInners::class, PoP_Events_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_EVENTS],
@@ -32,7 +32,7 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
             self::COMPONENT_DELEGATORFILTER_TAGEVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSimpleFilterInners::class, PoP_Events_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGEVENTSCALENDAR],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

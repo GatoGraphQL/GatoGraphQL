@@ -14,7 +14,7 @@ class PoP_UserStateModuleDecoratorProcessorHooks
         );
     }
 
-    public function addHeaddatasetcomponentDataProperties($ret_in_array, array $component, $props_in_array, $processor)
+    public function addHeaddatasetcomponentDataProperties($ret_in_array, \PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $processoruserstatedecorator = PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->getProcessorDecorator($processor);
 

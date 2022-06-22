@@ -6,19 +6,19 @@ class PoP_Module_Processor_CommentsFeedbackMessageLayouts extends PoP_Module_Pro
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_COMMENTS = 'layout-feedbackmessage-comments';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT = 'layout-feedbackmessage-addcomment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_COMMENTS],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_COMMENTS,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT,
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_COMMENTS:
                 $names = TranslationAPIFacade::getInstance()->__('comments', 'pop-coreprocessors');
                 $ret['noresults'] = sprintf(

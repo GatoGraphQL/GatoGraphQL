@@ -17,7 +17,7 @@ class UserStance_DataLoad_FilterHooks
         );
     }
 
-    public function filtercomponents($filterinputs, array $component)
+    public function filtercomponents($filterinputs, \PoP\ComponentModel\Component\Component $component)
     {
         if (in_array($component, [
             [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_STANCES],
@@ -38,7 +38,7 @@ class UserStance_DataLoad_FilterHooks
         }
         return $filterinputs;
     }
-    public function simplefiltercomponents($filterinputs, array $component)
+    public function simplefiltercomponents($filterinputs, \PoP\ComponentModel\Component\Component $component)
     {
         if (in_array($component, [
             [PoPVP_Module_Processor_CustomSimpleFilterInners::class, PoPVP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES],

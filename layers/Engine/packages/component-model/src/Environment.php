@@ -8,6 +8,7 @@ use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 
 class Environment
 {
+    public final const ENABLE_COMPONENT_MODEL_CACHE = 'ENABLE_COMPONENT_MODEL_CACHE';
     public final const USE_COMPONENT_MODEL_CACHE = 'USE_COMPONENT_MODEL_CACHE';
     public final const NAMESPACE_TYPES_AND_INTERFACES = 'NAMESPACE_TYPES_AND_INTERFACES';
     public final const ENABLE_MUTATIONS = 'ENABLE_MUTATIONS';

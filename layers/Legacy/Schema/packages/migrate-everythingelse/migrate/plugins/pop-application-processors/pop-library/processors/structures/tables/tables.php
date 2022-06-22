@@ -7,18 +7,18 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
     public final const COMPONENT_TABLE_MYHIGHLIGHTS = 'table-myhighlights';
     public final const COMPONENT_TABLE_MYPOSTS = 'table-myposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLE_MYCONTENT],
-            [self::class, self::COMPONENT_TABLE_MYHIGHLIGHTS],
-            [self::class, self::COMPONENT_TABLE_MYPOSTS],
+            self::COMPONENT_TABLE_MYCONTENT,
+            self::COMPONENT_TABLE_MYHIGHLIGHTS,
+            self::COMPONENT_TABLE_MYPOSTS,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYCONTENT:
             case self::COMPONENT_TABLE_MYHIGHLIGHTS:
             case self::COMPONENT_TABLE_MYPOSTS:
@@ -28,17 +28,17 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                     self::COMPONENT_TABLE_MYPOSTS => [PoP_Module_Processor_TableInners::class, PoP_Module_Processor_TableInners::COMPONENT_TABLEINNER_MYPOSTS],
                 );
 
-                return $inners[$component[1]];
+                return $inners[$component->name];
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getHeaderTitles(array $component)
+    public function getHeaderTitles(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getHeaderTitles($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYCONTENT:
                 $ret[] = TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'poptheme-wassup');
@@ -60,9 +60,9 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLE_MYHIGHLIGHTS:
                 $this->appendProp($component, $props, 'class', 'table-myhighlights');
                 break;

@@ -31,7 +31,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
     }
 
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
@@ -44,9 +44,9 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [
-                    'fields' => !empty(App::getState('query')) ?
-                        App::getState('query') :
-                        $this->getRESTFields()
+                    'fields' => !empty(App::getState('query'))
+                        ? App::getState('query')
+                        : $this->getRESTFields()
                     ]
                 ],
         );

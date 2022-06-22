@@ -75,85 +75,85 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
     public final const COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL = 'block-authorstances-carousel';
     public final const COMPONENT_BLOCK_TAGSTANCES_CAROUSEL = 'block-tagstances-carousel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_STANCES_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_STANCES_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL],
-            [self::class, self::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL],
+            self::COMPONENT_BLOCK_STANCES_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_STANCES_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_PRO_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_PRO_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_PRO_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_PRO_GENERAL_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_GENERAL_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_GENERAL_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_PRO_ARTICLE_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_AGAINST_ARTICLE_SCROLL_LIST,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_PRO_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGSTANCES_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGSTANCES_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGSTANCES_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGSTANCES_PRO_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_LIST,
+            self::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_TAGSTANCES_AGAINST_SCROLL_LIST,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_LIST,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_LIST,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_LIST,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST,
+            self::COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL,
+            self::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::COMPONENT_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
@@ -228,7 +228,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_STANCES_SCROLL_NAVIGATOR => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_SCROLL_NAVIGATOR],
@@ -303,12 +303,12 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_CAROUSEL],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
             case self::COMPONENT_BLOCK_STANCES_SCROLL_THUMBNAIL:
             case self::COMPONENT_BLOCK_STANCES_SCROLL_LIST:
@@ -390,9 +390,9 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getLatestcountSubcomponent(array $component)
+    public function getLatestcountSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STANCES_SCROLL_FULLVIEW:
             case self::COMPONENT_BLOCK_STANCES_SCROLL_LIST:
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::COMPONENT_LATESTCOUNT_STANCES];
@@ -461,9 +461,9 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         return parent::getLatestcountSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL:
                 // Artificial property added to identify the template when adding component-resources

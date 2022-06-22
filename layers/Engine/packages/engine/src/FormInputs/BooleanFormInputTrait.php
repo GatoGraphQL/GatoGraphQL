@@ -10,7 +10,7 @@ trait BooleanFormInputTrait
 {
     protected function getValueFromSource(?array $source = null): mixed
     {
-        // If it is not set, then return NULL, so that doing #formcomponentValue ignores value and proceeds to dbObject[dbObjectField]
+        // If it is not set, then return NULL, so that doing #formcomponentValue ignores value and proceeds to resolvedObject[resolvedObjectField]
         $value = $this->getValueFromSourceOrRequest($this->getName(), $source);
         if ($value === null) {
             return null;

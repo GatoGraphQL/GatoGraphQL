@@ -56,7 +56,7 @@ We can instruct a dataloading module to be lazy-loaded (i.e. instead of fetching
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
 
       // Set the content lazy
@@ -73,7 +73,7 @@ Being a prop, this value can be set either by the dataloading module itself, or 
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLESWRAPPER:
 
       // Set the content lazy
@@ -99,7 +99,7 @@ By default, a module will fetch its data from the domain where the application i
 ```php
 function initModelProps($component, &$props) {
     
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_SOMENAME:
 
       $this->setProp(
@@ -120,7 +120,7 @@ We can also pass an array of domains, in which case the module will fetch its da
 ```php
 function initModelProps($component, &$props) {
     
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_SOMENAME:
 
       $this->setProp(

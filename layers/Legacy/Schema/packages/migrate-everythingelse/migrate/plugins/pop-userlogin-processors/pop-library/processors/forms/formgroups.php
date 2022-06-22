@@ -9,19 +9,19 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
     public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD = 'forminputgroup-lostpwdreset-newpassword';
     public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT = 'forminputgroup-lostpwdreset-passwordrepeat';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOGIN_USERNAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOGIN_PWD],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWD_USERNAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_CODE],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT],
+            self::COMPONENT_FORMINPUTGROUP_LOGIN_USERNAME,
+            self::COMPONENT_FORMINPUTGROUP_LOGIN_PWD,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWD_USERNAME,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_CODE,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD,
+            self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT,
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_LOGIN_USERNAME => [PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOGIN_USERNAME],
@@ -32,7 +32,7 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
             self::COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT => [PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

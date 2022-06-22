@@ -1,9 +1,11 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
+
 class PoP_Module_BackgroundContentPageSectionComponentRoutingProcessor extends PoP_Module_BackgroundContentPageSectionComponentRoutingProcessorBase
 {
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

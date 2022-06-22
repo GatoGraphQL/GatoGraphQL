@@ -16,29 +16,29 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
     public final const COMPONENT_FORMINPUTGROUP_SENDERNAME = 'ure-forminputgroup-sendername';
     public final const COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE = 'ure-forminputgroup-additionalmessage';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_EDITOR],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_TEXTAREAEDITOR],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERUSER],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERPOST],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERTAG],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_ORDERCOMMENT],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_SEARCH],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_HASHTAGS],
-            [self::class, self::COMPONENT_FILTERINPUTGROUP_NAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_EMAILS],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_SENDERNAME],
-            [self::class, self::COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE],
+            self::COMPONENT_FORMINPUTGROUP_EDITOR,
+            self::COMPONENT_FORMINPUTGROUP_TEXTAREAEDITOR,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERUSER,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERPOST,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERTAG,
+            self::COMPONENT_FILTERINPUTGROUP_ORDERCOMMENT,
+            self::COMPONENT_FILTERINPUTGROUP_SEARCH,
+            self::COMPONENT_FILTERINPUTGROUP_HASHTAGS,
+            self::COMPONENT_FILTERINPUTGROUP_NAME,
+            self::COMPONENT_FORMINPUTGROUP_EMAILS,
+            self::COMPONENT_FORMINPUTGROUP_SENDERNAME,
+            self::COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE,
         );
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getLabelClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_ORDERUSER:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERPOST:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERTAG:
@@ -52,11 +52,11 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
         return $ret;
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTGROUP_ORDERUSER:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERPOST:
             case self::COMPONENT_FILTERINPUTGROUP_ORDERTAG:
@@ -71,7 +71,7 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_EDITOR => [PoP_Module_Processor_EditorFormInputs::class, PoP_Module_Processor_EditorFormInputs::COMPONENT_FORMINPUT_EDITOR],
@@ -88,18 +88,18 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
             self::COMPONENT_FORMINPUTGROUP_ADDITIONALMESSAGE => [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_SENDERNAME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -107,11 +107,11 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_SENDERNAME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -121,9 +121,9 @@ class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComp
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_SENDERNAME:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 

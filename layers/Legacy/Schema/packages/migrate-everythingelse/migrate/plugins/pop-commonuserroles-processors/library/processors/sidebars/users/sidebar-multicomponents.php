@@ -5,19 +5,22 @@ class GD_URE_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_M
     public final const COMPONENT_SIDEBARMULTICOMPONENT_ORGANIZATION = 'sidebarmulticomponent-organization';
     public final const COMPONENT_SIDEBARMULTICOMPONENT_INDIVIDUAL = 'sidebarmulticomponent-individual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_ORGANIZATION],
-            [self::class, self::COMPONENT_SIDEBARMULTICOMPONENT_INDIVIDUAL],
+            self::COMPONENT_SIDEBARMULTICOMPONENT_ORGANIZATION,
+            self::COMPONENT_SIDEBARMULTICOMPONENT_INDIVIDUAL,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARMULTICOMPONENT_ORGANIZATION:
                 $ret[] = [GD_URE_Custom_Module_Processor_UserWidgets::class, GD_URE_Custom_Module_Processor_UserWidgets::COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO];
                 $ret[] = [GD_URE_Module_Processor_SidebarComponentsWrappers::class, GD_URE_Module_Processor_SidebarComponentsWrappers::COMPONENT_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES];

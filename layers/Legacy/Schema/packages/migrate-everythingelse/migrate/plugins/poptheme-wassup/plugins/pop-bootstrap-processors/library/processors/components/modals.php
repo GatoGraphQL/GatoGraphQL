@@ -6,18 +6,18 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
 {
     public final const COMPONENT_MODAL_QUICKVIEW = 'modal-quickview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MODAL_QUICKVIEW],
+            self::COMPONENT_MODAL_QUICKVIEW,
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MODAL_QUICKVIEW:
                 $this->addJsmethod($ret, 'customQuickView');
                 $this->addJsmethod($ret, 'destroyPageOnModalClose', 'close');
@@ -27,13 +27,16 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         return $ret;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MODAL_QUICKVIEW:
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
@@ -65,11 +68,11 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
         return $ret;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getBodyClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MODAL_QUICKVIEW:
                 $ret .= ' pop-pagesection-group quickviewpagesection-group row';
                 break;

@@ -2,25 +2,25 @@
 
 abstract class PoP_Module_Processor_ButtonControlsBase extends PoP_Module_Processor_ControlsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_CONTROL_BUTTON];
     }
 
-    public function getType(array $component)
+    public function getType(\PoP\ComponentModel\Component\Component $component)
     {
         return 'button';
     }
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-default';
     }
-    public function getTextClass(array $component)
+    public function getTextClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'hidden-xs';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_ButtonControlsBase extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', $this->getBtnClass($component, $props));
         parent::initModelProps($component, $props);

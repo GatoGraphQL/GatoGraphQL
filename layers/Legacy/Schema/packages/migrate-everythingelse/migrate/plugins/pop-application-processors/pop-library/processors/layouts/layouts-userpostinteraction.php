@@ -5,19 +5,22 @@ class Wassup_Module_Processor_UserPostInteractionLayouts extends PoP_Module_Proc
     public final const COMPONENT_LAYOUT_USERPOSTINTERACTION = 'layout-userpostinteraction';
     public final const COMPONENT_LAYOUT_USERHIGHLIGHTPOSTINTERACTION = 'layout-userhighlightpostinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_LAYOUT_USERHIGHLIGHTPOSTINTERACTION],
+            self::COMPONENT_LAYOUT_USERPOSTINTERACTION,
+            self::COMPONENT_LAYOUT_USERHIGHLIGHTPOSTINTERACTION,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERPOSTINTERACTION:
                 // Allow TPPDebate to add the "What do you think about TPP?" before these layouts
                 if ($layouts = \PoP\Root\App::applyFilters(

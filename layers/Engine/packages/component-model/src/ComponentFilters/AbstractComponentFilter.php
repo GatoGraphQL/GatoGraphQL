@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentFilters;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -22,21 +23,25 @@ abstract class AbstractComponentFilter implements ComponentFilterInterface
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
-    public function excludeSubcomponent(array $component, array &$props): bool
+    public function excludeSubcomponent(Component $component, array &$props): bool
     {
         return false;
     }
 
-    public function removeExcludedSubcomponents(array $component, array $subComponents): array
+    /**
+     * @param Component[] $subcomponents
+     * @return Component[]
+     */
+    public function removeExcludedSubcomponents(Component $component, array $subcomponents): array
     {
-        return $subComponents;
+        return $subcomponents;
     }
 
-    public function prepareForPropagation(array $component, array &$props): void
+    public function prepareForPropagation(Component $component, array &$props): void
     {
     }
 
-    public function restoreFromPropagation(array $component, array &$props): void
+    public function restoreFromPropagation(Component $component, array &$props): void
     {
     }
 }

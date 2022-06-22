@@ -4,18 +4,18 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
 {
     public final const COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH = 'submitbuttonformgroup-search';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH],
+            self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH,
         );
     }
 
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getFormcontrolClass($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH:
                 $ret .= ' col-sm-offset-2 col-sm-10';
                 break;
@@ -24,13 +24,13 @@ class PoP_Module_Processor_FormGroups extends PoP_Module_Processor_FormGroupsBas
         return $ret;
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_SUBMITBUTTONFORMGROUP_SEARCH => [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SEARCH],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 

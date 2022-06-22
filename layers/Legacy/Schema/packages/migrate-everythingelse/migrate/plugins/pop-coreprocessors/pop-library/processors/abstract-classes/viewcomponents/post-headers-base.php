@@ -1,19 +1,20 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_PostViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_POST];
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $thumb = $this->getThumbField($component, $props);
         $data_fields = array('id', 'title', $thumb);
@@ -24,12 +25,12 @@ abstract class PoP_Module_Processor_PostViewComponentHeadersBase extends PoPEngi
         return $data_fields;
     }
 
-    public function headerShowUrl(array $component, array &$props)
+    public function headerShowUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getThumbField(array $component, array &$props)
+    public function getThumbField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return FieldQueryInterpreterFacade::getInstance()->getField(
             $this->getThumbFieldName($component, $props), 
@@ -38,22 +39,22 @@ abstract class PoP_Module_Processor_PostViewComponentHeadersBase extends PoPEngi
         );
     }
 
-    protected function getThumbFieldName(array $component, array &$props)
+    protected function getThumbFieldName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'thumb';
     }
 
-    protected function getThumbFieldArgs(array $component, array &$props)
+    protected function getThumbFieldArgs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return ['size' => 'thumb-xs'];
     }
 
-    protected function getThumbFieldAlias(array $component, array &$props)
+    protected function getThumbFieldAlias(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'thumb';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
     
@@ -63,9 +64,10 @@ abstract class PoP_Module_Processor_PostViewComponentHeadersBase extends PoPEngi
         }
 
         $ret['thumb'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+            'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($component, $props))
+                $this->getThumbField($component, $props) // @todo Fix: pass LeafField
+            )
         );
         
         return $ret;

@@ -1,0 +1,16 @@
+{
+  myPosts {
+    id
+    title
+  }
+  myCustomPosts {
+    __typename
+    ...on Post {
+      id
+      title
+    }
+  }
+  me {
+    id
+  }
+}

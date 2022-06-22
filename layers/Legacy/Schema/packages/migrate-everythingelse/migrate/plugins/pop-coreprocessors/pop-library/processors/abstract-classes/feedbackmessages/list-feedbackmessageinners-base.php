@@ -9,14 +9,14 @@ abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Mo
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(\PoP\ComponentModel\Component\Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
         
         // Show error message if no items, but only if the checkpoint did not fail
         // Do not show the message when doing loadLatest
         $checkpoint_failed = $dataaccess_checkpoint_validation !== null;
-        if (!$checkpoint_failed && empty($dbobjectids) && (!\PoP\Root\App::hasState('loading-latest') || !\PoP\Root\App::getState('loading-latest'))) {
+        if (!$checkpoint_failed && empty($objectIDs) && (!\PoP\Root\App::hasState('loading-latest') || !\PoP\Root\App::getState('loading-latest'))) {
             $query_args = $data_properties[DataloadingConstants::QUERYARGS];
             $pagenumber = $query_args[\PoP\ComponentModel\Constants\PaginationParams::PAGE_NUMBER];
 

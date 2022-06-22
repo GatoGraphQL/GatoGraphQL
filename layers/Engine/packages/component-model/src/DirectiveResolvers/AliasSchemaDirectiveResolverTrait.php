@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 /**
  * Create an alias of a directive, to use when:
@@ -262,7 +265,7 @@ trait AliasSchemaDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        string $field,
+        FieldInterface $field,
         array &$variables
     ): bool {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
@@ -287,24 +290,29 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function needsIDsDataFieldsToExecute(): bool
+    public function needsSomeIDFieldToExecute(): bool
     {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
-        return $aliasedDirectiveResolver->needsIDsDataFieldsToExecute();
+        return $aliasedDirectiveResolver->needsSomeIDFieldToExecute();
     }
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
-        array $unionDBKeyIDs,
-        array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
-        array &$dbItems,
+        array $idFieldSet,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
+        array $unionTypeOutputKeyIDs,
+        array $previouslyResolvedIDFieldValues,
+        array &$succeedingPipelineIDFieldSet,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -312,13 +320,13 @@ trait AliasSchemaDirectiveResolverTrait
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         $aliasedDirectiveResolver->resolveDirective(
             $relationalTypeResolver,
-            $idsDataFields,
-            $succeedingPipelineDirectiveResolverInstances,
-            $objectIDItems,
-            $unionDBKeyIDs,
-            $previousDBItems,
-            $succeedingPipelineIDsDataFields,
-            $dbItems,
+            $idFieldSet,
+            $succeedingPipelineDirectiveResolvers,
+            $idObjects,
+            $unionTypeOutputKeyIDs,
+            $previouslyResolvedIDFieldValues,
+            $succeedingPipelineIDFieldSet,
+            $resolvedIDFieldValues,
             $variables,
             $messages,
             $engineIterationFeedbackStore,

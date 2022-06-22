@@ -12,6 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
@@ -44,14 +45,18 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
     }
 
+    /**
+     * @param FieldInterface[] $fields
+     * @param FieldInterface[] $failedFields
+     */
     protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $dataFields,
+        array $fields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$failedDataFields,
+        array &$failedFields,
     ): void {
-        foreach ($dataFields as $field) {
+        foreach ($fields as $field) {
             $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->validateField(
                 $relationalTypeResolver,
@@ -66,14 +71,14 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
                 $this->directive
             );
             if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                $failedDataFields[] = $field;
+                $failedFields[] = $field;
             }
         }
     }
 
     protected function validateField(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $field,
+        FieldInterface $field,
         array &$variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

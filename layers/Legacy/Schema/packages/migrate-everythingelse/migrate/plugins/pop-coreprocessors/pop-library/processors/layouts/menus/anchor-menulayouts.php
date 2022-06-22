@@ -4,16 +4,16 @@ class PoP_Module_Processor_AnchorMenuLayouts extends PoP_Module_Processor_Anchor
 {
     public final const COMPONENT_LAYOUT_MENU_BUTTON = 'layout-menu-button';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MENU_BUTTON],
+            self::COMPONENT_LAYOUT_MENU_BUTTON,
         );
     }
 
-    public function getItemClass(array $component, array &$props)
+    public function getItemClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_BUTTON:
                 return 'btn btn-default btn-block';
         }

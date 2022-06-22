@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_CRUDMultiSelectFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
     public final const FILTERINPUT_CATEGORIES = 'filterinput-categories';
@@ -20,7 +20,10 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractF
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_POSTSECTIONS:
@@ -39,9 +42,9 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractF
                 $query['tax-query'] = $query['tax-query'] ?? ['relation' => 'AND'];
                 $taxonomy_terms = [];
                 foreach ($value as $pair) {
-                    $component = explode('|', $pair);
-                    $taxonomy = $component[0];
-                    $term = $component[1];
+                    $elements = explode('|', $pair);
+                    $taxonomy = $elements[0];
+                    $term = $elements[1];
                     $taxonomy_terms[$taxonomy][] = $term;
                 }
                 foreach ($taxonomy_terms as $taxonomy => $terms) {

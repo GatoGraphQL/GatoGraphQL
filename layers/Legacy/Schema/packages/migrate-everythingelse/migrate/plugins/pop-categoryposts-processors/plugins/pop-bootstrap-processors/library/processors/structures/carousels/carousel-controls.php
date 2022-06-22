@@ -68,75 +68,75 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
     public final const COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 = 'carouselcontrols-tagcategoryposts18';
     public final const COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 = 'carouselcontrols-tagcategoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS19],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS19],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19],
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS01,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS02,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS03,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS04,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS05,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS06,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS07,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS08,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS09,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS10,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS11,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS12,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS13,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS14,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS15,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS16,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS17,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS18,
+            self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS19,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS00,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS01,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS02,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS03,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS04,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS05,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS06,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS07,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS08,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS09,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS10,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS11,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS12,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS13,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS14,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS15,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS16,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS17,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS18,
+            self::COMPONENT_CAROUSELCONTROLS_AUTHORCATEGORYPOSTS19,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS00,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS01,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS02,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS03,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS04,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS05,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS06,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS07,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS08,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS09,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS10,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS11,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS12,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS13,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS14,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS15,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS16,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS17,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18,
+            self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19,
         );
     }
 
-    public function getControlClass(array $component)
+    public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS01:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS02:
@@ -203,9 +203,9 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
         return parent::getControlClass($component);
     }
 
-    public function getTitleClass(array $component)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS01:
             case self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS02:
@@ -271,7 +271,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
 
         return parent::getTitleClass($component);
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_CAROUSELCONTROLS_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -335,13 +335,13 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return RouteUtils::getRouteTitle($route);
         }
 
         return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
@@ -411,13 +411,13 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::COMPONENT_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return RouteUtils::getRouteURL($route);
-        } elseif ($route = $authorroutes[$component[1]] ?? null) {
+        } elseif ($route = $authorroutes[$component->name] ?? null) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $url = $userTypeAPI->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
-        } elseif ($route = $tagroutes[$component[1]] ?? null) {
+        } elseif ($route = $tagroutes[$component->name] ?? null) {
             $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
             return RequestUtils::addRoute($url, $route);
         }

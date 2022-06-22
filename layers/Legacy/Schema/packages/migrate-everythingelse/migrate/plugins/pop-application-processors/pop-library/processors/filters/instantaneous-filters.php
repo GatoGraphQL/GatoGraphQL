@@ -5,22 +5,22 @@ class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_Ins
     public final const COMPONENT_INSTANTANEOUSFILTER_CONTENTSECTIONS = 'instantaneousfilter-contentsections';
     public final const COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS = 'instantaneousfilter-postsections';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_INSTANTANEOUSFILTER_CONTENTSECTIONS],
-            [self::class, self::COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS],
+            self::COMPONENT_INSTANTANEOUSFILTER_CONTENTSECTIONS,
+            self::COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_INSTANTANEOUSFILTER_CONTENTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS],
             self::COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::COMPONENT_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

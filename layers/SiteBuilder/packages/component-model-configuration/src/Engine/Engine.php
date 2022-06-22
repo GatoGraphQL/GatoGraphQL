@@ -5,18 +5,23 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Engine;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Settings\SettingsManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\DataOutputItems;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\Engine\Engine\Engine as UpstreamEngine;
 use PoP\Engine\Exception\ContractNotSatisfiedException;
 use PoP\Engine\FunctionAPIFactory;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class Engine extends UpstreamEngine implements EngineInterface
 {
@@ -73,11 +78,11 @@ class Engine extends UpstreamEngine implements EngineInterface
         );
     }
 
-    public function getComponentSettings(array $component, $model_props, array &$props)
+    public function getComponentSettings(Component $component, $model_props, array &$props)
     {
         $ret = array();
 
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
@@ -201,14 +206,22 @@ class Engine extends UpstreamEngine implements EngineInterface
     }
 
     /**
-     * @return string[]
+     * @return ComponentFieldNodeInterface[]
      */
     protected function getDBObjectMandatoryFields(): array
     {
         // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
         return [
             ...parent::getDBObjectMandatoryFields(),
-            'id',
+            new LeafComponentFieldNode(
+                new LeafField(
+                    'id',
+                    null,
+                    [],
+                    [],
+                    LocationHelper::getNonSpecificLocation()
+                )
+            ),
         ];
     }
 }

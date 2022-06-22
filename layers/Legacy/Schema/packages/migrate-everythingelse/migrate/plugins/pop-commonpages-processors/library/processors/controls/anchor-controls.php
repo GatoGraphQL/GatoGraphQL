@@ -7,17 +7,17 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     public final const COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ = 'custombuttoncontrol-addcontentfaq';
     public final const COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ = 'custombuttoncontrol-accountfaq';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ],
-            [self::class, self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ],
+            self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ,
+            self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
                 return TranslationAPIFacade::getInstance()->__('FAQ: Adding Content', 'poptheme-wassup');
 
@@ -27,9 +27,9 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return 'fa-question';
@@ -37,25 +37,25 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 $pages = array(
                     self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
                     self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
                 );
-                $page_id = $pages[$component[1]];
+                $page_id = $pages[$component->name];
                 return $pageTypeAPI->getPermalink($page_id);
         }
 
         return parent::getHref($component, $props);
     }
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return POP_TARGET_MODALS;
@@ -63,9 +63,9 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
 
         return parent::getTarget($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 return null;
@@ -73,9 +73,9 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
 
         return parent::getText($component, $props);
     }
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::COMPONENT_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
                 // pop-btn-faq: to hide it for the addons

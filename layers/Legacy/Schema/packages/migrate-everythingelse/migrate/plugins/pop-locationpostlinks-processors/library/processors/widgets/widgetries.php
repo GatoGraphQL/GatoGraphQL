@@ -5,18 +5,21 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
 {
     public final const COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS = 'widget-form-locationpostlinkdetails';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS],
+            self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 // $ret[] = [GD_Custom_EM_Module_Processor_FormGroups::class, GD_Custom_EM_Module_Processor_FormGroups::COMPONENT_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES];
                 if (PoP_ApplicationProcessors_Utils::addCategories()) {
@@ -33,7 +36,7 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
                 }
 
                 // Comment Leo 16/01/2016: There's no need to ask for the LinkAccess since we don't show it anyway
-                // if ($component == [self::class, self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS]) {
+                // if ($component == self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS) {
                 //     $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS];
                 // }
                 break;
@@ -42,19 +45,19 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $locationpost = PoP_LocationPosts_PostNameUtils::getNameUc();
         $titles = array(
             self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS => sprintf(TranslationAPIFacade::getInstance()->__('%s link details', 'pop-locationpostlinks-processors'), $locationpost),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
 
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 if ($class = $this->getProp($component, $props, 'form-widget-class')/*$this->get_general_prop($props, 'form-widget-class')*/) {
                     return $class;
@@ -66,18 +69,18 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
         return parent::getWidgetClass($component, $props);
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 return 'panel-body';
         }
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 return '';
         }
@@ -85,9 +88,9 @@ class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Proc
         return parent::getItemWrapper($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS:
                 // Typeahead map: make it small
                 $this->setProp([PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP], $props, 'wrapper-class', '');

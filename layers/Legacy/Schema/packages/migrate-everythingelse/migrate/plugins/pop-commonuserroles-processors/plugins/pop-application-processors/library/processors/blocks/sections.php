@@ -15,27 +15,27 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
     public final const COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_LIST = 'block-organizations-scroll-list';
     public final const COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST = 'block-individuals-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_LIST],
-            [self::class, self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST],
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_ADDONS,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_DETAILS,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL,
+            self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_LIST,
+            self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_ADDONS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_DETAILS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
@@ -52,7 +52,7 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR],
@@ -69,12 +69,12 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
             self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_LIST => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_INDIVIDUALS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW:

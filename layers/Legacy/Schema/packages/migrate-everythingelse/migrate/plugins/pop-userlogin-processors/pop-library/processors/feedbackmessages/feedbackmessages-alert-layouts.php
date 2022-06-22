@@ -8,18 +8,18 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT = 'layout-feedbackmessagealert-logout';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD = 'layout-feedbackmessagealert-user-changepassword';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWD],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWDRESET],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWD,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWDRESET,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $layouts = array(
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN => [GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN],
@@ -29,7 +29,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
             self::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             return $layout;
         }
 

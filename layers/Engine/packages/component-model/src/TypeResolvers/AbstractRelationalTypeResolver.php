@@ -5,24 +5,27 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver implements RelationalTypeResolverInterface
 {
@@ -48,15 +51,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected ?array $succeedingMandatoryDirectivesForDirectives = null;
 
     /**
-     * @var array<string, array>
+     * @var array<string,array<string|int,EngineIterationFieldSet>>
      */
     private array $fieldDirectiveIDFields = [];
     /**
-     * @var array<string, string>
+     * @var array<string,string>
      */
     private array $fieldDirectivesFromFieldCache = [];
     /**
-     * @var array<string, array<string, DirectiveResolverInterface>>
+     * @var array<string,array<string,DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
 
@@ -101,13 +104,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @param string|int|array<string|int> $dbObjectIDOrIDs
+     * @param string|int|array<string|int> $objectIDOrIDs
      * @return string|int|array<string|int>
      */
-    public function getQualifiedDBObjectIDOrIDs(string | int | array $dbObjectIDOrIDs): string | int | array
+    public function getQualifiedDBObjectIDOrIDs(string | int | array $objectIDOrIDs): string | int | array
     {
         // Add the type before the ID
-        $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : [$dbObjectIDOrIDs];
+        $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : [$objectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
             fn (int | string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
                 $this,
@@ -115,7 +118,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             ),
             $objectIDs
         );
-        return is_array($dbObjectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
+        return is_array($objectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
     }
 
     public function qualifyDBObjectIDsToRemoveFromErrors(): bool
@@ -128,13 +131,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
      *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeScalarTypeValuesInDBItems: to serialize Scalar Type values
+     *   3. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
      *
      * Additionally to these 3, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
      *   - cacheControl
      *
-     * Because it may be more convenient to add the directive or the class, there are 2 methods
+     * Because it may be more convenient to add the directive or the class,
+     * there are 2 methods.
      */
     protected function getMandatoryDirectives()
     {
@@ -151,6 +155,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * 1. the directiveResolverInstance
      * 2. its fieldDirective
      * 3. the fields it affects
+     *
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
      */
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
@@ -159,18 +165,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         /**
-        * All directives are placed somewhere in the pipeline. There are 5 positions:
-        * 1. At the beginning
-        * 2. Before Validate directive
-        * 3. Between the Validate and Resolve directives
-        * 4. After the ResolveAndMerge directive
-        * 4. At the end
-        */
+         * All directives are placed somewhere in the pipeline.
+         *
+         *   1. At the very beginning
+         *   2. Before Validate directive
+         *   3. Between the Validate and Resolve directives
+         *   4. Between the Resolve and Serialize directives
+         *   5. After the Serialize directive
+         *   6. At the very end
+         */
         $directiveInstancesByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
             PipelinePositions::BEFORE_VALIDATE => [],
             PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE => [],
-            PipelinePositions::AFTER_RESOLVE => [],
+            PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE => [],
+            PipelinePositions::AFTER_SERIALIZE => [],
             PipelinePositions::END => [],
         ];
 
@@ -208,6 +217,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $pipelineData;
     }
 
+    /**
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     */
     protected function validateAndResolveInstances(
         array $fieldDirectives,
         array $fieldDirectiveFields,
@@ -224,7 +236,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then we deal with 2 variables:
             // 1. $fieldDirective: the actual directive
             // 2. $enqueuedFieldDirective: how it was added to the array
-            // For retrieving the idsDataFields for the directive, we'll use $enqueuedFieldDirective, since under this entry we stored all the data in the previous functions
+            // For retrieving the idFieldSet for the directive, we'll use $enqueuedFieldDirective, since under this entry we stored all the data in the previous functions
             // For everything else, we use $fieldDirective
             $enqueuedFieldDirective = $fieldDirectives[$i];
             // Check if it is a repeated directive: if it has the "|" symbol
@@ -242,7 +254,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $fieldDirective = $enqueuedFieldDirective;
             }
 
-            $fieldDirectiveResolverInstances = $this->getDirectiveResolverInstancesForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
+            $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
             $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolverInstances === null) {
@@ -266,7 +278,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
 
-            if (empty($fieldDirectiveResolverInstances)) {
+            if ($fieldDirectiveResolverInstances->count() === 0) {
                 foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -278,7 +290,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     json_encode($directiveArgs),
                                     implode(
                                         $this->__('\', \'', 'component-model'),
-                                        $fieldDirectiveFields[$fieldDirective]
+                                        array_map(
+                                            fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                                            $fieldDirectiveFields[$fieldDirective]
+                                        )
                                     ),
                                 ]
                             ),
@@ -302,7 +317,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 [
                                     $directiveName,
                                     json_encode($directiveArgs),
-                                    $field,
+                                    $field->asFieldOutputQueryString(),
                                 ]
                             ),
                             LocationHelper::getNonSpecificLocation(),
@@ -432,7 +447,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     ErrorFeedbackItemProvider::E23,
                                     [
                                         $fieldDirective,
-                                        implode('\', \'', $alreadyProcessingFields),
+                                        implode(
+                                            '\', \'',
+                                            array_map(
+                                                fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                                                $alreadyProcessingFields
+                                            )
+                                        ),
                                     ]
                                 ),
                                 LocationHelper::getNonSpecificLocation(),
@@ -458,9 +479,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @return array<string,DirectiveResolverInterface>|null
+     * @param FieldInterface[] $fieldDirectiveFields
+     * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getDirectiveResolverInstancesForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?array
+    public function getDirectiveResolversForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?SplObjectStorage
     {
         $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
         $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
@@ -472,10 +494,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Calculate directives per field
-        $fieldDirectiveResolverInstances = [];
+        /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
+        $fieldDirectiveResolverInstances = new SplObjectStorage();
         foreach ($fieldDirectiveFields as $field) {
             // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
-            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
             foreach ($directiveResolvers as $directiveResolver) {
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
@@ -505,25 +528,40 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @return mixed[]
      */
-    protected function getIDsToQuery(array $ids_data_fields): array
+    protected function getIDsToQuery(array $idFieldSet): array
     {
-        return array_keys($ids_data_fields);
+        return array_keys($idFieldSet);
     }
 
+    /**
+     * @param array<string|int> $objectIDs
+     * @return array<string|int>
+     */
+    protected function getResolvedObjectIDs(array $objectIDs): array
+    {
+        return $objectIDs;
+    }
+
+    /**
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     */
     public function fillObjects(
-        array $ids_data_fields,
-        array $unionDBKeyIDs,
-        array $previousDBItems,
-        array &$dbItems,
+        array $idFieldSet,
+        array $unionTypeOutputKeyIDs,
+        array $previouslyResolvedIDFieldValues,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // Obtain the data for the required object IDs
-        $objectIDItems = [];
-        $ids = $this->getIDsToQuery($ids_data_fields);
+        $idObjects = [];
+        $ids = $this->getIDsToQuery($idFieldSet);
         $typeDataLoader = $this->getRelationalTypeDataLoader();
         // If any ID cannot be resolved, the object will be null
         $objects = array_filter($typeDataLoader->getObjects($ids));
@@ -533,20 +571,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             if ($objectID === null) {
                 continue;
             }
-            $objectIDItems[$objectID] = $object;
+            $idObjects[$objectID] = $object;
             /**
              * If no fields are queried, the entry will be null.
              * Initialize it to [] to simplify typing/null-checking
              */
-            $dbItems[$objectID] ??= [];
+            $resolvedIDFieldValues[$objectID] ??= new SplObjectStorage();
         }
         // Show an error for all objects that couldn't be processed
-        $resolvedObjectIDs = $this->getIDsToQuery($objectIDItems);
+        $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($idObjects));
         $unresolvedObjectIDs = [];
         $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
             // If a UnionTypeResolver fails to load an object, the fields will be NULL
-            $failedFields = $ids_data_fields[$unresolvedObjectID]['direct'] ?? [];
+            $failedFields = $idFieldSet[$unresolvedObjectID]->fields ?? [];
             // Add in $schemaErrors instead of $objectErrors because in the latter one it will attempt to fetch the ID from the object, which it can't do
             foreach ($failedFields as $failedField) {
                 $schemaFeedbackStore->addError(
@@ -563,33 +601,33 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $unresolvedObjectIDs[] = $unresolvedObjectID;
         }
         // Remove all the IDs that failed from the elements to process, so it doesn't show a "Corrupted Data" error
-        // Because these are IDs (eg: 223) and $ids_data_fields contains qualified or typed IDs (eg: post/223), we must convert them first
+        // Because these are IDs (eg: 223) and $idFieldSet contains qualified or typed IDs (eg: post/223), we must convert them first
         if ($unresolvedObjectIDs) {
             if ($this->qualifyDBObjectIDsToRemoveFromErrors()) {
                 $unresolvedObjectIDs = $this->getQualifiedDBObjectIDOrIDs($unresolvedObjectIDs);
             }
-            $ids_data_fields = array_filter(
-                $ids_data_fields,
+            $idFieldSet = array_filter(
+                $idFieldSet,
                 fn (int | string $id) => !in_array($id, $unresolvedObjectIDs),
                 ARRAY_FILTER_USE_KEY
             );
         }
 
         // Enqueue the items
-        $this->enqueueFillingObjectsFromIDs($ids_data_fields);
+        $this->enqueueFillingObjectsFromIDs($idFieldSet);
 
         // Process them
         $this->processFillingObjectsFromIDs(
-            $unionDBKeyIDs,
-            $objectIDItems,
-            $previousDBItems,
-            $dbItems,
+            $unionTypeOutputKeyIDs,
+            $idObjects,
+            $previouslyResolvedIDFieldValues,
+            $resolvedIDFieldValues,
             $variables,
             $messages,
             $engineIterationFeedbackStore,
         );
 
-        return $objectIDItems;
+        return $idObjects;
     }
 
     protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
@@ -802,32 +840,46 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
+     *
+     * @return FieldInterface[]
      */
-    protected function getFieldsToEnqueueFillingObjectsFromIDs(array $data_fields)
+    protected function getFieldsToEnqueueFillingObjectsFromIDs(EngineIterationFieldSet $engineIterationFieldSet): array
     {
-        $fields = $data_fields['direct'];
-        // Watch out: If there are conditional fields, these will be processed by this directive too
-        // Hence, collect all these fields, and add them as if they were direct
-        $conditionalFields = FieldHelpers::extractConditionalFields($data_fields);
+        /**
+         * Watch out: If there are conditional fields,
+         * these will be processed by this directive too.
+         * Hence, collect all these fields, and add them
+         * as if they were direct
+         */
+        $allConditionalFields = [];
+        foreach ($engineIterationFieldSet->conditionalFields as $conditionField) {
+            $conditionalFields = $engineIterationFieldSet->conditionalFields[$conditionField];
+            $allConditionalFields = array_merge(
+                $allConditionalFields,
+                $conditionalFields
+            );
+        }
         return array_unique(array_merge(
-            $fields,
-            $conditionalFields
+            $engineIterationFieldSet->fields,
+            $allConditionalFields
         ));
     }
 
     /**
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
+     *
+     * @param FieldInterface[] $fields
      */
-    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, array $data_fields): void
+    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
     {
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
-            if (!isset($this->fieldDirectivesFromFieldCache[$field])) {
+            if (!isset($this->fieldDirectivesFromFieldCache[$field->getUniqueID()])) {
                 // Get the directives from the field
-                $directives = $this->getFieldQueryInterpreter()->getDirectives($field);
+                $directives = $this->getFieldQueryInterpreter()->getDirectives($field->asFieldOutputQueryString());
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
-                $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+                $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
                 if (
                     $mandatoryDirectivesForField = array_merge(
                         $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
@@ -862,43 +914,60 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     )
                 );
                 // Assign in the cache
-                $this->fieldDirectivesFromFieldCache[$field] = $fieldDirectives;
+                $this->fieldDirectivesFromFieldCache[$field->getUniqueID()] = $fieldDirectives;
             }
             // Extract all the directives, and store which fields they process
-            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field]) as $fieldDirective) {
+            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field->getUniqueID()]) as $fieldDirective) {
                 // Watch out! Directives can be repeated, and then they must be executed multiple times
                 // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
-                // However, because we are adding the $idsDataFields under key $fieldDirective, when the 2nd occurrence of the directive is found,
+                // However, because we are adding the $idFieldSet under key $fieldDirective, when the 2nd occurrence of the directive is found,
                 // adding data would just override the previous entry, and we can't keep track that it's another iteration
                 // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
                 // in which the "|" symbol could not be part of the field naturally
-                if (isset($fieldDirectiveCounter[$field][(string)$id][$fieldDirective])) {
+                if (isset($fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective])) {
                     // Increase counter and add to $fieldDirective
-                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field][(string)$id][$fieldDirective]);
+                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective]);
                 } else {
-                    $fieldDirectiveCounter[$field][(string)$id][$fieldDirective] = 0;
+                    $fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective] = 0;
                 }
+                $this->fieldDirectiveIDFields[$fieldDirective][$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
-                if (in_array($field, $data_fields['direct'])) {
-                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'][] = $field;
+                if (in_array($field, $fieldSet->fields)) {
+                    $this->fieldDirectiveIDFields[$fieldDirective][$id]->fields[] = $field;
                 }
-                if ($conditionalFields = $data_fields['conditional'][$field] ?? null) {
-                    // Make sure there's always a 'direct' alongside a 'conditional'
-                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'] ??= [];
-                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] = array_merge_recursive(
-                        $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] ?? [],
-                        $conditionalFields
-                    );
+                /** @var FieldInterface[]|null */
+                $conditionalFields = $fieldSet->conditionalFields[$field] ?? null;
+                if ($conditionalFields === null || $conditionalFields === []) {
+                    continue;
                 }
+                $this->fieldDirectiveIDFields[$fieldDirective][$id]->addConditionalFields($field, $conditionalFields);
             }
         }
     }
 
+    /**
+     * Execute the directive pipeline to resolve the data
+     * for all IDs and fields.
+     *
+     * The data under variable $resolvedIDFieldValues will undergo
+     * 2 stages:
+     *
+     *   1. Resolve the field (for each ID) via ObjectTypeFieldResolvers,
+     *      which may produce an object (eg: DateTime for `Post.date`)
+     *   2. Serialize the leaf values, to print the response
+     *      (via directive SerializeLeafOutputTypeValues, executed at the end of the pipeline)
+     *
+     * Hence, the type of this variable can change throughout the
+     * lifecycle of this script, and its type is then declared as `mixed`.
+     *
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     */
     protected function processFillingObjectsFromIDs(
-        array $unionDBKeyIDs,
-        array $objectIDItems,
-        array $previousDBItems,
-        array &$dbItems,
+        array $unionTypeOutputKeyIDs,
+        array $idObjects,
+        array $previouslyResolvedIDFieldValues,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
@@ -914,17 +983,26 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $fieldDirectives = array_keys($fieldDirectiveIDFields);
 
             // Calculate all the fields on which the directive will be applied.
-            $fieldDirectiveFields = $fieldDirectiveFieldIDs = [];
+            $fieldDirectiveFields = [];
+            /** @var array<string,SplObjectStorage<FieldInterface,array<string|int>>> */
+            $fieldDirectiveFieldIDs = [];
             $fieldDirectiveDirectFields = [];
             foreach ($fieldDirectives as $fieldDirective) {
-                foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
+                $fieldDirectiveFieldIDs[$fieldDirective] = new SplObjectStorage();
+                foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
                     $fieldDirectiveDirectFields = array_merge(
                         $fieldDirectiveDirectFields,
-                        $dataFields['direct']
+                        $fieldSet->fields
                     );
-                    $conditionalFields = FieldHelpers::extractConditionalFields($dataFields);
+                    $conditionalFields = [];
+                    foreach ($fieldSet->conditionalFields as $conditionField) {
+                        $conditionalFields = array_merge(
+                            $conditionalFields,
+                            $fieldSet->conditionalFields[$conditionField]
+                        );
+                    }
                     $idFieldDirectiveIDFields = array_unique(array_merge(
-                        $dataFields['direct'],
+                        $fieldSet->fields,
                         $conditionalFields
                     ));
                     $fieldDirectiveFields[$fieldDirective] = array_merge(
@@ -933,7 +1011,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     );
                     // Also transpose the array to match field to IDs later on
                     foreach ($idFieldDirectiveIDFields as $field) {
-                        $fieldDirectiveFieldIDs[$fieldDirective][$field][] = $id;
+                        $fieldSplObjectStorage = $fieldDirectiveFieldIDs[$fieldDirective][$field] ?? [];
+                        $fieldSplObjectStorage[] = $id;
+                        $fieldDirectiveFieldIDs[$fieldDirective][$field] = $fieldSplObjectStorage;
                     }
                 }
                 $fieldDirectiveFields[$fieldDirective] = array_unique($fieldDirectiveFields[$fieldDirective]);
@@ -969,23 +1049,24 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
                 foreach ($fieldDirectives as $fieldDirective) {
-                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $dataFields) {
-                        $object = $objectIDItems[$id];
+                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
+                        $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
                         $failingFields = array_intersect(
-                            $dataFields['direct'],
+                            $fieldSet->fields,
                             $schemaErrorFailingFields
                         );
                         foreach ($failingFields as $field) {
-                            $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($this, $field, $object);
-                            $dbItems[(string)$id][$fieldOutputKey] = null;
+                            $resolvedIDFieldValues[$id][$field] = null;
                         }
                     }
                 }
             }
 
-            // From the fields, reconstitute the $idsDataFields for each directive,
+            // From the fields, reconstitute the $idFieldSet for each directive,
             // and build the array to pass to the pipeline, for each directive (stage)
-            $directiveResolverInstances = $pipelineIDsDataFields = [];
+            $directiveResolverInstances = [];
+            /** @var array<array<string|int,EngineIterationFieldSet>> */
+            $pipelineIDFieldSet = [];
             foreach ($directivePipelineData as $pipelineStageData) {
                 $directiveResolverInstance = $pipelineStageData['instance'];
                 $fieldDirective = $pipelineStageData['fieldDirective'];
@@ -1000,20 +1081,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveDirectFields,
                     $schemaErrorFailingFields
                 );
-                // From the fields, reconstitute the $idsDataFields for each directive, and build the array to pass to the pipeline, for each directive (stage)
-                $directiveIDFields = [];
+                // From the fields, reconstitute the $idFieldSet for each directive, and build the array to pass to the pipeline, for each directive (stage)
+                /** @var array<string|int,EngineIterationFieldSet> */
+                $directiveIDFieldSet = [];
                 foreach ($directiveDirectFields as $field) {
                     $ids = $fieldDirectiveFieldIDs[$fieldDirective][$field];
                     foreach ($ids as $id) {
-                        $directiveIDFields[$id]['direct'][] = $field;
-                        if ($fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]['conditional'][$field] ?? null) {
-                            $directiveIDFields[$id]['conditional'][$field] = $fieldConditionalFields;
-                        } else {
-                            $directiveIDFields[$id]['conditional'] = $directiveIDFields[$id]['conditional'] ?? [];
+                        $directiveIDFieldSet[$id] ??= new EngineIterationFieldSet();
+                        $directiveIDFieldSet[$id]->fields[] = $field;
+                        /** @var FieldInterface[]|null */
+                        $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]->conditionalFields[$field] ?? null;
+                        if ($fieldConditionalFields === null || $fieldConditionalFields === []) {
+                            continue;
                         }
+                        $directiveIDFieldSet[$id]->conditionalFields[$field] = $fieldConditionalFields;
                     }
                 }
-                $pipelineIDsDataFields[] = $directiveIDFields;
+                $pipelineIDFieldSet[] = $directiveIDFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
 
@@ -1021,12 +1105,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($directiveResolverInstances);
             $directivePipeline->resolveDirectivePipeline(
                 $this,
-                $pipelineIDsDataFields,
+                $pipelineIDFieldSet,
                 $directiveResolverInstances,
-                $objectIDItems,
-                $unionDBKeyIDs,
-                $previousDBItems,
-                $dbItems,
+                $idObjects,
+                $unionTypeOutputKeyIDs,
+                $previouslyResolvedIDFieldValues,
+                $resolvedIDFieldValues,
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,

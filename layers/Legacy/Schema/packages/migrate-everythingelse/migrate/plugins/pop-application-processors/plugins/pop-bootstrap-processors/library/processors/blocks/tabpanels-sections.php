@@ -10,22 +10,22 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
     public final const COMPONENT_BLOCK_TABPANEL_MYCONTENT = 'block-mycontent-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYPOSTS = 'block-myposts-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_CONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_POSTS],
+            self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_CONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_POSTS,
 
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SEARCHUSERS],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_USERS],
+            self::COMPONENT_BLOCK_TABPANEL_SEARCHUSERS,
+            self::COMPONENT_BLOCK_TABPANEL_USERS,
 
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYPOSTS],
+            self::COMPONENT_BLOCK_TABPANEL_MYCONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_MYPOSTS,
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -38,16 +38,16 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
             self::COMPONENT_BLOCK_TABPANEL_MYCONTENT => [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYCONTENT],
             self::COMPONENT_BLOCK_TABPANEL_MYPOSTS => [PoP_Module_Processor_SectionTabPanelComponents::class, PoP_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYPOSTS],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_CONTENT:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::COMPONENT_FILTER_CONTENT];
@@ -70,9 +70,9 @@ class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_Se
     }
 
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SEARCHCONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_CONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_POSTS:

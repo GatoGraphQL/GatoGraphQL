@@ -4,25 +4,46 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
 class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpointDirectiveResolver
 {
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        return $this->userLoggedInCheckpoint ??= $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+    }
+
     public function getDirectiveName(): string
     {
         return 'validateIsUserLoggedIn';
     }
 
-    protected function getValidationCheckpointSet(RelationalTypeResolverInterface $relationalTypeResolver): array
+    /**
+     * @return CheckpointInterface[]
+     */
+    protected function getValidationCheckpoints(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
+        return [
+            $this->getUserLoggedInCheckpoint(),
+        ];
     }
 
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
+    /**
+     * @param FieldInterface[] $failedFields
+     */
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             FeedbackItemProvider::class,
@@ -30,7 +51,10 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
             [
                 implode(
                     $this->__('\', \''),
-                    $failedDataFields
+                    array_map(
+                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        $failedFields
+                    )
                 ),
                 $relationalTypeResolver->getMaybeNamespacedTypeName(),
             ]

@@ -8,11 +8,11 @@ class PopThemeWassup_AAL_ResourceLoaderProcessor_Hooks
             'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
             $this->getComponentCSSResources(...),
             10,
-            6
+            4
         );
     }
 
-    public function getComponentCSSResources($resources, array $component, array $templateResource, $template, array $props, $processor)
+    public function getComponentCSSResources(array $resources, \PoP\ComponentModel\Component\Component $component, array $templateResource, string $template): array
     {
         switch ($template) {
             case POP_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION:

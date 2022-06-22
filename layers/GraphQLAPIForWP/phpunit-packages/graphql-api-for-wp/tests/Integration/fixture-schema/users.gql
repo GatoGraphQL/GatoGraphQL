@@ -1,0 +1,92 @@
+query {
+  users(pagination: { limit: 3 }) {
+    avatar {
+      id
+      size
+      src
+    }
+    capabilities
+    customPostCount
+    customPosts {
+      __typename
+      ...on IsCustomPost {
+        id
+        title
+      }
+    }
+    description
+    displayName
+    email
+    firstName
+    hasAnyCapability(capabilities: ["manage_options", "edit_posts"])
+    hasAnyRole(roles: ["administrator", "editor"])
+    hasCapability(capability:"manage_options")
+    hasRole(role: "administrator")
+    id
+    lastName
+    locale
+    metaValue(key: "nickname")
+    name
+    nicename
+    nickname
+    postCount
+    posts {
+      id
+      title
+    }
+    registeredDate
+    registeredDateStr(format: "F j")
+    roleNames
+    roles {
+      id
+      name
+    }
+    slug
+    url
+    urlAbsolutePath
+    username
+    websiteURL
+  }
+
+  usersByExcludeIDs: users(filter: { excludeIDs: [1] }) {
+    id
+    name
+  }
+  usersByExcludeRoles: users(filter: { excludeRoles: ["administrator"] }) {
+    id
+    name
+  }
+  usersByIds: users(filter: { ids: [1, 2] }) {
+    id
+    name
+  }
+  usersByMetaQuery: users(filter: { metaQuery: {
+    key: "nickname",
+    compareBy: {
+      stringValue: {
+        value: "blogger"
+        operator: EQUALS
+      }
+    }
+  }}) {
+    id
+    name
+  }
+  usersByRoles: users(filter: { roles: ["author", "contributor"] }) {
+    id
+    name
+  }
+  usersBySearchBy: users(filter: { searchBy: { name: "Author Marquez" } }) {
+    id
+    name
+  }
+
+  usersSortedASC: users(pagination: { limit: 3 }, sort: { by: NAME, order: ASC}) {
+    id
+    name
+  }
+  usersSortedDESC: users(pagination: { limit: 3 }, sort: { by: NAME, order: DESC}) {
+    id
+    name
+  }
+}

@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use function getenv;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
+use PHPUnitForGraphQLAPI\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
-
-use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client = null;
     protected static ?CookieJar $cookieJar = null;
     protected static bool $enableTests = false;
-    protected static string $skipTestsReason = '';
+    protected static string $skipOrFailTestsReason = '';
 
     public static function setUpBeforeClass(): void
     {
@@ -37,13 +38,13 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         // Skip running tests if the domain has not been configured
         if (static::getWebserverDomain() === '') {
-            self::$skipTestsReason = 'Webserver domain not configured';
+            self::$skipOrFailTestsReason = 'Webserver domain not configured';
             return;
         }
 
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
-            self::$skipTestsReason = 'Test skipped for Continuous Integration';
+            self::$skipOrFailTestsReason = 'Test skipped for Continuous Integration';
             return;
         }
 
@@ -79,7 +80,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             // The webserver is down
         }
 
-        self::$skipTestsReason = sprintf(
+        self::$skipOrFailTestsReason = sprintf(
             'Webserver under "%s" is not running',
             static::getWebserverDomain()
         );
@@ -127,7 +128,27 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function skipTestsInContinuousIntegration(): bool
     {
-        return true;
+        $testingDomain = static::getWebserverDomain();
+        if ($testingDomain === '') {
+            return true;
+        }
+        return !static::isValidTestingDomain($testingDomain);
+    }
+
+    /**
+     * Indicate if the testing webserver is on a whitelist
+     * of approved domains. If so, the GitHub workflow is executing
+     * the test against some service (eg: InstaWP)
+     */
+    protected static function isValidTestingDomain(string $testingDomain): bool
+    {
+        $validTestingDomains = [
+            'instawp.xyz',
+        ];
+        // Calculate the top level domain (app.site.com => site.com)
+        $hostNames = array_reverse(explode('.', $testingDomain));
+        $host = $hostNames[1] . '.' . $hostNames[0];
+        return in_array($host, $validTestingDomains);
     }
 
     protected static function getWebserverPingURL(): string
@@ -177,7 +198,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 
     protected static function useSSL(): bool
     {
-        return false;
+        return true;
     }
 
     protected static function getWebserverDomain(): string
@@ -232,11 +253,19 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         parent::setUp();
 
-        /**
-         * Skip the tests if the webserver is down.
-         */
-        if (!static::$enableTests) {
-            $this->markTestSkipped(self::$skipTestsReason);
+        if (static::$enableTests) {
+            return;
         }
+
+        /**
+         * If the webserver is down:
+         *
+         * - In localhost: Skip the tests
+         * - In CI: throw error
+         */
+        if (static::isContinuousIntegration()) {
+            throw new IntegrationTestApplicationNotAvailableException(self::$skipOrFailTestsReason);
+        }
+        $this->markTestSkipped(self::$skipOrFailTestsReason);
     }
 }

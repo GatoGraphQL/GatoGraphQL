@@ -12,26 +12,29 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_HIGHLIGHT = 'layout-postsidebarinner-compacthorizontal-highlight';
     public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST = 'layout-postsidebarinner-compacthorizontal-post';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_HIGHLIGHT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_POST],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_HIGHLIGHT],
-            [self::class, self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST],
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_HIGHLIGHT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_POST,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_HIGHLIGHT,
+            self::COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
                 $ret = array_merge(
@@ -81,9 +84,9 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST:
@@ -96,9 +99,9 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
         return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT:
             case self::COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST:

@@ -4,23 +4,23 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
 {
     public final const COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR = 'multiple-single-locationpost-postauthorssidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR],
+            self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR,
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 $filters = array(
                     self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR];
                 break;
         }
@@ -28,9 +28,9 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 return POP_SCREEN_SINGLEUSERS;
         }
@@ -38,9 +38,9 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }

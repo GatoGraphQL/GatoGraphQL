@@ -26,6 +26,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -241,6 +242,10 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             return QueryHelpers::getExpressionQuery($value->getName());
         }
 
+        if ($value instanceof Enum) {
+            return $value->getValue();
+        }
+
         if ($value instanceof Literal) {
             if (is_string($value->getValue())) {
                 return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
@@ -250,7 +255,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         /**
          * @todo Temporary addition to match `asQueryString` in the AST
-         * Print again the variable, don't resolve it yet, so the fieldName is found on $dbObject
+         * Print again the variable, don't resolve it yet, so the fieldName is found on $resolvedObject
          */
         if ($value instanceof VariableReference) {
             return '$' . $value->getName();

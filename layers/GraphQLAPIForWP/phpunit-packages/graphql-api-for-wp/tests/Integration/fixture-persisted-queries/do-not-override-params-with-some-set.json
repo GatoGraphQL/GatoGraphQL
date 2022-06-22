@@ -2,34 +2,34 @@
     "data": {
         "users": [
             {
-                "id": 5,
-                "url": "http:\/\/graphql-api.lndo.site\/author\/editor\/",
+                "id": 6,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/editor\/",
                 "displayName": "Editor Smith",
                 "websiteURL": ""
             },
             {
-                "id": 4,
-                "url": "http:\/\/graphql-api.lndo.site\/author\/author\/",
+                "id": 5,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/author\/",
                 "displayName": "Author Marquez",
                 "websiteURL": ""
             },
             {
-                "id": 3,
-                "url": "http:\/\/graphql-api.lndo.site\/author\/contributor\/",
+                "id": 4,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/contributor\/",
                 "displayName": "Contributor Johnson",
                 "websiteURL": ""
             },
             {
-                "id": 2,
-                "url": "http:\/\/graphql-api.lndo.site\/author\/subscriber\/",
+                "id": 3,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/subscriber\/",
                 "displayName": "Subscriber Bennett",
                 "websiteURL": ""
             },
             {
-                "id": 1,
-                "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/",
-                "displayName": "admin",
-                "websiteURL": "http:\/\/graphql-api.lndo.site"
+                "id": 2,
+                "url": "https:\/\/graphql-api.lndo.site\/author\/blogger\/",
+                "displayName": "Blogger Davenport",
+                "websiteURL": ""
             }
         ]
     }

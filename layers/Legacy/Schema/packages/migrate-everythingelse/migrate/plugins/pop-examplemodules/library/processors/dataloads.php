@@ -1,9 +1,11 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
 use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
@@ -24,25 +26,28 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     public final const COMPONENT_EXAMPLE_PAGE = 'example-page';
     public final const COMPONENT_EXAMPLE_HOMESTATICPAGE = 'example-homestaticpage';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EXAMPLE_LATESTPOSTS],
-            [self::class, self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS],
-            [self::class, self::COMPONENT_EXAMPLE_AUTHORDESCRIPTION],
-            [self::class, self::COMPONENT_EXAMPLE_TAGLATESTPOSTS],
-            [self::class, self::COMPONENT_EXAMPLE_TAGDESCRIPTION],
-            [self::class, self::COMPONENT_EXAMPLE_SINGLE],
-            [self::class, self::COMPONENT_EXAMPLE_PAGE],
-            [self::class, self::COMPONENT_EXAMPLE_HOMESTATICPAGE],
+            self::COMPONENT_EXAMPLE_LATESTPOSTS,
+            self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS,
+            self::COMPONENT_EXAMPLE_AUTHORDESCRIPTION,
+            self::COMPONENT_EXAMPLE_TAGLATESTPOSTS,
+            self::COMPONENT_EXAMPLE_TAGDESCRIPTION,
+            self::COMPONENT_EXAMPLE_SINGLE,
+            self::COMPONENT_EXAMPLE_PAGE,
+            self::COMPONENT_EXAMPLE_HOMESTATICPAGE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_AUTHORDESCRIPTION:
                 $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_AUTHORPROPERTIES];
                 break;
@@ -55,9 +60,9 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_SINGLE:
             case self::COMPONENT_EXAMPLE_PAGE:
             case self::COMPONENT_EXAMPLE_TAGDESCRIPTION:
@@ -71,9 +76,9 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_LATESTPOSTS:
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
             case self::COMPONENT_EXAMPLE_TAGLATESTPOSTS:
@@ -94,11 +99,11 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
                 $ret['authors'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
@@ -112,25 +117,37 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
-        $ret = parent::getRelationalComponentFields($component);
+        $ret = parent::getRelationalComponentFieldNodes($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EXAMPLE_SINGLE:
             case self::COMPONENT_EXAMPLE_LATESTPOSTS:
             case self::COMPONENT_EXAMPLE_AUTHORLATESTPOSTS:
             case self::COMPONENT_EXAMPLE_TAGLATESTPOSTS:
-                $ret[] = new RelationalComponentField(
-                    'author',
+                $ret[] = new RelationalComponentFieldNode(
+                    new LeafField(
+                        'author',
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     [
                         [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_AUTHORPROPERTIES],
                     ]
                 );
-                $ret[] = new RelationalComponentField(
-                    'comments',
+                $ret[] = new RelationalComponentFieldNode(
+                    new LeafField(
+                        'comments',
+                        null,
+                        [],
+                        [],
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                     [
                         [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::COMPONENT_EXAMPLE_COMMENT],
                     ]
@@ -142,11 +159,11 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $data_fields = array(
             self::COMPONENT_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
@@ -157,8 +174,8 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
             self::COMPONENT_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
         );
         return array_merge(
-            parent::getLeafComponentFields($component, $props),
-            $data_fields[$component[1]] ?? array()
+            parent::getLeafComponentFieldNodes($component, $props),
+            $data_fields[$component->name] ?? array()
         );
     }
 }

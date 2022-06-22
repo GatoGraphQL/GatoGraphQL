@@ -11,17 +11,21 @@ trait UseObjectDictionaryTypeDataLoaderTrait
 {
     abstract protected function getObjectDictionary(): ObjectDictionaryInterface;
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         $objectTypeResolverClass = get_class($this->getObjectTypeResolver());
-        $ret = [];
+        $objects = [];
         foreach ($ids as $id) {
             if (!$this->getObjectDictionary()->has($objectTypeResolverClass, $id)) {
                 $this->getObjectDictionary()->set($objectTypeResolverClass, $id, $this->getObjectTypeNewInstance($id));
             }
-            $ret[] = $this->getObjectDictionary()->get($objectTypeResolverClass, $id);
+            $objects[] = $this->getObjectDictionary()->get($objectTypeResolverClass, $id);
         }
-        return $ret;
+        return $objects;
     }
 
     abstract protected function getObjectTypeResolver(): ObjectTypeResolverInterface;

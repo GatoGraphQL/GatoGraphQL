@@ -6,17 +6,17 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
     public final const COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP = 'layout-menu-dropdownbutton-top';
     public final const COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE = 'layout-menu-dropdownbutton-side';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP],
-            [self::class, self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE],
+            self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP,
+            self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_SIDE,
         );
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'btn btn-warning';
 
@@ -27,9 +27,9 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
         return parent::getBtnClass($component, $props);
     }
 
-    public function getBtnTitle(array $component, array &$props)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return '<i class="fa fa-fw fa-plus"></i>';
             
@@ -40,9 +40,9 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
         return parent::getBtnTitle($component, $props);
     }
 
-    public function getDropdownbtnClass(array $component, array &$props)
+    public function getDropdownbtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'dropdown';
         }
@@ -50,9 +50,9 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
         return parent::getDropdownbtnClass($component, $props);
     }
 
-    public function innerList(array $component, array &$props)
+    public function innerList(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return true;
         }

@@ -9,24 +9,24 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
     public final const COMPONENT_CODE_404 = 'code-404';
     public final const COMPONENT_CODE_EMPTYSIDEINFO = 'code-emptysideinfo';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_HOMEWELCOME],
-            [self::class, self::COMPONENT_CODE_EMPTY],
-            [self::class, self::COMPONENT_CODE_TRENDINGTAGSDESCRIPTION],
-            [self::class, self::COMPONENT_CODE_404],
-            [self::class, self::COMPONENT_CODE_EMPTYSIDEINFO],
+            self::COMPONENT_CODE_HOMEWELCOME,
+            self::COMPONENT_CODE_EMPTY,
+            self::COMPONENT_CODE_TRENDINGTAGSDESCRIPTION,
+            self::COMPONENT_CODE_404,
+            self::COMPONENT_CODE_EMPTYSIDEINFO,
         );
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_EMPTYSIDEINFO:
-                // Comment Leo 07/12/2017: this function closes the sideinfo for [self::class, self::COMPONENT_CODE_EMPTYSIDEINFO], and it must take place immediately,
+                // Comment Leo 07/12/2017: this function closes the sideinfo for self::COMPONENT_CODE_EMPTYSIDEINFO, and it must take place immediately,
                 // or otherwise the sideinfo will show and then disappear a few seconds later and it looks ugly (eg: in Verticals homepage, where there is no sideinfo)
                 $this->addJsmethod($ret, 'closePageSectionOnTabpaneShown', '', false, POP_PROGRESSIVEBOOTING_CRITICAL);
                 break;
@@ -35,9 +35,9 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         return $ret;
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_404:
                 return 'p';
         }
@@ -45,7 +45,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         return parent::getHtmlTag($component, $props);
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $question = '<h4>%s</h4>';
@@ -53,7 +53,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         $response_last = '<p>%s</p>';
         $li = '<li>%s</li>';
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_HOMEWELCOME:
                 $code = sprintf(
                     '<h3 class="media-heading">%s</h3>',
@@ -91,9 +91,9 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
         return parent::getCode($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_HOMEWELCOME:
                 $this->appendProp($component, $props, 'class', 'block-homewelcome');
                 break;

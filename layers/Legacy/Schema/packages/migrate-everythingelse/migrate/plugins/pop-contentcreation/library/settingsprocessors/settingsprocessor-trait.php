@@ -1,5 +1,6 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 
 trait PoP_ContentCreation_Module_SettingsProcessor_Trait
 {
@@ -21,11 +22,13 @@ trait PoP_ContentCreation_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
-            POP_CONTENTCREATION_ROUTE_MYCONTENT => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
+            POP_CONTENTCREATION_ROUTE_MYCONTENT => [$this->getUserLoggedInCheckpoint()],
         );
     }
 }

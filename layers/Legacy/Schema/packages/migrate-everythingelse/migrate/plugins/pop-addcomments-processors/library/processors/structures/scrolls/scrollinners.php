@@ -7,19 +7,19 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
     public final const COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS = 'layout-postcommentscroll-inner';
     public final const COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE = 'layout-postcommentscroll-inner-appendable';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_COMMENTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMENTS_ADD],
-            [self::class, self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS],
-            [self::class, self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE],
+            self::COMPONENT_SCROLLINNER_COMMENTS_LIST,
+            self::COMPONENT_SCROLLINNER_COMMENTS_ADD,
+            self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS,
+            self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_COMMENTS_LIST:
             case self::COMPONENT_SCROLLINNER_COMMENTS_ADD:
             case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS:
@@ -33,11 +33,14 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_COMMENTS_LIST:
             case self::COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::COMPONENT_LAYOUT_COMMENTFRAME_LIST];

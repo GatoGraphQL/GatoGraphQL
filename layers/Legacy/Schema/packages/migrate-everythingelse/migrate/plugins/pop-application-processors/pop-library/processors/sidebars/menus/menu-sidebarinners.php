@@ -4,18 +4,21 @@ class PoP_Module_Processor_CustomMenuSidebarInners extends PoP_Module_Processor_
 {
     public final const COMPONENT_SIDEBARINNER_MENU_ABOUT = 'sidebarinner-menu-about';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIDEBARINNER_MENU_ABOUT],
+            self::COMPONENT_SIDEBARINNER_MENU_ABOUT,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SIDEBARINNER_MENU_ABOUT:
                 $ret[] = [GD_Custom_Module_Processor_MenuWidgets::class, GD_Custom_Module_Processor_MenuWidgets::COMPONENT_WIDGET_MENU_ABOUT];
                 break;

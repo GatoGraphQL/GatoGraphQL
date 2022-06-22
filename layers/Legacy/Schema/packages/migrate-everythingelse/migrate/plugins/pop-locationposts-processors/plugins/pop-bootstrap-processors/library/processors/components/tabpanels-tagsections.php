@@ -4,18 +4,18 @@ class PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents extends Po
 {
     public final const COMPONENT_TABPANEL_TAGLOCATIONPOSTS = 'tabpanel-taglocationposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_TAGLOCATIONPOSTS],
+            self::COMPONENT_TABPANEL_TAGLOCATIONPOSTS,
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGLOCATIONPOSTS:
                 $ret = array_merge(
                     $ret,
@@ -34,9 +34,9 @@ class PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents extends Po
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGLOCATIONPOSTS:
                 $ret = array(
                     [

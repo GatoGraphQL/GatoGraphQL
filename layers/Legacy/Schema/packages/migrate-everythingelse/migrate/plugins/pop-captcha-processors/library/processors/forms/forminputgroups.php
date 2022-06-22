@@ -5,16 +5,16 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
 {
     public final const COMPONENT_FORMINPUTGROUP_CAPTCHA = 'forminputgroup-captcha';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUTGROUP_CAPTCHA],
+            self::COMPONENT_FORMINPUTGROUP_CAPTCHA,
         );
     }
 
-    public function getComponentSubname(array $component)
+    public function getComponentSubname(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 return 'input';
         }
@@ -22,24 +22,24 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
         return parent::getComponentSubname($component);
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $components = array(
             self::COMPONENT_FORMINPUTGROUP_CAPTCHA => [PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::COMPONENT_FORMINPUT_CAPTCHA],
         );
 
-        if ($component = $components[$component[1]] ?? null) {
+        if ($component = $components[$component->name] ?? null) {
             return $component;
         }
 
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -47,11 +47,11 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -61,9 +61,9 @@ class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUTGROUP_CAPTCHA:
                 $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 

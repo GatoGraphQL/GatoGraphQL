@@ -1,12 +1,12 @@
 "use strict";
-Handlebars.registerHelper('latestCountTargets', function(dbObject, options) {
+Handlebars.registerHelper('latestCountTargets', function(resolvedObject, options) {
 
-    // Build the notification prompt targets, based on the data on the dbObject
+    // Build the notification prompt targets, based on the data on the resolvedObject
     var targets = [];
     var selector = '.pop-block.'+pop.c.JS_INITIALIZED+' > .blocksection-latestcount > .pop-latestcount';
 
     // By Sections (post type + categories)
-    var trigger_values = dbObject['latestcountsTriggerValues'] || [];
+    var trigger_values = resolvedObject['latestcountsTriggerValues'] || [];
 
     // By Post Type + Categories
     jQuery.each(trigger_values, function(index, trigger_value) {
@@ -16,14 +16,14 @@ Handlebars.registerHelper('latestCountTargets', function(dbObject, options) {
     });
 
     // By Tags
-    jQuery.each(dbObject['tags'], function(index, tag) {
+    jQuery.each(resolvedObject['tags'], function(index, tag) {
 
         var target = selector+'.tag'+tag;
         targets.push(target);
     });
 
     // By author pages
-    jQuery.each(dbObject['authors'], function(index, author) {
+    jQuery.each(resolvedObject['authors'], function(index, author) {
 
 		var target = selector+'.author'+author;
 
@@ -40,7 +40,7 @@ Handlebars.registerHelper('latestCountTargets', function(dbObject, options) {
     });
 
     // By single relatedto posts
-    jQuery.each(dbObject['references'], function(index, post_id) {
+    jQuery.each(resolvedObject['references'], function(index, post_id) {
 
         var target = selector+'.single'+post_id;
 

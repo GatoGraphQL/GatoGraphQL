@@ -4,21 +4,25 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\SchemaHooks;
 
-use PoP\Root\App;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\UserRoles\FilterInputs\ExcludeUserRolesFilterInput;
+use PoPCMSSchema\UserRoles\FilterInputs\UserRolesFilterInput;
 use PoPCMSSchema\UserRoles\Module;
 use PoPCMSSchema\UserRoles\ModuleConfiguration;
-use PoPCMSSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?UserRolesFilterInput $userRolesFilterInput = null;
+    private ?ExcludeUserRolesFilterInput $excludeUserRolesFilterInput = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -27,6 +31,22 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setUserRolesFilterInput(UserRolesFilterInput $userRolesFilterInput): void
+    {
+        $this->userRolesFilterInput = $userRolesFilterInput;
+    }
+    final protected function getUserRolesFilterInput(): UserRolesFilterInput
+    {
+        return $this->userRolesFilterInput ??= $this->instanceManager->getInstance(UserRolesFilterInput::class);
+    }
+    final public function setExcludeUserRolesFilterInput(ExcludeUserRolesFilterInput $excludeUserRolesFilterInput): void
+    {
+        $this->excludeUserRolesFilterInput = $excludeUserRolesFilterInput;
+    }
+    final protected function getExcludeUserRolesFilterInput(): ExcludeUserRolesFilterInput
+    {
+        return $this->excludeUserRolesFilterInput ??= $this->instanceManager->getInstance(ExcludeUserRolesFilterInput::class);
     }
 
     protected function init(): void
@@ -135,16 +155,16 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?array {
+    ): ?FilterInputInterface {
         if (!($inputObjectTypeResolver instanceof AbstractUsersFilterInputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'roles' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USER_ROLES],
-            'excludeRoles' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_USER_ROLES],
+            'roles' => $this->getUserRolesFilterInput(),
+            'excludeRoles' => $this->getExcludeUserRolesFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

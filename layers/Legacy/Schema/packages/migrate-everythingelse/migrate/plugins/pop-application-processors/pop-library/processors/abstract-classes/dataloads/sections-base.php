@@ -7,7 +7,7 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getDataloadSource(array $component, array &$props): string
+    public function getDataloadSource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
         $ret = parent::getDataloadSource($component, $props);
 
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
@@ -55,22 +55,22 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     // PROTECTED Functions
     //-------------------------------------------------
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_ITEMLIST];
     }
 
-    protected function getFeedbackmessagesPosition(array $component)
+    protected function getFeedbackmessagesPosition(\PoP\ComponentModel\Component\Component $component)
     {
         return 'bottom';
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
         return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -81,19 +81,22 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    // public function getModelPropsForDescendantComponents(array $component, array &$props): array
+    // /**
+    //  * @return array<string,mixed>
+    //  */
+    // public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     // {
     //     $ret = parent::getModelPropsForDescendantComponents($component, $props);
 
     //     if ($filter_component = $this->getFilterSubcomponent($component)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //         $ret['filter-component'] = $filter_component;
-    //         // $ret['filter'] = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component);
+    //         // $ret['filter'] = $componentprocessor_manager->getComponentProcessor($filter_component)->getFilter($filter_component);
     //     }
 
     //     return $ret;

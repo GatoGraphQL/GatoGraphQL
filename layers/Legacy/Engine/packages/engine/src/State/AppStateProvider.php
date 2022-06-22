@@ -6,7 +6,7 @@ namespace PoP\Engine\State;
 
 use PoP\ComponentModel\ComponentFilters\ComponentPaths;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
 use PoP\Engine\Configuration\Request;
 use PoP\Engine\ComponentFilters\HeadComponent;
 use PoP\Engine\ComponentFilters\MainContentComponent;

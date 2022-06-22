@@ -5,17 +5,17 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
     public final const COMPONENT_MAP_STATICIMAGE = 'em-map-staticimage';
     public final const COMPONENT_MAP_STATICIMAGE_USERORPOST = 'em-map-staticimage-userorpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MAP_STATICIMAGE],
-            [self::class, self::COMPONENT_MAP_STATICIMAGE_USERORPOST],
+            self::COMPONENT_MAP_STATICIMAGE,
+            self::COMPONENT_MAP_STATICIMAGE_USERORPOST,
         );
     }
 
-    public function getUrlparamSubcomponent(array $component)
+    public function getUrlparamSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_STATICIMAGE:
                 return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::COMPONENT_MAP_STATICIMAGE_URLPARAM];
 
@@ -26,9 +26,9 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
         return parent::getUrlparamSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MAP_STATICIMAGE:
             case self::COMPONENT_MAP_STATICIMAGE_USERORPOST:
                 $this->appendProp($component, $props, 'class', 'img-responsive');

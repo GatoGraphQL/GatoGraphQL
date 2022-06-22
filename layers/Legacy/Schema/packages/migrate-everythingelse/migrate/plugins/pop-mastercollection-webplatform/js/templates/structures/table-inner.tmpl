@@ -1,9 +1,9 @@
-{{#each dbObjectIDs}}
+{{#each objectIDs}}
 	<tr class="pop-structureinner">
 		{{#each ../subcomponentoutputnames.layouts}}
 			{{#withModule ../../. this}}
 				<td>
-					{{enterModule ../../../. dbKey=../../../dbKey objectID=../../.}}
+					{{enterModule ../../../. typeOutputKey=../../../typeOutputKey objectID=../../.}}
 				</td>
 			{{/withModule}}
 		{{/each}}

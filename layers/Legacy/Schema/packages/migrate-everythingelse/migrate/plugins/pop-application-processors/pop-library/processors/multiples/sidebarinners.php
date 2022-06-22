@@ -23,37 +23,40 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
     public final const COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-authorsectioninner-categoryposts-sidebar';
     public final const COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR = 'multiple-homesectioninner-content-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Trending Tags has no filter
             case self::COMPONENT_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_TAGS];

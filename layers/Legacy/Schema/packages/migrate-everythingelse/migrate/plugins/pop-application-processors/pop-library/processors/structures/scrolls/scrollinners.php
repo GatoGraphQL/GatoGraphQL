@@ -41,53 +41,53 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
     public final const COMPONENT_SCROLLINNER_USERS_LIST = 'scrollinner-users-list';
     public final const COMPONENT_SCROLLINNER_USER_LIST = 'scrollinner-user-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_TAGS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_CONTENT_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_HIGHLIGHTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_USERS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_USER_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_TAGS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_POSTS_LINE],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORCONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORPOSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_CONTENT_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_POSTS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_USERS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_USER_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_CONTENT_ADDONS,
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_ADDONS,
+            self::COMPONENT_SCROLLINNER_POSTS_ADDONS,
+            self::COMPONENT_SCROLLINNER_USERS_ADDONS,
+            self::COMPONENT_SCROLLINNER_USER_ADDONS,
+            self::COMPONENT_SCROLLINNER_CONTENT_DETAILS,
+            self::COMPONENT_SCROLLINNER_POSTS_DETAILS,
+            self::COMPONENT_SCROLLINNER_TAGS_DETAILS,
+            self::COMPONENT_SCROLLINNER_USERS_DETAILS,
+            self::COMPONENT_SCROLLINNER_USER_DETAILS,
+            self::COMPONENT_SCROLLINNER_CONTENT_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_POSTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_CONTENT_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_POSTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_USERS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_USER_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_CONTENT_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_POSTS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_USERS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_USER_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_CONTENT_LIST,
+            self::COMPONENT_SCROLLINNER_HIGHLIGHTS_LIST,
+            self::COMPONENT_SCROLLINNER_POSTS_LIST,
+            self::COMPONENT_SCROLLINNER_USERS_LIST,
+            self::COMPONENT_SCROLLINNER_USER_LIST,
+            self::COMPONENT_SCROLLINNER_TAGS_LIST,
+            self::COMPONENT_SCROLLINNER_POSTS_LINE,
+            self::COMPONENT_SCROLLINNER_AUTHORCONTENT_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_AUTHORHIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_AUTHORPOSTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_CONTENT_THUMBNAIL:
             case self::COMPONENT_SCROLLINNER_HIGHLIGHTS_THUMBNAIL:
             case self::COMPONENT_SCROLLINNER_POSTS_THUMBNAIL:
@@ -149,7 +149,10 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -194,7 +197,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
             self::COMPONENT_SCROLLINNER_AUTHORPOSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_AUTHORLAYOUT_FULLVIEW_POST],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

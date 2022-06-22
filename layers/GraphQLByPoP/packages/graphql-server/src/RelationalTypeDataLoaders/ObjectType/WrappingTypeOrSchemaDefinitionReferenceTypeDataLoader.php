@@ -48,12 +48,13 @@ class WrappingTypeOrSchemaDefinitionReferenceTypeDataLoader extends AbstractObje
     /**
      * The IDs can contain GraphQL's type wrappers, such as `[String]!`
      *
-     * @return array<WrappingTypeInterface | SchemaDefinitionReferenceObjectInterface>
+     * @param array<string|int> $ids
+     * @return array<WrappingTypeInterface|SchemaDefinitionReferenceObjectInterface>
      */
     public function getObjects(array $ids): array
     {
         return array_map(
-            fn (string $typeID) => $this->getWrappingTypeOrSchemaDefinitionReferenceObject($typeID),
+            $this->getWrappingTypeOrSchemaDefinitionReferenceObject(...),
             $ids
         );
     }

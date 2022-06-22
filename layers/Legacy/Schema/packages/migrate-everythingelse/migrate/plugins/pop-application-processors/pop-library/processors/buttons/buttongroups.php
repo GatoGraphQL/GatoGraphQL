@@ -15,25 +15,25 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
     public final const COMPONENT_BUTTONGROUP_TAGS = 'buttongroup-tags';
     public final const COMPONENT_BUTTONGROUP_AUTHORTAGS = 'buttongroup-authortags';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONGROUP_SECTION],
-            [self::class, self::COMPONENT_BUTTONGROUP_SECTIONWITHMAP],
-            [self::class, self::COMPONENT_BUTTONGROUP_TAGSECTION],
-            [self::class, self::COMPONENT_BUTTONGROUP_TAGSECTIONWITHMAP],
-            [self::class, self::COMPONENT_BUTTONGROUP_USERS],
-            [self::class, self::COMPONENT_BUTTONGROUP_MYCONTENT],
-            [self::class, self::COMPONENT_BUTTONGROUP_HOMESECTION],
-            [self::class, self::COMPONENT_BUTTONGROUP_AUTHORSECTION],
-            [self::class, self::COMPONENT_BUTTONGROUP_AUTHORSECTIONWITHMAP],
-            [self::class, self::COMPONENT_BUTTONGROUP_AUTHORUSERS],
-            [self::class, self::COMPONENT_BUTTONGROUP_TAGS],
-            [self::class, self::COMPONENT_BUTTONGROUP_AUTHORTAGS],
+            self::COMPONENT_BUTTONGROUP_SECTION,
+            self::COMPONENT_BUTTONGROUP_SECTIONWITHMAP,
+            self::COMPONENT_BUTTONGROUP_TAGSECTION,
+            self::COMPONENT_BUTTONGROUP_TAGSECTIONWITHMAP,
+            self::COMPONENT_BUTTONGROUP_USERS,
+            self::COMPONENT_BUTTONGROUP_MYCONTENT,
+            self::COMPONENT_BUTTONGROUP_HOMESECTION,
+            self::COMPONENT_BUTTONGROUP_AUTHORSECTION,
+            self::COMPONENT_BUTTONGROUP_AUTHORSECTIONWITHMAP,
+            self::COMPONENT_BUTTONGROUP_AUTHORUSERS,
+            self::COMPONENT_BUTTONGROUP_TAGS,
+            self::COMPONENT_BUTTONGROUP_AUTHORTAGS,
         );
     }
 
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $screens = array(
             self::COMPONENT_BUTTONGROUP_SECTION => POP_SCREEN_SECTION,
@@ -49,16 +49,16 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
             self::COMPONENT_BUTTONGROUP_TAGS => POP_SCREEN_TAGS,
             self::COMPONENT_BUTTONGROUP_AUTHORTAGS => POP_SCREEN_AUTHORTAGS,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
         return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataformatsHasmap(array $component, array &$props)
+    protected function getHeadersdataformatsHasmap(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONGROUP_USERS:
             case self::COMPONENT_BUTTONGROUP_SECTIONWITHMAP:
             case self::COMPONENT_BUTTONGROUP_TAGSECTIONWITHMAP:

@@ -13,7 +13,7 @@ class DowngradeRectorDataSource
     /**
      * @return string[]
      */
-    public function getAdditionalDowngradeRectorDataSourceFiles(): array
+    public function getAdditionalDowngradeRectorFiles(): array
     {
         return [
             $this->rootDir . '/config/rector/downgrade/monorepo/chained-rules/rector-cacheitem.php',

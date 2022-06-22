@@ -15,17 +15,17 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTS_RESULT,
-            $this->getModelInstanceComponentsFromAppState(...)
+            ModelInstance::HOOK_ELEMENTS_RESULT,
+            $this->getModelInstanceElementsFromAppState(...)
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceElementsFromAppState(array $elements): array
     {
         // Removing fields changes the configuration
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $components[] = $this->__('disable redundant root fields:', 'pop-engine') . $moduleConfiguration->disableRedundantRootTypeMutationFields();
-        return $components;
+        $elements[] = $this->__('disable redundant root fields:', 'pop-engine') . $moduleConfiguration->disableRedundantRootTypeMutationFields();
+        return $elements;
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Constants\DataSources;
+use PoP\ComponentModel\Constants\HookNames;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
@@ -18,24 +20,24 @@ trait QueryDataComponentProcessorTrait
 
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(Component $component, array &$props): array
     {
         return array();
     }
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(Component $component, array &$props): array
     {
         return array();
     }
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(Component $component): ?QueryInputOutputHandlerInterface
     {
         return $this->getActionExecutionQueryInputOutputHandler();
     }
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     return null;
     // }
 
-    public function getImmutableHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getImmutableHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
@@ -45,7 +47,10 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getQueryArgsFilteringComponents(array $component, array &$props): array
+    /**
+     * @return Component[]
+     */
+    public function getQueryArgsFilteringComponents(Component $component, array &$props): array
     {
         // Attributes overriding the query args, taken from the request
         return [
@@ -53,7 +58,7 @@ trait QueryDataComponentProcessorTrait
         ];
     }
 
-    public function getMutableonmodelHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getMutableonmodelHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getMutableonmodelHeaddatasetcomponentDataProperties($component, $props);
 
@@ -70,7 +75,7 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getMutableonrequestHeaddatasetcomponentDataProperties(array $component, array &$props): array
+    public function getMutableonrequestHeaddatasetcomponentDataProperties(Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestHeaddatasetcomponentDataProperties($component, $props);
 
@@ -79,7 +84,7 @@ trait QueryDataComponentProcessorTrait
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
     {
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
@@ -87,7 +92,7 @@ trait QueryDataComponentProcessorTrait
             // Merge with $_POST/$_GET, so that params passed through the URL can be used for the query (eg: ?limit=5)
             // But whitelist the params that can be taken, to avoid hackers peering inside the system and getting custom data (eg: params "include", "post-status" => "draft", etc)
             $whitelisted_params = (array)App::applyFilters(
-                Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
+                HookNames::QUERYDATA_WHITELISTEDPARAMS,
                 array(
                     PaginationParams::PAGE_NUMBER,
                     PaginationParams::LIMIT,
@@ -126,18 +131,18 @@ trait QueryDataComponentProcessorTrait
         return $typeDataLoader->findIDs($data_properties);
     }
 
-    public function getDatasetmeta(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(Component $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDOrIDs): array
     {
-        $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
+        $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs);
 
         if ($queryHandler = $this->getQueryInputOutputHandler($component)) {
-            if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+            if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
                 $ret['querystate'] = $query_state;
             }
-            if ($query_params = $queryHandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+            if ($query_params = $queryHandler->getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
                 $ret['queryparams'] = $query_params;
             }
-            if ($query_result = $queryHandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+            if ($query_result = $queryHandler->getQueryResult($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDOrIDs)) {
                 $ret['queryresult'] = $query_result;
             }
         }

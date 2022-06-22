@@ -419,7 +419,7 @@ When executing this query on a [single post](https://nextapi.getpop.org/2013/01/
 {
   "datasetcomponentsettings": {
     "dataload-relationalfields-singlepost": {
-      "dbkeys": {
+      "outputKeys": {
         "id": "posts",
         "comments": "comments",
         "comments.author": "users"
@@ -428,7 +428,7 @@ When executing this query on a [single post](https://nextapi.getpop.org/2013/01/
   },
   "datasetcomponentdata": {
     "dataload-relationalfields-singlepost": {
-      "dbobjectids": [
+      "objectIDs": [
         23691
       ]
     }

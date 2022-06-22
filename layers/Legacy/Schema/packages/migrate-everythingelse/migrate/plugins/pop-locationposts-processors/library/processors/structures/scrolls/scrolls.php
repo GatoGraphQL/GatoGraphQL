@@ -11,22 +11,22 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL = 'scroll-locationposts-thumbnail';
     public final const COMPONENT_SCROLL_LOCATIONPOSTS_LIST = 'scroll-locationposts-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_LIST],
-            [self::class, self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW],
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_NAVIGATOR,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_ADDONS,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_DETAILS,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL,
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_LIST,
+            self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_LOCATIONPOSTS_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomScrollInners::class, PoP_LocationPosts_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR],
@@ -39,25 +39,25 @@ class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Proces
             self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW => [PoP_LocationPosts_Module_Processor_CustomScrollInners::class, PoP_LocationPosts_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $simpleviews = array(
             [GD_Custom_EM_Module_Processor_CustomScrolls::class, GD_Custom_EM_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW,
         );
         $fullviews = array(
             [GD_Custom_EM_Module_Processor_CustomScrolls::class, GD_Custom_EM_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW],
+            self::COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW,
         );
 
         $extra_class = '';

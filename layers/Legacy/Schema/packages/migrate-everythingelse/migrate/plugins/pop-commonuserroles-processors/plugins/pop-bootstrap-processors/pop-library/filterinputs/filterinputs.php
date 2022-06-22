@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
+class GD_URE_Module_Processor_MultiSelectFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
     public final const URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
@@ -16,7 +16,10 @@ class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFi
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
 

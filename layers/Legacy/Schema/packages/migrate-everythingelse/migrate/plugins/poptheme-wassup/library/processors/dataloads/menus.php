@@ -17,36 +17,36 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
     public final const COMPONENT_DATALOAD_MENU_BODY_MYSECTIONS = 'dataload-menu-body-mysections';
     public final const COMPONENT_DATALOAD_MENU_BODY_ABOUT = 'dataload-menu-body-about';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_MENU_SIDEBAR_ABOUT],
-            [self::class, self::COMPONENT_DATALOAD_MENU_TOPNAV_USERLOGGEDIN],
-            [self::class, self::COMPONENT_DATALOAD_MENU_TOPNAV_USERNOTLOGGEDIN],
-            [self::class, self::COMPONENT_DATALOAD_MENU_TOPNAV_ABOUT],
-            [self::class, self::COMPONENT_DATALOAD_MENU_TOP_ADDNEW],
-            [self::class, self::COMPONENT_DATALOAD_MENU_HOME_USERNOTLOGGEDIN],
-            [self::class, self::COMPONENT_DATALOAD_MENU_SIDE_ADDNEW],
-            [self::class, self::COMPONENT_DATALOAD_MENU_SIDE_SECTIONS],
-            [self::class, self::COMPONENT_DATALOAD_MENU_SIDE_SECTIONS_MULTITARGET],
-            [self::class, self::COMPONENT_DATALOAD_MENU_SIDE_MYSECTIONS],
-            [self::class, self::COMPONENT_DATALOAD_MENU_BODY_ADDCONTENT],
-            [self::class, self::COMPONENT_DATALOAD_MENU_BODY_SECTIONS],
-            [self::class, self::COMPONENT_DATALOAD_MENU_BODY_MYSECTIONS],
-            [self::class, self::COMPONENT_DATALOAD_MENU_BODY_ABOUT],
+            self::COMPONENT_DATALOAD_MENU_SIDEBAR_ABOUT,
+            self::COMPONENT_DATALOAD_MENU_TOPNAV_USERLOGGEDIN,
+            self::COMPONENT_DATALOAD_MENU_TOPNAV_USERNOTLOGGEDIN,
+            self::COMPONENT_DATALOAD_MENU_TOPNAV_ABOUT,
+            self::COMPONENT_DATALOAD_MENU_TOP_ADDNEW,
+            self::COMPONENT_DATALOAD_MENU_HOME_USERNOTLOGGEDIN,
+            self::COMPONENT_DATALOAD_MENU_SIDE_ADDNEW,
+            self::COMPONENT_DATALOAD_MENU_SIDE_SECTIONS,
+            self::COMPONENT_DATALOAD_MENU_SIDE_SECTIONS_MULTITARGET,
+            self::COMPONENT_DATALOAD_MENU_SIDE_MYSECTIONS,
+            self::COMPONENT_DATALOAD_MENU_BODY_ADDCONTENT,
+            self::COMPONENT_DATALOAD_MENU_BODY_SECTIONS,
+            self::COMPONENT_DATALOAD_MENU_BODY_MYSECTIONS,
+            self::COMPONENT_DATALOAD_MENU_BODY_ABOUT,
         );
     }
 
-    // function getRelevantRoute(array $component, array &$props) {
+    // function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $routes = array(
     //         self::COMPONENT_DATALOAD_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
     //         self::COMPONENT_DATALOAD_MENU_BODY_ADDCONTENT => POP_CONTENTCREATION_ROUTE_ADDCONTENT,
     //     );
-    //     return $routes[$component[1]] ?? parent::getRelevantRoute($component, $props);
+    //     return $routes[$component->name] ?? parent::getRelevantRoute($component, $props);
     // }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -67,16 +67,16 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
             self::COMPONENT_DATALOAD_MENU_BODY_ABOUT => [PoP_Module_Processor_IndentMenus::class, PoP_Module_Processor_IndentMenus::COMPONENT_INDENTMENU],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getMenu(array $component)
+    public function getMenu(\PoP\ComponentModel\Component\Component $component)
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_MENU_SIDEBAR_ABOUT => GD_MENU_SIDEBAR_ABOUT,
             self::COMPONENT_DATALOAD_MENU_TOPNAV_USERLOGGEDIN => GD_MENU_TOPNAV_USERLOGGEDIN,
             self::COMPONENT_DATALOAD_MENU_TOPNAV_USERNOTLOGGEDIN => GD_MENU_TOPNAV_USERNOTLOGGEDIN,

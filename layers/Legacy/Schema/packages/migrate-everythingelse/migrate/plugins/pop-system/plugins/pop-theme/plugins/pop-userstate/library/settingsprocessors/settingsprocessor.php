@@ -11,7 +11,7 @@ class PoP_System_Theme_UserState_Module_SettingsProcessor extends \PoPCMSSchema\
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_SYSTEM_ROUTE_SYSTEM_GENERATETHEME => false,

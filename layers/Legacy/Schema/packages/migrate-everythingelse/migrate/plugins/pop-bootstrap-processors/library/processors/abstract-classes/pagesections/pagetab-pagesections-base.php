@@ -4,17 +4,17 @@ use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_PageTabPageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_PAGESECTION_PAGETAB];
     }
 
-    public function getBtnClass(array $component, array &$props)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-default btn-sm';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -23,13 +23,13 @@ abstract class PoP_Module_Processor_PageTabPageSectionsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         parent::initModelProps($component, $props);
     }
 
-    protected function getInitjsBlockbranches(array $component, array &$props)
+    protected function getInitjsBlockbranches(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getInitjsBlockbranches($component, $props);
 
@@ -39,14 +39,14 @@ abstract class PoP_Module_Processor_PageTabPageSectionsBase extends PoP_Module_P
         return $ret;
     }
 
-    protected function openTab(array $component, array &$props)
+    protected function openTab(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Do not open the tab for 404s
         return !\PoP\Root\App::getState(['routing', 'is-404']);
     }
 
-    public function getPagesectionJsmethod(array $component, array &$props)
+    public function getPagesectionJsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getPagesectionJsmethod($component, $props);
 

@@ -4,10 +4,10 @@ class PoP_Module_Processor_LatestCountScriptsLayouts extends PoP_Module_Processo
 {
     public final const COMPONENT_LAYOUT_LATESTCOUNTSCRIPT = 'layout-latestcount-script';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_LATESTCOUNTSCRIPT],
+            self::COMPONENT_LAYOUT_LATESTCOUNTSCRIPT,
         );
     }
 }

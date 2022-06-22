@@ -15,12 +15,12 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTS_RESULT,
-            $this->getModelInstanceComponentsFromAppState(...)
+            ModelInstance::HOOK_ELEMENTS_RESULT,
+            $this->getModelInstanceElementsFromAppState(...)
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceElementsFromAppState(array $elements): array
     {
         switch (App::getState('nature')) {
             case RequestNature::PAGE:
@@ -30,10 +30,10 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_PAGE, $component_types)) {
                     $page_id = App::getState(['routing', 'queried-object-id']);
-                    $components[] = $this->__('page id:', 'pop-engine') . $page_id;
+                    $elements[] = $this->__('page id:', 'pop-engine') . $page_id;
                 }
                 break;
         }
-        return $components;
+        return $elements;
     }
 }

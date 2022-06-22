@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Posts\SchemaHooks;
 
-use PoP\Root\App;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\AbstractPostsFilterInputObjectTypeResolver;
-use PoPWPSchema\Posts\FilterInputProcessors\FilterInputProcessor;
+use PoPWPSchema\Posts\FilterInputs\IsStickyFilterInput;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IsStickyFilterInput $isStickyFilterInput = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -24,6 +26,14 @@ class InputObjectTypeHookSet extends AbstractHookSet
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
+    final public function setIsStickyFilterInput(IsStickyFilterInput $isStickyFilterInput): void
+    {
+        $this->isStickyFilterInput = $isStickyFilterInput;
+    }
+    final protected function getIsStickyFilterInput(): IsStickyFilterInput
+    {
+        return $this->isStickyFilterInput ??= $this->instanceManager->getInstance(IsStickyFilterInput::class);
     }
 
     protected function init(): void
@@ -81,15 +91,15 @@ class InputObjectTypeHookSet extends AbstractHookSet
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?array {
+    ): ?FilterInputInterface {
         if (!($inputObjectTypeResolver instanceof AbstractPostsFilterInputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'isSticky' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_IS_STICKY],
+            'isSticky' => $this->getIsStickyFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

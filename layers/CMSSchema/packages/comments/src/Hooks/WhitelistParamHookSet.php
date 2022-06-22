@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\Hooks;
 
+use PoP\ComponentModel\Constants\HookNames;
 use PoP\Root\App;
-use PoP\ComponentModel\ComponentProcessors\Constants;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\Comments\Constants\Params;
 
@@ -14,7 +14,7 @@ class WhitelistParamHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
+            HookNames::QUERYDATA_WHITELISTEDPARAMS,
             $this->getWhitelistedParams(...)
         );
     }

@@ -10,5 +10,8 @@ services:
     PoP\Engine\ComponentFilters\:
         resource: '../src/ComponentFilters/*'
 
+    PoP\Engine\DataStructureFormatters\:
+        resource: '../src/DataStructureFormatters/*'
+
     PoP\Engine\HelperServices\FormInputHelperServiceInterface:
         class: \PoP\Engine\HelperServices\FormInputHelperService

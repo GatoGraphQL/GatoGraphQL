@@ -9,14 +9,14 @@ define('GD_SUBMITFORMTYPE_DELEGATE', 'delegate');
 
 abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Processor_FiltersBase
 {
-    public function getAction(array $component, array &$props)
+    public function getAction(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         // The delegator filter will simply point to the current page, adding ?componentFilter=mainContentComponent so that is the module that gets filtered
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         return $requestHelperService->getCurrentURL();
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var MainContentComponent */
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
         parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -46,18 +46,18 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getFormType(array $component, array &$props)
+    public function getFormType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return GD_SUBMITFORMTYPE_DELEGATE;
     }
 
     // Method to override, giving the jQuery selector to the proxied form
-    public function getBlockTarget(array $component, array &$props)
+    public function getBlockTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Specify the block target

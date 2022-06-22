@@ -7,19 +7,19 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
     public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES = 'filtercomponent-selectabletypeaheadalert-selectableprofiles';
     public final const COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS = 'filtercomponent-selectabletypeaheadalert-communityusers';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS],
-            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS],
-            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES],
-            [self::class, self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS],
+            self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS,
+            self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS,
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES,
+            self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS,
         );
     }
 
-    public function getSelectedComponent(array $component)
+    public function getSelectedComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS:
                 return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::COMPONENT_LAYOUTUSER_CARD];
@@ -32,9 +32,9 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         return parent::getSelectedComponent($component);
     }
     
-    public function getHiddenInputComponent(array $component)
+    public function getHiddenInputComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
                 return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::COMPONENT_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTAUTHORS];
 
@@ -51,9 +51,9 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         return parent::getHiddenInputComponent($component);
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS:
             case self::COMPONENT_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES:

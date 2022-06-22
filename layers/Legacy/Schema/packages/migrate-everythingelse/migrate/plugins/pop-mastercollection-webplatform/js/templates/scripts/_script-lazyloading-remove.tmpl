@@ -2,7 +2,7 @@
 	<script type="text/javascript">
 	(function($){
 		$(document).one('template:merged', function() {
-			var destination = $('div.pop-append-{{../itemObjectDBKey}}-{{id}}');
+			var destination = $('div.pop-append-{{../itemObjectTypeOutputKey}}-{{id}}');
 			{{!If there is a "Loading data" spinner, hide it.}}
 			var loading = destination.closest('[data-lazyloadingspinner-target]');
 			$(loading.data('lazyloadingspinner-target')).addClass('hidden');

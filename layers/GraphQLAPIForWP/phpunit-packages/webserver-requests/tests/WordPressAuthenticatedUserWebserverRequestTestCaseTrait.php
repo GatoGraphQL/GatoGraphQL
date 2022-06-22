@@ -18,7 +18,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     /**
      * To login a user in WordPress, request the following URL by post:
      *
-     *   curl 'http://graphql-api.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
+     *   curl 'https://graphql-api.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
      */
     protected static function getWebserverPingURL(): string
     {
@@ -73,7 +73,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
         if ($username === '' || static::getLoginPassword() === '') {
             return 'The credentials to authenticate the user are incomplete or missing';
         }
-        return sprintf('Authentication of user "%s" did not succeed', $username);
+        return 'Authentication of the admin user did not succeed';
     }
 
     /**

@@ -7,18 +7,18 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
     public final const COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP = 'anchorcontrol-toggleauthormap';
     public final const COMPONENT_ANCHORCONTROL_TOGGLETAGMAP = 'anchorcontrol-toggletagmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEMAP],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP],
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP],
+            self::COMPONENT_ANCHORCONTROL_TOGGLEMAP,
+            self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP,
+            self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -27,9 +27,9 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
 
         return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -38,9 +38,9 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -52,11 +52,11 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         return parent::getHref($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -68,9 +68,9 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:
@@ -90,7 +90,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                     $props,
                     'params',
                     array(
-                        'data-cookieid' => \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component).'-togglemap',
+                        'data-cookieid' => \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component).'-togglemap',
                         'data-cookietarget' => $this->getProp($component, $props, 'target')/*'#'.$props['block-id'].' > .blocksection-inners .collapse.map'*/,
                         'data-cookiecollapse' => 'show',
                         'data-togglecookiebtn' => 'self',
@@ -99,7 +99,7 @@ class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Pro
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // The map is initially toggled non-visible
             case self::COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP:
             case self::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP:

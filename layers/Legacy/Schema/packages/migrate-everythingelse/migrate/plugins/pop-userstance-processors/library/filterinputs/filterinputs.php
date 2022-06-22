@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Module_Processor_UserStanceFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_UserStanceFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
 
@@ -12,7 +12,10 @@ class PoP_Module_Processor_UserStanceFilterInputProcessor extends AbstractFilter
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
 
@@ -20,9 +23,9 @@ class PoP_Module_Processor_UserStanceFilterInputProcessor extends AbstractFilter
                 $query['tax-query'] = $query['tax-query'] ?? ['relation' => 'AND'];
                 $taxonomy_terms = [];
                 foreach ($value as $pair) {
-                    $component = explode('|', $pair);
-                    $taxonomy = $component[0];
-                    $term = $component[1];
+                    $elements = explode('|', $pair);
+                    $taxonomy = $elements[0];
+                    $term = $elements[1];
                     $taxonomy_terms[$taxonomy][] = $term;
                 }
                 foreach ($taxonomy_terms as $taxonomy => $terms) {

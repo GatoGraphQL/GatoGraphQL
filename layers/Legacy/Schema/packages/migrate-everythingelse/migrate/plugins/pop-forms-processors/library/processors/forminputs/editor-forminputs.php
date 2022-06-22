@@ -5,16 +5,16 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
 {
     public final const COMPONENT_FORMINPUT_EDITOR = 'forminputeditor';
     
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_EDITOR],
+            self::COMPONENT_FORMINPUT_EDITOR,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EDITOR:
                 return TranslationAPIFacade::getInstance()->__('Content', 'pop-coreprocessors');
         }
@@ -22,9 +22,9 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EDITOR:
                 return true;
         }
@@ -32,10 +32,10 @@ class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorF
         return parent::isMandatory($component, $props);
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_EDITOR:
                 return 'forminputeditor';
         }

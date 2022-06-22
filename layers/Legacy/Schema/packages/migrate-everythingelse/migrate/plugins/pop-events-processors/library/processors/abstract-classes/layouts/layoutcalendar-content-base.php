@@ -2,19 +2,19 @@
 
 abstract class PoP_Module_Processor_CalendarContentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTCALENDAR_CONTENT_POPOVER];
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
         $ret[] = 'volunteersNeeded';
         $ret[] = 'url';
         if ($this->getProp($component, $props, 'show-title')) {
@@ -24,14 +24,14 @@ abstract class PoP_Module_Processor_CalendarContentLayoutsBase extends PoPEngine
     }
 
     // Comment Leo 18/07/2017: commented since removing the "hidden-md hidden-lg" view for smartphones. Now there is only one
-    // function getJsmethods(array $component, array &$props) {
+    // function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $ret = parent::getJsmethods($component, $props);
     //     $this->addJsmethod($ret, 'doNothing', 'void-link');
     //     return $ret;
     // }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_CalendarContentLayoutsBase extends PoPEngine
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Show the title by default

@@ -10,8 +10,8 @@ services:
     PoPCMSSchema\UserState\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPCMSSchema\UserState\CheckpointProcessors\:
-        resource: '../src/CheckpointProcessors/*'
+    PoPCMSSchema\UserState\Checkpoints\:
+        resource: '../src/Checkpoints/*'
 
     PoPCMSSchema\UserState\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'

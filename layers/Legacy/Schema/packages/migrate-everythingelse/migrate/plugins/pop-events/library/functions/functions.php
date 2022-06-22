@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ComponentProcessors\Constants;
+use PoP\ComponentModel\Constants\HookNames;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
@@ -52,7 +52,7 @@ function gdEmPosticonImpl($icon, $post_id)
 }
 
 \PoP\Root\App::addFilter(
-    Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
+    HookNames::QUERYDATA_WHITELISTEDPARAMS,
     function($params) {
         $params[] = GD_URLPARAM_YEAR;
         $params[] = GD_URLPARAM_MONTH;

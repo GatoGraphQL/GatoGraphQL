@@ -7,5 +7,5 @@ services:
     PoPCMSSchema\GenericCustomPosts\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
 
-    PoPCMSSchema\GenericCustomPosts\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPCMSSchema\GenericCustomPosts\FilterInputs\:
+        resource: '../src/FilterInputs/*'

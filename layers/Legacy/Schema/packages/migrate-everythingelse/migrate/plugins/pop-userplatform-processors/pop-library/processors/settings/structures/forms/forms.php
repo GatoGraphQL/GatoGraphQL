@@ -4,16 +4,16 @@ class PoP_Module_Processor_SettingsForms extends PoP_Module_Processor_FormsBase
 {
     public final const COMPONENT_FORM_SETTINGS = 'form-settings';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_SETTINGS],
+            self::COMPONENT_FORM_SETTINGS,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_SETTINGS:
                 return [PoP_Module_Processor_SettingsFormInners::class, PoP_Module_Processor_SettingsFormInners::COMPONENT_FORMINNER_SETTINGS];
         }

@@ -21,31 +21,31 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
     public final const COMPONENT_DELEGATORFILTER_TAGS = 'delegatorfilter-tags';
     public final const COMPONENT_DELEGATORFILTER_USERS = 'delegatorfilter-users';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_CONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_POSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_CATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGCATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_USERS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_MYCATEGORYPOSTS],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_TAGCONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_HOMECONTENT],
-            [self::class, self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT],
+            self::COMPONENT_DELEGATORFILTER_TAGS,
+            self::COMPONENT_DELEGATORFILTER_CONTENT,
+            self::COMPONENT_DELEGATORFILTER_AUTHORCONTENT,
+            self::COMPONENT_DELEGATORFILTER_POSTS,
+            self::COMPONENT_DELEGATORFILTER_CATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_AUTHORPOSTS,
+            self::COMPONENT_DELEGATORFILTER_AUTHORCATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_TAGPOSTS,
+            self::COMPONENT_DELEGATORFILTER_TAGCATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_USERS,
+            self::COMPONENT_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS,
+            self::COMPONENT_DELEGATORFILTER_MYCONTENT,
+            self::COMPONENT_DELEGATORFILTER_MYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_MYCATEGORYPOSTS,
+            self::COMPONENT_DELEGATORFILTER_TAGMAINCONTENT,
+            self::COMPONENT_DELEGATORFILTER_TAGCONTENT,
+            self::COMPONENT_DELEGATORFILTER_HOMECONTENT,
+            self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_DELEGATORFILTER_TAGS => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS],
@@ -68,20 +68,20 @@ class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_C
             self::COMPONENT_DELEGATORFILTER_AUTHORMAINCONTENT => [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getBlockTarget(array $component, array &$props)
+    public function getBlockTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
         // Comment Leo 12/01/2017: Actually, for the forms we must use .active instead of :last-child, because the selector is executed
         // on runtime, and not when initializing the JS
-        switch ($component[1]) {
+        switch ($component->name) {
          // Because the Home has a different structure (blockgroup_home => block with content) then must change the block target
             case self::COMPONENT_DELEGATORFILTER_HOMECONTENT:
                 return '#'.POP_COMPONENTID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel.active > .blockgroup-home > .blocksection-extensions > .pop-block.withfilter';

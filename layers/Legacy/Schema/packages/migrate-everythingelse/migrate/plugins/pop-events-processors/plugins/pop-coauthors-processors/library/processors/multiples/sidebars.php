@@ -5,19 +5,19 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
     public final const COMPONENT_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR = 'multiple-single-pastevent-postauthorssidebar';
     public final const COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR = 'multiple-single-event-postauthorssidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR],
+            self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR,
+            self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR,
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR:
                 // Comment Leo 27/07/2016: can't have the filter for "POSTAUTHORSSIDEBAR", because to get the authors we do:
@@ -27,7 +27,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
                 $filters = array(
                     self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],//[PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_EVENT_SIDEBAR];
                 break;
 
@@ -35,7 +35,7 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
                 $filters = array(
                     self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],//[PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR],
                 );
-                $ret[] = $filters[$component[1]];
+                $ret[] = $filters[$component->name];
                 $ret[] = [PoP_Events_Module_Processor_CustomSidebarDataloads::class, PoP_Events_Module_Processor_CustomSidebarDataloads::COMPONENT_DATALOAD_SINGLE_PASTEVENT_SIDEBAR];
                 break;
         }
@@ -43,22 +43,22 @@ class PoP_Events_CoAuthors_Module_Processor_SidebarMultiples extends PoP_Module_
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR => POP_SCREEN_SINGLEUSERS,
             self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR => POP_SCREEN_SINGLEUSERS,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR:
             case self::COMPONENT_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;

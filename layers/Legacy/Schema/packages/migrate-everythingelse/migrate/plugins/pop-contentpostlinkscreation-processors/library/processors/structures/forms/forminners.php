@@ -4,16 +4,16 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
 {
     public final const COMPONENT_FORMINNER_CONTENTPOSTLINK = 'forminner-contentpostlink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_CONTENTPOSTLINK],
+            self::COMPONENT_FORMINNER_CONTENTPOSTLINK,
         );
     }
 
-    protected function isLink(array $component)
+    protected function isLink(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CONTENTPOSTLINK:
                 return true;
         }
@@ -21,11 +21,14 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
         return parent::isLink($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CONTENTPOSTLINK:
                 return array_merge(
                     $ret,
@@ -36,12 +39,12 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners e
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_CONTENTPOSTLINK:
                 $rightside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE];
                 $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE];

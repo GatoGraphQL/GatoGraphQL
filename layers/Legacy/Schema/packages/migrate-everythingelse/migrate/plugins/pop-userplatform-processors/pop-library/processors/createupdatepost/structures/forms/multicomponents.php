@@ -12,17 +12,17 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
     public final const COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE = 'multicomponent-form-post-leftside';
     public final const COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE = 'multicomponent-form-post-rightside';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE],
-            [self::class, self::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE],
+            self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH,
+            self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH,
+            self::COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE,
+            self::COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE,
+            self::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE,
+            self::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE,
+            self::COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE,
+            self::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE,
         );
     }
 
@@ -35,11 +35,14 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
         // );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH:
                 $ret[] = [PoP_Module_Processor_CreateUpdatePostFormInputGroups::class, PoP_Module_Processor_CreateUpdatePostFormInputGroups::COMPONENT_FORMINPUTGROUP_CUP_STATUS];
                 $ret[] = [PoP_Module_Processor_SubmitButtons::class, PoP_Module_Processor_SubmitButtons::COMPONENT_SUBMITBUTTON_SUBMIT];
@@ -77,7 +80,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_FEATUREDIMAGE];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_METAINFORMATION];
-                $status = GD_CreateUpdate_Utils::moderate() ? [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] : [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
+                $status = GD_CreateUpdate_Utils::moderate() ? self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] : [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH;
                 $ret[] = $status;
                 break;
 
@@ -94,7 +97,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_FEATUREDIMAGE];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::COMPONENT_WIDGET_FORM_METAINFORMATION];
-                $status = GD_CreateUpdate_Utils::moderate() ? [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] : [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
+                $status = GD_CreateUpdate_Utils::moderate() ? self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] : [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH;
                 $ret[] = $status;
                 break;
         }
@@ -102,19 +105,19 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE:
             case self::COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE:
                 if (!($classs = $this->getProp($component, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
                     $classs = 'alert alert-info';
                 }
                 $status = GD_CreateUpdate_Utils::moderate() ?
-                    [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :
-                    [self::class, self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
+                    self::COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH :
+                    self::COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH;
                 $this->appendProp($status, $props, 'class', $classs);
                 break;
 

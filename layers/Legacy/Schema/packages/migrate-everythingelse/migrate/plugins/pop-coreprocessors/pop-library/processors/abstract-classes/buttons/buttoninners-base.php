@@ -2,53 +2,53 @@
 
 abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_BUTTONINNER];
     }
 
-    // function getGlyphicon(array $component) {
+    // function getGlyphicon(\PoP\ComponentModel\Component\Component $component) {
     //     return null;
     // }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getTag(array $component)
+    public function getTag(\PoP\ComponentModel\Component\Component $component)
     {
         return 'span';
     }
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getTextField(array $component, array &$props)
+    public function getTextField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getTextfieldOpen(array $component, array &$props)
+    public function getTextfieldOpen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getTextfieldClose(array $component, array &$props)
+    public function getTextfieldClose(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getBtntitleClass(array $component, array &$props)
+    public function getBtntitleClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getTextfieldClass(array $component, array &$props)
+    public function getTextfieldClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array();
         if ($text_field = $this->getTextField($component, $props)) {
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -92,7 +92,7 @@ abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'textfield-class', $this->getTextfieldClass($component, $props));
         parent::initModelProps($component, $props);

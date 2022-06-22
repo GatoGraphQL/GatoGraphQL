@@ -6,17 +6,17 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS = 'formcomponent-selectabletypeahead-locations';
     public final const COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION = 'formcomponent-selectabletypeahead-location';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS],
-            [self::class, self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION],
+            self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS,
+            self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION,
         );
     }
 
-    public function getComponentSubcomponents(array $component)
+    public function getComponentSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return array(
@@ -26,9 +26,9 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
 
         return parent::getComponentSubcomponents($component);
     }
-    public function getTriggerLayoutSubcomponent(array $component)
+    public function getTriggerLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
                 return [PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS];
 
@@ -39,9 +39,9 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         return parent::getTriggerLayoutSubcomponent($component);
     }
 
-    public function isMultiple(array $component): bool
+    public function isMultiple(\PoP\ComponentModel\Component\Component $component): bool
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return false;
         }
@@ -49,9 +49,9 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         return parent::isMultiple($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
                 return 'locations';
 
@@ -62,14 +62,14 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         return parent::getDbobjectField($component);
     }
 
-    protected function enableSuggestions(array $component)
+    protected function enableSuggestions(\PoP\ComponentModel\Component\Component $component)
     {
 
         // If there are suggestions, then enable the functionality
         return !empty($this->getSuggestions($component));
     }
 
-    protected function getSuggestions(array $component)
+    protected function getSuggestions(\PoP\ComponentModel\Component\Component $component)
     {
         return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_LocationSelectableTypeaheadFormInputs:suggestions',
@@ -78,11 +78,11 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         );
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
             case self::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 // Provide a pre-define list of locations

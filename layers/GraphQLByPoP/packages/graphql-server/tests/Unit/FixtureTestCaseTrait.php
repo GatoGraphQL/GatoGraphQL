@@ -11,6 +11,11 @@ use Symfony\Component\Finder\SplFileInfo;
 trait FixtureTestCaseTrait
 {
     /**
+     * Directory under the fixture files are placed
+     */
+    abstract protected function getFixtureFolder(): string;
+
+    /**
      * @return SplFileInfo[]
      */
     protected function findFilesInDirectory(string $directory, array $fileNames, array $notFileNames = []): array
@@ -32,6 +37,15 @@ trait FixtureTestCaseTrait
                 'File "%s" does not exist',
                 $file
             )
+        );
+    }
+
+    protected function addFixtureFolderInfo(string $string): string
+    {
+        return sprintf(
+            ' (fixture folder: "%s")%s',
+            $this->getFixtureFolder(),
+            $string,
         );
     }
 }

@@ -24,35 +24,35 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     public final const COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'dataload-authorlocationposts-scroll-list';
     public final const COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST = 'dataload-taglocationposts-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST,
 
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
@@ -75,7 +75,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
 
@@ -127,12 +127,12 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::COMPONENT_SCROLL_LOCATIONPOSTS_LIST],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW:
@@ -159,9 +159,9 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
         return parent::getFilterSubcomponent($component);
     }
 
-    // public function getNature(array $component)
+    // public function getNature(\PoP\ComponentModel\Component\Component $component)
     // {
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW:
     //         case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW:
@@ -180,35 +180,35 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //     return parent::getNature($component);
     // }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW,
         );
         $thumbnails = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST,
         );
         $typeaheads = array(
-            [self::class, self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD],
+            self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
@@ -227,11 +227,11 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Filter by the Profile/Community
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW:
@@ -253,9 +253,9 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_TYPEAHEAD:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS:
@@ -280,9 +280,9 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS:
             case self::COMPONENT_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS:

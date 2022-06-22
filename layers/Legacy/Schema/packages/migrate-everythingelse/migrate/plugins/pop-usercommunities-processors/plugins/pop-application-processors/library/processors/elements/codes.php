@@ -6,19 +6,19 @@ class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HT
 {
     public final const COMPONENT_CODE_INVITENEWMEMBERSHELP = 'code-invitenewmembershelp';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_INVITENEWMEMBERSHELP],
+            self::COMPONENT_CODE_INVITENEWMEMBERSHELP,
         );
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_INVITENEWMEMBERSHELP:
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                $invitenew_processor = $componentprocessor_manager->getProcessor([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS]);
+                $invitenew_processor = $componentprocessor_manager->getComponentProcessor([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS]);
                 $invitenew = sprintf(
                     '<a class="btn btn-xs btn-success" href="%s" target="%s"><i class="fa fa-fw %s"></i>%s</a>',
                     $invitenew_processor->getHref([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_INVITENEWMEMBERS], $props),

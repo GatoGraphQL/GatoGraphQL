@@ -8,21 +8,24 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
     public final const COMPONENT_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION = 'userstance-controlgroup-userpostinteraction';
     public final const COMPONENT_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION = 'userstance-controlgroup-userfullviewinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_STANCESTATS],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYSTANCELIST],
-            [self::class, self::COMPONENT_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION],
-            [self::class, self::COMPONENT_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION],
+            self::COMPONENT_CONTROLGROUP_STANCESTATS,
+            self::COMPONENT_CONTROLGROUP_MYSTANCELIST,
+            self::COMPONENT_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION,
+            self::COMPONENT_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_STANCESTATS:
                 $ret[] = [UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_GENERAL];
                 $ret[] = [UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE];
@@ -49,11 +52,11 @@ class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_STANCESTATS:
                 // Make them collapsible, with a control expanding them by looking for class "collapse"
                 $this->appendProp([UserStance_Module_Processor_CustomControlButtonGroups::class, UserStance_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE], $props, 'class', 'collapse');

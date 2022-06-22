@@ -12,15 +12,12 @@ abstract class DefaultSettingsProcessorBase extends SettingsProcessorBase
         SettingsProcessorManagerFactory::getInstance()->setDefault($this);
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         $route = \PoP\Root\App::getState('route');
 
         // Check if the page has checkpoints. If so, assume it requires user state
-        if ($checkpoints = \PoP\ComponentModel\Settings\SettingsManagerFactory::getInstance()->getCheckpoints($route)) {
-            return !empty($checkpoints);
-        }
-
-        return parent::requiresUserState();
+        $checkpoints = \PoP\ComponentModel\Settings\SettingsManagerFactory::getInstance()->getRouteCheckpoints($route)) {
+        return !empty($checkpoints);
     }
 }

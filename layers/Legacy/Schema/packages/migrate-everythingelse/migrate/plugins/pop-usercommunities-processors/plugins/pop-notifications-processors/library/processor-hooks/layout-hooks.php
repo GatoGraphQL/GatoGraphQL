@@ -1,6 +1,8 @@
 <?php
 
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class GD_URE_AAL_CustomMultipleLayoutHooks
 {
@@ -17,35 +19,47 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     }
 
     /**
-     * @param ConditionalLeafComponentField[] $conditionalLeafComponentFields
-     * @return ConditionalLeafComponentField[]
+     * @param ConditionalLeafComponentFieldNode[] $conditionalLeafComponentFieldNodes
+     * @return ConditionalLeafComponentFieldNode[]
      */
-    public function getConditionalBottomSubcomponents(array $conditionalLeafComponentFields): array
+    public function getConditionalBottomSubcomponents(array $conditionalLeafComponentFieldNodes): array
     {
         // Add layout for action "updated_user_membership"
-        $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
-            'isUserNotification',
+        $conditionalLeafComponentFieldNodes[] = new ConditionalLeafComponentFieldNode(
+            new LeafField(
+                'isUserNotification',
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            ),
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
             ]
         );
-        return $conditionalLeafComponentFields;
+        return $conditionalLeafComponentFieldNodes;
     }
 
     /**
-     * @param ConditionalLeafComponentField[] $conditionalLeafComponentFields
-     * @return ConditionalLeafComponentField[]
+     * @param ConditionalLeafComponentFieldNode[] $conditionalLeafComponentFieldNodes
+     * @return ConditionalLeafComponentFieldNode[]
      */
-    public function getQuicklinkgroupBottomSubcomponent(array $conditionalLeafComponentFields): array
+    public function getQuicklinkgroupBottomSubcomponent(array $conditionalLeafComponentFieldNodes): array
     {
         // Add layout for action "joined_community"
-        $conditionalLeafComponentFields[] = new ConditionalLeafComponentField(
-            'isUserNotification',
+        $conditionalLeafComponentFieldNodes[] = new ConditionalLeafComponentFieldNode(
+            new LeafField(
+                'isUserNotification',
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            ),
             [
                 [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
             ]
         );
-        return $conditionalLeafComponentFields;
+        return $conditionalLeafComponentFieldNodes;
     }
 }
 

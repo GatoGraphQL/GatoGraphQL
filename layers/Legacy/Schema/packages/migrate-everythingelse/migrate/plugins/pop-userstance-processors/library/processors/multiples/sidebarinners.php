@@ -12,26 +12,29 @@ class PoPVP_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     public final const COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar';
     public final const COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar-stance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_MYSTANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_AUTHORROLE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_GENERALSTANCE_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR],
+            self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_MYSTANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_AUTHORROLE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_GENERALSTANCE_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR,
+            self::COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR:
                 $ret[] = [PoPVP_Module_Processor_ButtonGroups::class, PoPVP_Module_Processor_ButtonGroups::COMPONENT_BUTTONGROUP_STANCES];
                 $ret[] = [PoPVP_Module_Processor_CustomDelegatorFilters::class, PoPVP_Module_Processor_CustomDelegatorFilters::COMPONENT_DELEGATORFILTER_STANCES];

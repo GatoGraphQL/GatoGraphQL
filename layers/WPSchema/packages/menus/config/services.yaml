@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPWPSchema\Menus\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPWPSchema\Menus\FilterInputs\:
+        resource: '../src/FilterInputs/*'
 
     PoPWPSchema\Menus\Hooks\:
         resource: '../src/Hooks/*'

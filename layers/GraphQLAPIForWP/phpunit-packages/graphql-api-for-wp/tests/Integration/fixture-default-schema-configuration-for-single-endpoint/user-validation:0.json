@@ -78,6 +78,16 @@
                 "comments": []
             },
             {
+                "__typename": "Page",
+                "id": 2,
+                "title": "Sample Page",
+                "date": "2022-04-17T13:06:58+00:00",
+                "url": "https:\/\/graphql-api.lndo.site\/sample-page\/",
+                "customPostType": "page",
+                "hasComments": false,
+                "comments": []
+            },
+            {
                 "__typename": "Post",
                 "id": 28,
                 "title": "HTTP caching improves performance",
@@ -89,25 +99,6 @@
                     {
                         "id": 11,
                         "content": "<p>Wow, this sounds awesome!<\/p>\n"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security",
-                "date": "2020-12-12T04:06:52+00:00",
-                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
-                "customPostType": "post",
-                "hasComments": true,
-                "comments": [
-                    {
-                        "id": 10,
-                        "content": "<p>Absolutely! And directives too!<\/p>\n"
-                    },
-                    {
-                        "id": 9,
-                        "content": "<p>Can I hide any field?<\/p>\n"
                     }
                 ]
             }
@@ -123,7 +114,16 @@
                 "comments": []
             }
         ],
-        "mediaItems": [],
+        "mediaItems": [
+            {
+                "id": 362,
+                "url": "https:\/\/graphql-api.lndo.site\/graphql-api-search-results\/"
+            },
+            {
+                "id": 361,
+                "url": "https:\/\/graphql-api.lndo.site\/graphql-api-header\/"
+            }
+        ],
         "users": [
             {
                 "avatar": "da83a02a60e209782d40d3feb41e00c5",
@@ -137,7 +137,7 @@
                 "websiteURL": "",
                 "nicename": "editor",
                 "self": {
-                    "id": 5
+                    "id": 6
                 }
             },
             {
@@ -152,7 +152,7 @@
                 "websiteURL": "",
                 "nicename": "author",
                 "self": {
-                    "id": 4
+                    "id": 5
                 }
             },
             {
@@ -167,21 +167,11 @@
                 "websiteURL": "",
                 "nicename": "contributor",
                 "self": {
-                    "id": 3
+                    "id": 4
                 }
             }
         ],
-        "myPosts": [
-            {
-                "id": 1
-            },
-            {
-                "id": 25
-            },
-            {
-                "id": 23
-            }
-        ],
+        "myPosts": [],
         "me": {
             "id": 1
         }

@@ -7,21 +7,24 @@ class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Process
     public final const COMPONENT_CONTROLGROUP_BLOCKAUTHOREVENTLIST = 'controlgroup-blockauthoreventlist';
     public final const COMPONENT_CONTROLGROUP_BLOCKTAGEVENTLIST = 'controlgroup-blocktageventlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_EVENTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKEVENTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKAUTHOREVENTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKTAGEVENTLIST],
+            self::COMPONENT_CONTROLGROUP_EVENTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKEVENTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKAUTHOREVENTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKTAGEVENTLIST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_EVENTLIST:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::class, PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_EVENTLINKS];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];

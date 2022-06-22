@@ -1,31 +1,33 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalComponentFieldNode;
 use PoP\Engine\Route\RouteUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP_Module_Processor_ViewComponentButtonsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_LOCATIONBUTTON];
     }
 
-    public function getMapscriptSubcomponent(array $component)
+    public function getMapscriptSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::COMPONENT_MAP_SCRIPT];
     }
 
-    public function getLocationComponent(array $component)
+    public function getLocationComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getLocationComplementComponent(array $component)
+    public function getLocationComplementComponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function initMarkers(array $component)
+    public function initMarkers(\PoP\ComponentModel\Component\Component $component)
     {
 
         // When in the Map window, the location link must not initialize the markers, since they are already initialized by the map itself.
@@ -34,7 +36,10 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         return true;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -47,9 +52,9 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     }
 
     /**
-     * @return RelationalComponentField[]
+     * @return RelationalComponentFieldNode[]
      */
-    public function getRelationalComponentFields(array $component): array
+    public function getRelationalComponentFieldNodes(\PoP\ComponentModel\Component\Component $component): array
     {
         if ($this->showEachLocation($component)) {
             $components = [];
@@ -62,65 +67,71 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
             if ($components) {
                 return [
-                    new RelationalComponentField(
-                        'locations',
+                    new RelationalComponentFieldNode(
+                        new LeafField(
+                            'locations',
+                            null,
+                            [],
+                            [],
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                         $components
                     ),
                 ];
             }
         }
 
-        return parent::getRelationalComponentFields($component);
+        return parent::getRelationalComponentFieldNodes($component);
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         return 'locationsmapURL';
     }
 
-    public function getUrl(array $component, array &$props)
+    public function getUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         return RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONSMAP);
     }
 
-    public function getLinkClass(array $component)
+    public function getLinkClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'pop-modalmap-link';
     }
 
-    public function showEachLocation(array $component)
+    public function showEachLocation(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
-    public function showJoinLocations(array $component)
+    public function showJoinLocations(\PoP\ComponentModel\Component\Component $component)
     {
         return true;
     }
-    public function getJoinSeparator(array $component)
+    public function getJoinSeparator(\PoP\ComponentModel\Component\Component $component)
     {
         return '<i class="fa fa-fw fa-long-arrow-right"></i>';
     }
-    public function getEachSeparator(array $component)
+    public function getEachSeparator(\PoP\ComponentModel\Component\Component $component)
     {
         return ' | ';
     }
-    public function getComplementSeparator(array $component)
+    public function getComplementSeparator(\PoP\ComponentModel\Component\Component $component)
     {
         return ' ';
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return TranslationAPIFacade::getInstance()->__('All Locations', 'em-popprocessors');
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return POP_TARGET_MODALS;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -130,8 +141,8 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         if ($this->initMarkers($component)) {
             $map_script = $this->getMapscriptSubcomponent($component);
             $resetmarkers = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::COMPONENT_MAP_SCRIPT_RESETMARKERS];
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($map_script);
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($resetmarkers);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($map_script);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['map-script-resetmarkers'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($resetmarkers);
         }
 
         $ret[GD_JS_TITLES]['locations'] = $this->getTitle($component, $props);
@@ -146,10 +157,10 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             $ret['complement-separator'] = $this->getComplementSeparator($component);
 
             if ($location_component = $this->getLocationComponent($component)) {
-                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($location_component);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($location_component);
             }
             if ($location_complement = $this->getLocationComplementComponent($component)) {
-                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-complement'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($location_complement);
+                $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['location-complement'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($location_complement);
             }
         }
 

@@ -8,19 +8,19 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
     public final const COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL = 'scroll-communities-thumbnail';
     public final const COMPONENT_SCROLL_COMMUNITIES_LIST = 'scroll-communities-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_LIST],
+            self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_COMMUNITIES_DETAILS,
+            self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW,
+            self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL,
+            self::COMPONENT_SCROLL_COMMUNITIES_LIST,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
@@ -30,29 +30,29 @@ class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Proc
             self::COMPONENT_SCROLL_COMMUNITIES_LIST => [PoP_UserCommunities_Module_Processor_CustomScrollInners::class, PoP_UserCommunities_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_COMMUNITIES_LIST],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL],
+            self::COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_LIST],
+            self::COMPONENT_SCROLL_COMMUNITIES_LIST,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_DETAILS],
+            self::COMPONENT_SCROLL_COMMUNITIES_DETAILS,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW],
+            self::COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLL_COMMUNITIES_FULLVIEW,
         );
 
         $extra_class = '';

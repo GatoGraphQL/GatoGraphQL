@@ -7,36 +7,36 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
     public final const COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT = 'dataload-mystances-table-edit';
     public final const COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW = 'dataload-mystances-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW => POP_USERSTANCE_ROUTE_MYSTANCES,
             self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT => POP_USERSTANCE_ROUTE_MYSTANCES,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT => [UserStance_Module_Processor_Tables::class, UserStance_Module_Processor_Tables::COMPONENT_TABLE_MYSTANCES],
             self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::COMPONENT_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_MYSTANCES];
@@ -45,13 +45,13 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $tables = array(
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT],
+            self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW,
         );
         if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
@@ -62,9 +62,9 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         return $format ?? parent::getFormat($component);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
                 return $this->instanceManager->getInstance(StanceObjectTypeResolver::class);
@@ -73,9 +73,9 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
                 $stances = PoP_UserStance_PostNameUtils::getNamesLc();

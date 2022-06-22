@@ -1,6 +1,8 @@
 <?php
 namespace PoP\ComponentModel\Settings;
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+
 abstract class SettingsProcessorBase
 {
     public function __construct()
@@ -24,10 +26,12 @@ abstract class SettingsProcessorBase
 
     abstract public function routesToProcess();
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
-        return array();
+        return [];
     }
 
     public function isFunctional()

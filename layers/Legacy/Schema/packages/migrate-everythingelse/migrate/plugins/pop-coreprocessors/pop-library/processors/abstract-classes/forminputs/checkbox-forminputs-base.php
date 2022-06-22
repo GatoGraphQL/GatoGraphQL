@@ -5,17 +5,17 @@ abstract class PoP_Module_Processor_CheckboxFormInputsBase extends PoP_Module_Pr
 
     // use PoP_Module_Processor_MultipleFormInputsTrait;
 
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_CHECKBOX];
     }
 
-    public function getCheckboxValue(array $component, array &$props)
+    public function getCheckboxValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

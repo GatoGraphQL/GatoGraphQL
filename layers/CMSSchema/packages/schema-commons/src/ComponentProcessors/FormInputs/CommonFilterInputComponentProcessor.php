@@ -4,18 +4,32 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\FormInputs\FormMultipleInput;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\FormInputs\FormMultipleInput;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Engine\FormInputs\BooleanFormInput;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoP\Engine\FormInputs\BooleanFormInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeIDsFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeParentIDsFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\FormatFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\GMTFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\LimitFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\OffsetFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDsFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugsFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SortFilterInput;
 use PoPCMSSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
 
@@ -41,6 +55,19 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?SortFilterInput $sortFilterInput = null;
+    private ?ExcludeIDsFilterInput $excludeIDsFilterInput = null;
+    private ?ExcludeParentIDsFilterInput $excludeParentIDsFilterInput = null;
+    private ?FormatFilterInput $formatFilterInput = null;
+    private ?GMTFilterInput $gmtFilterInput = null;
+    private ?IncludeFilterInput $includeFilterInput = null;
+    private ?LimitFilterInput $limitFilterInput = null;
+    private ?OffsetFilterInput $offsetFilterInput = null;
+    private ?ParentIDFilterInput $parentIDFilterInput = null;
+    private ?ParentIDsFilterInput $parentIDsFilterInput = null;
+    private ?SearchFilterInput $searchFilterInput = null;
+    private ?SlugFilterInput $slugFilterInput = null;
+    private ?SlugsFilterInput $slugsFilterInput = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -74,53 +101,157 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
+    final public function setSortFilterInput(SortFilterInput $sortFilterInput): void
+    {
+        $this->sortFilterInput = $sortFilterInput;
+    }
+    final protected function getSortFilterInput(): SortFilterInput
+    {
+        return $this->sortFilterInput ??= $this->instanceManager->getInstance(SortFilterInput::class);
+    }
+    final public function setExcludeIDsFilterInput(ExcludeIDsFilterInput $excludeIDsFilterInput): void
+    {
+        $this->excludeIDsFilterInput = $excludeIDsFilterInput;
+    }
+    final protected function getExcludeIDsFilterInput(): ExcludeIDsFilterInput
+    {
+        return $this->excludeIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeIDsFilterInput::class);
+    }
+    final public function setExcludeParentIDsFilterInput(ExcludeParentIDsFilterInput $excludeParentIDsFilterInput): void
+    {
+        $this->excludeParentIDsFilterInput = $excludeParentIDsFilterInput;
+    }
+    final protected function getExcludeParentIDsFilterInput(): ExcludeParentIDsFilterInput
+    {
+        return $this->excludeParentIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeParentIDsFilterInput::class);
+    }
+    final public function setFormatFilterInput(FormatFilterInput $formatFilterInput): void
+    {
+        $this->formatFilterInput = $formatFilterInput;
+    }
+    final protected function getFormatFilterInput(): FormatFilterInput
+    {
+        return $this->formatFilterInput ??= $this->instanceManager->getInstance(FormatFilterInput::class);
+    }
+    final public function setGMTFilterInput(GMTFilterInput $gmtFilterInput): void
+    {
+        $this->gmtFilterInput = $gmtFilterInput;
+    }
+    final protected function getGMTFilterInput(): GMTFilterInput
+    {
+        return $this->gmtFilterInput ??= $this->instanceManager->getInstance(GMTFilterInput::class);
+    }
+    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
+    {
+        $this->includeFilterInput = $includeFilterInput;
+    }
+    final protected function getIncludeFilterInput(): IncludeFilterInput
+    {
+        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
+    }
+    final public function setLimitFilterInput(LimitFilterInput $limitFilterInput): void
+    {
+        $this->limitFilterInput = $limitFilterInput;
+    }
+    final protected function getLimitFilterInput(): LimitFilterInput
+    {
+        return $this->limitFilterInput ??= $this->instanceManager->getInstance(LimitFilterInput::class);
+    }
+    final public function setOffsetFilterInput(OffsetFilterInput $offsetFilterInput): void
+    {
+        $this->offsetFilterInput = $offsetFilterInput;
+    }
+    final protected function getOffsetFilterInput(): OffsetFilterInput
+    {
+        return $this->offsetFilterInput ??= $this->instanceManager->getInstance(OffsetFilterInput::class);
+    }
+    final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
+    {
+        $this->parentIDFilterInput = $parentIDFilterInput;
+    }
+    final protected function getParentIDFilterInput(): ParentIDFilterInput
+    {
+        return $this->parentIDFilterInput ??= $this->instanceManager->getInstance(ParentIDFilterInput::class);
+    }
+    final public function setParentIDsFilterInput(ParentIDsFilterInput $parentIDsFilterInput): void
+    {
+        $this->parentIDsFilterInput = $parentIDsFilterInput;
+    }
+    final protected function getParentIDsFilterInput(): ParentIDsFilterInput
+    {
+        return $this->parentIDsFilterInput ??= $this->instanceManager->getInstance(ParentIDsFilterInput::class);
+    }
+    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
+    {
+        $this->searchFilterInput = $searchFilterInput;
+    }
+    final protected function getSearchFilterInput(): SearchFilterInput
+    {
+        return $this->searchFilterInput ??= $this->instanceManager->getInstance(SearchFilterInput::class);
+    }
+    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
+    {
+        $this->slugFilterInput = $slugFilterInput;
+    }
+    final protected function getSlugFilterInput(): SlugFilterInput
+    {
+        return $this->slugFilterInput ??= $this->instanceManager->getInstance(SlugFilterInput::class);
+    }
+    final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
+    {
+        $this->slugsFilterInput = $slugsFilterInput;
+    }
+    final protected function getSlugsFilterInput(): SlugsFilterInput
+    {
+        return $this->slugsFilterInput ??= $this->instanceManager->getInstance(SlugsFilterInput::class);
+    }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUT_SORT],
-            [self::class, self::COMPONENT_FILTERINPUT_LIMIT],
-            [self::class, self::COMPONENT_FILTERINPUT_OFFSET],
-            [self::class, self::COMPONENT_FILTERINPUT_SEARCH],
-            [self::class, self::COMPONENT_FILTERINPUT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_ID],
-            [self::class, self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_PARENT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_PARENT_ID],
-            [self::class, self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS],
-            [self::class, self::COMPONENT_FILTERINPUT_SLUGS],
-            [self::class, self::COMPONENT_FILTERINPUT_SLUG],
-            [self::class, self::COMPONENT_FILTERINPUT_DATEFORMAT],
-            [self::class, self::COMPONENT_FILTERINPUT_GMT],
+            self::COMPONENT_FILTERINPUT_SORT,
+            self::COMPONENT_FILTERINPUT_LIMIT,
+            self::COMPONENT_FILTERINPUT_OFFSET,
+            self::COMPONENT_FILTERINPUT_SEARCH,
+            self::COMPONENT_FILTERINPUT_IDS,
+            self::COMPONENT_FILTERINPUT_ID,
+            self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS,
+            self::COMPONENT_FILTERINPUT_PARENT_IDS,
+            self::COMPONENT_FILTERINPUT_PARENT_ID,
+            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS,
+            self::COMPONENT_FILTERINPUT_SLUGS,
+            self::COMPONENT_FILTERINPUT_SLUG,
+            self::COMPONENT_FILTERINPUT_DATEFORMAT,
+            self::COMPONENT_FILTERINPUT_GMT,
         );
     }
 
-    public function getFilterInput(array $component): ?array
+    public function getFilterInput(Component $component): ?FilterInputInterface
     {
-        $filterInputs = [
-            self::COMPONENT_FILTERINPUT_SORT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SORT],
-            self::COMPONENT_FILTERINPUT_LIMIT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_LIMIT],
-            self::COMPONENT_FILTERINPUT_OFFSET => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_OFFSET],
-            self::COMPONENT_FILTERINPUT_SEARCH => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SEARCH],
-            self::COMPONENT_FILTERINPUT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            self::COMPONENT_FILTERINPUT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_IDS],
-            self::COMPONENT_FILTERINPUT_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_IDS],
-            self::COMPONENT_FILTERINPUT_PARENT_ID => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PARENT_ID],
-            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_PARENT_IDS],
-            self::COMPONENT_FILTERINPUT_SLUGS => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUGS],
-            self::COMPONENT_FILTERINPUT_SLUG => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SLUG],
-            self::COMPONENT_FILTERINPUT_DATEFORMAT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATEFORMAT],
-            self::COMPONENT_FILTERINPUT_GMT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_GMT],
-        ];
-        return $filterInputs[$component[1]] ?? null;
+        return match ($component->name) {
+            self::COMPONENT_FILTERINPUT_SORT => $this->getSortFilterInput(),
+            self::COMPONENT_FILTERINPUT_LIMIT => $this->getLimitFilterInput(),
+            self::COMPONENT_FILTERINPUT_OFFSET => $this->getOffsetFilterInput(),
+            self::COMPONENT_FILTERINPUT_SEARCH => $this->getSearchFilterInput(),
+            self::COMPONENT_FILTERINPUT_IDS => $this->getIncludeFilterInput(),
+            self::COMPONENT_FILTERINPUT_ID => $this->getIncludeFilterInput(),
+            self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS => $this->getIncludeFilterInput(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS => $this->getExcludeIDsFilterInput(),
+            self::COMPONENT_FILTERINPUT_PARENT_IDS => $this->getParentIDsFilterInput(),
+            self::COMPONENT_FILTERINPUT_PARENT_ID => $this->getParentIDFilterInput(),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->getExcludeParentIDsFilterInput(),
+            self::COMPONENT_FILTERINPUT_SLUGS => $this->getSlugsFilterInput(),
+            self::COMPONENT_FILTERINPUT_SLUG => $this->getSlugFilterInput(),
+            self::COMPONENT_FILTERINPUT_DATEFORMAT => $this->getFormatFilterInput(),
+            self::COMPONENT_FILTERINPUT_GMT => $this->getGMTFilterInput(),
+            default => null,
+        };
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUT_SORT:
                 return OrderFormInput::class;
             case self::COMPONENT_FILTERINPUT_IDS:
@@ -138,10 +269,10 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return parent::getInputClass($component);
     }
 
-    public function getName(array $component): string
+    public function getName(Component $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        return match ((string) $component[1]) {
+        return match ((string) $component->name) {
             self::COMPONENT_FILTERINPUT_SORT => 'order',
             self::COMPONENT_FILTERINPUT_LIMIT => 'limit',
             self::COMPONENT_FILTERINPUT_OFFSET => 'offset',
@@ -161,9 +292,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->getStringScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->getIntScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->getIntScalarTypeResolver(),
@@ -183,9 +314,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUT_IDS,
             self::COMPONENT_FILTERINPUT_EXCLUDE_IDS,
             self::COMPONENT_FILTERINPUT_PARENT_IDS,
@@ -197,9 +328,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
-        return match ((string)$component[1]) {
+        return match ((string)$component->name) {
             self::COMPONENT_FILTERINPUT_SORT => $this->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
             self::COMPONENT_FILTERINPUT_LIMIT => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
             self::COMPONENT_FILTERINPUT_OFFSET => $this->__('Offset the results by how many positions', 'schema-commons'),

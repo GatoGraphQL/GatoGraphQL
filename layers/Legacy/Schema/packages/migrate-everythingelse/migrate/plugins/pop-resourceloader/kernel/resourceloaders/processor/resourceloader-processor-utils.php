@@ -106,7 +106,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        $componentroutingprocessors = $pop_component_componentroutingprocessor_manager->getProcessors(POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
+        $componentroutingprocessors = $pop_component_componentroutingprocessor_manager->getComponentRoutingProcessors(POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         foreach ($componentroutingprocessors as $componentroutingprocessor) {
             foreach ($componentroutingprocessor->getStatePropertiesToSelectComponentByNatureAndRoute() as $nature => $route_vars_properties) {
                 foreach ($route_vars_properties as $route => $vars_properties) {
@@ -474,7 +474,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 self::addResourcesFromCurrentLoop($componentFilter, $resources[$path], $key, $merge, $options);
 
-                // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceComponentsFromAppState() doesn't have all the information needed
+                // // We need to delete the cache, because PoP_VarsUtils::getModelInstanceElementsFromAppState() doesn't have all the information needed
                 // // Eg: because the categories are not in $vars, it can't tell the difference between past and future events,
                 // // or from 2 posts with different category
                 // $pop_component_processor_runtimecache->deleteCache();
@@ -709,7 +709,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
         $methods = array();
-        $entry_processor = $componentprocessor_manager->getProcessor($entryComponent);
+        $entry_processor = $componentprocessor_manager->getComponentProcessor($entryComponent);
         $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($entry_processor);
 
         // Get the Handlebars list of resources needed for that pageSection
@@ -742,7 +742,7 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function getJsmethodsFromComponent($addInitial, $entryComponent, $entry_model_props) {
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($entryComponent);
+        $processor = $componentprocessor_manager->getComponentProcessor($entryComponent);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
         $blockJSMethods = $processor->getJsmethodsComponentTree($entryComponent, $entry_model_props);
         return self::getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial);

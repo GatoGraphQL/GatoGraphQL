@@ -8,25 +8,25 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
-    protected function getValueKey(array $component, array &$props)
+    protected function getValueKey(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'symbolnamedescription';
     }
-    protected function getComponentTemplateResource(array $component)
+    protected function getComponentTemplateResource(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTTAG_TYPEAHEAD_COMPONENT];
     }
-    protected function getTokenizerKeys(array $component, array &$props)
+    protected function getTokenizerKeys(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array('symbolnamedescription');
     }
 
-    // protected function getSourceFilter(array $component, array &$props)
+    // protected function getSourceFilter(\PoP\ComponentModel\Component\Component $component, array &$props)
     // {
     //     return POP_FILTER_TAGS;
     // }
 
-    protected function getSourceFilterParams(array $component, array &$props)
+    protected function getSourceFilterParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSourceFilterParams($component, $props);
 
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
 
         return $ret;
     }
-    protected function getRemoteUrl(array $component, array &$props)
+    protected function getRemoteUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $url = parent::getRemoteUrl($component, $props);
 
@@ -48,7 +48,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
         ], $url);
     }
 
-    protected function getThumbprintQuery(array $component, array &$props)
+    protected function getThumbprintQuery(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array(
             // 'fields' => 'ids',
@@ -63,11 +63,11 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
         return $postTagTypeAPI->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
     }
 
-    protected function getPendingMsg(array $component)
+    protected function getPendingMsg(\PoP\ComponentModel\Component\Component $component)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Tags', 'pop-coreprocessors');
     }
-    protected function getNotfoundMsg(array $component)
+    protected function getNotfoundMsg(\PoP\ComponentModel\Component\Component $component)
     {
         return TranslationAPIFacade::getInstance()->__('No Tags found', 'pop-coreprocessors');
     }

@@ -30,33 +30,36 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_PAGESECTION_QUICKVIEW],
-            [self::class, self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO],
-            [self::class, self::COMPONENT_PAGESECTION_ADDONTABS],
-            [self::class, self::COMPONENT_PAGESECTION_BACKGROUND],
-            [self::class, self::COMPONENT_PAGESECTION_FRAMECOMPONENTS],
-            [self::class, self::COMPONENT_PAGESECTION_HOLE],
-            [self::class, self::COMPONENT_PAGESECTION_HOVER],
-            [self::class, self::COMPONENT_PAGESECTION_NAVIGATOR],
-            [self::class, self::COMPONENT_PAGESECTION_SIDE],
-            [self::class, self::COMPONENT_PAGESECTION_TOP],
-            [self::class, self::COMPONENT_PAGESECTION_BODYSIDEINFO],
-            [self::class, self::COMPONENT_PAGESECTION_MODALS],
-            [self::class, self::COMPONENT_PAGESECTION_BODYTABS],
-            [self::class, self::COMPONENT_PAGESECTION_BODY],
+            self::COMPONENT_PAGESECTION_QUICKVIEW,
+            self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO,
+            self::COMPONENT_PAGESECTION_ADDONTABS,
+            self::COMPONENT_PAGESECTION_BACKGROUND,
+            self::COMPONENT_PAGESECTION_FRAMECOMPONENTS,
+            self::COMPONENT_PAGESECTION_HOLE,
+            self::COMPONENT_PAGESECTION_HOVER,
+            self::COMPONENT_PAGESECTION_NAVIGATOR,
+            self::COMPONENT_PAGESECTION_SIDE,
+            self::COMPONENT_PAGESECTION_TOP,
+            self::COMPONENT_PAGESECTION_BODYSIDEINFO,
+            self::COMPONENT_PAGESECTION_MODALS,
+            self::COMPONENT_PAGESECTION_BODYTABS,
+            self::COMPONENT_PAGESECTION_BODY,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_QUICKVIEW:
             case self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO:
             case self::COMPONENT_PAGESECTION_ADDONTABS:
@@ -70,9 +73,8 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
             case self::COMPONENT_PAGESECTION_BODYTABS:
             case self::COMPONENT_PAGESECTION_BODY:
                 // If not told to be empty, then add the page subcomponent
-                $componentAtts = count($component) >= 3 ? $component[2] : null;
-                if (!($componentAtts && $componentAtts['empty'])) {
-                    $subComponents = array(
+                if (!($component->atts['empty'] ?? null)) {
+                    $subcomponents = array(
                         self::COMPONENT_PAGESECTION_QUICKVIEW => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_QUICKVIEW],
                         self::COMPONENT_PAGESECTION_QUICKVIEWSIDEINFO => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_QUICKVIEWSIDEINFO],
                         self::COMPONENT_PAGESECTION_ADDONTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::COMPONENT_PAGE_ADDONTABS],
@@ -86,7 +88,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                         self::COMPONENT_PAGESECTION_BODYTABS => [PoP_Module_Processor_PageTabs::class, PoP_Module_Processor_PageTabs::COMPONENT_PAGE_BODYTABS],
                         self::COMPONENT_PAGESECTION_BODY => [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_BODY],
                     );
-                    $ret[] = $subComponents[$component[1]];
+                    $ret[] = $subcomponents[$component->name];
                 }
                 break;
 
@@ -96,7 +98,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_FRAMECOMPONENTS];
+                $subcomponent = [PoP_Module_Processor_Pages::class, PoP_Module_Processor_Pages::COMPONENT_PAGE_FRAMECOMPONENTS];
                 $componentAtts = array();
 
                 // Requested a different target: load nothing
@@ -105,12 +107,12 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 }
                 if ($componentAtts) {
                     $ret[] = [
-                        $subComponent[0],
-                        $subComponent[1],
+                        $subcomponent[0],
+                        $subcomponent[1],
                         $componentAtts
                     ];
                 } else {
-                    $ret[] = $subComponent;
+                    $ret[] = $subcomponent;
                 }
                 break;
 
@@ -122,9 +124,9 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         return $ret;
     }
 
-    public function getID(array $component, array &$props): string
+    public function getID(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_HOVER:
                 return POP_COMPONENTID_PAGESECTIONCONTAINERID_HOVER;
 
@@ -171,9 +173,9 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         return parent::getID($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_QUICKVIEW:
                 $this->appendProp($component, $props, 'class', 'offcanvas body tab-content');
                 $this->mergeProp(
@@ -202,7 +204,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_FRAMECOMPONENTS:
                 $this->appendProp($component, $props, 'class', 'framecomponents');
                 break;
@@ -225,11 +227,11 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         }
 
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadComponent` can work
-        $componentFullName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentFullName($component);
         $component_props = array(
             $componentFullName => &$props[$componentFullName],
         );
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_BODYSIDEINFO:
                 // Allow the Sideinfo's permanent Events Calendar to be lazy-load
                 \PoP\Root\App::doAction(
@@ -272,11 +274,11 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_PAGESECTION_ADDONTABS:
                 $this->addJsmethod($ret, 'scrollbarHorizontal');
                 break;

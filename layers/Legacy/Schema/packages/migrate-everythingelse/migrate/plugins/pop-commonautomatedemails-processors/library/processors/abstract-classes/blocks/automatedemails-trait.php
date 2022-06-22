@@ -2,17 +2,20 @@
 
 trait AutomatedEmailsBlocksBaseTrait
 {
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    protected function showDisabledLayer(array $component, array &$props)
+    protected function showDisabledLayer(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getModelPropsForDescendantComponents(array $component, array &$props): array
+    /**
+     * @return array<string,mixed>
+     */
+    public function getModelPropsForDescendantComponents(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getModelPropsForDescendantComponents($component, $props);
 

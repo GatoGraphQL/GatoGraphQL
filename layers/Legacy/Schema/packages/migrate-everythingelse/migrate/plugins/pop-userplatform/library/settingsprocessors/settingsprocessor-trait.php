@@ -1,10 +1,21 @@
 <?php
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserState\Checkpoints\DoingPostUserLoggedInAggregateCheckpoint;
 
 trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 {
+    private ?DoingPostUserLoggedInAggregateCheckpoint $doingPostUserLoggedInAggregateCheckpoint = null;
+
+    final public function setDoingPostUserLoggedInAggregateCheckpoint(DoingPostUserLoggedInAggregateCheckpoint $doingPostUserLoggedInAggregateCheckpoint): void
+    {
+        $this->doingPostUserLoggedInAggregateCheckpoint = $doingPostUserLoggedInAggregateCheckpoint;
+    }
+    final protected function getDoingPostUserLoggedInAggregateCheckpoint(): DoingPostUserLoggedInAggregateCheckpoint
+    {
+        return $this->doingPostUserLoggedInAggregateCheckpoint ??= $this->instanceManager->getInstance(DoingPostUserLoggedInAggregateCheckpoint::class);
+    }
+    
     public function routesToProcess()
     {
         return array_filter(
@@ -19,18 +30,20 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
             // Allow the Change Password checkpoints to be overriden. Eg: by adding only non-WSL users
             POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => \PoP\Root\App::applyFilters(
                 'Wassup_Module_SettingsProcessor:changepwdprofile:checkpoints',
-                UserStateCheckpointSets::LOGGEDIN_STATIC//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
+                [$this->getDoingPostUserLoggedInAggregateCheckpoint()]
             ),
-            POP_USERPLATFORM_ROUTE_EDITPROFILE => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_USERPLATFORM_ROUTE_MYPREFERENCES => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),//$profile_datafromserver,
-            POP_USERPLATFORM_ROUTE_MYPROFILE => UserStateCheckpointSets::LOGGEDIN_STATIC,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
+            POP_USERPLATFORM_ROUTE_EDITPROFILE => [$this->getUserLoggedInCheckpoint()],
+            POP_USERPLATFORM_ROUTE_MYPREFERENCES => [$this->getUserLoggedInCheckpoint()],
+            POP_USERPLATFORM_ROUTE_MYPROFILE => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],
         );
     }
 

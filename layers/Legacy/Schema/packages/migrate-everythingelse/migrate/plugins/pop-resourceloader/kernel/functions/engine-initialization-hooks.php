@@ -40,7 +40,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 		return $scripts;
 	}
 
-	function generateHelperCalculations($helper_calculations_in_array, array $component, $props_in_array) {
+	function generateHelperCalculations($helper_calculations_in_array, \PoP\ComponentModel\Component\Component $component, $props_in_array) {
 
 		if (RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
@@ -49,7 +49,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 			$props = &$props_in_array[0];
 			$helperCalculations = &$helper_calculations_in_array[0];
 
-			$processor = $componentprocessor_manager->getProcessor($component);
+			$processor = $componentprocessor_manager->getComponentProcessor($component);
 			$processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
 			
 			// Do array_merge because it may already contain data from doing 'extra-uris'

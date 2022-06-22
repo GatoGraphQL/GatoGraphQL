@@ -6,10 +6,11 @@ namespace GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors;
 
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\ComponentProcessors\RootRelationalFieldDataloadComponentProcessor;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
@@ -25,17 +26,17 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 
         $ret[RequestNature::QUERY_ROOT][] = [
-            'component' => [
+            'component' => new Component(
                 RootRelationalFieldDataloadComponentProcessor::class,
                 RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT
-            ],
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
@@ -43,10 +44,10 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
             ],
         ];
         $ret[RequestNature::QUERY_ROOT][] = [
-            'component' => [
+            'component' => new Component(
                 RootRelationalFieldDataloadComponentProcessor::class,
                 RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT
-            ],
+            ),
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),

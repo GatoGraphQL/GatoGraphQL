@@ -7,30 +7,30 @@ trait FormComponentValueTrait
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return null;
     }
 
-    public function addMetaFormcomponentDataFields(&$ret, array $component, array &$props)
+    public function addMetaFormcomponentDataFields(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($field = $this->getDbobjectField($component)) {
             $ret[] = $field;
         }
     }
 
-    public function printValue(array $component, array &$props)
+    public function printValue(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Currently there is a bug: calling https://www.mesym.com/en/posts/?profiles[0]=1782&profiles[1]=1764&filter=posts
         // produces each hiddeninput to have value "1782,1764"
         // This is because the value is set by a parent formcomponent, the selectable trigger typeahead, which can have an array of values
         // and since all formcomponents share the same name, then they also share the value, creating an issue in this case
-        // The solution is to simply not print the value in the formcomponent, which will then be printed from the dbObject in function formcomponentValue
+        // The solution is to simply not print the value in the formcomponent, which will then be printed from the resolvedObject in function formcomponentValue
         return true;
     }
 
-    public function addMetaFormcomponentModuleRuntimeconfiguration(&$ret, array $component, array &$props)
+    public function addMetaFormcomponentModuleRuntimeconfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Sometimes we do not want to print the value. Check the description in function `printValue`
@@ -41,14 +41,14 @@ trait FormComponentValueTrait
             // $filter = $this->getProp($component, $props, 'filter');
             $value = $this->getValue($component);
 
-            // If it is null, then fetch value from the dbObject
-            // If it is empty, then it's a valid value, it takes priority over dbObject
+            // If it is null, then fetch value from the resolvedObject
+            // If it is empty, then it's a valid value, it takes priority over resolvedObject
             if (!is_null($value)) {
                 $ret['value'] = $value;
             }
         }
 
-        // After {{value}} and {{dbObject[dbObjectField]}} both fail, print {{default-value}}
+        // After {{value}} and {{resolvedObject[resolvedObjectField]}} both fail, print {{default-value}}
         // The value can also be the boolean false, so check for the !is_null condition
         $default_value = $this->getDefaultValue($component, $props);
         if (!is_null($default_value)) {
@@ -56,7 +56,7 @@ trait FormComponentValueTrait
         }
     }
 
-    public function addMetaFormcomponentModuleConfiguration(&$ret, array $component, array &$props)
+    public function addMetaFormcomponentModuleConfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($field = $this->getDbobjectField($component)) {
             $ret['dbobject-field'] = $field;

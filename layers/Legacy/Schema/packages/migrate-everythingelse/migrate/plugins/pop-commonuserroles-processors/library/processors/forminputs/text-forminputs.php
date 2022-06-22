@@ -7,18 +7,18 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
     public final const COMPONENT_URE_FORMINPUT_CUP_CONTACTNUMBER = 'forminput-ure-cup-contactnumber';
     public final const COMPONENT_URE_FORMINPUT_CUP_LASTNAME = 'forminput-ure-cup-lastName';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME],
-            [self::class, self::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON],
-            [self::class, self::COMPONENT_URE_FORMINPUT_CUP_CONTACTNUMBER],
+            self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME,
+            self::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON,
+            self::COMPONENT_URE_FORMINPUT_CUP_CONTACTNUMBER,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME:
                 return TranslationAPIFacade::getInstance()->__('Last name', 'ure-popprocessors');
 
@@ -32,11 +32,11 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         return parent::getLabelText($component, $props);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getLabel($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_CONTACTPERSON:
                 return '<i class="fa fa-fw fa-user"></i>'.$ret;
 
@@ -47,9 +47,9 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         return $ret;
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_CUP_LASTNAME:
                 return 'lastName';
 

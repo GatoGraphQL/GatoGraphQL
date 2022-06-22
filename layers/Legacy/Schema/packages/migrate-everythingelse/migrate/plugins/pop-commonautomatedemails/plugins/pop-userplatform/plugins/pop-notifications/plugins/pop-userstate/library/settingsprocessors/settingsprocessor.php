@@ -11,7 +11,7 @@ class PoP_CommonAutomatedEmails_AAL_UserState_Module_SettingsProcessor extends \
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY => false,

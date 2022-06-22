@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ItemProcessors\ProcessorItemUtils;
+use PoP\ConfigurationComponentModel\ItemProcessors\ProcessorItemUtils;
 use PoP\Resources\DefinitionGroups;
 
 class ResourceUtils

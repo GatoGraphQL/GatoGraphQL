@@ -3,55 +3,55 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_EmbedPreviewLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_EMBEDPREVIEW];
     }
 
-    public function getFrameSrc(array $component, array &$props)
+    public function getFrameSrc(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getFrameSrcField(array $component, array &$props)
+    public function getFrameSrcField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getFrameWidth(array $component, array &$props)
+    public function getFrameWidth(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '100%';
     }
-    public function getFrameHeight(array $component, array &$props)
+    public function getFrameHeight(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '400';
     }
-    public function printSource(array $component, array &$props)
+    public function printSource(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
-    public function getSourceTitle(array $component, array &$props)
+    public function getSourceTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return sprintf(
             '<em>%s</em>',
             TranslationAPIFacade::getInstance()->__('Source:', 'pop-coreprocessors')
         );
     }
-    public function getSourceTarget(array $component, array &$props)
+    public function getSourceTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '_blank';
     }
-    public function getHeader(array $component, array &$props)
+    public function getHeader(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
     
         if ($src_field = $this->getFrameSrcField($component, $props)) {
             $ret[] = $src_field;
@@ -60,7 +60,7 @@ abstract class PoP_Module_Processor_EmbedPreviewLayoutsBase extends PoPEngine_Qu
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

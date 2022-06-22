@@ -29,43 +29,46 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
     public final const COMPONENT_CONTROLGROUP_EDITPOST = 'controlgroup-editpost';
     public final const COMPONENT_CONTROLGROUP_USERPOSTINTERACTION = 'controlgroup-userpostinteraction';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_COMMENTS],
-            [self::class, self::COMPONENT_CONTROLGROUP_TAGLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_POSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKAUTHORPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKRELOAD],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKLOADLATEST],
-            [self::class, self::COMPONENT_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLISTMAIN],
-            [self::class, self::COMPONENT_CONTROLGROUP_USERLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_BLOCKUSERLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUUSERLISTMAIN],
-            [self::class, self::COMPONENT_CONTROLGROUP_SUBMENUSHARE],
-            [self::class, self::COMPONENT_CONTROLGROUP_SHARE],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYCUSTOMPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYBLOCKPOSTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_ACCOUNT],
-            [self::class, self::COMPONENT_CONTROLGROUP_CREATEACCOUNT],
-            [self::class, self::COMPONENT_CONTROLGROUP_CREATEPOST],
-            [self::class, self::COMPONENT_CONTROLGROUP_CREATERESETPOST],
-            [self::class, self::COMPONENT_CONTROLGROUP_EDITPOST],
-            [self::class, self::COMPONENT_CONTROLGROUP_USERPOSTINTERACTION],
+            self::COMPONENT_CONTROLGROUP_COMMENTS,
+            self::COMPONENT_CONTROLGROUP_TAGLIST,
+            self::COMPONENT_CONTROLGROUP_POSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKAUTHORPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKRELOAD,
+            self::COMPONENT_CONTROLGROUP_BLOCKLOADLATEST,
+            self::COMPONENT_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_SUBMENUPOSTLISTMAIN,
+            self::COMPONENT_CONTROLGROUP_USERLIST,
+            self::COMPONENT_CONTROLGROUP_BLOCKUSERLIST,
+            self::COMPONENT_CONTROLGROUP_SUBMENUUSERLIST,
+            self::COMPONENT_CONTROLGROUP_SUBMENUUSERLISTMAIN,
+            self::COMPONENT_CONTROLGROUP_SUBMENUSHARE,
+            self::COMPONENT_CONTROLGROUP_SHARE,
+            self::COMPONENT_CONTROLGROUP_MYPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_MYCUSTOMPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_MYBLOCKPOSTLIST,
+            self::COMPONENT_CONTROLGROUP_ACCOUNT,
+            self::COMPONENT_CONTROLGROUP_CREATEACCOUNT,
+            self::COMPONENT_CONTROLGROUP_CREATEPOST,
+            self::COMPONENT_CONTROLGROUP_CREATERESETPOST,
+            self::COMPONENT_CONTROLGROUP_EDITPOST,
+            self::COMPONENT_CONTROLGROUP_USERPOSTINTERACTION,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_COMMENTS:
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_FILTER];
                 break;

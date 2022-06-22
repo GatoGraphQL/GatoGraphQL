@@ -6,20 +6,23 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
     public final const COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL = 'layout-tagsidebarinner-horizontal';
     public final const COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL = 'layout-tagsidebarinner-compacthorizontal';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBARINNER_VERTICAL],
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL],
+            self::COMPONENT_LAYOUT_TAGSIDEBARINNER_VERTICAL,
+            self::COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL,
+            self::COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_VERTICAL:
                 $ret = array_merge(
@@ -39,9 +42,9 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getWrapperClass(array $component)
+    public function getWrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL:
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL:
                 return 'row';
@@ -50,9 +53,9 @@ class PoP_Module_Processor_CustomTagLayoutSidebarInners extends PoP_Module_Proce
         return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $component)
+    public function getWidgetwrapperClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_TAGSIDEBARINNER_HORIZONTAL:
                 return 'col-xsm-4';
 

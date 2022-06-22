@@ -5,7 +5,7 @@
 	<ul class="dropdown-menu" role="menu" aria-labelledby="{{lastGeneratedId}}">
 		{{#each subcomponentoutputnames.elements}}
 			<li role="presentation" class="pop-hide-empty">
-				{{! Please notice: the dbKey/dbObject below might be null (eg: controlgroup) or have a value (eg: quicklinkgroup)}}
+				{{! Please notice: the typeOutputKey/resolvedObject below might be null (eg: controlgroup) or have a value (eg: quicklinkgroup)}}
 				{{#withModule ../. this}}
 					{{enterModule ../../.}}
 				{{/withModule}}

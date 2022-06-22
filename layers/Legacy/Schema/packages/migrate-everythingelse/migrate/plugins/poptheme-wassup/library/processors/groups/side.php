@@ -4,18 +4,21 @@ class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
 {
     public final const COMPONENT_GROUP_SIDE = 'group-side';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_GROUP_SIDE],
+            self::COMPONENT_GROUP_SIDE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_GROUP_SIDE:
                 // Allow GetPoP to only keep the Sections menu
                 if ($components = \PoP\Root\App::applyFilters(

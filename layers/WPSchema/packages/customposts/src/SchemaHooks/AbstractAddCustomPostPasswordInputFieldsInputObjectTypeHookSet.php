@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\SchemaHooks;
 
-use PoP\Root\App;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPWPSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPWPSchema\CustomPosts\FilterInputs\HasPasswordFilterInput;
+use PoPWPSchema\CustomPosts\FilterInputs\PasswordFilterInput;
 
 abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?HasPasswordFilterInput $hasPasswordFilterInput = null;
+    private ?PasswordFilterInput $passwordFilterInput = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -33,6 +37,22 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+    }
+    final public function setHasPasswordFilterInput(HasPasswordFilterInput $hasPasswordFilterInput): void
+    {
+        $this->hasPasswordFilterInput = $hasPasswordFilterInput;
+    }
+    final protected function getHasPasswordFilterInput(): HasPasswordFilterInput
+    {
+        return $this->hasPasswordFilterInput ??= $this->instanceManager->getInstance(HasPasswordFilterInput::class);
+    }
+    final public function setPasswordFilterInput(PasswordFilterInput $passwordFilterInput): void
+    {
+        $this->passwordFilterInput = $passwordFilterInput;
+    }
+    final protected function getPasswordFilterInput(): PasswordFilterInput
+    {
+        return $this->passwordFilterInput ??= $this->instanceManager->getInstance(PasswordFilterInput::class);
     }
 
     protected function init(): void
@@ -142,16 +162,16 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
     }
 
     public function getInputFieldFilterInput(
-        ?array $inputFieldFilterInput,
+        ?FilterInputInterface $inputFieldFilterInput,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
-    ): ?array {
+    ): ?FilterInputInterface {
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {
-            'hasPassword' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_HAS_PASSWORD],
-            'password' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_PASSWORD],
+            'hasPassword' => $this->getHasPasswordFilterInput(),
+            'password' => $this->getPasswordFilterInput(),
             default => $inputFieldFilterInput,
         };
     }

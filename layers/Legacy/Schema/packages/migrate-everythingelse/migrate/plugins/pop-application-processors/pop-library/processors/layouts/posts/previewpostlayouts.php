@@ -22,36 +22,36 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED = 'layout-previewpost-post-related';
     public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT = 'layout-previewpost-post-edit';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER,
 
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_LINE],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_LINE,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT,
 
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT,
 
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT],
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED,
+            self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT,
         );
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
@@ -61,9 +61,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
@@ -76,9 +76,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_POSTEDIT];
@@ -97,9 +97,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function showPosttitle(array $component)
+    public function showPosttitle(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
                 return false;
@@ -108,9 +108,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::showPosttitle($component);
     }
 
-    public function getContentSubcomponent(array $component)
+    public function getContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
                 return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POSTCOMPACT];
@@ -119,9 +119,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getContentSubcomponent($component);
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
@@ -139,11 +139,11 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getBottomSubcomponents(array $component)
+    public function getBottomSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBottomSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_LIST:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
@@ -179,11 +179,11 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getBelowthumbLayoutSubcomponents(array $component)
+    public function getBelowthumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowthumbLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
@@ -203,9 +203,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getPostThumbSubcomponent(array $component)
+    public function getPostThumbSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::COMPONENT_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
@@ -238,9 +238,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getPostThumbSubcomponent($component);
     }
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 return true;
@@ -249,9 +249,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 return 'h3';
@@ -263,10 +263,10 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getAuthorAvatarComponent(array $component)
+    public function getAuthorAvatarComponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS:
                 case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST:
                 case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR:
@@ -279,9 +279,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getAuthorAvatarComponent($component);
     }
 
-    public function authorPositions(array $component)
+    public function authorPositions(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_ADDONS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
@@ -315,9 +315,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 return true;
@@ -326,9 +326,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $component)
+    public function horizontalMediaLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_RELATED:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_EDIT:
@@ -345,17 +345,17 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
                 $ret[GD_JS_CLASSES]['authors'] = 'pull-right authors-bottom';
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL:
@@ -370,7 +370,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
@@ -380,9 +380,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getTitleBeforeauthors(array $component, array &$props)
+    public function getTitleBeforeauthors(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT:
                 return array(
                     'belowcontent' => TranslationAPIFacade::getInstance()->__('added by', 'poptheme-wassup')
@@ -392,9 +392,9 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
         return parent::getTitleBeforeauthors($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWPOST_HEADER:
                 $this->appendProp($component, $props, 'class', 'alert alert-info alert-sm');
                 break;

@@ -6,20 +6,20 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
     public final const COMPONENT_LATESTCOUNT_AUTHOR_POSTS = 'latestcount-author-posts';
     public final const COMPONENT_LATESTCOUNT_TAG_POSTS = 'latestcount-tag-posts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LATESTCOUNT_POSTS],
-            [self::class, self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS],
-            [self::class, self::COMPONENT_LATESTCOUNT_TAG_POSTS],
+            self::COMPONENT_LATESTCOUNT_POSTS,
+            self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS,
+            self::COMPONENT_LATESTCOUNT_TAG_POSTS,
         );
     }
 
-    public function getSectionClasses(array $component, array &$props)
+    public function getSectionClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getSectionClasses($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_POSTS:
             case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS:
             case self::COMPONENT_LATESTCOUNT_TAG_POSTS:
@@ -32,9 +32,9 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
         return $ret;
     }
 
-    public function isAuthor(array $component, array &$props)
+    public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_AUTHOR_POSTS:
                 return true;
         }
@@ -42,9 +42,9 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
         return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $component, array &$props)
+    public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LATESTCOUNT_TAG_POSTS:
                 return true;
         }

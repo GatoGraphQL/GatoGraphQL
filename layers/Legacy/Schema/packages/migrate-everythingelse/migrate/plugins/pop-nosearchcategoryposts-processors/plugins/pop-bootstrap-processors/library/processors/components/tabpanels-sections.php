@@ -23,37 +23,37 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
     public final const COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS18 = 'tabpanel-nosearchcategoryposts18';
     public final const COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS19 = 'tabpanel-nosearchcategoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS19],
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS00,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS01,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS02,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS03,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS04,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS05,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS06,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS07,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS08,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS09,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS10,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS11,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS12,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS13,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS14,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS15,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS16,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS17,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS18,
+            self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS19,
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -318,9 +318,9 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_NOSEARCHCATEGORYPOSTS00:
                 return array(
                     [

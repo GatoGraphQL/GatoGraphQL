@@ -4,16 +4,16 @@
  */
 class PoP_ServerSide_MultiLayoutHelperCallers
 {
-    public static function withConditionalOnDataFieldModule($dbKey, $objectID, $conditionDataFieldModules, $defaultModule, $context, $options)
+    public static function withConditionalOnDataFieldModule($typeOutputKey, $objectID, $conditionDataFieldModules, $defaultModule, $context, $options)
     {
         global $pop_serverside_multilayouthelpers;
-        return $pop_serverside_multilayouthelpers->withConditionalOnDataFieldModule($dbKey, $objectID, $conditionDataFieldModules, $defaultModule, $context, $options);
+        return $pop_serverside_multilayouthelpers->withConditionalOnDataFieldModule($typeOutputKey, $objectID, $conditionDataFieldModules, $defaultModule, $context, $options);
     }
 
-    public static function layoutLabel($dbKey, $dbObject, $options)
+    public static function layoutLabel($typeOutputKey, $resolvedObject, $options)
     {
         global $pop_serverside_multilayouthelpers;
-        return $pop_serverside_multilayouthelpers->layoutLabel($dbKey, $dbObject, $options);
+        return $pop_serverside_multilayouthelpers->layoutLabel($typeOutputKey, $resolvedObject, $options);
     }
 }
 

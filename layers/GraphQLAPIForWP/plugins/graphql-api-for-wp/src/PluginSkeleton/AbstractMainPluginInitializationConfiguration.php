@@ -25,7 +25,7 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
         if ($this->containerCacheConfigurationCache === null) {
             $containerConfigurationCacheNamespace = null;
             $containerConfigurationCacheDirectory = null;
-            if ($cacheContainerConfiguration = $this->isCachingEnabled()) {
+            if ($cacheContainerConfiguration = $this->isContainerCachingEnabled()) {
                 $containerCacheConfigurationManager = ContainerCacheConfigurationManagerFacade::getInstance();
                 $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
                 $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
@@ -39,7 +39,7 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
         return $this->containerCacheConfigurationCache;
     }
 
-    protected function isCachingEnabled(): bool
+    protected function isContainerCachingEnabled(): bool
     {
         return false;
     }

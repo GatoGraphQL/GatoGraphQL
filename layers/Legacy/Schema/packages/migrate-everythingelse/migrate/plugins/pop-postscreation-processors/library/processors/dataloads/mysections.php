@@ -8,18 +8,18 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
     public final const COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-myposts-scroll-simpleviewpreview';
     public final const COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myposts-scroll-fullviewpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT],
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW],
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT,
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW,
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW => POP_POSTSCREATION_ROUTE_MYPOSTS,
             self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW => POP_POSTSCREATION_ROUTE_MYPOSTS,
             self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT => POP_POSTSCREATION_ROUTE_MYPOSTS,
@@ -27,7 +27,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::COMPONENT_TABLE_MYPOSTS],
@@ -35,12 +35,12 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
             self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::COMPONENT_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getFilterSubcomponent(array $component): ?array
+    public function getFilterSubcomponent(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\Component\Component
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
@@ -50,18 +50,18 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return parent::getFilterSubcomponent($component);
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
 
         // Add the format attr
         $tables = array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT],
+            self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW],
+            self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW,
         );
         if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
@@ -74,11 +74,11 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
@@ -91,9 +91,9 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
@@ -103,9 +103,9 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::COMPONENT_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:

@@ -5,16 +5,16 @@ class PoP_AddHighlights_Module_Processor_FormComponentGroups extends PoP_Module_
 {
     public final const COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST = 'formcomponentgroup-card-highlightedpost';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST],
+            self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST,
         );
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST:
                 return [PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST];
         }
@@ -22,9 +22,9 @@ class PoP_AddHighlights_Module_Processor_FormComponentGroups extends PoP_Module_
         return parent::getComponentSubcomponent($component);
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMCOMPONENTGROUP_CARD_HIGHLIGHTEDPOST:
                 return TranslationAPIFacade::getInstance()->__('Highlight from:', 'poptheme-wassup');
         }

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 interface FilterInputComponentProcessorInterface extends FormInputComponentProcessorInterface
 {
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface;
-    public function getFilterInputDescription(array $component): ?string;
-    public function getFilterInputDefaultValue(array $component): mixed;
-    public function getFilterInputTypeModifiers(array $component): int;
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface;
+    public function getFilterInputDescription(Component $component): ?string;
+    public function getFilterInputDefaultValue(Component $component): mixed;
+    public function getFilterInputTypeModifiers(Component $component): int;
 }

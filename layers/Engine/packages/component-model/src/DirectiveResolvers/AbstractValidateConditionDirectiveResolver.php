@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractValidateConditionDirectiveResolver extends AbstractValidateDirectiveResolver
 {
@@ -28,33 +29,36 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     public function getPipelinePosition(): string
     {
         if ($this->isValidatingDirective()) {
-            return PipelinePositions::AFTER_RESOLVE;
+            return PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE;
         }
         return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
     }
 
     /**
      * Validate a custom condition
+     *
+     * @param FieldInterface[] $fields
+     * @param FieldInterface[] $failedFields
      */
     protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $dataFields,
+        array $fields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-        array &$failedDataFields,
+        array &$failedFields,
     ): void {
         if ($this->isValidationSuccessful($relationalTypeResolver)) {
             return;
         }
         // All fields failed
-        $failedDataFields = array_merge(
-            $failedDataFields,
-            $dataFields
+        $failedFields = array_merge(
+            $failedFields,
+            $fields
         );
-        foreach ($dataFields as $field) {
+        foreach ($fields as $field) {
             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                 new SchemaFeedback(
-                    $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $dataFields),
+                    $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $fields),
                     LocationHelper::getNonSpecificLocation(),
                     $relationalTypeResolver,
                     $field,
@@ -78,7 +82,10 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         return false;
     }
 
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
+    /**
+     * @param FieldInterface[] $failedFields
+     */
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             ErrorFeedbackItemProvider::class,
@@ -86,7 +93,10 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
             [
                 implode(
                     $this->__('\', \''),
-                    $failedDataFields
+                    array_map(
+                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        $failedFields
+                    )
                 ),
             ]
         );

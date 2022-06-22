@@ -1,5 +1,6 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\Routing\RequestNature;
 use PoP\Root\Routing\Routes as RoutingRoutes;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
@@ -9,7 +10,7 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP_Module_SideInfoContentPageSectionComponentRoutingProcessorBase
 {
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
@@ -41,7 +42,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
@@ -76,7 +77,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     }
 
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

@@ -4,10 +4,10 @@
  */
 class PoP_ServerSide_DBObjectHelperCallers
 {
-    public static function withDBObject($dbKey, $objectID, $options)
+    public static function withDBObject($typeOutputKey, $objectID, $options)
     {
         global $pop_serverside_dbobjecthelpers;
-        return $pop_serverside_dbobjecthelpers->withDBObject($dbKey, $objectID, $options);
+        return $pop_serverside_dbobjecthelpers->withDBObject($typeOutputKey, $objectID, $options);
     }
 }
 

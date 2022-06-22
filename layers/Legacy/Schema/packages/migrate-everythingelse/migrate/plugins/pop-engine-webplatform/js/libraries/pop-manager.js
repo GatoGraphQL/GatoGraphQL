@@ -11,7 +11,7 @@ window.pop.Manager = {
 		general: {},
 		url: {}
 	},
-	// // Used to override the dbobjectids/feedback/params when resetting the block
+	// // Used to override the objectIDs/feedback/params when resetting the block
 	// initialBlockMemory : {},
 	firstLoad : {},
 	documentTitle : null, // We keep a copy of the document title, so we can add the notification number in it
@@ -117,7 +117,7 @@ window.pop.Manager = {
 		// 			configuration: {},
 		// 			'js-settings': {},
 		// 		},
-		// 		dbobjectids: {},
+		// 		objectIDs: {},
 		// 		feedback: {
 		// 			block: {},
 		// 			pagesection: {},
@@ -199,7 +199,7 @@ window.pop.Manager = {
 	// 	var url = response.statefuldata.feedback.toplevel[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pop.c.URLPARAM_URL];
 	// 	if (!that.initialBlockMemory[url]) {
 	// 		that.initialBlockMemory[url] = {
-	// 			dbobjectids: {},
+	// 			objectIDs: {},
 	// 			feedback: {
 	// 				block: {},
 	// 			},
@@ -218,19 +218,19 @@ window.pop.Manager = {
 	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT]) {
 	// 			initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 			initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
-	// 			initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
+	// 			initialMemory.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 			initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT] = {};
 	// 		}
 	// 		if (!initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]) {
 	// 			initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 			initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 			// initialMemory.runtimesettings.configuration[pssId] = {};
-	// 			initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
+	// 			initialMemory.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 			initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = {};
 	// 		}
 	// 		$.extend(initialMemory.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.querystate.sharedbydomains[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 	// 		$.extend(initialMemory.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.querystate.uniquetodomain[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
-	// 		$.extend(initialMemory.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
+	// 		$.extend(initialMemory.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 	// 		$.extend(initialMemory.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId], response.statefuldata.feedback.block[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId]);
 	// 	});
 	// },
@@ -2506,10 +2506,10 @@ window.pop.Manager = {
 		// var bsId = that.getSettingsId(block);
 		// var memory = that.getMemory(domain);
 
-		// Add 'dbObjectIDs' from the dbobjectids, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
+		// Add 'objectIDs' from the objectIDs, as to be read in scroll-inner.tmpl / carousel-inner.tmpl
 		options.extendContext = {
-			// dbObjectIDs: memory.statefuldata.dbobjectids[pssId][bsId],
-			dbObjectIDs: that.getDataset(domain, pageSection, block),
+			// objectIDs: memory.statefuldata.objectIDs[pssId][bsId],
+			objectIDs: that.getDataset(domain, pageSection, block),
 			ignorePSRuntimeId: true
 		};
 
@@ -3094,7 +3094,7 @@ window.pop.Manager = {
 
 	// 				memory.statefuldata.querystate.sharedbydomains[rpssId] = {};
 	// 				memory.statefuldata.querystate.uniquetodomain[rpssId] = {};
-	// 				memory.statefuldata.dbobjectids[rpssId] = {};
+	// 				memory.statefuldata.objectIDs[rpssId] = {};
 
 	// 				memory.statelessdata.settings['js-settings'][rpssId] = {};
 	// 				memory.statefuldata.settings['js-settings'][rpssId] = {};
@@ -3136,7 +3136,7 @@ window.pop.Manager = {
 
 	// 					memory.statefuldata.querystate.sharedbydomains[rpssId][rbsId] = $.extend({}, localMemory.querystate.sharedbydomains[rpssId][rbsId]);
 	// 					memory.statefuldata.querystate.uniquetodomain[rpssId][rbsId] = $.extend({}, localMemory.querystate.uniquetodomain[rpssId][rbsId]);
-	// 					memory.statefuldata.dbobjectids[rpssId][rbsId] = $.extend({}, localMemory.dbobjectids[rpssId][rbsId]);
+	// 					memory.statefuldata.objectIDs[rpssId][rbsId] = $.extend({}, localMemory.objectIDs[rpssId][rbsId]);
 
 	// 					memory.statefuldata.settings['js-settings'][rpssId][rbsId] = $.extend({}, localMemory.settings['js-settings'][rpssId][rbsId]);
 	// 					memory.statelessdata.settings['js-settings'][rpssId][rbsId] = $.extend({}, localMemory.settings['js-settings'][rpssId][rbsId]);
@@ -3234,10 +3234,10 @@ window.pop.Manager = {
 			// 	memory.statefuldata.feedback.block[rpssId] = {};
 			// }
 			// $.extend(memory.statefuldata.feedback.block[rpssId], response.statefuldata.feedback.block[rpssId]);
-			// if (!memory.statefuldata.dbobjectids[rpssId]) {
-			// 	memory.statefuldata.dbobjectids[rpssId] = {};
+			// if (!memory.statefuldata.objectIDs[rpssId]) {
+			// 	memory.statefuldata.objectIDs[rpssId] = {};
 			// }
-			// $.extend(memory.statefuldata.dbobjectids[rpssId], response.statefuldata.dbobjectids[rpssId]);
+			// $.extend(memory.statefuldata.objectIDs[rpssId], response.statefuldata.objectIDs[rpssId]);
 			// if (!memory.statefuldata.querystate.sharedbydomains[rpssId]) {
 			// 	memory.statefuldata.querystate.sharedbydomains[rpssId] = {};
 			// }
@@ -3267,7 +3267,7 @@ window.pop.Manager = {
 					if (process_actions.indexOf(action) > -1) {
 
 						var jsSettings = that.getJsSettings(domain, rPageSection, rBlock);
-						if (jsSettings['processblock-ifhasdata'] && !response.statefuldata.dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][rpssId][rbsId].length) {
+						if (jsSettings['processblock-ifhasdata'] && !response.statefuldata.objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][rpssId][rbsId].length) {
 							return;	
 						}
 					}
@@ -3329,24 +3329,24 @@ window.pop.Manager = {
 	// 	var that = this;
 
 	// 	// Integrate the response Database into the database
-	// 	$.each(responsedb, function(dbKey, dbObjectIDAttributes) {
+	// 	$.each(responsedb, function(typeOutputKey, objectIDAttributes) {
 
 	// 		// Initialize DB entry
-	// 		database[dbKey] = database[dbKey] || {};
+	// 		database[typeOutputKey] = database[typeOutputKey] || {};
 
-	// 		// When there are no elements in dbObjectIDAttributes, the object will appear not as an object but as an array
+	// 		// When there are no elements in objectIDAttributes, the object will appear not as an object but as an array
 	// 		// In that case, it will be empty, so skip
-	// 		if ($.type(dbObjectIDAttributes) == 'array') {
+	// 		if ($.type(objectIDAttributes) == 'array') {
 	// 			return;
 	// 		}
 
 	// 		// Extend with new values
-	// 		$.each(dbObjectIDAttributes, function(objectID, dbObjectAttributes) {
+	// 		$.each(objectIDAttributes, function(objectID, resolvedObjectAttributes) {
 
-	// 			if (!database[dbKey][objectID]) {
-	// 				database[dbKey][objectID] = {};
+	// 			if (!database[typeOutputKey][objectID]) {
+	// 				database[typeOutputKey][objectID] = {};
 	// 			}
-	// 			$.extend(database[dbKey][objectID], dbObjectAttributes);
+	// 			$.extend(database[typeOutputKey][objectID], resolvedObjectAttributes);
 	// 		});
 	// 	});
 	// },
@@ -3629,7 +3629,7 @@ window.pop.Manager = {
 		return targetConfiguration;
 	},
 
-	getComponentHTML : function(domain, pageSection, target, componentName, options, dbKey, objectID) {
+	getComponentHTML : function(domain, pageSection, target, componentName, options, typeOutputKey, objectID) {
 
 		var that = this;
 		var targetConfiguration = that.getTargetConfiguration(domain, pageSection, target, componentName);
@@ -3642,7 +3642,7 @@ window.pop.Manager = {
 		if (componentPath.length) {
 			var block = that.getBlock(target);
 			that.initContextSettings(domain, pageSection, block, targetContext);
-			that.extendContext(targetContext, domain, dbKey, objectID);
+			that.extendContext(targetContext, domain, typeOutputKey, objectID);
 		}
 
 		// extendContext: don't keep the overriding in the configuration. This way, we can use the preloading without having to reset
@@ -3655,7 +3655,7 @@ window.pop.Manager = {
 		return that.getHtml(domain, componentName, targetContext);
 	},
 
-	extendContext : function(context, domain, dbKey, objectID, override) {
+	extendContext : function(context, domain, typeOutputKey, objectID, override) {
 
 		// If merging a subcomponent (eg: appending data to Carousel), then we need to recreate the block Context
 		// Also used from within function enterModules to create the context to pass to each component
@@ -3663,14 +3663,14 @@ window.pop.Manager = {
 		override = override || {};
 		$.extend(context, override);
 
-		// Load dbObject?
-		if (dbKey) {
+		// Load resolvedObject?
+		if (typeOutputKey) {
 
-			$.extend(context, {dbKey: dbKey});
+			$.extend(context, {typeOutputKey: typeOutputKey});
 			if (objectID) {
 
-				var dbObject = that.getDBObject(domain, dbKey, objectID);
-				$.extend(context, {dbObject: dbObject, dbObjectDBKey: dbKey});
+				var resolvedObject = that.getDBObject(domain, typeOutputKey, objectID);
+				$.extend(context, {resolvedObject: resolvedObject, resolvedObjectTypeOutputKey: typeOutputKey});
 			}
 		}
 	},
@@ -3948,13 +3948,13 @@ window.pop.Manager = {
 		// Expand the JS Keys for the configuration
 		that.expandJSKeys(context);
 
-		// If there's no dbKey, also add it
-		// This is because there is a bug: first loading /log-in/, it will generate the settings adding dbKey when rendering
+		// If there's no typeOutputKey, also add it
+		// This is because there is a bug: first loading /log-in/, it will generate the settings adding typeOutputKey when rendering
 		// the component down the path. However, it then calls /loaders/initial-frames?target=main, and it will bring 
-		// again the /log-in preloading settings, which will override the ones from the log-in window that is open, making it lose the dbKey,
+		// again the /log-in preloading settings, which will override the ones from the log-in window that is open, making it lose the typeOutputKey,
 		// which is needed by the content-inner component.
-		if (!context.dbKey) {
-			context.dbKey = bs.dbkeys.id;
+		if (!context.typeOutputKey) {
+			context.typeOutputKey = bs.outputKeys.id;
 		}
 	},
 
@@ -4017,7 +4017,7 @@ window.pop.Manager = {
 	// 		// // (this is only needed since adding support for multicomponent, since their response may involve a pageSection which had never been initialized)
 	// 		// memory.statefuldata.querystate.sharedbydomains[pssId] = memory.statefuldata.querystate.sharedbydomains[pssId] || {};
 	// 		// memory.statefuldata.querystate.uniquetodomain[pssId] = memory.statefuldata.querystate.uniquetodomain[pssId] || {};
-	// 		// memory.statefuldata.dbobjectids[pssId] = memory.statefuldata.dbobjectids[pssId] || {};
+	// 		// memory.statefuldata.objectIDs[pssId] = memory.statefuldata.objectIDs[pssId] || {};
 	// 		// memory.statefuldata.feedback.pagesection[pssId] = memory.statefuldata.feedback.pagesection[pssId] || {};
 	// 		// memory.statefuldata.feedback.block[pssId] = memory.statefuldata.feedback.block[pssId] || {};
 	// 		// memory.statefuldata.settings['js-settings'][pssId] = memory.statefuldata.settings['js-settings'][pssId] || {};
@@ -4032,7 +4032,7 @@ window.pop.Manager = {
 
 	// 		// $.extend(memory.statefuldata.querystate.sharedbydomains[pssId], response.statefuldata.querystate.sharedbydomains[pssId]);
 	// 		// $.extend(memory.statefuldata.querystate.uniquetodomain[pssId], response.statefuldata.querystate.uniquetodomain[pssId]);
-	// 		// $.extend(memory.statefuldata.dbobjectids[pssId], response.statefuldata.dbobjectids[pssId]);
+	// 		// $.extend(memory.statefuldata.objectIDs[pssId], response.statefuldata.objectIDs[pssId]);
 	// 		// $.extend(memory.statefuldata.feedback.pagesection[pssId], response.statefuldata.feedback.pagesection[pssId]);
 	// 		// $.extend(memory.statefuldata.feedback.block[pssId], response.statefuldata.feedback.block[pssId]);
 
@@ -4114,8 +4114,8 @@ window.pop.Manager = {
 	
 		var that = this;
 		var blockSettings = {
-			dbkeys: that.getDatabaseKeys(domain, pssId, bsId),
-			dbobjectids: that.getDataset(domain, pssId, bsId),
+			outputKeys: that.getFieldToTypeOutputKeys(domain, pssId, bsId),
+			objectIDs: that.getDataset(domain, pssId, bsId),
 			feedback: that.getBlockFeedback(domain, pssId, bsId),
 			bsId: bsId,
 			bId: bId,
@@ -4134,10 +4134,10 @@ window.pop.Manager = {
 		var bsId = that.getSettingsId(block);
 		var url = that.getBlockTopLevelURL(domain, block);
 		
-		// return that.getMemory(domain).statefuldata.dbobjectids[pssId][bsId];
-		that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
-		that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] = that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] || {};
-		return that.getStatefulData(domain, url).dbobjectids[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
+		// return that.getMemory(domain).statefuldata.objectIDs[pssId][bsId];
+		that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] = that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId] || {};
+		that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] = that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId] || {};
+		return that.getStatefulData(domain, url).objectIDs[pop.c.COMPONENTSETTINGS_ENTRYCOMPONENT][pssId][bsId];
 	},
 
 	getBlockFeedback : function(domain, pageSection, block) {
@@ -4239,10 +4239,10 @@ window.pop.Manager = {
 	// 	return configuration[elsId] || {};
 	// },
 
-	getDatabaseKeys : function(domain, pageSection, block) {
+	getFieldToTypeOutputKeys : function(domain, pageSection, block) {
 	
 		var that = this;
-		return that.getStatelessSettings(domain, pageSection, block, 'dbkeys');
+		return that.getStatelessSettings(domain, pageSection, block, 'outputKeys');
 	},
 
 	getBlockFilteringUrl : function(domain, pageSection, block, use_pageurl) {
@@ -4384,7 +4384,7 @@ window.pop.Manager = {
 	// 	// var queryState = that.getRuntimeMemoryPage(pageSection, block, options)['querystate'];
 	// 	// querystate.sharedbydomains = $.extend(that.getBlockDefaultParams(), initialMemory.querystate.sharedbydomains[pssId][bsId]);
 
-	// 	// var dbobjectids = initialMemory.dbobjectids[pssId][bsId];
+	// 	// var objectIDs = initialMemory.objectIDs[pssId][bsId];
 	// 	// var query_urls = that.getQueryMultiDomainUrls(pageSection, block);
 	// 	// $.each(query_urls, function(domain, query_url) {
 			
@@ -4393,13 +4393,13 @@ window.pop.Manager = {
 	// 	// 	var memory = that.getMemory(domain);
 	// 	// 	memory.statefuldata.feedback.block[pssId][bsId] = $.extend({}, initialMemory.feedback.block[pssId][bsId]);
 
-	// 	// 	// If the initialMemory dbobjectids is empty and the memory one is not, then the extend fails to override
+	// 	// 	// If the initialMemory objectIDs is empty and the memory one is not, then the extend fails to override
 	// 	// 	// So ask for that case explicitly
-	// 	// 	if (dbobjectids.length) {
-	// 	// 		$.extend(memory.statefuldata.dbobjectids[pssId][bsId], dbobjectids);
+	// 	// 	if (objectIDs.length) {
+	// 	// 		$.extend(memory.statefuldata.objectIDs[pssId][bsId], objectIDs);
 	// 	// 	}
 	// 	// 	else {
-	// 	// 		memory.statefuldata.dbobjectids[pssId][bsId] = [];
+	// 	// 		memory.statefuldata.objectIDs[pssId][bsId] = [];
 	// 	// 	}
 	// 	// });
 	// },
@@ -4575,17 +4575,17 @@ window.pop.Manager = {
 		return '';
 	},
 
-	getDBObject : function(domain, dbKey, objectID) {
+	getDBObject : function(domain, typeOutputKey, objectID) {
 
 		var that = this;
 		var userItem = {}, item = {};
 		var userdatabase = that.getUserDatabase(domain);
 		var database = that.getDatabase(domain);
-		if (userdatabase[dbKey] && userdatabase[dbKey][objectID]) {
-			userItem = userdatabase[dbKey][objectID];
+		if (userdatabase[typeOutputKey] && userdatabase[typeOutputKey][objectID]) {
+			userItem = userdatabase[typeOutputKey][objectID];
 		}
-		if (database[dbKey] && database[dbKey][objectID]) {
-			item = database[dbKey][objectID];
+		if (database[typeOutputKey] && database[typeOutputKey][objectID]) {
+			item = database[typeOutputKey][objectID];
 		}
 		return $.extend({}, userItem, item);
 	},

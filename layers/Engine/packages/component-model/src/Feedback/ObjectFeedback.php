@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
@@ -14,7 +15,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         FeedbackItemResolution $feedbackItemResolution,
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        protected string $field,
+        protected FieldInterface $field,
         protected string|int $objectID,
         protected ?string $directive = null,
         /** @var array<string, mixed> */
@@ -32,7 +33,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
     public static function fromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $field,
+        FieldInterface $field,
         string|int $objectID,
         ?string $directive
     ): self {
@@ -64,7 +65,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         return $this->relationalTypeResolver;
     }
 
-    public function getField(): string
+    public function getField(): FieldInterface
     {
         return $this->field;
     }

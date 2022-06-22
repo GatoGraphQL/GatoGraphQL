@@ -5,19 +5,22 @@ class GD_URE_Module_Processor_ProfileFormInners extends PoP_Module_Processor_For
     public final const COMPONENT_FORMINNER_EDITMEMBERSHIP = 'forminner-editmembership';
     public final const COMPONENT_FORMINNER_MYCOMMUNITIES_UPDATE = 'forminner-mycommunities-update';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_EDITMEMBERSHIP],
-            [self::class, self::COMPONENT_FORMINNER_MYCOMMUNITIES_UPDATE],
+            self::COMPONENT_FORMINNER_EDITMEMBERSHIP,
+            self::COMPONENT_FORMINNER_MYCOMMUNITIES_UPDATE,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_EDITMEMBERSHIP:
                 $ret[] = [GD_URE_Module_Processor_ProfileFormGroups::class, GD_URE_Module_Processor_ProfileFormGroups::COMPONENT_URE_FORMINPUTGROUP_MEMBERSTATUS];
                 $ret[] = [GD_URE_Module_Processor_ProfileFormGroups::class, GD_URE_Module_Processor_ProfileFormGroups::COMPONENT_URE_FORMINPUTGROUP_MEMBERPRIVILEGES];

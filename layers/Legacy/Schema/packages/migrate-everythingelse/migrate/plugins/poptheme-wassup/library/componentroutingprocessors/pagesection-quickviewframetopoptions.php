@@ -1,11 +1,12 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_QuickviewFrameTopOptionsPageSectionComponentRoutingProcessor extends PoP_Module_QuickviewFrameTopOptionsPageSectionComponentRoutingProcessorBase
 {
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

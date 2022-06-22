@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ComponentModel\Settings;
 
-use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 
 class SettingsManager
 {
@@ -10,18 +10,21 @@ class SettingsManager
         SettingsManagerFactory::setInstance($this);
     }
 
-    public function getCheckpoints($route = null)
+    /**
+     * @return CheckpointInterface[]
+     */
+    public function getCheckpoints(?string $route = null): array
     {
         if (!$route) {
             $route = \PoP\Root\App::getState('route');
         }
 
         $processor = SettingsProcessorManagerFactory::getInstance()->getProcessor($route);
-        $checkpoints = $processor->getCheckpoints();
-        if ($checkpoints[$route]) {
-            return $checkpoints[$route];
+        $routeCheckpoints = $processor->getRouteCheckpoints();
+        if ($routeCheckpoints[$route] ?? null) {
+            return $routeCheckpoints[$route];
         }
-        return array();
+        return [];
     }
 
     public function isFunctional($route = null)

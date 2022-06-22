@@ -4,10 +4,10 @@ class PoP_Module_Processor_SocialLoginElements extends PoP_Module_Processor_Soci
 {
     public final const COMPONENT_SOCIALLOGIN_NETWORKLINKS = 'sociallogin-networklinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SOCIALLOGIN_NETWORKLINKS],
+            self::COMPONENT_SOCIALLOGIN_NETWORKLINKS,
         );
     }
 }

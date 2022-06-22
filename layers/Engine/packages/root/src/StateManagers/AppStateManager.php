@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\AppStateNotExistsException;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoP\Root\Translation\TranslationAPIInterface;
@@ -109,20 +111,43 @@ class AppStateManager implements AppStateManagerInterface
     {
         $state = &$this->state;
         foreach ($path as $pathItem) {
-            if (!array_key_exists($pathItem, $state)) {
-                throw new AppStateNotExistsException(
-                    \sprintf(
-                        $this->getTranslationAPI()->__('There is no application state under path \'%s\'', 'root'),
-                        implode(
-                            $this->getTranslationAPI()->__(',', 'root'),
-                            $path
-                        )
-                    )
-                );
+            if (!is_array($state) || !array_key_exists($pathItem, $state)) {
+                $this->throwAppStateNotExistsException($path);
             }
             $state = &$state[$pathItem];
         }
         return $state;
+    }
+
+    /**
+     * @throws ShouldNotHappenException
+     */
+    protected function assertIsSupportedSplObjectStorageItem(mixed $stateItem): void
+    {
+        if (!($stateItem instanceof FieldInterface)) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->getTranslationAPI()->__('In the SplObjectStorage stored in the AppState, cannot process item of class \'%s\'', 'root'),
+                    get_class($stateItem)
+                )
+            );
+        }
+    }
+
+    /**
+     * @throws AppStateNotExistsException If there is no state under the provided path
+     */
+    protected function throwAppStateNotExistsException(array $path): void
+    {
+        throw new AppStateNotExistsException(
+            \sprintf(
+                $this->getTranslationAPI()->__('There is no application state under path \'%s\'', 'root'),
+                implode(
+                    $this->getTranslationAPI()->__(',', 'root'),
+                    $path
+                )
+            )
+        );
     }
 
     public function has(string $key): bool
@@ -138,7 +163,7 @@ class AppStateManager implements AppStateManagerInterface
                 // Iterating to a subentry that is not defined?
                 return false;
             }
-            if (!array_key_exists($pathItem, $state)) {
+            if (!is_array($state) || !array_key_exists($pathItem, $state)) {
                 return false;
             }
             $state = &$state[$pathItem];

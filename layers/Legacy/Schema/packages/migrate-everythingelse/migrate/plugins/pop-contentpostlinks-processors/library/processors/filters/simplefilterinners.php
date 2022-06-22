@@ -6,16 +6,16 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS = 'simplefilterinputcontainer-authorlinks';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLINKS = 'simplefilterinputcontainer-taglinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLINKS],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGLINKS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -41,7 +41,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
             ],
         ];
         // Add the link access filter
-        if (($inputComponents[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputComponents[$component->name] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
 
             array_splice(
                 $ret,
@@ -57,7 +57,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
         }
         if ($components = \PoP\Root\App::applyFilters(
             'Links:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -68,13 +68,13 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_LINKS => POP_FILTER_LINKS,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORLINKS => POP_FILTER_AUTHORLINKS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

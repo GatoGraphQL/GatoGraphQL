@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<div class="layout notification-layout preview {{../class}} {{status}} target-{{id}}-{{../tls.domain-id}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
 		{{#withModule ../. "link"}}
 			{{enterModule ../../.}}
@@ -17,7 +17,7 @@
 				{{/withModule}}
 				{{#withModule ../. "user-avatar"}}
 					<div class="avatar {{../../classes.avatar}}" style="{{../../styles.avatar}}">					
-						{{enterModule ../../. dbKey=../../bs.dbkeys.user-id objectID=../user-id}}
+						{{enterModule ../../. typeOutputKey=../../bs.outputKeys.user-id objectID=../user-id}}
 					</div>
 				{{/withModule}}
 			</div>

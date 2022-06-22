@@ -4,10 +4,10 @@ class GD_URE_Custom_Module_Processor_ProfileOrganizationLayouts extends GD_URE_C
 {
     public final const COMPONENT_URE_LAYOUT_PROFILEORGANIZATION_DETAILS = 'ure-layoutuser-profileorganization-details';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_LAYOUT_PROFILEORGANIZATION_DETAILS],
+            self::COMPONENT_URE_LAYOUT_PROFILEORGANIZATION_DETAILS,
         );
     }
 }

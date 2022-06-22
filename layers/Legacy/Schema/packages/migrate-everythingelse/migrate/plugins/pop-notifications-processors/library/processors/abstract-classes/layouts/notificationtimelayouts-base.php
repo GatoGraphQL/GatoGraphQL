@@ -2,19 +2,19 @@
 
 abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_AAL_Processors_TemplateResourceLoaderProcessor::class, PoP_AAL_Processors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_NOTIFICATIONTIME];
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
 
         $ret[] = 'histTimeNogmt';
 
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngin
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
     
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngin
         return $ret;
     }
 
-    public function getMomentFormat(array $component, array &$props)
+    public function getMomentFormat(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Documentation: http://momentjs.com/docs/
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngin
         return 'X';
     }
     
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

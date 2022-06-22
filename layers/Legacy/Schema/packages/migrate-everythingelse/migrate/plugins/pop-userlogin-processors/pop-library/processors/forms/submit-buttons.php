@@ -8,19 +8,19 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
     public final const COMPONENT_SUBMITBUTTON_LOSTPWDRESET = 'submitbutton-lostpwdreset';
     public final const COMPONENT_SUBMITBUTTON_LOGOUT = 'submitbutton-logout';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOGIN],
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOSTPWD],
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOSTPWDRESET],
-            [self::class, self::COMPONENT_SUBMITBUTTON_LOGOUT],
+            self::COMPONENT_SUBMITBUTTON_LOGIN,
+            self::COMPONENT_SUBMITBUTTON_LOSTPWD,
+            self::COMPONENT_SUBMITBUTTON_LOSTPWDRESET,
+            self::COMPONENT_SUBMITBUTTON_LOGOUT,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Log in', 'pop-coreprocessors');
 
@@ -37,9 +37,9 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
         return parent::getLabel($component, $props);
     }
 
-    public function getLoadingText(array $component, array &$props)
+    public function getLoadingText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Logging in...', 'pop-coreprocessors');
 

@@ -4,17 +4,17 @@ use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_BUTTONGROUP];
     }
 
-    public function getHeaderType(array $component, array &$props)
+    public function getHeaderType(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn-group';
     }
 
-    public function getHeadersData(array $component, array &$props)
+    public function getHeadersData(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // The following items must be provided in the array
@@ -27,21 +27,21 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         );
     }
 
-    public function getItemClass(array $component, array &$props)
+    public function getItemClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn btn-xs btn-default';
     }
-    public function getItemdropdownClass(array $component, array &$props)
+    public function getItemdropdownClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'btn-default btn-dropdown';
     }
 
-    public function getDropdownTitle(array $component, array &$props)
+    public function getDropdownTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -92,7 +92,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -119,7 +119,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($header_type = $this->getHeaderType($component, $props)) {
             // header type 'btn-group' needs that same class

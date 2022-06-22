@@ -2,24 +2,24 @@
 
 abstract class PoP_Module_Processor_BootstrapComponentsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getBootstrapcomponentClass(array $component)
+    public function getBootstrapcomponentClass(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Needed for all the hooks using Bootstrap (show.bs.modal, etc)
         return 'pop-bscomponent';
     }
 
-    public function getContainerClass(array $component)
+    public function getContainerClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
 
-    public function getBootstrapcomponentType(array $component)
+    public function getBootstrapcomponentType(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -36,12 +36,12 @@ abstract class PoP_Module_Processor_BootstrapComponentsBase extends PoPEngine_Qu
         return $ret;
     }
 
-    protected function getInitjsBlockbranches(array $component, array &$props)
+    protected function getInitjsBlockbranches(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
     
-    public function getMutableonrequestJsconfiguration(array $component, array &$props): array
+    public function getMutableonrequestJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestJsconfiguration($component, $props);
 
@@ -52,7 +52,7 @@ abstract class PoP_Module_Processor_BootstrapComponentsBase extends PoPEngine_Qu
         return $ret;
     }
 
-    public function getInitializationjsmethod(array $component, array &$props)
+    public function getInitializationjsmethod(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'initActiveBranchesJSMethods';
     }

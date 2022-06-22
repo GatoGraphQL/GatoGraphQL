@@ -4,33 +4,33 @@ class PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts extends PoP_Module_P
 {
     public final const COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK = 'layout-addpostlinks-embedpreview-link';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
+            self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK,
         );
     }
-    public function getFrameSrcField(array $component, array &$props)
+    public function getFrameSrcField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
                 return 'link';
         }
 
         return parent::getFrameSrcField($component, $props);
     }
-    public function getFrameHeight(array $component, array &$props)
+    public function getFrameHeight(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
                 return '400';
         }
 
         return parent::getFrameHeight($component, $props);
     }
-    // function printSource(array $component, array &$props) {
+    // function printSource(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
             
     //         case self::COMPONENT_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
 

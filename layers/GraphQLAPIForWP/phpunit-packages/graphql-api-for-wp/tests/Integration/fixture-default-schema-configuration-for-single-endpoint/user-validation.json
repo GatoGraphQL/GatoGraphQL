@@ -239,6 +239,24 @@
             }
         },
         {
+            "message": "There is no field 'title' on type 'Page' and ID '2'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Page",
+                "id": 2,
+                "fields": [
+                    "title",
+                    "resolveValueAndMerge"
+                ],
+                "code": "PoP\\ComponentModel\\1"
+            }
+        },
+        {
             "message": "There is no field 'title' on type 'Post' and ID '1'",
             "locations": [
                 {
@@ -267,24 +285,6 @@
             "extensions": {
                 "type": "Post",
                 "id": 28,
-                "fields": [
-                    "title",
-                    "resolveValueAndMerge"
-                ],
-                "code": "PoP\\ComponentModel\\1"
-            }
-        },
-        {
-            "message": "There is no field 'title' on type 'Post' and ID '25'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "Post",
-                "id": 25,
                 "fields": [
                     "title",
                     "resolveValueAndMerge"
@@ -348,6 +348,16 @@
         ],
         "customPosts": [
             {
+                "__typename": "Page",
+                "id": 2,
+                "title": null,
+                "date": "2022-04-17T13:06:58+00:00",
+                "url": "https:\/\/graphql-api.lndo.site\/sample-page\/",
+                "customPostType": null,
+                "hasComments": false,
+                "comments": null
+            },
+            {
                 "__typename": "Post",
                 "id": 1,
                 "title": null,
@@ -366,16 +376,6 @@
                 "customPostType": null,
                 "hasComments": true,
                 "comments": null
-            },
-            {
-                "__typename": "Post",
-                "id": 25,
-                "title": null,
-                "date": "2020-12-12T04:06:52+00:00",
-                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
-                "customPostType": null,
-                "hasComments": true,
-                "comments": null
             }
         ],
         "pages": [
@@ -389,7 +389,16 @@
                 "comments": null
             }
         ],
-        "mediaItems": [],
+        "mediaItems": [
+            {
+                "id": 362,
+                "url": "https:\/\/graphql-api.lndo.site\/graphql-api-search-results\/"
+            },
+            {
+                "id": 361,
+                "url": "https:\/\/graphql-api.lndo.site\/graphql-api-header\/"
+            }
+        ],
         "users": [
             {
                 "avatar": "da83a02a60e209782d40d3feb41e00c5",
@@ -431,17 +440,7 @@
                 "self": null
             }
         ],
-        "myPosts": [
-            {
-                "id": 1
-            },
-            {
-                "id": 25
-            },
-            {
-                "id": 23
-            }
-        ],
+        "myPosts": [],
         "me": {
             "id": 1
         }

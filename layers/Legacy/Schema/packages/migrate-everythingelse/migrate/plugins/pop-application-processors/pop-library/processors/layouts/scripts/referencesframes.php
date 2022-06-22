@@ -9,21 +9,21 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
     public final const COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedby-appendtoscript-fullview';
     public final const COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedbyempty-appendtoscript-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW],
+            self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS,
+            self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW,
+            self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW,
+            self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW,
+            self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW,
         );
     }
 
-    public function doAppend(array $component)
+    public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS:
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW:
@@ -33,9 +33,9 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
         return parent::doAppend($component);
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
             case self::COMPONENT_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS:
                 return [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::COMPONENT_SUBCOMPONENT_REFERENCEDBY_DETAILS];

@@ -4,31 +4,39 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectivePipeline;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 class DirectivePipelineUtils
 {
+    /**
+     * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     */
     public static function convertArgumentsToPayload(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $pipelineDirectiveResolverInstances,
-        array $objectIDItems,
-        array $unionDBKeyIDs,
-        array $previousDBItems,
-        array &$pipelineIDsDataFields,
-        array &$dbItems,
+        array $pipelineDirectiveResolvers,
+        array $idObjects,
+        array $unionTypeOutputKeyIDs,
+        array $previouslyResolvedIDFieldValues,
+        array &$pipelineIDFieldSet,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         return [
             'typeResolver' => &$relationalTypeResolver,
-            'pipelineDirectiveResolverInstances' => &$pipelineDirectiveResolverInstances,
-            'objectIDItems' => &$objectIDItems,
-            'unionDBKeyIDs' => &$unionDBKeyIDs,
-            'previousDBItems' => &$previousDBItems,
-            'pipelineIDsDataFields' => &$pipelineIDsDataFields,
-            'dbItems' => &$dbItems,
+            'pipelineDirectiveResolvers' => &$pipelineDirectiveResolvers,
+            'idObjects' => &$idObjects,
+            'unionTypeOutputKeyIDs' => &$unionTypeOutputKeyIDs,
+            'previouslyResolvedIDFieldValues' => &$previouslyResolvedIDFieldValues,
+            'pipelineIDFieldSet' => &$pipelineIDFieldSet,
+            'resolvedIDFieldValues' => &$resolvedIDFieldValues,
             'variables' => &$variables,
             'messages' => &$messages,
             'engineIterationFeedbackStore' => &$engineIterationFeedbackStore,
@@ -39,12 +47,12 @@ class DirectivePipelineUtils
     {
         return [
             &$payload['typeResolver'],
-            &$payload['pipelineDirectiveResolverInstances'],
-            &$payload['objectIDItems'],
-            &$payload['unionDBKeyIDs'],
-            &$payload['previousDBItems'],
-            &$payload['pipelineIDsDataFields'],
-            &$payload['dbItems'],
+            &$payload['pipelineDirectiveResolvers'],
+            &$payload['idObjects'],
+            &$payload['unionTypeOutputKeyIDs'],
+            &$payload['previouslyResolvedIDFieldValues'],
+            &$payload['pipelineIDFieldSet'],
+            &$payload['resolvedIDFieldValues'],
             &$payload['variables'],
             &$payload['messages'],
             &$payload['engineIterationFeedbackStore'],

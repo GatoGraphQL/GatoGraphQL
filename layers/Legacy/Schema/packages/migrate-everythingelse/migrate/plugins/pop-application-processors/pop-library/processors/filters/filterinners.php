@@ -18,28 +18,28 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     public final const COMPONENT_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
     public final const COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'filterinputcontainer-mycategoryposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CONTENT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHORCONTENT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGCONTENT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_POSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHORPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_USERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYCONTENT],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGS,
+            self::COMPONENT_FILTERINPUTCONTAINER_CONTENT,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHORCONTENT,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGCONTENT,
+            self::COMPONENT_FILTERINPUTCONTAINER_POSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_CATEGORYPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHORPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGCATEGORYPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_USERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCONTENT,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -143,7 +143,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Blog:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -154,7 +154,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_TAGS => POP_FILTER_TAGS,
@@ -173,7 +173,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYPOSTS => POP_FILTER_MYPOSTS,
     //         self::COMPONENT_FILTERINPUTCONTAINER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

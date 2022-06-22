@@ -13,27 +13,30 @@ class PoP_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_Proc
     public final const COMPONENT_LAYOUT_DOWNVOTEPOST_STYLES = 'layout-downvoteposts-styles';
     public final const COMPONENT_LAYOUT_UNDODOWNVOTEPOST_STYLES = 'layout-undodownvoteposts-styles';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FOLLOWUSER_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNFOLLOWUSER_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_RECOMMENDPOST_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNRECOMMENDPOST_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UPVOTEPOST_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_DOWNVOTEPOST_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_STYLES],
+            self::COMPONENT_LAYOUT_FOLLOWUSER_STYLES,
+            self::COMPONENT_LAYOUT_UNFOLLOWUSER_STYLES,
+            self::COMPONENT_LAYOUT_RECOMMENDPOST_STYLES,
+            self::COMPONENT_LAYOUT_UNRECOMMENDPOST_STYLES,
+            self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_STYLES,
+            self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_STYLES,
+            self::COMPONENT_LAYOUT_UPVOTEPOST_STYLES,
+            self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_STYLES,
+            self::COMPONENT_LAYOUT_DOWNVOTEPOST_STYLES,
+            self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_STYLES,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FOLLOWUSER_STYLES:
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::COMPONENT_LAYOUT_FOLLOWUSER_HIDE_STYLES];
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES];

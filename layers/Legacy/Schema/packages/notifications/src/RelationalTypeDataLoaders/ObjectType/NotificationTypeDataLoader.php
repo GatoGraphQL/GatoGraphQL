@@ -11,17 +11,21 @@ use PoP_Notifications_API;
 
 class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
-    protected function getOrderbyDefault()
+    protected function getOrderbyDefault(): string
     {
         return 'histid';
     }
 
-    protected function getOrderDefault()
+    protected function getOrderDefault(): string
     {
         return 'DESC';
     }
 
-    public function getQuery($query_args): array
+    /**
+     * @param array<string,mixed> $query_args
+     * @return array<string,mixed>
+     */
+    public function getQuery(array $query_args): array
     {
         $query = parent::getQuery($query_args);
 
@@ -45,11 +49,15 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         );
     }
 
-    protected function getQueryHookName()
+    protected function getQueryHookName(): string
     {
         return 'Dataloader_NotificationList:query';
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return array(
@@ -57,7 +65,11 @@ class NotificationTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         );
     }
 
-    public function executeQueryIDs($query): array
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string|int>
+     */
+    public function executeQueryIDs(array $query): array
     {
         $query['array'] = true;
         $query['fields'] = array('histid');

@@ -206,6 +206,7 @@
         ],
         "destroy-server": "lando destroy -y",
         "rebuild-server": "lando rebuild -y",
+        "stop-server": "lando stop",
         "test": "phpunit",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests",

@@ -4,14 +4,17 @@ class PoP_ContactUs_Module_Processor_FeedbackMessageInners extends PoP_Module_Pr
 {
     public final const COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUS = 'feedbackmessageinner-contactus';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUS],
+            self::COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -19,7 +22,7 @@ class PoP_ContactUs_Module_Processor_FeedbackMessageInners extends PoP_Module_Pr
             self::COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUS => [PoP_ContactUs_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_ContactUs_Module_Processor_FeedbackMessageAlertLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUS],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

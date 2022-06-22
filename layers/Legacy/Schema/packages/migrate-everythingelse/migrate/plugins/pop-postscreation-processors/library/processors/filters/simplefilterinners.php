@@ -4,14 +4,14 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
 {
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS = 'simplefilterinputcontainer-mylinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -27,7 +27,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
             ],
         ];
         // Add the link access filter
-        if (($inputComponents[$component[1]] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (($inputComponents[$component->name] ?? null) && PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
             array_splice(
                 $ret,
                 array_search(
@@ -42,7 +42,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
         }
         if ($components = \PoP\Root\App::applyFilters(
             'Links:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -53,12 +53,12 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners ext
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLINKS => POP_FILTER_MYLINKS,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

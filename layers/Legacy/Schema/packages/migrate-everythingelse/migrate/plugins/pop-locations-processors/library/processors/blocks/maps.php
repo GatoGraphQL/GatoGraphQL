@@ -5,28 +5,28 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
     public final const COMPONENT_BLOCK_LOCATIONSMAP = 'block-locationsmap';
     public final const COMPONENT_BLOCK_STATICLOCATIONSMAP = 'block-staticlocationsmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_LOCATIONSMAP],
-            [self::class, self::COMPONENT_BLOCK_STATICLOCATIONSMAP],
+            self::COMPONENT_BLOCK_LOCATIONSMAP,
+            self::COMPONENT_BLOCK_STATICLOCATIONSMAP,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_LOCATIONSMAP => POP_LOCATIONS_ROUTE_LOCATIONSMAP,
             self::COMPONENT_BLOCK_STATICLOCATIONSMAP => POP_LOCATIONS_ROUTE_LOCATIONSMAP,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONSMAP:
                 $ret[] = [PoP_Module_Processor_LocationsMapDataloads::class, PoP_Module_Processor_LocationsMapDataloads::COMPONENT_DATALOAD_LOCATIONSMAP];
                 break;
@@ -39,9 +39,9 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
         return $ret;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_STATICLOCATIONSMAP:
                 return '';
         }
@@ -49,9 +49,9 @@ class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_Block
         return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_LOCATIONSMAP:
                 // No need to show the locations list, only the map will do
                 $this->appendProp([[PoP_Module_Processor_LocationsMapDataloads::class, PoP_Module_Processor_LocationsMapDataloads::COMPONENT_DATALOAD_LOCATIONSMAP], [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::COMPONENT_SCROLL_LOCATIONS_MAP]], $props, 'class', 'hidden');

@@ -5,17 +5,17 @@ class PoP_Module_Processor_CommentsLayouts extends PoP_Module_Processor_CommentL
     public final const COMPONENT_LAYOUT_COMMENT_LIST = 'layout-comment-list';
     public final const COMPONENT_LAYOUT_COMMENT_ADD = 'layout-comment-add';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_COMMENT_LIST],
-            [self::class, self::COMPONENT_LAYOUT_COMMENT_ADD],
+            self::COMPONENT_LAYOUT_COMMENT_LIST,
+            self::COMPONENT_LAYOUT_COMMENT_ADD,
         );
     }
 
-    public function isRuntimeAdded(array $component, array &$props)
+    public function isRuntimeAdded(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_COMMENT_ADD:
                 return true;
         }

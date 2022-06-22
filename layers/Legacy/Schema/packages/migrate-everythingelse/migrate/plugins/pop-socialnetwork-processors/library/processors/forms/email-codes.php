@@ -6,17 +6,17 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
     public final const COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL = 'code-emailnotifications-networklabel';
     public final const COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL = 'code-emailnotifications-subscribedtopicslabel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL],
-            [self::class, self::COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL],
+            self::COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL,
+            self::COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL,
         );
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CODE_EMAILNOTIFICATIONS_NETWORKLABEL:
             case self::COMPONENT_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL:
                 $titles = array(
@@ -25,7 +25,7 @@ class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_
                 );
                 return sprintf(
                     '<h4>%s</h4>',
-                    $titles[$component[1]]
+                    $titles[$component->name]
                 );
         }
     

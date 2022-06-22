@@ -7,18 +7,18 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
     public final const COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES = 'forminput-organizationcategories';
     public final const COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES = 'forminput-organizationtypes';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS],
-            [self::class, self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES],
-            [self::class, self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES],
+            self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS,
+            self::COMPONENT_URE_FORMINPUT_ORGANIZATIONCATEGORIES,
+            self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
                 
@@ -40,9 +40,9 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
         return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $component): string
+    public function getInputClass(\PoP\ComponentModel\Component\Component $component): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
                 
@@ -56,9 +56,9 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
         return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_URE_FORMINPUT_ORGANIZATIONTYPES:
                 return 'organizationtypes';
 

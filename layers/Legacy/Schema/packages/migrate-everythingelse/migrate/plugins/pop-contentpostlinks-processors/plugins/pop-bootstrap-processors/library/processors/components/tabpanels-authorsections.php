@@ -4,18 +4,18 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents exte
 {
     public final const COMPONENT_TABPANEL_AUTHORLINKS = 'tabpanel-authorlinks';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_AUTHORLINKS],
+            self::COMPONENT_TABPANEL_AUTHORLINKS,
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORLINKS:
                 $ret = array_merge(
                     $ret,
@@ -33,9 +33,9 @@ class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents exte
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORLINKS:
                 $ret = array(
                     [

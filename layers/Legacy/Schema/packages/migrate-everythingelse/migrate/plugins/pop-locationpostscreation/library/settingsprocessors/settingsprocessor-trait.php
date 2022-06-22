@@ -1,5 +1,6 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 
 trait PoP_LocationPostsCreation_Module_SettingsProcessor_Trait
 {
@@ -14,13 +15,15 @@ trait PoP_LocationPostsCreation_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
-            POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST => UserStateCheckpointSets::LOGGEDIN_STATIC,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
-            POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER),
-            POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST => POPUSERLOGIN_CHECKPOINTCONFIGURATION_LOGGEDIN_CANEDIT,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPUSERLOGIN_CHECKPOINTCONFIGURATION_LOGGEDIN_CANEDIT),
+            POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],
+            POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [$this->getUserLoggedInCheckpoint()],
+            POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST => POPUSERLOGIN_CHECKPOINTCONFIGURATION_LOGGEDIN_CANEDIT,
         );
     }
 

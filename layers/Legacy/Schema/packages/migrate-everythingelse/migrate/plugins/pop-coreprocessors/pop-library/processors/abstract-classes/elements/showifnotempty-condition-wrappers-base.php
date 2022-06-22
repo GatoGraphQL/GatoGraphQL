@@ -2,13 +2,13 @@
 
 abstract class PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public function getConditionfailedLayoutSubcomponents(array $component)
+    public function getConditionfailedLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         // The layouts and condition failed layouts are the same, the only difference is adding class "hidden" between the 2 states
         return $this->getLayoutSubcomponents($component);
     }
 
-    public function getConditionfailedClass(array $component, array &$props)
+    public function getConditionfailedClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $classs = parent::getConditionfailedClass($component, $props);
         $classs .= ' hidden';
@@ -16,12 +16,12 @@ abstract class PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase extends P
         return $classs;
     }
 
-    public function getTextfieldComponent(array $component, array &$props)
+    public function getTextfieldComponent(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-show-notempty');
         if ($textfield_component = $this->getTextfieldComponent($component, $props)) {

@@ -9,22 +9,25 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
     public final const COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO = 'widgetcompact-highlight-info';
     public final const COMPONENT_WIDGETCOMPACT_POSTINFO = 'widgetcompact-post-info';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_CATEGORIES],
-            [self::class, self::COMPONENT_WIDGET_APPLIESTO],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_GENERICINFO],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO],
-            [self::class, self::COMPONENT_WIDGETCOMPACT_POSTINFO],
+            self::COMPONENT_WIDGET_CATEGORIES,
+            self::COMPONENT_WIDGET_APPLIESTO,
+            self::COMPONENT_WIDGETCOMPACT_GENERICINFO,
+            self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO,
+            self::COMPONENT_WIDGETCOMPACT_POSTINFO,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_CATEGORIES:
                 $ret[] = [Wassup_Module_Processor_WidgetWrappers::class, Wassup_Module_Processor_WidgetWrappers::COMPONENT_LAYOUTWRAPPER_CATEGORIES];
                 break;
@@ -52,7 +55,7 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGET_CATEGORIES => TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup'),
@@ -62,9 +65,9 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
             self::COMPONENT_WIDGETCOMPACT_POSTINFO => TranslationAPIFacade::getInstance()->__('Post', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $fontawesomes = array(
             self::COMPONENT_WIDGET_CATEGORIES => 'fa-info-circle',
@@ -75,12 +78,12 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
             self::COMPONENT_WIDGETCOMPACT_POSTINFO => 'fa-circle',
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_GENERICINFO:
             case self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO:
             case self::COMPONENT_WIDGETCOMPACT_POSTINFO:
@@ -89,9 +92,9 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_GENERICINFO:
             case self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO:
             case self::COMPONENT_WIDGETCOMPACT_POSTINFO:
@@ -100,9 +103,9 @@ class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_Widget
 
         return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGETCOMPACT_GENERICINFO:
             case self::COMPONENT_WIDGETCOMPACT_HIGHLIGHTINFO:
             case self::COMPONENT_WIDGETCOMPACT_POSTINFO:

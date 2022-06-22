@@ -2,12 +2,12 @@
 
 abstract class PoP_Module_Processor_CarouselInnersBase extends PoP_Module_Processor_StructureInnersBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_CAROUSEL_INNER];
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array(
             'divider' => 1,
@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_CarouselInnersBase extends PoP_Module_Proces
         );
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_CarouselInnersBase extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'layout-grid', $this->getLayoutGrid($component, $props));
 

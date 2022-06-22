@@ -10,17 +10,17 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
     public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'block-tabpanel-singlerelatedstancecontent-against';
     public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'block-tabpanel-singlerelatedstancecontent-neutral';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST,
+            self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL,
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -30,16 +30,16 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
             self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupBottomSubcomponent(array $component)
+    protected function getControlgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
@@ -50,10 +50,10 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         return parent::getControlgroupBottomSubcomponent($component);
     }
 
-    public function initRequestProps(array $component, array &$props): void
+    public function initRequestProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
@@ -68,9 +68,9 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         parent::initRequestProps($component, $props);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::COMPONENT_FILTER_STANCES];
 

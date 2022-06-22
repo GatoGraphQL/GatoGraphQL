@@ -5,18 +5,18 @@ class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Proce
 {
     public final const COMPONENT_LAYOUT_MENU_MULTITARGETINDENT = 'layout-menu-multitargetindent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT],
+            self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT,
         );
     }
 
-    public function getTargets(array $component, array &$props)
+    public function getTargets(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getTargets($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 $ret[POP_TARGET_NAVIGATOR] = '<i class="fa fa-fw fa-angle-right"></i>';
                 
@@ -30,9 +30,9 @@ class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getMultitargetClass(array $component, array &$props)
+    public function getMultitargetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 // Do not show for mobile phone
                 return 'hidden-xs';
@@ -41,9 +41,9 @@ class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Proce
         return parent::getMultitargetClass($component, $props);
     }
 
-    public function getMultitargetTooltip(array $component, array &$props)
+    public function getMultitargetTooltip(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 return TranslationAPIFacade::getInstance()->__('Navigate', 'pop-coreprocessors');
         }
@@ -51,9 +51,9 @@ class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Proce
         return parent::getMultitargetTooltip($component, $props);
     }
 
-    // function getDropdownmenuClass(array $component, array &$props) {
+    // function getDropdownmenuClass(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_LAYOUT_MENU_MULTITARGETINDENT:
                 

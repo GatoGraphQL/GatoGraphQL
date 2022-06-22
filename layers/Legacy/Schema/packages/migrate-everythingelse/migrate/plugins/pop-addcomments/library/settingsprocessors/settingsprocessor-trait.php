@@ -1,5 +1,6 @@
 <?php
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 
 trait PoP_AddComments_Module_SettingsProcessor_Trait
 {
@@ -12,11 +13,13 @@ trait PoP_AddComments_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
-            POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => UserStateCheckpointSets::LOGGEDIN_STATIC,//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_STATIC),
+            POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => [$this->getDoingPostUserLoggedInAggregateCheckpoint()],
         );
     }
 }

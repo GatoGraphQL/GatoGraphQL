@@ -1,9 +1,11 @@
 <?php
 
+use PoP\ComponentModel\Component\Component;
+
 class PoP_Module_TabsPageSectionTopLevelComponentRoutingProcessor extends PoP_Module_TabsPageSectionTopLevelComponentRoutingProcessorBase
 {
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

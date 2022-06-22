@@ -6,8 +6,9 @@ namespace PoP\AccessControl\DirectiveResolvers;
 
 use PoP\AccessControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveResolver
 {
@@ -21,7 +22,10 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
         return false;
     }
 
-    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
+    /**
+     * @param FieldInterface[] $failedFields
+     */
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedFields): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             FeedbackItemProvider::class,
@@ -29,7 +33,10 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
             [
                 implode(
                     $this->__('\', \''),
-                    $failedDataFields
+                    array_map(
+                        fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
+                        $failedFields
+                    )
                 ),
             ]
         );

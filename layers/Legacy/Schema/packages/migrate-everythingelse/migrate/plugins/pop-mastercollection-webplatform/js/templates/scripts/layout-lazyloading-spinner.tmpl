@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<div class="{{../class}} {{#each ../templates.class-extensions}}{{enterTemplate . context=../../.}}{{/each}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}{{/generateId}}>
 		{{{../codes.spinner}}}
 	</div>

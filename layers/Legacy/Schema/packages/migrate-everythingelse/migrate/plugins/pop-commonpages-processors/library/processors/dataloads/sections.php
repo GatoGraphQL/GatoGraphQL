@@ -8,19 +8,19 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
     public final const COMPONENT_DATALOAD_WHOWEARE_SCROLL_LIST = 'dataload-whoweare-scroll-list';
     public final const COMPONENT_DATALOAD_WHOWEARE_SCROLL_FULLVIEW = 'dataload-whoweare-scroll-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL],
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_LIST],
-            [self::class, self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_FULLVIEW],
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL,
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_LIST,
+            self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_FULLVIEW,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_LIST => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
@@ -29,7 +29,7 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         };
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS => [GD_Custom_Module_Processor_CustomScrolls::class, GD_Custom_Module_Processor_CustomScrolls::COMPONENT_SCROLL_WHOWEARE_DETAILS],
@@ -38,12 +38,12 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
             self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_FULLVIEW => [GD_Custom_Module_Processor_CustomScrolls::class, GD_Custom_Module_Processor_CustomScrolls::COMPONENT_SCROLL_WHOWEARE_FULLVIEW],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_LIST:
@@ -54,9 +54,9 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function getDatasource(array $component, array &$props): string
+    public function getDatasource(\PoP\ComponentModel\Component\Component $component, array &$props): string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_LIST:
@@ -67,9 +67,9 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return parent::getDatasource($component, $props);
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(\PoP\ComponentModel\Component\Component $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::COMPONENT_DATALOAD_WHOWEARE_SCROLL_LIST:

@@ -9,19 +9,19 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     public final const COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'filterinputcontainer-authoreventscalendar';
     public final const COMPONENT_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'filterinputcontainer-tageventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_EVENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGEVENTS],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_EVENTSCALENDAR],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR],
+            self::COMPONENT_FILTERINPUTCONTAINER_EVENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGEVENTS,
+            self::COMPONENT_FILTERINPUTCONTAINER_EVENTSCALENDAR,
+            self::COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR,
+            self::COMPONENT_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -61,7 +61,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Events:FilterInnerComponentProcessor:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -72,7 +72,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_FILTERINPUTCONTAINER_EVENTS => POP_FILTER_EVENTS,
@@ -82,7 +82,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::COMPONENT_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR => POP_FILTER_AUTHOREVENTSCALENDAR,
     //         self::COMPONENT_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR => POP_FILTER_TAGEVENTSCALENDAR,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

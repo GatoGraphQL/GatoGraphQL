@@ -10,20 +10,20 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'simplefilterinnet-authorstances-stance';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'simplefilterinnet-stances-generalstance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYSTANCES],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_AUTHORROLE],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYSTANCES,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_AUTHORROLE,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_STANCE,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -81,7 +81,7 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Stances:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -92,7 +92,7 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES => POP_FILTER_STANCES,
@@ -103,7 +103,7 @@ class PoPVP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Process
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORSTANCES_STANCE => POP_FILTER_AUTHORSTANCES_STANCE,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_STANCES_GENERALSTANCE => POP_FILTER_STANCES_GENERALSTANCE,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

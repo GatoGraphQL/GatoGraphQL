@@ -5,16 +5,16 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 {
     public final const COMPONENT_FORMINPUT_COMMENTEDITOR = 'forminputcommenteditor'; // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_COMMENTEDITOR],
+            self::COMPONENT_FORMINPUT_COMMENTEDITOR,
         );
     }
 
-    // function getRows(array $component, array &$props) {
+    // function getRows(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 
@@ -24,9 +24,9 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
     //     return parent::getRows($component, $props);
     // }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 $this->appendProp($component, $props, 'class', 'pop-editor-form-clear');
                 break;
@@ -35,9 +35,9 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
         parent::initModelProps($component, $props);
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Comment', 'pop-coreprocessors');
         }
@@ -45,9 +45,9 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
@@ -55,11 +55,11 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
         return parent::isMandatory($component, $props);
     }
 
-    // function getJsmethods(array $component, array &$props) {
+    // function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $ret = parent::getJsmethods($component, $props);
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 
@@ -69,9 +69,9 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
     //     return $ret;
     // }
 
-    public function autofocus(array $component, array &$props)
+    public function autofocus(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
@@ -79,9 +79,9 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
         return parent::autofocus($component, $props);
     }
 
-    // function getPlaceholder(array $component, array &$props) {
+    // function getPlaceholder(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
-    //     switch ($component[1]) {
+    //     switch ($component->name) {
 
     //         case self::COMPONENT_FORMINPUT_COMMENTEDITOR:
 

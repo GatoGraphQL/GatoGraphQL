@@ -7,19 +7,19 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
     public final const COMPONENT_BUTTONWRAPPER_POSTVIEW = 'buttonwrapper-postview';
     public final const COMPONENT_BUTTONWRAPPER_POSTPREVIEW = 'buttonwrapper-postpreview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONWRAPPER_POSTVIEW],
-            [self::class, self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW],
+            self::COMPONENT_BUTTONWRAPPER_POSTVIEW,
+            self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
                 $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::COMPONENT_BUTTON_POSTVIEW];
                 break;
@@ -32,9 +32,9 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
 

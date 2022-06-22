@@ -4,10 +4,10 @@ class PoP_Module_Processor_PostDateLayouts extends PoP_Module_Processor_PostDate
 {
     public final const COMPONENT_LAYOUTPOST_DATE = 'layoutpost-date';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTPOST_DATE],
+            self::COMPONENT_LAYOUTPOST_DATE,
         );
     }
 }

@@ -12,17 +12,17 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     public final const COMPONENT_SUBMENU_TAG = 'submenu-tag';
     public final const COMPONENT_SUBMENU_SINGLE = 'submenu-single';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SUBMENU_AUTHOR],
-            [self::class, self::COMPONENT_SUBMENU_TAG],
-            [self::class, self::COMPONENT_SUBMENU_SINGLE],
+            self::COMPONENT_SUBMENU_AUTHOR,
+            self::COMPONENT_SUBMENU_TAG,
+            self::COMPONENT_SUBMENU_SINGLE,
         );
     }
-    public function getClass(array $component)
+    public function getClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
             case self::COMPONENT_SUBMENU_TAG:
             case self::COMPONENT_SUBMENU_SINGLE:
@@ -31,9 +31,9 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
         return parent::getClass($component);
     }
-    public function getXsClass(array $component)
+    public function getXsClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
             case self::COMPONENT_SUBMENU_TAG:
             case self::COMPONENT_SUBMENU_SINGLE:
@@ -42,9 +42,9 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
         return parent::getClass($component);
     }
-    public function getDropdownClass(array $component)
+    public function getDropdownClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
             case self::COMPONENT_SUBMENU_TAG:
             case self::COMPONENT_SUBMENU_SINGLE:
@@ -54,14 +54,14 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         return parent::getDropdownClass($component);
     }
 
-    public function getRoutes(array $component, array &$props)
+    public function getRoutes(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getRoutes($component, $props);
 
         // Potentially, add an extra header level if the current page is one of the subheaders
         $route = \PoP\Root\App::getState('route');
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
                 $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:author:mainsubheaders',
@@ -112,12 +112,12 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         return $ret;
     }
 
-    public function getUrl(array $component, $route, array &$props)
+    public function getUrl(\PoP\ComponentModel\Component\Component $component, $route, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SUBMENU_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);

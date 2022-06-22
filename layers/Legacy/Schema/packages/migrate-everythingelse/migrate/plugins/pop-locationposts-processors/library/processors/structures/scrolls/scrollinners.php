@@ -13,25 +13,25 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
     public final const COMPONENT_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL = 'scrollinner-locationposts-thumbnail';
     public final const COMPONENT_SCROLLINNER_LOCATIONPOSTS_LIST = 'scrollinner-locationposts-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_MAP],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_HORIZONTALMAP],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_LIST],
-            [self::class, self::COMPONENT_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_MAP,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_HORIZONTALMAP,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_ADDONS,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_DETAILS,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_LIST,
+            self::COMPONENT_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -60,7 +60,10 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -77,7 +80,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
             self::COMPONENT_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW => [GD_Custom_EM_Module_Processor_CustomFullViewLayouts::class, GD_Custom_EM_Module_Processor_CustomFullViewLayouts::COMPONENT_LAYOUT_FULLVIEW_LOCATIONPOST],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

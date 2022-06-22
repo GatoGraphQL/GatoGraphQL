@@ -1,0 +1,351 @@
+{
+    "data": {
+        "posts": [
+            {
+                "areCommentsOpen": true,
+                "categoryCount": 1,
+                "categoryNames": [
+                    "Uncategorized"
+                ],
+                "commentCount": 0,
+                "content": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
+                "customPostType": "post",
+                "date": "2022-04-17T13:06:58+00:00",
+                "dateStr": "April 17, 2022",
+                "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+                "hasComments": false,
+                "hasFeaturedImage": false,
+                "id": 1,
+                "isStatus": false,
+                "isSticky": false,
+                "metaValue": null,
+                "postFormat": "standard",
+                "rawContent": "\nWelcome to WordPress. This is your first post. Edit or delete it, then start writing!\n",
+                "slug": "hello-world",
+                "status": "publish",
+                "tagCount": 0,
+                "tagNames": [],
+                "title": "Hello world!",
+                "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
+                "urlAbsolutePath": "\/hello-world\/",
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
+                "categories": [
+                    {
+                        "id": 1,
+                        "name": "Uncategorized"
+                    }
+                ],
+                "comments": [],
+                "featuredImage": null,
+                "tags": []
+            },
+            {
+                "areCommentsOpen": true,
+                "categoryCount": 1,
+                "categoryNames": [
+                    "Advanced"
+                ],
+                "commentCount": 1,
+                "content": "<h2>Categories Block<\/h2>\n<ul class=\"wp-block-categories-list wp-block-categories\">\n<li class=\"cat-item cat-item-2\"><a href=\"https:\/\/graphql-api.lndo.site\/category\/advanced\/\">Advanced<\/a>\n<\/li>\n<li class=\"cat-item cat-item-3\"><a href=\"https:\/\/graphql-api.lndo.site\/category\/blog\/\">Blog<\/a>\n<\/li>\n<li class=\"cat-item cat-item-4\"><a href=\"https:\/\/graphql-api.lndo.site\/category\/blog\/resource\/\">Resource<\/a>\n<\/li>\n<li class=\"cat-item cat-item-1\"><a href=\"https:\/\/graphql-api.lndo.site\/category\/uncategorized\/\">Uncategorized<\/a>\n<\/li>\n<\/ul>\n<h2>Latest Posts Block<\/h2>\n<ul class=\"wp-block-latest-posts__list wp-block-latest-posts\">\n<li><a class=\"wp-block-latest-posts__post-title\" href=\"https:\/\/graphql-api.lndo.site\/hello-world\/\">Hello world!<\/a><\/li>\n<li><a class=\"wp-block-latest-posts__post-title\" href=\"https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/\">HTTP caching improves performance<\/a><\/li>\n<li><a class=\"wp-block-latest-posts__post-title\" href=\"https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/\">Public or Private API mode, for extra security<\/a><\/li>\n<li><a class=\"wp-block-latest-posts__post-title\" href=\"https:\/\/graphql-api.lndo.site\/graphql-or-rest-you-can-have-both\/\">GraphQL or REST? Why not both?<\/a><\/li>\n<li><a class=\"wp-block-latest-posts__post-title\" href=\"https:\/\/graphql-api.lndo.site\/customize-the-schema-for-each-client\/\">Customize the schema for each client<\/a><\/li>\n<\/ul>\n",
+                "customPostType": "post",
+                "date": "2020-12-12T04:08:47+00:00",
+                "dateStr": "December 12, 2020",
+                "excerpt": "Categories Block Latest Posts Block",
+                "hasComments": true,
+                "hasFeaturedImage": false,
+                "id": 28,
+                "isStatus": false,
+                "isSticky": false,
+                "metaValue": null,
+                "postFormat": "standard",
+                "rawContent": "Categories Block\n\nAdvanced\n\nBlog\n\nResource\n\nUncategorized\n\n\nLatest Posts Block\n\nHello world!\nHTTP caching improves performance\nPublic or Private API mode, for extra security\nGraphQL or REST? Why not both?\nCustomize the schema for each client\n\n",
+                "slug": "http-caching-improves-performance",
+                "status": "publish",
+                "tagCount": 0,
+                "tagNames": [],
+                "title": "HTTP caching improves performance",
+                "url": "https:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "urlAbsolutePath": "\/http-caching-improves-performance\/",
+                "author": {
+                    "id": 5,
+                    "name": "Author Marquez"
+                },
+                "categories": [
+                    {
+                        "id": 2,
+                        "name": "Advanced"
+                    }
+                ],
+                "comments": [
+                    {
+                        "id": 11
+                    }
+                ],
+                "featuredImage": null,
+                "tags": []
+            },
+            {
+                "areCommentsOpen": true,
+                "categoryCount": 3,
+                "categoryNames": [
+                    "Resource",
+                    "Blog",
+                    "Advanced"
+                ],
+                "commentCount": 2,
+                "content": "<h2>Verse Block<\/h2>\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.<\/pre>\n<h2>Table Block<\/h2>\n<figure class=\"wp-block-table is-style-stripes\">\n<table>\n<tbody>\n<tr>\n<td>Row 1 Column 1<\/td>\n<td>Row 1 Column 2<\/td>\n<\/tr>\n<tr>\n<td>Row 2 Column 1<\/td>\n<td>Row 2 Column 2<\/td>\n<\/tr>\n<tr>\n<td>Row 3 Column 1<\/td>\n<td>Row 3 Column 2<\/td>\n<\/tr>\n<\/tbody>\n<\/table>\n<\/figure>\n<h2>Separator Block<\/h2>\n<hr class=\"wp-block-separator\"\/>\n<h2 class=\"has-top-margin\">Spacer Block<\/h2>\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"><\/div>\n",
+                "customPostType": "post",
+                "date": "2020-12-12T04:06:52+00:00",
+                "dateStr": "December 12, 2020",
+                "excerpt": "Verse Block Write poetry and other literary expressions honoring all spaces and line-breaks. Table Block Row 1 Column 1 Row 1 Column 2 Row 2 Column 1 Row 2 Column 2 Row 3 Column 1 Row 3 Column 2 Separator Block Spacer Block",
+                "hasComments": true,
+                "hasFeaturedImage": true,
+                "id": 25,
+                "isStatus": false,
+                "isSticky": false,
+                "metaValue": "362",
+                "postFormat": "standard",
+                "rawContent": "Verse Block\nWrite poetry and other literary expressions honoring all spaces and line-breaks.\nTable Block\n\n\n\n\nRow 1 Column 1\nRow 1 Column 2\n\n\nRow 2 Column 1\nRow 2 Column 2\n\n\nRow 3 Column 1\nRow 3 Column 2\n\n\n\n\nSeparator Block\n\nSpacer Block\n\n",
+                "slug": "public-or-private-api-mode-for-extra-security",
+                "status": "publish",
+                "tagCount": 2,
+                "tagNames": [
+                    "security",
+                    "features"
+                ],
+                "title": "Public or Private API mode, for extra security",
+                "url": "https:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "urlAbsolutePath": "\/public-or-private-api-mode-for-extra-security\/",
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
+                "categories": [
+                    {
+                        "id": 4,
+                        "name": "Resource"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Advanced"
+                    }
+                ],
+                "comments": [
+                    {
+                        "id": 10
+                    },
+                    {
+                        "id": 9
+                    }
+                ],
+                "featuredImage": {
+                    "id": 362,
+                    "src": "http:\/\/graphql-api.lndo.site\/wp-content\/uploads\/2022\/05\/namespaced-interactive-schema.png"
+                },
+                "tags": [
+                    {
+                        "id": 11,
+                        "name": "security"
+                    },
+                    {
+                        "id": 6,
+                        "name": "features"
+                    }
+                ]
+            }
+        ],
+        "postsByAuthorIDs": [
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            }
+        ],
+        "postsByAuthorSlug": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            }
+        ],
+        "postsByCategoryIDs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            }
+        ],
+        "postsByDateQuery": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByExcludeAuthorIDs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByExcludeIDs": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByHasPassword": [],
+        "postsByIds": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            }
+        ],
+        "postsByIsSticky": [],
+        "postsByMetaQuery": [
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsByPassword": [],
+        "postsBySearch": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsByStatus": [],
+        "postsByTagIDs": [
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            }
+        ],
+        "postsByTagSlugs": [
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            }
+        ],
+        "postsSortedASC": [
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 1,
+                "title": "Hello world!"
+            }
+        ],
+        "postsSortedDESC": [
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            }
+        ]
+    }
+}

@@ -4,16 +4,16 @@ class PoP_Module_Processor_LocationViewComponentLinks extends PoP_Module_Process
 {
     public final const COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME = 'em-viewcomponent-link-locationiconname';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME],
+            self::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME:
                 return [PoP_Module_Processor_LocationNameLayouts::class, PoP_Module_Processor_LocationNameLayouts::COMPONENT_EM_LAYOUT_LOCATIONICONNAME];
         }
@@ -21,9 +21,9 @@ class PoP_Module_Processor_LocationViewComponentLinks extends PoP_Module_Process
         return parent::getLayoutSubcomponent($component);
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VIEWCOMPONENT_LINK_LOCATIONICONNAME:
                 return POP_TARGET_MODALS;
         }

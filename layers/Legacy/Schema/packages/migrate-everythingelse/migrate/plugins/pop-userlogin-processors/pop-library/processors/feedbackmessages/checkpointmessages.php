@@ -7,17 +7,17 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
     public final const COMPONENT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT = 'checkpointmessage-loggedincanedit';
     public final const COMPONENT_CHECKPOINTMESSAGE_LOGGEDINISADMIN = 'checkpointmessage-loggedinisadmin';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_NOTLOGGEDIN],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGE_LOGGEDINISADMIN],
+            self::COMPONENT_CHECKPOINTMESSAGE_NOTLOGGEDIN,
+            self::COMPONENT_CHECKPOINTMESSAGE_LOGGEDIN,
+            self::COMPONENT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT,
+            self::COMPONENT_CHECKPOINTMESSAGE_LOGGEDINISADMIN,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_CHECKPOINTMESSAGE_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageInners::class, GD_UserLogin_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
@@ -26,7 +26,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
             self::COMPONENT_CHECKPOINTMESSAGE_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageInners::class, GD_UserLogin_Module_Processor_UserCheckpointMessageInners::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 

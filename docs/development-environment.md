@@ -41,11 +41,17 @@ If the process throws an error before installing the WordPress site (it may happ
 composer install-site
 ```
 
+To re-install the WordPress DB with the initial set of data (needed for running integration tests), run:
+
+```bash
+composer reset-db
+```
+
 ## Site URL
 
-The site will be available under `http://graphql-api.lndo.site`.
+The site will be available under `https://graphql-api.lndo.site`.
 
-To access the [wp-admin](http://graphql-api.lndo.site/wp-admin/):
+To access the [wp-admin](https://graphql-api.lndo.site/wp-admin/):
 
 - User: `admin`
 - Password: `admin`

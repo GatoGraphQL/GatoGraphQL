@@ -6,7 +6,7 @@ use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 class Wassup_EM_Blog_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {

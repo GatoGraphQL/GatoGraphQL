@@ -8,20 +8,20 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
     public final const COMPONENT_LAYOUT_POPOVER_USER_AVATAR40 = 'layout-popover-user-avatar40';
     public final const COMPONENT_LAYOUT_POPOVER_USER_AVATAR26 = 'layout-popover-user-avatar26';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_POPOVER_USER],
-            [self::class, self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR],
-            [self::class, self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60],
-            [self::class, self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR40],
-            [self::class, self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR26],
+            self::COMPONENT_LAYOUT_POPOVER_USER,
+            self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR,
+            self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60,
+            self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR40,
+            self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR26,
         );
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60:
@@ -33,15 +33,15 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
         return parent::getLayoutSubcomponent($component);
     }
 
-    public function getLayoutContentSubcomponent(array $component)
+    public function getLayoutContentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
                 return [PoP_Module_Processor_PostAuthorNameLayouts::class, PoP_Module_Processor_PostAuthorNameLayouts::COMPONENT_LAYOUTPOST_AUTHORNAME];
         }
 
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
                     return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR120];
 
@@ -55,7 +55,7 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
                     return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::COMPONENT_LAYOUTPOST_AUTHORAVATAR26];
             }
         } else {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60:
                 case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR40:
@@ -67,9 +67,9 @@ class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_Pop
         return parent::getLayoutContentSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_POPOVER_USER:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR:
             case self::COMPONENT_LAYOUT_POPOVER_USER_AVATAR60:

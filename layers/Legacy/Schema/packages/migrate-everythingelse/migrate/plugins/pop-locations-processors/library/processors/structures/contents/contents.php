@@ -4,16 +4,16 @@ class PoP_Module_Processor_LocationContents extends PoP_Module_Processor_Content
 {
     public final const COMPONENT_TRIGGERTYPEAHEADSELECT_LOCATION = 'triggertypeaheadselect-location';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TRIGGERTYPEAHEADSELECT_LOCATION],
+            self::COMPONENT_TRIGGERTYPEAHEADSELECT_LOCATION,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TRIGGERTYPEAHEADSELECT_LOCATION:
                 return [PoP_Module_Processor_LocationContentInners::class, PoP_Module_Processor_LocationContentInners::COMPONENT_TRIGGERTYPEAHEADSELECTINNER_LOCATION];
         }

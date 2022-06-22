@@ -6,17 +6,17 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
     public final const COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP = 'formcomponent-locationsmap';
     public final const COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP = 'formcomponent-singlelocationlocationsmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP],
-            [self::class, self::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP],
+            self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP,
+            self::COMPONENT_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP,
         );
     }
 
-    public function getLocationsTypeaheadSubcomponent(array $component)
+    public function getLocationsTypeaheadSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return [PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::class, PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS];
 
@@ -27,9 +27,9 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
         return parent::getLocationsTypeaheadSubcomponent($component);
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
 

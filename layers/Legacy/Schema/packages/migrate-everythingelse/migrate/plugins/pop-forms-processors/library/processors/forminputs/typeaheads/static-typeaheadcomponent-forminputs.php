@@ -6,16 +6,16 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
 {
     public final const COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH = 'forminput-typeaheadcomponent-staticsearch';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH],
+            self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 return getRouteIcon(POP_BLOG_ROUTE_SEARCHCONTENT, true).TranslationAPIFacade::getInstance()->__('Search:', 'pop-coreprocessors');
         }
@@ -23,11 +23,11 @@ class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module
         return parent::getLabelText($component, $props);
     }
 
-    protected function getStaticSuggestions(array $component, array &$props)
+    protected function getStaticSuggestions(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getStaticSuggestions($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH:
                 $query_wildcard = GD_JSPLACEHOLDER_QUERY;
                 $ret[] = array(

@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
     public final const FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
@@ -14,7 +14,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
             case self::FILTERINPUT_LINKCATEGORIES:

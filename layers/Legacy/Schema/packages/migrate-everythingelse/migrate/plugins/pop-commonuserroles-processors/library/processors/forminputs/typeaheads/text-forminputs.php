@@ -5,16 +5,16 @@ class GD_URE_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Process
 {
     public final const COMPONENT_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS = 'forminput-text-typeaheadorganizations';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS],
+            self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_TEXT_TYPEAHEADORGANIZATIONS:
                 return TranslationAPIFacade::getInstance()->__('Organization', 'ure-popprocessors');
         }

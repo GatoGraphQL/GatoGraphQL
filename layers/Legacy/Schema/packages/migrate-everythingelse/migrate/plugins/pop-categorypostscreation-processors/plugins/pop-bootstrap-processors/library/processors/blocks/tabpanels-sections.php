@@ -23,33 +23,33 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
     public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS18 = 'block-mycategoryposts18-tabpanel';
     public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS19 = 'block-mycategoryposts19-tabpanel';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS19],
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS01,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS02,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS03,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS04,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS05,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS06,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS07,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS08,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS09,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS10,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS11,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS12,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS13,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS14,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS15,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS16,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS17,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS18,
+            self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS19,
         );
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
@@ -75,16 +75,16 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
             self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS18 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYCATEGORYPOSTS18],
             self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::COMPONENT_TABPANEL_MYCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS02:
@@ -111,9 +111,9 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    public function getDelegatorfilterSubcomponent(array $component)
+    public function getDelegatorfilterSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00:
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS01:
             case self::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS02:

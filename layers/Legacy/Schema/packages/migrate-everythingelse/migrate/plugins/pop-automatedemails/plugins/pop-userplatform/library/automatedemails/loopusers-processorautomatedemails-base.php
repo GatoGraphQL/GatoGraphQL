@@ -24,14 +24,14 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();
             $component = $engine->getEntryComponent();
-            $processor = $componentprocessor_manager->getProcessor($component);
+            $processor = $componentprocessor_manager->getComponentProcessor($component);
             $formatter = $dataStructureManager->getDataStructureFormatter();
             $request = $_GET;
 
-            // In order to obtain the dbobjectids from the results, located under pssId and bsId
+            // In order to obtain the objectIDs from the results, located under pssId and bsId
             $pagesection_settings_id = $this->getPagesectionSettingsid();
             $block_component = $this->getBlockComponent();
-            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($block_component);
+            $block_settings_id = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($block_component);
 
             // Set the recipient as the "current-user-id", pretending this user is logged in
             $vars = &ApplicationState::$vars;
@@ -65,8 +65,8 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 $data = $engine->getComponentData($component, $processor, $engineState->props, $formatter, $request);
 
                 // If the user has no notifications, then skip it
-                // Simply check if the dbobjectids for the user is empty, for the main block
-                if (empty($data['dbobjectids'][$pagesection_settings_id][$block_settings_id])) {
+                // Simply check if the objectIDs for the user is empty, for the main block
+                if (empty($data['objectIDs'][$pagesection_settings_id][$block_settings_id])) {
                     continue;
                 }
 

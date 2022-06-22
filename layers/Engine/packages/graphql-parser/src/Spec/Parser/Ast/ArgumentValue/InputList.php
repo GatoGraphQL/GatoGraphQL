@@ -24,7 +24,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
         parent::__construct($location);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
     }

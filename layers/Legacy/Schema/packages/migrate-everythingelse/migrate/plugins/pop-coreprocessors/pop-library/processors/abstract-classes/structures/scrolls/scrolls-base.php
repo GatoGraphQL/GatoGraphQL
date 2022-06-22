@@ -3,22 +3,25 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_StructuresBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SCROLL];
     }
 
-    protected function getDescription(array $component, array &$props)
+    protected function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
-    public function getFetchmoreButtonSubcomponent(array $component)
+    public function getFetchmoreButtonSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_FetchMore::class, PoP_Module_Processor_FetchMore::COMPONENT_FETCHMORE];
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -29,14 +32,14 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         if ($this->useFetchmore($component, $props)) {
             $fetchmore = $this->getFetchmoreButtonSubcomponent($component);
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['fetchmore'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($fetchmore);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['fetchmore'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($fetchmore);
         }
         if ($description = $this->getProp($component, $props, 'description')) {
             $ret[GD_JS_DESCRIPTION] = $description;
@@ -48,12 +51,12 @@ abstract class PoP_Module_Processor_ScrollsBase extends PoP_Module_Processor_Str
         return $ret;
     }
 
-    protected function useFetchmore(array $component, array &$props)
+    protected function useFetchmore(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return $this->getFetchmoreButtonSubcomponent($component) && $this->getProp($component, $props, 'show-fetchmore');
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'show-fetchmore', true);
         $this->setProp($component, $props, 'description', $this->getDescription($component, $props));

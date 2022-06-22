@@ -5,7 +5,7 @@ use PoP\ComponentModel\State\ApplicationState;
  * Add the filtercomponents to all filters
  */
 \PoP\Root\App::addFilter('Users:FilterInnerComponentProcessor:inputComponents', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
-function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $component)
+function gdUreAddFiltercomponentCommunitiesUser($filterinputs, \PoP\ComponentModel\Component\Component $component)
 {
     if (in_array($component, [
         [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_USERS],
@@ -28,7 +28,7 @@ function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $component)
     return $filterinputs;
 }
 \PoP\Root\App::addFilter('SimpleFilterInners:inputComponents', 'gdUreAddSimpleFiltercomponentCommunitiesUser', 10, 2);
-function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $component)
+function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, \PoP\ComponentModel\Component\Component $component)
 {
     if (in_array($component, [
         [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_USERS],
@@ -92,7 +92,7 @@ function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 
 // Add the author users filtercomponent on the Community author page
 \PoP\Root\App::addFilter('Blog:FilterInnerComponentProcessor:inputComponents', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
-function gdUreAddFiltercomponentCommunityusers($filterinputs, array $component)
+function gdUreAddFiltercomponentCommunityusers($filterinputs, \PoP\ComponentModel\Component\Component $component)
 {
     if (in_array($component, [
         [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::COMPONENT_FILTERINPUTCONTAINER_AUTHORCONTENT],
@@ -120,7 +120,7 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $component)
     return $filterinputs;
 }
 \PoP\Root\App::addFilter('SimpleFilterInners:inputComponents', 'gdUreAddSimpleFiltercomponentCommunityusers', 10, 2);
-function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $component)
+function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, \PoP\ComponentModel\Component\Component $component)
 {
     if (in_array($component, [
         [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],

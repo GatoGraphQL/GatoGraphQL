@@ -6,21 +6,24 @@ class PoP_Module_Processor_TableInners extends PoP_Module_Processor_TableInnersB
     public final const COMPONENT_TABLEINNER_MYHIGHLIGHTS = 'tableinner-myhighlights';
     public final const COMPONENT_TABLEINNER_MYPOSTS = 'tableinner-myposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABLEINNER_MYCONTENT],
-            [self::class, self::COMPONENT_TABLEINNER_MYHIGHLIGHTS],
-            [self::class, self::COMPONENT_TABLEINNER_MYPOSTS],
+            self::COMPONENT_TABLEINNER_MYCONTENT,
+            self::COMPONENT_TABLEINNER_MYHIGHLIGHTS,
+            self::COMPONENT_TABLEINNER_MYPOSTS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
         // Main layout
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABLEINNER_MYCONTENT:
                 $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::COMPONENT_LAYOUT_MULTIPLECONTENT_EDIT];
                 $ret[] = [PoP_Module_Processor_PostStatusLayouts::class, PoP_Module_Processor_PostStatusLayouts::COMPONENT_LAYOUTPOST_STATUS];

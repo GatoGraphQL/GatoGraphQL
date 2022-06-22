@@ -7,17 +7,20 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT = 'checkpointmessageinner-loggedincanedit';
     public final const COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN = 'checkpointmessageinner-loggedinisadmin';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDIN],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT],
-            [self::class, self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN],
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDIN,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT,
+            self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -28,7 +31,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
             self::COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::COMPONENT_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

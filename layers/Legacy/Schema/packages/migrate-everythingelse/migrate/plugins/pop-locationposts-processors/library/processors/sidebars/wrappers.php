@@ -4,18 +4,18 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
 {
     public final const COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES = 'layoutwrapper-locationpost-categories';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES],
+            self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
                 $ret[] = [GD_Custom_EM_Module_Processor_Layouts::class, GD_Custom_EM_Module_Processor_Layouts::COMPONENT_LAYOUT_LOCATIONPOST_CATEGORIES];
                 break;
@@ -24,11 +24,11 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getConditionFailedSubcomponents(array $component)
+    public function getConditionFailedSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionFailedSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
                 $ret[] = [GD_Custom_Module_Processor_WidgetMessages::class, GD_Custom_Module_Processor_WidgetMessages::COMPONENT_MESSAGE_NOCATEGORIES];
                 break;
@@ -37,9 +37,9 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
                 return 'has-locationpostcategories';
         }

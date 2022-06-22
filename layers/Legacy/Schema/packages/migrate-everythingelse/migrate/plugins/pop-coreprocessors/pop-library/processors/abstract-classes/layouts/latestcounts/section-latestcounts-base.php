@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_SectionLatestCountsBase extends PoP_Module_Processor_LatestCountsBase
 {
-    public function getClasses(array $component, array &$props)
+    public function getClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getClasses($component, $props);
         if ($section_classes = $this->getSectionClasses($component, $props)) {
@@ -35,22 +35,22 @@ abstract class PoP_Module_Processor_SectionLatestCountsBase extends PoP_Module_P
         return $ret;
     }
 
-    public function getSectionClasses(array $component, array &$props)
+    public function getSectionClasses(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
 
-    public function isAuthor(array $component, array &$props)
+    public function isAuthor(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function isTag(array $component, array &$props)
+    public function isTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function isSingle(array $component, array &$props)
+    public function isSingle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }

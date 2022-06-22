@@ -5,17 +5,17 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
     public final const COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT = 'layout-comments-appendtoscript';
     public final const COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT = 'layout-commentsempty-appendtoscript';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT],
-            [self::class, self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT],
+            self::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT,
+            self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT,
         );
     }
 
-    public function doAppend(array $component)
+    public function doAppend(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
                 return false;
         }
@@ -23,9 +23,9 @@ class PoP_Module_Processor_CommentsFramesLayouts extends PoP_Module_Processor_Co
         return parent::doAppend($component);
     }
 
-    public function getLayoutSubcomponent(array $component)
+    public function getLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_COMMENTS_APPENDTOSCRIPT:
             case self::COMPONENT_LAYOUT_COMMENTSEMPTY_APPENDTOSCRIPT:
                 return [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::COMPONENT_SUBCOMPONENT_POSTCOMMENTS];

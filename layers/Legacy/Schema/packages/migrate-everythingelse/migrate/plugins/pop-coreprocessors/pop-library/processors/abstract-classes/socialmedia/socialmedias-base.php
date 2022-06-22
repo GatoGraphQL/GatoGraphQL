@@ -2,17 +2,17 @@
 
 abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SOCIALMEDIA];
     }
 
-    public function useCounter(array $component)
+    public function useCounter(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -23,16 +23,16 @@ abstract class PoP_Module_Processor_SocialMediaBase extends PoPEngine_QueryDataC
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $title = $this->getProp($component, $props, 'title');
-        foreach ($this->getSubcomponents($component) as $subComponent) {
-            $this->setProp([$subComponent], $props, 'title', $title);
+        foreach ($this->getSubcomponents($component) as $subcomponent) {
+            $this->setProp([$subcomponent], $props, 'title', $title);
         }
 
         if ($this->useCounter($component)) {
-            foreach ($this->getSubcomponents($component) as $subComponent) {
-                $this->setProp([$subComponent], $props, 'load-socialmedia-counter', true);
+            foreach ($this->getSubcomponents($component) as $subcomponent) {
+                $this->setProp([$subcomponent], $props, 'load-socialmedia-counter', true);
             }
         }
 

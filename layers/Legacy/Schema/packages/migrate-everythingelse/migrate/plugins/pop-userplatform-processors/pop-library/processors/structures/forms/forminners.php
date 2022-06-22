@@ -5,19 +5,22 @@ class PoP_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInner
     public final const COMPONENT_FORMINNER_INVITENEWUSERS = 'forminner-inviteusers';
     public final const COMPONENT_FORMINNER_MYPREFERENCES = 'forminner-mypreferences';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINNER_INVITENEWUSERS],
-            [self::class, self::COMPONENT_FORMINNER_MYPREFERENCES],
+            self::COMPONENT_FORMINNER_INVITENEWUSERS,
+            self::COMPONENT_FORMINNER_MYPREFERENCES,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_INVITENEWUSERS:
                 $ret[] = [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FORMINPUTGROUP_EMAILS];
                 $ret[] = [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::COMPONENT_FORMINPUTGROUP_SENDERNAME];

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentFiltering;
 
-use PoP\ComponentModel\Configuration\Request;
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
+use PoP\ComponentModel\Configuration\Request;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
@@ -37,7 +38,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
      */
     protected ?array $not_excluded_component_sets_as_string;
     /**
-     * When targeting components in pop-engine.php (eg: when doing ->get_dbobjectids())
+     * When targeting components in pop-engine.php (eg: when doing ->getObjectIDs())
      * those components are already and always included, so no need to check
      * for their ancestors or anything
      */
@@ -120,7 +121,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         $this->neverExclude = $neverExclude;
     }
 
-    public function excludeSubcomponent(array $component, array &$props): bool
+    public function excludeSubcomponent(Component $component, array &$props): bool
     {
         if (!$this->initialized) {
             $this->init();
@@ -139,26 +140,30 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         return false;
     }
 
-    public function removeExcludedSubcomponents(array $component, array $subComponents): array
+    /**
+     * @param Component[] $subcomponents
+     * @return Component[]
+     */
+    public function removeExcludedSubcomponents(Component $component, array $subcomponents): array
     {
         if (!$this->initialized) {
             $this->init();
         }
         if ($this->selected_filter_name) {
             if ($this->neverExclude) {
-                return $subComponents;
+                return $subcomponents;
             }
 
-            return $this->selected_filter->removeExcludedSubcomponents($component, $subComponents);
+            return $this->selected_filter->removeExcludedSubcomponents($component, $subcomponents);
         }
 
-        return $subComponents;
+        return $subcomponents;
     }
 
     /**
      * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $component, array &$props): void
+    public function prepareForPropagation(Component $component, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();
@@ -184,7 +189,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         // Add the component to the path
         $this->getComponentPathManager()->prepareForPropagation($component, $props);
     }
-    public function restoreFromPropagation(array $component, array &$props): void
+    public function restoreFromPropagation(Component $component, array &$props): void
     {
         if (!$this->initialized) {
             $this->init();

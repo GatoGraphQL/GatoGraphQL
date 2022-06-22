@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use stdClass;
 
 /**
@@ -15,11 +16,9 @@ interface QueryableInputObjectTypeResolverInterface extends InputObjectTypeResol
 {
     /**
      * Have the input field filter the query
-     *
-     * @return array|null A FilterInput component, or null
      */
-    public function getInputFieldFilterInput(string $inputFieldName): ?array;
-    public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?array;
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface;
+    public function getConsolidatedInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface;
     /**
      * Apply the FilterInputs to produce the filtering query
      *

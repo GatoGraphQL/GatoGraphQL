@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
@@ -27,20 +28,20 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT],
-            [self::class, self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT],
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT,
+            self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT,
         );
     }
 
-    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(Component $component, array &$props, &$data_properties): string | int | array | null
     {
         if (App::getState('does-api-query-have-errors')) {
             return null;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return QueryRoot::ID;
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
@@ -49,9 +50,9 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(Component $component): ?RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             case self::COMPONENT_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:

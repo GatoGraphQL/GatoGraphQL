@@ -19,7 +19,7 @@ abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProc
     }
 
     /**
-     * @return array<string, array<string, array<array>>>
+     * @return array<string,array<string,array<array<string,mixed>>>>
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
@@ -27,7 +27,7 @@ abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProc
     }
 
     /**
-     * @return array<string, array<array>>
+     * @return array<string,array<array<string,mixed>>>
      */
     public function getStatePropertiesToSelectComponentByNature(): array
     {
@@ -35,7 +35,7 @@ abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProc
     }
 
     /**
-     * @return array<array<string, string[]>>
+     * @return array<array<string,mixed>>
      */
     public function getStatePropertiesToSelectComponent(): array
     {

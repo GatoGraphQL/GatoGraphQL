@@ -6,44 +6,47 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\ModuleInfo;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
+use PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
+use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
+use PoP\ComponentModel\Constants\DataProperties;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedbackInterface;
 use PoP\ComponentModel\Feedback\SchemaFeedbackStore;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
-use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
-use PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface;
-use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
-use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
-use PoP\ComponentModel\Modules\ComponentHelpersInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -51,18 +54,33 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
+use SplObjectStorage;
 
 class Engine implements EngineInterface
 {
     use BasicServiceTrait;
 
+    public const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
+
+    public const PRIMARY_DBNAME = 'primary';
+
     public final const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
     public final const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
     public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
     public final const CACHETYPE_PROPS = 'props';
+
+    protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
+    protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
+
+    /**
+     * @var array<string,string[]>|null
+     */
+    protected ?array $dbNameFieldNames = null;
 
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
@@ -73,7 +91,6 @@ class Engine implements EngineInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
-    private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
@@ -157,14 +174,6 @@ class Engine implements EngineInterface
     {
         return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
-    final public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
-    {
-        $this->checkpointProcessorManager = $checkpointProcessorManager;
-    }
-    final protected function getCheckpointProcessorManager(): CheckpointProcessorManagerInterface
-    {
-        return $this->checkpointProcessorManager ??= $this->instanceManager->getInstance(CheckpointProcessorManagerInterface::class);
-    }
     final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
     {
         $this->dataloadHelperService = $dataloadHelperService;
@@ -218,7 +227,7 @@ class Engine implements EngineInterface
         $engineState->backgroundload_urls[$url] = $targets;
     }
 
-    public function getEntryComponent(): array
+    public function getEntryComponent(): Component
     {
         $engineState = App::getEngineState();
 
@@ -469,12 +478,12 @@ class Engine implements EngineInterface
         return $data;
     }
 
-    public function getModelPropsComponentTree(array $component): array
+    public function getModelPropsComponentTree(Component $component): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
         // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
@@ -498,9 +507,9 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
-    public function addRequestPropsComponentTree(array $component, array $props): array
+    public function addRequestPropsComponentTree(Component $component, array $props): array
     {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
         $processor->initRequestPropsComponentTree($component, $props, [], []);
@@ -552,7 +561,7 @@ class Engine implements EngineInterface
         // That is because calculating the data may need the values from the settings. Eg: for the resourceLoader,
         // calculating $loadingframe_resources needs to know all the Handlebars templates from the sitemapping as to generate file "resources.js",
         // which is done through an action, called through getData()
-        // Data = dbobjectids (data-ids) + feedback + database
+        // Data = objectIDs (data-ids) + feedback + database
         if (
             in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems)
             || in_array(DataOutputItems::DATABASES, $dataoutputitems)
@@ -644,13 +653,13 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getComponentDatasetSettings(array $component, $model_props, array &$props): array
+    public function getComponentDatasetSettings(Component $component, $model_props, array &$props): array
     {
         $ret = [];
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -695,8 +704,9 @@ class Engine implements EngineInterface
     {
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
+        $entryComponent = $this->getEntryComponent();
         $meta = array(
-            Response::ENTRY_COMPONENT => $this->getEntryComponent()[1],
+            Response::ENTRY_COMPONENT => $entryComponent->name,
             Response::UNIQUE_ID => $moduleInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
@@ -769,31 +779,68 @@ class Engine implements EngineInterface
         );
     }
 
+    /**
+     * @param array<string,array{relationalTypeResolver: RelationalTypeResolverInterface, idFieldSet: array<string|int,EngineIterationFieldSet>}> $relationalTypeOutputKeyIDFieldSets
+     * @param array<string|int> $ids
+     * @param ComponentFieldNodeInterface[] $directComponentFieldNodes
+     * @param SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> $conditionalComponentFieldNodesSplObjectStorage
+     */
     private function combineIDsDatafields(
-        array &$relationalTypeOutputDBKeyIDsDataFields,
+        array &$relationalTypeOutputKeyIDFieldSets,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $relationalTypeOutputDBKey,
+        string $relationalTypeOutputKey,
         array $ids,
-        array $data_fields,
-        array $conditional_data_fields = []
+        array $directComponentFieldNodes,
+        SplObjectStorage $conditionalComponentFieldNodesSplObjectStorage
     ): void {
-        $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey] ??= [
-            'relationalTypeResolver' => $relationalTypeResolver,
-            'idsDataFields' => [],
+        $relationalTypeOutputKeyIDFieldSets[$relationalTypeOutputKey] ??= [
+            self::DATA_PROP_RELATIONAL_TYPE_RESOLVER => $relationalTypeResolver,
+            self::DATA_PROP_ID_FIELD_SET => [],
         ];
         foreach ($ids as $id) {
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
-                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ?? $this->getDBObjectMandatoryFields(),
-                $data_fields
-            )));
-            // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'] ??= [];
-            foreach ($conditional_data_fields as $conditionDataField => $conditionalDataFields) {
-                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] = array_merge(
-                    $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['conditional'][$conditionDataField] ?? [],
-                    $conditionalDataFields
+            /** @var EngineIterationFieldSet */
+            $engineIterationFieldSet = $relationalTypeOutputKeyIDFieldSets[$relationalTypeOutputKey][self::DATA_PROP_ID_FIELD_SET][$id]
+                ?? new EngineIterationFieldSet(
+                    array_map(
+                        fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
+                        $this->getDBObjectMandatoryFields()
+                    )
+                );
+
+            // Add the 'direct' fields
+            $engineIterationFieldSet->addFields(
+                array_map(
+                    fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
+                    $directComponentFieldNodes
+                )
+            );
+
+            /**
+             * Add the 'conditional' fields, as an array with this format:
+             *
+             *   Key: condition field
+             *   Value: the list of conditional fields to load
+             *          if the condition one is successful (eg: if it's `true`)
+             */
+            foreach ($conditionalComponentFieldNodesSplObjectStorage as $conditionComponentFieldNode) {
+                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                $conditionalFields = $conditionalComponentFieldNodesSplObjectStorage[$conditionComponentFieldNode];
+                /** @var ComponentFieldNodeInterface[] $conditionalFields */
+                $conditionField = $conditionComponentFieldNode->getField();
+                $conditionalComponentFieldNodes = [];
+                foreach ($conditionalFields as $conditionalField) {
+                    /** @var ComponentFieldNodeInterface $conditionalField */
+                    $conditionalComponentFieldNodes[] = $conditionalField;
+                }
+                $engineIterationFieldSet->conditionalFields[$conditionField] = array_merge(
+                    $engineIterationFieldSet->conditionalFields[$conditionField] ??= [],
+                    array_map(
+                        fn (ComponentFieldNodeInterface $componentFieldNode) => $componentFieldNode->getField(),
+                        $conditionalComponentFieldNodes
+                    )
                 );
             }
+            $relationalTypeOutputKeyIDFieldSets[$relationalTypeOutputKey][self::DATA_PROP_ID_FIELD_SET][$id] = $engineIterationFieldSet;
         }
     }
 
@@ -801,51 +848,54 @@ class Engine implements EngineInterface
      * If any field must be retrieved always (eg: the object ID
      * must always be displayed in the client) then add it here.
      *
-     * @return string[]
+     * @return ComponentFieldNodeInterface[]
      */
     protected function getDBObjectMandatoryFields(): array
     {
         return [];
     }
 
+    /**
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataItems
+     */
     private function doAddDatasetToDatabase(
         array &$database,
-        string $dbKey,
-        array $dataitems
+        string $typeOutputKey,
+        array $dataItems
     ): void {
         /**
          * Save in the database under the corresponding database-key.
          * This way, different dataloaders, like 'list-users' and 'author',
          * can both save their results under database key 'users'
          */
-        if (!isset($database[$dbKey])) {
-            $database[$dbKey] = $dataitems;
+        if (!isset($database[$typeOutputKey])) {
+            $database[$typeOutputKey] = $dataItems;
             return;
         }
 
-        /**
-         * array_merge_recursive doesn't work as expected:
-         * It merges 2 hashmap arrays into an array,
-         * so then we must do a foreach instead
-         */
-        foreach ($dataitems as $id => $dbobject_values) {
-            $database[$dbKey][(string)$id] = array_merge(
-                $database[$dbKey][(string)$id] ?? [],
-                $dbobject_values
-            );
+        foreach ($dataItems as $id => $dbobject_values) {
+            /** @var SplObjectStorage<FieldInterface,mixed> */
+            $dbIDFieldValues = $database[$typeOutputKey][$id] ?? new SplObjectStorage();
+            $dbIDFieldValues->addAll($dbobject_values);
+            $database[$typeOutputKey][$id] = $dbIDFieldValues;
         }
     }
 
+    /**
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $database
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $dataItems
+     */
     private function addDatasetToDatabase(
         array &$database,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $dbKey,
-        array $dataitems,
-        array $objectIDItems,
-        bool $addEntryIfError = false
+        string $typeOutputKey,
+        array $dataItems,
+        array $idObjects,
+        bool $addEntryIfError = false,
     ): void {
         // Do not create the database key entry when there are no items, or it produces an error when deep merging the database object in the webplatform with that from the response
-        if (!$dataitems) {
+        if (!$dataItems) {
             return;
         }
 
@@ -853,24 +903,24 @@ class Engine implements EngineInterface
         if ($isUnionTypeResolver) {
             /** @var UnionTypeResolverInterface $relationalTypeResolver */
             // Get the actual type for each entity, and add the entry there
-            $targetObjectTypeResolverNameTypeResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameDBKeys = [];
+            $targetObjectTypeResolverNameTypeResolvers = $targetObjectTypeResolverNameDataItems = $targetObjectTypeResolverNameTypeOutputKeys = [];
             $noTargetObjectTypeResolverDataItems = [];
-            foreach ($dataitems as $objectID => $dataItem) {
+            foreach ($dataItems as $objectID => $dataItem) {
                 // Obtain the type of the object
                 $exists = false;
-                if ($object = $objectIDItems[$objectID] ?? null) {
+                if ($object = $idObjects[$objectID] ?? null) {
                     $targetObjectTypeResolver = $relationalTypeResolver->getTargetObjectTypeResolver($object);
                     if ($targetObjectTypeResolver !== null) {
                         $exists = true;
                         // The ID will contain the type. Remove it
                         list(
-                            $objectDBKey,
+                            $objectTypeOutputKey,
                             $objectID
-                        ) = UnionTypeHelpers::extractDBObjectTypeAndID($objectID);
+                        ) = UnionTypeHelpers::extractObjectTypeAndID($objectID);
 
                         $targetObjectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
                         $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName] = $targetObjectTypeResolver;
-                        $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName] = $objectDBKey;
+                        $targetObjectTypeResolverNameTypeOutputKeys[$targetObjectTypeResolverName] = $objectTypeOutputKey;
                         $targetObjectTypeResolverNameDataItems[$targetObjectTypeResolverName][$objectID] = $dataItem;
                     }
                 }
@@ -881,19 +931,19 @@ class Engine implements EngineInterface
             }
             foreach ($targetObjectTypeResolverNameDataItems as $targetObjectTypeResolverName => $convertedDataItems) {
                 $targetObjectTypeResolver = $targetObjectTypeResolverNameTypeResolvers[$targetObjectTypeResolverName];
-                $targetObjectTypeDBKey = $targetObjectTypeResolverNameDBKeys[$targetObjectTypeResolverName];
-                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeDBKey, $convertedDataItems, $objectIDItems, $addEntryIfError);
+                $targetObjectTypeOutputKey = $targetObjectTypeResolverNameTypeOutputKeys[$targetObjectTypeResolverName];
+                $this->addDatasetToDatabase($database, $targetObjectTypeResolver, $targetObjectTypeOutputKey, $convertedDataItems, $idObjects, $addEntryIfError);
             }
             // Add the errors under the UnionTypeResolver key
             if ($noTargetObjectTypeResolverDataItems) {
-                $this->doAddDatasetToDatabase($database, $dbKey, $noTargetObjectTypeResolverDataItems);
+                $this->doAddDatasetToDatabase($database, $typeOutputKey, $noTargetObjectTypeResolverDataItems);
             }
             return;
         }
-        $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
+        $this->doAddDatasetToDatabase($database, $typeOutputKey, $dataItems);
     }
 
-    protected function getInterreferencedComponentFullPaths(array $component, array &$props): array
+    protected function getInterreferencedComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
         $this->addInterreferencedComponentFullPaths($paths, [], $component, $props);
@@ -903,10 +953,10 @@ class Engine implements EngineInterface
     private function addInterreferencedComponentFullPaths(
         array &$paths,
         array $component_path,
-        array $component,
+        Component $component,
         array &$props
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
@@ -931,32 +981,39 @@ class Engine implements EngineInterface
             )
         );
 
-        // Propagate to its inner modules
-        $subComponents = $processor->getAllSubcomponents($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
+        // Propagate to its inner components
+        $subcomponents = $processor->getAllSubcomponents($component);
+        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
+        // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
-            $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+        foreach ($subcomponents as $subcomponent) {
+            $this->addInterreferencedComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function getDataloadingComponentFullPaths(array $component, array &$props): array
+    /**
+     * @return array<Component[]>
+     */
+    protected function getDataloadingComponentFullPaths(Component $component, array &$props): array
     {
         $paths = [];
         $this->addDataloadingComponentFullPaths($paths, [], $component, $props);
         return $paths;
     }
 
+    /**
+     * @param array<Component[]> $paths
+     * @param Component[] $component_path
+     */
     private function addDataloadingComponentFullPaths(
         array &$paths,
         array $component_path,
-        array $component,
+        Component $component,
         array &$props
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
@@ -979,14 +1036,14 @@ class Engine implements EngineInterface
             )
         );
 
-        // Propagate to its inner modules
-        $subComponents = $processor->getAllSubcomponents($component);
-        $subComponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subComponents);
+        // Propagate to its inner components
+        $subcomponents = $processor->getAllSubcomponents($component);
+        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
+        // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        foreach ($subComponents as $subComponent) {
-            $this->addDataloadingComponentFullPaths($paths, $subcomponent_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
+        foreach ($subcomponents as $subcomponent) {
+            $this->addDataloadingComponentFullPaths($paths, $subcomponent_path, $subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -994,7 +1051,7 @@ class Engine implements EngineInterface
     protected function assignValueForComponent(
         array &$array,
         array $component_path,
-        array $component,
+        Component $component,
         string $key,
         mixed $value,
     ): void {
@@ -1002,9 +1059,9 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
         $array_pointer = &$array;
-        foreach ($component_path as $subComponent) {
+        foreach ($component_path as $subcomponent) {
             // Notice that when generating the array for the response, we don't use $component anymore, but $componentOutputName
-            $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
+            $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subcomponent);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$subcomponentOutputName][$subcomponentsOutputProperty])) {
@@ -1019,11 +1076,17 @@ class Engine implements EngineInterface
         $array_pointer[$componentOutputName][$key] = $value;
     }
 
+    /**
+     * @param CheckpointInterface[] $checkpoints
+     */
     public function validateCheckpoints(array $checkpoints): ?FeedbackItemResolution
     {
-        // Iterate through the list of all checkpoints, process all of them, if any produces an error, already return it
+        /**
+         * Iterate through the list of all checkpoints, process all of them,
+         * if any produces an error, already return it
+         */
         foreach ($checkpoints as $checkpoint) {
-            $feedbackItemResolution = $this->getCheckpointProcessorManager()->getProcessor($checkpoint)->validateCheckpoint($checkpoint);
+            $feedbackItemResolution = $checkpoint->validateCheckpoint();
             if ($feedbackItemResolution !== null) {
                 return $feedbackItemResolution;
             }
@@ -1032,19 +1095,19 @@ class Engine implements EngineInterface
         return null;
     }
 
-    protected function getComponentPathKey(array $component_path, array $component): string
+    protected function getComponentPathKey(array $component_path, Component $component): string
     {
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
         return $componentFullName . '-' . implode('.', $component_path);
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getComponentData(array $root_component, array $root_model_props, array $root_props): array
+    public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $root_processor = $this->getComponentProcessorManager()->getProcessor($root_component);
+        $root_processor = $this->getComponentProcessorManager()->getComponentProcessor($root_component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -1064,7 +1127,7 @@ class Engine implements EngineInterface
         $engineState->backgroundload_urls = [];
 
         // Load under global key (shared by all pagesections / blocks)
-        $engineState->relationalTypeOutputDBKeyIDsDataFields = [];
+        $engineState->relationalTypeOutputKeyIDFieldSets = [];
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
@@ -1112,19 +1175,19 @@ class Engine implements EngineInterface
             );
         }
 
-        // Get the list of all modules which calculate their data feedback using another component's results
+        // Get the list of all components which calculate their data feedback using another component's results
         $interreferenced_componentfullpaths = $this->getInterreferencedComponentFullPaths($root_component, $root_props);
 
-        // Get the list of all modules which load data, as a list of the component path starting from the top element (the entry component)
-        $module_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
+        // Get the list of all components which load data, as a list of the component path starting from the top element (the entry component)
+        $component_fullpaths = $this->getDataloadingComponentFullPaths($root_component, $root_props);
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
-        // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
+        // The components below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getComponentFilterManager()->setNeverExclude(true);
-        foreach ($module_fullpaths as $component_path) {
+        foreach ($component_fullpaths as $component_path) {
             // The component is the last element in the path.
             // Notice that the component is removed from the path, providing the path to all its properties
             $component = array_pop($component_path);
@@ -1135,8 +1198,8 @@ class Engine implements EngineInterface
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
-            foreach ($component_path as $subComponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
+            foreach ($component_path as $subcomponent) {
+                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
                 $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
@@ -1164,8 +1227,8 @@ class Engine implements EngineInterface
             // The $props is directly moving the array to the corresponding path
             $props = &$root_props;
             $model_props = &$root_model_props;
-            foreach ($component_path as $subComponent) {
-                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
+            foreach ($component_path as $subcomponent) {
+                $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
                 $props = &$props[$subcomponentFullName][Props::SUBCOMPONENTS];
                 $model_props = &$model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
             }
@@ -1185,14 +1248,14 @@ class Engine implements EngineInterface
                 $component_props = &$props;
             }
 
-            $processor = $this->getComponentProcessorManager()->getProcessor($component);
+            $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
 
             // The component path key is used for storing temporary results for later retrieval
             $component_path_key = $this->getComponentPathKey($component_path, $component);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
             $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
-            $mutation_checkpoint_validation = $executed = $dbObjectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputDBKey = null;
+            $mutation_checkpoint_validation = $executed = $objectIDOrIDs = $typeDBObjectIDOrIDs = $relationalTypeOutputKey = null;
             if ($load_data) {
                 // ------------------------------------------
                 // Action Executers
@@ -1216,7 +1279,7 @@ class Engine implements EngineInterface
                     }
                 }
 
-                // Allow modules to change their data_properties based on the actionexecution of previous modules.
+                // Allow components to change their data_properties based on the actionexecution of previous components.
                 $processor->prepareDataPropertiesAfterMutationExecution($component, $component_props, $data_properties);
 
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
@@ -1224,33 +1287,33 @@ class Engine implements EngineInterface
                 if ($load_data) {
                     $relationalTypeResolver = $processor->getRelationalTypeResolver($component);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-                    $relationalTypeOutputDBKey = $relationalTypeResolver->getTypeOutputDBKey();
+                    $relationalTypeOutputKey = $relationalTypeResolver->getTypeOutputKey();
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
                     // Execute and get the ids and the meta
-                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($component, $component_props, $data_properties);
+                    $objectIDOrIDs = $processor->getObjectIDOrIDs($component, $component_props, $data_properties);
                     // To simplify the logic, deal with arrays only
-                    if ($dbObjectIDOrIDs === null) {
-                        $dbObjectIDOrIDs = [];
+                    if ($objectIDOrIDs === null) {
+                        $objectIDOrIDs = [];
                     }
                     // If the type is union, we must add the type to each object
                     $typeDBObjectIDOrIDs = $isUnionTypeResolver ?
-                        $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($dbObjectIDOrIDs)
-                        : $dbObjectIDOrIDs;
+                        $relationalTypeResolver->getQualifiedDBObjectIDOrIDs($objectIDOrIDs)
+                        : $objectIDOrIDs;
 
-                    $objectIDs = is_array($dbObjectIDOrIDs) ? $dbObjectIDOrIDs : array($dbObjectIDOrIDs);
+                    $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : array($objectIDOrIDs);
                     $typeDBObjectIDs = is_array($typeDBObjectIDOrIDs) ? $typeDBObjectIDOrIDs : array($typeDBObjectIDOrIDs);
 
                     // Store the ids under $data under key dataload_name => id
-                    $data_fields = $data_properties['data-fields'] ?? [];
-                    $conditional_data_fields = $data_properties['conditional-data-fields'] ?? [];
-                    $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $relationalTypeResolver, $relationalTypeOutputDBKey, $typeDBObjectIDs, $data_fields, $conditional_data_fields);
+                    $directComponentFieldNodes = $data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [];
+                    $conditionalComponentFieldNodesSplObjectStorage = $data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
+                    $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $relationalTypeResolver, $relationalTypeOutputKey, $typeDBObjectIDs, $directComponentFieldNodes, $conditionalComponentFieldNodesSplObjectStorage);
 
                     // Add the IDs to the possibly-already produced IDs for this typeResolver
-                    $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputDBKey, $component_path_key);
-                    $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]['ids'] = array_merge(
-                        $engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]['ids'],
+                    $this->initializeTypeResolverEntry($engineState->dbdata, $relationalTypeOutputKey, $component_path_key);
+                    $engineState->dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
+                        $engineState->dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::IDS],
                         $typeDBObjectIDs
                     );
 
@@ -1259,7 +1322,7 @@ class Engine implements EngineInterface
                     // Before checking below if the checkpoint failed or if the block content must not be loaded.
                     // Eg: Locations Map for the Create Individual Profile: it allows to pre-select locations,
                     // these ones must be fetched even if the block has a static typeResolver
-                    // If it has extend, add those ids under its relationalTypeOutputDBKey
+                    // If it has extend, add those ids under its relationalTypeOutputKey
                     $dataload_extend_settings = $processor->getModelSupplementaryDBObjectDataComponentTree($component, $model_props);
                     if ($datasource == DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
@@ -1267,21 +1330,21 @@ class Engine implements EngineInterface
                             $processor->getMutableonrequestSupplementaryDBObjectDataComponentTree($component, $props)
                         );
                     }
-                    foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {
-                         // Get the info for the subcomponent typeResolver
-                        $extend_data_fields = $extend_data_properties['data-fields'] ? $extend_data_properties['data-fields'] : [];
-                        $extend_conditional_data_fields = $extend_data_properties['conditional-data-fields'] ? $extend_data_properties['conditional-data-fields'] : [];
-                        $extend_ids = $extend_data_properties['ids'];
-                        $extend_typeResolver = $extend_data_properties['resolver'];
+                    foreach ($dataload_extend_settings as $extendTypeOutputKey => $extend_data_properties) {
+                        // Get the info for the subcomponent typeResolver
+                        $extend_data_fields = $extend_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [];
+                        $extend_conditional_data_fields = $extend_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
+                        $extend_ids = $extend_data_properties[DataProperties::IDS];
+                        $extend_typeResolver = $extend_data_properties[DataProperties::RESOLVER];
 
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $extend_typeResolver, $extendTypeOutputDBKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
+                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $extend_typeResolver, $extendTypeOutputKey, $extend_ids, $extend_data_fields, $extend_conditional_data_fields);
 
                         // This is needed to add the typeResolver-extend IDs, for if nobody else creates an entry for this typeResolver
-                        $this->initializeTypeResolverEntry($engineState->dbdata, $extendTypeOutputDBKey, $component_path_key);
+                        $this->initializeTypeResolverEntry($engineState->dbdata, $extendTypeOutputKey, $component_path_key);
                     }
 
                     // Keep iterating for its subcomponents
-                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $data_properties, $relationalTypeOutputDBKey, $component_path_key);
+                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $data_properties, $relationalTypeOutputKey, $component_path_key);
                 }
             }
 
@@ -1307,8 +1370,8 @@ class Engine implements EngineInterface
                 $engineState->componentdata = &$mutableonrequest_componentdata;
             }
 
-            // Integrate the dbobjectids into $datasetcomponentdata
-            // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading component, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous component when iterating down
+            // Integrate the objectIDs into $datasetcomponentdata
+            // ALWAYS print the $objectIDs, even if its an empty array. This to indicate that this is a dataloading component, so the application in the webplatform knows if to load a new batch of objectIDs, or reuse the ones from the previous component when iterating down
             if ($datasetcomponentdata !== null) {
                 $this->assignValueForComponent($datasetcomponentdata, $component_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
@@ -1316,7 +1379,7 @@ class Engine implements EngineInterface
             // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
                 if (!is_null($datasetcomponentmeta)) {
-                    if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+                    if ($dataset_meta = $processor->getDatasetmeta($component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDOrIDs)) {
                         $this->assignValueForComponent($datasetcomponentmeta, $component_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
@@ -1325,15 +1388,15 @@ class Engine implements EngineInterface
             // Integrate the feedback into $componentdata
             $this->processAndAddComponentData($component_path, $component, $component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
-            // Allow other modules to produce their own feedback using this component's data results
+            // Allow other components to produce their own feedback using this component's data results
             if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getComponentPathHelpers()->stringifyComponentPath(array_merge($component_path, array($component)))] ?? null) {
                 foreach ($referencer_componentfullpaths as $referencer_componentPath) {
                     $referencer_component = array_pop($referencer_componentPath);
 
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
-                    foreach ($referencer_componentPath as $subComponent) {
-                        $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subComponent);
+                    foreach ($referencer_componentPath as $subcomponent) {
+                        $subcomponentFullName = $this->getComponentHelpers()->getComponentFullName($subcomponent);
                         $referencer_props = &$referencer_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                         $referencer_model_props = &$referencer_model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                     }
@@ -1370,7 +1433,7 @@ class Engine implements EngineInterface
                 $dataaccess_checkpoint_validation,
                 $mutation_checkpoint_validation,
                 $executed,
-                $dbObjectIDOrIDs,
+                $objectIDOrIDs,
                 array(&$engineState->helperCalculations),
                 $this
             );
@@ -1473,51 +1536,97 @@ class Engine implements EngineInterface
         return $ret;
     }
 
-    public function moveEntriesUnderDBName(
+    /**
+     * Allow to inject what data fields must be placed under what dbNames
+     *
+     * @return array<string,string[]> Array of key: dbName, values: field names
+     */
+    public function getDBNameFieldNames(
+        RelationalTypeResolverInterface $relationalTypeResolver
+    ): array {
+        if ($this->dbNameFieldNames === null) {
+            $this->dbNameFieldNames = App::applyFilters(
+                self::HOOK_DBNAME_TO_FIELDNAMES,
+                [],
+                $relationalTypeResolver
+            );
+        }
+        return $this->dbNameFieldNames;
+    }
+
+    /**
+     * Place all entries under dbName "primary"
+     *
+     * @param SplObjectStorage<FieldInterface,mixed>|array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>|array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     */
+    protected function getEntriesUnderPrimaryDBName(
+        array|SplObjectStorage $entries,
+    ): array {
+        return [
+            self::PRIMARY_DBNAME => $entries,
+        ];
+    }
+
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
+     * @return array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>
+     */
+    public function moveEntriesWithIDUnderDBName(
         array $entries,
-        bool $entryHasId,
         RelationalTypeResolverInterface $relationalTypeResolver
     ): array {
         if (!$entries) {
             return [];
         }
 
-        // By default place everything under "primary"
-        $dbname_entries = [
-            'primary' => $entries,
-        ];
-
-        // Allow to inject what data fields must be placed under what dbNames
-        // Array of key: dbName, values: data-fields
-        $dbname_datafields = App::applyFilters(
-            'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
-            [],
-            $relationalTypeResolver
-        );
-        foreach ($dbname_datafields as $dbname => $data_fields) {
-            // Move these data fields under "meta" DB name
-            if ($entryHasId) {
-                foreach ($dbname_entries['primary'] as $id => $dbObject) {
-                    $entry_data_fields_to_move = array_intersect(
-                        // If field "id" for this type has been disabled (eg: by ACL),
-                        // then $dbObject may be `null`
-                        array_keys($dbObject ?? []),
-                        $data_fields
-                    );
-                    foreach ($entry_data_fields_to_move as $data_field) {
-                        $dbname_entries[$dbname][$id][$data_field] = $dbname_entries['primary'][$id][$data_field];
-                        unset($dbname_entries['primary'][$id][$data_field]);
-                    }
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
+        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
+        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
+        foreach ($dbname_entries[self::PRIMARY_DBNAME] as $id => $fieldValues) {
+            $fields = iterator_to_array($fieldValues);
+            foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
+                $fields_to_move = array_filter(
+                    $fields,
+                    fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
+                );
+                $dbname_entries[$dbName][$id] ??= new SplObjectStorage();
+                foreach ($fields_to_move as $field) {
+                    $dbname_entries[$dbName][$id][$field] = $dbname_entries[self::PRIMARY_DBNAME][$id][$field];
+                    $dbname_entries[self::PRIMARY_DBNAME][$id]->detach($field);
                 }
-                continue;
             }
-            $entry_data_fields_to_move = array_intersect(
-                array_keys($dbname_entries['primary']),
-                $data_fields
+        }
+        return $dbname_entries;
+    }
+
+    /**
+     * @param SplObjectStorage<FieldInterface,mixed> $entries
+     * @return array<string,SplObjectStorage<FieldInterface,mixed>>
+     */
+    public function moveEntriesWithoutIDUnderDBName(
+        SplObjectStorage $entries,
+        RelationalTypeResolverInterface $relationalTypeResolver
+    ): array {
+        if ($entries->count() === 0) {
+            return [];
+        }
+
+        // By default place everything under "primary"
+        /** @var array<string,SplObjectStorage<FieldInterface,mixed>> */
+        $dbname_entries = $this->getEntriesUnderPrimaryDBName($entries);
+        $dbNameToFieldNames = $this->getDBNameFieldNames($relationalTypeResolver);
+        $fields = iterator_to_array($entries);
+        foreach ($dbNameToFieldNames as $dbName => $fieldNames) {
+            // Move these data fields under "meta" DB name
+            $fields_to_move = array_filter(
+                $fields,
+                fn (FieldInterface $field) => in_array($field->getName(), $fieldNames),
             );
-            foreach ($entry_data_fields_to_move as $data_field) {
-                $dbname_entries[$dbname][$data_field] = $dbname_entries['primary'][$data_field];
-                unset($dbname_entries['primary'][$data_field]);
+            foreach ($fields_to_move as $field) {
+                $dbname_entries[$dbName] ??= new SplObjectStorage();
+                $dbname_entries[$dbName][$field] = $dbname_entries[self::PRIMARY_DBNAME][$field];
+                $dbname_entries[self::PRIMARY_DBNAME]->detach($field);
             }
         }
         return $dbname_entries;
@@ -1528,7 +1637,15 @@ class Engine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Save all database elements here, under typeResolver
-        $databases = $unionDBKeyIDs = $combinedUnionDBKeyIDs = $previousDBItems = [];
+        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
+        $databases = [];
+        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
+        $unionTypeOutputKeyIDs = [];
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
+        $combinedUnionTypeOutputKeyIDs = [];
+
+        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
+        $previouslyResolvedIDFieldValues = [];
         $objectFeedbackEntries = $schemaFeedbackEntries = [
             FeedbackCategories::ERROR => [],
             FeedbackCategories::WARNING => [],
@@ -1541,7 +1658,7 @@ class Engine implements EngineInterface
 
         // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
         // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
-        $already_loaded_ids_data_fields = [];
+        $already_loaded_id_fields = [];
 
         /**
          * The variables initially come from the AppState, but then they
@@ -1553,91 +1670,110 @@ class Engine implements EngineInterface
         $messages = [];
 
         // Iterate while there are dataloaders with data to be processed
-        while (!empty($engineState->relationalTypeOutputDBKeyIDsDataFields)) {
+        while (!empty($engineState->relationalTypeOutputKeyIDFieldSets)) {
             // Move the pointer to the first element, and get it
-            reset($engineState->relationalTypeOutputDBKeyIDsDataFields);
-            $relationalTypeOutputDBKey = key($engineState->relationalTypeOutputDBKeyIDsDataFields);
+            reset($engineState->relationalTypeOutputKeyIDFieldSets);
+            $relationalTypeOutputKey = key($engineState->relationalTypeOutputKeyIDFieldSets);
             /** @var RelationalTypeResolverInterface */
-            $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
-            $ids_data_fields = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
+            $relationalTypeResolver = $engineState->relationalTypeOutputKeyIDFieldSets[$relationalTypeOutputKey][self::DATA_PROP_RELATIONAL_TYPE_RESOLVER];
+            /** @var array<string|int,EngineIterationFieldSet> */
+            $idFieldSet = $engineState->relationalTypeOutputKeyIDFieldSets[$relationalTypeOutputKey][self::DATA_PROP_ID_FIELD_SET];
 
             // Remove the typeResolver element from the array, so it doesn't process it anymore
             // Do it immediately, so that subcomponents can load new IDs for this current typeResolver (eg: posts => related)
-            unset($engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]);
+            unset($engineState->relationalTypeOutputKeyIDFieldSets[$relationalTypeOutputKey]);
 
             // If no ids to execute, then skip
-            if (empty($ids_data_fields)) {
+            if (empty($idFieldSet)) {
                 continue;
             }
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
-            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ??= [];
-            foreach ($ids_data_fields as $id => $data_fields) {
-                $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
-                    $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
-                    $data_fields['direct'],
-                    array_keys($data_fields['conditional'])
+            $already_loaded_id_fields[$relationalTypeOutputKey] ??= [];
+            foreach ($idFieldSet as $id => $fieldSet) {
+                $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
+                    $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
+                    $fieldSet->fields,
+                    // Conditional items must also be in direct, so no need to check to cache them
+                    // iterator_to_array($fieldSet->conditionalFields)
                 );
             }
 
-            $database_key = $relationalTypeResolver->getTypeOutputDBKey();
+            $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();
             $engineIterationFeedbackStore = new EngineIterationFeedbackStore();
 
             // Execute the typeResolver for all combined ids
-            $iterationDBItems = [];
+            /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
+            $iterationResolvedIDFieldValues = [];
             $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
-            $objectIDItems = $relationalTypeResolver->fillObjects(
-                $ids_data_fields,
-                $combinedUnionDBKeyIDs,
-                $previousDBItems,
-                $iterationDBItems,
+            $idObjects = $relationalTypeResolver->fillObjects(
+                $idFieldSet,
+                $combinedUnionTypeOutputKeyIDs,
+                $previouslyResolvedIDFieldValues,
+                $iterationResolvedIDFieldValues,
                 $variables,
                 $messages,
                 $engineIterationFeedbackStore,
             );
 
-            // Save in the database under the corresponding database-key
-            // (this way, different dataloaders, like 'list-users' and 'author',
-            // can both save their results under database key 'users'
-            // Plugin PoP User Login: Also save those results which depend on the logged-in user.
-            // These are treated separately because:
-            // 1: They contain personal information, so it must be erased from the front-end
-            // as soon as the user logs out
-            // 2: These results make the page state-full, so this page is not cacheable
-            // By splitting the results into state-full and state-less, we can split all functionality
-            // into cacheable and non-cacheable,
-            // thus caching most of the website even for logged-in users
-            if ($iterationDBItems) {
-                // Conditional data fields: Store the loaded IDs/fields in an object,
-                // to avoid fetching them again in later iterations on the same typeResolver
-                // To find out if they were loaded, validate against the DBObject, to see if it has those properties
-                foreach ($ids_data_fields as $id => $data_fields) {
-                    foreach ($data_fields['conditional'] as $conditionDataField => $conditionalDataFields) {
-                        $iterationFields = array_keys($iterationDBItems[(string)$id]);
-                        $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
-                            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
-                            Methods::arrayIntersectAssocRecursive(
-                                $conditionalDataFields,
-                                $iterationFields
-                            ) ?? []
-                        );
+            /**
+             * Save in the database under the corresponding database-key
+             * (this way, different dataloaders, like 'list-users' and 'author',
+             * can both save their results under database key 'users'.
+             *
+             * Plugin PoP User Login: Also save those results which depend
+             * on the logged-in user. These are treated separately because:
+             *
+             *   1: They contain personal information, so it must be erased
+             *      from the front-end as soon as the user logs out
+             *   2: These results make the page state-full,
+             *      so this page is not cacheable
+             *
+             * By splitting the results into state-full and state-less,
+             * we can split all functionality into cacheable and non-cacheable,
+             * thus caching most of the website even for logged-in users
+             */
+            if ($iterationResolvedIDFieldValues) {
+                /**
+                 * Conditional data fields: Store the loaded IDs/fields in an object,
+                 * to avoid fetching them again in later iterations on the same typeResolver
+                 * To find out if they were loaded, validate against the DBObject,
+                 * to see if it has those properties
+                 */
+                foreach ($idFieldSet as $id => $fieldSet) {
+                    // If it failed to load the item, it will be null
+                    $iterationResolvedFieldValues = $iterationResolvedIDFieldValues[$id];
+                    if ($iterationResolvedFieldValues === null) {
+                        continue;
                     }
+                    /** @var FieldInterface[] $conditionalFields */
+                    $resolvedDirectFields = iterator_to_array($iterationResolvedFieldValues);
+                    $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
+                        $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],
+                        $resolvedDirectFields
+                    );
                 }
 
                 // If the type is union, then add the type corresponding to each object on its ID
-                $dbItems = $this->moveEntriesUnderDBName($iterationDBItems, true, $relationalTypeResolver);
-                foreach ($dbItems as $dbname => $entries) {
-                    $databases[$dbname] ??= [];
-                    $this->addDatasetToDatabase($databases[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems);
+                $resolvedIDFieldValues = $this->moveEntriesWithIDUnderDBName($iterationResolvedIDFieldValues, $relationalTypeResolver);
+                foreach ($resolvedIDFieldValues as $dbName => $entries) {
+                    $databases[$dbName] ??= [];
+                    $this->addDatasetToDatabase($databases[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects);
 
-                    // Populate the $previousDBItems, pointing to the newly fetched dbItems (but without the dbname!)
-                    // Save the reference to the values, instead of the values, to save memory
-                    // Passing $previousDBItems instead of $databases makes it read-only: Directives can only read the values... if they want to modify them,
-                    // the modification is done on $previousDBItems, so it carries no risks
+                    /**
+                     * Populate the $previouslyResolvedIDFieldValues, pointing to the newly
+                     * fetched resolvedIDFieldValues (but without the dbName!)
+                     *
+                     * Passing $previouslyResolvedIDFieldValues instead of $databases
+                     * makes it read-only: Directives can only read the values...
+                     * if they want to modify them, the modification is done on
+                     * $previouslyResolvedIDFieldValues, so it carries no risks
+                     */
                     foreach ($entries as $id => $fieldValues) {
-                        foreach ($fieldValues as $field => &$entryFieldValues) {
-                            $previousDBItems[$database_key][$id][$field] = &$entryFieldValues;
-                        }
+                        /** @var SplObjectStorage<FieldInterface,mixed> */
+                        $previouslyResolvedFieldValues = $previouslyResolvedIDFieldValues[$typeOutputKey][$id] ?? new SplObjectStorage();
+                        $previouslyResolvedFieldValues->addAll($fieldValues);
+                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id] = $previouslyResolvedFieldValues;
                     }
                 }
             }
@@ -1648,8 +1784,8 @@ class Engine implements EngineInterface
              */
             $this->transferFeedback(
                 $relationalTypeResolver,
-                $database_key,
-                $objectIDItems,
+                $typeOutputKey,
+                $idObjects,
                 $engineIterationFeedbackStore,
                 $objectFeedbackEntries,
                 $schemaFeedbackEntries,
@@ -1657,34 +1793,34 @@ class Engine implements EngineInterface
 
             // Important: query like this: obtain keys first instead of iterating directly on array,
             // because it will keep adding elements
-            $typeResolver_dbdata = $engineState->dbdata[$relationalTypeOutputDBKey];
+            $typeResolver_dbdata = $engineState->dbdata[$relationalTypeOutputKey];
             foreach (array_keys($typeResolver_dbdata) as $component_path_key) {
-                $typeResolver_data = &$engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key];
+                $typeResolver_data = &$engineState->dbdata[$relationalTypeOutputKey][$component_path_key];
 
-                unset($engineState->dbdata[$relationalTypeOutputDBKey][$component_path_key]);
+                unset($engineState->dbdata[$relationalTypeOutputKey][$component_path_key]);
 
                 // Check if it has subcomponents, and then bring this data
-                if ($subcomponents_data_properties = $typeResolver_data['subcomponents']) {
-                    $typeResolver_ids = $typeResolver_data['ids'];
+                if ($subcomponents_data_properties = $typeResolver_data[DataProperties::SUBCOMPONENTS]) {
+                    $typeResolverIDs = $typeResolver_data[DataProperties::IDS];
                     // The unionTypeResolver doesn't know how to resolver the subcomponents, since the fields
                     // (eg: "authors") are attached to the target typeResolver, not to the unionTypeResolver
                     // Then, iterate through all the target typeResolvers, and have each of them process their data
                     if ($isUnionTypeResolver) {
-                        // If the type data resolver is union, the dbKey where the value is stored
-                        // is contained in the ID itself, with format dbKey/ID.
-                        // We must extract this information: assign the dbKey to $database_key,
-                        // and remove the dbKey from the ID.
+                        // If the type data resolver is union, the typeOutputKey where the value is stored
+                        // is contained in the ID itself, with format typeOutputKey/ID.
+                        // We must extract this information: assign the typeOutputKey to $typeOutputKey,
+                        // and remove the typeOutputKey from the ID.
                         // If the Dataloader failed loading the object, the original ID as int
                         // may have been stored, so cast it always to string
                         $targetObjectIDItems = [];
                         $objectTypeResolver_ids = [];
-                        foreach ($typeResolver_ids as $composedID) {
+                        foreach ($typeResolverIDs as $composedID) {
                             list(
-                                $database_key,
+                                $typeOutputKey,
                                 $id
-                            ) = UnionTypeHelpers::extractDBObjectTypeAndID((string)$composedID);
+                            ) = UnionTypeHelpers::extractObjectTypeAndID((string)$composedID);
                             // It's null if the Dataloader couldn't load the item with the given ID
-                            $targetObjectIDItems[$id] = $objectIDItems[$composedID] ?? null;
+                            $targetObjectIDItems[$id] = $idObjects[$composedID] ?? null;
                             $objectTypeResolver_ids[] = $id;
                         }
 
@@ -1695,7 +1831,7 @@ class Engine implements EngineInterface
                         $iterationObjectTypeResolverNameDataItems = [];
                         foreach ($objectTypeResolver_ids as $id) {
                             // If there's no resolver, it's an error: the ID can't be processed by anyone
-                            if ($targetObjectTypeResolver = $targetObjectTypeResolvers[(string)$id] ?? null) {
+                            if ($targetObjectTypeResolver = $targetObjectTypeResolvers[$id] ?? null) {
                                 $objectTypeResolverName = $targetObjectTypeResolver->getNamespacedTypeName();
                                 $iterationObjectTypeResolverNameDataItems[$objectTypeResolverName] ??= [
                                     'targetObjectTypeResolver' => $targetObjectTypeResolver,
@@ -1707,11 +1843,11 @@ class Engine implements EngineInterface
                         foreach ($iterationObjectTypeResolverNameDataItems as $iterationObjectTypeResolverName => $iterationObjectTypeResolverDataItems) {
                             $targetObjectTypeResolver = $iterationObjectTypeResolverDataItems['targetObjectTypeResolver'];
                             $targetObjectIDs = $iterationObjectTypeResolverDataItems['objectIDs'];
-                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $targetObjectIDItems);
+                            $this->processSubcomponentData($relationalTypeResolver, $targetObjectTypeResolver, $targetObjectIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $targetObjectIDItems);
                         }
                     } else {
                         /** @var ObjectTypeResolverInterface $relationalTypeResolver */
-                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolver_ids, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_ids_data_fields, $unionDBKeyIDs, $combinedUnionDBKeyIDs, $objectIDItems);
+                        $this->processSubcomponentData($relationalTypeResolver, $relationalTypeResolver, $typeResolverIDs, $component_path_key, $databases, $subcomponents_data_properties, $already_loaded_id_fields, $unionTypeOutputKeyIDs, $combinedUnionTypeOutputKeyIDs, $idObjects);
                     }
                 }
             }
@@ -1726,8 +1862,8 @@ class Engine implements EngineInterface
 
         // Print data into the output
         $ret = [];
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'dbData', $databases);
-        $this->maybeCombineAndAddDatabaseEntries($ret, 'unionDBKeyIDs', $unionDBKeyIDs);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'databases', $databases);
+        $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);
 
         // Add the feedback (errors, warnings, deprecations, notices, etc) into the output
         $this->combineAndAddFeedbackEntries($ret, $objectFeedbackEntries, $schemaFeedbackEntries);
@@ -1859,61 +1995,67 @@ class Engine implements EngineInterface
         }
     }
 
+    /**
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
+     */
     protected function addObjectEntriesToDestinationArray(
         array &$entries,
         array &$destination,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $database_key,
-        array $objectIDItems,
+        string $typeOutputKey,
+        array $idObjects,
     ): void {
         if ($entries === []) {
             return;
         }
 
-        $dbNameEntries = $this->moveEntriesUnderDBName($entries, true, $relationalTypeResolver);
-        foreach ($dbNameEntries as $dbname => $entries) {
-            $destination[$dbname] ??= [];
-            $this->addDatasetToDatabase($destination[$dbname], $relationalTypeResolver, $database_key, $entries, $objectIDItems, true);
+        $dbNameEntries = $this->moveEntriesWithIDUnderDBName($entries, $relationalTypeResolver);
+        foreach ($dbNameEntries as $dbName => $entries) {
+            $destination[$dbName] ??= [];
+            $this->addDatasetToDatabase($destination[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
         }
     }
 
+    /**
+     * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
+     */
     protected function addSchemaEntriesToDestinationArray(
-        array &$entries,
+        SplObjectStorage &$entries,
         array &$destination,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $database_key,
+        string $typeOutputKey,
     ): void {
-        if ($entries === []) {
+        if ($entries->count() === 0) {
             return;
         }
 
-        $dbNameEntries = $this->moveEntriesUnderDBName($entries, false, $relationalTypeResolver);
-        foreach ($dbNameEntries as $dbname => $entries) {
-            $destination[$dbname][$database_key] = array_merge(
-                $destination[$dbname][$database_key] ?? [],
-                $entries
-            );
+        $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $relationalTypeResolver);
+        foreach ($dbNameEntries as $dbName => $entries) {
+            /** @var SplObjectStorage<FieldInterface,mixed> */
+            $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
+            $destinationSplObjectStorage->addAll($entries);
+            $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
         }
     }
 
     private function transferFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $database_key,
-        array $objectIDItems,
+        string $typeOutputKey,
+        array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectFeedbackEntries,
         array &$schemaFeedbackEntries,
     ): void {
         $this->transferObjectFeedback(
             $relationalTypeResolver,
-            $database_key,
-            $objectIDItems,
+            $typeOutputKey,
+            $idObjects,
             $engineIterationFeedbackStore->objectFeedbackStore,
             $objectFeedbackEntries,
         );
         $this->transferSchemaFeedback(
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
             $engineIterationFeedbackStore->schemaFeedbackStore,
             $schemaFeedbackEntries,
         );
@@ -1925,7 +2067,7 @@ class Engine implements EngineInterface
          */
         $this->transferSchemaFeedback(
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
             App::getFeedbackStore()->schemaFeedbackStore,
             $schemaFeedbackEntries,
         );
@@ -1933,8 +2075,8 @@ class Engine implements EngineInterface
 
     private function transferObjectFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $database_key,
-        array $objectIDItems,
+        string $typeOutputKey,
+        array $idObjects,
         ObjectFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
@@ -1949,8 +2091,8 @@ class Engine implements EngineInterface
             $iterationObjectErrors,
             $objectFeedbackEntries[FeedbackCategories::ERROR],
             $relationalTypeResolver,
-            $database_key,
-            $objectIDItems
+            $typeOutputKey,
+            $idObjects
         );
 
         $iterationObjectWarnings = [];
@@ -1964,8 +2106,8 @@ class Engine implements EngineInterface
             $iterationObjectWarnings,
             $objectFeedbackEntries[FeedbackCategories::WARNING],
             $relationalTypeResolver,
-            $database_key,
-            $objectIDItems
+            $typeOutputKey,
+            $idObjects
         );
 
         $iterationObjectDeprecations = [];
@@ -1979,8 +2121,8 @@ class Engine implements EngineInterface
             $iterationObjectDeprecations,
             $objectFeedbackEntries[FeedbackCategories::DEPRECATION],
             $relationalTypeResolver,
-            $database_key,
-            $objectIDItems
+            $typeOutputKey,
+            $idObjects
         );
 
         $iterationObjectNotices = [];
@@ -1994,8 +2136,8 @@ class Engine implements EngineInterface
             $iterationObjectNotices,
             $objectFeedbackEntries[FeedbackCategories::NOTICE],
             $relationalTypeResolver,
-            $database_key,
-            $objectIDItems
+            $typeOutputKey,
+            $idObjects
         );
 
         $iterationObjectSuggestions = [];
@@ -2009,8 +2151,8 @@ class Engine implements EngineInterface
             $iterationObjectSuggestions,
             $objectFeedbackEntries[FeedbackCategories::SUGGESTION],
             $relationalTypeResolver,
-            $database_key,
-            $objectIDItems
+            $typeOutputKey,
+            $idObjects
         );
 
         $iterationObjectLogs = [];
@@ -2024,8 +2166,8 @@ class Engine implements EngineInterface
             $iterationObjectLogs,
             $objectFeedbackEntries[FeedbackCategories::LOG],
             $relationalTypeResolver,
-            $database_key,
-            $objectIDItems
+            $typeOutputKey,
+            $idObjects
         );
     }
 
@@ -2043,16 +2185,20 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $objectFeedbackEntries[(string)$objectFeedback->getObjectID()][] = $entry;
+        $objectFeedbackEntriesStorage = $objectFeedbackEntries[$objectFeedback->getObjectID()] ?? new SplObjectStorage();
+        $fieldObjectFeedbackEntries = $objectFeedbackEntries[$objectFeedback->getObjectID()][$objectFeedback->getField()] ?? [];
+        $fieldObjectFeedbackEntries[] = $entry;
+        $objectFeedbackEntriesStorage[$objectFeedback->getField()] = $fieldObjectFeedbackEntries;
+        $objectFeedbackEntries[$objectFeedback->getObjectID()] = $objectFeedbackEntriesStorage;
     }
 
     private function transferSchemaFeedback(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $database_key,
+        string $typeOutputKey,
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {
-        $iterationSchemaErrors = [];
+        $iterationSchemaErrors = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackError,
@@ -2063,10 +2209,10 @@ class Engine implements EngineInterface
             $iterationSchemaErrors,
             $schemaFeedbackEntries[FeedbackCategories::ERROR],
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
         );
 
-        $iterationSchemaWarnings = [];
+        $iterationSchemaWarnings = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackWarning,
@@ -2077,10 +2223,10 @@ class Engine implements EngineInterface
             $iterationSchemaWarnings,
             $schemaFeedbackEntries[FeedbackCategories::WARNING],
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
         );
 
-        $iterationSchemaDeprecations = [];
+        $iterationSchemaDeprecations = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackDeprecation,
@@ -2091,10 +2237,10 @@ class Engine implements EngineInterface
             $iterationSchemaDeprecations,
             $schemaFeedbackEntries[FeedbackCategories::DEPRECATION],
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
         );
 
-        $iterationSchemaNotices = [];
+        $iterationSchemaNotices = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackNotice,
@@ -2105,10 +2251,10 @@ class Engine implements EngineInterface
             $iterationSchemaNotices,
             $schemaFeedbackEntries[FeedbackCategories::NOTICE],
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
         );
 
-        $iterationSchemaSuggestions = [];
+        $iterationSchemaSuggestions = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getSuggestions() as $schemaFeedbackSuggestion) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackSuggestion,
@@ -2119,10 +2265,10 @@ class Engine implements EngineInterface
             $iterationSchemaSuggestions,
             $schemaFeedbackEntries[FeedbackCategories::SUGGESTION],
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
         );
 
-        $iterationSchemaLogs = [];
+        $iterationSchemaLogs = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getLogs() as $schemaFeedbackLog) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackLog,
@@ -2133,13 +2279,13 @@ class Engine implements EngineInterface
             $iterationSchemaLogs,
             $schemaFeedbackEntries[FeedbackCategories::LOG],
             $relationalTypeResolver,
-            $database_key,
+            $typeOutputKey,
         );
     }
 
     private function transferSchemaFeedbackEntries(
         SchemaFeedbackInterface $schemaFeedback,
-        array &$schemaFeedbackEntries
+        SplObjectStorage &$schemaFeedbackEntries
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
         if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
@@ -2151,7 +2297,9 @@ class Engine implements EngineInterface
                 );
             }
         }
-        $schemaFeedbackEntries[] = $entry;
+        $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$schemaFeedback->getField()] ?? [];
+        $fieldSchemaFeedbackEntries[] = $entry;
+        $schemaFeedbackEntries[$schemaFeedback->getField()] = $fieldSchemaFeedbackEntries;
     }
 
     /**
@@ -2166,8 +2314,8 @@ class Engine implements EngineInterface
         return [
             Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
             Tokens::PATH => $directive !== null
-                ? [$objectOrSchemaFeedback->getField(), $directive]
-                : [$objectOrSchemaFeedback->getField()],
+                ? [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString(), $directive]
+                : [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString()],
             Tokens::LOCATIONS => [$objectOrSchemaFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
@@ -2223,99 +2371,114 @@ class Engine implements EngineInterface
         return $output;
     }
 
+    /**
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
+     */
     protected function processSubcomponentData(
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeResolverInterface $targetObjectTypeResolver,
-        array $typeResolver_ids,
+        array $typeResolverIDs,
         string $component_path_key,
         array &$databases,
-        array &$subcomponents_data_properties,
-        array &$already_loaded_ids_data_fields,
-        array &$unionDBKeyIDs,
-        array &$combinedUnionDBKeyIDs,
-        array $objectIDItems,
+        SplObjectStorage $subcomponents_data_properties,
+        array &$already_loaded_id_fields,
+        array &$unionTypeOutputKeyIDs,
+        array &$combinedUnionTypeOutputKeyIDs,
+        array $idObjects,
     ): void {
         $engineState = App::getEngineState();
-        $database_key = $targetObjectTypeResolver->getTypeOutputDBKey();
-        foreach ($subcomponents_data_properties as $subcomponent_data_field => $subcomponent_data_properties) {
+        $targetTypeOutputKey = $targetObjectTypeResolver->getTypeOutputKey();
+        foreach ($subcomponents_data_properties as $componentFieldNode) {
+            /** @var ComponentFieldNodeInterface $componentFieldNode */
+            $subcomponent_data_properties = $subcomponents_data_properties[$componentFieldNode];
+            /** @var array<string,mixed> $subcomponent_data_properties */
             // Retrieve the subcomponent typeResolver from the current typeResolver
             // Watch out! When dealing with the UnionDataLoader, we attempt to get the subcomponentType for that field twice: first from the UnionTypeResolver and, if it doesn't handle it, only then from the TargetTypeResolver
-            // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionDBKeyIDs"
-            // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
+            // This is for the very specific use of the "self" field: When referencing "self" from a UnionTypeResolver, we don't know what type it's going to be the result, hence we need to add the type to entry "unionTypeOutputKeyIDs"
+            // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionTypeOutputKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
-            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
+            $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($relationalTypeResolver, $componentFieldNode->getField());
             if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
-                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
+                $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField($targetObjectTypeResolver, $componentFieldNode->getField());
             }
             if ($subcomponentTypeResolver === null) {
                 continue;
             }
-            $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
+            $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
             // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-            $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
-            $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
-            if ($subcomponent_data_fields || $subcomponent_conditional_data_fields) {
+            $subcomponent_direct_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
+            /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
+            $subcomponent_conditional_fields_storage = $subcomponent_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
+            if ($subcomponent_direct_fields || $subcomponent_conditional_fields_storage->count() > 0) {
                 $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
-                $subcomponent_already_loaded_ids_data_fields = [];
-                if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey] ?? null)) {
-                    $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey];
+                $subcomponent_already_loaded_id_fields = [];
+                if ($already_loaded_id_fields && ($already_loaded_id_fields[$subcomponentTypeOutputKey] ?? null)) {
+                    $subcomponent_already_loaded_id_fields = $already_loaded_id_fields[$subcomponentTypeOutputKey];
                 }
                 $subcomponentIDs = [];
-                foreach ($typeResolver_ids as $id) {
-                    $object = $objectIDItems[$id];
-                    $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
+                foreach ($typeResolverIDs as $id) {
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
-                    foreach ($databases as $dbname => $database) {
-                        if ($database_field_ids = $database[$database_key][(string)$id][$subcomponent_data_field_outputkey] ?? null) {
-                            $subcomponentIDs[$dbname][$database_key][(string)$id] = array_merge(
-                                $subcomponentIDs[$dbname][$database_key][(string)$id] ?? [],
-                                is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
-                            );
+                    foreach ($databases as $dbName => $database) {
+                        $database_field_ids = $database[$targetTypeOutputKey][$id][$componentFieldNode->getField()] ?? null;
+                        if (!$database_field_ids) {
+                            continue;
                         }
+                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] = array_merge(
+                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ?? [],
+                            is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
+                        );
                     }
                 }
-                // We don't want to store the dbKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
-                // So, instead, we store the dbKey/ID values in another object "$unionDBKeyIDs"
-                // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
+                /**
+                 * We don't want to store the typeOutputKey/ID inside the relationalID,
+                 * because that can lead to problems when dealing with the relations
+                 * in the application (better keep it only to the ID).
+                 * So, instead, we store the typeOutputKey/ID values in another object
+                 * "$unionTypeOutputKeyIDs".
+                 * Then, whenever it's a union type data resolver, we obtain the values
+                 * for the relationship under this other object.
+                 */
                 $typedSubcomponentIDs = [];
-                // if ($subcomponentIsUnionTypeResolver) {
-                    // Get the types for all of the IDs all at once. Flatten 3 levels: dbname => dbkey => id => ...
-                    $allSubcomponentIDs = array_values(array_unique(
-                        GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
-                    ));
-                    $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
-                    // Create a map, from ID to TypedID
+                /**
+                 * Get the types for all of the IDs all at once.
+                 * Flatten 3 levels: dbName => typeOutputKey => id => ...
+                 */
+                $allSubcomponentIDs = array_values(array_unique(
+                    GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
+                ));
+                $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
+                // Create a map, from ID to TypedID
                 for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
                     $typedSubcomponentIDs[$allSubcomponentIDs[$i]] = $qualifiedSubcomponentIDs[$i];
                 }
-                // }
 
+                /** @var array<string|int> */
                 $field_ids = [];
-                foreach ($subcomponentIDs as $dbname => $dbkey_id_database_field_ids) {
-                    foreach ($dbkey_id_database_field_ids as $database_key => $id_database_field_ids) {
+                foreach ($subcomponentIDs as $dbName => $typeOutputKey_id_database_field_ids) {
+                    foreach ($typeOutputKey_id_database_field_ids as $typeOutputKey => $id_database_field_ids) {
                         foreach ($id_database_field_ids as $id => $database_field_ids) {
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
-                            // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
-                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.dbkeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
+                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
-                                function ($field_id) use ($typedSubcomponentIDs) {
-                                    return $typedSubcomponentIDs[$field_id];
-                                },
+                                fn (string|int $field_id) => $typedSubcomponentIDs[$field_id],
                                 $database_field_ids
                             );
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
-                            $object = $objectIDItems[$id];
-                            $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
-                            // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
-                            $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            $combinedUnionDBKeyIDs[$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
+                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($componentFieldNode->getField()) && is_array($databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()]);
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id] ??= new SplObjectStorage();
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id] ??= new SplObjectStorage();
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(
@@ -2328,48 +2491,59 @@ class Engine implements EngineInterface
                 if ($field_ids) {
                     foreach ($field_ids as $field_id) {
                         // Do not add again the IDs/Fields already loaded
-                        if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
-                            $id_subcomponent_data_fields = array_values(
-                                array_diff(
-                                    $subcomponent_data_fields,
-                                    $subcomponent_already_loaded_data_fields
+                        if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
+                            $id_subcomponent_direct_fields = array_values(
+                                array_filter(
+                                    $subcomponent_direct_fields,
+                                    fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
                                 )
                             );
-                            $id_subcomponent_conditional_data_fields = [];
-                            foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
-                                $id_subcomponent_conditional_data_fields[$conditionField] = Methods::arrayDiffRecursive(
-                                    $conditionalFields,
-                                    $subcomponent_already_loaded_data_fields
-                                );
+                            $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
+                            foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
+                                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                                $conditionComponentFieldNodes = $subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
+                                /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
+                                $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] ??= [];
+                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
+                                foreach ($conditionComponentFieldNodes as $componentFieldNode) {
+                                    /** @var ComponentFieldNodeInterface $componentFieldNode */
+                                    if (in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)) {
+                                        continue;
+                                    }
+                                    $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;
+                                }
+                                $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
                             }
                         } else {
-                            $id_subcomponent_data_fields = $subcomponent_data_fields;
-                            $id_subcomponent_conditional_data_fields = $subcomponent_conditional_data_fields;
+                            $id_subcomponent_direct_fields = $subcomponent_direct_fields;
+                            $id_subcomponent_conditional_fields_storage = $subcomponent_conditional_fields_storage;
                         }
-                        // Important: do ALWAYS execute the lines below, even if $id_subcomponent_data_fields is empty
+                        // Important: do ALWAYS execute the lines below, even if $id_subcomponent_direct_fields is empty
                         // That is because we can load additional data for an object that was already loaded in a previous iteration
                         // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
                         // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
-                        // if ($id_subcomponent_data_fields) {
-                        $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
-                        // }
+                        $this->combineIDsDatafields($engineState->relationalTypeOutputKeyIDFieldSets, $subcomponentTypeResolver, $subcomponentTypeOutputKey, array($field_id), $id_subcomponent_direct_fields, $id_subcomponent_conditional_fields_storage);
                     }
-                    $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $component_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_merge(
-                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] ?? [],
+                    $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] ?? [],
                         $field_ids
                     );
-                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $component_path_key);
+                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputKey, $component_path_key);
                 }
 
-                if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key] ?? null) {
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['ids']);
-                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['data-fields'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$component_path_key]['data-fields']);
+                if ($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key] ?? null) {
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS]);
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
                 }
             }
         }
     }
 
+    /**
+     * @param array<string,array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>>> $ret
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $entries
+     */
     protected function maybeCombineAndAddDatabaseEntries(array &$ret, string $name, array $entries): void
     {
         // Do not add the "database", "userstatedatabase" entries unless there are values in them
@@ -2389,17 +2563,16 @@ class Engine implements EngineInterface
         if ($dboutputmode == DatabasesOutputModes::COMBINED) {
             // Filter to make sure there are entries
             if ($entries = array_filter($entries)) {
+                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
                 $combined_databases = [];
                 foreach ($entries as $database_name => $database) {
                     // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
-                    foreach ($database as $database_key => $dbItems) {
-                        foreach ($dbItems as $dbobject_id => $dbobject_values) {
-                            $combined_databases[$database_key][(string)$dbobject_id] = array_merge(
-                                $combined_databases[$database_key][(string)$dbobject_id] ?? [],
-                                // If field "id" for this type has been disabled (eg: by ACL),
-                                // then $dbObject may be `null`
-                                $dbobject_values ?? []
-                            );
+                    foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
+                        foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
+                            /** @var SplObjectStorage<FieldInterface,mixed> */
+                            $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage();
+                            $combinedDatabasesSplObjectStorage->addAll($fieldValues);
+                            $combined_databases[$typeOutputKey][$dbobject_id] = $combinedDatabasesSplObjectStorage;
                         }
                     }
                 }
@@ -2439,7 +2612,7 @@ class Engine implements EngineInterface
 
     protected function processAndAddComponentData(
         array $component_path,
-        array $component,
+        Component $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
@@ -2447,7 +2620,7 @@ class Engine implements EngineInterface
         $executed,
         $objectIDs
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $processor = $this->getComponentProcessorManager()->getComponentProcessor($component);
         $engineState = App::getEngineState();
 
         // Integrate the feedback into $componentdata
@@ -2461,8 +2634,8 @@ class Engine implements EngineInterface
                 $subcomponentsOutputProperty = $moduleInfo->getSubcomponentsOutputProperty();
 
                 // Advance the position of the array into the current component
-                foreach ($component_path as $subComponent) {
-                    $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subComponent);
+                foreach ($component_path as $subcomponent) {
+                    $subcomponentOutputName = $this->getComponentHelpers()->getComponentOutputName($subcomponent);
                     $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] = $componentdata[$subcomponentOutputName][$subcomponentsOutputProperty] ?? [];
                     $componentdata = &$componentdata[$subcomponentOutputName][$subcomponentsOutputProperty];
                 }
@@ -2477,14 +2650,14 @@ class Engine implements EngineInterface
 
     private function initializeTypeResolverEntry(
         array &$dbdata,
-        string $relationalTypeOutputDBKey,
+        string $relationalTypeOutputKey,
         string $component_path_key
     ): void {
-        if (!isset($dbdata[$relationalTypeOutputDBKey][$component_path_key])) {
-            $dbdata[$relationalTypeOutputDBKey][$component_path_key] = array(
-                'ids' => [],
-                'data-fields' => [],
-                'subcomponents' => [],
+        if (!isset($dbdata[$relationalTypeOutputKey][$component_path_key])) {
+            $dbdata[$relationalTypeOutputKey][$component_path_key] = array(
+                DataProperties::IDS => [],
+                DataProperties::DIRECT_COMPONENT_FIELD_NODES => [],
+                DataProperties::SUBCOMPONENTS => new SplObjectStorage(),
             );
         }
     }
@@ -2492,17 +2665,59 @@ class Engine implements EngineInterface
     private function integrateSubcomponentDataProperties(
         array &$dbdata,
         array $data_properties,
-        string $relationalTypeOutputDBKey,
+        string $relationalTypeOutputKey,
         string $component_path_key
     ): void {
         // Process the subcomponents
         // If it has subcomponents, bring its data to, after executing getData on the primary typeResolver, execute getData also on the subcomponent typeResolver
-        if ($subcomponents_data_properties = $data_properties['subcomponents'] ?? null) {
-            // Merge them into the data
-            $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] = array_merge_recursive(
-                $dbdata[$relationalTypeOutputDBKey][$component_path_key]['subcomponents'] ?? [],
-                $subcomponents_data_properties
-            );
+        if ($subcomponents_data_properties = $data_properties[DataProperties::SUBCOMPONENTS] ?? null) {
+            /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> $subcomponents_data_properties */
+            $dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::SUBCOMPONENTS] ??= new SplObjectStorage();
+            /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> */
+            $dbDataSubcomponentsSplObjectStorage = $dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::SUBCOMPONENTS];
+            /**
+             * Merge them into the data.
+             * Watch out! Can't do `array_merge_recursive` because:
+             *
+             *   - SplObjectStorage items (under 'conditional-component-field-nodes') are all deleted!
+             *   - 'direct-component-field-nodes' items are duplicated
+             *
+             * So then iterate the 3 entries, and merge them individually
+             */
+            foreach ($subcomponents_data_properties as $componentFieldNode) {
+                /** @var ComponentFieldNodeInterface $componentFieldNode */
+                $componentFieldNodeData = $subcomponents_data_properties[$componentFieldNode];
+                $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] ??= [];
+                $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentFieldNode];
+                if (isset($componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES])) {
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique(array_merge(
+                        $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [],
+                        $componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
+                    )));
+                }
+                if (isset($componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES])) {
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
+                    /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
+                    $componentFieldNodeConditionalFieldsSplObjectStorage = $componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
+                    foreach ($componentFieldNodeConditionalFieldsSplObjectStorage as $conditionField) {
+                        /** @var ComponentFieldNodeInterface $conditionField */
+                        $conditionalComponentFieldNodes = $componentFieldNodeConditionalFieldsSplObjectStorage[$conditionField];
+                        /** @var ComponentFieldNodeInterface[] $conditionalComponentFieldNodes */
+                        $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionField] = array_merge(
+                            $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionField] ?? [],
+                            $conditionalComponentFieldNodes
+                        );
+                    }
+                }
+                if (isset($componentFieldNodeData[DataProperties::SUBCOMPONENTS])) {
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::SUBCOMPONENTS] ??= new SplObjectStorage();
+                    /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>> */
+                    $componentFieldNodeDataSubcomponents = $componentFieldNodeData[DataProperties::SUBCOMPONENTS];
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::SUBCOMPONENTS]->addAll($componentFieldNodeDataSubcomponents);
+                }
+                $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] = $dbDataSubcomponentsFieldSplObjectStorage;
+            }
+            $dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::SUBCOMPONENTS] = $dbDataSubcomponentsSplObjectStorage;
         }
     }
 }

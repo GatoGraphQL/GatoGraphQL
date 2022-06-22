@@ -3,37 +3,37 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_UserLoggedInsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_UserLogin_TemplateResourceLoaderProcessor::class, PoP_UserLogin_TemplateResourceLoaderProcessor::RESOURCE_USERLOGGEDIN];
     }
 
-    public function addLink(array $component, array &$props)
+    public function addLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function addUseravatar(array $component, array &$props)
+    public function addUseravatar(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return PoP_Application_ConfigurationUtils::useUseravatar();
     }
 
-    public function getTitleTop(array $component, array &$props)
+    public function getTitleTop(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getTitleBottom(array $component, array &$props)
+    public function getTitleBottom(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getNameHtmlmarkup(array $component, array &$props)
+    public function getNameHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'h2';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_UserLoggedInsBase extends PoPEngine_QueryDat
         return $ret;
     }
     
-    // function initModelProps(array $component, array &$props) {
+    // function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props) {
 
     //     $this->appendProp($component, $props, 'class', 'visible-loggedin');
     //     parent::initModelProps($component, $props);

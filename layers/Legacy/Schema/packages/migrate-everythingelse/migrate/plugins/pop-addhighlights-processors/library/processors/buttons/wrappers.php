@@ -7,18 +7,18 @@ class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
 {
     public final const COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW = 'buttonwrapper-highlightview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW],
+            self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW,
         );
     }
 
-    public function getConditionSucceededSubcomponents(array $component)
+    public function getConditionSucceededSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getConditionSucceededSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW:
                 $ret[] = [PoP_AddHighlights_Module_Processor_Buttons::class, PoP_AddHighlights_Module_Processor_Buttons::COMPONENT_BUTTON_HIGHLIGHTVIEW];
                 break;
@@ -27,9 +27,9 @@ class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionField(array $component): ?string
+    public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_HIGHLIGHTVIEW:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }

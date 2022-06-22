@@ -5,19 +5,22 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
     public final const COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD = 'contentinner-marknotificationasread';
     public final const COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD = 'contentinner-marknotificationasunread';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD],
-            [self::class, self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD],
+            self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD,
+            self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES];
 
@@ -57,15 +60,15 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASREAD:
             case self::COMPONENT_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
                 // In addition, bring the new status (read/unread) of the notification to update the database/userstatedatabase in the webplatform, for consistency

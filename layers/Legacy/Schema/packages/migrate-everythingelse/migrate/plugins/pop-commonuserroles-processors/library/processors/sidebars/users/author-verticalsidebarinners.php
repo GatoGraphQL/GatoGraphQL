@@ -5,19 +5,22 @@ class GD_URE_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Modu
     public final const COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION = 'vertical-sidebarinner-author-organization';
     public final const COMPONENT_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL = 'vertical-sidebarinner-author-individual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION],
-            [self::class, self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL],
+            self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION,
+            self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_INDIVIDUAL,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_VERTICALSIDEBARINNER_AUTHOR_ORGANIZATION:
                 $ret = array_merge(
                     $ret,

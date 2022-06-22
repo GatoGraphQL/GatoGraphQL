@@ -8,20 +8,20 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
     public final const COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL = 'scrollinner-communities-thumbnail';
     public final const COMPONENT_SCROLLINNER_COMMUNITIES_LIST = 'scrollinner-communities-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLLINNER_COMMUNITIES_LIST],
+            self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_DETAILS,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL,
+            self::COMPONENT_SCROLLINNER_COMMUNITIES_LIST,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_COMMUNITIES_THUMBNAIL:
                 return array(
                     'row-items' => 3,
@@ -41,7 +41,10 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -53,7 +56,7 @@ class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module
             self::COMPONENT_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW => [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

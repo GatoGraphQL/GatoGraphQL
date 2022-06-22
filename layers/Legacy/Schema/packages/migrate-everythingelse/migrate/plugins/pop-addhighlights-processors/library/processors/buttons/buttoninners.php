@@ -6,35 +6,35 @@ class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Process
     public final const COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE = 'buttoninner-highlight-create';
     public final const COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN = 'buttoninner-highlight-createbtn';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE],
-            [self::class, self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN],
+            self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE,
+            self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN,
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $routes = array(
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
         );
-        if ($route = $routes[$component[1]] ?? null) {
+        if ($route = $routes[$component->name] ?? null) {
             return 'fa-fw '.getRouteIcon($route, false);
         }
 
         return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $component)
+    public function getBtnTitle(\PoP\ComponentModel\Component\Component $component)
     {
         $extract = TranslationAPIFacade::getInstance()->__('Add Highlight', 'poptheme-wassup');
         $titles = array(
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATE => $extract,
             self::COMPONENT_BUTTONINNER_HIGHLIGHT_CREATEBTN => $extract,
         );
-        if ($title = $titles[$component[1]] ?? null) {
+        if ($title = $titles[$component->name] ?? null) {
             return $title;
         }
 

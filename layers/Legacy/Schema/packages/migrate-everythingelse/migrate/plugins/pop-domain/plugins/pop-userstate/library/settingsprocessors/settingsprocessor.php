@@ -11,7 +11,7 @@ class PoP_Domain_UserState_Module_SettingsProcessor extends \PoPCMSSchema\UserSt
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN => false,

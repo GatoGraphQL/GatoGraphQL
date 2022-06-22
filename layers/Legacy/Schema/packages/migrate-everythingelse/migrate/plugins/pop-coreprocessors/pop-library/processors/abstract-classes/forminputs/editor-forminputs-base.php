@@ -4,12 +4,15 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMINPUT_EDITOR];
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -24,7 +27,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    protected function getEditorLayoutSubcomponents(array $component)
+    protected function getEditorLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Allow Mentions to add its required templates (User/Tag Mention Layout)
@@ -34,11 +37,11 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         );
     }
 
-    public function getComponentsToPropagateDataProperties(array $component): array
+    public function getComponentsToPropagateDataProperties(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // Important: the MENTION_COMPONENT (eg: PoP_Module_Processor_UserMentionComponentLayouts::COMPONENT_LAYOUTUSER_MENTION_COMPONENT) should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
-        // but it applies to @Mentions, which doesn't need these parameters, however these, here, upset the whole getDatasetcomponentTreeSectionFlattenedDataFields
+        // but it applies to @Mentions, which doesn't need these parameters, however these, here, upset the whole getDatasetComponentTreeSectionFlattenedDataProperties
         // To fix this, in the editor data_properties we stop spreading down, so it never reaches below there to get further data-fields
         if ($this->getEditorLayoutSubcomponents($component)) {
             // Do nothing
@@ -48,12 +51,12 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return parent::getComponentsToPropagateDataProperties($component);
     }
 
-    public function addQuicktags(array $component, array &$props)
+    public function addQuicktags(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getRows(array $component, array &$props)
+    public function getRows(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow pageSection Addons to define how many rows it will have
@@ -67,7 +70,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return 0;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'editor');
@@ -77,7 +80,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
@@ -87,12 +90,12 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function autofocus(array $component, array &$props)
+    public function autofocus(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -115,7 +118,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
 
         // For the replicate functionality, we need to replace the ComponentModelModuleInfo::get('unique-id') bit from the IDs (generated on html load) with the newly
         // generated unique-id from the feedback
-        // In addition, allow others to also add their own replacements. Eg: in forms we can add the dbObject value to edit in the wp-editor
+        // In addition, allow others to also add their own replacements. Eg: in forms we can add the resolvedObject value to edit in the wp-editor
         // This replacement below must be done always
         $ret['unique-id'] = ComponentModelModuleInfo::get('unique-id');
 
@@ -126,7 +129,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         if ($this->autofocus($component, $props)) {
             $this->appendProp($component, $props, 'class', 'pop-editor-autofocus');
@@ -135,14 +138,14 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         parent::initModelProps($component, $props);
     }
 
-    public function getInitialtext(array $component, array &$props)
+    public function getInitialtext(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // This is needed since this string will be replaced by the actual content (either empty, or the post content, or etc)
         return TranslationAPIFacade::getInstance()->__('Please write the content here...', 'pop-coreprocessors');
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
         return 'contentEditor';
     }

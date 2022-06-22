@@ -5,17 +5,17 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
     public final const COMPONENT_EM_LAYOUT_LOCATIONNAME = 'em-layout-locationname';
     public final const COMPONENT_EM_LAYOUT_LOCATIONICONNAME = 'em-layout-locationiconname';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_LAYOUT_LOCATIONNAME],
-            [self::class, self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME],
+            self::COMPONENT_EM_LAYOUT_LOCATIONNAME,
+            self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME,
         );
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_LAYOUT_LOCATIONICONNAME:
                 return 'fa-fw fa-map-marker';
         }
@@ -23,7 +23,7 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
         return parent::getFontawesome($component, $props);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

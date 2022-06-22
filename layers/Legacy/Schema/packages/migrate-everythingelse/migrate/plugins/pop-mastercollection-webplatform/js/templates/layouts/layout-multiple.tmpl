@@ -1,7 +1,7 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<div class="{{../class}}" style="{{../style}}">
-		{{#withConditionalOnDataFieldModule ../dbKey id ../condition-on-data-field-components ../default-component ../.}}
-			{{enterModule ../../. dbKey=dbKey objectID=objectID}}
+		{{#withConditionalOnDataFieldModule ../typeOutputKey id ../condition-on-data-field-components ../default-component ../.}}
+			{{enterModule ../../. typeOutputKey=typeOutputKey objectID=objectID}}
 		{{/withConditionalOnDataFieldModule}}	
 	</div>
 {{/with}}

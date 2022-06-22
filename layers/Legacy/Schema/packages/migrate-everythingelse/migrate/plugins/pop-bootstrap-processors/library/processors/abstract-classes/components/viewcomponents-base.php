@@ -3,12 +3,15 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Module_Processor_BootstrapComponentsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BOOTSTRAPCOMPONENT_VIEWCOMPONENT];
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array_merge(
             parent::getSubcomponents($component),
@@ -16,25 +19,25 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         return array();
     }
 
-    public function getBootstrapcomponentType(array $component)
+    public function getBootstrapcomponentType(\PoP\ComponentModel\Component\Component $component)
     {
         return $this->getType($component);
     }
 
-    public function getType(array $component)
+    public function getType(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getViewcomponentClass(array $component)
+    public function getViewcomponentClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getViewcomponentParams(array $component, array &$props)
+    public function getViewcomponentParams(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getType($component));
         return array(
@@ -42,7 +45,7 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
         );
     }
 
-    protected function getInitjsBlockbranches(array $component, array &$props)
+    protected function getInitjsBlockbranches(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getInitjsBlockbranches($component, $props);
         
@@ -54,22 +57,22 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
         return $ret;
     }
 
-    public function getDialogClass(array $component)
+    public function getDialogClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getHeaderTitle(array $component)
+    public function getHeaderTitle(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
         if ($inner_components = $this->getInnerSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['inners'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...), 
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...), 
                 $inner_components
             );
         }
@@ -89,7 +92,7 @@ abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Modu
         return $ret;
     }
 
-    public function addWebPlatformModuleConfiguration(&$ret, array $component, array &$props)
+    public function addWebPlatformModuleConfiguration(&$ret, \PoP\ComponentModel\Component\Component $component, array &$props)
     {
         if ($viewcomponent_params = $this->getViewcomponentParams($component, $props)) {
             $ret['viewcomponent-params'] = $viewcomponent_params;

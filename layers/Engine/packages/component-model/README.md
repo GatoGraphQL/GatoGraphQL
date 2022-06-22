@@ -142,7 +142,7 @@ For instance, if fetching the data for blog posts with titles "Hello World!" and
 }
 ```
 
-Each component knows which are its queried objects from section `datasetcomponentdata`, which provides the IDs of the queried objects under property `dbobjectids` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `componentsettings`, which indicates to what type each object belongs under property `dbkeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
+Each component knows which are its queried objects from section `datasetcomponentdata`, which provides the IDs of the queried objects under property `objectIDs` (IDs 4 and 9 for the blog posts), and knows from where to retrieve the database object data from under section `databases` through section `componentsettings`, which indicates to what type each object belongs under property `outputKeys` (then, it knows that the post's author data, corresponding to the author with the ID given under property "author", is found under object type "users"):
 
 ```javascript
 {
@@ -150,7 +150,7 @@ Each component knows which are its queried objects from section `datasetcomponen
     "page": {
       components: {
         "post-feed": {
-          dbkeys: {
+          outputKeys: {
             id: "posts",
             author: "users"
           }
@@ -162,7 +162,7 @@ Each component knows which are its queried objects from section `datasetcomponen
     "page": {
       components: {
         "post-feed": {
-          dbobjectids: [4, 9]
+          objectIDs: [4, 9]
         }
       }
     }
@@ -420,24 +420,24 @@ Every component can interact with itself from client to server just by adding it
 
 This is accomplished by allowing to select what component paths (i.e. the path to a specific component starting from the top-most component) will be included in the response, so as to load data only starting from that level, and ignore anything above that level. This is done through adding parameters `componentFilter=componentpaths` and `componentpaths[]=path-to-the-component` to the URL (we use `componentpaths[]` instead of `componentpaths` for versatility, so that we can include more than one component path in a single request). The value for the `componentpaths[]` parameter is a list of components separated by dots. Hence, fetching data for component "component5", located under `component1 => component2 => component5`, is done by adding parameter `componentpaths[]=component1.component2.component5` to the URL. 
 
-For instance, in the following component hierarchy every component is loading data, hence every level has an entry `dbobjectids`:
+For instance, in the following component hierarchy every component is loading data, hence every level has an entry `objectIDs`:
 
 ```javascript
 "component1"
-  dbobjectids: [...]
+  objectIDs: [...]
   components
     "component2"
-      dbobjectids: [...]
+      objectIDs: [...]
       components
         "component3"
-          dbobjectids: [...]
+          objectIDs: [...]
         "component4"
-          dbobjectids: [...]
+          objectIDs: [...]
         "component5"
-          dbobjectids: [...]
+          objectIDs: [...]
           components
             "component6"
-              dbobjectids: [...]
+              objectIDs: [...]
 ```
 
 Then requesting the webpage URL adding parameters `componentFilter=componentpaths` and `componentpaths[]=component1.component2.component5` will produce the following response:
@@ -448,10 +448,10 @@ Then requesting the webpage URL adding parameters `componentFilter=componentpath
     "component2"
       components
         "component5"
-          dbobjectids: [...]
+          objectIDs: [...]
           components
             "component6"
-              dbobjectids: [...]
+              objectIDs: [...]
 ```
 
 In essence, the API starts loading data starting from component1 => component2 => component5, that's why "component6", which comes under "component5", also brings its data, but "component3" and "component4" do not.
@@ -602,18 +602,18 @@ Having the component-based structure, we can now add the actual information requ
   },
   datasetcomponentdata: {
     "top-component": {
-      dbobjectids: [...],
+      objectIDs: [...],
       ...,
       components: {
         "component-level1": {
-          dbobjectids: [...],
+          objectIDs: [...],
           ...,
           components: {
             "component-level11": {
               repeat...
             },
             "component-level12": {
-              dbobjectids: [...],
+              objectIDs: [...],
               ...,
               components: {
                 "component-level121": {
@@ -624,7 +624,7 @@ Having the component-based structure, we can now add the actual information requ
           }
         },
         "component-level2": {
-          dbobjectids: [...],
+          objectIDs: [...],
           ...,
           components: {
             "component-level21": {
@@ -656,7 +656,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
   {
     $ret = parent::getSubcomponents($component);
 
-    switch ($component[1]) {
+    switch ($component->name) {
       
       case self::COMPONENT_SOMENAME:
         
@@ -673,7 +673,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
     $ret = parent::getImmutableConfiguration($component, $props);
 
     // Print the components properties ...
-    switch ($component[1]) {
+    switch ($component->name) {
       case self::COMPONENT_SOMENAME:        
         $ret['description'] = __('Some description');
         $ret['showmore'] = $this->getProp($component, $props, 'showmore');
@@ -687,7 +687,7 @@ class SomeComponentProcessor extends AbstractComponentProcessor {
   function initModelProps($component, &$props) 
   {
     // Implement the components properties ...
-    switch ($component[1]) {
+    switch ($component->name) {
       case self::COMPONENT_SOMENAME:
         $this->setProp($component, $props, 'showmore', false);
         $this->appendProp($component, $props, 'class', 'text-center');
@@ -723,8 +723,8 @@ Database object data is retrieved and placed under a shared section called `data
 
 For instance, the API response below contains a component hierarchy with two components, `"page" => "post-feed"`, where component `"post-feed"` fetches blog posts. Please notice the following:
 
-- Each component knows which are its queried objects from property `dbobjectids` (IDs 4 and 9 for the blog posts)
-- Each component knows the object type for its queried objects from property `dbkeys` (each post's data is found under "posts", and the post's author data, corresponding to the author with the ID given under the post's property "author", is found under "users"):
+- Each component knows which are its queried objects from property `objectIDs` (IDs 4 and 9 for the blog posts)
+- Each component knows the object type for its queried objects from property `outputKeys` (each post's data is found under "posts", and the post's author data, corresponding to the author with the ID given under the post's property "author", is found under "users"):
 - Because the database object data is relational, property "author" contains the ID to the author object instead of printing the author data directly
 
 ```javascript
@@ -733,7 +733,7 @@ For instance, the API response below contains a component hierarchy with two com
     "page": {
       components: {
         "post-feed": {
-          dbobjectids: [4, 9]
+          objectIDs: [4, 9]
         }
       }
     }
@@ -742,7 +742,7 @@ For instance, the API response below contains a component hierarchy with two com
     "page": {
       components: {
         "post-feed": {
-          dbkeys: {
+          outputKeys: {
             id: "posts",
             author: "users"
           }
@@ -843,14 +843,14 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
 Once the ComponentProcessor class is instantiated, all of its defined components become available to be added to the component hirarchy.
 
-To access the properties of a component, we must reference its corresponding ComponentProcessor through function `getProcessor` from class `ComponentProcessor_Manager`:
+To access the properties of a component, we must reference its corresponding ComponentProcessor through function `getComponentProcessor` from class `ComponentProcessor_Manager`:
 
 ```php
 // Retrive the PoP_ComponentProcessor_Manager object from the factory
 $componentprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
 
 // Obtain the ComponentProcessor for component COMPONENT_SOMENAME
-$processor = $componentprocessor_manager->getProcessor([SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_SOMENAME]);
+$processor = $componentprocessor_manager->getComponentProcessor(new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_SOMENAME));
 
 // Do something...
 // $processor->...
@@ -869,7 +869,7 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
     $ret = parent::foo($component);
 
     // Add properties to the component
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
@@ -918,19 +918,19 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
   {
     $ret = parent::getSubcomponents($component);
 
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
-        $ret[] = [self::class, self::COMPONENT_SOMENAME2];
+        $ret[] = self::COMPONENT_SOMENAME2;
         break;
 
       case self::COMPONENT_SOMENAME2:
       case self::COMPONENT_SOMENAME3:
         
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT1];
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT2];
-        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT3];
+        $ret[] = new \PoP\ComponentModel\Component\Component(LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT1);
+        $ret[] = new \PoP\ComponentModel\Component\Component(LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT2);
+        $ret[] = new \PoP\ComponentModel\Component\Component(LayoutComponentProcessor::class, LayoutComponentProcessor::COMPONENT_LAYOUT3);
         break;
     }
 
@@ -977,7 +977,7 @@ abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\Abstract
   protected function getThumbnailComponent($component) 
   {
     // Default value
-    return [self::class, self::COMPONENT_LAYOUT_THUMBNAILSMALL];
+    return self::COMPONENT_LAYOUT_THUMBNAILSMALL;
   }
   protected function getAftercontentComponents($component) 
   {
@@ -989,31 +989,31 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
 
   protected function getContentComponent($component) 
   {
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
-        return [self::class, self::COMPONENT_LAYOUT_POSTCONTENT];
+        return self::COMPONENT_LAYOUT_POSTCONTENT;
 
       case self::COMPONENT_SOMENAME2:
       case self::COMPONENT_SOMENAME3:
         
-        return [self::class, self::COMPONENT_LAYOUT_POSTEXCERPT];
+        return self::COMPONENT_LAYOUT_POSTEXCERPT;
     }
 
     return parent::getContentComponent($component);
   }
   protected function getThumbnailComponent($component) 
   {
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME1:
         
-        return [self::class, self::COMPONENT_LAYOUT_THUMBNAILBIG];
+        return self::COMPONENT_LAYOUT_THUMBNAILBIG;
 
       case self::COMPONENT_SOMENAME3:
         
-        return [self::class, self::COMPONENT_LAYOUT_THUMBNAILMEDIUM];
+        return self::COMPONENT_LAYOUT_THUMBNAILMEDIUM;
     }
 
     return parent::getThumbnailComponent($component);
@@ -1022,7 +1022,7 @@ class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor 
   {
     $ret = parent::getAftercontentComponents($component);
 
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_SOMENAME2:
         
@@ -1156,7 +1156,7 @@ Let's see an example: a component for rendering maps has 2 orientations: `"horiz
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_MAP:
       // Component "map" is setting the default value
       $this->setProp($component, $props, 'orientation', 'vertical');
@@ -1178,7 +1178,7 @@ By default, component map will have prop `"orientation"` set with value `"vertic
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_MAPWRAPPER:
       $this->setProp([[SomeComponent::class, SomeComponent::COMPONENT_MAP]], $props, 'orientation', 'horizontal');      
       break;
@@ -1205,7 +1205,7 @@ Indicate if the results are `immutable` (eg: results which never change and are 
 ```php
 function getDatasource($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_WHOWEARE:
       return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
   }
@@ -1221,7 +1221,7 @@ Define the IDs of the objects to be retrieved from the database, through functio
 ```php
 function getDbobjectIds($component, &$props, $data_properties) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_WHOWEARE:
       return [13, 54, 998];
   }
@@ -1239,7 +1239,7 @@ Define what [Dataloader](#dataloader) to use, which is the object in charge of f
 ```php
 function getDataloader($component) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       return [Dataloader::class, Dataloader::DATALOADER_POSTLIST];
   }
@@ -1257,7 +1257,7 @@ protected function getImmutableDataloadQueryArgs($component, $props)
 {
   $ret = parent::getImmutableDataloadQueryArgs($component, $props);
   
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       // 55: id of "Articles" category
       $ret['cat'] = 55;
@@ -1271,7 +1271,7 @@ protected function getMutableonrequestDataloadQueryArgs($component, $props)
 {
   $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
   
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
     
       // Set the logged-in user id
@@ -1292,7 +1292,7 @@ The fetched data can be filtered through [Filter](#filter) objects, defined thro
 ```php
 function getFilter($component) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
           
       return GD_FILTER_AUTHORARTICLES;
@@ -1310,7 +1310,7 @@ After fetching data, we can communicate state (eg: are there more results? what'
 ```php
 function getQueryhandler($component) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       return GD_DATALOAD_QUERYHANDLER_LIST;
   }
@@ -1328,7 +1328,7 @@ function getImmutableHeaddatasetcomponentDataProperties($component, &$props)
 {
   $ret = parent::getImmutableHeaddatasetcomponentDataProperties($component, $props);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       // Make it not fetch more results
       $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
@@ -1346,7 +1346,7 @@ We can instruct a dataloading component to not load its data simply by setting i
 ```php
 function initModelProps($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
 
       // Set the content lazy
@@ -1372,14 +1372,14 @@ Starting from a dataloading component, and including itself, any descendant comp
 
 ##### Defining the Data-Fields
 
-"Data fields", which are the properties to be required from the loaded database object, are defined through function `getLeafComponentFields`:
+"Data fields", which are the properties to be required from the loaded database object, are defined through function `getLeafComponentFieldNodes`:
 
 ```php
-function getLeafComponentFields($component, $props) 
+function getLeafComponentFieldNodes($component, $props) 
 {
-  $ret = parent::getLeafComponentFields($component, $props);
+  $ret = parent::getLeafComponentFieldNodes($component, $props);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
       $ret[] = 'title';
       $ret[] = 'content';
@@ -1400,14 +1400,14 @@ Consider the image below: Starting from the object type "post", and moving down 
 
 ![Changing the DB object from one domain to another](https://uploads.getpop.org/wp-content/uploads/2018/12/loading-data-at-intervals-relational.jpg)
 
-Switching domins is accomplished through function `getRelationalComponentFields`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the components to use:
+Switching domins is accomplished through function `getRelationalComponentFieldNodes`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the components to use:
 
 ```php
-function getRelationalComponentFields($component) 
+function getRelationalComponentFieldNodes($component) 
 {
-  $ret = parent::getRelationalComponentFields($component);
+  $ret = parent::getRelationalComponentFieldNodes($component);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
     
       $ret['author'] = [
@@ -1432,21 +1432,21 @@ function getRelationalComponentFields($component)
 Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [ObjectTypeFieldResolver](#ObjectTypeFieldResolver). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
 
 ```php
-function getRelationalComponentFields($component) 
+function getRelationalComponentFieldNodes($component) 
 {
-  $ret = parent::getRelationalComponentFields($component);
+  $ret = parent::getRelationalComponentFieldNodes($component);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_AUTHORARTICLES:
     
       $ret['author'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_AUTHORNAME],
+          new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_AUTHORNAME),
         ]
       ];
       $ret['comments'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_COMMENTLAYOUT],
+          new \PoP\ComponentModel\Component\Component(SomeComponentProcessor::class, SomeComponentProcessor::COMPONENT_COMMENTLAYOUT),
         ]
       ];
       break;
@@ -1645,7 +1645,7 @@ class ObjectTypeFieldResolver_Posts extends \PoP\Engine\AbstractObjectTypeFieldR
 }
 ```
 
-The ObjectTypeFieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getRelationalComponentFields` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
+The ObjectTypeFieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getRelationalComponentFieldNodes` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
 
 ```php
 function getFieldDefaultDataloader($field) 
@@ -1705,7 +1705,7 @@ class TextFilterInputs extends TextFormInputsBase implements \PoP\ComponentModel
 {
   public function filterDataloadQueryArgs(array &$query, $component, $value)
   {
-    switch ($component[1]) 
+    switch ($component->name) 
     {
       case self::COMPONENT_FILTERINPUT_SEARCH:
         $query['search'] = $value;
@@ -1721,7 +1721,7 @@ The QueryInputOutputHandler is an object that synchronizes the state of the quer
 
 Before fetching data from the database, function `prepareQueryArgs` populates the `$query_args` object used passed to the dataloader to fetch data. It can get values from the request (eg: set through the application in the client) or define default values.
 
-After fecthing data from the database, functions `getQueryState`, `getQueryParams` and `getQueryResult`, all of them receiving parameters `$data_properties, $checkpoint_validation, $executed, $dbobjectids`, send information about the executed query back to the client: state values (eg: are there more results?), parameter values (eg: how many results to bring each time) and result values (eg: was execution successful?) correspondingly.
+After fecthing data from the database, functions `getQueryState`, `getQueryParams` and `getQueryResult`, all of them receiving parameters `$data_properties, $checkpoint_validation, $executed, $objectIDs`, send information about the executed query back to the client: state values (eg: are there more results?), parameter values (eg: how many results to bring each time) and result values (eg: was execution successful?) correspondingly.
 
 ### ActionExecuter
 
@@ -1732,7 +1732,7 @@ To achieve this, the ComponentProcessor must define the ActionExecuter object fo
 ```php
 function getActionExecuterClass($component) {
   
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_SOMENAME:
   
       return SomeActionExecuter::class;
@@ -1839,7 +1839,7 @@ function prepareDataPropertiesAfterMutationExecution($component, &$props, &$data
     
   parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_ADDCOMMENT:
 
       $actionexecution_manager = \PoP\Engine\ActionExecution_Manager_Factory::getInstance();
@@ -1872,7 +1872,7 @@ For instance, a component that needs to validate that the user's IP is whitelist
 ```php
 function getDataAccessCheckpoints($component, &$props) 
 {
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_SOMECOMPONENT:
     
       return [CHECKPOINT_WHITELISTEDIP];
@@ -1887,7 +1887,7 @@ Pages can also be assigned checkpoints through their [SettingsProcessor](#settin
 ```php
 function getRelevantPage($component, &$props) {
     
-  switch ($component[1]) {
+  switch ($component->name) {
     case self::COMPONENT_MYPOSTS_SCROLL:
     case self::COMPONENT_MYPOSTS_CAROUSEL:
     case self::COMPONENT_MYPOSTS_TABLE:
@@ -1899,49 +1899,32 @@ function getRelevantPage($component, &$props) {
 }
 ```
 
-A checkpoint is resolved through a [CheckpointProcessor](#checkpointprocessor).
+A checkpoint is resolved through a [Checkpoint](#checkpoint).
 
-#### CheckpointProcessor
+#### Checkpoint
 
-A CheckpointProcessor is an object inheriting from class `AbstractCheckpointProcessor`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
+A Checkpoint is an object inheriting from class `AbstractCheckpoint`, which handles checkpoints, resolving if a checkpoint is satisfied or not through function `process`. When a checkpoint is not satisfied, it must thrown an error. Otherwise, the base class will eventually return `true`, signalling that the validation is satisfied.
 
 For instance, to validate if the user IP is whitelisted can be implemented like this:
 
 ```php
 
-class CheckpointProcessor extends \PoP\Engine\AbstractCheckpointProcessor {
+class WhitelistedIPCheckpoint extends \PoP\Engine\AbstractCheckpoint {
 
-  const CHECKPOINT_WHITELISTEDIP = 'checkpoint-whitelistedip';
-
-  function getCheckpointsToProcess() 
+  function validateCheckpoint() 
   {
-    return array(
-      [self::class, self::CHECKPOINT_WHITELISTEDIP],
-    );
-  }
+    // Validate the user's IP
+    $ip = get_client_ip();
+    if (!$ip) {          
+      return new \PoP\ComponentModel\Error\Error('ipempty');
+    }
 
-  function process($checkpoint) 
-  {
-    switch ($checkpoint) 
-    {
-      case self::CHECKPOINT_WHITELISTEDIP:
-
-        // Validate the user's IP
-        $ip = get_client_ip();
-        if (!$ip) {
-          
-          return new \PoP\ComponentModel\Error\Error('ipempty');
-        }
-
-        $whitelisted_ips = array(...);
-        if (!in_array($ip, $whitelisted_ips)) {
-          
-          return new \PoP\ComponentModel\Error\Error('ipincorrect');
-        }
-        break;
+    $whitelisted_ips = array(...);
+    if (!in_array($ip, $whitelisted_ips)) {      
+      return new \PoP\ComponentModel\Error\Error('ipincorrect');
     }
   
-    return parent::process($checkpoint, $component);
+    return parent::validateCheckpoint();
   }
 }
 ```

@@ -22,6 +22,10 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->mediaTypeAPI ??= $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
@@ -34,7 +38,11 @@ class MediaTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->getMediaTypeAPI()->getMediaItems($query, $options);
     }
 
-    public function executeQueryIDs($query): array
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string|int>
+     */
+    public function executeQueryIDs(array $query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

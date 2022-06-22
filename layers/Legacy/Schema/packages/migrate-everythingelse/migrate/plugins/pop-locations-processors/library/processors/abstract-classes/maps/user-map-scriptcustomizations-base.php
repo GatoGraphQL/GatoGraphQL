@@ -1,29 +1,29 @@
 <?php
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_SCRIPTCUSTOMIZATION_USER];
     }
 
-    public function getAvatarMarker(array $component)
+    public function getAvatarMarker(\PoP\ComponentModel\Component\Component $component)
     {
         return GD_AVATAR_SIZE_40;
     }
 
-    public function getAvatarInfowindow(array $component)
+    public function getAvatarInfowindow(\PoP\ComponentModel\Component\Component $component)
     {
         return GD_AVATAR_SIZE_64;
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $data_fields = array('id', 'displayName', 'url', 'shortDescriptionFormatted');
 
@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
         return $data_fields;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -51,16 +51,16 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
 
             $ret['avatars'] = array(
                 'sm' => array(
-                    'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+                    'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($component, $props, 'succeeding-typeResolver'),
-                        $avatar_field_sm
+                        $avatar_field_sm // @todo Fix: pass LeafField
                     ),
                     'size' => $avatar_size_sm
                 ),
                 'md' => array(
-                    'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+                    'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                         $this->getProp($component, $props, 'succeeding-typeResolver'),
-                        $avatar_field_md
+                        $avatar_field_md // @todo Fix: pass LeafField
                     ),
                     'size' => $avatar_size_md
                 )

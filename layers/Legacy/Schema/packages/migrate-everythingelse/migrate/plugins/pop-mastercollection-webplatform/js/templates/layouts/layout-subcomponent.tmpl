@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	{{#withget . ../subcomponent-field}}
 		{{#each ../../subcomponentoutputnames.layouts}}
 			{{#withModule ../../../. this}}
@@ -10,7 +10,7 @@
 					{{/each}}
 				{{else}}
 					<{{../../../../html-tag}} class="{{../../../../class}}" style="{{../../../../style}}" {{#each ../../../../previouscomponents-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../. component=this}}"{{/each}}>
-						{{enterModule ../../../../. subcomponent=../../../../subcomponent-field dbObjectIDs=../../.}}
+						{{enterModule ../../../../. subcomponent=../../../../subcomponent-field objectIDs=../../.}}
 					</{{../../../../html-tag}}>
 				{{/if}}
 			{{/withModule}}

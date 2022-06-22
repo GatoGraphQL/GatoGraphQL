@@ -16,13 +16,13 @@ class UnionTypeHelpers
     /**
      * Extracts the DB key and ID from the object ID
      */
-    public static function extractDBObjectTypeAndID(string $composedDBKeyObjectID): array
+    public static function extractObjectTypeAndID(string $composedTypeOutputKeyObjectID): array
     {
         $parts = explode(
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR,
-            $composedDBKeyObjectID
+            $composedTypeOutputKeyObjectID
         );
-        // If the object could not be loaded, $composedDBKeyObjectID will be all ID, with no $dbKey
+        // If the object could not be loaded, $composedTypeOutputKeyObjectID will be all ID, with no $typeOutputKey
         if (count($parts) === 1) {
             return ['', $parts[0]];
         }
@@ -44,12 +44,12 @@ class UnionTypeHelpers
     }
 
     /**
-     * Creates a composed string containing the type and ID of the dbObject
+     * Creates a composed string containing the type and ID of the resolvedObject
      */
     public static function getObjectComposedTypeAndID(RelationalTypeResolverInterface $relationalTypeResolver, int | string $id): string
     {
         return
-            $relationalTypeResolver->getTypeOutputDBKey() .
+            $relationalTypeResolver->getTypeOutputKey() .
             UnionTypeSymbols::OBJECT_COMPOSED_TYPE_ID_SEPARATOR .
             (string) $id;
     }

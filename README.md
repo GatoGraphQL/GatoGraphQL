@@ -2,6 +2,12 @@
 
 PoP is a monorepo containing several projects.
 
+![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg)
+![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg)
+![Downgrade PHP tests](https://github.com/leoloso/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
+![Scoping tests](https://github.com/leoloso/PoP/actions/workflows/scoping_tests.yml/badge.svg)
+<!-- ![PHPStan](https://github.com/leoloso/PoP/actions/workflows/phpstan.yml/badge.svg) -->
+
 ## The GraphQL API for WordPress plugin
 
 <p align="center"><img src="https://graphql-api.com/assets/graphql-api-logo-with-name.png" width="450" /></p>

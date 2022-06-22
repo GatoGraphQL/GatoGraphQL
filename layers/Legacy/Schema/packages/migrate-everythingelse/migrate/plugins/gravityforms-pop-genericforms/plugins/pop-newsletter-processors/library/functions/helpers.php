@@ -12,7 +12,7 @@ class PoP_Newsletter_GFHelpers
         );
         $fieldnames = array();
         foreach ($gfinputname_components as $gf_field_name => $component) {
-            $fieldnames[$componentprocessor_manager->getProcessor($component)->getName($component)] = $gf_field_name;
+            $fieldnames[$componentprocessor_manager->getComponentProcessor($component)->getName($component)] = $gf_field_name;
         }
         
         return $fieldnames;

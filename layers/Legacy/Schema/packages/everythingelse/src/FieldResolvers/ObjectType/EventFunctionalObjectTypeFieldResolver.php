@@ -11,6 +11,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
@@ -84,6 +86,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         array $fieldArgs,
         array $variables,
         array $expressions,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
@@ -92,7 +95,20 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         switch ($fieldName) {
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
-                $scope = $objectTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $scope = $objectTypeResolver->resolveValue(
+                    $event,
+                    new LeafField(
+                        'scope',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $scope;
                 }
@@ -103,7 +119,20 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 );
 
             case 'latestcountsTriggerValues':
-                $scope = $objectTypeResolver->resolveValue($event, 'scope', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $scope = $objectTypeResolver->resolveValue(
+                    $event,
+                    new LeafField(
+                        'scope',
+                        null,
+                        [],
+                        [],
+                        $field->getLocation()
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $scope;
                 }
@@ -113,6 +142,6 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

@@ -5,16 +5,16 @@ class GD_EM_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetM
 {
     public final const COMPONENT_EM_MESSAGE_NOLOCATION = 'em-message-nolocation';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_EM_MESSAGE_NOLOCATION],
+            self::COMPONENT_EM_MESSAGE_NOLOCATION,
         );
     }
 
-    public function getMessage(array $component)
+    public function getMessage(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_EM_MESSAGE_NOLOCATION:
                 return TranslationAPIFacade::getInstance()->__('No location', 'em-popprocessors');
         }

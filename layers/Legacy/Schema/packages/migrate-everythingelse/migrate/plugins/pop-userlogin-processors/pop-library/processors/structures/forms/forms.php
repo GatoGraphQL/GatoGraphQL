@@ -11,20 +11,20 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
     public final const COMPONENT_FORM_LOGOUT = 'form-logout';
     public final const COMPONENT_FORM_USER_CHANGEPASSWORD = 'form-user-changepwd';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORM_LOGIN],
-            [self::class, self::COMPONENT_FORM_LOSTPWD],
-            [self::class, self::COMPONENT_FORM_LOSTPWDRESET],
-            [self::class, self::COMPONENT_FORM_LOGOUT],
-            [self::class, self::COMPONENT_FORM_USER_CHANGEPASSWORD],
+            self::COMPONENT_FORM_LOGIN,
+            self::COMPONENT_FORM_LOSTPWD,
+            self::COMPONENT_FORM_LOSTPWDRESET,
+            self::COMPONENT_FORM_LOGOUT,
+            self::COMPONENT_FORM_USER_CHANGEPASSWORD,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_LOGIN:
                 return [GD_UserLogin_Module_Processor_UserFormInners::class, GD_UserLogin_Module_Processor_UserFormInners::COMPONENT_FORMINNER_LOGIN];
 
@@ -44,11 +44,11 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_LOGIN:
             case self::COMPONENT_FORM_LOGOUT:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -57,11 +57,11 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_LOGIN:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-notloggedin-';
@@ -76,10 +76,10 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORM_LOGIN:
                 $description = sprintf(
                     '<div class="pull-right"><p><em><a href="%s">%s</a></em></p></div>',

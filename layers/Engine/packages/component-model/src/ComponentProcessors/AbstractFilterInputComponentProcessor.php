@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -21,12 +22,12 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
-    protected function getFilterInputSchemaDefinitionResolver(array $component): FilterInputComponentProcessorInterface
+    protected function getFilterInputSchemaDefinitionResolver(Component $component): FilterInputComponentProcessorInterface
     {
         return $this;
     }
 
-    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(Component $component): InputTypeResolverInterface
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {
@@ -40,7 +41,7 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return $this->getSchemaDefinitionService()->getDefaultInputTypeResolver();
     }
 
-    public function getFilterInputDescription(array $component): ?string
+    public function getFilterInputDescription(Component $component): ?string
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {
@@ -49,7 +50,7 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return null;
     }
 
-    public function getFilterInputDefaultValue(array $component): mixed
+    public function getFilterInputDefaultValue(Component $component): mixed
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {
@@ -58,7 +59,7 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
         return null;
     }
 
-    public function getFilterInputTypeModifiers(array $component): int
+    public function getFilterInputTypeModifiers(Component $component): int
     {
         $filterSchemaDefinitionResolver = $this->getFilterInputSchemaDefinitionResolver($component);
         if ($filterSchemaDefinitionResolver !== $this) {

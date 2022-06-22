@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeIDsFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
 
 abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?ExcludeIDsFilterInput $excludeIDsFilterInput = null;
+    private ?IncludeFilterInput $includeFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -20,6 +24,22 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+    }
+    final public function setExcludeIDsFilterInput(ExcludeIDsFilterInput $excludeIDsFilterInput): void
+    {
+        $this->excludeIDsFilterInput = $excludeIDsFilterInput;
+    }
+    final protected function getExcludeIDsFilterInput(): ExcludeIDsFilterInput
+    {
+        return $this->excludeIDsFilterInput ??= $this->instanceManager->getInstance(ExcludeIDsFilterInput::class);
+    }
+    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
+    {
+        $this->includeFilterInput = $includeFilterInput;
+    }
+    final protected function getIncludeFilterInput(): IncludeFilterInput
+    {
+        return $this->includeFilterInput ??= $this->instanceManager->getInstance(IncludeFilterInput::class);
     }
 
     public function getInputFieldNameTypeResolvers(): array
@@ -50,11 +70,11 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
         };
     }
 
-    public function getInputFieldFilterInput(string $inputFieldName): ?array
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'ids' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_INCLUDE],
-            'excludeIDs' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EXCLUDE_IDS],
+            'ids' => $this->getIncludeFilterInput(),
+            'excludeIDs' => $this->getExcludeIDsFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

@@ -6,20 +6,23 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
     public final const COMPONENT_QUICKLINKBUTTONGROUP_STANCEVIEW = 'quicklinkbuttongroup-stanceview';
     public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE = 'quicklinkbuttongroup-poststance';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEEDIT],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEVIEW],
-            [self::class, self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE],
+            self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEEDIT,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEVIEW,
+            self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_STANCEEDIT:
                 $ret[] = [UserStance_Module_Processor_Buttons::class, UserStance_Module_Processor_Buttons::COMPONENT_BUTTON_STANCEEDIT];
                 break;
@@ -39,9 +42,9 @@ class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_QUICKLINKBUTTONGROUP_POSTSTANCE:
                 $this->appendProp($component, $props, 'class', 'pop-stance-count');
                 break;

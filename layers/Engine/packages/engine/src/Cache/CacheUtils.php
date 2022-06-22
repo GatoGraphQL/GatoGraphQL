@@ -10,14 +10,14 @@ use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 
 class CacheUtils
 {
-    public final const HOOK_SCHEMA_CACHE_KEY_COMPONENTS = __CLASS__ . ':schema-cache-key-components';
+    public final const HOOK_SCHEMA_CACHE_KEY_ELEMENTS = __CLASS__ . ':schema-cache-key-elements';
 
-    public static function getSchemaCacheKeyComponents(): array
+    public static function getSchemaCacheKeyElements(): array
     {
         /** @var EngineModuleConfiguration */
         $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
         return (array)App::applyFilters(
-            self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
+            self::HOOK_SCHEMA_CACHE_KEY_ELEMENTS,
             [
                 'namespaced' => App::getState('namespace-types-and-interfaces'),
                 'version-constraint' => App::getState('version-constraint'),

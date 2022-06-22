@@ -15,24 +15,24 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
     public final const COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN = 'anchorcontrol-closepagebtn';
     public final const COMPONENT_ANCHORCONTROL_CLOSEPAGEBTNBIG = 'anchorcontrol-closepagebtnbig';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_EXPANDCOLLAPSIBLE],
-            [self::class, self::COMPONENT_ANCHORCONTROL_FILTERTOGGLE],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CURRENTURL],
-            [self::class, self::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS],
-            [self::class, self::COMPONENT_ANCHORCONTROL_PRINT],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CLOSEPAGE],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN],
-            [self::class, self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTNBIG],
+            self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS,
+            self::COMPONENT_ANCHORCONTROL_EXPANDCOLLAPSIBLE,
+            self::COMPONENT_ANCHORCONTROL_FILTERTOGGLE,
+            self::COMPONENT_ANCHORCONTROL_CURRENTURL,
+            self::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS,
+            self::COMPONENT_ANCHORCONTROL_PRINT,
+            self::COMPONENT_ANCHORCONTROL_CLOSEPAGE,
+            self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN,
+            self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTNBIG,
         );
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
                 return TranslationAPIFacade::getInstance()->__('Toggle optional fields', 'pop-coreprocessors');
 
@@ -56,9 +56,9 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getLabel($component, $props);
     }
-    public function getText(array $component, array &$props)
+    public function getText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_FILTERTOGGLE:
             case self::COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN:
                 return null;
@@ -66,9 +66,9 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getText($component, $props);
     }
-    public function getIcon(array $component)
+    public function getIcon(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS:
                 return 'glyphicon-menu-hamburger';
 
@@ -83,9 +83,9 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getIcon($component);
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
                 return 'fa-star-half-o';
 
@@ -101,11 +101,11 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
 
         return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $component, array &$props)
+    public function getHref(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
             case self::COMPONENT_ANCHORCONTROL_EXPANDCOLLAPSIBLE:
                 // $block_id = $props['block-id'];
@@ -122,7 +122,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                     // Comment Leo 26/03/2019: This must be re-implemented through Handlebars function `upcomingModuleId`
                     // // The Filter is set in the props
                     // if ($filter = $this->getProp($component, $props, 'filter-component')) {
-                    //     $filter_id = $componentprocessor_manager->getProcessor($filter)->getFrontendId($filter, $props);
+                    //     $filter_id = $componentprocessor_manager->getComponentProcessor($filter)->getFrontendId($filter, $props);
                     //     return '#'.$filter_id;
                     // }
                     return '#'; // This must be replaced! Not working now!
@@ -145,9 +145,9 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         return parent::getHref($component, $props);
     }
 
-    public function getTarget(array $component, array &$props)
+    public function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_CURRENTURL:
                 return \PoP\ConfigurationComponentModel\Constants\Targets::MAIN;
         }
@@ -155,11 +155,11 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS:
                 $this->appendProp($component, $props, 'class', 'btn btn-primary');
                 $this->mergeProp(
@@ -198,7 +198,7 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_CURRENTURL:
                 $this->appendProp($component, $props, 'class', 'btn btn-compact btn-link');
                 break;
@@ -215,11 +215,11 @@ class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorCon
         parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_ANCHORCONTROL_PRINT:
                 $this->addJsmethod($ret, 'controlPrint');
                 break;

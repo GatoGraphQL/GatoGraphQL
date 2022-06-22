@@ -13,20 +13,20 @@ class VarsHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            ModelInstance::HOOK_COMPONENTS_RESULT,
-            $this->getModelInstanceComponentsFromAppState(...)
+            ModelInstance::HOOK_ELEMENTS_RESULT,
+            $this->getModelInstanceElementsFromAppState(...)
         );
     }
 
-    public function getModelInstanceComponentsFromAppState($components)
+    public function getModelInstanceElementsFromAppState(array $elements): array
     {
-        $components[] = $this->__('edit schema:', 'graphql-server') . App::getState('edit-schema');
+        $elements[] = $this->__('edit schema:', 'graphql-server') . App::getState('edit-schema');
         if ($graphQLOperationType = App::getState('graphql-operation-type')) {
-            $components[] = $this->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
+            $elements[] = $this->__('GraphQL operation type:', 'graphql-server') . $graphQLOperationType;
         }
-        $components[] = $this->__('enable nested mutations:', 'graphql-server') . App::getState('nested-mutations-enabled');
-        $components[] = $this->__('enable GraphQL introspection:', 'graphql-server') . App::getState('graphql-introspection-enabled');
+        $elements[] = $this->__('enable nested mutations:', 'graphql-server') . App::getState('nested-mutations-enabled');
+        $elements[] = $this->__('enable GraphQL introspection:', 'graphql-server') . App::getState('graphql-introspection-enabled');
 
-        return $components;
+        return $elements;
     }
 }

@@ -23,35 +23,35 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
     public final const COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW = 'scrollinner-nosearchcategoryposts18-simpleview';
     public final const COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW = 'scrollinner-nosearchcategoryposts19-simpleview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS01_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS02_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS03_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS04_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS05_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS06_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS07_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS08_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS09_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS10_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS11_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS12_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS13_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS14_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS15_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS16_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS17_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW],
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS01_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS02_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS03_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS04_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS05_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS06_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS07_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS08_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS09_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS10_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS11_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS12_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS13_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS14_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS15_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS16_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS17_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW,
+            self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW:
             case self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS01_SIMPLEVIEW:
             case self::COMPONENT_SCROLLINNER_NOSEARCHCATEGORYPOSTS02_SIMPLEVIEW:
@@ -81,7 +81,10 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -112,7 +115,7 @@ class PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners extends PoP_Module
         if ($layout = \PoP\Root\App::applyFilters(
             'PoP_NoSearchCategoryPosts_Module_Processor_ScrollInners:layout',
             [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
-            $categories[$component[1]]
+            $categories[$component->name]
         )
         ) {
             $ret[] = $layout;

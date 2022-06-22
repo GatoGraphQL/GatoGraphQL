@@ -5,19 +5,22 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
     public final const COMPONENT_DROPDOWNBUTTONCONTROL_SHARE = 'dropdownbuttoncontrol-share';
     public final const COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE = 'dropdownbuttoncontrol-resultsshare';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE],
-            [self::class, self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE],
+            self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE,
+            self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
     
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 $components = array();
@@ -39,9 +42,9 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         return $ret;
     }
 
-    public function getBtnClass(array $component)
+    public function getBtnClass(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'btn btn-compact btn-link';
@@ -50,9 +53,9 @@ class PoP_Module_Processor_DropdownButtonControls extends PoP_Module_Processor_D
         return parent::getBtnClass($component);
     }
 
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_SHARE:
             case self::COMPONENT_DROPDOWNBUTTONCONTROL_RESULTSSHARE:
                 return 'fa-share';

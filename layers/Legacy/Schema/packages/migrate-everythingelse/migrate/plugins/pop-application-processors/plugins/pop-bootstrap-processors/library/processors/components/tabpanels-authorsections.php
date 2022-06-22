@@ -9,21 +9,21 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
     public final const COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'tabpanel-authorsubscribedtotags';
     public final const COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'tabpanel-authorrecommendedposts';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_AUTHORCONTENT],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORPOSTS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORFOLLOWERS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORFOLLOWINGUSERS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS],
+            self::COMPONENT_TABPANEL_AUTHORCONTENT,
+            self::COMPONENT_TABPANEL_AUTHORPOSTS,
+            self::COMPONENT_TABPANEL_AUTHORFOLLOWERS,
+            self::COMPONENT_TABPANEL_AUTHORFOLLOWINGUSERS,
+            self::COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS,
+            self::COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORFOLLOWERS:
             case self::COMPONENT_TABPANEL_AUTHORFOLLOWINGUSERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORUSERS);
@@ -35,11 +35,11 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORCONTENT:
                 $ret = array_merge(
                     $ret,
@@ -120,9 +120,9 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORCONTENT:
                 $ret = array(
                     [

@@ -69,8 +69,8 @@ services:
     PoP\ComponentModel\State\:
         resource: '../src/State/*'
 
-    PoP\ComponentModel\CheckpointProcessors\:
-        resource: '../src/CheckpointProcessors/*'
+    PoP\ComponentModel\Checkpoints\:
+        resource: '../src/Checkpoints/*'
 
     PoP\ComponentModel\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
@@ -96,8 +96,8 @@ services:
     PoP\ComponentModel\ComponentPath\ComponentPathManagerInterface:
         class: \PoP\ComponentModel\ComponentPath\ComponentPathManager
 
-    PoP\ComponentModel\Modules\ComponentHelpersInterface:
-        class: \PoP\ComponentModel\Modules\ComponentHelpers
+    PoP\ComponentModel\ComponentHelpers\ComponentHelpersInterface:
+        class: \PoP\ComponentModel\ComponentHelpers\ComponentHelpers
 
     default_data_structure_formatter:
         class: PoP\ComponentModel\DataStructure\DefaultDataStructureFormatter
@@ -113,12 +113,6 @@ services:
 
     PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface:
         class: \PoP\ComponentModel\ComponentProcessors\ComponentProcessorManager
-
-    PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface:
-        class: \PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManager
-
-    PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface:
-        class: \PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManager
 
     PoP\ComponentModel\Registries\TypeRegistryInterface:
         class: \PoP\ComponentModel\Registries\TypeRegistry

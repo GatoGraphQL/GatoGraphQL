@@ -1,0 +1,103 @@
+{
+    "data": {
+        "post": {
+            "tags": [
+                {
+                    "count": 1,
+                    "description": "",
+                    "id": 11,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "security",
+                    "postCount": 1,
+                    "slug": "security",
+                    "url": "https:\/\/graphql-api.lndo.site\/tag\/security\/",
+                    "urlAbsolutePath": "\/tag\/security\/",
+                    "posts": [
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        }
+                    ]
+                },
+                {
+                    "count": 4,
+                    "description": "",
+                    "id": 6,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "features",
+                    "postCount": 4,
+                    "slug": "features",
+                    "url": "https:\/\/graphql-api.lndo.site\/tag\/features\/",
+                    "urlAbsolutePath": "\/tag\/features\/",
+                    "posts": [
+                        {
+                            "id": 25,
+                            "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 21,
+                            "title": "Customize the schema for each client"
+                        },
+                        {
+                            "id": 19,
+                            "title": "Nested mutations are a must have"
+                        },
+                        {
+                            "id": 16,
+                            "title": "Working on flat chain syntax next"
+                        }
+                    ]
+                }
+            ],
+            "tagsByExcludeIDs": [
+                {
+                    "id": 11
+                },
+                {
+                    "id": 6
+                }
+            ],
+            "tagsByIds": [],
+            "tagsByMetaQuery": [
+                {
+                    "id": 11
+                },
+                {
+                    "id": 6
+                }
+            ],
+            "tagsBySearch": [
+                {
+                    "id": 11
+                }
+            ],
+            "tagsBySlugs": [
+                {
+                    "id": 6
+                }
+            ],
+            "tagsBySortASC": [
+                {
+                    "id": 6,
+                    "name": "features"
+                },
+                {
+                    "id": 11,
+                    "name": "security"
+                }
+            ],
+            "tagsBySortDESC": [
+                {
+                    "id": 11,
+                    "name": "security"
+                },
+                {
+                    "id": 6,
+                    "name": "features"
+                }
+            ]
+        }
+    }
+}

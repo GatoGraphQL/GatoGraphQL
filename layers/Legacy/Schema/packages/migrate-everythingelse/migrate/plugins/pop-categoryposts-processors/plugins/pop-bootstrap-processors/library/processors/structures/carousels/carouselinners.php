@@ -43,55 +43,55 @@ class CPP_Module_Processor_CarouselInners extends PoP_Module_Processor_CarouselI
     public final const COMPONENT_CAROUSELINNER_CATEGORYPOSTS18_CONTENT = 'carouselinner-categoryposts18-content';
     public final const COMPONENT_CAROUSELINNER_CATEGORYPOSTS19_CONTENT = 'carouselinner-categoryposts19-content';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS01],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS02],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS03],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS04],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS05],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS06],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS07],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS08],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS09],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS10],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS11],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS12],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS13],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS14],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS15],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS16],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS17],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS18],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS19],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS01_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS02_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS03_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS04_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS05_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS06_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS07_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS08_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS09_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS10_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS11_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS12_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS13_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS14_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS15_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS16_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS17_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS18_CONTENT],
-            [self::class, self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS19_CONTENT],
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS01,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS02,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS03,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS04,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS05,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS06,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS07,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS08,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS09,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS10,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS11,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS12,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS13,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS14,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS15,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS16,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS17,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS18,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS19,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS01_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS02_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS03_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS04_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS05_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS06_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS07_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS08_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS09_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS10_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS11_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS12_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS13_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS14_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS15_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS16_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS17_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS18_CONTENT,
+            self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS19_CONTENT,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS00:
             case self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS01:
             case self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS02:
@@ -156,7 +156,10 @@ class CPP_Module_Processor_CarouselInners extends PoP_Module_Processor_CarouselI
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -202,7 +205,7 @@ class CPP_Module_Processor_CarouselInners extends PoP_Module_Processor_CarouselI
             self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS18_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
             self::COMPONENT_CAROUSELINNER_CATEGORYPOSTS19_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::COMPONENT_LAYOUT_CONTENT_POST],
         );
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] =$layout;
         }
 

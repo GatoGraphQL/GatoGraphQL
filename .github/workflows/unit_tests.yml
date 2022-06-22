@@ -1,4 +1,4 @@
-name: PHPUnit tests
+name: Unit tests
 on:
     push:
         branches:
@@ -9,7 +9,7 @@ env:
 
 jobs:
     main:
-        name: Execute PHPUnit tests
+        name: Execute unit tests
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
@@ -29,5 +29,5 @@ jobs:
                 uses: "ramsey/composer-install@v1"
 
             -   name: Run tests
-                run: vendor/bin/phpunit
+                run: vendor/bin/phpunit --filter='/^((?!Integration).)*$/'
 

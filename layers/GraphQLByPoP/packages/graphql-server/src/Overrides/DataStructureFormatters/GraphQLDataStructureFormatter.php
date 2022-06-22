@@ -13,7 +13,7 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as U
 /**
  * Change the properties printed for the standard GraphQL response:
  *
- * - extension "entityDBKey" is renamed as "type"
+ * - extension "entityTypeOutputKey" is renamed as "type"
  * - extension "fields" (or "field" if there's one item) instead of "path",
  *   because there are no composable fields
  * - move "location" up from under "extensions"
@@ -102,32 +102,32 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     /**
      * Change properties for GraphQL
      */
-    protected function getObjectEntryExtensions(string $dbKey, int | string $id, array $item): array
+    protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
     {
         if (App::getState('standard-graphql')) {
             $extensions = [
-                'type' => $dbKey,
+                'type' => $typeOutputKey,
                 'id' => $id,
             ];
             $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
             return $extensions;
         }
-        return parent::getObjectEntryExtensions($dbKey, $id, $item);
+        return parent::getObjectEntryExtensions($typeOutputKey, $id, $item);
     }
 
     /**
      * Change properties for GraphQL
      */
-    protected function getSchemaEntryExtensions(string $dbKey, array $item): array
+    protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
         if (App::getState('standard-graphql')) {
             $extensions = [
-                'type' => $dbKey,
+                'type' => $typeOutputKey,
             ];
             $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
             return $extensions;
         }
-        return parent::getSchemaEntryExtensions($dbKey, $item);
+        return parent::getSchemaEntryExtensions($typeOutputKey, $item);
     }
 
     /**

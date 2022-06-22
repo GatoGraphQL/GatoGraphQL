@@ -16,27 +16,27 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
     public final const COMPONENT_BLOCK_TAGPASTEVENTS_SCROLLMAP = 'block-tagpastevents-scrollmap';
     public final const COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP = 'block-tagevents-horizontalscrollmap';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_BLOCK_EVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_PASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_USERS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLLMAP],
-            [self::class, self::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP],
+            self::COMPONENT_BLOCK_EVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_PASTEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_USERS_SCROLLMAP,
+            self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP,
+            self::COMPONENT_BLOCK_TAGEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_TAGPASTEVENTS_SCROLLMAP,
+            self::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
             self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
             self::COMPONENT_BLOCK_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
@@ -44,7 +44,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
         };
     }
 
-    protected function getInnerSubcomponent(array $component)
+    protected function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inner_components = array(
             self::COMPONENT_BLOCK_SEARCHUSERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SEARCHUSERS_SCROLLMAP],
@@ -61,12 +61,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
             self::COMPONENT_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_components[$component[1]] ?? null;
+        return $inner_components[$component->name] ?? null;
     }
 
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
@@ -79,9 +79,9 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
         return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubcomponent(array $component)
+    protected function getControlgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_SCROLLMAP:
             case self::COMPONENT_BLOCK_PASTEVENTS_SCROLLMAP:
                 return [PoP_Events_Module_Processor_CustomControlGroups::class, PoP_Events_Module_Processor_CustomControlGroups::COMPONENT_CONTROLGROUP_BLOCKEVENTLIST];
@@ -114,9 +114,9 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
         return parent::getControlgroupTopSubcomponent($component);
     }
 
-    protected function getComponentTogglemapanchorcontrolPath(array $component)
+    protected function getComponentTogglemapanchorcontrolPath(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
@@ -140,15 +140,15 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
                         [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::COMPONENT_ANCHORCONTROL_TOGGLETAGMAP],
                     ),
                 );
-                return $paths[$component[1]];
+                return $paths[$component->name];
         }
 
         return null;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_SCROLLMAP:
             case self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_SCROLLMAP:
@@ -162,9 +162,9 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
         parent::initModelProps($component, $props);
     }
 
-    public function initWebPlatformModelProps(array $component, array &$props)
+    public function initWebPlatformModelProps(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_USERS_HORIZONTALSCROLLMAP:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:

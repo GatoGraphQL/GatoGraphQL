@@ -5,15 +5,15 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS = 'simplefilterinputcontainer-mymembers';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES = 'simplefilterinputcontainer-communities';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -33,7 +33,7 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'UserCommunities:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -44,13 +44,13 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS => POP_FILTER_MYMEMBERS,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES => POP_FILTER_COMMUNITIES,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

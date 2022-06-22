@@ -15,7 +15,7 @@ class PoP_UserLogin_UserState_Module_SettingsProcessor extends \PoPCMSSchema\Use
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_USERLOGIN_ROUTE_LOGIN => doingPost(),

@@ -14,27 +14,30 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_OFFCANVAS_HOVER],
-            [self::class, self::COMPONENT_OFFCANVAS_NAVIGATOR],
-            [self::class, self::COMPONENT_OFFCANVAS_SIDE],
-            [self::class, self::COMPONENT_OFFCANVAS_TOP],
-            [self::class, self::COMPONENT_OFFCANVAS_BODYSIDEINFO],
-            [self::class, self::COMPONENT_OFFCANVAS_BACKGROUND],
-            [self::class, self::COMPONENT_OFFCANVAS_BODYTABS],
-            [self::class, self::COMPONENT_OFFCANVAS_BODY],
+            self::COMPONENT_OFFCANVAS_HOVER,
+            self::COMPONENT_OFFCANVAS_NAVIGATOR,
+            self::COMPONENT_OFFCANVAS_SIDE,
+            self::COMPONENT_OFFCANVAS_TOP,
+            self::COMPONENT_OFFCANVAS_BODYSIDEINFO,
+            self::COMPONENT_OFFCANVAS_BACKGROUND,
+            self::COMPONENT_OFFCANVAS_BODYTABS,
+            self::COMPONENT_OFFCANVAS_BODY,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
         $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
             case self::COMPONENT_OFFCANVAS_NAVIGATOR:
             case self::COMPONENT_OFFCANVAS_BODY:
@@ -43,21 +46,21 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponents = array(
+                $subcomponents = array(
                     self::COMPONENT_OFFCANVAS_HOVER => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_HOVER],
                     self::COMPONENT_OFFCANVAS_NAVIGATOR => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_NAVIGATOR],
                     self::COMPONENT_OFFCANVAS_BODY => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODY],
                 );
-                $subComponent = $subComponents[$component[1]];
+                $subcomponent = $subcomponents[$component->name];
 
                 if ($load_component) {
-                    $ret[] = $subComponent;
+                    $ret[] = $subcomponent;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $componentAtts = array('empty' => true);
                     $ret[] = [
-                        $subComponent[0],
-                        $subComponent[1],
+                        $subcomponent[0],
+                        $subcomponent[1],
                         $componentAtts
                     ];
                 }
@@ -68,26 +71,26 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                 $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
                     $dependencies = array(
-                        self::COMPONENT_OFFCANVAS_BODYTABS => [self::class, self::COMPONENT_OFFCANVAS_BODY],
-                        self::COMPONENT_OFFCANVAS_BODYSIDEINFO => [self::class, self::COMPONENT_OFFCANVAS_BODY],
+                        self::COMPONENT_OFFCANVAS_BODYTABS => self::COMPONENT_OFFCANVAS_BODY,
+                        self::COMPONENT_OFFCANVAS_BODYSIDEINFO => self::COMPONENT_OFFCANVAS_BODY,
                     );
-                    $load_component = $dependencies[$component[1]] == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_component = $dependencies[$component->name] == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGECOMPONENTGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponents = array(
+                $subcomponents = array(
                     self::COMPONENT_OFFCANVAS_BODYTABS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYTABS],
                     self::COMPONENT_OFFCANVAS_BODYSIDEINFO => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::COMPONENT_PAGESECTION_BODYSIDEINFO],
                 );
-                $subComponent = $subComponents[$component[1]];
+                $subcomponent = $subcomponents[$component->name];
 
                 if ($load_component) {
-                    $ret[] = $subComponent;
+                    $ret[] = $subcomponent;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $componentAtts = array('empty' => true);
                     $ret[] = [
-                        $subComponent[0],
-                        $subComponent[1],
+                        $subcomponent[0],
+                        $subcomponent[1],
                         $componentAtts
                     ];
                 }
@@ -109,9 +112,9 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getHtmltag(array $component, array &$props)
+    protected function getHtmltag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_TOP:
                 return 'header';
         }
@@ -119,11 +122,11 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return parent::getHtmltag($component, $props);
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
             case self::COMPONENT_OFFCANVAS_NAVIGATOR:
             case self::COMPONENT_OFFCANVAS_SIDE:
@@ -148,11 +151,11 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getWrapperClass(array $component, array &$props)
+    protected function getWrapperClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getWrapperClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
             case self::COMPONENT_OFFCANVAS_NAVIGATOR:
             case self::COMPONENT_OFFCANVAS_SIDE:
@@ -170,11 +173,11 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getContentClass(array $component, array &$props)
+    protected function getContentClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getContentClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
             case self::COMPONENT_OFFCANVAS_NAVIGATOR:
             case self::COMPONENT_OFFCANVAS_BODYSIDEINFO:
@@ -186,11 +189,11 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getClosebuttonClass(array $component, array &$props)
+    protected function getClosebuttonClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getClosebuttonClass($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
                 $ret .= ' close-lg';
                 break;
@@ -199,9 +202,9 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return $ret;
     }
 
-    protected function getOffcanvasClass(array $component, array &$props)
+    protected function getOffcanvasClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
             case self::COMPONENT_OFFCANVAS_NAVIGATOR:
             case self::COMPONENT_OFFCANVAS_SIDE:
@@ -220,15 +223,15 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     self::COMPONENT_OFFCANVAS_BODYTABS => 'pagetabs',
                     self::COMPONENT_OFFCANVAS_BODY => 'body',
                 );
-                return $classes[$component[1]];
+                return $classes[$component->name];
         }
 
         return parent::getOffcanvasClass($component, $props);
     }
 
-    protected function addClosebutton(array $component, array &$props)
+    protected function addClosebutton(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
             case self::COMPONENT_OFFCANVAS_NAVIGATOR:
                 return true;
@@ -237,9 +240,9 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
         return parent::addClosebutton($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
             case self::COMPONENT_OFFCANVAS_NAVIGATOR:
             case self::COMPONENT_OFFCANVAS_SIDE:
@@ -265,7 +268,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                 break;
         }
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_OFFCANVAS_HOVER:
                 $this->mergeProp(
                     $component,

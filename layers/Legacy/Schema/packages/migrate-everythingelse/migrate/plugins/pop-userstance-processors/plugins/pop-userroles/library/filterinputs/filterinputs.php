@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
+use PoP\ComponentModel\FilterInputs\AbstractValueToQueryFilterInput;
 
-class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends AbstractFilterInputProcessor
+class PoP_Module_Processor_UserStanceUserRolesFilterInput extends AbstractValueToQueryFilterInput
 {
     public final const FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 
@@ -12,7 +12,10 @@ class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends Abstr
         );
     }
 
-    public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
+    /**
+     * @todo Split this class into multiple ones, returning a single string per each ($filterInput is not valid anymore)
+     */
+    protected function getQueryArgKey(): string
     {
         switch ($filterInput[1]) {
 

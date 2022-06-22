@@ -4,10 +4,10 @@ class PoP_Module_Processor_PostStatusLayouts extends PoP_Module_Processor_PostSt
 {
     public final const COMPONENT_LAYOUTPOST_STATUS = 'layoutpost-status';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUTPOST_STATUS],
+            self::COMPONENT_LAYOUTPOST_STATUS,
         );
     }
 }

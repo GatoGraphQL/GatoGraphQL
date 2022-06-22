@@ -3,20 +3,20 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FullObjectTitleLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_FULLOBJECTTITLE];
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         return array_merge(
-            parent::getLeafComponentFields($component, $props),
+            parent::getLeafComponentFieldNodes($component, $props),
             array(
                 $this->getTitleConditionField($component, $props),
                 $this->getUrlField($component, $props),
@@ -26,39 +26,39 @@ abstract class PoP_Module_Processor_FullObjectTitleLayoutsBase extends PoPEngine
         );
     }
 
-    // function getTitleClass(array $component, array &$props) {
+    // function getTitleClass(\PoP\ComponentModel\Component\Component $component, array &$props) {
         
     //     return 'title';
     // }
     
-    public function getTitleConditionField(array $component, array &$props)
+    public function getTitleConditionField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         
         // By returning 'id', the condition will always be true by default since all objects have an id >= 1
         return 'id';
     }
 
-    public function getUrlField(array $component, array &$props)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'url';
     }
     
-    public function getTitleField(array $component, array &$props)
+    public function getTitleField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
     
-    public function getTitleattrField(array $component, array &$props)
+    public function getTitleattrField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return $this->getTitleField($component, $props);
     }
 
-    public function getHtmlmarkup(array $component, array &$props)
+    public function getHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'h1';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 

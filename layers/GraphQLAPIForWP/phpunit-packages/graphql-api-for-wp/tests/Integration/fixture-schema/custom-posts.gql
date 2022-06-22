@@ -1,0 +1,139 @@
+query {
+  customPosts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
+    __typename
+    ...on IsCustomPost {
+      areCommentsOpen
+      author {
+        id
+        name
+      }
+      commentCount
+      comments {
+        id
+      }
+      content
+      customPostType
+      date
+      dateStr
+      excerpt
+      featuredImage {
+        id
+        src
+      }
+      hasComments
+      hasFeaturedImage
+      id
+      isStatus(status: pending)
+      metaValue(key: "_thumbnail_id")
+      # These ones produce the value of data being inserted to DB, so can't save fixed value for testing
+      # modifiedDate
+      # modifiedDateStr(format: "m-d")
+      rawContent
+      slug
+      status
+      title
+      url
+      urlAbsolutePath
+    }
+  }
+
+  customPostsByAuthorIDs: customPosts(filter: { authorIDs: 5 }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByAuthorSlug: customPosts(filter: { authorSlug: "blogger" }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByCustomPostTypes: customPosts(filter: { customPostTypes: "page" }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByDateQuery: customPosts(filter: { dateQuery: { after: "2022-01-01" } }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByExcludeAuthorIDs: customPosts(filter: { excludeAuthorIDs: 4 }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByExcludeIDs: customPosts(filter: { excludeIDs: [1, 28] }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByHasPassword: customPosts(filter: { hasPassword: true }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByIds: customPosts(filter: { ids: [1, 28] }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByMetaQuery: customPosts(filter: { metaQuery: { key: "_thumbnail_id", compareBy: { key: { operator: EXISTS } } } }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByPassword: customPosts(filter: { password: "password" }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsBySearch: customPosts(filter: { search: "hello" }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsByStatus: customPosts(filter: { status: draft }) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  
+  customPostsSortedASC: customPosts(pagination: { limit: 3 }, sort: { by: TITLE, order: ASC}) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+  customPostsSortedDESC: customPosts(pagination: { limit: 3 }, sort: { by: TITLE, order: DESC}) {
+    __typename
+    ...on IsCustomPost {
+      id
+      title
+    }
+  }
+}

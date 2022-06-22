@@ -3,19 +3,19 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_StructuresBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_CALENDAR];
     }
 
-    public function isCritical(array $component, array &$props)
+    public function isCritical(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // Allow to set the value from above
         return $this->getProp($component, $props, 'critical');
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -28,7 +28,10 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -39,37 +42,37 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($controlgroup = $this->getControlgroupSubcomponent($component)) {
-            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($controlgroup);
+            $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($controlgroup);
         }
 
         return $ret;
     }
 
-    public function getControlgroupSubcomponent(array $component)
+    public function getControlgroupSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return [PoP_Module_Processor_CalendarControlGroups::class, PoP_Module_Processor_CalendarControlGroups::COMPONENT_CALENDARCONTROLGROUP_CALENDAR];
     }
 
-    public function getOptions(array $component, array &$props)
+    public function getOptions(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array();
     }
 
-    public function getImmutableJsconfiguration(array $component, array &$props): array
+    public function getImmutableJsconfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableJsconfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $inner = $this->getInnerSubcomponent($component);
-        $ret['calendar']['layouts'] = $componentprocessor_manager->getProcessor($inner)->getLayoutSubcomponents($inner);
+        $ret['calendar']['layouts'] = $componentprocessor_manager->getComponentProcessor($inner)->getLayoutSubcomponents($inner);
 
         if ($options = $this->getOptions($component, $props)) {
             $ret['calendar']['options'] = $options;
@@ -78,7 +81,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -86,7 +89,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
             $inner = $this->getInnerSubcomponent($component);
-            $layouts = $componentprocessor_manager->getProcessor($inner)->getLayoutSubcomponents($inner);
+            $layouts = $componentprocessor_manager->getComponentProcessor($inner)->getLayoutSubcomponents($inner);
             foreach ($layouts as $layout) {
                 $this->setProp($layout, $props, 'needs-dynamic-data', true);
             }

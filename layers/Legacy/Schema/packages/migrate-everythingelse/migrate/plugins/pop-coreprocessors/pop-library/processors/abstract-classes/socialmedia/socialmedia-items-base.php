@@ -1,43 +1,42 @@
 <?php
-use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_SOCIALMEDIA_ITEM];
     }
 
-    public function getName(array $component): string
+    public function getName(\PoP\ComponentModel\Component\Component $component): string
     {
         return null;
     }
-    public function getShortname(array $component)
+    public function getShortname(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    public function getProvider(array $component)
+    public function getProvider(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getShareurlField(array $component, array &$props)
+    public function getShareurlField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = array(
             $this->getShareurlField($component, $props),
@@ -47,10 +46,8 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $title = sprintf(TranslationAPIFacade::getInstance()->__('Share on %s', 'pop-coreprocessors'), $this->getName($component));
@@ -60,9 +57,9 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         $ret[GD_JS_TITLES]['share'] = $title;
         $ret[GD_JS_FONTAWESOME] = $this->getFontawesome($component, $props);
         
-        $ret['shareurl-field'] = FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+        $ret['shareurl-field'] = TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
             $this->getProp($component, $props, 'succeeding-typeResolver'),
-            $this->getShareurlField($component, $props)
+            $this->getShareurlField($component, $props) // @todo Fix: pass LeafField
         );
 
         if ($provider = $this->getProvider($component)) {

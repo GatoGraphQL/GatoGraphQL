@@ -7,19 +7,19 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
     public final const COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW = 'scrollinner-organizations-fullview';
     public final const COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW = 'scrollinner-individuals-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLLINNER_ORGANIZATIONS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_INDIVIDUALS_DETAILS],
-            [self::class, self::COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW],
+            self::COMPONENT_SCROLLINNER_ORGANIZATIONS_DETAILS,
+            self::COMPONENT_SCROLLINNER_INDIVIDUALS_DETAILS,
+            self::COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW,
+            self::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW,
         );
     }
 
-    public function getLayoutGrid(array $component, array &$props)
+    public function getLayoutGrid(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLLINNER_ORGANIZATIONS_DETAILS:
             case self::COMPONENT_SCROLLINNER_INDIVIDUALS_DETAILS:
             case self::COMPONENT_SCROLLINNER_ORGANIZATIONS_FULLVIEW:
@@ -33,7 +33,10 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
         return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
@@ -45,7 +48,7 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
             self::COMPONENT_SCROLLINNER_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomFullUserLayouts::class, GD_URE_Module_Processor_CustomFullUserLayouts::COMPONENT_LAYOUT_FULLUSER_INDIVIDUAL],
         );
 
-        if ($layout = $layouts[$component[1]] ?? null) {
+        if ($layout = $layouts[$component->name] ?? null) {
             $ret[] = $layout;
         }
 

@@ -1,2 +1,2 @@
 {{! It will be printed inside data-header attr, so we can't use "double quotes" but only 'single quotes'}}
-{{#withModule . 'header-post'}}<div class='{{../class}}' style='{{../style}}'>{{enterModule ../. dbKey=../bs.dbkeys.post-id objectID=../dbObject.post-id}}</div>{{/withModule}}
+{{#withModule . 'header-post'}}<div class='{{../class}}' style='{{../style}}'>{{enterModule ../. typeOutputKey=../bs.outputKeys.post-id objectID=../resolvedObject.post-id}}</div>{{/withModule}}

@@ -41,52 +41,52 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
     public final const COMPONENT_SCROLL_USERS_LIST = 'scroll-users-list';
     public final const COMPONENT_SCROLL_USER_LIST = 'scroll-user-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_POSTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_USERS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_USER_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_CONTENT_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_POSTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_USERS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_USER_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_CONTENT_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_POSTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_TAGS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_USERS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_USER_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_CONTENT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_POSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_USERS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_USER_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_CONTENT_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_POSTS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_USERS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_USER_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_CONTENT_LIST],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_LIST],
-            [self::class, self::COMPONENT_SCROLL_POSTS_LIST],
-            [self::class, self::COMPONENT_SCROLL_USERS_LIST],
-            [self::class, self::COMPONENT_SCROLL_USER_LIST],
-            [self::class, self::COMPONENT_SCROLL_TAGS_LIST],
-            [self::class, self::COMPONENT_SCROLL_POSTS_LINE],
-            [self::class, self::COMPONENT_SCROLL_AUTHORCONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTHORHIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTHORPOSTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_SINGLERELATEDCONTENT_FULLVIEW],
+            self::COMPONENT_SCROLL_CONTENT_NAVIGATOR,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_NAVIGATOR,
+            self::COMPONENT_SCROLL_POSTS_NAVIGATOR,
+            self::COMPONENT_SCROLL_USERS_NAVIGATOR,
+            self::COMPONENT_SCROLL_USER_NAVIGATOR,
+            self::COMPONENT_SCROLL_CONTENT_ADDONS,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_ADDONS,
+            self::COMPONENT_SCROLL_POSTS_ADDONS,
+            self::COMPONENT_SCROLL_USERS_ADDONS,
+            self::COMPONENT_SCROLL_USER_ADDONS,
+            self::COMPONENT_SCROLL_CONTENT_DETAILS,
+            self::COMPONENT_SCROLL_POSTS_DETAILS,
+            self::COMPONENT_SCROLL_TAGS_DETAILS,
+            self::COMPONENT_SCROLL_USERS_DETAILS,
+            self::COMPONENT_SCROLL_USER_DETAILS,
+            self::COMPONENT_SCROLL_CONTENT_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_POSTS_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CONTENT_FULLVIEW,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_SCROLL_POSTS_FULLVIEW,
+            self::COMPONENT_SCROLL_USERS_FULLVIEW,
+            self::COMPONENT_SCROLL_USER_FULLVIEW,
+            self::COMPONENT_SCROLL_CONTENT_THUMBNAIL,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_THUMBNAIL,
+            self::COMPONENT_SCROLL_POSTS_THUMBNAIL,
+            self::COMPONENT_SCROLL_USERS_THUMBNAIL,
+            self::COMPONENT_SCROLL_USER_THUMBNAIL,
+            self::COMPONENT_SCROLL_CONTENT_LIST,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_LIST,
+            self::COMPONENT_SCROLL_POSTS_LIST,
+            self::COMPONENT_SCROLL_USERS_LIST,
+            self::COMPONENT_SCROLL_USER_LIST,
+            self::COMPONENT_SCROLL_TAGS_LIST,
+            self::COMPONENT_SCROLL_POSTS_LINE,
+            self::COMPONENT_SCROLL_AUTHORCONTENT_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTHORHIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTHORPOSTS_FULLVIEW,
+            self::COMPONENT_SCROLL_SINGLERELATEDCONTENT_FULLVIEW,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_CONTENT_NAVIGATOR => [PoP_Module_Processor_CustomScrollInners::class, PoP_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_CONTENT_NAVIGATOR],
@@ -129,80 +129,80 @@ class PoP_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBas
             self::COMPONENT_SCROLL_SINGLERELATEDCONTENT_FULLVIEW => [PoP_Module_Processor_CustomScrollInners::class, PoP_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_SINGLERELATEDCONTENT_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_POSTS_THUMBNAIL],
+            self::COMPONENT_SCROLL_CONTENT_THUMBNAIL,
+            self::COMPONENT_SCROLL_POSTS_THUMBNAIL,
 
-            [self::class, self::COMPONENT_SCROLL_USERS_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_USER_THUMBNAIL],
+            self::COMPONENT_SCROLL_USERS_THUMBNAIL,
+            self::COMPONENT_SCROLL_USER_THUMBNAIL,
         );
         $independentitem_thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_THUMBNAIL],
+            self::COMPONENT_SCROLL_HIGHLIGHTS_THUMBNAIL,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_LIST],
-            [self::class, self::COMPONENT_SCROLL_TAGS_LIST],
-            [self::class, self::COMPONENT_SCROLL_POSTS_LIST],
+            self::COMPONENT_SCROLL_CONTENT_LIST,
+            self::COMPONENT_SCROLL_TAGS_LIST,
+            self::COMPONENT_SCROLL_POSTS_LIST,
 
-            [self::class, self::COMPONENT_SCROLL_USERS_LIST],
-            [self::class, self::COMPONENT_SCROLL_USER_LIST],
+            self::COMPONENT_SCROLL_USERS_LIST,
+            self::COMPONENT_SCROLL_USER_LIST,
         );
         $independentitem_lists = array(
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_LIST],
+            self::COMPONENT_SCROLL_HIGHLIGHTS_LIST,
         );
         $lines = array(
-            [self::class, self::COMPONENT_SCROLL_POSTS_LINE],
+            self::COMPONENT_SCROLL_POSTS_LINE,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_POSTS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_TAGS_DETAILS],
+            self::COMPONENT_SCROLL_CONTENT_DETAILS,
+            self::COMPONENT_SCROLL_POSTS_DETAILS,
+            self::COMPONENT_SCROLL_TAGS_DETAILS,
 
-            [self::class, self::COMPONENT_SCROLL_USERS_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_USER_DETAILS],
+            self::COMPONENT_SCROLL_USERS_DETAILS,
+            self::COMPONENT_SCROLL_USER_DETAILS,
         );
         $navigators = array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_POSTS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_USERS_NAVIGATOR],
-            [self::class, self::COMPONENT_SCROLL_USER_NAVIGATOR],
+            self::COMPONENT_SCROLL_CONTENT_NAVIGATOR,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_NAVIGATOR,
+            self::COMPONENT_SCROLL_POSTS_NAVIGATOR,
+            self::COMPONENT_SCROLL_USERS_NAVIGATOR,
+            self::COMPONENT_SCROLL_USER_NAVIGATOR,
         );
         $addons = array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_POSTS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_USERS_ADDONS],
-            [self::class, self::COMPONENT_SCROLL_USER_ADDONS],
+            self::COMPONENT_SCROLL_CONTENT_ADDONS,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_ADDONS,
+            self::COMPONENT_SCROLL_POSTS_ADDONS,
+            self::COMPONENT_SCROLL_USERS_ADDONS,
+            self::COMPONENT_SCROLL_USER_ADDONS,
         );
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_POSTS_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_CONTENT_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_POSTS_SIMPLEVIEW,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_CONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_HIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_POSTS_FULLVIEW],
+            self::COMPONENT_SCROLL_CONTENT_FULLVIEW,
+            self::COMPONENT_SCROLL_HIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_SCROLL_POSTS_FULLVIEW,
 
-            [self::class, self::COMPONENT_SCROLL_USERS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_USER_FULLVIEW],
+            self::COMPONENT_SCROLL_USERS_FULLVIEW,
+            self::COMPONENT_SCROLL_USER_FULLVIEW,
 
-            [self::class, self::COMPONENT_SCROLL_AUTHORCONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTHORHIGHLIGHTS_FULLVIEW],
-            [self::class, self::COMPONENT_SCROLL_AUTHORPOSTS_FULLVIEW],
+            self::COMPONENT_SCROLL_AUTHORCONTENT_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTHORHIGHLIGHTS_FULLVIEW,
+            self::COMPONENT_SCROLL_AUTHORPOSTS_FULLVIEW,
 
-            [self::class, self::COMPONENT_SCROLL_SINGLERELATEDCONTENT_FULLVIEW],
+            self::COMPONENT_SCROLL_SINGLERELATEDCONTENT_FULLVIEW,
         );
 
         $extra_class = '';

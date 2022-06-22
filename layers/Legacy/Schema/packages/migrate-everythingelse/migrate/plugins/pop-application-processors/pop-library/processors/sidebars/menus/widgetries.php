@@ -5,18 +5,21 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
 {
     public final const COMPONENT_WIDGET_MENU_ABOUT = 'widget-menu-about';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_MENU_ABOUT],
+            self::COMPONENT_WIDGET_MENU_ABOUT,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_MENU_ABOUT:
                 $ret[] = [PoP_Module_Processor_IndentMenuLayouts::class, PoP_Module_Processor_IndentMenuLayouts::COMPONENT_LAYOUT_MENU_INDENT];
                 break;
@@ -25,7 +28,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $menu = TranslationAPIFacade::getInstance()->__('Section links', 'poptheme-wassup');
 
@@ -33,9 +36,9 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::COMPONENT_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
-    public function getFontawesome(array $component, array &$props)
+    public function getFontawesome(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $menu = 'fa-sitemap';
 
@@ -43,21 +46,21 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::COMPONENT_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $fontawesomes[$component[1]] ?? null;
+        return $fontawesomes[$component->name] ?? null;
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_MENU_ABOUT:
                 return 'panel-body';
         }
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_MENU_ABOUT:
                 return '';
         }

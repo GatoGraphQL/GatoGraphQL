@@ -5,17 +5,17 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
     public final const COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS = 'layout-previewuser-organization-details';
     public final const COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS = 'layout-previewuser-individual-details';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS],
+            self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS,
+            self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS,
         );
     }
 
-    public function getQuicklinkgroupTopSubcomponent(array $component)
+    public function getQuicklinkgroupTopSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USER];
@@ -24,9 +24,9 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::getQuicklinkgroupTopSubcomponent($component);
     }
 
-    public function getTitleHtmlmarkup(array $component, array &$props)
+    public function getTitleHtmlmarkup(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return 'h3';
@@ -35,9 +35,9 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubcomponent(array $component)
+    public function getQuicklinkgroupBottomSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::COMPONENT_QUICKLINKGROUP_USERBOTTOM];
@@ -46,11 +46,11 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::getQuicklinkgroupBottomSubcomponent($component);
     }
 
-    public function getBelowexcerptLayoutSubcomponents(array $component)
+    public function getBelowexcerptLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowexcerptLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
                 $ret[] = [GD_URE_Module_Processor_LayoutMultipleComponents::class, GD_URE_Module_Processor_LayoutMultipleComponents::COMPONENT_MULTICOMPONENT_ORGANIZATIONDETAILS];
                 if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
@@ -66,11 +66,11 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getBelowavatarLayoutSubcomponents(array $component)
+    public function getBelowavatarLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getBelowavatarLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
@@ -80,10 +80,10 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getUseravatarSubcomponent(array $component)
+    public function getUseravatarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($component[1]) {
+            switch ($component->name) {
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
                 case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                     return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::COMPONENT_LAYOUT_USERAVATAR_150_RESPONSIVE];
@@ -94,9 +94,9 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
     }
 
 
-    public function showExcerpt(array $component)
+    public function showExcerpt(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return true;
@@ -105,9 +105,9 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::showExcerpt($component);
     }
 
-    public function horizontalLayout(array $component)
+    public function horizontalLayout(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return true;
@@ -116,11 +116,11 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return parent::horizontalLayout($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::COMPONENT_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 $ret[GD_JS_CLASSES]['belowavatar'] = 'bg-info text-info belowavatar';

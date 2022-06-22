@@ -24,6 +24,10 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->commentTypeAPI ??= $this->instanceManager->getInstance(CommentTypeAPIInterface::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<string,mixed>
+     */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         return [
@@ -47,7 +51,11 @@ class CommentTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
         return $this->getCommentTypeAPI()->getComments($query, $options);
     }
 
-    public function executeQueryIDs($query): array
+    /**
+     * @param array<string,mixed> $query
+     * @return array<string|int>
+     */
+    public function executeQueryIDs(array $query): array
     {
         $options = [
             QueryOptions::RETURN_TYPE => ReturnTypes::IDS,

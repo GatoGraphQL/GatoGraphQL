@@ -24,7 +24,7 @@ class Directive extends AbstractAst
         $this->setArguments($arguments);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         $strDirectiveArguments = '';
         if ($this->arguments !== []) {

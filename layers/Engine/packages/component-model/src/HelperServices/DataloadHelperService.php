@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\App;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
 class DataloadHelperService implements DataloadHelperServiceInterface
@@ -46,7 +47,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
      * ObjectTypeResolverInterface, to make it easy within the application to check
      * for this result without checking in advance what's the typeResolver
      */
-    public function getTypeResolverFromSubcomponentDataField(RelationalTypeResolverInterface $relationalTypeResolver, string $subcomponent_data_field): ?RelationalTypeResolverInterface
+    public function getTypeResolverFromSubcomponentField(RelationalTypeResolverInterface $relationalTypeResolver, FieldInterface $field): ?RelationalTypeResolverInterface
     {
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
@@ -62,19 +63,19 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         // If this field doesn't have a typeResolver, show a schema error
         $variables = [];
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($subcomponent_data_field, $variables, $objectTypeFieldResolutionFeedbackStore);
-        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $subcomponent_data_field);
+        $subcomponentFieldNodeTypeResolver = $objectTypeResolver->getFieldTypeResolver($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $field);
         if (
-            $subcomponentFieldTypeResolver === null
-            || !($subcomponentFieldTypeResolver instanceof RelationalTypeResolverInterface)
+            $subcomponentFieldNodeTypeResolver === null
+            || !($subcomponentFieldNodeTypeResolver instanceof RelationalTypeResolverInterface)
         ) {
             // But if there are no ObjectTypeFieldResolvers, then skip adding an error here, since that error will have been added already
             // Otherwise, there will appear 2 error messages:
             // 1. No ObjectTypeFieldResolver
             // 2. No FieldDefaultTypeDataLoader
-            if ($objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
+            if ($objectTypeResolver->hasObjectTypeFieldResolversForField($field)) {
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
-                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
+                $subcomponent_data_field_outputkey = $field->getOutputKey();
                 App::getFeedbackStore()->schemaFeedbackStore->addError(
                     new SchemaFeedback(
                         new FeedbackItemResolution(
@@ -86,12 +87,12 @@ class DataloadHelperService implements DataloadHelperServiceInterface
                         ),
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
-                        $subcomponent_data_field,
+                        $field,
                     )
                 );
             }
             return null;
         }
-        return $subcomponentFieldTypeResolver;
+        return $subcomponentFieldNodeTypeResolver;
     }
 }

@@ -20,26 +20,26 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
     public final const COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW = 'layout-singlemultiplepost-fullview';
     public final const COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT = 'layout-multiplepost-simpleview-abovecontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_THUMBNAIL],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_LIST],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_LINE],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_RELATED],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_EDIT],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW],
-            [self::class, self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT],
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_THUMBNAIL,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_LIST,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_LINE,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_RELATED,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_EDIT,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_FULLVIEW,
+            self::COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW,
+            self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW,
+            self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT,
         );
     }
 
-    public function getDefaultLayoutSubcomponent(array $component)
+    public function getDefaultLayoutSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $defaults = array(
             self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
@@ -56,16 +56,16 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
             self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::COMPONENT_SINGLELAYOUT_FULLVIEW_POST],
         );
 
-        if ($default = $defaults[$component[1]] ?? null) {
+        if ($default = $defaults[$component->name] ?? null) {
             return $default;
         }
 
         return parent::getDefaultLayoutSubcomponent($component);
     }
 
-    public function getMultipleLayoutSubcomponents(array $component)
+    public function getMultipleLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR:
             case self::COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS:
             case self::COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS:
@@ -84,7 +84,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                     self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => POP_MULTILAYOUT_HANDLE_SINGLEPOSTCONTENT,
                     self::COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT => POP_MULTILAYOUT_HANDLE_POSTABOVECONTENT,
                 );
-                $handle = $handles[$component[1]] ?? POP_MULTILAYOUT_HANDLE_POSTCONTENT;
+                $handle = $handles[$component->name] ?? POP_MULTILAYOUT_HANDLE_POSTCONTENT;
 
                 $formats = array(
                     self::COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR => POP_FORMAT_NAVIGATOR,
@@ -100,7 +100,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                     self::COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW => POP_FORMAT_FULLVIEW,
                     self::COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => POP_FORMAT_FULLVIEW,
                 );
-                $format = $formats[$component[1]] ?? '';
+                $format = $formats[$component->name] ?? '';
 
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
                 return $multilayout_manager->getLayoutComponents($handle, $format);

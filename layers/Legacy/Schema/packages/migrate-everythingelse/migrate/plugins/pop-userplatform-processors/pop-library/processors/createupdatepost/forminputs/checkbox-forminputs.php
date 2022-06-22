@@ -7,16 +7,16 @@ class PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs extends PoP_Module
 {
     public final const COMPONENT_FORMINPUT_CUP_KEEPASDRAFT = 'forminput-keepasdraft';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT],
+            self::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT:
                 return TranslationAPIFacade::getInstance()->__('Keep as draft?', 'poptheme-wassup');
         }
@@ -24,9 +24,9 @@ class PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs extends PoP_Module
         return parent::getLabelText($component, $props);
     }
 
-    public function getDbobjectField(array $component): ?string
+    public function getDbobjectField(\PoP\ComponentModel\Component\Component $component): ?string
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::DRAFT], 'is-draft');
         }

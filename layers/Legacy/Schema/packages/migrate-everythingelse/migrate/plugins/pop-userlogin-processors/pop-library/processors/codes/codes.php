@@ -5,16 +5,16 @@ class PoP_UserLogin_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTML
 {
     public final const COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN = 'htmlcode-usermustbeloggedin';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN],
+            self::COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN,
         );
     }
 
-    public function getHtmlTag(array $component, array &$props)
+    public function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN:
                 return 'p';
         }
@@ -22,9 +22,9 @@ class PoP_UserLogin_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTML
         return parent::getHtmlTag($component, $props);
     }
 
-    public function getCode(array $component, array &$props)
+    public function getCode(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN:
                 return TranslationAPIFacade::getInstance()->__('You need to be logged in to access this page.', 'pop-userlogin-processors');
         }

@@ -6,19 +6,19 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST = 'layout-feedbackmessage-itemlist';
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY = 'layout-feedbackmessage-empty';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST],
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST,
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_EMPTY,
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
                 $names = $this->getProp($component, $props, 'pluralname');
                 $ret['noresults'] = sprintf(
@@ -35,9 +35,9 @@ class PoP_Module_Processor_DomainFeedbackMessageLayouts extends PoP_Module_Proce
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST:
                 $this->setProp($component, $props, 'pluralname', TranslationAPIFacade::getInstance()->__('results', 'poptheme-wassup'));
                 break;

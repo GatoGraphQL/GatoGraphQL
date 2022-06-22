@@ -2,36 +2,36 @@
 
 abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_PAGESECTION_MODAL];
     }
 
-    public function getHeaderClass(array $component)
+    public function getHeaderClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getDialogClasses(array $component)
+    public function getDialogClasses(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
-    public function getBodyClasses(array $component)
+    public function getBodyClasses(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = array();
 
-        foreach ($this->getSubcomponents($component) as $subComponent) {
-            $subcomponentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($subComponent);
+        foreach ($this->getSubcomponents($component) as $subcomponent) {
+            $subcomponentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($subcomponent);
             $ret[$subcomponentOutputName] = 'modal-body';
         }
 
         return $ret;
     }
-    public function getHeaderTitles(array $component)
+    public function getHeaderTitles(\PoP\ComponentModel\Component\Component $component)
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -39,21 +39,21 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
             $ret[GD_JS_CLASSES]['header'] = $header_class;
         }
         // Only send the classes/titles that are targetted to any of the subcomponents
-        $subComponents = array_flip($this->getInnerSubcomponents($component));
-        if ($dialogs_class = array_intersect_key($this->getDialogClasses($component), $subComponents)) {
+        $subcomponents = array_flip($this->getInnerSubcomponents($component));
+        if ($dialogs_class = array_intersect_key($this->getDialogClasses($component), $subcomponents)) {
             $ret[GD_JS_CLASSES]['dialogs'] = $dialogs_class;
         }
-        if ($bodies_class = array_intersect_key($this->getBodyClasses($component), $subComponents)) {
+        if ($bodies_class = array_intersect_key($this->getBodyClasses($component), $subcomponents)) {
             $ret[GD_JS_CLASSES]['bodies'] = $bodies_class;
         }
-        if ($headerTitles = array_intersect_key($this->getHeaderTitles($component), $subComponents)) {
+        if ($headerTitles = array_intersect_key($this->getHeaderTitles($component), $subcomponents)) {
             $ret[GD_JS_TITLES]['headers'] = $headerTitles;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         $this->mergeProp(
@@ -67,7 +67,7 @@ abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Pro
         parent::initModelProps($component, $props);
     }
 
-    protected function getInitjsBlockbranches(array $component, array &$props)
+    protected function getInitjsBlockbranches(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getInitjsBlockbranches($component, $props);
 

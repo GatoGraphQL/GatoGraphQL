@@ -4,16 +4,16 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
 {
     public final const COMPONENT_FORMINNER_LOCATIONPOSTLINK = 'forminner-locationpostlink';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
             [GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::class, GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners::COMPONENT_FORMINNER_LOCATIONPOSTLINK],
         );
     }
 
-    protected function isLink(array $component)
+    protected function isLink(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return true;
         }
@@ -21,18 +21,18 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         return parent::isLink($component);
     }
 
-    protected function volunteering(array $component)
+    protected function volunteering(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return true;
         }
 
         return parent::volunteering($component);
     }
-    protected function getLocationsInput(array $component)
+    protected function getLocationsInput(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::COMPONENT_EM_FORMCOMPONENT_TYPEAHEADMAP];
         }
@@ -40,7 +40,10 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -50,7 +53,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 return array_merge(
                     $ret,
@@ -61,12 +64,12 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners 
                 );
         }
 
-        return parent::getComponentSubcomponents($component, $props);
+        return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINNER_LOCATIONPOSTLINK:
                 // Make it into left/right columns
                 $rightside_component = [PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::class, PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents::COMPONENT_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE];

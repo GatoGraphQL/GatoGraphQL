@@ -7,5 +7,5 @@ services:
     PoPCMSSchema\Media\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
 
-    PoPCMSSchema\Media\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPCMSSchema\Media\FilterInputs\:
+        resource: '../src/FilterInputs/*'

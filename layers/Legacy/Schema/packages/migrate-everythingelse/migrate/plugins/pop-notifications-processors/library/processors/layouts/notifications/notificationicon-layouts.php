@@ -4,10 +4,10 @@ class PoP_Module_Processor_NotificationActionIconLayouts extends PoP_Module_Proc
 {
     public final const COMPONENT_LAYOUT_NOTIFICATIONICON = 'layout-notificationicon';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_NOTIFICATIONICON],
+            self::COMPONENT_LAYOUT_NOTIFICATIONICON,
         );
     }
 }

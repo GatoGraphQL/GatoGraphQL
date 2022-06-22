@@ -6,18 +6,18 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
     public final const COMPONENT_TABPANEL_PASTEVENTS = 'tabpanel-pastevents';
     public final const COMPONENT_TABPANEL_EVENTSCALENDAR = 'tabpanel-eventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_EVENTS],
-            [self::class, self::COMPONENT_TABPANEL_PASTEVENTS],
-            [self::class, self::COMPONENT_TABPANEL_EVENTSCALENDAR],
+            self::COMPONENT_TABPANEL_EVENTS,
+            self::COMPONENT_TABPANEL_PASTEVENTS,
+            self::COMPONENT_TABPANEL_EVENTSCALENDAR,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_EVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTIONCALENDAR);
         }
@@ -25,11 +25,11 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_EVENTS:
                 $ret = array_merge(
                     $ret,
@@ -72,9 +72,9 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_EVENTS:
                 return array(
                     [

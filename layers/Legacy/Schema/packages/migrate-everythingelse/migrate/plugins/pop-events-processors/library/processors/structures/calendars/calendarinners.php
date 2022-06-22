@@ -6,20 +6,23 @@ class GD_EM_Module_Processor_CalendarInners extends PoP_Module_Processor_Calenda
     public final const COMPONENT_CALENDARINNER_EVENTS_ADDONS = 'calendarinner-events-addons';
     public final const COMPONENT_CALENDARINNER_EVENTS_MAIN = 'calendarinner-events-main';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CALENDARINNER_EVENTS_NAVIGATOR],
-            [self::class, self::COMPONENT_CALENDARINNER_EVENTS_ADDONS],
-            [self::class, self::COMPONENT_CALENDARINNER_EVENTS_MAIN],
+            self::COMPONENT_CALENDARINNER_EVENTS_NAVIGATOR,
+            self::COMPONENT_CALENDARINNER_EVENTS_ADDONS,
+            self::COMPONENT_CALENDARINNER_EVENTS_MAIN,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CALENDARINNER_EVENTS_NAVIGATOR:
             case self::COMPONENT_CALENDARINNER_EVENTS_ADDONS:
             case self::COMPONENT_CALENDARINNER_EVENTS_MAIN:

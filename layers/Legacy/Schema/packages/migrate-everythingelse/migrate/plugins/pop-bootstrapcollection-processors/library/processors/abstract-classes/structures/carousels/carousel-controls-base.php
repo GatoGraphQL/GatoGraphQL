@@ -2,12 +2,12 @@
 
 abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_CAROUSEL_CONTROLS];
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -16,40 +16,40 @@ abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getControlClass(array $component)
+    public function getControlClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'carousel-control';
     }
-    public function getControlPrevClass(array $component)
+    public function getControlPrevClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getControlNextClass(array $component)
+    public function getControlNextClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getTitleClass(array $component)
+    public function getTitleClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getTitle(array $component, array &$props)
+    public function getTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
-    protected function getTitleLink(array $component, array &$props)
+    protected function getTitleLink(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    protected function getTarget(array $component, array &$props)
+    protected function getTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    protected function getHtmlTag(array $component, array &$props)
+    protected function getHtmlTag(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'h4';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
@@ -77,7 +77,7 @@ abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $component, array &$props): array
+    public function getMutableonrequestConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($component, $props);
 
@@ -99,7 +99,7 @@ abstract class PoP_Module_Processor_CarouselControlsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->setProp($component, $props, 'title-class', $this->getTitleClass($component));
         $this->setProp($component, $props, 'html-tag', $this->getHtmlTag($component, $props));

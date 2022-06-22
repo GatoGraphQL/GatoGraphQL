@@ -17,13 +17,13 @@ class PoP_WebPlatform_CSSConverter_Hooks
         );
     }
 
-    public function getImmutableConfiguration($configuration, array $component, array $props, $processor)
+    public function getImmutableConfiguration($configuration, \PoP\ComponentModel\Component\Component $component, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed
         // Replace classes with styles, if set in the general props
         if ($processor->getProp($component, $props, 'convert-classes-to-styles')) {
-            $componentOutputName = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+            $componentOutputName = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
             // Classes to convert to styles are set in $configuration[GD_JS_CLASS] and $configuration[GD_JS_CLASSES]
             if ($allclasses = array_filter(explode(' ', $configuration[GD_JS_CLASS]))) {
@@ -53,7 +53,7 @@ class PoP_WebPlatform_CSSConverter_Hooks
         return $configuration;
     }
 
-    public function getMutableonrequestConfiguration($configuration, array $component, array $props, $processor)
+    public function getMutableonrequestConfiguration($configuration, \PoP\ComponentModel\Component\Component $component, array $props, $processor)
     {
 
         // After saving the configuration, we can manipulate it, to convert values if needed

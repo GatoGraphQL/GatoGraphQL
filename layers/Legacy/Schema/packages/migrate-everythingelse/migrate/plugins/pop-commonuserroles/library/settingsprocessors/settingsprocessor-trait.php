@@ -1,6 +1,6 @@
 <?php
 
-use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 
 trait PoP_CommonUserRoles_Module_SettingsProcessor_Trait
 {
@@ -18,12 +18,14 @@ trait PoP_CommonUserRoles_Module_SettingsProcessor_Trait
         );
     }
 
-    // function getCheckpointConfiguration() {
-    public function getCheckpoints()
+    /**
+     * @return array<string,CheckpointInterface[]>
+     */
+    public function getRouteCheckpoints(): array
     {
         return array(
-            POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION => UserStateCheckpointSets::NOTLOGGEDIN,
-            POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL => UserStateCheckpointSets::NOTLOGGEDIN,
+            POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION => [$this->getDoingPostUserNotLoggedInAggregateCheckpoint()],
+            POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL => [$this->getDoingPostUserNotLoggedInAggregateCheckpoint()],
             POP_COMMONUSERROLES_ROUTE_EDITPROFILEORGANIZATION => POPCOMMONUSERROLES_CHECKPOINTCONFIGURATION_PROFILEORGANIZATION_DATAFROMSERVER,//PoP_CommonUserRoles_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPCOMMONUSERROLES_CHECKPOINTCONFIGURATION_PROFILEORGANIZATION_DATAFROMSERVER),
             POP_COMMONUSERROLES_ROUTE_EDITPROFILEINDIVIDUAL => POPCOMMONUSERROLES_CHECKPOINTCONFIGURATION_PROFILEINDIVIDUAL_DATAFROMSERVER,//PoP_CommonUserRoles_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(POPCOMMONUSERROLES_CHECKPOINTCONFIGURATION_PROFILEINDIVIDUAL_DATAFROMSERVER),
         );

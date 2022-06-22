@@ -6,16 +6,16 @@ class PoP_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Processor
     public final const COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL = 'layout-usersidebar-horizontal';
     public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL = 'layout-usersidebar-compacthorizontal';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL => [PoP_Module_Processor_CustomUserLayoutSidebarInners::class, PoP_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL],
@@ -23,16 +23,16 @@ class PoP_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Processor
             self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL => [PoP_Module_Processor_CustomUserLayoutSidebarInners::class, PoP_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL:
                 $this->appendProp($component, $props, 'class', 'vertical');
                 break;

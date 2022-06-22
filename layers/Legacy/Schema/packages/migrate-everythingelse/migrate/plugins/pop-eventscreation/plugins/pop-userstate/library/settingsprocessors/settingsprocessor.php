@@ -11,7 +11,7 @@ class PoP_EventsCreation_UserState_Module_SettingsProcessor extends \PoPCMSSchem
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_EVENTSCREATION_ROUTE_ADDEVENT => PoP_ContentCreation_UserState_Utils::requireUserStateForContentcreationPages(),

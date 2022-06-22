@@ -9,19 +9,19 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
     public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION = 'layout-usersidebar-compacthorizontal-organization';
     public final const COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL = 'layout-usersidebar-compacthorizontal-individual';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION],
-            [self::class, self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
+            self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION,
+            self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $sidebarinners = array(
             self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION],
@@ -32,16 +32,16 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
             self::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::COMPONENT_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL],
         );
 
-        if ($inner = $sidebarinners[$component[1]] ?? null) {
+        if ($inner = $sidebarinners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION:
             case self::COMPONENT_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL:
                 $this->appendProp($component, $props, 'class', 'vertical');

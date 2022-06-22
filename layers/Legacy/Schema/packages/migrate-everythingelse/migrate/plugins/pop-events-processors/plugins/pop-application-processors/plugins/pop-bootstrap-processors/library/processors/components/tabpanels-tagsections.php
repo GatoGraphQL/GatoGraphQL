@@ -6,18 +6,18 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
     public final const COMPONENT_TABPANEL_TAGPASTEVENTS = 'tabpanel-tagpastevents';
     public final const COMPONENT_TABPANEL_TAGEVENTSCALENDAR = 'tabpanel-tageventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_TAGEVENTS],
-            [self::class, self::COMPONENT_TABPANEL_TAGPASTEVENTS],
-            [self::class, self::COMPONENT_TABPANEL_TAGEVENTSCALENDAR],
+            self::COMPONENT_TABPANEL_TAGEVENTS,
+            self::COMPONENT_TABPANEL_TAGPASTEVENTS,
+            self::COMPONENT_TABPANEL_TAGEVENTSCALENDAR,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGEVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTIONCALENDAR);
         }
@@ -25,11 +25,11 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGEVENTS:
                 $ret = array_merge(
                     $ret,
@@ -72,9 +72,9 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGEVENTS:
                 $ret = array(
                     [

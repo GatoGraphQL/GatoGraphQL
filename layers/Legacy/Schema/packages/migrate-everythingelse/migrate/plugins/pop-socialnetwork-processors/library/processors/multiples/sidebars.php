@@ -8,21 +8,21 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public final const COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR = 'multiple-authorsubscribedtotags-sidebar';
     public final const COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR = 'multiple-authorrecommendedposts-sidebar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR],
-            [self::class, self::COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR],
+            self::COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR,
+            self::COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR,
         );
     }
 
-    public function getInnerSubcomponents(array $component): array
+    public function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getInnerSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
          // Add also the filter block for the Single Related Content, etc
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR:
@@ -35,7 +35,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                     self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR],
                     self::COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::COMPONENT_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
                 );
-                if ($filter = $filters[$component[1]] ?? null) {
+                if ($filter = $filters[$component->name] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -52,7 +52,7 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getScreen(array $component)
+    public function getScreen(\PoP\ComponentModel\Component\Component $component)
     {
         $screens = array(
             self::COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR => POP_SCREEN_AUTHORUSERS,
@@ -60,16 +60,16 @@ class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR => POP_SCREEN_AUTHORTAGS,
             self::COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$component[1]] ?? null) {
+        if ($screen = $screens[$component->name] ?? null) {
             return $screen;
         }
 
         return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $component)
+    public function getScreengroup(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR:
             case self::COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR:

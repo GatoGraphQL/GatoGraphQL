@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORMGROUP];
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
@@ -17,41 +17,44 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
         return $ret;
     }
 
-    public function getLabel(array $component, array &$props)
+    public function getLabel(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getComponentSubcomponent(array $component)
+    public function getComponentSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getLabelClass(array $component)
+    public function getLabelClass(\PoP\ComponentModel\Component\Component $component)
     {
         return 'control-label';
     }
-    public function getFormcontrolClass(array $component)
+    public function getFormcontrolClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
-    public function getInfo(array $component, array &$props)
+    public function getInfo(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
-    public function getDescription(array $component, array &$props)
+    public function getDescription(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
         $ret[] = $this->getComponentSubcomponent($component);
         return $ret;
     }
 
-    public function getComponentName(array $component)
+    public function getComponentName(\PoP\ComponentModel\Component\Component $component)
     {
 
         // This property is needed for the inheriting class FormComponentGroupsBase, to print the name of the formcomponent
@@ -59,15 +62,15 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
         return $this->getComponentSubcomponent($component);
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $component = $this->getComponentSubcomponent($component);
-        $component_processor = $componentprocessor_manager->getProcessor($component);
-        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
+        $component_processor = $componentprocessor_manager->getComponentProcessor($component);
+        $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['component'] = \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName($component);
 
         // Re-use the label from the component
         if ($label = $this->getProp($component, $props, 'label')) {
@@ -92,7 +95,7 @@ abstract class PoP_Module_Processor_FormGroupsBase extends PoPEngine_QueryDataCo
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // No need for the input to have a label or a placeholder (for the text inputs) anymore

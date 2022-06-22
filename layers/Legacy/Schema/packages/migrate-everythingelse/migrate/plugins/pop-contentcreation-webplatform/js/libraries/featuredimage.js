@@ -85,7 +85,7 @@ window.pop.FeaturedImage = {
 						));
 					});
 
-					// Finally, having recreated the datum as the dbObject, it can be merged
+					// Finally, having recreated the datum as the resolvedObject, it can be merged
 					that.merge(domain, pageSection, block, featuredImage, datum);
 				}
 				
@@ -137,7 +137,7 @@ window.pop.FeaturedImage = {
 		var that = this;
 
 		var context = {
-			dbObject: datum,
+			resolvedObject: datum,
 		};
 		var options = {
 			operation: pop.c.URLPARAM_OPERATION_REPLACE,

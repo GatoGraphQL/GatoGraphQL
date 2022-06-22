@@ -23,34 +23,34 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
     public final const COMPONENT_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW = 'scroll-categoryposts18-simpleview';
     public final const COMPONENT_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW = 'scroll-categoryposts19-simpleview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS03_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS04_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS05_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS06_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS07_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS08_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS09_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS10_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS11_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS12_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS13_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS14_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS15_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS16_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS17_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS03_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS04_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS05_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS06_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS07_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS08_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS09_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS10_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS11_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS12_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS13_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS14_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS15_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS16_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS17_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW,
         );
     }
 
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_ScrollInners::class, PoP_CategoryPosts_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW],
@@ -75,38 +75,38 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
             self::COMPONENT_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_ScrollInners::class, PoP_CategoryPosts_Module_Processor_ScrollInners::COMPONENT_SCROLLINNER_CATEGORYPOSTS19_SIMPLEVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $simpleviews = array(
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS03_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS04_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS05_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS06_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS07_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS08_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS09_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS10_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS11_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS12_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS13_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS14_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS15_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS16_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS17_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW],
-            [self::class, self::COMPONENT_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW],
+            self::COMPONENT_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS03_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS04_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS05_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS06_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS07_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS08_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS09_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS10_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS11_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS12_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS13_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS14_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS15_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS16_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS17_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW,
+            self::COMPONENT_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW,
         );
 
         $extra_class = '';

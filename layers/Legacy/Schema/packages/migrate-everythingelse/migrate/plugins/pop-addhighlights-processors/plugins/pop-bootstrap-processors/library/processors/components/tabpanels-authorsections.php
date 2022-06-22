@@ -4,16 +4,16 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
 {
     public final const COMPONENT_TABPANEL_AUTHORHIGHLIGHTS = 'tabpanel-authorhighlights';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS],
+            self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
         }
@@ -21,17 +21,17 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 $ret = array_merge(
                     $ret,
                     array(
                         [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
-                        // [self::class, self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_DETAILS],
+                        // self::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_DETAILS,
                         [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST],
                         [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL],
                     )
@@ -42,9 +42,9 @@ class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHORHIGHLIGHTS:
                 $ret = array(
                     [

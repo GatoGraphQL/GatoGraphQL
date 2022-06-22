@@ -5,8 +5,8 @@
 	{{!http://arshaw.com/fullcalendar/docs/event_data/Event_Source_Object/}}
 	var events_data = [];
 	
-	{{#each dbObjectIDs}}
-		{{#withDBObject ../dbKey this context=../.}}
+	{{#each objectIDs}}
+		{{#withDBObject ../typeOutputKey this context=../.}}
 			events_data.push({
 				id: "{{id}}",
 				title: "{{title}}",

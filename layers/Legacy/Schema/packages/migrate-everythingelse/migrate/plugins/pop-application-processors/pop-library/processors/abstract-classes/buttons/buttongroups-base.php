@@ -5,7 +5,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Processor_ButtonGroupsBase
 {
-    public function getHeadersData(array $component, array &$props)
+    public function getHeadersData(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $formats = $this->getHeadersdataFormats($component, $props);
         
@@ -27,7 +27,7 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
             'url' => $this->getHeadersdataUrl($component, $props),
         );
     }
-    protected function getHeadersdataTitles(array $component, array &$props)
+    protected function getHeadersdataTitles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array(
             POP_FORMAT_SIMPLEVIEW => TranslationAPIFacade::getInstance()->__('Feed', 'poptheme-wassup'),
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
             POP_FORMAT_TABLE => TranslationAPIFacade::getInstance()->__('Edit', 'poptheme-wassup'),
         );
     }
-    protected function getHeadersdataIcons(array $component, array &$props)
+    protected function getHeadersdataIcons(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return array(
             POP_FORMAT_SIMPLEVIEW => 'fa-angle-right',
@@ -56,12 +56,12 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
         );
     }
 
-    protected function getHeadersdataformatsHasmap(array $component, array &$props)
+    protected function getHeadersdataformatsHasmap(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return false;
     }
 
-    protected function getHeadersdataFormats(array $component, array &$props)
+    protected function getHeadersdataFormats(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen
@@ -158,11 +158,11 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
 
         return array();
     }
-    protected function getHeadersdataScreen(array $component, array &$props)
+    protected function getHeadersdataScreen(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return null;
     }
-    protected function getHeadersdataUrl(array $component, array &$props)
+    protected function getHeadersdataUrl(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $requestHelperService = RequestHelperServiceFacade::getInstance();
         return $requestHelperService->getCurrentURL();

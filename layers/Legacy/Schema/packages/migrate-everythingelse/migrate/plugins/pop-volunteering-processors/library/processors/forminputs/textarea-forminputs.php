@@ -5,16 +5,16 @@ class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Pr
 {
     public final const COMPONENT_FORMINPUT_WHYVOLUNTEER = 'gf-field-whyvolunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FORMINPUT_WHYVOLUNTEER],
+            self::COMPONENT_FORMINPUT_WHYVOLUNTEER,
         );
     }
 
-    public function getLabelText(array $component, array &$props)
+    public function getLabelText(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_WHYVOLUNTEER:
                 return TranslationAPIFacade::getInstance()->__('Why do you want to volunteer?', 'pop-genericforms');
         }
@@ -22,9 +22,9 @@ class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Pr
         return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $component, array &$props)
+    public function isMandatory(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_WHYVOLUNTEER:
                 return true;
         }
@@ -32,9 +32,9 @@ class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Pr
         return parent::isMandatory($component, $props);
     }
 
-    public function clearInput(array $component, array &$props)
+    public function clearInput(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FORMINPUT_WHYVOLUNTEER:
                 return true;
         }

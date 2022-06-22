@@ -5,18 +5,18 @@ class PoP_Volunteering_Module_Processor_FeedbackMessageLayouts extends PoP_Modul
 {
     public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_VOLUNTEER = 'layout-feedbackmessage-volunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_VOLUNTEER],
+            self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_VOLUNTEER,
         );
     }
 
-    public function getMessages(array $component, array &$props)
+    public function getMessages(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getMessages($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FEEDBACKMESSAGE_VOLUNTEER:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Awesome! Thanks for taking part!', 'pop-genericforms');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__("We have sent a message with your information to the organizers. They should contact you soon.", 'pop-genericforms');

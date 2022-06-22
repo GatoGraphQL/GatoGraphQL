@@ -37,14 +37,14 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         $form_data = array_merge(
             $form_data,
             array(
-                'short_description' => trim($this->getComponentProcessorManager()->getProcessor($inputs['short_description'])->getValue($inputs['short_description'])),
-                'display_email' => $this->getComponentProcessorManager()->getProcessor($inputs['display_email'])->getValue($inputs['display_email']),
-                'facebook' => trim($this->getComponentProcessorManager()->getProcessor($inputs['facebook'])->getValue($inputs['facebook'])),
-                'twitter' => trim($this->getComponentProcessorManager()->getProcessor($inputs['twitter'])->getValue($inputs['twitter'])),
-                'linkedin' => trim($this->getComponentProcessorManager()->getProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])),
-                'youtube' => trim($this->getComponentProcessorManager()->getProcessor($inputs['youtube'])->getValue($inputs['youtube'])),
-                'instagram' => trim($this->getComponentProcessorManager()->getProcessor($inputs['instagram'])->getValue($inputs['instagram'])),
-                // 'blog' => trim($this->getComponentProcessorManager()->getProcessor($inputs['blog'])->getValue($inputs['blog'])),
+                'short_description' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description'])),
+                'display_email' => $this->getComponentProcessorManager()->getComponentProcessor($inputs['display_email'])->getValue($inputs['display_email']),
+                'facebook' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['facebook'])->getValue($inputs['facebook'])),
+                'twitter' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['twitter'])->getValue($inputs['twitter'])),
+                'linkedin' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])),
+                'youtube' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['youtube'])->getValue($inputs['youtube'])),
+                'instagram' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['instagram'])->getValue($inputs['instagram'])),
+                // 'blog' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['blog'])->getValue($inputs['blog'])),
             )
         );
 

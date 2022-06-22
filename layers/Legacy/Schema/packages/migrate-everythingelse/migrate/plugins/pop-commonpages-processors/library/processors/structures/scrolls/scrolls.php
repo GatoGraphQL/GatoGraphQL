@@ -7,17 +7,17 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
     public final const COMPONENT_SCROLL_WHOWEARE_LIST = 'scroll-whoweare-list';
     public final const COMPONENT_SCROLL_WHOWEARE_FULLVIEW = 'scroll-whoweare-fullview';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_DETAILS],
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL],
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_LIST],
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW],
+            self::COMPONENT_SCROLL_WHOWEARE_DETAILS,
+            self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL,
+            self::COMPONENT_SCROLL_WHOWEARE_LIST,
+            self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW,
         );
     }
 
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         $inners = array(
             self::COMPONENT_SCROLL_WHOWEARE_DETAILS => [GD_Custom_Module_Processor_CustomScrollInners::class, GD_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_WHOWEARE_DETAILS],
@@ -26,16 +26,16 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
             self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW => [GD_Custom_Module_Processor_CustomScrollInners::class, GD_Custom_Module_Processor_CustomScrollInners::COMPONENT_SCROLLINNER_WHOWEARE_FULLVIEW],
         );
 
-        if ($inner = $inners[$component[1]] ?? null) {
+        if ($inner = $inners[$component->name] ?? null) {
             return $inner;
         }
 
         return parent::getInnerSubcomponent($component);
     }
 
-    public function getFetchmoreButtonSubcomponent(array $component)
+    public function getFetchmoreButtonSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_SCROLL_WHOWEARE_DETAILS:
             case self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL:
             case self::COMPONENT_SCROLL_WHOWEARE_LIST:
@@ -46,21 +46,21 @@ class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scro
         return parent::getFetchmoreButtonSubcomponent($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
 
         // Extra classes
         $thumbnails = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL],
+            self::COMPONENT_SCROLL_WHOWEARE_THUMBNAIL,
         );
         $details = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_DETAILS],
+            self::COMPONENT_SCROLL_WHOWEARE_DETAILS,
         );
         $lists = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_LIST],
+            self::COMPONENT_SCROLL_WHOWEARE_LIST,
         );
         $fullviews = array(
-            [self::class, self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW],
+            self::COMPONENT_SCROLL_WHOWEARE_FULLVIEW,
         );
 
         $extra_class = '';

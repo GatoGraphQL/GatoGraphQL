@@ -4,10 +4,10 @@ class PoP_Module_Processor_AppendCommentLayouts extends PoP_Module_Processor_App
 {
     public final const COMPONENT_SCRIPT_APPENDCOMMENT = 'script-append-comment';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SCRIPT_APPENDCOMMENT],
+            self::COMPONENT_SCRIPT_APPENDCOMMENT,
         );
     }
 }

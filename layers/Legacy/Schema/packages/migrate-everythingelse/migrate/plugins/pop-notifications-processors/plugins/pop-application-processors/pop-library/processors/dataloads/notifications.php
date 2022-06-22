@@ -11,24 +11,24 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
     public final const COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS = 'dataload-notifications-scroll-details';
     public final const COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST = 'dataload-notifications-scroll-list';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS,
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST,
         );
     }
 
-    public function getRelevantRoute(array $component, array &$props): ?string
+    public function getRelevantRoute(\PoP\ComponentModel\Component\Component $component, array &$props): ?string
     {
-        return match($component[1]) {
+        return match($component->name) {
             self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
             self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
             default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubcomponents(array $component): array
+    protected function getInnerSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -39,18 +39,18 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
             self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST => [GD_AAL_Module_Processor_CustomScrolls::class, GD_AAL_Module_Processor_CustomScrolls::COMPONENT_SCROLL_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inner_components[$component[1]] ?? null) {
+        if ($inner = $inner_components[$component->name] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getJsmethods(array $component, array &$props)
+    public function getJsmethods(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $ret = parent::getJsmethods($component, $props);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 // Notifications: Need to delete block param 'hist_time' so it can refetch notifications from new users
@@ -64,13 +64,13 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $ret;
     }
 
-    public function getFormat(array $component): ?string
+    public function getFormat(\PoP\ComponentModel\Component\Component $component): ?string
     {
         $details = array(
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS],
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS,
         );
         $lists = array(
-            [self::class, self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST],
+            self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST,
         );
         if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
@@ -81,12 +81,12 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
+    protected function getImmutableDataloadQueryArgs(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 // Limit: 2 times the default for posts
@@ -104,9 +104,9 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return $ret;
     }
 
-    protected function getFeedbackMessageComponent(array $component)
+    protected function getFeedbackMessageComponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 return [PoP_Module_Processor_DomainFeedbackMessages::class, PoP_Module_Processor_DomainFeedbackMessages::COMPONENT_FEEDBACKMESSAGE_ITEMLIST];
@@ -115,9 +115,9 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getFeedbackMessageComponent($component);
     }
 
-    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(\PoP\ComponentModel\Component\Component $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 return $this->instanceManager->getInstance(GD_DataLoad_QueryInputOutputHandler_NotificationList::class);
@@ -126,9 +126,9 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(\PoP\ComponentModel\Component\Component $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 return $this->instanceManager->getInstance(NotificationObjectTypeResolver::class);
@@ -137,9 +137,9 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::COMPONENT_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('notifications', 'pop-notifications-processors'));

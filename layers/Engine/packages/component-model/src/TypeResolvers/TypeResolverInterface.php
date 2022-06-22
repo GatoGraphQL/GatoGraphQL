@@ -10,6 +10,6 @@ interface TypeResolverInterface
     public function getNamespace(): string;
     public function getNamespacedTypeName(): string;
     public function getMaybeNamespacedTypeName(): string;
-    public function getTypeOutputDBKey(): string;
+    public function getTypeOutputKey(): string;
     public function getTypeDescription(): ?string;
 }

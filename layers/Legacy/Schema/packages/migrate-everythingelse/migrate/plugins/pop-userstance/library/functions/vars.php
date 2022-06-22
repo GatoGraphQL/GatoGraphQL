@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-\PoP\Root\App::addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popUserstanceModuleInstanceComponents');
+\PoP\Root\App::addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_ELEMENTS_RESULT, 'popUserstanceModuleInstanceComponents');
 function popUserstanceModuleInstanceComponents($components)
 {
 
@@ -15,7 +15,7 @@ function popUserstanceModuleInstanceComponents($components)
 
         if ($route == POP_USERSTANCE_ROUTE_ADDOREDITSTANCE) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            $stancetarget_name = $componentprocessor_manager->getProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET])->getName([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET]);
+            $stancetarget_name = $componentprocessor_manager->getComponentProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET])->getName([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET]);
             $components[] = TranslationAPIFacade::getInstance()->__('stancetarget:', 'pop-userstance').(App::getRequest()->query->has($stancetarget_name) ? 'singlepost' : 'general');
         }
     }

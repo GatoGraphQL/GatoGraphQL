@@ -9,7 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 interface DirectivePipelineServiceInterface
 {
     /**
-     * @param DirectiveResolverInterface[] $directiveResolverInstances
+     * @param DirectiveResolverInterface[] $directiveResolvers
      */
-    public function getDirectivePipeline(array $directiveResolverInstances): DirectivePipelineDecorator;
+    public function getDirectivePipeline(array $directiveResolvers): DirectivePipelineDecorator;
 }

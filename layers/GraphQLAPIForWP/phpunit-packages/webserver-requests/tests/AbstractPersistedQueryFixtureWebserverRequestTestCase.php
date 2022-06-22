@@ -11,6 +11,11 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
 {
     use FixtureTestCaseTrait;
 
+    public function getDataSetAsString(bool $includeData = true): string
+    {
+        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
+    }
+
     /**
      * Retrieve all files under the "/fixture" folder
      * to retrieve the expected response bodies, as JSON.
@@ -44,11 +49,6 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
         }
         return $providerItems;
     }
-
-    /**
-     * Directory under the fixture files are placed
-     */
-    abstract protected function getFixtureFolder(): string;
 
     protected function getEntryMethod(string $dataName): string
     {

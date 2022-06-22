@@ -8,6 +8,11 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
 {
     use FixtureTestCaseTrait;
 
+    public function getDataSetAsString(bool $includeData = true): string
+    {
+        return $this->addFixtureFolderInfo(parent::getDataSetAsString($includeData));
+    }
+
     /**
      * @dataProvider fixtureGraphQLServerExecutionProvider
      */
@@ -116,9 +121,4 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     {
         return false;
     }
-
-    /**
-     * Directory under the fixture files are placed
-     */
-    abstract protected function getFixtureFolder(): string;
 }

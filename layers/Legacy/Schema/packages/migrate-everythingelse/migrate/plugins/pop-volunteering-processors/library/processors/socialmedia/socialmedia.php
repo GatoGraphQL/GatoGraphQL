@@ -5,17 +5,20 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
     public final const COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER = 'post-socialmedia-simpleview-volunteer';
     public final const COMPONENT_POSTSOCIALMEDIA_VOLUNTEER = 'post-socialmedia-volunteer';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER],
-            [self::class, self::COMPONENT_POSTSOCIALMEDIA_VOLUNTEER],
+            self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER,
+            self::COMPONENT_POSTSOCIALMEDIA_VOLUNTEER,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
                 return array(
                     [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::COMPONENT_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND],
@@ -34,12 +37,12 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
         return parent::getSubcomponents($component);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
-                foreach ($this->getSubcomponents($component) as $subComponent) {
-                    $this->appendProp([$subComponent], $props, 'class', 'inline');
+                foreach ($this->getSubcomponents($component) as $subcomponent) {
+                    $this->appendProp([$subcomponent], $props, 'class', 'inline');
                 }
                 break;
         }

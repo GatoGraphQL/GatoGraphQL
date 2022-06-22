@@ -18,28 +18,28 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'simplefilterinputcontainer-mycategoryposts';
     public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT = 'simplefilterinputcontainer-tagcontent';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_CONTENT],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_POSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_USERS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCONTENT],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS],
-            [self::class, self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT],
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_CONTENT,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_POSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_USERS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCONTENT,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS,
+            self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT,
         );
     }
 
-    protected function getInputSubcomponents(array $component)
+    protected function getInputSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getInputSubcomponents($component);
 
@@ -143,7 +143,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
         ];
         if ($components = \PoP\Root\App::applyFilters(
             'Blog:SimpleFilterInners:inputComponents',
-            $inputComponents[$component[1]],
+            $inputComponents[$component->name],
             $component
         )) {
             $ret = array_merge(
@@ -154,7 +154,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
         return $ret;
     }
 
-    // public function getFilter(array $component)
+    // public function getFilter(\PoP\ComponentModel\Component\Component $component)
     // {
     //     $filters = array(
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS => POP_FILTER_TAGS,
@@ -173,7 +173,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //         self::COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT => POP_FILTER_TAGCONTENT,
     //     );
-    //     if ($filter = $filters[$component[1]] ?? null) {
+    //     if ($filter = $filters[$component->name] ?? null) {
     //         return $filter;
     //     }
 

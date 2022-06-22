@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -25,13 +26,15 @@ abstract class AbstractValidateCheckpointDirectiveResolver extends AbstractValid
      */
     protected function isValidationSuccessful(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
-        $checkpointSet = $this->getValidationCheckpointSet($relationalTypeResolver);
-        $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpointSet);
+        $checkpoints = $this->getValidationCheckpoints($relationalTypeResolver);
+        $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
         return $feedbackItemResolution === null;
     }
 
     /**
      * Provide the checkpoint to validate
+     *
+     * @return CheckpointInterface[]
      */
-    abstract protected function getValidationCheckpointSet(RelationalTypeResolverInterface $relationalTypeResolver): array;
+    abstract protected function getValidationCheckpoints(RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

@@ -13,7 +13,7 @@ class PoP_System_UserState_Module_SettingsProcessor extends \PoPCMSSchema\UserSt
         );
     }
 
-    public function requiresUserState()
+    public function requiresUserState(): bool
     {
         return array(
             POP_SYSTEM_ROUTE_SYSTEM_BUILD => false,

@@ -5,17 +5,17 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
     public final const COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS = 'tabpanel-stances-byorganizations';
     public final const COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS = 'tabpanel-stances-byindividuals';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS],
-            [self::class, self::COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS],
+            self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS,
+            self::COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_STANCES);
@@ -24,11 +24,11 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array_merge(
                     $ret,
@@ -55,9 +55,9 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array(
                     [

@@ -14,11 +14,11 @@ class PoP_Events_PageSectionHooks
         );
     }
 
-    public function initModelPropsSideinfo(array $component, $props_in_array, $processor)
+    public function initModelPropsSideinfo(\PoP\ComponentModel\Component\Component $component, $props_in_array, $processor)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $subComponent = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS];
-        // if (in_array($subComponent, $processor->getSubcomponents($component))) {
+        $subcomponent = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_EVENTS_SCROLL_ADDONS];
+        // if (in_array($subcomponent, $processor->getSubcomponents($component))) {
 
         $props = &$props_in_array[0];
         
@@ -27,19 +27,19 @@ class PoP_Events_PageSectionHooks
         // only the sideinfo with some unrelated content was)
         if (defined('POP_SERVICEWORKERS_INITIALIZED')) {
             if (!PoP_ServiceWorkers_ServerUtils::disableServiceworkers()) {
-                $processor->setProp($subComponent, $props, 'lazy-load', true);
+                $processor->setProp($subcomponent, $props, 'lazy-load', true);
             }
         }
 
         // Comment Leo 29/10/2017: we can't use skeleton screen, since it will then load posts
         // which may change the ETag value for the page... not worth it
         // // Use the Skeleton screen to load the lazy-load content
-        // $processor->setProp($subComponent, $ret, 'use-skeletonscreen', true);
+        // $processor->setProp($subcomponent, $ret, 'use-skeletonscreen', true);
         // }
 
         // Add the link
-        $processor->setProp($subComponent, $props, 'title-htmltag', 'h4');
-        $processor->setProp($subComponent, $props, 'add-titlelink', true);
+        $processor->setProp($subcomponent, $props, 'title-htmltag', 'h4');
+        $processor->setProp($subcomponent, $props, 'add-titlelink', true);
         
         // For the Events scroll
         $processor->setProp([PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_ADDONS], $props, 'limit', 6);
@@ -50,7 +50,7 @@ class PoP_Events_PageSectionHooks
             RouteUtils::getRouteURL(POP_EVENTS_ROUTE_EVENTS),
             TranslationAPIFacade::getInstance()->__('View all events', 'poptheme-wassup')
         );
-        $processor->setProp($subComponent, $props, 'description-bottom', $link);
+        $processor->setProp($subcomponent, $props, 'description-bottom', $link);
         // }
     }
 }

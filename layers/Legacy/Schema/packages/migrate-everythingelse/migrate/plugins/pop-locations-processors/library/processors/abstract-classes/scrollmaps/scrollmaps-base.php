@@ -3,12 +3,15 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_MultiplesBase
 {
-    public function getInnerSubcomponent(array $component)
+    public function getInnerSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         return null;
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -20,7 +23,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getMapSubcomponent(array $component)
+    public function getMapSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
         if ($this->isPostMap($component)) {
             return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::COMPONENT_EM_MAP_POST];
@@ -31,22 +34,22 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
         return null;
     }
 
-    protected function isPostMap(array $component)
+    protected function isPostMap(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    protected function isUserMap(array $component)
+    protected function isUserMap(\PoP\ComponentModel\Component\Component $component)
     {
         return false;
     }
 
-    public function getMapDirection(array $component, array &$props)
+    public function getMapDirection(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'vertical';
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 

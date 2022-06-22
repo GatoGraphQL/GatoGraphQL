@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 // Event and Past Event have different configurations, so we must differentiate among them
-\PoP\Root\App::addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popEmModuleInstanceComponents');
+\PoP\Root\App::addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_ELEMENTS_RESULT, 'popEmModuleInstanceComponents');
 function popEmModuleInstanceComponents($components)
 {
     // Add source param for Organizations: view their profile as Community or Organization

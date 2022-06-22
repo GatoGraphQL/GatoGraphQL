@@ -1,10 +1,10 @@
-{{#with dbObject}}
-	<span class="make-popover {{../class}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} data-popover-target="#popover-{{../tls.domain-id}}-{{../dbObjectDBKey}}-{{id}}">
+{{#with resolvedObject}}
+	<span class="make-popover {{../class}}" style="{{../style}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} data-popover-target="#popover-{{../tls.domain-id}}-{{../resolvedObjectTypeOutputKey}}-{{id}}">
 		{{#withModule ../. "layout-content"}}
 			{{enterModule ../../.}}
 		{{/withModule}}
 	</span>
-	<span id="popover-{{../tls.domain-id}}-{{../dbObjectDBKey}}-{{id}}" style="display: none;" class="make-popover-content">
+	<span id="popover-{{../tls.domain-id}}-{{../resolvedObjectTypeOutputKey}}-{{id}}" style="display: none;" class="make-popover-content">
 		{{#withModule ../. "layout"}}
 			{{enterModule ../../.}}
 		{{/withModule}}

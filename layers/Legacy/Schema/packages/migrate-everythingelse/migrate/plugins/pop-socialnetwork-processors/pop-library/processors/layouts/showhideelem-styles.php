@@ -23,33 +23,33 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
     public final const COMPONENT_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES = 'layout-undodownvoteposts-show-styles';
     public final const COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES = 'layout-undodownvoteposts-hide-styles';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_FOLLOWUSER_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNFOLLOWUSER_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_RECOMMENDPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_RECOMMENDPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNRECOMMENDPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNRECOMMENDPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UPVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UPVOTEPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_DOWNVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_DOWNVOTEPOST_HIDE_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES],
-            [self::class, self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES],
+            self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_FOLLOWUSER_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNFOLLOWUSER_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_RECOMMENDPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_RECOMMENDPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNRECOMMENDPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNRECOMMENDPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_SUBSCRIBETOTAG_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNSUBSCRIBEFROMTAG_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UPVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UPVOTEPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNDOUPVOTEPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_DOWNVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_DOWNVOTEPOST_HIDE_STYLES,
+            self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES,
+            self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES,
         );
     }
 
-    public function getElemTarget(array $component, array &$props)
+    public function getElemTarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $targets = array(
             self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES => GD_CLASS_FOLLOWUSER,
@@ -73,16 +73,16 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
             self::COMPONENT_LAYOUT_DOWNVOTEPOST_HIDE_STYLES => GD_CLASS_DOWNVOTEPOST,
             self::COMPONENT_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES => GD_CLASS_UNDODOWNVOTEPOST,
         );
-        if ($target = $targets[$component[1]] ?? null) {
+        if ($target = $targets[$component->name] ?? null) {
             return '.'.$target;
         }
 
         return parent::getElemTarget($component, $props);
     }
 
-    public function getElemStyles(array $component, array &$props)
+    public function getElemStyles(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FOLLOWUSER_SHOW_STYLES:
             case self::COMPONENT_LAYOUT_UNFOLLOWUSER_SHOW_STYLES:
             case self::COMPONENT_LAYOUT_RECOMMENDPOST_SHOW_STYLES:

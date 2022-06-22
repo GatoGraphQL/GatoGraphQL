@@ -8,21 +8,24 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
     public final const COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS = 'widget-form-linkdetails';
     public final const COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS = 'widget-form-postdetails';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE],
-            [self::class, self::COMPONENT_WIDGET_FORM_METAINFORMATION],
-            [self::class, self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS],
-            [self::class, self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS],
+            self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE,
+            self::COMPONENT_WIDGET_FORM_METAINFORMATION,
+            self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS,
+            self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS,
         );
     }
 
-    public function getLayoutSubcomponents(array $component)
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getLayoutSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
                 $ret[] = [GD_ContentCreation_Module_Processor_FormInputGroups::class, GD_ContentCreation_Module_Processor_FormInputGroups::COMPONENT_FORMCOMPONENTGROUP_FEATUREDIMAGE];
                 break;
@@ -63,7 +66,7 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         return $ret;
     }
 
-    public function getMenuTitle(array $component, array &$props)
+    public function getMenuTitle(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         $titles = array(
             self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE => TranslationAPIFacade::getInstance()->__('Featured Image', 'poptheme-wassup'),
@@ -72,12 +75,12 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
             self::COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS => TranslationAPIFacade::getInstance()->__('Post details', 'poptheme-wassup'),
         );
 
-        return $titles[$component[1]] ?? null;
+        return $titles[$component->name] ?? null;
     }
 
-    public function getWidgetClass(array $component, array &$props)
+    public function getWidgetClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
             case self::COMPONENT_WIDGET_FORM_METAINFORMATION:
             case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
@@ -92,9 +95,9 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         return parent::getWidgetClass($component, $props);
     }
 
-    public function getBodyClass(array $component, array &$props)
+    public function getBodyClass(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
             case self::COMPONENT_WIDGET_FORM_METAINFORMATION:
             case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
@@ -104,9 +107,9 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
 
         return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $component, array &$props)
+    public function getItemWrapper(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
             case self::COMPONENT_WIDGET_FORM_METAINFORMATION:
             case self::COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS:
@@ -117,9 +120,9 @@ class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBa
         return parent::getItemWrapper($component, $props);
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_WIDGET_FORM_FEATUREDIMAGE:
                 $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER], $props, 'setbtn-class', 'btn btn-sm btn-link');
                 $this->setProp([PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::COMPONENT_FORMINPUT_FEATUREDIMAGEINNER], $props, 'removebtn-class', 'btn btn-sm btn-link');

@@ -1,8 +1,8 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<script type="text/javascript">
 	(function($){
 		$(document).one('component:merged', function() {
-			var destination = $('div.pop-append-{{../dbObjectDBKey}}-{{id}}.{{../classes.spinner}}');
+			var destination = $('div.pop-append-{{../resolvedObjectTypeOutputKey}}-{{id}}.{{../classes.spinner}}');
 			destination.addClass('hidden');
 		});
 	})(jQuery);

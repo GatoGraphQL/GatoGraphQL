@@ -6,18 +6,18 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
     public final const COMPONENT_TABPANEL_AUTHORPASTEVENTS = 'tabpanel-authorpastevents';
     public final const COMPONENT_TABPANEL_AUTHOREVENTSCALENDAR = 'tabpanel-authoreventscalendar';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_AUTHOREVENTS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHORPASTEVENTS],
-            [self::class, self::COMPONENT_TABPANEL_AUTHOREVENTSCALENDAR],
+            self::COMPONENT_TABPANEL_AUTHOREVENTS,
+            self::COMPONENT_TABPANEL_AUTHORPASTEVENTS,
+            self::COMPONENT_TABPANEL_AUTHOREVENTSCALENDAR,
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $component)
+    protected function getDefaultActivepanelFormat(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHOREVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTIONCALENDAR);
         }
@@ -25,11 +25,11 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
         return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHOREVENTS:
                 $ret = array_merge(
                     $ret,
@@ -72,9 +72,9 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_AUTHOREVENTS:
                 $ret = array(
                     [

@@ -7,5 +7,5 @@ services:
     PoPWPSchema\CustomPosts\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPWPSchema\CustomPosts\FilterInputProcessors\:
-        resource: '../src/FilterInputProcessors/*'
+    PoPWPSchema\CustomPosts\FilterInputs\:
+        resource: '../src/FilterInputs/*'

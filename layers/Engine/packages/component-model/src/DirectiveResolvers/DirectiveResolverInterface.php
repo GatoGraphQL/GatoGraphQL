@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 interface DirectiveResolverInterface extends AttachableExtensionInterface, SchemaDirectiveResolverInterface
 {
@@ -41,6 +44,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function getDirectiveKind(): string;
     /**
      * Extract and validate the directive arguments
+     *
+     * @param array<string,FieldInterface[]> $fieldDirectiveFields
      */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -58,16 +63,34 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         array $directiveArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
+
     /**
      * Define where to place the directive in the directive execution pipeline
-     * 2 directives are mandatory: Validate and ResolveAndMerge, which are executed in this order.
-     * All other directives must indicate where to position themselves, using these 2 directives as anchors.
-     * There are 3 positions:
-     * 1. At the beginning, before the Validate pipeline
-     * 2. In the middle, between the Validate and Resolve directives
-     * 3. At the end, after the ResolveAndMerge directive
+     *
+     * 3 directives are mandatory, and executed in this order:
+     *
+     *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
+     *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
+     *   3. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
+     *
+     * All other directives must indicate where to position themselves,
+     * using these 3 directives as anchors.
+     *
+     * There are 6 positions:
+     *
+     *   1. At the very beginning
+     *   2. Before Validate directive
+     *   3. Between the Validate and Resolve directives
+     *   4. Between the Resolve and Serialize directives
+     *   5. After the Serialize directive
+     *   6. At the very end
+     *
+     * In the "serialize" step, the directive takes the objects
+     * stored in $resolvedIDFieldValues, such as a DateTime object,
+     * and converts them to string for printing in the response.
      */
     public function getPipelinePosition(): string;
+
     /**
      * This is the equivalent to `__invoke` in League\Pipeline\StageInterface
      *
@@ -82,7 +105,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs,
-        string $field,
+        FieldInterface $field,
         array &$variables
     ): bool;
     /**
@@ -90,21 +113,26 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function isRepeatable(): bool;
     /**
-     * Indicate if the directive needs to be passed $idsDataFields filled with data to be able to execute
+     * Indicate if the directive needs to be passed $idFieldSet filled with data to be able to execute
      */
-    public function needsIDsDataFieldsToExecute(): bool;
+    public function needsSomeIDFieldToExecute(): bool;
     /**
      * Execute the directive
+     *
+     * @param array<string|int,EngineIterationFieldSet> $idFieldSet
+     * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array $idsDataFields,
-        array $succeedingPipelineDirectiveResolverInstances,
-        array $objectIDItems,
-        array $unionDBKeyIDs,
-        array $previousDBItems,
-        array &$succeedingPipelineIDsDataFields,
-        array &$dbItems,
+        array $idFieldSet,
+        array $succeedingPipelineDirectiveResolvers,
+        array $idObjects,
+        array $unionTypeOutputKeyIDs,
+        array $previouslyResolvedIDFieldValues,
+        array &$succeedingPipelineIDFieldSet,
+        array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,

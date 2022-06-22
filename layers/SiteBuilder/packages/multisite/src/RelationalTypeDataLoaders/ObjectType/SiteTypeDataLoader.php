@@ -21,6 +21,10 @@ class SiteTypeDataLoader extends AbstractObjectTypeDataLoader
         return $this->site ??= $this->instanceManager->getInstance(Site::class);
     }
 
+    /**
+     * @param array<string|int> $ids
+     * @return array<object|null>
+     */
     public function getObjects(array $ids): array
     {
         // Currently it deals only with the current site and nothing else

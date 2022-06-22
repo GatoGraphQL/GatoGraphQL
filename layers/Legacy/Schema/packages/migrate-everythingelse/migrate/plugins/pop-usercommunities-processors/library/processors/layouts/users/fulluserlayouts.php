@@ -4,22 +4,22 @@ class GD_UserCommunities_Module_Processor_CustomFullUserLayouts extends PoP_Modu
 {
     public final const COMPONENT_LAYOUT_FULLUSER_COMMUNITY = 'layout-fulluser-community';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY],
+            self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY,
         );
     }
 
-    public function getSidebarSubcomponent(array $component)
+    public function getSidebarSubcomponent(\PoP\ComponentModel\Component\Component $component)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY:
                 $sidebars = array(
                     self::COMPONENT_LAYOUT_FULLUSER_COMMUNITY => [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::COMPONENT_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL],
                 );
 
-                return $sidebars[$component[1]];
+                return $sidebars[$component->name];
         }
 
         return parent::getSidebarSubcomponent($component);

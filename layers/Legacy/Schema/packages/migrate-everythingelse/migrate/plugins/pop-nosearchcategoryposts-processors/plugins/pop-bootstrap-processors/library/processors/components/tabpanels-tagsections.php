@@ -23,37 +23,37 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
     public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 = 'tabpanel-tagnosearchcategoryposts18';
     public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 = 'tabpanel-tagnosearchcategoryposts19';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18],
-            [self::class, self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18,
+            self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19,
         );
     }
 
-    public function getPanelSubcomponents(array $component)
+    public function getPanelSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
         $ret = parent::getPanelSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -318,9 +318,9 @@ class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getPanelHeaders(array $component, array &$props)
+    public function getPanelHeaders(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00:
                 $ret = array(
                     [

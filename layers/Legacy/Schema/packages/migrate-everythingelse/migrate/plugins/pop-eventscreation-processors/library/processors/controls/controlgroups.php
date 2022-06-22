@@ -5,19 +5,22 @@ class PoP_EventsCreation_Module_Processor_CustomControlGroups extends PoP_Module
     public final const COMPONENT_CONTROLGROUP_MYEVENTLIST = 'controlgroup-myeventlist';
     public final const COMPONENT_CONTROLGROUP_MYBLOCKEVENTLIST = 'controlgroup-myblockeventlist';
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_CONTROLGROUP_MYEVENTLIST],
-            [self::class, self::COMPONENT_CONTROLGROUP_MYBLOCKEVENTLIST],
+            self::COMPONENT_CONTROLGROUP_MYEVENTLIST,
+            self::COMPONENT_CONTROLGROUP_MYBLOCKEVENTLIST,
         );
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_CONTROLGROUP_MYEVENTLIST:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::class, PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_ADDEVENT];
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::class, PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::COMPONENT_CONTROLBUTTONGROUP_MYEVENTLINKS];

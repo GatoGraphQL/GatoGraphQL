@@ -1,11 +1,11 @@
-{{#if dbObject.locations}}
+{{#if resolvedObject.locations}}
 	{{#withModule . "map-script-customize"}}	
 		{{enterModule ../.}}
 	{{/withModule}}
 {{/if}}
 
-{{#each dbObject.locations}}
+{{#each resolvedObject.locations}}
 	{{#withModule ../. "map-script-markers"}}
-		{{enterModule ../../. dbKey=../../bs.dbkeys.locations objectID=../.}}
+		{{enterModule ../../. typeOutputKey=../../bs.outputKeys.locations objectID=../.}}
 	{{/withModule}}
 {{/each}}

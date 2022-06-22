@@ -18,7 +18,7 @@ class Argument extends AbstractAst
         parent::__construct($location);
     }
 
-    public function asQueryString(): string
+    protected function doAsQueryString(): string
     {
         return sprintf(
             '%s: %s',

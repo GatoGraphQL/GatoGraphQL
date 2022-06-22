@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\ComponentProcessors;
 
+use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
@@ -30,61 +31,64 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    public function getComponentsToProcess(): array
+    public function getComponentNamesToProcess(): array
     {
         return array(
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE],
-            [self::class, self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING],
+            self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID,
+            self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG,
+            self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING,
+            self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE,
+            self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING,
         );
     }
 
-    public function getFilterInputComponents(array $component): array
+    /**
+     * @return Component[]
+     */
+    public function getFilterInputComponents(Component $component): array
     {
-        return match ($component[1]) {
+        return match ($component->name) {
             self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID],
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG],
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT],
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT],
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT),
             ],
             self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING => [
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT],
-                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT],
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT),
+                new Component(CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT),
             ],
             default => [],
         };
     }
 
-    public function getFieldFilterInputDefaultValue(array $component, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(Component $component, string $fieldArgName): mixed
     {
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_DATE_AS_STRING:
             case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
-                $formatFilterInputName = FilterInputHelper::getFilterInputName([
+                $formatFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_DATEFORMAT
-                ]);
+                ));
                 if ($fieldArgName === $formatFilterInputName) {
                     return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:dateFormat'));
                 }
                 break;
         }
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE:
             case self::COMPONENT_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
-                $gmtFilterInputName = FilterInputHelper::getFilterInputName([
+                $gmtFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_GMT
-                ]);
+                ));
                 if ($fieldArgName === $gmtFilterInputName) {
                     return false;
                 }
@@ -93,24 +97,24 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         return parent::getFieldFilterInputDefaultValue($component, $fieldArgName);
     }
 
-    public function getFieldFilterInputTypeModifiers(array $component, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(Component $component, string $fieldArgName): int
     {
         $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
-        switch ($component[1]) {
+        switch ($component->name) {
             case self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_ID:
-                $idFilterInputName = FilterInputHelper::getFilterInputName([
+                $idFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_ID
-                ]);
+                ));
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }
                 break;
             case self::COMPONENT_FILTERINPUTCONTAINER_ENTITY_BY_SLUG:
-                $slugFilterInputName = FilterInputHelper::getFilterInputName([
+                $slugFilterInputName = FilterInputHelper::getFilterInputName(new Component(
                     CommonFilterInputComponentProcessor::class,
                     CommonFilterInputComponentProcessor::COMPONENT_FILTERINPUT_SLUG
-                ]);
+                ));
                 if ($fieldArgName === $slugFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
                 }

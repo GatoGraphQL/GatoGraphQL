@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use Leoloso\BlockMetadata\Data;
 use Leoloso\BlockMetadata\Metadata;
@@ -142,6 +143,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $fieldArgs,
         array $variables,
         array $expressions,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
@@ -155,7 +157,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 if ($blockName = $fieldArgs['blockName']) {
                     $block_metadata = array_filter(
                         $block_metadata,
-                        fn ($block) => $block['blockName'] == $blockName
+                        fn ($block) => $block['blockName'] === $blockName
                     );
                 }
                 if ($filterBy = $fieldArgs['filterBy']) {
@@ -184,6 +186,6 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return (object) $block_metadata;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

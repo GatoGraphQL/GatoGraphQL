@@ -1,4 +1,4 @@
-{{#with dbObject}}
+{{#with resolvedObject}}
 	<style type="text/css" {{#generateId context=../.}}{{../id}}{{/generateId}}>
 		body.loggedin-{{../tls.domain-id}}.user-{{../sessionmeta.user.id}}-{{../tls.domain-id}} {{../elem-target}}.target-{{id}}-{{../tls.domain-id}} {
 			{{#each ../elem-styles}}

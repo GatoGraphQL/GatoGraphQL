@@ -1,14 +1,18 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ConfigurationComponentModel\Facades\TypeResolverHelperService\TypeResolverHelperServiceFacade;
 
 abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $component, array &$props): ?array
+    public function getTemplateResource(\PoP\ComponentModel\Component\Component $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POSTTHUMB];
     }
 
-    public function getSubcomponents(array $component): array
+    /**
+     * @return \PoP\ComponentModel\Component\Component[]
+     */
+    public function getSubcomponents(\PoP\ComponentModel\Component\Component $component): array
     {
         $ret = parent::getSubcomponents($component);
 
@@ -22,7 +26,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getExtraThumbLayoutSubcomponents(array $component)
+    public function getExtraThumbLayoutSubcomponents(\PoP\ComponentModel\Component\Component $component)
     {
 
         // Add the MultiLayout item always, since the layouts will also be referenced by the MultLayout
@@ -33,13 +37,13 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
     }
 
     /**
-     * @todo Migrate from string to LeafComponentField
+     * @todo Migrate from string to LeafComponentFieldNode
      *
-     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode[]
      */
-    public function getLeafComponentFields(array $component, array &$props): array
+    public function getLeafComponentFieldNodes(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        $ret = parent::getLeafComponentFields($component, $props);
+        $ret = parent::getLeafComponentFieldNodes($component, $props);
 
         $ret[] = $this->getThumbField($component, $props);
         $ret[] = $this->getUrlField($component);
@@ -47,17 +51,17 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getUrlField(array $component)
+    public function getUrlField(\PoP\ComponentModel\Component\Component $component)
     {
         return 'url';
     }
 
-    public function getLinktarget(array $component, array &$props)
+    public function getLinktarget(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return '';
     }
 
-    public function getThumbField(array $component, array &$props)
+    public function getThumbField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return FieldQueryInterpreterFacade::getInstance()->getField(
             $this->getThumbFieldName($component, $props),
@@ -66,40 +70,41 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         );
     }
 
-    protected function getThumbFieldName(array $component, array &$props)
+    protected function getThumbFieldName(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'thumb';
     }
 
-    protected function getThumbFieldArgs(array $component, array &$props)
+    protected function getThumbFieldArgs(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return ['size' => 'thumb-sm'];
     }
 
-    protected function getThumbFieldAlias(array $component, array &$props)
+    protected function getThumbFieldAlias(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
         return 'thumb';
     }
 
-    public function getThumbImgClass(array $component)
+    public function getThumbImgClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
 
-    public function getThumbLinkClass(array $component)
+    public function getThumbLinkClass(\PoP\ComponentModel\Component\Component $component)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $component, array &$props): array
+    public function getImmutableConfiguration(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($component, $props);
 
         $ret['url-field'] = $this->getUrlField($component);
         $ret['thumb'] = array(
-            'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
+            'name' => TypeResolverHelperServiceFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
                 $this->getProp($component, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($component, $props))
+                $this->getThumbField($component, $props) // @todo Fix: pass LeafField
+            )
         );
         if ($target = $this->getLinktarget($component, $props)) {
             $ret['link-target'] = $target;
@@ -112,7 +117,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
 
         if ($thumb_extras = $this->getExtraThumbLayoutSubcomponents($component)) {
             $ret[GD_JS_SUBCOMPONENTOUTPUTNAMES]['thumb-extras'] = array_map(
-                \PoP\ComponentModel\Facades\Modules\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
+                \PoP\ComponentModel\Facades\ComponentHelpers\ComponentHelpersFacade::getInstance()->getComponentOutputName(...),
                 $thumb_extras
             );
         }
@@ -120,7 +125,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $component, array &$props): void
+    public function initModelProps(\PoP\ComponentModel\Component\Component $component, array &$props): void
     {
         $this->appendProp($component, $props, 'img-class', $this->getThumbImgClass($component));
         parent::initModelProps($component, $props);
