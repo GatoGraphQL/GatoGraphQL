@@ -205,7 +205,10 @@ class ExecutableDocument implements ExecutableDocumentInterface
          * Exactly one operation must have the requested name, or otherwise
          * parsing the query would've thrown an error
          */
-        $matchingOperations = array_filter($requestedOperations, fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName());
+        $matchingOperations = array_filter(
+            $requestedOperations,
+            fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName()
+        );
         return $matchingOperations[0];
     }
 }
