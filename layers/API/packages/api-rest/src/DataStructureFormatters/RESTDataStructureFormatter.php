@@ -56,13 +56,11 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
 
         // Parse the GraphQL query
         $variableValues = App::getState('variables');
-        $operationName = App::getState('graphql-operation-name');
 
         try {
             $executableDocument = $this->parseGraphQLQuery(
                 $query,
                 $variableValues,
-                $operationName
             );
         } catch (SyntaxErrorException | InvalidRequestException $e) {
             return [];
@@ -77,14 +75,13 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     protected function parseGraphQLQuery(
         string $query,
         array $variableValues,
-        ?string $operationName,
     ): ExecutableDocument {
         $document = $this->getParser()->parse($query)->setAncestorsInAST();
         /** @var ExecutableDocument */
         $executableDocument = (
             new ExecutableDocument(
                 $document,
-                new Context($operationName, $variableValues)
+                new Context(null, $variableValues)
             )
         )->validateAndInitialize();
         return $executableDocument;
