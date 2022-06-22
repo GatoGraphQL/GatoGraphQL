@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPAPI\RESTAPI\DataStructureFormatters;
 
-use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServerHelpers;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
@@ -47,7 +47,7 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $variableValues = App::getState('variables');
 
         try {
-            $executableDocument = GraphQLServerHelpers::parseGraphQLQuery(
+            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variableValues,
                 null,

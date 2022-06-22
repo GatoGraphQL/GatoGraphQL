@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\State;
 
-use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServerHelpers;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
@@ -14,6 +13,7 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
@@ -83,7 +83,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $operationName = $state['operation-name'];
 
         try {
-            $executableDocument = GraphQLServerHelpers::parseGraphQLQuery(
+            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
                 $variableValues,
                 $operationName

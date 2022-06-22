@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Standalone;
+namespace PoP\GraphQLParser\StaticHelpers;
 
 use PoP\ComponentModel\App;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 
-class GraphQLServerHelpers
+class GraphQLParserHelpers
 {
     protected static function getParser(): ParserInterface
     {
