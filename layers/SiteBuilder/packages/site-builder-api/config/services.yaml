@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPAPI\API\Schema\FieldQueryConvertorInterface:
-        class: \PoP\SiteBuilderAPI\Schema\FieldQueryConvertor
-
     PoP\SiteBuilderAPI\State\:
         resource: '../src/State/*'
 
