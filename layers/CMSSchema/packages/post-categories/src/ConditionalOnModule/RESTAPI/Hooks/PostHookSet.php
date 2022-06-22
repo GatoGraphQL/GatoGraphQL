@@ -11,7 +11,7 @@ use PoPCMSSchema\Posts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\En
 
 class PostHookSet extends AbstractHookSet
 {
-    const CATEGORY_RESTFIELDS = 'categories.id|name|url';
+    const CATEGORY_RESTFIELDS = 'categories { id name url }';
 
     protected function init(): void
     {
@@ -23,6 +23,6 @@ class PostHookSet extends AbstractHookSet
 
     public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
     {
-        return $restEndpointGraphQLQuery . ',' . self::CATEGORY_RESTFIELDS;
+        return str_replace('query {', 'query { ' . self::CATEGORY_RESTFIELDS . ' ', $restEndpointGraphQLQuery);
     }
 }

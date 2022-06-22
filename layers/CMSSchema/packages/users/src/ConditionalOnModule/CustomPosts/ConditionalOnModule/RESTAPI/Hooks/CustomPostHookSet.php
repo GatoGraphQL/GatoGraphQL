@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcess
 
 class CustomPostHookSet extends AbstractHookSet
 {
-    const AUTHOR_RESTFIELDS = 'author.id|name|url';
+    const AUTHOR_RESTFIELDS = 'author { id name url }';
 
     protected function init(): void
     {
@@ -23,6 +23,6 @@ class CustomPostHookSet extends AbstractHookSet
 
     public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
     {
-        return $restEndpointGraphQLQuery . ',' . self::AUTHOR_RESTFIELDS;
+        return str_replace('query {', 'query { ' . self::AUTHOR_RESTFIELDS . ' ', $restEndpointGraphQLQuery);
     }
 }

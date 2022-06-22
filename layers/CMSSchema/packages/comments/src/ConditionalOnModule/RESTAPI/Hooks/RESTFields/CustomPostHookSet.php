@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcess
 
 class CustomPostHookSet extends AbstractHookSet
 {
-    const COMMENT_RESTFIELDS = 'comments.id|content';
+    const COMMENT_RESTFIELDS = 'comments { id content }';
 
     protected function init(): void
     {
@@ -23,6 +23,6 @@ class CustomPostHookSet extends AbstractHookSet
 
     public function hookGraphQLQueryToResolveRESTEndpoint($restEndpointGraphQLQuery): string
     {
-        return $restEndpointGraphQLQuery . ',' . self::COMMENT_RESTFIELDS;
+        return str_replace('query {', 'query { ' . self::COMMENT_RESTFIELDS . ' ', $restEndpointGraphQLQuery);
     }
 }
