@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLRequest\State;
 
 use GraphQLByPoP\GraphQLQuery\Schema\GraphQLQueryConvertorInterface;
-use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
@@ -37,7 +36,6 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         $state['graphql-operation-name'] = null;
-        $state['graphql-operation-type'] = null;
         $state['standard-graphql'] = true;
     }
 
@@ -72,28 +70,5 @@ class AppStateProvider extends AbstractAppStateProvider
 
         // Do not include the fieldArgs and directives when outputting the field
         $state['only-fieldname-as-outputkey'] = true;
-
-        // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
-        // ---------------------------------------------
-        list(
-            $operationType,
-            $fieldQuery
-        ) = $this->getGraphQLQueryConvertor()->convertFromGraphQLToFieldQuery(
-            $state['query'] ?? '',
-            $state['variables'],
-            $state['graphql-operation-name'],
-        );
-        $state['field-query'] = $fieldQuery;
-
-        // Set the operation type and, based on it, if mutations are supported
-        $state['graphql-operation-type'] = $operationType;
-        $state['are-mutations-enabled'] = $operationType === OperationTypes::MUTATION;
-
-        // If there was an error when parsing the query, the operationType will be null,
-        // then there's no need to execute the query
-        if ($operationType === null) {
-            $state['does-api-query-have-errors'] = true;
-        }
-        // ---------------------------------------------
     }
 }
