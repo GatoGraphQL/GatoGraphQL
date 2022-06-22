@@ -36,15 +36,15 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        $state['graphql-operation-name'] = null;
         $state['executable-document-ast'] = null;
         $state['does-api-query-have-errors'] = null;
-
+        
         // Passing the query via URL param?
         /** @var ComponentModelModuleConfiguration */
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
+        $state['graphql-operation-name'] = EngineRequest::getQueryOperationName($enableModifyingEngineBehaviorViaRequest);
     }
 
     public function consolidate(array &$state): void

@@ -21,4 +21,14 @@ class EngineRequest
 
         return App::request(QueryInputs::QUERY) ?? App::query(QueryInputs::QUERY, $default);
     }
+
+    public static function getQueryOperationName(bool $enableModifyingEngineBehaviorViaRequest): ?string
+    {
+        $default = null;
+        if (!$enableModifyingEngineBehaviorViaRequest) {
+            return $default;
+        }
+
+        return App::request(QueryInputs::QUERY_OPERATION_NAME) ?? App::query(QueryInputs::QUERY_OPERATION_NAME, $default);
+    }
 }
