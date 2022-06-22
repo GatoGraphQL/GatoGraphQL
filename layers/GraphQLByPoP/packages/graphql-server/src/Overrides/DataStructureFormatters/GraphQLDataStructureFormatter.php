@@ -27,12 +27,9 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      */
     protected function addTopLevelExtensionsEntryToResponse(): bool
     {
-        if (App::getState('standard-graphql')) {
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            return $moduleConfiguration->enableProactiveFeedback();
-        }
-        return parent::addTopLevelExtensionsEntryToResponse();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->enableProactiveFeedback();
     }
 
     /**
@@ -85,17 +82,17 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function reformatExtensions(array $extensions): array
     {
         $extensions = parent::reformatExtensions($extensions);
-        if (App::getState('standard-graphql')) {
-            if (!empty($extensions[Tokens::ARGUMENT_PATH])) {
-                // The first element is the field or directive argument name
-                $fieldOrDirectiveName = array_shift($extensions[Tokens::ARGUMENT_PATH]);
-                $extensions[Tokens::ARGUMENT_PATH] = sprintf(
-                    '%s:%s',
-                    $fieldOrDirectiveName,
-                    implode('.', $extensions[Tokens::ARGUMENT_PATH])
-                );
-            }
+
+        if (!empty($extensions[Tokens::ARGUMENT_PATH])) {
+            // The first element is the field or directive argument name
+            $fieldOrDirectiveName = array_shift($extensions[Tokens::ARGUMENT_PATH]);
+            $extensions[Tokens::ARGUMENT_PATH] = sprintf(
+                '%s:%s',
+                $fieldOrDirectiveName,
+                implode('.', $extensions[Tokens::ARGUMENT_PATH])
+            );
         }
+
         return $extensions;
     }
 
@@ -104,15 +101,12 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      */
     protected function getObjectEntryExtensions(string $typeOutputKey, int | string $id, array $item): array
     {
-        if (App::getState('standard-graphql')) {
-            $extensions = [
-                'type' => $typeOutputKey,
-                'id' => $id,
-            ];
-            $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
-            return $extensions;
-        }
-        return parent::getObjectEntryExtensions($typeOutputKey, $id, $item);
+        $extensions = [
+            'type' => $typeOutputKey,
+            'id' => $id,
+        ];
+        $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
+        return $extensions;
     }
 
     /**
@@ -120,14 +114,11 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      */
     protected function getSchemaEntryExtensions(string $typeOutputKey, array $item): array
     {
-        if (App::getState('standard-graphql')) {
-            $extensions = [
-                'type' => $typeOutputKey,
-            ];
-            $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
-            return $extensions;
-        }
-        return parent::getSchemaEntryExtensions($typeOutputKey, $item);
+        $extensions = [
+            'type' => $typeOutputKey,
+        ];
+        $this->addFieldOrDirectiveEntryToExtensions($extensions, $item);
+        return $extensions;
     }
 
     /**
@@ -135,10 +126,7 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
      */
     protected function getDocumentEntryExtensions(): array
     {
-        if (App::getState('standard-graphql')) {
-            // Do not print "type" => "query"
-            return [];
-        }
-        return parent::getDocumentEntryExtensions();
+        // Do not print "type" => "query"
+        return [];
     }
 }

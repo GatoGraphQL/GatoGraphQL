@@ -113,9 +113,6 @@ class ModelInstance implements ModelInstanceInterface
             // so only in these exceptional cases the identifier will add this parameter
             $elements[] = $this->__('mangled:', 'component-model') . $mangled;
         }
-        if (App::getState('only-fieldname-as-outputkey')) {
-            $elements[] = $this->__('only-fieldname-as-outputkey', 'component-model');
-        }
         if ($versionConstraint = App::getState('version-constraint')) {
             $elements[] = $this->__('version-constraint:', 'component-model') . $versionConstraint;
         }

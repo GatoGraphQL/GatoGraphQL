@@ -90,8 +90,6 @@ class GraphQLServer implements GraphQLServerInterface
             'scheme' => Schemes::API,
             'datastructure' => $this->getGraphQLDataStructureFormatter()->getName(),
             'nature' => RequestNature::QUERY_ROOT,
-            'only-fieldname-as-outputkey' => true,
-            'standard-graphql' => true,
             'query' => '{}', // Added to avoid error message "The query in the body is empty"
         ];
     }

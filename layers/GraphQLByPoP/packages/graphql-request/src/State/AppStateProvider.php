@@ -23,11 +23,6 @@ class AppStateProvider extends AbstractAppStateProvider
         return $this->graphQLDataStructureFormatter ??= $this->instanceManager->getInstance(GraphQLDataStructureFormatter::class);
     }
 
-    public function initialize(array &$state): void
-    {
-        $state['standard-graphql'] = true;
-    }
-
     public function consolidate(array &$state): void
     {
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
@@ -47,17 +42,5 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['query'] = $payload['query'] ?? null;
         $state['variables'] = $payload['variables'] ?? [];
         $state['operation-name'] = $payload['operationName'] ?? null;
-    }
-
-    public function augment(array &$state): void
-    {
-        if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
-            return;
-        }
-
-        $state['standard-graphql'] = true;
-
-        // Do not include the fieldArgs and directives when outputting the field
-        $state['only-fieldname-as-outputkey'] = true;
     }
 }
