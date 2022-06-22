@@ -18,14 +18,14 @@ class AbstractCustomPostRESTEntryComponentRoutingProcessor extends AbstractRESTE
     /**
      * Add an additional hook on this abstract class
      */
-    public function getRESTFieldsQuery(): string
+    public function getGraphQLQueryToResolveRESTEndpoint(): string
     {
-        if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = (string) App::applyFilters(
+        if ($this->restEndpointGraphQLQuery === null) {
+            $this->restEndpointGraphQLQuery = (string) App::applyFilters(
                 HookHelpers::getHookName(__CLASS__),
-                parent::getRESTFieldsQuery()
+                parent::getGraphQLQueryToResolveRESTEndpoint()
             );
         }
-        return $this->restFieldsQuery;
+        return $this->restEndpointGraphQLQuery;
     }
 }

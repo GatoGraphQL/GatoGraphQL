@@ -18,16 +18,16 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
     /**
      * Remove the author data, added by hook to CustomPosts
      */
-    public function getRESTFieldsQuery(): string
+    public function getGraphQLQueryToResolveRESTEndpoint(): string
     {
-        if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = str_replace(
+        if ($this->restEndpointGraphQLQuery === null) {
+            $this->restEndpointGraphQLQuery = str_replace(
                 ',' . CustomPostHookSet::AUTHOR_RESTFIELDS,
                 '',
-                parent::getRESTFieldsQuery()
+                parent::getGraphQLQueryToResolveRESTEndpoint()
             );
         }
-        return $this->restFieldsQuery;
+        return $this->restEndpointGraphQLQuery;
     }
 
     /**
