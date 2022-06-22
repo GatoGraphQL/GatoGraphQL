@@ -1746,7 +1746,7 @@ class Engine implements EngineInterface
                     if ($iterationResolvedFieldValues === null) {
                         continue;
                     }
-                    /** @var FieldInterface[] $conditionalFields */
+                    /** @var FieldInterface[] */
                     $resolvedDirectFields = iterator_to_array($iterationResolvedFieldValues);
                     $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
                         $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],

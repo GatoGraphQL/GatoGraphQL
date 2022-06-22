@@ -193,7 +193,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     /**
      * @param array<string,mixed>|null $resolvedObjectRet
-     * @param LeafField[]> $leafFields
+     * @param LeafField[] $leafFields
      * @param RelationalField[] $relationalFields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
