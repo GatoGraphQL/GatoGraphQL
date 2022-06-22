@@ -36,5 +36,5 @@ class GraphQLParserHelpers
             )
         )->validateAndInitialize();
         return $executableDocument;
-    }    
+    }
 }
