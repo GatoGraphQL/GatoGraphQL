@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPAPI\RESTAPI\ComponentRoutingProcessors;
 
 use PoP\Root\App;
-use PoPAPI\API\Schema\FieldQueryConvertorInterface;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
