@@ -170,7 +170,7 @@
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.12",
+        "rector/rector": "^0.13",
         "squizlabs/php_codesniffer": "^3.6",
         "szepeviktor/phpstan-wordpress": "^1.0"
     },
