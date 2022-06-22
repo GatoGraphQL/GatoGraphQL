@@ -38,7 +38,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         $state['executable-document-ast'] = null;
         $state['does-api-query-have-errors'] = null;
-        
+
         // Passing the query via URL param?
         /** @var ComponentModelModuleConfiguration */
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
