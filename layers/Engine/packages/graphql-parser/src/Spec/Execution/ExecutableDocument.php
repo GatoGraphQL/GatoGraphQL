@@ -187,4 +187,25 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
         return $this->requestedOperations;
     }
+
+    /**
+     * The actual requested operation. Even though with Multiple Query Execution
+     * the document can contain multiple operations, there is only one that
+     * can be requested via ?operationName=...
+     *
+     * @throws InvalidRequestException
+     */
+    public function getRequestedOperation(): OperationInterface
+    {
+        $requestedOperations = $this->getRequestedOperations();
+        if (count($requestedOperations) === 1) {
+            return $requestedOperations[0];
+        }
+        /**
+         * Exactly one operation must have the requested name, or otherwise
+         * parsing the query would've thrown an error
+         */
+        $matchingOperations = array_filter($requestedOperations, fn (OperationInterface $operation) => $operation->getName() === $this->context->getOperationName());
+        return $matchingOperations[0];
+    }
 }

@@ -27,6 +27,14 @@ interface ExecutableDocumentInterface
      * @throws InvalidRequestException
      */
     public function getRequestedOperations(): array;
+    /**
+     * The actual requested operation. Even though with Multiple Query Execution
+     * the document can contain multiple operations, there is only one that
+     * can be requested via ?operationName=...
+     *
+     * @throws InvalidRequestException
+     */
+    public function getRequestedOperation(): OperationInterface;
 
     public function getDocument(): Document;
     public function getContext(): Context;
