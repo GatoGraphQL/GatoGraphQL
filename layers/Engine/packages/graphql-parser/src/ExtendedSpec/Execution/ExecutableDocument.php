@@ -78,6 +78,9 @@ class ExecutableDocument extends UpstreamExecutableDocument
         /**
          * Multiple operations, and no operationName requested => use __ALL
          */
-        return $this->getMatchingRequestedOperation(QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME);
+        return $this->getMatchingRequestedOperation(
+            $this->document->getOperations(),
+            QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
+        );
     }
 }

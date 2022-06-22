@@ -14,6 +14,7 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Response\Schemes;
@@ -143,6 +144,7 @@ class GraphQLServer implements GraphQLServerInterface
             /**
              * Set the operation type and, based on it, if mutations are supported.
              */
+            /** @var OperationInterface */
             $requestedOperation = $executableDocument->getRequestedOperation();
             $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
