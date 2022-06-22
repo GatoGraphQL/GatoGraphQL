@@ -31,7 +31,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
         return 'id|name|count|url';
     }

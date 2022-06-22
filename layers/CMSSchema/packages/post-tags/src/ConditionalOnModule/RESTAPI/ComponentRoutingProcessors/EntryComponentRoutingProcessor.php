@@ -31,7 +31,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
         return 'id|name|count|url';
     }

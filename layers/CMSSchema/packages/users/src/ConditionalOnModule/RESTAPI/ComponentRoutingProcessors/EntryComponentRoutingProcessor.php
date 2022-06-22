@@ -18,7 +18,7 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
         return 'id|name|url';
     }

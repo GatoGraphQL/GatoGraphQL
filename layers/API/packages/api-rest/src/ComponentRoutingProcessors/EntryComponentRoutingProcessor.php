@@ -12,7 +12,7 @@ use PoP\Root\App;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
         return 'fullSchema';
     }

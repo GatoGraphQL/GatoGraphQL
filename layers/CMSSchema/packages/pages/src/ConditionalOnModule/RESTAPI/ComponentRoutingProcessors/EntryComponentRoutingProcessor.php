@@ -13,7 +13,7 @@ use PoPCMSSchema\Pages\Routing\RequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
         return 'id|title|url|content';
     }
