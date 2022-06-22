@@ -128,7 +128,6 @@ class GraphQLServer implements GraphQLServerInterface
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
 
-        // @todo Fix: this code is duplicated! It's also in api/src/State/AppStateProvider.php, keep DRY!
         try {
             $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                 $query,
