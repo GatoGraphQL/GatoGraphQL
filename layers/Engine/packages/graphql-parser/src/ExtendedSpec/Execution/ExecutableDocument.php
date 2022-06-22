@@ -66,10 +66,18 @@ class ExecutableDocument extends UpstreamExecutableDocument
     }
 
     /**
-     * Allow overriding: If no operationName was provided, then it's assigned to __ALL
+     * Override: If no operationName was provided, then it's assigned to __ALL
      */
-    public function getRequestedOperationName(): string
+    public function getRequestedOperation(): OperationInterface
     {
-        return trim($this->context->getOperationName()) ? $this->context->getOperationName() : QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME;
+        $requestedOperations = $this->getRequestedOperations();
+        if (count($requestedOperations) === 1 || !empty($this->context->getOperationName())) {
+            return parent::getRequestedOperation();
+        }
+
+        /**
+         * Multiple operations, and no operationName requested => use __ALL
+         */
+        return $this->getMatchingRequestedOperation(QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME);
     }
 }

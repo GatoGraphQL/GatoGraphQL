@@ -206,19 +206,16 @@ class ExecutableDocument implements ExecutableDocumentInterface
          * Exactly one operation must have the requested name, or otherwise
          * parsing the query would've thrown an error
          */
-        $operationName = $this->getRequestedOperationName();
+        return $this->getMatchingRequestedOperation($this->context->getOperationName());
+    }
+
+    protected function getMatchingRequestedOperation(string $operationName): OperationInterface
+    {
+        $requestedOperations = $this->getRequestedOperations();
         $matchingOperations = array_values(array_filter(
             $requestedOperations,
             fn (OperationInterface $operation) => $operation->getName() === $operationName
         ));
         return $matchingOperations[0];
-    }
-
-    /**
-     * Allow overriding: If no operationName was provided, then it's assigned to __ALL
-     */
-    public function getRequestedOperationName(): string
-    {
-        return $this->context->getOperationName();
     }
 }
