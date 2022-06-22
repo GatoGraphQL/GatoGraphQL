@@ -15,7 +15,6 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
     protected ?array $restEndpointGraphQLQuery = null;
 
     private ?RESTDataStructureFormatter $restDataStructureFormatter = null;
-    private ?FieldQueryConvertorInterface $fieldQueryConvertor = null;
 
     final public function setRESTDataStructureFormatter(RESTDataStructureFormatter $restDataStructureFormatter): void
     {
@@ -24,14 +23,6 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
     final protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
         return $this->restDataStructureFormatter ??= $this->instanceManager->getInstance(RESTDataStructureFormatter::class);
-    }
-    final public function setFieldQueryConvertor(FieldQueryConvertorInterface $fieldQueryConvertor): void
-    {
-        $this->fieldQueryConvertor = $fieldQueryConvertor;
-    }
-    final protected function getFieldQueryConvertor(): FieldQueryConvertorInterface
-    {
-        return $this->fieldQueryConvertor ??= $this->instanceManager->getInstance(FieldQueryConvertorInterface::class);
     }
 
     public function getGraphQLQueryToResolveRESTEndpoint(): string
