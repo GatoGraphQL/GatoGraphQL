@@ -197,10 +197,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param RelationalField[] $relationalFields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
-     * @param string|integer $objectID
-     * @param string $objectKeyPath
      * @param array<string> $typeOutputKeyPaths
-     * @param boolean $concatenateField
      */
     protected function addObjectData(?array &$resolvedObjectRet, array $leafFields, array $relationalFields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
     {
