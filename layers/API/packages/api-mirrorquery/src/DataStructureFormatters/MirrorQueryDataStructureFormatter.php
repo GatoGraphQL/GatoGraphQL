@@ -8,7 +8,12 @@ use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\Root\App;
 use SplObjectStorage;
 
@@ -26,7 +31,102 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      */
     protected function getFields(): array
     {
-        return App::getState('requested-query') ?? App::getState('executable-query') ?? [];
+        $executableDocument = App::getState('executable-document-ast');
+
+        // Make sure the GraphQL query exists and was parsed properly into an AST
+        if ($executableDocument === null) {
+            return [];
+        }
+        /** @var ExecutableDocument $executableDocument */
+
+        /**
+         * Return the root level Fields
+         */
+        return $this->getFieldsFromExecutableDocument($executableDocument);
+    }
+
+    /**
+     * @return FieldInterface[]
+     */
+    protected function getFieldsFromExecutableDocument(
+        ExecutableDocument $executableDocument,
+    ): array {
+        $fragments = $executableDocument->getDocument()->getFragments();
+        $fields = [];
+        foreach ($executableDocument->getRequestedOperations() as $operation) {
+            $fields = array_merge(
+                $fields,
+                $this->getAllFieldsFromFieldsOrFragmentBonds(
+                    $operation->getFieldsOrFragmentBonds(),
+                    $fragments,
+                )
+            );
+        }
+        return $fields;
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Fragment[] $fragments
+     * @return FieldInterface[]
+     */
+    protected function getAllFieldsFromFieldsOrFragmentBonds(
+        array $fieldsOrFragmentBonds,
+        array $fragments,
+    ): array {
+        /** @var FieldInterface[] */
+        $fields = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                /** @var FragmentReference */
+                $fragmentReference = $fieldOrFragmentBond;
+                $fragment = $this->getFragment($fragmentReference->getName(), $fragments);
+                if ($fragment === null) {
+                    continue;
+                }
+                $allFieldsFromFieldsOrFragmentBonds = $this->getAllFieldsFromFieldsOrFragmentBonds(
+                    $fragment->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
+                $fields = array_merge(
+                    $fields,
+                    $allFieldsFromFieldsOrFragmentBonds
+                );
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $allFieldsFromFieldsOrFragmentBonds = $this->getAllFieldsFromFieldsOrFragmentBonds(
+                    $inlineFragment->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
+                $fields = array_merge(
+                    $fields,
+                    $allFieldsFromFieldsOrFragmentBonds
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $fields[] = $field;
+        }
+        return $fields;
+    }
+
+    /**
+     * @param Fragment[] $fragments
+     */
+    protected function getFragment(
+        string $fragmentName,
+        array $fragments,
+    ): ?Fragment {
+        foreach ($fragments as $fragment) {
+            if ($fragment->getName() === $fragmentName) {
+                return $fragment;
+            }
+        }
+        return null;
     }
 
     public function getFormattedData(array $data): array
