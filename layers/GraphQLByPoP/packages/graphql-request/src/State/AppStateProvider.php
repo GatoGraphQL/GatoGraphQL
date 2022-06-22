@@ -56,7 +56,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Set state with the GraphQL query from the body
         $state['query'] = $payload['query'] ?? null;
         $state['variables'] = $payload['variables'] ?? [];
-        $state['graphql-operation-name'] = $payload['operationName'] ?? null;
+        $state['operation-name'] = $payload['operationName'] ?? null;
     }
 
     public function augment(array &$state): void

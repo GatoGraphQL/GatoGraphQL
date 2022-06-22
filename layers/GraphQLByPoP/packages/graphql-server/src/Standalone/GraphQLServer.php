@@ -124,7 +124,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
-        $appStateManager->override('graphql-operation-name', $operationName);
+        $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
         $appStateManager->override('graphql-operation-type', null);
 
