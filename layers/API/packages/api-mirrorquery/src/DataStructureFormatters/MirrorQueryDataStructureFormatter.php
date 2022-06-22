@@ -237,59 +237,28 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $resolvedObject = $databases[$typeOutputKey][$objectID] ?? new SplObjectStorage();
         foreach ($leafFields as $leafField) {
-            // Only if the property has been set (in case of dbError it is not set)
-            $leafFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($leafField);
-
-            // @todo Re-do this logic, by passing the FieldInterface directly
-            /** @var FieldInterface|null */
-            $leafFieldInstance = null;
-            /** @var FieldInterface[] */
-            $resolvedObjectFields = iterator_to_array($resolvedObject);
-            foreach ($resolvedObjectFields as $resolvedObjectField) {
-                if ($resolvedObjectField->getOutputKey() === $leafFieldOutputKey) {
-                    $leafFieldInstance = $resolvedObjectField;
-                    break;
-                }
+            /**
+             * If the key doesn't exist, then do nothing.
+             */
+            if (!$resolvedObject->contains($leafField)) {
+                continue;
             }
-
-            if ($leafFieldInstance !== null) {
-                $resolvedObjectRet[$leafFieldOutputKey] = $resolvedObject[$leafFieldInstance];
-            }
+            $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
         }
 
         // Add the nested levels
-        foreach ($relationalFields as $relationalField => $relationalNestedFields) {
-            $relationalFieldOutputKey = $this->getFieldQueryInterpreter()->getFieldOutputKey($relationalField);
-        
-
-            // @todo Re-do this logic, by passing the FieldInterface directly
-            /** @var FieldInterface|null */
-            $relationalFieldInstance = null;
-            /** @var FieldInterface[] */
-            $resolvedObjectFields = iterator_to_array($resolvedObject);
-            foreach ($resolvedObjectFields as $resolvedObjectField) {
-                if ($resolvedObjectField->getOutputKey() === $relationalFieldOutputKey) {
-                    $relationalFieldInstance = $resolvedObjectField;
-                    break;
-                }
-            }
-            if ($relationalFieldInstance === null) {
-                continue;
-            }
-
+        foreach ($relationalFields as $relationalField) {
             /**
              * If the key doesn't exist, then do nothing.
-             *
-             * This supports the "skip output if null" behaviour:
-             * if it is to be skipped, there will be no value
-             * (which is different than a null)
              */
-            if (!$resolvedObject->contains($relationalFieldInstance)) {
+            if (!$resolvedObject->contains($relationalField)) {
                 continue;
             }
 
+            $relationalFieldOutputKey = $relationalField->getOutputKey();
+
             // If it's null, directly assign the null to the result
-            if ($resolvedObject[$relationalFieldInstance] === null) {
+            if ($resolvedObject[$relationalField] === null) {
                 $resolvedObjectRet[$relationalFieldOutputKey] = null;
                 continue;
             }
@@ -305,13 +274,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $nextField = ($concatenateField ? $objectKeyPath . Constants::RELATIONAL_FIELD_PATH_SEPARATOR : '') . $relationalFieldOutputKey;
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
-            $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$relationalFieldInstance] ?? null;
+            $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$relationalField] ?? null;
 
             // Add a new subarray for the nested property
             $resolvedObjectNestedPropertyRet = &$resolvedObjectRet[$relationalFieldOutputKey];
 
             // If it is an empty array, then directly add an empty array as the result
-            if (is_array($resolvedObject[$relationalFieldInstance]) && empty($resolvedObject[$relationalFieldInstance])) {
+            if (is_array($resolvedObject[$relationalField]) && empty($resolvedObject[$relationalField])) {
                 $resolvedObjectRet[$relationalFieldOutputKey] = [];
                 continue;
             }
@@ -333,7 +302,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     }
                 }
             }
-            $this->addData($resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalFieldInstance], $nextField, $typeOutputKeyPaths);
+            $this->addData($resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
     }
 }
