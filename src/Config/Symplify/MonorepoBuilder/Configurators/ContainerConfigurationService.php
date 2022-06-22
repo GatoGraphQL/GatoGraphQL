@@ -38,8 +38,8 @@ class ContainerConfigurationService
                 CustomOption::PACKAGE_ORGANIZATIONS,
                 $packageOrganizationConfig->getPackagePathOrganizations()
             );
-            $parameters->packageDirectories($packageOrganizationConfig->getPackageDirectories());
-            $parameters->packageDirectoriesExcludes($packageOrganizationConfig->getPackageDirectoryExcludes());
+            $this->mbConfig->packageDirectories($packageOrganizationConfig->getPackageDirectories());
+            $this->mbConfig->packageDirectoriesExcludes($packageOrganizationConfig->getPackageDirectoryExcludes());
         }
 
         /**
