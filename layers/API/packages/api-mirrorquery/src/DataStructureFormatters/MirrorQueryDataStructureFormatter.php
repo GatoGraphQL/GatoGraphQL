@@ -193,8 +193,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     /**
      * @param array<string,mixed>|null $resolvedObjectRet
-     * @param FieldInterface[]> $leafFields
-     * @param FieldInterface[] $relationalFields
+     * @param LeafField[]> $leafFields
+     * @param RelationalField[] $relationalFields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param string|integer $objectID
@@ -303,6 +303,17 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     // }
                 }
             }
+            /**
+             * The RelationalField can contain fragments.
+             * Replace these into fields.
+             */
+            /** @var ExecutableDocument */
+            $executableDocument = App::getState('executable-document-ast');
+            $fragments = $executableDocument->getDocument()->getFragments();
+            $relationalNestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
+                $relationalField->getFieldsOrFragmentBonds(),
+                $fragments
+            );
             $this->addData($resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
     }
