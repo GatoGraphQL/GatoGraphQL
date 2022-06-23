@@ -73,7 +73,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      */
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
-        array &$fieldDirectiveFields,
+        array $fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;

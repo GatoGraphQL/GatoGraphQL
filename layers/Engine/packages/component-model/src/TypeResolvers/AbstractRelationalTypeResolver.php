@@ -158,7 +158,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     public function resolveDirectivesIntoPipelineData(
         array $fieldDirectives,
-        array &$fieldDirectiveFields,
+        array $fieldDirectiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
