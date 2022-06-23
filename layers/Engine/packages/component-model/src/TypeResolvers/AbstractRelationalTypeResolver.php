@@ -349,7 +349,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Validate all the directiveResolvers in the field
-        $processedDirectiveNames = [];
+        // $processedDirectiveNames = [];
         foreach ($directiveResolverInstanceFields as $instanceID => $instanceData) {
             $directive = $instanceData['directive'];
             /** @var DirectiveResolverInterface */
@@ -359,7 +359,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // // If a directive is repeated on the same pipeline, validate it can do so
             // $isRepeatedDirective = in_array($directive->getName(), $processedDirectiveNames);
             $directiveName = $directive->getName();
-            $processedDirectiveNames[] = $directiveName;
+            // $processedDirectiveNames[] = $directiveName;
             
             // // If it is a repeated directive, no need to do the validation again
             // if (!$isRepeatedDirective) {
