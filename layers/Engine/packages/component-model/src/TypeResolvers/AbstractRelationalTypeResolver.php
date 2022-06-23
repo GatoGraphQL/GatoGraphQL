@@ -357,15 +357,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolverInstance = $instanceData['instance'];
             /** @var FieldInterface[] */
             $directiveResolverFields = $instanceData['fields'];
-            // @todo Remove commented code here:
-            // // If a directive is repeated on the same pipeline, validate it can do so
-            // $isRepeatedDirective = in_array($directive->getName(), $processedDirectiveNames);
             $directiveName = $directive->getName();
-            // $processedDirectiveNames[] = $directiveName;
             
-            // // If it is a repeated directive, no need to do the validation again
-            // if (!$isRepeatedDirective) {
-
             // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
             $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             list(
@@ -434,10 +427,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     );
                 }
             }
-            // }
 
             // Validate if the directive can be executed multiple times on each field
-            if (/*$isRepeatedDirective && */!$directiveResolverInstance->isRepeatable()) {
+            if (!$directiveResolverInstance->isRepeatable()) {
                 // Check if the directive is already processing any of the fields
                 $alreadyProcessingFields = array_intersect(
                     $directiveFieldTrack[$directiveName] ?? [],
