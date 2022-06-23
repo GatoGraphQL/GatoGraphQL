@@ -1032,9 +1032,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     );
                     // Also transpose the array to match field to IDs later on
                     foreach ($idFieldDirectiveIDFields as $field) {
-                        $fieldSplObjectStorage = $directiveFieldIDs[$directive][$field] ?? [];
-                        $fieldSplObjectStorage[] = $id;
-                        $directiveFieldIDs[$directive][$field] = $fieldSplObjectStorage;
+                        $ids = $directiveFieldIDs[$directive][$field] ?? [];
+                        $ids[] = $id;
+                        $directiveFieldIDs[$directive][$field] = $ids;
                     }
                 }
                 // @todo Check that the `array_unique` is not needed
