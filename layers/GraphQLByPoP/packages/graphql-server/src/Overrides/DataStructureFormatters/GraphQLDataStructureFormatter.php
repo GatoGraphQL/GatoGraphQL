@@ -49,20 +49,21 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             $extensions['field'] = $fields[0];
             return;
         }
-        // Two fields: it may be a directive
-        if (count($fields) == 2) {
-            $maybeField = $fields[0];
-            $maybeDirective = $fields[1];
-            $maybeFieldDirectives = array_map(
-                $this->getFieldQueryInterpreter()->convertDirectiveToFieldDirective(...),
-                $this->getFieldQueryInterpreter()->getDirectives($maybeField)
-            );
-            // Find out if the directive is contained in the field
-            if (in_array($maybeDirective, $maybeFieldDirectives)) {
-                $extensions['directive'] = $maybeDirective;
-                return;
-            }
-        }
+        // @todo Temporarily commented as removing FieldQueryInterpreter - Re-do!
+        // // Two fields: it may be a directive
+        // if (count($fields) == 2) {
+        //     $maybeField = $fields[0];
+        //     $maybeDirective = $fields[1];
+        //     $maybeFieldDirectives = array_map(
+        //         $this->getFieldQueryInterpreter()->convertDirectiveToFieldDirective(...),
+        //         $this->getFieldQueryInterpreter()->getDirectives($maybeField)
+        //     );
+        //     // Find out if the directive is contained in the field
+        //     if (in_array($maybeDirective, $maybeFieldDirectives)) {
+        //         $extensions['directive'] = $maybeDirective;
+        //         return;
+        //     }
+        // }
         // Many fields
         $extensions['fields'] = $fields;
     }
