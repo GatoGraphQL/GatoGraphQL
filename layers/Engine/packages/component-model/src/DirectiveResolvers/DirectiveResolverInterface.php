@@ -27,6 +27,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;
     public function getDirectiveName(): string;
+    public function getDirective(): Directive;
     /**
      * Invoked when creating the non-shared directive instance
      * to resolve a field in the pipeline

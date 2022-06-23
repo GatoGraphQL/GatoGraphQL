@@ -114,6 +114,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $this->directive = $directive;
     }
 
+    public function getDirective(): Directive
+    {
+        return $this->directive;
+    }
+
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
