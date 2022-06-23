@@ -953,24 +953,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             
             // Store which fields do the directives process
-            foreach ($this->fieldDirectives as $processedField) {
-                /** @var FieldInterface $processedField */
-                $directives = $this->fieldDirectives[$processedField];
-                /** @var Directive[] $directives */
-                foreach ($directives as $directive) {
-                    $idFieldSet = $this->directiveIDFieldSet[$directive] ?? [];
-                    $idFieldSet[$id] ??= new EngineIterationFieldSet();
-                    // Store which ID/field this directive must process
-                    if (in_array($field, $fieldSet->fields)) {
-                        $idFieldSet[$id]->fields[] = $field;
-                    }
-                    /** @var FieldInterface[]|null */
-                    $conditionalFields = $fieldSet->conditionalFields[$field] ?? null;
-                    if (!($conditionalFields === null || $conditionalFields === [])) {
-                        $idFieldSet[$id]->addConditionalFields($field, $conditionalFields);
-                    }
-                    $this->directiveIDFieldSet[$directive] = $idFieldSet;
+            /** @var Directive[] */
+            $directives = $this->fieldDirectives[$field];
+            foreach ($directives as $directive) {
+                $idFieldSet = $this->directiveIDFieldSet[$directive] ?? [];
+                $idFieldSet[$id] ??= new EngineIterationFieldSet();
+                // Store which ID/field this directive must process
+                if (in_array($field, $fieldSet->fields)) {
+                    $idFieldSet[$id]->fields[] = $field;
                 }
+                /** @var FieldInterface[]|null */
+                $conditionalFields = $fieldSet->conditionalFields[$field] ?? null;
+                if (!($conditionalFields === null || $conditionalFields === [])) {
+                    $idFieldSet[$id]->addConditionalFields($field, $conditionalFields);
+                }
+                $this->directiveIDFieldSet[$directive] = $idFieldSet;
             }
         }
     }
