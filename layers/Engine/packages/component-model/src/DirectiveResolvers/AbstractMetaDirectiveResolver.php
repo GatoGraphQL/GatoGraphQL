@@ -12,7 +12,9 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\App;
+use SplObjectStorage;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
 {
@@ -39,9 +41,14 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         return $moduleConfiguration->enableComposableDirectives();
     }
 
+    /**
+     * Extract and validate the directive arguments
+     *
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$fieldDirectiveFields,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -66,9 +73,9 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
                 $nestedFieldDirectives = $expandedNestedFieldDirectives;
             }
             // Each composed directive will deal with the same fields as the current directive
-            $nestedFieldDirectiveFields = $fieldDirectiveFields;
+            $nestedFieldDirectiveFields = $directiveFields;
             foreach ($nestedFieldDirectives as $nestedFieldDirective) {
-                $nestedFieldDirectiveFields[$nestedFieldDirective] = $fieldDirectiveFields[$this->directive];
+                $nestedFieldDirectiveFields[$nestedFieldDirective] = $directiveFields[$this->directive];
             }
             $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
@@ -91,7 +98,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
 
         return parent::dissectAndValidateDirectiveForSchema(
             $relationalTypeResolver,
-            $fieldDirectiveFields,
+            $directiveFields,
             $variables,
             $engineIterationFeedbackStore,
         );

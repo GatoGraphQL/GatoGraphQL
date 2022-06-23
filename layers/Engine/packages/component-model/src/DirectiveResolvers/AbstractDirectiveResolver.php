@@ -32,6 +32,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -178,11 +179,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Extract and validate the directive arguments
      *
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$fieldDirectiveFields,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -195,7 +196,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this,
             $relationalTypeResolver,
             $this->directive,
-            $fieldDirectiveFields,
+            $directiveFields,
             $variables,
             $engineIterationFeedbackStore,
             $this->disableDynamicFieldsFromDirectiveArgs()
