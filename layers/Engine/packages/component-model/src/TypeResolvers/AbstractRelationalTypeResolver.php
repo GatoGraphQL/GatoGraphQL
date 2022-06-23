@@ -639,6 +639,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Eg: a directive `@validateDoesUserHaveCapability` must be preceded by a directive `@validateIsUserLoggedIn`
      *
      * The process is recursive: mandatory directives can have their own mandatory directives, and these are added too
+     *
+     * @param Directive[] $directives
+     * @return Directive[]
      */
     protected function addMandatoryDirectivesForDirectives(array $directives): array
     {
@@ -646,7 +649,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $succeedingMandatoryDirectivesForDirectives = $this->getAllSucceedingMandatoryDirectivesForDirectives();
         $allDirectives = [];
         foreach ($directives as $directive) {
-            $directiveName = $this->getFieldQueryInterpreter()->getDirectiveName($directive);
+            $directiveName = $directive->getName();
             // Add preceding mandatory directives
             if (
                 $mandatoryDirectivesForDirective = array_merge(
