@@ -14,22 +14,22 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
-use Symplify\MonorepoBuilder\Config\MBConfig;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
 
 class ContainerConfigurationService
 {
     public function __construct(
-        protected MBConfig $mbConfig,
+        protected ContainerConfigurator $containerConfigurator,
         protected string $rootDirectory,
     ) {
     }
 
     public function configureContainer(): void
     {
-        $parameters = $this->mbConfig->parameters();
+        $parameters = $this->containerConfigurator->parameters();
 
         /**
          * Packages handled by the monorepo
@@ -39,11 +39,6 @@ class ContainerConfigurationService
                 CustomOption::PACKAGE_ORGANIZATIONS,
                 $packageOrganizationConfig->getPackagePathOrganizations()
             );
-
-            // @todo Check error: "[ERROR] The file "graphql-api-for-wp/wordpress" does not exist."
-            // Then remove deprecated 
-            // $this->mbConfig->packageDirectories($packageOrganizationConfig->getPackageDirectories());
-            // $this->mbConfig->packageDirectoriesExcludes($packageOrganizationConfig->getPackageDirectoryExcludes());
             $parameters->set(
                 Option::PACKAGE_DIRECTORIES,
                 $packageOrganizationConfig->getPackageDirectories()
@@ -129,14 +124,20 @@ class ContainerConfigurationService
          * Libraries that must always be required (or removed) in composer.json
          */
         if ($dataToAppendAndRemoveConfig = $this->getDataToAppendAndRemoveDataSource()) {
-            $this->mbConfig->dataToAppend($dataToAppendAndRemoveConfig->getDataToAppend());
-            $this->mbConfig->dataToRemove($dataToAppendAndRemoveConfig->getDataToRemove());
+            $parameters->set(
+                Option::DATA_TO_APPEND,
+                $dataToAppendAndRemoveConfig->getDataToAppend()
+            );
+            $parameters->set(
+                Option::DATA_TO_REMOVE,
+                $dataToAppendAndRemoveConfig->getDataToRemove()
+            );
         }
 
         /**
          * Configure services
          */
-        $services = $this->mbConfig->services();
+        $services = $this->containerConfigurator->services();
         $services->defaults()
             ->autowire()
             ->autoconfigure();
@@ -202,7 +203,7 @@ class ContainerConfigurationService
         /**
          * Release workers
          */
-        $this->setReleaseWorkerServices();
+        $this->setReleaseWorkerServices($services);
     }
 
     protected function setCustomServices(ServicesConfigurator $services): void
@@ -213,13 +214,15 @@ class ContainerConfigurationService
             ->load('PoP\\PoP\\Extensions\\', $this->rootDirectory . '/src/Extensions/*');
     }
 
-    protected function setReleaseWorkerServices(): void
+    protected function setReleaseWorkerServices(ServicesConfigurator $services): void
     {
         /**
          * Release workers - in order to execute
          */
         if ($releaseWorkersConfig = $this->getReleaseWorkersDataSource()) {
-            $this->mbConfig->workers($releaseWorkersConfig->getReleaseWorkerClasses());
+            foreach ($releaseWorkersConfig->getReleaseWorkerClasses() as $releaseWorkerClass) {
+                $services->set($releaseWorkerClass);
+            }
         }
     }
 }

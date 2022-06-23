@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use PoP\PoP\Config\Symplify\MonorepoBuilder\Configurators\ContainerConfigurationService;
-use Symplify\MonorepoBuilder\Config\MBConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (MBConfig $mbConfig): void {
+return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurationService = new ContainerConfigurationService(
-        $mbConfig,
+        $containerConfigurator,
         __DIR__
     );
     $containerConfigurationService->configureContainer();
