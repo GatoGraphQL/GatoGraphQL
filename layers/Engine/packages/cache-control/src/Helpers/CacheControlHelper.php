@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\CacheControl\Helpers;
 
 use PoP\CacheControl\DirectiveResolvers\CacheControlDirectiveResolver;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;

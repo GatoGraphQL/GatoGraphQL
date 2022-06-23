@@ -358,7 +358,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /** @var FieldInterface[] */
             $directiveResolverFields = $instanceData['fields'];
             $directiveName = $directive->getName();
-            
+
             // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
             $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             list(
@@ -725,7 +725,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /**
              * `array_merge_recursive` so that if 2 different decorators add a directive
              * for the same directive, the results are merged together, not override each other.
-             */            
+             */
             if ($typeResolverDecorator->enabled($this)) {
                 $precedingMandatoryDirectivesForDirectives = array_merge_recursive(
                     $precedingMandatoryDirectivesForDirectives,
@@ -945,7 +945,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 $this->fieldDirectives[$field] = $directives;
             }
-            
+
             // Store which fields do the directives process
             /** @var Directive[] */
             $directives = $this->fieldDirectives[$field];
