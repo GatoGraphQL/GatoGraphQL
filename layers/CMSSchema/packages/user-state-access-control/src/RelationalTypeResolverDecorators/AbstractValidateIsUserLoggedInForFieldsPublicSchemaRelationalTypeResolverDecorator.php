@@ -59,6 +59,8 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
 
     /**
      * Verify that the user is logged in before checking the roles/capabilities
+     *
+     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
      */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {

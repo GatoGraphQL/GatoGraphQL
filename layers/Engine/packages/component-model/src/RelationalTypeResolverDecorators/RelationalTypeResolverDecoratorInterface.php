@@ -29,6 +29,8 @@ interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionIn
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     /**
      * Return an array of fieldNames as keys, and, for each fieldName, an array of directives (including directive arguments) to be applied always on the field
+     *
+     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
      */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array;
     /**
