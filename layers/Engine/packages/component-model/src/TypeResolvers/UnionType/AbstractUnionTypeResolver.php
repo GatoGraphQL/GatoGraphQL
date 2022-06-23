@@ -183,6 +183,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // This is mandatory, because the UnionType doesn't have fields by itself.
         // Otherwise, RelationalTypeResolverDecorators can't have their defined ACL rules
         // work when querying a union type (eg: "customPosts")
+        /** @var array<string,Directive[]> */
         $targetObjectTypeResolverClassMandatoryDirectivesForFields = [];
         $targetObjectTypeResolvers = $this->getTargetObjectTypeResolvers();
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
