@@ -351,9 +351,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Validate all the directiveResolvers in the field
         // $processedDirectiveNames = [];
         foreach ($directiveResolverInstanceFields as $instanceID => $instanceData) {
+            /** @var Directive */
             $directive = $instanceData['directive'];
             /** @var DirectiveResolverInterface */
             $directiveResolverInstance = $instanceData['instance'];
+            /** @var FieldInterface[] */
             $directiveResolverFields = $instanceData['fields'];
             // @todo Remove commented code here:
             // // If a directive is repeated on the same pipeline, validate it can do so
@@ -458,7 +460,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     ErrorFeedbackItemProvider::class,
                                     ErrorFeedbackItemProvider::E23,
                                     [
-                                        $directive,
+                                        $directive->asQueryString(),
                                         implode(
                                             '\', \'',
                                             array_map(
