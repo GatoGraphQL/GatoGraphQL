@@ -878,11 +878,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
             if (!isset($this->fieldDirectivesFromFieldCache[$field->getUniqueID()])) {
-                // Get the directives from the field
-                $directives = $this->getFieldQueryInterpreter()->getDirectives($field->asFieldOutputQueryString());
+                $directives = $field->getDirectives();
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
-                $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
+                $fieldName = $field->getName();
                 if (
                     $mandatoryDirectivesForField = array_merge(
                         $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
