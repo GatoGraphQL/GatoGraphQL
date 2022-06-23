@@ -870,7 +870,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @param FieldInterface[] $fields
      */
-    public function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
+    protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
     {
         $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
