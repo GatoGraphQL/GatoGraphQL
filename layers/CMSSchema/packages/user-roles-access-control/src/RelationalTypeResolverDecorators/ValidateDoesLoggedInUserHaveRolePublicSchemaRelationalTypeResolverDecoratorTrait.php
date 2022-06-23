@@ -13,6 +13,9 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait
 {
+    /** @var array<string,Directive> */
+    protected array $validateDoesLoggedInUserHaveAnyRoleDirectives = [];
+
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
 
     /**
@@ -33,8 +36,9 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
      */
     protected function getValidateDoesLoggedInUserHaveAnyRoleDirective(array $roles): Directive
     {
-        if ($this->validateDoesLoggedInUserHaveAnyCapabilityDirective === null) {
-            $this->validateDoesLoggedInUserHaveAnyCapabilityDirective = new Directive(
+        $rolesKey = implode('|', $roles);
+        if (!isset($this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey])) {
+            $this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey] = new Directive(
                 $this->getValidateRoleDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
@@ -49,7 +53,7 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
                 LocationHelper::getNonSpecificLocation()
             );
         }
-        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirective;
+        return $this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey];
     }
 
     abstract protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface;

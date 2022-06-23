@@ -13,7 +13,8 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait
 {
-    protected ?Directive $validateDoesLoggedInUserHaveAnyCapabilityDirective = null;
+    /** @var array<string,Directive> */
+    protected array $validateDoesLoggedInUserHaveAnyCapabilityDirectives = [];
 
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
 
@@ -35,8 +36,9 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
      */
     protected function getValidateDoesLoggedInUserHaveAnyCapabilityDirective(array $capabilities): Directive
     {
-        if ($this->validateDoesLoggedInUserHaveAnyCapabilityDirective === null) {
-            $this->validateDoesLoggedInUserHaveAnyCapabilityDirective = new Directive(
+        $capabilitiesKey = implode('|', $capabilities);
+        if (!isset($this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey])) {
+            $this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey] = new Directive(
                 $this->getValidateCapabilityDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
@@ -51,7 +53,7 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
                 LocationHelper::getNonSpecificLocation()
             );
         }
-        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirective;
+        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirectives[$capabilitiesKey];
     }
 
     abstract protected function getValidateCapabilityDirectiveResolver(): DirectiveResolverInterface;
