@@ -131,6 +131,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->mandatoryDirectivesForFields;
     }
 
+    /**
+     * @return Directive[]
+     */
     private function calculateAllMandatoryDirectivesForFields(): array
     {
         $mandatoryDirectivesForFields = [];
