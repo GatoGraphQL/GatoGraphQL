@@ -8,10 +8,14 @@ use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelat
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;
 
 abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
 {
+    protected ?Directive $validateIsUserLoggedInDirective = null;
+
     private ?ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver = null;
 
     final public function setValidateIsUserLoggedInDirectiveResolver(ValidateIsUserLoggedInDirectiveResolver $validateIsUserLoggedInDirectiveResolver): void
@@ -31,10 +35,7 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
         $mandatoryDirectivesForDirectives = [];
         if ($directiveResolvers = $this->getDirectiveResolvers()) {
             // This is the required "validateIsUserLoggedIn" directive
-            $validateIsUserLoggedInDirective = $this->getFieldQueryInterpreter()->getDirective(
-                $this->getValidateIsUserLoggedInDirectiveResolver()->getDirectiveName(),
-                []
-            );
+            $validateIsUserLoggedInDirective = $this->getValidateIsUserLoggedInDirective();
             // Add the mapping
             foreach ($directiveResolvers as $needValidateIsUserLoggedInDirectiveResolver) {
                 $mandatoryDirectivesForDirectives[$needValidateIsUserLoggedInDirectiveResolver->getDirectiveName()] = [
@@ -44,6 +45,19 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
         }
         return $mandatoryDirectivesForDirectives;
     }
+
+    protected function getValidateIsUserLoggedInDirective(): Directive
+    {
+        if ($this->validateIsUserLoggedInDirective === null) {
+            $this->validateIsUserLoggedInDirective = new Directive(
+                $this->getValidateIsUserLoggedInDirectiveResolver()->getDirectiveName(),
+                [],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->validateIsUserLoggedInDirective;
+    }
+
     /**
      * Provide the DirectiveResolvers that need the "validateIsUserLoggedIn" directive
      *
@@ -56,16 +70,15 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
 
     /**
      * Verify that the user is logged in before checking the roles/capabilities
+     *
+     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
      */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         $mandatoryDirectivesForFields = [];
         if ($fieldNames = $this->getFieldNames()) {
             // This is the required "validateIsUserLoggedIn" directive
-            $validateIsUserLoggedInDirective = $this->getFieldQueryInterpreter()->getDirective(
-                $this->getValidateIsUserLoggedInDirectiveResolver()->getDirectiveName(),
-                []
-            );
+            $validateIsUserLoggedInDirective = $this->getValidateIsUserLoggedInDirective();
             // Add the mapping
             foreach ($fieldNames as $fieldName) {
                 $mandatoryDirectivesForFields[$fieldName] = [

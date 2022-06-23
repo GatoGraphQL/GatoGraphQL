@@ -32,6 +32,7 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -53,18 +54,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private const MESSAGE_EXPRESSIONS_FOR_OBJECT = 'expressionsForObject';
     private const MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD = 'expressionsForObjectAndField';
 
-    protected string $directive;
-    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    protected Directive $directive;
+    /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedDirectiveArgNameTypeResolversCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedDirectiveArgDescriptionCache = [];
-    /** @var array<string, mixed> */
+    /** @var array<string,mixed> */
     protected array $consolidatedDirectiveArgDefaultValueCache = [];
-    /** @var array<string, int> */
+    /** @var array<string,int> */
     protected array $consolidatedDirectiveArgTypeModifiersCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedDirectiveArgExtensionsCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
@@ -97,16 +98,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function __construct()
     {
-        $this->directive = $this->getDirectiveName();
+        $this->directive = new Directive(
+            $this->getDirectiveName(),
+            [],
+            LocationHelper::getNonSpecificLocation()
+        );
     }
 
     /**
      * Invoked when creating the non-shared directive instance
      * to resolve a field in the pipeline
      */
-    final public function setDirective(string $directive): void
+    final public function setDirective(Directive $directive): void
     {
         $this->directive = $directive;
+    }
+
+    public function getDirective(): Directive
+    {
+        return $this->directive;
     }
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
@@ -178,11 +188,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * Extract and validate the directive arguments
      *
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$fieldDirectiveFields,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -195,7 +205,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $this,
             $relationalTypeResolver,
             $this->directive,
-            $fieldDirectiveFields,
+            $directiveFields,
             $variables,
             $engineIterationFeedbackStore,
             $this->disableDynamicFieldsFromDirectiveArgs()
@@ -1014,7 +1024,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                                         ErrorFeedbackItemProvider::class,
                                         ErrorFeedbackItemProvider::E11A,
                                         [
-                                            $this->directive,
+                                            $this->directive->asQueryString(),
                                             $e->getMessage(),
                                             $e->getTraceAsString(),
                                         ]
@@ -1035,7 +1045,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E11A,
                             [
-                                $this->directive,
+                                $this->directive->asQueryString(),
                                 $e->getMessage(),
                                 $e->getTraceAsString(),
                             ]
@@ -1044,7 +1054,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E11,
                             [
-                                $this->directive,
+                                $this->directive->asQueryString(),
                                 $e->getMessage(),
                             ]
                         )
@@ -1053,7 +1063,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E12,
                         [
-                            $this->directive,
+                            $this->directive->asQueryString(),
                         ]
                     );
             }
@@ -1352,7 +1362,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E5,
                         [
-                            $this->directive,
+                            $this->directive->asQueryString(),
                         ]
                     ),
                     LocationHelper::getNonSpecificLocation(),

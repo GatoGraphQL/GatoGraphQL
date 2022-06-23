@@ -51,6 +51,10 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         }
         // Two fields: it may be a directive
         if (count($fields) == 2) {
+            // @todo Temporary hack to fix tests, will be removed soon anyway
+            if (str_starts_with($fields[1], '@')) {
+                $fields[1] = substr($fields[1], 1);
+            }
             $maybeField = $fields[0];
             $maybeDirective = $fields[1];
             $maybeFieldDirectives = array_map(

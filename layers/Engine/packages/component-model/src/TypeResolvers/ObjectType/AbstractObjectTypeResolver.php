@@ -27,6 +27,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
@@ -42,7 +43,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected array $objectTypeFieldResolversForFieldCache = [];
     /**
-     * @var array<string,array>|null
+     * @var array<string,Directive[]>|null
      */
     protected ?array $mandatoryDirectivesForFields = null;
     /**
@@ -119,6 +120,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or fieldName, Value: List of directives
+     */
     final public function getAllMandatoryDirectivesForFields(): array
     {
         if ($this->mandatoryDirectivesForFields === null) {
@@ -127,12 +131,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->mandatoryDirectivesForFields;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or fieldName, Value: List of directives
+     */
     private function calculateAllMandatoryDirectivesForFields(): array
     {
         $mandatoryDirectivesForFields = [];
         $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
-            // array_merge_recursive so that if 2 different decorators add a directive for the same field, the results are merged together, not override each other
+            /**
+             * `array_merge_recursive` so that if 2 different decorators add a directive
+             * for the same field, the results are merged together, not override each other.
+             */
             if ($typeResolverDecorator->enabled($this)) {
                 $mandatoryDirectivesForFields = array_merge_recursive(
                     $mandatoryDirectivesForFields,

@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -26,11 +27,12 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function getRelationalTypeOrInterfaceTypeResolverClassesToAttachTo(): array;
     public function getDirectiveName(): string;
+    public function getDirective(): Directive;
     /**
      * Invoked when creating the non-shared directive instance
      * to resolve a field in the pipeline
      */
-    public function setDirective(string $directive): void;
+    public function setDirective(Directive $directive): void;
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
@@ -45,11 +47,11 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     /**
      * Extract and validate the directive arguments
      *
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$fieldDirectiveFields,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;

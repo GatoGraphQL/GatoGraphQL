@@ -18,6 +18,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -183,6 +184,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         // This is mandatory, because the UnionType doesn't have fields by itself.
         // Otherwise, RelationalTypeResolverDecorators can't have their defined ACL rules
         // work when querying a union type (eg: "customPosts")
+        /** @var array<string,Directive[]> */
         $targetObjectTypeResolverClassMandatoryDirectivesForFields = [];
         $targetObjectTypeResolvers = $this->getTargetObjectTypeResolvers();
         foreach ($targetObjectTypeResolvers as $targetObjectTypeResolver) {
@@ -243,6 +245,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         );
     }
 
+    /**
+     * @return ObjectTypeResolverInterface[]
+     */
     public function getTargetObjectTypeResolvers(): array
     {
         $objectTypeResolverPickers = $this->getObjectTypeResolverPickers();

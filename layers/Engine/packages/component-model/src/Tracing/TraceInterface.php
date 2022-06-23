@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Tracing;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface TraceInterface
@@ -18,7 +19,7 @@ interface TraceInterface
      * @return array<string|int,FieldInterface[]>|null
      */
     public function getIDFields(): ?array;
-    public function getDirective(): ?string;
+    public function getDirective(): ?Directive;
     public function getRelationalTypeResolver(): ?RelationalTypeResolverInterface;
     public function getField(): ?FieldInterface;
     public function getObjectID(): string|int|null;

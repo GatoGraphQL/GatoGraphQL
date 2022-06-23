@@ -18,9 +18,8 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
-use PoP\FieldQuery\QueryHelpers;
-use PoP\FieldQuery\QuerySyntax;
-use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -34,32 +33,37 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public final const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnObject';
 
     /**
+     * @var array<string,Directive>
+     */
+    protected array $directives = [];
+
+    /**
      * @var array<string,DirectiveResolverInterface[]>|null
      */
     protected ?array $directiveNameResolvers = null;
     /**
-     * @var string[]|null
+     * @var RelationalTypeResolverDecoratorInterface[]|null
      */
     protected ?array $typeResolverDecorators = null;
     /**
-     * @var array<string, array>|null
+     * @var array<string,Directive[]>|null
      */
     protected ?array $precedingMandatoryDirectivesForDirectives = null;
     /**
-     * @var array<string, array>|null
+     * @var array<string,Directive[]>|null
      */
     protected ?array $succeedingMandatoryDirectivesForDirectives = null;
 
     /**
-     * @var array<string,array<string|int,EngineIterationFieldSet>>
+     * @var SplObjectStorage<Directive,array<string|int,EngineIterationFieldSet>>
      */
-    private array $fieldDirectiveIDFields = [];
+    private SplObjectStorage $directiveIDFieldSet;
     /**
-     * @var array<string,string>
+     * @var SplObjectStorage<FieldInterface,Directive[]>
      */
-    private array $fieldDirectivesFromFieldCache = [];
+    private SplObjectStorage $fieldDirectives;
     /**
-     * @var array<string,array<string,DirectiveResolverInterface>>
+     * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
      */
     private array $directiveResolverInstanceCache = [];
 
@@ -90,6 +94,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
+    }
+
+    public function __construct()
+    {
+        $this->directiveIDFieldSet = new SplObjectStorage();
+        $this->fieldDirectives = new SplObjectStorage();
     }
 
     /**
@@ -139,28 +149,43 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * Because it may be more convenient to add the directive or the class,
      * there are 2 methods.
+     *
+     * @return Directive[]
      */
-    protected function getMandatoryDirectives()
+    protected function getMandatoryDirectives(): array
     {
         return array_map(
-            function ($directiveResolver) {
-                return $this->getFieldQueryInterpreter()->listFieldDirective($directiveResolver->getDirectiveName());
-            },
+            fn (DirectiveResolverInterface $directiveResolver) => $this->getDirective($directiveResolver->getDirectiveName()),
             $this->getDataloadingEngine()->getMandatoryDirectiveResolvers()
         );
     }
 
+    protected function getDirective(string $directiveName): Directive
+    {
+        if (!isset($this->directives[$directiveName])) {
+            $this->directives[$directiveName] = new Directive(
+                $directiveName,
+                [],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->directives[$directiveName];
+    }
+
     /**
-     * Validate and resolve the fieldDirectives into an array, each item containing:
-     * 1. the directiveResolverInstance
-     * 2. its fieldDirective
-     * 3. the fields it affects
+     * Validate and resolve the directives into an array, each item containing:
      *
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     *   1. the directiveResolverInstance
+     *   2. its directive
+     *   3. the fields it affects
+     *
+     * @param Directive[] $directives
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     * @param array<string,mixed> $variables
      */
     public function resolveDirectivesIntoPipelineData(
-        array $fieldDirectives,
-        array &$fieldDirectiveFields,
+        array $directives,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -185,8 +210,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Resolve from directive into their actual object instance.
         $directiveResolverInstanceData = $this->validateAndResolveInstances(
-            $fieldDirectives,
-            $fieldDirectiveFields,
+            $directives,
+            $directiveFields,
             $variables,
             $engineIterationFeedbackStore,
         );
@@ -197,18 +222,18 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolverInstance = $directiveResolverInstanceData['instance'];
             $pipelinePosition = $directiveResolverInstance->getPipelinePosition();
             $directiveInstancesByPosition[$pipelinePosition][] = $directiveResolverInstance;
-            $fieldDirectivesByPosition[$pipelinePosition][] = $directiveResolverInstanceData['fieldDirective'];
+            $fieldDirectivesByPosition[$pipelinePosition][] = $directiveResolverInstanceData['directive'];
             $directiveFieldsByPosition[$pipelinePosition][] = $directiveResolverInstanceData['fields'];
         }
 
         // Once we have them ordered, we can simply discard the positions, keep only the values
-        // Each item has 3 elements: the directiveResolverInstance, its fieldDirective, and the fields it affects
+        // Each item has 3 elements: the directiveResolverInstance, its directive, and the fields it affects
         $pipelineData = [];
         foreach ($directiveInstancesByPosition as $position => $directiveResolverInstances) {
             for ($i = 0; $i < count($directiveResolverInstances); $i++) {
                 $pipelineData[] = [
                     'instance' => $directiveResolverInstances[$i],
-                    'fieldDirective' => $fieldDirectivesByPosition[$position][$i],
+                    'directive' => $fieldDirectivesByPosition[$position][$i],
                     'fields' => $directiveFieldsByPosition[$position][$i],
                 ];
             }
@@ -218,11 +243,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     * @param Directive[] $directives
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     * @param array<string,mixed> $variables
      */
     protected function validateAndResolveInstances(
-        array $fieldDirectives,
-        array $fieldDirectiveFields,
+        array $directives,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -230,35 +257,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Count how many times each directive is added
         $directiveFieldTrack = [];
         $directiveResolverInstanceFields = [];
-        $fieldDirectivesCount = count($fieldDirectives);
-        for ($i = 0; $i < $fieldDirectivesCount; $i++) {
-            // Because directives can be repeated inside a field (eg: <resize(50%),resize(50%)>),
-            // then we deal with 2 variables:
-            // 1. $fieldDirective: the actual directive
-            // 2. $enqueuedFieldDirective: how it was added to the array
-            // For retrieving the idFieldSet for the directive, we'll use $enqueuedFieldDirective, since under this entry we stored all the data in the previous functions
-            // For everything else, we use $fieldDirective
-            $enqueuedFieldDirective = $fieldDirectives[$i];
-            // Check if it is a repeated directive: if it has the "|" symbol
-            $counterSeparatorPos = QueryUtils::findLastSymbolPosition(
-                $enqueuedFieldDirective,
-                FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR,
-                [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING],
-                [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING],
-            );
-            $isRepeatedFieldDirective = $counterSeparatorPos !== false;
-            if ($isRepeatedFieldDirective) {
-                // Remove the "|counter" bit from the fieldDirective
-                $fieldDirective = substr($enqueuedFieldDirective, 0, $counterSeparatorPos);
-            } else {
-                $fieldDirective = $enqueuedFieldDirective;
-            }
-
-            $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
-            $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
+        $directivesCount = count($directives);
+        for ($i = 0; $i < $directivesCount; $i++) {
+            $directive = $directives[$i];
+            $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
+            $directiveName = $directive->getName();
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolverInstances === null) {
-                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                foreach ($directiveFields[$directive] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
@@ -276,10 +282,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 continue;
             }
-            $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
+            $directiveArgs = $directive->getArguments();
 
             if ($fieldDirectiveResolverInstances->count() === 0) {
-                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                foreach ($directiveFields[$directive] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
@@ -287,12 +293,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 ErrorFeedbackItemProvider::E21,
                                 [
                                     $directiveName,
-                                    json_encode($directiveArgs),
+                                    json_encode(array_map(
+                                        fn (Argument $argument) => $argument->asQueryString(),
+                                        $directiveArgs
+                                    )),
                                     implode(
                                         $this->__('\', \'', 'component-model'),
                                         array_map(
                                             fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                                            $fieldDirectiveFields[$fieldDirective]
+                                            $directiveFields[$directive]
                                         )
                                     ),
                                 ]
@@ -306,7 +315,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 continue;
             }
 
-            foreach ($fieldDirectiveFields[$enqueuedFieldDirective] as $field) {
+            foreach ($directiveFields[$directive] as $field) {
                 $directiveResolverInstance = $fieldDirectiveResolverInstances[$field] ?? null;
                 if ($directiveResolverInstance === null) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
@@ -330,10 +339,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 // Consolidate the same directiveResolverInstances for different fields,
                 // as to do the validation only once on each of them
-                $instanceID = get_class($directiveResolverInstance) . $enqueuedFieldDirective;
+                $instanceID = get_class($directiveResolverInstance) . spl_object_hash($directive);
                 if (!isset($directiveResolverInstanceFields[$instanceID])) {
-                    $directiveResolverInstanceFields[$instanceID]['fieldDirective'] = $fieldDirective;
-                    $directiveResolverInstanceFields[$instanceID]['enqueuedFieldDirective'] = $enqueuedFieldDirective;
+                    $directiveResolverInstanceFields[$instanceID]['directive'] = $directive;
                     $directiveResolverInstanceFields[$instanceID]['instance'] = $directiveResolverInstance;
                 }
                 $directiveResolverInstanceFields[$instanceID]['fields'][] = $field;
@@ -341,56 +349,40 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Validate all the directiveResolvers in the field
+        // $processedDirectiveNames = [];
         foreach ($directiveResolverInstanceFields as $instanceID => $instanceData) {
-            $fieldDirective = $instanceData['fieldDirective'];
-            $enqueuedFieldDirective = $instanceData['enqueuedFieldDirective'];
+            /** @var Directive */
+            $directive = $instanceData['directive'];
             /** @var DirectiveResolverInterface */
             $directiveResolverInstance = $instanceData['instance'];
+            /** @var FieldInterface[] */
             $directiveResolverFields = $instanceData['fields'];
-            // If the enqueued and the fieldDirective are different, it's because it is a repeated one
-            $isRepeatedFieldDirective = $fieldDirective !== $enqueuedFieldDirective;
-            // If it is a repeated directive, no need to do the validation again
-            if (!$isRepeatedFieldDirective) {
-                // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
-                $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
-                list(
-                    $validFieldDirective,
-                    $directiveName,
-                    $directiveArgs,
-                ) = $directiveResolverInstance->dissectAndValidateDirectiveForSchema(
-                    $this,
-                    $fieldDirectiveFields,
-                    $variables,
-                    $separateEngineIterationFeedbackStore,
-                );
-                $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
-                if ($separateEngineIterationFeedbackStore->hasErrors()) {
-                    continue;
-                }
+            $directiveName = $directive->getName();
 
-                // Validate against the directiveResolver
-                if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directiveName, $directiveArgs)) {
-                    foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                        foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
-                            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                                new SchemaFeedback(
-                                    $errorFeedbackItemResolution,
-                                    LocationHelper::getNonSpecificLocation(),
-                                    $this,
-                                    $field,
-                                )
-                            );
-                        }
-                    }
-                    continue;
-                }
+            // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
+            $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
+            list(
+                $validFieldDirective,
+                $directiveName,
+                $directiveArgs,
+            ) = $directiveResolverInstance->dissectAndValidateDirectiveForSchema(
+                $this,
+                $directiveFields,
+                $variables,
+                $separateEngineIterationFeedbackStore,
+            );
+            $engineIterationFeedbackStore->incorporate($separateEngineIterationFeedbackStore);
+            if ($separateEngineIterationFeedbackStore->hasErrors()) {
+                continue;
+            }
 
-                // Check for warnings
-                if ($warningFeedbackItemResolution = $directiveResolverInstance->resolveDirectiveWarning($this)) {
-                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
-                        $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
+            // Validate against the directiveResolver
+            if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directiveName, $directiveArgs)) {
+                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                    foreach ($directiveFields[$directive] as $field) {
+                        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                             new SchemaFeedback(
-                                $warningFeedbackItemResolution,
+                                $errorFeedbackItemResolution,
                                 LocationHelper::getNonSpecificLocation(),
                                 $this,
                                 $field,
@@ -398,33 +390,47 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         );
                     }
                 }
+                continue;
+            }
 
-                // Check for deprecations
-                if ($deprecationMessage = $directiveResolverInstance->getDirectiveDeprecationMessage($this)) {
-                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
-                        $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
-                            new SchemaFeedback(
-                                new FeedbackItemResolution(
-                                    DeprecationFeedbackItemProvider::class,
-                                    DeprecationFeedbackItemProvider::D1,
-                                    [
-                                        $directiveName,
-                                        $deprecationMessage,
-                                    ]
-                                ),
-                                LocationHelper::getNonSpecificLocation(),
-                                $this,
-                                $field,
-                            )
-                        );
-                    }
+            // Check for warnings
+            if ($warningFeedbackItemResolution = $directiveResolverInstance->resolveDirectiveWarning($this)) {
+                foreach ($directiveFields[$directive] as $field) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
+                        new SchemaFeedback(
+                            $warningFeedbackItemResolution,
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
+                        )
+                    );
+                }
+            }
+
+            // Check for deprecations
+            if ($deprecationMessage = $directiveResolverInstance->getDirectiveDeprecationMessage($this)) {
+                foreach ($directiveFields[$directive] as $field) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                DeprecationFeedbackItemProvider::class,
+                                DeprecationFeedbackItemProvider::D1,
+                                [
+                                    $directiveName,
+                                    $deprecationMessage,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                            $field,
+                        )
+                    );
                 }
             }
 
             // Validate if the directive can be executed multiple times on each field
             if (!$directiveResolverInstance->isRepeatable()) {
                 // Check if the directive is already processing any of the fields
-                $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
                 $alreadyProcessingFields = array_intersect(
                     $directiveFieldTrack[$directiveName] ?? [],
                     $directiveResolverFields
@@ -446,7 +452,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     ErrorFeedbackItemProvider::class,
                                     ErrorFeedbackItemProvider::E23,
                                     [
-                                        $fieldDirective,
+                                        $directive->getName(),
                                         implode(
                                             '\', \'',
                                             array_map(
@@ -472,20 +478,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
             // Directive is valid. Add it under its instanceID, which enables to add fields under the same directiveResolverInstance
             $instances[$instanceID]['instance'] = $directiveResolverInstance;
-            $instances[$instanceID]['fieldDirective'] = $fieldDirective;
+            $instances[$instanceID]['directive'] = $directive;
             $instances[$instanceID]['fields'] = $directiveResolverFields;
         }
         return $instances;
     }
 
     /**
-     * @param FieldInterface[] $fieldDirectiveFields
+     * @param FieldInterface[] $fields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getDirectiveResolversForDirective(string $fieldDirective, array $fieldDirectiveFields, array &$variables): ?SplObjectStorage
+    public function getDirectiveResolversForDirective(Directive $directive, array $fields, array &$variables): ?SplObjectStorage
     {
-        $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
-        $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
+        $directiveName = $directive->getName();
+        $directiveArgs = $directive->getArguments();
 
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
         $directiveResolvers = $directiveNameResolvers[$directiveName] ?? null;
@@ -496,9 +502,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Calculate directives per field
         /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
         $fieldDirectiveResolverInstances = new SplObjectStorage();
-        foreach ($fieldDirectiveFields as $field) {
-            // Check that at least one class which deals with this directiveName can satisfy the directive (for instance, validating that a required directiveArg is present)
-            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
+        foreach ($fields as $field) {
+            /**
+             * Check that at least one class which deals with this directiveName can satisfy
+             * the directive (for instance, validating that a required directiveArg is present)
+             */
+            $fieldName = $field->getName();
             foreach ($directiveResolvers as $directiveResolver) {
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
@@ -507,16 +516,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $directiveResolverClass = get_class($directiveResolver);
                 // Get the instance from the cache if it exists, or create it if not
-                if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective])) {
+                if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass]) || !$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
                     /**
                      * The instance from the container is shared. We need a non-shared instance
-                     * to set the unique $fieldDirective. So clone the service.
+                     * to set the unique $directive. So clone the service.
                      */
                     $fieldDirectiveResolver = clone $directiveResolver;
-                    $fieldDirectiveResolver->setDirective($fieldDirective);
-                    $this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective] = $fieldDirectiveResolver;
+                    $fieldDirectiveResolver->setDirective($directive);
+                    $this->directiveResolverInstanceCache[$directiveResolverClass] ??= new SplObjectStorage();
+                    $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $fieldDirectiveResolver;
                 }
-                $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$fieldDirective];
+                $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
                 // Check if this instance can process the directive
                 if ($maybeDirectiveResolverInstance->resolveCanProcess($this, $directiveName, $directiveArgs, $field, $variables)) {
                     $fieldDirectiveResolverInstances[$field] = $maybeDirectiveResolverInstance;
@@ -647,14 +657,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Eg: a directive `@validateDoesUserHaveCapability` must be preceded by a directive `@validateIsUserLoggedIn`
      *
      * The process is recursive: mandatory directives can have their own mandatory directives, and these are added too
+     *
+     * @param Directive[] $directives
+     * @return Directive[]
      */
     protected function addMandatoryDirectivesForDirectives(array $directives): array
     {
         $precedingMandatoryDirectivesForDirectives = $this->getAllPrecedingMandatoryDirectivesForDirectives();
         $succeedingMandatoryDirectivesForDirectives = $this->getAllSucceedingMandatoryDirectivesForDirectives();
+        if ($precedingMandatoryDirectivesForDirectives === [] && $succeedingMandatoryDirectivesForDirectives === []) {
+            return $directives;
+        }
+
         $allDirectives = [];
         foreach ($directives as $directive) {
-            $directiveName = $this->getFieldQueryInterpreter()->getDirectiveName($directive);
+            $directiveName = $directive->getName();
             // Add preceding mandatory directives
             if (
                 $mandatoryDirectivesForDirective = array_merge(
@@ -686,20 +703,29 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $allDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function getAllPrecedingMandatoryDirectivesForDirectives(): array
     {
-        if (is_null($this->precedingMandatoryDirectivesForDirectives)) {
+        if ($this->precedingMandatoryDirectivesForDirectives === null) {
             $this->precedingMandatoryDirectivesForDirectives = $this->calculateAllPrecedingMandatoryDirectivesForDirectives();
         }
         return $this->precedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function calculateAllPrecedingMandatoryDirectivesForDirectives(): array
     {
         $precedingMandatoryDirectivesForDirectives = [];
         $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
-            // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
+            /**
+             * `array_merge_recursive` so that if 2 different decorators add a directive
+             * for the same directive, the results are merged together, not override each other.
+             */
             if ($typeResolverDecorator->enabled($this)) {
                 $precedingMandatoryDirectivesForDirectives = array_merge_recursive(
                     $precedingMandatoryDirectivesForDirectives,
@@ -711,20 +737,29 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $precedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function getAllSucceedingMandatoryDirectivesForDirectives(): array
     {
-        if (is_null($this->succeedingMandatoryDirectivesForDirectives)) {
+        if ($this->succeedingMandatoryDirectivesForDirectives === null) {
             $this->succeedingMandatoryDirectivesForDirectives = $this->calculateAllSucceedingMandatoryDirectivesForDirectives();
         }
         return $this->succeedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function calculateAllSucceedingMandatoryDirectivesForDirectives(): array
     {
         $succeedingMandatoryDirectivesForDirectives = [];
         $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
-            // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
+            /**
+             * `array_merge_recursive` so that if 2 different decorators add a directive
+             * for the same directive, the results are merged together, not override each other.
+             */
             if ($typeResolverDecorator->enabled($this)) {
                 $succeedingMandatoryDirectivesForDirectives = array_merge_recursive(
                     $succeedingMandatoryDirectivesForDirectives,
@@ -736,6 +771,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $succeedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return RelationalTypeResolverDecoratorInterface[]
+     */
     protected function getAllRelationalTypeResolverDecorators(): array
     {
         if ($this->typeResolverDecorators === null) {
@@ -744,6 +782,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this->typeResolverDecorators;
     }
 
+    /**
+     * @return RelationalTypeResolverDecoratorInterface[]
+     */
     protected function calculateAllRelationalTypeResolverDecorators(): array
     {
         $typeResolverDecorators = [];
@@ -869,17 +910,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
      *
      * @param FieldInterface[] $fields
+     * @param array<string,Directive[]> $mandatoryDirectivesForFields Key: '*' (for all) or fieldName, Value: List of Directives
+     * @param Directive[] $mandatorySystemDirectives
      */
     protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
     {
-        $fieldDirectiveCounter = [];
         foreach ($fields as $field) {
-            if (!isset($this->fieldDirectivesFromFieldCache[$field->getUniqueID()])) {
-                // Get the directives from the field
-                $directives = $this->getFieldQueryInterpreter()->getDirectives($field->asFieldOutputQueryString());
+            if (!$this->fieldDirectives->contains($field)) {
+                $directives = $field->getDirectives();
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
-                $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
+                $fieldName = $field->getName();
                 if (
                     $mandatoryDirectivesForField = array_merge(
                         $mandatoryDirectivesForFields[FieldSymbols::ANY_FIELD] ?? [],
@@ -898,49 +939,29 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $mandatorySystemDirectives,
                     $directives
                 );
+
                 // If the directives must be preceded by other directives, add them now
                 $directives = $this->addMandatoryDirectivesForDirectives($directives);
 
-                // Convert from directive to fieldDirective
-                $fieldDirectives = implode(
-                    /**
-                     * @todo Temporary addition to match `asQueryString` in the AST
-                     * Added an extra " "
-                     */
-                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ',
-                    array_map(
-                        $this->getFieldQueryInterpreter()->convertDirectiveToFieldDirective(...),
-                        $directives
-                    )
-                );
-                // Assign in the cache
-                $this->fieldDirectivesFromFieldCache[$field->getUniqueID()] = $fieldDirectives;
+                $this->fieldDirectives[$field] = $directives;
             }
-            // Extract all the directives, and store which fields they process
-            foreach (QueryHelpers::splitFieldDirectives($this->fieldDirectivesFromFieldCache[$field->getUniqueID()]) as $fieldDirective) {
-                // Watch out! Directives can be repeated, and then they must be executed multiple times
-                // Eg: resizing a pic to 25%: <resize(50%),resize(50%)>
-                // However, because we are adding the $idFieldSet under key $fieldDirective, when the 2nd occurrence of the directive is found,
-                // adding data would just override the previous entry, and we can't keep track that it's another iteration
-                // Then, as solution, change the name of the $fieldDirective, adding "|counter". This is an artificial construction,
-                // in which the "|" symbol could not be part of the field naturally
-                if (isset($fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective])) {
-                    // Increase counter and add to $fieldDirective
-                    $fieldDirective .= FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . (++$fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective]);
-                } else {
-                    $fieldDirectiveCounter[$field->getUniqueID()][$id][$fieldDirective] = 0;
-                }
-                $this->fieldDirectiveIDFields[$fieldDirective][$id] ??= new EngineIterationFieldSet();
+
+            // Store which fields do the directives process
+            /** @var Directive[] */
+            $directives = $this->fieldDirectives[$field];
+            foreach ($directives as $directive) {
+                $idFieldSet = $this->directiveIDFieldSet[$directive] ?? [];
+                $idFieldSet[$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
                 if (in_array($field, $fieldSet->fields)) {
-                    $this->fieldDirectiveIDFields[$fieldDirective][$id]->fields[] = $field;
+                    $idFieldSet[$id]->fields[] = $field;
                 }
                 /** @var FieldInterface[]|null */
                 $conditionalFields = $fieldSet->conditionalFields[$field] ?? null;
-                if ($conditionalFields === null || $conditionalFields === []) {
-                    continue;
+                if (!($conditionalFields === null || $conditionalFields === [])) {
+                    $idFieldSet[$id]->addConditionalFields($field, $conditionalFields);
                 }
-                $this->fieldDirectiveIDFields[$fieldDirective][$id]->addConditionalFields($field, $conditionalFields);
+                $this->directiveIDFieldSet[$directive] = $idFieldSet;
             }
         }
     }
@@ -973,25 +994,32 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Iterate while there are directives with data to be processed
-        while (!empty($this->fieldDirectiveIDFields)) {
-            $fieldDirectiveIDFields = $this->fieldDirectiveIDFields;
+        while ($this->directiveIDFieldSet->count() > 0) {
+            /**
+             * @var SplObjectStorage<Directive,array<string|int,EngineIterationFieldSet>>
+             */
+            $directiveIDFieldSet = $this->directiveIDFieldSet;
             // Now that we have all data, remove all entries from the inner stack.
             // It may be filled again with composed directives, when resolving the pipeline
-            $this->fieldDirectiveIDFields = [];
+            $this->directiveIDFieldSet = new SplObjectStorage();
 
-            // Calculate the fieldDirectives
-            $fieldDirectives = array_keys($fieldDirectiveIDFields);
+            $directives = iterator_to_array($directiveIDFieldSet);
 
             // Calculate all the fields on which the directive will be applied.
-            $fieldDirectiveFields = [];
-            /** @var array<string,SplObjectStorage<FieldInterface,array<string|int>>> */
-            $fieldDirectiveFieldIDs = [];
-            $fieldDirectiveDirectFields = [];
-            foreach ($fieldDirectives as $fieldDirective) {
-                $fieldDirectiveFieldIDs[$fieldDirective] = new SplObjectStorage();
-                foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
-                    $fieldDirectiveDirectFields = array_merge(
-                        $fieldDirectiveDirectFields,
+            /** @var SplObjectStorage<Directive,FieldInterface[]> */
+            $directiveFields = new SplObjectStorage();
+            /** @var SplObjectStorage<Directive,SplObjectStorage<FieldInterface,array<string|int>>> */
+            $directiveFieldIDs = new SplObjectStorage();
+            /** @var FieldInterface[] */
+            $directiveDirectFields = [];
+            foreach ($directives as $directive) {
+                /** @var SplObjectStorage<FieldInterface,array<string|int>> */
+                $fieldIDsSplObjectStorage = $directiveFieldIDs[$directive] ?? new SplObjectStorage();
+                /** @var FieldInterface[] */
+                $fields = [];
+                foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
+                    $directiveDirectFields = array_merge(
+                        $directiveDirectFields,
                         $fieldSet->fields
                     );
                     $conditionalFields = [];
@@ -1005,26 +1033,27 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $fieldSet->fields,
                         $conditionalFields
                     ));
-                    $fieldDirectiveFields[$fieldDirective] = array_merge(
-                        $fieldDirectiveFields[$fieldDirective] ?? [],
+                    $fields = array_merge(
+                        $fields,
                         $idFieldDirectiveIDFields
                     );
                     // Also transpose the array to match field to IDs later on
                     foreach ($idFieldDirectiveIDFields as $field) {
-                        $fieldSplObjectStorage = $fieldDirectiveFieldIDs[$fieldDirective][$field] ?? [];
-                        $fieldSplObjectStorage[] = $id;
-                        $fieldDirectiveFieldIDs[$fieldDirective][$field] = $fieldSplObjectStorage;
+                        $ids = $fieldIDsSplObjectStorage[$field] ?? [];
+                        $ids[] = $id;
+                        $fieldIDsSplObjectStorage[$field] = $ids;
                     }
                 }
-                $fieldDirectiveFields[$fieldDirective] = array_unique($fieldDirectiveFields[$fieldDirective]);
+                $directiveFieldIDs[$directive] = $fieldIDsSplObjectStorage;
+                $directiveFields[$directive] = array_unique($fields);
             }
-            $fieldDirectiveDirectFields = array_unique($fieldDirectiveDirectFields);
+            $directiveDirectFields = array_unique($directiveDirectFields);
 
             // Validate and resolve the directives into instances and fields they operate on
             $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $directivePipelineData = $this->resolveDirectivesIntoPipelineData(
-                $fieldDirectives,
-                $fieldDirectiveFields,
+                $directives,
+                $directiveFields,
                 $variables,
                 $separateEngineIterationFeedbackStore,
             );
@@ -1048,8 +1077,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
-                foreach ($fieldDirectives as $fieldDirective) {
-                    foreach ($fieldDirectiveIDFields[$fieldDirective] as $id => $fieldSet) {
+                foreach ($directives as $directive) {
+                    foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
                         $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
                         $failingFields = array_intersect(
                             $fieldSet->fields,
@@ -1069,35 +1098,35 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $pipelineIDFieldSet = [];
             foreach ($directivePipelineData as $pipelineStageData) {
                 $directiveResolverInstance = $pipelineStageData['instance'];
-                $fieldDirective = $pipelineStageData['fieldDirective'];
+                $directive = $pipelineStageData['directive'];
                 $directiveFields = $pipelineStageData['fields'];
                 // Only process the direct fields
-                $directiveDirectFields = array_intersect(
+                $directiveDirectFieldsToProcess = array_intersect(
                     $directiveFields,
-                    $fieldDirectiveDirectFields
+                    $directiveDirectFields
                 );
                 // Remove those fields which have a failing directive
-                $directiveDirectFields = array_diff(
-                    $directiveDirectFields,
+                $directiveDirectFieldsToProcess = array_diff(
+                    $directiveDirectFieldsToProcess,
                     $schemaErrorFailingFields
                 );
                 // From the fields, reconstitute the $idFieldSet for each directive, and build the array to pass to the pipeline, for each directive (stage)
                 /** @var array<string|int,EngineIterationFieldSet> */
-                $directiveIDFieldSet = [];
-                foreach ($directiveDirectFields as $field) {
-                    $ids = $fieldDirectiveFieldIDs[$fieldDirective][$field];
+                $idFieldSet = [];
+                foreach ($directiveDirectFieldsToProcess as $field) {
+                    $ids = $directiveFieldIDs[$directive][$field];
                     foreach ($ids as $id) {
-                        $directiveIDFieldSet[$id] ??= new EngineIterationFieldSet();
-                        $directiveIDFieldSet[$id]->fields[] = $field;
+                        $idFieldSet[$id] ??= new EngineIterationFieldSet();
+                        $idFieldSet[$id]->fields[] = $field;
                         /** @var FieldInterface[]|null */
-                        $fieldConditionalFields = $fieldDirectiveIDFields[$fieldDirective][$id]->conditionalFields[$field] ?? null;
+                        $fieldConditionalFields = $directiveIDFieldSet[$directive][$id]->conditionalFields[$field] ?? null;
                         if ($fieldConditionalFields === null || $fieldConditionalFields === []) {
                             continue;
                         }
-                        $directiveIDFieldSet[$id]->conditionalFields[$field] = $fieldConditionalFields;
+                        $idFieldSet[$id]->conditionalFields[$field] = $fieldConditionalFields;
                     }
                 }
-                $pipelineIDFieldSet[] = $directiveIDFieldSet;
+                $pipelineIDFieldSet[] = $idFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
             }
 

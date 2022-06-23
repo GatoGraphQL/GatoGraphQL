@@ -9,6 +9,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -215,17 +216,19 @@ trait AliasSchemaDirectiveResolverTrait
 
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
+     *
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$fieldDirectiveFields,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->dissectAndValidateDirectiveForSchema(
             $relationalTypeResolver,
-            $fieldDirectiveFields,
+            $directiveFields,
             $variables,
             $engineIterationFeedbackStore,
         );

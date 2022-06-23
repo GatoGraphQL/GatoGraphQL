@@ -6,6 +6,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorator
 
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForFieldsTrait;
 
 trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTrait
@@ -24,8 +25,14 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
         );
     }
 
+    /**
+     * @return Directive[]
+     */
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
+    /**
+     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
+     */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array
     {
         $mandatoryDirectivesForFields = [];

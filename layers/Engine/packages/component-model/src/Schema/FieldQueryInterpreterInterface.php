@@ -10,7 +10,9 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\FieldQueryInterpreterInterface as UpstreamFieldQueryInterpreterInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
@@ -41,11 +43,14 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
+    /**
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     */
     public function extractDirectiveArgumentsForSchema(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directive,
-        array $fieldDirectiveFields,
+        Directive $directive,
+        SplObjectStorage $directiveFields,
         array $variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         bool $disableDynamicFields = false
@@ -66,7 +71,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
         array $fields,
-        string $directive,
+        Directive $directive,
         array $variables,
         array $expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,

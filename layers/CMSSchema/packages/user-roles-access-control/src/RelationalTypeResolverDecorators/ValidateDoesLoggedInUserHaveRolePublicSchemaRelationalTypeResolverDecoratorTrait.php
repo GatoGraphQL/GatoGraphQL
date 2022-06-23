@@ -6,28 +6,54 @@ namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecoratorTrait
 {
+    /** @var array<string,Directive> */
+    protected array $validateDoesLoggedInUserHaveAnyRoleDirectives = [];
+
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
 
     /**
      * By default, only the admin can see the roles from the users
+     *
+     * @return Directive[]
      */
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $roles = $entryValue;
-        $directiveResolver = $this->getValidateRoleDirectiveResolver();
-        $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyRoleDirective = $this->getFieldQueryInterpreter()->getDirective(
-            $directiveName,
-            [
-                'roles' => $roles,
-            ]
-        );
         return [
-            $validateDoesLoggedInUserHaveAnyRoleDirective,
+            $this->getValidateDoesLoggedInUserHaveAnyRoleDirective($roles),
         ];
+    }
+
+    /**
+     * @param string[] $roles
+     */
+    protected function getValidateDoesLoggedInUserHaveAnyRoleDirective(array $roles): Directive
+    {
+        $rolesKey = implode('|', $roles);
+        if (!isset($this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey])) {
+            $this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey] = new Directive(
+                $this->getValidateRoleDirectiveResolver()->getDirectiveName(),
+                [
+                    new Argument(
+                        'roles',
+                        new InputList(
+                            $roles,
+                            LocationHelper::getNonSpecificLocation()
+                        ),
+                        LocationHelper::getNonSpecificLocation()
+                    ),
+                ],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->validateDoesLoggedInUserHaveAnyRoleDirectives[$rolesKey];
     }
 
     abstract protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface;

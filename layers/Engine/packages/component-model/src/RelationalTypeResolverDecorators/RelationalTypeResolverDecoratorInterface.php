@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\RelationalTypeResolverDecorators;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 
 interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionInterface
 {
@@ -29,6 +30,8 @@ interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionIn
     public function enabled(RelationalTypeResolverInterface $relationalTypeResolver): bool;
     /**
      * Return an array of fieldNames as keys, and, for each fieldName, an array of directives (including directive arguments) to be applied always on the field
+     *
+     * @return array<string,Directive[]> Key: fieldName, Value: List of Directives
      */
     public function getMandatoryDirectivesForFields(ObjectTypeResolverInterface $objectTypeResolver): array;
     /**
@@ -39,6 +42,8 @@ interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionIn
     /**
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied after
+     *
+     * @return array<string,Directive[]> Key: directiveName, Value: List of Directives
      */
     public function getSucceedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array;
 }

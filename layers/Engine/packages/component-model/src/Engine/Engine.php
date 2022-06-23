@@ -2313,7 +2313,7 @@ class Engine implements EngineInterface
         return [
             Tokens::MESSAGE => $objectOrSchemaFeedback->getFeedbackItemResolution()->getMessage(),
             Tokens::PATH => $directive !== null
-                ? [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString(), $directive]
+                ? [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString(), $directive->asQueryString()]
                 : [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString()],
             Tokens::LOCATIONS => [$objectOrSchemaFeedback->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(

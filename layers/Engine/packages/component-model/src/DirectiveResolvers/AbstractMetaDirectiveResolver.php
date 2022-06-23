@@ -6,13 +6,15 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\FieldQuery\QueryHelpers;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
+use SplObjectStorage;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
 {
@@ -39,41 +41,31 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         return $moduleConfiguration->enableComposableDirectives();
     }
 
+    /**
+     * Extract and validate the directive arguments
+     *
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     */
     public function dissectAndValidateDirectiveForSchema(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        array &$fieldDirectiveFields,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // If it has nestedDirectives, extract them and validate them
-        $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive, false);
-        if ($nestedFieldDirectives) {
-            $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
-            // Support repeated fields by adding a counter next to them
-            if (count($nestedFieldDirectives) != count(array_unique($nestedFieldDirectives))) {
-                // Find the repeated fields, and add a counter next to them
-                $expandedNestedFieldDirectives = [];
-                $counters = [];
-                foreach ($nestedFieldDirectives as $nestedFieldDirective) {
-                    if (!isset($counters[$nestedFieldDirective])) {
-                        $expandedNestedFieldDirectives[] = $nestedFieldDirective;
-                        $counters[$nestedFieldDirective] = 1;
-                    } else {
-                        $expandedNestedFieldDirectives[] = $nestedFieldDirective . FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . $counters[$nestedFieldDirective];
-                        $counters[$nestedFieldDirective]++;
-                    }
-                }
-                $nestedFieldDirectives = $expandedNestedFieldDirectives;
-            }
+        /** @var MetaDirective */
+        $metaDirective = $this->directive;
+        $nestedDirectives = $metaDirective->getNestedDirectives();
+        if ($nestedDirectives !== []) {
             // Each composed directive will deal with the same fields as the current directive
-            $nestedFieldDirectiveFields = $fieldDirectiveFields;
-            foreach ($nestedFieldDirectives as $nestedFieldDirective) {
-                $nestedFieldDirectiveFields[$nestedFieldDirective] = $fieldDirectiveFields[$this->directive];
+            $nestedDirectiveFields = $directiveFields;
+            foreach ($nestedDirectives as $nestedDirective) {
+                $nestedDirectiveFields[$nestedDirective] = $directiveFields[$this->directive];
             }
             $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
-                $nestedFieldDirectives,
-                $nestedFieldDirectiveFields,
+                $nestedDirectives,
+                $nestedDirectiveFields,
                 $variables,
                 $separateEngineIterationFeedbackStore,
             );
@@ -91,7 +83,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
 
         return parent::dissectAndValidateDirectiveForSchema(
             $relationalTypeResolver,
-            $fieldDirectiveFields,
+            $directiveFields,
             $variables,
             $engineIterationFeedbackStore,
         );

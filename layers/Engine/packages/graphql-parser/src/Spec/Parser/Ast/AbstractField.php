@@ -58,7 +58,13 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
 
     /**
      * Take the Location into consideration to indicate
-     * that 2 Fields are the same
+     * that 2 AST elements are the same.
+     *
+     * In this query:
+     *
+     *   { queryType { name } mutationType { name } }
+     *
+     * fields `name` are different fields (even if under the same type).
      */
     public function __toString(): string
     {
