@@ -533,6 +533,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         bool $disableDynamicFields = false
     ): array {
         $fieldDirective = $directive->asQueryString();
+        // @todo Temporary hack: remove the leading "@", not expected by PQL
+        $fieldDirective = substr($fieldDirective, 1);
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $directive->getName();
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
@@ -655,6 +657,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         $fieldDirective = $directive->asQueryString();
+        // @todo Temporary hack: remove the leading "@", not expected by PQL
+        $fieldDirective = substr($fieldDirective, 1);
         $validAndResolvedDirective = $fieldDirective;
         $directiveName = $directive->getName();
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
