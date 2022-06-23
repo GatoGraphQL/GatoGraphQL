@@ -20,7 +20,7 @@ class DataToAppendAndRemoveDataSource
                  *
                  * @see https://github.com/symplify/symplify/issues/4184
                  */                
-                'symplify/monorepo-builder' => '10.2.2',
+                'symplify/monorepo-builder' => '^10.2.2',
                 'friendsofphp/php-cs-fixer' => '^3.5',
                 'slevomat/coding-standard' => '^7.0',
             ],
