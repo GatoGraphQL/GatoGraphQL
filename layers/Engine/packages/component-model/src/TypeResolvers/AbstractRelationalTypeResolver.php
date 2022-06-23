@@ -1004,10 +1004,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /** @var SplObjectStorage<Directive,FieldInterface[]> */
             $directiveFields = new SplObjectStorage();
             /** @var SplObjectStorage<Directive,SplObjectStorage<FieldInterface,array<string|int>>> */
-            $directiveFieldIDs = [];
+            $directiveFieldIDs = new SplObjectStorage();
             /** @var FieldInterface[] */
             $directiveDirectFields = [];
             foreach ($directives as $directive) {
+                /** @var SplObjectStorage<FieldInterface,array<string|int>> */
+                $fieldIDsSplObjectStorage = $directiveFieldIDs[$directive] ?? new SplObjectStorage();
                 /** @var array<string|int,FieldInterface[]> */
                 $fields = [];
                 foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
@@ -1032,11 +1034,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     );
                     // Also transpose the array to match field to IDs later on
                     foreach ($idFieldDirectiveIDFields as $field) {
-                        $ids = $directiveFieldIDs[$directive][$field] ?? [];
+                        $ids = $fieldIDsSplObjectStorage[$field] ?? [];
                         $ids[] = $id;
-                        $directiveFieldIDs[$directive][$field] = $ids;
+                        $fieldIDsSplObjectStorage[$field] = $ids;
                     }
                 }
+                $directiveFieldIDs[$directive] = $fieldIDsSplObjectStorage;
                 // @todo Check that the `array_unique` is not needed
                 // $directiveFields[$directive] = array_unique($directiveFields[$directive]);
                 $directiveFields[$directive] = $fields;
