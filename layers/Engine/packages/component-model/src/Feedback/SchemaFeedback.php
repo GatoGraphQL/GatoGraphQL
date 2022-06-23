@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -16,7 +17,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         protected FieldInterface $field,
-        protected ?string $directive = null,
+        protected ?Directive $directive = null,
         /** @var array<string, mixed> */
         array $extensions = [],
         /** @var SchemaFeedbackInterface[] */
@@ -66,7 +67,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         return $this->field;
     }
 
-    public function getDirective(): ?string
+    public function getDirective(): ?Directive
     {
         return $this->directive;
     }
