@@ -945,17 +945,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 /** @var Directive[] $directives */
                 foreach ($directives as $directive) {
                     $idFieldSet = $this->directiveIDFieldSet[$directive] ?? [];
-                    $fieldSet = $idFieldSet[$id] ?? new EngineIterationFieldSet();
+                    $idFieldSet[$id] ??= new EngineIterationFieldSet();
                     // Store which ID/field this directive must process
                     if (in_array($field, $fieldSet->fields)) {
-                        $fieldSet->fields[] = $field;
+                        $idFieldSet[$id]->fields[] = $field;
                     }
                     /** @var FieldInterface[]|null */
                     $conditionalFields = $fieldSet->conditionalFields[$field] ?? null;
                     if (!($conditionalFields === null || $conditionalFields === [])) {
-                        $fieldSet->addConditionalFields($field, $conditionalFields);
+                        $idFieldSet[$id]->addConditionalFields($field, $conditionalFields);
                     }
-                    $idFieldSet[$id] = $fieldSet;
                     $this->directiveIDFieldSet[$directive] = $idFieldSet;
                 }
             }
