@@ -71,7 +71,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
         array $fields,
-        string $directive,
+        Directive $directive,
         array $variables,
         array $expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,

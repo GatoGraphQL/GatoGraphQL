@@ -649,13 +649,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
         array $fields,
-        string $fieldDirective,
+        Directive $directive,
         array $variables,
         array $expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
+        $fieldDirective = $directive->asQueryString();
         $validAndResolvedDirective = $fieldDirective;
-        $directiveName = $this->getFieldDirectiveName($fieldDirective);
+        $directiveName = $directive->getName();
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
             $directiveResolver,
