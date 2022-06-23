@@ -657,6 +657,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $precedingMandatoryDirectivesForDirectives = $this->getAllPrecedingMandatoryDirectivesForDirectives();
         $succeedingMandatoryDirectivesForDirectives = $this->getAllSucceedingMandatoryDirectivesForDirectives();
+        if ($precedingMandatoryDirectivesForDirectives === [] && $succeedingMandatoryDirectivesForDirectives === []) {
+            return $directives;
+        }
+        
         $allDirectives = [];
         foreach ($directives as $directive) {
             $directiveName = $directive->getName();
