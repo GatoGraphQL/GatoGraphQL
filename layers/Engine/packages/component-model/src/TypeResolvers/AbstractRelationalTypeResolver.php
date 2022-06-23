@@ -953,9 +953,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             
             // Store which fields do the directives process
-            foreach ($this->fieldDirectives as $field) {
-                /** @var FieldInterface $field */
-                $directives = $this->fieldDirectives[$field];
+            foreach ($this->fieldDirectives as $processedField) {
+                /** @var FieldInterface $processedField */
+                $directives = $this->fieldDirectives[$processedField];
                 /** @var Directive[] $directives */
                 foreach ($directives as $directive) {
                     $idFieldSet = $this->directiveIDFieldSet[$directive] ?? [];
