@@ -52,7 +52,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var SplObjectStorage<Directive,array<string|int,EngineIterationFieldSet>>
      */
-    private SplObjectStorage $directiveIDFields;
+    private SplObjectStorage $directiveIDFieldSet;
     /**
      * @var SplObjectStorage<FieldInterface,Directive[]>
      */
@@ -93,7 +93,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     public function __construct()
     {
-        $this->directiveIDFields = new SplObjectStorage();
+        $this->directiveIDFieldSet = new SplObjectStorage();
         $this->fieldDirectives = new SplObjectStorage();
     }
 
@@ -660,7 +660,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         if ($precedingMandatoryDirectivesForDirectives === [] && $succeedingMandatoryDirectivesForDirectives === []) {
             return $directives;
         }
-        
+
         $allDirectives = [];
         foreach ($directives as $directive) {
             $directiveName = $directive->getName();
@@ -944,7 +944,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directives = $this->fieldDirectives[$field];
                 /** @var Directive[] $directives */
                 foreach ($directives as $directive) {
-                    $idFieldSet = $this->directiveIDFields[$directive] ?? [];
+                    $idFieldSet = $this->directiveIDFieldSet[$directive] ?? [];
                     $fieldSet = $idFieldSet[$id] ?? new EngineIterationFieldSet();
                     // Store which ID/field this directive must process
                     if (in_array($field, $fieldSet->fields)) {
@@ -956,7 +956,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $fieldSet->addConditionalFields($field, $conditionalFields);
                     }
                     $idFieldSet[$id] = $fieldSet;
-                    $this->directiveIDFields[$directive] = $idFieldSet;
+                    $this->directiveIDFieldSet[$directive] = $idFieldSet;
                 }
             }
         }
@@ -990,16 +990,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Iterate while there are directives with data to be processed
-        while ($this->directiveIDFields->count() > 0) {
+        while ($this->directiveIDFieldSet->count() > 0) {
             /**
              * @var SplObjectStorage<Directive,array<string|int,EngineIterationFieldSet>>
              */
-            $directiveIDFields = $this->directiveIDFields;
+            $directiveIDFieldSet = $this->directiveIDFieldSet;
             // Now that we have all data, remove all entries from the inner stack.
             // It may be filled again with composed directives, when resolving the pipeline
-            $this->directiveIDFields = new SplObjectStorage();
+            $this->directiveIDFieldSet = new SplObjectStorage();
 
-            $directives = iterator_to_array($directiveIDFields);
+            $directives = iterator_to_array($directiveIDFieldSet);
 
             // Calculate all the fields on which the directive will be applied.
             /** @var SplObjectStorage<Directive,FieldInterface[]> */
@@ -1011,7 +1011,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             foreach ($directives as $directive) {
                 /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveIDFieldSet = [];
-                foreach ($directiveIDFields[$directive] as $id => $fieldSet) {
+                foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
                     $directiveDirectFields = array_merge(
                         $directiveDirectFields,
                         $fieldSet->fields
@@ -1073,7 +1073,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
                 foreach ($directives as $directive) {
-                    foreach ($directiveIDFields[$directive] as $id => $fieldSet) {
+                    foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
                         $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
                         $failingFields = array_intersect(
                             $fieldSet->fields,
@@ -1114,7 +1114,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $directiveIDFieldSet[$id] ??= new EngineIterationFieldSet();
                         $directiveIDFieldSet[$id]->fields[] = $field;
                         /** @var FieldInterface[]|null */
-                        $fieldConditionalFields = $directiveIDFields[$directive][$id]->conditionalFields[$field] ?? null;
+                        $fieldConditionalFields = $directiveIDFieldSet[$directive][$id]->conditionalFields[$field] ?? null;
                         if ($fieldConditionalFields === null || $fieldConditionalFields === []) {
                             continue;
                         }
