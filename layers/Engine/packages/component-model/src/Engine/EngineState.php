@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Engine;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 class EngineState
 {
@@ -81,7 +82,7 @@ class EngineState
          * @todo Check if caching by $options is also needed
          * @todo Check how this plays out for mutations; should they be executed more than once? If so, when/how?
          *
-         * @var array<string,array<string,array<string,array<string|id,array<string,mixed>>>>> Multidimensional array of [$objectTypeResolverNamespacedName][$variablesHash][$expressionsHash][$objectID][$field] => $value
+         * @var array<string,array<string,array<string,array<string|id,SplObjectStorage<FieldInterface,mixed>>>>> Multidimensional array of [$objectTypeResolverNamespacedName][$variablesHash][$expressionsHash][$objectID][$field] => $value
          */
         protected array $objectTypeResolvedValuesCache = [],
     ) {
@@ -98,10 +99,10 @@ class EngineState
         array $variables,
         array $expressions,
     ): bool {
-        $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        return array_key_exists($field->getUniqueID(), $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID] ?? []);
+        $objectID = $objectTypeResolver->getID($object);
+        return isset($this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID]) && $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID]->contains($field);
     }
 
     /**
@@ -115,10 +116,10 @@ class EngineState
         array $variables,
         array $expressions,
     ): mixed {
-        $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        return $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->getUniqueID()];
+        $objectID = $objectTypeResolver->getID($object);
+        return $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field];
     }
 
     /**
@@ -133,10 +134,13 @@ class EngineState
         array $expressions,
         mixed $value,
     ): void {
-        $objectID = $objectTypeResolver->getID($object);
         $variablesHash = $this->getDataHash($variables);
         $expressionsHash = $this->getDataHash($expressions);
-        $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID][$field->getUniqueID()] = $value;
+        $objectID = $objectTypeResolver->getID($object);
+        /** @var SplObjectStorage<FieldInterface,mixed> */
+        $fieldResolvedValueSplObjectStorage = $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID] ?? new SplObjectStorage();
+        $fieldResolvedValueSplObjectStorage[$field] = $value;
+        $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$variablesHash][$expressionsHash][$objectID] = $fieldResolvedValueSplObjectStorage;
     }
 
     protected function getDataHash(array $data): string
