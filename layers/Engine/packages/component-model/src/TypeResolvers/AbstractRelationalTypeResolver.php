@@ -339,7 +339,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 // Consolidate the same directiveResolverInstances for different fields,
                 // as to do the validation only once on each of them
-                $instanceID = get_class($directiveResolverInstance) . $directive->asQueryString();
+                $instanceID = get_class($directiveResolverInstance) . spl_object_hash($directive);
                 if (!isset($directiveResolverInstanceFields[$instanceID])) {
                     $directiveResolverInstanceFields[$instanceID]['directive'] = $directive;
                     $directiveResolverInstanceFields[$instanceID]['instance'] = $directiveResolverInstance;
