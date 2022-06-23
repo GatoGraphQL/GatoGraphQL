@@ -58,7 +58,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         if ($nestedFieldDirectives) {
             $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
             // Support repeated fields by adding a counter next to them
-            if (count($nestedFieldDirectives) != count(array_unique($nestedFieldDirectives))) {
+            if (count($nestedFieldDirectives) !== count(array_unique($nestedFieldDirectives))) {
                 // Find the repeated fields, and add a counter next to them
                 $expandedNestedFieldDirectives = [];
                 $counters = [];
