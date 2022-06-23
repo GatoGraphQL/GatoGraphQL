@@ -54,7 +54,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private const MESSAGE_EXPRESSIONS_FOR_OBJECT = 'expressionsForObject';
     private const MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD = 'expressionsForObjectAndField';
 
-    protected string $directive;
+    protected Directive $directive;
     /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedDirectiveArgNameTypeResolversCache = [];
     /** @var array<string,string|null> */
@@ -98,14 +98,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function __construct()
     {
-        $this->directive = $this->getDirectiveName();
+        $this->directive = new Directive(
+            $this->getDirectiveName(),
+            [],
+            LocationHelper::getNonSpecificLocation()
+        );
     }
 
     /**
      * Invoked when creating the non-shared directive instance
      * to resolve a field in the pipeline
      */
-    final public function setDirective(string $directive): void
+    final public function setDirective(Directive $directive): void
     {
         $this->directive = $directive;
     }

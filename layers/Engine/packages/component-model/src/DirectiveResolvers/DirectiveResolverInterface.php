@@ -31,7 +31,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * Invoked when creating the non-shared directive instance
      * to resolve a field in the pipeline
      */
-    public function setDirective(string $directive): void;
+    public function setDirective(Directive $directive): void;
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
