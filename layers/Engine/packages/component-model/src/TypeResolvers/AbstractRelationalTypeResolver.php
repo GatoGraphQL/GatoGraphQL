@@ -892,6 +892,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Split function, so it can be invoked both from here and from the UnionTypeResolver
      *
      * @param FieldInterface[] $fields
+     * @param array<string,Directive[]> $mandatoryDirectivesForFields Key: '*' (for all) or fieldName, Value: List of Directives
+     * @param Directive[] $mandatorySystemDirectives
      */
     protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
     {
