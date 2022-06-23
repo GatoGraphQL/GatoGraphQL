@@ -58,7 +58,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var array<string,Directive[]>
      */
-    private array $directivesForFieldCache = [];
+    private array $fieldDirectives = [];
     /**
      * @var array<string,array<string,DirectiveResolverInterface>>
      */
@@ -877,7 +877,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string | int $id, EngineIterationFieldSet $fieldSet): void
     {
         foreach ($fields as $field) {
-            if (!isset($this->directivesForFieldCache[$field->getUniqueID()])) {
+            if (!isset($this->fieldDirectives[$field->getUniqueID()])) {
                 $directives = $field->getDirectives();
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
@@ -904,11 +904,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // If the directives must be preceded by other directives, add them now
                 $directives = $this->addMandatoryDirectivesForDirectives($directives);
 
-                $this->directivesForFieldCache[$field->getUniqueID()] = $directives;
+                $this->fieldDirectives[$field->getUniqueID()] = $directives;
             }
             
             // Store which fields do the directives process
-            foreach ($this->directivesForFieldCache[$field->getUniqueID()] as $directive) {
+            foreach ($this->fieldDirectives[$field->getUniqueID()] as $directive) {
                 $this->directiveIDFields[$directive->asQueryString()][$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
                 if (in_array($field, $fieldSet->fields)) {
