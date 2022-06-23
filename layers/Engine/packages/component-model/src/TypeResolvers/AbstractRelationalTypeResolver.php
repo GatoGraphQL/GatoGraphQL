@@ -516,6 +516,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                      */
                     $fieldDirectiveResolver = clone $directiveResolver;
                     $fieldDirectiveResolver->setDirective($directive);
+                    $this->directiveResolverInstanceCache[$directiveResolverClass] ??= new SplObjectStorage();
                     $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $fieldDirectiveResolver;
                 }
                 $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
