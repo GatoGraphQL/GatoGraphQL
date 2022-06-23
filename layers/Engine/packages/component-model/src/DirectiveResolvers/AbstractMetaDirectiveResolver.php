@@ -10,6 +10,7 @@ use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -54,34 +55,19 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // If it has nestedDirectives, extract them and validate them
-        $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive->asQueryString(), false);
-        if ($nestedFieldDirectives) {
-            $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
-            // Support repeated fields by adding a counter next to them
-            if (count($nestedFieldDirectives) !== count(array_unique($nestedFieldDirectives))) {
-                // Find the repeated fields, and add a counter next to them
-                $expandedNestedFieldDirectives = [];
-                $counters = [];
-                foreach ($nestedFieldDirectives as $nestedFieldDirective) {
-                    if (!isset($counters[$nestedFieldDirective])) {
-                        $expandedNestedFieldDirectives[] = $nestedFieldDirective;
-                        $counters[$nestedFieldDirective] = 1;
-                    } else {
-                        $expandedNestedFieldDirectives[] = $nestedFieldDirective . FieldSymbols::REPEATED_DIRECTIVE_COUNTER_SEPARATOR . $counters[$nestedFieldDirective];
-                        $counters[$nestedFieldDirective]++;
-                    }
-                }
-                $nestedFieldDirectives = $expandedNestedFieldDirectives;
-            }
+        /** @var MetaDirective */
+        $metaDirective = $this->directive;
+        $nestedDirectives = $metaDirective->getNestedDirectives();
+        if ($nestedDirectives !== []) {
             // Each composed directive will deal with the same fields as the current directive
-            $nestedFieldDirectiveFields = $directiveFields;
-            foreach ($nestedFieldDirectives as $nestedFieldDirective) {
-                $nestedFieldDirectiveFields[$nestedFieldDirective] = $directiveFields[$this->directive];
+            $nestedDirectiveFields = $directiveFields;
+            foreach ($nestedDirectives as $nestedDirective) {
+                $nestedDirectiveFields[$nestedDirective] = $directiveFields[$this->directive];
             }
             $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
             $this->nestedDirectivePipelineData = $relationalTypeResolver->resolveDirectivesIntoPipelineData(
-                $nestedFieldDirectives,
-                $nestedFieldDirectiveFields,
+                $nestedDirectives,
+                $nestedDirectiveFields,
                 $variables,
                 $separateEngineIterationFeedbackStore,
             );
