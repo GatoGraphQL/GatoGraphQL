@@ -38,7 +38,7 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     {
         if (!isset($this->cacheControlDirectives[$maxAge])) {
             $this->cacheControlDirectives[$maxAge] = new Directive(
-                $this->getSaveCacheDirectiveResolver()->getDirectiveName(),
+                $this->getCacheControlDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
                         'maxAge',
