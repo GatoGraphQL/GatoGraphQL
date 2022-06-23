@@ -52,11 +52,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var SplObjectStorage<Directive,array<string|int,EngineIterationFieldSet>>
      */
-    private array $directiveIDFields;
+    private SplObjectStorage $directiveIDFields;
     /**
      * @var SplObjectStorage<FieldInterface,Directive[]>
      */
-    private array $fieldDirectives;
+    private SplObjectStorage $fieldDirectives;
     /**
      * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
      */
