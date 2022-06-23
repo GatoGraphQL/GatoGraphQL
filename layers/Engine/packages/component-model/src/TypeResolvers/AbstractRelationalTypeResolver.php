@@ -1054,9 +1054,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     }
                 }
                 $directiveFieldIDs[$directive] = $fieldIDsSplObjectStorage;
-                // @todo Check that the `array_unique` is not needed
-                // $directiveFields[$directive] = array_unique($directiveFields[$directive]);
-                $directiveFields[$directive] = $fields;
+                $directiveFields[$directive] = array_unique($fields);
             }
             $directiveDirectFields = array_unique($directiveDirectFields);
 
