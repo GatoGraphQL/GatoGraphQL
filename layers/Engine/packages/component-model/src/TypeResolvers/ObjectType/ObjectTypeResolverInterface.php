@@ -49,7 +49,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     ): ?MutationResolverInterface;
     public function isFieldAMutation(string $fieldName): ?bool;
     /**
-     * @return Directive[]
+     * @return array<string,Directive[]>
      */
     public function getAllMandatoryDirectivesForFields(): array;
     /**

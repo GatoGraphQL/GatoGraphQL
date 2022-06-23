@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 

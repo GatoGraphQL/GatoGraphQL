@@ -1015,7 +1015,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             foreach ($directives as $directive) {
                 /** @var SplObjectStorage<FieldInterface,array<string|int>> */
                 $fieldIDsSplObjectStorage = $directiveFieldIDs[$directive] ?? new SplObjectStorage();
-                /** @var array<string|int,FieldInterface[]> */
+                /** @var FieldInterface[] */
                 $fields = [];
                 foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
                     $directiveDirectFields = array_merge(
@@ -1034,7 +1034,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $conditionalFields
                     ));
                     $fields = array_merge(
-                        $fields ?? [],
+                        $fields,
                         $idFieldDirectiveIDFields
                     );
                     // Also transpose the array to match field to IDs later on
