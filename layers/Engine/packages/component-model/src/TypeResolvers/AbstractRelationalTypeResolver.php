@@ -724,7 +724,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $succeedingMandatoryDirectivesForDirectives = [];
         $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
-            // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
+            /**
+             * `array_merge_recursive` so that if 2 different decorators add a directive
+             * for the same directive, the results are merged together, not override each other.
+             */
             if ($typeResolverDecorator->enabled($this)) {
                 $succeedingMandatoryDirectivesForDirectives = array_merge_recursive(
                     $succeedingMandatoryDirectivesForDirectives,

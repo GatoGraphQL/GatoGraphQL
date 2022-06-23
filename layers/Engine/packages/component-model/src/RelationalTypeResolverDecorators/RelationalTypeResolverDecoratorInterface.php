@@ -41,6 +41,8 @@ interface RelationalTypeResolverDecoratorInterface extends AttachableExtensionIn
     /**
      * Return an array of directiveName as keys, and, for each directiveName,
      * an array of directives (including directive arguments) to be applied after
+     *
+     * @return array<string,Directive[]> Key: directiveName, Value: List of Directives
      */
     public function getSucceedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array;
 }
