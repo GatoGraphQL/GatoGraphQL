@@ -37,7 +37,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected ?array $directiveNameResolvers = null;
     /**
-     * @var string[]|null
+     * @var RelationalTypeResolverDecoratorInterface[]|null
      */
     protected ?array $typeResolverDecorators = null;
     /**
@@ -700,7 +700,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $precedingMandatoryDirectivesForDirectives = [];
         $typeResolverDecorators = $this->getAllRelationalTypeResolverDecorators();
         foreach ($typeResolverDecorators as $typeResolverDecorator) {
-            // array_merge_recursive so that if 2 different decorators add a directive for the same directive, the results are merged together, not override each other
+            /**
+             * `array_merge_recursive` so that if 2 different decorators add a directive
+             * for the same directive, the results are merged together, not override each other.
+             */            
             if ($typeResolverDecorator->enabled($this)) {
                 $precedingMandatoryDirectivesForDirectives = array_merge_recursive(
                     $precedingMandatoryDirectivesForDirectives,
@@ -746,6 +749,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $succeedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return RelationalTypeResolverDecoratorInterface[]
+     */
     protected function getAllRelationalTypeResolverDecorators(): array
     {
         if ($this->typeResolverDecorators === null) {
@@ -754,6 +760,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $this->typeResolverDecorators;
     }
 
+    /**
+     * @return RelationalTypeResolverDecoratorInterface[]
+     */
     protected function calculateAllRelationalTypeResolverDecorators(): array
     {
         $typeResolverDecorators = [];
