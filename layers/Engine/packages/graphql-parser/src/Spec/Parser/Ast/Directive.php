@@ -37,12 +37,6 @@ class Directive extends AbstractAst
                 implode(', ', $strArguments)
             );
         }
-        // @todo Fix: temporarily remove "@" to match PQL. Remove this code!
-        return sprintf(
-            '%s%s',
-            $this->name,
-            $strDirectiveArguments
-        ); /** @phpstan-ignore-next-line */
         return sprintf(
             '@%s%s',
             $this->name,
