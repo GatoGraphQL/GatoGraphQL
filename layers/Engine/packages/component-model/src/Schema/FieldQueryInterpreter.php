@@ -26,12 +26,14 @@ use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\FieldQuery\QueryUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
+use SplObjectStorage;
 use stdClass;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -518,11 +520,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldName . $this->getFieldArgsAsString($fieldArgs) . substr($field, strlen($fieldName));
     }
 
+    /**
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     */
     public function extractDirectiveArgumentsForSchema(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $fieldDirective,
-        array $fieldDirectiveFields,
+        SplObjectStorage $directiveFields,
         array $variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         bool $disableDynamicFields = false
@@ -545,7 +550,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $directiveArgs = $directiveResolver->validateDirectiveArgumentsForSchema($relationalTypeResolver, $directiveName, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
         }
         // Transfer the feedback
-        foreach ($fieldDirectiveFields as $fieldDirective => $fields) {
+        foreach ($directiveFields as $directive) {
+            $fields = $directiveFields[$directive];
             foreach ($fields as $field) {
                 $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                     $objectTypeFieldResolutionFeedbackStore,
