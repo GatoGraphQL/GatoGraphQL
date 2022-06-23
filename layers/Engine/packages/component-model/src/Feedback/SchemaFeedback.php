@@ -34,7 +34,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        ?string $directive,
+        ?Directive $directive,
     ): self {
         /** @var SchemaFeedbackInterface[] */
         $nestedSchemaFeedbackEntries = [];

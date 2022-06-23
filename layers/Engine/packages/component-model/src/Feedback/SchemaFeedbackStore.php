@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class SchemaFeedbackStore
@@ -55,7 +56,7 @@ class SchemaFeedbackStore
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        ?string $directive = null,
+        ?Directive $directive = null,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(

@@ -36,7 +36,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
         string|int $objectID,
-        ?string $directive
+        ?Directive $directive
     ): self {
         /** @var ObjectFeedbackInterface[] */
         $nestedObjectFeedbackEntries = [];
