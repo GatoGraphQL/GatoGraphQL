@@ -14,24 +14,33 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class CacheControlHelper
 {
-    public static function getNoCacheDirective(): Directive
+    protected static ?Directive $noCacheDirective = null;
+
+    final protected static function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver
     {
         $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var DirectiveResolverInterface */
-        $cacheControlDirectiveResolver = $instanceManager->getInstance(CacheControlDirectiveResolver::class);
-        return new Directive(
-            $cacheControlDirectiveResolver->getDirectiveName(),
-            [
-                new Argument(
-                    'maxAge',
-                    new Literal(
-                        0,
+        return $instanceManager->getInstance(CacheControlDirectiveResolver::class);
+    }
+
+    public static function getNoCacheDirective(): Directive
+    {
+        if (self::$noCacheDirective === null) {
+            $cacheControlDirectiveResolver = static::getCacheControlDirectiveResolver();
+            self::$noCacheDirective = new Directive(
+                $cacheControlDirectiveResolver->getDirectiveName(),
+                [
+                    new Argument(
+                        'maxAge',
+                        new Literal(
+                            0,
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                         LocationHelper::getNonSpecificLocation()
                     ),
-                    LocationHelper::getNonSpecificLocation()
-                ),
-            ],
-            LocationHelper::getNonSpecificLocation()
-        );
+                ],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return self::$noCacheDirective;
     }
 }
