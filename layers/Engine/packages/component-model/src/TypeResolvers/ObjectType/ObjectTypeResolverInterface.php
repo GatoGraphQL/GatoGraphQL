@@ -10,6 +10,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, OutputTypeResolverInterface
@@ -47,6 +48,9 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface;
     public function isFieldAMutation(string $fieldName): ?bool;
+    /**
+     * @return Directive[]
+     */
     public function getAllMandatoryDirectivesForFields(): array;
     /**
      * The "executable" FieldResolver is the first one in the list

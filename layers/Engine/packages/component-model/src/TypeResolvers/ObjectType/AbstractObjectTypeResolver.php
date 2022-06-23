@@ -27,6 +27,7 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
@@ -119,6 +120,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
     }
 
+    /**
+     * @return Directive[]
+     */
     final public function getAllMandatoryDirectivesForFields(): array
     {
         if ($this->mandatoryDirectivesForFields === null) {
