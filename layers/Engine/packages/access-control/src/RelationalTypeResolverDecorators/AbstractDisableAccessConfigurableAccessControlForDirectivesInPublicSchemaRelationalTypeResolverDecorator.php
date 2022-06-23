@@ -10,6 +10,8 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
+    protected ?Directive $disableAccessDirective = null;
+
     private ?DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver = null;
 
     final public function setDisableAccessForDirectivesDirectiveResolver(DisableAccessForDirectivesDirectiveResolver $disableAccessForDirectivesDirectiveResolver): void
@@ -26,13 +28,20 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
      */
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
-        $disableAccessDirective = new Directive(
-            $this->getDisableAccessForDirectivesDirectiveResolver()->getDirectiveName(),
-            [],
-            LocationHelper::getNonSpecificLocation()
-        );
         return [
-            $disableAccessDirective,
+            $this->getDisableAccessDirective(),
         ];
+    }
+
+    protected function getDisableAccessDirective(): Directive
+    {
+        if ($this->disableAccessDirective === null) {
+            $this->disableAccessDirective = new Directive(
+                $this->getDisableAccessForDirectivesDirectiveResolver()->getDirectiveName(),
+                [],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->disableAccessDirective;
     }
 }

@@ -23,25 +23,33 @@ trait ValidateDoesLoggedInUserHaveRolePublicSchemaRelationalTypeResolverDecorato
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $roles = $entryValue;
-        $directiveResolver = $this->getValidateRoleDirectiveResolver();
-        $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyRoleDirective = new Directive(
-            $directiveName,
-            [
-                new Argument(
-                    'roles',
-                    new InputList(
-                        $roles,
+        return [
+            $this->getValidateDoesLoggedInUserHaveAnyRoleDirective($roles),
+        ];
+    }
+
+    /**
+     * @param string[] $roles
+     */
+    protected function getValidateDoesLoggedInUserHaveAnyRoleDirective(array $roles): Directive
+    {
+        if ($this->validateDoesLoggedInUserHaveAnyCapabilityDirective === null) {
+            $this->validateDoesLoggedInUserHaveAnyCapabilityDirective = new Directive(
+                $this->getValidateRoleDirectiveResolver()->getDirectiveName(),
+                [
+                    new Argument(
+                        'roles',
+                        new InputList(
+                            $roles,
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                         LocationHelper::getNonSpecificLocation()
                     ),
-                    LocationHelper::getNonSpecificLocation()
-                ),
-            ],
-            LocationHelper::getNonSpecificLocation()
-        );
-        return [
-            $validateDoesLoggedInUserHaveAnyRoleDirective,
-        ];
+                ],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirective;
     }
 
     abstract protected function getValidateRoleDirectiveResolver(): DirectiveResolverInterface;

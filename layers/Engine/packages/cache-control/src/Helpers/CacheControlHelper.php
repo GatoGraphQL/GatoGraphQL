@@ -25,9 +25,8 @@ class CacheControlHelper
     public static function getNoCacheDirective(): Directive
     {
         if (self::$noCacheDirective === null) {
-            $cacheControlDirectiveResolver = static::getCacheControlDirectiveResolver();
             self::$noCacheDirective = new Directive(
-                $cacheControlDirectiveResolver->getDirectiveName(),
+                static::getCacheControlDirectiveResolver()->getDirectiveName(),
                 [
                     new Argument(
                         'maxAge',

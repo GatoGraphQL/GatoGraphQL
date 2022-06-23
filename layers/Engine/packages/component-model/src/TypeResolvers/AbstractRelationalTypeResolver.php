@@ -33,6 +33,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public final const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnObject';
 
     /**
+     * @var array<string,Directive>
+     */
+    protected array $directives = [];
+
+    /**
      * @var array<string,DirectiveResolverInterface[]>|null
      */
     protected ?array $directiveNameResolvers = null;
@@ -150,13 +155,21 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function getMandatoryDirectives(): array
     {
         return array_map(
-            fn (DirectiveResolverInterface $directiveResolver) => new Directive(
-                $directiveResolver->getDirectiveName(),
-                [],
-                LocationHelper::getNonSpecificLocation(),
-            ),
+            fn (DirectiveResolverInterface $directiveResolver) => $this->getDirective($directiveResolver->getDirectiveName()),
             $this->getDataloadingEngine()->getMandatoryDirectiveResolvers()
         );
+    }
+
+    protected function getDirective(string $directiveName): Directive
+    {
+        if (!isset($this->directives[$directiveName])) {
+            $this->directives[$directiveName] = new Directive(
+                $directiveName,
+                [],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->directives[$directiveName];
     }
 
     /**

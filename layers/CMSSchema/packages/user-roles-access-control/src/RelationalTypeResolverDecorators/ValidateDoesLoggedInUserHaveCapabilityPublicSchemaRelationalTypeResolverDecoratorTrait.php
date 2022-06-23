@@ -13,6 +13,8 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait
 {
+    protected ?Directive $validateDoesLoggedInUserHaveAnyCapabilityDirective = null;
+
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
 
     /**
@@ -23,25 +25,33 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $capabilities = $entryValue;
-        $directiveResolver = $this->getValidateCapabilityDirectiveResolver();
-        $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyCapabilityDirective = new Directive(
-            $directiveName,
-            [
-                new Argument(
-                    'capabilities',
-                    new InputList(
-                        $capabilities,
+        return [
+            $this->getValidateDoesLoggedInUserHaveAnyCapabilityDirective($capabilities),
+        ];
+    }
+
+    /**
+     * @param string[] $capabilities
+     */
+    protected function getValidateDoesLoggedInUserHaveAnyCapabilityDirective(array $capabilities): Directive
+    {
+        if ($this->validateDoesLoggedInUserHaveAnyCapabilityDirective === null) {
+            $this->validateDoesLoggedInUserHaveAnyCapabilityDirective = new Directive(
+                $this->getValidateCapabilityDirectiveResolver()->getDirectiveName(),
+                [
+                    new Argument(
+                        'capabilities',
+                        new InputList(
+                            $capabilities,
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                         LocationHelper::getNonSpecificLocation()
                     ),
-                    LocationHelper::getNonSpecificLocation()
-                ),
-            ],
-            LocationHelper::getNonSpecificLocation()
-        );
-        return [
-            $validateDoesLoggedInUserHaveAnyCapabilityDirective,
-        ];
+                ],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->validateDoesLoggedInUserHaveAnyCapabilityDirective;
     }
 
     abstract protected function getValidateCapabilityDirectiveResolver(): DirectiveResolverInterface;

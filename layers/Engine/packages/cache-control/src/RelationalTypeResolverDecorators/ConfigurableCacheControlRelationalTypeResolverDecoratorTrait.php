@@ -13,6 +13,11 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
 {
+    /**
+     * @var array<string|int,Directive>
+     */
+    protected array $cacheControlDirectives = [];
+
     abstract protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface;
     abstract protected function getCacheControlDirectiveResolver(): CacheControlDirectiveResolver;
 
@@ -24,22 +29,29 @@ trait ConfigurableCacheControlRelationalTypeResolverDecoratorTrait
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $maxAge = $entryValue;
-        $cacheControlDirective = new Directive(
-            $this->getSaveCacheDirectiveResolver()->getDirectiveName(),
-            [
-                new Argument(
-                    'maxAge',
-                    new Literal(
-                        $maxAge,
+        return [
+            $this->getCacheControlDirective($maxAge),
+        ];
+    }
+
+    protected function getCacheControlDirective(string|int $maxAge): Directive
+    {
+        if (!isset($this->cacheControlDirectives[$maxAge])) {
+            $this->cacheControlDirectives[$maxAge] = new Directive(
+                $this->getSaveCacheDirectiveResolver()->getDirectiveName(),
+                [
+                    new Argument(
+                        'maxAge',
+                        new Literal(
+                            $maxAge,
+                            LocationHelper::getNonSpecificLocation()
+                        ),
                         LocationHelper::getNonSpecificLocation()
                     ),
-                    LocationHelper::getNonSpecificLocation()
-                ),
-            ],
-            LocationHelper::getNonSpecificLocation()
-        );
-        return [
-            $cacheControlDirective,
-        ];
+                ],
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return $this->cacheControlDirectives[$maxAge];
     }
 }
