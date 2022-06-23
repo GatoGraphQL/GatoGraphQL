@@ -940,6 +940,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directives = $this->fieldDirectives[$field];
                 /** @var Directive[] $directives */
                 foreach ($directives as $directive) {
+                    $this->directiveIDFields[$directive] ??= [];
                     $fieldSet = $this->directiveIDFields[$directive][$id] ?? new EngineIterationFieldSet();
                     // Store which ID/field this directive must process
                     if (in_array($field, $fieldSet->fields)) {
