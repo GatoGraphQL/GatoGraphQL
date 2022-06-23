@@ -52,11 +52,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var SplObjectStorage<Directive,array<string|int,EngineIterationFieldSet>>
      */
-    private array $directiveIDFields = new SplObjectStorage();
+    private array $directiveIDFields;
     /**
      * @var SplObjectStorage<FieldInterface,Directive[]>
      */
-    private array $fieldDirectives = new SplObjectStorage();
+    private array $fieldDirectives;
     /**
      * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
      */
@@ -89,6 +89,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
         return $this->directivePipelineService ??= $this->instanceManager->getInstance(DirectivePipelineServiceInterface::class);
+    }
+
+    public function __construct()
+    {
+        $this->directiveIDFields = new SplObjectStorage();
+        $this->fieldDirectives = new SplObjectStorage();
     }
 
     /**

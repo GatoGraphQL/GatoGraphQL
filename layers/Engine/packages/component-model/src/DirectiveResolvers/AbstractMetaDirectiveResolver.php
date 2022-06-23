@@ -53,7 +53,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // If it has nestedDirectives, extract them and validate them
-        $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive, false);
+        $nestedFieldDirectives = $this->getFieldQueryInterpreter()->getFieldDirectives($this->directive->asQueryString(), false);
         if ($nestedFieldDirectives) {
             $nestedFieldDirectives = QueryHelpers::splitFieldDirectives($nestedFieldDirectives);
             // Support repeated fields by adding a counter next to them
