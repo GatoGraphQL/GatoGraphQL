@@ -41,11 +41,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected ?array $typeResolverDecorators = null;
     /**
-     * @var array<string, array>|null
+     * @var array<string,Directive[]>|null
      */
     protected ?array $precedingMandatoryDirectivesForDirectives = null;
     /**
-     * @var array<string, array>|null
+     * @var array<string,Directive[]>|null
      */
     protected ?array $succeedingMandatoryDirectivesForDirectives = null;
 
@@ -681,14 +681,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $allDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function getAllPrecedingMandatoryDirectivesForDirectives(): array
     {
-        if (is_null($this->precedingMandatoryDirectivesForDirectives)) {
+        if ($this->precedingMandatoryDirectivesForDirectives === null) {
             $this->precedingMandatoryDirectivesForDirectives = $this->calculateAllPrecedingMandatoryDirectivesForDirectives();
         }
         return $this->precedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function calculateAllPrecedingMandatoryDirectivesForDirectives(): array
     {
         $precedingMandatoryDirectivesForDirectives = [];
@@ -706,14 +712,20 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         return $precedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function getAllSucceedingMandatoryDirectivesForDirectives(): array
     {
-        if (is_null($this->succeedingMandatoryDirectivesForDirectives)) {
+        if ($this->succeedingMandatoryDirectivesForDirectives === null) {
             $this->succeedingMandatoryDirectivesForDirectives = $this->calculateAllSucceedingMandatoryDirectivesForDirectives();
         }
         return $this->succeedingMandatoryDirectivesForDirectives;
     }
 
+    /**
+     * @return array<string,Directive[]> Key: '*' (for all) or directiveName, Value: List of directives
+     */
     protected function calculateAllSucceedingMandatoryDirectivesForDirectives(): array
     {
         $succeedingMandatoryDirectivesForDirectives = [];
