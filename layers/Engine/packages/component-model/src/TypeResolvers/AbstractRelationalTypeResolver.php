@@ -460,7 +460,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                     ErrorFeedbackItemProvider::class,
                                     ErrorFeedbackItemProvider::E23,
                                     [
-                                        $directive->asQueryString(),
+                                        $directive->getName(),
                                         implode(
                                             '\', \'',
                                             array_map(
