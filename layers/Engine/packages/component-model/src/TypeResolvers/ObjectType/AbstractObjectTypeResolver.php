@@ -43,7 +43,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected array $objectTypeFieldResolversForFieldCache = [];
     /**
-     * @var array<string,array>|null
+     * @var array<string,Directive[]>|null
      */
     protected ?array $mandatoryDirectivesForFields = null;
     /**
@@ -121,7 +121,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * @return Directive[]
+     * @return array<string,Directive[]> Key: '*' (for all) or fieldName, Value: List of directives
      */
     final public function getAllMandatoryDirectivesForFields(): array
     {
@@ -132,7 +132,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * @return Directive[]
+     * @return array<string,Directive[]> Key: '*' (for all) or fieldName, Value: List of directives
      */
     private function calculateAllMandatoryDirectivesForFields(): array
     {
