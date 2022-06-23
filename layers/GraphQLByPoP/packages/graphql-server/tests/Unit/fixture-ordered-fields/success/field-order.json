@@ -1,0 +1,68 @@
+{
+    "data": {
+        "firstID": "root",
+        "firstSelf": {
+            "id": "root"
+        },
+        "secondID": "root",
+        "secondSelf": {
+            "id": "root"
+        },
+        "thirdID": "root",
+        "thirdSelf": {
+            "id": "root",
+            "firstID": "root",
+            "firstSelf": {
+                "id": "root"
+            },
+            "secondID": "root",
+            "secondSelf": {
+                "id": "root"
+            },
+            "thirdID": "root",
+            "thirdSelf": {
+                "id": "root"
+            },
+            "fourthID": "root",
+            "fourthSelf": {
+                "id": "root"
+            }
+        },
+        "fourthID": "root",
+        "fourthSelf": {
+            "id": "root",
+            "firstID": "root",
+            "firstSelf": {
+                "id": "root"
+            },
+            "secondID": "root",
+            "secondSelf": {
+                "id": "root"
+            },
+            "thirdID": "root",
+            "thirdSelf": {
+                "id": "root"
+            },
+            "fourthID": "root",
+            "fourthSelf": {
+                "id": "root",
+                "firstID": "root",
+                "firstSelf": {
+                    "id": "root"
+                },
+                "secondID": "root",
+                "secondSelf": {
+                    "id": "root"
+                },
+                "thirdID": "root",
+                "thirdSelf": {
+                    "id": "root"
+                },
+                "fourthID": "root",
+                "fourthSelf": {
+                    "id": "root"
+                }
+            }
+        }
+    }
+}

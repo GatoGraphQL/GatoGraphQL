@@ -31,7 +31,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     {
         return $this->typeResolverHelperService ??= $this->instanceManager->getInstance(TypeResolverHelperServiceInterface::class);
     }
-    
+
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
@@ -71,7 +71,7 @@ abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProce
     {
         /** @var SplObjectStorage<FieldInterface,string> */
         $ret = new SplObjectStorage();
-        
+
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             if ($typeOutputKey = $relationalTypeResolver->getTypeOutputKey()) {
                 /**

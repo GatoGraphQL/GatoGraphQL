@@ -7,4 +7,5 @@ namespace PoPAPI\API\Schema;
 class QueryInputs
 {
     const QUERY = 'query';
+    const OPERATION_NAME = 'operationName';
 }

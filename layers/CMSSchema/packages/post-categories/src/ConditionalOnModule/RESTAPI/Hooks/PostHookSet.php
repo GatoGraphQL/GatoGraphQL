@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\ConditionalOnModule\RESTAPI\Hooks;
 
-use PoP\Root\App;
-use PoP\Root\Hooks\AbstractHookSet;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
 use PoPCMSSchema\Posts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\EntryComponentRoutingProcessor;
+use PoPAPI\RESTAPI\Hooks\AbstractRESTHookSet;
 
-class PostHookSet extends AbstractHookSet
+class PostHookSet extends AbstractRESTHookSet
 {
-    const CATEGORY_RESTFIELDS = 'categories.id|name|url';
+    const CATEGORY_RESTFIELDS = 'categories { id name url }';
 
-    protected function init(): void
+    protected function getHookName(): string
     {
-        App::addFilter(
-            HookHelpers::getHookName(EntryComponentRoutingProcessor::class),
-            $this->getRESTFields(...)
-        );
+        return HookHelpers::getHookName(EntryComponentRoutingProcessor::class);
     }
 
-    public function getRESTFields($restFields): string
+    protected function getGraphQLFieldsToAppend(): string
     {
-        return $restFields . ',' . self::CATEGORY_RESTFIELDS;
+        return self::CATEGORY_RESTFIELDS;
     }
 }

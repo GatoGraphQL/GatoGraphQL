@@ -57,7 +57,6 @@ use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\Root\Helpers\Methods;
 use PoP\Root\Services\BasicServiceTrait;
 use SplObjectStorage;
 
@@ -1746,7 +1745,7 @@ class Engine implements EngineInterface
                     if ($iterationResolvedFieldValues === null) {
                         continue;
                     }
-                    /** @var FieldInterface[] $conditionalFields */
+                    /** @var FieldInterface[] */
                     $resolvedDirectFields = iterator_to_array($iterationResolvedFieldValues);
                     $already_loaded_id_fields[$relationalTypeOutputKey][$id] = array_merge(
                         $already_loaded_id_fields[$relationalTypeOutputKey][$id] ?? [],

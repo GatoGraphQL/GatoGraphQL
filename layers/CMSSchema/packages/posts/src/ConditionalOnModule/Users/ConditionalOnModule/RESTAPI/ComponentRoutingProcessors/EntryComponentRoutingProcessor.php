@@ -18,16 +18,16 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
     /**
      * Remove the author data, added by hook to CustomPosts
      */
-    public function getRESTFieldsQuery(): string
+    public function getGraphQLQueryToResolveRESTEndpoint(): string
     {
-        if (is_null($this->restFieldsQuery)) {
-            $this->restFieldsQuery = str_replace(
-                ',' . CustomPostHookSet::AUTHOR_RESTFIELDS,
+        if ($this->restEndpointGraphQLQuery === null) {
+            $this->restEndpointGraphQLQuery = str_replace(
+                CustomPostHookSet::AUTHOR_RESTFIELDS,
                 '',
-                parent::getRESTFieldsQuery()
+                parent::getGraphQLQueryToResolveRESTEndpoint()
             );
         }
-        return $this->restFieldsQuery;
+        return $this->restEndpointGraphQLQuery;
     }
 
     /**
@@ -44,9 +44,9 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                     ]
                 ],
         );

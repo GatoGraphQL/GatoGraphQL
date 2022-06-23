@@ -31,9 +31,16 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         return $this->postCategoryTypeAPI ??= $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
     }
 
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
-        return 'id|name|count|url';
+        return <<<GRAPHQL
+            query {
+                id
+                name
+                count
+                url
+            }
+        GRAPHQL;
     }
 
     /**
@@ -47,9 +54,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 PostCategoryFieldDataloadComponentProcessor::class,
                 PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORY,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                 ]
             ),
             'conditions' => [
@@ -77,9 +84,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 PostCategoryFieldDataloadComponentProcessor::class,
                 PostCategoryFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                 ]
             ],
         );
@@ -99,9 +106,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 CategoryPostFieldDataloadComponentProcessor::class,
                 CategoryPostFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                     ]
                 ],
         );

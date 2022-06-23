@@ -14,7 +14,13 @@ class DataToAppendAndRemoveDataSource
         // Install also the monorepo-builder! So it can be used in CI
         return [
             'require-dev' => [
-                'symplify/monorepo-builder' => '^11.0',
+                /**
+                 * Last working version of the MonorepoBuilder before upgraded to using MBConfig
+                 * (after which the library can't be used directly from source anymore).
+                 *
+                 * @see https://github.com/symplify/symplify/issues/4184
+                 */                
+                'symplify/monorepo-builder' => '10.2.2',
                 'friendsofphp/php-cs-fixer' => '^3.5',
                 'slevomat/coding-standard' => '^7.0',
             ],

@@ -1541,11 +1541,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
     protected function getNoAliasFieldOutputKey(string $field): string
     {
-        // GraphQL: Use fieldName only
-        if (App::getState('only-fieldname-as-outputkey')) {
-            return $this->getFieldName($field);
-        }
-        return parent::getNoAliasFieldOutputKey($field);
+        return $this->getFieldName($field);
     }
 
     protected function serializeObject(object $object): string

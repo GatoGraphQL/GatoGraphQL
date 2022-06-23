@@ -13,9 +13,16 @@ use PoPCMSSchema\Pages\Routing\RequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
-        return 'id|title|url|content';
+        return <<<GRAPHQL
+            query {
+                id
+                title
+                url
+                content
+            }
+        GRAPHQL;
     }
 
     /**
@@ -30,9 +37,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_PAGE,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                 ]
             ),
             'conditions' => [

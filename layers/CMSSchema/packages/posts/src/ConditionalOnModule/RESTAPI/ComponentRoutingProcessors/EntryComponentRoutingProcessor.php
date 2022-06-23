@@ -29,9 +29,9 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                 FieldDataloadComponentProcessor::class,
                 FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                     ]
             ),
             'conditions' => [
@@ -60,9 +60,9 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                     FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
                     : FieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                     ]
                 ],
         );

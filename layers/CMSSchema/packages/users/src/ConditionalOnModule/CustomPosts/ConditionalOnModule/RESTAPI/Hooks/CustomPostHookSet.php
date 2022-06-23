@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ConditionalOnModule\RESTAPI\Hooks;
 
-use PoP\Root\App;
-use PoP\Root\Hooks\AbstractHookSet;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
+use PoPAPI\RESTAPI\Hooks\AbstractRESTHookSet;
 use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\AbstractCustomPostRESTEntryComponentRoutingProcessor;
 
-class CustomPostHookSet extends AbstractHookSet
+class CustomPostHookSet extends AbstractRESTHookSet
 {
-    const AUTHOR_RESTFIELDS = 'author.id|name|url';
+    const AUTHOR_RESTFIELDS = 'author { id name url }';
 
-    protected function init(): void
+    protected function getHookName(): string
     {
-        App::addFilter(
-            HookHelpers::getHookName(AbstractCustomPostRESTEntryComponentRoutingProcessor::class),
-            $this->getRESTFields(...)
-        );
+        return HookHelpers::getHookName(AbstractCustomPostRESTEntryComponentRoutingProcessor::class);
     }
 
-    public function getRESTFields($restFields): string
+    protected function getGraphQLFieldsToAppend(): string
     {
-        return $restFields . ',' . self::AUTHOR_RESTFIELDS;
+        return self::AUTHOR_RESTFIELDS;
     }
 }

@@ -1,0 +1,66 @@
+query {
+    firstID: id
+    firstSelf: self {
+        id
+    }
+    secondID: id
+    secondSelf: self {
+        id
+    }
+    thirdID: id
+    thirdSelf: self {
+        id
+        firstID: id
+        firstSelf: self {
+            id
+        }
+        secondID: id
+        secondSelf: self {
+            id
+        }
+        thirdID: id
+        thirdSelf: self {
+            id
+        }
+        fourthID: id
+        fourthSelf: self {
+            id
+        }
+    }
+    fourthID: id
+    fourthSelf: self {
+        id
+        firstID: id
+        firstSelf: self {
+            id
+        }
+        secondID: id
+        secondSelf: self {
+            id
+        }
+        thirdID: id
+        thirdSelf: self {
+            id
+        }
+        fourthID: id
+        fourthSelf: self {
+            id
+            firstID: id
+            firstSelf: self {
+                id
+            }
+            secondID: id
+            secondSelf: self {
+                id
+            }
+            thirdID: id
+            thirdSelf: self {
+                id
+            }
+            fourthID: id
+            fourthSelf: self {
+                id
+            }
+        }
+    }
+}

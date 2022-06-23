@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\PersistedQueries;
 
-use PoPAPI\API\Facades\PersistedQueryManagerFacade;
-
 class PersistedQueryUtils
 {
     /**
@@ -24,21 +22,5 @@ class PersistedQueryUtils
     public static function addSpacingToExpressions(string $fragmentResolution): string
     {
         return preg_replace('/%([\s\S]+?)%/', '% $1 %', $fragmentResolution);
-    }
-
-    /**
-     * Retrieve the query name from the persisted query param, which starts with "!"
-     */
-    public static function maybeGetPersistedQuery(string $query): string
-    {
-        $persistedQueryManager = PersistedQueryManagerFacade::getInstance();
-        if ($persistedQueryManager->isPersistedQuery($query)) {
-            // Get the query name, and extract the query from the PersistedQueryManager
-            $queryName = $persistedQueryManager->getPersistedQueryName($query);
-            if ($persistedQueryManager->hasPersistedQuery($queryName)) {
-                return $persistedQueryManager->getPersistedQuery($queryName);
-            }
-        }
-        return $query;
     }
 }

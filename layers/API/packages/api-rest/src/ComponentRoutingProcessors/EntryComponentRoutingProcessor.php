@@ -12,9 +12,13 @@ use PoP\Root\App;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
-    protected function getInitialRESTFields(): string
+    protected function doGetGraphQLQueryToResolveRESTEndpoint(): string
     {
-        return 'fullSchema';
+        return <<<GRAPHQL
+            query {
+                fullSchema
+            }
+        GRAPHQL;
     }
 
     /**
@@ -29,9 +33,9 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 RootRelationalFieldDataloadComponentProcessor::class,
                 RootRelationalFieldDataloadComponentProcessor::COMPONENT_DATALOAD_RELATIONALFIELDS_ROOT,
                 [
-                    'fields' => !empty(App::getState('query'))
+                    'query' => !empty(App::getState('query'))
                         ? App::getState('query')
-                        : $this->getRESTFields()
+                        : $this->getGraphQLQueryToResolveRESTEndpoint()
                 ]
             ),
             'conditions' => [

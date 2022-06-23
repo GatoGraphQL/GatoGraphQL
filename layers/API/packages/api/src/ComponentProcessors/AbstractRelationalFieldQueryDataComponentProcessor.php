@@ -42,11 +42,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     protected function getFieldFragmentModelsTuples(array $componentAtts): array
     {
+        /**
+         * There are not virtual component atts when loading the component
+         * the first time (i.e. for the fields at the root level).
+         */
         if ($componentAtts === []) {
-            /**
-             * There are not virtual component atts when loading the component
-             * the first time (i.e. for the fields at the root level).
-             */
             $executableDocument = App::getState('executable-document-ast');
 
             // Make sure the GraphQL query exists and was parsed properly into an AST

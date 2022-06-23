@@ -4,9 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPAPI\API\Schema\FieldQueryConvertorInterface:
-        class: \PoPAPI\API\Schema\FieldQueryConvertor
-
     PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface:
         class: \PoPAPI\API\PersistedQueries\PersistedFragmentManager
 
