@@ -149,16 +149,19 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * Validate and resolve the fieldDirectives into an array, each item containing:
-     * 1. the directiveResolverInstance
-     * 2. its fieldDirective
-     * 3. the fields it affects
+     * Validate and resolve the directives into an array, each item containing:
      *
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     *   1. the directiveResolverInstance
+     *   2. its directive
+     *   3. the fields it affects
+     *
+     * @param Directive[] $directives
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     * @param array<string,mixed> $variables
      */
     public function resolveDirectivesIntoPipelineData(
-        array $fieldDirectives,
-        array $fieldDirectiveFields,
+        array $directives,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -183,8 +186,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Resolve from directive into their actual object instance.
         $directiveResolverInstanceData = $this->validateAndResolveInstances(
-            $fieldDirectives,
-            $fieldDirectiveFields,
+            $directives,
+            $directiveFields,
             $variables,
             $engineIterationFeedbackStore,
         );
@@ -216,11 +219,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     }
 
     /**
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     * @param array<string,FieldInterface[]> $directiveFields
      */
     protected function validateAndResolveInstances(
-        array $fieldDirectives,
-        array $fieldDirectiveFields,
+        array $directives,
+        array $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
@@ -228,16 +231,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Count how many times each directive is added
         $directiveFieldTrack = [];
         $directiveResolverInstanceFields = [];
-        $fieldDirectivesCount = count($fieldDirectives);
+        $fieldDirectivesCount = count($directives);
         for ($i = 0; $i < $fieldDirectivesCount; $i++) {
-            $enqueuedFieldDirective = $fieldDirectives[$i];
+            $enqueuedFieldDirective = $directives[$i];
             $fieldDirective = $enqueuedFieldDirective;
 
-            $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($fieldDirective, $fieldDirectiveFields[$enqueuedFieldDirective], $variables);
+            $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($fieldDirective, $directiveFields[$enqueuedFieldDirective], $variables);
             $directiveName = $this->getFieldQueryInterpreter()->getFieldDirectiveName($fieldDirective);
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolverInstances === null) {
-                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                foreach ($directiveFields[$fieldDirective] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
@@ -258,7 +261,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveArgs = $this->getFieldQueryInterpreter()->extractStaticDirectiveArguments($fieldDirective);
 
             if ($fieldDirectiveResolverInstances->count() === 0) {
-                foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                foreach ($directiveFields[$fieldDirective] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
                             new FeedbackItemResolution(
@@ -271,7 +274,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                         $this->__('\', \'', 'component-model'),
                                         array_map(
                                             fn (FieldInterface $field) => $field->asFieldOutputQueryString(),
-                                            $fieldDirectiveFields[$fieldDirective]
+                                            $directiveFields[$fieldDirective]
                                         )
                                     ),
                                 ]
@@ -285,7 +288,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 continue;
             }
 
-            foreach ($fieldDirectiveFields[$enqueuedFieldDirective] as $field) {
+            foreach ($directiveFields[$enqueuedFieldDirective] as $field) {
                 $directiveResolverInstance = $fieldDirectiveResolverInstances[$field] ?? null;
                 if ($directiveResolverInstance === null) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
@@ -338,7 +341,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveArgs,
                 ) = $directiveResolverInstance->dissectAndValidateDirectiveForSchema(
                     $this,
-                    $fieldDirectiveFields,
+                    $directiveFields,
                     $variables,
                     $separateEngineIterationFeedbackStore,
                 );
@@ -350,7 +353,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Validate against the directiveResolver
                 if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directiveName, $directiveArgs)) {
                     foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                        foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                        foreach ($directiveFields[$fieldDirective] as $field) {
                             $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                                 new SchemaFeedback(
                                     $errorFeedbackItemResolution,
@@ -366,7 +369,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 // Check for warnings
                 if ($warningFeedbackItemResolution = $directiveResolverInstance->resolveDirectiveWarning($this)) {
-                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                    foreach ($directiveFields[$fieldDirective] as $field) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addWarning(
                             new SchemaFeedback(
                                 $warningFeedbackItemResolution,
@@ -380,7 +383,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 // Check for deprecations
                 if ($deprecationMessage = $directiveResolverInstance->getDirectiveDeprecationMessage($this)) {
-                    foreach ($fieldDirectiveFields[$fieldDirective] as $field) {
+                    foreach ($directiveFields[$fieldDirective] as $field) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addDeprecation(
                             new SchemaFeedback(
                                 new FeedbackItemResolution(

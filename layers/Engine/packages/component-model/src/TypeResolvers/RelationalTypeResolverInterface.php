@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
@@ -63,20 +64,25 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed;
+
     /**
-     * Validate and resolve the fieldDirectives into an array, each item containing:
-     * 1. the directiveResolverInstance
-     * 2. its fieldDirective
-     * 3. the fields it affects
+     * Validate and resolve the directives into an array, each item containing:
      *
-     * @param array<string,FieldInterface[]> $fieldDirectiveFields
+     *   1. the directiveResolverInstance
+     *   2. its directive
+     *   3. the fields it affects
+     *
+     * @param Directive[] $directives
+     * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
+     * @param array<string,mixed> $variables
      */
     public function resolveDirectivesIntoPipelineData(
-        array $fieldDirectives,
-        array $fieldDirectiveFields,
+        array $directives,
+        SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
+
     /**
      * @param FieldInterface[] $fieldDirectiveFields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
