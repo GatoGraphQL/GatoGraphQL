@@ -138,13 +138,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * Because it may be more convenient to add the directive or the class,
      * there are 2 methods.
+     *
+     * @return Directive[]
      */
-    protected function getMandatoryDirectives()
+    protected function getMandatoryDirectives(): array
     {
         return array_map(
-            function ($directiveResolver) {
-                return $this->getFieldQueryInterpreter()->listFieldDirective($directiveResolver->getDirectiveName());
-            },
+            fn (DirectiveResolverInterface $directiveResolver) => new Directive(
+                $directiveResolver->getDirectiveName(),
+                [],
+                LocationHelper::getNonSpecificLocation(),
+            ),
             $this->getDataloadingEngine()->getMandatoryDirectiveResolvers()
         );
     }
