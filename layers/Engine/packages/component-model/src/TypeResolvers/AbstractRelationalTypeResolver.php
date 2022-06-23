@@ -1051,7 +1051,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $pipelineIDFieldSet = [];
             foreach ($directivePipelineData as $pipelineStageData) {
                 $directiveResolverInstance = $pipelineStageData['instance'];
-                $fieldDirective = $pipelineStageData['directive'];
+                $directive = $pipelineStageData['directive'];
                 $directiveFields = $pipelineStageData['fields'];
                 // Only process the direct fields
                 $directiveDirectFieldsToProcess = array_intersect(
@@ -1067,12 +1067,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 /** @var array<string|int,EngineIterationFieldSet> */
                 $directiveIDFieldSet = [];
                 foreach ($directiveDirectFieldsToProcess as $field) {
-                    $ids = $directiveFieldIDs[$fieldDirective][$field];
+                    $ids = $directiveFieldIDs[$directive][$field];
                     foreach ($ids as $id) {
                         $directiveIDFieldSet[$id] ??= new EngineIterationFieldSet();
                         $directiveIDFieldSet[$id]->fields[] = $field;
                         /** @var FieldInterface[]|null */
-                        $fieldConditionalFields = $directiveIDFields[$fieldDirective][$id]->conditionalFields[$field] ?? null;
+                        $fieldConditionalFields = $directiveIDFields[$directive][$id]->conditionalFields[$field] ?? null;
                         if ($fieldConditionalFields === null || $fieldConditionalFields === []) {
                             continue;
                         }
