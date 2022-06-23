@@ -526,14 +526,15 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     public function extractDirectiveArgumentsForSchema(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $fieldDirective,
+        Directive $directive,
         SplObjectStorage $directiveFields,
         array $variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         bool $disableDynamicFields = false
     ): array {
+        $fieldDirective = $directive->asQueryString();
         $validAndResolvedDirective = $fieldDirective;
-        $directiveName = $this->getFieldDirectiveName($fieldDirective);
+        $directiveName = $directive->getName();
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $extractedDirectiveArgs = $directiveArgs = $this->extractDirectiveArguments(
             $directiveResolver,

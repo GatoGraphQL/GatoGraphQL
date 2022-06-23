@@ -49,7 +49,7 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
     public function extractDirectiveArgumentsForSchema(
         DirectiveResolverInterface $directiveResolver,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directive,
+        Directive $directive,
         SplObjectStorage $directiveFields,
         array $variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
