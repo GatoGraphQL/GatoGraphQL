@@ -55,17 +55,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private const MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD = 'expressionsForObjectAndField';
 
     protected string $directive;
-    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedDirectiveArgNameTypeResolversCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedDirectiveArgDescriptionCache = [];
-    /** @var array<string, mixed> */
+    /** @var array<string,mixed> */
     protected array $consolidatedDirectiveArgDefaultValueCache = [];
-    /** @var array<string, int> */
+    /** @var array<string,int> */
     protected array $consolidatedDirectiveArgTypeModifiersCache = [];
-    /** @var array<string, array<string,mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedDirectiveArgExtensionsCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
