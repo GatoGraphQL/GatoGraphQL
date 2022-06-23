@@ -10,7 +10,10 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "directive": "validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])",
+        "fields": [
+          "hi: echo(value: \"Hi there\")<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])>",
+          "validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
+        ],
         "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
       }
     }
