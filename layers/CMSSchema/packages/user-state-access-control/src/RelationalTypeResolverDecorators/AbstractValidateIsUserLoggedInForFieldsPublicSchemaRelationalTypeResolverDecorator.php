@@ -8,6 +8,8 @@ use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelat
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInDirectiveResolver;
 
 abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
@@ -31,9 +33,10 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
         $mandatoryDirectivesForDirectives = [];
         if ($directiveResolvers = $this->getDirectiveResolvers()) {
             // This is the required "validateIsUserLoggedIn" directive
-            $validateIsUserLoggedInDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $validateIsUserLoggedInDirective = new Directive(
                 $this->getValidateIsUserLoggedInDirectiveResolver()->getDirectiveName(),
-                []
+                [],
+                LocationHelper::getNonSpecificLocation()
             );
             // Add the mapping
             foreach ($directiveResolvers as $needValidateIsUserLoggedInDirectiveResolver) {
@@ -62,9 +65,10 @@ abstract class AbstractValidateIsUserLoggedInForFieldsPublicSchemaRelationalType
         $mandatoryDirectivesForFields = [];
         if ($fieldNames = $this->getFieldNames()) {
             // This is the required "validateIsUserLoggedIn" directive
-            $validateIsUserLoggedInDirective = $this->getFieldQueryInterpreter()->getDirective(
+            $validateIsUserLoggedInDirective = new Directive(
                 $this->getValidateIsUserLoggedInDirectiveResolver()->getDirectiveName(),
-                []
+                [],
+                LocationHelper::getNonSpecificLocation()
             );
             // Add the mapping
             foreach ($fieldNames as $fieldName) {

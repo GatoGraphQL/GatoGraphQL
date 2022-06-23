@@ -7,6 +7,8 @@ namespace PoPCMSSchema\UserStateAccessControl\RelationalTypeResolverDecorators;
 use PoP\AccessControl\RelationalTypeResolverDecorators\AbstractPublicSchemaRelationalTypeResolverDecorator;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoPCMSSchema\UserStateAccessControl\DirectiveResolvers\ValidateIsUserLoggedInForDirectivesDirectiveResolver;
 
 abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelationalTypeResolverDecorator extends AbstractPublicSchemaRelationalTypeResolverDecorator
@@ -29,9 +31,10 @@ abstract class AbstractValidateIsUserLoggedInForDirectivesPublicSchemaRelational
     {
         $mandatoryDirectivesForDirectives = [];
         // This is the required "validateIsUserLoggedIn" directive
-        $validateIsUserLoggedInDirective = $this->getFieldQueryInterpreter()->getDirective(
+        $validateIsUserLoggedInDirective = new Directive(
             $this->getValidateIsUserLoggedInForDirectivesDirectiveResolver()->getDirectiveName(),
-            []
+            [],
+            LocationHelper::getNonSpecificLocation()
         );
         // Add the mapping
         foreach ($this->getDirectiveResolvers() as $needValidateIsUserLoggedInDirectiveResolver) {

@@ -6,6 +6,7 @@ namespace PoP\MandatoryDirectivesByConfiguration\RelationalTypeResolverDecorator
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\MandatoryDirectivesByConfiguration\ConfigurationEntries\ConfigurableMandatoryDirectivesForDirectivesTrait;
 use PoP\Root\Instances\InstanceManagerInterface;
 
@@ -15,6 +16,9 @@ trait ConfigurableMandatoryDirectivesForDirectivesRelationalTypeResolverDecorato
 
     abstract protected function getInstanceManager(): InstanceManagerInterface;
 
+    /**
+     * @return Directive[]
+     */
     abstract protected function getMandatoryDirectives(mixed $entryValue = null): array;
 
     public function getPrecedingMandatoryDirectivesForDirectives(RelationalTypeResolverInterface $relationalTypeResolver): array

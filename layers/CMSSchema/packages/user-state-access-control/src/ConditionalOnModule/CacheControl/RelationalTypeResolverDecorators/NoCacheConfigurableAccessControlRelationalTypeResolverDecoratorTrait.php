@@ -8,6 +8,9 @@ use PoP\CacheControl\Helpers\CacheControlHelper;
 
 trait NoCacheConfigurableAccessControlRelationalTypeResolverDecoratorTrait
 {
+    /**
+     * @return Directive[]
+     */
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         return [

@@ -6,6 +6,10 @@ namespace PoPCMSSchema\UserRolesAccessControl\RelationalTypeResolverDecorators;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDecoratorTrait
 {
@@ -13,17 +17,27 @@ trait ValidateDoesLoggedInUserHaveCapabilityPublicSchemaRelationalTypeResolverDe
 
     /**
      * By default, only the admin can see the roles from the users
+     *
+     * @return Directive[]
      */
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
         $capabilities = $entryValue;
         $directiveResolver = $this->getValidateCapabilityDirectiveResolver();
         $directiveName = $directiveResolver->getDirectiveName();
-        $validateDoesLoggedInUserHaveAnyCapabilityDirective = $this->getFieldQueryInterpreter()->getDirective(
+        $validateDoesLoggedInUserHaveAnyCapabilityDirective = new Directive(
             $directiveName,
             [
-                'capabilities' => $capabilities,
-            ]
+                new Argument(
+                    'capabilities',
+                    new InputList(
+                        $capabilities,
+                        LocationHelper::getNonSpecificLocation()
+                    ),
+                    LocationHelper::getNonSpecificLocation()
+                ),
+            ],
+            LocationHelper::getNonSpecificLocation()
         );
         return [
             $validateDoesLoggedInUserHaveAnyCapabilityDirective,

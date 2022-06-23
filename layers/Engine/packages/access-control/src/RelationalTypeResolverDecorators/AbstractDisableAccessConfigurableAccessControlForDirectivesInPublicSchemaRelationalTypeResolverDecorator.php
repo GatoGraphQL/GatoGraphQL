@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\AccessControl\RelationalTypeResolverDecorators;
 
 use PoP\AccessControl\DirectiveResolvers\DisableAccessForDirectivesDirectiveResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator extends AbstractConfigurableAccessControlForDirectivesInPublicSchemaRelationalTypeResolverDecorator
 {
@@ -19,11 +21,15 @@ abstract class AbstractDisableAccessConfigurableAccessControlForDirectivesInPubl
         return $this->disableAccessForDirectivesDirectiveResolver ??= $this->instanceManager->getInstance(DisableAccessForDirectivesDirectiveResolver::class);
     }
 
+    /**
+     * @return Directive[]
+     */
     protected function getMandatoryDirectives(mixed $entryValue = null): array
     {
-        $disableAccessDirective = $this->getFieldQueryInterpreter()->getDirective(
+        $disableAccessDirective = new Directive(
             $this->getDisableAccessForDirectivesDirectiveResolver()->getDirectiveName(),
-            []
+            [],
+            LocationHelper::getNonSpecificLocation()
         );
         return [
             $disableAccessDirective,
