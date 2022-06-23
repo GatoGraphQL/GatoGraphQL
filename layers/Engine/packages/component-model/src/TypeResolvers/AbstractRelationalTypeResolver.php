@@ -1008,8 +1008,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /** @var FieldInterface[] */
             $directiveDirectFields = [];
             foreach ($directives as $directive) {
-                /** @var array<string|int,EngineIterationFieldSet> */
-                $idFieldSet = [];
+                /** @var array<string|int,FieldInterface[]> */
+                $fields = [];
                 foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
                     $directiveDirectFields = array_merge(
                         $directiveDirectFields,
@@ -1026,8 +1026,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $fieldSet->fields,
                         $conditionalFields
                     ));
-                    $idFieldSet = array_merge(
-                        $idFieldSet ?? [],
+                    $fields = array_merge(
+                        $fields ?? [],
                         $idFieldDirectiveIDFields
                     );
                     // Also transpose the array to match field to IDs later on
@@ -1039,7 +1039,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 // @todo Check that the `array_unique` is not needed
                 // $directiveFields[$directive] = array_unique($directiveFields[$directive]);
-                $directiveFields[$directive] = $idFieldSet;
+                $directiveFields[$directive] = $fields;
             }
             $directiveDirectFields = array_unique($directiveDirectFields);
 
