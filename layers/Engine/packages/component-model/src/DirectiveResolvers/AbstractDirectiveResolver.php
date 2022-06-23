@@ -1024,7 +1024,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                                         ErrorFeedbackItemProvider::class,
                                         ErrorFeedbackItemProvider::E11A,
                                         [
-                                            $this->directive,
+                                            $this->directive->asQueryString(),
                                             $e->getMessage(),
                                             $e->getTraceAsString(),
                                         ]
@@ -1045,7 +1045,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E11A,
                             [
-                                $this->directive,
+                                $this->directive->asQueryString(),
                                 $e->getMessage(),
                                 $e->getTraceAsString(),
                             ]
@@ -1054,7 +1054,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E11,
                             [
-                                $this->directive,
+                                $this->directive->asQueryString(),
                                 $e->getMessage(),
                             ]
                         )
@@ -1063,7 +1063,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E12,
                         [
-                            $this->directive,
+                            $this->directive->asQueryString(),
                         ]
                     );
             }
@@ -1362,7 +1362,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E5,
                         [
-                            $this->directive,
+                            $this->directive->asQueryString(),
                         ]
                     ),
                     LocationHelper::getNonSpecificLocation(),
