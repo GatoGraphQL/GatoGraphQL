@@ -120,7 +120,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     return $this->isFieldArgumentValueAFieldOrAnArrayWithAField($fieldArgValue, $variables);
                 }
             );
-            $fieldDirectiveFields = array_unique(array_merge(
+            $directiveFields = array_unique(array_merge(
                 $nestedFields,
                 array_map(
                     // To evaluate on the root fields, we must remove the fieldArgs, to avoid a loop
@@ -147,19 +147,19 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     $fields
                 )
             ));
-            $fieldDirectiveResolvers = $relationalTypeResolver->getDirectiveResolversForDirective(
+            $directiveResolvers = $relationalTypeResolver->getDirectiveResolversForDirective(
                 $this->directive,
-                $fieldDirectiveFields,
+                $directiveFields,
                 $variables
             );
             // Nothing to do, there's some error
-            if ($fieldDirectiveResolvers === null) {
+            if ($directiveResolvers === null) {
                 return;
             }
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
             $directiveResolverInstanceFieldsDataItems = [];
-            foreach ($fieldDirectiveResolvers as $field) {
-                $directiveResolver = $fieldDirectiveResolvers[$field];
+            foreach ($directiveResolvers as $field) {
+                $directiveResolver = $directiveResolvers[$field];
                 $instanceID = get_class($directiveResolver);
                 if (!isset($directiveResolverInstanceFieldsDataItems[$instanceID])) {
                     $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolver;
