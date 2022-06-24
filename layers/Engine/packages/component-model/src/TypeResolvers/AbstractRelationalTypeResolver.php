@@ -262,9 +262,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Count how many times each directive is added
         $directiveFieldTrack = [];
         $directiveResolverInstanceFields = [];
-        $directivesCount = count($directives);
-        for ($i = 0; $i < $directivesCount; $i++) {
-            $directive = $directives[$i];
+        foreach ($directives as $directive) {
             $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
             $directiveName = $directive->getName();
             // If there is no directive with this name, show an error and skip it
