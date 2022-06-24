@@ -618,9 +618,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E5,
                         [
-                            $fieldPosition,
+                            $affectedFieldPosition,
                             $directive->getName(),
-                            'affectAdditionalFields',
+                            $argument->getName(),
                         ]
                     ),
                     $argument->getLocation()
@@ -638,9 +638,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E6,
                         [
-                            $fieldPosition,
+                            $affectedFieldPosition,
                             $directive->getName(),
-                            'affectAdditionalFields',
+                            $argument->getName(),
                         ]
                     ),
                     $argument->getLocation()
