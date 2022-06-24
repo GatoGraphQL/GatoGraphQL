@@ -263,10 +263,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $directiveFieldTrack = [];
         $directiveResolverInstanceFields = [];
         foreach ($directives as $directive) {
-            $directiveResolvers = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
+            $fieldDirectiveResolvers = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
             $directiveName = $directive->getName();
             // If there is no directive with this name, show an error and skip it
-            if ($directiveResolvers === null) {
+            if ($fieldDirectiveResolvers === null) {
                 foreach ($directiveFields[$directive] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -287,7 +287,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             $directiveArgs = $directive->getArguments();
 
-            if ($directiveResolvers->count() === 0) {
+            if ($fieldDirectiveResolvers->count() === 0) {
                 foreach ($directiveFields[$directive] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -319,7 +319,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             foreach ($directiveFields[$directive] as $field) {
-                $directiveResolverInstance = $directiveResolvers[$field] ?? null;
+                $directiveResolverInstance = $fieldDirectiveResolvers[$field] ?? null;
                 if ($directiveResolverInstance === null) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
