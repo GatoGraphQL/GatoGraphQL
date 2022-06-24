@@ -9,7 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 class DirectiveRegistry implements DirectiveRegistryInterface
 {
     /**
-     * @var array<string,DirectiveResolverInterface[]>
+     * @var array<string,DirectiveResolverInterface>
      */
     protected array $directiveResolvers = [];
 
@@ -19,7 +19,7 @@ class DirectiveRegistry implements DirectiveRegistryInterface
     }
 
     /**
-     * @return array<string,DirectiveResolverInterface[]>
+     * @return array<string,DirectiveResolverInterface>
      */
     public function getDirectiveResolvers(): array
     {
