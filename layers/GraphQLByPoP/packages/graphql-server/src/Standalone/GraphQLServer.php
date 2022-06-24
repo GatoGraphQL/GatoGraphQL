@@ -148,6 +148,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         /**
          * Set the operation type and, based on it, if mutations are supported.
+         * If there's an error in `parseGraphQLQuery`, $executableDocument will be null.
          */
         if ($executableDocument !== null) {
             /** @var OperationInterface */
@@ -155,7 +156,7 @@ class GraphQLServer implements GraphQLServerInterface
             $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
         } else {
-            // There was an error, reset the state
+            // Reset to the initial state
             $appStateManager->override('graphql-operation-type', null);
 
             /** @var ComponentModelModuleConfiguration */
