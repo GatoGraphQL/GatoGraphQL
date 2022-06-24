@@ -131,18 +131,20 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
 
         // Convert the GraphQL query to AST
-        if ($passingQuery) {
-            try {
+        try {
+            if ($passingQuery) {
                 $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                     $query,
                     $variables,
                     $operationName
                 );
-            } catch (SyntaxErrorException | InvalidRequestException $e) {
-                // @todo Show GraphQL error in client
-                // ...
-                $appStateManager->override('does-api-query-have-errors', true);
+            } else {
+                $executableDocument->validateAndInitialize();
             }
+        } catch (SyntaxErrorException | InvalidRequestException $e) {
+            // @todo Show GraphQL error in client
+            // ...
+            $appStateManager->override('does-api-query-have-errors', true);
         }
         $appStateManager->override('executable-document-ast', $executableDocument);
 
