@@ -113,6 +113,13 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
             ]
         );
     }
+    /**
+     * Do not allow the "multi-field directives" feature for this directive
+     */
+    public function getAffectAdditionalFieldsUnderPosArgumentName(): ?string
+    {
+        return null;
+    }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {

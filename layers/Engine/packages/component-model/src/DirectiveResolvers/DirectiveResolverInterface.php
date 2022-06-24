@@ -171,6 +171,8 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * must be affected by the directive, by indicating their relative position.
      *
      * Eg: { posts { excerpt content @translate(affectAdditionalFieldsUnderPos: [1]) } }
+     *
+     * @return string Name of the directiveArg, or `null` to disable this feature for the directive
      */
-    public function getAffectAdditionalFieldsUnderPosArgumentName(): string;
+    public function getAffectAdditionalFieldsUnderPosArgumentName(): ?string;
 }

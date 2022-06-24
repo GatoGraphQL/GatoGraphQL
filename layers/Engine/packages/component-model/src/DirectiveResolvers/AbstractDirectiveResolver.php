@@ -667,12 +667,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getDirectiveArgNameTypeResolvers($relationalTypeResolver);
         }
+
         $directiveArgNameTypeResolvers = [];
+
         /** @var GraphQLParserModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
         if ($moduleConfiguration->enableMultiFieldDirectives()) {
             $directiveArgNameTypeResolvers[$this->getAffectAdditionalFieldsUnderPosArgumentName()] = $this->getIntScalarTypeResolver();
         }
+
         return $directiveArgNameTypeResolvers;
     }
 
@@ -681,8 +684,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * must be affected by the directive, by indicating their relative position.
      *
      * Eg: { posts { excerpt content @translate(affectAdditionalFieldsUnderPos: [1]) } }
+     *
+     * @return string Name of the directiveArg, or `null` to disable this feature for the directive
      */
-    public function getAffectAdditionalFieldsUnderPosArgumentName(): string
+    public function getAffectAdditionalFieldsUnderPosArgumentName(): ?string
     {
         return 'affectAdditionalFieldsUnderPos';
     }
