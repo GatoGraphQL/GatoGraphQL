@@ -92,9 +92,12 @@ class ValidateDoesLoggedInUserHaveAnyCapabilityDirectiveResolver extends Abstrac
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [
-            'capabilities' => $this->getStringScalarTypeResolver(),
-        ];
+        return array_merge(
+            parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
+            [
+                'capabilities' => $this->getStringScalarTypeResolver(),
+            ]
+        );
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string

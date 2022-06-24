@@ -29,4 +29,13 @@ trait WithDirectivesTrait
     {
         $this->directives = $directives;
     }
+
+    /**
+     * @internal Method used by the Engine for the Extended Spec's
+     *           "MultiField Directives" feature. Don't call otherwise!
+     */
+    public function addDirective(Directive $directive): void
+    {
+        $this->directives[] = $directive;
+    }
 }

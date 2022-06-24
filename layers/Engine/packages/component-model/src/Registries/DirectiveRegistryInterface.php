@@ -10,7 +10,8 @@ interface DirectiveRegistryInterface
 {
     public function addDirectiveResolver(DirectiveResolverInterface $directiveResolver): void;
     /**
-     * @return DirectiveResolverInterface[]
+     * @return array<string,DirectiveResolverInterface>
      */
     public function getDirectiveResolvers(): array;
+    public function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface;
 }

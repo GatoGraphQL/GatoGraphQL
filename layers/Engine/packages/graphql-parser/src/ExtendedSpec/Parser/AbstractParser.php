@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -23,6 +24,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
@@ -31,6 +33,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
+    private ?DirectiveRegistryInterface $directiveRegistry = null;
 
     final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
     {
@@ -41,21 +44,40 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryAugmenterServiceInterface::class);
     }
 
+    final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    {
+        $this->directiveRegistry = $directiveRegistry;
+    }
+    final protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    {
+        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
+    }
+
     /**
-     * Replace `Directive` with `MetaDirective`, and nest the affected
-     * directives inside.
-     *
      * @return Directive[]
      */
     protected function parseDirectiveList(): array
     {
         $directives = parent::parseDirectiveList();
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableComposableDirectives()) {
-            return $directives;
+        if ($moduleConfiguration->enableComposableDirectives()) {
+            $directives = $this->addMetaDirectiveList($directives);
         }
 
+        return $directives;
+    }
+
+    /**
+     * Replace `Directive` with `MetaDirective`, and nest the affected
+     * directives inside.
+     *
+     * @param Directive[] $directives
+     * @return Directive[]
+     */
+    protected function addMetaDirectiveList(array $directives): array
+    {
         /**
          * For each directive, indicate which meta-directive is composing it
          * by indicating their relative position (as a negative int)
@@ -292,6 +314,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $this->replaceResolvedFieldVariableReferences($document);
         }
 
+        if ($moduleConfiguration->enableMultiFieldDirectives()) {
+            $this->spreadMultiFieldDirectives($document);
+        }
+
         return $document;
     }
 
@@ -436,6 +462,203 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $dynamicVariableReference->getLocation()
         );
         $argument->setValue($resolvedFieldVariableReference);
+    }
+
+    /**
+     * Iterate the elements in the Document AST, and whenever a Directive
+     * is to be applied to multiple fields, add it under the corresponding Fields
+     */
+    protected function spreadMultiFieldDirectives(
+        Document $document,
+    ): void {
+        foreach ($document->getOperations() as $operation) {
+            $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                $operation->getFieldsOrFragmentBonds(),
+                $document->getFragments(),
+            );
+        }
+        foreach ($document->getFragments() as $fragment) {
+            $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                $fragment->getFieldsOrFragmentBonds(),
+                $document->getFragments(),
+            );
+        }
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Fragment[] $fragments
+     */
+    protected function spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+        array $fieldsOrFragmentBonds,
+        array $fragments,
+    ): void {
+        $fieldsOrFragmentBondsCount = count($fieldsOrFragmentBonds);
+        for ($i = 0; $i < $fieldsOrFragmentBondsCount; $i++) {
+            $fieldOrFragmentBond = $fieldsOrFragmentBonds[$i];
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                    $inlineFragment->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            foreach ($field->getDirectives() as $directive) {
+                $this->maybeSpreadDirectiveToFields(
+                    $directive,
+                    $i,
+                    $fieldsOrFragmentBonds,
+                );
+                continue;
+            }
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                    $relationalField->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
+            }
+        }
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     */
+    protected function maybeSpreadDirectiveToFields(
+        Directive $directive,
+        int $originFieldPosition,
+        array $fieldsOrFragmentBonds,
+    ): void {
+        // Check if it is a MultiField Directive
+        $argument = $this->getAffectAdditionalFieldsUnderPosArgument($directive);
+        if ($argument === null) {
+            return;
+        }
+
+        if (empty($argument->getValue()->getValue())) {
+            return;
+        }
+
+        $this->spreadDirectiveToFields(
+            $directive,
+            $argument,
+            $originFieldPosition,
+            $fieldsOrFragmentBonds,
+        );
+    }
+
+    protected function getAffectAdditionalFieldsUnderPosArgument(
+        Directive $directive,
+    ): ?Argument {
+        $directiveResolver = $this->getDirectiveResolver($directive->getName());
+        if ($directiveResolver === null) {
+            return null;
+        }
+        $affectAdditionalFieldsUnderPosArgName = $directiveResolver->getAffectAdditionalFieldsUnderPosArgumentName();
+        if ($affectAdditionalFieldsUnderPosArgName === null) {
+            // Disabled for the directive
+            return null;
+        }
+        foreach ($directive->getArguments() as $argument) {
+            if ($argument->getName() !== $affectAdditionalFieldsUnderPosArgName) {
+                continue;
+            }
+            return $argument;
+        }
+        return null;
+    }
+
+    protected function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
+    {
+        return $this->getDirectiveRegistry()->getDirectiveResolver($directiveName);
+    }
+
+    /**
+     * Append the directive to the fields on the defined
+     * relative positions to its left.
+     *
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     */
+    protected function spreadDirectiveToFields(
+        Directive $directive,
+        Argument $argument,
+        int $originFieldPosition,
+        array $fieldsOrFragmentBonds,
+    ): void {
+        /**
+         * List of integers, as relative positions to the affected fields
+         * (to the left of the directive)
+         */
+        $affectedFieldPositions = $argument->getValue()->getValue();
+        if (!is_array($affectedFieldPositions)) {
+            $affectedFieldPositions = [$affectedFieldPositions];
+        }
+        foreach ($affectedFieldPositions as $affectedFieldPosition) {
+            if (!is_int($affectedFieldPosition) || ((int)$affectedFieldPosition <= 0)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E3,
+                        [
+                            $argument->getName(),
+                            $directive->getName(),
+                            $affectedFieldPosition === null ? 'null' : $affectedFieldPosition,
+                        ]
+                    ),
+                    $argument->getLocation()
+                );
+            }
+
+            $fieldPosition = $originFieldPosition - $affectedFieldPosition;
+            if ($fieldPosition < 0) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E5,
+                        [
+                            $affectedFieldPosition,
+                            $directive->getName(),
+                            $argument->getName(),
+                        ]
+                    ),
+                    $argument->getLocation()
+                );
+            }
+
+            /**
+             * Get the element at that position, and validate
+             * it is indeed a Field (eg: not a FragmentReference)
+             */
+            $field = $fieldsOrFragmentBonds[$fieldPosition];
+            if (!($field instanceof FieldInterface)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E6,
+                        [
+                            $affectedFieldPosition,
+                            $directive->getName(),
+                            $argument->getName(),
+                        ]
+                    ),
+                    $argument->getLocation()
+                );
+            }
+            /** @var FieldInterface $field */
+
+            /**
+             * Everything is valid, append the Directive to the field
+             */
+            $field->addDirective($directive);
+        }
     }
 
     /**

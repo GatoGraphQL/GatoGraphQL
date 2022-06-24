@@ -22,6 +22,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function enableMultiFieldDirectives(): bool
+    {
+        $envVariable = Environment::ENABLE_MULTIFIELD_DIRECTIVES;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableComposableDirectives(): bool
     {
         $envVariable = Environment::ENABLE_COMPOSABLE_DIRECTIVES;

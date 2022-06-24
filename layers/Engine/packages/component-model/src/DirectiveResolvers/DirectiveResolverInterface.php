@@ -179,4 +179,13 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     ): array;
     public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;
+    /**
+     * Name for the directive arg to indicate which additional fields
+     * must be affected by the directive, by indicating their relative position.
+     *
+     * Eg: { posts { excerpt content @translate(affectAdditionalFieldsUnderPos: [1]) } }
+     *
+     * @return string Name of the directiveArg, or `null` to disable this feature for the directive
+     */
+    public function getAffectAdditionalFieldsUnderPosArgumentName(): ?string;
 }

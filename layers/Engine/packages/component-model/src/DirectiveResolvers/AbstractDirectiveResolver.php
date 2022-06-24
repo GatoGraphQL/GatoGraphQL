@@ -31,7 +31,10 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -68,12 +71,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /** @var array<string,array<string,mixed>> */
     protected array $schemaDirectiveArgsCache = [];
 
-    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?SemverHelperServiceInterface $semverHelperService = null;
-    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
-    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
-    private ?VersioningServiceInterface $versioningService = null;
-
     /**
      * @var array<string, mixed>
      */
@@ -88,36 +85,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected array $schemaDefinitionForDirectiveCache = [];
 
-    /**
-     * The directiveResolvers are instantiated through the service container,
-     * but NOT for the directivePipeline, since there each directiveResolver
-     * will require the actual $directive to process.
-     *
-     * By default, the directive is directly the directive name.
-     * This is what is used when instantiating the directive through the container.
-     */
-    public function __construct()
-    {
-        $this->directive = new Directive(
-            $this->getDirectiveName(),
-            [],
-            LocationHelper::getNonSpecificLocation()
-        );
-    }
-
-    /**
-     * Invoked when creating the non-shared directive instance
-     * to resolve a field in the pipeline
-     */
-    final public function setDirective(Directive $directive): void
-    {
-        $this->directive = $directive;
-    }
-
-    public function getDirective(): Directive
-    {
-        return $this->directive;
-    }
+    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?SemverHelperServiceInterface $semverHelperService = null;
+    private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
+    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
+    private ?VersioningServiceInterface $versioningService = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -158,6 +131,45 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getVersioningService(): VersioningServiceInterface
     {
         return $this->versioningService ??= $this->instanceManager->getInstance(VersioningServiceInterface::class);
+    }
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+
+    /**
+     * The directiveResolvers are instantiated through the service container,
+     * but NOT for the directivePipeline, since there each directiveResolver
+     * will require the actual $directive to process.
+     *
+     * By default, the directive is directly the directive name.
+     * This is what is used when instantiating the directive through the container.
+     */
+    public function __construct()
+    {
+        $this->directive = new Directive(
+            $this->getDirectiveName(),
+            [],
+            LocationHelper::getNonSpecificLocation()
+        );
+    }
+
+    /**
+     * Invoked when creating the non-shared directive instance
+     * to resolve a field in the pipeline
+     */
+    final public function setDirective(Directive $directive): void
+    {
+        $this->directive = $directive;
+    }
+
+    public function getDirective(): Directive
+    {
+        return $this->directive;
     }
 
     final public function getClassesToAttachTo(): array
@@ -672,7 +684,32 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getDirectiveArgNameTypeResolvers($relationalTypeResolver);
         }
-        return [];
+
+        $directiveArgNameTypeResolvers = [];
+
+        /** @var GraphQLParserModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+        if ($moduleConfiguration->enableMultiFieldDirectives()) {
+            $affectAdditionalFieldsUnderPosArgumentName = $this->getAffectAdditionalFieldsUnderPosArgumentName();
+            if ($affectAdditionalFieldsUnderPosArgumentName !== null) {
+                $directiveArgNameTypeResolvers[$affectAdditionalFieldsUnderPosArgumentName] = $this->getIntScalarTypeResolver();
+            }
+        }
+
+        return $directiveArgNameTypeResolvers;
+    }
+
+    /**
+     * Name for the directive arg to indicate which additional fields
+     * must be affected by the directive, by indicating their relative position.
+     *
+     * Eg: { posts { excerpt content @translate(affectAdditionalFieldsUnderPos: [1]) } }
+     *
+     * @return string Name of the directiveArg, or `null` to disable this feature for the directive
+     */
+    public function getAffectAdditionalFieldsUnderPosArgumentName(): ?string
+    {
+        return 'affectAdditionalFieldsUnderPos';
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
@@ -681,11 +718,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getDirectiveArgDescription($relationalTypeResolver, $directiveArgName);
         }
-        // Version constraint (possibly enabled)
-        if ($directiveArgName === SchemaDefinition::VERSION_CONSTRAINT) {
-            return $this->getVersionConstraintFieldOrDirectiveArgDescription();
-        }
-        return null;
+        return match ($directiveArgName) {
+            // Version constraint (possibly enabled)
+            SchemaDefinition::VERSION_CONSTRAINT => $this->getVersionConstraintFieldOrDirectiveArgDescription(),
+            // Multi-Field Directives (possibly enabled)
+            $this->getAffectAdditionalFieldsUnderPosArgumentName() => $this->__('Positions of the additional fields to be affected by the directive, relative from the directive (as an array of positive integers)', 'graphql-server'),
+            default => null,
+        };
     }
 
     public function getDirectiveArgDefaultValue(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): mixed
@@ -694,7 +733,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName);
         }
-        return null;
+        return match ($directiveArgName) {
+            $this->getAffectAdditionalFieldsUnderPosArgumentName() => [],
+            default => null,
+        };
     }
 
     public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
@@ -703,7 +745,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($schemaDefinitionResolver !== $this) {
             return $schemaDefinitionResolver->getDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName);
         }
-        return SchemaTypeModifiers::NONE;
+        return match ($directiveArgName) {
+            $this->getAffectAdditionalFieldsUnderPosArgumentName() => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => SchemaTypeModifiers::NONE,
+        };
     }
 
     /**
