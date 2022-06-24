@@ -258,11 +258,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
-        /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[] */
+        /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
         $instances = new SplObjectStorage();
         // Count how many times each directive is added
         $directiveFieldTrack = [];
-        /** @var SplObjectStorage<DirectiveResolverInstance,FieldInterface[]> */
+        /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
         $directiveResolverInstanceFields = new SplObjectStorage();
         foreach ($directives as $directive) {
             $fieldDirectiveResolvers = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
