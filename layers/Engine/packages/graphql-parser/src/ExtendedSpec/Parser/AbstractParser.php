@@ -522,7 +522,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     protected function maybeSpreadDirectiveToFields(
         Directive $directive,
-        int $currentFieldPosition,
+        int $originFieldPosition,
         array $fieldsOrFragmentBonds,
     ): void {
         // Check if it is a MultiField Directive
@@ -534,15 +534,33 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return;
         }
 
+        $this->spreadDirectiveToFields(
+            $directive,
+            $argument,
+            $originFieldPosition,
+            $fieldsOrFragmentBonds,
+        );
+    }
+
+    /**
+     * Append the directive to the fields on the defined
+     * relative positions to its left.
+     *
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     */
+    protected function spreadDirectiveToFields(
+        Directive $directive,
+        Argument $argument,
+        int $originFieldPosition,
+        array $fieldsOrFragmentBonds,
+    ): void {
         /**
-         * The value is a list of relative positions.
-         * Append the directive to the fields on those
-         * relative positions to the left.
+         * List of integers, as relative positions to the affected fields
+         * (to the left of the directive)
          */
-        /** @var array<int<1,max>> */
-        $argumentValueItems = $argument->getValue()->getValue();
-        foreach ($argumentValueItems as $argumentValueItem) {
-            if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
+        $fieldPositions = $argument->getValue()->getValue();
+        foreach ($fieldPositions as $fieldPosition) {
+            if (!is_int($fieldPosition) || ((int)$fieldPosition <= 0)) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
@@ -550,21 +568,21 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         [
                             $argument->getName(),
                             $directive->getName(),
-                            $argumentValueItem === null ? 'null' : $argumentValueItem,
+                            $fieldPosition === null ? 'null' : $fieldPosition,
                         ]
                     ),
                     $argument->getLocation()
                 );
             }
 
-            $affectedFieldPosition = $currentFieldPosition - $argumentValueItem;
+            $affectedFieldPosition = $originFieldPosition - $fieldPosition;
             if ($affectedFieldPosition < 0) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E5,
                         [
-                            $argumentValueItem,
+                            $fieldPosition,
                             $directive->getName(),
                             'affectAdditionalFields',
                         ]
@@ -572,6 +590,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                     $argument->getLocation()
                 );
             }
+            /** @var array<int<1,max>> $fieldPosition */
 
             /**
              * Get the element at that position, and validate
@@ -584,7 +603,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                         GraphQLExtendedSpecErrorFeedbackItemProvider::E6,
                         [
-                            $argumentValueItem,
+                            $fieldPosition,
                             $directive->getName(),
                             'affectAdditionalFields',
                         ]
