@@ -42,9 +42,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     }
 
     /**
-     * Replace `Directive` with `MetaDirective`, and nest the affected
-     * directives inside.
-     *
      * @return Directive[]
      */
     protected function parseDirectiveList(): array
