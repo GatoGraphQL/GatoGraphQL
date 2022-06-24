@@ -157,24 +157,24 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                 return;
             }
             // Consolidate the same directiveResolverInstances for different fields, as to execute them only once
-            $directiveResolverInstanceFieldsDataItems = [];
+            /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
+            $directiveResolverInstanceFieldsDataItems = new SplObjectStorage();
             foreach ($directiveResolvers as $field) {
+                /** @var FieldInterface $field */
                 $directiveResolver = $directiveResolvers[$field];
-                $instanceID = get_class($directiveResolver);
-                if (!isset($directiveResolverInstanceFieldsDataItems[$instanceID])) {
-                    $directiveResolverInstanceFieldsDataItems[$instanceID]['instance'] = $directiveResolver;
-                }
-                $directiveResolverInstanceFieldsDataItems[$instanceID]['fields'][] = $field;
+                /** @var DirectiveResolverInterface $directiveResolver */
+                $directiveResolverInstanceFields = $directiveResolverInstanceFieldsDataItems[$directiveResolver] ?? [];
+                $directiveResolverInstanceFields[] = $field;
+                $directiveResolverInstanceFieldsDataItems[$directiveResolver] = $directiveResolverInstanceFields;
             }
             // Iterate through all the directives, and simply resolve each
-            foreach ($directiveResolverInstanceFieldsDataItems as $instanceID => $directiveResolverInstanceFieldsDataItem) {
-                /** @var DirectiveResolverInterface */
-                $directiveResolver = $directiveResolverInstanceFieldsDataItem['instance'];
+            /** @var DirectiveResolverInterface $directiveResolver */
+            foreach ($directiveResolverInstanceFieldsDataItems as $directiveResolver) {
                 /** @var FieldInterface[] */
-                $directiveResolverFields = $directiveResolverInstanceFieldsDataItem['fields'];
+                $directiveResolverFields = $directiveResolverInstanceFieldsDataItems[$directiveResolver];
 
                 // Regenerate the $idFieldSet for each directive
-                /** @var array<string|int,EngineIterationFieldSet> */
+                /** @var array<string|int,EngineIterationFieldSet> $directiveResolverIDFieldSet */
                 $directiveResolverIDFieldSet = [];
                 foreach (array_keys($idFieldSet) as $id) {
                     $directiveResolverIDFieldSet[$id] = new EngineIterationFieldSet($directiveResolverFields);
