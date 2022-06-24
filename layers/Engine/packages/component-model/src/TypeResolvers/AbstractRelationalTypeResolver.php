@@ -32,6 +32,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     public final const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnObject';
 
+    protected final const ARRAY_KEY_DIRECTIVE_RESOLVER = 'directiveResolver';
+    protected final const ARRAY_KEY_DIRECTIVE = 'directive';
+    protected final const ARRAY_KEY_FIELDS = 'fields';
+
     /**
      * @var array<string,Directive>
      */
@@ -220,11 +224,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($directiveResolverInstanceData as $instanceID => $directiveResolverInstanceData) {
             // Add the directive in its required position in the pipeline, and retrieve what fields it will process
             /** @var DirectiveResolverInterface */
-            $directiveResolverInstance = $directiveResolverInstanceData['directiveResolver'];
+            $directiveResolverInstance = $directiveResolverInstanceData[self::ARRAY_KEY_DIRECTIVE_RESOLVER];
             $pipelinePosition = $directiveResolverInstance->getPipelinePosition();
             $directiveInstancesByPosition[$pipelinePosition][] = $directiveResolverInstance;
-            $fieldDirectivesByPosition[$pipelinePosition][] = $directiveResolverInstanceData['directive'];
-            $directiveFieldsByPosition[$pipelinePosition][] = $directiveResolverInstanceData['fields'];
+            $fieldDirectivesByPosition[$pipelinePosition][] = $directiveResolverInstanceData[self::ARRAY_KEY_DIRECTIVE];
+            $directiveFieldsByPosition[$pipelinePosition][] = $directiveResolverInstanceData[self::ARRAY_KEY_FIELDS];
         }
 
         // Once we have them ordered, we can simply discard the positions, keep only the values
@@ -233,9 +237,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($directiveInstancesByPosition as $position => $directiveResolverInstances) {
             for ($i = 0; $i < count($directiveResolverInstances); $i++) {
                 $pipelineData[] = [
-                    'directiveResolver' => $directiveResolverInstances[$i],
-                    'directive' => $fieldDirectivesByPosition[$position][$i],
-                    'fields' => $directiveFieldsByPosition[$position][$i],
+                    self::ARRAY_KEY_DIRECTIVE_RESOLVER => $directiveResolverInstances[$i],
+                    self::ARRAY_KEY_DIRECTIVE => $fieldDirectivesByPosition[$position][$i],
+                    self::ARRAY_KEY_FIELDS => $directiveFieldsByPosition[$position][$i],
                 ];
             }
         }
@@ -342,10 +346,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // as to do the validation only once on each of them
                 $instanceID = get_class($directiveResolverInstance) . spl_object_hash($directive);
                 if (!isset($directiveResolverInstanceFields[$instanceID])) {
-                    $directiveResolverInstanceFields[$instanceID]['directive'] = $directive;
-                    $directiveResolverInstanceFields[$instanceID]['directiveResolver'] = $directiveResolverInstance;
+                    $directiveResolverInstanceFields[$instanceID][self::ARRAY_KEY_DIRECTIVE] = $directive;
+                    $directiveResolverInstanceFields[$instanceID][self::ARRAY_KEY_DIRECTIVE_RESOLVER] = $directiveResolverInstance;
                 }
-                $directiveResolverInstanceFields[$instanceID]['fields'][] = $field;
+                $directiveResolverInstanceFields[$instanceID][self::ARRAY_KEY_FIELDS][] = $field;
             }
         }
 
@@ -353,11 +357,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // $processedDirectiveNames = [];
         foreach ($directiveResolverInstanceFields as $instanceID => $instanceData) {
             /** @var Directive */
-            $directive = $instanceData['directive'];
+            $directive = $instanceData[self::ARRAY_KEY_DIRECTIVE];
             /** @var DirectiveResolverInterface */
-            $directiveResolverInstance = $instanceData['directiveResolver'];
+            $directiveResolverInstance = $instanceData[self::ARRAY_KEY_DIRECTIVE_RESOLVER];
             /** @var FieldInterface[] */
-            $directiveResolverFields = $instanceData['fields'];
+            $directiveResolverFields = $instanceData[self::ARRAY_KEY_FIELDS];
             $directiveName = $directive->getName();
 
             // Validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
@@ -478,9 +482,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // Directive is valid. Add it under its instanceID, which enables to add fields under the same directiveResolverInstance
-            $instances[$instanceID]['directiveResolver'] = $directiveResolverInstance;
-            $instances[$instanceID]['directive'] = $directive;
-            $instances[$instanceID]['fields'] = $directiveResolverFields;
+            $instances[$instanceID][self::ARRAY_KEY_DIRECTIVE_RESOLVER] = $directiveResolverInstance;
+            $instances[$instanceID][self::ARRAY_KEY_DIRECTIVE] = $directive;
+            $instances[$instanceID][self::ARRAY_KEY_FIELDS] = $directiveResolverFields;
         }
         return $instances;
     }
@@ -1099,11 +1103,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $pipelineIDFieldSet = [];
             foreach ($directivePipelineData as $pipelineStageData) {
                 /** @var DirectiveResolverInterface */
-                $directiveResolverInstance = $pipelineStageData['directiveResolver'];
+                $directiveResolverInstance = $pipelineStageData[self::ARRAY_KEY_DIRECTIVE_RESOLVER];
                 /** @var Directive */
-                $directive = $pipelineStageData['directive'];
+                $directive = $pipelineStageData[self::ARRAY_KEY_DIRECTIVE];
                 /** @var FieldInterface[] */
-                $directiveFields = $pipelineStageData['fields'];
+                $directiveFields = $pipelineStageData[self::ARRAY_KEY_FIELDS];
                 // Only process the direct fields
                 $directiveDirectFieldsToProcess = array_intersect(
                     $directiveFields,
