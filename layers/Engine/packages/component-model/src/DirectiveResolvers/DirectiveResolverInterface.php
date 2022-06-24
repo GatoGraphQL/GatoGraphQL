@@ -173,8 +173,4 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * Eg: { posts { excerpt content @translate(affectAdditionalFieldsUnderPos: [1]) } }
      */
     public function getAffectAdditionalFieldsUnderPosArgumentName(): string;
-    /**
-     * @return int[]
-     */
-    public function getAffectAdditionalFieldsUnderPosArgumentDefaultValue(): array;
 }

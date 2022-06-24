@@ -709,17 +709,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return $schemaDefinitionResolver->getDirectiveArgDefaultValue($relationalTypeResolver, $directiveArgName);
         }
         return match ($directiveArgName) {
-            $this->getAffectAdditionalFieldsUnderPosArgumentName() => $this->getAffectAdditionalFieldsUnderPosArgumentDefaultValue(),
+            $this->getAffectAdditionalFieldsUnderPosArgumentName() => [],
             default => null,
         };
-    }
-
-    /**
-     * @return int[]
-     */
-    public function getAffectAdditionalFieldsUnderPosArgumentDefaultValue(): array
-    {
-        return [];
     }
 
     public function getDirectiveArgTypeModifiers(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): int
