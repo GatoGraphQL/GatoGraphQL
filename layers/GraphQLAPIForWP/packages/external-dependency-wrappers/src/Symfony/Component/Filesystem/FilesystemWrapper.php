@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem;
 
+use Exception;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\StandaloneServiceTrait;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -35,7 +35,7 @@ class FilesystemWrapper
     {
         try {
             $this->fileSystem->remove($files);
-        } catch (IOExceptionInterface $e) {
+        } catch (Exception $e) {
             if (is_string($files)) {
                 $fileItems = $files;
             } else {
