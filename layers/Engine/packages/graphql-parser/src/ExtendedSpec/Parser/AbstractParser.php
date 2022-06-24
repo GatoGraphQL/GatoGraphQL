@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ModuleConfiguration;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Registries\DirectiveRegistryInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -23,6 +24,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
@@ -31,6 +33,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
+    private ?DirectiveRegistryInterface $directiveRegistry = null;
 
     final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
     {
@@ -39,6 +42,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     final protected function getQueryAugmenterService(): QueryAugmenterServiceInterface
     {
         return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryAugmenterServiceInterface::class);
+    }
+
+    final public function setDirectiveRegistry(DirectiveRegistryInterface $directiveRegistry): void
+    {
+        $this->directiveRegistry = $directiveRegistry;
+    }
+    final protected function getDirectiveRegistry(): DirectiveRegistryInterface
+    {
+        return $this->directiveRegistry ??= $this->instanceManager->getInstance(DirectiveRegistryInterface::class);
     }
 
     /**
@@ -526,10 +538,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         array $fieldsOrFragmentBonds,
     ): void {
         // Check if it is a MultiField Directive
-        $argument = $this->findArgumentWithName(
-            $directive->getArguments(),
-            'affectAdditionalFields',
-        );
+        $argument = $this->getAffectAdditionalFieldsUnderPosArgument($directive);
         if ($argument === null) {
             return;
         }
@@ -540,6 +549,26 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $originFieldPosition,
             $fieldsOrFragmentBonds,
         );
+    }
+
+    protected function getAffectAdditionalFieldsUnderPosArgument(
+        Directive $directive,
+    ): ?Argument {
+        /** @var DirectiveResolverInterface */
+        $directiveResolver = $this->getDirectiveResolver($directive->getName());
+        $affectAdditionalFieldsUnderPosArgName = $directiveResolver->getAffectAdditionalFieldsUnderPosArgumentName();
+        foreach ($directive->getArguments() as $argument) {
+            if ($argument->getName() !== $affectAdditionalFieldsUnderPosArgName) {
+                continue;
+            }
+            return $argument;
+        }
+        return null;
+    }
+
+    protected function getDirectiveResolver(string $directiveName): ?DirectiveResolverInterface
+    {
+        return $this->getDirectiveRegistry()->getDirectiveResolver($directiveName);
     }
 
     /**
@@ -617,19 +646,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
              */
             $field->addDirective($directive);
         }
-    }
-
-    /**
-     * @param Argument[] $arguments
-     */
-    protected function findArgumentWithName(array $arguments, string $name): ?Argument
-    {
-        foreach ($arguments as $argument) {
-            if ($argument->getName() === $name) {
-                return $argument;
-            }
-        }
-        return null;
     }
 
     /**
