@@ -264,7 +264,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $directiveResolverInstanceFields = [];
         foreach ($directives as $directive) {
             $fieldDirectiveResolvers = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
-            $directiveName = $directive->getName();
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolvers === null) {
                 foreach ($directiveFields[$directive] as $field) {
@@ -274,7 +273,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 ErrorFeedbackItemProvider::class,
                                 ErrorFeedbackItemProvider::E20,
                                 [
-                                    $directiveName,
+                                    $directive->getName(),
                                 ]
                             ),
                             LocationHelper::getNonSpecificLocation(),
@@ -295,7 +294,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 ErrorFeedbackItemProvider::class,
                                 ErrorFeedbackItemProvider::E21,
                                 [
-                                    $directiveName,
+                                    $directive->getName(),
                                     json_encode(array_map(
                                         fn (Argument $argument) => $argument->asQueryString(),
                                         $directiveArgs
@@ -327,7 +326,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                                 ErrorFeedbackItemProvider::class,
                                 ErrorFeedbackItemProvider::E22,
                                 [
-                                    $directiveName,
+                                    $directive->getName(),
                                     json_encode($directiveArgs),
                                     $field->asFieldOutputQueryString(),
                                 ]
