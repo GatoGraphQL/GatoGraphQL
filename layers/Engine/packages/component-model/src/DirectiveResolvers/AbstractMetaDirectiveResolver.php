@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -18,10 +19,8 @@ use SplObjectStorage;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
 {
-    /**
-     * @var array[]
-     */
-    protected array $nestedDirectivePipelineData = [];
+    /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
+    protected SplObjectStorage $nestedDirectivePipelineData;
 
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
@@ -32,6 +31,12 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->nestedDirectivePipelineData = new SplObjectStorage();
     }
 
     public function isServiceEnabled(): bool
