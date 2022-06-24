@@ -106,9 +106,12 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [
-            $this->getAffectDirectivesUnderPosArgumentName() => $this->getIntScalarTypeResolver(),
-        ];
+        return array_merge(
+            parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
+            [
+                $this->getAffectDirectivesUnderPosArgumentName() => $this->getIntScalarTypeResolver(),
+            ]
+        );
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string

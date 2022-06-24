@@ -71,9 +71,12 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     }
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [
-            'if' => $this->getBooleanScalarTypeResolver(),
-        ];
+        return array_merge(
+            parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
+            [
+                'if' => $this->getBooleanScalarTypeResolver(),
+            ]
+        );
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string

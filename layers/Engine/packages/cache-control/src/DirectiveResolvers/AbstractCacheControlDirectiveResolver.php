@@ -71,9 +71,12 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     }
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        return [
-            'maxAge' => $this->getIntScalarTypeResolver(),
-        ];
+        return array_merge(
+            parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
+            [
+                'maxAge' => $this->getIntScalarTypeResolver(),
+            ]
+        );
     }
 
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
