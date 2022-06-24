@@ -8,7 +8,6 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
@@ -21,17 +20,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
 {
     /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
     protected SplObjectStorage $nestedDirectivePipelineData;
-
-    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
-    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
-    {
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
-    }
 
     public function __construct()
     {
