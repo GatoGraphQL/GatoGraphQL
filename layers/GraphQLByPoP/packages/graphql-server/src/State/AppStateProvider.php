@@ -48,7 +48,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['graphql-introspection-enabled'] = $moduleConfiguration->enableGraphQLIntrospection() ?? true;
     }
 
-    public function compute(array &$state): void
+    public function execute(array &$state): void
     {
         if (!($state['scheme'] === APISchemes::API && $state['datastructure'] === $this->getGraphQLDataStructureFormatter()->getName())) {
             return;
