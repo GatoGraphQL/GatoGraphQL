@@ -11,7 +11,6 @@ use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
@@ -19,7 +18,6 @@ use SplObjectStorage;
 abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirectiveResolver implements CacheControlDirectiveResolverInterface
 {
     private ?CacheControlEngineInterface $cacheControlEngine = null;
-    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     final public function setCacheControlEngine(CacheControlEngineInterface $cacheControlEngine): void
     {
@@ -28,14 +26,6 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     final protected function getCacheControlEngine(): CacheControlEngineInterface
     {
         return $this->cacheControlEngine ??= $this->instanceManager->getInstance(CacheControlEngineInterface::class);
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
-    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
-    {
-        return $this->intScalarTypeResolver ??= $this->instanceManager->getInstance(IntScalarTypeResolver::class);
     }
 
     public function getDirectiveName(): string
