@@ -558,9 +558,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * List of integers, as relative positions to the affected fields
          * (to the left of the directive)
          */
-        $fieldPositions = $argument->getValue()->getValue();
-        foreach ($fieldPositions as $fieldPosition) {
-            if (!is_int($fieldPosition) || ((int)$fieldPosition <= 0)) {
+        $affectedFieldPositions = $argument->getValue()->getValue();
+        foreach ($affectedFieldPositions as $affectedFieldPosition) {
+            if (!is_int($affectedFieldPosition) || ((int)$affectedFieldPosition <= 0)) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
@@ -568,15 +568,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         [
                             $argument->getName(),
                             $directive->getName(),
-                            $fieldPosition === null ? 'null' : $fieldPosition,
+                            $affectedFieldPosition === null ? 'null' : $affectedFieldPosition,
                         ]
                     ),
                     $argument->getLocation()
                 );
             }
 
-            $affectedFieldPosition = $originFieldPosition - $fieldPosition;
-            if ($affectedFieldPosition < 0) {
+            $fieldPosition = $originFieldPosition - $affectedFieldPosition;
+            if ($fieldPosition < 0) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
@@ -590,14 +590,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                     $argument->getLocation()
                 );
             }
-            /** @var array<int<1,max>> $fieldPosition */
 
             /**
              * Get the element at that position, and validate
              * it is indeed a Field (eg: not a FragmentReference)
              */
-            $affectedField = $fieldsOrFragmentBonds[$affectedFieldPosition];
-            if (!($affectedField instanceof FieldInterface)) {
+            $field = $fieldsOrFragmentBonds[$fieldPosition];
+            if (!($field instanceof FieldInterface)) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLExtendedSpecErrorFeedbackItemProvider::class,
@@ -611,12 +610,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                     $argument->getLocation()
                 );
             }
-            /** @var FieldInterface $affectedFieldPosition */
+            /** @var FieldInterface $field */
 
             /**
              * Everything is valid, append the Directive to the field
              */
-            $affectedField->addDirective($directive);
+            $field->addDirective($directive);
         }
     }
 
