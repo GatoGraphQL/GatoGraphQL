@@ -264,7 +264,8 @@ trait AliasSchemaDirectiveResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased DirectiveResolver
      */
-    public function isDirectiveEnabled(): bool {
+    public function isDirectiveEnabled(): bool
+    {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->isDirectiveEnabled();
     }
