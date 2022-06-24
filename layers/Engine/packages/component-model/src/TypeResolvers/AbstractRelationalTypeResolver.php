@@ -32,9 +32,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     public final const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnObject';
 
-    public final const ARRAY_KEY_DIRECTIVE_RESOLVER = 'directiveResolver';
-    public final const ARRAY_KEY_FIELDS = 'fields';
-
     /**
      * @var array<string,Directive>
      */
