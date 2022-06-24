@@ -543,6 +543,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return;
         }
 
+        if (empty($argument->getValue()->getValue())) {
+            return;
+        }
+
         $this->spreadDirectiveToFields(
             $directive,
             $argument,
@@ -595,6 +599,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * (to the left of the directive)
          */
         $affectedFieldPositions = $argument->getValue()->getValue();
+        if (!is_array($affectedFieldPositions)) {
+            $affectedFieldPositions = [$affectedFieldPositions];
+        }
         foreach ($affectedFieldPositions as $affectedFieldPosition) {
             if (!is_int($affectedFieldPosition) || ((int)$affectedFieldPosition <= 0)) {
                 throw new InvalidRequestException(
