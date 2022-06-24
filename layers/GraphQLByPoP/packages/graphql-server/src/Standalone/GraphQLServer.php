@@ -115,8 +115,8 @@ class GraphQLServer implements GraphQLServerInterface
 
         $passingQuery = is_string($queryOrExecutableDocument);
         if ($passingQuery) {
-            $executableDocument = null;
             $query = $queryOrExecutableDocument;
+            $executableDocument = null;
         } else {
             $executableDocument = $queryOrExecutableDocument;
             $query = $executableDocument->getDocument()->asDocumentString();
