@@ -71,7 +71,12 @@ class ExecutableDocument extends UpstreamExecutableDocument
     public function getRequestedOperation(): ?OperationInterface
     {
         $requestedOperations = $this->getRequestedOperations();
-        if (count($requestedOperations) === 1 || !empty($this->context->getOperationName())) {
+        if (count($requestedOperations) === 1) {
+            return parent::getRequestedOperation();
+        }
+
+        $operationName = $this->context->getOperationName();
+        if (!empty($operationName) && $operationName !== QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME) {
             return parent::getRequestedOperation();
         }
 
