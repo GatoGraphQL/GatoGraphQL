@@ -27,11 +27,15 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         $this->nestedDirectivePipelineData = new SplObjectStorage();
     }
 
-    public function isServiceEnabled(): bool
+    public function isDirectiveEnabled(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->enableComposableDirectives();
+        if (!$moduleConfiguration->enableComposableDirectives()) {
+            return false;
+        }
+
+        return parent::isDirectiveEnabled();
     }
 
     /**

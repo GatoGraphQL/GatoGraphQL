@@ -39,6 +39,19 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function getFieldNamesToApplyTo(): array;
     /**
+     * ModuleConfiguration values cannot be accessed in `isServiceEnabled`,
+     * because the DirectiveResolver services are initialized on
+     * the "boot" event, and by then the `SchemaConfigurationExecuter`
+     * services, to set-up configuration hooks, have not been initialized yet.
+     * Then, the GraphQL custom endpoint will not have its Schema Configuration
+     * applied.
+     *
+     * That's why it is done in this method instead.
+     *
+     * @see BootAttachExtensionCompilerPass.php
+     */
+    public function isDirectiveEnabled(): bool;
+    /**
      * Directives can be either of type "Schema" or "Query" and,
      * depending on one case or the other, might be exposed to the user.
      * By default, use the Query type
