@@ -38,6 +38,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * Returning an empty array means all of them
      */
     public function getFieldNamesToApplyTo(): array;
+    public function isDirectiveEnabled(): bool;
     /**
      * Directives can be either of type "Schema" or "Query" and,
      * depending on one case or the other, might be exposed to the user.

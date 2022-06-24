@@ -324,6 +324,11 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return [];
     }
 
+    public function isDirectiveEnabled(): bool
+    {
+        return true;
+    }
+
     /**
      * Define if to use the version to decide if to process the directive or not
      */
