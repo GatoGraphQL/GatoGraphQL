@@ -219,7 +219,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Create an array with the dataFields affected by each directive, in order in which they will be invoked
         foreach ($directiveResolverInstanceData as $instanceID => $directiveResolverInstanceData) {
             // Add the directive in its required position in the pipeline, and retrieve what fields it will process
-            $directiveResolverInstance = $directiveResolverInstanceData['instance'];
+            /** @var DirectiveResolverInterface */
+            $directiveResolverInstance = $directiveResolverInstanceData['directiveResolver'];
             $pipelinePosition = $directiveResolverInstance->getPipelinePosition();
             $directiveInstancesByPosition[$pipelinePosition][] = $directiveResolverInstance;
             $fieldDirectivesByPosition[$pipelinePosition][] = $directiveResolverInstanceData['directive'];
@@ -232,7 +233,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($directiveInstancesByPosition as $position => $directiveResolverInstances) {
             for ($i = 0; $i < count($directiveResolverInstances); $i++) {
                 $pipelineData[] = [
-                    'instance' => $directiveResolverInstances[$i],
+                    'directiveResolver' => $directiveResolverInstances[$i],
                     'directive' => $fieldDirectivesByPosition[$position][$i],
                     'fields' => $directiveFieldsByPosition[$position][$i],
                 ];
@@ -342,7 +343,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $instanceID = get_class($directiveResolverInstance) . spl_object_hash($directive);
                 if (!isset($directiveResolverInstanceFields[$instanceID])) {
                     $directiveResolverInstanceFields[$instanceID]['directive'] = $directive;
-                    $directiveResolverInstanceFields[$instanceID]['instance'] = $directiveResolverInstance;
+                    $directiveResolverInstanceFields[$instanceID]['directiveResolver'] = $directiveResolverInstance;
                 }
                 $directiveResolverInstanceFields[$instanceID]['fields'][] = $field;
             }
@@ -354,7 +355,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /** @var Directive */
             $directive = $instanceData['directive'];
             /** @var DirectiveResolverInterface */
-            $directiveResolverInstance = $instanceData['instance'];
+            $directiveResolverInstance = $instanceData['directiveResolver'];
             /** @var FieldInterface[] */
             $directiveResolverFields = $instanceData['fields'];
             $directiveName = $directive->getName();
@@ -477,7 +478,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // Directive is valid. Add it under its instanceID, which enables to add fields under the same directiveResolverInstance
-            $instances[$instanceID]['instance'] = $directiveResolverInstance;
+            $instances[$instanceID]['directiveResolver'] = $directiveResolverInstance;
             $instances[$instanceID]['directive'] = $directive;
             $instances[$instanceID]['fields'] = $directiveResolverFields;
         }
@@ -1097,8 +1098,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDFieldSet = [];
             foreach ($directivePipelineData as $pipelineStageData) {
-                $directiveResolverInstance = $pipelineStageData['instance'];
+                /** @var DirectiveResolverInterface */
+                $directiveResolverInstance = $pipelineStageData['directiveResolver'];
+                /** @var Directive */
                 $directive = $pipelineStageData['directive'];
+                /** @var FieldInterface[] */
                 $directiveFields = $pipelineStageData['fields'];
                 // Only process the direct fields
                 $directiveDirectFieldsToProcess = array_intersect(
