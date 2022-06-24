@@ -73,6 +73,21 @@ class AppStateManager implements AppStateManagerInterface
     }
 
     /**
+     * Called by the AppLoader to "boot" the state.
+     *
+     * Execute application state
+     */
+    public function executeAppState(): void
+    {
+        $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
+        $appStateProviders = $appStateProviderRegistry->getEnabledAppStateProviders();
+
+        foreach ($appStateProviders as $appStateProvider) {
+            $appStateProvider->execute($this->state);
+        }
+    }
+
+    /**
      * @return array<string,mixed>
      */
     public function all(): array

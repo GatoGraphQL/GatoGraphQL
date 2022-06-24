@@ -64,7 +64,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = false;
     }
 
-    public function compute(array &$state): void
+    public function execute(array &$state): void
     {
         if ($state['scheme'] !== APISchemes::API) {
             return;
