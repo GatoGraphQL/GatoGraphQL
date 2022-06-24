@@ -28,7 +28,7 @@ abstract class AbstractAppStateProvider implements AppStateProviderInterface
     {
     }
 
-    public function boot(array &$state): void
+    public function execute(array &$state): void
     {
     }
 }

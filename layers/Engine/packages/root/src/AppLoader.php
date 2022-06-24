@@ -400,7 +400,7 @@ class AppLoader implements AppLoaderInterface
          * (eg: Composable Directives enabled?) before the env var is read for
          * first time and, then, initialized.
          */
-        $appStateManager->bootAppState();
+        $appStateManager->executeAppState();
         $moduleManager->afterBoot();
 
         // Allow to inject functionality

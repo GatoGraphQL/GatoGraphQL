@@ -47,5 +47,5 @@ interface AppStateProviderInterface extends ServiceInterface
      *
      * @param array<string,mixed> $state
      */
-    public function boot(array &$state): void;
+    public function execute(array &$state): void;
 }
