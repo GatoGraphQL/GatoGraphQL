@@ -123,13 +123,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('variables', $variables);
         $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
-        $appStateManager->override('graphql-operation-type', null);
-        $appStateManager->override('executable-document-ast', null);
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
-
-        /** @var ComponentModelModuleConfiguration */
-        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
 
         // Convert the GraphQL query to AST
         if ($query !== null) {
@@ -155,6 +149,13 @@ class GraphQLServer implements GraphQLServerInterface
             $requestedOperation = $executableDocument->getRequestedOperation();
             $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
+        } else {
+            // There was an error, reset the state
+            $appStateManager->override('graphql-operation-type', null);
+
+            /** @var ComponentModelModuleConfiguration */
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+            $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
         }
 
         // Generate the data, print the response to buffer, and send headers
