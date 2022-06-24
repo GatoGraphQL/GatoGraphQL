@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\HttpFoundation\Response;
 
 interface GraphQLServerInterface
@@ -15,7 +16,7 @@ interface GraphQLServerInterface
      * @param array<string,mixed> $variables
      */
     public function execute(
-        string $query,
+        string|ExecutableDocument $queryOrExecutableDocument,
         array $variables = [],
         ?string $operationName = null
     ): Response;

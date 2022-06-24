@@ -11,6 +11,7 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
 use PoP\Root\App;
@@ -105,12 +106,21 @@ class GraphQLServer implements GraphQLServerInterface
      * @param array<string,mixed> $variables
      */
     public function execute(
-        string $query,
+        string|ExecutableDocument $queryOrExecutableDocument,
         array $variables = [],
         ?string $operationName = null
     ): Response {
         // Override the previous response, if any
         App::regenerateResponse();
+
+        $passingQuery = is_string($queryOrExecutableDocument);
+        if ($passingQuery) {
+            $query = $queryOrExecutableDocument;
+            $executableDocument = null;
+        } else {
+            $executableDocument = $queryOrExecutableDocument;
+            $query = $executableDocument->getDocument()->asDocumentString();
+        }
 
         // Override the state
         $appStateManager = App::getAppStateManager();
@@ -118,33 +128,40 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('variables', $variables);
         $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
-        $appStateManager->override('graphql-operation-type', null);
-        $appStateManager->override('executable-document-ast', null);
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
 
-        /** @var ComponentModelModuleConfiguration */
-        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
+        // Convert the GraphQL query to AST
+        if ($passingQuery) {
+            try {
+                $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
+                    $query,
+                    $variables,
+                    $operationName
+                );
+            } catch (SyntaxErrorException | InvalidRequestException $e) {
+                // @todo Show GraphQL error in client
+                // ...
+                $appStateManager->override('does-api-query-have-errors', true);
+            }
+        }
+        $appStateManager->override('executable-document-ast', $executableDocument);
 
-        try {
-            $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
-                $query,
-                $variables,
-                $operationName
-            );
-            $appStateManager->override('executable-document-ast', $executableDocument);
-
-            /**
-             * Set the operation type and, based on it, if mutations are supported.
-             */
+        /**
+         * Set the operation type and, based on it, if mutations are supported.
+         * If there's an error in `parseGraphQLQuery`, $executableDocument will be null.
+         */
+        if ($executableDocument !== null) {
             /** @var OperationInterface */
             $requestedOperation = $executableDocument->getRequestedOperation();
             $appStateManager->override('graphql-operation-type', $requestedOperation->getOperationType());
             $appStateManager->override('are-mutations-enabled', $requestedOperation->getOperationType() === OperationTypes::MUTATION);
-        } catch (SyntaxErrorException | InvalidRequestException $e) {
-            // @todo Show GraphQL error in client
-            // ...
-            $appStateManager->override('does-api-query-have-errors', true);
+        } else {
+            // Reset to the initial state
+            $appStateManager->override('graphql-operation-type', null);
+
+            /** @var ComponentModelModuleConfiguration */
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+            $appStateManager->override('are-mutations-enabled', $moduleConfiguration->enableMutations());
         }
 
         // Generate the data, print the response to buffer, and send headers
