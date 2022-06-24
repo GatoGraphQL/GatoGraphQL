@@ -325,6 +325,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
+     * ModuleConfiguration values cannot be accessed in `isServiceEnabled`,
+     * because the DirectiveResolver services are initialized on
+     * the "boot" event, and by then the `SchemaConfigurationExecuter`
+     * services, to set-up configuration hooks, have not been initialized yet.
+     * Then, the GraphQL custom endpoint will not have its Schema Configuration
+     * applied.
+     *
+     * That's why it is done in this method instead.
+     *
+     * @see BootAttachExtensionCompilerPass.php
+     */
+    public function isDirectiveEnabled(): bool
+    {
+        return true;
+    }
+
+    /**
      * Define if to use the version to decide if to process the directive or not
      */
     public function decideCanProcessBasedOnVersionConstraint(RelationalTypeResolverInterface $relationalTypeResolver): bool

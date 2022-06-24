@@ -1193,6 +1193,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedDirectiveResolvers);
                 // Add them to the results. We keep the list of all resolvers, so that if the first one cannot process the directive (eg: through `resolveCanProcess`, the next one can do it)
                 foreach ($attachedDirectiveResolvers as $directiveResolver) {
+                    if (!$directiveResolver->isDirectiveEnabled()) {
+                        // Skip disabled directives
+                        continue;
+                    }
                     $directiveName = $directiveResolver->getDirectiveName();
                     $directiveNameResolvers[$directiveName][] = $directiveResolver;
                 }

@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\EmbeddableFields;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\FieldResolvers\ObjectType\OperatorGlobalObjectTypeFieldResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\App;
+use PoPAPI\API\Module as APIModule;
+use PoPAPI\API\ModuleConfiguration as APIModuleConfiguration;
 
 /**
  * When Embeddable Fields is enabled, register the `echoStr` field
  */
 class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectTypeFieldResolver
 {
-    use EmbeddableFieldsObjectTypeFieldResolverTrait;
-
     /**
      * By making it not global, it gets registered on each single type.
      * Otherwise, it is not exposed in the schema
@@ -38,12 +39,24 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     // }
 
     /**
-     * Only the `echo` field is to be exposed
+     * Only the `echoStr` field is to be exposed
      *
      * @return string[]
      */
     public function getFieldNamesToResolve(): array
     {
+        /**
+         * Only use it when "embeddable fields" is enabled.
+         *
+         * Check on runtime (not via container) since this option can be
+         * assigned to the Schema Configuration in the GraphQL API plugin.
+         */
+        /** @var APIModuleConfiguration */
+        $moduleConfiguration = App::getModule(APIModule::class)->getConfiguration();
+        if (!$moduleConfiguration->enableEmbeddableFields()) {
+            return [];
+        }
+
         return [
             'echoStr',
         ];
