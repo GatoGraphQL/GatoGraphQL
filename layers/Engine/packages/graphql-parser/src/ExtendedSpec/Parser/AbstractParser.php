@@ -499,7 +499,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             /** @var FieldInterface */
             $field = $fieldOrFragmentBond;
             foreach ($field->getDirectives() as $directive) {
-                // Check if it is a MultiField Directive
                 $this->maybeSpreadDirectiveToFields(
                     $directive,
                     $i,
@@ -507,7 +506,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                 );
                 continue;
             }
-
             if ($field instanceof RelationalField) {
                 /** @var RelationalField */
                 $relationalField = $field;
