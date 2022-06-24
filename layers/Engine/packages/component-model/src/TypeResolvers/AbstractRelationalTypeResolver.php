@@ -261,6 +261,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
         $instances = new SplObjectStorage();
         // Count how many times each directive is added
+        /** @var array<string,FieldInterface[]> */
         $directiveFieldTrack = [];
         /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
         $directiveResolverInstanceFields = new SplObjectStorage();
