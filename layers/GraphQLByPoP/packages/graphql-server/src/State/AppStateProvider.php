@@ -8,6 +8,7 @@ use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
@@ -57,6 +58,7 @@ class AppStateProvider extends AbstractAppStateProvider
         if ($executableDocument === null) {
             return;
         }
+        /** @var ExecutableDocument $executableDocument */
 
         /**
          * Set the operation type and, based on it, if mutations are supported.
