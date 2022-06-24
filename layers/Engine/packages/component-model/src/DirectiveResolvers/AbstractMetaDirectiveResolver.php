@@ -39,16 +39,6 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
         $this->nestedDirectivePipelineData = new SplObjectStorage();
     }
 
-    /**
-     * The ModuleConfiguration cannot be accessed in `isServiceEnabled`,
-     * because the DirectiveResolver services are initialized on
-     * the "boot" event, and by then the SchemaConfigurationExecuter
-     * services, to set-up configuration hooks, have not been initialized yet.
-     *
-     * That's why it is done in this method instead.
-     *
-     * @see BootAttachExtensionCompilerPass.php
-     */
     public function isDirectiveEnabled(): bool
     {
         /** @var ModuleConfiguration */
