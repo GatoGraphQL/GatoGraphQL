@@ -36,4 +36,16 @@ interface AppStateProviderInterface extends ServiceInterface
      * @param array<string,mixed> $state
      */
     public function compute(array &$state): void;
+
+    /**
+     * After services have been initialized, we can then "boot" the AppState.
+     *
+     * Eg: parsing the GraphQL query must be done on this stage,
+     * as to allow the SchemaConfigutationExecuter to inject its hooks
+     * (eg: Composable Directives enabled?)  in the `boot` stage.
+     * Otherwise, the env var would be read before it was properly initialized.
+     *
+     * @param array<string,mixed> $state
+     */
+    public function boot(array &$state): void;
 }

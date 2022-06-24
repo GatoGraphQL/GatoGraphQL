@@ -18,6 +18,13 @@ interface AppStateManagerInterface
     public function initializeAppState(array $initialAppState): void;
 
     /**
+     * Called by the AppLoader to boot the state.
+     *
+     * Boot application state
+     */
+    public function bootAppState(): void;
+
+    /**
      * @return array<string,mixed>
      */
     public function all(): array;

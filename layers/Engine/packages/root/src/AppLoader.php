@@ -390,9 +390,17 @@ class AppLoader implements AppLoaderInterface
      */
     public function bootApplicationModules(): void
     {
-        App::getAppStateManager()->initializeAppState($this->initialAppState);
+        $appStateManager = App::getAppStateManager();
+        $appStateManager->initializeAppState($this->initialAppState);
         $moduleManager = App::getModuleManager();
         $moduleManager->boot();
+        /**
+         * After the services have been initialized, we can then parse the GraphQL query.
+         * This way, the SchemaConfigutationExecuter can inject its hooks
+         * (eg: Composable Directives enabled?) before the env var is read for
+         * first time and, then, initialized.
+         */
+        $appStateManager->bootAppState();
         $moduleManager->afterBoot();
 
         // Allow to inject functionality
