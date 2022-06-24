@@ -302,6 +302,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $this->replaceResolvedFieldVariableReferences($document);
         }
 
+        if ($moduleConfiguration->enableMultiFieldDirectives()) {
+            $this->spreadMultiFieldDirectives($document);
+        }
+
         return $document;
     }
 
@@ -446,6 +450,170 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $dynamicVariableReference->getLocation()
         );
         $argument->setValue($resolvedFieldVariableReference);
+    }
+
+    /**
+     * Iterate the elements in the Document AST, and whenever a Directive
+     * is to be applied to multiple fields, add it under the corresponding Fields
+     */
+    protected function spreadMultiFieldDirectives(
+        Document $document,
+    ): void {
+        foreach ($document->getOperations() as $operation) {
+            $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                $operation->getFieldsOrFragmentBonds(),
+                $document->getFragments(),
+            );
+        }
+        foreach ($document->getFragments() as $fragment) {
+            $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                $fragment->getFieldsOrFragmentBonds(),
+                $document->getFragments(),
+            );
+        }
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Fragment[] $fragments
+     */
+    protected function spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+        array $fieldsOrFragmentBonds,
+        array $fragments,
+    ): void {
+        $fieldsOrFragmentBondsCount = count($fieldsOrFragmentBonds);
+        for ($i = 0; $i < $fieldsOrFragmentBondsCount; $i++) {
+            $fieldOrFragmentBond = $fieldsOrFragmentBonds[$i];
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                    $inlineFragment->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            foreach ($field->getDirectives() as $directive) {
+                // Check if it is a MultiField Directive
+                $this->maybeSpreadDirectiveToFields(
+                    $directive,
+                    $i,
+                    $fieldsOrFragmentBonds,
+                );
+                continue;
+            }
+
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $this->spreadMultiFieldDirectivesInFieldsOrInlineFragments(
+                    $relationalField->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
+            }
+        }
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     */
+    protected function maybeSpreadDirectiveToFields(
+        Directive $directive,
+        int $currentFieldPosition,
+        array $fieldsOrFragmentBonds,
+    ): void {
+        // Check if it is a MultiField Directive
+        $argument = $this->findArgumentWithName(
+            $directive->getArguments(),
+            'affectAdditionalFields',
+        );
+        if ($argument === null) {
+            return;
+        }
+
+        /**
+         * The value is a list of relative positions.
+         * Append the directive to the fields on those
+         * relative positions to the left.
+         */
+        /** @var array<int<1,max>> */
+        $argumentValueItems = $argument->getValue()->getValue();
+        foreach ($argumentValueItems as $argumentValueItem) {
+            if (!is_int($argumentValueItem) || ((int)$argumentValueItem <= 0)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E3,
+                        [
+                            $argument->getName(),
+                            $directive->getName(),
+                            $argumentValueItem === null ? 'null' : $argumentValueItem,
+                        ]
+                    ),
+                    $argument->getLocation()
+                );
+            }
+
+            $affectedFieldPosition = $currentFieldPosition - $argumentValueItem;
+            if ($affectedFieldPosition < 0) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E5,
+                        [
+                            $argumentValueItem,
+                            $directive->getName(),
+                            'affectAdditionalFields',
+                        ]
+                    ),
+                    $argument->getLocation()
+                );
+            }
+
+            /**
+             * Get the element at that position, and validate
+             * it is indeed a Field (eg: not a FragmentReference)
+             */
+            $affectedField = $fieldsOrFragmentBonds[$affectedFieldPosition];
+            if (!($affectedField instanceof FieldInterface)) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E6,
+                        [
+                            $argumentValueItem,
+                            $directive->getName(),
+                            'affectAdditionalFields',
+                        ]
+                    ),
+                    $argument->getLocation()
+                );
+            }
+            /** @var FieldInterface $affectedFieldPosition */
+
+            /**
+             * Everything is valid, append the Directive to the field
+             */
+            $affectedField->addDirective($directive);
+        }
+    }
+
+    /**
+     * @param Argument[] $arguments
+     */
+    protected function findArgumentWithName(array $arguments, string $name): ?Argument
+    {
+        foreach ($arguments as $argument) {
+            if ($argument->getName() === $name) {
+                return $argument;
+            }
+        }
+        return null;
     }
 
     /**
