@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PHPUnit\Framework\TestCase;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase
@@ -52,12 +53,12 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     }
 
     protected function assertGraphQLQueryExecution(
-        string $query,
+        string|ExecutableDocument $queryOrExecutableDocument,
         array $expectedResponse,
         array $variables = [],
         ?string $operationName = null
     ): void {
-        $response = self::getGraphQLServer()->execute($query, $variables, $operationName);
+        $response = self::getGraphQLServer()->execute($queryOrExecutableDocument, $variables, $operationName);
         $this->assertJsonStringEqualsJsonString(
             json_encode($expectedResponse),
             $response->getContent()
