@@ -115,7 +115,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         $passingAST = $queryOrExecutableDocument instanceof ExecutableDocument;
         $executableDocument = $passingAST ? $queryOrExecutableDocument : null;
-        $query = $passingAST ? null : $queryOrExecutableDocument;
+        $query = $passingAST ? $executableDocument->getDocument()->asDocumentString() : $queryOrExecutableDocument;
 
         // Override the state
         $appStateManager = App::getAppStateManager();
@@ -126,7 +126,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
 
         // Convert the GraphQL query to AST
-        if ($query !== null) {
+        if ($executableDocument === null) {
             try {
                 $executableDocument = GraphQLParserHelpers::parseGraphQLQuery(
                     $query,
