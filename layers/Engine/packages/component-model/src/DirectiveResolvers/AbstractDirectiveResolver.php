@@ -673,7 +673,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         /** @var GraphQLParserModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
         if ($moduleConfiguration->enableMultiFieldDirectives()) {
-            $directiveArgNameTypeResolvers[$this->getAffectAdditionalFieldsUnderPosArgumentName()] = $this->getIntScalarTypeResolver();
+            $affectAdditionalFieldsUnderPosArgumentName = $this->getAffectAdditionalFieldsUnderPosArgumentName();
+            if ($affectAdditionalFieldsUnderPosArgumentName !== null) {
+                $directiveArgNameTypeResolvers[$affectAdditionalFieldsUnderPosArgumentName] = $this->getIntScalarTypeResolver();
+            }
         }
 
         return $directiveArgNameTypeResolvers;
