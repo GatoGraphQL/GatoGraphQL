@@ -556,6 +556,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     ): ?Argument {
         /** @var DirectiveResolverInterface */
         $directiveResolver = $this->getDirectiveResolver($directive->getName());
+        if ($directiveResolver === null) {
+            return null;
+        }
         $affectAdditionalFieldsUnderPosArgName = $directiveResolver->getAffectAdditionalFieldsUnderPosArgumentName();
         if ($affectAdditionalFieldsUnderPosArgName === null) {
             // Disabled for the directive
