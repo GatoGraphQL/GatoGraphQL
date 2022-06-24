@@ -263,10 +263,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $directiveFieldTrack = [];
         $directiveResolverInstanceFields = [];
         foreach ($directives as $directive) {
-            $fieldDirectiveResolverInstances = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
+            $directiveResolvers = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
             $directiveName = $directive->getName();
             // If there is no directive with this name, show an error and skip it
-            if ($fieldDirectiveResolverInstances === null) {
+            if ($directiveResolvers === null) {
                 foreach ($directiveFields[$directive] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -287,7 +287,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
             $directiveArgs = $directive->getArguments();
 
-            if ($fieldDirectiveResolverInstances->count() === 0) {
+            if ($directiveResolvers->count() === 0) {
                 foreach ($directiveFields[$directive] as $field) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -319,7 +319,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             foreach ($directiveFields[$directive] as $field) {
-                $directiveResolverInstance = $fieldDirectiveResolverInstances[$field] ?? null;
+                $directiveResolverInstance = $directiveResolvers[$field] ?? null;
                 if ($directiveResolverInstance === null) {
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
@@ -504,7 +504,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
         // Calculate directives per field
         /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
-        $fieldDirectiveResolverInstances = new SplObjectStorage();
+        $fieldDirectiveResolvers = new SplObjectStorage();
         foreach ($fields as $field) {
             /**
              * Check that at least one class which deals with this directiveName can satisfy
@@ -532,12 +532,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
                 // Check if this instance can process the directive
                 if ($maybeDirectiveResolverInstance->resolveCanProcess($this, $directiveName, $directiveArgs, $field, $variables)) {
-                    $fieldDirectiveResolverInstances[$field] = $maybeDirectiveResolverInstance;
+                    $fieldDirectiveResolvers[$field] = $maybeDirectiveResolverInstance;
                     break;
                 }
             }
         }
-        return $fieldDirectiveResolverInstances;
+        return $fieldDirectiveResolvers;
     }
 
     /**
