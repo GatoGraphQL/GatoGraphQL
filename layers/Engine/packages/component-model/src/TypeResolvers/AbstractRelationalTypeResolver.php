@@ -185,13 +185,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param Directive[] $directives
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      * @param array<string,mixed> $variables
+     * @return SplObjectStorage<DirectiveResolverInterface,FieldInterface[]>
      */
     public function resolveDirectivesIntoPipelineData(
         array $directives,
         SplObjectStorage $directiveFields,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): array {
+    ): SplObjectStorage {
         /**
          * All directives are placed somewhere in the pipeline.
          *
@@ -232,14 +233,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Once we have them ordered, we can simply discard the positions, keep only the values
-        // Each item has 3 elements: the directiveResolverInstance, its directive, and the fields it affects
-        $pipelineData = [];
+        // Each item has 2 elements: the directiveResolverInstance and the fields it affects
+        /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
+        $pipelineData = new SplObjectStorage();
         foreach ($directiveInstancesByPosition as $position => $directiveResolverInstances) {
             for ($i = 0; $i < count($directiveResolverInstances); $i++) {
-                $pipelineData[] = [
-                    self::ARRAY_KEY_DIRECTIVE_RESOLVER => $directiveResolverInstances[$i],
-                    self::ARRAY_KEY_FIELDS => $directiveFieldsByPosition[$position][$i],
-                ];
+                $pipelineData[$directiveResolverInstances[$i]] = $directiveFieldsByPosition[$position][$i];
             }
         }
 
@@ -1093,11 +1092,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolverInstances = [];
             /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDFieldSet = [];
-            foreach ($directivePipelineData as $pipelineStageData) {
-                /** @var DirectiveResolverInterface */
-                $directiveResolverInstance = $pipelineStageData[self::ARRAY_KEY_DIRECTIVE_RESOLVER];
+            /** @var DirectiveResolverInterface $directiveResolverInstance */
+            foreach ($directivePipelineData as $directiveResolverInstance) {
                 /** @var FieldInterface[] */
-                $directiveFields = $pipelineStageData[self::ARRAY_KEY_FIELDS];
+                $directiveFields = $directivePipelineData[$directiveResolverInstance];
                 $directive = $directiveResolverInstance->getDirective();
                 // Only process the direct fields
                 $directiveDirectFieldsToProcess = array_intersect(
