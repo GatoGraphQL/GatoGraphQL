@@ -50,12 +50,25 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function parseDirectiveList(): array
     {
         $directives = parent::parseDirectiveList();
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableComposableDirectives()) {
-            return $directives;
+        if ($moduleConfiguration->enableComposableDirectives()) {
+            $directives = $this->integrateMetaDirectiveList($directives);
         }
 
+        return $directives;
+    }
+
+    /**
+     * Replace `Directive` with `MetaDirective`, and nest the affected
+     * directives inside.
+     *
+     * @param Directive[] $directives
+     * @return Directive[]
+     */
+    protected function integrateMetaDirectiveList(array $directives): array
+    {
         /**
          * For each directive, indicate which meta-directive is composing it
          * by indicating their relative position (as a negative int)
