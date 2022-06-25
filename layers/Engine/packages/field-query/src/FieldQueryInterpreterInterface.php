@@ -25,10 +25,6 @@ interface FieldQueryInterpreterInterface
     public function getFieldDirectives(string $field, bool $includeSyntaxDelimiters = false): ?string;
     public function getFieldDirectiveArgs(string $fieldDirective): ?string;
     /**
-     * @param array<string|null> $directive
-     */
-    public function getDirectiveName(array $directive): string;
-    /**
      * @param array<string, mixed> $fieldArgValue
      */
     public function getArrayAsStringForQuery(array $fieldArgValue): string;
