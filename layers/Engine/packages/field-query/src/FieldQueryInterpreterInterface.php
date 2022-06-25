@@ -66,10 +66,6 @@ interface FieldQueryInterpreterInterface
      */
     public function getFieldDirectivesAsString(array $fieldDirectives): string;
     /**
-     * @return array<string, mixed>
-     */
-    public function getVariablesFromRequest(): array;
-    /**
      * @param array<string, mixed> $fieldArgValue
      */
     public function getArrayAsStringForQuery(array $fieldArgValue): string;

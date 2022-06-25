@@ -126,38 +126,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return trim($field);
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function getVariablesFromRequest(): array
-    {
-        if (is_null($this->variablesFromRequestCache)) {
-            $this->variablesFromRequestCache = $this->doGetVariablesFromRequest();
-        }
-        return $this->variablesFromRequestCache;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function doGetVariablesFromRequest(): array
-    {
-        /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
-        if (!$rootModuleConfiguration->enablePassingStateViaRequest()) {
-            return [];
-        }
-
-        // Watch out! GraphiQL also uses the "variables" URL param, but as a string
-        // Hence, check if this param is an array, and only then process it
-        return array_merge(
-            App::getRequest()->query->all(),
-            App::getRequest()->request->all(),
-            App::getRequest()->query->has('variables') && is_array(App::getRequest()->query->all()['variables']) ? App::getRequest()->query->all()['variables'] : [],
-            App::getRequest()->request->has('variables') && is_array(App::getRequest()->request->all()['variables']) ? App::getRequest()->request->all()['variables'] : []
-        );
-    }
-
     public function getFieldArgs(string $field): ?string
     {
         if (!isset($this->fieldArgsCache[$field])) {
