@@ -53,12 +53,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     private array $fieldOutputKeysCache = [];
 
-    // Cache vars to take from the request
-    /**
-     * @var array<string, mixed>|null
-     */
-    private ?array $variablesFromRequestCache = null;
-
     public final const ALIAS_POSITION_KEY = 'pos';
     public final const ALIAS_LENGTH_KEY = 'length';
 

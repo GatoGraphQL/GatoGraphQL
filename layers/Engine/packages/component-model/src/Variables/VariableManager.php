@@ -11,6 +11,13 @@ use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 class VariableManager implements VariableManagerInterface
 {
     /**
+     * Cache vars to take from the request
+     *
+     * @var array<string,mixed>|null
+     */
+    private ?array $variablesFromRequestCache = null;
+
+    /**
      * @return array<string, mixed>
      */
     public function getVariablesFromRequest(): array
