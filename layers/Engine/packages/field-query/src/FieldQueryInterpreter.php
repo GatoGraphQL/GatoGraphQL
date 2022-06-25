@@ -465,49 +465,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
 
     /**
-     * @return array<array<string|null>>
-     */
-    public function extractFieldDirectives(string $fieldDirectives): array
-    {
-        if (!isset($this->extractedFieldDirectivesCache[$fieldDirectives])) {
-            $this->extractedFieldDirectivesCache[$fieldDirectives] = $this->doExtractFieldDirectives($fieldDirectives);
-        }
-        return $this->extractedFieldDirectivesCache[$fieldDirectives];
-    }
-
-    /**
-     * @return array<array<string|null>>
-     */
-    protected function doExtractFieldDirectives(string $fieldDirectives): array
-    {
-        if (!$fieldDirectives) {
-            return [];
-        }
-        return array_map(
-            function ($fieldDirective) {
-                $fieldDirective = trim($fieldDirective);
-                return $this->listFieldDirective($fieldDirective);
-            },
-            $this->getQueryParser()->splitElements(
-                $fieldDirectives,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
-                [
-                    QuerySyntax::SYMBOL_FIELDARGS_OPENING,
-                    QuerySyntax::SYMBOL_BOOKMARK_OPENING,
-                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING
-                ],
-                [
-                    QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
-                    QuerySyntax::SYMBOL_BOOKMARK_CLOSING,
-                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-                ],
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
-            )
-        );
-    }
-
-    /**
      * @param string[] $fieldDirectives
      */
     public function composeFieldDirectives(array $fieldDirectives): string
