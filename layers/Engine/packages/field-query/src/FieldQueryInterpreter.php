@@ -477,34 +477,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return (string)$directive[0];
     }
 
-    public function getDirectiveOutputKey(string $fieldDirective): string
-    {
-        return $this->getFieldOutputKey($fieldDirective);
-    }
-
-    public function getFieldOutputKey(string $field): string
-    {
-        if (!isset($this->fieldOutputKeysCache[$field])) {
-            $this->fieldOutputKeysCache[$field] = $this->doGetFieldOutputKey($field);
-        }
-        return $this->fieldOutputKeysCache[$field];
-    }
-
-    protected function doGetFieldOutputKey(string $field): string
-    {
-        // If there is an alias, use this to represent the field
-        if ($fieldAlias = $this->getFieldAlias($field)) {
-            return $fieldAlias;
-        }
-        // Otherwise, use fieldName+fieldArgs
-        return $this->getNoAliasFieldOutputKey($field);
-    }
-    protected function getNoAliasFieldOutputKey(string $field): string
-    {
-        // Use fieldName+fieldArgs
-        return $this->getFieldName($field) . $this->getFieldArgs($field);
-    }
-
     /**
      * @return array<string|null>
      */
