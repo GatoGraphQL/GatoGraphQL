@@ -39,8 +39,7 @@ class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_P
                         $instanceManager = InstanceManagerFacade::getInstance();
                         /** @var RelationalTypeResolverInterface */
                         $stanceTypeResolver = $instanceManager->getInstance(StanceObjectTypeResolver::class);
-                        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-                        $field = $fieldQueryInterpreter->getField(
+                        $field = /* @todo Re-do this code! Left undone */ new Field(
                             'isObjectType',
                             [
                                 'type' => $stanceTypeResolver->getTypeName(),

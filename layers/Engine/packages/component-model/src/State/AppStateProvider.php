@@ -9,7 +9,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
-use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\Variables\VariableManagerInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
 use PoP\Root\App;
@@ -19,16 +19,16 @@ use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
+    private ?VariableManagerInterface $fieldQueryInterpreter = null;
     private ?ComponentFilterManagerInterface $componentFilterManager = null;
 
-    final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
+    final public function setVariableManager(VariableManagerInterface $fieldQueryInterpreter): void
     {
         $this->fieldQueryInterpreter = $fieldQueryInterpreter;
     }
-    final protected function getFieldQueryInterpreter(): FieldQueryInterpreterInterface
+    final protected function getVariableManager(): VariableManagerInterface
     {
-        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
+        return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(VariableManagerInterface::class);
     }
     final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
     {
@@ -47,7 +47,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
 
         $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
-        $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
+        $state['variables'] = $this->getVariableManager()->getVariablesFromRequest();
 
         /** @var RootModuleConfiguration */
         $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();

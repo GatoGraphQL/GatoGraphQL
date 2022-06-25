@@ -41,14 +41,11 @@ use PoP\FieldQuery\Facades\Query\FieldQueryInterpreterFacade;
 $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
 
 // To create a field from its elements
-$field = $fieldQueryInterpreter->getField($fieldName, $fieldArgs, $fieldAlias, $skipOutputIfNull, $fieldDirectives);
+$field = /* @todo Re-do this code! Left undone */ new Field($fieldName, $fieldArgs, $fieldAlias, $skipOutputIfNull, $fieldDirectives);
 
 // To retrieve the elements from a field
 $fieldName = $fieldQueryInterpreter->getFieldName($field);
 $fieldArgs = $fieldQueryInterpreter->getFieldArgs($field);
-$fieldAlias = $fieldQueryInterpreter->getFieldAlias($field);
-$skipOutputIfNull = $fieldQueryInterpreter->isSkipOuputIfNullField($field);
-$fieldDirectives = $fieldQueryInterpreter->getFieldDirectives($field);
 
 // All other functions listed in FieldQueryInterpreterInterface
 // ...

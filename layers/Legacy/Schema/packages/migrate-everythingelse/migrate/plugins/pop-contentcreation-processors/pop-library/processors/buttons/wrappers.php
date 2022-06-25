@@ -36,10 +36,10 @@ class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Proc
     {
         switch ($component->name) {
             case self::COMPONENT_BUTTONWRAPPER_POSTVIEW:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
+                return /* @todo Re-do this code! Left undone */ new Field('isStatus', ['status' => Status::PUBLISHED], 'published');
 
             case self::COMPONENT_BUTTONWRAPPER_POSTPREVIEW:
-                return FieldQueryInterpreterFacade::getInstance()->getField('not', ['field' => FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED])], 'not-published');
+                return /* @todo Re-do this code! Left undone */ new Field('not', ['field' => /* @todo Re-do this code! Left undone */ new Field('isStatus', ['status' => Status::PUBLISHED])], 'not-published');
         }
 
         return null;

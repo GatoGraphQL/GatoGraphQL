@@ -105,20 +105,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
     }
 
-    /**
-     * Extract field args without using the schema.
-     * It is needed to find out which fieldResolver will process a field,
-     * where we can't depend on the schema since this one needs to know
-     * who the fieldResolver is, creating an infitine loop.
-     *
-     * Directive arguments have the same syntax as field arguments,
-     * so simply re-utilize the corresponding function for field arguments.
-     */
-    public function extractStaticDirectiveArguments(string $directive, ?array $variables = null): array
-    {
-        return $this->extractStaticFieldArguments($directive, $variables);
-    }
-
     protected function getVariablesHash(?array $variables): string
     {
         return (string)hash('crc32', json_encode($variables ?? []));
@@ -620,9 +606,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $objectTypeFieldResolutionFeedbackStore
         );
         // Only need to extract arguments if they have fields or arrays
-        $fieldOutputKey = $this->getFieldOutputKey($field->asFieldOutputQueryString());
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
+        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
@@ -668,8 +653,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $objectTypeFieldResolutionFeedbackStore,
         );
         // Only need to extract arguments if they have fields or arrays
-        $directiveOutputKey = $this->getDirectiveOutputKey($fieldDirective);
-        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $directiveOutputKey, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
+        $directiveArgs = $this->extractFieldOrDirectiveArgumentsForObject($relationalTypeResolver, $object, $directiveArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
         $directiveArgs = $this->castAndValidateDirectiveArgumentsForObject($directiveResolver, $relationalTypeResolver, $fieldDirective, $directiveArgs, $objectTypeFieldResolutionFeedbackStore);
         // Transfer the feedback
@@ -701,7 +685,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
         array $fieldOrDirectiveArgs,
-        string $fieldOrDirectiveOutputKey,
         ?array $variables,
         ?array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

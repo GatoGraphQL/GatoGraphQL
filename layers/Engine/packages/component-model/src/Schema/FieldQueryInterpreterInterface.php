@@ -20,7 +20,6 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
      * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
      */
     public function extractStaticFieldArguments(string $field, ?array $variables = null): array;
-    public function extractStaticDirectiveArguments(string $directive, ?array $variables = null): array;
     /**
      * Return `null` if there is no resolver for the field
      */

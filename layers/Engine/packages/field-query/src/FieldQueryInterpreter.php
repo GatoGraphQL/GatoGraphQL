@@ -6,9 +6,6 @@ namespace PoP\FieldQuery;
 
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
-use PoP\Root\App;
-use PoP\Root\Module as RootModule;
-use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use stdClass;
 
 class FieldQueryInterpreter implements FieldQueryInterpreterInterface
@@ -25,39 +22,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     private array $fieldArgsCache = [];
     /**
-     * @var array<string, bool>
-     */
-    private array $skipOutputIfNullCache = [];
-    /**
-     * @var array<string, string|null>
-     */
-    private array $fieldAliasesCache = [];
-    /**
      * @var array<string, array<string, int>|null>
      */
     private array $fieldAliasPositionSpansCache = [];
-    /**
-     * @var array<string, string|null>
-     */
-    private array $fieldDirectivesCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $directivesCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $extractedFieldDirectivesCache = [];
-    /**
-     * @var array<string, string>
-     */
-    private array $fieldOutputKeysCache = [];
-
-    // Cache vars to take from the request
-    /**
-     * @var array<string, mixed>|null
-     */
-    private ?array $variablesFromRequestCache = null;
 
     public final const ALIAS_POSITION_KEY = 'pos';
     public final const ALIAS_LENGTH_KEY = 'length';
@@ -126,38 +93,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return trim($field);
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function getVariablesFromRequest(): array
-    {
-        if (is_null($this->variablesFromRequestCache)) {
-            $this->variablesFromRequestCache = $this->doGetVariablesFromRequest();
-        }
-        return $this->variablesFromRequestCache;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function doGetVariablesFromRequest(): array
-    {
-        /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
-        if (!$rootModuleConfiguration->enablePassingStateViaRequest()) {
-            return [];
-        }
-
-        // Watch out! GraphiQL also uses the "variables" URL param, but as a string
-        // Hence, check if this param is an array, and only then process it
-        return array_merge(
-            App::getRequest()->query->all(),
-            App::getRequest()->request->all(),
-            App::getRequest()->query->has('variables') && is_array(App::getRequest()->query->all()['variables']) ? App::getRequest()->query->all()['variables'] : [],
-            App::getRequest()->request->has('variables') && is_array(App::getRequest()->request->all()['variables']) ? App::getRequest()->request->all()['variables'] : []
-        );
-    }
-
     public function getFieldArgs(string $field): ?string
     {
         if (!isset($this->fieldArgsCache[$field])) {
@@ -208,33 +143,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             (int)$fieldArgsOpeningSymbolPos,
             $fieldArgsClosingSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDARGS_CLOSING) - $fieldArgsOpeningSymbolPos
         );
-    }
-
-    public function isSkipOuputIfNullField(string $field): bool
-    {
-        if (!isset($this->skipOutputIfNullCache[$field])) {
-            $this->skipOutputIfNullCache[$field] = $this->doIsSkipOuputIfNullField($field);
-        }
-        return $this->skipOutputIfNullCache[$field];
-    }
-
-    protected function doIsSkipOuputIfNullField(string $field): bool
-    {
-        return QueryHelpers::findSkipOutputIfNullSymbolPosition($field) !== false;
-    }
-
-    public function removeSkipOuputIfNullFromField(string $field): string
-    {
-        $pos = QueryHelpers::findSkipOutputIfNullSymbolPosition($field);
-        if ($pos !== false) {
-            // Replace the "?" with nothing
-            $field = str_replace(
-                QuerySyntax::SYMBOL_SKIPOUTPUTIFNULL,
-                '',
-                $field
-            );
-        }
-        return $field;
     }
 
     public function isFieldArgumentValueAField(mixed $fieldArgValue): bool
@@ -331,55 +239,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
     }
 
-    public function createFieldArgValueAsFieldFromFieldName(string $fieldName): string
-    {
-        return $fieldName . QueryHelpers::getEmptyFieldArgs();
-    }
-
-    public function getFieldAlias(string $field): ?string
-    {
-        if (!isset($this->fieldAliasesCache[$field])) {
-            $this->fieldAliasesCache[$field] = $this->doGetFieldAlias($field);
-        }
-        return $this->fieldAliasesCache[$field];
-    }
-
-    protected function doGetFieldAlias(string $field): ?string
-    {
-        if ($fieldAliasPositionSpan = $this->getFieldAliasPositionSpanInField($field)) {
-            $aliasSymbolPos = $fieldAliasPositionSpan[self::ALIAS_POSITION_KEY];
-            if ($aliasSymbolPos === 0) {
-                // Only there is the alias, nothing to alias to
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->__('The field to be aliased in \'%s\' is missing', 'field-query'),
-                    $field
-                ));
-                return null;
-            } elseif ($aliasSymbolPos === strlen($field) - 1) {
-                // Only the "@" was added, but the alias is missing
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->__('Alias in \'%s\' is missing', 'field-query'),
-                    $field
-                ));
-                return null;
-            }
-
-            // Extract the alias, without the "@" symbol
-            $aliasSymbolLength = $fieldAliasPositionSpan[self::ALIAS_LENGTH_KEY];
-            // return substr(
-            //     $field,
-            //     $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX),
-            //     $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
-            // );
-            return substr(
-                $field,
-                0,
-                $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
-            );
-        }
-        return null;
-    }
-
     /**
      * Return an array with the position where the alias starts (including the "@") and its length
      * Return null if the field has no alias
@@ -435,326 +294,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         ];
     }
 
-    public function getFieldDirectives(string $field, bool $includeSyntaxDelimiters = false): ?string
-    {
-        if (!isset($this->fieldDirectivesCache[$field])) {
-            $this->fieldDirectivesCache[$field] = $this->doGetFieldDirectives($field);
-        }
-        // Add the syntax delimiters "<...>" only if the directive is not empty
-        return $this->fieldDirectivesCache[$field] && $includeSyntaxDelimiters ?
-            (
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING .
-                $this->fieldDirectivesCache[$field] .
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-            ) :
-            $this->fieldDirectivesCache[$field];
-    }
-
-    protected function doGetFieldDirectives(string $field): ?string
-    {
-        list(
-            $fieldDirectivesOpeningSymbolPos,
-            $fieldDirectivesClosingSymbolPos
-        ) = QueryHelpers::listFieldDirectivesSymbolPositions($field);
-
-        // If there are no "<" and "." then there is no directive
-        if ($fieldDirectivesClosingSymbolPos === false && $fieldDirectivesOpeningSymbolPos === false) {
-            return null;
-        }
-        // If there is only one of them, it's a query error, so discard the query bit
-        if (
-            (
-                $fieldDirectivesClosingSymbolPos === false
-                && $fieldDirectivesOpeningSymbolPos !== false
-            ) || (
-                $fieldDirectivesClosingSymbolPos !== false
-                && $fieldDirectivesOpeningSymbolPos === false
-            )
-        ) {
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->__(
-                    'Directive \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
-                    'field-query'
-                ),
-                $field,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-            ));
-            return null;
-        }
-
-        // We have a field directive. Extract it
-        $fieldDirectiveOpeningSymbolStrPos =
-            $fieldDirectivesOpeningSymbolPos
-            + strlen(QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING);
-        $fieldDirectiveClosingStrPos = $fieldDirectivesClosingSymbolPos - $fieldDirectiveOpeningSymbolStrPos;
-        return substr($field, $fieldDirectiveOpeningSymbolStrPos, $fieldDirectiveClosingStrPos);
-    }
-
-    /**
-     * @return array<array<string|null>>
-     */
-    public function getDirectives(string $field): array
-    {
-        if (!isset($this->directivesCache[$field])) {
-            $this->directivesCache[$field] = $this->doGetDirectives($field);
-        }
-        return $this->directivesCache[$field];
-    }
-
-    /**
-     * @return array<array<string|null>>
-     */
-    protected function doGetDirectives(string $field): array
-    {
-        $fieldDirectives = $this->getFieldDirectives($field, false);
-        if (is_null($fieldDirectives)) {
-            return [];
-        }
-        return $this->extractFieldDirectives($fieldDirectives);
-    }
-
-    /**
-     * @return array<array<string|null>>
-     */
-    public function extractFieldDirectives(string $fieldDirectives): array
-    {
-        if (!isset($this->extractedFieldDirectivesCache[$fieldDirectives])) {
-            $this->extractedFieldDirectivesCache[$fieldDirectives] = $this->doExtractFieldDirectives($fieldDirectives);
-        }
-        return $this->extractedFieldDirectivesCache[$fieldDirectives];
-    }
-
-    /**
-     * @return array<array<string|null>>
-     */
-    protected function doExtractFieldDirectives(string $fieldDirectives): array
-    {
-        if (!$fieldDirectives) {
-            return [];
-        }
-        return array_map(
-            function ($fieldDirective) {
-                $fieldDirective = trim($fieldDirective);
-                return $this->listFieldDirective($fieldDirective);
-            },
-            $this->getQueryParser()->splitElements(
-                $fieldDirectives,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
-                [
-                    QuerySyntax::SYMBOL_FIELDARGS_OPENING,
-                    QuerySyntax::SYMBOL_BOOKMARK_OPENING,
-                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING
-                ],
-                [
-                    QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
-                    QuerySyntax::SYMBOL_BOOKMARK_CLOSING,
-                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-                ],
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
-            )
-        );
-    }
-
-    /**
-     * @param string[] $fieldDirectives
-     */
-    public function composeFieldDirectives(array $fieldDirectives): string
-    {
-        /**
-         * @todo Temporary addition to match `asQueryString` in the AST
-         * Added an extra " "
-         */
-        return implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', $fieldDirectives);
-    }
-
-    /**
-     * @param array<string|null> $directive
-     */
-    public function convertDirectiveToFieldDirective(array $directive): string
-    {
-        $directiveArgs = $this->getDirectiveArgs($directive) ?? '';
-        $nestedDirectives = $this->getDirectiveNestedDirectives($directive) ?? '';
-        return $this->getDirectiveName($directive) . $directiveArgs . $nestedDirectives;
-    }
-
-    /**
-     * @return array<string|null>
-     */
-    public function listFieldDirective(string $fieldDirective): array
-    {
-        // Each item is an array of up to 3 elements: 0 => name, 1 => args, 2 => composed directives
-        return [
-            $this->getFieldDirectiveName($fieldDirective),
-            $this->getFieldDirectiveArgs($fieldDirective),
-            $this->getFieldDirectiveNestedDirectives($fieldDirective, true),
-        ];
-    }
-
-    public function getFieldDirectiveName(string $fieldDirective): string
-    {
-        return $this->getFieldName($fieldDirective);
-    }
-
     public function getFieldDirectiveArgs(string $fieldDirective): ?string
     {
         return $this->getFieldArgs($fieldDirective);
-    }
-
-    public function getFieldDirectiveNestedDirectives(string $fieldDirective, bool $includeSyntaxDelimiters = false): ?string
-    {
-        return $this->getFieldDirectives($fieldDirective, $includeSyntaxDelimiters);
-    }
-
-    /**
-     * @param array<string, mixed> $directiveArgs
-     */
-    public function getFieldDirective(string $directiveName, array $directiveArgs): string
-    {
-        return $this->getField($directiveName, $directiveArgs);
-    }
-
-    /**
-     * @param array<string|null> $directive
-     */
-    public function getDirectiveName(array $directive): string
-    {
-        return (string)$directive[0];
-    }
-
-    /**
-     * @param array<string|null> $directive
-     */
-    public function getDirectiveArgs(array $directive): ?string
-    {
-        return $directive[1] ?? null;
-    }
-
-    /**
-     * @param array<string|null> $directive
-     */
-    public function getDirectiveNestedDirectives(array $directive): ?string
-    {
-        return $directive[2] ?? null;
-    }
-
-    public function getDirectiveOutputKey(string $fieldDirective): string
-    {
-        return $this->getFieldOutputKey($fieldDirective);
-    }
-
-    public function getFieldOutputKey(string $field): string
-    {
-        if (!isset($this->fieldOutputKeysCache[$field])) {
-            $this->fieldOutputKeysCache[$field] = $this->doGetFieldOutputKey($field);
-        }
-        return $this->fieldOutputKeysCache[$field];
-    }
-
-    protected function doGetFieldOutputKey(string $field): string
-    {
-        // If there is an alias, use this to represent the field
-        if ($fieldAlias = $this->getFieldAlias($field)) {
-            return $fieldAlias;
-        }
-        // Otherwise, use fieldName+fieldArgs
-        return $this->getNoAliasFieldOutputKey($field);
-    }
-    protected function getNoAliasFieldOutputKey(string $field): string
-    {
-        // Use fieldName+fieldArgs
-        return $this->getFieldName($field) . $this->getFieldArgs($field);
-    }
-
-    /**
-     * @return array<string|null>
-     */
-    public function listField(string $field): array
-    {
-        if ($fieldAlias = $this->getFieldAlias($field)) {
-            /**
-             * @todo Temporary addition to match `asQueryString` in the AST
-             * Added an extra " "
-             */
-            $fieldAlias = $fieldAlias . QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . ' ';
-        }
-        return [
-            $this->getFieldName($field),
-            $this->getFieldArgs($field),
-            $fieldAlias,
-            $this->getFieldSkipOutputIfNullAsString($this->isSkipOuputIfNullField($field)),
-            $this->getFieldDirectives($field, true),
-        ];
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<array<string|null>>|null $fieldDirectives
-     */
-    public function getField(
-        string $fieldName,
-        array $fieldArgs,
-        ?string $fieldAlias = null,
-        bool $skipOutputIfNull = false,
-        ?array $fieldDirectives = [],
-        bool $addFieldArgSymbolsIfEmpty = false
-    ): string {
-        return
-            $this->getFieldAliasAsString($fieldAlias) .
-            $fieldName .
-            $this->getFieldArgsAsString($fieldArgs, $addFieldArgSymbolsIfEmpty) .
-            $this->getFieldSkipOutputIfNullAsString($skipOutputIfNull) .
-            $this->getFieldDirectivesAsString($fieldDirectives ?? []);
-    }
-
-    public function composeField(
-        string $fieldName,
-        ?string $fieldArgs = '',
-        ?string $fieldAlias = '',
-        ?string $skipOutputIfNull = '',
-        ?string $fieldDirectives = ''
-    ): string {
-        return ($fieldAlias ?? '') . $fieldName . ($fieldArgs ?? '') . ($skipOutputIfNull ?? '') . ($fieldDirectives ?? '');
-    }
-
-    /**
-     * @return array<string|null>
-     */
-    public function composeDirective(
-        string $directiveName,
-        ?string $directiveArgs = '',
-        ?string $directiveNestedDirectives = ''
-    ): array {
-        return [
-            $directiveName,
-            $directiveArgs,
-            $directiveNestedDirectives,
-        ];
-    }
-
-    /**
-     * @param array<string, mixed> $directiveArgs
-     * @return array<string|null>
-     */
-    public function getDirective(
-        string $directiveName,
-        array $directiveArgs,
-        ?string $directiveNestedDirectives = ''
-    ): array {
-        return $this->composeDirective(
-            $directiveName,
-            $this->getDirectiveArgsAsString($directiveArgs),
-            $directiveNestedDirectives ?? ''
-        );
-    }
-
-    public function composeFieldDirective(
-        string $directiveName,
-        ?string $directiveArgs = '',
-        ?string $directiveNestedDirectives = ''
-    ): string {
-        return $directiveName . ($directiveArgs ?? '') . ($directiveNestedDirectives ?? '');
     }
 
     /**
@@ -825,14 +367,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected function serializeObject(object $object): string
     {
         return $object->__serialize();
-    }
-
-    /**
-     * @param array<string, mixed> $directiveArgs
-     */
-    public function getDirectiveArgsAsString(array $directiveArgs): string
-    {
-        return $this->getFieldArgsAsString($directiveArgs);
     }
 
     protected function isStringWrappedInQuotes(string $value): bool
@@ -1047,32 +581,5 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return '';
         }
         return QuerySyntax::SYMBOL_SKIPOUTPUTIFNULL;
-    }
-
-    /**
-     * @param array<array<string|null>> $fieldDirectives
-     */
-    public function getFieldDirectivesAsString(array $fieldDirectives): string
-    {
-        if (!$fieldDirectives) {
-            return '';
-        }
-        return
-            QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING .
-            /**
-             * @todo Temporary addition to match `asQueryString` in the AST
-             * Added an extra " "
-             */
-            implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', array_map(
-                function ($fieldDirective) {
-                    return $this->composeFieldDirective(
-                        (string)$fieldDirective[0],
-                        $fieldDirective[1] ?? null,
-                        $fieldDirective[2] ?? null
-                    );
-                },
-                $fieldDirectives
-            )) .
-            QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING;
     }
 }

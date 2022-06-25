@@ -35,10 +35,10 @@ class Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers extends PoP_Module
     {
         switch ($component->name) {
             case self::COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isAction', ['action' => URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP]);
+                return /* @todo Re-do this code! Left undone */ new Field('isAction', ['action' => URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP]);
 
             case self::COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isAction', ['action' => URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY]);
+                return /* @todo Re-do this code! Left undone */ new Field('isAction', ['action' => URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY]);
         }
 
         return null;

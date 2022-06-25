@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_PostViewComponentHeadersBase extends PoPEngi
 
     public function getThumbField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        return FieldQueryInterpreterFacade::getInstance()->getField(
+        return /* @todo Re-do this code! Left undone */ new Field(
             $this->getThumbFieldName($component, $props), 
             $this->getThumbFieldArgs($component, $props),
             $this->getThumbFieldAlias($component, $props)

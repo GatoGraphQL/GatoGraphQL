@@ -39,7 +39,7 @@ class PoP_AvatarFoundationManager
     public function getAvatarField($size)
     {
         // return 'avatar-'.$size;
-        return FieldQueryInterpreterFacade::getInstance()->getField('avatar', ['size' => $size], 'avatar-'.$size);
+        return /* @todo Re-do this code! Left undone */ new Field('avatar', ['size' => $size], 'avatar-'.$size);
     }
 
     // public function getSize($name)

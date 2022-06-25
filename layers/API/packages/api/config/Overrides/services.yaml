@@ -6,9 +6,3 @@ services:
 
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \PoPAPI\API\Schema\SchemaDefinitionService
-
-    # Override the services from FieldQuery and ComponentModel
-    PoP\FieldQuery\FieldQueryInterpreterInterface:
-        class: \PoPAPI\API\Schema\FieldQueryInterpreter
-    PoP\ComponentModel\Schema\FieldQueryInterpreterInterface:
-        class: \PoPAPI\API\Schema\FieldQueryInterpreter

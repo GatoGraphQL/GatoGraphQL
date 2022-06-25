@@ -16,6 +16,6 @@ abstract class PoP_Module_Processor_FullViewTitleLayoutsBase extends PoP_Module_
 
     public function getTitleConditionField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
+        return /* @todo Re-do this code! Left undone */ new Field('isStatus', ['status' => Status::PUBLISHED], 'published');
     }
 }

@@ -55,17 +55,10 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
             if (str_starts_with($fields[1], '@')) {
                 $fields[1] = substr($fields[1], 1);
             }
-            $maybeField = $fields[0];
-            $maybeDirective = $fields[1];
-            $maybeFieldDirectives = array_map(
-                $this->getFieldQueryInterpreter()->convertDirectiveToFieldDirective(...),
-                $this->getFieldQueryInterpreter()->getDirectives($maybeField)
-            );
-            // Find out if the directive is contained in the field
-            if (in_array($maybeDirective, $maybeFieldDirectives)) {
-                $extensions['directive'] = $maybeDirective;
-                return;
-            }
+            // $maybeField = $fields[0];
+            // $maybeDirective = $fields[1];
+            // $extensions['directive'] = $maybeDirective;
+            // return;
         }
         // Many fields
         $extensions['fields'] = $fields;

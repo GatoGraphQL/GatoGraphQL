@@ -86,34 +86,17 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
     abstract public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string;
 
+    /**
+     * Calculate the "not" data field for the conditionField
+     *
+     * @todo Re-do this method with AST
+     */
     public function getNotConditionField(\PoP\ComponentModel\Component\Component $component)
     {
         // Calculate the "not" data field for the conditionField
         if ($conditionField = $this->getConditionField($component)) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-            list(
-                $fieldName,
-                $fieldArgs,
-                $fieldAlias,
-                $skipIfOutputNull,
-                $fieldDirectives,
-            ) = $fieldQueryInterpreter->listField($conditionField);
-            if (!is_null($fieldAlias)) {
-                $notFieldAlias = 'not-'.$fieldAlias;
-            }
-            // Make sure the conditionField has "()" as to be executed as a field
-            $conditionField = $fieldArgs ?
-                $fieldQueryInterpreter->composeField($fieldName, $fieldArgs) :
-                $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName($fieldName);
-            return $fieldQueryInterpreter->getField(
-                'not',
-                [
-                    'value' => $conditionField,
-                ],
-                $notFieldAlias,
-                $skipIfOutputNull,
-                $fieldDirectives
-            );
+            // @todo Create the "not" Field using FieldVariableReferences
+            return '';
         }
         return null;
     }
@@ -143,10 +126,10 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         }
 
         if ($condition_field = $this->getConditionField($component)) {
-            $ret['condition-field'] = FieldQueryInterpreterFacade::getInstance()->getFieldAlias($condition_field);
+            $ret['condition-field'] = /* @todo This must be a Field */ $condition_field->getAlias();
         }
         if ($not_condition_field = $this->getNotConditionField($component)) {
-            $ret['not-condition-field'] = FieldQueryInterpreterFacade::getInstance()->getFieldAlias($not_condition_field);
+            $ret['not-condition-field'] = /* @todo This must be a Field */ $not_condition_field->getAlias();
         }
         if ($condition_method = $this->getConditionMethod($component)) {
             $ret['condition-method'] = $condition_method;

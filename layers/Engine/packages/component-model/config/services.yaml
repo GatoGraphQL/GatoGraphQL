@@ -149,3 +149,6 @@ services:
 
     PoP\ComponentModel\Response\OutputServiceInterface:
         class: \PoP\ComponentModel\Response\OutputService
+
+    PoP\ComponentModel\Variables\VariableManagerInterface:
+        class: \PoP\ComponentModel\Variables\VariableManager

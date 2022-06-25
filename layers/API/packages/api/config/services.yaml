@@ -13,9 +13,6 @@ services:
     PoPAPI\API\Schema\SchemaDefinitionServiceInterface:
         class: \PoPAPI\API\Schema\SchemaDefinitionService
 
-    PoPAPI\API\Schema\FieldQueryInterpreterInterface:
-        class: \PoPAPI\API\Schema\FieldQueryInterpreter
-
     PoPAPI\API\State\:
         resource: '../src/State/*'
 
