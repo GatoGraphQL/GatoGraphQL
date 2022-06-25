@@ -25,34 +25,10 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     private array $fieldArgsCache = [];
     /**
-     * @var array<string, bool>
-     */
-    private array $skipOutputIfNullCache = [];
-    /**
-     * @var array<string, string|null>
-     */
-    private array $fieldAliasesCache = [];
-    /**
      * @var array<string, array<string, int>|null>
      */
     private array $fieldAliasPositionSpansCache = [];
-    /**
-     * @var array<string, string|null>
-     */
-    private array $fieldDirectivesCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $directivesCache = [];
-    /**
-     * @var array<string, array>
-     */
-    private array $extractedFieldDirectivesCache = [];
-    /**
-     * @var array<string, string>
-     */
-    private array $fieldOutputKeysCache = [];
-
+    
     public final const ALIAS_POSITION_KEY = 'pos';
     public final const ALIAS_LENGTH_KEY = 'length';
 
