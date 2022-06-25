@@ -47,7 +47,6 @@ $field = $fieldQueryInterpreter->getField($fieldName, $fieldArgs, $fieldAlias, $
 $fieldName = $fieldQueryInterpreter->getFieldName($field);
 $fieldArgs = $fieldQueryInterpreter->getFieldArgs($field);
 $fieldAlias = $fieldQueryInterpreter->getFieldAlias($field);
-$skipOutputIfNull = $fieldQueryInterpreter->isSkipOuputIfNullField($field);
 $fieldDirectives = $fieldQueryInterpreter->getFieldDirectives($field);
 
 // All other functions listed in FieldQueryInterpreterInterface

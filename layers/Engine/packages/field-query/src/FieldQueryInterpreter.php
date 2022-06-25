@@ -210,19 +210,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         );
     }
 
-    public function isSkipOuputIfNullField(string $field): bool
-    {
-        if (!isset($this->skipOutputIfNullCache[$field])) {
-            $this->skipOutputIfNullCache[$field] = $this->doIsSkipOuputIfNullField($field);
-        }
-        return $this->skipOutputIfNullCache[$field];
-    }
-
-    protected function doIsSkipOuputIfNullField(string $field): bool
-    {
-        return QueryHelpers::findSkipOutputIfNullSymbolPosition($field) !== false;
-    }
-
     public function removeSkipOuputIfNullFromField(string $field): string
     {
         $pos = QueryHelpers::findSkipOutputIfNullSymbolPosition($field);
@@ -683,7 +670,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $this->getFieldName($field),
             $this->getFieldArgs($field),
             $fieldAlias,
-            $this->getFieldSkipOutputIfNullAsString($this->isSkipOuputIfNullField($field)),
+            '',
             $this->getFieldDirectives($field, true),
         ];
     }

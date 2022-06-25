@@ -10,7 +10,6 @@ interface FieldQueryInterpreterInterface
 {
     public function getFieldName(string $field): string;
     public function getFieldArgs(string $field): ?string;
-    public function isSkipOuputIfNullField(string $field): bool;
     public function removeSkipOuputIfNullFromField(string $field): string;
     public function isFieldArgumentValueAField(mixed $fieldArgValue): bool;
     public function isFieldArgumentValueAVariable(mixed $fieldArgValue): bool;
