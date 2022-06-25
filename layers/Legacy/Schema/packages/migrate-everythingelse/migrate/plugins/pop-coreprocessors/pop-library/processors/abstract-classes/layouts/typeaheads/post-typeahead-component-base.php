@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentLayoutsBase extends Po
 
     public function getThumbField(\PoP\ComponentModel\Component\Component $component, array &$props): array
     {
-        return FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'thumb-xs'], 'thumb');
+        return /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'thumb-xs'], 'thumb');
     }
 
     /**

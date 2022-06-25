@@ -38,7 +38,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         switch ($component->name) {
             case self::COMPONENT_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
+                return /* @todo Re-do this code! Left undone */ new Field('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 
         return null;

@@ -44,7 +44,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
             case self::COMPONENT_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
+                return /* @todo Re-do this code! Left undone */ new Field('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 
         return null;

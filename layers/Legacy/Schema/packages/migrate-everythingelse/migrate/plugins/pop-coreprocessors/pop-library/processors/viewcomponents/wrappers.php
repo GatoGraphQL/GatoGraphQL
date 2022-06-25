@@ -51,7 +51,7 @@ class PoP_Module_Processor_ViewComponentButtonWrappers extends PoP_Module_Proces
             case self::COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG:
             case self::COMPONENT_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
             case self::COMPONENT_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
+                return /* @todo Re-do this code! Left undone */ new Field('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 
         return null;

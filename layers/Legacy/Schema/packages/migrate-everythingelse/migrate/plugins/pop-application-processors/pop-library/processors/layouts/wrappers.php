@@ -62,7 +62,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
             case self::COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
+                return /* @todo Re-do this code! Left undone */ new Field('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 
         return null;

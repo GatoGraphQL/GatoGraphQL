@@ -63,7 +63,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
 
     public function getThumbField(\PoP\ComponentModel\Component\Component $component, array &$props)
     {
-        return FieldQueryInterpreterFacade::getInstance()->getField(
+        return /* @todo Re-do this code! Left undone */ new Field(
             $this->getThumbFieldName($component, $props),
             $this->getThumbFieldArgs($component, $props),
             $this->getThumbFieldAlias($component, $props)
