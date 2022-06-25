@@ -29,10 +29,6 @@ interface FieldQueryInterpreterInterface
      */
     public function getDirectiveName(array $directive): string;
     /**
-     * @return array<string|null>
-     */
-    public function listField(string $field): array;
-    /**
      * @param array<string, mixed> $directiveArgs
      * @return array<string|null>
      */

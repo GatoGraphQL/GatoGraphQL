@@ -440,27 +440,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return (string)$directive[0];
     }
 
-    /**
-     * @return array<string|null>
-     */
-    public function listField(string $field): array
-    {
-        if ($fieldAlias = $this->getFieldAlias($field)) {
-            /**
-             * @todo Temporary addition to match `asQueryString` in the AST
-             * Added an extra " "
-             */
-            $fieldAlias = $fieldAlias . QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . ' ';
-        }
-        return [
-            $this->getFieldName($field),
-            $this->getFieldArgs($field),
-            $fieldAlias,
-            '',
-            $this->getFieldDirectives($field, true),
-        ];
-    }
-
     public function composeFieldDirective(
         string $directiveName,
         ?string $directiveArgs = '',
