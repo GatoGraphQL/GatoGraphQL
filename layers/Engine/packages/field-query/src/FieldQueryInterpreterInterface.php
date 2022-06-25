@@ -33,10 +33,6 @@ interface FieldQueryInterpreterInterface
      */
     public function composeFieldDirectives(array $fieldDirectives): string;
     /**
-     * @param array<string|null> $directive
-     */
-    public function convertDirectiveToFieldDirective(array $directive): string;
-    /**
      * @return array<string|null>
      */
     public function listFieldDirective(string $fieldDirective): array;

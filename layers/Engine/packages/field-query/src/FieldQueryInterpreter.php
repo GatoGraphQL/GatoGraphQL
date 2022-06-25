@@ -520,16 +520,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
 
     /**
-     * @param array<string|null> $directive
-     */
-    public function convertDirectiveToFieldDirective(array $directive): string
-    {
-        $directiveArgs = $this->getDirectiveArgs($directive) ?? '';
-        $nestedDirectives = $this->getDirectiveNestedDirectives($directive) ?? '';
-        return $this->getDirectiveName($directive) . $directiveArgs . $nestedDirectives;
-    }
-
-    /**
      * @return array<string|null>
      */
     public function listFieldDirective(string $fieldDirective): array
