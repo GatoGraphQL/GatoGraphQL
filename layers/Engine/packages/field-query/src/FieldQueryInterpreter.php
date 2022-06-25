@@ -469,11 +469,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return $this->getFieldArgs($fieldDirective);
     }
 
-    public function getFieldDirectiveNestedDirectives(string $fieldDirective, bool $includeSyntaxDelimiters = false): ?string
-    {
-        return $this->getFieldDirectives($fieldDirective, $includeSyntaxDelimiters);
-    }
-
     /**
      * @param array<string, mixed> $directiveArgs
      */
