@@ -461,26 +461,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         ];
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<array<string|null>>|null $fieldDirectives
-     */
-    public function getField(
-        string $fieldName,
-        array $fieldArgs,
-        ?string $fieldAlias = null,
-        bool $skipOutputIfNull = false,
-        ?array $fieldDirectives = [],
-        bool $addFieldArgSymbolsIfEmpty = false
-    ): string {
-        return
-            $this->getFieldAliasAsString($fieldAlias) .
-            $fieldName .
-            $this->getFieldArgsAsString($fieldArgs, $addFieldArgSymbolsIfEmpty) .
-            $this->getFieldSkipOutputIfNullAsString($skipOutputIfNull) .
-            $this->getFieldDirectivesAsString($fieldDirectives ?? []);
-    }
-
     public function composeFieldDirective(
         string $directiveName,
         ?string $directiveArgs = '',

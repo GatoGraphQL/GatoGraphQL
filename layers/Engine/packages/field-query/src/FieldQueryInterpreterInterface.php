@@ -33,18 +33,6 @@ interface FieldQueryInterpreterInterface
      */
     public function listField(string $field): array;
     /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<array<string|null>>|null $fieldDirectives
-     */
-    public function getField(
-        string $fieldName,
-        array $fieldArgs,
-        ?string $fieldAlias = null,
-        bool $skipOutputIfNull = false,
-        ?array $fieldDirectives = [],
-        bool $addFieldArgSymbolsIfEmpty = false
-    ): string;
-    /**
      * @param array<string, mixed> $directiveArgs
      * @return array<string|null>
      */
