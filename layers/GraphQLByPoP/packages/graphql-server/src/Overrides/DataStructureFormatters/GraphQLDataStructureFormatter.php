@@ -53,10 +53,12 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         if (count($fields) == 2) {
             // @todo Temporary hack to fix tests, will be removed soon anyway
             if (str_starts_with($fields[1], '@')) {
-                $directive = substr($fields[1], 1);
-                $extensions['directive'] = $directive;
-                return;
+                $fields[1] = substr($fields[1], 1);
             }
+            // $maybeField = $fields[0];
+            // $maybeDirective = $fields[1];
+            // $extensions['directive'] = $maybeDirective;
+            // return;
         }
         // Many fields
         $extensions['fields'] = $fields;
