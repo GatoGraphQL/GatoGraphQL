@@ -38,10 +38,6 @@ interface FieldQueryInterpreterInterface
         ?string $directiveNestedDirectives = ''
     ): string;
     /**
-     * @param array<array<string|null>> $fieldDirectives
-     */
-    public function getFieldDirectivesAsString(array $fieldDirectives): string;
-    /**
      * @param array<string, mixed> $fieldArgValue
      */
     public function getArrayAsStringForQuery(array $fieldArgValue): string;

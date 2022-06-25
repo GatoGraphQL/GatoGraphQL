@@ -731,31 +731,4 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         return QuerySyntax::SYMBOL_SKIPOUTPUTIFNULL;
     }
-
-    /**
-     * @param array<array<string|null>> $fieldDirectives
-     */
-    public function getFieldDirectivesAsString(array $fieldDirectives): string
-    {
-        if (!$fieldDirectives) {
-            return '';
-        }
-        return
-            QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING .
-            /**
-             * @todo Temporary addition to match `asQueryString` in the AST
-             * Added an extra " "
-             */
-            implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', array_map(
-                function ($fieldDirective) {
-                    return $this->composeFieldDirective(
-                        (string)$fieldDirective[0],
-                        $fieldDirective[1] ?? null,
-                        $fieldDirective[2] ?? null
-                    );
-                },
-                $fieldDirectives
-            )) .
-            QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING;
-    }
 }
