@@ -86,34 +86,17 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
     abstract public function getConditionField(\PoP\ComponentModel\Component\Component $component): ?string;
 
+    /**
+     * Calculate the "not" data field for the conditionField
+     *
+     * @todo Re-do this method with AST
+     */
     public function getNotConditionField(\PoP\ComponentModel\Component\Component $component)
     {
         // Calculate the "not" data field for the conditionField
         if ($conditionField = $this->getConditionField($component)) {
-            $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-            list(
-                $fieldName,
-                $fieldArgs,
-                $fieldAlias,
-                $skipIfOutputNull,
-                $fieldDirectives,
-            ) = $fieldQueryInterpreter->listField($conditionField);
-            if (!is_null($fieldAlias)) {
-                $notFieldAlias = 'not-'.$fieldAlias;
-            }
-            // Make sure the conditionField has "()" as to be executed as a field
-            $conditionField = $fieldArgs ?
-                $fieldQueryInterpreter->composeField($fieldName, $fieldArgs) :
-                $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName($fieldName);
-            return $fieldQueryInterpreter->getField(
-                'not',
-                [
-                    'value' => $conditionField,
-                ],
-                $notFieldAlias,
-                $skipIfOutputNull,
-                $fieldDirectives
-            );
+            // @todo Create the "not" Field using FieldVariableReferences
+            return '';
         }
         return null;
     }
