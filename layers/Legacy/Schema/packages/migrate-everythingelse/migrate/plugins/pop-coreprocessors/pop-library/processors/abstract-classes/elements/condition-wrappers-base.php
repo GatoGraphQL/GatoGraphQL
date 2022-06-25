@@ -126,10 +126,10 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         }
 
         if ($condition_field = $this->getConditionField($component)) {
-            $ret['condition-field'] = FieldQueryInterpreterFacade::getInstance()->getFieldAlias($condition_field);
+            $ret['condition-field'] = /* @todo This must be a Field */ $condition_field->getAlias();
         }
         if ($not_condition_field = $this->getNotConditionField($component)) {
-            $ret['not-condition-field'] = FieldQueryInterpreterFacade::getInstance()->getFieldAlias($not_condition_field);
+            $ret['not-condition-field'] = /* @todo This must be a Field */ $not_condition_field->getAlias();
         }
         if ($condition_method = $this->getConditionMethod($component)) {
             $ret['condition-method'] = $condition_method;

@@ -46,7 +46,6 @@ $field = /* @todo Re-do this code! Left undone */ new Field($fieldName, $fieldAr
 // To retrieve the elements from a field
 $fieldName = $fieldQueryInterpreter->getFieldName($field);
 $fieldArgs = $fieldQueryInterpreter->getFieldArgs($field);
-$fieldAlias = $fieldQueryInterpreter->getFieldAlias($field);
 
 // All other functions listed in FieldQueryInterpreterInterface
 // ...

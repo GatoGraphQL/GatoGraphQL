@@ -272,50 +272,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
     }
 
-    public function getFieldAlias(string $field): ?string
-    {
-        if (!isset($this->fieldAliasesCache[$field])) {
-            $this->fieldAliasesCache[$field] = $this->doGetFieldAlias($field);
-        }
-        return $this->fieldAliasesCache[$field];
-    }
-
-    protected function doGetFieldAlias(string $field): ?string
-    {
-        if ($fieldAliasPositionSpan = $this->getFieldAliasPositionSpanInField($field)) {
-            $aliasSymbolPos = $fieldAliasPositionSpan[self::ALIAS_POSITION_KEY];
-            if ($aliasSymbolPos === 0) {
-                // Only there is the alias, nothing to alias to
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->__('The field to be aliased in \'%s\' is missing', 'field-query'),
-                    $field
-                ));
-                return null;
-            } elseif ($aliasSymbolPos === strlen($field) - 1) {
-                // Only the "@" was added, but the alias is missing
-                $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                    $this->__('Alias in \'%s\' is missing', 'field-query'),
-                    $field
-                ));
-                return null;
-            }
-
-            // Extract the alias, without the "@" symbol
-            $aliasSymbolLength = $fieldAliasPositionSpan[self::ALIAS_LENGTH_KEY];
-            // return substr(
-            //     $field,
-            //     $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX),
-            //     $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
-            // );
-            return substr(
-                $field,
-                0,
-                $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
-            );
-        }
-        return null;
-    }
-
     /**
      * Return an array with the position where the alias starts (including the "@") and its length
      * Return null if the field has no alias
