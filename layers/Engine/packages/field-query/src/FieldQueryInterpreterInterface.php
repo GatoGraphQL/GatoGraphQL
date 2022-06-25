@@ -53,14 +53,6 @@ interface FieldQueryInterpreterInterface
         ?string $fieldDirectives = ''
     ): string;
     /**
-     * @return array<string|null>
-     */
-    public function composeDirective(
-        string $directiveName,
-        ?string $directiveArgs = '',
-        ?string $directiveNestedDirectives = ''
-    ): array;
-    /**
      * @param array<string, mixed> $directiveArgs
      * @return array<string|null>
      */
