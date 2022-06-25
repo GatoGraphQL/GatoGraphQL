@@ -470,14 +470,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
 
     /**
-     * @param array<string, mixed> $directiveArgs
-     */
-    public function getFieldDirective(string $directiveName, array $directiveArgs): string
-    {
-        return $this->getField($directiveName, $directiveArgs);
-    }
-
-    /**
      * @param array<string|null> $directive
      */
     public function getDirectiveName(array $directive): string
