@@ -10,30 +10,6 @@ use PoP\FieldQuery\QueryUtils;
 
 class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements FieldQueryInterpreterInterface
 {
-    // Cache the output from functions
-    /**
-     * @var array<string, array >
-     */
-    private array $extractedFieldArgumentValuesCache = [];
-
-    public function extractFieldArgumentValues(string $field): array
-    {
-        if (!isset($this->extractedFieldArgumentValuesCache[$field])) {
-            $this->extractedFieldArgumentValuesCache[$field] = $this->doExtractFieldArgumentValues($field);
-        }
-        return $this->extractedFieldArgumentValuesCache[$field];
-    }
-
-    protected function doExtractFieldArgumentValues(string $field): array
-    {
-        // Extract the args from the string into an array
-        if ($fieldArgsStr = $this->getFieldDirectiveArgs($field)) {
-            return $this->extractFieldOrDirectiveArgumentValues($fieldArgsStr);
-        }
-
-        return [];
-    }
-
     public function extractFieldOrDirectiveArgumentValues(string $fieldOrDirectiveArgsStr): array
     {
         $fieldOrDirectiveArgValues = [];
