@@ -81,9 +81,5 @@ interface FieldQueryInterpreterInterface
         array $fieldArgs,
         bool $addFieldArgSymbolsIfEmpty = false
     ): string;
-    /**
-     * @param array<string, mixed> $directiveArgs
-     */
-    public function getDirectiveArgsAsString(array $directiveArgs): string;
     public function wrapStringInQuotes(string $value): string;
 }

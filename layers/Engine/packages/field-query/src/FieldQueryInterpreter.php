@@ -606,14 +606,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return $object->__serialize();
     }
 
-    /**
-     * @param array<string, mixed> $directiveArgs
-     */
-    public function getDirectiveArgsAsString(array $directiveArgs): string
-    {
-        return $this->getFieldArgsAsString($directiveArgs);
-    }
-
     protected function isStringWrappedInQuotes(string $value): bool
     {
         return
