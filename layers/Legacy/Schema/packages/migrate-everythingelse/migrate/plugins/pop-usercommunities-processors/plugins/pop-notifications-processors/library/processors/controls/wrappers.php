@@ -37,7 +37,7 @@ class GD_URE_AAL_Module_Processor_QuicklinkButtonGroupWrappers extends PoP_Modul
             case self::COMPONENT_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_EDITUSERMEMBERSHIP:
             case self::COMPONENT_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_VIEWALLMEMBERS:
                 $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-                return $fieldQueryInterpreter->getField(
+                return /* @todo Re-do this code! Left undone */ new Field(
                     'equals',
                     [
                         'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('objectID'),

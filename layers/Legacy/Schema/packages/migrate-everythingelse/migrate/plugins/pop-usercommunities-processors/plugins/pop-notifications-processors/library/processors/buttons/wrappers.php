@@ -51,7 +51,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
             case self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
             case self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
                 $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-                return $fieldQueryInterpreter->getField(
+                return /* @todo Re-do this code! Left undone */ new Field(
                     'equals',
                     [
                         'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('objectID'),

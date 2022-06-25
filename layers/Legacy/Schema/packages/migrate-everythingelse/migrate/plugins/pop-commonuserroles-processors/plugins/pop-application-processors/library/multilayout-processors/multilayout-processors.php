@@ -5,14 +5,13 @@ class PoP_CommonUserRoles_Multilayout_Processor extends PoP_Application_Multilay
 {
     public function addLayoutComponents(&$layouts, $handle, $format = '')
     {
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-        $field_organization = $fieldQueryInterpreter->getField(
+        $field_organization = /* @todo Re-do this code! Left undone */ new Field(
             'hasRole',
             [
                 'role' => GD_URE_ROLE_ORGANIZATION,
             ]
         );
-        $field_individual = $fieldQueryInterpreter->getField(
+        $field_individual = /* @todo Re-do this code! Left undone */ new Field(
             'hasRole',
             [
                 'role' => GD_URE_ROLE_INDIVIDUAL,

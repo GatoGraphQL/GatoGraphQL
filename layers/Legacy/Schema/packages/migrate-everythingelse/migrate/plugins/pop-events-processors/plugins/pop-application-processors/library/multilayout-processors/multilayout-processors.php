@@ -20,11 +20,10 @@ class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_Proce
     {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event_post_type = $eventTypeAPI->getEventCustomPostType();
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var RelationalTypeResolverInterface */
         $eventObjectTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
-        $field = $fieldQueryInterpreter->getField(
+        $field = /* @todo Re-do this code! Left undone */ new Field(
             'isObjectType',
             [
                 'type' => $eventObjectTypeResolver->getTypeName(),

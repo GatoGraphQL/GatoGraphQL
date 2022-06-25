@@ -14,8 +14,7 @@ class PoP_LocationPostCategoryLayouts_Multilayout_Processor extends PoP_Applicat
                     $instanceManager = InstanceManagerFacade::getInstance();
                     /** @var RelationalTypeResolverInterface */
                     $locationPostTypeResolver = $instanceManager->getInstance(LocationPostObjectTypeResolver::class);
-                    $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
-                    $field = $fieldQueryInterpreter->getField(
+                    $field = /* @todo Re-do this code! Left undone */ new Field(
                         'isObjectType',
                         [
                             'type' => $locationPostTypeResolver->getTypeName(),
