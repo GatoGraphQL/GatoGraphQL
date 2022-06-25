@@ -371,62 +371,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         ];
     }
 
-    public function getFieldDirectives(string $field, bool $includeSyntaxDelimiters = false): ?string
-    {
-        if (!isset($this->fieldDirectivesCache[$field])) {
-            $this->fieldDirectivesCache[$field] = $this->doGetFieldDirectives($field);
-        }
-        // Add the syntax delimiters "<...>" only if the directive is not empty
-        return $this->fieldDirectivesCache[$field] && $includeSyntaxDelimiters ?
-            (
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING .
-                $this->fieldDirectivesCache[$field] .
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-            ) :
-            $this->fieldDirectivesCache[$field];
-    }
-
-    protected function doGetFieldDirectives(string $field): ?string
-    {
-        list(
-            $fieldDirectivesOpeningSymbolPos,
-            $fieldDirectivesClosingSymbolPos
-        ) = QueryHelpers::listFieldDirectivesSymbolPositions($field);
-
-        // If there are no "<" and "." then there is no directive
-        if ($fieldDirectivesClosingSymbolPos === false && $fieldDirectivesOpeningSymbolPos === false) {
-            return null;
-        }
-        // If there is only one of them, it's a query error, so discard the query bit
-        if (
-            (
-                $fieldDirectivesClosingSymbolPos === false
-                && $fieldDirectivesOpeningSymbolPos !== false
-            ) || (
-                $fieldDirectivesClosingSymbolPos !== false
-                && $fieldDirectivesOpeningSymbolPos === false
-            )
-        ) {
-            $this->getFeedbackMessageStore()->addQueryError(sprintf(
-                $this->__(
-                    'Directive \'%s\' must start with symbol \'%s\' and end with symbol \'%s\'',
-                    'field-query'
-                ),
-                $field,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-            ));
-            return null;
-        }
-
-        // We have a field directive. Extract it
-        $fieldDirectiveOpeningSymbolStrPos =
-            $fieldDirectivesOpeningSymbolPos
-            + strlen(QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING);
-        $fieldDirectiveClosingStrPos = $fieldDirectivesClosingSymbolPos - $fieldDirectiveOpeningSymbolStrPos;
-        return substr($field, $fieldDirectiveOpeningSymbolStrPos, $fieldDirectiveClosingStrPos);
-    }
-
     public function getFieldDirectiveArgs(string $fieldDirective): ?string
     {
         return $this->getFieldArgs($fieldDirective);
