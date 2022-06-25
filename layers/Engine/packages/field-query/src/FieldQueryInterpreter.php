@@ -486,16 +486,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             $this->getFieldDirectivesAsString($fieldDirectives ?? []);
     }
 
-    public function composeField(
-        string $fieldName,
-        ?string $fieldArgs = '',
-        ?string $fieldAlias = '',
-        ?string $skipOutputIfNull = '',
-        ?string $fieldDirectives = ''
-    ): string {
-        return ($fieldAlias ?? '') . $fieldName . ($fieldArgs ?? '') . ($skipOutputIfNull ?? '') . ($fieldDirectives ?? '');
-    }
-
     public function composeFieldDirective(
         string $directiveName,
         ?string $directiveArgs = '',

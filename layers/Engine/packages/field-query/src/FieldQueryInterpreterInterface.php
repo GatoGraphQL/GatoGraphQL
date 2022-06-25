@@ -45,13 +45,6 @@ interface FieldQueryInterpreterInterface
         ?array $fieldDirectives = [],
         bool $addFieldArgSymbolsIfEmpty = false
     ): string;
-    public function composeField(
-        string $fieldName,
-        ?string $fieldArgs = '',
-        ?string $fieldAlias = '',
-        ?string $skipOutputIfNull = '',
-        ?string $fieldDirectives = ''
-    ): string;
     /**
      * @param array<string, mixed> $directiveArgs
      * @return array<string|null>
