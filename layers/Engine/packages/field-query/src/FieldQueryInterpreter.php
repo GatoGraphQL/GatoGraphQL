@@ -210,20 +210,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         );
     }
 
-    public function removeSkipOuputIfNullFromField(string $field): string
-    {
-        $pos = QueryHelpers::findSkipOutputIfNullSymbolPosition($field);
-        if ($pos !== false) {
-            // Replace the "?" with nothing
-            $field = str_replace(
-                QuerySyntax::SYMBOL_SKIPOUTPUTIFNULL,
-                '',
-                $field
-            );
-        }
-        return $field;
-    }
-
     public function isFieldArgumentValueAField(mixed $fieldArgValue): bool
     {
         // If the result fieldArgValue is a string (i.e. not numeric), and it has brackets (...),
