@@ -163,9 +163,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
         $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($field->asFieldOutputQueryString());
-        return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+        return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $field->getName(), $fieldArgs);
     }
 
     final public function collectFieldValidationErrors(
@@ -406,14 +405,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * Needed for compatibility with CustomPostUnionTypeResolver
              * (so that data-fields aimed for another post_type are not retrieved)
              */
-            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field->asFieldOutputQueryString());
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         FieldResolutionErrorFeedbackItemProvider::class,
                         FieldResolutionErrorFeedbackItemProvider::E1,
                         [
-                            $fieldName,
+                            $field->getName(),
                             $this->getMaybeNamespacedTypeName(),
                             $this->getID($object),
                         ]
