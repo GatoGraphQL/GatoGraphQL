@@ -24,10 +24,6 @@ interface FieldQueryInterpreterInterface
      */
     public function getFieldAliasPositionSpanInField(string $field): ?array;
     public function getFieldDirectives(string $field, bool $includeSyntaxDelimiters = false): ?string;
-    /**
-     * @return array<string|null>
-     */
-    public function listFieldDirective(string $fieldDirective): array;
     public function getFieldDirectiveName(string $fieldDirective): string;
     public function getFieldDirectiveArgs(string $fieldDirective): ?string;
     public function getFieldDirectiveNestedDirectives(

@@ -464,19 +464,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return substr($field, $fieldDirectiveOpeningSymbolStrPos, $fieldDirectiveClosingStrPos);
     }
 
-    /**
-     * @return array<string|null>
-     */
-    public function listFieldDirective(string $fieldDirective): array
-    {
-        // Each item is an array of up to 3 elements: 0 => name, 1 => args, 2 => composed directives
-        return [
-            $this->getFieldDirectiveName($fieldDirective),
-            $this->getFieldDirectiveArgs($fieldDirective),
-            $this->getFieldDirectiveNestedDirectives($fieldDirective, true),
-        ];
-    }
-
     public function getFieldDirectiveName(string $fieldDirective): string
     {
         return $this->getFieldName($fieldDirective);
