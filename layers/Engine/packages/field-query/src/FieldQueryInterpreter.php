@@ -467,29 +467,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     /**
      * @return array<array<string|null>>
      */
-    public function getDirectives(string $field): array
-    {
-        if (!isset($this->directivesCache[$field])) {
-            $this->directivesCache[$field] = $this->doGetDirectives($field);
-        }
-        return $this->directivesCache[$field];
-    }
-
-    /**
-     * @return array<array<string|null>>
-     */
-    protected function doGetDirectives(string $field): array
-    {
-        $fieldDirectives = $this->getFieldDirectives($field, false);
-        if (is_null($fieldDirectives)) {
-            return [];
-        }
-        return $this->extractFieldDirectives($fieldDirectives);
-    }
-
-    /**
-     * @return array<array<string|null>>
-     */
     public function extractFieldDirectives(string $fieldDirectives): array
     {
         if (!isset($this->extractedFieldDirectivesCache[$fieldDirectives])) {

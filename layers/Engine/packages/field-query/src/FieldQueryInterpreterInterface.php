@@ -27,10 +27,6 @@ interface FieldQueryInterpreterInterface
     /**
      * @return array<array<string|null>>
      */
-    public function getDirectives(string $field): array;
-    /**
-     * @return array<array<string|null>>
-     */
     public function extractFieldDirectives(string $fieldDirectives): array;
     /**
      * @param string[] $fieldDirectives
