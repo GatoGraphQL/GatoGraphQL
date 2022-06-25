@@ -440,14 +440,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return (string)$directive[0];
     }
 
-    public function composeFieldDirective(
-        string $directiveName,
-        ?string $directiveArgs = '',
-        ?string $directiveNestedDirectives = ''
-    ): string {
-        return $directiveName . ($directiveArgs ?? '') . ($directiveNestedDirectives ?? '');
-    }
-
     /**
      * @param array<string, mixed> $fieldArgs
      */

@@ -29,15 +29,6 @@ interface FieldQueryInterpreterInterface
      */
     public function getDirectiveName(array $directive): string;
     /**
-     * @param array<string, mixed> $directiveArgs
-     * @return array<string|null>
-     */
-    public function composeFieldDirective(
-        string $directiveName,
-        ?string $directiveArgs = '',
-        ?string $directiveNestedDirectives = ''
-    ): string;
-    /**
      * @param array<string, mixed> $fieldArgValue
      */
     public function getArrayAsStringForQuery(array $fieldArgValue): string;
