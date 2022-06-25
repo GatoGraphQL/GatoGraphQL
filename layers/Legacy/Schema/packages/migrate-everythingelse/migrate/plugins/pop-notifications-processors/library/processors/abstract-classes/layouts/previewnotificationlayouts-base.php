@@ -154,12 +154,11 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     {
         $ret = [];
         // Only fetch data if doing loadingLatest and is a comment notification
-        $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field = /* @todo Re-do this code! Left undone */ new Field(
             'and',
             [
                 'values' => [
-                    $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('isCommentNotification'),
+                    'isCommentNotification()', /* @todo @todo Re-do this code! Use ResolvedVariableReference */
                     /* @todo Re-do this code! Left undone */ new Field('var', ['name' => 'loading-latest']),
                 ],
             ],

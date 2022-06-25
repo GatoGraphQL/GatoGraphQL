@@ -14,7 +14,6 @@ interface FieldQueryInterpreterInterface
     public function isFieldArgumentValueAVariable(mixed $fieldArgValue): bool;
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool;
     public function isFieldArgumentValueDynamic(mixed $fieldArgValue): bool;
-    public function createFieldArgValueAsFieldFromFieldName(string $fieldName): string;
     public function getFieldAlias(string $field): ?string;
     /**
      * Return an array with the position where the alias starts (including the "@") and its length

@@ -272,11 +272,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             ) == QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
     }
 
-    public function createFieldArgValueAsFieldFromFieldName(string $fieldName): string
-    {
-        return $fieldName . QueryHelpers::getEmptyFieldArgs();
-    }
-
     public function getFieldAlias(string $field): ?string
     {
         if (!isset($this->fieldAliasesCache[$field])) {

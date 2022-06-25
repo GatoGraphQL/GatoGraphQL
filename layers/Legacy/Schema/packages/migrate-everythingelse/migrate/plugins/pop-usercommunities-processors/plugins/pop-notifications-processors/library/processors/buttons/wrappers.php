@@ -50,12 +50,11 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         switch ($component->name) {
             case self::COMPONENT_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
             case self::COMPONENT_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
-                $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                 return /* @todo Re-do this code! Left undone */ new Field(
                     'equals',
                     [
-                        'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('objectID'),
-                        'value2' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('me'),
+                        'value1' => 'objectID()', /* @todo @todo Re-do this code! Use ResolvedVariableReference */
+                        'value2' => 'me()', /* @todo @todo Re-do this code! Use ResolvedVariableReference */
                     ],
                     'object-id-equals-logged-in-user-id'
                 );
