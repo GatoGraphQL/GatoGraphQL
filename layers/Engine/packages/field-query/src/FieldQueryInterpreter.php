@@ -464,11 +464,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return substr($field, $fieldDirectiveOpeningSymbolStrPos, $fieldDirectiveClosingStrPos);
     }
 
-    public function getFieldDirectiveName(string $fieldDirective): string
-    {
-        return $this->getFieldName($fieldDirective);
-    }
-
     public function getFieldDirectiveArgs(string $fieldDirective): ?string
     {
         return $this->getFieldArgs($fieldDirective);
