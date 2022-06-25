@@ -480,14 +480,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     /**
      * @param array<string|null> $directive
      */
-    public function getDirectiveArgs(array $directive): ?string
-    {
-        return $directive[1] ?? null;
-    }
-
-    /**
-     * @param array<string|null> $directive
-     */
     public function getDirectiveNestedDirectives(array $directive): ?string
     {
         return $directive[2] ?? null;
