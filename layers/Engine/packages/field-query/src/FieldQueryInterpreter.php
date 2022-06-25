@@ -465,18 +465,6 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     }
 
     /**
-     * @param string[] $fieldDirectives
-     */
-    public function composeFieldDirectives(array $fieldDirectives): string
-    {
-        /**
-         * @todo Temporary addition to match `asQueryString` in the AST
-         * Added an extra " "
-         */
-        return implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', $fieldDirectives);
-    }
-
-    /**
      * @return array<string|null>
      */
     public function listFieldDirective(string $fieldDirective): array
