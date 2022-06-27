@@ -22,6 +22,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 
@@ -292,11 +293,17 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         return SchemaTypeModifiers::NONE;
     }
 
-    public function isFieldAMutation(string $fieldName): bool
+    public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): bool
     {
+        if ($fieldOrFieldName instanceof FieldInterface) {
+            $field = $fieldOrFieldName;
+            $fieldName = $field->getName();
+        } else {
+            $fieldName = $fieldOrFieldName;
+        }
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->isFieldAMutation($fieldName);
+            return $schemaDefinitionResolver->isFieldAMutation($fieldOrFieldName);
         }
         return false;
     }

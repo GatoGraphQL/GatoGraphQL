@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface InterfaceTypeFieldSchemaDefinitionResolverInterface
 {
@@ -37,7 +38,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgDescription(string $fieldName, string $fieldArgName): ?string;
     public function getConsolidatedFieldArgDefaultValue(string $fieldName, string $fieldArgName): mixed;
     public function getConsolidatedFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int;
-    public function isFieldAMutation(string $fieldName): bool;
+    public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): bool;
     /**
      * Validate the constraints for a field argument
      *

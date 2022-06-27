@@ -341,11 +341,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
     }
 
-    final public function isFieldAMutation(string $fieldName): ?bool
+    final public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): ?bool
     {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldName);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldOrFieldName);
         if ($executableObjectTypeFieldResolver === null) {
             return null;
+        }
+
+        if ($fieldOrFieldName instanceof FieldInterface) {
+            $field = $fieldOrFieldName;
+            $fieldName = $field->getName();
+        } else {
+            $fieldName = $fieldOrFieldName;
         }
 
         $fieldMutationResolver = $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
