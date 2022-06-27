@@ -120,7 +120,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
         FieldInterface $field,
-        array &$variables
     ): bool;
     /**
      * Indicates if the directive can be added several times to the pipeline, or only once

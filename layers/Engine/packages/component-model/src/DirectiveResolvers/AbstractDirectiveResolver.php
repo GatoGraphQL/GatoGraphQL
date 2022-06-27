@@ -369,7 +369,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
         FieldInterface $field,
-        array &$variables
     ): bool {
         /** Check if to validate the version */
         if (

@@ -484,8 +484,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     public function getDirectiveResolversForDirective(Directive $directive, array $fields, array &$variables): ?SplObjectStorage
     {
         $directiveName = $directive->getName();
-        $directiveArgs = $directive->getArguments();
-
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
         $directiveResolvers = $directiveNameResolvers[$directiveName] ?? null;
         if ($directiveResolvers === null) {
@@ -521,7 +519,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
                 // Check if this instance can process the directive
-                if ($maybeDirectiveResolverInstance->resolveCanProcess($this, $directive, $field, $variables)) {
+                if ($maybeDirectiveResolverInstance->resolveCanProcess($this, $directive, $field)) {
                     $fieldDirectiveResolvers[$field] = $maybeDirectiveResolverInstance;
                     break;
                 }
