@@ -919,11 +919,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     // If using an ACL to remove a field from an interface,
                     // getting the ObjectTypeFieldResolvers for that field will be empty
                     // Then ignore adding the field, it must not be added to the schema
-                    $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForFieldOrFieldName($fieldName);
-                    if (!$objectTypeFieldResolversForField) {
+                    $objectTypeFieldResolversForFieldName = $this->getObjectTypeFieldResolversForFieldOrFieldName($fieldName);
+                    if (!$objectTypeFieldResolversForFieldName) {
                         continue;
                     }
-                    $schemaObjectTypeFieldResolvers[$fieldName] = $objectTypeFieldResolversForField;
+                    $schemaObjectTypeFieldResolvers[$fieldName] = $objectTypeFieldResolversForFieldName;
                 }
             }
             // Otherwise, continue iterating for the class parents
@@ -1018,11 +1018,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final protected function getExecutableObjectTypeFieldResolverForField(FieldInterface|string $fieldOrFieldName): ?ObjectTypeFieldResolverInterface
     {
-        $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
-        if ($objectTypeFieldResolversForField === []) {
+        $objectTypeFieldResolversForFieldOrFieldName = $this->getObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
+        if ($objectTypeFieldResolversForFieldOrFieldName === []) {
             return null;
         }
-        return $objectTypeFieldResolversForField[0];
+        return $objectTypeFieldResolversForFieldOrFieldName[0];
     }
 
     /**
