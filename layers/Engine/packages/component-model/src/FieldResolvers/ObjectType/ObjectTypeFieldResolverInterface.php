@@ -78,8 +78,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      */
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): bool;
     /**
      * The mutation can be validated either on the schema (`false`)

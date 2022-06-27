@@ -161,8 +161,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): bool {
         switch ($field->getName()) {
             case 'optionValue':
@@ -172,8 +171,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return parent::validateResolvedFieldType(
             $objectTypeResolver,
-            $fieldName,
-            $fieldArgs,
+            $field,
         );
     }
 

@@ -609,8 +609,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             } elseif (
                 $objectTypeFieldResolver->validateResolvedFieldType(
                     $this,
-                    $fieldName,
-                    $fieldArgs,
+                    $field,
                 )
             ) {
                 $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
