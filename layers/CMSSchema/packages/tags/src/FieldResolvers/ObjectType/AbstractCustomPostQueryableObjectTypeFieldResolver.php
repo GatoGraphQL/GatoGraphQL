@@ -144,7 +144,7 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     ): mixed {
         $tagTypeAPI = $this->getTagTypeAPI();
         $customPost = $object;
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
         switch ($field->getName()) {
             case 'tags':
                 return $tagTypeAPI->getCustomPostTags($objectTypeResolver->getID($customPost), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);

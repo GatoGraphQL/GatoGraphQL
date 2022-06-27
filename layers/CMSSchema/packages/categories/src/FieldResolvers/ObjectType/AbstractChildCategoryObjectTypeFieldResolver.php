@@ -145,7 +145,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         $category = $object;
         $categoryTypeAPI = $this->getCategoryTypeAPI();
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             [
                 'parent-id' => $objectTypeResolver->getID($category),
             ]

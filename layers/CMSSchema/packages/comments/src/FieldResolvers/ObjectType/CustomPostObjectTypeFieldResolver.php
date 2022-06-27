@@ -87,7 +87,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             [
                 'customPostID' => $objectTypeResolver->getID($post),
             ]

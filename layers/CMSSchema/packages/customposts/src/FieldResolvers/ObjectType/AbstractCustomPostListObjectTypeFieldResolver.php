@@ -141,7 +141,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
         );
         switch ($field->getName()) {

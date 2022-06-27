@@ -137,7 +137,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         switch ($field->getName()) {
             case 'customPost':
                 $query = array_merge(
-                    $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+                    $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
                     $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
                 );
                 if ($posts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
