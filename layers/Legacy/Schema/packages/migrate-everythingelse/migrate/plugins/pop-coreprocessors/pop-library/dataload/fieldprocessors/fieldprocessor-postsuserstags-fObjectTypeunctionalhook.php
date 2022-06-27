@@ -52,11 +52,11 @@ class GD_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     ): mixed {
         switch ($field->getName()) {
             case 'printURL':
-                $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $url = $objectTypeResolver->resolveValue($object, 'url', $objectTypeFieldResolutionFeedbackStore);
                 return PoP_Application_Engine_Utils::getPrintUrl($url);
 
             case 'embedURL':
-                $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $url = $objectTypeResolver->resolveValue($object, 'url', $objectTypeFieldResolutionFeedbackStore);
                 return PoP_Application_Engine_Utils::getEmbedUrl($url);
         }
 

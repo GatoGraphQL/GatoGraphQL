@@ -286,10 +286,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
@@ -315,10 +312,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
@@ -344,10 +338,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
@@ -377,10 +368,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                             [],
                             $field->getLocation()
                         ),
-                        $variables,
-                        $expressions,
                         $objectTypeFieldResolutionFeedbackStore,
-                        $options
                     );
                     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         return null;

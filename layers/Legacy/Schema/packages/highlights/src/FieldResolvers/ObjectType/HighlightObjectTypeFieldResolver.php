@@ -132,10 +132,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $highlightedPost;

@@ -112,7 +112,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
 
          // Needed for using handlebars helper "compare" to compare a category id in a buttongroup, which is taken as a string, inside a list of cats, which must then also be strings
             case 'catsByName':
-                $cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $cats = $objectTypeResolver->resolveValue($post, 'categories', $objectTypeFieldResolutionFeedbackStore);
                 $value = array();
                 foreach ($cats as $cat) {
                     $value[] = strval($cat);
@@ -131,12 +131,12 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
 
             case 'topicsByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'topics', $objectTypeFieldResolutionFeedbackStore);
                 $categories = new GD_FormInput_Categories('', $selected);
                 return $categories->getSelectedValue();
 
             case 'appliestoByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $objectTypeFieldResolutionFeedbackStore);
                 $appliesto = new GD_FormInput_AppliesTo('', $selected);
                 return $appliesto->getSelectedValue();
         }

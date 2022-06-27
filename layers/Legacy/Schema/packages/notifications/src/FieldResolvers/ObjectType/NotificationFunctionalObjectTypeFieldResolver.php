@@ -84,10 +84,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 $action = $objectTypeResolver->resolveValue(
                     $notification,
@@ -98,10 +95,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 return array(
                     $object_type . '-' . $action,

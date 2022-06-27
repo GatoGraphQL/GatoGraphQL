@@ -93,10 +93,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $scope;
@@ -117,10 +114,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $scope;

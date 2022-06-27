@@ -151,7 +151,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
 
             case 'linkAccessByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $objectTypeFieldResolutionFeedbackStore);
                 $linkaccess = new GD_FormInput_LinkAccessDescription('', $selected);
                 return $linkaccess->getSelectedValue();
 
@@ -159,7 +159,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
 
             case 'linkCategoriesByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $objectTypeFieldResolutionFeedbackStore);
                 $linkcategories = new GD_FormInput_LinkCategories('', $selected);
                 return $linkcategories->getSelectedValue();
 

@@ -73,10 +73,10 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
 
              // Needed for tinyMCE-mention plug-in
             case 'mentionQueryby':
-                return $objectTypeResolver->resolveValue($user, 'displayName', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                return $objectTypeResolver->resolveValue($user, 'displayName', $objectTypeFieldResolutionFeedbackStore);
 
             case 'descriptionFormatted':
-                $value = $objectTypeResolver->resolveValue($user, 'description', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $value = $objectTypeResolver->resolveValue($user, 'description', $objectTypeFieldResolutionFeedbackStore);
                 return $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML(strip_tags($value)));
 
             case 'excerpt':

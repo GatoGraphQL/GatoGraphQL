@@ -50,7 +50,7 @@ class PS_POP_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFi
         switch ($field->getName()) {
             case 'thumbFullDimensions':
                 // This is the format needed by PhotoSwipe under attr data-size
-                $thumb = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $thumb = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $thumb;
                 }

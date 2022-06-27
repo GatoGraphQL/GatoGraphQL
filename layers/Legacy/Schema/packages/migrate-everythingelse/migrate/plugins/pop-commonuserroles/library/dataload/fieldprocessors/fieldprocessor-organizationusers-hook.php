@@ -90,7 +90,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
                     $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
                     $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
                     $objectTypeResolver->resolveValue($user, 'contactPerson', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options) ||
-                    $objectTypeResolver->resolveValue($user, 'contactNumber', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                    $objectTypeResolver->resolveValue($user, 'contactNumber', $objectTypeFieldResolutionFeedbackStore);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);

@@ -61,14 +61,14 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
         $comment = $object;
         switch ($field->getName()) {
             case 'contentClipped':
-                $content = $objectTypeResolver->resolveValue($object, 'content', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $content = $objectTypeResolver->resolveValue($object, 'content', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $content;
                 }
                 return limitString(strip_tags($content), 250);
 
             case 'replycommentURL':
-                $customPostID = $objectTypeResolver->resolveValue($object, 'customPostID', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $customPostID = $objectTypeResolver->resolveValue($object, 'customPostID', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
                 }

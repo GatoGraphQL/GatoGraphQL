@@ -63,12 +63,12 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
         switch ($field->getName()) {
             case 'shortDescriptionFormatted':
                 // doing esc_html so that single quotes ("'") do not screw the map output
-                $value = $objectTypeResolver->resolveValue($user, 'shortDescription', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $value = $objectTypeResolver->resolveValue($user, 'shortDescription', $objectTypeFieldResolutionFeedbackStore);
                 return $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->escapeHTML($value));
 
             case 'contactSmall':
                 $value = array();
-                $contacts = $objectTypeResolver->resolveValue($user, 'contact', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $contacts = $objectTypeResolver->resolveValue($user, 'contact', $objectTypeFieldResolutionFeedbackStore);
                 // Remove text, replace all icons with their shorter version
                 foreach ($contacts as $contact) {
                     $value[] = array(

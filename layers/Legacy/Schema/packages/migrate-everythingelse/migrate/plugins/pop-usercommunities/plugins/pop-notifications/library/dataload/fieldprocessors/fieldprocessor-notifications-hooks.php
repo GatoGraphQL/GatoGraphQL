@@ -145,7 +145,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
 
             case 'memberStatusByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $objectTypeFieldResolutionFeedbackStore);
                 $status = new GD_URE_FormInput_MultiMemberStatus('', $selected);
                 return $status->getSelectedValue();
 
@@ -156,7 +156,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
 
             case 'memberPrivilegesByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $objectTypeFieldResolutionFeedbackStore);
                 $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $selected);
                 return $privileges->getSelectedValue();
 
@@ -167,7 +167,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);
 
             case 'memberTagsByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $objectTypeFieldResolutionFeedbackStore);
                 $tags = new GD_URE_FormInput_FilterMemberTags('', $selected);
                 return $tags->getSelectedValue();
          // ----------------------------------------

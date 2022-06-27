@@ -72,10 +72,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;

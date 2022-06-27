@@ -324,10 +324,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 return ($status == AAL_POP_STATUS_READ);
 
@@ -341,10 +338,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 return !$is_read;
 

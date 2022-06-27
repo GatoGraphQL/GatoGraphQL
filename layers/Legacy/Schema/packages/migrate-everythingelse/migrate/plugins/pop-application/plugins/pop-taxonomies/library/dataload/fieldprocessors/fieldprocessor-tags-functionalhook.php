@@ -47,7 +47,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
         switch ($field->getName()) {
              // Needed for tinyMCE-mention plug-in
             case 'mentionQueryby':
-                return $objectTypeResolver->resolveValue($tag, 'name', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                return $objectTypeResolver->resolveValue($tag, 'name', $objectTypeFieldResolutionFeedbackStore);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);

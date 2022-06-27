@@ -175,7 +175,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                 return $value;
 
             case 'hasContact':
-                $contact = $objectTypeResolver->resolveValue($object, 'contact', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $contact = $objectTypeResolver->resolveValue($object, 'contact', $objectTypeFieldResolutionFeedbackStore);
                 return !empty($contact);
 
             case 'facebook':

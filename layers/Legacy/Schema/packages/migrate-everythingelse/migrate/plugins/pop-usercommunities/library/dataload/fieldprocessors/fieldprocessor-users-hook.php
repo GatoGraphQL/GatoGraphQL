@@ -121,7 +121,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
                 return gdUreGetCommunitiesStatusActive($objectTypeResolver->getID($user));
 
             case 'hasActiveCommunities':
-                $communities = $objectTypeResolver->resolveValue($object, 'activeCommunities', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $communities = $objectTypeResolver->resolveValue($object, 'activeCommunities', $objectTypeFieldResolutionFeedbackStore);
                 return !empty($communities);
         }
 
