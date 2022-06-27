@@ -417,6 +417,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         );
     }
 
+    /**
+     * @param array<string,mixed> $options
+     */
     public function resolveValue(
         object $object,
         FieldInterface $field,

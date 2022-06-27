@@ -363,6 +363,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
+    /**
+     * @param array<string,mixed> $options
+     */
     final public function resolveValue(
         object $object,
         FieldInterface $field,
@@ -382,7 +385,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $engineState->getObjectTypeResolvedValue($this, $object, $field);
     }
 
-    final public function doResolveValue(
+    /**
+     * @param array<string,mixed> $options
+     */
+    final protected function doResolveValue(
         object $object,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
