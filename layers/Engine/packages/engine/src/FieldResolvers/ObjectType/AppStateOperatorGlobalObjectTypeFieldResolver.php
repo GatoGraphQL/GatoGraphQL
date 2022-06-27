@@ -110,32 +110,25 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
 
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
-        // Important: The validations below can only be done if no fieldArg contains a field!
-        // That is because this is a schema error, so we still don't have the $object against which to resolve the field
-        // For instance, this doesn't work: /?query=arrayItem(posts(),3)
-        // In that case, the validation will be done inside ->resolveValue(), and will be treated as a $dbError, not a $schemaError
-        if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-            switch ($field->getName()) {
-                case 'var':
-                    if (!App::hasState($field->getArgumentValue('name'))) {
-                        return [
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E6,
-                                [
-                                    $field->getArgumentValue('name'),
-                                ]
-                            ),
-                        ];
-                    };
-                    break;
-            }
+        switch ($field->getName()) {
+            case 'var':
+                if (!App::hasState($field->getArgumentValue('name'))) {
+                    return [
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E6,
+                            [
+                                $field->getArgumentValue('name'),
+                            ]
+                        ),
+                    ];
+                };
+                break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
     }
 
     public function resolveValue(

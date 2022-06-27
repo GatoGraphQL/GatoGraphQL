@@ -454,8 +454,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // Custom validations
         return $this->doResolveSchemaValidationErrors(
             $relationalTypeResolver,
-            $directiveName,
-            $directiveArgs,
         );
     }
 
@@ -509,8 +507,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function doResolveSchemaValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs
     ): array {
         return [];
     }
