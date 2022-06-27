@@ -180,16 +180,14 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
-        return match ($fieldName) {
+        return match ($field->getName()) {
             'myCustomPost',
             'myCustomPosts',
             'myCustomPostCount'
@@ -209,7 +207,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     ): mixed {
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
-            $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
+            $this->getQuery($objectTypeResolver, $object, $field)
         );
         switch ($field->getName()) {
             case 'myCustomPostCount':

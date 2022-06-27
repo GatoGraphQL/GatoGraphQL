@@ -122,14 +122,12 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
         return [];
     }
@@ -142,7 +140,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     ): mixed {
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
-            $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
+            $this->getQuery($objectTypeResolver, $object, $field)
         );
         switch ($field->getName()) {
             case 'customPosts':

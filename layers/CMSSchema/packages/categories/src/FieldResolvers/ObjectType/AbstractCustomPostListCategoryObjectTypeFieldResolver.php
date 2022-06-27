@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\Categories\ModuleContracts\CategoryAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPCMSSchema\Taxonomies\FieldResolvers\ObjectType\AbstractCustomPostListTaxonomyObjectTypeFieldResolver;
 
@@ -22,16 +23,14 @@ abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends Abs
     abstract protected function getQueryProperty(): string;
 
     /**
-     * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
-        $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
+        $query = parent::getQuery($objectTypeResolver, $object, $field);
 
         $category = $object;
         switch ($field->getName()) {
