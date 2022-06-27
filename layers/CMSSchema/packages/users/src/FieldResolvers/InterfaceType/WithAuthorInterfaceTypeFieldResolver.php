@@ -56,7 +56,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
-        switch ($field->getName()) {
+        switch ($fieldName) {
             case 'author':
                 return $this->getUserObjectTypeResolver();
         }
