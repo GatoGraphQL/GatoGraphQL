@@ -483,25 +483,15 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveValue(
             $objectTypeResolver,
             $object,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs,
-            $variables,
-            $expressions,
-            $field,
+            $this->getAliasedField($field),
             $objectTypeFieldResolutionFeedbackStore,
-            $options
         );
     }
 
