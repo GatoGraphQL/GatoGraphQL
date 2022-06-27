@@ -29,6 +29,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -1056,6 +1057,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldName = $field->getName();
         } else {
             $fieldName = $fieldOrFieldName;
+            /** 
+             * Please notice: $fieldName could be for either a Leaf or Relational Field,
+             * but just to ask if the FieldResolver can resolve it, this doesn't make a
+             * difference, so simply provide a LeafField always to make it simple.
+             *
+             * @var FieldInterface
+             */
+            $field = new LeafField(
+                $fieldName,
+                null,
+                [],
+                [],
+                LocationHelper::getNonSpecificLocation()
+            );
         }
 
         $objectTypeFieldResolvers = [];
@@ -1076,7 +1091,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     continue;
                 }
                 // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                // @Fix here: passing FieldInterface, do I always have it?
                 if (!$objectTypeFieldResolver->resolveCanProcess($this, $field)) {
                     continue;
                 }
