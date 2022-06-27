@@ -229,7 +229,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'if':
                 if ($field->getArgumentValue('condition')) {
                     return $field->getArgumentValue('then');
-                } elseif (isset($field->getArgumentValue('else'))) {
+                }
+                if ($field->getArgument('else') !== null) {
                     return $field->getArgumentValue('else');
                 }
                 return null;
