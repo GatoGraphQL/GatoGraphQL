@@ -231,18 +231,18 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getMediaTypeAPI()->getDate($media, $field->getArgument('gmt')?->getValue()));
+                return new DateTime($this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt')));
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgument('format')?->getValue(),
-                    $this->getMediaTypeAPI()->getDate($media, $field->getArgument('gmt')?->getValue())
+                    $field->getArgumentValue('format'),
+                    $this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt'))
                 );
             case 'modifiedDate':
-                return new DateTime($this->getMediaTypeAPI()->getModified($media, $field->getArgument('gmt')?->getValue()));
+                return new DateTime($this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt')));
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgument('format')?->getValue(),
-                    $this->getMediaTypeAPI()->getModified($media, $field->getArgument('gmt')?->getValue())
+                    $field->getArgumentValue('format'),
+                    $this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt'))
                 );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
@@ -258,6 +258,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
      */
     protected function obtainImageSizeFromParameters(array $fieldArgs): ?string
     {
-        return $field->getArgument('size')?->getValue() ?? null;
+        return $field->getArgumentValue('size') ?? null;
     }
 }

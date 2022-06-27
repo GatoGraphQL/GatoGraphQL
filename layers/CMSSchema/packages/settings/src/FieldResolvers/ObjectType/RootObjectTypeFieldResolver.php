@@ -144,13 +144,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($field->getArgument('name')?->getValue())) {
+                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($field->getArgumentValue('name'))) {
                     return [
                         new FeedbackItemResolution(
                             FeedbackItemProvider::class,
                             FeedbackItemProvider::E1,
                             [
-                                $field->getArgument('name')?->getValue(),
+                                $field->getArgumentValue('name'),
                             ]
                         ),
                     ];
@@ -190,7 +190,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                $value = $this->getSettingsTypeAPI()->getOption($field->getArgument('name')?->getValue());
+                $value = $this->getSettingsTypeAPI()->getOption($field->getArgumentValue('name'));
                 if ($fieldName === 'optionValues') {
                     return (array) $value;
                 }

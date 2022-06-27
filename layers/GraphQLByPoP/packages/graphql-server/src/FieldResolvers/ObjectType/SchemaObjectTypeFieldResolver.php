@@ -145,7 +145,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'subscriptionType' => $schema->getSubscriptionRootObjectTypeID(),
             'types' => $schema->getTypeIDs(),
             'directives' => $schema->getDirectiveIDs(),
-            'type' => $schema->getTypeID($field->getArgument('name')?->getValue()),
+            'type' => $schema->getTypeID($field->getArgumentValue('name')),
             'extensions' => $schema->getExtensions()->getID(),
             default => parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore),
         };

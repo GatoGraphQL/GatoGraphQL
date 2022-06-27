@@ -645,7 +645,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
-     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $field->getArgument('branch')?->getValue())
+     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $field->getArgumentValue('branch'))
      *
      * @param array<string, mixed> $fieldArgs
      */

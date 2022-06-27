@@ -123,7 +123,7 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $role;
                 }
-                return $role === $field->getArgument('role')?->getValue();
+                return $role === $field->getArgumentValue('role');
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);

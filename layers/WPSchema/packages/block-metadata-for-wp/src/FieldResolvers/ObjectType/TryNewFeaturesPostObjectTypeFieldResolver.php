@@ -38,7 +38,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
-        return $field->getArgument('branch')?->getValue() === 'try-new-features' && $field->getArgument('project')?->getValue() === 'block-metadata';
+        return $field->getArgumentValue('branch') === 'try-new-features' && $field->getArgumentValue('project') === 'block-metadata';
     }
 
     public function getFieldNamesToResolve(): array
@@ -80,8 +80,8 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     ): mixed {
         switch ($field->getName()) {
             case 'content':
-                unset($field->getArgument('branch')?->getValue());
-                unset($field->getArgument('project')?->getValue());
+                unset($field->getArgumentValue('branch'));
+                unset($field->getArgumentValue('project'));
                 return $objectTypeResolver->resolveValue(
                     $object,
                     new LeafField(
