@@ -148,7 +148,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $fieldName
         );
         $customPost = $object;
-        switch ($field->getName()) {
+        switch ($fieldName) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
                 $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);

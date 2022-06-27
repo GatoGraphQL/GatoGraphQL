@@ -111,7 +111,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
             $fieldName
         );
         $customPost = $object;
-        switch ($field->getName()) {
+        switch ($fieldName) {
             case 'addComment':
                 $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
                 break;

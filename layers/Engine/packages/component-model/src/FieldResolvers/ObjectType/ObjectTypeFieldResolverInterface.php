@@ -49,8 +49,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
      * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldArgs['branch'])
-     *
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcess(
         ObjectTypeResolverInterface $objectTypeResolver,

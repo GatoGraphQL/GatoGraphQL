@@ -59,8 +59,6 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
 
     /**
      * Only use this fieldResolver when parameter `namespaced` is provided. Otherwise, use the default implementation
-     *
-     * @param array<string, mixed> $fieldArgs
      */
     public function resolveCanProcess(
         ObjectTypeResolverInterface $objectTypeResolver,
