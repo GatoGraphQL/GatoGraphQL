@@ -129,7 +129,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
         $type = $object;
         switch ($field->getName()) {
             case 'name':
-                if ($field->getArgument('namespaced')?->getValue()->getValue()) {
+                if ($field->getArgument('namespaced')?->getValue()) {
                     return $type->getNamespacedName();
                 }
                 return $type->getElementName();

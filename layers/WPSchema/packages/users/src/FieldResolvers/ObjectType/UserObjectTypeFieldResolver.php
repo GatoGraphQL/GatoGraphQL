@@ -133,7 +133,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return new DateTime($user->user_registered);
             case 'registeredDateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgument('format')?->getValue()->getValue(),
+                    $field->getArgument('format')?->getValue(),
                     $user->user_registered
                 );
         }

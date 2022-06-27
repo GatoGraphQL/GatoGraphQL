@@ -190,16 +190,16 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $this->getUserRoleTypeAPI()->getUserCapabilities($user);
             case 'hasRole':
                 $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($user);
-                return in_array($field->getArgument('role')?->getValue()->getValue(), $userRoles);
+                return in_array($field->getArgument('role')?->getValue(), $userRoles);
             case 'hasAnyRole':
                 $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($user);
-                return !empty(array_intersect($field->getArgument('roles')?->getValue()->getValue(), $userRoles));
+                return !empty(array_intersect($field->getArgument('roles')?->getValue(), $userRoles));
             case 'hasCapability':
                 $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($user);
-                return in_array($field->getArgument('capability')?->getValue()->getValue(), $userCapabilities);
+                return in_array($field->getArgument('capability')?->getValue(), $userCapabilities);
             case 'hasAnyCapability':
                 $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($user);
-                return !empty(array_intersect($field->getArgument('capabilities')?->getValue()->getValue(), $userCapabilities));
+                return !empty(array_intersect($field->getArgument('capabilities')?->getValue(), $userCapabilities));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);

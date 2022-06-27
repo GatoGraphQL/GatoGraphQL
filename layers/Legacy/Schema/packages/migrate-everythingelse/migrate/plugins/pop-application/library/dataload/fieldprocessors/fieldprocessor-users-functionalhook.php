@@ -85,7 +85,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
                     $userTypeAPI->getUserURL($objectTypeResolver->getID($user))
                 );
                 // Excerpt length can be set through fieldArgs
-                $length = $field->getArgument('length')?->getValue()->getValue() ? (int) $field->getArgument('length')?->getValue()->getValue() : 300;
+                $length = $field->getArgument('length')?->getValue() ? (int) $field->getArgument('length')?->getValue() : 300;
                 return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($userTypeAPI->getUserDescription($objectTypeResolver->getID($user)))), $length, $readmore));
         }
 
