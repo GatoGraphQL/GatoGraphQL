@@ -1039,7 +1039,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // Calculate the fieldResolver to process this field if not already in the cache
         // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
         if (!isset($this->objectTypeFieldResolversForFieldCache[$fieldQueryString])) {
-            $this->objectTypeFieldResolversForFieldCache[$fieldQueryString] = $this->calculateObjectTypeFieldResolversForFieldName($fieldOrFieldName);
+            $this->objectTypeFieldResolversForFieldCache[$fieldQueryString] = $this->calculateObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
         }
 
         return $this->objectTypeFieldResolversForFieldCache[$fieldQueryString];
@@ -1050,7 +1050,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return !empty($this->getObjectTypeFieldResolversForField($field));
     }
 
-    protected function calculateObjectTypeFieldResolversForFieldName(FieldInterface|string $fieldOrFieldName): array
+    protected function calculateObjectTypeFieldResolversForFieldOrFieldName(FieldInterface|string $fieldOrFieldName): array
     {
         if ($fieldOrFieldName instanceof FieldInterface) {
             $field = $fieldOrFieldName;
