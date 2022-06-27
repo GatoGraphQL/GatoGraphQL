@@ -38,7 +38,7 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
-        return ($fieldArgs['branch'] ?? null) == 'try-new-features' && ($fieldArgs['project'] ?? null) == 'block-metadata';
+        return $field->getArgument('branch')?->getValue() === 'try-new-features' && $field->getArgument('project')?->getValue() === 'block-metadata';
     }
 
     public function getFieldNamesToResolve(): array

@@ -392,7 +392,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * 3. Through param `versionConstraint`: applies to all fields and directives in the query
              */
             $versionConstraint =
-                $directiveArgs[SchemaDefinition::VERSION_CONSTRAINT]
+                $directive->getArgument(SchemaDefinition::VERSION_CONSTRAINT)?->getValue()
                 ?? $this->getVersioningService()->getVersionConstraintsForDirective($this->getDirectiveName())
                 ?? App::getState('version-constraint');
             /**

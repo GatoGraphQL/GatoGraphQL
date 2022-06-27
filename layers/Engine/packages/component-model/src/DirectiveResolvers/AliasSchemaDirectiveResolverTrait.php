@@ -282,8 +282,7 @@ trait AliasSchemaDirectiveResolverTrait
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->resolveCanProcess(
             $relationalTypeResolver,
-            $directiveName,
-            $directiveArgs,
+            $directive,
             $field,
             $variables
         );

@@ -66,7 +66,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool {
-        return $fieldName === 'name' && isset($fieldArgs['namespaced']);
+        return $field->getName() === 'name' && $field->getArgument('namespaced') !== null;
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

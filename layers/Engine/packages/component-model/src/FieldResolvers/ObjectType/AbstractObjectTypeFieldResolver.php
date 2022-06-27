@@ -657,7 +657,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (
             Environment::enableSemanticVersionConstraints()
             && $this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)
-            && $this->hasFieldVersion($objectTypeResolver, $fieldName)
+            && $this->hasFieldVersion($objectTypeResolver, $field->getName())
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
@@ -666,23 +666,23 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * inside the schemaDefinition object.
              * If this field is tagged with a version...
              */
-            $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName);
+            $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $field->getName());
             /**
              * Get versionConstraint in this order:
              * 1. Passed as field argument
-             * 2. Through param `fieldVersionConstraints[$fieldName]`: specific to the namespaced type + field
-             * 3. Through param `fieldVersionConstraints[$fieldName]`: specific to the type + field
+             * 2. Through param `fieldVersionConstraints[$field->getName()]`: specific to the namespaced type + field
+             * 3. Through param `fieldVersionConstraints[$field->getName()]`: specific to the type + field
              * 4. Through param `versionConstraint`: applies to all fields and directives in the query
              */
             $versionConstraint =
-                $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT]
+                $field->getArgument(SchemaDefinition::VERSION_CONSTRAINT)?->getValue()
                 ?? $this->getVersioningService()->getVersionConstraintsForField(
                     $objectTypeResolver->getNamespacedTypeName(),
-                    $fieldName
+                    $field->getName()
                 )
                 ?? $this->getVersioningService()->getVersionConstraintsForField(
                     $objectTypeResolver->getTypeName(),
-                    $fieldName
+                    $field->getName()
                 )
                 ?? App::getState('version-constraint');
             /**

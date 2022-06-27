@@ -9,6 +9,8 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 /**
  * Create an alias of a fieldName (or fieldNames), to use when:
@@ -71,10 +73,25 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         FieldInterface $field,
     ): bool {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
+        $aliasedField = ($field instanceof RelationalField)
+            ? new RelationalField(
+                $field->getName(),
+                $this->getAliasedFieldName($field->getName()),
+                $field->getArguments(),
+                $field->getFieldsOrFragmentBonds(),
+                $field->getDirectives(),
+                $field->getLocation(),
+            )
+            : new LeafField(
+                $field->getName(),
+                $this->getAliasedFieldName($field->getName()),
+                $field->getArguments(),
+                $field->getDirectives(),
+                $field->getLocation(),
+            );
         return $aliasedObjectTypeFieldResolver->resolveCanProcess(
             $objectTypeResolver,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs
+            $aliasedField
         );
     }
 

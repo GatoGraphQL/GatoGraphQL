@@ -1080,7 +1080,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     continue;
                 }
                 // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                if (!$objectTypeFieldResolver->resolveCanProcess($this, $fieldName, $fieldArgs)) {
+                // @Fix here: passing FieldInterface, do I always have it?
+                if (!$objectTypeFieldResolver->resolveCanProcess($this, $field)) {
                     continue;
                 }
                 $extensionPriority = $objectTypeFieldResolver->getPriorityToAttachToClasses();
