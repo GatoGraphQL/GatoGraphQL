@@ -364,46 +364,27 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    /**
-     * @param array<string,mixed> $variables
-     * @param array<string,mixed> $expressions
-     * @param array<string,mixed> $options
-     */
     final public function resolveValue(
         object $object,
         FieldInterface $field,
-        array $variables,
-        array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $engineState = App::getEngineState();
-        if (!$engineState->hasObjectTypeResolvedValue($this, $object, $field, $variables, $expressions)) {
+        if (!$engineState->hasObjectTypeResolvedValue($this, $object, $field)) {
             $value = $this->doResolveValue(
                 $object,
                 $field,
-                $variables,
-                $expressions,
                 $objectTypeFieldResolutionFeedbackStore,
-                $options,
             );
-            $engineState->setObjectTypeResolvedValue($this, $object, $field, $variables, $expressions, $value);
+            $engineState->setObjectTypeResolvedValue($this, $object, $field, $value);
         }
-        return $engineState->getObjectTypeResolvedValue($this, $object, $field, $variables, $expressions);
+        return $engineState->getObjectTypeResolvedValue($this, $object, $field);
     }
 
-    /**
-     * @param array<string,mixed> $variables
-     * @param array<string,mixed> $expressions
-     * @param array<string,mixed> $options
-     */
     final public function doResolveValue(
         object $object,
         FieldInterface $field,
-        array $variables,
-        array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForFieldOrFieldName($field);
         if ($objectTypeFieldResolvers === []) {
@@ -439,7 +420,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $validatedField,
             $fieldName,
             $fieldArgs,
-        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, /* @todo Review: Replaced $variables with [] */[]/*$variables*/, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -461,7 +442,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
             FieldQueryUtils::isAnyFieldArgumentValueDynamic(
                 array_values(
-                    $this->getFieldQueryInterpreter()->extractFieldArguments($this, $field, $variables, $separateObjectTypeFieldResolutionFeedbackStore) ?? []
+                    $this->getFieldQueryInterpreter()->extractFieldArguments($this, $field, /* @todo Review: Replaced $variables with [] */[]/*$variables*/, $separateObjectTypeFieldResolutionFeedbackStore) ?? []
                 )
             );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
@@ -476,7 +457,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $validatedField,
             $fieldName,
             $fieldArgs,
-        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
+        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, /* @todo Review: Replaced $variables with [] */[]/*$variables*/, /* @todo Review: Replaced $expressions with [] */[]/*$expressions*/, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -513,13 +494,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $value = $objectTypeFieldResolver->resolveValue(
                     $this,
                     $object,
-                    $fieldName,
-                    $fieldArgs,
-                    $variables,
-                    $expressions,
                     $field,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */

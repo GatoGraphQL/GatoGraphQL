@@ -51,18 +51,10 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
-    /**
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         object $object,
         FieldInterface $field,
-        array $variables,
-        array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed;
 
     /**
