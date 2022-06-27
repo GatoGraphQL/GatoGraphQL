@@ -1051,16 +1051,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     protected function calculateObjectTypeFieldResolversForFieldName(FieldInterface|string $fieldOrFieldName): array
     {
-        $fieldArgs = [];
         if ($fieldOrFieldName instanceof FieldInterface) {
             $field = $fieldOrFieldName;
             $fieldName = $field->getName();
-            $fieldQueryString = $field->asFieldOutputQueryString();
-            $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldQueryString);
         } else {
             $fieldName = $fieldOrFieldName;
         }
-        // $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($fieldName);
 
         $objectTypeFieldResolvers = [];
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
