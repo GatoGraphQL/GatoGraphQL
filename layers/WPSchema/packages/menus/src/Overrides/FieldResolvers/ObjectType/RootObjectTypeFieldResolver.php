@@ -20,7 +20,7 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
         switch ($field->getName()) {
             case 'menu':
                 $menuParam = null;
-                $by = $field->getArgument('by')?->getValue();
+                $by = $field->getArgument('by')?->getTEMPPPValue();
                 if (isset($by->slug)) {
                     $menuParam = $by->slug;
                 } elseif (isset($by->location)) {

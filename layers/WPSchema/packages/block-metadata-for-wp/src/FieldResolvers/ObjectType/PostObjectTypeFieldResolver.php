@@ -143,13 +143,13 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 $block_metadata = Metadata::get_block_metadata($block_data);
 
                 // Filter by blockName
-                if ($blockName = $field->getArgument('blockName')?->getValue()) {
+                if ($blockName = $field->getArgument('blockName')?->getTEMPPPValue()) {
                     $block_metadata = array_filter(
                         $block_metadata,
                         fn ($block) => $block['blockName'] === $blockName
                     );
                 }
-                if ($filterBy = $field->getArgument('filterBy')?->getValue()) {
+                if ($filterBy = $field->getArgument('filterBy')?->getTEMPPPValue()) {
                     if ($blockNameStartsWith = $filterBy['blockNameStartsWith']) {
                         $block_metadata = array_filter(
                             $block_metadata,

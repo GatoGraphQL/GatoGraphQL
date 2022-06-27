@@ -120,13 +120,13 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
             switch ($field->getName()) {
                 case 'var':
-                    if (!App::hasState($field->getArgument('name')?->getValue())) {
+                    if (!App::hasState($field->getArgument('name')?->getTEMPPPValue())) {
                         return [
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
                                 ErrorFeedbackItemProvider::E6,
                                 [
-                                    $field->getArgument('name')?->getValue(),
+                                    $field->getArgument('name')?->getTEMPPPValue(),
                                 ]
                             ),
                         ];
@@ -146,7 +146,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
     ): mixed {
         switch ($field->getName()) {
             case 'var':
-                return App::getState($field->getArgument('name')?->getValue());
+                return App::getState($field->getArgument('name')?->getTEMPPPValue());
             case 'context':
                 return App::getAppStateManager()->all();
         }

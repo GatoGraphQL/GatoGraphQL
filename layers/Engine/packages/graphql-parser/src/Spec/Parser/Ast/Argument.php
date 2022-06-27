@@ -42,13 +42,18 @@ class Argument extends AbstractAst
         return $this->name;
     }
 
-    public function getValue(): WithValueInterface
+    public function getValueAST(): WithValueInterface
     {
         return $this->value;
     }
 
-    public function setValue(WithValueInterface $value): void
+    public function setValueAST(WithValueInterface $value): void
     {
         $this->value = $value;
+    }
+
+    final public function getValue(): mixed
+    {
+        return $this->value->getValue();
     }
 }

@@ -499,7 +499,7 @@ class Document implements DocumentInterface
         foreach ($arguments as $argument) {
             $variableReferences = array_merge(
                 $variableReferences,
-                $this->getVariableReferencesInArgumentValue($argument->getValue())
+                $this->getVariableReferencesInArgumentValue($argument->getValueAST())
             );
         }
         return $variableReferences;
@@ -727,7 +727,7 @@ class Document implements DocumentInterface
     private function setAncestorsUnderArgument(Argument $argument): void
     {
         /** @var Enum|InputList|InputObject|Literal|VariableReference */
-        $argumentValue = $argument->getValue();
+        $argumentValue = $argument->getValueAST();
         $argumentValue->setParent($argument);
     }
 

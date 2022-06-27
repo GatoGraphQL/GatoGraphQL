@@ -39,7 +39,7 @@ trait WithArgumentsTrait
     public function getArgumentValue(string $name): mixed
     {
         if ($argument = $this->getArgument($name)) {
-            return $argument->getValue()->getValue();
+            return $argument->getValue();
         }
 
         return null;
@@ -65,7 +65,7 @@ trait WithArgumentsTrait
 
         $this->keyValueArguments = [];
         foreach ($this->getArguments() as $argument) {
-            $this->keyValueArguments[$argument->getName()] = $argument->getValue()->getValue();
+            $this->keyValueArguments[$argument->getName()] = $argument->getValue();
         }
         return $this->keyValueArguments;
     }

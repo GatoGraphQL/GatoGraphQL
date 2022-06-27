@@ -199,7 +199,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         int $directivePos,
         int $directiveCount,
     ): array {
-        $argumentValue = $argument->getValue()->getValue();
+        $argumentValue = $argument->getValue();
         if ($argumentValue === null) {
             throw new InvalidRequestException(
                 new FeedbackItemResolution(
@@ -438,11 +438,11 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         array $fieldsOrFragmentBonds,
         array $fragments,
     ): void {
-        if (!($argument->getValue() instanceof DynamicVariableReference)) {
+        if (!($argument->getValueAST() instanceof DynamicVariableReference)) {
             return;
         }
         /** @var DynamicVariableReference */
-        $dynamicVariableReference = $argument->getValue();
+        $dynamicVariableReference = $argument->getValueAST();
 
         // Check if there is a field with the variable name
         $referencedFieldNameOrAlias = $this->getQueryAugmenterService()->extractDynamicVariableName($dynamicVariableReference->getName());
@@ -461,7 +461,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $field,
             $dynamicVariableReference->getLocation()
         );
-        $argument->setValue($resolvedFieldVariableReference);
+        $argument->setValueAST($resolvedFieldVariableReference);
     }
 
     /**
@@ -543,7 +543,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             return;
         }
 
-        if (empty($argument->getValue()->getValue())) {
+        if (empty($argument->getValue())) {
             return;
         }
 
@@ -597,7 +597,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
          * List of integers, as relative positions to the affected fields
          * (to the left of the directive)
          */
-        $affectedFieldPositions = $argument->getValue()->getValue();
+        $affectedFieldPositions = $argument->getValue();
         if (!is_array($affectedFieldPositions)) {
             $affectedFieldPositions = [$affectedFieldPositions];
         }
