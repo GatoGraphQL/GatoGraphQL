@@ -186,10 +186,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'optionValues':
             case 'optionObjectValue':
                 $value = $this->getSettingsTypeAPI()->getOption($field->getArgumentValue('name'));
-                if ($fieldName === 'optionValues') {
+                if ($field->getName() === 'optionValues') {
                     return (array) $value;
                 }
-                if ($fieldName === 'optionObjectValue') {
+                if ($field->getName() === 'optionObjectValue') {
                     return (object) $value;
                 }
                 return $value;

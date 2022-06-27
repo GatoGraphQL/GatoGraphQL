@@ -78,7 +78,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 $routes = array(
                     'addhighlightURL' => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
                 );
-                $route = $routes[$fieldName];
+                $route = $routes[$field->getName()];
 
                 // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 // $input = [PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST];

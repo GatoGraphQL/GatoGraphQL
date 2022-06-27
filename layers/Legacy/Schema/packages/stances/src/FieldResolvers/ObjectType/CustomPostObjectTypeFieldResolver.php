@@ -157,7 +157,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Override the category
                 $query['tax-query'][] = [
                     'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
-                    'terms'    => $cats[$fieldName],
+                    'terms'    => $cats[$field->getName()],
                 ];
 
                 // // All results

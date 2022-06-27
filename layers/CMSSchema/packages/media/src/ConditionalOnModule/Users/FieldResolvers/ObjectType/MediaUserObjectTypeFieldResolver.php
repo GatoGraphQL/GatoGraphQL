@@ -64,7 +64,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        return match ($fieldName) {
+        return match ($field->getName()) {
             'author' => $this->getUserMediaTypeAPI()->getMediaAuthorId($media),
             default => parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore),
         };

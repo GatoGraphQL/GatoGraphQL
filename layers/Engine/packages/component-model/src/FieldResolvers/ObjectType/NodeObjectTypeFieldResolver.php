@@ -69,7 +69,7 @@ class NodeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return match ($fieldName) {
+        return match ($field->getName()) {
             'id',
             'self'
                 => $objectTypeResolver->getID($object),

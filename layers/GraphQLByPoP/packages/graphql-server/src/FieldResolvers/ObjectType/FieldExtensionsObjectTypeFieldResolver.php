@@ -70,7 +70,7 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     ): mixed {
         /** @var FieldExtensions */
         $fieldExtensions = $object;
-        return match ($fieldName) {
+        return match ($field->getName()) {
             'isMutation' => $fieldExtensions->isMutation(),
             'isAdminElement' => $fieldExtensions->isAdminElement(),
             default => parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore),

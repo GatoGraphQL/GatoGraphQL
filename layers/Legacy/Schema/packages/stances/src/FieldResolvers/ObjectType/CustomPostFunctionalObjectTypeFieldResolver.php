@@ -163,7 +163,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 $routes = array(
                     'addStanceURL' => POP_USERSTANCE_ROUTE_ADDSTANCE,
                 );
-                $route = $routes[$fieldName];
+                $route = $routes[$field->getName()];
 
                 // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 // $input = [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET];
@@ -223,7 +223,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                     'postStancesAgainstURL' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
                 $url = $customPostTypeAPI->getPermalink($post);
-                return RequestUtils::addRoute($url, $routes[$fieldName]);
+                return RequestUtils::addRoute($url, $routes[$field->getName()]);
 
             // Lazy Loading fields
             case 'createStanceButtonLazy':
