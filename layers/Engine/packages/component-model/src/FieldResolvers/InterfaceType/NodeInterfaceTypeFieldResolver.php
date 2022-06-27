@@ -46,7 +46,7 @@ class NodeInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 
     public function getFieldTypeModifiers(string $fieldName): int
     {
-        switch ($field->getName()) {
+        switch ($fieldName) {
             case 'id':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }

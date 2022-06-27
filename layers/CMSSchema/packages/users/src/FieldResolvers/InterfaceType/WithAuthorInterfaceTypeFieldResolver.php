@@ -39,7 +39,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
 
     public function getFieldTypeModifiers(string $fieldName): int
     {
-        switch ($field->getName()) {
+        switch ($fieldName) {
             case 'author':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
