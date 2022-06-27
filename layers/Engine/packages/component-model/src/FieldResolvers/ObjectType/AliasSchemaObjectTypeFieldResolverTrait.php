@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use SplObjectStorage;
 
 /**
  * Create an alias of a fieldName (or fieldNames), to use when:
@@ -29,6 +30,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
  */
 trait AliasSchemaObjectTypeFieldResolverTrait
 {
+    /** @var SplObjectStorage<FieldInterface,FieldInterface> */
+    protected ?SplObjectStorage $aliasedFieldCache = null;
+
     /**
      * The fieldName that is being aliased
      */
@@ -73,26 +77,36 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         FieldInterface $field,
     ): bool {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        $aliasedField = ($field instanceof RelationalField)
-            ? new RelationalField(
-                $field->getName(),
-                $this->getAliasedFieldName($field->getName()),
-                $field->getArguments(),
-                $field->getFieldsOrFragmentBonds(),
-                $field->getDirectives(),
-                $field->getLocation(),
-            )
-            : new LeafField(
-                $field->getName(),
-                $this->getAliasedFieldName($field->getName()),
-                $field->getArguments(),
-                $field->getDirectives(),
-                $field->getLocation(),
-            );
         return $aliasedObjectTypeFieldResolver->resolveCanProcess(
             $objectTypeResolver,
-            $aliasedField
+            $this->getAliasedField($field)
         );
+    }
+
+    protected function getAliasedField(
+        FieldInterface $field,
+    ): FieldInterface {
+        /** @var SplObjectStorage<FieldInterface,FieldInterface> */
+        $this->aliasedFieldCache ??= new SplObjectStorage();
+        if (!$this->aliasedFieldCache->contains($field)) {
+            $this->aliasedFieldCache[$field] = ($field instanceof RelationalField)
+                ? new RelationalField(
+                    $field->getName(),
+                    $this->getAliasedFieldName($field->getName()),
+                    $field->getArguments(),
+                    $field->getFieldsOrFragmentBonds(),
+                    $field->getDirectives(),
+                    $field->getLocation(),
+                )
+                : new LeafField(
+                    $field->getName(),
+                    $this->getAliasedFieldName($field->getName()),
+                    $field->getArguments(),
+                    $field->getDirectives(),
+                    $field->getLocation(),
+                );
+        }
+        return $this->aliasedFieldCache[$field];
     }
 
     /**
@@ -101,15 +115,13 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->collectFieldValidationErrors(
             $objectTypeResolver,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs,
+            $this->getAliasedField($field),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
