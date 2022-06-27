@@ -19,7 +19,6 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool;
     public function collectFieldValidationErrors(
         FieldInterface $field,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): void;
     public function collectFieldValidationWarnings(

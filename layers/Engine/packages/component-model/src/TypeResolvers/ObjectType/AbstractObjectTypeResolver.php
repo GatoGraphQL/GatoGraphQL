@@ -170,14 +170,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final public function collectFieldValidationErrors(
         FieldInterface $field,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): void {
         list(
             $validField,
             $fieldName,
             $fieldArgs,
-        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($field, /* @todo Review: Replaced $variables with [] */[]/*$variables*/, $objectTypeFieldResolutionFeedbackStore);
         // Dissecting the field may already fail, then already return the error
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
@@ -217,7 +216,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
-        $executableObjectTypeFieldResolver->collectFieldValidationErrors($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+        $executableObjectTypeFieldResolver->collectFieldValidationErrors($this, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function collectFieldValidationWarnings(
@@ -471,7 +470,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
             if ($validateSchemaOnObject) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-                $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolver->collectFieldValidationErrors($this, $field, $separateObjectTypeFieldResolutionFeedbackStore);
                 $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
                 $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {

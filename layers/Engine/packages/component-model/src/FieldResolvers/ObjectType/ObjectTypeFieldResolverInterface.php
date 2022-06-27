@@ -58,8 +58,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     ): bool;
     public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     public function collectFieldValidationDeprecationMessages(
