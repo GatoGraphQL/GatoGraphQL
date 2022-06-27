@@ -59,23 +59,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         return 100;
     }
 
-    // /**
-    //  * Only use this fieldResolver when parameter `ofKinds` is provided.
-    //  * Otherwise, use the default implementation
-    //  */
-    // public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
-    // {
-    //     return $fieldName == 'directives' && isset($fieldArgs['ofKinds']);
-    // }
-
-    // public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    // {
-    //     $descriptions = [
-    //         'directives' => $this->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
-    //     ];
-    //     return $descriptions[$fieldName] ?? parent::getFieldDescription($objectTypeResolver, $fieldName);
-    // }
-
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
