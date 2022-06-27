@@ -55,6 +55,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         object $object,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $options = [],
     ): mixed;
 
     /**
