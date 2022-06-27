@@ -204,7 +204,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        $size = $this->obtainImageSizeFromParameters($fieldArgs);
+        $size = $this->obtainImageSizeFromParameters($field);
         switch ($field->getName()) {
             case 'src':
                 // The media item may be an image, or a video or audio.
@@ -251,13 +251,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    /**
-     * Overridable function
-     *
-     * @param array<string, mixed> $fieldArgs
-     */
-    protected function obtainImageSizeFromParameters(array $fieldArgs): ?string
+    protected function obtainImageSizeFromParameters(FieldInterface $field): ?string
     {
-        return $field->getArgumentValue('size') ?? null;
+        return $field->getArgumentValue('size');
     }
 }
