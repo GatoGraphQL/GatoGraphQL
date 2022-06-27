@@ -44,6 +44,7 @@ class FakerWordPressDataSeeder
         if ($limitPosts = $options['limit-posts'] ?? 0) {
             $postDataEntries = array_slice($postDataEntries, 0, $limitPosts, true);
         }
+        $postTypes = [];
         foreach ($postDataEntries as $postDataEntry) {
             $postID = $postDataEntry['post_id'];
             $wpFaker->post([
@@ -68,11 +69,18 @@ class FakerWordPressDataSeeder
                     $termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] = ($termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] ?? 0) + 1;
                 }
             }
+            $postTypes[] = $postDataEntry['post_type'];
             /**
              * @todo Map relationships between posts and tags/categories
              * Currently not supported because BrainFaker is not mocking `wp_get_post_terms`
              */
             // ...
+        }
+        $postTypes = array_unique($postTypes);
+        foreach ($postTypes as $postType) {
+            $wpFaker->postType([
+                'name' => $postType
+            ]);
         }
 
         $categoryDataEntries = ($data['categories'] ?? []);
