@@ -482,7 +482,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        $object,
+        object $object,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
