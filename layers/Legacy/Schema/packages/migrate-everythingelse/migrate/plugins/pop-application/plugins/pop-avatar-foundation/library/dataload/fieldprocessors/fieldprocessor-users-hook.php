@@ -84,7 +84,7 @@ class PoP_Application_UserAvatar_DataLoad_ObjectTypeFieldResolver_Users extends 
         switch ($field->getName()) {
             case 'avatar':
                 // The avatar size is set through fieldArgs
-                return gdGetAvatar($objectTypeResolver->getID($user), (int) $field->getArgument('size')?->getTEMPPPValue());
+                return gdGetAvatar($objectTypeResolver->getID($user), (int) $field->getArgument('size')?->getValue());
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);

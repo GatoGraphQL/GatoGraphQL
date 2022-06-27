@@ -49,7 +49,7 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
             case 'metaValues':
                 return $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $objectTypeResolver->getID($comment),
-                    $field->getArgument('key')?->getTEMPPPValue(),
+                    $field->getArgument('key')?->getValue(),
                     $fieldName === 'metaValue'
                 );
         }
