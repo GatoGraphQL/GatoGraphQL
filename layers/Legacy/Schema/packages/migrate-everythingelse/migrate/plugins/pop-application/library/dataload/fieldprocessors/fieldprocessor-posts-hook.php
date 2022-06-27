@@ -165,7 +165,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         switch ($field->getName()) {
             case 'favicon':
             case 'thumb':
-                return $this->getThumb($post, $objectTypeResolver, $field->getArgument('size')?->getValue(), $field->getArgument('addDescription')?->getValue());
+                return $this->getThumb($post, $objectTypeResolver, $field->getArgument('size')?->getValue()->getValue(), $field->getArgument('addDescription')?->getValue()->getValue());
 
             case 'thumbFullSrc':
                 $thumb = $objectTypeResolver->resolveValue($post, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $objectTypeFieldResolutionFeedbackStore);

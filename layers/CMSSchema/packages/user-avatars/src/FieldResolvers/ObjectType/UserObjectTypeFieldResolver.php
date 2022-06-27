@@ -121,7 +121,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($field->getName()) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
-                $avatarSize = $field->getArgument('size')?->getValue() ?? $moduleConfiguration->getUserAvatarDefaultSize();
+                $avatarSize = $field->getArgument('size')?->getValue()->getValue() ?? $moduleConfiguration->getUserAvatarDefaultSize();
                 $avatarSrc = $this->getUserAvatarTypeAPI()->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;

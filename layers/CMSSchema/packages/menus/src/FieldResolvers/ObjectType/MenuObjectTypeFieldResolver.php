@@ -137,7 +137,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $menu = $object;
         switch ($field->getName()) {
             case 'itemDataEntries':
-                $isFlat = $field->getArgument('flat')?->getValue() ?? false;
+                $isFlat = $field->getArgument('flat')?->getValue()->getValue() ?? false;
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
                 $entries = array();
                 if ($menuItems) {

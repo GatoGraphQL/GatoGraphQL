@@ -96,7 +96,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         switch ($field->getName()) {
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
-                if ($ofKinds = $field->getArgument('ofKinds')?->getValue() ?? null) {
+                if ($ofKinds = $field->getArgument('ofKinds')?->getValue()->getValue() ?? null) {
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getDirectiveResolvers(),
                         fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)

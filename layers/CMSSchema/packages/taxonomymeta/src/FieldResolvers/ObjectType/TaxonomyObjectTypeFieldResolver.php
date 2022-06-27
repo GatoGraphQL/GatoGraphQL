@@ -49,7 +49,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
             case 'metaValues':
                 return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
                     $objectTypeResolver->getID($taxonomy),
-                    $field->getArgument('key')?->getValue(),
+                    $field->getArgument('key')?->getValue()->getValue(),
                     $fieldName === 'metaValue'
                 );
         }

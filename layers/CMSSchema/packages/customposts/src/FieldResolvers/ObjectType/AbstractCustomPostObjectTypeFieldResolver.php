@@ -95,24 +95,24 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getStatus($customPost);
 
             case 'isStatus':
-                return $field->getArgument('status')?->getValue() == $customPostTypeAPI->getStatus($customPost);
+                return $field->getArgument('status')?->getValue()->getValue() == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $field->getArgument('gmt')?->getValue()));
+                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $field->getArgument('gmt')?->getValue()->getValue()));
 
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgument('format')?->getValue(),
-                    $customPostTypeAPI->getPublishedDate($customPost, $field->getArgument('gmt')?->getValue())
+                    $field->getArgument('format')?->getValue()->getValue(),
+                    $customPostTypeAPI->getPublishedDate($customPost, $field->getArgument('gmt')?->getValue()->getValue())
                 );
 
             case 'modifiedDate':
-                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $field->getArgument('gmt')?->getValue()));
+                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $field->getArgument('gmt')?->getValue()->getValue()));
 
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgument('format')?->getValue(),
-                    $customPostTypeAPI->getModifiedDate($customPost, $field->getArgument('gmt')?->getValue())
+                    $field->getArgument('format')?->getValue()->getValue(),
+                    $customPostTypeAPI->getModifiedDate($customPost, $field->getArgument('gmt')?->getValue()->getValue())
                 );
 
             case 'title':
