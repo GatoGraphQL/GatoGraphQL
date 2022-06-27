@@ -1032,17 +1032,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         if ($fieldOrFieldName instanceof FieldInterface) {
             $field = $fieldOrFieldName;
-            $fieldQueryString = $field->asFieldOutputQueryString();
+            $cacheKey = $field->asFieldOutputQueryString();
         } else {
-            $fieldQueryString = $fieldOrFieldName;
+            $cacheKey = $fieldOrFieldName;
         }
         // Calculate the fieldResolver to process this field if not already in the cache
         // If none is found, this value will be set to NULL. This is needed to stop attempting to find the fieldResolver
-        if (!isset($this->objectTypeFieldResolversForFieldOrFieldNameCache[$fieldQueryString])) {
-            $this->objectTypeFieldResolversForFieldOrFieldNameCache[$fieldQueryString] = $this->calculateObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
+        if (!isset($this->objectTypeFieldResolversForFieldOrFieldNameCache[$cacheKey])) {
+            $this->objectTypeFieldResolversForFieldOrFieldNameCache[$cacheKey] = $this->calculateObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
         }
 
-        return $this->objectTypeFieldResolversForFieldOrFieldNameCache[$fieldQueryString];
+        return $this->objectTypeFieldResolversForFieldOrFieldNameCache[$cacheKey];
     }
 
     final public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool
