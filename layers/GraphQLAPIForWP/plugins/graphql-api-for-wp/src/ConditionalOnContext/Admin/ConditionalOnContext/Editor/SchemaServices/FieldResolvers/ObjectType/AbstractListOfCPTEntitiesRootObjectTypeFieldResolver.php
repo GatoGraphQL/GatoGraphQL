@@ -83,7 +83,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
-    abstract protected function getFieldCustomPostType(string $fieldName): string;
+    abstract protected function getFieldCustomPostType(FieldInterface $field): string;
 
     public function getFieldTypeResolver(
         ObjectTypeResolverInterface $objectTypeResolver,
