@@ -136,22 +136,11 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $category = $object;
         $categoryTypeAPI = $this->getCategoryTypeAPI();
@@ -161,7 +150,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 'parent-id' => $objectTypeResolver->getID($category),
             ]
         );
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'children':
                 return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childNames':
@@ -170,6 +159,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 return $categoryTypeAPI->getCategoryCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

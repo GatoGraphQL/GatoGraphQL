@@ -90,24 +90,13 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'shareURL':
                 $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -118,9 +107,9 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
                     return $title;
                 }
                 $providerURLs = $this->socialMediaProviderEnumTypeResolver->getEnumValues();
-                return $this->getShareUrl($url, $title, $providerURLs[$fieldArgs['provider']]);
+                return $this->getShareUrl($url, $title, $providerURLs[$field->getArgument('provider')?->getValue()]);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

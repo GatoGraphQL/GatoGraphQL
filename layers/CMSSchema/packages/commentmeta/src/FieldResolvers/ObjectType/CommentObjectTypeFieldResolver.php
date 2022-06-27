@@ -37,34 +37,23 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
         return $this->getCommentMetaTypeAPI();
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $comment = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'metaValue':
             case 'metaValues':
                 return $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $objectTypeResolver->getID($comment),
-                    $fieldArgs['key'],
+                    $field->getArgument('key')?->getValue(),
                     $fieldName === 'metaValue'
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

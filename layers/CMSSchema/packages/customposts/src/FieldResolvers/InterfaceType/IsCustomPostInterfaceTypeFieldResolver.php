@@ -150,7 +150,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInte
          * Please notice that the URL, slug, title and excerpt are nullable,
          * and content is not!
          */
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'content':
             case 'rawContent':
             case 'status':

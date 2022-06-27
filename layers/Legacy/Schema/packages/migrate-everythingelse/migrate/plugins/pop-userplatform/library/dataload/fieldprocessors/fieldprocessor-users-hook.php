@@ -76,26 +76,15 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $user = $object;
 
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'shortDescription':
                 return gdGetUserShortdescription($objectTypeResolver->getID($user));
 
@@ -208,7 +197,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObj
                 return isProfile($objectTypeResolver->getID($user));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

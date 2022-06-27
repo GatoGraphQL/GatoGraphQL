@@ -11,27 +11,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
 {
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'menu':
                 $menuParam = null;
-                $by = $fieldArgs['by'];
+                $by = $field->getArgument('by')?->getValue();
                 if (isset($by->slug)) {
                     $menuParam = $by->slug;
                 } elseif (isset($by->location)) {
@@ -42,7 +31,7 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                     }
                 }
                 if ($menuParam === null) {
-                    return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+                    return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
                 }
                 $menu = wp_get_nav_menu_object($menuParam);
                 if ($menu === false) {
@@ -51,6 +40,6 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                 return $menu->term_id;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

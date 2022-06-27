@@ -155,28 +155,17 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         return 'thumb-md';
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'favicon':
             case 'thumb':
-                return $this->getThumb($post, $objectTypeResolver, $fieldArgs['size'], $fieldArgs['addDescription']);
+                return $this->getThumb($post, $objectTypeResolver, $field->getArgument('size')?->getValue(), $field->getArgument('addDescription')?->getValue());
 
             case 'thumbFullSrc':
                 $thumb = $objectTypeResolver->resolveValue($post, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
@@ -245,7 +234,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
                 return $commentCount + $referencedByCount + $highlightsCount;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

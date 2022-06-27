@@ -65,7 +65,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName
     ): bool {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'update':
                 return true;
         }
@@ -85,7 +85,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             $fieldName
         );
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'update':
                 $mutationFieldArgs[MutationInputProperties::ID] = $objectTypeResolver->getID($post);
                 break;

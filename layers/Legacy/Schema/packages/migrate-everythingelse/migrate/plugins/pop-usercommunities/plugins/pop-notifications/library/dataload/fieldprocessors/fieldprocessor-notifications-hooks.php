@@ -117,27 +117,16 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         return true;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'editUserMembershipURL':
                 return gdUreEditMembershipUrl($notification->user_id);
 
@@ -237,7 +226,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

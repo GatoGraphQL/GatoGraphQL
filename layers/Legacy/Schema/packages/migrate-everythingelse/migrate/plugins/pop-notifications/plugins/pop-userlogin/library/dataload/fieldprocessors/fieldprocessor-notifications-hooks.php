@@ -63,26 +63,15 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
         );
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'icon':
                 $routes = array(
                     AAL_POP_ACTION_USER_LOGGEDIN => POP_USERLOGIN_ROUTE_LOGIN,
@@ -104,7 +93,7 @@ class PoP_Notifications_UserLogin_DataLoad_ObjectTypeFieldResolver_Notifications
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

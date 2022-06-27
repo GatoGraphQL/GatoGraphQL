@@ -63,25 +63,14 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'recommendPostURL':
                 return GeneralUtils::addQueryArgs([
                     \PoPCMSSchema\Posts\Constants\InputNames::POST_ID => $objectTypeResolver->getID($post),
@@ -131,7 +120,7 @@ class GD_SocialNetwork_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 return 1;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

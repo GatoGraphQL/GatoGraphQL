@@ -61,25 +61,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         ];
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'areCommentsOpen':
                 return $this->getCommentTypeAPI()->areCommentsOpen($objectTypeResolver->getID($post));
 
@@ -106,7 +95,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 'customPostID' => $objectTypeResolver->getID($post),
             ]
         );
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'commentCount':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
 
@@ -114,6 +103,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

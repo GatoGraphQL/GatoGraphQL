@@ -57,7 +57,7 @@ class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListOb
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
         $user = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'customPosts':
             case 'customPostCount':
                 $query['authors'] = [$objectTypeResolver->getID($user)];

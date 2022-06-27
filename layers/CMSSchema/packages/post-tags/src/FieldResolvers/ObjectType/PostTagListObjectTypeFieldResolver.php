@@ -39,7 +39,7 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
         $tag = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'posts':
             case 'postCount':
                 $query['tag-ids'] = [$objectTypeResolver->getID($tag)];

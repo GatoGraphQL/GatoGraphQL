@@ -76,27 +76,16 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
         );
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $notification = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'icon':
                 $icons = array(
                     AAL_POP_ACTION_POST_APPROVEDPOST => 'fa-check',
@@ -211,7 +200,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

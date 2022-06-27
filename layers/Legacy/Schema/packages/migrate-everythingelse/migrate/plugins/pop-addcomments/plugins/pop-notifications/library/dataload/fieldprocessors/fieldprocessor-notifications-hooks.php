@@ -88,28 +88,17 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
         );
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $commentTypeAPI = CommentTypeAPIFacade::getInstance();
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             // Specific fields to be used by the subcomponents, based on a combination of Object Type + Action
             // Needed to, for instance, load the comment immediately, already from the notification
             case 'commentObject':
@@ -196,7 +185,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

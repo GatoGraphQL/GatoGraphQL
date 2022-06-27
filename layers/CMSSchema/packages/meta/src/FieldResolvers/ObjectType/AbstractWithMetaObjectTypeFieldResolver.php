@@ -47,16 +47,16 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
         array $fieldArgs
     ): array {
         // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'metaValue':
             case 'metaValues':
-                if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
+                if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($field->getArgument('key')?->getValue())) {
                     return [
                         new FeedbackItemResolution(
                             FeedbackItemProvider::class,
                             FeedbackItemProvider::E1,
                             [
-                                $fieldArgs['key'],
+                                $field->getArgument('key')?->getValue(),
                             ]
                         ),
                     ];
@@ -73,7 +73,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
         string $fieldName,
         array $fieldArgs,
     ): bool {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'metaValue':
             case 'metaValues':
                 return true;

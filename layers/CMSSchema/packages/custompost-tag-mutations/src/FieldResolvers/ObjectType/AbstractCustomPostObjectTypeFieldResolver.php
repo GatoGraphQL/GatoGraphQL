@@ -92,7 +92,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             $fieldName
         );
         $customPost = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'setTags':
                 $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
                 break;

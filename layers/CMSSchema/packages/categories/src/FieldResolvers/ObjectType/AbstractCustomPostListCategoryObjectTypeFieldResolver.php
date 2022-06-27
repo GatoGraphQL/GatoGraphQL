@@ -34,7 +34,7 @@ abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends Abs
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
         $category = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'customPosts':
             case 'customPostCount':
                 $query[$this->getQueryProperty()] = [$objectTypeResolver->getID($category)];

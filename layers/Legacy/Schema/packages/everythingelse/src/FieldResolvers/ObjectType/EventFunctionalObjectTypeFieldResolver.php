@@ -73,26 +73,15 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
                 $scope = $objectTypeResolver->resolveValue(
@@ -142,6 +131,6 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

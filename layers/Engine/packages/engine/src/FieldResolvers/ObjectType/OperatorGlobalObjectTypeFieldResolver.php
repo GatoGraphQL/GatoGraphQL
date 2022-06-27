@@ -219,53 +219,42 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'if':
-                if ($fieldArgs['condition']) {
-                    return $fieldArgs['then'];
-                } elseif (isset($fieldArgs['else'])) {
-                    return $fieldArgs['else'];
+                if ($field->getArgument('condition')?->getValue()) {
+                    return $field->getArgument('then')?->getValue();
+                } elseif (isset($field->getArgument('else')?->getValue())) {
+                    return $field->getArgument('else')?->getValue();
                 }
                 return null;
             case 'not':
-                return !$fieldArgs['value'];
+                return !$field->getArgument('value')?->getValue();
             case 'and':
-                return array_reduce($fieldArgs['values'], function ($accumulated, $value) {
+                return array_reduce($field->getArgument('values')?->getValue(), function ($accumulated, $value) {
                     $accumulated = $accumulated && $value;
                     return $accumulated;
                 }, true);
             case 'or':
-                return array_reduce($fieldArgs['values'], function ($accumulated, $value) {
+                return array_reduce($field->getArgument('values')?->getValue(), function ($accumulated, $value) {
                     $accumulated = $accumulated || $value;
                     return $accumulated;
                 }, false);
             case 'equals':
-                return $fieldArgs['value1'] == $fieldArgs['value2'];
+                return $field->getArgument('value1')?->getValue() == $field->getArgument('value2')?->getValue();
             case 'empty':
-                return empty($fieldArgs['value']);
+                return empty($field->getArgument('value')?->getValue());
             case 'isNull':
-                return is_null($fieldArgs['value']);
+                return is_null($field->getArgument('value')?->getValue());
             case 'extract':
                 try {
-                    $array = (array) $fieldArgs['object'];
-                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToElementItemUnderPath($array, $fieldArgs['path']);
+                    $array = (array) $field->getArgument('object')?->getValue();
+                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToElementItemUnderPath($array, $field->getArgument('path')?->getValue());
                 } catch (RuntimeOperationException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
@@ -286,12 +275,12 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'time':
                 return time();
             case 'echo':
-                return $fieldArgs['value'];
+                return $field->getArgument('value')?->getValue();
             case 'sprintf':
                 // If more "%s" are passed than replacements provided, then `sprintf`
                 // will throw an ArgumentCountError. Catch it and return an error instead.
                 try {
-                    return sprintf($fieldArgs['string'], ...$fieldArgs['values']);
+                    return sprintf($field->getArgument('string')?->getValue(), ...$field->getArgument('values')?->getValue());
                 } catch (ArgumentCountError $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
@@ -310,6 +299,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 }
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

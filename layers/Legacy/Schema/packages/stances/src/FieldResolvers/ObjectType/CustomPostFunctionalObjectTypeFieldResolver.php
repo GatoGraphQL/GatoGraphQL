@@ -149,27 +149,16 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = FunctionAPIFactory::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'addStanceURL':
                 $routes = array(
                     'addStanceURL' => POP_USERSTANCE_ROUTE_ADDSTANCE,
@@ -269,6 +258,6 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 return $stance->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

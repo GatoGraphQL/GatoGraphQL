@@ -645,7 +645,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
-     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldArgs['branch'])
+     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $field->getArgument('branch')?->getValue())
      *
      * @param array<string, mixed> $fieldArgs
      */
@@ -1250,22 +1250,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return false;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);

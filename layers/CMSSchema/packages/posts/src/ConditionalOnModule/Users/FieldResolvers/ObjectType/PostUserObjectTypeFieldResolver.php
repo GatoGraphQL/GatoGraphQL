@@ -39,7 +39,7 @@ class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
         $user = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'posts':
             case 'postCount':
                 $query['authors'] = [$objectTypeResolver->getID($user)];

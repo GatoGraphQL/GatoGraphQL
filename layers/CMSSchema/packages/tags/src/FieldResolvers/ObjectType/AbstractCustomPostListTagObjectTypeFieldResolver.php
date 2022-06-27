@@ -34,7 +34,7 @@ abstract class AbstractCustomPostListTagObjectTypeFieldResolver extends Abstract
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
         $tag = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'customPosts':
             case 'customPostCount':
                 $query[$this->getQueryProperty()] = [$objectTypeResolver->getID($tag)];

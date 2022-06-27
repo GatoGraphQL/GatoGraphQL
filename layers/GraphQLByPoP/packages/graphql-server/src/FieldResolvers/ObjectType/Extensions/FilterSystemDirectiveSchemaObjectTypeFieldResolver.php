@@ -85,29 +85,18 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
-                if ($ofKinds = $fieldArgs['ofKinds'] ?? null) {
+                if ($ofKinds = $field->getArgument('ofKinds')?->getValue() ?? null) {
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getDirectiveResolvers(),
                         fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
@@ -134,6 +123,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 return $directiveIDs;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

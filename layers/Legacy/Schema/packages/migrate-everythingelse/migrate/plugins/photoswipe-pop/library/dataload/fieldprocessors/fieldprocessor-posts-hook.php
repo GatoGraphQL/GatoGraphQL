@@ -39,26 +39,15 @@ class PS_POP_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFi
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
 
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'thumbFullDimensions':
                 // This is the format needed by PhotoSwipe under attr data-size
                 $thumb = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
@@ -72,7 +61,7 @@ class PS_POP_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObjectTypeFi
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

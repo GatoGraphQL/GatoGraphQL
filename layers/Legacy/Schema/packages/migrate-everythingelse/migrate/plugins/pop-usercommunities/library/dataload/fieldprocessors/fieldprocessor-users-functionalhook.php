@@ -62,25 +62,14 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $user = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'editMembershipURL':
                 return gdUreEditMembershipUrl($objectTypeResolver->getID($user));
 
@@ -103,7 +92,7 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return $tags->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

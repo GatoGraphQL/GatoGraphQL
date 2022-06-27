@@ -118,15 +118,15 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         // For instance, this doesn't work: /?query=arrayItem(posts(),3)
         // In that case, the validation will be done inside ->resolveValue(), and will be treated as a $dbError, not a $schemaError
         if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-            switch ($fieldName) {
+            switch ($field->getName()) {
                 case 'var':
-                    if (!App::hasState($fieldArgs['name'])) {
+                    if (!App::hasState($field->getArgument('name')?->getValue())) {
                         return [
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
                                 ErrorFeedbackItemProvider::E6,
                                 [
-                                    $fieldArgs['name'],
+                                    $field->getArgument('name')?->getValue(),
                                 ]
                             ),
                         ];
@@ -138,30 +138,19 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'var':
-                return App::getState($fieldArgs['name']);
+                return App::getState($field->getArgument('name')?->getValue());
             case 'context':
                 return App::getAppStateManager()->all();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -140,17 +140,17 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $fieldArgs
     ): array {
         // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldArgs['name'])) {
+                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($field->getArgument('name')?->getValue())) {
                     return [
                         new FeedbackItemResolution(
                             FeedbackItemProvider::class,
                             FeedbackItemProvider::E1,
                             [
-                                $fieldArgs['name'],
+                                $field->getArgument('name')?->getValue(),
                             ]
                         ),
                     ];
@@ -167,7 +167,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         string $fieldName,
         array $fieldArgs,
     ): bool {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
@@ -180,28 +180,17 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         );
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                $value = $this->getSettingsTypeAPI()->getOption($fieldArgs['name']);
+                $value = $this->getSettingsTypeAPI()->getOption($field->getArgument('name')?->getValue());
                 if ($fieldName === 'optionValues') {
                     return (array) $value;
                 }
@@ -211,6 +200,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $value;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

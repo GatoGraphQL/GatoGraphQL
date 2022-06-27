@@ -39,7 +39,7 @@ class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFiel
         $query = parent::getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs);
 
         $category = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'posts':
             case 'postCount':
                 $query['category-ids'] = [$objectTypeResolver->getID($category)];

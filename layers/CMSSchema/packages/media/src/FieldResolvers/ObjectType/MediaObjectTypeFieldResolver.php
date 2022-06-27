@@ -197,26 +197,15 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $media = $object;
         $size = $this->obtainImageSizeFromParameters($fieldArgs);
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
@@ -242,24 +231,24 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt']));
+                return new DateTime($this->getMediaTypeAPI()->getDate($media, $field->getArgument('gmt')?->getValue()));
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
-                    $this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt'])
+                    $field->getArgument('format')?->getValue(),
+                    $this->getMediaTypeAPI()->getDate($media, $field->getArgument('gmt')?->getValue())
                 );
             case 'modifiedDate':
-                return new DateTime($this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt']));
+                return new DateTime($this->getMediaTypeAPI()->getModified($media, $field->getArgument('gmt')?->getValue()));
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
-                    $this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt'])
+                    $field->getArgument('format')?->getValue(),
+                    $this->getMediaTypeAPI()->getModified($media, $field->getArgument('gmt')?->getValue())
                 );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
@@ -269,6 +258,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
      */
     protected function obtainImageSizeFromParameters(array $fieldArgs): ?string
     {
-        return $fieldArgs['size'] ?? null;
+        return $field->getArgument('size')?->getValue() ?? null;
     }
 }
