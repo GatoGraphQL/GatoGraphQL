@@ -275,8 +275,7 @@ trait AliasSchemaDirectiveResolverTrait
      */
     public function resolveCanProcess(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs,
+        Directive $directive,
         FieldInterface $field,
         array &$variables
     ): bool {
