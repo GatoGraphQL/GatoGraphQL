@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class Directive extends AbstractAst
+class Directive extends AbstractAst implements WithArgumentsInterface
 {
     use WithArgumentsTrait;
 
