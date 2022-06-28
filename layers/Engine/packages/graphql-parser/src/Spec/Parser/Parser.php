@@ -545,10 +545,10 @@ class Parser extends Tokenizer implements ParserInterface
     {
         switch ($this->lookAhead->getType()) {
             case Token::TYPE_LSQUARE_BRACE:
-                return $this->parseList(true);
+                return $this->parseList();
 
             case Token::TYPE_LBRACE:
-                return $this->parseObject(true);
+                return $this->parseObject();
 
             case Token::TYPE_VARIABLE:
                 return $this->parseVariableReference();
@@ -583,7 +583,7 @@ class Parser extends Tokenizer implements ParserInterface
         return new Enum($enumValue, $location);
     }
 
-    protected function parseList(bool $createType): InputList|array
+    protected function parseList(): InputList
     {
         $startToken = $this->eat(Token::TYPE_LSQUARE_BRACE);
 
@@ -596,7 +596,7 @@ class Parser extends Tokenizer implements ParserInterface
 
         $this->expect(Token::TYPE_RSQUARE_BRACE);
 
-        return $createType ? $this->createInputList($list, $this->getTokenLocation($startToken)) : $list;
+        return $this->createInputList($list, $this->getTokenLocation($startToken));
     }
 
     /**
@@ -625,9 +625,9 @@ class Parser extends Tokenizer implements ParserInterface
             Token::TYPE_VARIABLE
                 => $this->parseVariableReference(),
             Token::TYPE_LBRACE
-                => $this->parseObject(true),
+                => $this->parseObject(),
             Token::TYPE_LSQUARE_BRACE
-                => $this->parseList(false),
+                => $this->parseList(),
             default
                 => throw new SyntaxErrorException(
                     new FeedbackItemResolution(
@@ -642,7 +642,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseObject(bool $createType): InputObject|stdClass
+    protected function parseObject(): InputObject
     {
         $startToken = $this->eat(Token::TYPE_LBRACE);
 
@@ -675,7 +675,7 @@ class Parser extends Tokenizer implements ParserInterface
 
         $this->eat(Token::TYPE_RBRACE);
 
-        return $createType ? $this->createInputObject($object, $this->getTokenLocation($startToken)) : $object;
+        return $this->createInputObject($object, $this->getTokenLocation($startToken));
     }
 
     protected function createInputObject(
