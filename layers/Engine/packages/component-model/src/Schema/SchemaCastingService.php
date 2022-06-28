@@ -141,7 +141,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
                 $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
                     $fieldOrDirectiveArgTypeResolver,
-                    $coercedArgValueAST,
+                    $coercedArgValueAST->getValue(),
                     $fieldOrDirectiveArgIsArrayType,
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
