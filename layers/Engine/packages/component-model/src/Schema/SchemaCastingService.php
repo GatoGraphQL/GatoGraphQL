@@ -101,7 +101,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            $argValueAST = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+            $argValueAST = $this->getInputCoercingService()->maybeConvertInputValueASTFromSingleToList(
                 $argValueAST,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,

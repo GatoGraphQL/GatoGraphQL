@@ -12,7 +12,6 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\CoercibleArgumentValueAstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -44,7 +43,7 @@ class InputCoercingService implements InputCoercingServiceInterface
      *
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
      */
-    public function maybeConvertInputValueFromSingleToList(
+    public function maybeConvertInputValueASTFromSingleToList(
         WithValueInterface $inputValueAST,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
@@ -79,6 +78,36 @@ class InputCoercingService implements InputCoercingServiceInterface
             );
         }
         return $inputValueAST;
+    }
+
+    /**
+     * Support passing a single value where a list is expected:
+     * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+     *
+     * Defined in the GraphQL spec.
+     *
+     * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+     */
+    public function maybeConvertInputValueFromSingleToList(
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType,
+    ): mixed {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            is_array($inputValue)
+            || !$moduleConfiguration->convertInputValueFromSingleToList()
+        ) {
+            return $inputValue;
+        }
+        if ($inputIsArrayOfArraysType) {
+            return [[$inputValue]];
+        }
+        if ($inputIsArrayType) {
+            return [$inputValue];
+        }
+        return $inputValue;
     }
 
     /**

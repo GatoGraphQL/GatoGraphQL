@@ -21,11 +21,25 @@ interface InputCoercingServiceInterface
      *
      * @return WithValueInterface The provided value as is, converted to array, or converted to array of arrays
      */
-    public function maybeConvertInputValueFromSingleToList(
+    public function maybeConvertInputValueASTFromSingleToList(
         WithValueInterface $inputValueAST,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
     ): WithValueInterface;
+
+    /**
+     * Support passing a single value where a list is expected:
+     * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+     *
+     * Defined in the GraphQL spec.
+     *
+     * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+     */
+    public function maybeConvertInputValueFromSingleToList(
+        mixed $inputValue,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType,
+    ): mixed;
 
     /**
      * Validate that the expected array/non-array input is provided,
