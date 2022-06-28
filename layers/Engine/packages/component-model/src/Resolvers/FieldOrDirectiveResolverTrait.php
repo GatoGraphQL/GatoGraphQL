@@ -58,22 +58,6 @@ trait FieldOrDirectiveResolverTrait
     }
 
     /**
-     * The validations below can only be done if no fieldArg or directiveArg contains a field!
-     * That is because this is a schema error, so we still don't have the $object against which to resolve the field
-     * For instance, this doesn't work: /?query=arrayItem(posts(),3)
-     * In that case, the validation will be done inside ->resolveValue(),
-     * and will be treated as a $dbError, not a $schemaError.
-     *
-     * Same with expressions, as when calling `getSelfProp(%{self}%, "posts")`.
-     *
-     * But no need with variables, because by now they will have been replaced with the actual value.
-     */
-    protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
-    {
-        return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
-    }
-
-    /**
      * @param string[] $deprecations
      * @param string[] $fieldOrDirectiveArgumentValueItems
      */

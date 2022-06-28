@@ -727,28 +727,26 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return;
         }
 
-        if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($field->getArguments())) {
-            /**
-             * Validate field argument constraints
-             */
-            if (
-                $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
-                    $objectTypeResolver,
-                    $field->getName(),
-                    $field->getArguments()
-                )
-            ) {
-                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            $errorFeedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver,
-                        )
-                    );
-                }
-                return;
+        /**
+         * Validate field argument constraints
+         */
+        if (
+            $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
+                $objectTypeResolver,
+                $field->getName(),
+                $field->getArguments()
+            )
+        ) {
+            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver,
+                    )
+                );
             }
+            return;
         }
 
         /**

@@ -434,19 +434,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return [$maybeErrorFeedbackItemResolution];
         }
 
-        if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
-            /**
-             * Validate directive argument constraints
-             */
-            if (
-                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
-                    $relationalTypeResolver,
-                    $directiveName,
-                    $directiveArgs
-                )
-            ) {
-                return $maybeErrorFeedbackItemResolutions;
-            }
+        /**
+         * Validate directive argument constraints
+         */
+        if (
+            $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
+                $relationalTypeResolver,
+                $directiveName,
+                $directiveArgs
+            )
+        ) {
+            return $maybeErrorFeedbackItemResolutions;
         }
 
         // Custom validations
