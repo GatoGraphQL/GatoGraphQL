@@ -1165,6 +1165,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
+     *
+     * @return Argument[]
      */
     final protected function getConsolidatedMutationFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
