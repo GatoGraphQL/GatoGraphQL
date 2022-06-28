@@ -60,8 +60,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 continue;
             }
 
-            $argValueAST = $argument->getValueAST();
-
             /** @var InputTypeResolverInterface */
             $fieldOrDirectiveArgTypeResolver = $argumentSchemaDefinition[$argName][SchemaDefinition::TYPE_RESOLVER];
 
@@ -93,6 +91,8 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $fieldOrDirectiveArgIsArrayOfArraysType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
             $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
 
+            $argValueAST = $argument->getValueAST();
+
             /**
              * Support passing a single value where a list is expected:
              * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
@@ -111,7 +111,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
-                $argValueAST,
+                $argValueAST->getValue(),
                 $argName,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
