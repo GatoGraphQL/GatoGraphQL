@@ -9,6 +9,7 @@ use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\CoercibleArgumentValueAstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -123,11 +124,17 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 continue;
             }
 
+            if (!($argValueAST instanceof CoercibleArgumentValueAstInterface)) {
+                continue;
+            }
+            /** @var CoercibleArgumentValueAstInterface */
+            $coercibleArgValueAST = $argValueAST;
+
             // Cast (or "coerce" in GraphQL terms) the value
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedArgValueAST = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
-                $argValueAST,
+                $coercibleArgValueAST,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $separateSchemaInputValidationFeedbackStore,

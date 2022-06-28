@@ -11,7 +11,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use stdClass;
 
-class InputObject extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
+class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterface, WithAstValueInterface
 {
     protected InputList|InputObject|Argument $parent;
 
@@ -55,6 +55,14 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
             $object->$key = $value;
         }
         return $object;
+    }
+
+    /**
+     * @param stdClass $object
+     */
+    public function setValue(mixed $object): void
+    {
+        $this->object = $object;
     }
 
     /**

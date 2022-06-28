@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
+class InputList extends AbstractAst implements CoercibleArgumentValueAstInterface, WithAstValueInterface
 {
     protected InputList|InputObject|Argument $parent;
 
@@ -57,6 +57,14 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
             $list[$key] = $value;
         }
         return $list;
+    }
+
+    /**
+     * @param array<mixed> $list
+     */
+    public function setValue(mixed $list): void
+    {
+        $this->list = $list;
     }
 
     /**

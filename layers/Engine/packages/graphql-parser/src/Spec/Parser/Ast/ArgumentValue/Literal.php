@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class Literal extends AbstractAst implements ArgumentValueAstInterface
+class Literal extends AbstractAst implements CoercibleArgumentValueAstInterface
 {
     protected InputList|InputObject|Argument $parent;
 
@@ -40,5 +40,13 @@ class Literal extends AbstractAst implements ArgumentValueAstInterface
     public function getValue(): mixed
     {
         return $this->value;
+    }
+
+    /**
+     * @param string|int|float|bool|null $value
+     */
+    public function setValue(mixed $value): void
+    {
+        $this->value = $value;
     }
 }

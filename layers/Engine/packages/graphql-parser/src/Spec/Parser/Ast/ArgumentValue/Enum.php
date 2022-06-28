@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class Enum extends AbstractAst implements ArgumentValueAstInterface
+class Enum extends AbstractAst implements CoercibleArgumentValueAstInterface
 {
     protected InputList|InputObject|Argument $parent;
 
@@ -40,5 +40,13 @@ class Enum extends AbstractAst implements ArgumentValueAstInterface
     public function getValue(): mixed
     {
         return $this->enumValue;
+    }
+
+    /**
+     * @param string $enumValue
+     */
+    public function setValue(mixed $enumValue): void
+    {
+        $this->enumValue = $enumValue;
     }
 }
