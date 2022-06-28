@@ -589,7 +589,7 @@ class Parser extends Tokenizer implements ParserInterface
 
         $list = [];
         while (!$this->match(Token::TYPE_RSQUARE_BRACE) && !$this->end()) {
-            $list[] = $this->parseListValue();
+            $list[] = $this->parseValue();
 
             $this->eat(Token::TYPE_COMMA);
         }
@@ -612,36 +612,6 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseListValue(): mixed
-    {
-        return match ($this->lookAhead->getType()) {
-            Token::TYPE_NUMBER,
-            Token::TYPE_STRING,
-            Token::TYPE_TRUE,
-            Token::TYPE_FALSE,
-            Token::TYPE_NULL,
-            Token::TYPE_IDENTIFIER
-                => $this->expect($this->lookAhead->getType())->getData(),
-            Token::TYPE_VARIABLE
-                => $this->parseVariableReference(),
-            Token::TYPE_LBRACE
-                => $this->parseObject(),
-            Token::TYPE_LSQUARE_BRACE
-                => $this->parseList(),
-            default
-                => throw new SyntaxErrorException(
-                    new FeedbackItemResolution(
-                        GraphQLParserErrorFeedbackItemProvider::class,
-                        GraphQLParserErrorFeedbackItemProvider::E_2
-                    ),
-                    $this->getLocation()
-                ),
-        };
-    }
-
-    /**
-     * @throws SyntaxErrorException
-     */
     protected function parseObject(): InputObject
     {
         $startToken = $this->eat(Token::TYPE_LBRACE);
@@ -652,7 +622,7 @@ class Parser extends Tokenizer implements ParserInterface
             $keyToken = $this->expectMulti([Token::TYPE_STRING, Token::TYPE_IDENTIFIER]);
             $key = $keyToken->getData();
             $this->expect(Token::TYPE_COLON);
-            $value = $this->parseListValue();
+            $value = $this->parseValue();
 
             $this->eat(Token::TYPE_COMMA);
 
