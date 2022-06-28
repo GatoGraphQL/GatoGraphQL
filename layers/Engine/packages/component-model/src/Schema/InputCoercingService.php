@@ -231,19 +231,18 @@ class InputCoercingService implements InputCoercingServiceInterface
      */
     public function coerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
-        CoercibleArgumentValueAstInterface $coercibleInputValueAST,
+        mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): void {
-        $inputValue = $coercibleInputValueAST->getValue();
+    ): mixed {
         if ($inputValue === null) {
-            return;
+            return $inputValue;
         }
         if ($inputIsArrayOfArraysType) {
             /** @var array $inputValue */
             // If the value is an array of arrays, then cast each subelement to the item type
-            $coercedInputValue = array_map(
+            return array_map(
                 // If it contains a null value, return it as is
                 fn (?array $arrayArgValueElem) => $arrayArgValueElem === null ? null : array_map(
                     fn (mixed $arrayOfArraysArgValueElem) => $arrayOfArraysArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $schemaInputValidationFeedbackStore),
@@ -251,18 +250,17 @@ class InputCoercingService implements InputCoercingServiceInterface
                 ),
                 $inputValue
             );
-        } elseif ($inputIsArrayType) {
+        }
+        if ($inputIsArrayType) {
             /** @var array $inputValue */
             // If the value is an array, then cast each element to the item type
-            $coercedInputValue = array_map(
+            return array_map(
                 fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem, $schemaInputValidationFeedbackStore),
                 $inputValue
             );
-        } else {
-            // Otherwise, simply cast the given value directly
-            $coercedInputValue = $inputTypeResolver->coerceValue($inputValue, $schemaInputValidationFeedbackStore);
         }
-        $coercibleInputValueAST->setValue($coercedInputValue);
+        // Otherwise, simply cast the given value directly
+        return $inputTypeResolver->coerceValue($inputValue, $schemaInputValidationFeedbackStore);
     }
 
     /**

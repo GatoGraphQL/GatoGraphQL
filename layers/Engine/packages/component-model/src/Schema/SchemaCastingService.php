@@ -125,6 +125,8 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             }
 
             if (!($argValueAST instanceof CoercibleArgumentValueAstInterface)) {
+                // Re-assign the possible single-to-list modification
+                $argument->setValueAST($argValueAST);
                 continue;
             }
             /** @var CoercibleArgumentValueAstInterface */
@@ -132,9 +134,9 @@ class SchemaCastingService implements SchemaCastingServiceInterface
 
             // Cast (or "coerce" in GraphQL terms) the value
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-            $coercedArgValueAST = $this->getInputCoercingService()->coerceInputValue(
+            $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
-                $coercibleArgValueAST,
+                $coercibleArgValueAST->getValue(),
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $separateSchemaInputValidationFeedbackStore,
@@ -144,11 +146,18 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 continue;
             }
 
+            /**
+             * No errors, re-assign the coerced value to the InputValueAST,
+             * and the InputValueAST to the Argument
+             */
+            $coercibleArgValueAST->setValue($coercedArgValue);
+            $argument->setValueAST($coercibleArgValueAST);
+
             // Obtain the deprecations
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
                 $deprecationMessages = $this->getInputCoercingService()->getInputValueDeprecationMessages(
                     $fieldOrDirectiveArgTypeResolver,
-                    $coercedArgValueAST->getValue(),
+                    $coercedArgValue,
                     $fieldOrDirectiveArgIsArrayType,
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
@@ -168,9 +177,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                     );
                 }
             }
-
-            // No errors, re-assign the coerced value to the Argument
-            $argument->setValueAST($coercedArgValueAST);
         }
     }
 }

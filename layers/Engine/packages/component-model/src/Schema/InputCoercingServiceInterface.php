@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\Schema;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\CoercibleArgumentValueAstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 
 interface InputCoercingServiceInterface
@@ -51,11 +50,11 @@ interface InputCoercingServiceInterface
      */
     public function coerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
-        CoercibleArgumentValueAstInterface $inputValueAST,
+        mixed $inputValue,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): void;
+    ): mixed;
 
     /**
      * If applicable, get the deprecation messages for the input value
