@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'if' in directive 'skip' cannot be empty",
+      "message": "Argument 'if' in directive '@skip' cannot be empty",
       "locations": [
         {
           "line": 1,
