@@ -753,7 +753,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field->getName(), $field->getArguments());
+            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field);
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1058,7 +1058,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field->getName(), $field->getArguments());
+            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
                 $mutationResolver->validateWarnings($mutationFieldArgs)
@@ -1174,16 +1174,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function getConsolidatedMutationFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): array {
         return App::applyFilters(
             HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS,
-            $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->getMutationFieldArgs($objectTypeResolver, $field->getName(), $field->getArguments()),
             $this,
             $objectTypeResolver,
-            $fieldName,
-            $fieldArgs,
+            $field->getName(),
+            $field->getArguments(),
         );
     }
 
@@ -1249,7 +1248,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
             $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
-                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field->getName(), $field->getArguments()),
+                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field),
                 $objectTypeResolver,
                 $object,
                 $field->getName()
