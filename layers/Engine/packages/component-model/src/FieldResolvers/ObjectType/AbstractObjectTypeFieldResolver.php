@@ -1097,18 +1097,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $validationCheckpoints;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
+        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $field->getName(), $field->getArguments())) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
             if ($feedbackItemResolution !== null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1127,7 +1123,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
             // Validate on the object
             $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
-                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
+                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field),
                 $objectTypeResolver,
                 $object,
                 $fieldName

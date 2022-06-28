@@ -105,14 +105,10 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         array $fieldArgs
     ): bool;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     /**
