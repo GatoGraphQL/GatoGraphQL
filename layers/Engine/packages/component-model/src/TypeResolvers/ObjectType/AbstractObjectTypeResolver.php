@@ -25,11 +25,17 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -420,6 +426,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
+        $this->integrateDefaultFieldArguments($field);
+
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
         // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
@@ -798,6 +806,86 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             )
         );
         return null;
+    }
+
+    final protected function integrateDefaultFieldArguments(FieldInterface $field): void
+    {
+        $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($field);
+        if ($fieldOrDirectiveArgumentNameDefaultValues === null) {
+            return;
+        }
+        foreach ($fieldOrDirectiveArgumentNameDefaultValues as $fieldArgName => $fieldArgValue) {
+            $fieldArgValueAST = $this->getArgumentValueAsAST($fieldArgValue);
+            $field->addArgument(
+                new Argument(
+                    $fieldArgName,
+                    $fieldArgValueAST,
+                    LocationHelper::getNonSpecificLocation()
+                )
+            );
+        }
+    }
+
+    final protected function getArgumentValueAsAST(mixed $argumentValue): WithValueInterface
+    {
+        if (is_array($argumentValue)) {
+            $listValues = [];
+            foreach ($argumentValue as $key => $value) {
+                $listValues[$key] = $this->getArgumentValueAsAST($value);
+            }
+            return new InputList(
+                $listValues,
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        if ($argumentValue instanceof stdClass) {
+            $objectValues = new stdClass();
+            foreach ((array)$argumentValue as $key => $value) {
+                $objectValues->$key = $this->getArgumentValueAsAST($value);
+            }
+            return new InputObject(
+                $objectValues,
+                LocationHelper::getNonSpecificLocation()
+            );
+        }
+        return new Literal($argumentValue, LocationHelper::getNonSpecificLocation());
+    }
+
+    /**
+     * Get the field arguments which have a default value.
+     * Set the missing InputObject as {} to give it a chance to set
+     * its default input field values
+     *
+     * @return array<string,mixed>|null
+     */
+    final protected function getFieldArgumentNameDefaultValues(FieldInterface $field): ?array
+    {
+        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($field);
+        if ($fieldSchemaDefinition === null) {
+            return null;
+        }
+        $fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
+        if ($fieldArgsSchemaDefinition === null) {
+            return null;
+        }
+
+        $fieldArgNameDefaultValues = [];
+        foreach ($fieldArgsSchemaDefinition as $fieldSchemaDefinitionArg) {
+            if (\array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldSchemaDefinitionArg)) {
+                // If it has a default value, set it
+                $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
+                continue;
+            }
+            if (
+                // If it is a non-mandatory InputObject, set {}
+                // (If it is mandatory, don't set a value as to let the validation fail)
+                $fieldSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface
+                && !($fieldSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false)
+            ) {
+                $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = new stdClass();
+            }
+        }
+        return $fieldArgNameDefaultValues;
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
