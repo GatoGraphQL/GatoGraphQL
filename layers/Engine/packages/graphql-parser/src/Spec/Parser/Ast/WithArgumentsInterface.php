@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-interface WithArgumentsInterface
+interface WithArgumentsInterface extends AstInterface
 {
     public function hasArguments(): bool;
 
