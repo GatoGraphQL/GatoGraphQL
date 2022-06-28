@@ -6,8 +6,11 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 trait WithArgumentsTrait
 {
-    /** @var array<string,Argument> */
-    protected array $arguments;
+    /** @var Argument[] */
+    protected array $arguments = [];
+
+    /** @var array<string,Argument> Keep separate to validate that no 2 Arguments have same name */
+    protected array $nameArguments = [];
 
     // /** @var array<string,mixed>|null */
     // protected ?array $keyValueArguments = null;
@@ -20,7 +23,7 @@ trait WithArgumentsTrait
 
     public function hasArgument(string $name): bool
     {
-        return array_key_exists($name, $this->arguments);
+        return array_key_exists($name, $this->nameArguments);
     }
 
     /**
@@ -28,12 +31,12 @@ trait WithArgumentsTrait
      */
     public function getArguments(): array
     {
-        return array_values($this->arguments);
+        return $this->arguments;
     }
 
     public function getArgument(string $name): ?Argument
     {
-        return $this->arguments[$name] ?? null;
+        return $this->nameArguments[$name] ?? null;
     }
 
     public function getArgumentValue(string $name): mixed
@@ -48,7 +51,8 @@ trait WithArgumentsTrait
     public function addArgument(Argument $argument): void
     {
         // $this->keyValueArguments = null;
-        $this->arguments[$argument->getName()] = $argument;
+        $this->arguments[] = $argument;
+        $this->nameArguments[$argument->getName()] = $argument;
     }
 
     /**
@@ -57,9 +61,9 @@ trait WithArgumentsTrait
     protected function setArguments(array $arguments): void
     {
         // $this->keyValueArguments = null;
-        $this->arguments = [];
         foreach ($arguments as $argument) {
-            $this->arguments[$argument->getName()] = $argument;
+            $this->arguments[] = $argument;
+            $this->nameArguments[$argument->getName()] = $argument;
         };
     }
 
