@@ -372,7 +372,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // Validate against the directiveResolver
-            if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directiveName, $directiveArgs)) {
+            if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directive)) {
                 foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                     foreach ($directiveFields[$directive] as $field) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addError(

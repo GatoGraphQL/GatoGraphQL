@@ -8,6 +8,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
 
 trait FieldOrDirectiveResolverTrait
@@ -25,13 +26,12 @@ trait FieldOrDirectiveResolverTrait
      */
     private function validateNotMissingFieldOrDirectiveArguments(
         array $mandatoryFieldOrDirectiveArgNames,
-        string $fieldOrDirectiveName,
-        array $fieldOrDirectiveArgs,
+        WithArgumentsInterface $withArgumentsAST,
         string $type
     ): ?FeedbackItemResolution {
         $missing = array_values(array_filter(
             $mandatoryFieldOrDirectiveArgNames,
-            fn (string $fieldArgName) => !isset($fieldOrDirectiveArgs[$fieldArgName])
+            fn (string $fieldArgName) => $withArgumentsAST->getArgument($fieldArgName) === null
         ));
         if ($missing !== []) {
             return count($missing) === 1 ?
@@ -41,7 +41,7 @@ trait FieldOrDirectiveResolverTrait
                     [
                         $missing[0],
                         $type,
-                        $fieldOrDirectiveName
+                        $withArgumentsAST->asQueryString()
                     ]
                 )
                 : new FeedbackItemResolution(
@@ -50,7 +50,7 @@ trait FieldOrDirectiveResolverTrait
                     [
                         implode($this->getTranslationAPI()->__('\', \''), $missing),
                         $type,
-                        $fieldOrDirectiveName
+                        $withArgumentsAST->asQueryString()
                     ]
                 );
         }

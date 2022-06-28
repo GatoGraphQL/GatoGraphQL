@@ -713,8 +713,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (
             $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
                 $mandatoryConsolidatedFieldArgNames,
-                $field->getName(),
-                $field->getArguments(),
+                $field,
                 ResolverTypes::FIELD
             )
         ) {

@@ -413,8 +413,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     public function resolveDirectiveValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs
+        Directive $directive,
     ): array {
         /**
          * Validate all mandatory args have been provided
@@ -428,8 +427,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (
             $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
                 $mandatoryConsolidatedDirectiveArgNames,
-                $directiveName,
-                $directiveArgs,
+                $directive,
                 ResolverTypes::DIRECTIVE
             )
         ) {
