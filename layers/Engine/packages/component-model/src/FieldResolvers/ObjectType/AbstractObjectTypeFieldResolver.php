@@ -802,7 +802,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $field,
     ): array {
         $errors = [];
-        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
         foreach ($field->getArguments() as $argument) {
             /**
              * If the field is an InputObject, let it perform validations on its input fields
