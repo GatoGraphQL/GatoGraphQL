@@ -11,6 +11,7 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -20,7 +21,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Response\OutputServiceInterface;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
+use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -81,6 +82,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?OutputServiceInterface $outputService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
+    private ?SchemaCastingServiceInterface $schemaCastingService = null;
 
     final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
@@ -105,6 +107,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
     {
         return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
+    }
+    final public function setSchemaCastingService(SchemaCastingServiceInterface $schemaCastingService): void
+    {
+        $this->schemaCastingService = $schemaCastingService;
+    }
+    final protected function getSchemaCastingService(): SchemaCastingServiceInterface
+    {
+        return $this->schemaCastingService ??= $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
     }
 
     /**
@@ -426,7 +436,21 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
+        /**
+         * Add the default Arguments to the Field
+         */
         $this->integrateDefaultFieldArguments($field);
+        
+        /**
+         * Cast the Arguments, return if any of them produced an error
+         */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->getSchemaCastingService()->castArguments($field, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
+        }
 
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
@@ -856,11 +880,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final protected function getFieldArgumentNameDefaultValues(FieldInterface $field): ?array
     {
-        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($field);
-        if ($fieldSchemaDefinition === null) {
-            return null;
-        }
-        $fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         if ($fieldArgsSchemaDefinition === null) {
             return null;
         }
@@ -882,6 +902,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
         }
         return $fieldArgNameDefaultValues;
+    }
+
+    final protected function getFieldArgumentsSchemaDefinition(FieldInterface $field): ?array
+    {
+        $fieldSchemaDefinition = $this->getFieldSchemaDefinition($field);
+        if ($fieldSchemaDefinition === null) {
+            return null;
+        }
+        $fieldArgsSchemaDefinition = $fieldSchemaDefinition[SchemaDefinition::ARGS] ?? [];
+        if ($fieldArgsSchemaDefinition === null) {
+            return null;
+        }
+
+        return $fieldArgsSchemaDefinition;
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
