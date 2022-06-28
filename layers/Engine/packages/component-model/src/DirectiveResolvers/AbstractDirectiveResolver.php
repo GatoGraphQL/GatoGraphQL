@@ -298,8 +298,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             if (
                 $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
-                    $directiveName,
-                    $directiveArgs
                 )
             ) {
                 foreach ($fields as $field) {
@@ -440,8 +438,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (
             $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                 $relationalTypeResolver,
-                $directiveName,
-                $directiveArgs
             )
         ) {
             return $maybeErrorFeedbackItemResolutions;
@@ -460,17 +456,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     final protected function resolveDirectiveArgumentErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs
     ): array {
         $errors = [];
-        foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
+        foreach ($this->directive->getArguments() as $argument) {
             if (
                 $maybeErrorFeedbackItemResolutions = $this->validateDirectiveArgValue(
                     $relationalTypeResolver,
-                    $directiveName,
-                    $directiveArgName,
-                    $directiveArgValue
+                    $this->directive->getName(),
+                    $argument->getName(),
+                    $argument->getValue()
                 )
             ) {
                 $errors = array_merge(
