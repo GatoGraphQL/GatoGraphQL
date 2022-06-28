@@ -94,6 +94,10 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $argValueAST = $argument->getValueAST();
 
             /**
+             * Modifying the AST and not directly its value, because
+             * a VariableReference may be converted to InputList([VariableReference]),
+             * so the underlying AST holding the value must also change.
+             *
              * Support passing a single value where a list is expected:
              * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
              *
