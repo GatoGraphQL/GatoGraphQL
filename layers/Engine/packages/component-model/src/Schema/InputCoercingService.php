@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -42,25 +44,25 @@ class InputCoercingService implements InputCoercingServiceInterface
      * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
      */
     public function maybeConvertInputValueFromSingleToList(
-        mixed $inputValue,
+        WithValueInterface $inputValueAST,
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
-    ): mixed {
+    ): WithValueInterface {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (
-            is_array($inputValue)
+            $inputValueAST instanceof InputList
             || !$moduleConfiguration->convertInputValueFromSingleToList()
         ) {
-            return $inputValue;
+            return $inputValueAST;
         }
         if ($inputIsArrayOfArraysType) {
-            return [[$inputValue]];
+            return new InputList([[$inputValueAST->getValue()]], LocationHelper::getNonSpecificLocation());
         }
         if ($inputIsArrayType) {
-            return [$inputValue];
+            return new InputList([$inputValueAST->getValue()], LocationHelper::getNonSpecificLocation());
         }
-        return $inputValue;
+        return $inputValueAST;
     }
 
     /**
