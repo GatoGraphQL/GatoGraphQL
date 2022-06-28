@@ -260,7 +260,7 @@ class Parser extends Tokenizer implements ParserInterface
 
             if ($this->match(Token::TYPE_EQUAL)) {
                 $this->eat(Token::TYPE_EQUAL);
-                $variable->setDefaultValue($this->parseValue());
+                $variable->setDefaultValueAST($this->parseValue());
             }
 
             $this->variables[] = $variable;

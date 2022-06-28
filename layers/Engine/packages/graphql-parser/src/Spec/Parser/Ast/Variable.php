@@ -27,7 +27,7 @@ class Variable extends AbstractAst implements WithValueInterface
 
     protected bool $hasDefaultValue = false;
 
-    protected InputList|InputObject|Literal|Enum|null $defaultValue = null;
+    protected InputList|InputObject|Literal|Enum|null $defaultValueAST = null;
 
     protected OperationInterface $parent;
 
@@ -58,7 +58,7 @@ class Variable extends AbstractAst implements WithValueInterface
             '$%s: %s%s',
             $this->name,
             $strType,
-            $this->hasDefaultValue ? sprintf(' = %s', $this->defaultValue) : ''
+            $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValue()) : ''
         );
     }
 
@@ -99,18 +99,18 @@ class Variable extends AbstractAst implements WithValueInterface
 
     public function hasDefaultValue(): bool
     {
-        return $this->hasDefaultValue;
+        return $this->hasDefaultValue !== null;
     }
 
-    public function getDefaultValue(): InputList|InputObject|Literal|Enum|null
+    public function getDefaultValue(): mixed
     {
-        return $this->defaultValue;
+        return $this->defaultValueAST?->getValue();
     }
 
-    public function setDefaultValue(InputList|InputObject|Literal|Enum|null $defaultValue): void
+    public function setDefaultValueAST(InputList|InputObject|Literal|Enum|null $defaultValueAST): void
     {
         $this->hasDefaultValue = true;
-        $this->defaultValue = $defaultValue;
+        $this->defaultValueAST = $defaultValueAST;
     }
 
     public function isArrayElementRequired(): bool
