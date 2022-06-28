@@ -833,22 +833,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getArgumentValueAsAST(mixed $argumentValue): WithValueInterface
     {
         if (is_array($argumentValue)) {
-            $listValues = [];
-            foreach ($argumentValue as $key => $value) {
-                $listValues[$key] = $this->getArgumentValueAsAST($value);
-            }
             return new InputList(
-                $listValues,
+                $argumentValue,
                 LocationHelper::getNonSpecificLocation()
             );
         }
         if ($argumentValue instanceof stdClass) {
-            $objectValues = new stdClass();
-            foreach ((array)$argumentValue as $key => $value) {
-                $objectValues->$key = $this->getArgumentValueAsAST($value);
-            }
             return new InputObject(
-                $objectValues,
+                $argumentValue,
                 LocationHelper::getNonSpecificLocation()
             );
         }
