@@ -40,6 +40,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
@@ -1146,8 +1147,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Retrieve the field arguments to pass to the MutationResolver,
      * for instance from under an InputObject.
      *
-     * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
+     * @return Argument[]
      */
     protected function getMutationFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -1195,30 +1195,31 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
      *
-     * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
+     * @return Argument[]
      */
     private function maybeGetInputObjectFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): array {
-        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
 
         // Check if there is only one fieldArg
         if (count($fieldArgNameTypeResolvers) !== 1) {
-            return $fieldArgs;
+            return $field->getArguments();
         }
 
         // Check if the fieldArg is an InputObject
         $fieldArgName = key($fieldArgNameTypeResolvers);
         $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
         if (!($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface)) {
-            return $fieldArgs;
+            return $field->getArguments();
         }
 
         // Retrieve the elements under the InputObject, cast to array
-        return (array) $fieldArgs[$fieldArgName];
+        return array_values(array_filter(
+            $field->getArguments(),
+            fn (Argument $argument) => $argument->getName() === $fieldArgName
+        ));
     }
 
     /**
