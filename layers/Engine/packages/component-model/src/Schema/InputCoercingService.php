@@ -58,10 +58,25 @@ class InputCoercingService implements InputCoercingServiceInterface
             return $inputValueAST;
         }
         if ($inputIsArrayOfArraysType) {
-            return new InputList([[$inputValueAST->getValue()]], $inputValueAST->getLocation());
+            return new InputList(
+                [
+                    new InputList(
+                        [
+                            $inputValueAST,
+                        ],
+                        $inputValueAST->getLocation()
+                    ),
+                ],
+                $inputValueAST->getLocation()
+            );
         }
         if ($inputIsArrayType) {
-            return new InputList([$inputValueAST->getValue()], $inputValueAST->getLocation());
+            return new InputList(
+                [
+                    $inputValueAST,
+                ],
+                $inputValueAST->getLocation()
+            );
         }
         return $inputValueAST;
     }
