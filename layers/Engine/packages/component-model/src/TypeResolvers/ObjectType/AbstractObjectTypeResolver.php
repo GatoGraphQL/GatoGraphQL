@@ -819,10 +819,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($field->getArgument($fieldArgName) !== null) {
                 continue;
             }
+            $fieldArgValueAST = $this->getArgumentValueAsAST($fieldArgValue);
             $field->addArgument(
                 new Argument(
                     $fieldArgName,
-                    $this->getArgumentValueAsAST($fieldArgValue),
+                    $fieldArgValueAST,
                     LocationHelper::getNonSpecificLocation()
                 )
             );
