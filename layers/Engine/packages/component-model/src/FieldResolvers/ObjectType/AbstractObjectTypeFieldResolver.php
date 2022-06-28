@@ -733,8 +733,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (
             $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
                 $objectTypeResolver,
-                $field->getName(),
-                $field->getArguments()
+                $field,
             )
         ) {
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
@@ -800,31 +799,30 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function resolveFieldArgumentErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
         $errors = [];
         $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-        foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
+        foreach ($field->getArguments() as $argument) {
             /**
              * If the field is an InputObject, let it perform validations on its input fields
              */
-            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
+            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argument->getName()];
             if (
                 $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
             ) {
                 $errors = array_merge(
                     $errors,
-                    $fieldArgTypeResolver->validateInputValue($fieldArgValue)
+                    $fieldArgTypeResolver->validateInputValue($argument->getValue())
                 );
             }
             $errors = array_merge(
                 $errors,
                 $this->validateFieldArgValue(
                     $objectTypeResolver,
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
+                    $field->getName(),
+                    $argument->getName(),
+                    $argument->getValue()
                 )
             );
         }
