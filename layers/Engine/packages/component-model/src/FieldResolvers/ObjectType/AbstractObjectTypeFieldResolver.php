@@ -1151,14 +1151,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function getMutationFieldArgs(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): array {
-        if ($this->extractInputObjectFieldArgsForMutation($objectTypeResolver, $fieldName)) {
+        if ($this->extractInputObjectFieldArgsForMutation($objectTypeResolver, $field->getName())) {
             $fieldArgs = $this->maybeGetInputObjectFieldArgs(
                 $objectTypeResolver,
-                $fieldName,
-                $fieldArgs,
+                $field,
             );
         }
         return $fieldArgs;
@@ -1174,7 +1172,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): array {
         return App::applyFilters(
             HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS,
-            $this->getMutationFieldArgs($objectTypeResolver, $field->getName(), $field->getArguments()),
+            $this->getMutationFieldArgs($objectTypeResolver, $field),
             $this,
             $objectTypeResolver,
             $field->getName(),
