@@ -659,10 +659,10 @@ GRAPHQL;
     public function queryProvider()
     {
         $filter = new stdClass();
-        $filter->title = 'unrequested';
-        $filter->director = 'steven';
+        $filter->title = new Literal('unrequested', new Location(1, 26));
+        $filter->director = new Literal('steven', new Location(1, 51));
         $attrs = new stdClass();
-        $attrs->stars = 5;
+        $attrs->stars = new Literal(5, new Location(1, 76));
         $filter->attrs = new InputObject($attrs, new Location(1, 67));
         return [
             [
@@ -840,7 +840,27 @@ GRAPHQL;
                                 'users',
                                 'allUsers',
                                 [
-                                    new Argument('id', new InputList([1, 2, 3], new Location(1, 26)), new Location(1, 22)),
+                                    new Argument(
+                                        'id',
+                                        new InputList(
+                                            [
+                                                new Literal(
+                                                    1,
+                                                    new Location(1, 28)
+                                                ),
+                                                new Literal(
+                                                    2,
+                                                    new Location(1, 31)
+                                                ),
+                                                new Literal(
+                                                    3,
+                                                    new Location(1, 34)
+                                                ),
+                                            ],
+                                            new Location(1, 26)
+                                        ),
+                                        new Location(1, 22)
+                                    ),
                                 ],
                                 [
                                     new LeafField('id', null, [], [], new Location(1, 41)),
@@ -866,7 +886,35 @@ GRAPHQL;
                                     'users',
                                     'allUsers',
                                     [
-                                        new Argument('id', new InputList([1, 1.5, "2", true, null], new Location(1, 26)), new Location(1, 22)),
+                                        new Argument(
+                                            'id',
+                                            new InputList(
+                                                [
+                                                    new Literal(
+                                                        1,
+                                                        new Location(1, 28)
+                                                    ),
+                                                    new Literal(
+                                                        1.5,
+                                                        new Location(1, 31)
+                                                    ),
+                                                    new Literal(
+                                                        "2",
+                                                        new Location(1, 37)
+                                                    ),
+                                                    new Literal(
+                                                        true,
+                                                        new Location(1, 41)
+                                                    ),
+                                                    new Literal(
+                                                        null,
+                                                        new Location(1, 47)
+                                                    ),
+                                                ],
+                                                new Location(1, 26)
+                                            ),
+                                            new Location(1, 22)
+                                        ),
                                     ],
                                     [
                                         new LeafField('id', null, [], [], new Location(1, 57)),
@@ -890,15 +938,32 @@ GRAPHQL;
                                 'users',
                                 'allUsers',
                                 [
-                                    new Argument('object', new InputObject((object) [
-                                        'a' => 123,
-                                        'd' => 'asd',
-                                        'b' => [1, 2, 4],
-                                        'c' => new InputObject((object) [
-                                            'a' => 123,
-                                            'b' => 'asd',
-                                        ], new Location(1, 79)),
-                                    ], new Location(1, 30)), new Location(1, 22)),
+                                    new Argument(
+                                        'object',
+                                        new InputObject(
+                                            (object) [
+                                                'a' => new Literal(123, new Location(1, 37)),
+                                                'd' => new Literal('asd', new Location(1, 48)),
+                                                'b' => new InputList(
+                                                    [
+                                                        new Literal(1, new Location(1, 63)),
+                                                        new Literal(2, new Location(1, 66)),
+                                                        new Literal(4, new Location(1, 69)),
+                                                    ],
+                                                    new Location(1, 61)
+                                                ),
+                                                'c' => new InputObject(
+                                                    (object) [
+                                                        'a' => new Literal(123, new Location(1, 87)),
+                                                        'b' => new Literal('asd', new Location(1, 99)),
+                                                    ],
+                                                    new Location(1, 79)
+                                                ),
+                                            ],
+                                            new Location(1, 30)
+                                        ),
+                                        new Location(1, 22)
+                                    ),
                                 ],
                                 [
                                     new LeafField('id', null, [], [], new Location(1, 112)),
