@@ -109,7 +109,7 @@ class Variable extends AbstractAst implements WithValueInterface
 
     public function setDefaultValueAST(InputList|InputObject|Literal|Enum|null $defaultValueAST): void
     {
-        $this->hasDefaultValue = true;
+        $this->hasDefaultValue = $defaultValueAST !== null;
         $this->defaultValueAST = $defaultValueAST;
     }
 
@@ -157,5 +157,10 @@ class Variable extends AbstractAst implements WithValueInterface
             );
         }
         return null;
+    }
+
+    public function getDefaultValueAST(): InputList|InputObject|Literal|Enum|null
+    {
+        return $this->defaultValueAST;
     }
 }
