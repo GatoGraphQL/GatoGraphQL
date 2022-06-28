@@ -1031,7 +1031,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array
     {
         $warningFeedbackItemResolutions = [];
         if (Environment::enableSemanticVersionConstraints()) {
@@ -1047,8 +1047,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         WarningFeedbackItemProvider::class,
                         WarningFeedbackItemProvider::W2,
                         [
-                            $fieldName,
-                            $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
+                            $field->getName(),
+                            $this->getFieldVersion($objectTypeResolver, $field->getName()) ?? '',
                             $versionConstraint
                         ]
                     );
@@ -1056,9 +1056,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
+            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field->getName(), $field->getArguments());
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
                 $mutationResolver->validateWarnings($mutationFieldArgs)
