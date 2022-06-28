@@ -13,7 +13,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -23,7 +22,6 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-    use WithVariableValueTrait;
 
     protected ?Context $context = null;
 
@@ -141,11 +139,7 @@ class Variable extends AbstractAst implements WithValueInterface
             );
         }
         if ($this->context->hasVariableValue($this->name)) {
-            $variableValue = $this->context->getVariableValue($this->name);
-            return $this->convertVariableValueToAst(
-                $variableValue,
-                $this->getLocation()
-            );
+            return $this->context->getVariableValue($this->name);
         }
         if ($this->hasDefaultValue()) {
             return $this->getDefaultValue();

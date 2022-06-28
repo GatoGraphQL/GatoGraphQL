@@ -9,12 +9,9 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
 
 class DynamicVariableReference extends AbstractDynamicVariableReference
 {
-    use WithVariableValueTrait;
-
     private ?Context $context = null;
 
     public function setContext(?Context $context): void
@@ -69,10 +66,6 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
                 $this->getLocation()
             );
         }
-        $variableValue = $this->context->getVariableValue($this->name);
-        return $this->convertVariableValueToAst(
-            $variableValue,
-            $this->getLocation()
-        );
+        return $this->context->getVariableValue($this->name);
     }
 }
