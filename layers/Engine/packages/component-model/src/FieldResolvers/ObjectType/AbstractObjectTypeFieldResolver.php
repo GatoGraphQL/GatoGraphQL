@@ -1120,14 +1120,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
-        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
             $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
                 $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field),
                 $objectTypeResolver,
                 $object,
-                $fieldName
+                $field->getName()
             );
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
