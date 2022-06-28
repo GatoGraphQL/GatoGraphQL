@@ -15,7 +15,7 @@ trait WithArgumentsTrait
 
     public function hasArguments(): bool
     {
-        return count($this->arguments) > 0;
+        return $this->arguments !== [];
     }
 
     public function hasArgument(string $name): bool
