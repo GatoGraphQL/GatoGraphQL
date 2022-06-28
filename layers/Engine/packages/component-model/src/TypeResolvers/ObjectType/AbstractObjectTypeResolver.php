@@ -815,11 +815,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
         foreach ($fieldOrDirectiveArgumentNameDefaultValues as $fieldArgName => $fieldArgValue) {
-            $fieldArgValueAST = $this->getArgumentValueAsAST($fieldArgValue);
+            // If the argument does not exist, add a new one
+            if ($field->getArgument($fieldArgName) !== null) {
+                continue;
+            }
             $field->addArgument(
                 new Argument(
                     $fieldArgName,
-                    $fieldArgValueAST,
+                    $this->getArgumentValueAsAST($fieldArgValue),
                     LocationHelper::getNonSpecificLocation()
                 )
             );
