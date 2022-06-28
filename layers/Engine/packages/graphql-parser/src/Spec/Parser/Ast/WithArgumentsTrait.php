@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 trait WithArgumentsTrait
 {
-    /** @var Argument[] */
+    /** @var array<string,Argument> */
     protected array $arguments;
 
     /** @var array<string,mixed>|null */
@@ -28,7 +28,7 @@ trait WithArgumentsTrait
      */
     public function getArguments(): array
     {
-        return $this->arguments;
+        return array_values($this->arguments);
     }
 
     public function getArgument(string $name): ?Argument
@@ -45,13 +45,22 @@ trait WithArgumentsTrait
         return null;
     }
 
+    public function addArgument(Argument $argument): void
+    {
+        $this->keyValueArguments = null;
+        $this->arguments[$argument->getName()] = $argument;
+    }
+
     /**
      * @param Argument[] $arguments
      */
     protected function setArguments(array $arguments): void
     {
         $this->keyValueArguments = null;
-        $this->arguments = $arguments;
+        $this->arguments = [];
+        foreach ($arguments as $argument) {
+            $this->arguments[$argument->getName()] = $argument;
+        };
     }
 
     /**
