@@ -16,7 +16,7 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
     protected InputList|InputObject|Argument $parent;
 
     public function __construct(
-        protected readonly stdClass $object,
+        protected stdClass $object,
         Location $location,
     ) {
         parent::__construct($location);

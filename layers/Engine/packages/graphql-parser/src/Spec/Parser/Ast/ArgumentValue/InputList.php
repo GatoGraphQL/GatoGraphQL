@@ -18,7 +18,7 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
      * @param mixed[] $list
      */
     public function __construct(
-        protected readonly array $list,
+        protected array $list,
         Location $location,
     ) {
         parent::__construct($location);

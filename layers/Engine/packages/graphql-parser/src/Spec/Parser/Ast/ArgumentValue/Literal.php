@@ -13,7 +13,7 @@ class Literal extends AbstractAst implements CoercibleArgumentValueAstInterface
     protected InputList|InputObject|Argument $parent;
 
     public function __construct(
-        protected readonly string|int|float|bool|null $value,
+        protected string|int|float|bool|null $value,
         Location $location
     ) {
         parent::__construct($location);
