@@ -115,7 +115,7 @@ class AstTest extends AbstractTestCase
         $this->assertFalse($variable->isArray());
 
         $variable->setContext(new Context(null, [$variable->getName() => 'text']));
-        $this->assertEquals(new Literal('text', new Location(1, 1)), $variable->getValue());
+        $this->assertEquals('text', $variable->getValue());
     }
 
     public function testVariableLogicException()
