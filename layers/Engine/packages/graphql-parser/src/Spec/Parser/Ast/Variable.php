@@ -99,7 +99,7 @@ class Variable extends AbstractAst implements WithValueInterface
 
     public function hasDefaultValue(): bool
     {
-        return $this->hasDefaultValue !== null;
+        return $this->hasDefaultValue;
     }
 
     public function getDefaultValue(): mixed
