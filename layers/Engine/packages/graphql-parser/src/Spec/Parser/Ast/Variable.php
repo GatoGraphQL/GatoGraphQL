@@ -58,7 +58,7 @@ class Variable extends AbstractAst implements WithValueInterface
             '$%s: %s%s',
             $this->name,
             $strType,
-            $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValue()) : ''
+            $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValueAST()->asQueryString()) : ''
         );
     }
 
