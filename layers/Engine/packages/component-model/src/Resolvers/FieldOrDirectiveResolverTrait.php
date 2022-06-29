@@ -31,7 +31,7 @@ trait FieldOrDirectiveResolverTrait
     ): ?FeedbackItemResolution {
         $missing = array_values(array_filter(
             $mandatoryFieldOrDirectiveArgNames,
-            fn (string $fieldArgName) => $withArgumentsAST->getArgument($fieldArgName) === null
+            fn (string $fieldArgName) => !$withArgumentsAST->hasArgument($fieldArgName)
         ));
         if ($missing !== []) {
             return count($missing) === 1 ?
