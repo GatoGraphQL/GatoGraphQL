@@ -15,7 +15,7 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
     protected InputList|InputObject|Argument $parent;
 
     /**
-     * @param mixed[] $list
+     * @param mixed[] $list Elements inside can be WithValueInterface or native types (array, int, string, etc)
      */
     public function __construct(
         protected array $list,
