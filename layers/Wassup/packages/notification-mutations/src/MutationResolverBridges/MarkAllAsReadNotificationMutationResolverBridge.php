@@ -35,8 +35,6 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        $form_data = array(
-            'user_id' => App::getState('current-user-id'),
-        );
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('user_id', App::getState('current-user-id'), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
     }
 }

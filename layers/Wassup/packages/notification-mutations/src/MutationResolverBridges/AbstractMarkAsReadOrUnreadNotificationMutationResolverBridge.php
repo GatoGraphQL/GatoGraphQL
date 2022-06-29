@@ -12,10 +12,8 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge exte
 {
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        $form_data = array(
-            'histid' => App::query($this->getRequestKey()),
-            'user_id' => App::getState('current-user-id'),
-        );
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('histid', App::query($this->getRequestKey()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('user_id', App::getState('current-user-id'), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
     }
 
     protected function getRequestKey()

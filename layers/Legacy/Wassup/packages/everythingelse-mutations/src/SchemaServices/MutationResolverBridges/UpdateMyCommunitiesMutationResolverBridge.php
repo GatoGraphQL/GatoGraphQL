@@ -34,10 +34,9 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         $communities = $this->getComponentProcessorManager()->getComponentProcessor($inputs['communities'])->getValue($inputs['communities']);
-        $form_data = array(
-            'user_id' => $user_id,
-            'communities' => $communities ?? array(),
-        );
+        
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('user_id', $user_id, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('communities', $communities ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
 
         // Allow to add extra inputs
         $form_data = App::applyFilters('gd_createupdate_mycommunities:form_data', $form_data);

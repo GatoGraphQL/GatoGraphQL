@@ -31,8 +31,6 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
-        $form_data = array(
-            'user_id' => $user_id,
-        );
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('user_id', $user_id, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
     }
 }

@@ -14,8 +14,6 @@ abstract class AbstractUpdateUserMetaValueMutationResolverBridge extends Abstrac
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        $form_data = array(
-            'target_id' => App::query($this->getRequestKey()),
-        );
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('target_id', App::query($this->getRequestKey()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
     }
 }
