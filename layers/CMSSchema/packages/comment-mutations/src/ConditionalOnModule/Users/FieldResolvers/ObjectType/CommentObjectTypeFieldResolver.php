@@ -19,6 +19,8 @@ use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
  */
 class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResolver
 {
+    use AddCommentToCustomPostObjectTypeFieldResolverTrait;
+
     private ?UserCommentTypeAPIInterface $userCommentTypeAPI = null;
     private ?UserTypeAPIInterface $userTypeAPI = null;
 
@@ -79,6 +81,16 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         $comment = $object;
         $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
         return $commentUserID !== null;
+    }
+
+    /**
+     * If not provided, set the properties from the logged-in user
+     */
+    public function customizeField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): void {
+        $this->customizeAddCommentField($field);
     }
 
     public function resolveValue(
