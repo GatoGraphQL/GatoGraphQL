@@ -7,7 +7,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addFilter('gd_createupdate_profile:form_data', $this->addArgumentsForMutation(...), 10);
+        \PoP\Root\App::addAction('gd_createupdate_profile:form_data', $this->addArgumentsForMutation(...), 10);
         \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubcomponents(...), 10, 3);
         \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionals(...), 10, 1);
     }

@@ -9,7 +9,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
 {
     public function __construct()
     {
-        \PoP\Root\App::addFilter(
+        \PoP\Root\App::addAction(
             AbstractCreateUpdateCustomPostMutationResolverBridge::HOOK_FORM_DATA_CREATE_OR_UPDATE,
             $this->addArgumentsForMutation(...),
             10

@@ -123,7 +123,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         }
 
         // Allow plugins to add their own fields
-        return App::applyFilters(
+        return App::doAction(
             self::HOOK_FORM_DATA_CREATE_OR_UPDATE,
             $form_data
         );
