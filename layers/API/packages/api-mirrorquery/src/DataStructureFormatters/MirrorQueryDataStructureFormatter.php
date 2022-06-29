@@ -8,7 +8,7 @@ use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\DataStructureFormatters\AbstractJSONDataStructureFormatter;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;

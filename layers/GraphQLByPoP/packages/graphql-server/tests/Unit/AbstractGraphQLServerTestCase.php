@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PHPUnit\Framework\TestCase;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 abstract class AbstractGraphQLServerTestCase extends TestCase

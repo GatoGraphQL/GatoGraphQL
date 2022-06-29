@@ -11,7 +11,7 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
 use PoP\Root\App;

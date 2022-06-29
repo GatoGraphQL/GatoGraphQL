@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\Root\HttpFoundation\Response;
 
 interface GraphQLServerInterface
