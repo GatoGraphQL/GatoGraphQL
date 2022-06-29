@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
@@ -37,11 +38,11 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         $errors = [];
-        $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
-        $pwd = $form_data[MutationInputProperties::PASSWORD];
+        $username_or_email = $withArgumentsAST->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $withArgumentsAST->getArgumentValue(MutationInputProperties::PASSWORD);
 
         if (!$username_or_email) {
             $errors[] = new FeedbackItemResolution(
@@ -71,14 +72,13 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
-        $pwd = $form_data[MutationInputProperties::PASSWORD];
+        $username_or_email = $withArgumentsAST->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $withArgumentsAST->getArgumentValue(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');

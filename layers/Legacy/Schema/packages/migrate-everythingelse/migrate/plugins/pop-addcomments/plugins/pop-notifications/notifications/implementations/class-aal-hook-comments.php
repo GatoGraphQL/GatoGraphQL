@@ -40,9 +40,9 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
         // parent::__construct();
     }
 
-    public function commented($comment_id, $form_data)
+    public function commented($comment_id, $withArgumentsAST)
     {
-        $this->logComment($comment_id, $form_data['user_id'], AAL_POP_ACTION_COMMENT_ADDED);
+        $this->logComment($comment_id, $withArgumentsAST->getArgumentValue('user_id'), AAL_POP_ACTION_COMMENT_ADDED);
     }
 
     public function spamComment($comment_id)

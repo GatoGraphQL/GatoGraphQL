@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -27,10 +28,9 @@ class SettingsMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();

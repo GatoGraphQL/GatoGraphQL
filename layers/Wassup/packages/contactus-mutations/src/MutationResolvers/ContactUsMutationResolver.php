@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUsMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -12,10 +13,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ContactUsMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         $errors = [];
-        if (empty($form_data['name'])) {
+        if (empty($withArgumentsAST->getArgumentValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -23,14 +24,14 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
-        if (empty($form_data['email'])) {
+        if (empty($withArgumentsAST->getArgumentValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($withArgumentsAST->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -38,7 +39,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
-        if (empty($form_data['message'])) {
+        if (empty($withArgumentsAST->getArgumentValue('message'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -52,12 +53,12 @@ class ContactUsMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data): void
+    protected function additionals($withArgumentsAST): void
     {
-        App::doAction('pop_contactus', $form_data);
+        App::doAction('pop_contactus', $withArgumentsAST);
     }
 
-    protected function doExecute($form_data)
+    protected function doExecute($withArgumentsAST)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -73,37 +74,36 @@ class ContactUsMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $form_data['name']
+            $withArgumentsAST->getArgumentValue('name')
         ) . sprintf(
             $placeholder,
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $form_data['email']
+                $withArgumentsAST->getArgumentValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Subject', 'pop-genericforms'),
-            $form_data['subject']
+            $withArgumentsAST->getArgumentValue('subject')
         ) . sprintf(
             $placeholder,
             $this->__('Message', 'pop-genericforms'),
-            $form_data['message']
+            $withArgumentsAST->getArgumentValue('message')
         );
 
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $result = $this->doExecute($form_data);
+        $result = $this->doExecute($withArgumentsAST);
 
         // Allow for additional operations
-        $this->additionals($form_data);
+        $this->additionals($withArgumentsAST);
 
         return $result;
     }

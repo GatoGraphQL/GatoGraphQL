@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Notifications_API;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -11,25 +12,24 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
 {
-    protected function additionals($form_data): void
+    protected function additionals($withArgumentsAST): void
     {
-        App::doAction('GD_NotificationMarkAllAsRead:additionals', $form_data);
+        App::doAction('GD_NotificationMarkAllAsRead:additionals', $withArgumentsAST);
     }
 
-    protected function markAllAsRead($form_data)
+    protected function markAllAsRead($withArgumentsAST)
     {
-        // return AAL_Main::instance()->api->setStatusMultipleNotifications($form_data['user_id'], AAL_POP_STATUS_READ);
-        return PoP_Notifications_API::setStatusMultipleNotifications($form_data['user_id'], \AAL_POP_STATUS_READ);
+        // return AAL_Main::instance()->api->setStatusMultipleNotifications($withArgumentsAST->getArgumentValue('user_id'), AAL_POP_STATUS_READ);
+        return PoP_Notifications_API::setStatusMultipleNotifications($withArgumentsAST->getArgumentValue('user_id'), \AAL_POP_STATUS_READ);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $hist_ids = $this->markAllAsRead($form_data);
-        $this->additionals($form_data);
+        $hist_ids = $this->markAllAsRead($withArgumentsAST);
+        $this->additionals($withArgumentsAST);
 
         return $hist_ids;
     }

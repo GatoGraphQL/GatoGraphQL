@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         $errors = [];
-        $target_id = $form_data['target_id'];
+        $target_id = $withArgumentsAST->getArgumentValue('target_id');
         if (!$target_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -25,29 +26,27 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $errors;
     }
 
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        App::doAction('gd_updateusermetavalue', $target_id, $form_data);
+        App::doAction('gd_updateusermetavalue', $target_id, $withArgumentsAST);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int
+    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
     {
-        $target_id = $form_data['target_id'];
+        $target_id = $withArgumentsAST->getArgumentValue('target_id');
         return $target_id;
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $target_id = $this->update($form_data);
-        $this->additionals($target_id, $form_data);
+        $target_id = $this->update($withArgumentsAST);
+        $this->additionals($target_id, $withArgumentsAST);
 
         return $target_id;
     }

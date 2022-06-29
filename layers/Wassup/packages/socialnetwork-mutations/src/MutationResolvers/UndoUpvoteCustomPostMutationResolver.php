@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
 class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        $errors = parent::validateErrors($form_data);
+        $errors = parent::validateErrors($withArgumentsAST);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $form_data['target_id'];
+            $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
@@ -37,20 +38,19 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        parent::additionals($target_id, $form_data);
-        App::doAction('gd_undoupvotepost', $target_id, $form_data);
+        parent::additionals($target_id, $withArgumentsAST);
+        App::doAction('gd_undoupvotepost', $target_id, $withArgumentsAST);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int
+    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $form_data['target_id'];
+        $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
         // Update value
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS, $target_id);
@@ -61,14 +61,14 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
         $count = $count ? $count : 0;
         \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, \GD_METAKEY_POST_UPVOTECOUNT, ($count - 1), true);
 
-        return parent::update($form_data);
+        return parent::update($withArgumentsAST);
     }
 
     /**
      * Function to be called by the opposite function (Up-vote/Down-vote)
      */
-    public function undo($form_data)
+    public function undo($withArgumentsAST)
     {
-        return $this->update($form_data);
+        return $this->update($withArgumentsAST);
     }
 }

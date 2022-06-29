@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -56,10 +57,9 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin

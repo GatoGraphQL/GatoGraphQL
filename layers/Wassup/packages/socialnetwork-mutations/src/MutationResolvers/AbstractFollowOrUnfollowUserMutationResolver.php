@@ -8,9 +8,9 @@ use PoP\Root\App;
 
 abstract class AbstractFollowOrUnfollowUserMutationResolver extends AbstractUserUpdateUserMetaValueMutationResolver
 {
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        parent::additionals($target_id, $form_data);
-        App::doAction('gd_followunfollow_user', $target_id, $form_data);
+        parent::additionals($target_id, $withArgumentsAST);
+        App::doAction('gd_followunfollow_user', $target_id, $withArgumentsAST);
     }
 }

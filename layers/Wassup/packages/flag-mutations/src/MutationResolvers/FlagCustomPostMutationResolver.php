@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FlagMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -24,10 +25,10 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         $errors = [];
-        if (empty($form_data['name'])) {
+        if (empty($withArgumentsAST->getArgumentValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -36,14 +37,14 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($form_data['email'])) {
+        if (empty($withArgumentsAST->getArgumentValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($withArgumentsAST->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -52,7 +53,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($form_data['whyflag'])) {
+        if (empty($withArgumentsAST->getArgumentValue('whyflag'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -61,7 +62,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Why flag cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($form_data['target-id'])) {
+        if (empty($withArgumentsAST->getArgumentValue('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -70,7 +71,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $target = $this->getCustomPostTypeAPI()->getCustomPost($form_data['target-id']);
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($withArgumentsAST->getArgumentValue('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -86,12 +87,12 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data): void
+    protected function additionals($withArgumentsAST): void
     {
-        App::doAction('pop_flag', $form_data);
+        App::doAction('pop_flag', $withArgumentsAST);
     }
 
-    protected function doExecute($form_data)
+    protected function doExecute($withArgumentsAST)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -107,41 +108,40 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $form_data['name']
+            $withArgumentsAST->getArgumentValue('name')
         ) . sprintf(
             $placeholder,
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $form_data['email']
+                $withArgumentsAST->getArgumentValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Post ID', 'pop-genericforms'),
-            $form_data['target-id']
+            $withArgumentsAST->getArgumentValue('target-id')
         ) . sprintf(
             $placeholder,
             $this->__('Post title', 'pop-genericforms'),
-            $this->getCustomPostTypeAPI()->getTitle($form_data['target-id'])
+            $this->getCustomPostTypeAPI()->getTitle($withArgumentsAST->getArgumentValue('target-id'))
         ) . sprintf(
             $placeholder,
             $this->__('Why flag', 'pop-genericforms'),
-            $form_data['whyflag']
+            $withArgumentsAST->getArgumentValue('whyflag')
         );
 
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $result = $this->doExecute($form_data);
+        $result = $this->doExecute($withArgumentsAST);
 
         // Allow for additional operations
-        $this->additionals($form_data);
+        $this->additionals($withArgumentsAST);
 
         return $result;
     }

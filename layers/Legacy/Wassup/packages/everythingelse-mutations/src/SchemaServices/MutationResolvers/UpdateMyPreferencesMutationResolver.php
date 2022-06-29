@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\UserMeta\Utils;
@@ -11,13 +12,12 @@ use PoPCMSSchema\UserMeta\Utils;
 class UpdateMyPreferencesMutationResolver extends AbstractMutationResolver
 {
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $user_id = $form_data['user_id'];
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $form_data['userPreferences']);
+        $user_id = $withArgumentsAST->getArgumentValue('user_id');
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $withArgumentsAST->getArgumentValue('userPreferences'));
         return $user_id;
     }
 }

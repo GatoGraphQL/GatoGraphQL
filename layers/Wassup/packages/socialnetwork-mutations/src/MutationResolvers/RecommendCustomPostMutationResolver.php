@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
 class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommendCustomPostMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        $errors = parent::validateErrors($form_data);
+        $errors = parent::validateErrors($withArgumentsAST);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $form_data['target_id'];
+            $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
             // Check that the logged in user has not already recommended this post
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS);
@@ -37,25 +38,24 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        parent::additionals($target_id, $form_data);
-        App::doAction('gd_recommendpost', $target_id, $form_data);
+        parent::additionals($target_id, $withArgumentsAST);
+        App::doAction('gd_recommendpost', $target_id, $withArgumentsAST);
     }
 
-    // protected function updateValue($value, $form_data) {
+    // protected function updateValue($value, $withArgumentsAST) {
     //     // Add the user to follow to the list
-    //     $target_id = $form_data['target_id'];
+    //     $target_id = $withArgumentsAST->getArgumentValue('target_id');
     //     $value[] = $target_id;
     // }
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int
+    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $form_data['target_id'];
+        $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS, $target_id);
@@ -66,6 +66,6 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
         $count = $count ? $count : 0;
         \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, \GD_METAKEY_POST_RECOMMENDCOUNT, ($count + 1), true);
 
-        return parent::update($form_data);
+        return parent::update($withArgumentsAST);
     }
 }

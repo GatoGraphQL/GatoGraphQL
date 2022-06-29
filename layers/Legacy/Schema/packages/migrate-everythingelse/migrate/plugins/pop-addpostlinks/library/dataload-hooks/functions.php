@@ -27,11 +27,11 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         );
     }
 
-    public function validateContent($errors_in_array, $form_data)
+    public function validateContent($errors_in_array, $withArgumentsAST)
     {
         $errors = &$errors_in_array[0];
 
-        if ($link = $form_data['link']) {
+        if ($link = $withArgumentsAST->getArgumentValue('link')) {
             if (!isValidUrl($link)) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -43,11 +43,11 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         }
     }
 
-    public function createUpdate($post_id, $form_data)
+    public function createUpdate($post_id, $withArgumentsAST)
     {
 
         // Save the link in the post meta
-        $link = $form_data['link'];
+        $link = $withArgumentsAST->getArgumentValue('link');
         if ($link) {
             \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINK, $link, true);
         } else {
@@ -55,13 +55,13 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         }
     }
 
-    public function getFormData($form_data)
+    public function getFormData($withArgumentsAST)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $form_data['link'] = $componentprocessor_manager->getComponentProcessor([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK])->getValue([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK]);
+        $withArgumentsAST->getArgumentValue('link') = $componentprocessor_manager->getComponentProcessor([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK])->getValue([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK]);
 
-        return $form_data;
+        return $withArgumentsAST;
     }
 }
 

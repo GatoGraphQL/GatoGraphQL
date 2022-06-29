@@ -4,37 +4,37 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
 class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMutationResolver
 {
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        if ($this->isUpdate($form_data)) {
-            return $this->update($form_data);
+        if ($this->isUpdate($withArgumentsAST)) {
+            return $this->update($withArgumentsAST);
         }
-        return $this->create($form_data);
+        return $this->create($withArgumentsAST);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        if ($this->isUpdate($form_data)) {
-            return $this->validateUpdateErrors($form_data);
+        if ($this->isUpdate($withArgumentsAST)) {
+            return $this->validateUpdateErrors($withArgumentsAST);
         }
-        return $this->validateCreateErrors($form_data);
+        return $this->validateCreateErrors($withArgumentsAST);
     }
 
     /**
      * If there's an "id" entry => It's Update
      * Otherwise => It's Create
      */
-    protected function isUpdate(array $form_data): bool
+    protected function isUpdate(WithArgumentsInterface $withArgumentsAST): bool
     {
-        return !empty($form_data[MutationInputProperties::ID]);
+        return !empty($withArgumentsAST->getArgumentValue(MutationInputProperties::ID));
     }
 }

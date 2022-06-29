@@ -59,7 +59,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     /**
      * Validated the mutation on the object because the ID
      * is obtained from the same object, so it's not originally
-     * present in $form_data
+     * present in $withArgumentsAST
      */
     public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,

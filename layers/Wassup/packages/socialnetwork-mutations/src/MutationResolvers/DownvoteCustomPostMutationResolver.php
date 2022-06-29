@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
@@ -21,12 +22,12 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         return $this->upvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(UpvoteCustomPostMutationResolver::class);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        $errors = parent::validateErrors($form_data);
+        $errors = parent::validateErrors($withArgumentsAST);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $form_data['target_id'];
+            $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
             // Check that the logged in user has not already recommended this post
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
@@ -48,20 +49,19 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        parent::additionals($target_id, $form_data);
-        App::doAction('gd_downvotepost', $target_id, $form_data);
+        parent::additionals($target_id, $withArgumentsAST);
+        App::doAction('gd_downvotepost', $target_id, $withArgumentsAST);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int
+    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $form_data['target_id'];
+        $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);
@@ -75,9 +75,9 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
-            $this->getUpvoteCustomPostMutationResolver()->executeMutation($form_data);
+            $this->getUpvoteCustomPostMutationResolver()->executeMutation($withArgumentsAST);
         }
 
-        return parent::update($form_data);
+        return parent::update($withArgumentsAST);
     }
 }

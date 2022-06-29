@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
@@ -20,11 +21,11 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        $errors = parent::validateErrors($form_data);
+        $errors = parent::validateErrors($withArgumentsAST);
         if (!$errors) {
-            $target_id = $form_data['target_id'];
+            $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
             // Make sure the post exists
             $target = $this->getPostTagTypeAPI()->getTag($target_id);
@@ -40,9 +41,9 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $errors;
     }
 
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        App::doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);
-        parent::additionals($target_id, $form_data);
+        App::doAction('gd_subscritetounsubscribefrom_tag', $target_id, $withArgumentsAST);
+        parent::additionals($target_id, $withArgumentsAST);
     }
 }

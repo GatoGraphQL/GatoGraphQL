@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
 class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        $errors = parent::validateErrors($form_data);
+        $errors = parent::validateErrors($withArgumentsAST);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $form_data['target_id'];
+            $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
@@ -37,25 +38,24 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     /**
      * Function to override
      */
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        parent::additionals($target_id, $form_data);
-        App::doAction('gd_unfollowuser', $target_id, $form_data);
+        parent::additionals($target_id, $withArgumentsAST);
+        App::doAction('gd_unfollowuser', $target_id, $withArgumentsAST);
     }
 
-    // protected function updateValue($value, $form_data) {
+    // protected function updateValue($value, $withArgumentsAST) {
     //     // Remove the user from the list
-    //     $target_id = $form_data['target_id'];
+    //     $target_id = $withArgumentsAST->getArgumentValue('target_id');
     //     array_splice($value, array_search($target_id, $value), 1);
     // }
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int
+    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $form_data['target_id'];
+        $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
         // Update values
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS, $target_id);
@@ -66,6 +66,6 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
         $count = $count ? $count : 0;
         Utils::updateUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWERSCOUNT, ($count - 1), true);
 
-        return parent::update($form_data);
+        return parent::update($withArgumentsAST);
     }
 }

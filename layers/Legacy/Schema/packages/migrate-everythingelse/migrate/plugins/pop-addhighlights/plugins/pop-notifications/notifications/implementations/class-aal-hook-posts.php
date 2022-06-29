@@ -35,7 +35,7 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         }
     }
 
-    public function updatedHighlight($post_id, $form_data, $log)
+    public function updatedHighlight($post_id, $withArgumentsAST, $log)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {

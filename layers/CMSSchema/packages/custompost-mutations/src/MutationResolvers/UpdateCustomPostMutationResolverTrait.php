@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
@@ -11,30 +12,29 @@ use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 trait UpdateCustomPostMutationResolverTrait
 {
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        return $this->update($form_data);
+        return $this->update($withArgumentsAST);
     }
 
     /**
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    abstract protected function update(array $form_data): string | int;
+    abstract protected function update(WithArgumentsInterface $withArgumentsAST): string | int;
 
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        return $this->validateUpdateErrors($form_data);
+        return $this->validateUpdateErrors($withArgumentsAST);
     }
 
     /**
      * @return FeedbackItemResolution[]
      */
-    abstract protected function validateUpdateErrors(array $form_data): array;
+    abstract protected function validateUpdateErrors(WithArgumentsInterface $withArgumentsAST): array;
 }

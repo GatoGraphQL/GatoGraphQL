@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\Exception\AbstractException;
@@ -16,14 +17,13 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     use ValidateUserLoggedInMutationResolverTrait;
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $customPostID = $form_data[MutationInputProperties::CUSTOMPOST_ID];
-        $postCategoryIDs = $form_data[MutationInputProperties::CATEGORY_IDS];
-        $append = $form_data[MutationInputProperties::APPEND];
+        $customPostID = $withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
+        $postCategoryIDs = $withArgumentsAST->getArgumentValue(MutationInputProperties::CATEGORY_IDS);
+        $append = $withArgumentsAST->getArgumentValue(MutationInputProperties::APPEND);
         $customPostCategoryTypeAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeAPI->setCategories($customPostID, $postCategoryIDs, $append);
         return $customPostID;
@@ -31,7 +31,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
     abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -42,7 +42,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
 
         $errors = [];
-        if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null)) {
+        if (!$withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

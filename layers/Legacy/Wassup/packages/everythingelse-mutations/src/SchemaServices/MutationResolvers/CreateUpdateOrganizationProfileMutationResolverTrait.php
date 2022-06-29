@@ -8,29 +8,29 @@ use PoPCMSSchema\UserMeta\Utils;
 use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 trait CreateUpdateOrganizationProfileMutationResolverTrait
 {
-    protected function createuser($form_data)
+    protected function createuser($withArgumentsAST)
     {
-        $user_id = parent::createuser($form_data);
-        $this->commonuserrolesCreateuser($user_id, $form_data);
+        $user_id = parent::createuser($withArgumentsAST);
+        $this->commonuserrolesCreateuser($user_id, $withArgumentsAST);
         return $user_id;
     }
-    protected function commonuserrolesCreateuser($user_id, $form_data)
+    protected function commonuserrolesCreateuser($user_id, $withArgumentsAST)
     {
         // Add the extra User Role
         $cmsuserrolesapi = FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_ORGANIZATION);
     }
 
-    protected function createupdateuser($user_id, $form_data)
+    protected function createupdateuser($user_id, $withArgumentsAST)
     {
-        parent::createupdateuser($user_id, $form_data);
-        $this->commonuserrolesCreateupdateuser($user_id, $form_data);
+        parent::createupdateuser($user_id, $withArgumentsAST);
+        $this->commonuserrolesCreateupdateuser($user_id, $withArgumentsAST);
     }
-    protected function commonuserrolesCreateupdateuser($user_id, $form_data)
+    protected function commonuserrolesCreateupdateuser($user_id, $withArgumentsAST)
     {
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES, $form_data['organizationtypes']);
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES, $form_data['organizationcategories']);
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, $form_data['contact_person'], true);
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, $form_data['contact_number'], true);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES, $withArgumentsAST->getArgumentValue('organizationtypes'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES, $withArgumentsAST->getArgumentValue('organizationcategories'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, $withArgumentsAST->getArgumentValue('contact_person'), true);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, $withArgumentsAST->getArgumentValue('contact_number'), true);
     }
 }

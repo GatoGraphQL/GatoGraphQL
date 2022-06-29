@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use GD_FileUpload_UserPhotoFactory;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -19,20 +20,19 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $user_id = $form_data['user_id'];
+        $user_id = $withArgumentsAST->getArgumentValue('user_id');
         $this->savePicture($user_id);
-        $this->additionals($user_id, $form_data);
+        $this->additionals($user_id, $withArgumentsAST);
 
         return $user_id;
     }
 
-    protected function additionals($user_id, $form_data): void
+    protected function additionals($user_id, $withArgumentsAST): void
     {
-        App::doAction('gd_useravatar_update:additionals', $user_id, $form_data);
+        App::doAction('gd_useravatar_update:additionals', $user_id, $withArgumentsAST);
     }
 }

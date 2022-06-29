@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -14,7 +15,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         return [];
     }
@@ -22,7 +23,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(array $form_data): array
+    public function validateWarnings(WithArgumentsInterface $withArgumentsAST): array
     {
         return [];
     }

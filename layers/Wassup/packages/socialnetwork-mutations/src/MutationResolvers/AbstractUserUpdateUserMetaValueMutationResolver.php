@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoPCMSSchema\Users\Constants\InputNames;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -21,11 +22,11 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
-        $errors = parent::validateErrors($form_data);
+        $errors = parent::validateErrors($withArgumentsAST);
         if (!$errors) {
-            $target_id = $form_data['target_id'];
+            $target_id = $withArgumentsAST->getArgumentValue('target_id');
 
             // Make sure the user exists
             $target = $this->getUserTypeAPI()->getUserByID($target_id);
@@ -46,9 +47,9 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return InputNames::USER_ID;
     }
 
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, $withArgumentsAST): void
     {
-        App::doAction('gd_updateusermetavalue:user', $target_id, $form_data);
-        parent::additionals($target_id, $form_data);
+        App::doAction('gd_updateusermetavalue:user', $target_id, $withArgumentsAST);
+        parent::additionals($target_id, $withArgumentsAST);
     }
 }

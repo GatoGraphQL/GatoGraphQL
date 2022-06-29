@@ -8,25 +8,25 @@ use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
-    protected function additionalsCreate($user_id, $form_data): void
+    protected function additionalsCreate($user_id, $withArgumentsAST): void
     {
-        parent::additionalsCreate($user_id, $form_data);
-        $this->usercommunitiesAdditionalsCreate($user_id, $form_data);
+        parent::additionalsCreate($user_id, $withArgumentsAST);
+        $this->usercommunitiesAdditionalsCreate($user_id, $withArgumentsAST);
     }
-    protected function usercommunitiesAdditionalsCreate($user_id, $form_data): void
+    protected function usercommunitiesAdditionalsCreate($user_id, $withArgumentsAST): void
     {
-        App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $form_data);
+        App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $withArgumentsAST);
     }
 
-    protected function createuser($form_data)
+    protected function createuser($withArgumentsAST)
     {
-        $user_id = parent::createuser($form_data);
-        $this->usercommunitiesCreateuser($user_id, $form_data);
+        $user_id = parent::createuser($withArgumentsAST);
+        $this->usercommunitiesCreateuser($user_id, $withArgumentsAST);
         return $user_id;
     }
-    protected function usercommunitiesCreateuser($user_id, $form_data): void
+    protected function usercommunitiesCreateuser($user_id, $withArgumentsAST): void
     {
-        $communities = $form_data['communities'];
+        $communities = $withArgumentsAST->getArgumentValue('communities');
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
 
         // Set the privileges/tags for the new communities

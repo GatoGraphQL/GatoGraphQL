@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -24,10 +25,10 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         $errors = [];
-        if (empty($form_data['name'])) {
+        if (empty($withArgumentsAST->getArgumentValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -36,14 +37,14 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($form_data['email'])) {
+        if (empty($withArgumentsAST->getArgumentValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($withArgumentsAST->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -52,7 +53,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($form_data['target-id'])) {
+        if (empty($withArgumentsAST->getArgumentValue('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -61,7 +62,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $target = $this->getCustomPostTypeAPI()->getCustomPost($form_data['target-id']);
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($withArgumentsAST->getArgumentValue('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -72,7 +73,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             }
         }
 
-        if (empty($form_data['whyvolunteer'])) {
+        if (empty($withArgumentsAST->getArgumentValue('whyvolunteer'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -86,21 +87,21 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data): void
+    protected function additionals($withArgumentsAST): void
     {
-        App::doAction('pop_volunteer', $form_data);
+        App::doAction('pop_volunteer', $withArgumentsAST);
     }
 
-    protected function doExecute($form_data)
+    protected function doExecute($withArgumentsAST)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $post_title = $this->getCustomPostTypeAPI()->getTitle($form_data['target-id']);
+        $post_title = $this->getCustomPostTypeAPI()->getTitle($withArgumentsAST->getArgumentValue('target-id'));
         $subject = sprintf(
             $this->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
             sprintf(
                 $this->__('%s applied to volunteer for %s', 'pop-genericforms'),
-                $form_data['name'],
+                $withArgumentsAST->getArgumentValue('name'),
                 $post_title
             )
         );
@@ -112,8 +113,8 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             '<p>%s</p>',
             sprintf(
                 $this->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
-                $form_data['name'],
-                $this->getCustomPostTypeAPI()->getPermalink($form_data['target-id']),
+                $withArgumentsAST->getArgumentValue('name'),
+                $this->getCustomPostTypeAPI()->getPermalink($withArgumentsAST->getArgumentValue('target-id')),
                 $post_title
             )
         ) . sprintf(
@@ -121,31 +122,30 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $form_data['email']
+                $withArgumentsAST->getArgumentValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Phone', 'pop-genericforms'),
-            $form_data['phone']
+            $withArgumentsAST->getArgumentValue('phone')
         ) . sprintf(
             $placeholder,
             $this->__('Why volunteer', 'pop-genericforms'),
-            $form_data['whyvolunteer']
+            $withArgumentsAST->getArgumentValue('whyvolunteer')
         );
 
-        return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($form_data['target-id']), $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($withArgumentsAST->getArgumentValue('target-id')), $subject, $msg);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $result = $this->doExecute($form_data);
+        $result = $this->doExecute($withArgumentsAST);
 
         // Allow for additional operations
-        $this->additionals($form_data);
+        $this->additionals($withArgumentsAST);
 
         return $result;
     }

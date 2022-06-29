@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\Hooks;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
@@ -34,16 +35,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeSetCategories(int | string $customPostID, array $form_data): void
+    public function maybeSetCategories(int | string $customPostID, WithArgumentsInterface $withArgumentsAST): void
     {
         // Only for that specific CPT
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!isset($form_data[MutationInputProperties::CATEGORY_IDS])) {
+        if (!$withArgumentsAST->hasArgument(MutationInputProperties::CATEGORY_IDS)) {
             return;
         }
-        $customPostCategoryIDs = $form_data[MutationInputProperties::CATEGORY_IDS];
+        $customPostCategoryIDs = $withArgumentsAST->getArgumentValue(MutationInputProperties::CATEGORY_IDS);
         $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
     }

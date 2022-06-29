@@ -19,9 +19,9 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
         }
     }
 
-    protected function getNewsletterData($form_data)
+    protected function getNewsletterData($withArgumentsAST)
     {
-        $ret = parent::getNewsletterData($form_data);
+        $ret = parent::getNewsletterData($withArgumentsAST);
 
         // Find the entry_id from the email (let's assume there is only one. If there is more than one, that is the user subscribed more than once, so will have to unsubscribe more than once. HOhohoho)
         $search_criteria = array(
@@ -29,7 +29,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
             'field_filters' => array(
                 array(
                     'key' => '1'/*POP_GENERICFORMS_NEWSLETTER_FIELDNAME_EMAIL_ID*/,
-                    'value' => $form_data['email'],
+                    'value' => $withArgumentsAST->getArgumentValue('email'),
                 ),
             ),
         );

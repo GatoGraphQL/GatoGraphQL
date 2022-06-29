@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
@@ -25,15 +26,14 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     }
     
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        $user_id = $form_data['user_id'];
+        $user_id = $withArgumentsAST->getArgumentValue('user_id');
 
         $previous_communities = gdUreGetCommunities($user_id);
-        $communities = $form_data['communities'];
+        $communities = $withArgumentsAST->getArgumentValue('communities');
         // $maybe_new_communities = array_diff($communities, $previous_communities);
         $new_communities = array();
 
@@ -62,20 +62,20 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         );
 
         // Allow to send an email before the update: get the current communities, so we know which ones are new
-        App::doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
+        App::doAction('gd_update_mycommunities:update', $user_id, $withArgumentsAST, $operationlog);
 
         return $user_id;
         // Update: either updated or no banned communities (even if nothing changed, tell the user update was successful)
         // return $update || empty($banned_communities);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         $errors = [];
-        $user_id = $form_data['user_id'];
+        $user_id = $withArgumentsAST->getArgumentValue('user_id');
 
         // Validate the Community doesn't belong to itself as a member
-        if (in_array($user_id, $form_data['communities'])) {
+        if (in_array($user_id, $withArgumentsAST->getArgumentValue('communities'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -89,12 +89,12 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(array $form_data): array
+    public function validateWarnings(WithArgumentsInterface $withArgumentsAST): array
     {
         $warnings = [];
-        $user_id = $form_data['user_id'];
+        $user_id = $withArgumentsAST->getArgumentValue('user_id');
         $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
-        $communities = $form_data['communities'];
+        $communities = $withArgumentsAST->getArgumentValue('communities');
         $banned_communities = array();
 
         // Check all the $maybe_new_communities and double check they are not banned
