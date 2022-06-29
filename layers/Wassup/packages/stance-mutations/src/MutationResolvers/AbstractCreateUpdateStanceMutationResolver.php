@@ -117,7 +117,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     }
 
     // Moved to WordPress-specific code
-    // protected function getCreatepostData($withArgumentsAST)
+    // protected function getCreatepostData(WithArgumentsInterface $withArgumentsAST)
     // {
     //     $post_data = parent::getCreatepostData($withArgumentsAST);
 

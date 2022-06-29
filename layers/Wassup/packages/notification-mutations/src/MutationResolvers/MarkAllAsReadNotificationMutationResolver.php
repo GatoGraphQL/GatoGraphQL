@@ -12,12 +12,12 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
 {
-    protected function additionals($withArgumentsAST): void
+    protected function additionals(WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('GD_NotificationMarkAllAsRead:additionals', $withArgumentsAST);
     }
 
-    protected function markAllAsRead($withArgumentsAST)
+    protected function markAllAsRead(WithArgumentsInterface $withArgumentsAST)
     {
         // return AAL_Main::instance()->api->setStatusMultipleNotifications($withArgumentsAST->getArgumentValue('user_id'), AAL_POP_STATUS_READ);
         return PoP_Notifications_API::setStatusMultipleNotifications($withArgumentsAST->getArgumentValue('user_id'), \AAL_POP_STATUS_READ);

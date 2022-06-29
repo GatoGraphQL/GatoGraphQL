@@ -67,7 +67,7 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
     /**
      * Function to be called by the opposite function (Up-vote/Down-vote)
      */
-    public function undo($withArgumentsAST)
+    public function undo(WithArgumentsInterface $withArgumentsAST)
     {
         return $this->update($withArgumentsAST);
     }

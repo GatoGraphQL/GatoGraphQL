@@ -19,7 +19,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
         }
     }
 
-    protected function getNewsletterData($withArgumentsAST)
+    protected function getNewsletterData(WithArgumentsInterface $withArgumentsAST)
     {
         $ret = parent::getNewsletterData($withArgumentsAST);
 

@@ -173,7 +173,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function getUpdateuserData($withArgumentsAST)
+    protected function getUpdateuserData(WithArgumentsInterface $withArgumentsAST)
     {
         $user_data = array(
             'id' => $withArgumentsAST->getArgumentValue('user_id'),
@@ -186,7 +186,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_data;
     }
 
-    protected function getCreateuserData($withArgumentsAST)
+    protected function getCreateuserData(WithArgumentsInterface $withArgumentsAST)
     {
         $user_data = $this->getUpdateuserData($withArgumentsAST);
 
@@ -215,7 +215,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     {
     }
 
-    protected function updateuser($withArgumentsAST)
+    protected function updateuser(WithArgumentsInterface $withArgumentsAST)
     {
         $user_data = $this->getUpdateuserData($withArgumentsAST);
         $user_id = $user_data['id'];
@@ -233,7 +233,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->insertUser($user_data);
     }
 
-    protected function createuser($withArgumentsAST)
+    protected function createuser(WithArgumentsInterface $withArgumentsAST)
     {
         $user_data = $this->getCreateuserData($withArgumentsAST);
         $result = $this->executeCreateuser($user_data);

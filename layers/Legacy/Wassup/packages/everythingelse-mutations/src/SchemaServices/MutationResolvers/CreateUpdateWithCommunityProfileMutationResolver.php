@@ -18,7 +18,7 @@ class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfi
         App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $withArgumentsAST);
     }
 
-    protected function createuser($withArgumentsAST)
+    protected function createuser(WithArgumentsInterface $withArgumentsAST)
     {
         $user_id = parent::createuser($withArgumentsAST);
         $this->usercommunitiesCreateuser($user_id, $withArgumentsAST);

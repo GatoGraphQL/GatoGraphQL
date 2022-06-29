@@ -45,7 +45,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
 
     abstract protected function getStatus();
 
-    protected function setStatus($withArgumentsAST)
+    protected function setStatus(WithArgumentsInterface $withArgumentsAST)
     {
         // return AAL_Main::instance()->api->setStatus($withArgumentsAST->getArgumentValue('histid'), $withArgumentsAST->getArgumentValue('user_id'), $this->getStatus());
         return PoP_Notifications_API::setStatus($withArgumentsAST->getArgumentValue('histid'), $withArgumentsAST->getArgumentValue('user_id'), $this->getStatus());

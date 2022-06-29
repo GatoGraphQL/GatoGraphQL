@@ -23,7 +23,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     
-    protected function getEmailContent($withArgumentsAST)
+    protected function getEmailContent(WithArgumentsInterface $withArgumentsAST)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         // The user must be always logged in, so we will have the user_id
@@ -78,7 +78,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject($withArgumentsAST)
+    protected function getEmailSubject(WithArgumentsInterface $withArgumentsAST)
     {
         // The user must be always logged in, so we will have the user_id
         $user_id = $withArgumentsAST->getArgumentValue('user_id');

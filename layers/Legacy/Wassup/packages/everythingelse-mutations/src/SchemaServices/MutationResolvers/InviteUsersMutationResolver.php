@@ -13,7 +13,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    protected function getEmailContent($withArgumentsAST)
+    protected function getEmailContent(WithArgumentsInterface $withArgumentsAST)
     {
         $website_html = PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
@@ -73,7 +73,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject($withArgumentsAST)
+    protected function getEmailSubject(WithArgumentsInterface $withArgumentsAST)
     {
         $subject = '';
 

@@ -8,7 +8,7 @@ use PoPCMSSchema\UserMeta\Utils;
 use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 trait CreateUpdateIndividualProfileMutationResolverTrait
 {
-    protected function createuser($withArgumentsAST)
+    protected function createuser(WithArgumentsInterface $withArgumentsAST)
     {
         $user_id = parent::createuser($withArgumentsAST);
         $this->commonuserrolesCreateuser($user_id, $withArgumentsAST);

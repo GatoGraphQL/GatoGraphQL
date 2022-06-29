@@ -87,12 +87,12 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($withArgumentsAST): void
+    protected function additionals(WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('pop_volunteer', $withArgumentsAST);
     }
 
-    protected function doExecute($withArgumentsAST)
+    protected function doExecute(WithArgumentsInterface $withArgumentsAST)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $post_title = $this->getCustomPostTypeAPI()->getTitle($withArgumentsAST->getArgumentValue('target-id'));

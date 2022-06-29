@@ -102,7 +102,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return $warnings;
     }
 
-    abstract protected function getEmailContent($withArgumentsAST);
+    abstract protected function getEmailContent(WithArgumentsInterface $withArgumentsAST);
 
-    abstract protected function getEmailSubject($withArgumentsAST);
+    abstract protected function getEmailSubject(WithArgumentsInterface $withArgumentsAST);
 }

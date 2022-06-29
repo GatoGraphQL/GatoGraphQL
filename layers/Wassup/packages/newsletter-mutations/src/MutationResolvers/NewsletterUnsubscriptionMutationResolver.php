@@ -78,7 +78,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($withArgumentsAST): void
+    protected function additionals(WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('pop_unsubscribe_from_newsletter', $withArgumentsAST);
     }
@@ -86,7 +86,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override by Gravity Forms
      */
-    protected function getNewsletterData($withArgumentsAST)
+    protected function getNewsletterData(WithArgumentsInterface $withArgumentsAST)
     {
         return array();
     }

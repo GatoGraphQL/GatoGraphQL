@@ -9,7 +9,7 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
 {
     use CreateUpdateIndividualProfileMutationResolverTrait;
 
-    protected function getUpdateuserData($withArgumentsAST)
+    protected function getUpdateuserData(WithArgumentsInterface $withArgumentsAST)
     {
         $user_data = parent::getUpdateuserData($withArgumentsAST);
 

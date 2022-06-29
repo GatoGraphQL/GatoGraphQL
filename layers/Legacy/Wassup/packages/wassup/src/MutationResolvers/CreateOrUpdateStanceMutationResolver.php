@@ -7,7 +7,7 @@ namespace PoPSitesWassup\Wassup\MutationResolvers;
 use PoP\Application\Environment;
 class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver
 {
-    protected function getCreatepostData($withArgumentsAST)
+    protected function getCreatepostData(WithArgumentsInterface $withArgumentsAST)
     {
         $post_data = parent::getCreatepostData($withArgumentsAST);
 
