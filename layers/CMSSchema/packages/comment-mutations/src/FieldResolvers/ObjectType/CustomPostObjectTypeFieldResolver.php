@@ -8,6 +8,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CustomPostAddCommentFilterInputObjectTypeResolver;
@@ -98,14 +99,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         };
     }
 
-    protected function getMutationFieldArgsForObject(
-        array $mutationFieldArgs,
+    protected function getMutationFieldForObject(
+        FieldInterface $mutationField,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName
-    ): array {
-        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
-            $mutationFieldArgs,
+        string $fieldName,
+    ): FieldInterface {
+        $mutationField = parent::getMutationFieldForObject(
+            $mutationField,
             $objectTypeResolver,
             $object,
             $fieldName
@@ -113,11 +114,11 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         $customPost = $object;
         switch ($fieldName) {
             case 'addComment':
-                $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
+                $mutationField->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
                 break;
         }
 
-        return $mutationFieldArgs;
+        return $mutationField;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface

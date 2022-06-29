@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateFilterInputObjectTypeResolver;
 
@@ -72,14 +73,14 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
-    protected function getMutationFieldArgsForObject(
-        array $mutationFieldArgs,
+    protected function getMutationFieldForObject(
+        FieldInterface $mutationField,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName
-    ): array {
-        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
-            $mutationFieldArgs,
+        string $fieldName,
+    ): FieldInterface {
+        $mutationField = parent::getMutationFieldForObject(
+            $mutationField,
             $objectTypeResolver,
             $object,
             $fieldName
@@ -87,10 +88,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $post = $object;
         switch ($fieldName) {
             case 'update':
-                $mutationFieldArgs[MutationInputProperties::ID] = $objectTypeResolver->getID($post);
+                $mutationField->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::ID, $objectTypeResolver->getID($post), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
                 break;
         }
 
-        return $mutationFieldArgs;
+        return $mutationField;
     }
 }

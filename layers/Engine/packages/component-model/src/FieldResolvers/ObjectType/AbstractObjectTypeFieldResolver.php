@@ -42,6 +42,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarType
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
@@ -754,8 +756,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
+            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationField);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1059,10 +1061,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field);
+            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
-                $mutationResolver->validateWarnings($mutationFieldArgs)
+                $mutationResolver->validateWarnings($mutationField)
             );
         }
         return $warningFeedbackItemResolutions;
@@ -1123,13 +1125,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
-                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field),
+            $mutationField = $this->getConsolidatedMutationFieldForObject(
+                $this->getConsolidatedMutationField($objectTypeResolver, $field),
                 $objectTypeResolver,
                 $object,
                 $field->getName()
             );
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationField);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1144,37 +1146,33 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * Retrieve the field arguments to pass to the MutationResolver,
-     * for instance from under an InputObject.
-     *
-     * @return Argument[]
+     * Retrieve the field to pass to the MutationResolver,
+     * for instance it can change for an InputObject.
      */
-    protected function getMutationFieldArgs(
+    protected function getMutationField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): array {
-        if ($this->extractInputObjectFieldArgsForMutation($objectTypeResolver, $field->getName())) {
-            $fieldArgs = $this->maybeGetInputObjectFieldArgs(
+    ): FieldInterface {
+        if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $field->getName())) {
+            return $this->maybeGetInputObjectField(
                 $objectTypeResolver,
                 $field,
             );
         }
-        return $fieldArgs;
+        return $field;
     }
 
     /**
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
-     *
-     * @return Argument[]
      */
-    final protected function getConsolidatedMutationFieldArgs(
+    final protected function getConsolidatedMutationField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): array {
+    ): FieldInterface {
         return App::applyFilters(
-            HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS,
-            $this->getMutationFieldArgs($objectTypeResolver, $field),
+            HookNames::OBJECT_TYPE_MUTATION_FIELD,
+            $this->getMutationField($objectTypeResolver, $field),
             $this,
             $objectTypeResolver,
             $field->getName(),
@@ -1186,7 +1184,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Indicate: if the field has a single field argument, which is of type InputObject,
      * then retrieve the value for its input fields?
      */
-    protected function extractInputObjectFieldArgsForMutation(
+    protected function extractInputObjectFieldForMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
@@ -1199,29 +1197,48 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      *
      * @return Argument[]
      */
-    private function maybeGetInputObjectFieldArgs(
+    private function maybeGetInputObjectField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): array {
+    ): FieldInterface {
         $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
 
         // Check if there is only one fieldArg
         if (count($fieldArgNameTypeResolvers) !== 1) {
-            return $field->getArguments();
+            return $field;
         }
 
         // Check if the fieldArg is an InputObject
         $fieldArgName = key($fieldArgNameTypeResolvers);
         $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
         if (!($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface)) {
-            return $field->getArguments();
+            return $field;
         }
 
-        // Retrieve the elements under the InputObject, cast to array
-        return array_values(array_filter(
-            $field->getArguments(),
-            fn (Argument $argument) => $argument->getName() === $fieldArgName
-        ));
+        // Create a new Field, passing the corresponding Argument only
+        $arguments = [
+            new Argument(
+                $fieldArgName,
+                $field->getArgumentValue($fieldArgName),
+                LocationHelper::getNonSpecificLocation()
+            ),
+        ];
+        return ($field instanceof RelationalField)
+                ? new RelationalField(
+                    $field->getName(),
+                    $field->getAlias() . '-inputObject',
+                    $arguments,
+                    $field->getFieldsOrFragmentBonds(),
+                    [],
+                    LocationHelper::getNonSpecificLocation(),
+                )
+                : new LeafField(
+                    $field->getName(),
+                    $field->getAlias() . '-inputObject',
+                    $arguments,
+                    [],
+                    LocationHelper::getNonSpecificLocation(),
+                );
     }
 
     /**
@@ -1244,14 +1261,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
-                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $field),
+            $mutationField = $this->getConsolidatedMutationFieldForObject(
+                $this->getConsolidatedMutationField($objectTypeResolver, $field),
                 $objectTypeResolver,
                 $object,
                 $field->getName()
             );
             try {
-                return $mutationResolver->executeMutation($mutationFieldArgs);
+                return $mutationResolver->executeMutation($mutationField);
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1322,35 +1339,35 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Consolidation of the schema field arguments. Call this function to read the data
      * instead of the individual functions, since it applies hooks to override/extend.
      */
-    final protected function getConsolidatedMutationFieldArgsForObject(
-        array $mutationFieldArgs,
+    final protected function getConsolidatedMutationFieldForObject(
+        FieldInterface $mutationField,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-    ): array {
+    ): FieldInterface {
         return App::applyFilters(
             HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS_FOR_OBJECT,
-            $this->getMutationFieldArgsForObject(
-                $mutationFieldArgs,
+            $this->getMutationFieldForObject(
+                $mutationField,
                 $objectTypeResolver,
                 $object,
                 $fieldName,
             ),
             $this,
-            $mutationFieldArgs,
+            $mutationField,
             $objectTypeResolver,
             $object,
             $fieldName,
         );
     }
 
-    protected function getMutationFieldArgsForObject(
-        array $mutationFieldArgs,
+    protected function getMutationFieldForObject(
+        FieldInterface $mutationField,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-    ): array {
-        return $mutationFieldArgs;
+    ): FieldInterface {
+        return $mutationField;
     }
 
     public function getFieldMutationResolver(
