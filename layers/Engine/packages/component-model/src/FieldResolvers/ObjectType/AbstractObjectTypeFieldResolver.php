@@ -1216,13 +1216,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // Create a new Field, passing the corresponding Argument only
-        $arguments = [
-            new Argument(
-                $fieldArgName,
-                $field->getArgumentValue($fieldArgName),
-                LocationHelper::getNonSpecificLocation()
-            ),
-        ];
+        $arguments = array_values(array_filter(
+            $field->getArguments(),
+            fn (Argument $argument) => $argument->getName() === $fieldArgName
+        ));
         return ($field instanceof RelationalField)
                 ? new RelationalField(
                     $field->getName(),
