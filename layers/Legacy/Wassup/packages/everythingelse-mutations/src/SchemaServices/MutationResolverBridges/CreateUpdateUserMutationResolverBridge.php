@@ -70,7 +70,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
 
         // Allow to add extra inputs
-        $form_data = App::applyFilters('gd_createupdate_user:form_data', $form_data);
+        App::doAction('gd_createupdate_user:form_data', $withArgumentsAST);
 
         if ($user_id) {
             $this->getUpdateuserFormData($withArgumentsAST);

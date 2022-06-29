@@ -39,6 +39,6 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('communities', $communities ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
 
         // Allow to add extra inputs
-        $form_data = App::applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
+        App::doAction('gd_createupdate_mycommunities:form_data', $withArgumentsAST);
     }
 }
