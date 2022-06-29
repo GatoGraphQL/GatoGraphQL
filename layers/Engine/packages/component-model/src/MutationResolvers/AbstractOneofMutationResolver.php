@@ -139,7 +139,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     final public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
     {
-        [$inputFieldMutationResolver, $withArgumentsAST] = $this->getInputFieldMutationResolverAndFormData($withArgumentsAST);
+        [$inputFieldMutationResolver, $withArgumentsAST] = $this->getInputFieldMutationResolverAndOneOfAST($withArgumentsAST);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
         return $inputFieldMutationResolver->executeMutation($withArgumentsAST);
     }
@@ -150,7 +150,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     final public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
     {
         try {
-            [$inputFieldMutationResolver, $withArgumentsAST] = $this->getInputFieldMutationResolverAndFormData($withArgumentsAST);
+            [$inputFieldMutationResolver, $withArgumentsAST] = $this->getInputFieldMutationResolverAndOneOfAST($withArgumentsAST);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
             return $inputFieldMutationResolver->validateErrors($withArgumentsAST);
         } catch (QueryResolutionException $e) {
@@ -173,7 +173,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     final public function validateWarnings(WithArgumentsInterface $withArgumentsAST): array
     {
         try {
-            [$inputFieldMutationResolver, $withArgumentsAST] = $this->getInputFieldMutationResolverAndFormData($withArgumentsAST);
+            [$inputFieldMutationResolver, $withArgumentsAST] = $this->getInputFieldMutationResolverAndOneOfAST($withArgumentsAST);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
             return $inputFieldMutationResolver->validateWarnings($withArgumentsAST);
         } catch (QueryResolutionException $e) {
@@ -185,7 +185,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndFormData(WithArgumentsInterface $withArgumentsAST): array
+    final protected function getInputFieldMutationResolverAndOneOfAST(WithArgumentsInterface $withArgumentsAST): array
     {
         $inputFieldName = $this->getOneofInputObjectFieldName($withArgumentsAST);
         // Create a new Field, passing the corresponding Argument only
