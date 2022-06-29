@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Module_Processor_TextareaFormInputs;
 use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
 use PoP\Root\App;
@@ -63,16 +64,14 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        $form_data = parent::getFormData();
+        parent::addArgumentsForMutation($withArgumentsAST);
 
         $form_data['highlightedpost'] = $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
         $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['highlightedpost']);
         $form_data['title'] = $this->getCustomPostTypeAPI()->getTitle($referenced);
-
-        return $form_data;
     }
 }

@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
@@ -10,7 +11,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
     {
         \PoP\Root\App::addFilter(
             AbstractCreateUpdateCustomPostMutationResolverBridge::HOOK_FORM_DATA_CREATE_OR_UPDATE,
-            $this->getFormData(...),
+            $this->addArgumentsForMutation(...),
             10
         );
         \PoP\Root\App::addAction(
@@ -55,13 +56,11 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         }
     }
 
-    public function getFormData($form_data)
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $form_data['link'] = $componentprocessor_manager->getComponentProcessor([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK])->getValue([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK]);
-
-        return $form_data;
     }
 }
 

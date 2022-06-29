@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -32,12 +33,10 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
         return false;
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         $form_data = array(
             'user_id' => App::getState('current-user-id'),
         );
-
-        return $form_data;
     }
 }

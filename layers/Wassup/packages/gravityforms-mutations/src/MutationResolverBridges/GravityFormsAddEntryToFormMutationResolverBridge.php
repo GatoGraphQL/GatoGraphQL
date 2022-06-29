@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use GD_GF_Module_Processor_TextFormInputs;
 use PoP_FormUtils;
 use PoP_Forms_Module_Processor_TextFormInputs;
@@ -133,15 +134,13 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         return $executed;
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         /** @var FormInputComponentProcessorInterface */
         $formid_processor = $this->getComponentProcessorManager()->getComponentProcessor([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]);
         $form_data = array(
             'form_id' => $formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]),
         );
-
-        return $form_data;
     }
 
     public function setup(): void

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
@@ -28,7 +29,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
         return $this->getSettingsMutationResolver();
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         return [];
     }

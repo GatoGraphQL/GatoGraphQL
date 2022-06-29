@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\GenericSystemException;
 use PoP\Root\App;
 use Exception;
@@ -55,7 +56,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         return $inputs;
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         return array_merge(
             parent::getFormData(),

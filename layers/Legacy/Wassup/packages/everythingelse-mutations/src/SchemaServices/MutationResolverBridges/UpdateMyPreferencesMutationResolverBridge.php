@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Module_Processor_UserProfileCheckboxFormInputs;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
@@ -28,7 +29,7 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
         return $this->getUpdateMyPreferencesMutationResolver();
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $form_data = array(
@@ -36,7 +37,5 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
             // We can just get the value for any one forminput from the My Preferences form, since they all have the same name (and even if the forminput was actually removed from the form!)
             'userPreferences' => $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST])->getValue([PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST]),
         );
-
-        return $form_data;
     }
 }

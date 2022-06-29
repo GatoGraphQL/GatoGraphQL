@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -28,7 +29,7 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         return $this->getUpdateMyCommunitiesMutationResolver();
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
@@ -40,7 +41,5 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
 
         // Allow to add extra inputs
         $form_data = App::applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
-
-        return $form_data;
     }
 }

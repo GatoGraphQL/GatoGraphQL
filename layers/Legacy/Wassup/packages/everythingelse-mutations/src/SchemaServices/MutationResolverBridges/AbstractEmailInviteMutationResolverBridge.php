@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Module_Processor_TextareaFormInputs;
 use PoP_FormUtils;
 use PoP_Module_Processor_TextFormInputs;
@@ -24,7 +25,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         );
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         // Get the list of all emails
         $emails = array();
@@ -64,7 +65,5 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $form_data['captcha'] = $captcha;
         }
-
-        return $form_data;
     }
 }

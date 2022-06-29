@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use GD_CreateUpdate_Utils;
 use GD_Custom_Module_Processor_SelectFormInputs;
 use PoP\ComponentModel\Component\Component;
@@ -62,7 +63,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     abstract protected function isUpdate(): bool;
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         $form_data = [];
         if ($this->isUpdate()) {

@@ -13,6 +13,8 @@ use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -64,7 +66,19 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
-        $form_data = $this->getFormData();
+        /**
+         * Create a runtime field to be executed. It doesn't matter
+         * what's the name of the mutation field, so providing
+         * a random one suffices.
+         */
+        $withArgumentsAST = new LeafField(
+            'someMutation',
+            null,
+            [],
+            [],
+            LocationHelper::getNonSpecificLocation()
+        );
+        $this->addArgumentsForMutation($withArgumentsAST);
         $return = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -73,7 +87,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             ErrorTypes::CODES => ResponseConstants::ERRORCODES,
         ];
         $errorTypeKey = $errorTypeKeys[$errorType];
-        if ($errors = $mutationResolver->validateErrors($form_data)) {
+        if ($errors = $mutationResolver->validateErrors($withArgumentsAST)) {
             // @todo Migrate from string to FeedbackItemProvider
             $return[$errorTypeKey] = array_map(
                 fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
@@ -85,7 +99,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             }
             return $return;
         }
-        if ($warnings = $mutationResolver->validateWarnings($form_data)) {
+        if ($warnings = $mutationResolver->validateWarnings($withArgumentsAST)) {
             $warningTypeKeys = [
                 ErrorTypes::DESCRIPTIONS => ResponseConstants::WARNINGSTRINGS,
                 ErrorTypes::CODES => ResponseConstants::WARNINGCODES,
@@ -101,7 +115,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $errorMessage = null;
         $resultID = null;
         try {
-            $resultID = $mutationResolver->executeMutation($form_data);
+            $resultID = $mutationResolver->executeMutation($withArgumentsAST);
         } catch (AbstractClientException $e) {
             $errorMessage = $e->getMessage();
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;

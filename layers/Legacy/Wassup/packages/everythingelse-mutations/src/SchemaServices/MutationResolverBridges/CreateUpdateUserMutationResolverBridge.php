@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Application_Utils;
 use PoP_Forms_ConfigurationUtils;
 use PoP\Root\Exception\GenericSystemException;
@@ -48,7 +49,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
@@ -73,28 +74,22 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         $form_data = App::applyFilters('gd_createupdate_user:form_data', $form_data);
 
         if ($user_id) {
-            $form_data = $this->getUpdateuserFormData($form_data);
+            $this->getUpdateuserFormData($withArgumentsAST);
         } else {
-            $form_data = $this->getCreateuserFormData($form_data);
+            $this->getCreateuserFormData($withArgumentsAST);
         }
-
-        return $form_data;
     }
 
-    protected function getCreateuserFormData(array $form_data)
+    protected function getCreateuserFormData(WithArgumentsInterface $withArgumentsAST)
     {
         // Allow to add extra inputs
-        $form_data = App::applyFilters('gd_createupdate_user:form_data:create', $form_data);
-
-        return $form_data;
+        App::doAction('gd_createupdate_user:form_data:create', $withArgumentsAST);
     }
 
-    protected function getUpdateuserFormData(array $form_data)
+    protected function getUpdateuserFormData(WithArgumentsInterface $withArgumentsAST)
     {
         // Allow to add extra inputs
-        $form_data = App::applyFilters('gd_createupdate_user:form_data:update', $form_data);
-
-        return $form_data;
+        App::doAction('gd_createupdate_user:form_data:update', $withArgumentsAST);
     }
 
     private function getFormInputs()

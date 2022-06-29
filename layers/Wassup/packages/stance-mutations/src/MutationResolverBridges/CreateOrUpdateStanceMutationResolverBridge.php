@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP_Module_Processor_TextareaFormInputs;
@@ -35,14 +36,12 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         return false;
     }
 
-    public function getFormData(): array
+    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        $form_data = parent::getFormData();
+        parent::addArgumentsForMutation($withArgumentsAST);
 
         $target = $this->getComponentProcessorManager()->getComponentProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET])->getValue([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET]);
         $form_data['stancetarget'] = $target;
-
-        return $form_data;
     }
 
     protected function isUpdate(): bool
