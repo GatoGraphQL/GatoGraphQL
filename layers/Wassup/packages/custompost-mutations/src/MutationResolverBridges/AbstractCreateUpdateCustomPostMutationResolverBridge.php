@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use GD_CreateUpdate_Utils;
 use GD_Custom_Module_Processor_SelectFormInputs;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\MutationResolverBridges\AbstractCRUDComponentMutationResolverBridge;
 use PoP\EditPosts\HelperAPIFactory;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP_ApplicationProcessors_Utils;
 use PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs;
@@ -66,59 +68,59 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
         if ($this->isUpdate()) {
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::ID, $this->getUpdateCustomPostID(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::ID, new Literal($this->getUpdateCustomPostID(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         if ($this->supportsTitle()) {
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::TITLE, trim(strip_tags($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE])->getValue([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE]))), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::TITLE, new Literal(trim(strip_tags($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE])->getValue([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE]))), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         $editor = $this->getEditorInput();
         if ($editor !== null) {
             $cmseditpostshelpers = HelperAPIFactory::getInstance();
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::CONTENT, trim($cmseditpostshelpers->kses(stripslashes($this->getComponentProcessorManager()->getComponentProcessor($editor)->getValue($editor)))), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::CONTENT, new Literal(trim($cmseditpostshelpers->kses(stripslashes($this->getComponentProcessorManager()->getComponentProcessor($editor)->getValue($editor)))), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         if ($this->showCategories()) {
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::CATEGORIES, $this->getCategories(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::CATEGORIES, new InputList($this->getCategories(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         // Status: 2 possibilities:
         // - Moderate: then using the Draft/Pending/Publish Select, user cannot choose 'Publish' when creating a post
         // - No moderation: using the 'Keep as Draft' checkbox, completely omitting value 'Pending', post is either 'draft' or 'publish'
         if ($this->moderate()) {
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::STATUS, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS]), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::STATUS, new Literal($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS]), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         } else {
             $keepasdraft = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT])->getValue([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT]);
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::STATUS, $keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::STATUS, new Literal($keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         if ($featuredimage = $this->getFeaturedimageComponent()) {
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID, $this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID, new Literal($this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         if ($this->addReferences()) {
             $references = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES])->getValue([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES]);
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::REFERENCES, $references ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::REFERENCES, new InputList($references ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         if (PoP_ApplicationProcessors_Utils::addCategories()) {
             $topics = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_CATEGORIES])->getValue([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_CATEGORIES]);
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::TOPICS, $topics ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::TOPICS, new InputList($topics ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         // Only if the Volunteering is enabled
         if (defined('POP_VOLUNTEERING_INITIALIZED')) {
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 if ($this->volunteer()) {
-                    $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::VOLUNTEERSNEEDED, $this->getComponentProcessorManager()->getComponentProcessor([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT]), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+                    $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::VOLUNTEERSNEEDED, new Literal($this->getComponentProcessorManager()->getComponentProcessor([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT]), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
                 }
             }
         }
 
         if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
             $appliesto = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_APPLIESTO])->getValue([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_APPLIESTO]);
-            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::APPLIESTO, $appliesto ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+            $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::APPLIESTO, new InputList($appliesto ?? array(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
 
         // Allow plugins to add their own fields

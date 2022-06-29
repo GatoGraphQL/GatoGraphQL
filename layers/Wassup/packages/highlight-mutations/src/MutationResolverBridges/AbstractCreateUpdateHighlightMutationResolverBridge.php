@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP_Module_Processor_TextareaFormInputs;
-use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
 use PoP\Root\App;
+use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
+use PoP_Module_Processor_TextareaFormInputs;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
@@ -69,10 +70,10 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         parent::addArgumentsForMutation($withArgumentsAST);
 
         $highlightedPost = $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
-        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('highlightedpost', $highlightedPost, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('highlightedpost', new Literal($highlightedPost, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
         $referenced = $this->getCustomPostTypeAPI()->getCustomPost($highlightedPost);
-        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('title', $this->getCustomPostTypeAPI()->getTitle($referenced), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('title', new Literal($this->getCustomPostTypeAPI()->getTitle($referenced), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
     }
 }
