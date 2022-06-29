@@ -115,4 +115,11 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * Define if to use the version to decide if to process the field or not
      */
     public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
+    /**
+     * Allow to add additional Arguments
+     */
+    public function customizeField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): void;
 }

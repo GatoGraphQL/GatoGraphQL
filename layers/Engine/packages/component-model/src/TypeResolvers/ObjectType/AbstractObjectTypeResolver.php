@@ -515,6 +515,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 return null;
             }
 
+            /**
+             * Allow to inject additional Arguments
+             */
+            $objectTypeFieldResolver->customizeField($this, $field);
+
             // Resolve the value. If the field resolver throws an Exception,
             // catch it and return the equivalent GraphQL error so that it
             // fails gracefully in production (but not on development!)

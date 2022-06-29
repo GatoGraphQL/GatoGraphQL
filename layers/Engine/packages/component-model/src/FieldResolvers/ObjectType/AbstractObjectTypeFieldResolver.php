@@ -1359,4 +1359,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): ?MutationResolverInterface {
         return null;
     }
+
+    /**
+     * Allow to add additional Arguments
+     */
+    public function customizeField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): void {
+    }
 }
