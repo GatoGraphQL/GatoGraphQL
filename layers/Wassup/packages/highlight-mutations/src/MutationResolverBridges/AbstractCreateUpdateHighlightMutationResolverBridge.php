@@ -68,10 +68,11 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
     {
         parent::addArgumentsForMutation($withArgumentsAST);
 
-        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('highlightedpost', $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $highlightedPost = $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
+        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('highlightedpost', $highlightedPost, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
-        $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['highlightedpost']);
+        $referenced = $this->getCustomPostTypeAPI()->getCustomPost($highlightedPost);
         $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('title', $this->getCustomPostTypeAPI()->getTitle($referenced), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
     }
 }
