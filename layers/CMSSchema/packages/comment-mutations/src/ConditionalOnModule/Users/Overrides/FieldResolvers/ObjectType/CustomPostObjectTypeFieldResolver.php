@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\Overrides\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\RootObjectTypeFieldResolver as UpstreamRootObjectTypeFieldResolver;
+use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\CustomPostObjectTypeFieldResolver as UpstreamCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
-class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
+class CustomPostObjectTypeFieldResolver extends UpstreamCustomPostObjectTypeFieldResolver
 {
     use AddCommentToCustomPostObjectTypeFieldResolverTrait;
 
