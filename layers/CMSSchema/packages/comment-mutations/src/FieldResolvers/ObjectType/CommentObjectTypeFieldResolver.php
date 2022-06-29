@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -124,8 +126,8 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
         $comment = $object;
         switch ($fieldName) {
             case 'reply':
-                $mutationField->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::CUSTOMPOST_ID, new Literal($this->getCommentTypeAPI()->getCommentPostId($comment), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
-                $mutationField->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::PARENT_COMMENT_ID, new Literal($objectTypeResolver->getID($comment), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+                $mutationField->addArgument(new Argument(MutationInputProperties::CUSTOMPOST_ID, new Literal($this->getCommentTypeAPI()->getCommentPostId($comment), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+                $mutationField->addArgument(new Argument(MutationInputProperties::PARENT_COMMENT_ID, new Literal($objectTypeResolver->getID($comment), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
                 break;
         }
 

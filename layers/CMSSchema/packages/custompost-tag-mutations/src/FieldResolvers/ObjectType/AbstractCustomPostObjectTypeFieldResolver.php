@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -96,7 +98,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $customPost = $object;
         switch ($fieldName) {
             case 'setTags':
-                $mutationField->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::CUSTOMPOST_ID, new Literal($objectTypeResolver->getID($customPost), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+                $mutationField->addArgument(new Argument(MutationInputProperties::CUSTOMPOST_ID, new Literal($objectTypeResolver->getID($customPost), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
                 break;
         }
 

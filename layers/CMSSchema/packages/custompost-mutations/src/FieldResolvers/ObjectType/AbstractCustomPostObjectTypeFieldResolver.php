@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -89,7 +91,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $post = $object;
         switch ($fieldName) {
             case 'update':
-                $mutationField->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::ID, new Literal($objectTypeResolver->getID($post), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+                $mutationField->addArgument(new Argument(MutationInputProperties::ID, new Literal($objectTypeResolver->getID($post), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
                 break;
         }
 

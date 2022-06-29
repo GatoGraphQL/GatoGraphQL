@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -42,7 +44,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         parent::addArgumentsForMutation($withArgumentsAST);
 
         $target = $this->getComponentProcessorManager()->getComponentProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET])->getValue([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET]);
-        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('stancetarget', new Literal($target, \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new Argument('stancetarget', new Literal($target, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 
     protected function isUpdate(): bool

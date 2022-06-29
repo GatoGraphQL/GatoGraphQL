@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use GD_Captcha;
 use GD_GF_Module_Processor_TextFormInputs;
 use PoP\ComponentModel\App;
@@ -139,7 +141,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
     {
         /** @var FormInputComponentProcessorInterface */
         $formid_processor = $this->getComponentProcessorManager()->getComponentProcessor([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]);
-        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('form_id', new Literal($formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new Argument('form_id', new Literal($formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 
     public function setup(): void
