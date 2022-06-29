@@ -452,6 +452,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
+        /**
+         * Allow to inject additional Arguments
+         */
+        $this->customizeField($field);
+
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
         // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
@@ -916,6 +921,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         return $fieldArgsSchemaDefinition;
+    }
+
+    /**
+     * Allow to add additional Arguments
+     */
+    protected function customizeField(FieldInterface $field): void
+    {
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
