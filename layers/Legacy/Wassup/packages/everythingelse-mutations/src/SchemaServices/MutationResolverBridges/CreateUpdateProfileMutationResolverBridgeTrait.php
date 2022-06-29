@@ -12,13 +12,6 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
 
-    // public function getFormData(): array
-    // {
-    //     return array_merge(
-    //         parent::getFormData(),
-    //         $this->getUsercommunitiesFormData()
-    //     );
-    // }
     protected function getUsercommunitiesFormData()
     {
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
