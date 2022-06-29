@@ -4,5 +4,5 @@ services:
         autowire: true
 
     PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\Overrides\FieldResolvers\:
-        resource: '../../../src/ConditionalOnModule/Users/Overrides/FieldResolvers/*'
+        resource: '../../../../src/ConditionalOnModule/Users/Overrides/FieldResolvers/*'
 
