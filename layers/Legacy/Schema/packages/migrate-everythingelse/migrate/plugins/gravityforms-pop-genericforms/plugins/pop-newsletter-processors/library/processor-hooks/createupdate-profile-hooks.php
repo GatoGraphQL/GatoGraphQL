@@ -9,7 +9,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
     {
         \PoP\Root\App::addAction('gd_createupdate_profile:form_data', $this->addArgumentsForMutation(...), 10);
         \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubcomponents(...), 10, 3);
-        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionals(...), 10, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionalsCreate(...), 10, 2);
     }
 
     public function enabled()
@@ -57,13 +57,13 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         return $components;
     }
 
-    public function additionals($user_id)
+    public function additionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST)
     {
         if (!$this->enabled()) {
             return;
         }
 
-        $subscribe = $form_data['newsletter'];
+        $subscribe = $withArgumentsAST->getArgumentValue('newsletter');
         if ($subscribe) {
             // Trigger the form sending
             $form_id = PoP_Newsletter_GFHelpers::getNewsletterFormId();
