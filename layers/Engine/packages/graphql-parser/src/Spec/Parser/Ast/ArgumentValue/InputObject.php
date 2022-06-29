@@ -16,7 +16,7 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
     protected InputList|InputObject|Argument $parent;
 
     /**
-     * @param stdClass<string,mixed> $object Elements inside can be WithValueInterface or native types (array, int, string, etc)
+     * @param stdClass $object Elements inside can be WithValueInterface or native types (array, int, string, etc)
      */
     public function __construct(
         protected stdClass $object,
