@@ -65,7 +65,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        $form_data = [];
         if ($this->isUpdate()) {
             $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument(MutationInputProperties::ID, $this->getUpdateCustomPostID(), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
         }
@@ -125,7 +124,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
         // Allow plugins to add their own fields
         return App::doAction(
             self::HOOK_FORM_DATA_CREATE_OR_UPDATE,
-            $form_data
+            $withArgumentsAST
         );
     }
 
