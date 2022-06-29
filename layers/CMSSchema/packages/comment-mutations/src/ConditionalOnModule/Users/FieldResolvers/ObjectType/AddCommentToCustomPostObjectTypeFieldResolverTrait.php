@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\SchemaHooks;
+namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -23,7 +22,6 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
      * If not provided, set the properties from the logged-in user
      */
     protected function customizeAddCommentField(
-        ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void {
         /** @var ModuleConfiguration */
