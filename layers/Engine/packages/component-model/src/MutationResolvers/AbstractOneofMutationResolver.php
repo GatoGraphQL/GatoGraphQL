@@ -116,7 +116,8 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     protected function getOneofInputObjectFieldName(WithArgumentsInterface $withArgumentsAST): string
     {
-        $formDataSize = count($withArgumentsAST->getArguments());
+        $arguments = $withArgumentsAST->getArguments();
+        $formDataSize = count($arguments);
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
                 sprintf(
@@ -125,13 +126,13 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
                     implode('\'%s\'',
                         array_map(
                             fn(Argument $argument) => $argument->getName(),
-                            $withArgumentsAST->getArguments()
+                            $arguments
                         )
                     )
                 )
             );
         }
-        return key($withArgumentsAST);
+        return $arguments[0]->getName();
     }
 
     /**
