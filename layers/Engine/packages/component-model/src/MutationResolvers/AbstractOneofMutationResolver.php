@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\ComponentModel\Exception\QueryResolutionException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
@@ -113,13 +114,18 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     protected function getOneofInputObjectFieldName(WithArgumentsInterface $withArgumentsAST): string
     {
-        $formDataSize = count($withArgumentsAST);
+        $formDataSize = count($withArgumentsAST->getArguments());
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
                 sprintf(
                     $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,
-                    implode('\'%s\'', array_keys($withArgumentsAST))
+                    implode('\'%s\'',
+                        array_map(
+                            fn(Argument $argument) => $argument->getName(),
+                            $withArgumentsAST->getArguments()
+                        )
+                    )
                 )
             );
         }
