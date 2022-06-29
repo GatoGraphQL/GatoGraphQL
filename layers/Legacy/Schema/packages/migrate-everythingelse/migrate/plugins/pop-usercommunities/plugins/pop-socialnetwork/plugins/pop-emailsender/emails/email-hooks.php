@@ -15,7 +15,7 @@ class PoP_URE_EmailSender_Hooks
         \PoP\Root\App::addAction('gd_update_mycommunities:update', $this->emailnotificationsNetworkJoinscommunity(...), 10, 3);
     }
 
-    public function emailnotificationsNetworkJoinscommunity($user_id, $withArgumentsAST, $operationlog)
+    public function emailnotificationsNetworkJoinscommunity($user_id, WithArgumentsInterface $withArgumentsAST, $operationlog)
     {
         if (!$communities = $operationlog['new-communities']) {
             return;

@@ -41,7 +41,7 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
     /**
      * Function to override
      */
-    protected function additionals($target_id, $withArgumentsAST): void
+    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionals($target_id, $withArgumentsAST);
         App::doAction('gd_unsubscribefromtag', $target_id, $withArgumentsAST);

@@ -9,7 +9,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends Creat
 {
     use CreateUpdateOrganizationProfileMutationResolverTrait;
 
-    protected function createupdateuser($user_id, $withArgumentsAST): void
+    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::createupdateuser($user_id, $withArgumentsAST);
         $this->commonuserrolesCreateupdateuser($user_id, $withArgumentsAST);

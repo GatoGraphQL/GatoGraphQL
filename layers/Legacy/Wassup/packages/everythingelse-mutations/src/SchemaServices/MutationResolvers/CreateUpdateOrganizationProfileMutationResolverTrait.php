@@ -14,19 +14,19 @@ trait CreateUpdateOrganizationProfileMutationResolverTrait
         $this->commonuserrolesCreateuser($user_id, $withArgumentsAST);
         return $user_id;
     }
-    protected function commonuserrolesCreateuser($user_id, $withArgumentsAST)
+    protected function commonuserrolesCreateuser($user_id, WithArgumentsInterface $withArgumentsAST)
     {
         // Add the extra User Role
         $cmsuserrolesapi = FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_ORGANIZATION);
     }
 
-    protected function createupdateuser($user_id, $withArgumentsAST)
+    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST)
     {
         parent::createupdateuser($user_id, $withArgumentsAST);
         $this->commonuserrolesCreateupdateuser($user_id, $withArgumentsAST);
     }
-    protected function commonuserrolesCreateupdateuser($user_id, $withArgumentsAST)
+    protected function commonuserrolesCreateupdateuser($user_id, WithArgumentsInterface $withArgumentsAST)
     {
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES, $withArgumentsAST->getArgumentValue('organizationtypes'));
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES, $withArgumentsAST->getArgumentValue('organizationcategories'));

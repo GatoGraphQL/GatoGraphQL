@@ -8,12 +8,12 @@ use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
-    protected function additionalsCreate($user_id, $withArgumentsAST): void
+    protected function additionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionalsCreate($user_id, $withArgumentsAST);
         $this->usercommunitiesAdditionalsCreate($user_id, $withArgumentsAST);
     }
-    protected function usercommunitiesAdditionalsCreate($user_id, $withArgumentsAST): void
+    protected function usercommunitiesAdditionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $withArgumentsAST);
     }
@@ -24,7 +24,7 @@ class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfi
         $this->usercommunitiesCreateuser($user_id, $withArgumentsAST);
         return $user_id;
     }
-    protected function usercommunitiesCreateuser($user_id, $withArgumentsAST): void
+    protected function usercommunitiesCreateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         $communities = $withArgumentsAST->getArgumentValue('communities');
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);

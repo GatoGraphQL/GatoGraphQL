@@ -27,7 +27,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         );
     }
 
-    public function validateContent($errors_in_array, $withArgumentsAST)
+    public function validateContent($errors_in_array, WithArgumentsInterface $withArgumentsAST)
     {
         $errors = &$errors_in_array[0];
 
@@ -43,7 +43,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         }
     }
 
-    public function createUpdate($post_id, $withArgumentsAST)
+    public function createUpdate($post_id, WithArgumentsInterface $withArgumentsAST)
     {
 
         // Save the link in the post meta

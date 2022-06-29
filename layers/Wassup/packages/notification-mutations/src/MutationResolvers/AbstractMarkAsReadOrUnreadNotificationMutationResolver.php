@@ -38,7 +38,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return $errors;
     }
 
-    protected function additionals($histid, $withArgumentsAST): void
+    protected function additionals($histid, WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $withArgumentsAST);
     }

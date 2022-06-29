@@ -40,7 +40,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
         // parent::__construct();
     }
 
-    public function commented($comment_id, $withArgumentsAST)
+    public function commented($comment_id, WithArgumentsInterface $withArgumentsAST)
     {
         $this->logComment($comment_id, $withArgumentsAST->getArgumentValue('user_id'), AAL_POP_ACTION_COMMENT_ADDED);
     }

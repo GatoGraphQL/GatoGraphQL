@@ -49,7 +49,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     /**
      * Function to override
      */
-    protected function additionals($target_id, $withArgumentsAST): void
+    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionals($target_id, $withArgumentsAST);
         App::doAction('gd_downvotepost', $target_id, $withArgumentsAST);

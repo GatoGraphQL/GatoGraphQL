@@ -47,7 +47,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return InputNames::USER_ID;
     }
 
-    protected function additionals($target_id, $withArgumentsAST): void
+    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('gd_updateusermetavalue:user', $target_id, $withArgumentsAST);
         parent::additionals($target_id, $withArgumentsAST);

@@ -38,13 +38,13 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
     /**
      * Function to override
      */
-    protected function additionals($target_id, $withArgumentsAST): void
+    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionals($target_id, $withArgumentsAST);
         App::doAction('gd_recommendpost', $target_id, $withArgumentsAST);
     }
 
-    // protected function updateValue($value, $withArgumentsAST) {
+    // protected function updateValue($value, WithArgumentsInterface $withArgumentsAST) {
     //     // Add the user to follow to the list
     //     $target_id = $withArgumentsAST->getArgumentValue('target_id');
     //     $value[] = $target_id;

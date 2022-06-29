@@ -27,23 +27,23 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         }
     }
 
-    protected function additionals($user_id, $withArgumentsAST): void
+    protected function additionals($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionals($user_id, $withArgumentsAST);
         App::doAction('gd_createupdate_profile:additionals', $user_id, $withArgumentsAST);
     }
-    protected function additionalsUpdate($user_id, $withArgumentsAST): void
+    protected function additionalsUpdate($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionalsUpdate($user_id, $withArgumentsAST);
         App::doAction('gd_createupdate_profile:additionalsUpdate', $user_id, $withArgumentsAST);
     }
-    protected function additionalsCreate($user_id, $withArgumentsAST): void
+    protected function additionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionalsCreate($user_id, $withArgumentsAST);
 
         App::doAction('gd_createupdate_profile:additionalsCreate', $user_id, $withArgumentsAST);
     }
-    protected function createupdateuser($user_id, $withArgumentsAST): void
+    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::createupdateuser($user_id, $withArgumentsAST);
 

@@ -19,12 +19,12 @@ class URE_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
         // parent::__construct();
     }
 
-    public function joinedCommunities($user_id, $withArgumentsAST, $operationlog)
+    public function joinedCommunities($user_id, WithArgumentsInterface $withArgumentsAST, $operationlog)
     {
         $this->userJoinedCommunities($user_id, $operationlog['new-communities']);
     }
 
-    public function newUserCommunities($user_id, $withArgumentsAST)
+    public function newUserCommunities($user_id, WithArgumentsInterface $withArgumentsAST)
     {
         $this->userJoinedCommunities($user_id, $withArgumentsAST->getArgumentValue('communities'));
     }

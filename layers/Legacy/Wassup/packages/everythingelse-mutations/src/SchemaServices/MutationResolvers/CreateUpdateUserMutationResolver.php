@@ -211,7 +211,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->updateUser($user_data);
     }
 
-    protected function createupdateuser($user_id, $withArgumentsAST): void
+    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
     }
 
@@ -259,15 +259,15 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $this->create($withArgumentsAST);
     }
 
-    protected function additionals($user_id, $withArgumentsAST): void
+    protected function additionals($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('gd_createupdate_user:additionals', $user_id, $withArgumentsAST);
     }
-    protected function additionalsUpdate($user_id, $withArgumentsAST): void
+    protected function additionalsUpdate($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('gd_createupdate_user:additionalsUpdate', $user_id, $withArgumentsAST);
     }
-    protected function additionalsCreate($user_id, $withArgumentsAST): void
+    protected function additionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $withArgumentsAST);
     }

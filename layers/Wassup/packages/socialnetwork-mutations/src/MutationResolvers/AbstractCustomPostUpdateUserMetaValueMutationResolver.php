@@ -63,7 +63,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return InputNames::POST_ID;
     }
 
-    protected function additionals($target_id, $withArgumentsAST): void
+    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
     {
         App::doAction('gd_updateusermetavalue:post', $target_id, $withArgumentsAST);
         parent::additionals($target_id, $withArgumentsAST);

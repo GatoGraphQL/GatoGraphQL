@@ -38,13 +38,13 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     /**
      * Function to override
      */
-    protected function additionals($target_id, $withArgumentsAST): void
+    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
     {
         parent::additionals($target_id, $withArgumentsAST);
         App::doAction('gd_unfollowuser', $target_id, $withArgumentsAST);
     }
 
-    // protected function updateValue($value, $withArgumentsAST) {
+    // protected function updateValue($value, WithArgumentsInterface $withArgumentsAST) {
     //     // Remove the user from the list
     //     $target_id = $withArgumentsAST->getArgumentValue('target_id');
     //     array_splice($value, array_search($target_id, $value), 1);
