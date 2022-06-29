@@ -1041,7 +1041,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
              */
-            if ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null) {
+            if ($versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)) {
                 /**
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */

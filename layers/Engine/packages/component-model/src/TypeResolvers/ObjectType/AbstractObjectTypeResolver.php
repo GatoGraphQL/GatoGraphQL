@@ -203,7 +203,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * If the error happened from requesting a version that doesn't exist, show an appropriate error message
              */
             $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
-                && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null);
+                && ($versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT));
             $feedbackItemResolution = $useSemanticVersionConstraints
                 ? new FeedbackItemResolution(
                     ErrorFeedbackItemProvider::class,
