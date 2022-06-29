@@ -25,6 +25,14 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
     }
 
     /**
+     * Higher priority to override the previous FieldResolver
+     */
+    public function getPriorityToAttachToClasses(): int
+    {
+        return parent::getPriorityToAttachToClasses() + 10;
+    }
+
+    /**
      * If not provided, set the properties from the logged-in user
      */
     public function customizeField(
