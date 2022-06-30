@@ -65,7 +65,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
      */
-    private array $directiveResolverInstanceCache = [];
+    private array $directiveResolverClassDirectivesCache = [];
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
@@ -507,11 +507,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $directiveResolverClass = get_class($directiveResolver);
                 // Get the instance from the cache if it exists, or create it if not
-                $this->directiveResolverInstanceCache[$directiveResolverClass] ??= new SplObjectStorage();
-                if (!$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
-                    $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $this->getUniqueDirectiveResolverForDirective($directiveResolver, $directive);
+                $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
+                if (!$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
+                    $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $this->getUniqueDirectiveResolverForDirective($directiveResolver, $directive);
                 }
-                $maybeFieldDirectiveResolver = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
+                $maybeFieldDirectiveResolver = $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive];
                 // Check if this instance can process the directive
                 if ($maybeFieldDirectiveResolver->resolveCanProcess($this, $directive, $field)) {
                     $fieldDirectiveResolvers[$field] = $maybeFieldDirectiveResolver;
