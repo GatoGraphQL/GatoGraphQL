@@ -180,7 +180,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             return [];
         }
     }
-    
+
     /**
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
@@ -189,11 +189,11 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     {
         // Create a new Field, passing the corresponding Argument only
         $oneOfPropertyName = $this->getOneofInputObjectPropertyName($inputObjectFieldArgumentMutationDataProvider);
+        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName);
         $oneOfMutationDataProvider = $this->getOneOfMutationDataProvider(
             $inputObjectFieldArgumentMutationDataProvider,
             $oneOfPropertyName
         );
-        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName);
         /**
          * @todo Review this commenting works for different oneof mutations
          * eg: http://graphql-by-pop-pro.lndo.site/graphiql/?query=mutation%20LoginUser%20%7B%0A%20%20loginUser(by%3A%20%7Bcredentials%3A%20%7BusernameOrEmail%3A%20%22admin%22%2C%20password%3A%20%22admin%22%7D%7D)%20%7B%0A%20%20%20%20id%0A%20%20%20%20name%0A%20%20%7D%0A%7D&operationName=LoginUser&variables=%7B%0A%20%20%22authorID%22%3A%203%0A%7D
