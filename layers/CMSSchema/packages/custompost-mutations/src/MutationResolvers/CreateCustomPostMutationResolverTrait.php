@@ -14,27 +14,27 @@ trait CreateCustomPostMutationResolverTrait
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        return $this->create($withArgumentsAST);
+        return $this->create($mutationDataProvider);
     }
 
     /**
      * @return string|int The ID of the created entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    abstract protected function create(WithArgumentsInterface $withArgumentsAST): string | int;
+    abstract protected function create(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int;
 
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
-        return $this->validateCreateErrors($withArgumentsAST);
+        return $this->validateCreateErrors($mutationDataProvider);
     }
 
     /**
      * @return FeedbackItemResolution[]
      */
-    abstract protected function validateCreateErrors(WithArgumentsInterface $withArgumentsAST): array;
+    abstract protected function validateCreateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array;
 }

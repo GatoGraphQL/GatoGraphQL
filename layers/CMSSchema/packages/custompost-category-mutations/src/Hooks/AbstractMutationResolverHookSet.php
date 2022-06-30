@@ -35,16 +35,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeSetCategories(int | string $customPostID, WithArgumentsInterface $withArgumentsAST): void
+    public function maybeSetCategories(int | string $customPostID, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         // Only for that specific CPT
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!$withArgumentsAST->hasArgument(MutationInputProperties::CATEGORY_IDS)) {
+        if (!$mutationDataProvider->hasArgument(MutationInputProperties::CATEGORY_IDS)) {
             return;
         }
-        $customPostCategoryIDs = $withArgumentsAST->getArgumentValue(MutationInputProperties::CATEGORY_IDS);
+        $customPostCategoryIDs = $mutationDataProvider->getArgumentValue(MutationInputProperties::CATEGORY_IDS);
         $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
     }

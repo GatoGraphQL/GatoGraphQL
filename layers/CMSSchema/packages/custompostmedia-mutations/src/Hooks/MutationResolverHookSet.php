@@ -37,12 +37,12 @@ class MutationResolverHookSet extends AbstractHookSet
     /**
      * If entry "featuredImageID" has an ID, set it. If it is null, remove it
      */
-    public function setOrRemoveFeaturedImage(int | string $customPostID, WithArgumentsInterface $withArgumentsAST): void
+    public function setOrRemoveFeaturedImage(int | string $customPostID, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        if (!$withArgumentsAST->hasArgument(MutationInputProperties::FEATUREDIMAGE_ID)) {
+        if (!$mutationDataProvider->hasArgument(MutationInputProperties::FEATUREDIMAGE_ID)) {
             return;
         }
-        if ($featuredImageID = $withArgumentsAST->getArgumentValue(MutationInputProperties::FEATUREDIMAGE_ID)) {
+        if ($featuredImageID = $mutationDataProvider->getArgumentValue(MutationInputProperties::FEATUREDIMAGE_ID)) {
             $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
         } else {
             $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);

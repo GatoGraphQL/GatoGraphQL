@@ -8,26 +8,26 @@ use PoPCMSSchema\UserMeta\Utils;
 use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 trait CreateUpdateIndividualProfileMutationResolverTrait
 {
-    protected function createuser(WithArgumentsInterface $withArgumentsAST)
+    protected function createuser(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        $user_id = parent::createuser($withArgumentsAST);
-        $this->commonuserrolesCreateuser($user_id, $withArgumentsAST);
+        $user_id = parent::createuser($mutationDataProvider);
+        $this->commonuserrolesCreateuser($user_id, $mutationDataProvider);
         return $user_id;
     }
-    protected function commonuserrolesCreateuser($user_id, WithArgumentsInterface $withArgumentsAST)
+    protected function commonuserrolesCreateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
         // Add the extra User Role
         $cmsuserrolesapi = FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_INDIVIDUAL);
     }
 
-    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST)
+    protected function createupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        parent::createupdateuser($user_id, $withArgumentsAST);
-        $this->commonuserrolesCreateupdateuser($user_id, $withArgumentsAST);
+        parent::createupdateuser($user_id, $mutationDataProvider);
+        $this->commonuserrolesCreateupdateuser($user_id, $mutationDataProvider);
     }
-    protected function commonuserrolesCreateupdateuser($user_id, WithArgumentsInterface $withArgumentsAST)
+    protected function commonuserrolesCreateupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $withArgumentsAST->getArgumentValue('individualinterests'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $mutationDataProvider->getArgumentValue('individualinterests'));
     }
 }

@@ -16,14 +16,14 @@ interface MutationResolverInterface
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed;
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array;
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(WithArgumentsInterface $withArgumentsAST): array;
+    public function validateWarnings(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array;
     public function getErrorType(): int;
 }
