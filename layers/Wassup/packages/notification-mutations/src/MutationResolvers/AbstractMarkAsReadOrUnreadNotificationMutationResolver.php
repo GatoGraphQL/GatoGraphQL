@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Notifications_API;
 use PoP\Root\Exception\AbstractException;
@@ -12,7 +13,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         $histid = $mutationDataProvider->getArgumentValue('histid');
@@ -38,14 +39,14 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return $errors;
     }
 
-    protected function additionals($histid, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($histid, MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $mutationDataProvider);
     }
 
     abstract protected function getStatus();
 
-    protected function setStatus(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function setStatus(MutationDataProviderInterface $mutationDataProvider)
     {
         // return AAL_Main::instance()->api->setStatus($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider->getArgumentValue('user_id'), $this->getStatus());
         return PoP_Notifications_API::setStatus($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider->getArgumentValue('user_id'), $this->getStatus());
@@ -54,7 +55,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $hist_ids = $this->setStatus($mutationDataProvider);
         $this->additionals($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider);

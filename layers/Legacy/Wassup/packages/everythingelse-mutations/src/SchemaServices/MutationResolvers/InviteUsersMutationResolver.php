@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_EmailTemplatesFactory;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -13,7 +14,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    protected function getEmailContent(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getEmailContent(MutationDataProviderInterface $mutationDataProvider)
     {
         $website_html = PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
@@ -73,7 +74,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getEmailSubject(MutationDataProviderInterface $mutationDataProvider)
     {
         $subject = '';
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
@@ -32,7 +33,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         return ErrorTypes::CODES;
     }
 
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errorcodes = array();
         $code = $mutationDataProvider->getArgumentValue(MutationInputProperties::CODE);
@@ -83,7 +84,7 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $code = $mutationDataProvider->getArgumentValue(MutationInputProperties::CODE);
         $pwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::PASSWORD);

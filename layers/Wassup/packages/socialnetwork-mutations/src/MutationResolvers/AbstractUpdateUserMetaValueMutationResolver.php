@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -11,7 +12,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         $target_id = $mutationDataProvider->getArgumentValue('target_id');
@@ -26,7 +27,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $errors;
     }
 
-    protected function additionals($target_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('gd_updateusermetavalue', $target_id, $mutationDataProvider);
     }
@@ -34,7 +35,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $target_id = $mutationDataProvider->getArgumentValue('target_id');
         return $target_id;
@@ -43,7 +44,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $target_id = $this->update($mutationDataProvider);
         $this->additionals($target_id, $mutationDataProvider);

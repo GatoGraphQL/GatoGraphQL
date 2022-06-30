@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\Application\Environment;
 class CreateOrUpdateStanceMutationResolver extends \PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver
 {
-    protected function getCreatepostData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getCreatepostData(MutationDataProviderInterface $mutationDataProvider)
     {
         $post_data = parent::getCreatepostData($mutationDataProvider);
 

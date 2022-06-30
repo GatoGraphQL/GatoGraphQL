@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -114,7 +115,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return Argument The current input field
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getOneofInputObjectArgument(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): Argument
+    protected function getOneofInputObjectArgument(MutationDataProviderInterface $mutationDataProvider): Argument
     {
         $arguments = $mutationDataProvider->getArguments();
         $formDataSize = count($arguments);
@@ -138,7 +139,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    final public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    final public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfAST($mutationDataProvider);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
@@ -148,7 +149,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     /**
      * @return FeedbackItemResolution[]
      */
-    final public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    final public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         try {
             [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfAST($mutationDataProvider);
@@ -171,7 +172,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     /**
      * @return FeedbackItemResolution[]
      */
-    final public function validateWarnings(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    final public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
     {
         try {
             [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfAST($mutationDataProvider);
@@ -186,7 +187,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndOneOfAST(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    final protected function getInputFieldMutationResolverAndOneOfAST(MutationDataProviderInterface $mutationDataProvider): array
     {
         // Create a new Field, passing the corresponding Argument only
         $oneOfArgument = $this->getOneofInputObjectArgument($mutationDataProvider);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use GFAPI;
 use PoP_Newsletter_GFHelpers;
 use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptionMutationResolver;
@@ -19,7 +20,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
         }
     }
 
-    protected function getNewsletterData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getNewsletterData(MutationDataProviderInterface $mutationDataProvider)
     {
         $ret = parent::getNewsletterData($mutationDataProvider);
 

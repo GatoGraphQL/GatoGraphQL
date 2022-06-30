@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Forms_ConfigurationUtils;
 use GD_Captcha;
@@ -21,7 +22,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return 'subscriber';
     }
 
-    protected function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         if (empty($mutationDataProvider->getArgumentValue('first_name'))) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -64,7 +65,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function validateCreateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateCreateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         // Check the username
         $user_login = $mutationDataProvider->getArgumentValue('username');
@@ -157,7 +158,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateUpdateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         $user_id = $mutationDataProvider->getArgumentValue('user_id');
         $user_email = $mutationDataProvider->getArgumentValue('user_email');
@@ -173,7 +174,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function getUpdateuserData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getUpdateuserData(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = array(
             'id' => $mutationDataProvider->getArgumentValue('user_id'),
@@ -186,7 +187,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_data;
     }
 
-    protected function getCreateuserData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getCreateuserData(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = $this->getUpdateuserData($mutationDataProvider);
 
@@ -211,11 +212,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->updateUser($user_data);
     }
 
-    protected function createupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function createupdateuser($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
     }
 
-    protected function updateuser(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function updateuser(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = $this->getUpdateuserData($mutationDataProvider);
         $user_id = $user_data['id'];
@@ -233,7 +234,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->insertUser($user_data);
     }
 
-    protected function createuser(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function createuser(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = $this->getCreateuserData($mutationDataProvider);
         $result = $this->executeCreateuser($user_data);
@@ -248,7 +249,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
@@ -259,20 +260,20 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $this->create($mutationDataProvider);
     }
 
-    protected function additionals($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('gd_createupdate_user:additionals', $user_id, $mutationDataProvider);
     }
-    protected function additionalsUpdate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionalsUpdate($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('gd_createupdate_user:additionalsUpdate', $user_id, $mutationDataProvider);
     }
-    protected function additionalsCreate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionalsCreate($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $mutationDataProvider);
     }
 
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         $this->validateContent($errors, $mutationDataProvider);
@@ -288,7 +289,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the updated entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function update(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         // Do the Post update
         $user_id = $this->updateuser($mutationDataProvider);
@@ -306,7 +307,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the created entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function create(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function create(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = $this->createuser($mutationDataProvider);
 

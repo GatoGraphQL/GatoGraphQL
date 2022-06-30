@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
@@ -25,7 +26,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         if (empty($mutationDataProvider->getArgumentValue('name'))) {
@@ -87,12 +88,12 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('pop_volunteer', $mutationDataProvider);
     }
 
-    protected function doExecute(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function doExecute(MutationDataProviderInterface $mutationDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $post_title = $this->getCustomPostTypeAPI()->getTitle($mutationDataProvider->getArgumentValue('target-id'));
@@ -140,7 +141,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $result = $this->doExecute($mutationDataProvider);
 

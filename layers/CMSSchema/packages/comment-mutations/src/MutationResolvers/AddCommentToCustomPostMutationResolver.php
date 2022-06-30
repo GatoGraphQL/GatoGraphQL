@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
@@ -54,7 +55,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
 
@@ -108,12 +109,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         );
     }
 
-    protected function additionals(string | int $comment_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(string | int $comment_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('gd_addcomment', $comment_id, $mutationDataProvider);
     }
 
-    protected function getCommentData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    protected function getCommentData(MutationDataProviderInterface $mutationDataProvider): array
     {
         $comment_data = [
             'authorIP' => App::server('REMOTE_ADDR'),
@@ -163,7 +164,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $comment_data = $this->getCommentData($mutationDataProvider);
         $comment_id = $this->insertComment($comment_data);

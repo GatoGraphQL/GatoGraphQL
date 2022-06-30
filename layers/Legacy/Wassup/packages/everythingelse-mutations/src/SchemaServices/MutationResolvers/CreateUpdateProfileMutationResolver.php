@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
@@ -16,7 +17,7 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         return GD_ROLE_PROFILE;
     }
 
-    protected function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::validateContent($errors, $mutationDataProvider);
 
@@ -27,23 +28,23 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         }
     }
 
-    protected function additionals($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::additionals($user_id, $mutationDataProvider);
         App::doAction('gd_createupdate_profile:additionals', $user_id, $mutationDataProvider);
     }
-    protected function additionalsUpdate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionalsUpdate($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::additionalsUpdate($user_id, $mutationDataProvider);
         App::doAction('gd_createupdate_profile:additionalsUpdate', $user_id, $mutationDataProvider);
     }
-    protected function additionalsCreate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionalsCreate($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::additionalsCreate($user_id, $mutationDataProvider);
 
         App::doAction('gd_createupdate_profile:additionalsCreate', $user_id, $mutationDataProvider);
     }
-    protected function createupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function createupdateuser($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::createupdateuser($user_id, $mutationDataProvider);
 

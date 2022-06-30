@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_GenericForms_NewsletterUtils;
 use PoP_EmailSender_Utils;
@@ -14,7 +15,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         if (empty($mutationDataProvider->getArgumentValue('email'))) {
@@ -78,7 +79,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('pop_unsubscribe_from_newsletter', $mutationDataProvider);
     }
@@ -86,7 +87,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override by Gravity Forms
      */
-    protected function getNewsletterData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getNewsletterData(MutationDataProviderInterface $mutationDataProvider)
     {
         return array();
     }
@@ -122,7 +123,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $newsletter_data = $this->getNewsletterData($mutationDataProvider);
         $result = $this->doExecute($newsletter_data);

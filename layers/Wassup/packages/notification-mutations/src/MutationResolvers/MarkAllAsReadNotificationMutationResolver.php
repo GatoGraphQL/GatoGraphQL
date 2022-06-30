@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Notifications_API;
 use PoP\Root\Exception\AbstractException;
@@ -12,12 +13,12 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
 {
-    protected function additionals(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(MutationDataProviderInterface $mutationDataProvider): void
     {
         App::doAction('GD_NotificationMarkAllAsRead:additionals', $mutationDataProvider);
     }
 
-    protected function markAllAsRead(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function markAllAsRead(MutationDataProviderInterface $mutationDataProvider)
     {
         // return AAL_Main::instance()->api->setStatusMultipleNotifications($mutationDataProvider->getArgumentValue('user_id'), AAL_POP_STATUS_READ);
         return PoP_Notifications_API::setStatusMultipleNotifications($mutationDataProvider->getArgumentValue('user_id'), \AAL_POP_STATUS_READ);
@@ -26,7 +27,7 @@ class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $hist_ids = $this->markAllAsRead($mutationDataProvider);
         $this->additionals($mutationDataProvider);

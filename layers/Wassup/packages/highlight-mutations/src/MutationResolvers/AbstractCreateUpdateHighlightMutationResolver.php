@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMeta\Utils;
@@ -17,7 +18,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         return \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }
 
-    protected function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
@@ -57,7 +58,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         }
     }
 
-    protected function createAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function createAdditionals(string | int $post_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::createAdditionals($post_id, $mutationDataProvider);
 
@@ -67,7 +68,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $mutationDataProvider);
     }
 
-    protected function updateAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider, array $log): void
+    protected function updateAdditionals(string | int $post_id, MutationDataProviderInterface $mutationDataProvider, array $log): void
     {
         parent::updateAdditionals($post_id, $mutationDataProvider, $log);
 

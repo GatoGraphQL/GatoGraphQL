@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
     use CreateUpdateIndividualProfileMutationResolverTrait;
 
-    protected function getUpdateuserData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getUpdateuserData(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = parent::getUpdateuserData($mutationDataProvider);
 
@@ -17,7 +18,7 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
 
         return $user_data;
     }
-    protected function createupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function createupdateuser($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::createupdateuser($user_id, $mutationDataProvider);
 

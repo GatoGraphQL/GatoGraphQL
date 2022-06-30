@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_EmailTemplatesFactory;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\Misc\RequestUtils;
@@ -23,7 +24,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     
-    protected function getEmailContent(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getEmailContent(MutationDataProviderInterface $mutationDataProvider)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         // The user must be always logged in, so we will have the user_id
@@ -78,7 +79,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
+    protected function getEmailSubject(MutationDataProviderInterface $mutationDataProvider)
     {
         // The user must be always logged in, so we will have the user_id
         $user_id = $mutationDataProvider->getArgumentValue('user_id');

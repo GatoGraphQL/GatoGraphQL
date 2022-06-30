@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use UserStance_Module_Processor_CustomSectionBlocksUtils;
 use PoP_UserStance_PostNameUtils;
@@ -18,7 +19,7 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
     // Update Post Validation
-    protected function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         if ($mutationDataProvider->getArgumentValue('stancetarget')) {
             // Check that the referenced post exists
@@ -62,7 +63,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         return $category_error_msgs;
     }
 
-    protected function validateCreateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateCreateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::validateCreateContent($errors, $mutationDataProvider);
 
@@ -130,7 +131,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     //     return $post_data;
     // }
 
-    protected function createAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    protected function createAdditionals(string | int $post_id, MutationDataProviderInterface $mutationDataProvider): void
     {
         parent::createAdditionals($post_id, $mutationDataProvider);
 
@@ -142,7 +143,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $mutationDataProvider);
     }
 
-    protected function updateAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider, array $log): void
+    protected function updateAdditionals(string | int $post_id, MutationDataProviderInterface $mutationDataProvider, array $log): void
     {
         parent::updateAdditionals($post_id, $mutationDataProvider, $log);
 

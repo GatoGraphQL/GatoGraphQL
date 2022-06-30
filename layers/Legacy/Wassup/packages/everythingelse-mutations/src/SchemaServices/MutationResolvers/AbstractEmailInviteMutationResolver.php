@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP_FormUtils;
@@ -19,7 +20,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $emails = $mutationDataProvider->getArgumentValue('emails');
         // Remove the invalid emails
@@ -46,7 +47,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         }
     }
 
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
@@ -82,7 +83,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
     {
         $warnings = [];
 
@@ -102,7 +103,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return $warnings;
     }
 
-    abstract protected function getEmailContent(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider);
+    abstract protected function getEmailContent(MutationDataProviderInterface $mutationDataProvider);
 
-    abstract protected function getEmailSubject(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider);
+    abstract protected function getEmailSubject(MutationDataProviderInterface $mutationDataProvider);
 }
