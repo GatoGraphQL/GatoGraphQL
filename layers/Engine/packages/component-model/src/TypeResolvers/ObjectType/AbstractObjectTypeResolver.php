@@ -194,8 +194,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        if ($executableObjectTypeFieldResolver === null) {
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($objectTypeFieldResolver === null) {
             /**
              * If the error happened from requesting a version that doesn't exist, show an appropriate error message
              */
@@ -229,7 +229,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
-        $executableObjectTypeFieldResolver->collectFieldValidationErrors($this, $field, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolver->collectFieldValidationErrors($this, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function collectFieldValidationWarnings(
