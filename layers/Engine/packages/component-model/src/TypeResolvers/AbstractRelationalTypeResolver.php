@@ -507,9 +507,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $directiveResolverClass = get_class($directiveResolver);
                 // Get the instance from the cache if it exists, or create it if not
-                if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass])) {
-                    $this->directiveResolverInstanceCache[$directiveResolverClass] = new SplObjectStorage();
-                }
+                $this->directiveResolverInstanceCache[$directiveResolverClass] ??= new SplObjectStorage();
                 if (!$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
                     /**
                      * The instance from the container is shared. We need a non-shared instance
