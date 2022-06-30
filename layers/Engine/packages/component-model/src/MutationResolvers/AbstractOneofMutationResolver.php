@@ -196,7 +196,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             [],
             LocationHelper::getNonSpecificLocation(),
         );
-        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName->getName());
+        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName);
         /**
          * @todo Review this commenting works for different oneof mutations
          * eg: http://graphql-by-pop-pro.lndo.site/graphiql/?query=mutation%20LoginUser%20%7B%0A%20%20loginUser(by%3A%20%7Bcredentials%3A%20%7BusernameOrEmail%3A%20%22admin%22%2C%20password%3A%20%22admin%22%7D%7D)%20%7B%0A%20%20%20%20id%0A%20%20%20%20name%0A%20%20%7D%0A%7D&operationName=LoginUser&variables=%7B%0A%20%20%22authorID%22%3A%203%0A%7D
