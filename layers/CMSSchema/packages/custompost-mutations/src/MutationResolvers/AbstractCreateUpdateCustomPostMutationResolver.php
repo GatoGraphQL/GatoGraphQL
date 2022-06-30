@@ -186,7 +186,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         // Validate that the status is valid
-        if ($mutationDataProvider->hasValue(MutationInputProperties::STATUS)) {
+        if ($mutationDataProvider->hasProperty(MutationInputProperties::STATUS)) {
             $status = $mutationDataProvider->getValue(MutationInputProperties::STATUS);
             if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
                 $errors[] = new FeedbackItemResolution(
@@ -228,8 +228,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     {
         // Either the title or the content must be set
         if (
-            !$mutationDataProvider->hasValue(MutationInputProperties::TITLE)
-            && !$mutationDataProvider->hasValue(MutationInputProperties::CONTENT)
+            !$mutationDataProvider->hasProperty(MutationInputProperties::TITLE)
+            && !$mutationDataProvider->hasProperty(MutationInputProperties::CONTENT)
         ) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
@@ -295,13 +295,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     protected function addCreateUpdateCustomPostData(array &$post_data, MutationDataProviderInterface $mutationDataProvider): void
     {
-        if ($mutationDataProvider->hasValue(MutationInputProperties::CONTENT)) {
+        if ($mutationDataProvider->hasProperty(MutationInputProperties::CONTENT)) {
             $post_data['content'] = $mutationDataProvider->getValue(MutationInputProperties::CONTENT);
         }
-        if ($mutationDataProvider->hasValue(MutationInputProperties::TITLE)) {
+        if ($mutationDataProvider->hasProperty(MutationInputProperties::TITLE)) {
             $post_data['title'] = $mutationDataProvider->getValue(MutationInputProperties::TITLE);
         }
-        if ($mutationDataProvider->hasValue(MutationInputProperties::STATUS)) {
+        if ($mutationDataProvider->hasProperty(MutationInputProperties::STATUS)) {
             $post_data['status'] = $mutationDataProvider->getValue(MutationInputProperties::STATUS);
         }
     }

@@ -9,19 +9,19 @@ use stdClass;
 
 abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends AbstractFieldArgumentMutationDataProvider
 {
-    public function hasValue(string $inputName): bool
+    public function hasProperty(string $propertyName): bool
     {
         $inputObjectValue = $this->getInputObjectValue();
-        return property_exists($inputObjectValue, $inputName);
+        return property_exists($inputObjectValue, $propertyName);
     }
 
-    public function getValue(string $inputName): mixed
+    public function getValue(string $propertyName): mixed
     {
-        if (!$this->hasValue($inputName)) {
+        if (!$this->hasProperty($propertyName)) {
             return null;
         }
         $inputObjectValue = $this->getInputObjectValue();
-        return $inputObjectValue->$inputName;
+        return $inputObjectValue->$propertyName;
     }
 
     protected function getInputObjectValue(): stdClass

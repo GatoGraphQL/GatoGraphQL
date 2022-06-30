@@ -6,13 +6,13 @@ namespace PoP\ComponentModel\Mutation;
 
 class FieldArgumentMutationDataProvider extends AbstractFieldArgumentMutationDataProvider
 {
-    public function hasValue(string $inputName): bool
+    public function hasProperty(string $propertyName): bool
     {
-        return $this->field->hasArgument($inputName);
+        return $this->field->hasArgument($propertyName);
     }
 
-    public function getValue(string $inputName): mixed
+    public function getValue(string $propertyName): mixed
     {
-        return $this->field->getArgumentValue($inputName);
+        return $this->field->getArgumentValue($propertyName);
     }
 }
