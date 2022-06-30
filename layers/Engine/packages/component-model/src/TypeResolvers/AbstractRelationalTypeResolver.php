@@ -505,18 +505,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
                     continue;
                 }
-                $directiveResolverClass = get_class($directiveResolver);
-                // Get the instance from the cache if it exists, or create it if not
-                $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
-                if (!$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
-                    $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $this->getUniqueDirectiveResolverForDirective($directiveResolver, $directive);
-                }
-                $maybeDirectiveResolverForField = $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive];
-                if (!$maybeDirectiveResolverForField->resolveCanProcess($this, $directive, $field)) {
+                $uniqueDirectiveResolver = $this->getUniqueDirectiveResolverForDirective($directiveResolver, $directive);
+                if (!$uniqueDirectiveResolver->resolveCanProcess($this, $directive, $field)) {
                     continue;
                 }
                 // This instance can process the directive, end the loop
-                $fieldDirectiveResolvers[$field] = $maybeDirectiveResolverForField;
+                $fieldDirectiveResolvers[$field] = $uniqueDirectiveResolver;
                 break;
             }
         }
@@ -531,9 +525,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         DirectiveResolverInterface $directiveResolver,
         Directive $directive,
     ): DirectiveResolverInterface {
-        $uniqueDirectiveResolver = clone $directiveResolver;
-        $uniqueDirectiveResolver->setDirective($directive);
-        return $uniqueDirectiveResolver;
+        $directiveResolverClass = get_class($directiveResolver);
+        // Get the instance from the cache if it exists, or create it if not
+        if (!isset($this->directiveResolverClassDirectivesCache[$directiveResolverClass]) || !$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
+            $uniqueDirectiveResolver = clone $directiveResolver;
+            $uniqueDirectiveResolver->setDirective($directive);
+            $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
+            $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;
+        }
+        return $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive];
     }
 
     /**
