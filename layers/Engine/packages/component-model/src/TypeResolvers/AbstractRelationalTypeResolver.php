@@ -500,17 +500,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              */
             $fieldName = $field->getName();
             foreach ($directiveResolvers as $directiveResolver) {
+                if (!$directiveResolver->resolveCanProcess($this, $directive)) {
+                    continue;
+                }
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
                 if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
                     continue;
                 }
-                $uniqueDirectiveResolver = $this->getUniqueDirectiveResolverForDirective($directiveResolver, $directive);
-                if (!$uniqueDirectiveResolver->resolveCanProcess($this, $directive, $field)) {
-                    continue;
-                }
+                /**
+                 * Create a non-shared directiveResolver instance to handle
+                 * this specific $directive object instance.
+                 */
+                $fieldDirectiveResolvers[$field] = $this->getUniqueDirectiveResolverForDirective(
+                    $directiveResolver,
+                    $directive,
+                );
                 // This instance can process the directive, end the loop
-                $fieldDirectiveResolvers[$field] = $uniqueDirectiveResolver;
                 break;
             }
         }
@@ -1197,7 +1203,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $attachedDirectiveResolvers
                 );
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedDirectiveResolvers);
-                // Add them to the results. We keep the list of all resolvers, so that if the first one cannot process the directive (eg: through `resolveCanProcess`, the next one can do it)
+                /**
+                 * Add them to the results. We keep the list of all resolvers,
+                 * so that if the first one cannot process the directive
+                 * (eg: through `resolveCanProcess`, the next one can do it)
+                 */
                 foreach ($attachedDirectiveResolvers as $directiveResolver) {
                     if (!$directiveResolver->isDirectiveEnabled()) {
                         // Skip disabled directives

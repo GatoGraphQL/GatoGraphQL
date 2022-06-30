@@ -366,7 +366,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function resolveCanProcess(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
-        FieldInterface $field,
     ): bool {
         /** Check if to validate the version */
         if (

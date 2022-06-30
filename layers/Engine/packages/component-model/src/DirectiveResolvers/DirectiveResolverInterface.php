@@ -119,7 +119,6 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function resolveCanProcess(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
-        FieldInterface $field,
     ): bool;
     /**
      * Indicates if the directive can be added several times to the pipeline, or only once

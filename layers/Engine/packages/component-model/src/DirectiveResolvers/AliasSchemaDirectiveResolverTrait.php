@@ -276,13 +276,11 @@ trait AliasSchemaDirectiveResolverTrait
     public function resolveCanProcess(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
-        FieldInterface $field,
     ): bool {
         $aliasedDirectiveResolver = $this->getAliasedDirectiveResolver();
         return $aliasedDirectiveResolver->resolveCanProcess(
             $relationalTypeResolver,
             $directive,
-            $field,
         );
     }
 
