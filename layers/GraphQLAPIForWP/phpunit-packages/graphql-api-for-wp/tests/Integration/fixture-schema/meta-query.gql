@@ -1,0 +1,55 @@
+query {
+  postsOR: posts(
+    filter: {
+      metaQuery: [
+        {
+          relation: OR
+          key: "_thumbnail_id",
+          compareBy: {
+            key: {
+              operator: EXISTS
+            }
+          }
+        },
+        {
+          key: "key_not_exists_so_all_entries_eval_false",
+          compareBy: {
+            key: {
+              operator: EXISTS
+            }
+          }
+        }
+      ]
+    }
+  ) {
+    id
+    title
+  }
+
+  postsAND: posts(
+    filter: {
+      metaQuery: [
+        {
+          relation: AND
+          key: "_thumbnail_id",
+          compareBy: {
+            key: {
+              operator: EXISTS
+            }
+          }
+        },
+        {
+          key: "key_not_exists_so_all_entries_eval_false",
+          compareBy: {
+            key: {
+              operator: EXISTS
+            }
+          }
+        }
+      ]
+    }
+  ) {
+    id
+    title
+  }
+}
