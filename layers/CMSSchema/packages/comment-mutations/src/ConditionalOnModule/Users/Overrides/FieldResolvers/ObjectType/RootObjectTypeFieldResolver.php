@@ -39,6 +39,6 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void {
-        $this->customizeAddCommentField($field);
+        $this->prepareAddCommentField($field);
     }
 }

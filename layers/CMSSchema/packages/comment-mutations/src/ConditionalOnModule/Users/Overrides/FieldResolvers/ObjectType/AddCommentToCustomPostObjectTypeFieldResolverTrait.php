@@ -21,7 +21,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     /**
      * If not provided, set the properties from the logged-in user
      */
-    protected function customizeAddCommentField(
+    protected function prepareAddCommentField(
         FieldInterface $field,
     ): void {
         /** @var ModuleConfiguration */

@@ -39,6 +39,6 @@ class CustomPostObjectTypeFieldResolver extends UpstreamCustomPostObjectTypeFiel
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void {
-        $this->customizeAddCommentField($field);
+        $this->prepareAddCommentField($field);
     }
 }
