@@ -1147,7 +1147,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $mutationField,
     ): MutationDataProviderInterface {
         if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $mutationField->getName())) {
-            return new InputObjectFieldArgumentMutationDataProvider($mutationField);
+            $fieldInputArgumentName = 'input';
+            return new InputObjectFieldArgumentMutationDataProvider(
+                $mutationField,
+                $fieldInputArgumentName,
+            );
         }
         return new FieldArgumentMutationDataProvider($mutationField);
     }
