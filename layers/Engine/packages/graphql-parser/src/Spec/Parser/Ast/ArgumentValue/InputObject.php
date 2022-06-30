@@ -15,6 +15,8 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
 {
     protected InputList|InputObject|Argument $parent;
 
+    protected ?stdClass $cachedValue = null;
+
     /**
      * @param stdClass $object Elements inside can be WithValueInterface or native types (array, int, string, etc)
      */
@@ -47,7 +49,15 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
      *
      * @return stdClass
      */
-    public function getValue(): mixed
+    final public function getValue(): mixed
+    {
+        if ($this->cachedValue === null) {
+            $this->cachedValue = $this->doGetValue();
+        }
+        return $this->cachedValue;
+    }
+
+    protected function doGetValue(): stdClass
     {
         $object = new stdClass();
         foreach ((array) $this->object as $key => $value) {
@@ -65,6 +75,7 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
      */
     public function setValue(mixed $object): void
     {
+        $this->cachedValue = null;
         $this->object = $object;
     }
 

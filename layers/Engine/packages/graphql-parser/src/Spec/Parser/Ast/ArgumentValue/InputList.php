@@ -14,6 +14,9 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
 {
     protected InputList|InputObject|Argument $parent;
 
+    /** @var mixed[] */
+    protected ?array $cachedValue = null;
+
     /**
      * @param mixed[] $list Elements inside can be WithValueInterface or native types (array, int, string, etc)
      */
@@ -46,7 +49,18 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
      *
      * @return mixed[]
      */
-    public function getValue(): mixed
+    final public function getValue(): mixed
+    {
+        if ($this->cachedValue === null) {
+            $this->cachedValue = $this->doGetValue();
+        }
+        return $this->cachedValue;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function doGetValue(): array
     {
         $list = [];
         foreach ($this->list as $key => $value) {
@@ -64,6 +78,7 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
      */
     public function setValue(mixed $list): void
     {
+        $this->cachedValue = null;
         $this->list = $list;
     }
 
