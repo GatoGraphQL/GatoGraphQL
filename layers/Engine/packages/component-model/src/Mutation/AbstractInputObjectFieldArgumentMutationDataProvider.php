@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Mutation;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use stdClass;
 
-abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends AbstractFieldArgumentMutationDataProvider
+abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends AbstractFieldArgumentMutationDataProvider implements InputObjectFieldArgumentMutationDataProviderInterface
 {
     /**
      * @return string[]
@@ -43,6 +43,4 @@ abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends Abst
         $argument = $this->field->getArgument($this->getArgumentName());
         return $argument->getValueAST();
     }
-
-    abstract public function getArgumentName(): string;
 }
