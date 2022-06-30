@@ -38,7 +38,7 @@ abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends Abst
         return $this->getInputObject()->getValue();
     }
 
-    protected function getInputObject(): InputObject
+    final protected function getInputObject(): InputObject
     {
         $argument = $this->field->getArgument($this->getArgumentName());
         return $argument->getValueAST();
