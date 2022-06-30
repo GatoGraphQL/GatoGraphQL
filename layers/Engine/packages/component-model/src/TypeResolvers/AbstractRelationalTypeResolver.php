@@ -510,7 +510,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             foreach ($directiveResolvers as $directiveResolver) {
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
-                if ($directiveSupportedFieldNames && !in_array($field->getName(), $directiveSupportedFieldNames)) {
+                if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
                     continue;
                 }
                 /**
