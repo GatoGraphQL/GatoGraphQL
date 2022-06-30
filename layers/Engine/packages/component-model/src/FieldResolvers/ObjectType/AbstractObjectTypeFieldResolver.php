@@ -1113,12 +1113,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
-            $mutationField = $this->getConsolidatedMutationFieldForObject(
-                $this->getConsolidatedMutationField($objectTypeResolver, $field),
-                $objectTypeResolver,
-                $object,
-                $field->getName()
-            );
+            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationField);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1244,12 +1239,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationField = $this->getConsolidatedMutationFieldForObject(
-                $this->getConsolidatedMutationField($objectTypeResolver, $field),
-                $objectTypeResolver,
-                $object,
-                $field->getName()
-            );
+            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
             try {
                 return $mutationResolver->executeMutation($mutationField);
             } catch (Exception $e) {
@@ -1316,32 +1306,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $object->$field->getName();
         }
         return null;
-    }
-
-    /**
-     * Consolidation of the schema field arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
-    final protected function getConsolidatedMutationFieldForObject(
-        FieldInterface $mutationField,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-    ): FieldInterface {
-        return App::applyFilters(
-            HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS_FOR_OBJECT,
-            $this->getMutationFieldForObject(
-                $mutationField,
-                $objectTypeResolver,
-                $object,
-                $fieldName,
-            ),
-            $this,
-            $mutationField,
-            $objectTypeResolver,
-            $object,
-            $fieldName,
-        );
     }
 
     protected function getMutationFieldForObject(
