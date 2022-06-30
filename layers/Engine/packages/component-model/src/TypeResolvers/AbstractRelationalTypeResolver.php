@@ -509,13 +509,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 // Get the instance from the cache if it exists, or create it if not
                 $this->directiveResolverInstanceCache[$directiveResolverClass] ??= new SplObjectStorage();
                 if (!$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
-                    /**
-                     * The instance from the container is shared. We need a non-shared instance
-                     * to set the unique $directive. So clone the service.
-                     */
-                    $uniqueDirectiveResolver = clone $directiveResolver;
-                    $uniqueDirectiveResolver->setDirective($directive);
-                    $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;
+                    $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $this->getUniqueDirectiveResolverForDirective($directiveResolver, $directive);
                 }
                 $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
                 // Check if this instance can process the directive
@@ -526,6 +520,19 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
         }
         return $fieldDirectiveResolvers;
+    }
+
+    /**
+     * The instance from the container is shared. We need a non-shared instance
+     * to set the unique $directive. So clone the service.
+     */
+    protected function getUniqueDirectiveResolverForDirective(
+        DirectiveResolverInterface $directiveResolver,
+        Directive $directive,
+    ): DirectiveResolverInterface {
+        $uniqueDirectiveResolver = clone $directiveResolver;
+        $uniqueDirectiveResolver->setDirective($directive);
+        return $uniqueDirectiveResolver;
     }
 
     /**
