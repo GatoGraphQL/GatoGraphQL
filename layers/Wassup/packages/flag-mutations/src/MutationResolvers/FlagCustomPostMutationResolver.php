@@ -29,7 +29,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        if (empty($mutationDataProvider->getArgumentValue('name'))) {
+        if (empty($mutationDataProvider->getValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -38,14 +38,14 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->getArgumentValue('email'))) {
+        if (empty($mutationDataProvider->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($mutationDataProvider->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($mutationDataProvider->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -54,7 +54,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->getArgumentValue('whyflag'))) {
+        if (empty($mutationDataProvider->getValue('whyflag'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -63,7 +63,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Why flag cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->getArgumentValue('target-id'))) {
+        if (empty($mutationDataProvider->getValue('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -72,7 +72,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $target = $this->getCustomPostTypeAPI()->getCustomPost($mutationDataProvider->getArgumentValue('target-id'));
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($mutationDataProvider->getValue('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -109,26 +109,26 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $mutationDataProvider->getArgumentValue('name')
+            $mutationDataProvider->getValue('name')
         ) . sprintf(
             $placeholder,
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $mutationDataProvider->getArgumentValue('email')
+                $mutationDataProvider->getValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Post ID', 'pop-genericforms'),
-            $mutationDataProvider->getArgumentValue('target-id')
+            $mutationDataProvider->getValue('target-id')
         ) . sprintf(
             $placeholder,
             $this->__('Post title', 'pop-genericforms'),
-            $this->getCustomPostTypeAPI()->getTitle($mutationDataProvider->getArgumentValue('target-id'))
+            $this->getCustomPostTypeAPI()->getTitle($mutationDataProvider->getValue('target-id'))
         ) . sprintf(
             $placeholder,
             $this->__('Why flag', 'pop-genericforms'),
-            $mutationDataProvider->getArgumentValue('whyflag')
+            $mutationDataProvider->getValue('whyflag')
         );
 
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);

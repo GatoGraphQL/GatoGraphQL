@@ -17,7 +17,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
         $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $mutationDataProvider->getArgumentValue('target_id');
+            $target_id = $mutationDataProvider->getValue('target_id');
 
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
@@ -47,7 +47,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
 
     // protected function updateValue($value, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider) {
     //     // Remove the user from the list
-    //     $target_id = $mutationDataProvider->getArgumentValue('target_id');
+    //     $target_id = $mutationDataProvider->getValue('target_id');
     //     array_splice($value, array_search($target_id, $value), 1);
     // }
     /**
@@ -56,7 +56,7 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $mutationDataProvider->getArgumentValue('target_id');
+        $target_id = $mutationDataProvider->getValue('target_id');
 
         // Update values
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS, $target_id);

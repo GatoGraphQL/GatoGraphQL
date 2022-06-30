@@ -17,7 +17,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
         $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $mutationDataProvider->getArgumentValue('target_id');
+            $target_id = $mutationDataProvider->getValue('target_id');
 
             if ($user_id == $target_id) {
                 // @todo Migrate from string to FeedbackItemProvider
@@ -56,7 +56,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
 
     // protected function updateValue($value, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider) {
     //     // Add the user to follow to the list
-    //     $target_id = $mutationDataProvider->getArgumentValue('target_id');
+    //     $target_id = $mutationDataProvider->getValue('target_id');
     //     $value[] = $target_id;
     // }
     /**
@@ -65,7 +65,7 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
     protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $mutationDataProvider->getArgumentValue('target_id');
+        $target_id = $mutationDataProvider->getValue('target_id');
 
         // Comment Leo 02/10/2015: added redundant values, so that we can query for both "Who are my followers" and "Who I am following"
         // and make both searchable and with pagination

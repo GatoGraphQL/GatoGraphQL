@@ -31,7 +31,7 @@ abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCrea
         parent::additionals($post_id, $mutationDataProvider);
 
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $mutationDataProvider->getArgumentValue('linkaccess'), true);
+            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $mutationDataProvider->getValue('linkaccess'), true);
         }
     }
 }

@@ -51,14 +51,14 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         // Last Edited: needed for the user thumbprint
         Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelModuleInfo::get('time'));
 
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $mutationDataProvider->getArgumentValue('display_email'), true, true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $mutationDataProvider->getArgumentValue('short_description'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $mutationDataProvider->getValue('display_email'), true, true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $mutationDataProvider->getValue('short_description'), true);
 
         // Comment Leo 05/12/2016: LinkedIn is removed from AgendaUrbana, however we don't check for the condition here, so it will still save null
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $mutationDataProvider->getArgumentValue('facebook'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $mutationDataProvider->getArgumentValue('twitter'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $mutationDataProvider->getArgumentValue('linkedin'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $mutationDataProvider->getArgumentValue('youtube'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $mutationDataProvider->getArgumentValue('instagram'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $mutationDataProvider->getValue('facebook'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $mutationDataProvider->getValue('twitter'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $mutationDataProvider->getValue('linkedin'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $mutationDataProvider->getValue('youtube'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $mutationDataProvider->getValue('instagram'), true);
     }
 }

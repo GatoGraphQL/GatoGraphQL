@@ -24,11 +24,11 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $user_id = $mutationDataProvider->getArgumentValue('user_id');
-        $community = $mutationDataProvider->getArgumentValue('community');
-        $new_community_status = $mutationDataProvider->getArgumentValue('status');
-        $new_community_privileges = $mutationDataProvider->getArgumentValue('privileges');
-        $new_community_tags = $mutationDataProvider->getArgumentValue('tags');
+        $user_id = $mutationDataProvider->getValue('user_id');
+        $community = $mutationDataProvider->getValue('community');
+        $new_community_status = $mutationDataProvider->getValue('status');
+        $new_community_privileges = $mutationDataProvider->getValue('privileges');
+        $new_community_tags = $mutationDataProvider->getValue('tags');
 
         // Get all the current values for that user
         $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
@@ -90,7 +90,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
     public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $user_id = $mutationDataProvider->getArgumentValue('user_id');
+        $user_id = $mutationDataProvider->getValue('user_id');
         if (!$user_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -101,13 +101,13 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             return $errors;
         }
 
-        // $nonce = $mutationDataProvider->getArgumentValue('nonce');
+        // $nonce = $mutationDataProvider->getValue('nonce');
         // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
         //     $errors[] = $this->getTranslationAPI()->__('Incorrect URL', 'ure-pop');
         //     return;
         // }
 
-        $status = $mutationDataProvider->getArgumentValue('status');
+        $status = $mutationDataProvider->getValue('status');
         if (!$status) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(

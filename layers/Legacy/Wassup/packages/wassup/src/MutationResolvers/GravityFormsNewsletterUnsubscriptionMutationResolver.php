@@ -30,7 +30,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
             'field_filters' => array(
                 array(
                     'key' => '1'/*POP_GENERICFORMS_NEWSLETTER_FIELDNAME_EMAIL_ID*/,
-                    'value' => $mutationDataProvider->getArgumentValue('email'),
+                    'value' => $mutationDataProvider->getValue('email'),
                 ),
             ),
         );

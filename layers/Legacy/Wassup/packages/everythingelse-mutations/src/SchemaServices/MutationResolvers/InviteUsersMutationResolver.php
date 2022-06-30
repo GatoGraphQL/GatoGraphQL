@@ -20,9 +20,9 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
 
         // Maybe the user is logged in, maybe not
-        if ($sender_name = $mutationDataProvider->getArgumentValue('sender-name')) {
+        if ($sender_name = $mutationDataProvider->getValue('sender-name')) {
             // There might be a sender URL if the user was logged in, or not
-            if ($sender_url = $mutationDataProvider->getArgumentValue('sender-url')) {
+            if ($sender_url = $mutationDataProvider->getValue('sender-url')) {
                 $sender_html = sprintf('<a href="%s">%s</a>', $sender_url, $sender_name);
             } else {
                 $sender_html = $sender_name;
@@ -48,7 +48,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         );
 
         // Optional: Additional Message
-        if ($additional_msg = $mutationDataProvider->getArgumentValue('additional-msg')) {
+        if ($additional_msg = $mutationDataProvider->getValue('additional-msg')) {
             $content .= sprintf(
                 '<div style="margin-left: 20px;">%s</div>',
                 $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML($additional_msg))
@@ -80,7 +80,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         // Maybe the user is logged in, maybe not
-        if ($sender_name = $mutationDataProvider->getArgumentValue('sender-name')) {
+        if ($sender_name = $mutationDataProvider->getValue('sender-name')) {
             $subject = sprintf(
                 $this->getTranslationAPI()->__('%s is inviting you to join %s!', 'pop-coreprocessors'),
                 $sender_name,

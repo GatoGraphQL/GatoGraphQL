@@ -21,9 +21,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     // Update Post Validation
     protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
-        if ($mutationDataProvider->getArgumentValue('stancetarget')) {
+        if ($mutationDataProvider->getValue('stancetarget')) {
             // Check that the referenced post exists
-            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($mutationDataProvider->getArgumentValue('stancetarget'));
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($mutationDataProvider->getValue('stancetarget'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -74,7 +74,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         // If this validation already fails, the rest does not matter
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
-        $referenced_id = $mutationDataProvider->getArgumentValue('stancetarget');
+        $referenced_id = $mutationDataProvider->getValue('stancetarget');
 
         // Check if there is already an existing stance
         $query = array(
@@ -124,7 +124,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
     //     // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
     //     // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
-    //     if ($mutationDataProvider->getArgumentValue('stancetarget')) {
+    //     if ($mutationDataProvider->getValue('stancetarget')) {
     //         $post_data['menu-order'] = 1;
     //     }
 
@@ -135,7 +135,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     {
         parent::createAdditionals($post_id, $mutationDataProvider);
 
-        if ($target = $mutationDataProvider->getArgumentValue('stancetarget')) {
+        if ($target = $mutationDataProvider->getValue('stancetarget')) {
             Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 

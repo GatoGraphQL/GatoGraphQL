@@ -71,13 +71,13 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             }
         } elseif ($moduleConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
-            if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::AUTHOR_NAME)) {
+            if (!$mutationDataProvider->getValue(MutationInputProperties::AUTHOR_NAME)) {
                 $errors[] = new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
                     MutationErrorFeedbackItemProvider::E2,
                 );
             }
-            if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::AUTHOR_EMAIL)) {
+            if (!$mutationDataProvider->getValue(MutationInputProperties::AUTHOR_EMAIL)) {
                 $errors[] = new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
                     MutationErrorFeedbackItemProvider::E3,
@@ -86,13 +86,13 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
-        if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID) && !$mutationDataProvider->getArgumentValue(MutationInputProperties::PARENT_COMMENT_ID)) {
+        if (!$mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID) && !$mutationDataProvider->getValue(MutationInputProperties::PARENT_COMMENT_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             );
         }
-        if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::COMMENT)) {
+        if (!$mutationDataProvider->getValue(MutationInputProperties::COMMENT)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
@@ -119,9 +119,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $comment_data = [
             'authorIP' => App::server('REMOTE_ADDR'),
             'agent' => App::server('HTTP_USER_AGENT'),
-            'content' => $mutationDataProvider->getArgumentValue(MutationInputProperties::COMMENT),
-            'parent' => $mutationDataProvider->getArgumentValue(MutationInputProperties::PARENT_COMMENT_ID),
-            'customPostID' => $mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID),
+            'content' => $mutationDataProvider->getValue(MutationInputProperties::COMMENT),
+            'parent' => $mutationDataProvider->getValue(MutationInputProperties::PARENT_COMMENT_ID),
+            'customPostID' => $mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID),
         ];
         /**
          * Override with the user's properties
@@ -138,9 +138,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             if ($userID = App::getState('current-user-id')) {
                 $comment_data['userID'] = $userID;
             }
-            $comment_data['author'] = $mutationDataProvider->getArgumentValue(MutationInputProperties::AUTHOR_NAME);
-            $comment_data['authorEmail'] = $mutationDataProvider->getArgumentValue(MutationInputProperties::AUTHOR_EMAIL);
-            $comment_data['authorURL'] = $mutationDataProvider->getArgumentValue(MutationInputProperties::AUTHOR_URL);
+            $comment_data['author'] = $mutationDataProvider->getValue(MutationInputProperties::AUTHOR_NAME);
+            $comment_data['authorEmail'] = $mutationDataProvider->getValue(MutationInputProperties::AUTHOR_EMAIL);
+            $comment_data['authorURL'] = $mutationDataProvider->getValue(MutationInputProperties::AUTHOR_URL);
         }
 
         // If the parent comment is provided and the custom post is not,

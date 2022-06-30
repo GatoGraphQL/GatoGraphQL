@@ -14,7 +14,7 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
     {
         $user_data = parent::getUpdateuserData($mutationDataProvider);
 
-        $user_data['lastName'] = $mutationDataProvider->getArgumentValue('last_name');
+        $user_data['lastName'] = $mutationDataProvider->getValue('last_name');
 
         return $user_data;
     }
@@ -22,6 +22,6 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
     {
         parent::createupdateuser($user_id, $mutationDataProvider);
 
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $mutationDataProvider->getArgumentValue('individualinterests'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $mutationDataProvider->getValue('individualinterests'));
     }
 }

@@ -36,6 +36,6 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
      */
     protected function isUpdate(MutationDataProviderInterface $mutationDataProvider): bool
     {
-        return !empty($mutationDataProvider->getArgumentValue(MutationInputProperties::ID));
+        return !empty($mutationDataProvider->getValue(MutationInputProperties::ID));
     }
 }

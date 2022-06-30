@@ -29,7 +29,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        if (empty($mutationDataProvider->getArgumentValue('name'))) {
+        if (empty($mutationDataProvider->getValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -38,14 +38,14 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->getArgumentValue('email'))) {
+        if (empty($mutationDataProvider->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($mutationDataProvider->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($mutationDataProvider->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -54,7 +54,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->getArgumentValue('message'))) {
+        if (empty($mutationDataProvider->getValue('message'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -63,7 +63,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Message cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->getArgumentValue('target-id'))) {
+        if (empty($mutationDataProvider->getValue('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -71,7 +71,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
-            $target = $this->getUserTypeAPI()->getUserByID($mutationDataProvider->getArgumentValue('target-id'));
+            $target = $this->getUserTypeAPI()->getUserByID($mutationDataProvider->getValue('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -99,9 +99,9 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         $subject = sprintf(
             $this->__('[%s]: %s', 'pop-genericforms'),
             $websitename,
-            $mutationDataProvider->getArgumentValue('subject') ? $mutationDataProvider->getArgumentValue('subject') : sprintf(
+            $mutationDataProvider->getValue('subject') ? $mutationDataProvider->getValue('subject') : sprintf(
                 $this->__('%s sends you a message', 'pop-genericforms'),
-                $mutationDataProvider->getArgumentValue('name')
+                $mutationDataProvider->getValue('name')
             )
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
@@ -114,25 +114,25 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $mutationDataProvider->getArgumentValue('name')
+            $mutationDataProvider->getValue('name')
         ) . sprintf(
             $placeholder,
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $mutationDataProvider->getArgumentValue('email')
+                $mutationDataProvider->getValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Subject', 'pop-genericforms'),
-            $mutationDataProvider->getArgumentValue('subject')
+            $mutationDataProvider->getValue('subject')
         ) . sprintf(
             $placeholder,
             $this->__('Message', 'pop-genericforms'),
-            $mutationDataProvider->getArgumentValue('message')
+            $mutationDataProvider->getValue('message')
         );
 
-        return PoP_EmailSender_Utils::sendemailToUser($mutationDataProvider->getArgumentValue('target-id'), $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUser($mutationDataProvider->getValue('target-id'), $subject, $msg);
     }
 
     /**

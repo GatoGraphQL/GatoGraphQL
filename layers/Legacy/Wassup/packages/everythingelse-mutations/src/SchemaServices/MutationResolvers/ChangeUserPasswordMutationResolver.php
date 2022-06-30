@@ -19,9 +19,9 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         // Validate Password
         // Check current password really belongs to the user
-        $current_password = $mutationDataProvider->getArgumentValue('current_password');
-        $password = $mutationDataProvider->getArgumentValue('password');
-        $repeatpassword =  $mutationDataProvider->getArgumentValue('repeat_password');
+        $current_password = $mutationDataProvider->getValue('current_password');
+        $password = $mutationDataProvider->getValue('password');
+        $repeatpassword =  $mutationDataProvider->getValue('repeat_password');
 
         if (!$current_password) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -30,7 +30,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->getTranslationAPI()->__('Please provide the current password.', 'pop-application');
-        } elseif (!$cmsuseraccountapi->checkPassword($mutationDataProvider->getArgumentValue('user_id'), $current_password)) {
+        } elseif (!$cmsuseraccountapi->checkPassword($mutationDataProvider->getValue('user_id'), $current_password)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -82,8 +82,8 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
     protected function getChangepasswordData(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = array(
-            'id' => $mutationDataProvider->getArgumentValue('user_id'),
-            'password' => $mutationDataProvider->getArgumentValue('password')
+            'id' => $mutationDataProvider->getValue('user_id'),
+            'password' => $mutationDataProvider->getValue('password')
         );
 
         return $user_data;

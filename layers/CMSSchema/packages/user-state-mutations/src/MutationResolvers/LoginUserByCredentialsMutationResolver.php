@@ -42,8 +42,8 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $username_or_email = $mutationDataProvider->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::PASSWORD);
+        $username_or_email = $mutationDataProvider->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $mutationDataProvider->getValue(MutationInputProperties::PASSWORD);
 
         if (!$username_or_email) {
             $errors[] = new FeedbackItemResolution(
@@ -78,8 +78,8 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $mutationDataProvider->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::PASSWORD);
+        $username_or_email = $mutationDataProvider->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $mutationDataProvider->getValue(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');

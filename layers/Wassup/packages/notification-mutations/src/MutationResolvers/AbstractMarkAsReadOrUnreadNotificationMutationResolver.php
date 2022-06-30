@@ -16,7 +16,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $histid = $mutationDataProvider->getArgumentValue('histid');
+        $histid = $mutationDataProvider->getValue('histid');
         if (!$histid) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -48,8 +48,8 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
 
     protected function setStatus(MutationDataProviderInterface $mutationDataProvider)
     {
-        // return AAL_Main::instance()->api->setStatus($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider->getArgumentValue('user_id'), $this->getStatus());
-        return PoP_Notifications_API::setStatus($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider->getArgumentValue('user_id'), $this->getStatus());
+        // return AAL_Main::instance()->api->setStatus($mutationDataProvider->getValue('histid'), $mutationDataProvider->getValue('user_id'), $this->getStatus());
+        return PoP_Notifications_API::setStatus($mutationDataProvider->getValue('histid'), $mutationDataProvider->getValue('user_id'), $this->getStatus());
     }
 
     /**
@@ -58,8 +58,8 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $hist_ids = $this->setStatus($mutationDataProvider);
-        $this->additionals($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider);
+        $this->additionals($mutationDataProvider->getValue('histid'), $mutationDataProvider);
 
-        return $hist_ids; //$mutationDataProvider->getArgumentValue('histid');
+        return $hist_ids; //$mutationDataProvider->getValue('histid');
     }
 }
