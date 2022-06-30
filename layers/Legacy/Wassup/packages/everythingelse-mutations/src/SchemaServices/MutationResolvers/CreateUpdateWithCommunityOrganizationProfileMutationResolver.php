@@ -9,14 +9,14 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends Creat
 {
     use CreateUpdateOrganizationProfileMutationResolverTrait;
 
-    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function createupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::createupdateuser($user_id, $withArgumentsAST);
-        $this->commonuserrolesCreateupdateuser($user_id, $withArgumentsAST);
+        parent::createupdateuser($user_id, $mutationDataProvider);
+        $this->commonuserrolesCreateupdateuser($user_id, $mutationDataProvider);
 
         // Is community?
         $cmsuserrolesapi = FunctionAPIFactory::getInstance();
-        if ($withArgumentsAST->getArgumentValue('is_community')) {
+        if ($mutationDataProvider->getArgumentValue('is_community')) {
             $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_COMMUNITY);
         } else {
             $cmsuserrolesapi->removeRoleFromUser($user_id, GD_URE_ROLE_COMMUNITY);

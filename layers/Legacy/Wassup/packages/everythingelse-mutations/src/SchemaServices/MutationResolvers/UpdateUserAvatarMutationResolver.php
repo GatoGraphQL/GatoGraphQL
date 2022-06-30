@@ -22,17 +22,17 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $user_id = $withArgumentsAST->getArgumentValue('user_id');
+        $user_id = $mutationDataProvider->getArgumentValue('user_id');
         $this->savePicture($user_id);
-        $this->additionals($user_id, $withArgumentsAST);
+        $this->additionals($user_id, $mutationDataProvider);
 
         return $user_id;
     }
 
-    protected function additionals($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_useravatar_update:additionals', $user_id, $withArgumentsAST);
+        App::doAction('gd_useravatar_update:additionals', $user_id, $mutationDataProvider);
     }
 }

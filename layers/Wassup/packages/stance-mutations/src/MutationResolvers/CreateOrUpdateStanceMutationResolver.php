@@ -13,28 +13,28 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        if ($this->isUpdate($withArgumentsAST)) {
-            return $this->update($withArgumentsAST);
+        if ($this->isUpdate($mutationDataProvider)) {
+            return $this->update($mutationDataProvider);
         }
-        return $this->create($withArgumentsAST);
+        return $this->create($mutationDataProvider);
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
-        if ($this->isUpdate($withArgumentsAST)) {
-            return $this->validateUpdateErrors($withArgumentsAST);
+        if ($this->isUpdate($mutationDataProvider)) {
+            return $this->validateUpdateErrors($mutationDataProvider);
         }
-        return $this->validateCreateErrors($withArgumentsAST);
+        return $this->validateCreateErrors($mutationDataProvider);
     }
 
     /**
      * If there's an "id" entry => It's Update
      * Otherwise => It's Create
      */
-    protected function isUpdate(WithArgumentsInterface $withArgumentsAST): bool
+    protected function isUpdate(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): bool
     {
-        return !empty($withArgumentsAST->getArgumentValue(MutationInputProperties::ID));
+        return !empty($mutationDataProvider->getArgumentValue(MutationInputProperties::ID));
     }
 }

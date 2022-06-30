@@ -9,18 +9,18 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
 {
     use CreateUpdateIndividualProfileMutationResolverTrait;
 
-    protected function getUpdateuserData(WithArgumentsInterface $withArgumentsAST)
+    protected function getUpdateuserData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        $user_data = parent::getUpdateuserData($withArgumentsAST);
+        $user_data = parent::getUpdateuserData($mutationDataProvider);
 
-        $user_data['lastName'] = $withArgumentsAST->getArgumentValue('last_name');
+        $user_data['lastName'] = $mutationDataProvider->getArgumentValue('last_name');
 
         return $user_data;
     }
-    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function createupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::createupdateuser($user_id, $withArgumentsAST);
+        parent::createupdateuser($user_id, $mutationDataProvider);
 
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $withArgumentsAST->getArgumentValue('individualinterests'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $mutationDataProvider->getArgumentValue('individualinterests'));
     }
 }

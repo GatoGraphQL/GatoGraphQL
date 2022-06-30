@@ -25,10 +25,10 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        if (empty($withArgumentsAST->getArgumentValue('name'))) {
+        if (empty($mutationDataProvider->getArgumentValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -37,14 +37,14 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($withArgumentsAST->getArgumentValue('email'))) {
+        if (empty($mutationDataProvider->getArgumentValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($withArgumentsAST->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($mutationDataProvider->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -53,7 +53,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($withArgumentsAST->getArgumentValue('message'))) {
+        if (empty($mutationDataProvider->getArgumentValue('message'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -62,7 +62,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Message cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($withArgumentsAST->getArgumentValue('target-id'))) {
+        if (empty($mutationDataProvider->getArgumentValue('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -70,7 +70,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
-            $target = $this->getUserTypeAPI()->getUserByID($withArgumentsAST->getArgumentValue('target-id'));
+            $target = $this->getUserTypeAPI()->getUserByID($mutationDataProvider->getArgumentValue('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -86,21 +86,21 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('pop_contactuser', $withArgumentsAST);
+        App::doAction('pop_contactuser', $mutationDataProvider);
     }
 
-    protected function doExecute(WithArgumentsInterface $withArgumentsAST)
+    protected function doExecute(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $websitename = $cmsapplicationapi->getSiteName();
         $subject = sprintf(
             $this->__('[%s]: %s', 'pop-genericforms'),
             $websitename,
-            $withArgumentsAST->getArgumentValue('subject') ? $withArgumentsAST->getArgumentValue('subject') : sprintf(
+            $mutationDataProvider->getArgumentValue('subject') ? $mutationDataProvider->getArgumentValue('subject') : sprintf(
                 $this->__('%s sends you a message', 'pop-genericforms'),
-                $withArgumentsAST->getArgumentValue('name')
+                $mutationDataProvider->getArgumentValue('name')
             )
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
@@ -113,36 +113,36 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $withArgumentsAST->getArgumentValue('name')
+            $mutationDataProvider->getArgumentValue('name')
         ) . sprintf(
             $placeholder,
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $withArgumentsAST->getArgumentValue('email')
+                $mutationDataProvider->getArgumentValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Subject', 'pop-genericforms'),
-            $withArgumentsAST->getArgumentValue('subject')
+            $mutationDataProvider->getArgumentValue('subject')
         ) . sprintf(
             $placeholder,
             $this->__('Message', 'pop-genericforms'),
-            $withArgumentsAST->getArgumentValue('message')
+            $mutationDataProvider->getArgumentValue('message')
         );
 
-        return PoP_EmailSender_Utils::sendemailToUser($withArgumentsAST->getArgumentValue('target-id'), $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUser($mutationDataProvider->getArgumentValue('target-id'), $subject, $msg);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $result = $this->doExecute($withArgumentsAST);
+        $result = $this->doExecute($mutationDataProvider);
 
         // Allow for additional operations
-        $this->additionals($withArgumentsAST);
+        $this->additionals($mutationDataProvider);
 
         return $result;
     }

@@ -14,9 +14,9 @@ class GravityFormsAddEntryToFormMutationResolver extends AbstractMutationResolve
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
         // $execution_response = do_shortcode('[gravityform id="'.$form_id.'" title="false" description="false" ajax="false"]');
-        return RGForms::get_form($withArgumentsAST->getArgumentValue('form_id'), false, false);
+        return RGForms::get_form($mutationDataProvider->getArgumentValue('form_id'), false, false);
     }
 }

@@ -19,11 +19,11 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $customPostID = $withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
-        $postCategoryIDs = $withArgumentsAST->getArgumentValue(MutationInputProperties::CATEGORY_IDS);
-        $append = $withArgumentsAST->getArgumentValue(MutationInputProperties::APPEND);
+        $customPostID = $mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
+        $postCategoryIDs = $mutationDataProvider->getArgumentValue(MutationInputProperties::CATEGORY_IDS);
+        $append = $mutationDataProvider->getArgumentValue(MutationInputProperties::APPEND);
         $customPostCategoryTypeAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeAPI->setCategories($customPostID, $postCategoryIDs, $append);
         return $customPostID;
@@ -31,7 +31,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
     abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -42,7 +42,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
 
         $errors = [];
-        if (!$withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

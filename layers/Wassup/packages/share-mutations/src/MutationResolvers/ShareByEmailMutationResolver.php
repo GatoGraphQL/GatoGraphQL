@@ -13,10 +13,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ShareByEmailMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        if (empty($withArgumentsAST->getArgumentValue('name'))) {
+        if (empty($mutationDataProvider->getArgumentValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -25,14 +25,14 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($withArgumentsAST->getArgumentValue('email'))) {
+        if (empty($mutationDataProvider->getArgumentValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($withArgumentsAST->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($mutationDataProvider->getArgumentValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -41,7 +41,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($withArgumentsAST->getArgumentValue('target-url'))) {
+        if (empty($mutationDataProvider->getArgumentValue('target-url'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -50,7 +50,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The shared-page URL cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($withArgumentsAST->getArgumentValue('target-title'))) {
+        if (empty($mutationDataProvider->getArgumentValue('target-title'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -64,12 +64,12 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('pop_sharebyemail', $withArgumentsAST);
+        App::doAction('pop_sharebyemail', $mutationDataProvider);
     }
 
-    protected function doExecute(WithArgumentsInterface $withArgumentsAST)
+    protected function doExecute(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $subject = sprintf(
@@ -77,8 +77,8 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $cmsapplicationapi->getSiteName(),
             sprintf(
                 $this->__('%s is sharing with you: %s', 'pop-genericforms'),
-                $withArgumentsAST->getArgumentValue('name'),
-                $withArgumentsAST->getArgumentValue('target-title')
+                $mutationDataProvider->getArgumentValue('name'),
+                $mutationDataProvider->getArgumentValue('target-title')
             )
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
@@ -86,28 +86,28 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             '<p>%s</p>',
             sprintf(
                 $this->__('%s is sharing with you: <a href="%s">%s</a>', 'pop-genericforms'),
-                $withArgumentsAST->getArgumentValue('name'),
-                $withArgumentsAST->getArgumentValue('target-url'),
-                $withArgumentsAST->getArgumentValue('target-title')
+                $mutationDataProvider->getArgumentValue('name'),
+                $mutationDataProvider->getArgumentValue('target-url'),
+                $mutationDataProvider->getArgumentValue('target-title')
             )
-        ) . ($withArgumentsAST->getArgumentValue('message') ? sprintf(
+        ) . ($mutationDataProvider->getArgumentValue('message') ? sprintf(
             $placeholder,
             $this->__('Additional message', 'pop-genericforms'),
-            $withArgumentsAST->getArgumentValue('message')
+            $mutationDataProvider->getArgumentValue('message')
         ) : '');
 
-        return PoP_EmailSender_Utils::sendEmail($withArgumentsAST->getArgumentValue('email'), $subject, $msg);
+        return PoP_EmailSender_Utils::sendEmail($mutationDataProvider->getArgumentValue('email'), $subject, $msg);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $result = $this->doExecute($withArgumentsAST);
+        $result = $this->doExecute($mutationDataProvider);
 
         // Allow for additional operations
-        $this->additionals($withArgumentsAST);
+        $this->additionals($mutationDataProvider);
 
         return $result;
     }

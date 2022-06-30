@@ -19,25 +19,25 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $emails = $withArgumentsAST->getArgumentValue('emails');
+        $emails = $mutationDataProvider->getArgumentValue('emails');
         // Remove the invalid emails
         $emails = array_diff($emails, $this->getInvalidEmails($emails));
         if (!empty($emails)) {
-            $subject = $this->getEmailSubject($withArgumentsAST);
-            $content = $this->getEmailContent($withArgumentsAST);
+            $subject = $this->getEmailSubject($mutationDataProvider);
+            $content = $this->getEmailContent($mutationDataProvider);
             PoP_EmailSender_Utils::sendemailToUsers($emails, array(), $subject, $content, true);
             return true;
         }
         return false;
     }
 
-    protected function validateCaptcha(&$errors, &$withArgumentsAST): void
+    protected function validateCaptcha(&$errors, &$mutationDataProvider): void
     {
         // Validate the captcha
         if (!PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
-            $captcha = $withArgumentsAST->getArgumentValue('captcha');
+            $captcha = $mutationDataProvider->getArgumentValue('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
@@ -46,17 +46,17 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         }
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
-        $this->validateCaptcha($errors, $withArgumentsAST);
+        $this->validateCaptcha($errors, $mutationDataProvider);
 
         if ($errors) {
             return $errors;
         }
 
-        $emails = $withArgumentsAST->getArgumentValue('emails');
+        $emails = $mutationDataProvider->getArgumentValue('emails');
         if (empty($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -82,11 +82,11 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(WithArgumentsInterface $withArgumentsAST): array
+    public function validateWarnings(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $warnings = [];
 
-        $emails = $withArgumentsAST->getArgumentValue('emails');
+        $emails = $mutationDataProvider->getArgumentValue('emails');
         if ($invalid_emails = $this->getInvalidEmails($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $warnings[] = new FeedbackItemResolution(
@@ -102,7 +102,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return $warnings;
     }
 
-    abstract protected function getEmailContent(WithArgumentsInterface $withArgumentsAST);
+    abstract protected function getEmailContent(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider);
 
-    abstract protected function getEmailSubject(WithArgumentsInterface $withArgumentsAST);
+    abstract protected function getEmailSubject(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider);
 }

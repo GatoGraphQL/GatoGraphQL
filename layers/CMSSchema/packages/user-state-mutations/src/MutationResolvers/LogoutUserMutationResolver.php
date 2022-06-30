@@ -26,7 +26,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
@@ -39,7 +39,7 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
         $user_id = App::getState('current-user-id');
 

@@ -30,14 +30,14 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $customPostID = $withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
+        $customPostID = $mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
         $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
         return $customPostID;
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -48,7 +48,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
         }
 
         $errors = [];
-        if (!$withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

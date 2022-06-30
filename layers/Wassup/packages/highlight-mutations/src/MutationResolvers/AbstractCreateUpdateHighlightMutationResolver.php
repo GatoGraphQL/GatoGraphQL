@@ -17,11 +17,11 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         return \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }
 
-    protected function validateContent(array &$errors, WithArgumentsInterface $withArgumentsAST): void
+    protected function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
-        if (!$withArgumentsAST->getArgumentValue('highlightedpost')) {
+        if (!$mutationDataProvider->getArgumentValue('highlightedpost')) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -30,7 +30,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
             $errors[] = $this->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
-            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($withArgumentsAST->getArgumentValue('highlightedpost'));
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($mutationDataProvider->getArgumentValue('highlightedpost'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -53,25 +53,25 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
 
         // If cheating then that's it, no need to validate anymore
         if (!$errors) {
-            parent::validateContent($errors, $withArgumentsAST);
+            parent::validateContent($errors, $mutationDataProvider);
         }
     }
 
-    protected function createAdditionals(string | int $post_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function createAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::createAdditionals($post_id, $withArgumentsAST);
+        parent::createAdditionals($post_id, $mutationDataProvider);
 
-        Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $withArgumentsAST->getArgumentValue('highlightedpost'), true);
+        Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $mutationDataProvider->getArgumentValue('highlightedpost'), true);
 
         // Allow to create a Notification
-        App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $withArgumentsAST);
+        App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $mutationDataProvider);
     }
 
-    protected function updateAdditionals(string | int $post_id, WithArgumentsInterface $withArgumentsAST, array $log): void
+    protected function updateAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider, array $log): void
     {
-        parent::updateAdditionals($post_id, $withArgumentsAST, $log);
+        parent::updateAdditionals($post_id, $mutationDataProvider, $log);
 
         // Allow to create a Notification
-        App::doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $withArgumentsAST, $log);
+        App::doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $mutationDataProvider, $log);
     }
 }

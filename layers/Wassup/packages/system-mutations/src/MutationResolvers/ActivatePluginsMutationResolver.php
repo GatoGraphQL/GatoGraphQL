@@ -59,7 +59,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin

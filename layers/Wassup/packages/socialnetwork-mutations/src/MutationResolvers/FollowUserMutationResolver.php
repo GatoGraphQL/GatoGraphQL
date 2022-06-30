@@ -11,12 +11,12 @@ use PoPCMSSchema\UserMeta\Utils;
 
 class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
-        $errors = parent::validateErrors($withArgumentsAST);
+        $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $withArgumentsAST->getArgumentValue('target_id');
+            $target_id = $mutationDataProvider->getArgumentValue('target_id');
 
             if ($user_id == $target_id) {
                 // @todo Migrate from string to FeedbackItemProvider
@@ -47,24 +47,24 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
     /**
      * Function to override
      */
-    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($target_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::additionals($target_id, $withArgumentsAST);
-        App::doAction('gd_followuser', $target_id, $withArgumentsAST);
+        parent::additionals($target_id, $mutationDataProvider);
+        App::doAction('gd_followuser', $target_id, $mutationDataProvider);
     }
 
-    // protected function updateValue($value, WithArgumentsInterface $withArgumentsAST) {
+    // protected function updateValue($value, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider) {
     //     // Add the user to follow to the list
-    //     $target_id = $withArgumentsAST->getArgumentValue('target_id');
+    //     $target_id = $mutationDataProvider->getArgumentValue('target_id');
     //     $value[] = $target_id;
     // }
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
+    protected function update(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $withArgumentsAST->getArgumentValue('target_id');
+        $target_id = $mutationDataProvider->getArgumentValue('target_id');
 
         // Comment Leo 02/10/2015: added redundant values, so that we can query for both "Who are my followers" and "Who I am following"
         // and make both searchable and with pagination
@@ -77,6 +77,6 @@ class FollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationRes
         $count = $count ? $count : 0;
         Utils::updateUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWERSCOUNT, ($count + 1), true);
 
-        return parent::update($withArgumentsAST);
+        return parent::update($mutationDataProvider);
     }
 }

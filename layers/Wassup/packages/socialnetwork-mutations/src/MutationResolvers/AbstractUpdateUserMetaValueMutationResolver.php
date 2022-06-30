@@ -11,10 +11,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $target_id = $withArgumentsAST->getArgumentValue('target_id');
+        $target_id = $mutationDataProvider->getArgumentValue('target_id');
         if (!$target_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -26,27 +26,27 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $errors;
     }
 
-    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($target_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_updateusermetavalue', $target_id, $withArgumentsAST);
+        App::doAction('gd_updateusermetavalue', $target_id, $mutationDataProvider);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
+    protected function update(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
     {
-        $target_id = $withArgumentsAST->getArgumentValue('target_id');
+        $target_id = $mutationDataProvider->getArgumentValue('target_id');
         return $target_id;
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $target_id = $this->update($withArgumentsAST);
-        $this->additionals($target_id, $withArgumentsAST);
+        $target_id = $this->update($mutationDataProvider);
+        $this->additionals($target_id, $mutationDataProvider);
 
         return $target_id;
     }

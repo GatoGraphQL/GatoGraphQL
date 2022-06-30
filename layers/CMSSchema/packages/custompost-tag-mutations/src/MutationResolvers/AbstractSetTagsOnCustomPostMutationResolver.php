@@ -19,11 +19,11 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $customPostID = $withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
-        $postTags = $withArgumentsAST->getArgumentValue(MutationInputProperties::TAGS);
-        $append = $withArgumentsAST->getArgumentValue(MutationInputProperties::APPEND);
+        $customPostID = $mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
+        $postTags = $mutationDataProvider->getArgumentValue(MutationInputProperties::TAGS);
+        $append = $mutationDataProvider->getArgumentValue(MutationInputProperties::APPEND);
         $customPostTagTypeAPI = $this->getCustomPostTagTypeMutationAPI();
         $customPostTagTypeAPI->setTags($customPostID, $postTags, $append);
         return $customPostID;
@@ -31,7 +31,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
     abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -42,7 +42,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
 
         $errors = [];
-        if (!$withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

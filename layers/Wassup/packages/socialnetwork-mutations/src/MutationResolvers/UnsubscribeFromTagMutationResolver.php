@@ -12,12 +12,12 @@ use PoPCMSSchema\UserMeta\Utils;
 
 class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver
 {
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
-        $errors = parent::validateErrors($withArgumentsAST);
+        $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $withArgumentsAST->getArgumentValue('target_id');
+            $target_id = $mutationDataProvider->getArgumentValue('target_id');
 
             // Check that the logged in user is currently subscribed to that tag
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
@@ -41,19 +41,19 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
     /**
      * Function to override
      */
-    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($target_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::additionals($target_id, $withArgumentsAST);
-        App::doAction('gd_unsubscribefromtag', $target_id, $withArgumentsAST);
+        parent::additionals($target_id, $mutationDataProvider);
+        App::doAction('gd_unsubscribefromtag', $target_id, $mutationDataProvider);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
+    protected function update(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $withArgumentsAST->getArgumentValue('target_id');
+        $target_id = $mutationDataProvider->getArgumentValue('target_id');
 
         // Update value
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
@@ -64,6 +64,6 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
         $count = $count ? $count : 0;
         \PoPCMSSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count - 1), true);
 
-        return parent::update($withArgumentsAST);
+        return parent::update($mutationDataProvider);
     }
 }

@@ -18,9 +18,9 @@ abstract class AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver extends 
     /**
      * Function to override
      */
-    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($target_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::additionals($target_id, $withArgumentsAST);
-        App::doAction('gd_downvoteundodownvote_post', $target_id, $withArgumentsAST);
+        parent::additionals($target_id, $mutationDataProvider);
+        App::doAction('gd_downvoteundodownvote_post', $target_id, $mutationDataProvider);
     }
 }

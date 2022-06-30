@@ -15,7 +15,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         return [];
     }
@@ -23,7 +23,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(WithArgumentsInterface $withArgumentsAST): array
+    public function validateWarnings(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         return [];
     }

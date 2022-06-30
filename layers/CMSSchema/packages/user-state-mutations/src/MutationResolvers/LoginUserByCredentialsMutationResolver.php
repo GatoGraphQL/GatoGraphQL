@@ -38,11 +38,11 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $username_or_email = $withArgumentsAST->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $withArgumentsAST->getArgumentValue(MutationInputProperties::PASSWORD);
+        $username_or_email = $mutationDataProvider->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::PASSWORD);
 
         if (!$username_or_email) {
             $errors[] = new FeedbackItemResolution(
@@ -74,11 +74,11 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $withArgumentsAST->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $withArgumentsAST->getArgumentValue(MutationInputProperties::PASSWORD);
+        $username_or_email = $mutationDataProvider->getArgumentValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');

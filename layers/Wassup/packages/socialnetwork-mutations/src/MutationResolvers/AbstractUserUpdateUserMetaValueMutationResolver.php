@@ -22,11 +22,11 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
-        $errors = parent::validateErrors($withArgumentsAST);
+        $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
-            $target_id = $withArgumentsAST->getArgumentValue('target_id');
+            $target_id = $mutationDataProvider->getArgumentValue('target_id');
 
             // Make sure the user exists
             $target = $this->getUserTypeAPI()->getUserByID($target_id);
@@ -47,9 +47,9 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return InputNames::USER_ID;
     }
 
-    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($target_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_updateusermetavalue:user', $target_id, $withArgumentsAST);
-        parent::additionals($target_id, $withArgumentsAST);
+        App::doAction('gd_updateusermetavalue:user', $target_id, $mutationDataProvider);
+        parent::additionals($target_id, $mutationDataProvider);
     }
 }

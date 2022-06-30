@@ -14,10 +14,10 @@ class UpdateMyPreferencesMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $user_id = $withArgumentsAST->getArgumentValue('user_id');
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $withArgumentsAST->getArgumentValue('userPreferences'));
+        $user_id = $mutationDataProvider->getArgumentValue('user_id');
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $mutationDataProvider->getArgumentValue('userPreferences'));
         return $user_id;
     }
 }

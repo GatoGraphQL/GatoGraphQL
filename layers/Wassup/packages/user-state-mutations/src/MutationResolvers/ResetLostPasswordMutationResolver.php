@@ -32,12 +32,12 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         return ErrorTypes::CODES;
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errorcodes = array();
-        $code = $withArgumentsAST->getArgumentValue(MutationInputProperties::CODE);
-        $pwd = $withArgumentsAST->getArgumentValue(MutationInputProperties::PASSWORD);
-        $repeatpwd = $withArgumentsAST->getArgumentValue(MutationInputProperties::REPEAT_PASSWORD);
+        $code = $mutationDataProvider->getArgumentValue(MutationInputProperties::CODE);
+        $pwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::PASSWORD);
+        $repeatpwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::REPEAT_PASSWORD);
 
         if (!$code) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -83,10 +83,10 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $code = $withArgumentsAST->getArgumentValue(MutationInputProperties::CODE);
-        $pwd = $withArgumentsAST->getArgumentValue(MutationInputProperties::PASSWORD);
+        $code = $mutationDataProvider->getArgumentValue(MutationInputProperties::CODE);
+        $pwd = $mutationDataProvider->getArgumentValue(MutationInputProperties::PASSWORD);
 
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         $decoded = MutationResolverUtils::decodeLostPasswordCode($code);

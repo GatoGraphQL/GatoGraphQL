@@ -18,11 +18,11 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
     // Update Post Validation
-    protected function validateContent(array &$errors, WithArgumentsInterface $withArgumentsAST): void
+    protected function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        if ($withArgumentsAST->getArgumentValue('stancetarget')) {
+        if ($mutationDataProvider->getArgumentValue('stancetarget')) {
             // Check that the referenced post exists
-            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($withArgumentsAST->getArgumentValue('stancetarget'));
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($mutationDataProvider->getArgumentValue('stancetarget'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -45,7 +45,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
         // If cheating then that's it, no need to validate anymore
         if (!$errors) {
-            parent::validateContent($errors, $withArgumentsAST);
+            parent::validateContent($errors, $mutationDataProvider);
         }
     }
 
@@ -62,9 +62,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         return $category_error_msgs;
     }
 
-    protected function validateCreateContent(array &$errors, WithArgumentsInterface $withArgumentsAST): void
+    protected function validateCreateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::validateCreateContent($errors, $withArgumentsAST);
+        parent::validateCreateContent($errors, $mutationDataProvider);
 
         $cmseditpostsapi = FunctionAPIFactory::getInstance();
         // For the Stance, there can be at most 1 post for:
@@ -73,7 +73,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         // If this validation already fails, the rest does not matter
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
-        $referenced_id = $withArgumentsAST->getArgumentValue('stancetarget');
+        $referenced_id = $mutationDataProvider->getArgumentValue('stancetarget');
 
         // Check if there is already an existing stance
         $query = array(
@@ -117,36 +117,36 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     }
 
     // Moved to WordPress-specific code
-    // protected function getCreatepostData(WithArgumentsInterface $withArgumentsAST)
+    // protected function getCreatepostData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     // {
-    //     $post_data = parent::getCreatepostData($withArgumentsAST);
+    //     $post_data = parent::getCreatepostData($mutationDataProvider);
 
     //     // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
     //     // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
-    //     if ($withArgumentsAST->getArgumentValue('stancetarget')) {
+    //     if ($mutationDataProvider->getArgumentValue('stancetarget')) {
     //         $post_data['menu-order'] = 1;
     //     }
 
     //     return $post_data;
     // }
 
-    protected function createAdditionals(string | int $post_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function createAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::createAdditionals($post_id, $withArgumentsAST);
+        parent::createAdditionals($post_id, $mutationDataProvider);
 
-        if ($target = $withArgumentsAST->getArgumentValue('stancetarget')) {
+        if ($target = $mutationDataProvider->getArgumentValue('stancetarget')) {
             Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 
         // Allow for URE to add the AuthorRole meta value
-        App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $withArgumentsAST);
+        App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $mutationDataProvider);
     }
 
-    protected function updateAdditionals(string | int $post_id, WithArgumentsInterface $withArgumentsAST, array $log): void
+    protected function updateAdditionals(string | int $post_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider, array $log): void
     {
-        parent::updateAdditionals($post_id, $withArgumentsAST, $log);
+        parent::updateAdditionals($post_id, $mutationDataProvider, $log);
 
         // Allow for URE to add the AuthorRole meta value
-        App::doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $withArgumentsAST, $log);
+        App::doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $mutationDataProvider, $log);
     }
 }

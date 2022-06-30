@@ -21,9 +21,9 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return 'subscriber';
     }
 
-    protected function validateContent(array &$errors, WithArgumentsInterface $withArgumentsAST): void
+    protected function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        if (empty($withArgumentsAST->getArgumentValue('first_name'))) {
+        if (empty($mutationDataProvider->getArgumentValue('first_name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -33,7 +33,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Validate email
-        $user_email = $withArgumentsAST->getArgumentValue('user_email');
+        $user_email = $mutationDataProvider->getArgumentValue('user_email');
         if ($user_email === '') {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -64,10 +64,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function validateCreateContent(array &$errors, WithArgumentsInterface $withArgumentsAST): void
+    protected function validateCreateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         // Check the username
-        $user_login = $withArgumentsAST->getArgumentValue('username');
+        $user_login = $mutationDataProvider->getArgumentValue('username');
         if ($user_login == '') {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -92,7 +92,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Check the e-mail address
-        $user_email = $withArgumentsAST->getArgumentValue('user_email');
+        $user_email = $mutationDataProvider->getArgumentValue('user_email');
         if (email_exists($user_email)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -103,8 +103,8 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Validate Password
-        $password = $withArgumentsAST->getArgumentValue('password');
-        $repeatpassword =  $withArgumentsAST->getArgumentValue('repeat_password');
+        $password = $mutationDataProvider->getArgumentValue('password');
+        $repeatpassword =  $mutationDataProvider->getArgumentValue('repeat_password');
 
         if (!$password) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -140,7 +140,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         // Validate the captcha
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $captcha = $withArgumentsAST->getArgumentValue('captcha');
+            $captcha = $mutationDataProvider->getArgumentValue('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
@@ -157,10 +157,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, WithArgumentsInterface $withArgumentsAST): void
+    protected function validateUpdateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $user_id = $withArgumentsAST->getArgumentValue('user_id');
-        $user_email = $withArgumentsAST->getArgumentValue('user_email');
+        $user_id = $mutationDataProvider->getArgumentValue('user_id');
+        $user_email = $mutationDataProvider->getArgumentValue('user_email');
 
         $email_user_id = email_exists($user_email);
         if ($email_user_id && $email_user_id !== $user_id) {
@@ -173,22 +173,22 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function getUpdateuserData(WithArgumentsInterface $withArgumentsAST)
+    protected function getUpdateuserData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = array(
-            'id' => $withArgumentsAST->getArgumentValue('user_id'),
-            'firstName' => $withArgumentsAST->getArgumentValue('first_name'),
-            'email' => $withArgumentsAST->getArgumentValue('user_email'),
-            'description' => $withArgumentsAST->getArgumentValue('description'),
-            'url' => $withArgumentsAST->getArgumentValue('user_url')
+            'id' => $mutationDataProvider->getArgumentValue('user_id'),
+            'firstName' => $mutationDataProvider->getArgumentValue('first_name'),
+            'email' => $mutationDataProvider->getArgumentValue('user_email'),
+            'description' => $mutationDataProvider->getArgumentValue('description'),
+            'url' => $mutationDataProvider->getArgumentValue('user_url')
         );
 
         return $user_data;
     }
 
-    protected function getCreateuserData(WithArgumentsInterface $withArgumentsAST)
+    protected function getCreateuserData(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        $user_data = $this->getUpdateuserData($withArgumentsAST);
+        $user_data = $this->getUpdateuserData($mutationDataProvider);
 
         // ID not needed
         unset($user_data['id']);
@@ -197,10 +197,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $user_data['role'] = $this->getRole();
 
         // Add the password
-        $user_data['password'] = $withArgumentsAST->getArgumentValue('password');
+        $user_data['password'] = $mutationDataProvider->getArgumentValue('password');
 
         // Username
-        $user_data['login'] = $withArgumentsAST->getArgumentValue('username');
+        $user_data['login'] = $mutationDataProvider->getArgumentValue('username');
 
         return $user_data;
     }
@@ -211,18 +211,18 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->updateUser($user_data);
     }
 
-    protected function createupdateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function createupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
     }
 
-    protected function updateuser(WithArgumentsInterface $withArgumentsAST)
+    protected function updateuser(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        $user_data = $this->getUpdateuserData($withArgumentsAST);
+        $user_data = $this->getUpdateuserData($mutationDataProvider);
         $user_id = $user_data['id'];
 
         $result = $this->executeUpdateuser($user_data);
 
-        $this->createupdateuser($user_id, $withArgumentsAST);
+        $this->createupdateuser($user_id, $mutationDataProvider);
 
         return $user_id;
     }
@@ -233,14 +233,14 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->insertUser($user_data);
     }
 
-    protected function createuser(WithArgumentsInterface $withArgumentsAST)
+    protected function createuser(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        $user_data = $this->getCreateuserData($withArgumentsAST);
+        $user_data = $this->getCreateuserData($mutationDataProvider);
         $result = $this->executeCreateuser($user_data);
 
         $user_id = $result;
 
-        $this->createupdateuser($user_id, $withArgumentsAST);
+        $this->createupdateuser($user_id, $mutationDataProvider);
 
         return $user_id;
     }
@@ -248,38 +248,38 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
         if (App::getState('is-user-logged-in')) {
-            return $this->update($withArgumentsAST);
+            return $this->update($mutationDataProvider);
         }
 
-        return $this->create($withArgumentsAST);
+        return $this->create($mutationDataProvider);
     }
 
-    protected function additionals($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_createupdate_user:additionals', $user_id, $withArgumentsAST);
+        App::doAction('gd_createupdate_user:additionals', $user_id, $mutationDataProvider);
     }
-    protected function additionalsUpdate($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionalsUpdate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_createupdate_user:additionalsUpdate', $user_id, $withArgumentsAST);
+        App::doAction('gd_createupdate_user:additionalsUpdate', $user_id, $mutationDataProvider);
     }
-    protected function additionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionalsCreate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $withArgumentsAST);
+        App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $mutationDataProvider);
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $this->validateContent($errors, $withArgumentsAST);
+        $this->validateContent($errors, $mutationDataProvider);
         if (App::getState('is-user-logged-in')) {
-            $this->validateUpdateContent($errors, $withArgumentsAST);
+            $this->validateUpdateContent($errors, $mutationDataProvider);
         } else {
-            $this->validateCreateContent($errors, $withArgumentsAST);
+            $this->validateCreateContent($errors, $mutationDataProvider);
         }
         return $errors;
     }
@@ -288,14 +288,14 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the updated entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function update(WithArgumentsInterface $withArgumentsAST): string | int
+    protected function update(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
     {
         // Do the Post update
-        $user_id = $this->updateuser($withArgumentsAST);
+        $user_id = $this->updateuser($mutationDataProvider);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionalsUpdate($user_id, $withArgumentsAST);
-        $this->additionals($user_id, $withArgumentsAST);
+        $this->additionalsUpdate($user_id, $mutationDataProvider);
+        $this->additionals($user_id, $mutationDataProvider);
 
         // Trigger to update the display_name and nickname
         \userNameUpdated($user_id);
@@ -306,17 +306,17 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the created entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function create(WithArgumentsInterface $withArgumentsAST): string | int
+    protected function create(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int
     {
-        $user_id = $this->createuser($withArgumentsAST);
+        $user_id = $this->createuser($mutationDataProvider);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionalsCreate($user_id, $withArgumentsAST);
-        $this->additionals($user_id, $withArgumentsAST);
+        $this->additionalsCreate($user_id, $mutationDataProvider);
+        $this->additionals($user_id, $mutationDataProvider);
 
         return $user_id;
         // Comment Leo 21/09/2015: we don't use this function anymore to send the notifications to the admin/user. Instead, use our own hooks.
         // Send notification of new user
-        // wpNewUserNotification( $user_id, $withArgumentsAST->getArgumentValue('password') );
+        // wpNewUserNotification( $user_id, $mutationDataProvider->getArgumentValue('password') );
     }
 }

@@ -30,15 +30,15 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $customPostID = $withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
-        $mediaItemID = $withArgumentsAST->getArgumentValue(MutationInputProperties::MEDIA_ITEM_ID);
+        $customPostID = $mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID);
+        $mediaItemID = $mutationDataProvider->getArgumentValue(MutationInputProperties::MEDIA_ITEM_ID);
         $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -49,13 +49,13 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         }
 
         $errors = [];
-        if (!$withArgumentsAST->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
             );
         }
-        if (!$withArgumentsAST->getArgumentValue(MutationInputProperties::MEDIA_ITEM_ID)) {
+        if (!$mutationDataProvider->getArgumentValue(MutationInputProperties::MEDIA_ITEM_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,

@@ -27,11 +27,11 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return true;
     }
 
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
-        $errors = parent::validateErrors($withArgumentsAST);
+        $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
-            $target_id = $withArgumentsAST->getArgumentValue('target_id');
+            $target_id = $mutationDataProvider->getArgumentValue('target_id');
 
             // Make sure the post exists
             $target = $this->getCustomPostTypeAPI()->getCustomPost($target_id);
@@ -63,9 +63,9 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return InputNames::POST_ID;
     }
 
-    protected function additionals($target_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($target_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_updateusermetavalue:post', $target_id, $withArgumentsAST);
-        parent::additionals($target_id, $withArgumentsAST);
+        App::doAction('gd_updateusermetavalue:post', $target_id, $mutationDataProvider);
+        parent::additionals($target_id, $mutationDataProvider);
     }
 }

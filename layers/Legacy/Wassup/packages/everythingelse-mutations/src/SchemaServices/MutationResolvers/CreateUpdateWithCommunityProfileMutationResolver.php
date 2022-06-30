@@ -8,25 +8,25 @@ use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
-    protected function additionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionalsCreate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::additionalsCreate($user_id, $withArgumentsAST);
-        $this->usercommunitiesAdditionalsCreate($user_id, $withArgumentsAST);
+        parent::additionalsCreate($user_id, $mutationDataProvider);
+        $this->usercommunitiesAdditionalsCreate($user_id, $mutationDataProvider);
     }
-    protected function usercommunitiesAdditionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function usercommunitiesAdditionalsCreate($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $withArgumentsAST);
+        App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $mutationDataProvider);
     }
 
-    protected function createuser(WithArgumentsInterface $withArgumentsAST)
+    protected function createuser(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        $user_id = parent::createuser($withArgumentsAST);
-        $this->usercommunitiesCreateuser($user_id, $withArgumentsAST);
+        $user_id = parent::createuser($mutationDataProvider);
+        $this->usercommunitiesCreateuser($user_id, $mutationDataProvider);
         return $user_id;
     }
-    protected function usercommunitiesCreateuser($user_id, WithArgumentsInterface $withArgumentsAST): void
+    protected function usercommunitiesCreateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $communities = $withArgumentsAST->getArgumentValue('communities');
+        $communities = $mutationDataProvider->getArgumentValue('communities');
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
 
         // Set the privileges/tags for the new communities

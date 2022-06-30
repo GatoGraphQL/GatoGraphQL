@@ -12,10 +12,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(WithArgumentsInterface $withArgumentsAST): array
+    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $histid = $withArgumentsAST->getArgumentValue('histid');
+        $histid = $mutationDataProvider->getArgumentValue('histid');
         if (!$histid) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -38,27 +38,27 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return $errors;
     }
 
-    protected function additionals($histid, WithArgumentsInterface $withArgumentsAST): void
+    protected function additionals($histid, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $withArgumentsAST);
+        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $mutationDataProvider);
     }
 
     abstract protected function getStatus();
 
-    protected function setStatus(WithArgumentsInterface $withArgumentsAST)
+    protected function setStatus(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        // return AAL_Main::instance()->api->setStatus($withArgumentsAST->getArgumentValue('histid'), $withArgumentsAST->getArgumentValue('user_id'), $this->getStatus());
-        return PoP_Notifications_API::setStatus($withArgumentsAST->getArgumentValue('histid'), $withArgumentsAST->getArgumentValue('user_id'), $this->getStatus());
+        // return AAL_Main::instance()->api->setStatus($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider->getArgumentValue('user_id'), $this->getStatus());
+        return PoP_Notifications_API::setStatus($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider->getArgumentValue('user_id'), $this->getStatus());
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(WithArgumentsInterface $withArgumentsAST): mixed
+    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $hist_ids = $this->setStatus($withArgumentsAST);
-        $this->additionals($withArgumentsAST->getArgumentValue('histid'), $withArgumentsAST);
+        $hist_ids = $this->setStatus($mutationDataProvider);
+        $this->additionals($mutationDataProvider->getArgumentValue('histid'), $mutationDataProvider);
 
-        return $hist_ids; //$withArgumentsAST->getArgumentValue('histid');
+        return $hist_ids; //$mutationDataProvider->getArgumentValue('histid');
     }
 }
