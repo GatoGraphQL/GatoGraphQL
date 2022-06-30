@@ -490,6 +490,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             return null;
         }
 
+        // Only consider the directiveResolvers that can satisfy this directive
+        $directiveResolvers = array_filter(
+            $directiveResolvers,
+            fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcess($this, $directive)
+        );
+        if ($directiveResolvers === []) {
+            return null;
+        }
+
         // Calculate directiveResolvers per field
         /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
         $fieldDirectiveResolvers = new SplObjectStorage();
@@ -500,9 +509,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              */
             $fieldName = $field->getName();
             foreach ($directiveResolvers as $directiveResolver) {
-                if (!$directiveResolver->resolveCanProcess($this, $directive)) {
-                    continue;
-                }
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
                 if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
