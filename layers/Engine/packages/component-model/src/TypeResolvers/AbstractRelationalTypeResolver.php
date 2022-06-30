@@ -513,9 +513,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                      * The instance from the container is shared. We need a non-shared instance
                      * to set the unique $directive. So clone the service.
                      */
-                    $fieldDirectiveResolver = clone $directiveResolver;
-                    $fieldDirectiveResolver->setDirective($directive);
-                    $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $fieldDirectiveResolver;
+                    $uniqueDirectiveResolver = clone $directiveResolver;
+                    $uniqueDirectiveResolver->setDirective($directive);
+                    $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;
                 }
                 $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
                 // Check if this instance can process the directive
