@@ -23,7 +23,7 @@ use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Mutation\FieldArgumentMutationDataProvider;
-use PoP\ComponentModel\Mutation\InputFieldArgumentMutationDataProvider;
+use PoP\ComponentModel\Mutation\InputObjectFieldArgumentMutationDataProvider;
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
@@ -1147,7 +1147,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $mutationField,
     ): MutationDataProviderInterface {
         if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $mutationField->getName())) {
-            return new InputFieldArgumentMutationDataProvider($mutationField);
+            return new InputObjectFieldArgumentMutationDataProvider($mutationField);
         }
         return new FieldArgumentMutationDataProvider($mutationField);
     }

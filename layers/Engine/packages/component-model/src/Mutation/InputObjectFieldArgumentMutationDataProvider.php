@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Mutation;
 
-class InputFieldArgumentMutationDataProvider extends AbstractInputObjectFieldArgumentMutationDataProvider
+class InputObjectFieldArgumentMutationDataProvider extends AbstractInputObjectFieldArgumentMutationDataProvider
 {
     protected function getArgumentName(): string
     {
