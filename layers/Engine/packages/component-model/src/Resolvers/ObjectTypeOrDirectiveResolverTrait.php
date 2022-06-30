@@ -10,6 +10,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -50,16 +52,16 @@ trait ObjectTypeOrDirectiveResolverTrait
      * @param array<string,mixed> $argumentNameDefaultValues
      */
     final protected function integrateDefaultFieldOrDirectiveArguments(
-        WithArgumentsInterface $withArgumentsAST,
+        FieldInterface|Directive $fieldOrDirective,
         array $argumentNameDefaultValues,
     ): void {
         foreach ($argumentNameDefaultValues as $argName => $argValue) {
             // If the argument does not exist, add a new one
-            if ($withArgumentsAST->hasArgument($argName)) {
+            if ($fieldOrDirective->hasArgument($argName)) {
                 continue;
             }
             $directiveArgValueAST = $this->getArgumentValueAsAST($argValue);
-            $withArgumentsAST->addArgument(
+            $fieldOrDirective->addArgument(
                 new Argument(
                     $argName,
                     $directiveArgValueAST,
