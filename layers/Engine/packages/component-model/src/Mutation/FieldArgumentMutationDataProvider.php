@@ -11,7 +11,7 @@ class FieldArgumentMutationDataProvider extends AbstractFieldArgumentMutationDat
         return $this->field->hasArgument($inputName);
     }
 
-    public function getValue(string $inputName): string
+    public function getValue(string $inputName): mixed
     {
         return $this->field->getArgumentValue($inputName);
     }

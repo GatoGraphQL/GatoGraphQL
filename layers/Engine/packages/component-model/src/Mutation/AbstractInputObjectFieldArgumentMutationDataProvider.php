@@ -15,7 +15,7 @@ abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends Abst
         return property_exists($inputObjectValue, $inputName);
     }
 
-    public function getValue(string $inputName): string
+    public function getValue(string $inputName): mixed
     {
         $inputObjectValue = $this->getInputObjectValue();
         return $inputObjectValue->$inputName;
