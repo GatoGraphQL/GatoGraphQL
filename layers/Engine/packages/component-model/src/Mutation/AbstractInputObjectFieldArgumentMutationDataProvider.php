@@ -44,5 +44,5 @@ abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends Abst
         return $argument->getValueAST();
     }
 
-    abstract protected function getArgumentName(): string;
+    abstract public function getArgumentName(): string;
 }
