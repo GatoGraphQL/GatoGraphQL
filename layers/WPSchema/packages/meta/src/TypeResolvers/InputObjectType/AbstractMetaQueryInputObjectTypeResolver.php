@@ -180,13 +180,20 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     {
         /** @var array $inputValue */
         $metaQuery = [];
+
+        /**
+         * Get the "relation" from the first element only
+         */
+        $firstInputValueElem = $inputValue[0];
+        if (property_exists($firstInputValueElem, 'relation')) {
+            $metaQuery['relation'] = $firstInputValueElem->relation;
+        }
+
         foreach ($inputValue as $inputValueElem) {
-            $metaQueryElem = [];
-            if (isset($inputValueElem->relation)) {
-                $metaQueryElem['relation'] = $inputValueElem->relation;
-            }
-            $metaQueryElem['key'] = $inputValueElem->key;
-            $metaQueryElem['type'] = $inputValueElem->type;
+            $metaQueryElem = [
+                'key' => $inputValueElem->key,
+                'type' => $inputValueElem->type,
+            ];
             $value = $operator = null;
             if (isset($inputValueElem->compareBy->key)) {
                 $operator = $inputValueElem->compareBy->key->operator;
