@@ -29,6 +29,7 @@ class UserLoginWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPF
                 \PoPWPSchema\Posts\Module::class,
                 \PoPCMSSchema\CustomPostMutationsWP\Module::class,
                 \PoPCMSSchema\PostMutations\Module::class,
+                \PoPCMSSchema\CommentMutationsWP\Module::class,
             ]
         ];
     }
