@@ -347,10 +347,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Validate all the directiveResolvers in the field
+        /** @var DirectiveResolverInterface $directiveResolverInstance */
         foreach ($directiveResolverInstanceFields as $directiveResolverInstance) {
-            /** @var DirectiveResolverInterface $directiveResolverInstance */
+            /** @var FieldInterface[] */
             $directiveResolverFields = $directiveResolverInstanceFields[$directiveResolverInstance];
-            /** @var FieldInterface[] $directiveResolverFields */
             $directive = $directiveResolverInstance->getDirective();
             $directiveName = $directive->getName();
 
