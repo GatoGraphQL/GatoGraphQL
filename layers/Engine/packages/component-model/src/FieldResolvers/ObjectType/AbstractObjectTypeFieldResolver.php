@@ -756,7 +756,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationField);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1061,7 +1061,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
                 $mutationResolver->validateWarnings($mutationField)
@@ -1113,7 +1113,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
-            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationField);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1143,24 +1143,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             );
         }
         return $field;
-    }
-
-    /**
-     * Consolidation of the schema field arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
-    final protected function getConsolidatedMutationField(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): FieldInterface {
-        return App::applyFilters(
-            HookNames::OBJECT_TYPE_MUTATION_FIELD,
-            $this->getMutationField($objectTypeResolver, $field),
-            $this,
-            $objectTypeResolver,
-            $field->getName(),
-            $field->getArguments(),
-        );
     }
 
     /**
@@ -1239,7 +1221,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationField = $this->getConsolidatedMutationField($objectTypeResolver, $field);
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
             try {
                 return $mutationResolver->executeMutation($mutationField);
             } catch (Exception $e) {
