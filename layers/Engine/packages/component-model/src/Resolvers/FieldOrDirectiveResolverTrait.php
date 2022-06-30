@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Translation\TranslationAPIInterface;
 
 trait FieldOrDirectiveResolverTrait

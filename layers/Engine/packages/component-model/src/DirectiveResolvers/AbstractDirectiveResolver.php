@@ -22,6 +22,7 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
@@ -53,6 +54,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use BasicServiceTrait;
     use CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
+    use ObjectTypeOrDirectiveResolverTrait;
 
     private const MESSAGE_EXPRESSIONS_FOR_OBJECT = 'expressionsForObject';
     private const MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD = 'expressionsForObjectAndField';
@@ -195,6 +197,47 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
         return false;
+    }
+
+    final protected function integrateDefaultDirectiveArguments(RelationalTypeResolverInterface $relationalTypeResolver): void
+    {
+        $directiveArgumentNameDefaultValues = $this->getDirectiveArgumentNameDefaultValues($relationalTypeResolver);
+        if ($directiveArgumentNameDefaultValues === null) {
+            return;
+        }
+        $this->integrateDefaultArguments(
+            $this->directive,
+            $directiveArgumentNameDefaultValues,
+        );
+    }
+
+    /**
+     * Get the directive arguments which have a default value.
+     *
+     * @return array<string,mixed>|null
+     */
+    final protected function getDirectiveArgumentNameDefaultValues(RelationalTypeResolverInterface $relationalTypeResolver): ?array
+    {
+        $directiveArgsSchemaDefinition = $this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver);
+        if ($directiveArgsSchemaDefinition === null) {
+            return null;
+        }
+
+        return $this->getFieldOrDirectiveArgumentNameDefaultValues($directiveArgsSchemaDefinition);
+    }
+
+    final protected function getDirectiveArgumentsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): ?array
+    {
+        $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
+        if ($directiveSchemaDefinition === null) {
+            return null;
+        }
+        $directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
+        if ($directiveArgsSchemaDefinition === null) {
+            return null;
+        }
+
+        return $directiveArgsSchemaDefinition;
     }
 
     /**

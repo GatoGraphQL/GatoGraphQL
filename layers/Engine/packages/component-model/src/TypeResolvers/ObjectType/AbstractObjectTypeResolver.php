@@ -20,23 +20,18 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
+use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -44,6 +39,8 @@ use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
+    use ObjectTypeOrDirectiveResolverTrait;
+    
     /**
      * Cache of which objectTypeFieldResolvers will process the given field
      *
@@ -848,37 +845,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($fieldArgumentNameDefaultValues === null) {
             return;
         }
-        foreach ($fieldArgumentNameDefaultValues as $fieldArgName => $fieldArgValue) {
-            // If the argument does not exist, add a new one
-            if ($field->hasArgument($fieldArgName)) {
-                continue;
-            }
-            $fieldArgValueAST = $this->getArgumentValueAsAST($fieldArgValue);
-            $field->addArgument(
-                new Argument(
-                    $fieldArgName,
-                    $fieldArgValueAST,
-                    LocationHelper::getNonSpecificLocation()
-                )
-            );
-        }
-    }
-
-    final protected function getArgumentValueAsAST(mixed $argumentValue): WithValueInterface
-    {
-        if (is_array($argumentValue)) {
-            return new InputList(
-                $argumentValue,
-                LocationHelper::getNonSpecificLocation()
-            );
-        }
-        if ($argumentValue instanceof stdClass) {
-            return new InputObject(
-                $argumentValue,
-                LocationHelper::getNonSpecificLocation()
-            );
-        }
-        return new Literal($argumentValue, LocationHelper::getNonSpecificLocation());
+        $this->integrateDefaultArguments(
+            $field,
+            $fieldArgumentNameDefaultValues,
+        );
     }
 
     /**
@@ -895,23 +865,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        $fieldArgNameDefaultValues = [];
-        foreach ($fieldArgsSchemaDefinition as $fieldSchemaDefinitionArg) {
-            if (\array_key_exists(SchemaDefinition::DEFAULT_VALUE, $fieldSchemaDefinitionArg)) {
-                // If it has a default value, set it
-                $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = $fieldSchemaDefinitionArg[SchemaDefinition::DEFAULT_VALUE];
-                continue;
-            }
-            if (
-                // If it is a non-mandatory InputObject, set {}
-                // (If it is mandatory, don't set a value as to let the validation fail)
-                $fieldSchemaDefinitionArg[SchemaDefinition::TYPE_RESOLVER] instanceof InputObjectTypeResolverInterface
-                && !($fieldSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false)
-            ) {
-                $fieldArgNameDefaultValues[$fieldSchemaDefinitionArg[SchemaDefinition::NAME]] = new stdClass();
-            }
-        }
-        return $fieldArgNameDefaultValues;
+        return $this->getFieldOrDirectiveArgumentNameDefaultValues($fieldArgsSchemaDefinition);
     }
 
     final protected function getFieldArgumentsSchemaDefinition(FieldInterface $field): ?array
