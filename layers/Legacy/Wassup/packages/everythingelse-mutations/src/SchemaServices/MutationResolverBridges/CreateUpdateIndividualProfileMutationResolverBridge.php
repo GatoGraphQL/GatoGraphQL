@@ -9,7 +9,6 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Exception\GenericSystemException;
@@ -59,17 +58,17 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         return $inputs;
     }
 
-    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
+    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
     {
-        $this->getCommonuserrolesFormData($withArgumentsAST);
-        $this->getUsercommunitiesFormData($withArgumentsAST);
+        $this->getCommonuserrolesFormData($mutationField);
+        $this->getUsercommunitiesFormData($mutationField);
     }
-    protected function getCommonuserrolesFormData(WithArgumentsInterface $withArgumentsAST)
+    protected function getCommonuserrolesFormData(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $individualinterests = $this->getComponentProcessorManager()->getComponentProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
-        $withArgumentsAST->addArgument(new Argument('last_name', new Literal(trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $withArgumentsAST->addArgument(new Argument('individualinterests', new InputList($individualinterests ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('last_name', new Literal(trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('individualinterests', new InputList($individualinterests ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 }

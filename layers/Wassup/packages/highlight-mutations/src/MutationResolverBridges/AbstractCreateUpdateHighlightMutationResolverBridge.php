@@ -7,7 +7,6 @@ namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
 use PoP_Module_Processor_TextareaFormInputs;
@@ -67,15 +66,15 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
+    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
     {
-        parent::addArgumentsForMutation($withArgumentsAST);
+        parent::addArgumentsForMutation($mutationField);
 
         $highlightedPost = $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
-        $withArgumentsAST->addArgument(new Argument('highlightedpost', new Literal($highlightedPost, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('highlightedpost', new Literal($highlightedPost, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
         $referenced = $this->getCustomPostTypeAPI()->getCustomPost($highlightedPost);
-        $withArgumentsAST->addArgument(new Argument('title', new Literal($this->getCustomPostTypeAPI()->getTitle($referenced), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('title', new Literal($this->getCustomPostTypeAPI()->getTitle($referenced), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 }

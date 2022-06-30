@@ -9,7 +9,6 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP_Forms_ConfigurationUtils;
 use PoP_FormUtils;
@@ -29,7 +28,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         );
     }
 
-    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
+    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
     {
         // Get the list of all emails
         $emails = array();
@@ -60,14 +59,14 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         }
         $additional_msg = trim($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE])->getValue([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE]));
         
-        $withArgumentsAST->addArgument(new Argument('emails', new InputList($emails, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $withArgumentsAST->addArgument(new Argument('user_id', new Literal($user_id, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $withArgumentsAST->addArgument(new Argument('sender-name', new Literal($sender_name, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $withArgumentsAST->addArgument(new Argument('sender-url', new Literal($sender_url, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $withArgumentsAST->addArgument(new Argument('additional-msg', new Literal($additional_msg, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('emails', new InputList($emails, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('user_id', new Literal($user_id, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('sender-name', new Literal($sender_name, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('sender-url', new Literal($sender_url, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('additional-msg', new Literal($additional_msg, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
         
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $withArgumentsAST->addArgument(new Argument('captcha', $captcha, LocationHelper::getNonSpecificLocation()));
+            $mutationField->addArgument(new Argument('captcha', $captcha, LocationHelper::getNonSpecificLocation()));
         }
     }
 }

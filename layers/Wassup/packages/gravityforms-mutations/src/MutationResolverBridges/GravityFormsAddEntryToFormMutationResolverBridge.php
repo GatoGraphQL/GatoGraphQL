@@ -13,7 +13,6 @@ use PoP\ComponentModel\ComponentProcessors\FormInputComponentProcessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Exception\GenericClientException;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
@@ -137,11 +136,11 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         return $executed;
     }
 
-    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
+    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
     {
         /** @var FormInputComponentProcessorInterface */
         $formid_processor = $this->getComponentProcessorManager()->getComponentProcessor([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]);
-        $withArgumentsAST->addArgument(new Argument('form_id', new Literal($formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationField->addArgument(new Argument('form_id', new Literal($formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 
     public function setup(): void
