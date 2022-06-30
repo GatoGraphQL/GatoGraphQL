@@ -96,14 +96,15 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * All other directives must indicate where to position themselves,
      * using these 3 directives as anchors.
      *
-     * There are 6 positions:
+     * There are 7 positions:
      *
      *   1. At the very beginning
-     *   2. Before Validate directive
-     *   3. Between the Validate and Resolve directives
-     *   4. Between the Resolve and Serialize directives
-     *   5. After the Serialize directive
-     *   6. At the very end
+     *   2. Before the PrepareField directive
+     *   3. Between the PrepareField and Validate directives
+     *   4. Between the Validate and Resolve directives
+     *   5. Between the Resolve and Serialize directives
+     *   6. After the Serialize directive
+     *   7. At the very end
      *
      * In the "serialize" step, the directive takes the objects
      * stored in $resolvedIDFieldValues, such as a DateTime object,

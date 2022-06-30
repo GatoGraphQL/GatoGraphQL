@@ -432,11 +432,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
             return null;
         }
-
-        /**
-         * Add the default Arguments to the Field
-         */
-        $this->integrateDefaultFieldArguments($field);
         
         /**
          * Cast the Arguments, return if any of them produced an error
@@ -448,11 +443,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }
-
-        /**
-         * Allow to inject additional Arguments
-         */
-        $this->prepareField($field);
 
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
@@ -855,10 +845,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Allow to add additional Arguments
+     * Add the default Arguments to the field, and needed customizations
      */
-    protected function prepareField(FieldInterface $field): void
+    public function prepareField(FieldInterface $field): void
     {
+        /**
+         * Add the default Arguments to the Field
+         */
+        $this->integrateDefaultFieldArguments($field);
+
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($objectTypeFieldResolver === null) {
             return;
