@@ -507,11 +507,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * Check that at least one class which deals with this directiveName can satisfy
              * the directive (for instance, validating that a required directiveArg is present)
              */
-            $fieldName = $field->getName();
             foreach ($directiveResolvers as $directiveResolver) {
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
-                if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
+                if ($directiveSupportedFieldNames && !in_array($field->getName(), $directiveSupportedFieldNames)) {
                     continue;
                 }
                 /**
