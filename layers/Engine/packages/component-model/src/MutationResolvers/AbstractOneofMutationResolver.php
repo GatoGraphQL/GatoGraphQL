@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\MutationResolvers;
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -111,10 +110,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * If that's not the case, this function must be overriden,
      * to avoid throwing an Exception
      *
-     * @return Argument The current input field
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getOneofInputObjectArgument(MutationDataProviderInterface $mutationDataProvider): Argument
+    protected function getOneofInputObjectPropertyName(MutationDataProviderInterface $mutationDataProvider): string
     {
         $propertyNames = $mutationDataProvider->getPropertyNames();
         $formDataSize = count($propertyNames);
@@ -187,18 +185,18 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     final protected function getInputFieldMutationResolverAndOneOfAST(MutationDataProviderInterface $mutationDataProvider): array
     {
         // Create a new Field, passing the corresponding Argument only
-        $oneOfArgument = $this->getOneofInputObjectArgument($mutationDataProvider);
+        $oneOfPropertyName = $this->getOneofInputObjectPropertyName($mutationDataProvider);
         // The name of the mutation does not matter, so provide a random one
         $field = new LeafField(
             'someOneOfMutation',
             null,
             [
-                $oneOfArgument,
+                $oneOfPropertyName,
             ],
             [],
             LocationHelper::getNonSpecificLocation(),
         );
-        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfArgument->getName());
+        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName->getName());
         /**
          * @todo Review this commenting works for different oneof mutations
          * eg: http://graphql-by-pop-pro.lndo.site/graphiql/?query=mutation%20LoginUser%20%7B%0A%20%20loginUser(by%3A%20%7Bcredentials%3A%20%7BusernameOrEmail%3A%20%22admin%22%2C%20password%3A%20%22admin%22%7D%7D)%20%7B%0A%20%20%20%20id%0A%20%20%20%20name%0A%20%20%7D%0A%7D&operationName=LoginUser&variables=%7B%0A%20%20%22authorID%22%3A%203%0A%7D
