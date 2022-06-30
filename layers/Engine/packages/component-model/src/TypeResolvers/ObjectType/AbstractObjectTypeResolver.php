@@ -844,11 +844,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     final protected function integrateDefaultFieldArguments(FieldInterface $field): void
     {
-        $fieldOrDirectiveArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($field);
-        if ($fieldOrDirectiveArgumentNameDefaultValues === null) {
+        $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($field);
+        if ($fieldArgumentNameDefaultValues === null) {
             return;
         }
-        foreach ($fieldOrDirectiveArgumentNameDefaultValues as $fieldArgName => $fieldArgValue) {
+        foreach ($fieldArgumentNameDefaultValues as $fieldArgName => $fieldArgValue) {
             // If the argument does not exist, add a new one
             if ($field->hasArgument($fieldArgName)) {
                 continue;
