@@ -43,10 +43,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
@@ -67,33 +64,33 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $schemaDefinitionForFieldCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldExtensionsCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
-    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
-    /** @var array<string, string[]> */
+    /** @var array<string,string[]> */
     protected array $consolidatedAdminFieldArgNamesCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDeprecationMessageCache = [];
-    /** @var array<string, mixed> */
+    /** @var array<string,mixed> */
     protected array $consolidatedFieldArgDefaultValueCache = [];
-    /** @var array<string, int> */
+    /** @var array<string,int> */
     protected array $consolidatedFieldArgTypeModifiersCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaFieldArgsCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaFieldArgExtensionsCache = [];
     /**
-     * @var array<string, ObjectTypeFieldSchemaDefinitionResolverInterface>
+     * @var array<string,ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
 
@@ -345,7 +342,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -969,7 +966,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Watch out: The same extensions must be present for both
      * the ObjectType and the InterfaceType!
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getFieldExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -1074,7 +1071,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
+     * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     protected function getValidationCheckpoints(
