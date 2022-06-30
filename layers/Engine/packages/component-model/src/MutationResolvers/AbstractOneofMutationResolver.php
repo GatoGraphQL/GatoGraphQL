@@ -180,6 +180,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             return [];
         }
     }
+    
     /**
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
@@ -201,6 +202,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         // return [$inputFieldMutationResolver, $inputFieldFormData];
         return [$inputFieldMutationResolver, $oneOfMutationDataProvider];
     }
+
     final protected function getOneOfMutationDataProvider(
         InputObjectFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider,
         string $oneOfPropertyName,
