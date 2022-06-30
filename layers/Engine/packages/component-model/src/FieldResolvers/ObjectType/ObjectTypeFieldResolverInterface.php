@@ -109,7 +109,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * Allow to add additional Arguments
      */
-    public function customizeField(
+    public function prepareField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void;

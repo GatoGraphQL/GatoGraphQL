@@ -452,7 +452,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Allow to inject additional Arguments
          */
-        $this->customizeField($field);
+        $this->prepareField($field);
 
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
@@ -857,7 +857,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * Allow to add additional Arguments
      */
-    protected function customizeField(FieldInterface $field): void
+    protected function prepareField(FieldInterface $field): void
     {
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($objectTypeFieldResolver === null) {
@@ -867,7 +867,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Allow to inject additional Arguments
          */
-        $objectTypeFieldResolver->customizeField($this, $field);
+        $objectTypeFieldResolver->prepareField($this, $field);
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array

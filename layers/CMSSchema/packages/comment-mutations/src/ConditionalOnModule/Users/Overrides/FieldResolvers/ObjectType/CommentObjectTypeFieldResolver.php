@@ -35,7 +35,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     /**
      * If not provided, set the properties from the logged-in user
      */
-    public function customizeField(
+    public function prepareField(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void {
