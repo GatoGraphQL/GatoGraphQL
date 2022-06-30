@@ -765,7 +765,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationField);
+            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProvider);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1070,9 +1071,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
             $mutationField = $this->getMutationField($objectTypeResolver, $field);
+            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
-                $mutationResolver->validateWarnings($mutationField)
+                $mutationResolver->validateWarnings($mutationDataProvider)
             );
         }
         return $warningFeedbackItemResolutions;
@@ -1122,7 +1124,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
             $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationField);
+            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProvider);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1230,8 +1233,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
             $mutationField = $this->getMutationField($objectTypeResolver, $field);
+            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
             try {
-                return $mutationResolver->executeMutation($mutationField);
+                return $mutationResolver->executeMutation($mutationDataProvider);
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
