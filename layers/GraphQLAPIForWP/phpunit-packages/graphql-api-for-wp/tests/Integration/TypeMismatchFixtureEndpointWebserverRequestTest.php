@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-class ErrorFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
+class TypeMismatchFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-errors';
+        return __DIR__ . '/fixture-type-mismatch';
     }
 
     /**
