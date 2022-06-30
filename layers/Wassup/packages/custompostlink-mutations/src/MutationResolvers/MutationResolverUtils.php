@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostLinkMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class MutationResolverUtils
 {
-    public static function validateContent(array &$errors, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    public static function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         if (empty($mutationDataProvider->getValue('content'))) {
             // The link will be the content. So then replace the error message if the content (link) is empty

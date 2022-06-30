@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
@@ -33,7 +34,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
         return $this->getLostPasswordMutationResolver();
     }
 
-    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
+    public function addArgumentsForMutation(FieldInterface $mutationField): void
     {
         $mutationField->addArgument(new Argument(MutationInputProperties::USERNAME_OR_EMAIL, new Literal($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }

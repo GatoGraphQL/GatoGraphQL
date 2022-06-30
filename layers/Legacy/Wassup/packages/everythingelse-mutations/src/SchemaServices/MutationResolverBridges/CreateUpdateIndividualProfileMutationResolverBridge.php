@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -58,12 +59,12 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         return $inputs;
     }
 
-    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
+    public function addArgumentsForMutation(FieldInterface $mutationField): void
     {
         $this->getCommonuserrolesFormData($mutationField);
         $this->getUsercommunitiesFormData($mutationField);
     }
-    protected function getCommonuserrolesFormData(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField)
+    protected function getCommonuserrolesFormData(FieldInterface $mutationField)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();

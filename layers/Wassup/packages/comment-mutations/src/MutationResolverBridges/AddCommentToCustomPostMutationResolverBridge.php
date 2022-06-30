@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CommentMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
@@ -33,7 +34,7 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
         return $this->getAddCommentToCustomPostMutationResolver();
     }
 
-    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
+    public function addArgumentsForMutation(FieldInterface $mutationField): void
     {
         $mutationField->addArgument(new Argument(MutationInputProperties::COMMENT, new Literal($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR])->getValue([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
         $mutationField->addArgument(new Argument(MutationInputProperties::PARENT_COMMENT_ID, new Literal($this->getComponentProcessorManager()->getComponentProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT])->getValue([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));

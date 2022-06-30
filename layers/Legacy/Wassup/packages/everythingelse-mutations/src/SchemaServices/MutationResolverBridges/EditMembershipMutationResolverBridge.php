@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use GD_URE_Module_Processor_ProfileMultiSelectFormInputs;
@@ -34,7 +35,7 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
         return $this->getEditMembershipMutationResolver();
     }
 
-    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
+    public function addArgumentsForMutation(FieldInterface $mutationField): void
     {
         $community = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $privileges = $this->getComponentProcessorManager()->getComponentProcessor([GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES])->getValue([GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES]);

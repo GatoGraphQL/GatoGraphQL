@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
@@ -14,7 +15,7 @@ trait UpdateCustomPostMutationResolverTrait
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         return $this->update($mutationDataProvider);
     }
@@ -23,12 +24,12 @@ trait UpdateCustomPostMutationResolverTrait
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    abstract protected function update(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int;
+    abstract protected function update(MutationDataProviderInterface $mutationDataProvider): string | int;
 
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         return $this->validateUpdateErrors($mutationDataProvider);
     }
@@ -36,5 +37,5 @@ trait UpdateCustomPostMutationResolverTrait
     /**
      * @return FeedbackItemResolution[]
      */
-    abstract protected function validateUpdateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array;
+    abstract protected function validateUpdateErrors(MutationDataProviderInterface $mutationDataProvider): array;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use Exception;
@@ -51,7 +52,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
     }
 
-    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
+    public function addArgumentsForMutation(FieldInterface $mutationField): void
     {
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
@@ -81,13 +82,13 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
     }
 
-    protected function getCreateuserFormData(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField)
+    protected function getCreateuserFormData(FieldInterface $mutationField)
     {
         // Allow to add extra inputs
         App::doAction('gd_createupdate_user:form_data:create', $mutationField);
     }
 
-    protected function getUpdateuserFormData(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField)
+    protected function getUpdateuserFormData(FieldInterface $mutationField)
     {
         // Allow to add extra inputs
         App::doAction('gd_createupdate_user:form_data:update', $mutationField);

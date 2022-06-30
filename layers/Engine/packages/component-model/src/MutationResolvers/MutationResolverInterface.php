@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
@@ -16,14 +17,14 @@ interface MutationResolverInterface
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed;
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array;
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array;
+    public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array;
     public function getErrorType(): int;
 }

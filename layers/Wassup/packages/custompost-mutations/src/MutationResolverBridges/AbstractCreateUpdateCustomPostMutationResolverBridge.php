@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use GD_CreateUpdate_Utils;
@@ -66,7 +67,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     abstract protected function isUpdate(): bool;
 
-    public function addArgumentsForMutation(\PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $mutationField): void
+    public function addArgumentsForMutation(FieldInterface $mutationField): void
     {
         if ($this->isUpdate()) {
             $mutationField->addArgument(new Argument(MutationInputProperties::ID, new Literal($this->getUpdateCustomPostID(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));

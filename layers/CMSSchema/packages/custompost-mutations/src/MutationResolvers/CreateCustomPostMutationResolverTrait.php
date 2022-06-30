@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
@@ -14,7 +15,7 @@ trait CreateCustomPostMutationResolverTrait
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         return $this->create($mutationDataProvider);
     }
@@ -23,12 +24,12 @@ trait CreateCustomPostMutationResolverTrait
      * @return string|int The ID of the created entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    abstract protected function create(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): string | int;
+    abstract protected function create(MutationDataProviderInterface $mutationDataProvider): string | int;
 
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         return $this->validateCreateErrors($mutationDataProvider);
     }
@@ -36,5 +37,5 @@ trait CreateCustomPostMutationResolverTrait
     /**
      * @return FeedbackItemResolution[]
      */
-    abstract protected function validateCreateErrors(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): array;
+    abstract protected function validateCreateErrors(MutationDataProviderInterface $mutationDataProvider): array;
 }
