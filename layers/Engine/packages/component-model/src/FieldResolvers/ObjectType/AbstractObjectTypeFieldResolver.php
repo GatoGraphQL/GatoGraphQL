@@ -1147,11 +1147,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $mutationField,
     ): MutationDataProviderInterface {
         if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $mutationField->getName())) {
-            $fieldInputArgumentName = 'input';
-            return new InputObjectFieldArgumentMutationDataProvider(
-                $mutationField,
-                $fieldInputArgumentName,
-            );
+            $fieldInputArgumentName = $this->getInputObjectFieldArgumentName($objectTypeResolver, $mutationField);
+            if ($fieldInputArgumentName) {
+                return new InputObjectFieldArgumentMutationDataProvider(
+                    $mutationField,
+                    $fieldInputArgumentName,
+                );
+            }
         }
         return new FieldArgumentMutationDataProvider($mutationField);
     }
@@ -1171,45 +1173,25 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
      */
-    private function maybeGetInputObjectField(
+    protected function getInputObjectFieldArgumentName(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): FieldInterface {
+    ): ?string {
         $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
 
         // Check if there is only one fieldArg
         if (count($fieldArgNameTypeResolvers) !== 1) {
-            return $field;
+            return null;
         }
 
         // Check if the fieldArg is an InputObject
         $fieldArgName = key($fieldArgNameTypeResolvers);
         $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
         if (!($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface)) {
-            return $field;
+            return null;
         }
 
-        // Create a new Field, passing the corresponding Argument only
-        $arguments = array_values(array_filter(
-            $field->getArguments(),
-            fn (Argument $argument) => $argument->getName() === $fieldArgName
-        ));
-        return ($field instanceof RelationalField)
-                ? new RelationalField(
-                    $field->getName(),
-                    $field->getAlias() . '-inputObject',
-                    $arguments,
-                    $field->getFieldsOrFragmentBonds(),
-                    [],
-                    LocationHelper::getNonSpecificLocation(),
-                )
-                : new LeafField(
-                    $field->getName(),
-                    $field->getAlias() . '-inputObject',
-                    $arguments,
-                    [],
-                    LocationHelper::getNonSpecificLocation(),
-                );
+        return $fieldArgName;
     }
 
     /**
