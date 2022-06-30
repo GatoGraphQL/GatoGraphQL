@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-abstract class AbstractField extends AbstractAst implements FieldInterface, WithArgumentsInterface
+abstract class AbstractField extends AbstractAst implements FieldInterface, WithNameInterface, WithArgumentsInterface
 {
     use WithArgumentsTrait;
     use WithDirectivesTrait;
