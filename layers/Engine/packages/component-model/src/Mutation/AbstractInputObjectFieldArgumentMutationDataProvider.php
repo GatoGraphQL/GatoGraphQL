@@ -17,6 +17,9 @@ abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends Abst
 
     public function getValue(string $inputName): mixed
     {
+        if (!$this->hasValue($inputName)) {
+            return null;
+        }
         $inputObjectValue = $this->getInputObjectValue();
         return $inputObjectValue->$inputName;
     }
