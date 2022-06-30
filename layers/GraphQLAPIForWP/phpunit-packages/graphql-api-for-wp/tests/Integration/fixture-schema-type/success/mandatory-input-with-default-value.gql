@@ -1,0 +1,21 @@
+###########################################################
+# The commented value under the input `metaQuery`
+# is the default value
+###########################################################
+query {
+  postsByMetaQuery: posts(
+    filter: {
+      metaQuery: {
+        key: "_thumbnail_id",
+        compareBy: {
+          key: {
+            # operator: EXISTS
+          }
+        }
+      }
+    }
+  ) {
+    id
+    title
+  }
+}
