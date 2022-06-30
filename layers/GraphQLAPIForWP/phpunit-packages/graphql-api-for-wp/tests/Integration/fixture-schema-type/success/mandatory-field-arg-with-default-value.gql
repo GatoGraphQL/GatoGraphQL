@@ -1,0 +1,12 @@
+#######################################################
+# Argument `size` is mandatory, and it's
+# not provided in the query, but since it has a default value
+# it will not produce an error
+#######################################################
+query {
+  user(by: {id: 1}) {
+    avatar {
+      id
+    }
+  }
+}

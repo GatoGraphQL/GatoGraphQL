@@ -1,0 +1,12 @@
+#######################################################
+# Argument `size` is mandatory and it has a default
+# value, but since it's overriden with `null` then
+# it will produce an error
+#######################################################
+query {
+  user(by: {id: 1}) {
+    avatar(size: null) {
+      id
+    }
+  }
+}
