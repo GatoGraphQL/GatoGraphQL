@@ -540,7 +540,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Get the instance from the cache if it exists, or create it if not
         if (!isset($this->directiveResolverClassDirectivesCache[$directiveResolverClass]) || !$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
             $uniqueDirectiveResolver = clone $directiveResolver;
-            $uniqueDirectiveResolver->setDirective($directive);
+            $uniqueDirectiveResolver->setAndPrepareDirective($this, $directive);
             $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
             $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;
         }

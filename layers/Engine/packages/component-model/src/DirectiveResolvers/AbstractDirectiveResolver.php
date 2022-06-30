@@ -164,7 +164,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * Invoked when creating the non-shared directive instance
      * to resolve a field in the pipeline
      */
-    final public function setDirective(Directive $directive): void
+    final protected function setDirective(Directive $directive): void
     {
         $this->directive = $directive;
     }
@@ -197,6 +197,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function disableDynamicFieldsFromDirectiveArgs(): bool
     {
         return false;
+    }
+
+    final public function setAndPrepareDirective(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        Directive $directive,
+    ): void {
+        $this->setDirective($directive);
+        $this->prepareDirective($relationalTypeResolver);
+    }
+
+    /**
+     * Initialize the Directive with additional information,
+     * such as adding the default Argument AST objects which
+     * were not provided in the query.
+     */
+    protected function prepareDirective(RelationalTypeResolverInterface $relationalTypeResolver): void
+    {
+        $this->integrateDefaultDirectiveArguments($relationalTypeResolver);
     }
 
     final protected function integrateDefaultDirectiveArguments(RelationalTypeResolverInterface $relationalTypeResolver): void
