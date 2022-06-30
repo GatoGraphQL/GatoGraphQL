@@ -1072,18 +1072,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * @param array<string, mixed> $fieldArgs
-     */
-    public function resolveCanProcessObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): bool {
-        return true;
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     protected function getValidationCheckpoints(

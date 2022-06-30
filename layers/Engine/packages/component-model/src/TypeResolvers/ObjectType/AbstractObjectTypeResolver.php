@@ -491,10 +491,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
-            // Also send the typeResolver along, as to get the id of the $object being passed
-            if (!$objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
-                continue;
-            }
             if ($validateSchemaOnObject) {
                 $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $objectTypeFieldResolver->collectFieldValidationErrors($this, $field, $separateObjectTypeFieldResolutionFeedbackStore);

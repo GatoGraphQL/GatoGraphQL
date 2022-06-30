@@ -67,20 +67,6 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         ];
     }
 
-    /**
-     * Check there is an author. Otherwise, let the upstream resolve it
-     */
-    public function resolveCanProcessObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): bool {
-        $comment = $object;
-        $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
-        return $commentUserID !== null;
-    }
-
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
@@ -89,6 +75,14 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     ): mixed {
         $comment = $object;
         $commentUserID = $this->getUserCommentTypeAPI()->getCommentUserId($comment);
+        
+        /**
+         * Check there is an author. Otherwise, let the upstream resolve it
+         */
+        if ($commentUserID === null) {
+            return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        }
+
         switch ($field->getName()) {
             case 'authorName':
                 return $this->getUserTypeAPI()->getUserDisplayName($commentUserID);

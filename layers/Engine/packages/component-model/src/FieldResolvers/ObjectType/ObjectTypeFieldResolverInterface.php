@@ -95,15 +95,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * @return FeedbackItemResolution[]
      */
     public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array;
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
-    public function resolveCanProcessObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): bool;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
