@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\Root\Exception\GenericSystemException;
-use PoP\Root\App;
 use Exception;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
+use PoP\Root\Exception\GenericSystemException;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateOrganizationProfileMutationResolver;
 
 class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
@@ -64,23 +68,18 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        return array_merge(
-            parent::getFormData(),
-            $this->getCommonuserrolesFormData(),
-            $this->getUsercommunitiesFormData()
-        );
+        $this->getCommonuserrolesFormData($withArgumentsAST);
+        $this->getUsercommunitiesFormData($withArgumentsAST);
     }
-    protected function getCommonuserrolesFormData()
+    protected function getCommonuserrolesFormData(WithArgumentsInterface $withArgumentsAST)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $organizationtypes = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
         $organizationcategories = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
-        return array(
-            'organizationtypes' => $organizationtypes ?? array(),
-            'organizationcategories' => $organizationcategories ?? array(),
-            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
-            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
-        );
+        $withArgumentsAST->addArgument(new Argument('organizationtypes', new InputList($organizationtypes ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new Argument('organizationcategories', new InputList($organizationcategories ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new Argument('contact_number', new Literal(trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new Argument('contact_person', new Literal(trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 }

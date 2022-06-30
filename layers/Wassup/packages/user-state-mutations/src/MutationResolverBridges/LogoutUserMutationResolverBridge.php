@@ -29,6 +29,5 @@ class LogoutUserMutationResolverBridge extends AbstractComponentMutationResolver
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        return [];
     }
 }

@@ -16,6 +16,5 @@ abstract class AbstractSystemComponentMutationResolverBridge extends AbstractCom
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        return [];
     }
 }

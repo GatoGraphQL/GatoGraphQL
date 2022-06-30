@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\Root\Exception\GenericSystemException;
-use PoP\Root\App;
-use Exception;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
+use PoP\Root\Exception\GenericSystemException;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateIndividualProfileMutationResolver;
 
 class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
@@ -58,20 +61,15 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        return array_merge(
-            parent::getFormData(),
-            $this->getCommonuserrolesFormData(),
-            $this->getUsercommunitiesFormData()
-        );
+        $this->getCommonuserrolesFormData($withArgumentsAST);
+        $this->getUsercommunitiesFormData($withArgumentsAST);
     }
-    protected function getCommonuserrolesFormData()
+    protected function getCommonuserrolesFormData(WithArgumentsInterface $withArgumentsAST)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $individualinterests = $this->getComponentProcessorManager()->getComponentProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
-        return array(
-            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
-            'individualinterests' => $individualinterests ?? array(),
-        );
+        $withArgumentsAST->addArgument(new Argument('last_name', new Literal(trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $withArgumentsAST->addArgument(new Argument('individualinterests', new InputList($individualinterests ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 }

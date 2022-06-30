@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP_Module_Processor_LoginTextFormInputs;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Engine\Route\RouteUtils;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP_Module_Processor_LoginTextFormInputs;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\LostPasswordMutationResolver;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
 
@@ -33,9 +36,7 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        return [
-            MutationInputProperties::USERNAME_OR_EMAIL => $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME]),
-        ];
+        $withArgumentsAST->addArgument(new Argument(MutationInputProperties::USERNAME_OR_EMAIL, new Literal($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
 
     /**

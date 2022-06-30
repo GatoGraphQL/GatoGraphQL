@@ -31,7 +31,6 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        return [];
     }
 
     /**

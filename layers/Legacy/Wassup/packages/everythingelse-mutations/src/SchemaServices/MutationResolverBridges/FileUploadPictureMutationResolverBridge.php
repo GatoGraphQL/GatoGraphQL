@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
-use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\FileUploadPictureMutationResolver;
 
 class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationResolverBridge
@@ -34,9 +37,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
 
     public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
     {
-        return [
-            'user_id' => App::getState('current-user-id'),
-        ];
+        $withArgumentsAST->addArgument(new Argument('user_id', new Literal(App::getState('current-user-id'), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
     }
     /**
      * @return array<string, mixed>|null
