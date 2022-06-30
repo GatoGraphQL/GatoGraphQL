@@ -521,7 +521,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveResolver,
                     $directive,
                 );
-                // This instance can process the directive, end the loop
+                // As this instance can process the directive and the field, we found it, then end the loop
                 break;
             }
         }
