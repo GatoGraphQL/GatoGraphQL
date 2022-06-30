@@ -10,8 +10,6 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeRe
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface
 {

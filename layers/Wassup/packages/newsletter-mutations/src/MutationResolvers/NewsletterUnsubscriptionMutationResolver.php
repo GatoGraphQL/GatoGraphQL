@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_GenericForms_NewsletterUtils;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;

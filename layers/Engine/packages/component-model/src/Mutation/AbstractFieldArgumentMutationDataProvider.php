@@ -10,6 +10,6 @@ abstract class AbstractFieldArgumentMutationDataProvider implements MutationData
 {
     public function __construct(
         protected FieldInterface $field
-    ) {        
+    ) {
     }
 }

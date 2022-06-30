@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;

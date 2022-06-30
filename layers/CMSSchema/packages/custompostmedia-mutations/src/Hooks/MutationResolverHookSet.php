@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\Hooks;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;

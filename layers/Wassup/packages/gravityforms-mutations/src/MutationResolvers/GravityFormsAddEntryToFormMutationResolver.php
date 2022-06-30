@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use RGForms;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;

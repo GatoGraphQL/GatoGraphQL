@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use UserStance_Module_Processor_CustomSectionBlocksUtils;
 use PoP_UserStance_PostNameUtils;
 use PoP\Root\App;

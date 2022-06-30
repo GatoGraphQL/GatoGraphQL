@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\PostLinkMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_ApplicationProcessors_Utils;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;

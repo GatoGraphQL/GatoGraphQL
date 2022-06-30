@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\CustomPostLinkMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class MutationResolverUtils

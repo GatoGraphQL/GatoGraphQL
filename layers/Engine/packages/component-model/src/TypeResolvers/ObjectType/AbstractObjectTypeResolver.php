@@ -40,7 +40,7 @@ use stdClass;
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
     use ObjectTypeOrDirectiveResolverTrait;
-    
+
     /**
      * Cache of which objectTypeFieldResolvers will process the given field
      *
@@ -432,7 +432,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
             return null;
         }
-        
+
         /**
          * Cast the Arguments, return if any of them produced an error
          */
@@ -461,11 +461,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        
+
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
-        
+
         // Once again, the $validField becomes the $field
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         list(
@@ -474,11 +474,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldArgs,
         ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, /* @todo Review: Replaced $variables with [] */[]/*$variables*/, /* @todo Review: Replaced $expressions with [] */[]/*$expressions*/, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        
+
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
-            
+
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
@@ -1096,7 +1096,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldName = $field->getName();
         } else {
             $fieldName = $fieldOrFieldName;
-            /** 
+            /**
              * Please notice: $fieldName could be for either a Leaf or Relational Field,
              * but just to ask if the FieldResolver can resolve it, this doesn't make a
              * difference, so simply provide a LeafField always to make it simple.

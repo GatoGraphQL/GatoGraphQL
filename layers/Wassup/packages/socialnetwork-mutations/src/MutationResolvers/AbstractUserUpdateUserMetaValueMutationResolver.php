@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoPCMSSchema\Users\Constants\InputNames;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;

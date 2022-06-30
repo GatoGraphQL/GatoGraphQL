@@ -9,7 +9,6 @@ use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
@@ -124,7 +123,8 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
                 sprintf(
                     $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,
-                    implode('\'%s\'',
+                    implode(
+                        '\'%s\'',
                         array_map(
                             fn(Argument $argument) => $argument->getName(),
                             $arguments

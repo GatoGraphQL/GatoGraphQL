@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithNameInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Translation\TranslationAPIInterface;

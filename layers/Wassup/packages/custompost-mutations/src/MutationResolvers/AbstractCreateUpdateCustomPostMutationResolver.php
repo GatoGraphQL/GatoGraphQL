@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_ApplicationProcessors_Utils;
 use GD_CreateUpdate_Utils;
 use PoP\Root\Feedback\FeedbackItemResolution;
