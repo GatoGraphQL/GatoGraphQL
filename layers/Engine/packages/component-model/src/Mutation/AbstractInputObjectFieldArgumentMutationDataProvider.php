@@ -9,6 +9,15 @@ use stdClass;
 
 abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends AbstractFieldArgumentMutationDataProvider
 {
+    /**
+     * @return string[]
+     */
+    public function getPropertyNames(): array
+    {
+        $inputObjectValue = $this->getInputObjectValue();
+        return array_keys((array) $inputObjectValue);
+    }
+
     public function hasProperty(string $propertyName): bool
     {
         $inputObjectValue = $this->getInputObjectValue();
