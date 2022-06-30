@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoP\ComponentModel\Mutation\InputObjectFieldArgumentMutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\SubpropertyInputObjectFieldArgumentMutationDataProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -136,7 +138,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     final public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfAST($mutationDataProvider);
+        [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
         return $inputFieldMutationResolver->executeMutation($mutationDataProvider);
     }
@@ -147,7 +149,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     final public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         try {
-            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfAST($mutationDataProvider);
+            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
             return $inputFieldMutationResolver->validateErrors($mutationDataProvider);
         } catch (QueryResolutionException $e) {
@@ -170,7 +172,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     final public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
     {
         try {
-            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfAST($mutationDataProvider);
+            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
             return $inputFieldMutationResolver->validateWarnings($mutationDataProvider);
         } catch (QueryResolutionException $e) {
@@ -182,19 +184,13 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndOneOfAST(MutationDataProviderInterface $mutationDataProvider): array
+    final protected function getInputFieldMutationResolverAndOneOfMutationDataProvider(InputObjectFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider): array
     {
         // Create a new Field, passing the corresponding Argument only
-        $oneOfPropertyName = $this->getOneofInputObjectPropertyName($mutationDataProvider);
-        // The name of the mutation does not matter, so provide a random one
-        $field = new LeafField(
-            'someOneOfMutation',
-            null,
-            [
-                $oneOfPropertyName,
-            ],
-            [],
-            LocationHelper::getNonSpecificLocation(),
+        $oneOfPropertyName = $this->getOneofInputObjectPropertyName($inputObjectFieldArgumentMutationDataProvider);
+        $oneOfMutationDataProvider = $this->getOneOfMutationDataProvider(
+            $inputObjectFieldArgumentMutationDataProvider,
+            $oneOfPropertyName
         );
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName);
         /**
@@ -203,6 +199,16 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
          */
         // $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
         // return [$inputFieldMutationResolver, $inputFieldFormData];
-        return [$inputFieldMutationResolver, $field];
+        return [$inputFieldMutationResolver, $oneOfMutationDataProvider];
+    }
+    final protected function getOneOfMutationDataProvider(
+        InputObjectFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider,
+        string $oneOfPropertyName,
+    ): SubpropertyInputObjectFieldArgumentMutationDataProvider {
+        return new SubpropertyInputObjectFieldArgumentMutationDataProvider(
+            $inputObjectFieldArgumentMutationDataProvider->getField(),
+            $inputObjectFieldArgumentMutationDataProvider->getArgumentName(),
+            $oneOfPropertyName
+        );
     }
 }
