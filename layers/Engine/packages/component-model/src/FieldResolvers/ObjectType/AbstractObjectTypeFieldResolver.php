@@ -49,6 +49,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
@@ -93,6 +94,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @var array<string,ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
+    /** @var SplObjectStorage<FieldInterface,MutationDataProviderInterface> */
+    protected SplObjectStorage $fieldMutationDataProviderCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
@@ -175,6 +178,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getEnabledMutationsCheckpoint(): EnabledMutationsCheckpoint
     {
         return $this->enabledMutationsCheckpoint ??= $this->instanceManager->getInstance(EnabledMutationsCheckpoint::class);
+    }
+
+    public function __construct()
+    {
+        $this->fieldMutationDataProviderCache = new SplObjectStorage();
     }
 
     final public function getClassesToAttachTo(): array
@@ -1139,7 +1147,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $field;
     }
 
-    protected function getMutationDataProvider(
+    final protected function getMutationDataProvider(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
+    ): MutationDataProviderInterface {
+        if (!$this->fieldMutationDataProviderCache->contains($mutationField)) {
+            $this->fieldMutationDataProviderCache[$mutationField] = $this->doGetMutationDataProvider($objectTypeResolver, $mutationField);
+        }
+        return $this->fieldMutationDataProviderCache[$mutationField];
+    }
+
+    protected function doGetMutationDataProvider(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $mutationField,
     ): MutationDataProviderInterface {
