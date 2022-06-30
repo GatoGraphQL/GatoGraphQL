@@ -28,9 +28,9 @@ trait CreateUpdateOrganizationProfileMutationResolverTrait
     }
     protected function commonuserrolesCreateupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES, $mutationDataProvider->getArgumentValue('organizationtypes'));
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES, $mutationDataProvider->getArgumentValue('organizationcategories'));
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, $mutationDataProvider->getArgumentValue('contact_person'), true);
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, $mutationDataProvider->getArgumentValue('contact_number'), true);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES, $mutationDataProvider->getValue('organizationtypes'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES, $mutationDataProvider->getValue('organizationcategories'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTPERSON, $mutationDataProvider->getValue('contact_person'), true);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_CONTACTNUMBER, $mutationDataProvider->getValue('contact_number'), true);
     }
 }

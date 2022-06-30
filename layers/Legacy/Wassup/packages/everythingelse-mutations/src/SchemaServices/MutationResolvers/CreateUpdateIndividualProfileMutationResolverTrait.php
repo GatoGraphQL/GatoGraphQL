@@ -28,6 +28,6 @@ trait CreateUpdateIndividualProfileMutationResolverTrait
     }
     protected function commonuserrolesCreateupdateuser($user_id, \PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider)
     {
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $mutationDataProvider->getArgumentValue('individualinterests'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $mutationDataProvider->getValue('individualinterests'));
     }
 }
