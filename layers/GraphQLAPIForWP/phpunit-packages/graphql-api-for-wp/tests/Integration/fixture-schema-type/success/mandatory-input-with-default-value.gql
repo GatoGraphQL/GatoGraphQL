@@ -1,6 +1,6 @@
 ###########################################################
-# The commented values under the input `metaQuery`
-# are the default values
+# The commented value under the input `metaQuery`
+# is the default value
 ###########################################################
 query {
   postsByMetaQuery: posts(
