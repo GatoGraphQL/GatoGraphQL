@@ -511,10 +511,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 if (!$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
                     $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $this->getUniqueDirectiveResolverForDirective($directiveResolver, $directive);
                 }
-                $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
+                $maybeFieldDirectiveResolver = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
                 // Check if this instance can process the directive
-                if ($maybeDirectiveResolverInstance->resolveCanProcess($this, $directive, $field)) {
-                    $fieldDirectiveResolvers[$field] = $maybeDirectiveResolverInstance;
+                if ($maybeFieldDirectiveResolver->resolveCanProcess($this, $directive, $field)) {
+                    $fieldDirectiveResolvers[$field] = $maybeFieldDirectiveResolver;
                     break;
                 }
             }
