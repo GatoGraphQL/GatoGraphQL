@@ -490,7 +490,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             return null;
         }
 
-        // Calculate directives per field
+        // Calculate directiveResolvers per field
         /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
         $fieldDirectiveResolvers = new SplObjectStorage();
         foreach ($fields as $field) {
@@ -507,14 +507,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $directiveResolverClass = get_class($directiveResolver);
                 // Get the instance from the cache if it exists, or create it if not
-                if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass]) || !$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
+                if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass])) {
+                    $this->directiveResolverInstanceCache[$directiveResolverClass] = new SplObjectStorage();
+                }
+                if (!$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
                     /**
                      * The instance from the container is shared. We need a non-shared instance
                      * to set the unique $directive. So clone the service.
                      */
                     $fieldDirectiveResolver = clone $directiveResolver;
                     $fieldDirectiveResolver->setDirective($directive);
-                    $this->directiveResolverInstanceCache[$directiveResolverClass] ??= new SplObjectStorage();
                     $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $fieldDirectiveResolver;
                 }
                 $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
