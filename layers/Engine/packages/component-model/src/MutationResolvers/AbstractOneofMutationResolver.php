@@ -116,8 +116,8 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     protected function getOneofInputObjectArgument(MutationDataProviderInterface $mutationDataProvider): Argument
     {
-        $arguments = $mutationDataProvider->getArguments();
-        $formDataSize = count($arguments);
+        $propertyNames = $mutationDataProvider->getPropertyNames();
+        $formDataSize = count($propertyNames);
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
                 sprintf(
@@ -125,15 +125,12 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
                     $formDataSize,
                     implode(
                         '\'%s\'',
-                        array_map(
-                            fn(Argument $argument) => $argument->getName(),
-                            $arguments
-                        )
+                        $propertyNames
                     )
                 )
             );
         }
-        return $arguments[0];
+        return $propertyNames[0];
     }
 
     /**
