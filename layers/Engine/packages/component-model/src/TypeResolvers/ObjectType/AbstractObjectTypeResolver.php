@@ -1141,7 +1141,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         if ($fieldOrFieldName instanceof FieldInterface) {
             $field = $fieldOrFieldName;
-            $cacheKey = $field->asQueryString();
+            $cacheKey = $field->asFieldOutputQueryString();
         } else {
             $cacheKey = $fieldOrFieldName;
         }
