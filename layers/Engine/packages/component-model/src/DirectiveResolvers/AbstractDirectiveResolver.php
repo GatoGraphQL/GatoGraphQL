@@ -205,7 +205,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($directiveArgumentNameDefaultValues === null) {
             return;
         }
-        $this->integrateDefaultArguments(
+        $this->integrateDefaultFieldOrDirectiveArguments(
             $this->directive,
             $directiveArgumentNameDefaultValues,
         );

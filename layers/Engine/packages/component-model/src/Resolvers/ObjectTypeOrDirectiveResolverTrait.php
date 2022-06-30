@@ -49,7 +49,7 @@ trait ObjectTypeOrDirectiveResolverTrait
     /**
      * @param array<string,mixed> $argumentNameDefaultValues
      */
-    final protected function integrateDefaultArguments(
+    final protected function integrateDefaultFieldOrDirectiveArguments(
         WithArgumentsInterface $withArgumentsAST,
         array $argumentNameDefaultValues,
     ): void {

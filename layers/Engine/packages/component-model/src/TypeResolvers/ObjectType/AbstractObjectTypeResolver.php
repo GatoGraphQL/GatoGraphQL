@@ -845,7 +845,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($fieldArgumentNameDefaultValues === null) {
             return;
         }
-        $this->integrateDefaultArguments(
+        $this->integrateDefaultFieldOrDirectiveArguments(
             $field,
             $fieldArgumentNameDefaultValues,
         );
