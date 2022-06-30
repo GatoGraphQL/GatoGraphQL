@@ -92,7 +92,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
     /**
      * Validated the mutation on the object because the ID
      * is obtained from the same object, so it's not originally
-     * present in $withArgumentsAST
+     * present in the field argument in the query
      */
     public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
