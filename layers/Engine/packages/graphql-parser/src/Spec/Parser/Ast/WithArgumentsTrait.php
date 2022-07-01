@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 
 trait WithArgumentsTrait
 {

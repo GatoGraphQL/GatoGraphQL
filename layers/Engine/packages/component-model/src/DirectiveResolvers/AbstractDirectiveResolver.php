@@ -35,7 +35,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarType
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
