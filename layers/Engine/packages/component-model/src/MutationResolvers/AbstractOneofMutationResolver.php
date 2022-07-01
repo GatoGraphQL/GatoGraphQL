@@ -132,6 +132,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
+     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
      * @throws AbstractException In case of error
      */
     final public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
@@ -142,6 +143,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
+     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
      * @return FeedbackItemResolution[]
      */
     final public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
@@ -165,6 +167,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
+     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
      * @return FeedbackItemResolution[]
      */
     final public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array

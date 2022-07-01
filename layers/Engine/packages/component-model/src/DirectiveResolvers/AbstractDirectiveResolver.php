@@ -247,9 +247,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final protected function getDirectiveArgumentsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): ?array
     {
         $directiveSchemaDefinition = $this->getDirectiveSchemaDefinition($relationalTypeResolver);
-        if ($directiveSchemaDefinition === null) {
-            return null;
-        }
         $directiveArgsSchemaDefinition = $directiveSchemaDefinition[SchemaDefinition::ARGS] ?? [];
         if ($directiveArgsSchemaDefinition === null) {
             return null;

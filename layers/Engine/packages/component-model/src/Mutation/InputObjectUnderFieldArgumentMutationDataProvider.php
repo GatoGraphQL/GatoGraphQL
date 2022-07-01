@@ -61,6 +61,7 @@ class InputObjectUnderFieldArgumentMutationDataProvider extends MutationDataProv
     final protected function getInputObject(): InputObject
     {
         $argument = $this->field->getArgument($this->getArgumentName());
+        /** @var InputObject */
         return $argument->getValueAST();
     }
 
