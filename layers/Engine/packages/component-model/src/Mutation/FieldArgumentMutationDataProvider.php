@@ -26,19 +26,28 @@ class FieldArgumentMutationDataProvider extends MutationDataProvider implements 
      */
     public function getPropertyNames(): array
     {
-        return array_map(
-            fn(Argument $argument) => $argument->getName(),
-            $this->field->getArguments()
-        );
+        return array_unique(array_merge(
+            parent::getPropertyNames(),
+            array_map(
+                fn(Argument $argument) => $argument->getName(),
+                $this->field->getArguments()
+            )
+        ));
     }
 
     public function hasProperty(string $propertyName): bool
     {
-        return $this->field->hasArgument($propertyName);
+        if ($this->field->hasArgument($propertyName)) {
+            return true;
+        }
+        return parent::hasProperty($propertyName);
     }
 
     public function getValue(string $propertyName): mixed
     {
-        return $this->field->getArgumentValue($propertyName);
+        if ($this->field->hasArgument($propertyName)) {
+            return $this->field->getArgumentValue($propertyName);
+        }
+        return parent::getValue($propertyName);
     }
 }
