@@ -12,5 +12,5 @@ interface MutationDataProviderInterface
     public function getPropertyNames(): array;
     public function has(string $propertyName): bool;
     public function get(string $propertyName): mixed;
-    public function addProperty(string $propertyName, mixed $value): void;
+    public function add(string $propertyName, mixed $value): void;
 }
