@@ -27,4 +27,8 @@ class MutationDataProvider implements MutationDataProviderInterface
     {
         return $this->propertyValues[$propertyName] ?? null;
     }
+    public function addProperty(string $propertyName, mixed $value): void
+    {
+        $this->propertyValues[$propertyName] = $value;
+    }
 }
