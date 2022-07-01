@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoP\ComponentModel\Mutation\InputObjectFieldArgumentMutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentMutationDataProviderInterface;
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\ComponentModel\Mutation\SubpropertyInputObjectFieldArgumentMutationDataProvider;
+use PoP\ComponentModel\Mutation\PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -185,7 +185,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndOneOfMutationDataProvider(InputObjectFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider): array
+    final protected function getInputFieldMutationResolverAndOneOfMutationDataProvider(InputObjectUnderFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider): array
     {
         // Create a new Field, passing the corresponding Argument only
         $oneOfPropertyName = $this->getOneofInputObjectPropertyName($inputObjectFieldArgumentMutationDataProvider);
@@ -204,10 +204,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     final protected function getOneOfMutationDataProvider(
-        InputObjectFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider,
+        InputObjectUnderFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider,
         string $oneOfPropertyName,
-    ): SubpropertyInputObjectFieldArgumentMutationDataProvider {
-        return new SubpropertyInputObjectFieldArgumentMutationDataProvider(
+    ): PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider {
+        return new PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider(
             $inputObjectFieldArgumentMutationDataProvider->getField(),
             $inputObjectFieldArgumentMutationDataProvider->getArgumentName(),
             $oneOfPropertyName

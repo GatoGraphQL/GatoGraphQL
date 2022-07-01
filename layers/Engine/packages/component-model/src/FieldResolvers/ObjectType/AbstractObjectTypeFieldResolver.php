@@ -23,7 +23,7 @@ use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Mutation\FieldArgumentMutationDataProvider;
-use PoP\ComponentModel\Mutation\InputObjectFieldArgumentMutationDataProvider;
+use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentMutationDataProvider;
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
@@ -1168,9 +1168,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $mutationField,
     ): MutationDataProviderInterface {
         if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $mutationField->getName())) {
-            $fieldInputArgumentName = $this->getInputObjectFieldArgumentName($objectTypeResolver, $mutationField);
+            $fieldInputArgumentName = $this->getInputObjectUnderFieldArgumentName($objectTypeResolver, $mutationField);
             if ($fieldInputArgumentName) {
-                return new InputObjectFieldArgumentMutationDataProvider(
+                return new InputObjectUnderFieldArgumentMutationDataProvider(
                     $mutationField,
                     $fieldInputArgumentName,
                 );
@@ -1216,7 +1216,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
      */
-    protected function getInputObjectFieldArgumentName(
+    protected function getInputObjectUnderFieldArgumentName(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): ?string {
