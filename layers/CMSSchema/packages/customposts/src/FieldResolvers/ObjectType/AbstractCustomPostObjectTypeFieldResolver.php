@@ -98,21 +98,21 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $field->getArgumentValue('status') == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt')));
+                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt') ?? false));
 
             case 'dateStr':
                 return $this->getDateFormatter()->format(
                     $field->getArgumentValue('format'),
-                    $customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt'))
+                    $customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt') ?? false)
                 );
 
             case 'modifiedDate':
-                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt')));
+                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt') ?? false));
 
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
                     $field->getArgumentValue('format'),
-                    $customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt'))
+                    $customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt') ?? false)
                 );
 
             case 'title':
