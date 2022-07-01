@@ -8,20 +8,13 @@ use PoPSitesWassup\PostMutations\MutationResolverBridges\AbstractCreateUpdatePos
 
 abstract class AbstractCreateUpdatePostLinkMutationResolverBridge extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $form_data = parent::getFormData();
+        parent::fillMutationDataProvider($mutationDataProvider);
 
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            $form_data = array_merge(
-                $form_data,
-                array(
-                    'linkaccess' => $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS]),
-                )
-            );
+            $mutationDataProvider->add('linkaccess', $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS]));
         }
-
-        return $form_data;
     }
 
     protected function getEditorInput()

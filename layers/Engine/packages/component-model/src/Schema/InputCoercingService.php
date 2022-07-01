@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -31,6 +33,51 @@ class InputCoercingService implements InputCoercingServiceInterface
     final protected function getOutputService(): OutputServiceInterface
     {
         return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
+
+    /**
+     * Support passing a single value where a list is expected:
+     * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
+     *
+     * Defined in the GraphQL spec.
+     *
+     * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
+     */
+    public function maybeConvertInputValueASTFromSingleToList(
+        WithValueInterface $inputValueAST,
+        bool $inputIsArrayType,
+        bool $inputIsArrayOfArraysType,
+    ): WithValueInterface {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (
+            $inputValueAST instanceof InputList
+            || !$moduleConfiguration->convertInputValueFromSingleToList()
+        ) {
+            return $inputValueAST;
+        }
+        if ($inputIsArrayOfArraysType) {
+            return new InputList(
+                [
+                    new InputList(
+                        [
+                            $inputValueAST,
+                        ],
+                        $inputValueAST->getLocation()
+                    ),
+                ],
+                $inputValueAST->getLocation()
+            );
+        }
+        if ($inputIsArrayType) {
+            return new InputList(
+                [
+                    $inputValueAST,
+                ],
+                $inputValueAST->getLocation()
+            );
+        }
+        return $inputValueAST;
     }
 
     /**
@@ -234,9 +281,10 @@ class InputCoercingService implements InputCoercingServiceInterface
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): mixed {
         if ($inputValue === null) {
-            return null;
+            return $inputValue;
         }
         if ($inputIsArrayOfArraysType) {
+            /** @var array $inputValue */
             // If the value is an array of arrays, then cast each subelement to the item type
             return array_map(
                 // If it contains a null value, return it as is
@@ -248,6 +296,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             );
         }
         if ($inputIsArrayType) {
+            /** @var array $inputValue */
             // If the value is an array, then cast each element to the item type
             return array_map(
                 fn (mixed $arrayArgValueElem) => $arrayArgValueElem === null ? null : $inputTypeResolver->coerceValue($arrayArgValueElem, $schemaInputValidationFeedbackStore),

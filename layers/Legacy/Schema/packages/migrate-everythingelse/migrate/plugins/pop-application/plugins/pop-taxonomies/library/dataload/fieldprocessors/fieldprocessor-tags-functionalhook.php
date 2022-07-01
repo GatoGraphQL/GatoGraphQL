@@ -37,31 +37,20 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Tags extends AbstractObje
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $tag = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
              // Needed for tinyMCE-mention plug-in
             case 'mentionQueryby':
-                return $objectTypeResolver->resolveValue($tag, 'name', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                return $objectTypeResolver->resolveValue($tag, 'name', $objectTypeFieldResolutionFeedbackStore);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

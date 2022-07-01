@@ -129,6 +129,9 @@ services:
     PoP\ComponentModel\Schema\InputCoercingServiceInterface:
         class: \PoP\ComponentModel\Schema\InputCoercingService
 
+    PoP\ComponentModel\Schema\SchemaCastingServiceInterface:
+        class: \PoP\ComponentModel\Schema\SchemaCastingService
+
     PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface:
         class: \PoP\ComponentModel\Schema\SchemaNamespacingService
 

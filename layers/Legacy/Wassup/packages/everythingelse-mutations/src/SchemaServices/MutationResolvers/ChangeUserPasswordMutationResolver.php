@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -11,15 +13,15 @@ use PoP\UserAccount\FunctionAPIFactory;
 
 class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         // Validate Password
         // Check current password really belongs to the user
-        $current_password = $form_data['current_password'];
-        $password = $form_data['password'];
-        $repeatpassword =  $form_data['repeat_password'];
+        $current_password = $mutationDataProvider->get('current_password');
+        $password = $mutationDataProvider->get('password');
+        $repeatpassword =  $mutationDataProvider->get('repeat_password');
 
         if (!$current_password) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -28,7 +30,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->getTranslationAPI()->__('Please provide the current password.', 'pop-application');
-        } elseif (!$cmsuseraccountapi->checkPassword($form_data['user_id'], $current_password)) {
+        } elseif (!$cmsuseraccountapi->checkPassword($mutationDataProvider->get('user_id'), $current_password)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -77,28 +79,27 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->updateUser($user_data);
     }
 
-    protected function getChangepasswordData($form_data)
+    protected function getChangepasswordData(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = array(
-            'id' => $form_data['user_id'],
-            'password' => $form_data['password']
+            'id' => $mutationDataProvider->get('user_id'),
+            'password' => $mutationDataProvider->get('password')
         );
 
         return $user_data;
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $user_data = $this->getChangepasswordData($form_data);
+        $user_data = $this->getChangepasswordData($mutationDataProvider);
         $result = $this->executeChangepassword($user_data);
 
         $user_id = $user_data['ID'];
 
-        App::doAction('gd_changepassword_user', $user_id, $form_data);
+        App::doAction('gd_changepassword_user', $user_id, $mutationDataProvider);
 
         return $user_id;
     }

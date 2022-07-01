@@ -54,37 +54,26 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $user = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'organizationTypesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'organizationtypes', $objectTypeFieldResolutionFeedbackStore);
                 $organizationtypes = new GD_FormInput_OrganizationTypes('', $selected);
                 return $organizationtypes->getSelectedValue();
 
             case 'organizationCategoriesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($user, 'organizationcategories', $objectTypeFieldResolutionFeedbackStore);
                 $organizationcategories = new GD_FormInput_OrganizationCategories('', $selected);
                 return $organizationcategories->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

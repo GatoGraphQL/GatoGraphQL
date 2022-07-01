@@ -114,26 +114,15 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var WP_User */
         $user = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'nicename':
                 return $user->user_nicename;
             case 'nickname':
@@ -144,11 +133,11 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return new DateTime($user->user_registered);
             case 'registeredDateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
+                    $field->getArgumentValue('format'),
                     $user->user_registered
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

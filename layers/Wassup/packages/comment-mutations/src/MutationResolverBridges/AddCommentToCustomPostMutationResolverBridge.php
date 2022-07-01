@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CommentMutations\MutationResolverBridges;
 
-use PoP_Module_Processor_CommentEditorFormInputs;
-use PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues;
-use PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues;
+use PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues;
+use PoP_Module_Processor_CommentEditorFormInputs;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 
@@ -30,14 +30,10 @@ class AddCommentToCustomPostMutationResolverBridge extends AbstractComponentMuta
         return $this->getAddCommentToCustomPostMutationResolver();
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $form_data = array(
-            MutationInputProperties::COMMENT => $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR])->getValue([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR]),
-            MutationInputProperties::PARENT_COMMENT_ID => $this->getComponentProcessorManager()->getComponentProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT])->getValue([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT]),
-            MutationInputProperties::CUSTOMPOST_ID => $this->getComponentProcessorManager()->getComponentProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST])->getValue([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST]),
-        );
-
-        return $form_data;
+        $mutationDataProvider->add(MutationInputProperties::COMMENT, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR])->getValue([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::COMPONENT_FORMINPUT_COMMENTEDITOR]));
+        $mutationDataProvider->add(MutationInputProperties::PARENT_COMMENT_ID, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT])->getValue([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENT]));
+        $mutationDataProvider->add(MutationInputProperties::CUSTOMPOST_ID, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST])->getValue([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_COMMENTPOST]));
     }
 }

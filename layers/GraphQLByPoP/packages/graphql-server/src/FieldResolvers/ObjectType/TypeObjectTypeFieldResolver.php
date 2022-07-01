@@ -214,26 +214,15 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var TypeInterface */
         $type = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'kind':
                 return $type->getKind();
             case 'name':
@@ -244,7 +233,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC1BJC3BAn6e):
                 // "should be non-null for OBJECT and INTERFACE only, must be null for the others"
                 if ($type instanceof HasFieldsTypeInterface) {
-                    return $type->getFieldIDs($fieldArgs['includeDeprecated']);
+                    return $type->getFieldIDs($field->getArgumentValue('includeDeprecated'));
                 }
                 return null;
             case 'interfaces':
@@ -265,7 +254,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC7CCC9CA2nT):
                 // "should be non-null for ENUM only, must be null for the others"
                 if ($type instanceof EnumType) {
-                    return $type->getEnumValueIDs($fieldArgs['includeDeprecated']);
+                    return $type->getEnumValueIDs($field->getArgumentValue('includeDeprecated'));
                 }
                 return null;
             case 'inputFields':
@@ -301,6 +290,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -127,26 +127,15 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var Directive */
         $directive = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'name':
                 return $directive->getName();
             case 'description':
@@ -161,6 +150,6 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $directive->getExtensions()->getID();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -78,25 +78,14 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'multilayoutKeys':
                 // Allow pop-categorypostlayouts to add more layouts
                 return \PoP\Root\App::applyFilters(
@@ -123,7 +112,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
 
          // Needed for using handlebars helper "compare" to compare a category id in a buttongroup, which is taken as a string, inside a list of cats, which must then also be strings
             case 'catsByName':
-                $cats = $objectTypeResolver->resolveValue($post, 'categories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $cats = $objectTypeResolver->resolveValue($post, 'categories', $objectTypeFieldResolutionFeedbackStore);
                 $value = array();
                 foreach ($cats as $cat) {
                     $value[] = strval($cat);
@@ -142,17 +131,17 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends A
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
 
             case 'topicsByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'topics', $objectTypeFieldResolutionFeedbackStore);
                 $categories = new GD_FormInput_Categories('', $selected);
                 return $categories->getSelectedValue();
 
             case 'appliestoByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'appliesto', $objectTypeFieldResolutionFeedbackStore);
                 $appliesto = new GD_FormInput_AppliesTo('', $selected);
                 return $appliesto->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

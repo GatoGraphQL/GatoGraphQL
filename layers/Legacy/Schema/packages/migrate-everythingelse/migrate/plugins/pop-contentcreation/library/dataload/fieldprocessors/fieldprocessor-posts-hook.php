@@ -66,27 +66,16 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
 
             case 'titleEdit':
                 if (gdCurrentUserCanEdit($objectTypeResolver->getID($post))) {
@@ -113,7 +102,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 return $cmseditpostsapi->getDeletePostLink($objectTypeResolver->getID($post));
 
             case 'coauthors':
-                $authors = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new Field('authors', $fieldArgs), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $authors = $objectTypeResolver->resolveValue($object, /* @todo Re-do this code! Left undone */ new Field('authors', $fieldArgs), $objectTypeFieldResolutionFeedbackStore);
 
                 // This function only makes sense when the user is logged in
                 if (\PoP\Root\App::getState('is-user-logged-in')) {
@@ -125,7 +114,7 @@ class GD_ContentCreation_DataLoad_ObjectTypeFieldResolver_Posts extends Abstract
                 return $authors;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

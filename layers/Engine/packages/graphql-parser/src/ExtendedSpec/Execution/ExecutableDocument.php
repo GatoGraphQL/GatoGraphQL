@@ -11,6 +11,7 @@ use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 
@@ -56,11 +57,14 @@ class ExecutableDocument extends UpstreamExecutableDocument
         }
 
         foreach ($this->document->getOperations() as $operation) {
-            foreach ($this->document->getVariableReferencesInOperation($operation) as $variableReference) {
-                if (!($variableReference instanceof DynamicVariableReference)) {
-                    continue;
-                }
-                $variableReference->setContext($context);
+            $variableReferences = $this->document->getVariableReferencesInOperation($operation);
+            /** @var DynamicVariableReference[] */
+            $dynamicVariableReferences = array_filter(
+                $variableReferences,
+                fn (VariableReference $variableReference) => $variableReference instanceof DynamicVariableReference
+            );
+            foreach ($dynamicVariableReferences as $dynamicVariableReference) {
+                $dynamicVariableReference->setContext($context);
             }
         }
     }

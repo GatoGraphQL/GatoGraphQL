@@ -41,5 +41,10 @@ class Module extends AbstractModule
             $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
             '/ConditionalOnModule/Users'
         );
+        $this->initSchemaServices(
+            dirname(__DIR__),
+            $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
+            '/ConditionalOnModule/Users/Overrides'
+        );
     }
 }

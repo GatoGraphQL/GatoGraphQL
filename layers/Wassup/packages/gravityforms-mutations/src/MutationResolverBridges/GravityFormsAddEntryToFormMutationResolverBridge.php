@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
-use GD_GF_Module_Processor_TextFormInputs;
-use PoP_FormUtils;
-use PoP_Forms_Module_Processor_TextFormInputs;
-use PoP_Forms_ConfigurationUtils;
-use PoP_Module_Processor_CaptchaFormInputs;
 use GD_Captcha;
+use GD_GF_Module_Processor_TextFormInputs;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentProcessors\FormInputComponentProcessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -18,6 +14,10 @@ use PoP\Root\Constants\HookNames;
 use PoP\Root\Exception\GenericClientException;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceTrait;
+use PoP_Forms_ConfigurationUtils;
+use PoP_Forms_Module_Processor_TextFormInputs;
+use PoP_FormUtils;
+use PoP_Module_Processor_CaptchaFormInputs;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 use PoPSitesWassup\GravityFormsMutations\MutationResolvers\GravityFormsAddEntryToFormMutationResolver;
@@ -133,15 +133,11 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         return $executed;
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         /** @var FormInputComponentProcessorInterface */
         $formid_processor = $this->getComponentProcessorManager()->getComponentProcessor([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]);
-        $form_data = array(
-            'form_id' => $formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]),
-        );
-
-        return $form_data;
+        $mutationDataProvider->add('form_id', $formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::COMPONENT_GF_FORMINPUT_FORMID]));
     }
 
     public function setup(): void

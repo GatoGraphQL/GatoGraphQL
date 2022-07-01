@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Root\Exception\GenericSystemException;
-use PoP\Root\App;
-use Exception;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
+use PoP\Root\Exception\GenericSystemException;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateIndividualProfileMutationResolver;
 
 class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
@@ -55,22 +59,17 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         return $inputs;
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        return array_merge(
-            parent::getFormData(),
-            $this->getCommonuserrolesFormData(),
-            $this->getUsercommunitiesFormData()
-        );
+        $this->getCommonuserrolesFormData($mutationField);
+        $this->getUsercommunitiesFormData($mutationField);
     }
-    protected function getCommonuserrolesFormData()
+    protected function getCommonuserrolesFormData(FieldInterface $mutationField)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $individualinterests = $this->getComponentProcessorManager()->getComponentProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
-        return array(
-            'last_name' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))),
-            'individualinterests' => $individualinterests ?? array(),
-        );
+        $mutationDataProvider->add('last_name', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))));
+        $mutationDataProvider->add('individualinterests', $individualinterests ?? array());
     }
 }

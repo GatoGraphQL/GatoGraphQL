@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class DynamicVariableReference extends AbstractDynamicVariableReference
 {
-    use WithVariableValueTrait;
-
     private ?Context $context = null;
 
     public function setContext(?Context $context): void
@@ -27,6 +25,7 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
      * as to handle dynamic variables
      *
      * @throws InvalidRequestException
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      *
      * @todo Review this logic, it must not work! How to pass the context to the AST? Checking for the variable must instead be done against $variable in ->resolveValue
      */
@@ -58,7 +57,7 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
             );
         }
         if (!$this->context->hasVariableValue($this->name)) {
-            throw new InvalidRequestException(
+            throw new InvalidDynamicContextException(
                 new FeedbackItemResolution(
                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,
                     GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
@@ -69,10 +68,6 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
                 $this->getLocation()
             );
         }
-        $variableValue = $this->context->getVariableValue($this->name);
-        return $this->convertVariableValueToAst(
-            $variableValue,
-            $this->getLocation()
-        );
+        return $this->context->getVariableValue($this->name);
     }
 }

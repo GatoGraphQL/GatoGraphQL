@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Root\Exception\GenericSystemException;
-use PoP\Root\App;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use Exception;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\Root\App;
+use PoP\Root\Exception\GenericSystemException;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateProfileMutationResolver;
 
 class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutationResolverBridge
@@ -29,29 +33,21 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         return $this->getCreateUpdateProfileMutationResolver();
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $form_data = parent::getFormData();
+        parent::fillMutationDataProvider($mutationDataProvider);
 
         $inputs = $this->getFormInputs();
-        $form_data = array_merge(
-            $form_data,
-            array(
-                'short_description' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description'])),
-                'display_email' => $this->getComponentProcessorManager()->getComponentProcessor($inputs['display_email'])->getValue($inputs['display_email']),
-                'facebook' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['facebook'])->getValue($inputs['facebook'])),
-                'twitter' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['twitter'])->getValue($inputs['twitter'])),
-                'linkedin' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])),
-                'youtube' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['youtube'])->getValue($inputs['youtube'])),
-                'instagram' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['instagram'])->getValue($inputs['instagram'])),
-                // 'blog' => trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['blog'])->getValue($inputs['blog'])),
-            )
-        );
+        $mutationDataProvider->add('short_description', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description'])));
+        $mutationDataProvider->add('display_email', $this->getComponentProcessorManager()->getComponentProcessor($inputs['display_email'])->getValue($inputs['display_email']));
+        $mutationDataProvider->add('facebook', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['facebook'])->getValue($inputs['facebook'])));
+        $mutationDataProvider->add('twitter', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['twitter'])->getValue($inputs['twitter'])));
+        $mutationDataProvider->add('linkedin', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])));
+        $mutationDataProvider->add('youtube', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['youtube'])->getValue($inputs['youtube'])));
+        $mutationDataProvider->add('instagram', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['instagram'])->getValue($inputs['instagram'])));
 
         // Allow to add extra inputs
-        $form_data = App::applyFilters('gd_createupdate_profile:form_data', $form_data);
-
-        return $form_data;
+        App::doAction('gd_createupdate_profile:form_data', $mutationDataProvider);
     }
 
     private function getFormInputs()

@@ -47,13 +47,13 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         return ($object instanceof WP_Taxonomy) && $object->hierarchical;
     }
 
-    protected function getTagFromObjectOrID(string | int | object $tagObjectOrID): ?object
+    protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?object
     {
         return is_object($tagObjectOrID) ?
             $tagObjectOrID
             : $this->getTerm($tagObjectOrID, $this->getTagTaxonomyName());
     }
-    public function getTagName(string | int | object $tagObjectOrID): string
+    public function getTagName(string|int|object $tagObjectOrID): string
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
         if ($tag === null) {
@@ -132,18 +132,18 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
             $options
         );
     }
-    public function getTagURL(string | int | object $tagObjectOrID): string
+    public function getTagURL(string|int|object $tagObjectOrID): string
     {
         return get_term_link($tagObjectOrID, $this->getTagTaxonomyName());
     }
 
-    public function getTagURLPath(string | int | object $tagObjectOrID): string
+    public function getTagURLPath(string|int|object $tagObjectOrID): string
     {
         /** @var string */
         return $this->getCMSHelperService()->getLocalURLPath($this->getTagURL($tagObjectOrID));
     }
 
-    public function getTagSlug(string | int | object $tagObjectOrID): string
+    public function getTagSlug(string|int|object $tagObjectOrID): string
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
         if ($tag === null) {
@@ -151,7 +151,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
         return $tag->slug;
     }
-    public function getTagDescription(string | int | object $tagObjectOrID): string
+    public function getTagDescription(string|int|object $tagObjectOrID): string
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
         if ($tag === null) {
@@ -159,7 +159,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         }
         return $tag->description;
     }
-    public function getTagItemCount(string | int | object $tagObjectOrID): int
+    public function getTagItemCount(string|int|object $tagObjectOrID): int
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
         if ($tag === null) {

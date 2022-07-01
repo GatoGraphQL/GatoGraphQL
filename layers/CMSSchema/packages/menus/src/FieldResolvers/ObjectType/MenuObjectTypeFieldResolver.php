@@ -128,27 +128,16 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $menu = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'itemDataEntries':
-                $isFlat = $fieldArgs['flat'] ?? false;
+                $isFlat = $field->getArgumentValue('flat') ?? false;
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
                 $entries = array();
                 if ($menuItems) {
@@ -207,7 +196,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 
     protected function findEntryPosition(string | int $menuItemID, array $entries): int

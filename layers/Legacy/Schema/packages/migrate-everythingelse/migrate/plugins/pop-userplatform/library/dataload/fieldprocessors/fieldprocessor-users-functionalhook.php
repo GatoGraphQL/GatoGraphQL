@@ -52,34 +52,23 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $user = $object;
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'shortDescriptionFormatted':
                 // doing esc_html so that single quotes ("'") do not screw the map output
-                $value = $objectTypeResolver->resolveValue($user, 'shortDescription', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $value = $objectTypeResolver->resolveValue($user, 'shortDescription', $objectTypeFieldResolutionFeedbackStore);
                 return $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->escapeHTML($value));
 
             case 'contactSmall':
                 $value = array();
-                $contacts = $objectTypeResolver->resolveValue($user, 'contact', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $contacts = $objectTypeResolver->resolveValue($user, 'contact', $objectTypeFieldResolutionFeedbackStore);
                 // Remove text, replace all icons with their shorter version
                 foreach ($contacts as $contact) {
                     $value[] = array(
@@ -95,7 +84,7 @@ class GD_UserPlatform_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
                 return \PoPCMSSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_METAKEY_PROFILE_USERPREFERENCES);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

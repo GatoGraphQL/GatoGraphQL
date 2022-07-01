@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP_FormUtils;
 use GD_Captcha;
@@ -16,28 +18,27 @@ use PoP\Root\Exception\GenericClientException;
 abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResolver
 {
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $emails = $form_data['emails'];
+        $emails = $mutationDataProvider->get('emails');
         // Remove the invalid emails
         $emails = array_diff($emails, $this->getInvalidEmails($emails));
         if (!empty($emails)) {
-            $subject = $this->getEmailSubject($form_data);
-            $content = $this->getEmailContent($form_data);
+            $subject = $this->getEmailSubject($mutationDataProvider);
+            $content = $this->getEmailContent($mutationDataProvider);
             PoP_EmailSender_Utils::sendemailToUsers($emails, array(), $subject, $content, true);
             return true;
         }
         return false;
     }
 
-    protected function validateCaptcha(&$errors, &$form_data): void
+    protected function validateCaptcha(&$errors, &$mutationDataProvider): void
     {
         // Validate the captcha
         if (!PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
-            $captcha = $form_data['captcha'];
+            $captcha = $mutationDataProvider->get('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
@@ -46,17 +47,17 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         }
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
-        $this->validateCaptcha($errors, $form_data);
+        $this->validateCaptcha($errors, $mutationDataProvider);
 
         if ($errors) {
             return $errors;
         }
 
-        $emails = $form_data['emails'];
+        $emails = $mutationDataProvider->get('emails');
         if (empty($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -82,11 +83,11 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(array $form_data): array
+    public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
     {
         $warnings = [];
 
-        $emails = $form_data['emails'];
+        $emails = $mutationDataProvider->get('emails');
         if ($invalid_emails = $this->getInvalidEmails($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $warnings[] = new FeedbackItemResolution(
@@ -102,7 +103,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return $warnings;
     }
 
-    abstract protected function getEmailContent($form_data);
+    abstract protected function getEmailContent(MutationDataProviderInterface $mutationDataProvider);
 
-    abstract protected function getEmailSubject($form_data);
+    abstract protected function getEmailSubject(MutationDataProviderInterface $mutationDataProvider);
 }

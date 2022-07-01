@@ -46,25 +46,14 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'isLinkEmbeddable':
                 $nonembeddable = PoP_MediaHostThumbs_Utils::getNonembeddableHosts();
                 $link = PoP_AddPostLinks_Utils::getLink($objectTypeResolver->getID($post));
@@ -72,7 +61,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 return (!is_ssl() || substr($link, 0, 8) == 'https://') && !in_array($host, $nonembeddable);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

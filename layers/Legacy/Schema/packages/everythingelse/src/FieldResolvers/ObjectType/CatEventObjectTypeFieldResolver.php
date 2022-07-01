@@ -71,27 +71,16 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $eventTagTypeAPI = EventTagTypeAPIFacade::getInstance();
         $event = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
              // Override
             case 'catSlugs':
                 $value = array();
@@ -111,10 +100,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $cat;
@@ -124,6 +110,6 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

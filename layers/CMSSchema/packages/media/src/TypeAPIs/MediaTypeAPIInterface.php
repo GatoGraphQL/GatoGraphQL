@@ -22,11 +22,11 @@ interface MediaTypeAPIInterface
     public function getMediaItems(array $query, array $options = []): array;
     public function getMediaItemCount(array $query, array $options = []): int;
     public function getMediaItemID(object $media): string | int;
-    public function getTitle(string | int | object $mediaObjectOrID): ?string;
-    public function getCaption(string | int | object $mediaObjectOrID): ?string;
-    public function getAltText(string | int | object $mediaObjectOrID): ?string;
-    public function getDescription(string | int | object $mediaObjectOrID): ?string;
-    public function getDate(string | int | object $mediaObjectOrID, bool $gmt = false): ?string;
-    public function getModified(string | int | object $mediaObjectOrID, bool $gmt = false): ?string;
-    public function getMimeType(string | int | object $mediaObjectOrID): ?string;
+    public function getTitle(string|int|object $mediaObjectOrID): ?string;
+    public function getCaption(string|int|object $mediaObjectOrID): ?string;
+    public function getAltText(string|int|object $mediaObjectOrID): ?string;
+    public function getDescription(string|int|object $mediaObjectOrID): ?string;
+    public function getDate(string|int|object $mediaObjectOrID, bool $gmt = false): ?string;
+    public function getModified(string|int|object $mediaObjectOrID, bool $gmt = false): ?string;
+    public function getMimeType(string|int|object $mediaObjectOrID): ?string;
 }

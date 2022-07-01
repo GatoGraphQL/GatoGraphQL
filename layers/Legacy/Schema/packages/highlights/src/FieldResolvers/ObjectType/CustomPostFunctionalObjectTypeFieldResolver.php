@@ -66,30 +66,19 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'addhighlightURL':
                 $routes = array(
                     'addhighlightURL' => POP_ADDHIGHLIGHTS_ROUTE_ADDHIGHLIGHT,
                 );
-                $route = $routes[$fieldName];
+                $route = $routes[$field->getName()];
 
                 // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 // $input = [PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST];
@@ -100,6 +89,6 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 ], RouteUtils::getRouteURL($route));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

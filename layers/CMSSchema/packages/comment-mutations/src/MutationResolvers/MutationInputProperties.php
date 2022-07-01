@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
 class MutationInputProperties
 {
+    public final const INPUT = 'input';
     public final const CUSTOMPOST_ID = 'customPostID';
     public final const COMMENT = 'comment';
     public final const PARENT_COMMENT_ID = 'parentCommentID';

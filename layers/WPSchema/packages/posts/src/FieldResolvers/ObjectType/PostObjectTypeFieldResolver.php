@@ -81,26 +81,15 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var WP_Post */
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'postFormat':
                 $postFormat = \get_post_format($post);
                 // @see https://developer.wordpress.org/reference/functions/get_post_format/#more-information
@@ -112,6 +101,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return \is_sticky($post->ID);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

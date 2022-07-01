@@ -57,24 +57,13 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'endpoint':
                 return APIUtils::getEndpoint(
                     $objectTypeResolver->resolveValue(
@@ -86,14 +75,11 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
                             [],
                             $field->getLocation()
                         ),
-                        $variables,
-                        $expressions,
                         $objectTypeFieldResolutionFeedbackStore,
-                        $options
                     )
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

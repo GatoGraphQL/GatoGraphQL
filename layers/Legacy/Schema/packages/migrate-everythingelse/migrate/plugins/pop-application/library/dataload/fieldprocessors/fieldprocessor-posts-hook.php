@@ -155,31 +155,20 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         return 'thumb-md';
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'favicon':
             case 'thumb':
-                return $this->getThumb($post, $objectTypeResolver, $fieldArgs['size'], $fieldArgs['addDescription']);
+                return $this->getThumb($post, $objectTypeResolver, $field->getArgumentValue('size'), $field->getArgumentValue('addDescription'));
 
             case 'thumbFullSrc':
-                $thumb = $objectTypeResolver->resolveValue($post, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $thumb = $objectTypeResolver->resolveValue($post, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $thumb;
                 }
@@ -192,7 +181,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
 
             case 'hasTopics':
-                $topics = $objectTypeResolver->resolveValue($post, 'topics', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $topics = $objectTypeResolver->resolveValue($post, 'topics', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $topics;
                 } elseif ($topics) {
@@ -204,7 +193,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
 
             case 'hasAppliesto':
-                $appliesto = $objectTypeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $appliesto = $objectTypeResolver->resolveValue($post, 'appliesto', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $appliesto;
                 } elseif ($appliesto) {
@@ -214,15 +203,15 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
             case 'hasUserpostactivity':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $hasComments = $objectTypeResolver->resolveValue($object, 'hasComments', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $hasComments = $objectTypeResolver->resolveValue($object, 'hasComments', $objectTypeFieldResolutionFeedbackStore);
                 if ($hasComments) {
                     return $hasComments;
                 }
-                $hasReferencedBy = $objectTypeResolver->resolveValue($object, 'hasReferencedBy', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $hasReferencedBy = $objectTypeResolver->resolveValue($object, 'hasReferencedBy', $objectTypeFieldResolutionFeedbackStore);
                 if ($hasReferencedBy) {
                     return $hasReferencedBy;
                 }
-                $hasHighlights = $objectTypeResolver->resolveValue($object, 'hasHighlights', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $hasHighlights = $objectTypeResolver->resolveValue($object, 'hasHighlights', $objectTypeFieldResolutionFeedbackStore);
                 if ($hasHighlights) {
                     return $hasHighlights;
                 }
@@ -230,22 +219,22 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
 
             case 'userPostActivityCount':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $commentCount = $objectTypeResolver->resolveValue($object, 'commentCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $commentCount = $objectTypeResolver->resolveValue($object, 'commentCount', $objectTypeFieldResolutionFeedbackStore);
                 if ($commentCount) {
                     return $commentCount;
                 }
-                $referencedByCount = $objectTypeResolver->resolveValue($object, 'referencedByCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $referencedByCount = $objectTypeResolver->resolveValue($object, 'referencedByCount', $objectTypeFieldResolutionFeedbackStore);
                 if ($referencedByCount) {
                     return $referencedByCount;
                 }
-                $highlightsCount = $objectTypeResolver->resolveValue($object, 'highlightsCount', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $highlightsCount = $objectTypeResolver->resolveValue($object, 'highlightsCount', $objectTypeFieldResolutionFeedbackStore);
                 if ($highlightsCount) {
                     return $highlightsCount;
                 }
                 return $commentCount + $referencedByCount + $highlightsCount;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

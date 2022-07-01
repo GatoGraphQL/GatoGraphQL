@@ -19,7 +19,6 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool;
     public function collectFieldValidationErrors(
         FieldInterface $field,
-        array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): void;
     public function collectFieldValidationWarnings(
@@ -47,7 +46,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?MutationResolverInterface;
-    public function isFieldAMutation(string $fieldName): ?bool;
+    public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): ?bool;
     /**
      * @return array<string,Directive[]>
      */
@@ -66,4 +65,8 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      * @return array<string, ObjectTypeFieldResolverInterface[]> Key: fieldName, Value: List of FieldResolvers
      */
     public function getObjectTypeFieldResolversByField(bool $global): array;
+    /**
+     * Add the default Arguments to the field, and needed customizations
+     */
+    public function prepareField(FieldInterface $field): void;
 }

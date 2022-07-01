@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_Notifications_API;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -11,10 +12,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $histid = $form_data['histid'];
+        $histid = $mutationDataProvider->get('histid');
         if (!$histid) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -37,28 +38,27 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return $errors;
     }
 
-    protected function additionals($histid, $form_data): void
+    protected function additionals($histid, MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $form_data);
+        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $mutationDataProvider);
     }
 
     abstract protected function getStatus();
 
-    protected function setStatus($form_data)
+    protected function setStatus(MutationDataProviderInterface $mutationDataProvider)
     {
-        // return AAL_Main::instance()->api->setStatus($form_data['histid'], $form_data['user_id'], $this->getStatus());
-        return PoP_Notifications_API::setStatus($form_data['histid'], $form_data['user_id'], $this->getStatus());
+        // return AAL_Main::instance()->api->setStatus($mutationDataProvider->get('histid'), $mutationDataProvider->get('user_id'), $this->getStatus());
+        return PoP_Notifications_API::setStatus($mutationDataProvider->get('histid'), $mutationDataProvider->get('user_id'), $this->getStatus());
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $hist_ids = $this->setStatus($form_data);
-        $this->additionals($form_data['histid'], $form_data);
+        $hist_ids = $this->setStatus($mutationDataProvider);
+        $this->additionals($mutationDataProvider->get('histid'), $mutationDataProvider);
 
-        return $hist_ids; //$form_data['histid'];
+        return $hist_ids; //$mutationDataProvider->get('histid');
     }
 }

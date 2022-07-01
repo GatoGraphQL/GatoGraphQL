@@ -52,17 +52,13 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array;
     /**
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
+     * @param array<string,mixed> $options
      */
     public function resolveValue(
         object $object,
         FieldInterface $field,
-        array $variables,
-        array $expressions,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
+        array $options = [],
     ): mixed;
 
     /**
@@ -88,7 +84,7 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @param FieldInterface[] $fields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getDirectiveResolversForDirective(Directive $directive, array $fields, array &$variables): ?SplObjectStorage;
+    public function getFieldDirectiveResolvers(Directive $directive, array $fields): ?SplObjectStorage;
     /**
      * Array of directive name => resolver
      *

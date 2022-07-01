@@ -62,26 +62,15 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
         );
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'icon':
                 switch ($notification->action) {
                     case AAL_POP_ACTION_USER_UPDATEDPHOTO:
@@ -106,7 +95,7 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

@@ -56,27 +56,16 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $user = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'multilayoutKeys':
                 return array(
                     $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options),
@@ -84,10 +73,10 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
 
              // Needed for tinyMCE-mention plug-in
             case 'mentionQueryby':
-                return $objectTypeResolver->resolveValue($user, 'displayName', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                return $objectTypeResolver->resolveValue($user, 'displayName', $objectTypeFieldResolutionFeedbackStore);
 
             case 'descriptionFormatted':
-                $value = $objectTypeResolver->resolveValue($user, 'description', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $value = $objectTypeResolver->resolveValue($user, 'description', $objectTypeFieldResolutionFeedbackStore);
                 return $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML(strip_tags($value)));
 
             case 'excerpt':
@@ -96,11 +85,11 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
                     $userTypeAPI->getUserURL($objectTypeResolver->getID($user))
                 );
                 // Excerpt length can be set through fieldArgs
-                $length = $fieldArgs['length'] ? (int) $fieldArgs['length'] : 300;
+                $length = $field->getArgumentValue('length') ? (int) $field->getArgumentValue('length') : 300;
                 return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($userTypeAPI->getUserDescription($objectTypeResolver->getID($user)))), $length, $readmore));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

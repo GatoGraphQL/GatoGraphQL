@@ -191,30 +191,19 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             [
                 'authors' => [App::getState('current-user-id')],
             ]
         );
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'myCommentCount':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
             case 'myComments':
@@ -226,6 +215,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

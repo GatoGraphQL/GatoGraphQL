@@ -50,30 +50,19 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'link':
                 return PoP_AddPostLinks_Utils::getLink($objectTypeResolver->getID($post));
 
             case 'hasLink':
-                $link = $objectTypeResolver->resolveValue($post, 'link', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $link = $objectTypeResolver->resolveValue($post, 'link', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $link;
                 } elseif ($link) {
@@ -82,7 +71,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
                 return false;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

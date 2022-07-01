@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateFilterInputObjectTypeResolver;
 
@@ -59,7 +61,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     /**
      * Validated the mutation on the object because the ID
      * is obtained from the same object, so it's not originally
-     * present in $form_data
+     * present in the field argument in the query
      */
     public function validateMutationOnObject(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -72,25 +74,23 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
-    protected function getMutationFieldArgsForObject(
-        array $mutationFieldArgs,
+    protected function prepareMutationDataProviderForObject(
+        MutationDataProviderInterface $mutationDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
         object $object,
-        string $fieldName
-    ): array {
-        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
-            $mutationFieldArgs,
+    ): void {
+        parent::prepareMutationDataProviderForObject(
+            $mutationDataProviderForObject,
             $objectTypeResolver,
+            $mutationField,
             $object,
-            $fieldName
         );
         $post = $object;
-        switch ($fieldName) {
+        switch ($mutationField->getName()) {
             case 'update':
-                $mutationFieldArgs[MutationInputProperties::ID] = $objectTypeResolver->getID($post);
+                $mutationDataProviderForObject->add(MutationInputProperties::ID, $objectTypeResolver->getID($post));
                 break;
         }
-
-        return $mutationFieldArgs;
     }
 }

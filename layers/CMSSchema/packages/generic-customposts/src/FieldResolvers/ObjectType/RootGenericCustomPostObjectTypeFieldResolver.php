@@ -218,25 +218,14 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
-        switch ($fieldName) {
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        switch ($field->getName()) {
             case 'genericCustomPost':
                 if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $customPosts[0];
@@ -248,6 +237,6 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
                 return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

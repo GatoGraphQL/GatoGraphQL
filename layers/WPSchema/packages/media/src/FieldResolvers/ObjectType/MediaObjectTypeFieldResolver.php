@@ -78,30 +78,19 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var WP_Post */
         $mediaItem = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'url':
             case 'urlAbsolutePath':
                 $url = \get_permalink($mediaItem->ID);
-                if ($fieldName === 'url') {
+                if ($field->getName() === 'url') {
                     return $url;
                 }
                 /** @var string */
@@ -110,6 +99,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $mediaItem->post_name;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

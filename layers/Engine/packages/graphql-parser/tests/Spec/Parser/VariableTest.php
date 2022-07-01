@@ -21,7 +21,7 @@ class VariableTest extends AbstractTestCase
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setContext(new Context(null, ['foo' => $actual]));
-        $this->assertEquals($var->getValue()->getValue(), $expected);
+        $this->assertEquals($var->getValue(), $expected);
     }
 
     public function testGetNullValueException()
@@ -29,18 +29,18 @@ class VariableTest extends AbstractTestCase
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(FeedbackItemProvider::class, FeedbackItemProvider::E2, ['foo']))->getMessage());
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
-        $var->getValue()->getValue();
+        $var->getValue();
     }
 
     public function testGetValueReturnsDefaultValueIfNoValueSet()
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
-        $var->setDefaultValue(new Literal('default-value', new Location(1, 1)));
+        $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
         $var->setContext(new Context());
 
         $this->assertEquals(
             'default-value',
-            $var->getValue()->getValue()
+            $var->getValue()
         );
     }
 
@@ -48,18 +48,18 @@ class VariableTest extends AbstractTestCase
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->setContext(new Context(null, ['foo' => 'real-value']));
-        $var->setDefaultValue(new Literal('default-value', new Location(1, 1)));
+        $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
 
         $this->assertEquals(
             'real-value',
-            $var->getValue()->getValue()
+            $var->getValue()
         );
     }
 
     public function testIndicatesDefaultValuePresent()
     {
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
-        $var->setDefaultValue(new Literal('default-value', new Location(1, 1)));
+        $var->setDefaultValueAST(new Literal('default-value', new Location(1, 1)));
 
         $this->assertTrue(
             $var->hasDefaultValue()

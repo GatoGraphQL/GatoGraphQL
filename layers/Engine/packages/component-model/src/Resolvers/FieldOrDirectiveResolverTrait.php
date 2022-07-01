@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Translation\TranslationAPIInterface;
 
 trait FieldOrDirectiveResolverTrait
@@ -22,16 +24,17 @@ trait FieldOrDirectiveResolverTrait
      * because empty values could be allowed.
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
+     *
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     private function validateNotMissingFieldOrDirectiveArguments(
         array $mandatoryFieldOrDirectiveArgNames,
-        string $fieldOrDirectiveName,
-        array $fieldOrDirectiveArgs,
+        FieldInterface|Directive $fieldOrDirective,
         string $type
     ): ?FeedbackItemResolution {
         $missing = array_values(array_filter(
             $mandatoryFieldOrDirectiveArgNames,
-            fn (string $fieldArgName) => !isset($fieldOrDirectiveArgs[$fieldArgName])
+            fn (string $fieldArgName) => $fieldOrDirective->getArgumentValue($fieldArgName) === null
         ));
         if ($missing !== []) {
             return count($missing) === 1 ?
@@ -41,7 +44,7 @@ trait FieldOrDirectiveResolverTrait
                     [
                         $missing[0],
                         $type,
-                        $fieldOrDirectiveName
+                        $fieldOrDirective->getName()
                     ]
                 )
                 : new FeedbackItemResolution(
@@ -50,27 +53,11 @@ trait FieldOrDirectiveResolverTrait
                     [
                         implode($this->getTranslationAPI()->__('\', \''), $missing),
                         $type,
-                        $fieldOrDirectiveName
+                        $fieldOrDirective->getName()
                     ]
                 );
         }
         return null;
-    }
-
-    /**
-     * The validations below can only be done if no fieldArg or directiveArg contains a field!
-     * That is because this is a schema error, so we still don't have the $object against which to resolve the field
-     * For instance, this doesn't work: /?query=arrayItem(posts(),3)
-     * In that case, the validation will be done inside ->resolveValue(),
-     * and will be treated as a $dbError, not a $schemaError.
-     *
-     * Same with expressions, as when calling `getSelfProp(%{self}%, "posts")`.
-     *
-     * But no need with variables, because by now they will have been replaced with the actual value.
-     */
-    protected function canValidateFieldOrDirectiveArgumentsWithValuesForSchema(array $fieldOrDirectiveArgs): bool
-    {
-        return !FieldQueryUtils::isAnyFieldArgumentValueAFieldOrExpression($fieldOrDirectiveArgs);
     }
 
     /**

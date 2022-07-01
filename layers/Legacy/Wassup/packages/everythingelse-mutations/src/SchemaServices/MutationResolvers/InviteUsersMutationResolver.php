@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_EmailTemplatesFactory;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -13,15 +14,15 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    protected function getEmailContent($form_data)
+    protected function getEmailContent(MutationDataProviderInterface $mutationDataProvider)
     {
         $website_html = PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
 
         // Maybe the user is logged in, maybe not
-        if ($sender_name = $form_data['sender-name']) {
+        if ($sender_name = $mutationDataProvider->get('sender-name')) {
             // There might be a sender URL if the user was logged in, or not
-            if ($sender_url = $form_data['sender-url']) {
+            if ($sender_url = $mutationDataProvider->get('sender-url')) {
                 $sender_html = sprintf('<a href="%s">%s</a>', $sender_url, $sender_name);
             } else {
                 $sender_html = $sender_name;
@@ -47,7 +48,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         );
 
         // Optional: Additional Message
-        if ($additional_msg = $form_data['additional-msg']) {
+        if ($additional_msg = $mutationDataProvider->get('additional-msg')) {
             $content .= sprintf(
                 '<div style="margin-left: 20px;">%s</div>',
                 $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML($additional_msg))
@@ -73,13 +74,13 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject($form_data)
+    protected function getEmailSubject(MutationDataProviderInterface $mutationDataProvider)
     {
         $subject = '';
 
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         // Maybe the user is logged in, maybe not
-        if ($sender_name = $form_data['sender-name']) {
+        if ($sender_name = $mutationDataProvider->get('sender-name')) {
             $subject = sprintf(
                 $this->getTranslationAPI()->__('%s is inviting you to join %s!', 'pop-coreprocessors'),
                 $sender_name,

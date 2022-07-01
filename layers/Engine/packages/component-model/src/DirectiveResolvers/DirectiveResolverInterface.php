@@ -29,10 +29,15 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function getDirectiveName(): string;
     public function getDirective(): Directive;
     /**
-     * Invoked when creating the non-shared directive instance
-     * to resolve a field in the pipeline
+     * Set the Directive to be resolved by the DirectiveResolver,
+     * and initialize the Directive with additional information,
+     * such as adding the default Argument AST objects which
+     * were not provided in the query.
      */
-    public function setDirective(Directive $directive): void;
+    public function setAndPrepareDirective(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        Directive $directive,
+    ): void;
     /**
      * Indicate to what fieldNames this directive can be applied.
      * Returning an empty array means all of them
@@ -91,14 +96,15 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      * All other directives must indicate where to position themselves,
      * using these 3 directives as anchors.
      *
-     * There are 6 positions:
+     * There are 7 positions:
      *
      *   1. At the very beginning
-     *   2. Before Validate directive
-     *   3. Between the Validate and Resolve directives
-     *   4. Between the Resolve and Serialize directives
-     *   5. After the Serialize directive
-     *   6. At the very end
+     *   2. Before the PrepareField directive
+     *   3. Between the PrepareField and Validate directives
+     *   4. Between the Validate and Resolve directives
+     *   5. Between the Resolve and Serialize directives
+     *   6. After the Serialize directive
+     *   7. At the very end
      *
      * In the "serialize" step, the directive takes the objects
      * stored in $resolvedIDFieldValues, such as a DateTime object,
@@ -118,10 +124,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function resolveCanProcess(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs,
-        FieldInterface $field,
-        array &$variables
+        Directive $directive,
     ): bool;
     /**
      * Indicates if the directive can be added several times to the pipeline, or only once
@@ -174,8 +177,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      */
     public function resolveDirectiveValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directiveName,
-        array $directiveArgs
+        Directive $directive,
     ): array;
     public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution;
     public function getDirectiveDeprecationMessage(RelationalTypeResolverInterface $relationalTypeResolver): ?string;

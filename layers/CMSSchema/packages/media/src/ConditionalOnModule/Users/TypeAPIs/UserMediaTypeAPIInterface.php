@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Media\ConditionalOnModule\Users\TypeAPIs;
 
 interface UserMediaTypeAPIInterface
 {
-    public function getMediaAuthorId(string | int | object $mediaObjectOrID): string | int | null;
+    public function getMediaAuthorId(string|int|object $mediaObjectOrID): string | int | null;
 }

@@ -34,9 +34,11 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ];
     }
 
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
-    {
-        return ($fieldArgs['branch'] ?? null) == 'try-new-features' && ($fieldArgs['project'] ?? null) == 'block-metadata';
+    public function resolveCanProcess(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return $field->getArgumentValue('branch') === 'try-new-features' && $field->getArgumentValue('project') === 'block-metadata';
     }
 
     public function getFieldNamesToResolve(): array
@@ -70,27 +72,16 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'content':
-                unset($fieldArgs['branch']);
-                unset($fieldArgs['project']);
+                unset($field->getArgumentValue('branch'));
+                unset($field->getArgumentValue('project'));
                 return $objectTypeResolver->resolveValue(
                     $object,
                     new LeafField(
@@ -100,13 +91,10 @@ class TryNewFeaturesPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

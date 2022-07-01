@@ -8,12 +8,11 @@ class PoP_UserAvatarProcessors_UserPlatform_ActionExecuter_Hooks
         \PoP\Root\App::addAction(
             'gd_createupdate_user:additionalsCreate',
             $this->additionalsCreate(...),
-            10,
-            2
+            10
         );
     }
 
-    public function additionalsCreate($user_id, $form_data)
+    public function additionalsCreate($user_id)
     {
         // Save the user avatar
         $instanceManager = InstanceManagerFacade::getInstance();

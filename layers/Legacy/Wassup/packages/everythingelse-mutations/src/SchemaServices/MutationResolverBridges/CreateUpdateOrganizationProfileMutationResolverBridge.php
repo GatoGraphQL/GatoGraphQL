@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Root\Exception\GenericSystemException;
-use PoP\Root\App;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use Exception;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
+use PoP\Root\Exception\GenericSystemException;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\CreateUpdateOrganizationProfileMutationResolver;
 
 class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdateProfileMutationResolverBridge
@@ -61,25 +66,20 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         return $inputs;
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        return array_merge(
-            parent::getFormData(),
-            $this->getCommonuserrolesFormData(),
-            $this->getUsercommunitiesFormData()
-        );
+        $this->getCommonuserrolesFormData($mutationField);
+        $this->getUsercommunitiesFormData($mutationField);
     }
-    protected function getCommonuserrolesFormData()
+    protected function getCommonuserrolesFormData(FieldInterface $mutationField)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $organizationtypes = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
         $organizationcategories = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
-        return array(
-            'organizationtypes' => $organizationtypes ?? array(),
-            'organizationcategories' => $organizationcategories ?? array(),
-            'contact_number' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))),
-            'contact_person' => trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))),
-        );
+        $mutationDataProvider->add('organizationtypes', $organizationtypes ?? array());
+        $mutationDataProvider->add('organizationcategories', $organizationcategories ?? array());
+        $mutationDataProvider->add('contact_number', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))));
+        $mutationDataProvider->add('contact_person', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))));
     }
 }

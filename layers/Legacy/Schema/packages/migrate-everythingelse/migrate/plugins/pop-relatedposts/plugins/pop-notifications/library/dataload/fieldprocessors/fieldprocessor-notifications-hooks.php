@@ -64,27 +64,16 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ex
         );
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'icon':
                 $routes = array(
                     AAL_POP_ACTION_POST_REFERENCEDPOST => POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT,
@@ -116,7 +105,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications ex
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

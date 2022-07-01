@@ -4,37 +4,37 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
 class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMutationResolver
 {
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        if ($this->isUpdate($form_data)) {
-            return $this->update($form_data);
+        if ($this->isUpdate($mutationDataProvider)) {
+            return $this->update($mutationDataProvider);
         }
-        return $this->create($form_data);
+        return $this->create($mutationDataProvider);
     }
 
-    public function validateErrors(array $form_data): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
-        if ($this->isUpdate($form_data)) {
-            return $this->validateUpdateErrors($form_data);
+        if ($this->isUpdate($mutationDataProvider)) {
+            return $this->validateUpdateErrors($mutationDataProvider);
         }
-        return $this->validateCreateErrors($form_data);
+        return $this->validateCreateErrors($mutationDataProvider);
     }
 
     /**
      * If there's an "id" entry => It's Update
      * Otherwise => It's Create
      */
-    protected function isUpdate(array $form_data): bool
+    protected function isUpdate(MutationDataProviderInterface $mutationDataProvider): bool
     {
-        return !empty($form_data[MutationInputProperties::ID]);
+        return !empty($mutationDataProvider->get(MutationInputProperties::ID));
     }
 }

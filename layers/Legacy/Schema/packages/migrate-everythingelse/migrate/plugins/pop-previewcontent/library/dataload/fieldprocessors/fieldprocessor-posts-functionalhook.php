@@ -37,32 +37,21 @@ class PPPPoP_DataLoad_ObjectTypeFieldResolver_FunctionalProfiles extends Abstrac
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'previewURL':
                 // Use function getID to also cater for events (whose ID is $event->post_id)
                 return $pluginapi->getPreviewLink($objectTypeResolver->getID($post));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

@@ -114,26 +114,15 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
              // Override 'locations' field
             case 'locations':
                 // Events can have no location
@@ -147,10 +136,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $location;
@@ -189,6 +175,6 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

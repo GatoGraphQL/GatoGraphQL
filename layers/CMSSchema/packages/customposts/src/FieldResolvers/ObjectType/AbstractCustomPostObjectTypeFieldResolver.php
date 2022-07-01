@@ -67,26 +67,15 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         ];
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'url':
                 return $customPostTypeAPI->getPermalink($customPost);
 
@@ -106,24 +95,24 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getStatus($customPost);
 
             case 'isStatus':
-                return $fieldArgs['status'] == $customPostTypeAPI->getStatus($customPost);
+                return $field->getArgumentValue('status') == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $fieldArgs['gmt']));
+                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt') ?? false));
 
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
-                    $customPostTypeAPI->getPublishedDate($customPost, $fieldArgs['gmt'])
+                    $field->getArgumentValue('format'),
+                    $customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt') ?? false)
                 );
 
             case 'modifiedDate':
-                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $fieldArgs['gmt']));
+                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt') ?? false));
 
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
-                    $customPostTypeAPI->getModifiedDate($customPost, $fieldArgs['gmt'])
+                    $field->getArgumentValue('format'),
+                    $customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt') ?? false)
                 );
 
             case 'title':
@@ -136,6 +125,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getCustomPostType($customPost);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

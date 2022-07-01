@@ -35,14 +35,12 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         return false;
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $form_data = parent::getFormData();
+        parent::fillMutationDataProvider($mutationDataProvider);
 
         $target = $this->getComponentProcessorManager()->getComponentProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET])->getValue([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET]);
-        $form_data['stancetarget'] = $target;
-
-        return $form_data;
+        $mutationDataProvider->add('stancetarget', $target);
     }
 
     protected function isUpdate(): bool

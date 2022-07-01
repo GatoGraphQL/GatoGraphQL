@@ -37,34 +37,23 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
         return $this->getTaxonomyMetaTypeAPI();
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $taxonomy = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'metaValue':
             case 'metaValues':
                 return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
                     $objectTypeResolver->getID($taxonomy),
-                    $fieldArgs['key'],
-                    $fieldName === 'metaValue'
+                    $field->getArgumentValue('key'),
+                    $field->getName() === 'metaValue'
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

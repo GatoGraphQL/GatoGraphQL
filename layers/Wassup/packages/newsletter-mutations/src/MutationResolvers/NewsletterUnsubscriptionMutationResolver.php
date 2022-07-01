@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_GenericForms_NewsletterUtils;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
@@ -13,17 +14,17 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        if (empty($form_data['email'])) {
+        if (empty($mutationDataProvider->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($mutationDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -34,7 +35,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 
         $placeholder_string = $this->__('%s %s', 'pop-genericforms');
         $makesure_string = $this->__('Please make sure you have clicked on the unsubscription link in the newsletter.', 'pop-genericforms');
-        if (empty($form_data['verificationcode'])) {
+        if (empty($mutationDataProvider->get('verificationcode'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -52,8 +53,8 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         }
 
         // Verify that the verification code corresponds to the email
-        $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($form_data['email']);
-        if ($verificationcode != $form_data['verificationcode']) {
+        $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($mutationDataProvider->get('email'));
+        if ($verificationcode != $mutationDataProvider->get('verificationcode')) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -69,7 +70,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             return $errors;
         }
 
-        $newsletter_data = $this->getNewsletterData($form_data);
+        $newsletter_data = $this->getNewsletterData($mutationDataProvider);
         $this->validateData($errors, $newsletter_data);
         return $errors;
     }
@@ -77,15 +78,15 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data): void
+    protected function additionals(MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('pop_unsubscribe_from_newsletter', $form_data);
+        App::doAction('pop_unsubscribe_from_newsletter', $mutationDataProvider);
     }
 
     /**
      * Function to override by Gravity Forms
      */
-    protected function getNewsletterData($form_data)
+    protected function getNewsletterData(MutationDataProviderInterface $mutationDataProvider)
     {
         return array();
     }
@@ -119,16 +120,15 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $newsletter_data = $this->getNewsletterData($form_data);
+        $newsletter_data = $this->getNewsletterData($mutationDataProvider);
         $result = $this->doExecute($newsletter_data);
 
         // Allow for additional operations
-        $this->additionals($form_data);
+        $this->additionals($mutationDataProvider);
 
         return $result;
     }

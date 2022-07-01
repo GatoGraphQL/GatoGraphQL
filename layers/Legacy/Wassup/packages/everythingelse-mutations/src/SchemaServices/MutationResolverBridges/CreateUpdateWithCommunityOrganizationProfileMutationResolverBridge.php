@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\GenericSystemException;
 use PoP\Root\App;
 use Exception;
@@ -58,7 +59,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
         return $inputs;
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         $inputs = $this->getFormInputs();
         return array_merge(

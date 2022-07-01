@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostLinkMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_ApplicationProcessors_Utils;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
@@ -11,25 +12,25 @@ use PoPSitesWassup\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutat
 
 abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCreateUpdatePostMutationResolver
 {
-    protected function getCategories(array $form_data): ?array
+    protected function getCategories(MutationDataProviderInterface $mutationDataProvider): ?array
     {
-        $ret = parent::getCategories($form_data);
+        $ret = parent::getCategories($mutationDataProvider);
         $ret[] = \POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
         return $ret;
     }
 
-    protected function validateContent(array &$errors, array $form_data): void
+    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::validateContent($errors, $form_data);
-        MutationResolverUtils::validateContent($errors, $form_data);
+        parent::validateContent($errors, $mutationDataProvider);
+        MutationResolverUtils::validateContent($errors, $mutationDataProvider);
     }
 
-    protected function additionals(string | int $post_id, array $form_data): void
+    protected function additionals(string | int $post_id, MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::additionals($post_id, $form_data);
+        parent::additionals($post_id, $mutationDataProvider);
 
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $form_data['linkaccess'], true);
+            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $mutationDataProvider->get('linkaccess'), true);
         }
     }
 }

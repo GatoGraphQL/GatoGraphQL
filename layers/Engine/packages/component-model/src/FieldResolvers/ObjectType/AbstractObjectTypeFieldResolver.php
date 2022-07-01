@@ -15,6 +15,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -22,6 +23,9 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\Mutation\FieldArgumentMutationDataProvider;
+use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentMutationDataProvider;
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -40,12 +44,14 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver implements ObjectTypeFieldResolverInterface
 {
@@ -61,35 +67,39 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $schemaDefinitionForFieldCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDescriptionCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $consolidatedFieldExtensionsCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldDeprecationMessageCache = [];
-    /** @var array<string, array<string, InputTypeResolverInterface>> */
+    /** @var array<string,array<string,InputTypeResolverInterface>> */
     protected array $consolidatedFieldArgNameTypeResolversCache = [];
-    /** @var array<string, string[]> */
+    /** @var array<string,string[]> */
     protected array $consolidatedAdminFieldArgNamesCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDescriptionCache = [];
-    /** @var array<string, string|null> */
+    /** @var array<string,string|null> */
     protected array $consolidatedFieldArgDeprecationMessageCache = [];
-    /** @var array<string, mixed> */
+    /** @var array<string,mixed> */
     protected array $consolidatedFieldArgDefaultValueCache = [];
-    /** @var array<string, int> */
+    /** @var array<string,int> */
     protected array $consolidatedFieldArgTypeModifiersCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaFieldArgsCache = [];
-    /** @var array<string, array<string, mixed>> */
+    /** @var array<string,array<string,mixed>> */
     protected array $schemaFieldArgExtensionsCache = [];
     /**
-     * @var array<string, ObjectTypeFieldSchemaDefinitionResolverInterface>
+     * @var array<string,ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
+    /** @var SplObjectStorage<FieldInterface,MutationDataProviderInterface> */
+    protected SplObjectStorage $fieldMutationDataProviderCache;
+    /** @var SplObjectStorage<FieldInterface,SplObjectStorage<object,MutationDataProviderInterface>> */
+    protected SplObjectStorage $fieldMutationDataProviderForObjectCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
@@ -172,6 +182,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getEnabledMutationsCheckpoint(): EnabledMutationsCheckpoint
     {
         return $this->enabledMutationsCheckpoint ??= $this->instanceManager->getInstance(EnabledMutationsCheckpoint::class);
+    }
+
+    public function __construct()
+    {
+        $this->fieldMutationDataProviderCache = new SplObjectStorage();
+        $this->fieldMutationDataProviderForObjectCache = new SplObjectStorage();
     }
 
     final public function getClassesToAttachTo(): array
@@ -339,7 +355,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -645,17 +661,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
-     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldArgs['branch'])
-     *
-     * @param array<string, mixed> $fieldArgs
+     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $field->getArgumentValue('branch'))
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
-    {
+    public function resolveCanProcess(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
         /** Check if to validate the version */
         if (
             Environment::enableSemanticVersionConstraints()
             && $this->decideCanProcessBasedOnVersionConstraint($objectTypeResolver)
-            && $this->hasFieldVersion($objectTypeResolver, $fieldName)
+            && $this->hasFieldVersion($objectTypeResolver, $field->getName())
         ) {
             /**
              * Please notice: we can get the fieldVersion directly from this instance,
@@ -664,23 +680,23 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * inside the schemaDefinition object.
              * If this field is tagged with a version...
              */
-            $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $fieldName);
+            $schemaFieldVersion = $this->getFieldVersion($objectTypeResolver, $field->getName());
             /**
              * Get versionConstraint in this order:
              * 1. Passed as field argument
-             * 2. Through param `fieldVersionConstraints[$fieldName]`: specific to the namespaced type + field
-             * 3. Through param `fieldVersionConstraints[$fieldName]`: specific to the type + field
+             * 2. Through param `fieldVersionConstraints[$field->getName()]`: specific to the namespaced type + field
+             * 3. Through param `fieldVersionConstraints[$field->getName()]`: specific to the type + field
              * 4. Through param `versionConstraint`: applies to all fields and directives in the query
              */
             $versionConstraint =
-                $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT]
+                $field->getArgument(SchemaDefinition::VERSION_CONSTRAINT)?->getValue()
                 ?? $this->getVersioningService()->getVersionConstraintsForField(
                     $objectTypeResolver->getNamespacedTypeName(),
-                    $fieldName
+                    $field->getName()
                 )
                 ?? $this->getVersioningService()->getVersionConstraintsForField(
                     $objectTypeResolver->getTypeName(),
-                    $fieldName
+                    $field->getName()
                 )
                 ?? App::getState('version-constraint');
             /**
@@ -698,30 +714,46 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
     public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         /**
          * Validate all mandatory args have been provided
          */
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
         $mandatoryConsolidatedFieldArgNames = array_keys(array_filter(
             $consolidatedFieldArgNameTypeResolvers,
-            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
+            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $field->getName(), $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
             ARRAY_FILTER_USE_KEY
         ));
-        if (
-            $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
-                $mandatoryConsolidatedFieldArgNames,
-                $fieldName,
-                $fieldArgs,
-                ResolverTypes::FIELD
-            )
-        ) {
+        try {
+            if (
+                $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
+                    $mandatoryConsolidatedFieldArgNames,
+                    $field,
+                    ResolverTypes::FIELD
+                )
+            ) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $maybeErrorFeedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver,
+                    )
+                );
+                return;
+            }
+        } catch (InvalidDynamicContextException $e) {
+            $feedbackItemResolution = new FeedbackItemResolution(
+                GenericFeedbackItemProvider::class,
+                GenericFeedbackItemProvider::E1,
+                [
+                    $e->getMessage(),
+                ]
+            );
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $maybeErrorFeedbackItemResolution,
+                    $feedbackItemResolution,
                     LocationHelper::getNonSpecificLocation(),
                     $objectTypeResolver,
                 )
@@ -729,37 +761,35 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return;
         }
 
-        if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($fieldArgs)) {
-            /**
-             * Validate field argument constraints
-             */
-            if (
-                $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
-                    $objectTypeResolver,
-                    $fieldName,
-                    $fieldArgs
-                )
-            ) {
-                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            $errorFeedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver,
-                        )
-                    );
-                }
-                return;
+        /**
+         * Validate field argument constraints
+         */
+        if (
+            $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
+                $objectTypeResolver,
+                $field,
+            )
+        ) {
+            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $objectTypeResolver,
+                    )
+                );
             }
+            return;
         }
 
         /**
          * If a MutationResolver is declared, let it validate the schema
          */
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
-        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
+            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProvider);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -775,8 +805,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // Custom validations
         $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrors(
             $objectTypeResolver,
-            $fieldName,
-            $fieldArgs,
+            $field,
         );
         foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -791,8 +820,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): bool {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -806,33 +834,43 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function resolveFieldArgumentErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
         $errors = [];
-        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-        foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
+        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
+        foreach ($field->getArguments() as $argument) {
             /**
              * If the field is an InputObject, let it perform validations on its input fields
              */
-            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
-            if (
-                $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
-            ) {
+            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argument->getName()];
+            try {
+                $argumentValue = $argument->getValue();
+                if (
+                    $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
+                ) {
+                    $errors = array_merge(
+                        $errors,
+                        $fieldArgTypeResolver->validateInputValue($argumentValue)
+                    );
+                }
                 $errors = array_merge(
                     $errors,
-                    $fieldArgTypeResolver->validateInputValue($fieldArgValue)
+                    $this->validateFieldArgValue(
+                        $objectTypeResolver,
+                        $field->getName(),
+                        $argument->getName(),
+                        $argumentValue
+                    )
+                );
+            } catch (InvalidDynamicContextException $e) {
+                $errors[] = new FeedbackItemResolution(
+                    GenericFeedbackItemProvider::class,
+                    GenericFeedbackItemProvider::E1,
+                    [
+                        $e->getMessage(),
+                    ]
                 );
             }
-            $errors = array_merge(
-                $errors,
-                $this->validateFieldArgValue(
-                    $objectTypeResolver,
-                    $fieldName,
-                    $fieldArgName,
-                    $fieldArgValue
-                )
-            );
         }
         return $errors;
     }
@@ -844,8 +882,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
         return [];
     }
@@ -972,7 +1009,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * Watch out: The same extensions must be present for both
      * the ObjectType and the InterfaceType!
      *
-     * @return array<string, mixed>
+     * @return array<string,mixed>
      */
     protected function getFieldExtensionsSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
@@ -1040,14 +1077,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array
     {
         $warningFeedbackItemResolutions = [];
         if (Environment::enableSemanticVersionConstraints()) {
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
              */
-            if ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null) {
+            if ($versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)) {
                 /**
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
@@ -1056,8 +1093,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         WarningFeedbackItemProvider::class,
                         WarningFeedbackItemProvider::W2,
                         [
-                            $fieldName,
-                            $this->getFieldVersion($objectTypeResolver, $fieldName) ?? '',
+                            $field->getName(),
+                            $this->getFieldVersion($objectTypeResolver, $field->getName()) ?? '',
                             $versionConstraint
                         ]
                     );
@@ -1065,31 +1102,20 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs);
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
+            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
-                $mutationResolver->validateWarnings($mutationFieldArgs)
+                $mutationResolver->validateWarnings($mutationDataProvider)
             );
         }
         return $warningFeedbackItemResolutions;
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
-     */
-    public function resolveCanProcessObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): bool {
-        return true;
-    }
-
-    /**
-     * @param array<string, mixed> $fieldArgs
+     * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
     protected function getValidationCheckpoints(
@@ -1106,18 +1132,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $validationCheckpoints;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldName, $fieldArgs)) {
+        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $field->getName(), $field->getArguments())) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
             if ($feedbackItemResolution !== null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1132,16 +1154,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
-        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldName)) {
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
-                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
-                $objectTypeResolver,
-                $object,
-                $fieldName
-            );
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationFieldArgs);
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
+            $mutationDataProviderForObject = $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProviderForObject);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1156,51 +1174,77 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * Retrieve the field arguments to pass to the MutationResolver,
-     * for instance from under an InputObject.
-     *
-     * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
+     * Retrieve the field to pass to the MutationResolver,
+     * for instance it can change for an InputObject.
      */
-    protected function getMutationFieldArgs(
+    protected function getMutationField(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
-    ): array {
-        if ($this->extractInputObjectFieldArgsForMutation($objectTypeResolver, $fieldName)) {
-            $fieldArgs = $this->maybeGetInputObjectFieldArgs(
-                $objectTypeResolver,
-                $fieldName,
-                $fieldArgs,
-            );
-        }
-        return $fieldArgs;
+        FieldInterface $field,
+    ): FieldInterface {
+        return $field;
     }
 
-    /**
-     * Consolidation of the schema field arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
-    final protected function getConsolidatedMutationFieldArgs(
+    final protected function getMutationDataProvider(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
-    ): array {
-        return App::applyFilters(
-            HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS,
-            $this->getMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
-            $this,
+        FieldInterface $mutationField,
+    ): MutationDataProviderInterface {
+        if (!$this->fieldMutationDataProviderCache->contains($mutationField)) {
+            $this->fieldMutationDataProviderCache[$mutationField] = $this->doGetMutationDataProvider($objectTypeResolver, $mutationField);
+        }
+        return $this->fieldMutationDataProviderCache[$mutationField];
+    }
+
+    protected function doGetMutationDataProvider(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
+    ): MutationDataProviderInterface {
+        if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $mutationField->getName())) {
+            $fieldInputArgumentName = $this->getInputObjectUnderFieldArgumentName($objectTypeResolver, $mutationField);
+            if ($fieldInputArgumentName) {
+                return new InputObjectUnderFieldArgumentMutationDataProvider(
+                    $mutationField,
+                    $fieldInputArgumentName,
+                );
+            }
+        }
+        return new FieldArgumentMutationDataProvider($mutationField);
+    }
+
+    final protected function getMutationDataProviderForObject(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
+        object $object,
+    ): MutationDataProviderInterface {
+        if (!$this->fieldMutationDataProviderForObjectCache->contains($mutationField)) {
+            $this->fieldMutationDataProviderForObjectCache[$mutationField] = new SplObjectStorage();
+        }
+        if (!$this->fieldMutationDataProviderForObjectCache[$mutationField]->contains($object)) {
+            $this->fieldMutationDataProviderForObjectCache[$mutationField][$object] = $this->doGetMutationDataProviderForObject($objectTypeResolver, $mutationField, $object);
+        }
+        return $this->fieldMutationDataProviderForObjectCache[$mutationField][$object];
+    }
+
+    protected function doGetMutationDataProviderForObject(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
+        object $object,
+    ): MutationDataProviderInterface {
+        $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+        $mutationDataProviderForObject = clone $mutationDataProvider;
+        $this->prepareMutationDataProviderForObject(
+            $mutationDataProviderForObject,
             $objectTypeResolver,
-            $fieldName,
-            $fieldArgs,
+            $mutationField,
+            $object,
         );
+        return $mutationDataProviderForObject;
     }
 
     /**
      * Indicate: if the field has a single field argument, which is of type InputObject,
      * then retrieve the value for its input fields?
      */
-    protected function extractInputObjectFieldArgsForMutation(
+    protected function extractInputObjectFieldForMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
@@ -1210,31 +1254,26 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
-     *
-     * @param array<string, mixed> $fieldArgs
-     * @return array<string, mixed>
      */
-    private function maybeGetInputObjectFieldArgs(
+    protected function getInputObjectUnderFieldArgumentName(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
-    ): array {
-        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        FieldInterface $field,
+    ): ?string {
+        $fieldArgNameTypeResolvers = $this->getFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
 
         // Check if there is only one fieldArg
         if (count($fieldArgNameTypeResolvers) !== 1) {
-            return $fieldArgs;
+            return null;
         }
 
         // Check if the fieldArg is an InputObject
         $fieldArgName = key($fieldArgNameTypeResolvers);
         $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$fieldArgName];
         if (!($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface)) {
-            return $fieldArgs;
+            return null;
         }
 
-        // Retrieve the elements under the InputObject, cast to array
-        return (array) $fieldArgs[$fieldArgName];
+        return $fieldArgName;
     }
 
     /**
@@ -1248,34 +1287,21 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return false;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationFieldArgs = $this->getConsolidatedMutationFieldArgsForObject(
-                $this->getConsolidatedMutationFieldArgs($objectTypeResolver, $fieldName, $fieldArgs),
-                $objectTypeResolver,
-                $object,
-                $fieldName
-            );
+            $mutationField = $this->getMutationField($objectTypeResolver, $field);
+            $mutationDataProvider = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
+                ? $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object)
+                : $this->getMutationDataProvider($objectTypeResolver, $mutationField);
             try {
-                return $mutationResolver->executeMutation($mutationFieldArgs);
+                return $mutationResolver->executeMutation($mutationDataProvider);
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1286,7 +1312,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                                 ErrorFeedbackItemProvider::class,
                                 ErrorFeedbackItemProvider::E6A,
                                 [
-                                    $fieldName,
+                                    $field->getName(),
                                     $e->getMessage(),
                                     $e->getTraceAsString(),
                                 ]
@@ -1304,7 +1330,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6A,
                             [
-                                $fieldName,
+                                $field->getName(),
                                 $e->getMessage(),
                                 $e->getTraceAsString(),
                             ]
@@ -1313,7 +1339,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6,
                             [
-                                $fieldName,
+                                $field->getName(),
                                 $e->getMessage(),
                             ]
                         )
@@ -1322,7 +1348,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E7,
                         [
-                            $fieldName
+                            $field->getName()
                         ]
                     );
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1335,46 +1361,19 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return null;
             }
         }
-        // Base case: If the fieldName exists as property in the object, then retrieve it
-        if (\property_exists($object, $fieldName)) {
-            return $object->$fieldName;
+        // Base case: If the field->getName() exists as property in the object, then retrieve it
+        if (\property_exists($object, $field->getName())) {
+            return $object->$field->getName();
         }
         return null;
     }
 
-    /**
-     * Consolidation of the schema field arguments. Call this function to read the data
-     * instead of the individual functions, since it applies hooks to override/extend.
-     */
-    final protected function getConsolidatedMutationFieldArgsForObject(
-        array $mutationFieldArgs,
+    protected function prepareMutationDataProviderForObject(
+        MutationDataProviderInterface $mutationDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
         object $object,
-        string $fieldName,
-    ): array {
-        return App::applyFilters(
-            HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS_FOR_OBJECT,
-            $this->getMutationFieldArgsForObject(
-                $mutationFieldArgs,
-                $objectTypeResolver,
-                $object,
-                $fieldName,
-            ),
-            $this,
-            $mutationFieldArgs,
-            $objectTypeResolver,
-            $object,
-            $fieldName,
-        );
-    }
-
-    protected function getMutationFieldArgsForObject(
-        array $mutationFieldArgs,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-    ): array {
-        return $mutationFieldArgs;
+    ): void {
     }
 
     public function getFieldMutationResolver(
@@ -1382,5 +1381,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         string $fieldName
     ): ?MutationResolverInterface {
         return null;
+    }
+
+    /**
+     * Allow to add additional Arguments
+     */
+    public function prepareField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): void {
     }
 }

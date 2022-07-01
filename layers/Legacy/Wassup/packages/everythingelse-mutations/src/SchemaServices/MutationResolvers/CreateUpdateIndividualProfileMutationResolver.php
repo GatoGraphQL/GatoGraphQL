@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
     use CreateUpdateIndividualProfileMutationResolverTrait;
 
-    protected function getUpdateuserData($form_data)
+    protected function getUpdateuserData(MutationDataProviderInterface $mutationDataProvider)
     {
-        $user_data = parent::getUpdateuserData($form_data);
+        $user_data = parent::getUpdateuserData($mutationDataProvider);
 
-        $user_data['lastName'] = $form_data['last_name'];
+        $user_data['lastName'] = $mutationDataProvider->get('last_name');
 
         return $user_data;
     }
-    protected function createupdateuser($user_id, $form_data): void
+    protected function createupdateuser($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::createupdateuser($user_id, $form_data);
+        parent::createupdateuser($user_id, $mutationDataProvider);
 
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $mutationDataProvider->get('individualinterests'));
     }
 }

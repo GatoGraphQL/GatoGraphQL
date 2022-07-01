@@ -169,26 +169,15 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'menu':
-                $by = $fieldArgs['by'];
+                $by = $field->getArgumentValue('by');
                 if (isset($by->id)) {
                     // Validate the ID exists
                     $menuID = $by->id;
@@ -199,8 +188,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return null;
         }
 
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
-        switch ($fieldName) {
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        switch ($field->getName()) {
             case 'menus':
                 return $this->getMenuTypeAPI()->getMenus($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
@@ -208,6 +197,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return $this->getMenuTypeAPI()->getMenuCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

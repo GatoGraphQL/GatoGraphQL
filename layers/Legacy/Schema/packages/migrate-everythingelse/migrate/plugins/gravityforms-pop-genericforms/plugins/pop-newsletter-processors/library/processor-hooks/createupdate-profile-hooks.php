@@ -1,14 +1,16 @@
 <?php
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addFilter('gd_createupdate_profile:form_data', $this->getFormData(...), 10);
+        \PoP\Root\App::addAction('gd_createupdate_profile:form_data', $this->fillMutationDataProvider(...), 10);
         \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubcomponents(...), 10, 3);
-        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionals(...), 10, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionalsCreate(...), 10, 2);
     }
 
     public function enabled()
@@ -21,15 +23,14 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         );
     }
 
-    public function getFormData($form_data)
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         if (!$this->enabled()) {
-            return $form_data;
+            return;
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $form_data['newsletter'] = $componentprocessor_manager->getComponentProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]);
-        return $form_data;
+        $mutationDataProvider->add('newsletter', $componentprocessor_manager->getComponentProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]));
     }
 
     /**
@@ -57,13 +58,13 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         return $components;
     }
 
-    public function additionals($user_id)
+    public function additionalsCreate($user_id, WithArgumentsInterface $withArgumentsAST)
     {
         if (!$this->enabled()) {
             return;
         }
 
-        $subscribe = $form_data['newsletter'];
+        $subscribe = $withArgumentsAST->getArgumentValue('newsletter');
         if ($subscribe) {
             // Trigger the form sending
             $form_id = PoP_Newsletter_GFHelpers::getNewsletterFormId();

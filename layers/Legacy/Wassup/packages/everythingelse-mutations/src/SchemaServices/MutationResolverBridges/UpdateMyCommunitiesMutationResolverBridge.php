@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Root\App;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\Root\App;
 use PoPSitesWassup\EverythingElseMutations\MutationResolverUtils\MutationResolverUtils;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\UpdateMyCommunitiesMutationResolver;
 
@@ -28,19 +33,16 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         return $this->getUpdateMyCommunitiesMutationResolver();
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         $communities = $this->getComponentProcessorManager()->getComponentProcessor($inputs['communities'])->getValue($inputs['communities']);
-        $form_data = array(
-            'user_id' => $user_id,
-            'communities' => $communities ?? array(),
-        );
+        
+        $mutationDataProvider->add('user_id', $user_id);
+        $mutationDataProvider->add('communities', $communities ?? array());
 
         // Allow to add extra inputs
-        $form_data = App::applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
-
-        return $form_data;
+        App::doAction('gd_createupdate_mycommunities:form_data', $mutationDataProvider);
     }
 }

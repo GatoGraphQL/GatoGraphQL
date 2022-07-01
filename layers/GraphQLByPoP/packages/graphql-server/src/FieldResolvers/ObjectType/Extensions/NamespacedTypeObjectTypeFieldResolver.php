@@ -59,12 +59,12 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
 
     /**
      * Only use this fieldResolver when parameter `namespaced` is provided. Otherwise, use the default implementation
-     *
-     * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
-    {
-        return $fieldName === 'name' && isset($fieldArgs['namespaced']);
+    public function resolveCanProcess(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
+        return $field->getName() === 'name' && $field->hasArgument('namespaced');
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
@@ -117,33 +117,22 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var NamedTypeInterface */
         $type = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'name':
-                if ($fieldArgs['namespaced']) {
+                if ($field->getArgumentValue('namespaced')) {
                     return $type->getNamespacedName();
                 }
                 return $type->getElementName();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

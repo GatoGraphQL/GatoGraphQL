@@ -29,6 +29,22 @@ class UserLoginWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPF
                 \PoPWPSchema\Posts\Module::class,
                 \PoPCMSSchema\CustomPostMutationsWP\Module::class,
                 \PoPCMSSchema\PostMutations\Module::class,
+                \PoPCMSSchema\CommentMutationsWP\Module::class,
+            ]
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getGraphQLServerModuleClassConfiguration(): array
+    {
+        return [
+            ...parent::getGraphQLServerModuleClassConfiguration(),
+            ...[
+                \PoPCMSSchema\CommentMutations\Module::class => [
+                    \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
+                ],
             ]
         ];
     }

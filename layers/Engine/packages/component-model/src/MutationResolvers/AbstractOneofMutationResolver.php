@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentMutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
@@ -107,45 +110,48 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * If that's not the case, this function must be overriden,
      * to avoid throwing an Exception
      *
-     * @return string The current input field's name
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getOneofInputObjectFieldName(array $form_data): string
+    protected function getOneofInputObjectPropertyName(MutationDataProviderInterface $mutationDataProvider): string
     {
-        $formDataSize = count($form_data);
+        $propertyNames = $mutationDataProvider->getPropertyNames();
+        $formDataSize = count($propertyNames);
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
                 sprintf(
                     $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,
-                    implode('\'%s\'', array_keys($form_data))
+                    implode(
+                        $this->__(', ', 'component-model'),
+                        $propertyNames
+                    )
                 )
             );
         }
-        return key($form_data);
+        return $propertyNames[0];
     }
 
     /**
+     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
      * @throws AbstractException In case of error
      */
-    final public function executeMutation(array $form_data): mixed
+    final public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($form_data);
+        [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
-        /** @var stdClass $inputFieldFormData */
-        return $inputFieldMutationResolver->executeMutation((array)$inputFieldFormData);
+        return $inputFieldMutationResolver->executeMutation($mutationDataProvider);
     }
 
     /**
+     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
      * @return FeedbackItemResolution[]
      */
-    final public function validateErrors(array $form_data): array
+    final public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         try {
-            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($form_data);
+            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            /** @var stdClass $inputFieldFormData */
-            return $inputFieldMutationResolver->validateErrors((array)$inputFieldFormData);
+            return $inputFieldMutationResolver->validateErrors($mutationDataProvider);
         } catch (QueryResolutionException $e) {
             // Return the error message from the exception
             return [
@@ -161,37 +167,51 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
+     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
      * @return FeedbackItemResolution[]
      */
-    final public function validateWarnings(array $form_data): array
+    final public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
     {
         try {
-            [$inputFieldMutationResolver, $inputFieldFormData] = $this->getInputFieldMutationResolverAndFormData($form_data);
+            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            /** @var stdClass $inputFieldFormData */
-            return $inputFieldMutationResolver->validateWarnings((array)$inputFieldFormData);
+            return $inputFieldMutationResolver->validateWarnings($mutationDataProvider);
         } catch (QueryResolutionException $e) {
             // Do nothing since the Error will already return the problem
             return [];
         }
     }
+
     /**
-     * @param array<string,mixed> $form_data
-     * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the current input field's form data
+     * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndFormData(array $form_data): array
+    final protected function getInputFieldMutationResolverAndOneOfMutationDataProvider(InputObjectUnderFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider): array
     {
-        $inputFieldName = $this->getOneofInputObjectFieldName($form_data);
-        /** @var stdClass */
-        $oneofInputObjectFormData = $form_data[$inputFieldName];
-        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($inputFieldName);
+        // Create a new Field, passing the corresponding Argument only
+        $oneOfPropertyName = $this->getOneofInputObjectPropertyName($inputObjectFieldArgumentMutationDataProvider);
+        $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName);
+        $oneOfMutationDataProvider = $this->getOneOfMutationDataProvider(
+            $inputObjectFieldArgumentMutationDataProvider,
+            $oneOfPropertyName
+        );
         /**
          * @todo Review this commenting works for different oneof mutations
          * eg: http://graphql-by-pop-pro.lndo.site/graphiql/?query=mutation%20LoginUser%20%7B%0A%20%20loginUser(by%3A%20%7Bcredentials%3A%20%7BusernameOrEmail%3A%20%22admin%22%2C%20password%3A%20%22admin%22%7D%7D)%20%7B%0A%20%20%20%20id%0A%20%20%20%20name%0A%20%20%7D%0A%7D&operationName=LoginUser&variables=%7B%0A%20%20%22authorID%22%3A%203%0A%7D
          */
         // $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
         // return [$inputFieldMutationResolver, $inputFieldFormData];
-        return [$inputFieldMutationResolver, $oneofInputObjectFormData];
+        return [$inputFieldMutationResolver, $oneOfMutationDataProvider];
+    }
+
+    final protected function getOneOfMutationDataProvider(
+        InputObjectUnderFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider,
+        string $oneOfPropertyName,
+    ): PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider {
+        return new PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider(
+            $inputObjectFieldArgumentMutationDataProvider->getField(),
+            $inputObjectFieldArgumentMutationDataProvider->getArgumentName(),
+            $oneOfPropertyName
+        );
     }
 }

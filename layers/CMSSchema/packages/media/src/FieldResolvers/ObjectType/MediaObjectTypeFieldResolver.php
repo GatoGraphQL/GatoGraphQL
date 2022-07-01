@@ -197,26 +197,15 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $media = $object;
-        $size = $this->obtainImageSizeFromParameters($fieldArgs);
-        switch ($fieldName) {
+        $size = $this->obtainImageSizeFromParameters($field);
+        switch ($field->getName()) {
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
@@ -228,7 +217,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'width':
             case 'height':
                 $properties = $this->getMediaTypeAPI()->getImageProperties($objectTypeResolver->getID($media), $size);
-                return $properties[$fieldName];
+                return $properties[$field->getName()];
             case 'srcSet':
                 return $this->getMediaTypeAPI()->getImageSrcSet($objectTypeResolver->getID($media), $size);
             case 'sizes':
@@ -242,33 +231,28 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt']));
+                return new DateTime($this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt')));
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
-                    $this->getMediaTypeAPI()->getDate($media, $fieldArgs['gmt'])
+                    $field->getArgumentValue('format'),
+                    $this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt'))
                 );
             case 'modifiedDate':
-                return new DateTime($this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt']));
+                return new DateTime($this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt')));
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
-                    $this->getMediaTypeAPI()->getModified($media, $fieldArgs['gmt'])
+                    $field->getArgumentValue('format'),
+                    $this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt'))
                 );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    /**
-     * Overridable function
-     *
-     * @param array<string, mixed> $fieldArgs
-     */
-    protected function obtainImageSizeFromParameters(array $fieldArgs): ?string
+    protected function obtainImageSizeFromParameters(FieldInterface $field): ?string
     {
-        return $fieldArgs['size'] ?? null;
+        return $field->getArgumentValue('size');
     }
 }

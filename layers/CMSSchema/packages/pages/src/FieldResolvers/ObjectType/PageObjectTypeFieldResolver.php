@@ -150,42 +150,31 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $page = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'parent':
                 return $this->getPageTypeAPI()->getParentPageID($page);
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             [
                 'parent-id' => $objectTypeResolver->getID($page),
             ]
         );
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'children':
                 return $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childCount':
                 return $this->getPageTypeAPI()->getPageCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

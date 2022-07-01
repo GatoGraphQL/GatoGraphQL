@@ -138,40 +138,27 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     }
 
     /**
-     * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
         return [];
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
-            $this->getQuery($objectTypeResolver, $object, $fieldName, $fieldArgs)
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
+            $this->getQuery($objectTypeResolver, $object, $field)
         );
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'posts':
                 return $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
@@ -179,6 +166,6 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
                 return $this->getPostTypeAPI()->getPostCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

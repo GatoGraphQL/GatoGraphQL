@@ -52,34 +52,23 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $comment = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'contentClipped':
-                $content = $objectTypeResolver->resolveValue($object, 'content', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $content = $objectTypeResolver->resolveValue($object, 'content', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $content;
                 }
                 return limitString(strip_tags($content), 250);
 
             case 'replycommentURL':
-                $customPostID = $objectTypeResolver->resolveValue($object, 'customPostID', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $customPostID = $objectTypeResolver->resolveValue($object, 'customPostID', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
                 }
@@ -92,7 +81,7 @@ class PoPGenericForms_DataLoad_ObjectTypeFieldResolver_Comments extends Abstract
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

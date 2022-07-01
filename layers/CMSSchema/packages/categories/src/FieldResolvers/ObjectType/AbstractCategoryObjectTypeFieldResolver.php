@@ -102,26 +102,15 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $categoryTypeAPI = $this->getCategoryTypeAPI();
         $category = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'url':
                 return $categoryTypeAPI->getCategoryURL($objectTypeResolver->getID($category));
 
@@ -144,6 +133,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 return $categoryTypeAPI->getCategoryItemCount($category);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

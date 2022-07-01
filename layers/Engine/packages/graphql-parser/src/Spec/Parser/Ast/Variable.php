@@ -13,7 +13,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
@@ -23,13 +22,12 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-    use WithVariableValueTrait;
 
     protected ?Context $context = null;
 
     protected bool $hasDefaultValue = false;
 
-    protected InputList|InputObject|Literal|Enum|null $defaultValue = null;
+    protected InputList|InputObject|Literal|Enum|null $defaultValueAST = null;
 
     protected OperationInterface $parent;
 
@@ -60,7 +58,7 @@ class Variable extends AbstractAst implements WithValueInterface
             '$%s: %s%s',
             $this->name,
             $strType,
-            $this->hasDefaultValue ? sprintf(' = %s', $this->defaultValue) : ''
+            $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValueAST()->asQueryString()) : ''
         );
     }
 
@@ -104,15 +102,15 @@ class Variable extends AbstractAst implements WithValueInterface
         return $this->hasDefaultValue;
     }
 
-    public function getDefaultValue(): InputList|InputObject|Literal|Enum|null
+    public function getDefaultValue(): mixed
     {
-        return $this->defaultValue;
+        return $this->defaultValueAST?->getValue();
     }
 
-    public function setDefaultValue(InputList|InputObject|Literal|Enum|null $defaultValue): void
+    public function setDefaultValueAST(InputList|InputObject|Literal|Enum|null $defaultValueAST): void
     {
-        $this->hasDefaultValue = true;
-        $this->defaultValue = $defaultValue;
+        $this->hasDefaultValue = $defaultValueAST !== null;
+        $this->defaultValueAST = $defaultValueAST;
     }
 
     public function isArrayElementRequired(): bool
@@ -141,11 +139,7 @@ class Variable extends AbstractAst implements WithValueInterface
             );
         }
         if ($this->context->hasVariableValue($this->name)) {
-            $variableValue = $this->context->getVariableValue($this->name);
-            return $this->convertVariableValueToAst(
-                $variableValue,
-                $this->getLocation()
-            );
+            return $this->context->getVariableValue($this->name);
         }
         if ($this->hasDefaultValue()) {
             return $this->getDefaultValue();
@@ -163,5 +157,10 @@ class Variable extends AbstractAst implements WithValueInterface
             );
         }
         return null;
+    }
+
+    public function getDefaultValueAST(): InputList|InputObject|Literal|Enum|null
+    {
+        return $this->defaultValueAST;
     }
 }

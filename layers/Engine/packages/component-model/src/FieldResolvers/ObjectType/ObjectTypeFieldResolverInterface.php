@@ -49,14 +49,14 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
      * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldArgs['branch'])
-     *
-     * @param array<string, mixed> $fieldArgs
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool;
+    public function resolveCanProcess(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool;
     public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     public function collectFieldValidationDeprecationMessages(
@@ -65,30 +65,18 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed;
     /**
      * Indicate if to validate the type of the response
      */
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): bool;
     /**
      * The mutation can be validated either on the schema (`false`)
@@ -106,29 +94,23 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
-    public function resolveCanProcessObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): bool;
+    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     /**
      * Define if to use the version to decide if to process the field or not
      */
     public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
+    /**
+     * Allow to add additional Arguments
+     */
+    public function prepareField(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): void;
 }

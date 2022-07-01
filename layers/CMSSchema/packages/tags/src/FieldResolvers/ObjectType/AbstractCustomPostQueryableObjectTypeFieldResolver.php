@@ -136,27 +136,16 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $tagTypeAPI = $this->getTagTypeAPI();
         $customPost = $object;
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
-        switch ($fieldName) {
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        switch ($field->getName()) {
             case 'tags':
                 return $tagTypeAPI->getCustomPostTags($objectTypeResolver->getID($customPost), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'tagNames':
@@ -165,6 +154,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                 return $tagTypeAPI->getCustomPostTagCount($objectTypeResolver->getID($customPost), $query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

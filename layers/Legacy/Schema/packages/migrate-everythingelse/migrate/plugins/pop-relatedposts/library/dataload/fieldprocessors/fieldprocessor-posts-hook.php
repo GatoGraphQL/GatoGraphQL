@@ -72,45 +72,34 @@ class PoP_RelatedPosts_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractOb
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'references':
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_REFERENCES) ?? [];
 
             case 'hasReferences':
-                $references = $objectTypeResolver->resolveValue($object, 'references', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $references = $objectTypeResolver->resolveValue($object, 'references', $objectTypeFieldResolutionFeedbackStore);
                 return !empty($references);
 
             case 'referencedby':
                 return PoP_RelatedPosts_SectionUtils::getReferencedby($objectTypeResolver->getID($post));
 
             case 'hasReferencedBy':
-                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $objectTypeFieldResolutionFeedbackStore);
                 return !empty($referencedby);
 
             case 'referencedByCount':
-                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $referencedby = $objectTypeResolver->resolveValue($object, 'referencedby', $objectTypeFieldResolutionFeedbackStore);
                 return count($referencedby);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

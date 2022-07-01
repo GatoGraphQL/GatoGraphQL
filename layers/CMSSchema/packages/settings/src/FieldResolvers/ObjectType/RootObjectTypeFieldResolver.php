@@ -136,38 +136,34 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
-        // if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldArgs['name'])) {
+                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($field->getArgumentValue('name'))) {
                     return [
                         new FeedbackItemResolution(
                             FeedbackItemProvider::class,
                             FeedbackItemProvider::E1,
                             [
-                                $fieldArgs['name'],
+                                $field->getArgumentValue('name'),
                             ]
                         ),
                     ];
                 }
                 break;
         }
-        // }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
     }
 
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
     ): bool {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
@@ -175,42 +171,30 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return parent::validateResolvedFieldType(
             $objectTypeResolver,
-            $fieldName,
-            $fieldArgs,
+            $field,
         );
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                $value = $this->getSettingsTypeAPI()->getOption($fieldArgs['name']);
-                if ($fieldName === 'optionValues') {
+                $value = $this->getSettingsTypeAPI()->getOption($field->getArgumentValue('name'));
+                if ($field->getName() === 'optionValues') {
                     return (array) $value;
                 }
-                if ($fieldName === 'optionObjectValue') {
+                if ($field->getName() === 'optionObjectValue') {
                     return (object) $value;
                 }
                 return $value;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

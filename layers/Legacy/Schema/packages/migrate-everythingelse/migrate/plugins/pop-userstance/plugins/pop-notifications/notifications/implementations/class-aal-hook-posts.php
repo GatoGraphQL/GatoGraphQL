@@ -34,7 +34,7 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         }
     }
 
-    public function updatedStance($post_id, $form_data, $log)
+    public function updatedStance($post_id, WithArgumentsInterface $withArgumentsAST, $log)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {

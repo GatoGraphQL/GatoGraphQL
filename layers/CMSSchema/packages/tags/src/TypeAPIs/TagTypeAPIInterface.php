@@ -21,12 +21,12 @@ interface TagTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getTagByName(string $tagName): object;
     public function getTags(array $query, array $options = []): array;
     public function getTagCount(array $query = [], array $options = []): int;
-    public function getTagURL(string | int | object $tagObjectOrID): string;
-    public function getTagURLPath(string | int | object $tagObjectOrID): string;
-    public function getTagName(string | int | object $tagObjectOrID): string;
-    public function getTagSlug(string | int | object $tagObjectOrID): string;
-    public function getTagDescription(string | int | object $tagObjectOrID): string;
-    public function getTagItemCount(string | int | object $tagObjectOrID): int;
+    public function getTagURL(string|int|object $tagObjectOrID): string;
+    public function getTagURLPath(string|int|object $tagObjectOrID): string;
+    public function getTagName(string|int|object $tagObjectOrID): string;
+    public function getTagSlug(string|int|object $tagObjectOrID): string;
+    public function getTagDescription(string|int|object $tagObjectOrID): string;
+    public function getTagItemCount(string|int|object $tagObjectOrID): int;
 
     public function getCustomPostTags(string | int $customPostID, array $query = [], array $options = []): array;
     public function getCustomPostTagCount(string | int $customPostID, array $query = [], array $options = []): int;

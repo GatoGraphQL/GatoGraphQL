@@ -39,36 +39,25 @@ class GD_DataLoad_ObjectTypeFieldResolver_Comments extends AbstractObjectTypeFie
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $comment = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             // Users mentioned in the comment: @mentions
             case 'taggedusers':
                 return \PoPCMSSchema\CommentMeta\Utils::getCommentMeta($objectTypeResolver->getID($comment), GD_METAKEY_COMMENT_TAGGEDUSERS) ?? [];
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): \PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface
     {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'taggedusers':
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }

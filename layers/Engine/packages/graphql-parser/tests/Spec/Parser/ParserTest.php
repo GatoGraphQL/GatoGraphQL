@@ -1302,8 +1302,8 @@ GRAPHQL;
         $var = $document->getOperations()[0]->getVariables()[0];
         $var->setContext(new Context());
         $this->assertTrue($var->hasDefaultValue());
-        $this->assertEquals('small', $var->getDefaultValue()->getValue());
-        $this->assertEquals('small', $var->getValue()->getValue());
+        $this->assertEquals('small', $var->getDefaultValue());
+        $this->assertEquals('small', $var->getValue());
 
         // Test with null default value
         $parser          = $this->getParser();
@@ -1318,8 +1318,8 @@ GRAPHQL;
         $var = $document->getOperations()[0]->getVariables()[0];
         $var->setContext(new Context());
         $this->assertTrue($var->hasDefaultValue());
-        $this->assertNull($var->getDefaultValue()->getValue());
-        $this->assertNull($var->getValue()->getValue());
+        $this->assertNull($var->getDefaultValue());
+        $this->assertNull($var->getValue());
 
         // 2nd test: Converting document back to query string is right
         $documentAsStr = 'query ($format: String = null) { user { avatar(format: $format) } }';
@@ -1350,7 +1350,7 @@ GRAPHQL;
         $filter->age = 19;
         $filter->relatives = new stdClass();
         $filter->relatives->dad = 'Jacinto';
-        $this->assertEquals($var->getDefaultValue()->getValue(), $filter);
+        $this->assertEquals($var->getDefaultValue(), $filter);
 
         // Test injecting in Context
         $parser          = $this->getParser();
@@ -1366,7 +1366,7 @@ GRAPHQL;
         $var = $document->getOperations()[0]->getVariables()[0];
         $var->setContext(new Context(null, ['filter' => $filter]));
         $this->assertFalse($var->hasDefaultValue());
-        $this->assertEquals($var->getValue()->getValue(), $filter);
+        $this->assertEquals($var->getValue(), $filter);
 
         // 2nd test: Converting document back to query string is right
         $documentAsStr = 'query FilterUsers($filter: UserFilterInput!) { users(filter: $filter) { id name } }';
@@ -1395,7 +1395,7 @@ GRAPHQL;
         $idObject = new stdClass();
         $idObject->id = 5;
         $ids = [3, 5, $idObject];
-        $this->assertEquals($var->getDefaultValue()->getValue(), $ids);
+        $this->assertEquals($var->getDefaultValue(), $ids);
 
         // 2nd test: Converting document back to query string is right
         $documentAsStr = 'query FilterPosts($ids: [ID!]! = [3, 5, {id: 5}]) { posts(ids: $ids) { id title } }';
@@ -1418,7 +1418,7 @@ GRAPHQL;
         $var = $document->getOperations()[0]->getVariables()[0];
         $var->setContext(new Context(null, ['ids' => $ids]));
         $this->assertFalse($var->hasDefaultValue());
-        $this->assertEquals($var->getValue()->getValue(), $ids);
+        $this->assertEquals($var->getValue(), $ids);
 
         // 2nd test: Converting document back to query string is right
         $documentAsStr = 'query FilterPosts($ids: [ID!]!) { posts(ids: $ids) { id title } }';

@@ -310,25 +310,14 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $comment = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'content':
                 return $this->getCommentTypeAPI()->getCommentContent($comment);
 
@@ -361,22 +350,22 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentParent($comment);
 
             case 'date':
-                return new DateTime($this->getCommentTypeAPI()->getCommentDate($comment, $fieldArgs['gmt']));
+                return new DateTime($this->getCommentTypeAPI()->getCommentDate($comment, $field->getArgumentValue('gmt')));
 
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $fieldArgs['format'],
-                    $this->getCommentTypeAPI()->getCommentDate($comment, $fieldArgs['gmt'])
+                    $field->getArgumentValue('format'),
+                    $this->getCommentTypeAPI()->getCommentDate($comment, $field->getArgumentValue('gmt'))
                 );
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             [
                 'parent-id' => $objectTypeResolver->getID($comment),
             ]
         );
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'responses':
                 return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
@@ -384,6 +373,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

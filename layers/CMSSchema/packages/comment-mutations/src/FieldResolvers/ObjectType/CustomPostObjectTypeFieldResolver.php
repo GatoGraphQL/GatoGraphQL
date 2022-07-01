@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CustomPostAddCommentFilterInputObjectTypeResolver;
@@ -71,7 +73,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
     {
         return match ($fieldName) {
             'addComment' => [
-                'input' => $this->getCustomPostAddCommentFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostAddCommentFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -80,7 +82,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['addComment' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            ['addComment' => MutationInputProperties::INPUT] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -88,7 +90,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
     /**
      * Validated the mutation on the object because the ID
      * is obtained from the same object, so it's not originally
-     * present in $form_data
+     * present in the field argument in the query
      */
     public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
@@ -98,26 +100,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         };
     }
 
-    protected function getMutationFieldArgsForObject(
-        array $mutationFieldArgs,
+    protected function prepareMutationDataProviderForObject(
+        MutationDataProviderInterface $mutationDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
         object $object,
-        string $fieldName
-    ): array {
-        $mutationFieldArgs = parent::getMutationFieldArgsForObject(
-            $mutationFieldArgs,
+    ): void {
+        parent::prepareMutationDataProviderForObject(
+            $mutationDataProviderForObject,
             $objectTypeResolver,
+            $mutationField,
             $object,
-            $fieldName
         );
         $customPost = $object;
-        switch ($fieldName) {
+        switch ($mutationField->getName()) {
             case 'addComment':
-                $mutationFieldArgs[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
+                $mutationDataProviderForObject->add(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
                 break;
         }
-
-        return $mutationFieldArgs;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface

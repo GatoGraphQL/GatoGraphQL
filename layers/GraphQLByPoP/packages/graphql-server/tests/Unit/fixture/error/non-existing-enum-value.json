@@ -11,7 +11,7 @@
       "extensions": {
         "type": "__Schema",
         "fields": [
-          "directives(ofKinds: [\"NON_EXISTING\"])",
+          "directives(ofKinds: [NON_EXISTING])",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e14"

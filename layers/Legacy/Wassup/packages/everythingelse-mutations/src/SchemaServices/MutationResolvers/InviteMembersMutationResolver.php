@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_EmailTemplatesFactory;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\Misc\RequestUtils;
@@ -23,11 +24,11 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
     
-    protected function getEmailContent($form_data)
+    protected function getEmailContent(MutationDataProviderInterface $mutationDataProvider)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         // The user must be always logged in, so we will have the user_id
-        $user_id = $form_data['user_id'];
+        $user_id = $mutationDataProvider->get('user_id');
 
         $author_url = $this->getUserTypeAPI()->getUserURL($user_id);
         $author_name = $this->getUserTypeAPI()->getUserDisplayName($user_id);
@@ -42,7 +43,7 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
             RequestUtils::addRoute($author_url, POP_USERCOMMUNITIES_ROUTE_MEMBERS)
         );
         // Optional: Additional Message
-        if ($additional_msg = $form_data['additional-msg']) {
+        if ($additional_msg = $mutationDataProvider->get('additional-msg')) {
             $content .= sprintf(
                 '<div style="margin-left: 20px;">%s</div>',
                 $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML($additional_msg))
@@ -78,10 +79,10 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject($form_data)
+    protected function getEmailSubject(MutationDataProviderInterface $mutationDataProvider)
     {
         // The user must be always logged in, so we will have the user_id
-        $user_id = $form_data['user_id'];
+        $user_id = $mutationDataProvider->get('user_id');
         return sprintf(
             $this->getTranslationAPI()->__('%s is inviting you to become their member!', 'ure-pop'),
             $this->getUserTypeAPI()->getUserDisplayName($user_id)

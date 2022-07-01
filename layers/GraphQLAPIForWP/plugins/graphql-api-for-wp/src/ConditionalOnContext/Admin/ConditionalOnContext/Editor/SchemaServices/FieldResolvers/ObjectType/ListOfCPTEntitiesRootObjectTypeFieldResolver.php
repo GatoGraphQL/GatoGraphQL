@@ -8,6 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCusto
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin
@@ -65,9 +66,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
         };
     }
 
-    protected function getFieldCustomPostType(string $fieldName): string
+    protected function getFieldCustomPostType(FieldInterface $field): string
     {
-        return match ($fieldName) {
+        return match ($field->getName()) {
             'accessControlLists' => $this->getGraphQLAccessControlListCustomPostType()->getCustomPostType(),
             'cacheControlLists' => $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType(),
             'schemaConfigurations' => $this->getGraphQLSchemaConfigurationCustomPostType()->getCustomPostType(),

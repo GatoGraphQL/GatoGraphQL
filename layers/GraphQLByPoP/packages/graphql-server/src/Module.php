@@ -79,7 +79,6 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initServices(dirname(__DIR__), '/Overrides');
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-        $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
 
         // Boot conditionals
         /** @var AccessControlModuleConfiguration */

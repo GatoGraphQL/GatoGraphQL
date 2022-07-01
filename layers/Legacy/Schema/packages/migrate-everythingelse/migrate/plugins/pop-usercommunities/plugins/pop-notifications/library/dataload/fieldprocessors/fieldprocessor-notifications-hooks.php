@@ -117,27 +117,16 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
         return true;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'editUserMembershipURL':
                 return gdUreEditMembershipUrl($notification->user_id);
 
@@ -156,7 +145,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
 
             case 'memberStatusByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $objectTypeFieldResolutionFeedbackStore);
                 $status = new GD_URE_FormInput_MultiMemberStatus('', $selected);
                 return $status->getSelectedValue();
 
@@ -167,7 +156,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
 
             case 'memberPrivilegesByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $objectTypeFieldResolutionFeedbackStore);
                 $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $selected);
                 return $privileges->getSelectedValue();
 
@@ -178,7 +167,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);
 
             case 'memberTagsByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $objectTypeFieldResolutionFeedbackStore);
                 $tags = new GD_URE_FormInput_FilterMemberTags('', $selected);
                 return $tags->getSelectedValue();
          // ----------------------------------------
@@ -237,7 +226,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use RGForms;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -11,12 +12,11 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 class GravityFormsAddEntryToFormMutationResolver extends AbstractMutationResolver
 {
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
         // $execution_response = do_shortcode('[gravityform id="'.$form_id.'" title="false" description="false" ajax="false"]');
-        return RGForms::get_form($form_data['form_id'], false, false);
+        return RGForms::get_form($mutationDataProvider->get('form_id'), false, false);
     }
 }

@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP_Module_Processor_TextareaFormInputs;
-use PoP_FormUtils;
-use PoP_Module_Processor_TextFormInputs;
-use PoP_Forms_ConfigurationUtils;
-use PoP_Module_Processor_CaptchaFormInputs;
-use PoP\Root\App;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\Root\App;
+use PoP_Forms_ConfigurationUtils;
+use PoP_FormUtils;
+use PoP_Module_Processor_CaptchaFormInputs;
+use PoP_Module_Processor_TextareaFormInputs;
+use PoP_Module_Processor_TextFormInputs;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 abstract class AbstractEmailInviteMutationResolverBridge extends AbstractComponentMutationResolverBridge
@@ -24,7 +29,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         );
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         // Get the list of all emails
         $emails = array();
@@ -54,17 +59,15 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
             }
         }
         $additional_msg = trim($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE])->getValue([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE]));
-        $form_data = array(
-            'emails' => $emails,
-            'user_id' => $user_id,
-            'sender-name' => $sender_name,
-            'sender-url' => $sender_url,
-            'additional-msg' => $additional_msg,
-        );
+        
+        $mutationDataProvider->add('emails', $emails);
+        $mutationDataProvider->add('user_id', $user_id);
+        $mutationDataProvider->add('sender-name', $sender_name);
+        $mutationDataProvider->add('sender-url', $sender_url);
+        $mutationDataProvider->add('additional-msg', $additional_msg);
+        
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $form_data['captcha'] = $captcha;
+            $mutationDataProvider->add('captcha', $captcha);
         }
-
-        return $form_data;
     }
 }

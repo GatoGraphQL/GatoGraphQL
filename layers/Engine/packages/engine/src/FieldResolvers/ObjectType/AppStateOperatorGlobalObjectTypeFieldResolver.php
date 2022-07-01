@@ -8,7 +8,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
-use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -110,58 +109,40 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
 
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs
+        FieldInterface $field,
     ): array {
-        // Important: The validations below can only be done if no fieldArg contains a field!
-        // That is because this is a schema error, so we still don't have the $object against which to resolve the field
-        // For instance, this doesn't work: /?query=arrayItem(posts(),3)
-        // In that case, the validation will be done inside ->resolveValue(), and will be treated as a $dbError, not a $schemaError
-        if (!FieldQueryUtils::isAnyFieldArgumentValueAField($fieldArgs)) {
-            switch ($fieldName) {
-                case 'var':
-                    if (!App::hasState($fieldArgs['name'])) {
-                        return [
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E6,
-                                [
-                                    $fieldArgs['name'],
-                                ]
-                            ),
-                        ];
-                    };
-                    break;
-            }
+        switch ($field->getName()) {
+            case 'var':
+                if (!App::hasState($field->getArgumentValue('name'))) {
+                    return [
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E6,
+                            [
+                                $field->getArgumentValue('name'),
+                            ]
+                        ),
+                    ];
+                };
+                break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'var':
-                return App::getState($fieldArgs['name']);
+                return App::getState($field->getArgumentValue('name'));
             case 'context':
                 return App::getAppStateManager()->all();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

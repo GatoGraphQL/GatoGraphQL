@@ -9,6 +9,9 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use SplObjectStorage;
 
 /**
  * Create an alias of a fieldName (or fieldNames), to use when:
@@ -27,6 +30,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
  */
 trait AliasSchemaObjectTypeFieldResolverTrait
 {
+    /** @var SplObjectStorage<FieldInterface,FieldInterface> */
+    protected ?SplObjectStorage $aliasedFieldCache = null;
+
     /**
      * The fieldName that is being aliased
      */
@@ -66,14 +72,41 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
-    {
+    public function resolveCanProcess(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): bool {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveCanProcess(
             $objectTypeResolver,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs
+            $this->getAliasedField($field)
         );
+    }
+
+    protected function getAliasedField(
+        FieldInterface $field,
+    ): FieldInterface {
+        /** @var SplObjectStorage<FieldInterface,FieldInterface> */
+        $this->aliasedFieldCache ??= new SplObjectStorage();
+        if (!$this->aliasedFieldCache->contains($field)) {
+            $this->aliasedFieldCache[$field] = ($field instanceof RelationalField)
+                ? new RelationalField(
+                    $field->getName(),
+                    $this->getAliasedFieldName($field->getName()),
+                    $field->getArguments(),
+                    $field->getFieldsOrFragmentBonds(),
+                    $field->getDirectives(),
+                    $field->getLocation(),
+                )
+                : new LeafField(
+                    $field->getName(),
+                    $this->getAliasedFieldName($field->getName()),
+                    $field->getArguments(),
+                    $field->getDirectives(),
+                    $field->getLocation(),
+                );
+        }
+        return $this->aliasedFieldCache[$field];
     }
 
     /**
@@ -82,15 +115,13 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->collectFieldValidationErrors(
             $objectTypeResolver,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs,
+            $this->getAliasedField($field),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
@@ -118,57 +149,30 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
-    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array
     {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveFieldValidationWarnings(
             $objectTypeResolver,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs
+            $this->getAliasedField($field),
         );
     }
 
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
-     */
-    /**
-     * @param array<string, mixed> $fieldArgs
-     */
-    public function resolveCanProcessObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        string $fieldName,
-        array $fieldArgs
-    ): bool {
-        $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
-        return $aliasedObjectTypeFieldResolver->resolveCanProcessObject(
-            $objectTypeResolver,
-            $object,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs
-        );
-    }
-
-    /**
-     * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
-     * for the aliased $fieldName
-     *
-     * @param array<string, mixed> $fieldArgs
      */
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->collectValidationErrors(
             $objectTypeResolver,
             $object,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs,
+            $this->getAliasedField($field),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
@@ -451,26 +455,16 @@ trait AliasSchemaObjectTypeFieldResolverTrait
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
-        $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
+        object $object,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveValue(
             $objectTypeResolver,
             $object,
-            $this->getAliasedFieldName($fieldName),
-            $fieldArgs,
-            $variables,
-            $expressions,
-            $field,
+            $this->getAliasedField($field),
             $objectTypeFieldResolutionFeedbackStore,
-            $options
         );
     }
 

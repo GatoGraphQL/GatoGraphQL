@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $target_id = $form_data['target_id'];
+        $target_id = $mutationDataProvider->get('target_id');
         if (!$target_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -25,29 +26,27 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $errors;
     }
 
-    protected function additionals($target_id, $form_data): void
+    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('gd_updateusermetavalue', $target_id, $form_data);
+        App::doAction('gd_updateusermetavalue', $target_id, $mutationDataProvider);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int
+    protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
-        $target_id = $form_data['target_id'];
+        $target_id = $mutationDataProvider->get('target_id');
         return $target_id;
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $target_id = $this->update($form_data);
-        $this->additionals($target_id, $form_data);
+        $target_id = $this->update($mutationDataProvider);
+        $this->additionals($target_id, $mutationDataProvider);
 
         return $target_id;
     }

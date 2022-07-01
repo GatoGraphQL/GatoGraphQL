@@ -26,7 +26,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
-    protected function getTermObjectAndID(string | int | object $termObjectOrID): array
+    protected function getTermObjectAndID(string|int|object $termObjectOrID): array
     {
         if (is_object($termObjectOrID)) {
             $termObject = $termObjectOrID;
@@ -53,7 +53,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
-    public function getTermTaxonomyName(string | int | object $termObjectOrID): string
+    public function getTermTaxonomyName(string|int|object $termObjectOrID): string
     {
         list(
             $termObject,

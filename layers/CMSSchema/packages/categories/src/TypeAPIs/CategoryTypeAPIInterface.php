@@ -21,15 +21,15 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
     public function getCategoryCount(array $query, array $options = []): int;
     public function getCustomPostCategories(string | int $customPostID, array $query = [], array $options = []): array;
     public function getCustomPostCategoryCount(string | int $customPostID, array $query, array $options = []): int;
-    public function getCategorySlug(string | int | object $catObjectOrID): string;
-    public function getCategoryName(string | int | object $catObjectOrID): string;
-    public function getCategoryParentID(string | int | object $catObjectOrID): string | int | null;
+    public function getCategorySlug(string|int|object $catObjectOrID): string;
+    public function getCategoryName(string|int|object $catObjectOrID): string;
+    public function getCategoryParentID(string|int|object $catObjectOrID): string | int | null;
     /**
      * @return array<string|int>|null
      */
-    public function getCategoryChildIDs(string | int | object $catObjectOrID): ?array;
-    public function getCategoryURL(string | int | object $catObjectOrID): string;
-    public function getCategoryURLPath(string | int | object $catObjectOrID): string;
-    public function getCategoryDescription(string | int | object $catObjectOrID): string;
-    public function getCategoryItemCount(string | int | object $catObjectOrID): int;
+    public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array;
+    public function getCategoryURL(string|int|object $catObjectOrID): string;
+    public function getCategoryURLPath(string|int|object $catObjectOrID): string;
+    public function getCategoryDescription(string|int|object $catObjectOrID): string;
+    public function getCategoryItemCount(string|int|object $catObjectOrID): int;
 }

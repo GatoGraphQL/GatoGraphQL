@@ -220,8 +220,6 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $value = $relationalTypeResolver->resolveValue(
             $object,
             $field,
-            $variables,
-            $expressions,
             $objectTypeFieldResolutionFeedbackStore,
         );
 

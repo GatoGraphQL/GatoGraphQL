@@ -57,28 +57,17 @@ class InputValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFiel
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var InputValueExtensions */
         $inputValueExtensions = $object;
-        return match ($fieldName) {
+        return match ($field->getName()) {
             'isAdminElement' => $inputValueExtensions->isAdminElement(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore),
         };
     }
 

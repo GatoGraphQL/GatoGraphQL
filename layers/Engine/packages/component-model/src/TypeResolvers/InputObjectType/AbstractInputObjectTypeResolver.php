@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ModuleConfiguration;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -20,6 +19,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface

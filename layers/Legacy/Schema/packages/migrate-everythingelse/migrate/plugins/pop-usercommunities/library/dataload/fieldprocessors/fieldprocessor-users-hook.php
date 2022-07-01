@@ -79,26 +79,15 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $user = $object;
 
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'memberstatus':
                 // All status for all communities
                 $status = \PoPCMSSchema\UserMeta\Utils::getUserMeta($objectTypeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
@@ -132,11 +121,11 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
                 return gdUreGetCommunitiesStatusActive($objectTypeResolver->getID($user));
 
             case 'hasActiveCommunities':
-                $communities = $objectTypeResolver->resolveValue($object, 'activeCommunities', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $communities = $objectTypeResolver->resolveValue($object, 'activeCommunities', $objectTypeFieldResolutionFeedbackStore);
                 return !empty($communities);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

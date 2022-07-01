@@ -17,26 +17,15 @@ use PoPCMSSchema\Menus\Facades\MenuItemTypeAPIFacade;
  */
 abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
         $menuItem = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'classes':
                 // Copied from nav-menu-template.php function start_el
                 $classes = $menuItemTypeAPI->getMenuItemClasses($menuItem);
@@ -53,6 +42,6 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
                 return App::applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

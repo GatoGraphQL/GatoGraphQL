@@ -16,7 +16,4 @@ class HookNames
     public final const OBJECT_TYPE_FIELD_ARG_DEFAULT_VALUE = __CLASS__ . ':object-type-field-arg-default-value';
     public final const OBJECT_TYPE_FIELD_ARG_TYPE_MODIFIERS = __CLASS__ . ':object-type-field-arg-type-modifiers';
     public final const OBJECT_TYPE_FIELD_ARG_EXTENSIONS = __CLASS__ . ':object-type-field-arg-extensions';
-
-    public final const OBJECT_TYPE_MUTATION_FIELD_ARGS = __CLASS__ . ':object-type-mutation-field-args';
-    public final const OBJECT_TYPE_MUTATION_FIELD_ARGS_FOR_OBJECT = __CLASS__ . ':object-type-mutation-field-args-for-object';
 }

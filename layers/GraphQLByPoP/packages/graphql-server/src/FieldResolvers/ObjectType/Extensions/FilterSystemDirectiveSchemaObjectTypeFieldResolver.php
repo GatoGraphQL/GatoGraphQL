@@ -59,23 +59,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         return 100;
     }
 
-    // /**
-    //  * Only use this fieldResolver when parameter `ofKinds` is provided.
-    //  * Otherwise, use the default implementation
-    //  */
-    // public function resolveCanProcess(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): bool
-    // {
-    //     return $fieldName == 'directives' && isset($fieldArgs['ofKinds']);
-    // }
-
-    // public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    // {
-    //     $descriptions = [
-    //         'directives' => $this->__('All directives registered in the data graph, allowing to remove the system directives', 'graphql-api'),
-    //     ];
-    //     return $descriptions[$fieldName] ?? parent::getFieldDescription($objectTypeResolver, $fieldName);
-    // }
-
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
@@ -102,29 +85,18 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
-                if ($ofKinds = $fieldArgs['ofKinds'] ?? null) {
+                if ($ofKinds = $field->getArgumentValue('ofKinds')) {
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getDirectiveResolvers(),
                         fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
@@ -151,6 +123,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 return $directiveIDs;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

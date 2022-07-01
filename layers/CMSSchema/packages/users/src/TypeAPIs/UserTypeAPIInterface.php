@@ -19,15 +19,15 @@ interface UserTypeAPIInterface
     public function getUserByLogin(string $login): ?object;
     public function getUsers(array $query = [], array $options = []): array;
     public function getUserCount(array $query = [], array $options = []): int;
-    public function getUserDisplayName(string | int | object $userObjectOrID): ?string;
-    public function getUserEmail(string | int | object $userObjectOrID): ?string;
-    public function getUserFirstname(string | int | object $userObjectOrID): ?string;
-    public function getUserLastname(string | int | object $userObjectOrID): ?string;
-    public function getUserLogin(string | int | object $userObjectOrID): ?string;
-    public function getUserDescription(string | int | object $userObjectOrID): ?string;
-    public function getUserURL(string | int | object $userObjectOrID): ?string;
-    public function getUserURLPath(string | int | object $userObjectOrID): ?string;
-    public function getUserWebsiteURL(string | int | object $userObjectOrID): ?string;
-    public function getUserSlug(string | int | object $userObjectOrID): ?string;
+    public function getUserDisplayName(string|int|object $userObjectOrID): ?string;
+    public function getUserEmail(string|int|object $userObjectOrID): ?string;
+    public function getUserFirstname(string|int|object $userObjectOrID): ?string;
+    public function getUserLastname(string|int|object $userObjectOrID): ?string;
+    public function getUserLogin(string|int|object $userObjectOrID): ?string;
+    public function getUserDescription(string|int|object $userObjectOrID): ?string;
+    public function getUserURL(string|int|object $userObjectOrID): ?string;
+    public function getUserURLPath(string|int|object $userObjectOrID): ?string;
+    public function getUserWebsiteURL(string|int|object $userObjectOrID): ?string;
+    public function getUserSlug(string|int|object $userObjectOrID): ?string;
     public function getUserID(object $user): string | int;
 }

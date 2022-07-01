@@ -131,34 +131,23 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        return match ($fieldName) {
+        return match ($field->getName()) {
             'queryType' => $schema->getQueryRootObjectTypeID(),
             'mutationType' => $schema->getMutationRootObjectTypeID(),
             'subscriptionType' => $schema->getSubscriptionRootObjectTypeID(),
             'types' => $schema->getTypeIDs(),
             'directives' => $schema->getDirectiveIDs(),
-            'type' => $schema->getTypeID($fieldArgs['name']),
+            'type' => $schema->getTypeID($field->getArgumentValue('name')),
             'extensions' => $schema->getExtensions()->getID(),
-            default => parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options),
+            default => parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore),
         };
     }
 

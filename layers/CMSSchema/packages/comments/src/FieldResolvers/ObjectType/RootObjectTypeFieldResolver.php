@@ -211,31 +211,20 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $adminFieldArgNames;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldName, $fieldArgs);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
         /**
          * If "status" is admin and won't be shown, then default to "approve" only
          */
         if (!array_key_exists('status', $query)) {
             $query['status'] = CommentStatus::APPROVE;
         }
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'commentCount':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
 
@@ -263,6 +252,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

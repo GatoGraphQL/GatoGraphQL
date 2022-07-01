@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends CreateUpdateWithCommunityProfileMutationResolver
 {
     use CreateUpdateOrganizationProfileMutationResolverTrait;
 
-    protected function createupdateuser($user_id, $form_data): void
+    protected function createupdateuser($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::createupdateuser($user_id, $form_data);
-        $this->commonuserrolesCreateupdateuser($user_id, $form_data);
+        parent::createupdateuser($user_id, $mutationDataProvider);
+        $this->commonuserrolesCreateupdateuser($user_id, $mutationDataProvider);
 
         // Is community?
         $cmsuserrolesapi = FunctionAPIFactory::getInstance();
-        if ($form_data['is_community'] ?? null) {
+        if ($mutationDataProvider->get('is_community')) {
             $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_COMMUNITY);
         } else {
             $cmsuserrolesapi->removeRoleFromUser($user_id, GD_URE_ROLE_COMMUNITY);

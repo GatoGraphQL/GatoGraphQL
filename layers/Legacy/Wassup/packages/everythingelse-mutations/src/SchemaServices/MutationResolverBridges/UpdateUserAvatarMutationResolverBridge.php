@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
-use PoP\Root\App;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\Root\App;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers\UpdateUserAvatarMutationResolver;
 
 class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationResolverBridge
@@ -27,13 +31,9 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
         return $this->getUpdateUserAvatarMutationResolver();
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
-        $form_data = array(
-            'user_id' => $user_id,
-        );
-
-        return $form_data;
+        $mutationDataProvider->add('user_id', $user_id);
     }
 }

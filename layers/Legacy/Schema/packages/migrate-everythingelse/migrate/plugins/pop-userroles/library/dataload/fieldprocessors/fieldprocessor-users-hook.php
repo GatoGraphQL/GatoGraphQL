@@ -100,26 +100,15 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
         $user = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'role':
                 $user_roles = $userRoleTypeAPI->getUserRoles($objectTypeResolver->getID($user));
                 // Allow to hook for URE: Make sure we always get the most specific role
@@ -130,14 +119,14 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                     $objectTypeResolver->getID($user)
                 );
             case 'hasRole':
-                $role = $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $role = $objectTypeResolver->resolveValue($user, 'role', $objectTypeFieldResolutionFeedbackStore);
                 if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $role;
                 }
-                return $role === $fieldArgs['role'];
+                return $role === $field->getArgumentValue('role');
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

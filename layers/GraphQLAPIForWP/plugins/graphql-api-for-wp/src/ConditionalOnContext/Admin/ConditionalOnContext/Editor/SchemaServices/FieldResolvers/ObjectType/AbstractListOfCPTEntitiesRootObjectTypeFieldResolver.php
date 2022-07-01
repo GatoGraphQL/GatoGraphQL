@@ -62,28 +62,17 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $query = [
             'limit' => -1,
             // Execute for the corresponding field name
             'custompost-types' => [
-                $this->getFieldCustomPostType($fieldName),
+                $this->getFieldCustomPostType($field),
             ],
         ];
         $options = [
@@ -94,7 +83,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
-    abstract protected function getFieldCustomPostType(string $fieldName): string;
+    abstract protected function getFieldCustomPostType(FieldInterface $field): string;
 
     public function getFieldTypeResolver(
         ObjectTypeResolverInterface $objectTypeResolver,

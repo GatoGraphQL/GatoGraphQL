@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolverBridges;
 
-use PoP_Module_Processor_LoginTextFormInputs;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Engine\Route\RouteUtils;
+use PoP_Module_Processor_LoginTextFormInputs;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\LostPasswordMutationResolver;
 use PoPSitesWassup\UserStateMutations\MutationResolvers\MutationInputProperties;
 
@@ -30,11 +30,9 @@ class LostPasswordMutationResolverBridge extends AbstractComponentMutationResolv
         return $this->getLostPasswordMutationResolver();
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        return [
-            MutationInputProperties::USERNAME_OR_EMAIL => $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME]),
-        ];
+        $mutationDataProvider->add(MutationInputProperties::USERNAME_OR_EMAIL, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::COMPONENT_FORMINPUT_LOSTPWD_USERNAME]));
     }
 
     /**

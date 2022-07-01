@@ -37,26 +37,15 @@ class PoP_Avatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTy
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $user = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'userphoto':
                 $userphoto = gdGetAvatarPhotoinfo($objectTypeResolver->getID($user));
                 return array(
@@ -66,7 +55,7 @@ class PoP_Avatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTy
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

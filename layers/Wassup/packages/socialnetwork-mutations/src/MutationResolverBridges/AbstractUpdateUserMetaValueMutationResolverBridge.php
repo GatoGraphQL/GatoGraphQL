@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges;
 
-use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
+use PoP\Root\App;
 
 abstract class AbstractUpdateUserMetaValueMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
     abstract protected function getRequestKey();
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $form_data = array(
-            'target_id' => App::query($this->getRequestKey()),
-        );
-
-        return $form_data;
+        $mutationDataProvider->add('target_id', App::query($this->getRequestKey()));
     }
 }

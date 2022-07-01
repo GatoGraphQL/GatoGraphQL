@@ -128,27 +128,16 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $stance = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'categories':
                 return $taxonomyapi->getCustomPostTaxonomyTerms(
                     $objectTypeResolver->getID($stance),
@@ -178,10 +167,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
 
             // The Stance has no title, so return the excerpt instead.
@@ -191,9 +177,9 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'content':
                 // Add the quotes around the content for the Stance
                 $value = $customPostTypeAPI->getRawContent($stance);
-                if ($fieldName == 'title') {
+                if ($field->getName() === 'title') {
                     return limitString($value, 100);
-                } elseif ($fieldName == 'excerpt') {
+                } elseif ($field->getName() === 'excerpt') {
                     return limitString($value, 300);
                 }
                 return $value;
@@ -212,13 +198,10 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
-use PoP_Module_Processor_TextareaFormInputs;
-use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
 use PoP\Root\App;
+use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
+use PoP_Module_Processor_TextareaFormInputs;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
@@ -63,16 +63,15 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    public function getFormData(): array
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $form_data = parent::getFormData();
+        parent::fillMutationDataProvider($mutationDataProvider);
 
-        $form_data['highlightedpost'] = $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
+        $highlightedPost = $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
+        $mutationDataProvider->add('highlightedpost', $highlightedPost);
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
-        $referenced = $this->getCustomPostTypeAPI()->getCustomPost($form_data['highlightedpost']);
-        $form_data['title'] = $this->getCustomPostTypeAPI()->getTitle($referenced);
-
-        return $form_data;
+        $referenced = $this->getCustomPostTypeAPI()->getCustomPost($highlightedPost);
+        $mutationDataProvider->add('title', $this->getCustomPostTypeAPI()->getTitle($referenced));
     }
 }

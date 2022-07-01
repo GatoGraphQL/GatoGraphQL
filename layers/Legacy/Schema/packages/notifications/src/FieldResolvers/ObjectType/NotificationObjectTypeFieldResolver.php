@@ -263,28 +263,17 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'action':
                 return $notification->action;
             case 'objectType':
@@ -335,10 +324,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 return ($status == AAL_POP_STATUS_READ);
 
@@ -352,10 +338,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 return !$is_read;
 
@@ -415,9 +398,9 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $notification->object_type == 'Taxonomy';
 
             case 'isAction':
-                return $fieldArgs['action'] == $notification->action;
+                return $field->getArgumentValue('action') == $notification->action;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -12,6 +12,7 @@ use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\QueryableInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
@@ -102,25 +103,27 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      *     - Execute `filterDataloadQueryArgs` on the FilterInput to place the value
      *       under the expected input name
      *
-     * @param array<string, mixed> $fieldArgs
      * @return array<string, mixed>
      */
-    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array
     {
         $filteringQueryArgs = [];
-        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName)) {
+        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $field->getName())) {
             /** @var FilterDataComponentProcessorInterface */
             $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingComponent);
+
+            /** @todo Fix here! This function does not expect Argument[] */
+            $fieldArgs = $field->getArguments();
             $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingComponent, $filteringQueryArgs, $fieldArgs);
         }
         // InputObjects can also provide filtering query values
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
-        foreach ($fieldArgs as $fieldArgName => $fieldArgValue) {
-            $fieldArgTypeResolver = $consolidatedFieldArgNameTypeResolvers[$fieldArgName];
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
+        foreach ($field->getArguments() as $argument) {
+            $fieldArgTypeResolver = $consolidatedFieldArgNameTypeResolvers[$argument->getName()];
             if (!($fieldArgTypeResolver instanceof QueryableInputObjectTypeResolverInterface)) {
                 continue;
             }
-            $fieldArgTypeResolver->integrateInputValueToFilteringQueryArgs($filteringQueryArgs, $fieldArgValue);
+            $fieldArgTypeResolver->integrateInputValueToFilteringQueryArgs($filteringQueryArgs, $argument->getValue());
         }
         return $filteringQueryArgs;
     }

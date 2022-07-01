@@ -76,7 +76,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
     //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumName(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'linkaccess':
             case 'linkcategories':
                 $input_names = [
@@ -92,7 +92,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
     //        Until then, this logic is not working (this function is not invoked anymore)
     protected function getSchemaDefinitionEnumValues(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'linkaccess':
             case 'linkcategories':
                 $input_classes = [
@@ -130,25 +130,14 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
         return true;
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $post = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             // Override fields for Links
             case 'excerpt':
                 return PoP_ContentPostLinks_Utils::getLinkExcerpt($post);
@@ -162,7 +151,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
 
             case 'linkAccessByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $objectTypeFieldResolutionFeedbackStore);
                 $linkaccess = new GD_FormInput_LinkAccessDescription('', $selected);
                 return $linkaccess->getSelectedValue();
 
@@ -170,7 +159,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
 
             case 'linkCategoriesByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $objectTypeFieldResolutionFeedbackStore);
                 $linkcategories = new GD_FormInput_LinkCategories('', $selected);
                 return $linkcategories->getSelectedValue();
 
@@ -181,7 +170,7 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return false;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

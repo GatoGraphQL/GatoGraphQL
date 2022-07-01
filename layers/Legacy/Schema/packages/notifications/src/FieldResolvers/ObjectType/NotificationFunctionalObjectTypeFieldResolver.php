@@ -65,25 +65,14 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         };
     }
 
-    /**
-     * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed> $variables
-     * @param array<string, mixed> $expressions
-     * @param array<string, mixed> $options
-     */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        string $fieldName,
-        array $fieldArgs,
-        array $variables,
-        array $expressions,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        array $options = []
     ): mixed {
         $notification = $object;
-        switch ($fieldName) {
+        switch ($field->getName()) {
             case 'multilayoutKeys':
                 // If multiple-layouts, then we need 'objectType' and 'action' data-fields
                 $object_type = $objectTypeResolver->resolveValue(
@@ -95,10 +84,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 $action = $objectTypeResolver->resolveValue(
                     $notification,
@@ -109,16 +95,13 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                         [],
                         $field->getLocation()
                     ),
-                    $variables,
-                    $expressions,
                     $objectTypeFieldResolutionFeedbackStore,
-                    $options
                 );
                 return array(
                     $object_type . '-' . $action,
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $field, $objectTypeFieldResolutionFeedbackStore, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
     }
 }

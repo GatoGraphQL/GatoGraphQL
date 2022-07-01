@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -12,17 +13,17 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(array $form_data): array
+    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        if (empty($form_data['email'])) {
+        if (empty($mutationDataProvider->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($mutationDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -36,12 +37,12 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals($form_data): void
+    protected function additionals(MutationDataProviderInterface $mutationDataProvider): void
     {
-        App::doAction('pop_subscribetonewsletter', $form_data);
+        App::doAction('pop_subscribetonewsletter', $mutationDataProvider);
     }
 
-    protected function doExecute($form_data)
+    protected function doExecute(MutationDataProviderInterface $mutationDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -59,27 +60,26 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $form_data['email']
+                $mutationDataProvider->get('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $form_data['name']
+            $mutationDataProvider->get('name')
         );
 
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
     /**
-     * @param array<string,mixed> $form_data
      * @throws AbstractException In case of error
      */
-    public function executeMutation(array $form_data): mixed
+    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $result = $this->doExecute($form_data);
+        $result = $this->doExecute($mutationDataProvider);
 
         // Allow for additional operations
-        $this->additionals($form_data);
+        $this->additionals($mutationDataProvider);
 
         return $result;
     }

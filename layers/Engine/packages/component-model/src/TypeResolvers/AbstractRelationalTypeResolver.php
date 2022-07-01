@@ -65,7 +65,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
      */
-    private array $directiveResolverInstanceCache = [];
+    private array $directiveResolverClassDirectivesCache = [];
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
@@ -194,15 +194,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          * All directives are placed somewhere in the pipeline.
          *
          *   1. At the very beginning
-         *   2. Before Validate directive
-         *   3. Between the Validate and Resolve directives
-         *   4. Between the Resolve and Serialize directives
-         *   5. After the Serialize directive
-         *   6. At the very end
+         *   2. Before the PrepareField directive
+         *   3. Between the PrepareField and Validate directives
+         *   4. Between the Validate and Resolve directives
+         *   5. Between the Resolve and Serialize directives
+         *   6. After the Serialize directive
+         *   7. At the very end
          */
         $directiveInstancesByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
-            PipelinePositions::BEFORE_VALIDATE => [],
+            PipelinePositions::BEFORE_PREPARE => [],
+            PipelinePositions::AFTER_PREPARE_BEFORE_VALIDATE => [],
             PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE => [],
             PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE => [],
             PipelinePositions::AFTER_SERIALIZE => [],
@@ -262,7 +264,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /** @var SplObjectStorage<DirectiveResolverInterface,FieldInterface[]> */
         $directiveResolverInstanceFields = new SplObjectStorage();
         foreach ($directives as $directive) {
-            $fieldDirectiveResolvers = $this->getDirectiveResolversForDirective($directive, $directiveFields[$directive], $variables);
+            $fieldDirectiveResolvers = $this->getFieldDirectiveResolvers($directive, $directiveFields[$directive]);
             // If there is no directive with this name, show an error and skip it
             if ($fieldDirectiveResolvers === null) {
                 foreach ($directiveFields[$directive] as $field) {
@@ -347,10 +349,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         }
 
         // Validate all the directiveResolvers in the field
+        /** @var DirectiveResolverInterface $directiveResolverInstance */
         foreach ($directiveResolverInstanceFields as $directiveResolverInstance) {
-            /** @var DirectiveResolverInterface $directiveResolverInstance */
+            /** @var FieldInterface[] */
             $directiveResolverFields = $directiveResolverInstanceFields[$directiveResolverInstance];
-            /** @var FieldInterface[] $directiveResolverFields */
             $directive = $directiveResolverInstance->getDirective();
             $directiveName = $directive->getName();
 
@@ -372,7 +374,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             }
 
             // Validate against the directiveResolver
-            if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directiveName, $directiveArgs)) {
+            if ($maybeErrorFeedbackItemResolutions = $directiveResolverInstance->resolveDirectiveValidationErrors($this, $directive)) {
                 foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                     foreach ($directiveFields[$directive] as $field) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addError(
@@ -481,18 +483,25 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param FieldInterface[] $fields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getDirectiveResolversForDirective(Directive $directive, array $fields, array &$variables): ?SplObjectStorage
+    public function getFieldDirectiveResolvers(Directive $directive, array $fields): ?SplObjectStorage
     {
         $directiveName = $directive->getName();
-        $directiveArgs = $directive->getArguments();
-
         $directiveNameResolvers = $this->getDirectiveNameResolvers();
         $directiveResolvers = $directiveNameResolvers[$directiveName] ?? null;
         if ($directiveResolvers === null) {
             return null;
         }
 
-        // Calculate directives per field
+        // Only consider the directiveResolvers that can satisfy this directive
+        $directiveResolvers = array_filter(
+            $directiveResolvers,
+            fn (DirectiveResolverInterface $directiveResolver) => $directiveResolver->resolveCanProcess($this, $directive)
+        );
+        if ($directiveResolvers === []) {
+            return null;
+        }
+
+        // Calculate directiveResolvers per field
         /** @var SplObjectStorage<FieldInterface,DirectiveResolverInterface> */
         $fieldDirectiveResolvers = new SplObjectStorage();
         foreach ($fields as $field) {
@@ -500,34 +509,44 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * Check that at least one class which deals with this directiveName can satisfy
              * the directive (for instance, validating that a required directiveArg is present)
              */
-            $fieldName = $field->getName();
             foreach ($directiveResolvers as $directiveResolver) {
                 $directiveSupportedFieldNames = $directiveResolver->getFieldNamesToApplyTo();
                 // If this field is not supported by the directive, skip
-                if ($directiveSupportedFieldNames && !in_array($fieldName, $directiveSupportedFieldNames)) {
+                if ($directiveSupportedFieldNames !== [] && !in_array($field->getName(), $directiveSupportedFieldNames)) {
                     continue;
                 }
-                $directiveResolverClass = get_class($directiveResolver);
-                // Get the instance from the cache if it exists, or create it if not
-                if (!isset($this->directiveResolverInstanceCache[$directiveResolverClass]) || !$this->directiveResolverInstanceCache[$directiveResolverClass]->contains($directive)) {
-                    /**
-                     * The instance from the container is shared. We need a non-shared instance
-                     * to set the unique $directive. So clone the service.
-                     */
-                    $fieldDirectiveResolver = clone $directiveResolver;
-                    $fieldDirectiveResolver->setDirective($directive);
-                    $this->directiveResolverInstanceCache[$directiveResolverClass] ??= new SplObjectStorage();
-                    $this->directiveResolverInstanceCache[$directiveResolverClass][$directive] = $fieldDirectiveResolver;
-                }
-                $maybeDirectiveResolverInstance = $this->directiveResolverInstanceCache[$directiveResolverClass][$directive];
-                // Check if this instance can process the directive
-                if ($maybeDirectiveResolverInstance->resolveCanProcess($this, $directiveName, $directiveArgs, $field, $variables)) {
-                    $fieldDirectiveResolvers[$field] = $maybeDirectiveResolverInstance;
-                    break;
-                }
+                /**
+                 * Create a non-shared directiveResolver instance to handle
+                 * this specific $directive object instance.
+                 */
+                $fieldDirectiveResolvers[$field] = $this->getUniqueDirectiveResolverForDirective(
+                    $directiveResolver,
+                    $directive,
+                );
+                // As this instance can process the directive and the field, we found it, then end the loop
+                break;
             }
         }
         return $fieldDirectiveResolvers;
+    }
+
+    /**
+     * The instance from the container is shared. We need a non-shared instance
+     * to set the unique $directive. So clone the service.
+     */
+    protected function getUniqueDirectiveResolverForDirective(
+        DirectiveResolverInterface $directiveResolver,
+        Directive $directive,
+    ): DirectiveResolverInterface {
+        $directiveResolverClass = get_class($directiveResolver);
+        // Get the instance from the cache if it exists, or create it if not
+        if (!isset($this->directiveResolverClassDirectivesCache[$directiveResolverClass]) || !$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
+            $uniqueDirectiveResolver = clone $directiveResolver;
+            $uniqueDirectiveResolver->setAndPrepareDirective($this, $directive);
+            $this->directiveResolverClassDirectivesCache[$directiveResolverClass] ??= new SplObjectStorage();
+            $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive] = $uniqueDirectiveResolver;
+        }
+        return $this->directiveResolverClassDirectivesCache[$directiveResolverClass][$directive];
     }
 
     /**
@@ -1191,7 +1210,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $attachedDirectiveResolvers
                 );
                 array_multisort($extensionPriorities, SORT_DESC, SORT_NUMERIC, $attachedDirectiveResolvers);
-                // Add them to the results. We keep the list of all resolvers, so that if the first one cannot process the directive (eg: through `resolveCanProcess`, the next one can do it)
+                /**
+                 * Add them to the results. We keep the list of all resolvers,
+                 * so that if the first one cannot process the directive
+                 * (eg: through `resolveCanProcess`, the next one can do it)
+                 */
                 foreach ($attachedDirectiveResolvers as $directiveResolver) {
                     if (!$directiveResolver->isDirectiveEnabled()) {
                         // Skip disabled directives
