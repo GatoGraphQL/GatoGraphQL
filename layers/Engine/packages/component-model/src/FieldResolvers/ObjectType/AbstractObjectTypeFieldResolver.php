@@ -1198,7 +1198,15 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldInterface $mutationField,
         object $object,
     ): MutationDataProviderInterface {
-        return $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+        $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+        $mutationDataProviderForObject = clone $mutationDataProvider;
+        $this->prepareMutationDataProviderForObject(
+            $mutationDataProviderForObject,
+            $objectTypeResolver,
+            $mutationField,
+            $object,
+        );
+        return $mutationDataProviderForObject;
     }
 
     /**
@@ -1329,13 +1337,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return null;
     }
 
-    protected function getMutationFieldForObject(
-        FieldInterface $mutationField,
+    protected function prepareMutationDataProviderForObject(
+        MutationDataProviderInterface $mutationDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
         object $object,
-        string $fieldName,
-    ): FieldInterface {
-        return $mutationField;
+    ): void {
     }
 
     public function getFieldMutationResolver(

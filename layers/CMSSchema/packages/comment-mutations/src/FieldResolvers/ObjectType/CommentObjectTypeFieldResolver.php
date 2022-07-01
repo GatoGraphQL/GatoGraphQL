@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
@@ -111,27 +109,25 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
         };
     }
 
-    protected function getMutationFieldForObject(
-        FieldInterface $mutationField,
+    protected function prepareMutationDataProviderForObject(
+        MutationDataProviderInterface $mutationDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
         object $object,
-        string $fieldName,
-    ): FieldInterface {
-        $mutationField = parent::getMutationFieldForObject(
-            $mutationField,
+    ): void {
+        parent::prepareMutationDataProviderForObject(
+            $mutationDataProviderForObject,
             $objectTypeResolver,
+            $mutationField,
             $object,
-            $fieldName
         );
         $comment = $object;
-        switch ($fieldName) {
+        switch ($mutationField->getName()) {
             case 'reply':
-                $mutationField->addArgument(new Argument(MutationInputProperties::CUSTOMPOST_ID, new Literal($this->getCommentTypeAPI()->getCommentPostId($comment), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-                $mutationField->addArgument(new Argument(MutationInputProperties::PARENT_COMMENT_ID, new Literal($objectTypeResolver->getID($comment), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+                $mutationDataProviderForObject->add(MutationInputProperties::CUSTOMPOST_ID, $this->getCommentTypeAPI()->getCommentPostId($comment));
+                $mutationDataProviderForObject->add(MutationInputProperties::PARENT_COMMENT_ID, $objectTypeResolver->getID($comment));
                 break;
         }
-
-        return $mutationField;
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface

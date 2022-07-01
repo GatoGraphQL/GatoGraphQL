@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateFilterInputObjectTypeResolver;
@@ -76,25 +74,23 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
-    protected function getMutationFieldForObject(
-        FieldInterface $mutationField,
+    protected function prepareMutationDataProviderForObject(
+        MutationDataProviderInterface $mutationDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
         object $object,
-        string $fieldName,
-    ): FieldInterface {
-        $mutationField = parent::getMutationFieldForObject(
-            $mutationField,
+    ): void {
+        parent::prepareMutationDataProviderForObject(
+            $mutationDataProviderForObject,
             $objectTypeResolver,
+            $mutationField,
             $object,
-            $fieldName
         );
         $post = $object;
-        switch ($fieldName) {
+        switch ($mutationField->getName()) {
             case 'update':
-                $mutationField->addArgument(new Argument(MutationInputProperties::ID, new Literal($objectTypeResolver->getID($post), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+                $mutationDataProviderForObject->add(MutationInputProperties::ID, $objectTypeResolver->getID($post));
                 break;
         }
-
-        return $mutationField;
     }
 }
