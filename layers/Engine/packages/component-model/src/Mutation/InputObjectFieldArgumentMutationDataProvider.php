@@ -10,9 +10,10 @@ class InputObjectFieldArgumentMutationDataProvider extends AbstractInputObjectFi
 {
     public function __construct(
         FieldInterface $field,
-        protected string $fieldInputArgumentName
+        protected string $fieldInputArgumentName,
+        array $propertyValues = [],
     ) {
-        parent::__construct($field);
+        parent::__construct($field, $propertyValues);
     }
 
     public function getArgumentName(): string

@@ -15,22 +15,28 @@ abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends Abst
     public function getPropertyNames(): array
     {
         $inputObjectValue = $this->getInputObjectValue();
-        return array_keys((array) $inputObjectValue);
+        return array_unique(array_merge(
+            parent::getPropertyNames(),
+            array_keys((array) $inputObjectValue)
+        ));
     }
 
     public function hasProperty(string $propertyName): bool
     {
         $inputObjectValue = $this->getInputObjectValue();
-        return property_exists($inputObjectValue, $propertyName);
+        if (property_exists($inputObjectValue, $propertyName)) {
+            return true;
+        }
+        return parent::hasProperty($propertyName);
     }
 
     public function getValue(string $propertyName): mixed
     {
-        if (!$this->hasProperty($propertyName)) {
-            return null;
-        }
         $inputObjectValue = $this->getInputObjectValue();
-        return $inputObjectValue->$propertyName;
+        if (property_exists($inputObjectValue, $propertyName)) {
+            return $inputObjectValue->$propertyName;
+        }
+        return parent::getValue($propertyName);
     }
 
     protected function getInputObjectValue(): stdClass

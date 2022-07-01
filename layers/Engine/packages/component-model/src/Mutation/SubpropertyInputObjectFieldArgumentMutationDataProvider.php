@@ -12,8 +12,9 @@ class SubpropertyInputObjectFieldArgumentMutationDataProvider extends AbstractSu
         FieldInterface $field,
         protected string $fieldInputArgumentName,
         protected string $subpropertyName,
+        array $propertyValues = [],
     ) {
-        parent::__construct($field);
+        parent::__construct($field, $propertyValues);
     }
 
     public function getArgumentName(): string
