@@ -15,6 +15,7 @@ use WP_User_Query;
 use function get_user_by;
 use function get_users;
 use function esc_sql;
+use function get_userdata;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -288,44 +289,49 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return ' AND (' . implode(' OR ', $searches) . ')';
     }
 
-    protected function getUserProperty(string $property, string | int | object $userObjectOrID): ?string
+    protected function getUserProperty(string $property, string|int|object $userObjectOrID): mixed
     {
         if (is_object($userObjectOrID)) {
             /** @var WP_User */
             $user = $userObjectOrID;
-            return $user->$property;
+        } else {
+            $userID = $userObjectOrID;
+            $user = get_userdata($userID);
+            if ($user === false) {
+                return null;
+            }
         }
-        return get_the_author_meta($property, $userObjectOrID);
+        return $user->$property;
     }
-    public function getUserDisplayName(string | int | object $userObjectOrID): ?string
+    public function getUserDisplayName(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('display_name', $userObjectOrID);
     }
-    public function getUserEmail(string | int | object $userObjectOrID): ?string
+    public function getUserEmail(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_email', $userObjectOrID);
     }
-    public function getUserFirstname(string | int | object $userObjectOrID): ?string
+    public function getUserFirstname(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_firstname', $userObjectOrID);
     }
-    public function getUserLastname(string | int | object $userObjectOrID): ?string
+    public function getUserLastname(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_lastname', $userObjectOrID);
     }
-    public function getUserLogin(string | int | object $userObjectOrID): ?string
+    public function getUserLogin(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_login', $userObjectOrID);
     }
-    public function getUserDescription(string | int | object $userObjectOrID): ?string
+    public function getUserDescription(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('description', $userObjectOrID);
     }
-    public function getUserWebsiteURL(string | int | object $userObjectOrID): ?string
+    public function getUserWebsiteURL(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_url', $userObjectOrID);
     }
-    public function getUserSlug(string | int | object $userObjectOrID): ?string
+    public function getUserSlug(string|int|object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_nicename', $userObjectOrID);
     }
@@ -334,7 +340,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return $user->ID;
     }
 
-    public function getUserURL(string | int | object $userObjectOrID): ?string
+    public function getUserURL(string|int|object $userObjectOrID): ?string
     {
         if (is_object($userObjectOrID)) {
             /** @var WP_User */
