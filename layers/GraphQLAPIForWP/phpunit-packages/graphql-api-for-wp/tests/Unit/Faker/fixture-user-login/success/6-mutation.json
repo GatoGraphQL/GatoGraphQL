@@ -3,7 +3,7 @@
     "addCommentToCustomPost": {
       "content": "Great insight!",
       "authorName": "Leo",
-      "authorEmail": "leo@saronga.com",
+      "authorEmail": "admin@gmail.com",
       "customPost": {
         "__typename": "Post",
         "id": 1724,
