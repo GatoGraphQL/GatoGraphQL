@@ -96,6 +96,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
     /** @var SplObjectStorage<FieldInterface,MutationDataProviderInterface> */
     protected SplObjectStorage $fieldMutationDataProviderCache;
+    /** @var SplObjectStorage<FieldInterface,SplObjectStorage<object,MutationDataProviderInterface>> */
+    protected SplObjectStorage $fieldMutationDataProviderForObjectCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
@@ -183,6 +185,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function __construct()
     {
         $this->fieldMutationDataProviderCache = new SplObjectStorage();
+        $this->fieldMutationDataProviderForObjectCache = new SplObjectStorage();
     }
 
     final public function getClassesToAttachTo(): array
@@ -1124,8 +1127,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
             $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProvider);
+            $mutationDataProviderForObject = $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProviderForObject);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1174,6 +1177,28 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
         return new FieldArgumentMutationDataProvider($mutationField);
+    }
+
+    final protected function getMutationDataProviderForObject(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
+        object $object,
+    ): MutationDataProviderInterface {
+        if (!$this->fieldMutationDataProviderForObjectCache->contains($mutationField)) {
+            $this->fieldMutationDataProviderForObjectCache[$mutationField] = new SplObjectStorage();
+        }
+        if (!$this->fieldMutationDataProviderForObjectCache[$mutationField]->contains($object)) {
+            $this->fieldMutationDataProviderForObjectCache[$mutationField][$object] = $this->doGetMutationDataProviderForObject($objectTypeResolver, $mutationField, $object);
+        }
+        return $this->fieldMutationDataProviderForObjectCache[$mutationField][$object];
+    }
+
+    protected function doGetMutationDataProviderForObject(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $mutationField,
+        object $object,
+    ): MutationDataProviderInterface {
+        return $this->getMutationDataProvider($objectTypeResolver, $mutationField);
     }
 
     /**
@@ -1233,7 +1258,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
             $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+            $mutationDataProvider = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
+                ? $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object)
+                : $this->getMutationDataProvider($objectTypeResolver, $mutationField);
             try {
                 return $mutationResolver->executeMutation($mutationDataProvider);
             } catch (Exception $e) {
