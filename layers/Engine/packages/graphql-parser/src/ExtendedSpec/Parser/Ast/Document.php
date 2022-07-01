@@ -57,6 +57,7 @@ class Document extends UpstreamDocument
     protected function assertArgumentsUniqueInDirectives(array $directives): void
     {
         parent::assertArgumentsUniqueInDirectives($directives);
+
         /** @var MetaDirective[] */
         $metaDirectives = array_filter(
             $directives,
