@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Mutation;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use stdClass;
 
-class SubpropertyInputObjectFieldArgumentMutationDataProvider extends InputObjectFieldArgumentMutationDataProvider
+class SubpropertyInputObjectFieldArgumentMutationDataProvider extends InputObjectFieldArgumentMutationDataProvider implements SubpropertyInputObjectFieldArgumentMutationDataProviderInterface
 {
     public function __construct(
         FieldInterface $field,
@@ -18,7 +18,7 @@ class SubpropertyInputObjectFieldArgumentMutationDataProvider extends InputObjec
         parent::__construct($field, $fieldInputArgumentName, $propertyValues);
     }
 
-    protected function getSubpropertyName(): string
+    public function getSubpropertyName(): string
     {
         return $this->subpropertyName;
     }
