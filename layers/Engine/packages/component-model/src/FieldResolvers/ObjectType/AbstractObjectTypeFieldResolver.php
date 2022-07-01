@@ -844,23 +844,34 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
              * If the field is an InputObject, let it perform validations on its input fields
              */
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argument->getName()];
-            if (
-                $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
-            ) {
+            try {
+                $argumentValue = $argument->getValue();
+                if (
+                    $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
+                ) {
+                    $errors = array_merge(
+                        $errors,
+                        $fieldArgTypeResolver->validateInputValue($argumentValue)
+                    );
+                }
                 $errors = array_merge(
                     $errors,
-                    $fieldArgTypeResolver->validateInputValue($argument->getValue())
+                    $this->validateFieldArgValue(
+                        $objectTypeResolver,
+                        $field->getName(),
+                        $argument->getName(),
+                        $argumentValue
+                    )
+                );
+            } catch (InvalidDynamicContextException $e) {
+                $errors[] = new FeedbackItemResolution(
+                    GenericFeedbackItemProvider::class,
+                    GenericFeedbackItemProvider::E1,
+                    [
+                        $e->getMessage(),
+                    ]
                 );
             }
-            $errors = array_merge(
-                $errors,
-                $this->validateFieldArgValue(
-                    $objectTypeResolver,
-                    $field->getName(),
-                    $argument->getName(),
-                    $argument->getValue()
-                )
-            );
         }
         return $errors;
     }

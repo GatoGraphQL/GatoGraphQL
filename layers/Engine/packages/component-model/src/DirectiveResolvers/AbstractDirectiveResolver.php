@@ -529,17 +529,27 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     ): array {
         $errors = [];
         foreach ($this->directive->getArguments() as $argument) {
-            if (
-                $maybeErrorFeedbackItemResolutions = $this->validateDirectiveArgValue(
-                    $relationalTypeResolver,
-                    $this->directive->getName(),
-                    $argument->getName(),
-                    $argument->getValue()
-                )
-            ) {
-                $errors = array_merge(
-                    $errors,
-                    $maybeErrorFeedbackItemResolutions
+            try {
+                if (
+                    $maybeErrorFeedbackItemResolutions = $this->validateDirectiveArgValue(
+                        $relationalTypeResolver,
+                        $this->directive->getName(),
+                        $argument->getName(),
+                        $argument->getValue()
+                    )
+                ) {
+                    $errors = array_merge(
+                        $errors,
+                        $maybeErrorFeedbackItemResolutions
+                    );
+                }
+            } catch (InvalidDynamicContextException $e) {
+                $errors[] = new FeedbackItemResolution(
+                    GenericFeedbackItemProvider::class,
+                    GenericFeedbackItemProvider::E1,
+                    [
+                        $e->getMessage(),
+                    ]
                 );
             }
         }
