@@ -17,11 +17,6 @@ class InputObjectFieldArgumentMutationDataProvider extends FieldArgumentMutation
     ) {
         parent::__construct($field, $propertyValues);
     }
-
-    public function getArgumentName(): string
-    {
-        return $this->fieldInputArgumentName;
-    }
     
     /**
      * @return string[]
@@ -62,5 +57,10 @@ class InputObjectFieldArgumentMutationDataProvider extends FieldArgumentMutation
     {
         $argument = $this->field->getArgument($this->getArgumentName());
         return $argument->getValueAST();
+    }
+
+    public function getArgumentName(): string
+    {
+        return $this->fieldInputArgumentName;
     }
 }
