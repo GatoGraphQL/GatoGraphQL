@@ -123,10 +123,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
                 sprintf(
                     $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
                     $formDataSize,
-                    implode(
-                        '\'%s\'',
-                        $propertyNames
-                    )
+                    $propertyNames
                 )
             );
         }
