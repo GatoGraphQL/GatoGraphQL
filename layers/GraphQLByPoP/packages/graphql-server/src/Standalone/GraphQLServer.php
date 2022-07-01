@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
-use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
+use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Response\Schemes;

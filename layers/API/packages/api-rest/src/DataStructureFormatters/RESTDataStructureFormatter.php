@@ -9,7 +9,7 @@ use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\StaticHelpers\GraphQLParserHelpers;
+use PoPAPI\API\StaticHelpers\GraphQLParserHelpers;
 use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
