@@ -31,7 +31,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
             && App::getState('is-user-logged-in')
         ) {
             $userID = App::getState('current-user-id');
-            $inputArgument = $field->getArgument('input');
+            $inputArgument = $field->getArgument(MutationInputProperties::INPUT);
             /** @var InputObject */
             $inputValueAST = $inputArgument->getValueAST();
             $inputValue = $inputValueAST->getValue();

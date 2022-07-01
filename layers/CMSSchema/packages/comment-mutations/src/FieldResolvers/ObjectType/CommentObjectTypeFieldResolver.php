@@ -82,7 +82,7 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
     {
         return match ($fieldName) {
             'reply' => [
-                'input' => $this->getCommentReplyFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCommentReplyFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -91,7 +91,7 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['reply' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            ['reply' => MutationInputProperties::INPUT] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

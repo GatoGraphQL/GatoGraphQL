@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -12,7 +11,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
+use PoP\Root\App;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
+use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootAddCommentToCustomPostFilterInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootReplyCommentFilterInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
@@ -90,10 +91,10 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
     {
         return match ($fieldName) {
             'addCommentToCustomPost' => [
-                'input' => $this->getRootAddCommentToCustomPostFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getRootAddCommentToCustomPostFilterInputObjectTypeResolver(),
             ],
             'replyComment' => [
-                'input' => $this->getRootReplyCommentFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getRootReplyCommentFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -102,7 +103,7 @@ class RootObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ($fieldArgName) {
-            'input' => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::INPUT => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
