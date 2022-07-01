@@ -31,28 +31,29 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
             && App::getState('is-user-logged-in')
         ) {
             $userID = App::getState('current-user-id');
-            /** @var InputObject */
             $inputArgument = $field->getArgument('input');
-            $inputAstValue = $inputArgument->getAstValue();
-            if (!property_exists($inputArgument, MutationInputProperties::AUTHOR_NAME)) {
-                $inputArgument->${MutationInputProperties::AUTHOR_NAME} = new Literal(
+            $inputValueAST = $inputArgument->getValueAST();
+            /** @var InputObject */
+            $inputValue = $inputValueAST->getValue();
+            if (!property_exists($inputValue, MutationInputProperties::AUTHOR_NAME)) {
+                $inputValue->{MutationInputProperties::AUTHOR_NAME} = new Literal(
                     $this->getUserTypeAPI()->getUserDisplayName($userID),
                     LocationHelper::getNonSpecificLocation()
                 );
             }
-            if (!property_exists($inputArgument, MutationInputProperties::AUTHOR_EMAIL)) {
-                $inputArgument->${MutationInputProperties::AUTHOR_EMAIL} = new Literal(
+            if (!property_exists($inputValue, MutationInputProperties::AUTHOR_EMAIL)) {
+                $inputValue->{MutationInputProperties::AUTHOR_EMAIL} = new Literal(
                     $this->getUserTypeAPI()->getUserEmail($userID),
                     LocationHelper::getNonSpecificLocation()
                 );
             }
-            if (!property_exists($inputArgument, MutationInputProperties::AUTHOR_URL)) {
-                $inputArgument->${MutationInputProperties::AUTHOR_URL} = new Literal(
+            if (!property_exists($inputValue, MutationInputProperties::AUTHOR_URL)) {
+                $inputValue->{MutationInputProperties::AUTHOR_URL} = new Literal(
                     $this->getUserTypeAPI()->getUserWebsiteURL($userID),
                     LocationHelper::getNonSpecificLocation()
                 );
             }
-            $inputArgument->setValue($inputAstValue);
+            $inputArgument->setValueAST($inputValueAST);
         }
     }
 }
