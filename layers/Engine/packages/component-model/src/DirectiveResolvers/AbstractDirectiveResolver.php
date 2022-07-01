@@ -34,6 +34,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
@@ -490,7 +491,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ) {
                 return [$maybeErrorFeedbackItemResolution];
             }
-        } catch (InvalidRequestException $e) {
+        } catch (InvalidDynamicContextException $e) {
             $feedbackItemResolution = new FeedbackItemResolution(
                 GenericFeedbackItemProvider::class,
                 GenericFeedbackItemProvider::E1,

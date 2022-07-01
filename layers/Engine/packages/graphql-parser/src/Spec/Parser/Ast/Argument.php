@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
@@ -54,7 +55,7 @@ class Argument extends AbstractAst
     }
 
     /**
-     * @throws InvalidRequestException When accessing non-declared Dynamic Variables
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     final public function getValue(): mixed
     {

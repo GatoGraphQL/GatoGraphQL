@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -25,7 +26,7 @@ trait FieldOrDirectiveResolverTrait
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
      *
-     * @throws InvalidRequestException When accessing non-declared Dynamic Variables
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     private function validateNotMissingFieldOrDirectiveArguments(
         array $mandatoryFieldOrDirectiveArgNames,

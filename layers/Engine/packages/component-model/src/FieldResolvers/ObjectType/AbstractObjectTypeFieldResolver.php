@@ -44,6 +44,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
@@ -743,7 +744,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 );
                 return;
             }
-        } catch (InvalidRequestException $e) {
+        } catch (InvalidDynamicContextException $e) {
             $feedbackItemResolution = new FeedbackItemResolution(
                 GenericFeedbackItemProvider::class,
                 GenericFeedbackItemProvider::E1,

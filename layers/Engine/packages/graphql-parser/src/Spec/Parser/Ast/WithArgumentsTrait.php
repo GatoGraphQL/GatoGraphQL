@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 
 trait WithArgumentsTrait
@@ -42,7 +43,7 @@ trait WithArgumentsTrait
     }
 
     /**
-     * @throws InvalidRequestException When accessing non-declared Dynamic Variables
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     public function getArgumentValue(string $name): mixed
     {

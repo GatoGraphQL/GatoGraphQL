@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
@@ -48,6 +50,7 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
      * nested InputObjects with stdClass, etc
      *
      * @return mixed[]
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     final public function getValue(): mixed
     {
@@ -59,6 +62,7 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
 
     /**
      * @return mixed[]
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     public function doGetValue(): array
     {
