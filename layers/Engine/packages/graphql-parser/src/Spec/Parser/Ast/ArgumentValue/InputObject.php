@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
@@ -81,7 +80,7 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
      */
     public function setValue(mixed $object): void
     {
-        $this->cachedValue = null;
+        $this->resetCachedValue();
         $this->object = $object;
     }
 
@@ -91,5 +90,10 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
     public function getAstValue(): mixed
     {
         return $this->object;
+    }
+
+    public function resetCachedValue(): void
+    {
+        $this->cachedValue = null;
     }
 }

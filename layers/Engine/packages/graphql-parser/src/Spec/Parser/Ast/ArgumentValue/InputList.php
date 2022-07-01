@@ -82,7 +82,7 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
      */
     public function setValue(mixed $list): void
     {
-        $this->cachedValue = null;
+        $this->resetCachedValue();
         $this->list = $list;
     }
 
@@ -92,5 +92,10 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
     public function getAstValue(): mixed
     {
         return $this->list;
+    }
+
+    public function resetCachedValue(): void
+    {
+        $this->cachedValue = null;
     }
 }

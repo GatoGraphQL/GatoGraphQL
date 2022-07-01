@@ -67,4 +67,22 @@ class Document extends UpstreamDocument
             $this->assertArgumentsUniqueInDirectives($metaDirective->getNestedDirectives());
         }
     }
+
+    /**
+     * @param Directive[] $directives
+     * @throws InvalidRequestException
+     */
+    protected function resetCacheInDirectives(array $directives): void
+    {
+        parent::resetCacheInDirectives($directives);
+
+        /** @var MetaDirective[] */
+        $metaDirectives = array_filter(
+            $directives,
+            fn (Directive $directive) => $directive instanceof MetaDirective
+        );
+        foreach ($metaDirectives as $metaDirective) {
+            $this->resetCacheInDirectives($metaDirective->getNestedDirectives());
+        }
+    }
 }

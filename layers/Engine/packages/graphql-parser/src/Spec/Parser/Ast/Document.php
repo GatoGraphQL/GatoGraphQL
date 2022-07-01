@@ -792,4 +792,108 @@ class Document implements DocumentInterface
             $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
         }
     }
+
+    /**
+     * Method needed only for testing in PHPUnit,
+     * to reset the cache inside AST elements
+     * (InputList and InputObject) so that the
+     * `cachedValue` property does not make the comparison
+     * with the expected document fail.
+     *
+     * @throws InvalidRequestException
+     */
+    public function resetCache(): void
+    {
+        foreach ($this->getOperations() as $operation) {
+            $this->resetCacheInOperation($operation);
+        }
+        foreach ($this->getFragments() as $fragment) {
+            $this->resetCacheInFragment($fragment);
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function resetCacheInOperation(OperationInterface $operation): void
+    {
+        $this->resetCacheInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds());
+        $this->resetCacheInDirectives($operation->getDirectives());
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function resetCacheInFragment(Fragment $fragment): void
+    {
+        $this->resetCacheInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
+        $this->resetCacheInDirectives($fragment->getDirectives());
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @throws InvalidRequestException
+     */
+    protected function resetCacheInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): void
+    {
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $this->resetCacheInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds());
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $this->resetCacheInArguments($field->getArguments());
+            $this->resetCacheInDirectives($field->getDirectives());
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $this->resetCacheInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds());
+            }
+        }
+    }
+
+    /**
+     * @param Directive[] $directives
+     * @throws InvalidRequestException
+     */
+    protected function resetCacheInDirectives(array $directives): void
+    {
+        foreach ($directives as $directive) {
+            $this->resetCacheInArguments($directive->getArguments());
+        }
+    }
+
+    /**
+     * @param Argument[] $arguments
+     * @throws InvalidRequestException
+     */
+    protected function resetCacheInArguments(array $arguments): void
+    {
+        foreach ($arguments as $argument) {
+            $this->resetCacheInValueAST($argument->getValueAST());
+        }
+    }
+
+    protected function resetCacheInValueAST(WithValueInterface $valueAST): void
+    {
+        if (!($valueAST instanceof InputList || $valueAST instanceof InputObject)) {
+            return;
+        }
+
+        $valueAST->resetCachedValue();
+
+        $list = (array) $valueAST->getAstValue();
+        foreach ($list as $listItem) {
+            if (!($listItem instanceof WithValueInterface)) {
+                continue;
+            }
+            $this->resetCacheInValueAST($listItem);
+        }
+    }
 }
