@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Mutation;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use stdClass;
 
-abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends AbstractFieldArgumentMutationDataProvider implements InputObjectFieldArgumentMutationDataProviderInterface
+abstract class AbstractInputObjectFieldArgumentMutationDataProvider extends FieldArgumentMutationDataProvider implements InputObjectFieldArgumentMutationDataProviderInterface
 {
     /**
      * @return string[]
