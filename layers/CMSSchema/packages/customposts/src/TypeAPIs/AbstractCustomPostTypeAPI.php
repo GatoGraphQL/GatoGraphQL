@@ -22,7 +22,7 @@ abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
-    public function getPermalinkPath(string | int | object $customPostObjectOrID): ?string
+    public function getPermalinkPath(string|int|object $customPostObjectOrID): ?string
     {
         $permalink = $this->getPermalink($customPostObjectOrID);
         if ($permalink === null) {

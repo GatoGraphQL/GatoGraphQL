@@ -12,7 +12,7 @@ use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\TypeAPIs\CustomPostUserTy
  */
 class CustomPostUserTypeAPI implements CustomPostUserTypeAPIInterface
 {
-    public function getAuthorID(string | int | object $customPostObjectOrID)
+    public function getAuthorID(string|int|object $customPostObjectOrID)
     {
         list(
             $customPost,

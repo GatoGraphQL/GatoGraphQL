@@ -145,12 +145,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         );
     }
 
-    public function getCategoryURL(string | int | object $catObjectOrID): string
+    public function getCategoryURL(string|int|object $catObjectOrID): string
     {
         return get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
     }
 
-    public function getCategoryURLPath(string | int | object $catObjectOrID): string
+    public function getCategoryURLPath(string|int|object $catObjectOrID): string
     {
         /** @var string */
         return $this->getCMSHelperService()->getLocalURLPath($this->getCategoryURL($catObjectOrID));
@@ -214,7 +214,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     //     return get_cat_name($cat_id);
     // }
 
-    protected function getCategoryFromObjectOrID(string | int | object $catObjectOrID): ?WP_Term
+    protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
     {
         if (is_object($catObjectOrID)) {
             return $catObjectOrID;
@@ -226,19 +226,19 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $catObject;
     }
 
-    public function getCategorySlug(string | int | object $catObjectOrID): string
+    public function getCategorySlug(string|int|object $catObjectOrID): string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         return $category->slug;
     }
 
-    public function getCategoryName(string | int | object $catObjectOrID): string
+    public function getCategoryName(string|int|object $catObjectOrID): string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         return $category->name;
     }
 
-    public function getCategoryParentID(string | int | object $catObjectOrID): string | int | null
+    public function getCategoryParentID(string|int|object $catObjectOrID): string | int | null
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         // If it has no parent, it is assigned 0. In that case, return null
@@ -251,7 +251,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     /**
      * @return array<string|int>|null
      */
-    public function getCategoryChildIDs(string | int | object $catObjectOrID): ?array
+    public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array
     {
         $categoryID = is_object($catObjectOrID) ? $this->getCategoryID($catObjectOrID) : $catObjectOrID;
         $childrenIDs = get_term_children($categoryID, $this->getCategoryTaxonomyName());
@@ -261,12 +261,12 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $childrenIDs;
     }
 
-    public function getCategoryDescription(string | int | object $catObjectOrID): string
+    public function getCategoryDescription(string|int|object $catObjectOrID): string
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         return $category->description;
     }
-    public function getCategoryItemCount(string | int | object $catObjectOrID): int
+    public function getCategoryItemCount(string|int|object $catObjectOrID): int
     {
         $category = $this->getCategoryFromObjectOrID($catObjectOrID);
         return $category->count;

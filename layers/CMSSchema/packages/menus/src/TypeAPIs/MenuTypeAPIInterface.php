@@ -15,7 +15,7 @@ interface MenuTypeAPIInterface
     /**
      * @return MenuItem[]
      */
-    public function getMenuItems(string | int | object $menuObjectOrID): array;
+    public function getMenuItems(string|int|object $menuObjectOrID): array;
     public function getMenuID(object $menu): string | int;
     public function getMenuIDFromMenuName(string $menuName): string | int | null;
     /**

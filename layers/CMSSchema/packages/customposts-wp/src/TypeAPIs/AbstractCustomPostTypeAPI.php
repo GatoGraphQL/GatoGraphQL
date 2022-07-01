@@ -40,7 +40,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $customPost->ID;
     }
 
-    public function getStatus(string | int | object $customPostObjectOrID): ?string
+    public function getStatus(string|int|object $customPostObjectOrID): ?string
     {
         $status = get_post_status($customPostObjectOrID);
         if ($status === false) {
@@ -233,7 +233,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return get_post_types($query);
     }
 
-    public function getPermalink(string | int | object $customPostObjectOrID): ?string
+    public function getPermalink(string|int|object $customPostObjectOrID): ?string
     {
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         if ($customPostID === null) {
@@ -251,7 +251,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
 
 
-    public function getSlug(string | int | object $customPostObjectOrID): ?string
+    public function getSlug(string|int|object $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -272,19 +272,19 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $post_name;
     }
 
-    public function getExcerpt(string | int | object $customPostObjectOrID): ?string
+    public function getExcerpt(string|int|object $customPostObjectOrID): ?string
     {
         return get_the_excerpt($customPostObjectOrID);
     }
     /**
      * @return mixed[]
      */
-    protected function getCustomPostObjectAndID(string | int | object $customPostObjectOrID): array
+    protected function getCustomPostObjectAndID(string|int|object $customPostObjectOrID): array
     {
         return CustomPostTypeAPIHelpers::getCustomPostObjectAndID($customPostObjectOrID);
     }
 
-    protected function getCustomPostObject(string | int | object $customPostObjectOrID): ?object
+    protected function getCustomPostObject(string|int|object $customPostObjectOrID): ?object
     {
         list(
             $customPost,
@@ -293,7 +293,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $customPost;
     }
 
-    protected function getCustomPostID(string | int | object $customPostObjectOrID): ?int
+    protected function getCustomPostID(string|int|object $customPostObjectOrID): ?int
     {
         list(
             $customPost,
@@ -302,7 +302,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $customPostID;
     }
 
-    public function getTitle(string | int | object $customPostObjectOrID): ?string
+    public function getTitle(string|int|object $customPostObjectOrID): ?string
     {
         list(
             $customPost,
@@ -315,7 +315,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return App::applyFilters('the_title', $customPost->post_title, $customPostID);
     }
 
-    public function getContent(string | int | object $customPostObjectOrID): ?string
+    public function getContent(string|int|object $customPostObjectOrID): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
@@ -324,7 +324,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return App::applyFilters('the_content', $customPost->post_content);
     }
 
-    public function getRawContent(string | int | object $customPostObjectOrID): ?string
+    public function getRawContent(string|int|object $customPostObjectOrID): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
@@ -348,7 +348,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return strip_tags($ret);
     }
 
-    public function getPublishedDate(string | int | object $customPostObjectOrID, bool $gmt = false): ?string
+    public function getPublishedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
@@ -357,7 +357,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $gmt ? $customPost->post_date_gmt : $customPost->post_date;
     }
 
-    public function getModifiedDate(string | int | object $customPostObjectOrID, bool $gmt = false): ?string
+    public function getModifiedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
@@ -365,7 +365,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }
         return $gmt ? $customPost->post_modified_gmt : $customPost->post_modified;
     }
-    public function getCustomPostType(string | int | object $customPostObjectOrID): string
+    public function getCustomPostType(string|int|object $customPostObjectOrID): string
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         return $customPost?->post_type;

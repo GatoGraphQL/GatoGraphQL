@@ -22,7 +22,7 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
         return $this->cmsHelperService ??= $this->instanceManager->getInstance(CMSHelperServiceInterface::class);
     }
 
-    public function getUserURLPath(string | int | object $userObjectOrID): ?string
+    public function getUserURLPath(string|int|object $userObjectOrID): ?string
     {
         $userURL = $this->getUserURL($userObjectOrID);
         if ($userURL === null) {

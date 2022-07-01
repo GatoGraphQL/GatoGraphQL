@@ -12,5 +12,5 @@ interface CustomPostUserTypeAPIInterface
     /**
      * Get the author of the Custom Post
      */
-    public function getAuthorID(string | int | object $objectOrID);
+    public function getAuthorID(string|int|object $objectOrID);
 }
