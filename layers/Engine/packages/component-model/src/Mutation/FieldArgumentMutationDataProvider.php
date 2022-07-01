@@ -20,7 +20,7 @@ class FieldArgumentMutationDataProvider extends MutationDataProvider implements 
     {
         return $this->field;
     }
-    
+
     /**
      * @return string[]
      */

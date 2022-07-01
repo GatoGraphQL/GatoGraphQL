@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use GD_Captcha;
 use GD_GF_Module_Processor_TextFormInputs;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ComponentProcessors\FormInputComponentProcessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Exception\GenericClientException;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;

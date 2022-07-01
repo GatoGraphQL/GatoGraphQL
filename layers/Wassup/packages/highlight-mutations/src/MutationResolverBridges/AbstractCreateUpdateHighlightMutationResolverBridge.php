@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolverBridges;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\Root\App;
 use PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues;
 use PoP_Module_Processor_TextareaFormInputs;

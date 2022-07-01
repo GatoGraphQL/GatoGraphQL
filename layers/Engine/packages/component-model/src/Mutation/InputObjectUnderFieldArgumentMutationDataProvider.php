@@ -22,7 +22,7 @@ class InputObjectUnderFieldArgumentMutationDataProvider extends MutationDataProv
     {
         return $this->field;
     }
-    
+
     /**
      * @return string[]
      */
