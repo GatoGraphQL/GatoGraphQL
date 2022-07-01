@@ -402,6 +402,16 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                 $fieldsOrFragmentBonds,
                 $fragments,
             );
+            if (!($directive instanceof MetaDirective)) {
+                continue;
+            }
+            /** @var MetaDirective */
+            $metaDirective = $directive;
+            $this->replaceResolvedFieldVariableReferencesInDirectives(
+                $metaDirective->getNestedDirectives(),
+                $fieldsOrFragmentBonds,
+                $fragments,
+            );
         }
     }
 
