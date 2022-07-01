@@ -13,10 +13,10 @@ use PoP\Root\App;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function addArgumentsForMutation(FieldInterface $mutationField): void
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        $mutationField->addArgument(new Argument('histid', new Literal(App::query($this->getRequestKey()), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('user_id', new Literal(App::getState('current-user-id'), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationDataProvider->add('histid', App::query($this->getRequestKey()));
+        $mutationDataProvider->add('user_id', App::getState('current-user-id'));
     }
 
     protected function getRequestKey()

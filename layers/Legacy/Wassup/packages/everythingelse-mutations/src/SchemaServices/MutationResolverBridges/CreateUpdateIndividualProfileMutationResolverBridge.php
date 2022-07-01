@@ -59,7 +59,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         return $inputs;
     }
 
-    public function addArgumentsForMutation(FieldInterface $mutationField): void
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         $this->getCommonuserrolesFormData($mutationField);
         $this->getUsercommunitiesFormData($mutationField);
@@ -69,7 +69,7 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $individualinterests = $this->getComponentProcessorManager()->getComponentProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
-        $mutationField->addArgument(new Argument('last_name', new Literal(trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('individualinterests', new InputList($individualinterests ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationDataProvider->add('last_name', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))));
+        $mutationDataProvider->add('individualinterests', $individualinterests ?? array());
     }
 }

@@ -6,12 +6,12 @@ namespace PoP\ComponentModel\MutationResolverBridges;
 
 use Exception;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
-use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Mutation\FieldArgumentMutationDataProvider;
+use PoP\ComponentModel\Mutation\MutationDataProvider;
 use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
@@ -19,6 +19,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
@@ -69,20 +70,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
-        /**
-         * Create a runtime field to be executed. It doesn't matter
-         * what's the name of the mutation field, so providing
-         * a random one suffices.
-         */
-        $mutationField = new LeafField(
-            'someMutation',
-            null,
-            [],
-            [],
-            LocationHelper::getNonSpecificLocation()
-        );
-        $this->addArgumentsForMutation($mutationField);
-        $mutationDataProvider = $this->getMutationDataProvider($mutationField);
+        $mutationDataProvider = $this->getMutationDataProvider();
+        $this->fillMutationDataProvider($mutationDataProvider);
         $mutationResponse = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -155,9 +144,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $mutationResponse;
     }
 
-    protected function getMutationDataProvider(FieldInterface $mutationField): MutationDataProviderInterface
+    protected function getMutationDataProvider(): MutationDataProviderInterface
     {
-        return new FieldArgumentMutationDataProvider($mutationField);
+        return new MutationDataProvider();
     }
 
     protected function modifyDataProperties(array &$data_properties, string | int $resultID): void

@@ -12,7 +12,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
     {
         \PoP\Root\App::addAction(
             AbstractCreateUpdateCustomPostMutationResolverBridge::HOOK_FORM_DATA_CREATE_OR_UPDATE,
-            $this->addArgumentsForMutation(...),
+            $this->fillMutationDataProvider(...),
             10
         );
         \PoP\Root\App::addAction(
@@ -57,11 +57,11 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         }
     }
 
-    public function addArgumentsForMutation(WithArgumentsInterface $withArgumentsAST): void
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $withArgumentsAST->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('link', new Literal($componentprocessor_manager->getComponentProcessor([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK])->getValue([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK]), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $mutationDataProvider->add('link', $componentprocessor_manager->getComponentProcessor([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK])->getValue([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK]));
     }
 }
 

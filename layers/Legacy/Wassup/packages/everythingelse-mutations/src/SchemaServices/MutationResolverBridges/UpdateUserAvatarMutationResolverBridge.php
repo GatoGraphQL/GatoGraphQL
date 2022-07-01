@@ -31,9 +31,9 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
         return $this->getUpdateUserAvatarMutationResolver();
     }
 
-    public function addArgumentsForMutation(FieldInterface $mutationField): void
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
-        $mutationField->addArgument(new Argument('user_id', new Literal($user_id, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationDataProvider->add('user_id', $user_id);
     }
 }

@@ -22,6 +22,6 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
         /** @var FormComponentComponentProcessorInterface */
         $componentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($inputs['communities']);
         $communities = $componentProcessor->getValue($inputs['communities']);
-        $mutationField->addArgument(new Argument('communities', new InputList($communities ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationDataProvider->add('communities', $communities ?? array());
     }
 }

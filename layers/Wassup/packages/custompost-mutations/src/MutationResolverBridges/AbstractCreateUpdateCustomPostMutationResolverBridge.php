@@ -67,68 +67,68 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     abstract protected function isUpdate(): bool;
 
-    public function addArgumentsForMutation(FieldInterface $mutationField): void
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         if ($this->isUpdate()) {
-            $mutationField->addArgument(new Argument(MutationInputProperties::ID, new Literal($this->getUpdateCustomPostID(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::ID, $this->getUpdateCustomPostID());
         }
 
         if ($this->supportsTitle()) {
-            $mutationField->addArgument(new Argument(MutationInputProperties::TITLE, new Literal(trim(strip_tags($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE])->getValue([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE]))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::TITLE, trim(strip_tags($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE])->getValue([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE]))));
         }
 
         $editor = $this->getEditorInput();
         if ($editor !== null) {
             $cmseditpostshelpers = HelperAPIFactory::getInstance();
-            $mutationField->addArgument(new Argument(MutationInputProperties::CONTENT, new Literal(trim($cmseditpostshelpers->kses(stripslashes($this->getComponentProcessorManager()->getComponentProcessor($editor)->getValue($editor)))), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::CONTENT, trim($cmseditpostshelpers->kses(stripslashes($this->getComponentProcessorManager()->getComponentProcessor($editor)->getValue($editor)))));
         }
 
         if ($this->showCategories()) {
-            $mutationField->addArgument(new Argument(MutationInputProperties::CATEGORIES, new InputList($this->getCategories(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::CATEGORIES, $this->getCategories());
         }
 
         // Status: 2 possibilities:
         // - Moderate: then using the Draft/Pending/Publish Select, user cannot choose 'Publish' when creating a post
         // - No moderation: using the 'Keep as Draft' checkbox, completely omitting value 'Pending', post is either 'draft' or 'publish'
         if ($this->moderate()) {
-            $mutationField->addArgument(new Argument(MutationInputProperties::STATUS, new Literal($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::STATUS, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS]));
         } else {
             $keepasdraft = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT])->getValue([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT]);
-            $mutationField->addArgument(new Argument(MutationInputProperties::STATUS, new Literal($keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::STATUS, $keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH);
         }
 
         if ($featuredimage = $this->getFeaturedimageComponent()) {
-            $mutationField->addArgument(new Argument(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID, new Literal($this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID, $this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage));
         }
 
         if ($this->addReferences()) {
             $references = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES])->getValue([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES]);
-            $mutationField->addArgument(new Argument(MutationInputProperties::REFERENCES, new InputList($references ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::REFERENCES, $references ?? array());
         }
 
         if (PoP_ApplicationProcessors_Utils::addCategories()) {
             $topics = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_CATEGORIES])->getValue([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_CATEGORIES]);
-            $mutationField->addArgument(new Argument(MutationInputProperties::TOPICS, new InputList($topics ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::TOPICS, $topics ?? array());
         }
 
         // Only if the Volunteering is enabled
         if (defined('POP_VOLUNTEERING_INITIALIZED')) {
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 if ($this->volunteer()) {
-                    $mutationField->addArgument(new Argument(MutationInputProperties::VOLUNTEERSNEEDED, new Literal($this->getComponentProcessorManager()->getComponentProcessor([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT]), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+                    $mutationDataProvider->add(MutationInputProperties::VOLUNTEERSNEEDED, $this->getComponentProcessorManager()->getComponentProcessor([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT]));
                 }
             }
         }
 
         if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
             $appliesto = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_APPLIESTO])->getValue([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_APPLIESTO]);
-            $mutationField->addArgument(new Argument(MutationInputProperties::APPLIESTO, new InputList($appliesto ?? array(), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add(MutationInputProperties::APPLIESTO, $appliesto ?? array());
         }
 
         // Allow plugins to add their own fields
-        return App::doAction(
+        App::doAction(
             self::HOOK_FORM_DATA_CREATE_OR_UPDATE,
-            $mutationField
+            $mutationDataProvider
         );
     }
 

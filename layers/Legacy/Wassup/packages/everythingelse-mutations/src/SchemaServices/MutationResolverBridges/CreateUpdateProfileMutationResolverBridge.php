@@ -33,22 +33,21 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         return $this->getCreateUpdateProfileMutationResolver();
     }
 
-    public function addArgumentsForMutation(FieldInterface $mutationField): void
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
-        parent::addArgumentsForMutation($mutationField);
+        parent::fillMutationDataProvider($mutationDataProvider);
 
         $inputs = $this->getFormInputs();
-        $mutationField->addArgument(new Argument('short_description', new Literal(trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description'])), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('display_email', new Literal($this->getComponentProcessorManager()->getComponentProcessor($inputs['display_email'])->getValue($inputs['display_email']), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('facebook', new Literal(trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['facebook'])->getValue($inputs['facebook'])), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('twitter', new Literal(trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['twitter'])->getValue($inputs['twitter'])), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('linkedin', new Literal(trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('youtube', new Literal(trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['youtube'])->getValue($inputs['youtube'])), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('instagram', new Literal(trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['instagram'])->getValue($inputs['instagram'])), LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        // $mutationField->addArgument(new \PoP\GraphQLParser\Spec\Parser\Ast\Argument('blog', new Literal(trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['blog'])->getValue($inputs['blog'])), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()), \PoP\GraphQLParser\StaticHelpers\LocationHelper::getNonSpecificLocation()));
+        $mutationDataProvider->add('short_description', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description'])));
+        $mutationDataProvider->add('display_email', $this->getComponentProcessorManager()->getComponentProcessor($inputs['display_email'])->getValue($inputs['display_email']));
+        $mutationDataProvider->add('facebook', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['facebook'])->getValue($inputs['facebook'])));
+        $mutationDataProvider->add('twitter', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['twitter'])->getValue($inputs['twitter'])));
+        $mutationDataProvider->add('linkedin', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])));
+        $mutationDataProvider->add('youtube', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['youtube'])->getValue($inputs['youtube'])));
+        $mutationDataProvider->add('instagram', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['instagram'])->getValue($inputs['instagram'])));
 
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_profile:form_data', $mutationField);
+        App::doAction('gd_createupdate_profile:form_data', $mutationDataProvider);
     }
 
     private function getFormInputs()

@@ -29,7 +29,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         );
     }
 
-    public function addArgumentsForMutation(FieldInterface $mutationField): void
+    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
     {
         // Get the list of all emails
         $emails = array();
@@ -60,14 +60,14 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         }
         $additional_msg = trim($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE])->getValue([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE]));
         
-        $mutationField->addArgument(new Argument('emails', new InputList($emails, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('user_id', new Literal($user_id, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('sender-name', new Literal($sender_name, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('sender-url', new Literal($sender_url, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
-        $mutationField->addArgument(new Argument('additional-msg', new Literal($additional_msg, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation()));
+        $mutationDataProvider->add('emails', $emails);
+        $mutationDataProvider->add('user_id', $user_id);
+        $mutationDataProvider->add('sender-name', $sender_name);
+        $mutationDataProvider->add('sender-url', $sender_url);
+        $mutationDataProvider->add('additional-msg', $additional_msg);
         
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $mutationField->addArgument(new Argument('captcha', $captcha, LocationHelper::getNonSpecificLocation()));
+            $mutationDataProvider->add('captcha', $captcha);
         }
     }
 }
