@@ -58,7 +58,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
 
         foreach ($this->document->getOperations() as $operation) {
             $variableReferences = $this->document->getVariableReferencesInOperation($operation);
-            /** @var DynamicVariableReference */
+            /** @var DynamicVariableReference[] */
             $dynamicVariableReferences = array_filter(
                 $variableReferences,
                 fn (VariableReference $variableReference) => $variableReference instanceof DynamicVariableReference
