@@ -32,8 +32,8 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         ) {
             $userID = App::getState('current-user-id');
             $inputArgument = $field->getArgument('input');
-            $inputValueAST = $inputArgument->getValueAST();
             /** @var InputObject */
+            $inputValueAST = $inputArgument->getValueAST();
             $inputValue = $inputValueAST->getValue();
             if (!property_exists($inputValue, MutationInputProperties::AUTHOR_NAME)) {
                 $inputValue->{MutationInputProperties::AUTHOR_NAME} = new Literal(
@@ -53,7 +53,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
                     LocationHelper::getNonSpecificLocation()
                 );
             }
-            $inputArgument->setValueAST($inputValueAST);
+            $inputValueAST->setValue($inputValue);
         }
     }
 }
