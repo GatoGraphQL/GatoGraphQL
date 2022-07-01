@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\Environment as RootEnvironment;
 use stdClass;
 
 class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterface, WithAstValueInterface
@@ -54,14 +54,6 @@ class InputObject extends AbstractAst implements CoercibleArgumentValueAstInterf
      */
     final public function getValue(): mixed
     {
-        /**
-         * Caching results makes PHPUnit tests fail
-         * (those asserting the Document was parsed appropriately)
-         */
-        if (RootEnvironment::isApplicationEnvironmentDevPHPUnit()) {
-            return $this->doGetValue();
-        }
-
         if ($this->cachedValue === null) {
             $this->cachedValue = $this->doGetValue();
         }
