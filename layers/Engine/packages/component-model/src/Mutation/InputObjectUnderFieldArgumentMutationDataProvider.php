@@ -35,13 +35,13 @@ class InputObjectUnderFieldArgumentMutationDataProvider extends MutationDataProv
         ));
     }
 
-    public function hasProperty(string $propertyName): bool
+    public function has(string $propertyName): bool
     {
         $inputObjectValue = $this->getInputObjectValue();
         if (property_exists($inputObjectValue, $propertyName)) {
             return true;
         }
-        return parent::hasProperty($propertyName);
+        return parent::has($propertyName);
     }
 
     public function get(string $propertyName): mixed

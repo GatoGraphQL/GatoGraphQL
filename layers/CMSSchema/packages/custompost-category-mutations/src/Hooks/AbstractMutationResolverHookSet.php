@@ -41,7 +41,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!$mutationDataProvider->hasProperty(MutationInputProperties::CATEGORY_IDS)) {
+        if (!$mutationDataProvider->has(MutationInputProperties::CATEGORY_IDS)) {
             return;
         }
         $customPostCategoryIDs = $mutationDataProvider->get(MutationInputProperties::CATEGORY_IDS);

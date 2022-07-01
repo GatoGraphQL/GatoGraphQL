@@ -19,7 +19,7 @@ class MutationDataProvider implements MutationDataProviderInterface
     {
         return array_keys($this->propertyValues);
     }
-    public function hasProperty(string $propertyName): bool
+    public function has(string $propertyName): bool
     {
         return array_key_exists($propertyName, $this->propertyValues);
     }
