@@ -34,6 +34,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -479,14 +480,25 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             fn (string $directiveArgName) => ($this->getConsolidatedDirectiveArgTypeModifiers($relationalTypeResolver, $directiveArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
             ARRAY_FILTER_USE_KEY
         ));
-        if (
-            $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
-                $mandatoryConsolidatedDirectiveArgNames,
-                $directive,
-                ResolverTypes::DIRECTIVE
-            )
-        ) {
-            return [$maybeErrorFeedbackItemResolution];
+        try {
+            if (
+                $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
+                    $mandatoryConsolidatedDirectiveArgNames,
+                    $directive,
+                    ResolverTypes::DIRECTIVE
+                )
+            ) {
+                return [$maybeErrorFeedbackItemResolution];
+            }
+        } catch (InvalidRequestException $e) {
+            $feedbackItemResolution = new FeedbackItemResolution(
+                GenericFeedbackItemProvider::class,
+                GenericFeedbackItemProvider::E1,
+                [
+                    $e->getMessage(),
+                ]
+            );
+            return [$feedbackItemResolution];
         }
 
         /**

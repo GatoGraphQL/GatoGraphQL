@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+
 trait WithArgumentsTrait
 {
     /** @var Argument[] */
@@ -39,6 +41,9 @@ trait WithArgumentsTrait
         return $this->nameArguments[$name] ?? null;
     }
 
+    /**
+     * @throws InvalidRequestException When accessing non-declared Dynamic Variables
+     */
     public function getArgumentValue(string $name): mixed
     {
         if ($argument = $this->getArgument($name)) {

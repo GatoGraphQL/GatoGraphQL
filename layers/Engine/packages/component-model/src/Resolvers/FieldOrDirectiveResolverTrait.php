@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -23,6 +24,8 @@ trait FieldOrDirectiveResolverTrait
      * because empty values could be allowed.
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
+     *
+     * @throws InvalidRequestException When accessing non-declared Dynamic Variables
      */
     private function validateNotMissingFieldOrDirectiveArguments(
         array $mandatoryFieldOrDirectiveArgNames,
@@ -31,7 +34,7 @@ trait FieldOrDirectiveResolverTrait
     ): ?FeedbackItemResolution {
         $missing = array_values(array_filter(
             $mandatoryFieldOrDirectiveArgNames,
-            fn (string $fieldArgName) => !$fieldOrDirective->hasArgument($fieldArgName)
+            fn (string $fieldArgName) => $fieldOrDirective->getArgumentValue($fieldArgName) === null
         ));
         if ($missing !== []) {
             return count($missing) === 1 ?
