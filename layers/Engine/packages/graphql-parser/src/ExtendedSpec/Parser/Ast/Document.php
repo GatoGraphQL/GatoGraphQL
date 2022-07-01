@@ -49,4 +49,21 @@ class Document extends UpstreamDocument
         }
         return $variableReferences;
     }
+
+    /**
+     * @param Directive[] $directives
+     * @throws InvalidRequestException
+     */
+    protected function assertArgumentsUniqueInDirectives(array $directives): void
+    {
+        parent::assertArgumentsUniqueInDirectives($directives);
+        /** @var MetaDirective[] */
+        $metaDirectives = array_filter(
+            $directives,
+            fn (Directive $directive) => $directive instanceof MetaDirective
+        );
+        foreach ($metaDirectives as $metaDirective) {
+            $this->assertArgumentsUniqueInDirectives($metaDirective->getNestedDirectives());
+        }
+    }
 }
