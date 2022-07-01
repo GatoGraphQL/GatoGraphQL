@@ -24,7 +24,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
-        if (empty($mutationDataProvider->getValue('first_name'))) {
+        if (empty($mutationDataProvider->get('first_name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -34,7 +34,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Validate email
-        $user_email = $mutationDataProvider->getValue('user_email');
+        $user_email = $mutationDataProvider->get('user_email');
         if ($user_email === '') {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -68,7 +68,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     protected function validateCreateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
         // Check the username
-        $user_login = $mutationDataProvider->getValue('username');
+        $user_login = $mutationDataProvider->get('username');
         if ($user_login == '') {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -93,7 +93,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Check the e-mail address
-        $user_email = $mutationDataProvider->getValue('user_email');
+        $user_email = $mutationDataProvider->get('user_email');
         if (email_exists($user_email)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -104,8 +104,8 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Validate Password
-        $password = $mutationDataProvider->getValue('password');
-        $repeatpassword =  $mutationDataProvider->getValue('repeat_password');
+        $password = $mutationDataProvider->get('password');
+        $repeatpassword =  $mutationDataProvider->get('repeat_password');
 
         if (!$password) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -141,7 +141,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         // Validate the captcha
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $captcha = $mutationDataProvider->getValue('captcha');
+            $captcha = $mutationDataProvider->get('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
@@ -160,8 +160,8 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      */
     protected function validateUpdateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
-        $user_id = $mutationDataProvider->getValue('user_id');
-        $user_email = $mutationDataProvider->getValue('user_email');
+        $user_id = $mutationDataProvider->get('user_id');
+        $user_email = $mutationDataProvider->get('user_email');
 
         $email_user_id = email_exists($user_email);
         if ($email_user_id && $email_user_id !== $user_id) {
@@ -177,11 +177,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     protected function getUpdateuserData(MutationDataProviderInterface $mutationDataProvider)
     {
         $user_data = array(
-            'id' => $mutationDataProvider->getValue('user_id'),
-            'firstName' => $mutationDataProvider->getValue('first_name'),
-            'email' => $mutationDataProvider->getValue('user_email'),
-            'description' => $mutationDataProvider->getValue('description'),
-            'url' => $mutationDataProvider->getValue('user_url')
+            'id' => $mutationDataProvider->get('user_id'),
+            'firstName' => $mutationDataProvider->get('first_name'),
+            'email' => $mutationDataProvider->get('user_email'),
+            'description' => $mutationDataProvider->get('description'),
+            'url' => $mutationDataProvider->get('user_url')
         );
 
         return $user_data;
@@ -198,10 +198,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $user_data['role'] = $this->getRole();
 
         // Add the password
-        $user_data['password'] = $mutationDataProvider->getValue('password');
+        $user_data['password'] = $mutationDataProvider->get('password');
 
         // Username
-        $user_data['login'] = $mutationDataProvider->getValue('username');
+        $user_data['login'] = $mutationDataProvider->get('username');
 
         return $user_data;
     }
@@ -318,6 +318,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_id;
         // Comment Leo 21/09/2015: we don't use this function anymore to send the notifications to the admin/user. Instead, use our own hooks.
         // Send notification of new user
-        // wpNewUserNotification( $user_id, $mutationDataProvider->getValue('password') );
+        // wpNewUserNotification( $user_id, $mutationDataProvider->get('password') );
     }
 }

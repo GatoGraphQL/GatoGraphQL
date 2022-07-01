@@ -155,7 +155,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check if the user can publish custom posts
-        if ($mutationDataProvider->getValue(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
+        if ($mutationDataProvider->get(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
             $publishCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
             if (
                 !$this->getUserRoleTypeAPI()->userCan(
@@ -187,7 +187,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     {
         // Validate that the status is valid
         if ($mutationDataProvider->hasProperty(MutationInputProperties::STATUS)) {
-            $status = $mutationDataProvider->getValue(MutationInputProperties::STATUS);
+            $status = $mutationDataProvider->get(MutationInputProperties::STATUS);
             if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
                 $errors[] = new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
@@ -243,7 +243,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function validateUpdate(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
     {
-        $customPostID = $mutationDataProvider->getValue(MutationInputProperties::ID);
+        $customPostID = $mutationDataProvider->get(MutationInputProperties::ID);
         if (!$customPostID) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
@@ -296,20 +296,20 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected function addCreateUpdateCustomPostData(array &$post_data, MutationDataProviderInterface $mutationDataProvider): void
     {
         if ($mutationDataProvider->hasProperty(MutationInputProperties::CONTENT)) {
-            $post_data['content'] = $mutationDataProvider->getValue(MutationInputProperties::CONTENT);
+            $post_data['content'] = $mutationDataProvider->get(MutationInputProperties::CONTENT);
         }
         if ($mutationDataProvider->hasProperty(MutationInputProperties::TITLE)) {
-            $post_data['title'] = $mutationDataProvider->getValue(MutationInputProperties::TITLE);
+            $post_data['title'] = $mutationDataProvider->get(MutationInputProperties::TITLE);
         }
         if ($mutationDataProvider->hasProperty(MutationInputProperties::STATUS)) {
-            $post_data['status'] = $mutationDataProvider->getValue(MutationInputProperties::STATUS);
+            $post_data['status'] = $mutationDataProvider->get(MutationInputProperties::STATUS);
         }
     }
 
     protected function getUpdateCustomPostData(MutationDataProviderInterface $mutationDataProvider): array
     {
         $post_data = array(
-            'id' => $mutationDataProvider->getValue(MutationInputProperties::ID),
+            'id' => $mutationDataProvider->get(MutationInputProperties::ID),
         );
         $this->addCreateUpdateCustomPostData($post_data, $mutationDataProvider);
 

@@ -17,14 +17,14 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        if (empty($mutationDataProvider->getValue('email'))) {
+        if (empty($mutationDataProvider->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($mutationDataProvider->getValue('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($mutationDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -35,7 +35,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 
         $placeholder_string = $this->__('%s %s', 'pop-genericforms');
         $makesure_string = $this->__('Please make sure you have clicked on the unsubscription link in the newsletter.', 'pop-genericforms');
-        if (empty($mutationDataProvider->getValue('verificationcode'))) {
+        if (empty($mutationDataProvider->get('verificationcode'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -53,8 +53,8 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         }
 
         // Verify that the verification code corresponds to the email
-        $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($mutationDataProvider->getValue('email'));
-        if ($verificationcode != $mutationDataProvider->getValue('verificationcode')) {
+        $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($mutationDataProvider->get('email'));
+        if ($verificationcode != $mutationDataProvider->get('verificationcode')) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,

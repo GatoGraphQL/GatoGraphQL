@@ -32,7 +32,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
      */
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $customPostID = $mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        $customPostID = $mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID);
         $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
         return $customPostID;
     }
@@ -48,7 +48,7 @@ class RemoveFeaturedImageOnCustomPostMutationResolver extends AbstractMutationRe
         }
 
         $errors = [];
-        if (!$mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

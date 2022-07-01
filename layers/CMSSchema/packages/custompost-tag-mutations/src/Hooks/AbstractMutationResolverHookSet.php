@@ -44,7 +44,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$mutationDataProvider->hasProperty(MutationInputProperties::TAGS)) {
             return;
         }
-        $customPostTags = $mutationDataProvider->getValue(MutationInputProperties::TAGS);
+        $customPostTags = $mutationDataProvider->get(MutationInputProperties::TAGS);
         $customPostTagTypeMutationAPI = $this->getCustomPostTagTypeMutationAPI();
         $customPostTagTypeMutationAPI->setTags($customPostID, $customPostTags, false);
     }

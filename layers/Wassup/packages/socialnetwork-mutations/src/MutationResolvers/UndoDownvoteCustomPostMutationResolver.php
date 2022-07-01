@@ -16,7 +16,7 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
         $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $mutationDataProvider->getValue('target_id');
+            $target_id = $mutationDataProvider->get('target_id');
 
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
@@ -50,7 +50,7 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
     protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $mutationDataProvider->getValue('target_id');
+        $target_id = $mutationDataProvider->get('target_id');
 
         // Update value
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);

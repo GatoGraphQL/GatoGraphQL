@@ -23,7 +23,7 @@ class MutationDataProvider implements MutationDataProviderInterface
     {
         return array_key_exists($propertyName, $this->propertyValues);
     }
-    public function getValue(string $propertyName): mixed
+    public function get(string $propertyName): mixed
     {
         return $this->propertyValues[$propertyName] ?? null;
     }

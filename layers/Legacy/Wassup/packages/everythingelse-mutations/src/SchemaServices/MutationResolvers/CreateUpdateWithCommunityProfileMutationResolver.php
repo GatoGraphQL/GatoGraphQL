@@ -27,7 +27,7 @@ class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfi
     }
     protected function usercommunitiesCreateuser($user_id, MutationDataProviderInterface $mutationDataProvider): void
     {
-        $communities = $mutationDataProvider->getValue('communities');
+        $communities = $mutationDataProvider->get('communities');
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
 
         // Set the privileges/tags for the new communities

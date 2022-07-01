@@ -14,7 +14,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
     {
         $errors = [];
-        $target_id = $mutationDataProvider->getValue('target_id');
+        $target_id = $mutationDataProvider->get('target_id');
         if (!$target_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -36,7 +36,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
      */
     protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
-        $target_id = $mutationDataProvider->getValue('target_id');
+        $target_id = $mutationDataProvider->get('target_id');
         return $target_id;
     }
 

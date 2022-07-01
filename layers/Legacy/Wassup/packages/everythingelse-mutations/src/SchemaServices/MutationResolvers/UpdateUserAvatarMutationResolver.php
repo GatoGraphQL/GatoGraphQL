@@ -25,7 +25,7 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $user_id = $mutationDataProvider->getValue('user_id');
+        $user_id = $mutationDataProvider->get('user_id');
         $this->savePicture($user_id);
         $this->additionals($user_id, $mutationDataProvider);
 

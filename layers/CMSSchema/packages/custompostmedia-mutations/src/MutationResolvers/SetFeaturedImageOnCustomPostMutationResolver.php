@@ -32,8 +32,8 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
      */
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $customPostID = $mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        $mediaItemID = $mutationDataProvider->getValue(MutationInputProperties::MEDIA_ITEM_ID);
+        $customPostID = $mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID);
+        $mediaItemID = $mutationDataProvider->get(MutationInputProperties::MEDIA_ITEM_ID);
         $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
@@ -49,13 +49,13 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         }
 
         $errors = [];
-        if (!$mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
             );
         }
-        if (!$mutationDataProvider->getValue(MutationInputProperties::MEDIA_ITEM_ID)) {
+        if (!$mutationDataProvider->get(MutationInputProperties::MEDIA_ITEM_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,

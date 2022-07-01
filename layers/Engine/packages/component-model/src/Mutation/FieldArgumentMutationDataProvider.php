@@ -43,11 +43,11 @@ class FieldArgumentMutationDataProvider extends MutationDataProvider implements 
         return parent::hasProperty($propertyName);
     }
 
-    public function getValue(string $propertyName): mixed
+    public function get(string $propertyName): mixed
     {
         if ($this->field->hasArgument($propertyName)) {
             return $this->field->getArgumentValue($propertyName);
         }
-        return parent::getValue($propertyName);
+        return parent::get($propertyName);
     }
 }

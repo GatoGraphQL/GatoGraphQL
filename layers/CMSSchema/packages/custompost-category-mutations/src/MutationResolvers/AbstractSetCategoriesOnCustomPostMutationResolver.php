@@ -21,9 +21,9 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
      */
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $customPostID = $mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        $postCategoryIDs = $mutationDataProvider->getValue(MutationInputProperties::CATEGORY_IDS);
-        $append = $mutationDataProvider->getValue(MutationInputProperties::APPEND);
+        $customPostID = $mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID);
+        $postCategoryIDs = $mutationDataProvider->get(MutationInputProperties::CATEGORY_IDS);
+        $append = $mutationDataProvider->get(MutationInputProperties::APPEND);
         $customPostCategoryTypeAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeAPI->setCategories($customPostID, $postCategoryIDs, $append);
         return $customPostID;
@@ -42,7 +42,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
 
         $errors = [];
-        if (!$mutationDataProvider->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

@@ -17,7 +17,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
         $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $mutationDataProvider->getValue('target_id');
+            $target_id = $mutationDataProvider->get('target_id');
 
             // Check that the logged in user has not already subscribed to this tag
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
@@ -53,7 +53,7 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
     protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $mutationDataProvider->getValue('target_id');
+        $target_id = $mutationDataProvider->get('target_id');
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);

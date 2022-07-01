@@ -25,7 +25,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
     {
         $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
-            $target_id = $mutationDataProvider->getValue('target_id');
+            $target_id = $mutationDataProvider->get('target_id');
 
             // Make sure the post exists
             $target = $this->getPostTagTypeAPI()->getTag($target_id);

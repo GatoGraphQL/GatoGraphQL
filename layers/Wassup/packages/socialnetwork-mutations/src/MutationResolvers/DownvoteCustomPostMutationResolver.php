@@ -27,7 +27,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
         $errors = parent::validateErrors($mutationDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $mutationDataProvider->getValue('target_id');
+            $target_id = $mutationDataProvider->get('target_id');
 
             // Check that the logged in user has not already recommended this post
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
@@ -61,7 +61,7 @@ class DownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteC
     protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $mutationDataProvider->getValue('target_id');
+        $target_id = $mutationDataProvider->get('target_id');
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);

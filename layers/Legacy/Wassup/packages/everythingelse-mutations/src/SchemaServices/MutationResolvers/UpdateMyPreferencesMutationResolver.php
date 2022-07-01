@@ -17,8 +17,8 @@ class UpdateMyPreferencesMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
     {
-        $user_id = $mutationDataProvider->getValue('user_id');
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $mutationDataProvider->getValue('userPreferences'));
+        $user_id = $mutationDataProvider->get('user_id');
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $mutationDataProvider->get('userPreferences'));
         return $user_id;
     }
 }
