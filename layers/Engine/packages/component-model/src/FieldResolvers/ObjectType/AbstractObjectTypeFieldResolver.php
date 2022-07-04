@@ -1296,37 +1296,41 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $mutationDataProvider = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
-                ? $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object)
-                : $this->getMutationDataProvider($objectTypeResolver, $mutationField);
-            try {
-                return $mutationResolver->executeMutation($mutationDataProvider);
-            } catch (Exception $e) {
-                /** @var ModuleConfiguration */
-                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-                if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
-                    $objectTypeFieldResolutionFeedbackStore->addLog(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E6A,
-                                [
-                                    $field->getName(),
-                                    $e->getMessage(),
-                                    $e->getTraceAsString(),
-                                ]
-                            ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $objectTypeResolver,
-                        )
-                    );
-                }
-                $sendExceptionToClient = $e instanceof AbstractClientException
-                    || $moduleConfiguration->sendExceptionErrorMessages();
-                $feedbackItemResolution = $sendExceptionToClient
-                    ? ($moduleConfiguration->sendExceptionTraces()
-                        ? new FeedbackItemResolution(
+            return $this->executeMutation(
+                $objectTypeResolver,
+                $object,
+                $field,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+        // Base case: If the field->getName() exists as property in the object, then retrieve it
+        if (\property_exists($object, $field->getName())) {
+            return $object->{$field->getName()};
+        }
+        return null;
+    }
+
+    protected function executeMutation(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        // If a MutationResolver is declared, let it resolve the value
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        $mutationField = $this->getMutationField($objectTypeResolver, $field);
+        $mutationDataProvider = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
+            ? $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object)
+            : $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+        try {
+            return $mutationResolver->executeMutation($mutationDataProvider);
+        } catch (Exception $e) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
+                $objectTypeFieldResolutionFeedbackStore->addLog(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6A,
                             [
@@ -1334,38 +1338,50 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                                 $e->getMessage(),
                                 $e->getTraceAsString(),
                             ]
-                        )
-                        : new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E6,
-                            [
-                                $field->getName(),
-                                $e->getMessage(),
-                            ]
-                        )
-                    )
-                    : new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E7,
-                        [
-                            $field->getName()
-                        ]
-                    );
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $feedbackItemResolution,
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
                     )
                 );
-                return null;
             }
+            $sendExceptionToClient = $e instanceof AbstractClientException
+                || $moduleConfiguration->sendExceptionErrorMessages();
+            $feedbackItemResolution = $sendExceptionToClient
+                ? ($moduleConfiguration->sendExceptionTraces()
+                    ? new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E6A,
+                        [
+                            $field->getName(),
+                            $e->getMessage(),
+                            $e->getTraceAsString(),
+                        ]
+                    )
+                    : new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E6,
+                        [
+                            $field->getName(),
+                            $e->getMessage(),
+                        ]
+                    )
+                )
+                : new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E7,
+                    [
+                        $field->getName()
+                    ]
+                );
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $feedbackItemResolution,
+                    LocationHelper::getNonSpecificLocation(),
+                    $objectTypeResolver,
+                )
+            );
+            return null;
         }
-        // Base case: If the field->getName() exists as property in the object, then retrieve it
-        if (\property_exists($object, $field->getName())) {
-            return $object->$field->getName();
-        }
-        return null;
     }
 
     protected function prepareMutationDataProviderForObject(
