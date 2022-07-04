@@ -16,6 +16,79 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
+/**
+ * Set-up default arguments in the Field, and apply other customizations.
+ *
+ * Please notice that @prepareField will normally be called only once per field,
+ * but in it could be also called more than once, as when the
+ * field is inside a fragment, which gets called for different entities
+ * (and even types) across the GraphQL query.
+ *
+ * In that case, since the same field will be applied on different objects
+ * on different Engine iterations, the $idFieldSet (for different $ids)
+ * will contain the same direct $field, and this $field will then be
+ * "prepared" more than once.
+ *
+ * For instance, field '_kind69x5_name70x5_ofType71x5_isTypeOrImplementsAll___Type_: isTypeOrImplementsAll(typesOrInterfaces: ["__Type"])'
+ * is called more than once in the Introspection Query, as it is created on runtime
+ * within the fragment `TypeRef`, which is invoked several times:
+ *
+ *   ```graphql
+ *   query IntrospectionQuery {
+ *       __schema {
+ *           types {
+ *               ...FullType
+ *           }
+ *           directives {
+ *               args {
+ *                   ...InputValue
+ *               }
+ *           }
+ *       }
+ *   }
+ *   
+ *   fragment FullType on __Type {
+ *       fields(includeDeprecated: true) {
+ *           args {
+ *               ...InputValue
+ *           }
+ *           type {
+ *               ...TypeRef
+ *           }
+ *       }
+ *       inputFields {
+ *           ...InputValue
+ *       }
+ *       interfaces {
+ *           ...TypeRef
+ *       }
+ *       possibleTypes {
+ *           ...TypeRef
+ *       }
+ *   }
+ *   
+ *   fragment InputValue on __InputValue {
+ *       type {
+ *           ...TypeRef
+ *       }
+ *   }
+ *   
+ *   fragment TypeRef on __Type {
+ *       kind
+ *       name
+ *       # other fields
+ *   }
+ *   ```
+ *
+ * This circumstance should not produce issues, as long as @prepareField
+ * executes an action only if/when is needed.
+ *
+ * For instance, setting default Arguments is done only when the corresponding
+ * Arguent is not provided in the query. Then, the first execution of `@prepareField`
+ * on the query will check if the Argument is missing and, then, add it, and the
+ * second one will check if the Argument is missing and, since it is not (as it was
+ * added by the first iteration) then it will do nothing.
+ */
 final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
     public function getDirectiveName(): string
