@@ -13,28 +13,28 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        if ($this->isUpdate($fieldDataProvider)) {
-            return $this->update($fieldDataProvider);
+        if ($this->isUpdate($fieldDataAccessor)) {
+            return $this->update($fieldDataAccessor);
         }
-        return $this->create($fieldDataProvider);
+        return $this->create($fieldDataAccessor);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        if ($this->isUpdate($fieldDataProvider)) {
-            return $this->validateUpdateErrors($fieldDataProvider);
+        if ($this->isUpdate($fieldDataAccessor)) {
+            return $this->validateUpdateErrors($fieldDataAccessor);
         }
-        return $this->validateCreateErrors($fieldDataProvider);
+        return $this->validateCreateErrors($fieldDataAccessor);
     }
 
     /**
      * If there's an "id" entry => It's Update
      * Otherwise => It's Create
      */
-    protected function isUpdate(FieldDataAccessorInterface $fieldDataProvider): bool
+    protected function isUpdate(FieldDataAccessorInterface $fieldDataAccessor): bool
     {
-        return !empty($fieldDataProvider->get(MutationInputProperties::ID));
+        return !empty($fieldDataAccessor->get(MutationInputProperties::ID));
     }
 }

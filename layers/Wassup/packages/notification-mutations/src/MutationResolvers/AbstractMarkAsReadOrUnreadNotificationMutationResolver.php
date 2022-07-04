@@ -12,10 +12,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $histid = $fieldDataProvider->get('histid');
+        $histid = $fieldDataAccessor->get('histid');
         if (!$histid) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -38,27 +38,27 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return $errors;
     }
 
-    protected function additionals($histid, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals($histid, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $fieldDataProvider);
+        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $fieldDataAccessor);
     }
 
     abstract protected function getStatus();
 
-    protected function setStatus(FieldDataAccessorInterface $fieldDataProvider)
+    protected function setStatus(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        // return AAL_Main::instance()->api->setStatus($fieldDataProvider->get('histid'), $fieldDataProvider->get('user_id'), $this->getStatus());
-        return PoP_Notifications_API::setStatus($fieldDataProvider->get('histid'), $fieldDataProvider->get('user_id'), $this->getStatus());
+        // return AAL_Main::instance()->api->setStatus($fieldDataAccessor->get('histid'), $fieldDataAccessor->get('user_id'), $this->getStatus());
+        return PoP_Notifications_API::setStatus($fieldDataAccessor->get('histid'), $fieldDataAccessor->get('user_id'), $this->getStatus());
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $hist_ids = $this->setStatus($fieldDataProvider);
-        $this->additionals($fieldDataProvider->get('histid'), $fieldDataProvider);
+        $hist_ids = $this->setStatus($fieldDataAccessor);
+        $this->additionals($fieldDataAccessor->get('histid'), $fieldDataAccessor);
 
-        return $hist_ids; //$fieldDataProvider->get('histid');
+        return $hist_ids; //$fieldDataAccessor->get('histid');
     }
 }

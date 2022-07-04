@@ -9,25 +9,25 @@ use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 class CreateUpdateWithCommunityProfileMutationResolver extends CreateUpdateProfileMutationResolver
 {
-    protected function additionalsCreate($user_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionalsCreate($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionalsCreate($user_id, $fieldDataProvider);
-        $this->usercommunitiesAdditionalsCreate($user_id, $fieldDataProvider);
+        parent::additionalsCreate($user_id, $fieldDataAccessor);
+        $this->usercommunitiesAdditionalsCreate($user_id, $fieldDataAccessor);
     }
-    protected function usercommunitiesAdditionalsCreate($user_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function usercommunitiesAdditionalsCreate($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $fieldDataProvider);
+        App::doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $fieldDataAccessor);
     }
 
-    protected function createuser(FieldDataAccessorInterface $fieldDataProvider)
+    protected function createuser(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        $user_id = parent::createuser($fieldDataProvider);
-        $this->usercommunitiesCreateuser($user_id, $fieldDataProvider);
+        $user_id = parent::createuser($fieldDataAccessor);
+        $this->usercommunitiesCreateuser($user_id, $fieldDataAccessor);
         return $user_id;
     }
-    protected function usercommunitiesCreateuser($user_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function usercommunitiesCreateuser($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        $communities = $fieldDataProvider->get('communities');
+        $communities = $fieldDataAccessor->get('communities');
         Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
 
         // Set the privileges/tags for the new communities

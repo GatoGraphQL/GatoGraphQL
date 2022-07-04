@@ -11,12 +11,12 @@ use PoPCMSSchema\UserMeta\Utils;
 
 class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $errors = parent::validateErrors($fieldDataProvider);
+        $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $fieldDataProvider->get('target_id');
+            $target_id = $fieldDataAccessor->get('target_id');
 
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS);
@@ -38,24 +38,24 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
     /**
      * Function to override
      */
-    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($target_id, $fieldDataProvider);
-        App::doAction('gd_unfollowuser', $target_id, $fieldDataProvider);
+        parent::additionals($target_id, $fieldDataAccessor);
+        App::doAction('gd_unfollowuser', $target_id, $fieldDataAccessor);
     }
 
-    // protected function updateValue($value, \PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider) {
+    // protected function updateValue($value, \PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor) {
     //     // Remove the user from the list
-    //     $target_id = $fieldDataProvider->get('target_id');
+    //     $target_id = $fieldDataAccessor->get('target_id');
     //     array_splice($value, array_search($target_id, $value), 1);
     // }
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $fieldDataProvider->get('target_id');
+        $target_id = $fieldDataAccessor->get('target_id');
 
         // Update values
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_FOLLOWSUSERS, $target_id);
@@ -66,6 +66,6 @@ class UnfollowUserMutationResolver extends AbstractFollowOrUnfollowUserMutationR
         $count = $count ? $count : 0;
         Utils::updateUserMeta($target_id, \GD_METAKEY_PROFILE_FOLLOWERSCOUNT, ($count - 1), true);
 
-        return parent::update($fieldDataProvider);
+        return parent::update($fieldDataAccessor);
     }
 }

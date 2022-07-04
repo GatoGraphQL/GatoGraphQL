@@ -10,14 +10,14 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends Creat
 {
     use CreateUpdateOrganizationProfileMutationResolverTrait;
 
-    protected function createupdateuser($user_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function createupdateuser($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::createupdateuser($user_id, $fieldDataProvider);
-        $this->commonuserrolesCreateupdateuser($user_id, $fieldDataProvider);
+        parent::createupdateuser($user_id, $fieldDataAccessor);
+        $this->commonuserrolesCreateupdateuser($user_id, $fieldDataAccessor);
 
         // Is community?
         $cmsuserrolesapi = FunctionAPIFactory::getInstance();
-        if ($fieldDataProvider->get('is_community')) {
+        if ($fieldDataAccessor->get('is_community')) {
             $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_COMMUNITY);
         } else {
             $cmsuserrolesapi->removeRoleFromUser($user_id, GD_URE_ROLE_COMMUNITY);

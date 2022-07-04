@@ -14,17 +14,17 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        if (empty($fieldDataProvider->get('email'))) {
+        if (empty($fieldDataAccessor->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($fieldDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataAccessor->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -35,7 +35,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 
         $placeholder_string = $this->__('%s %s', 'pop-genericforms');
         $makesure_string = $this->__('Please make sure you have clicked on the unsubscription link in the newsletter.', 'pop-genericforms');
-        if (empty($fieldDataProvider->get('verificationcode'))) {
+        if (empty($fieldDataAccessor->get('verificationcode'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -53,8 +53,8 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         }
 
         // Verify that the verification code corresponds to the email
-        $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($fieldDataProvider->get('email'));
-        if ($verificationcode != $fieldDataProvider->get('verificationcode')) {
+        $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($fieldDataAccessor->get('email'));
+        if ($verificationcode != $fieldDataAccessor->get('verificationcode')) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -70,7 +70,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             return $errors;
         }
 
-        $newsletter_data = $this->getNewsletterData($fieldDataProvider);
+        $newsletter_data = $this->getNewsletterData($fieldDataAccessor);
         $this->validateData($errors, $newsletter_data);
         return $errors;
     }
@@ -78,15 +78,15 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('pop_unsubscribe_from_newsletter', $fieldDataProvider);
+        App::doAction('pop_unsubscribe_from_newsletter', $fieldDataAccessor);
     }
 
     /**
      * Function to override by Gravity Forms
      */
-    protected function getNewsletterData(FieldDataAccessorInterface $fieldDataProvider)
+    protected function getNewsletterData(FieldDataAccessorInterface $fieldDataAccessor)
     {
         return array();
     }
@@ -122,13 +122,13 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $newsletter_data = $this->getNewsletterData($fieldDataProvider);
+        $newsletter_data = $this->getNewsletterData($fieldDataAccessor);
         $result = $this->doExecute($newsletter_data);
 
         // Allow for additional operations
-        $this->additionals($fieldDataProvider);
+        $this->additionals($fieldDataAccessor);
 
         return $result;
     }

@@ -23,17 +23,17 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $user_id = $fieldDataProvider->get('user_id');
+        $user_id = $fieldDataAccessor->get('user_id');
         $this->savePicture($user_id);
-        $this->additionals($user_id, $fieldDataProvider);
+        $this->additionals($user_id, $fieldDataAccessor);
 
         return $user_id;
     }
 
-    protected function additionals($user_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals($user_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('gd_useravatar_update:additionals', $user_id, $fieldDataProvider);
+        App::doAction('gd_useravatar_update:additionals', $user_id, $fieldDataAccessor);
     }
 }

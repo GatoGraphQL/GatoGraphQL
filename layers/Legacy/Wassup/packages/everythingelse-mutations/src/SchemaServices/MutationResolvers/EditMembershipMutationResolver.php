@@ -22,13 +22,13 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $user_id = $fieldDataProvider->get('user_id');
-        $community = $fieldDataProvider->get('community');
-        $new_community_status = $fieldDataProvider->get('status');
-        $new_community_privileges = $fieldDataProvider->get('privileges');
-        $new_community_tags = $fieldDataProvider->get('tags');
+        $user_id = $fieldDataAccessor->get('user_id');
+        $community = $fieldDataAccessor->get('community');
+        $new_community_status = $fieldDataAccessor->get('status');
+        $new_community_privileges = $fieldDataAccessor->get('privileges');
+        $new_community_tags = $fieldDataAccessor->get('tags');
 
         // Get all the current values for that user
         $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
@@ -87,10 +87,10 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $user_id = $fieldDataProvider->get('user_id');
+        $user_id = $fieldDataAccessor->get('user_id');
         if (!$user_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -101,13 +101,13 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             return $errors;
         }
 
-        // $nonce = $fieldDataProvider->get('nonce');
+        // $nonce = $fieldDataAccessor->get('nonce');
         // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
         //     $errors[] = $this->getTranslationAPI()->__('Incorrect URL', 'ure-pop');
         //     return;
         // }
 
-        $status = $fieldDataProvider->get('status');
+        $status = $fieldDataAccessor->get('status');
         if (!$status) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(

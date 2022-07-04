@@ -13,17 +13,17 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        if (empty($fieldDataProvider->get('email'))) {
+        if (empty($fieldDataAccessor->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($fieldDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataAccessor->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -37,12 +37,12 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('pop_subscribetonewsletter', $fieldDataProvider);
+        App::doAction('pop_subscribetonewsletter', $fieldDataAccessor);
     }
 
-    protected function doExecute(FieldDataAccessorInterface $fieldDataProvider)
+    protected function doExecute(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -60,12 +60,12 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $fieldDataProvider->get('email')
+                $fieldDataAccessor->get('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $fieldDataProvider->get('name')
+            $fieldDataAccessor->get('name')
         );
 
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
@@ -74,12 +74,12 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $result = $this->doExecute($fieldDataProvider);
+        $result = $this->doExecute($fieldDataAccessor);
 
         // Allow for additional operations
-        $this->additionals($fieldDataProvider);
+        $this->additionals($fieldDataAccessor);
 
         return $result;
     }

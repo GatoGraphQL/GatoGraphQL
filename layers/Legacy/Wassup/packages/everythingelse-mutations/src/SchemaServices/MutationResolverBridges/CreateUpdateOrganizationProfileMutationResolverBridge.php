@@ -66,20 +66,20 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         return $inputs;
     }
 
-    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        $this->getCommonuserrolesFormData($fieldDataProvider);
-        $this->getUsercommunitiesFormData($fieldDataProvider);
+        $this->getCommonuserrolesFormData($fieldDataAccessor);
+        $this->getUsercommunitiesFormData($fieldDataAccessor);
     }
-    protected function getCommonuserrolesFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
+    protected function getCommonuserrolesFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $organizationtypes = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
         $organizationcategories = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
-        $fieldDataProvider->add('organizationtypes', $organizationtypes ?? array());
-        $fieldDataProvider->add('organizationcategories', $organizationcategories ?? array());
-        $fieldDataProvider->add('contact_number', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))));
-        $fieldDataProvider->add('contact_person', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))));
+        $fieldDataAccessor->add('organizationtypes', $organizationtypes ?? array());
+        $fieldDataAccessor->add('organizationcategories', $organizationcategories ?? array());
+        $fieldDataAccessor->add('contact_number', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))));
+        $fieldDataAccessor->add('contact_person', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))));
     }
 }

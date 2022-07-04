@@ -12,24 +12,24 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
 {
-    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('GD_NotificationMarkAllAsRead:additionals', $fieldDataProvider);
+        App::doAction('GD_NotificationMarkAllAsRead:additionals', $fieldDataAccessor);
     }
 
-    protected function markAllAsRead(FieldDataAccessorInterface $fieldDataProvider)
+    protected function markAllAsRead(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        // return AAL_Main::instance()->api->setStatusMultipleNotifications($fieldDataProvider->get('user_id'), AAL_POP_STATUS_READ);
-        return PoP_Notifications_API::setStatusMultipleNotifications($fieldDataProvider->get('user_id'), \AAL_POP_STATUS_READ);
+        // return AAL_Main::instance()->api->setStatusMultipleNotifications($fieldDataAccessor->get('user_id'), AAL_POP_STATUS_READ);
+        return PoP_Notifications_API::setStatusMultipleNotifications($fieldDataAccessor->get('user_id'), \AAL_POP_STATUS_READ);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $hist_ids = $this->markAllAsRead($fieldDataProvider);
-        $this->additionals($fieldDataProvider);
+        $hist_ids = $this->markAllAsRead($fieldDataAccessor);
+        $this->additionals($fieldDataAccessor);
 
         return $hist_ids;
     }

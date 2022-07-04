@@ -59,17 +59,17 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         return $inputs;
     }
 
-    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        $this->getCommonuserrolesFormData($fieldDataProvider);
-        $this->getUsercommunitiesFormData($fieldDataProvider);
+        $this->getCommonuserrolesFormData($fieldDataAccessor);
+        $this->getUsercommunitiesFormData($fieldDataAccessor);
     }
-    protected function getCommonuserrolesFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
+    protected function getCommonuserrolesFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $individualinterests = $this->getComponentProcessorManager()->getComponentProcessor($inputs['individualinterests'])->getValue($inputs['individualinterests']);
-        $fieldDataProvider->add('last_name', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))));
-        $fieldDataProvider->add('individualinterests', $individualinterests ?? array());
+        $fieldDataAccessor->add('last_name', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['last_name'])->getValue($inputs['last_name']))));
+        $fieldDataAccessor->add('individualinterests', $individualinterests ?? array());
     }
 }

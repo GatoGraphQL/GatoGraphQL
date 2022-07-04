@@ -12,12 +12,12 @@ use PoPCMSSchema\UserMeta\Utils;
 
 class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $errors = parent::validateErrors($fieldDataProvider);
+        $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $fieldDataProvider->get('target_id');
+            $target_id = $fieldDataAccessor->get('target_id');
 
             // Check that the logged in user is currently subscribed to that tag
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
@@ -41,19 +41,19 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
     /**
      * Function to override
      */
-    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($target_id, $fieldDataProvider);
-        App::doAction('gd_unsubscribefromtag', $target_id, $fieldDataProvider);
+        parent::additionals($target_id, $fieldDataAccessor);
+        App::doAction('gd_unsubscribefromtag', $target_id, $fieldDataAccessor);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $fieldDataProvider->get('target_id');
+        $target_id = $fieldDataAccessor->get('target_id');
 
         // Update value
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
@@ -64,6 +64,6 @@ class UnsubscribeFromTagMutationResolver extends AbstractSubscribeToOrUnsubscrib
         $count = $count ? $count : 0;
         \PoPCMSSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count - 1), true);
 
-        return parent::update($fieldDataProvider);
+        return parent::update($fieldDataAccessor);
     }
 }

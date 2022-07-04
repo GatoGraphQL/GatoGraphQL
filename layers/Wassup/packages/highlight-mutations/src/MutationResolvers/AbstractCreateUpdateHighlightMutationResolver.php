@@ -17,11 +17,11 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         return \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }
 
-    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
-        if (!$fieldDataProvider->get('highlightedpost')) {
+        if (!$fieldDataAccessor->get('highlightedpost')) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -30,7 +30,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
             $errors[] = $this->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
-            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataProvider->get('highlightedpost'));
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->get('highlightedpost'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -53,25 +53,25 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
 
         // If cheating then that's it, no need to validate anymore
         if (!$errors) {
-            parent::validateContent($errors, $fieldDataProvider);
+            parent::validateContent($errors, $fieldDataAccessor);
         }
     }
 
-    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::createAdditionals($post_id, $fieldDataProvider);
+        parent::createAdditionals($post_id, $fieldDataAccessor);
 
-        Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $fieldDataProvider->get('highlightedpost'), true);
+        Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $fieldDataAccessor->get('highlightedpost'), true);
 
         // Allow to create a Notification
-        App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $fieldDataProvider);
+        App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $fieldDataAccessor);
     }
 
-    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider, array $log): void
+    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
-        parent::updateAdditionals($post_id, $fieldDataProvider, $log);
+        parent::updateAdditionals($post_id, $fieldDataAccessor, $log);
 
         // Allow to create a Notification
-        App::doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $fieldDataProvider, $log);
+        App::doAction('GD_CreateUpdate_Highlight:updateAdditionals', $post_id, $fieldDataAccessor, $log);
     }
 }

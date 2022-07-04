@@ -35,16 +35,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeSetTags(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): void
+    public function maybeSetTags(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Only for that specific CPT
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!$fieldDataProvider->has(MutationInputProperties::TAGS)) {
+        if (!$fieldDataAccessor->has(MutationInputProperties::TAGS)) {
             return;
         }
-        $customPostTags = $fieldDataProvider->get(MutationInputProperties::TAGS);
+        $customPostTags = $fieldDataAccessor->get(MutationInputProperties::TAGS);
         $customPostTagTypeMutationAPI = $this->getCustomPostTagTypeMutationAPI();
         $customPostTagTypeMutationAPI->setTags($customPostID, $customPostTags, false);
     }

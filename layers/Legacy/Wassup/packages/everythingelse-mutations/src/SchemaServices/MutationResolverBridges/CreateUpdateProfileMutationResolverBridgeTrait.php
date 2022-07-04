@@ -12,12 +12,12 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
 {
     abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
 
-    protected function getUsercommunitiesFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
+    protected function getUsercommunitiesFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor)
     {
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         /** @var FormComponentComponentProcessorInterface */
         $componentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($inputs['communities']);
         $communities = $componentProcessor->getValue($inputs['communities']);
-        $fieldDataProvider->add('communities', $communities ?? array());
+        $fieldDataAccessor->add('communities', $communities ?? array());
     }
 }

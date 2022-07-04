@@ -18,11 +18,11 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
     // Update Post Validation
-    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if ($fieldDataProvider->get('stancetarget')) {
+        if ($fieldDataAccessor->get('stancetarget')) {
             // Check that the referenced post exists
-            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataProvider->get('stancetarget'));
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->get('stancetarget'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -45,7 +45,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
         // If cheating then that's it, no need to validate anymore
         if (!$errors) {
-            parent::validateContent($errors, $fieldDataProvider);
+            parent::validateContent($errors, $fieldDataAccessor);
         }
     }
 
@@ -62,9 +62,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         return $category_error_msgs;
     }
 
-    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::validateCreateContent($errors, $fieldDataProvider);
+        parent::validateCreateContent($errors, $fieldDataAccessor);
 
         $cmseditpostsapi = FunctionAPIFactory::getInstance();
         // For the Stance, there can be at most 1 post for:
@@ -73,7 +73,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         // If this validation already fails, the rest does not matter
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
-        $referenced_id = $fieldDataProvider->get('stancetarget');
+        $referenced_id = $fieldDataAccessor->get('stancetarget');
 
         // Check if there is already an existing stance
         $query = array(
@@ -117,36 +117,36 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     }
 
     // Moved to WordPress-specific code
-    // protected function getCreatepostData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
+    // protected function getCreatepostData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor)
     // {
-    //     $post_data = parent::getCreatepostData($fieldDataProvider);
+    //     $post_data = parent::getCreatepostData($fieldDataAccessor);
 
     //     // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
     //     // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
-    //     if ($fieldDataProvider->get('stancetarget')) {
+    //     if ($fieldDataAccessor->get('stancetarget')) {
     //         $post_data['menu-order'] = 1;
     //     }
 
     //     return $post_data;
     // }
 
-    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::createAdditionals($post_id, $fieldDataProvider);
+        parent::createAdditionals($post_id, $fieldDataAccessor);
 
-        if ($target = $fieldDataProvider->get('stancetarget')) {
+        if ($target = $fieldDataAccessor->get('stancetarget')) {
             Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 
         // Allow for URE to add the AuthorRole meta value
-        App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $fieldDataProvider);
+        App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $fieldDataAccessor);
     }
 
-    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider, array $log): void
+    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
-        parent::updateAdditionals($post_id, $fieldDataProvider, $log);
+        parent::updateAdditionals($post_id, $fieldDataAccessor, $log);
 
         // Allow for URE to add the AuthorRole meta value
-        App::doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $fieldDataProvider, $log);
+        App::doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $fieldDataAccessor, $log);
     }
 }

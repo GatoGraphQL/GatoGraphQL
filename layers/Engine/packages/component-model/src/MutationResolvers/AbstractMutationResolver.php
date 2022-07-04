@@ -15,7 +15,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [];
     }
@@ -23,7 +23,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [];
     }

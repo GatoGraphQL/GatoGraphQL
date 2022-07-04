@@ -112,9 +112,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      *
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getOneofInputObjectPropertyName(FieldDataAccessorInterface $fieldDataProvider): string
+    protected function getOneofInputObjectPropertyName(FieldDataAccessorInterface $fieldDataAccessor): string
     {
-        $propertyNames = $fieldDataProvider->getProperties();
+        $propertyNames = $fieldDataAccessor->getProperties();
         $formDataSize = count($propertyNames);
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
@@ -132,26 +132,26 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataProvider
+     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
      * @throws AbstractException In case of error
      */
-    final public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    final public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        [$inputFieldMutationResolver, $fieldDataProvider] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataProvider);
+        [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
-        return $inputFieldMutationResolver->executeMutation($fieldDataProvider);
+        return $inputFieldMutationResolver->executeMutation($fieldDataAccessor);
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataProvider
+     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
      */
-    final public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    final public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         try {
-            [$inputFieldMutationResolver, $fieldDataProvider] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataProvider);
+            [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            return $inputFieldMutationResolver->validateErrors($fieldDataProvider);
+            return $inputFieldMutationResolver->validateErrors($fieldDataAccessor);
         } catch (QueryResolutionException $e) {
             // Return the error message from the exception
             return [
@@ -167,15 +167,15 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataProvider
+     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
      */
-    final public function validateWarnings(FieldDataAccessorInterface $fieldDataProvider): array
+    final public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         try {
-            [$inputFieldMutationResolver, $fieldDataProvider] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataProvider);
+            [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            return $inputFieldMutationResolver->validateWarnings($fieldDataProvider);
+            return $inputFieldMutationResolver->validateWarnings($fieldDataAccessor);
         } catch (QueryResolutionException $e) {
             // Do nothing since the Error will already return the problem
             return [];

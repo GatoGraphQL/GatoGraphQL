@@ -16,14 +16,14 @@ interface MutationResolverInterface
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed;
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array;
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(FieldDataAccessorInterface $fieldDataProvider): array;
+    public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array;
     public function getErrorType(): int;
 }

@@ -26,7 +26,7 @@ class InstallSystemMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         // Save the new version on the DB
         update_option('PoP:version', $this->getApplicationInfo()->getVersion());

@@ -30,15 +30,15 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $customPostID = $fieldDataProvider->get(MutationInputProperties::CUSTOMPOST_ID);
-        $mediaItemID = $fieldDataProvider->get(MutationInputProperties::MEDIA_ITEM_ID);
+        $customPostID = $fieldDataAccessor->get(MutationInputProperties::CUSTOMPOST_ID);
+        $mediaItemID = $fieldDataAccessor->get(MutationInputProperties::MEDIA_ITEM_ID);
         $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -49,13 +49,13 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         }
 
         $errors = [];
-        if (!$fieldDataProvider->get(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$fieldDataAccessor->get(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
             );
         }
-        if (!$fieldDataProvider->get(MutationInputProperties::MEDIA_ITEM_ID)) {
+        if (!$fieldDataAccessor->get(MutationInputProperties::MEDIA_ITEM_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,

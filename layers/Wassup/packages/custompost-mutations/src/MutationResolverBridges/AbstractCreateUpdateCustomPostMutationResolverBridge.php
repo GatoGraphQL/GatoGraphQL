@@ -62,68 +62,68 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     abstract protected function isUpdate(): bool;
 
-    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor): void
     {
         if ($this->isUpdate()) {
-            $fieldDataProvider->add(MutationInputProperties::ID, $this->getUpdateCustomPostID());
+            $fieldDataAccessor->add(MutationInputProperties::ID, $this->getUpdateCustomPostID());
         }
 
         if ($this->supportsTitle()) {
-            $fieldDataProvider->add(MutationInputProperties::TITLE, trim(strip_tags($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE])->getValue([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE]))));
+            $fieldDataAccessor->add(MutationInputProperties::TITLE, trim(strip_tags($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE])->getValue([PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::COMPONENT_FORMINPUT_CUP_TITLE]))));
         }
 
         $editor = $this->getEditorInput();
         if ($editor !== null) {
             $cmseditpostshelpers = HelperAPIFactory::getInstance();
-            $fieldDataProvider->add(MutationInputProperties::CONTENT, trim($cmseditpostshelpers->kses(stripslashes($this->getComponentProcessorManager()->getComponentProcessor($editor)->getValue($editor)))));
+            $fieldDataAccessor->add(MutationInputProperties::CONTENT, trim($cmseditpostshelpers->kses(stripslashes($this->getComponentProcessorManager()->getComponentProcessor($editor)->getValue($editor)))));
         }
 
         if ($this->showCategories()) {
-            $fieldDataProvider->add(MutationInputProperties::CATEGORIES, $this->getCategories());
+            $fieldDataAccessor->add(MutationInputProperties::CATEGORIES, $this->getCategories());
         }
 
         // Status: 2 possibilities:
         // - Moderate: then using the Draft/Pending/Publish Select, user cannot choose 'Publish' when creating a post
         // - No moderation: using the 'Keep as Draft' checkbox, completely omitting value 'Pending', post is either 'draft' or 'publish'
         if ($this->moderate()) {
-            $fieldDataProvider->add(MutationInputProperties::STATUS, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS]));
+            $fieldDataAccessor->add(MutationInputProperties::STATUS, $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::COMPONENT_FORMINPUT_CUP_STATUS]));
         } else {
             $keepasdraft = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT])->getValue([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::COMPONENT_FORMINPUT_CUP_KEEPASDRAFT]);
-            $fieldDataProvider->add(MutationInputProperties::STATUS, $keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH);
+            $fieldDataAccessor->add(MutationInputProperties::STATUS, $keepasdraft ? CustomPostStatus::DRAFT : CustomPostStatus::PUBLISH);
         }
 
         if ($featuredimage = $this->getFeaturedimageComponent()) {
-            $fieldDataProvider->add(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID, $this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage));
+            $fieldDataAccessor->add(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID, $this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage));
         }
 
         if ($this->addReferences()) {
             $references = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES])->getValue([PoP_Module_Processor_PostSelectableTypeaheadFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadFormComponents::COMPONENT_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES]);
-            $fieldDataProvider->add(MutationInputProperties::REFERENCES, $references ?? array());
+            $fieldDataAccessor->add(MutationInputProperties::REFERENCES, $references ?? array());
         }
 
         if (PoP_ApplicationProcessors_Utils::addCategories()) {
             $topics = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_CATEGORIES])->getValue([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_CATEGORIES]);
-            $fieldDataProvider->add(MutationInputProperties::TOPICS, $topics ?? array());
+            $fieldDataAccessor->add(MutationInputProperties::TOPICS, $topics ?? array());
         }
 
         // Only if the Volunteering is enabled
         if (defined('POP_VOLUNTEERING_INITIALIZED')) {
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 if ($this->volunteer()) {
-                    $fieldDataProvider->add(MutationInputProperties::VOLUNTEERSNEEDED, $this->getComponentProcessorManager()->getComponentProcessor([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT]));
+                    $fieldDataAccessor->add(MutationInputProperties::VOLUNTEERSNEEDED, $this->getComponentProcessorManager()->getComponentProcessor([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT])->getValue([GD_Custom_Module_Processor_SelectFormInputs::class, GD_Custom_Module_Processor_SelectFormInputs::COMPONENT_FORMINPUT_VOLUNTEERSNEEDED_SELECT]));
                 }
             }
         }
 
         if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
             $appliesto = $this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_APPLIESTO])->getValue([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::COMPONENT_FORMINPUT_APPLIESTO]);
-            $fieldDataProvider->add(MutationInputProperties::APPLIESTO, $appliesto ?? array());
+            $fieldDataAccessor->add(MutationInputProperties::APPLIESTO, $appliesto ?? array());
         }
 
         // Allow plugins to add their own fields
         App::doAction(
             self::HOOK_FORM_DATA_CREATE_OR_UPDATE,
-            $fieldDataProvider
+            $fieldDataAccessor
         );
     }
 

@@ -22,11 +22,11 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $errors = parent::validateErrors($fieldDataProvider);
+        $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
-            $target_id = $fieldDataProvider->get('target_id');
+            $target_id = $fieldDataAccessor->get('target_id');
 
             // Make sure the user exists
             $target = $this->getUserTypeAPI()->getUserByID($target_id);
@@ -47,9 +47,9 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return InputNames::USER_ID;
     }
 
-    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('gd_updateusermetavalue:user', $target_id, $fieldDataProvider);
-        parent::additionals($target_id, $fieldDataProvider);
+        App::doAction('gd_updateusermetavalue:user', $target_id, $fieldDataAccessor);
+        parent::additionals($target_id, $fieldDataAccessor);
     }
 }

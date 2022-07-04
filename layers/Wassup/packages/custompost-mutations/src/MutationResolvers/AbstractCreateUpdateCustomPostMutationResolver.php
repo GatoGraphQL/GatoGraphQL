@@ -51,10 +51,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return false;
     }
 
-    protected function validateCategories(FieldDataAccessorInterface $fieldDataProvider)
+    protected function validateCategories(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        if ($fieldDataProvider->has(MutationInputProperties::CATEGORIES)) {
-            if (is_array($fieldDataProvider->get(MutationInputProperties::CATEGORIES))) {
+        if ($fieldDataAccessor->has(MutationInputProperties::CATEGORIES)) {
+            if (is_array($fieldDataAccessor->get(MutationInputProperties::CATEGORIES))) {
                 return self::VALIDATECATEGORIESTYPE_ATLEASTONE;
             }
 
@@ -77,11 +77,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     }
 
     // Update Post Validation
-    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::validateContent($errors, $fieldDataProvider);
+        parent::validateContent($errors, $fieldDataAccessor);
 
-        if ($this->supportsTitle() && empty($fieldDataProvider->get(MutationInputProperties::TITLE))) {
+        if ($this->supportsTitle() && empty($fieldDataAccessor->get(MutationInputProperties::TITLE))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -91,11 +91,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
 
         // Validate the following conditions only if status = pending/publish
-        if ($fieldDataProvider->get(MutationInputProperties::STATUS) == CustomPostStatus::DRAFT) {
+        if ($fieldDataAccessor->get(MutationInputProperties::STATUS) == CustomPostStatus::DRAFT) {
             return;
         }
 
-        if (empty($fieldDataProvider->get(MutationInputProperties::CONTENT))) {
+        if (empty($fieldDataAccessor->get(MutationInputProperties::CONTENT))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -104,7 +104,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             $errors[] = $this->__('The content cannot be empty', 'pop-application');
         }
 
-        if ($this->isFeaturedImageMandatory() && empty($fieldDataProvider->get(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID))) {
+        if ($this->isFeaturedImageMandatory() && empty($fieldDataAccessor->get(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -113,9 +113,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             $errors[] = $this->__('The featured image has not been set', 'pop-application');
         }
 
-        if ($validateCategories = $this->validateCategories($fieldDataProvider)) {
+        if ($validateCategories = $this->validateCategories($fieldDataAccessor)) {
             $category_error_msgs = $this->getCategoriesErrorMessages();
-            if (empty($fieldDataProvider->get(MutationInputProperties::CATEGORIES))) {
+            if (empty($fieldDataAccessor->get(MutationInputProperties::CATEGORIES))) {
                 if ($validateCategories == self::VALIDATECATEGORIESTYPE_ATLEASTONE) {
                     // @todo Migrate from string to FeedbackItemProvider
                     // $errors[] = new FeedbackItemResolution(
@@ -131,7 +131,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
                     // );
                     $errors[] = $category_error_msgs['empty-category'];
                 }
-            } elseif (count($fieldDataProvider->get(MutationInputProperties::CATEGORIES)) > 1 && $validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
+            } elseif (count($fieldDataAccessor->get(MutationInputProperties::CATEGORIES)) > 1 && $validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
                 //     MutationErrorFeedbackItemProvider::class,
@@ -145,11 +145,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::validateUpdateContent($errors, $fieldDataProvider);
+        parent::validateUpdateContent($errors, $fieldDataAccessor);
 
-        if ($fieldDataProvider->has(MutationInputProperties::REFERENCES) && in_array($fieldDataProvider->get(MutationInputProperties::ID), $fieldDataProvider->get(MutationInputProperties::REFERENCES))) {
+        if ($fieldDataAccessor->has(MutationInputProperties::REFERENCES) && in_array($fieldDataAccessor->get(MutationInputProperties::ID), $fieldDataAccessor->get(MutationInputProperties::REFERENCES))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -162,11 +162,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdate(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function validateUpdate(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::validateUpdate($errors, $fieldDataProvider);
+        parent::validateUpdate($errors, $fieldDataAccessor);
 
-        $customPostID = $fieldDataProvider->get(MutationInputProperties::ID);
+        $customPostID = $fieldDataAccessor->get(MutationInputProperties::ID);
 
         if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(CustomPostStatus::DRAFT, CustomPostStatus::PENDING, CustomPostStatus::PUBLISH))) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -192,27 +192,27 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         // }
     }
 
-    protected function additionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($customPostID, $fieldDataProvider);
+        parent::additionals($customPostID, $fieldDataAccessor);
 
         // Topics
         if (PoP_ApplicationProcessors_Utils::addCategories()) {
-            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_CATEGORIES, $fieldDataProvider->get(MutationInputProperties::TOPICS));
+            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_CATEGORIES, $fieldDataAccessor->get(MutationInputProperties::TOPICS));
         }
 
         // Only if the Volunteering is enabled
         if (defined('POP_VOLUNTEERING_INITIALIZED')) {
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 // Volunteers Needed?
-                if ($fieldDataProvider->has(MutationInputProperties::VOLUNTEERSNEEDED)) {
-                    Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_VOLUNTEERSNEEDED, $fieldDataProvider->get(MutationInputProperties::VOLUNTEERSNEEDED), true, true);
+                if ($fieldDataAccessor->has(MutationInputProperties::VOLUNTEERSNEEDED)) {
+                    Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_VOLUNTEERSNEEDED, $fieldDataAccessor->get(MutationInputProperties::VOLUNTEERSNEEDED), true, true);
                 }
             }
         }
 
         if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_APPLIESTO, $fieldDataProvider->get(MutationInputProperties::APPLIESTO));
+            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_APPLIESTO, $fieldDataAccessor->get(MutationInputProperties::APPLIESTO));
         }
     }
 
@@ -238,18 +238,18 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $categories;
     }
 
-    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::addCreateUpdateCustomPostData($post_data, $fieldDataProvider);
+        parent::addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
 
         if (!$this->supportsTitle()) {
             unset($post_data['title']);
         }
     }
 
-    protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataProvider): array
+    protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $post_data = parent::getUpdateCustomPostData($fieldDataProvider);
+        $post_data = parent::getUpdateCustomPostData($fieldDataAccessor);
 
         // Status: If provided, Validate the value is permitted, or get the default value otherwise
         if ($status = $post_data['status']) {
@@ -264,9 +264,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return GD_CreateUpdate_Utils::moderate();
     }
 
-    protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataProvider): array
+    protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $post_data = parent::getCreateCustomPostData($fieldDataProvider);
+        $post_data = parent::getCreateCustomPostData($fieldDataAccessor);
 
         // Status: Validate the value is permitted, or get the default value otherwise
         $post_data['status'] = GD_CreateUpdate_Utils::getCreatepostStatus($post_data['status'], $this->moderate());
@@ -274,29 +274,29 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $post_data;
     }
 
-    protected function getCategories(FieldDataAccessorInterface $fieldDataProvider): ?array
+    protected function getCategories(FieldDataAccessorInterface $fieldDataAccessor): ?array
     {
-        // $cats = parent::getCategories($fieldDataProvider);
-        $cats = $fieldDataProvider->get(MutationInputProperties::CATEGORIES);
+        // $cats = parent::getCategories($fieldDataAccessor);
+        $cats = $fieldDataAccessor->get(MutationInputProperties::CATEGORIES);
         return $this->maybeAddParentCategories($cats);
     }
 
-    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataProvider, int | string $customPostID): void
+    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataAccessor, int | string $customPostID): void
     {
-        parent::createUpdateCustomPost($fieldDataProvider, $customPostID);
+        parent::createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
-        if ($fieldDataProvider->has(MutationInputProperties::REFERENCES)) {
-            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_REFERENCES, $fieldDataProvider->get(MutationInputProperties::REFERENCES));
+        if ($fieldDataAccessor->has(MutationInputProperties::REFERENCES)) {
+            Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_REFERENCES, $fieldDataAccessor->get(MutationInputProperties::REFERENCES));
         }
     }
 
-    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): array
+    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $log = parent::getUpdateCustomPostDataLog($customPostID, $fieldDataProvider);
+        $log = parent::getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);
 
-        if ($fieldDataProvider->has(MutationInputProperties::REFERENCES)) {
+        if ($fieldDataAccessor->has(MutationInputProperties::REFERENCES)) {
             $previous_references = Utils::getCustomPostMeta($customPostID, GD_METAKEY_POST_REFERENCES);
-            $log['new-references'] = array_diff($fieldDataProvider->get(MutationInputProperties::REFERENCES), $previous_references);
+            $log['new-references'] = array_diff($fieldDataAccessor->get(MutationInputProperties::REFERENCES), $previous_references);
         }
 
         return $log;

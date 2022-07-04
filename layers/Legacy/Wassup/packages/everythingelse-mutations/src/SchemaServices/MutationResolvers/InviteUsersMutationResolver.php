@@ -14,15 +14,15 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 {
-    protected function getEmailContent(FieldDataAccessorInterface $fieldDataProvider)
+    protected function getEmailContent(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $website_html = PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
 
         // Maybe the user is logged in, maybe not
-        if ($sender_name = $fieldDataProvider->get('sender-name')) {
+        if ($sender_name = $fieldDataAccessor->get('sender-name')) {
             // There might be a sender URL if the user was logged in, or not
-            if ($sender_url = $fieldDataProvider->get('sender-url')) {
+            if ($sender_url = $fieldDataAccessor->get('sender-url')) {
                 $sender_html = sprintf('<a href="%s">%s</a>', $sender_url, $sender_name);
             } else {
                 $sender_html = $sender_name;
@@ -48,7 +48,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         );
 
         // Optional: Additional Message
-        if ($additional_msg = $fieldDataProvider->get('additional-msg')) {
+        if ($additional_msg = $fieldDataAccessor->get('additional-msg')) {
             $content .= sprintf(
                 '<div style="margin-left: 20px;">%s</div>',
                 $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML($additional_msg))
@@ -74,13 +74,13 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
         return $content;
     }
 
-    protected function getEmailSubject(FieldDataAccessorInterface $fieldDataProvider)
+    protected function getEmailSubject(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $subject = '';
 
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         // Maybe the user is logged in, maybe not
-        if ($sender_name = $fieldDataProvider->get('sender-name')) {
+        if ($sender_name = $fieldDataAccessor->get('sender-name')) {
             $subject = sprintf(
                 $this->getTranslationAPI()->__('%s is inviting you to join %s!', 'pop-coreprocessors'),
                 $sender_name,

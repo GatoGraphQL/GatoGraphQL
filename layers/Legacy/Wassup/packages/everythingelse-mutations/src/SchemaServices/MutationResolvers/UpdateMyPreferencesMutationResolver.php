@@ -15,10 +15,10 @@ class UpdateMyPreferencesMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $user_id = $fieldDataProvider->get('user_id');
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $fieldDataProvider->get('userPreferences'));
+        $user_id = $fieldDataAccessor->get('user_id');
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $fieldDataAccessor->get('userPreferences'));
         return $user_id;
     }
 }

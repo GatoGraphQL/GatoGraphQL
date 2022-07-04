@@ -12,25 +12,25 @@ use PoPSitesWassup\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutat
 
 abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCreateUpdatePostMutationResolver
 {
-    protected function getCategories(FieldDataAccessorInterface $fieldDataProvider): ?array
+    protected function getCategories(FieldDataAccessorInterface $fieldDataAccessor): ?array
     {
-        $ret = parent::getCategories($fieldDataProvider);
+        $ret = parent::getCategories($fieldDataAccessor);
         $ret[] = \POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
         return $ret;
     }
 
-    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::validateContent($errors, $fieldDataProvider);
-        MutationResolverUtils::validateContent($errors, $fieldDataProvider);
+        parent::validateContent($errors, $fieldDataAccessor);
+        MutationResolverUtils::validateContent($errors, $fieldDataAccessor);
     }
 
-    protected function additionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($post_id, $fieldDataProvider);
+        parent::additionals($post_id, $fieldDataAccessor);
 
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $fieldDataProvider->get('linkaccess'), true);
+            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $fieldDataAccessor->get('linkaccess'), true);
         }
     }
 }

@@ -19,9 +19,9 @@ abstract class AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver extends Abst
     /**
      * Function to override
      */
-    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($target_id, $fieldDataProvider);
-        App::doAction('gd_upvoteundoupvote_post', $target_id, $fieldDataProvider);
+        parent::additionals($target_id, $fieldDataAccessor);
+        App::doAction('gd_upvoteundoupvote_post', $target_id, $fieldDataAccessor);
     }
 }

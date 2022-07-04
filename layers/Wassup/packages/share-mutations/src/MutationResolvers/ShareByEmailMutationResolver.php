@@ -13,10 +13,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ShareByEmailMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        if (empty($fieldDataProvider->get('name'))) {
+        if (empty($fieldDataAccessor->get('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -25,14 +25,14 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataProvider->get('email'))) {
+        if (empty($fieldDataAccessor->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($fieldDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataAccessor->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -41,7 +41,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataProvider->get('target-url'))) {
+        if (empty($fieldDataAccessor->get('target-url'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -50,7 +50,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The shared-page URL cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataProvider->get('target-title'))) {
+        if (empty($fieldDataAccessor->get('target-title'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -64,12 +64,12 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('pop_sharebyemail', $fieldDataProvider);
+        App::doAction('pop_sharebyemail', $fieldDataAccessor);
     }
 
-    protected function doExecute(FieldDataAccessorInterface $fieldDataProvider)
+    protected function doExecute(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $subject = sprintf(
@@ -77,8 +77,8 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $cmsapplicationapi->getSiteName(),
             sprintf(
                 $this->__('%s is sharing with you: %s', 'pop-genericforms'),
-                $fieldDataProvider->get('name'),
-                $fieldDataProvider->get('target-title')
+                $fieldDataAccessor->get('name'),
+                $fieldDataAccessor->get('target-title')
             )
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
@@ -86,28 +86,28 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             '<p>%s</p>',
             sprintf(
                 $this->__('%s is sharing with you: <a href="%s">%s</a>', 'pop-genericforms'),
-                $fieldDataProvider->get('name'),
-                $fieldDataProvider->get('target-url'),
-                $fieldDataProvider->get('target-title')
+                $fieldDataAccessor->get('name'),
+                $fieldDataAccessor->get('target-url'),
+                $fieldDataAccessor->get('target-title')
             )
-        ) . ($fieldDataProvider->get('message') ? sprintf(
+        ) . ($fieldDataAccessor->get('message') ? sprintf(
             $placeholder,
             $this->__('Additional message', 'pop-genericforms'),
-            $fieldDataProvider->get('message')
+            $fieldDataAccessor->get('message')
         ) : '');
 
-        return PoP_EmailSender_Utils::sendEmail($fieldDataProvider->get('email'), $subject, $msg);
+        return PoP_EmailSender_Utils::sendEmail($fieldDataAccessor->get('email'), $subject, $msg);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $result = $this->doExecute($fieldDataProvider);
+        $result = $this->doExecute($fieldDataAccessor);
 
         // Allow for additional operations
-        $this->additionals($fieldDataProvider);
+        $this->additionals($fieldDataAccessor);
 
         return $result;
     }

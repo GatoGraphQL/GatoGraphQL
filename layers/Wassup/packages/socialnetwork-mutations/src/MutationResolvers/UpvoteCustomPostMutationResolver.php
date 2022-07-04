@@ -22,12 +22,12 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         return $this->downvoteCustomPostMutationResolver ??= $this->instanceManager->getInstance(DownvoteCustomPostMutationResolver::class);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $errors = parent::validateErrors($fieldDataProvider);
+        $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $fieldDataProvider->get('target_id');
+            $target_id = $fieldDataAccessor->get('target_id');
 
             // Check that the logged in user has not already recommended this post
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS);
@@ -49,19 +49,19 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
     /**
      * Function to override
      */
-    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($target_id, $fieldDataProvider);
-        App::doAction('gd_upvotepost', $target_id, $fieldDataProvider);
+        parent::additionals($target_id, $fieldDataAccessor);
+        App::doAction('gd_upvotepost', $target_id, $fieldDataAccessor);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataAccessorInterface $fieldDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $fieldDataProvider->get('target_id');
+        $target_id = $fieldDataAccessor->get('target_id');
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_UPVOTESPOSTS, $target_id);
@@ -75,9 +75,9 @@ class UpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomP
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
-            $this->getDownvoteCustomPostMutationResolver()->executeMutation($fieldDataProvider);
+            $this->getDownvoteCustomPostMutationResolver()->executeMutation($fieldDataAccessor);
         }
 
-        return parent::update($fieldDataProvider);
+        return parent::update($fieldDataAccessor);
     }
 }

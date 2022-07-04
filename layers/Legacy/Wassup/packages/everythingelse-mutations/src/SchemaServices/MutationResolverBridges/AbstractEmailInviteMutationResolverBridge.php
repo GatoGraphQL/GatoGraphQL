@@ -29,7 +29,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         );
     }
 
-    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Get the list of all emails
         $emails = array();
@@ -60,14 +60,14 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         }
         $additional_msg = trim($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE])->getValue([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE]));
         
-        $fieldDataProvider->add('emails', $emails);
-        $fieldDataProvider->add('user_id', $user_id);
-        $fieldDataProvider->add('sender-name', $sender_name);
-        $fieldDataProvider->add('sender-url', $sender_url);
-        $fieldDataProvider->add('additional-msg', $additional_msg);
+        $fieldDataAccessor->add('emails', $emails);
+        $fieldDataAccessor->add('user_id', $user_id);
+        $fieldDataAccessor->add('sender-name', $sender_name);
+        $fieldDataAccessor->add('sender-url', $sender_url);
+        $fieldDataAccessor->add('additional-msg', $additional_msg);
         
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $fieldDataProvider->add('captcha', $captcha);
+            $fieldDataAccessor->add('captcha', $captcha);
         }
     }
 }

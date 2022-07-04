@@ -75,13 +75,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     }
 
     protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataProviderForObject,
+        FieldDataAccessorInterface $fieldDataAccessorForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
         parent::prepareFieldDataAccessorForObject(
-            $fieldDataProviderForObject,
+            $fieldDataAccessorForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -89,7 +89,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $post = $object;
         switch ($field->getName()) {
             case 'update':
-                $fieldDataProviderForObject->add(MutationInputProperties::ID, $objectTypeResolver->getID($post));
+                $fieldDataAccessorForObject->add(MutationInputProperties::ID, $objectTypeResolver->getID($post));
                 break;
         }
     }

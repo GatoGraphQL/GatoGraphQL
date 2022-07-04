@@ -25,10 +25,10 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        if (empty($fieldDataProvider->get('name'))) {
+        if (empty($fieldDataAccessor->get('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -37,14 +37,14 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataProvider->get('email'))) {
+        if (empty($fieldDataAccessor->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($fieldDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataAccessor->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -53,7 +53,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataProvider->get('message'))) {
+        if (empty($fieldDataAccessor->get('message'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -62,7 +62,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Message cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataProvider->get('target-id'))) {
+        if (empty($fieldDataAccessor->get('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -70,7 +70,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
-            $target = $this->getUserTypeAPI()->getUserByID($fieldDataProvider->get('target-id'));
+            $target = $this->getUserTypeAPI()->getUserByID($fieldDataAccessor->get('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -86,21 +86,21 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('pop_contactuser', $fieldDataProvider);
+        App::doAction('pop_contactuser', $fieldDataAccessor);
     }
 
-    protected function doExecute(FieldDataAccessorInterface $fieldDataProvider)
+    protected function doExecute(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $websitename = $cmsapplicationapi->getSiteName();
         $subject = sprintf(
             $this->__('[%s]: %s', 'pop-genericforms'),
             $websitename,
-            $fieldDataProvider->get('subject') ? $fieldDataProvider->get('subject') : sprintf(
+            $fieldDataAccessor->get('subject') ? $fieldDataAccessor->get('subject') : sprintf(
                 $this->__('%s sends you a message', 'pop-genericforms'),
-                $fieldDataProvider->get('name')
+                $fieldDataAccessor->get('name')
             )
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
@@ -113,36 +113,36 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $fieldDataProvider->get('name')
+            $fieldDataAccessor->get('name')
         ) . sprintf(
             $placeholder,
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $fieldDataProvider->get('email')
+                $fieldDataAccessor->get('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Subject', 'pop-genericforms'),
-            $fieldDataProvider->get('subject')
+            $fieldDataAccessor->get('subject')
         ) . sprintf(
             $placeholder,
             $this->__('Message', 'pop-genericforms'),
-            $fieldDataProvider->get('message')
+            $fieldDataAccessor->get('message')
         );
 
-        return PoP_EmailSender_Utils::sendemailToUser($fieldDataProvider->get('target-id'), $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUser($fieldDataAccessor->get('target-id'), $subject, $msg);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $result = $this->doExecute($fieldDataProvider);
+        $result = $this->doExecute($fieldDataAccessor);
 
         // Allow for additional operations
-        $this->additionals($fieldDataProvider);
+        $this->additionals($fieldDataAccessor);
 
         return $result;
     }

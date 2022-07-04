@@ -14,5 +14,5 @@ interface ComponentMutationResolverBridgeInterface
      */
     public function executeMutation(array &$data_properties): ?array;
     public function getMutationResolver(): MutationResolverInterface;
-    public function appendMutationDataToFieldDataAccessor(FieldDataAccessorInterface $fieldDataProvider): void;
+    public function appendMutationDataToFieldDataAccessor(FieldDataAccessorInterface $fieldDataAccessor): void;
 }

@@ -38,11 +38,11 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $username_or_email = $fieldDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $fieldDataProvider->get(MutationInputProperties::PASSWORD);
+        $username_or_email = $fieldDataAccessor->get(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $fieldDataAccessor->get(MutationInputProperties::PASSWORD);
 
         if (!$username_or_email) {
             $errors[] = new FeedbackItemResolution(
@@ -74,11 +74,11 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $fieldDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $fieldDataProvider->get(MutationInputProperties::PASSWORD);
+        $username_or_email = $fieldDataAccessor->get(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $fieldDataAccessor->get(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');

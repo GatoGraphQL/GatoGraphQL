@@ -15,10 +15,10 @@ class FileUploadPictureMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         // Copy the images to the fileupload-userphoto upload folder
-        $user_id = $fieldDataProvider->get('user_id');
+        $user_id = $fieldDataAccessor->get('user_id');
         $gd_fileupload_userphoto = GD_FileUpload_UserPhotoFactory::getInstance();
         $gd_fileupload_userphoto->copyPicture($user_id);
         return $user_id;
