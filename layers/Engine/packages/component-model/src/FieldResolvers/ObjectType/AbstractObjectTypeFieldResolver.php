@@ -787,8 +787,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $fieldDataProvider = $this->getFieldDataProvider($objectTypeResolver, $mutationField);
+            $fieldDataProvider = $this->getFieldDataProvider($objectTypeResolver, $field);
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataProvider);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1104,8 +1103,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $fieldDataProvider = $this->getFieldDataProvider($objectTypeResolver, $mutationField);
+            $fieldDataProvider = $this->getFieldDataProvider($objectTypeResolver, $field);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
                 $mutationResolver->validateWarnings($fieldDataProvider)
@@ -1157,8 +1155,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
-            $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $fieldDataProviderForObject = $this->getFieldDataProviderForObject($objectTypeResolver, $mutationField, $object);
+            $fieldDataProviderForObject = $this->getFieldDataProviderForObject($objectTypeResolver, $field, $object);
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataProviderForObject);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1171,17 +1168,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
             return;
         }
-    }
-
-    /**
-     * Retrieve the field to pass to the MutationResolver,
-     * for instance it can change for an InputObject.
-     */
-    protected function getMutationField(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): FieldInterface {
-        return $field;
     }
 
     final protected function getFieldDataProvider(
@@ -1322,10 +1308,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        $mutationField = $this->getMutationField($objectTypeResolver, $field);
         $fieldDataProvider = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
-            ? $this->getFieldDataProviderForObject($objectTypeResolver, $mutationField, $object)
-            : $this->getFieldDataProvider($objectTypeResolver, $mutationField);
+            ? $this->getFieldDataProviderForObject($objectTypeResolver, $field, $object)
+            : $this->getFieldDataProvider($objectTypeResolver, $field);
         try {
             return $mutationResolver->executeMutation($fieldDataProvider);
         } catch (Exception $e) {
