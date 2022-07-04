@@ -32,8 +32,8 @@ class MarkAllAsReadNotificationMutationResolverBridge extends AbstractComponentM
         return false;
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
     {
-        $mutationDataProvider->add('user_id', App::getState('current-user-id'));
+        $fieldDataProvider->add('user_id', App::getState('current-user-id'));
     }
 }

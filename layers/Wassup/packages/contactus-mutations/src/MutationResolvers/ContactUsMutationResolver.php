@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUsMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -13,10 +13,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class ContactUsMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
         $errors = [];
-        if (empty($mutationDataProvider->get('name'))) {
+        if (empty($fieldDataProvider->get('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -24,14 +24,14 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
-        if (empty($mutationDataProvider->get('email'))) {
+        if (empty($fieldDataProvider->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($mutationDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -39,7 +39,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
-        if (empty($mutationDataProvider->get('message'))) {
+        if (empty($fieldDataProvider->get('message'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -53,12 +53,12 @@ class ContactUsMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(FieldDataProviderInterface $fieldDataProvider): void
     {
-        App::doAction('pop_contactus', $mutationDataProvider);
+        App::doAction('pop_contactus', $fieldDataProvider);
     }
 
-    protected function doExecute(MutationDataProviderInterface $mutationDataProvider)
+    protected function doExecute(FieldDataProviderInterface $fieldDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -74,22 +74,22 @@ class ContactUsMutationResolver extends AbstractMutationResolver
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $mutationDataProvider->get('name')
+            $fieldDataProvider->get('name')
         ) . sprintf(
             $placeholder,
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $mutationDataProvider->get('email')
+                $fieldDataProvider->get('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Subject', 'pop-genericforms'),
-            $mutationDataProvider->get('subject')
+            $fieldDataProvider->get('subject')
         ) . sprintf(
             $placeholder,
             $this->__('Message', 'pop-genericforms'),
-            $mutationDataProvider->get('message')
+            $fieldDataProvider->get('message')
         );
 
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
@@ -98,12 +98,12 @@ class ContactUsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
     {
-        $result = $this->doExecute($mutationDataProvider);
+        $result = $this->doExecute($fieldDataProvider);
 
         // Allow for additional operations
-        $this->additionals($mutationDataProvider);
+        $this->additionals($fieldDataProvider);
 
         return $result;
     }

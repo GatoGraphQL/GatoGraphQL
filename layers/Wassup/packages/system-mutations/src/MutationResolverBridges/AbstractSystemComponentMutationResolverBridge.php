@@ -13,7 +13,7 @@ abstract class AbstractSystemComponentMutationResolverBridge extends AbstractCom
         return false;
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
     {
     }
 }

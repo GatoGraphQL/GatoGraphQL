@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\Root\App;
 use PoPCMSSchema\Users\Constants\InputNames;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -22,11 +22,11 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
-        $errors = parent::validateErrors($mutationDataProvider);
+        $errors = parent::validateErrors($fieldDataProvider);
         if (!$errors) {
-            $target_id = $mutationDataProvider->get('target_id');
+            $target_id = $fieldDataProvider->get('target_id');
 
             // Make sure the user exists
             $target = $this->getUserTypeAPI()->getUserByID($target_id);
@@ -47,9 +47,9 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
         return InputNames::USER_ID;
     }
 
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        App::doAction('gd_updateusermetavalue:user', $target_id, $mutationDataProvider);
-        parent::additionals($target_id, $mutationDataProvider);
+        App::doAction('gd_updateusermetavalue:user', $target_id, $fieldDataProvider);
+        parent::additionals($target_id, $fieldDataProvider);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP_SocialNetwork_Utils;
 use PoP\Root\App;
 
@@ -19,9 +19,9 @@ abstract class AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver extends Abst
     /**
      * Function to override
      */
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        parent::additionals($target_id, $mutationDataProvider);
-        App::doAction('gd_upvoteundoupvote_post', $target_id, $mutationDataProvider);
+        parent::additionals($target_id, $fieldDataProvider);
+        App::doAction('gd_upvoteundoupvote_post', $target_id, $fieldDataProvider);
     }
 }

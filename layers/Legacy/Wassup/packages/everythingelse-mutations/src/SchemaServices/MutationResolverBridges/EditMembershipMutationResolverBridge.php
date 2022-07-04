@@ -35,17 +35,17 @@ class EditMembershipMutationResolverBridge extends AbstractComponentMutationReso
         return $this->getEditMembershipMutationResolver();
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
     {
         $community = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $privileges = $this->getComponentProcessorManager()->getComponentProcessor([GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES])->getValue([GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERPRIVILEGES]);
         $tags = $this->getComponentProcessorManager()->getComponentProcessor([GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERTAGS])->getValue([GD_URE_Module_Processor_ProfileMultiSelectFormInputs::class, GD_URE_Module_Processor_ProfileMultiSelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERTAGS]);
         
-        $mutationDataProvider->add('community', $community);
-        $mutationDataProvider->add('user_id', App::query(InputNames::USER_ID));
-        // $mutationDataProvider->add('nonce', App::query(POP_INPUTNAME_NONCE));
-        $mutationDataProvider->add('status', trim($this->getComponentProcessorManager()->getComponentProcessor([GD_URE_Module_Processor_SelectFormInputs::class, GD_URE_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERSTATUS])->getValue([GD_URE_Module_Processor_SelectFormInputs::class, GD_URE_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERSTATUS])));
-        $mutationDataProvider->add('privileges', $privileges ?? array());
-        $mutationDataProvider->add('tags', $tags ?? array());
+        $fieldDataProvider->add('community', $community);
+        $fieldDataProvider->add('user_id', App::query(InputNames::USER_ID));
+        // $fieldDataProvider->add('nonce', App::query(POP_INPUTNAME_NONCE));
+        $fieldDataProvider->add('status', trim($this->getComponentProcessorManager()->getComponentProcessor([GD_URE_Module_Processor_SelectFormInputs::class, GD_URE_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERSTATUS])->getValue([GD_URE_Module_Processor_SelectFormInputs::class, GD_URE_Module_Processor_SelectFormInputs::COMPONENT_URE_FORMINPUT_MEMBERSTATUS])));
+        $fieldDataProvider->add('privileges', $privileges ?? array());
+        $fieldDataProvider->add('tags', $tags ?? array());
     }
 }

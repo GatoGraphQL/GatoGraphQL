@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
 class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver
 {
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
-        $errors = parent::validateErrors($mutationDataProvider);
+        $errors = parent::validateErrors($fieldDataProvider);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $mutationDataProvider->get('target_id');
+            $target_id = $fieldDataProvider->get('target_id');
 
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
@@ -38,19 +38,19 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
     /**
      * Function to override
      */
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        parent::additionals($target_id, $mutationDataProvider);
-        App::doAction('gd_undodownvotepost', $target_id, $mutationDataProvider);
+        parent::additionals($target_id, $fieldDataProvider);
+        App::doAction('gd_undodownvotepost', $target_id, $fieldDataProvider);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function update(FieldDataProviderInterface $fieldDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $mutationDataProvider->get('target_id');
+        $target_id = $fieldDataProvider->get('target_id');
 
         // Update value
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);
@@ -61,14 +61,14 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
         $count = $count ? $count : 0;
         \PoPCMSSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, \GD_METAKEY_POST_DOWNVOTECOUNT, ($count - 1), true);
 
-        return parent::update($mutationDataProvider);
+        return parent::update($fieldDataProvider);
     }
 
     /**
      * Function to be called by the opposite function (Up-vote/Down-vote)
      */
-    public function undo(MutationDataProviderInterface $mutationDataProvider)
+    public function undo(FieldDataProviderInterface $fieldDataProvider)
     {
-        return $this->update($mutationDataProvider);
+        return $this->update($fieldDataProvider);
     }
 }

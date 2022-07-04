@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -22,13 +22,13 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
     {
-        $user_id = $mutationDataProvider->get('user_id');
-        $community = $mutationDataProvider->get('community');
-        $new_community_status = $mutationDataProvider->get('status');
-        $new_community_privileges = $mutationDataProvider->get('privileges');
-        $new_community_tags = $mutationDataProvider->get('tags');
+        $user_id = $fieldDataProvider->get('user_id');
+        $community = $fieldDataProvider->get('community');
+        $new_community_status = $fieldDataProvider->get('status');
+        $new_community_privileges = $fieldDataProvider->get('privileges');
+        $new_community_tags = $fieldDataProvider->get('tags');
 
         // Get all the current values for that user
         $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
@@ -87,10 +87,10 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
         $errors = [];
-        $user_id = $mutationDataProvider->get('user_id');
+        $user_id = $fieldDataProvider->get('user_id');
         if (!$user_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -101,13 +101,13 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             return $errors;
         }
 
-        // $nonce = $mutationDataProvider->get('nonce');
+        // $nonce = $fieldDataProvider->get('nonce');
         // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
         //     $errors[] = $this->getTranslationAPI()->__('Incorrect URL', 'ure-pop');
         //     return;
         // }
 
-        $status = $mutationDataProvider->get('status');
+        $status = $fieldDataProvider->get('status');
         if (!$status) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(

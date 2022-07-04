@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -25,10 +25,10 @@ class VolunteerMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
         $errors = [];
-        if (empty($mutationDataProvider->get('name'))) {
+        if (empty($fieldDataProvider->get('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -37,14 +37,14 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->get('email'))) {
+        if (empty($fieldDataProvider->get('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($mutationDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataProvider->get('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -53,7 +53,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($mutationDataProvider->get('target-id'))) {
+        if (empty($fieldDataProvider->get('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -62,7 +62,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $target = $this->getCustomPostTypeAPI()->getCustomPost($mutationDataProvider->get('target-id'));
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataProvider->get('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -73,7 +73,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             }
         }
 
-        if (empty($mutationDataProvider->get('whyvolunteer'))) {
+        if (empty($fieldDataProvider->get('whyvolunteer'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -87,21 +87,21 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(FieldDataProviderInterface $fieldDataProvider): void
     {
-        App::doAction('pop_volunteer', $mutationDataProvider);
+        App::doAction('pop_volunteer', $fieldDataProvider);
     }
 
-    protected function doExecute(MutationDataProviderInterface $mutationDataProvider)
+    protected function doExecute(FieldDataProviderInterface $fieldDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $post_title = $this->getCustomPostTypeAPI()->getTitle($mutationDataProvider->get('target-id'));
+        $post_title = $this->getCustomPostTypeAPI()->getTitle($fieldDataProvider->get('target-id'));
         $subject = sprintf(
             $this->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
             sprintf(
                 $this->__('%s applied to volunteer for %s', 'pop-genericforms'),
-                $mutationDataProvider->get('name'),
+                $fieldDataProvider->get('name'),
                 $post_title
             )
         );
@@ -113,8 +113,8 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             '<p>%s</p>',
             sprintf(
                 $this->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
-                $mutationDataProvider->get('name'),
-                $this->getCustomPostTypeAPI()->getPermalink($mutationDataProvider->get('target-id')),
+                $fieldDataProvider->get('name'),
+                $this->getCustomPostTypeAPI()->getPermalink($fieldDataProvider->get('target-id')),
                 $post_title
             )
         ) . sprintf(
@@ -122,30 +122,30 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $mutationDataProvider->get('email')
+                $fieldDataProvider->get('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Phone', 'pop-genericforms'),
-            $mutationDataProvider->get('phone')
+            $fieldDataProvider->get('phone')
         ) . sprintf(
             $placeholder,
             $this->__('Why volunteer', 'pop-genericforms'),
-            $mutationDataProvider->get('whyvolunteer')
+            $fieldDataProvider->get('whyvolunteer')
         );
 
-        return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($mutationDataProvider->get('target-id')), $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($fieldDataProvider->get('target-id')), $subject, $msg);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
     {
-        $result = $this->doExecute($mutationDataProvider);
+        $result = $this->doExecute($fieldDataProvider);
 
         // Allow for additional operations
-        $this->additionals($mutationDataProvider);
+        $this->additionals($fieldDataProvider);
 
         return $result;
     }

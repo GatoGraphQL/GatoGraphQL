@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Posts\Constants\InputNames;
@@ -27,11 +27,11 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return true;
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
-        $errors = parent::validateErrors($mutationDataProvider);
+        $errors = parent::validateErrors($fieldDataProvider);
         if (!$errors) {
-            $target_id = $mutationDataProvider->get('target_id');
+            $target_id = $fieldDataProvider->get('target_id');
 
             // Make sure the post exists
             $target = $this->getCustomPostTypeAPI()->getCustomPost($target_id);
@@ -63,9 +63,9 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return InputNames::POST_ID;
     }
 
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        App::doAction('gd_updateusermetavalue:post', $target_id, $mutationDataProvider);
-        parent::additionals($target_id, $mutationDataProvider);
+        App::doAction('gd_updateusermetavalue:post', $target_id, $fieldDataProvider);
+        parent::additionals($target_id, $fieldDataProvider);
     }
 }

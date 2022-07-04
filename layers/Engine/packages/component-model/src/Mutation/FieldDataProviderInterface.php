@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Mutation;
 
-interface MutationDataProviderInterface
+interface FieldDataProviderInterface
 {
     /**
      * @return string[]

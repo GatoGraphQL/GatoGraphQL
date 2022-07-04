@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\Root\App;
@@ -32,12 +32,12 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
         return ErrorTypes::CODES;
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
         $errorcodes = array();
-        $code = $mutationDataProvider->get(MutationInputProperties::CODE);
-        $pwd = $mutationDataProvider->get(MutationInputProperties::PASSWORD);
-        $repeatpwd = $mutationDataProvider->get(MutationInputProperties::REPEAT_PASSWORD);
+        $code = $fieldDataProvider->get(MutationInputProperties::CODE);
+        $pwd = $fieldDataProvider->get(MutationInputProperties::PASSWORD);
+        $repeatpwd = $fieldDataProvider->get(MutationInputProperties::REPEAT_PASSWORD);
 
         if (!$code) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -83,10 +83,10 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
     {
-        $code = $mutationDataProvider->get(MutationInputProperties::CODE);
-        $pwd = $mutationDataProvider->get(MutationInputProperties::PASSWORD);
+        $code = $fieldDataProvider->get(MutationInputProperties::CODE);
+        $pwd = $fieldDataProvider->get(MutationInputProperties::PASSWORD);
 
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         $decoded = MutationResolverUtils::decodeLostPasswordCode($code);

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
@@ -38,11 +38,11 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
     {
         $errors = [];
-        $username_or_email = $mutationDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $mutationDataProvider->get(MutationInputProperties::PASSWORD);
+        $username_or_email = $fieldDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $fieldDataProvider->get(MutationInputProperties::PASSWORD);
 
         if (!$username_or_email) {
             $errors[] = new FeedbackItemResolution(
@@ -74,11 +74,11 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $mutationDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $mutationDataProvider->get(MutationInputProperties::PASSWORD);
+        $username_or_email = $fieldDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $fieldDataProvider->get(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');

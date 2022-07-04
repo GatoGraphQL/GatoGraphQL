@@ -8,7 +8,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addAction('gd_createupdate_profile:form_data', $this->fillMutationDataProvider(...), 10);
+        \PoP\Root\App::addAction('gd_createupdate_profile:form_data', $this->appendMutationDataToFieldDataProvider(...), 10);
         \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubcomponents(...), 10, 3);
         \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionalsCreate(...), 10, 2);
     }
@@ -23,14 +23,14 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         );
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
     {
         if (!$this->enabled()) {
             return;
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $mutationDataProvider->add('newsletter', $componentprocessor_manager->getComponentProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]));
+        $fieldDataProvider->add('newsletter', $componentprocessor_manager->getComponentProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::COMPONENT_FORMINPUT_CUP_NEWSLETTER]));
     }
 
     /**

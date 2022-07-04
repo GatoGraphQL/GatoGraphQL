@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
 
@@ -16,14 +16,14 @@ interface MutationResolverInterface
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed;
+    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array;
+    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array;
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array;
+    public function validateWarnings(FieldDataProviderInterface $fieldDataProvider): array;
     public function getErrorType(): int;
 }

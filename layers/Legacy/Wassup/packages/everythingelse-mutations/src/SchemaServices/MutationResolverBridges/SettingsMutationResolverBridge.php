@@ -29,7 +29,7 @@ class SettingsMutationResolverBridge extends AbstractComponentMutationResolverBr
         return $this->getSettingsMutationResolver();
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
     {
     }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
@@ -17,48 +17,48 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         return GD_ROLE_PROFILE;
     }
 
-    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
     {
-        parent::validateContent($errors, $mutationDataProvider);
+        parent::validateContent($errors, $fieldDataProvider);
 
         // Allow to validate the extra inputs
-        $hooked_errors = App::applyFilters('gd_createupdate_profile:validateContent', array(), $mutationDataProvider);
+        $hooked_errors = App::applyFilters('gd_createupdate_profile:validateContent', array(), $fieldDataProvider);
         foreach ($hooked_errors as $error) {
             $errors[] = $error;
         }
     }
 
-    protected function additionals($user_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($user_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        parent::additionals($user_id, $mutationDataProvider);
-        App::doAction('gd_createupdate_profile:additionals', $user_id, $mutationDataProvider);
+        parent::additionals($user_id, $fieldDataProvider);
+        App::doAction('gd_createupdate_profile:additionals', $user_id, $fieldDataProvider);
     }
-    protected function additionalsUpdate($user_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionalsUpdate($user_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        parent::additionalsUpdate($user_id, $mutationDataProvider);
-        App::doAction('gd_createupdate_profile:additionalsUpdate', $user_id, $mutationDataProvider);
+        parent::additionalsUpdate($user_id, $fieldDataProvider);
+        App::doAction('gd_createupdate_profile:additionalsUpdate', $user_id, $fieldDataProvider);
     }
-    protected function additionalsCreate($user_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionalsCreate($user_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        parent::additionalsCreate($user_id, $mutationDataProvider);
+        parent::additionalsCreate($user_id, $fieldDataProvider);
 
-        App::doAction('gd_createupdate_profile:additionalsCreate', $user_id, $mutationDataProvider);
+        App::doAction('gd_createupdate_profile:additionalsCreate', $user_id, $fieldDataProvider);
     }
-    protected function createupdateuser($user_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function createupdateuser($user_id, FieldDataProviderInterface $fieldDataProvider): void
     {
-        parent::createupdateuser($user_id, $mutationDataProvider);
+        parent::createupdateuser($user_id, $fieldDataProvider);
 
         // Last Edited: needed for the user thumbprint
         Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelModuleInfo::get('time'));
 
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $mutationDataProvider->get('display_email'), true, true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $mutationDataProvider->get('short_description'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $fieldDataProvider->get('display_email'), true, true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $fieldDataProvider->get('short_description'), true);
 
         // Comment Leo 05/12/2016: LinkedIn is removed from AgendaUrbana, however we don't check for the condition here, so it will still save null
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $mutationDataProvider->get('facebook'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $mutationDataProvider->get('twitter'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $mutationDataProvider->get('linkedin'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $mutationDataProvider->get('youtube'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $mutationDataProvider->get('instagram'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $fieldDataProvider->get('facebook'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $fieldDataProvider->get('twitter'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $fieldDataProvider->get('linkedin'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $fieldDataProvider->get('youtube'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $fieldDataProvider->get('instagram'), true);
     }
 }

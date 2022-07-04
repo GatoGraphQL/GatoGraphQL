@@ -10,8 +10,8 @@ use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\Mutation\MutationDataProvider;
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataProvider;
+use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Root\Exception\AbstractClientException;
@@ -66,8 +66,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
-        $mutationDataProvider = $this->getMutationDataProvider();
-        $this->fillMutationDataProvider($mutationDataProvider);
+        $fieldDataProvider = $this->getFieldDataProvider();
+        $this->appendMutationDataToFieldDataProvider($fieldDataProvider);
         $mutationResponse = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -76,7 +76,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             ErrorTypes::CODES => ResponseConstants::ERRORCODES,
         ];
         $errorTypeKey = $errorTypeKeys[$errorType];
-        if ($errors = $mutationResolver->validateErrors($mutationDataProvider)) {
+        if ($errors = $mutationResolver->validateErrors($fieldDataProvider)) {
             // @todo Migrate from string to FeedbackItemProvider
             $mutationResponse[$errorTypeKey] = array_map(
                 fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
@@ -88,7 +88,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             }
             return $mutationResponse;
         }
-        if ($warnings = $mutationResolver->validateWarnings($mutationDataProvider)) {
+        if ($warnings = $mutationResolver->validateWarnings($fieldDataProvider)) {
             $warningTypeKeys = [
                 ErrorTypes::DESCRIPTIONS => ResponseConstants::WARNINGSTRINGS,
                 ErrorTypes::CODES => ResponseConstants::WARNINGCODES,
@@ -104,7 +104,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $errorMessage = null;
         $resultID = null;
         try {
-            $resultID = $mutationResolver->executeMutation($mutationDataProvider);
+            $resultID = $mutationResolver->executeMutation($fieldDataProvider);
         } catch (AbstractClientException $e) {
             $errorMessage = $e->getMessage();
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
@@ -140,9 +140,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $mutationResponse;
     }
 
-    protected function getMutationDataProvider(): MutationDataProviderInterface
+    protected function getFieldDataProvider(): FieldDataProviderInterface
     {
-        return new MutationDataProvider();
+        return new FieldDataProvider();
     }
 
     protected function modifyDataProperties(array &$data_properties, string | int $resultID): void

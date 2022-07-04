@@ -66,7 +66,7 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         return $inputs;
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
     {
         $this->getCommonuserrolesFormData($mutationField);
         $this->getUsercommunitiesFormData($mutationField);
@@ -77,9 +77,9 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         $inputs = $this->getFormInputs();
         $organizationtypes = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
         $organizationcategories = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
-        $mutationDataProvider->add('organizationtypes', $organizationtypes ?? array());
-        $mutationDataProvider->add('organizationcategories', $organizationcategories ?? array());
-        $mutationDataProvider->add('contact_number', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))));
-        $mutationDataProvider->add('contact_person', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))));
+        $fieldDataProvider->add('organizationtypes', $organizationtypes ?? array());
+        $fieldDataProvider->add('organizationcategories', $organizationcategories ?? array());
+        $fieldDataProvider->add('contact_number', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))));
+        $fieldDataProvider->add('contact_person', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))));
     }
 }

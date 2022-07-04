@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Mutation;
 
-class MutationDataProvider implements MutationDataProviderInterface
+class FieldDataProvider implements FieldDataProviderInterface
 {
     public function __construct(
         /** @var array<string,mixed> */
