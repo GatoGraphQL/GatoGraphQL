@@ -1,0 +1,11 @@
+############################################################
+# Field `dateStr` has argument `format` that cannot be null and,
+# if not provided, must be the set its default value via `@prepareField`.
+# This query validates that `@prepareField` then works well
+# for the ObjectTypeResolver (as resolved by `post`)
+############################################################
+query {
+  post(by: { id: 1724 }) {
+    dateStr
+  }
+}
