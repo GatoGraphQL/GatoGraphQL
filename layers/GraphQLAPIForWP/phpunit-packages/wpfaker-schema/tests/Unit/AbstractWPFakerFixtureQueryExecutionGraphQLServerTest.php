@@ -124,9 +124,10 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         // Stub `esc_sql`
         stubEscapeFunctions();
 
+        // Use default date format by WordPress
         expect('get_option')
             ->with('date_format', Mockery::any())
-            ->andReturn('Y-m-d');
+            ->andReturn('F j, Y');
 
         $wpMockFunctionContainer = new WordPressMockFunctionContainer();
 
