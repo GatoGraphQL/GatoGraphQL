@@ -73,25 +73,25 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
 
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_user:form_data', $mutationField);
+        App::doAction('gd_createupdate_user:form_data', $fieldDataProvider);
 
         if ($user_id) {
-            $this->getUpdateuserFormData($mutationField);
+            $this->getUpdateuserFormData($fieldDataProvider);
         } else {
-            $this->getCreateuserFormData($mutationField);
+            $this->getCreateuserFormData($fieldDataProvider);
         }
     }
 
-    protected function getCreateuserFormData(FieldInterface $mutationField)
+    protected function getCreateuserFormData(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider)
     {
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_user:form_data:create', $mutationField);
+        App::doAction('gd_createupdate_user:form_data:create', $fieldDataProvider);
     }
 
-    protected function getUpdateuserFormData(FieldInterface $mutationField)
+    protected function getUpdateuserFormData(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider)
     {
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_user:form_data:update', $mutationField);
+        App::doAction('gd_createupdate_user:form_data:update', $fieldDataProvider);
     }
 
     private function getFormInputs()
