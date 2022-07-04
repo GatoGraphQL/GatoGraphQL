@@ -958,12 +958,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Get the "schema" properties as for the fieldName
      */
-    final public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    final public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         // First check if the value was cached
-        $key = $objectTypeResolver->getNamespacedTypeName() . '|' . $fieldName . '|' . json_encode($fieldArgs);
+        $key = $objectTypeResolver->getNamespacedTypeName() . '|' . $fieldName;
         if (!isset($this->schemaDefinitionForFieldCache[$key])) {
-            $this->schemaDefinitionForFieldCache[$key] = $this->doGetFieldSchemaDefinition($objectTypeResolver, $fieldName, $fieldArgs);
+            $this->schemaDefinitionForFieldCache[$key] = $this->doGetFieldSchemaDefinition($objectTypeResolver, $fieldName);
         }
         return $this->schemaDefinitionForFieldCache[$key];
     }
@@ -971,7 +971,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Get the "schema" properties as for the fieldName
      */
-    final protected function doGetFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array
+    final protected function doGetFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $fieldTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
         $fieldDescription =

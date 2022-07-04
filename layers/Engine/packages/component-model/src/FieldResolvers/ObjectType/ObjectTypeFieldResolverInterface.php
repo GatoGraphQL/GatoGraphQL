@@ -37,7 +37,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * @return array<string, mixed>
      */
-    public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, array $fieldArgs): array;
+    public function getFieldSchemaDefinition(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array;
     public function getFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string;
     public function hasFieldVersion(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
     public function getFieldVersionInputTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?InputTypeResolverInterface;

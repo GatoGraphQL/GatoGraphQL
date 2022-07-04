@@ -91,8 +91,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
                 continue;
             }
 
-            // Watch out! We are passing empty $fieldArgs to generate the schema!
-            $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this->objectTypeResolver, $fieldName, []);
+            $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this->objectTypeResolver, $fieldName);
 
             // Extract the typeResolvers
             $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];

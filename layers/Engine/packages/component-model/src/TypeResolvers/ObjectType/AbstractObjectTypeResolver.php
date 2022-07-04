@@ -177,8 +177,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($field->asFieldOutputQueryString());
-        return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $field->getName(), $fieldArgs);
+        return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $field->getName());
     }
 
     final public function collectFieldValidationErrors(
@@ -624,7 +623,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $field,
             )
         ) {
-            $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+            $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName);
             $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
 
             /**
