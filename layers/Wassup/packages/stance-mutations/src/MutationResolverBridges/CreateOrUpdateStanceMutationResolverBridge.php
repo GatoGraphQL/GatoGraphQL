@@ -35,9 +35,9 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
         return false;
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
-        parent::appendMutationDataToFieldDataProvider($fieldDataProvider);
+        parent::appendMutationDataToFieldDataAccessor($fieldDataProvider);
 
         $target = $this->getComponentProcessorManager()->getComponentProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET])->getValue([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET]);
         $fieldDataProvider->add('stancetarget', $target);

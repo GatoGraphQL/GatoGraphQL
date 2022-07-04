@@ -29,7 +29,7 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         );
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         // Get the list of all emails
         $emails = array();

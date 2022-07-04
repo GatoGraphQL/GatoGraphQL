@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Posts\Constants\InputNames;
@@ -27,7 +27,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return true;
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = parent::validateErrors($fieldDataProvider);
         if (!$errors) {
@@ -63,7 +63,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
         return InputNames::POST_ID;
     }
 
-    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('gd_updateusermetavalue:post', $target_id, $fieldDataProvider);
         parent::additionals($target_id, $fieldDataProvider);

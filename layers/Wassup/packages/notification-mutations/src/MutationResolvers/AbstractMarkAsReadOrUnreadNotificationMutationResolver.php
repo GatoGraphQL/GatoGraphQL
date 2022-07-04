@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_Notifications_API;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -12,7 +12,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         $histid = $fieldDataProvider->get('histid');
@@ -38,14 +38,14 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return $errors;
     }
 
-    protected function additionals($histid, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals($histid, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $fieldDataProvider);
     }
 
     abstract protected function getStatus();
 
-    protected function setStatus(FieldDataProviderInterface $fieldDataProvider)
+    protected function setStatus(FieldDataAccessorInterface $fieldDataProvider)
     {
         // return AAL_Main::instance()->api->setStatus($fieldDataProvider->get('histid'), $fieldDataProvider->get('user_id'), $this->getStatus());
         return PoP_Notifications_API::setStatus($fieldDataProvider->get('histid'), $fieldDataProvider->get('user_id'), $this->getStatus());
@@ -54,7 +54,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $hist_ids = $this->setStatus($fieldDataProvider);
         $this->additionals($fieldDataProvider->get('histid'), $fieldDataProvider);

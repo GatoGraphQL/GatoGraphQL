@@ -8,7 +8,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addAction('gd_createupdate_profile:form_data', $this->appendMutationDataToFieldDataProvider(...), 10);
+        \PoP\Root\App::addAction('gd_createupdate_profile:form_data', $this->appendMutationDataToFieldDataAccessor(...), 10);
         \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubcomponents(...), 10, 3);
         \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionalsCreate(...), 10, 2);
     }
@@ -23,7 +23,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
         );
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         if (!$this->enabled()) {
             return;

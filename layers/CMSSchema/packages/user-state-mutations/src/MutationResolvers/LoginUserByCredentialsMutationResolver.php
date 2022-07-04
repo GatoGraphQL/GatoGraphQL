@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
@@ -38,7 +38,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         $username_or_email = $fieldDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);
@@ -74,7 +74,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         // If the user is already logged in, then return the error
         $username_or_email = $fieldDataProvider->get(MutationInputProperties::USERNAME_OR_EMAIL);

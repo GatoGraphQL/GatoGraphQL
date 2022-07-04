@@ -10,8 +10,8 @@ use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\Mutation\FieldDataProvider;
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessor;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -26,8 +26,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
 {
     use BasicServiceTrait;
     
-    /** @var SplObjectStorage<FieldInterface,FieldDataProviderInterface> */
-    protected SplObjectStorage $fieldFieldDataProviderCache;
+    /** @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface> */
+    protected SplObjectStorage $fieldFieldDataAccessorCache;
 
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
@@ -85,7 +85,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             [],
             LocationHelper::getNonSpecificLocation()
         );
-        $fieldDataProvider = $this->getFieldDataProvider($mutationField);
+        $fieldDataProvider = $this->getFieldDataAccessor($mutationField);
         $mutationResponse = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -158,18 +158,18 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $mutationResponse;
     }
 
-    protected function getFieldDataProvider(FieldInterface $mutationField): FieldDataProviderInterface
+    protected function getFieldDataAccessor(FieldInterface $mutationField): FieldDataAccessorInterface
     {
-        if (!$this->fieldFieldDataProviderCache->contains($mutationField)) {
-            $this->fieldFieldDataProviderCache[$mutationField] = $this->doGetFieldDataProvider($mutationField);
+        if (!$this->fieldFieldDataAccessorCache->contains($mutationField)) {
+            $this->fieldFieldDataAccessorCache[$mutationField] = $this->doGetFieldDataAccessor($mutationField);
         }
-        return $this->fieldFieldDataProviderCache[$mutationField];
+        return $this->fieldFieldDataAccessorCache[$mutationField];
     }
 
-    protected function doGetFieldDataProvider(FieldInterface $mutationField): FieldDataProviderInterface
+    protected function doGetFieldDataAccessor(FieldInterface $mutationField): FieldDataAccessorInterface
     {
-        $fieldDataProvider = new FieldDataProvider($mutationField);
-        $this->appendMutationDataToFieldDataProvider($fieldDataProvider);
+        $fieldDataProvider = new FieldDataAccessor($mutationField);
+        $this->appendMutationDataToFieldDataAccessor($fieldDataProvider);
         return $fieldDataProvider;
     }
 

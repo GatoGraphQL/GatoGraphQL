@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FlagMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -25,7 +25,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
         return $this->customPostTypeAPI ??= $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         if (empty($fieldDataProvider->get('name'))) {
@@ -87,12 +87,12 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('pop_flag', $fieldDataProvider);
     }
 
-    protected function doExecute(FieldDataProviderInterface $fieldDataProvider)
+    protected function doExecute(FieldDataAccessorInterface $fieldDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -136,7 +136,7 @@ class FlagCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $result = $this->doExecute($fieldDataProvider);
 

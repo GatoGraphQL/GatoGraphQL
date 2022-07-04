@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostLinkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class MutationResolverUtils
 {
-    public static function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    public static function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         if (empty($fieldDataProvider->get('content'))) {
             // The link will be the content. So then replace the error message if the content (link) is empty

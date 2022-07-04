@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -83,7 +83,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         return $message;
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         $user_login = $fieldDataProvider->get(MutationInputProperties::USER_LOGIN);
@@ -126,7 +126,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         $user_login = $fieldDataProvider->get(MutationInputProperties::USER_LOGIN);

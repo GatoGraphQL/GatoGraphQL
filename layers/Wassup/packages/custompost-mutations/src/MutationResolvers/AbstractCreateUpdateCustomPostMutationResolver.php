@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_ApplicationProcessors_Utils;
 use GD_CreateUpdate_Utils;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -51,7 +51,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return false;
     }
 
-    protected function validateCategories(FieldDataProviderInterface $fieldDataProvider)
+    protected function validateCategories(FieldDataAccessorInterface $fieldDataProvider)
     {
         if ($fieldDataProvider->has(MutationInputProperties::CATEGORIES)) {
             if (is_array($fieldDataProvider->get(MutationInputProperties::CATEGORIES))) {
@@ -77,7 +77,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     }
 
     // Update Post Validation
-    protected function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::validateContent($errors, $fieldDataProvider);
 
@@ -145,7 +145,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::validateUpdateContent($errors, $fieldDataProvider);
 
@@ -162,7 +162,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdate(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateUpdate(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::validateUpdate($errors, $fieldDataProvider);
 
@@ -192,7 +192,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         // }
     }
 
-    protected function additionals(int | string $customPostID, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::additionals($customPostID, $fieldDataProvider);
 
@@ -238,7 +238,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $categories;
     }
 
-    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataProviderInterface $fieldDataProvider): void
+    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::addCreateUpdateCustomPostData($post_data, $fieldDataProvider);
 
@@ -247,7 +247,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
-    protected function getUpdateCustomPostData(FieldDataProviderInterface $fieldDataProvider): array
+    protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $post_data = parent::getUpdateCustomPostData($fieldDataProvider);
 
@@ -264,7 +264,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return GD_CreateUpdate_Utils::moderate();
     }
 
-    protected function getCreateCustomPostData(FieldDataProviderInterface $fieldDataProvider): array
+    protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $post_data = parent::getCreateCustomPostData($fieldDataProvider);
 
@@ -274,14 +274,14 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         return $post_data;
     }
 
-    protected function getCategories(FieldDataProviderInterface $fieldDataProvider): ?array
+    protected function getCategories(FieldDataAccessorInterface $fieldDataProvider): ?array
     {
         // $cats = parent::getCategories($fieldDataProvider);
         $cats = $fieldDataProvider->get(MutationInputProperties::CATEGORIES);
         return $this->maybeAddParentCategories($cats);
     }
 
-    protected function createUpdateCustomPost(FieldDataProviderInterface $fieldDataProvider, int | string $customPostID): void
+    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataProvider, int | string $customPostID): void
     {
         parent::createUpdateCustomPost($fieldDataProvider, $customPostID);
 
@@ -290,7 +290,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
     }
 
-    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataProviderInterface $fieldDataProvider): array
+    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): array
     {
         $log = parent::getUpdateCustomPostDataLog($customPostID, $fieldDataProvider);
 

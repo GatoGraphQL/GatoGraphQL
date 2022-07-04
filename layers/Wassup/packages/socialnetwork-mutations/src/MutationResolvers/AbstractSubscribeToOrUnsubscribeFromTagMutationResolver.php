@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
@@ -21,7 +21,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = parent::validateErrors($fieldDataProvider);
         if (!$errors) {
@@ -41,7 +41,7 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $errors;
     }
 
-    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('gd_subscritetounsubscribefrom_tag', $target_id, $fieldDataProvider);
         parent::additionals($target_id, $fieldDataProvider);

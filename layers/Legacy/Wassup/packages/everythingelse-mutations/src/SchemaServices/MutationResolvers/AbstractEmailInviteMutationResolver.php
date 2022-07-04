@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP_FormUtils;
@@ -20,7 +20,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $emails = $fieldDataProvider->get('emails');
         // Remove the invalid emails
@@ -47,7 +47,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         }
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
@@ -83,7 +83,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateWarnings(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $warnings = [];
 
@@ -103,7 +103,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return $warnings;
     }
 
-    abstract protected function getEmailContent(FieldDataProviderInterface $fieldDataProvider);
+    abstract protected function getEmailContent(FieldDataAccessorInterface $fieldDataProvider);
 
-    abstract protected function getEmailSubject(FieldDataProviderInterface $fieldDataProvider);
+    abstract protected function getEmailSubject(FieldDataAccessorInterface $fieldDataProvider);
 }

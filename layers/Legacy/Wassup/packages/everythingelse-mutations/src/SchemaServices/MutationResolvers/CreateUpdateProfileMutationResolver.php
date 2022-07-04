@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
@@ -17,7 +17,7 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         return GD_ROLE_PROFILE;
     }
 
-    protected function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::validateContent($errors, $fieldDataProvider);
 
@@ -28,23 +28,23 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         }
     }
 
-    protected function additionals($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::additionals($user_id, $fieldDataProvider);
         App::doAction('gd_createupdate_profile:additionals', $user_id, $fieldDataProvider);
     }
-    protected function additionalsUpdate($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionalsUpdate($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::additionalsUpdate($user_id, $fieldDataProvider);
         App::doAction('gd_createupdate_profile:additionalsUpdate', $user_id, $fieldDataProvider);
     }
-    protected function additionalsCreate($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionalsCreate($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::additionalsCreate($user_id, $fieldDataProvider);
 
         App::doAction('gd_createupdate_profile:additionalsCreate', $user_id, $fieldDataProvider);
     }
-    protected function createupdateuser($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function createupdateuser($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::createupdateuser($user_id, $fieldDataProvider);
 

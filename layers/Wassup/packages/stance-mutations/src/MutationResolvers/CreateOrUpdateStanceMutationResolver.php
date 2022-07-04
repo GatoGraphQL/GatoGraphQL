@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
@@ -13,7 +13,7 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         if ($this->isUpdate($fieldDataProvider)) {
             return $this->update($fieldDataProvider);
@@ -21,7 +21,7 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
         return $this->create($fieldDataProvider);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         if ($this->isUpdate($fieldDataProvider)) {
             return $this->validateUpdateErrors($fieldDataProvider);
@@ -33,7 +33,7 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
      * If there's an "id" entry => It's Update
      * Otherwise => It's Create
      */
-    protected function isUpdate(FieldDataProviderInterface $fieldDataProvider): bool
+    protected function isUpdate(FieldDataAccessorInterface $fieldDataProvider): bool
     {
         return !empty($fieldDataProvider->get(MutationInputProperties::ID));
     }

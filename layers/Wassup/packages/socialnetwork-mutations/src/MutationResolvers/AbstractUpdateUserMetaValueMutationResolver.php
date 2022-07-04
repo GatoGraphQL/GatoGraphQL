@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         $target_id = $fieldDataProvider->get('target_id');
@@ -26,7 +26,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $errors;
     }
 
-    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('gd_updateusermetavalue', $target_id, $fieldDataProvider);
     }
@@ -34,7 +34,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataProviderInterface $fieldDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataProvider): string | int
     {
         $target_id = $fieldDataProvider->get('target_id');
         return $target_id;
@@ -43,7 +43,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $target_id = $this->update($fieldDataProvider);
         $this->additionals($target_id, $fieldDataProvider);

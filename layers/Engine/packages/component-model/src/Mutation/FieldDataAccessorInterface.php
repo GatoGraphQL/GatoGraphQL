@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Mutation;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-interface FieldDataProviderInterface
+interface FieldDataAccessorInterface
 {
     public function getField(): FieldInterface;
     public function getFieldName(): string;

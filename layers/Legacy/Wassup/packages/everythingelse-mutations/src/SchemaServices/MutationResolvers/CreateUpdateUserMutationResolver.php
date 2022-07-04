@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_Forms_ConfigurationUtils;
 use GD_Captcha;
@@ -22,7 +22,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return 'subscriber';
     }
 
-    protected function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         if (empty($fieldDataProvider->get('first_name'))) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -65,7 +65,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function validateCreateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         // Check the username
         $user_login = $fieldDataProvider->get('username');
@@ -158,7 +158,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         $user_id = $fieldDataProvider->get('user_id');
         $user_email = $fieldDataProvider->get('user_email');
@@ -174,7 +174,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
     }
 
-    protected function getUpdateuserData(FieldDataProviderInterface $fieldDataProvider)
+    protected function getUpdateuserData(FieldDataAccessorInterface $fieldDataProvider)
     {
         $user_data = array(
             'id' => $fieldDataProvider->get('user_id'),
@@ -187,7 +187,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_data;
     }
 
-    protected function getCreateuserData(FieldDataProviderInterface $fieldDataProvider)
+    protected function getCreateuserData(FieldDataAccessorInterface $fieldDataProvider)
     {
         $user_data = $this->getUpdateuserData($fieldDataProvider);
 
@@ -212,11 +212,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->updateUser($user_data);
     }
 
-    protected function createupdateuser($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function createupdateuser($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
     }
 
-    protected function updateuser(FieldDataProviderInterface $fieldDataProvider)
+    protected function updateuser(FieldDataAccessorInterface $fieldDataProvider)
     {
         $user_data = $this->getUpdateuserData($fieldDataProvider);
         $user_id = $user_data['id'];
@@ -234,7 +234,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $cmseditusersapi->insertUser($user_data);
     }
 
-    protected function createuser(FieldDataProviderInterface $fieldDataProvider)
+    protected function createuser(FieldDataAccessorInterface $fieldDataProvider)
     {
         $user_data = $this->getCreateuserData($fieldDataProvider);
         $result = $this->executeCreateuser($user_data);
@@ -249,7 +249,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
@@ -260,20 +260,20 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $this->create($fieldDataProvider);
     }
 
-    protected function additionals($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('gd_createupdate_user:additionals', $user_id, $fieldDataProvider);
     }
-    protected function additionalsUpdate($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionalsUpdate($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('gd_createupdate_user:additionalsUpdate', $user_id, $fieldDataProvider);
     }
-    protected function additionalsCreate($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionalsCreate($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('gd_createupdate_user:additionalsCreate', $user_id, $fieldDataProvider);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         $this->validateContent($errors, $fieldDataProvider);
@@ -289,7 +289,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the updated entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataProviderInterface $fieldDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataProvider): string | int
     {
         // Do the Post update
         $user_id = $this->updateuser($fieldDataProvider);
@@ -307,7 +307,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      * @return mixed The ID of the created entity, or an Error
      * @throws AbstractException In case of error
      */
-    protected function create(FieldDataProviderInterface $fieldDataProvider): string | int
+    protected function create(FieldDataAccessorInterface $fieldDataProvider): string | int
     {
         $user_id = $this->createuser($fieldDataProvider);
 

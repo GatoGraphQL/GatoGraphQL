@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_GenericForms_NewsletterUtils;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
@@ -14,7 +14,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         if (empty($fieldDataProvider->get('email'))) {
@@ -78,7 +78,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('pop_unsubscribe_from_newsletter', $fieldDataProvider);
     }
@@ -86,7 +86,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * Function to override by Gravity Forms
      */
-    protected function getNewsletterData(FieldDataProviderInterface $fieldDataProvider)
+    protected function getNewsletterData(FieldDataAccessorInterface $fieldDataProvider)
     {
         return array();
     }
@@ -122,7 +122,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $newsletter_data = $this->getNewsletterData($fieldDataProvider);
         $result = $this->doExecute($newsletter_data);

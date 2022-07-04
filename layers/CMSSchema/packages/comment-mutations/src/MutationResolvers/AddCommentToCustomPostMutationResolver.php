@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
@@ -54,7 +54,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
 
@@ -108,12 +108,12 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         );
     }
 
-    protected function additionals(string | int $comment_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals(string | int $comment_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('gd_addcomment', $comment_id, $fieldDataProvider);
     }
 
-    protected function getCommentData(FieldDataProviderInterface $fieldDataProvider): array
+    protected function getCommentData(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $comment_data = [
             'authorIP' => App::server('REMOTE_ADDR'),
@@ -163,7 +163,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $comment_data = $this->getCommentData($fieldDataProvider);
         $comment_id = $this->insertComment($comment_data);

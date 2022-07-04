@@ -26,7 +26,7 @@ class LogoutUserMutationResolverBridge extends AbstractComponentMutationResolver
         return $this->getLogoutUserMutationResolver();
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
     }
 }

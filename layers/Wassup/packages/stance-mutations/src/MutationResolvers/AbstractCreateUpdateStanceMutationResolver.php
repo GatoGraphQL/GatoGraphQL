@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use UserStance_Module_Processor_CustomSectionBlocksUtils;
 use PoP_UserStance_PostNameUtils;
 use PoP\Root\App;
@@ -18,7 +18,7 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreateUpdateCustomPostMutationResolver
 {
     // Update Post Validation
-    protected function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         if ($fieldDataProvider->get('stancetarget')) {
             // Check that the referenced post exists
@@ -62,7 +62,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         return $category_error_msgs;
     }
 
-    protected function validateCreateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::validateCreateContent($errors, $fieldDataProvider);
 
@@ -117,7 +117,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     }
 
     // Moved to WordPress-specific code
-    // protected function getCreatepostData(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider)
+    // protected function getCreatepostData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
     // {
     //     $post_data = parent::getCreatepostData($fieldDataProvider);
 
@@ -130,7 +130,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     //     return $post_data;
     // }
 
-    protected function createAdditionals(string | int $post_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::createAdditionals($post_id, $fieldDataProvider);
 
@@ -142,7 +142,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         App::doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $fieldDataProvider);
     }
 
-    protected function updateAdditionals(string | int $post_id, FieldDataProviderInterface $fieldDataProvider, array $log): void
+    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider, array $log): void
     {
         parent::updateAdditionals($post_id, $fieldDataProvider, $log);
 

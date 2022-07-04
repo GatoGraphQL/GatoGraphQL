@@ -35,7 +35,7 @@ class FileUploadPictureMutationResolverBridge extends AbstractComponentMutationR
         return false;
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         $fieldDataProvider->add('user_id', App::getState('current-user-id'));
     }

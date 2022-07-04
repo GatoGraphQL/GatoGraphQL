@@ -33,9 +33,9 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         return $this->getCreateUpdateProfileMutationResolver();
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
-        parent::appendMutationDataToFieldDataProvider($fieldDataProvider);
+        parent::appendMutationDataToFieldDataAccessor($fieldDataProvider);
 
         $inputs = $this->getFormInputs();
         $fieldDataProvider->add('short_description', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description'])));

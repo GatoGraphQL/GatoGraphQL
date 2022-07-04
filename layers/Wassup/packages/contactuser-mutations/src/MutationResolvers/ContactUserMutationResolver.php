@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -25,7 +25,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
         return $this->userTypeAPI ??= $this->instanceManager->getInstance(UserTypeAPIInterface::class);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         if (empty($fieldDataProvider->get('name'))) {
@@ -86,12 +86,12 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     /**
      * Function to override
      */
-    protected function additionals(FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals(FieldDataAccessorInterface $fieldDataProvider): void
     {
         App::doAction('pop_contactuser', $fieldDataProvider);
     }
 
-    protected function doExecute(FieldDataProviderInterface $fieldDataProvider)
+    protected function doExecute(FieldDataAccessorInterface $fieldDataProvider)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $websitename = $cmsapplicationapi->getSiteName();
@@ -137,7 +137,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $result = $this->doExecute($fieldDataProvider);
 

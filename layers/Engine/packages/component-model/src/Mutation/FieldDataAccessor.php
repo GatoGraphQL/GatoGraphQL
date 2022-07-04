@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Mutation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-class FieldDataProvider implements FieldDataProviderInterface
+class FieldDataAccessor implements FieldDataAccessorInterface
 {
     public function __construct(
         protected FieldInterface $field,

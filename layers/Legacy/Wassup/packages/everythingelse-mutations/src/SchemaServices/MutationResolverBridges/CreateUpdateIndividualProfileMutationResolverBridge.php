@@ -59,12 +59,12 @@ class CreateUpdateIndividualProfileMutationResolverBridge extends CreateUpdatePr
         return $inputs;
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         $this->getCommonuserrolesFormData($fieldDataProvider);
         $this->getUsercommunitiesFormData($fieldDataProvider);
     }
-    protected function getCommonuserrolesFormData(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider)
+    protected function getCommonuserrolesFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();

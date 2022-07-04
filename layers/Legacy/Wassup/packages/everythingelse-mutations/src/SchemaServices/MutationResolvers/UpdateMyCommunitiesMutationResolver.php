@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -29,7 +29,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(FieldDataProviderInterface $fieldDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataProvider): mixed
     {
         $user_id = $fieldDataProvider->get('user_id');
 
@@ -70,7 +70,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
         // return $update || empty($banned_communities);
     }
 
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
         $user_id = $fieldDataProvider->get('user_id');
@@ -90,7 +90,7 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateWarnings(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $warnings = [];
         $user_id = $fieldDataProvider->get('user_id');

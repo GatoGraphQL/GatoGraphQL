@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\HighlightMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
@@ -17,7 +17,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         return \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }
 
-    protected function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
@@ -57,7 +57,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         }
     }
 
-    protected function createAdditionals(string | int $post_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function createAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::createAdditionals($post_id, $fieldDataProvider);
 
@@ -67,7 +67,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
         App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $fieldDataProvider);
     }
 
-    protected function updateAdditionals(string | int $post_id, FieldDataProviderInterface $fieldDataProvider, array $log): void
+    protected function updateAdditionals(string | int $post_id, FieldDataAccessorInterface $fieldDataProvider, array $log): void
     {
         parent::updateAdditionals($post_id, $fieldDataProvider, $log);
 

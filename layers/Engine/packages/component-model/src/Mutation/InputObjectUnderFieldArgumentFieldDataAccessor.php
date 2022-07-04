@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use stdClass;
 
-class InputObjectUnderFieldArgumentFieldDataProvider extends FieldDataProvider implements InputObjectUnderFieldArgumentFieldDataProviderInterface
+class InputObjectUnderFieldArgumentFieldDataAccessor extends FieldDataAccessor implements InputObjectUnderFieldArgumentFieldDataAccessorInterface
 {
     public function __construct(
         FieldInterface $field,

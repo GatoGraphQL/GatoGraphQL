@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\Mutation;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use stdClass;
 
-class PropertyUnderInputObjectUnderFieldArgumentFieldDataProvider extends InputObjectUnderFieldArgumentFieldDataProvider implements PropertyUnderInputObjectUnderFieldArgumentFieldDataProviderInterface
+class PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor extends InputObjectUnderFieldArgumentFieldDataAccessor implements PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessorInterface
 {
     public function __construct(
         FieldInterface $field,

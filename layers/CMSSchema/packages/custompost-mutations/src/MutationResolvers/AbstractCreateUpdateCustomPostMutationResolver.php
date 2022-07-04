@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\LooseContracts\NameResolverInterface;
@@ -78,7 +78,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return FeedbackItemResolution[]
      */
-    protected function validateCreateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    protected function validateCreateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
 
@@ -103,7 +103,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return FeedbackItemResolution[]
      */
-    protected function validateUpdateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    protected function validateUpdateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = [];
 
@@ -128,7 +128,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateCreateUpdateErrors(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateCreateUpdateErrors(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -183,7 +183,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         // Validate that the status is valid
         if ($fieldDataProvider->has(MutationInputProperties::STATUS)) {
@@ -210,21 +210,21 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateCreateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
     }
 
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
     }
 
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateCreate(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateCreate(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         // Either the title or the content must be set
         if (
@@ -241,7 +241,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdate(array &$errors, FieldDataProviderInterface $fieldDataProvider): void
+    protected function validateUpdate(array &$errors, FieldDataAccessorInterface $fieldDataProvider): void
     {
         $customPostID = $fieldDataProvider->get(MutationInputProperties::ID);
         if (!$customPostID) {
@@ -278,13 +278,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function additionals(int | string $customPostID, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): void
     {
     }
-    protected function updateAdditionals(int | string $customPostID, FieldDataProviderInterface $fieldDataProvider, array $log): void
+    protected function updateAdditionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider, array $log): void
     {
     }
-    protected function createAdditionals(int | string $customPostID, FieldDataProviderInterface $fieldDataProvider): void
+    protected function createAdditionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): void
     {
     }
 
@@ -293,7 +293,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     //     $post_data['custompost-type'] = $this->getCustomPostType();
     // }
 
-    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataProviderInterface $fieldDataProvider): void
+    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataProvider): void
     {
         if ($fieldDataProvider->has(MutationInputProperties::CONTENT)) {
             $post_data['content'] = $fieldDataProvider->get(MutationInputProperties::CONTENT);
@@ -306,7 +306,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function getUpdateCustomPostData(FieldDataProviderInterface $fieldDataProvider): array
+    protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $post_data = array(
             'id' => $fieldDataProvider->get(MutationInputProperties::ID),
@@ -316,7 +316,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $post_data;
     }
 
-    protected function getCreateCustomPostData(FieldDataProviderInterface $fieldDataProvider): array
+    protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $post_data = [
             'custompost-type' => $this->getCustomPostType(),
@@ -336,11 +336,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $this->getCustomPostTypeMutationAPI()->updateCustomPost($post_data);
     }
 
-    protected function createUpdateCustomPost(FieldDataProviderInterface $fieldDataProvider, int | string $customPostID): void
+    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataProvider, int | string $customPostID): void
     {
     }
 
-    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataProviderInterface $fieldDataProvider): array
+    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataAccessorInterface $fieldDataProvider): array
     {
         return [
             'previous-status' => $this->getCustomPostTypeAPI()->getStatus($customPostID),
@@ -351,7 +351,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    protected function update(FieldDataProviderInterface $fieldDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataProvider): string | int
     {
         $post_data = $this->getUpdateCustomPostData($fieldDataProvider);
         $customPostID = $post_data['id'];
@@ -390,7 +390,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the created entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function create(FieldDataProviderInterface $fieldDataProvider): string | int
+    protected function create(FieldDataAccessorInterface $fieldDataProvider): string | int
     {
         $post_data = $this->getCreateCustomPostData($fieldDataProvider);
         $customPostID = $this->executeCreateCustomPost($post_data);

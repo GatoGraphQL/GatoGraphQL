@@ -30,7 +30,7 @@ class ChangeUserPasswordMutationResolverBridge extends AbstractComponentMutation
         return $this->getChangeUserPasswordMutationResolver();
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         $user_id = App::getState('current-user-id');
         

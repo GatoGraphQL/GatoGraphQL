@@ -11,7 +11,7 @@ abstract class AbstractUpdateUserMetaValueMutationResolverBridge extends Abstrac
 {
     abstract protected function getRequestKey();
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         $fieldDataProvider->add('target_id', App::query($this->getRequestKey()));
     }

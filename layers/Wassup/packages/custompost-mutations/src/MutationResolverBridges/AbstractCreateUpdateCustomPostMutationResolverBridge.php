@@ -62,7 +62,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends Abst
 
     abstract protected function isUpdate(): bool;
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         if ($this->isUpdate()) {
             $fieldDataProvider->add(MutationInputProperties::ID, $this->getUpdateCustomPostID());

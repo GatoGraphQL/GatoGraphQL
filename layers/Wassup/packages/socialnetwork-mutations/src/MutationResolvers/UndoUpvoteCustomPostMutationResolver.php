@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
 class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCustomPostMutationResolver
 {
-    public function validateErrors(FieldDataProviderInterface $fieldDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataProvider): array
     {
         $errors = parent::validateErrors($fieldDataProvider);
         if (!$errors) {
@@ -38,7 +38,7 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
     /**
      * Function to override
      */
-    protected function additionals($target_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::additionals($target_id, $fieldDataProvider);
         App::doAction('gd_undoupvotepost', $target_id, $fieldDataProvider);
@@ -47,7 +47,7 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(FieldDataProviderInterface $fieldDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataProvider): string | int
     {
         $user_id = App::getState('current-user-id');
         $target_id = $fieldDataProvider->get('target_id');
@@ -67,7 +67,7 @@ class UndoUpvoteCustomPostMutationResolver extends AbstractUpvoteOrUndoUpvoteCus
     /**
      * Function to be called by the opposite function (Up-vote/Down-vote)
      */
-    public function undo(FieldDataProviderInterface $fieldDataProvider)
+    public function undo(FieldDataAccessorInterface $fieldDataProvider)
     {
         return $this->update($fieldDataProvider);
     }

@@ -31,7 +31,7 @@ class UpdateUserAvatarMutationResolverBridge extends AbstractComponentMutationRe
         return $this->getUpdateUserAvatarMutationResolver();
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $fieldDataProvider->add('user_id', $user_id);

@@ -52,7 +52,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
@@ -82,13 +82,13 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
     }
 
-    protected function getCreateuserFormData(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider)
+    protected function getCreateuserFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
     {
         // Allow to add extra inputs
         App::doAction('gd_createupdate_user:form_data:create', $fieldDataProvider);
     }
 
-    protected function getUpdateuserFormData(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider)
+    protected function getUpdateuserFormData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider)
     {
         // Allow to add extra inputs
         App::doAction('gd_createupdate_user:form_data:update', $fieldDataProvider);

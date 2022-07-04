@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends CreateUpdateWithCommunityProfileMutationResolver
 {
     use CreateUpdateOrganizationProfileMutationResolverTrait;
 
-    protected function createupdateuser($user_id, FieldDataProviderInterface $fieldDataProvider): void
+    protected function createupdateuser($user_id, FieldDataAccessorInterface $fieldDataProvider): void
     {
         parent::createupdateuser($user_id, $fieldDataProvider);
         $this->commonuserrolesCreateupdateuser($user_id, $fieldDataProvider);

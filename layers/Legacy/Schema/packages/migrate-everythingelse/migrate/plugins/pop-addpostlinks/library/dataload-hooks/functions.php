@@ -11,7 +11,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
     {
         \PoP\Root\App::addAction(
             AbstractCreateUpdateCustomPostMutationResolverBridge::HOOK_FORM_DATA_CREATE_OR_UPDATE,
-            $this->appendMutationDataToFieldDataProvider(...),
+            $this->appendMutationDataToFieldDataAccessor(...),
             10
         );
         \PoP\Root\App::addAction(
@@ -56,7 +56,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         }
     }
 
-    public function appendMutationDataToFieldDataProvider(\PoP\ComponentModel\Mutation\FieldDataProviderInterface $fieldDataProvider): void
+    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataProvider): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
