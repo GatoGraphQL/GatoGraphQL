@@ -13,9 +13,9 @@ class PropertyUnderInputObjectUnderFieldArgumentFieldDataProvider extends InputO
         FieldInterface $field,
         string $fieldInputArgumentName,
         protected string $inputObjectPropertyName,
-        array $propertyValues = [],
+        array $customValues = [],
     ) {
-        parent::__construct($field, $fieldInputArgumentName, $propertyValues);
+        parent::__construct($field, $fieldInputArgumentName, $customValues);
     }
 
     public function getInputObjectPropertyName(): string

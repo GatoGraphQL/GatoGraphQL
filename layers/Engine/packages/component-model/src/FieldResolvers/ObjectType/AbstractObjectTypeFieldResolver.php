@@ -23,7 +23,7 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\Mutation\FieldArgumentFieldDataProvider;
+use PoP\ComponentModel\Mutation\FieldDataProvider;
 use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentFieldDataProvider;
 use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -1193,7 +1193,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 );
             }
         }
-        return new FieldArgumentFieldDataProvider($field);
+        return new FieldDataProvider($field);
     }
 
     final protected function getFieldDataProviderForObject(

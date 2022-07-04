@@ -114,7 +114,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      */
     protected function getOneofInputObjectPropertyName(FieldDataProviderInterface $fieldDataProvider): string
     {
-        $propertyNames = $fieldDataProvider->getPropertyNames();
+        $propertyNames = $fieldDataProvider->getProperties();
         $formDataSize = count($propertyNames);
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
