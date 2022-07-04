@@ -112,17 +112,17 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
     protected function prepareFieldDataProviderForObject(
         FieldDataProviderInterface $fieldDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
         parent::prepareFieldDataProviderForObject(
             $fieldDataProviderForObject,
             $objectTypeResolver,
-            $mutationField,
+            $field,
             $object,
         );
         $comment = $object;
-        switch ($mutationField->getName()) {
+        switch ($field->getName()) {
             case 'reply':
                 $fieldDataProviderForObject->add(MutationInputProperties::CUSTOMPOST_ID, $this->getCommentTypeAPI()->getCommentPostId($comment));
                 $fieldDataProviderForObject->add(MutationInputProperties::PARENT_COMMENT_ID, $objectTypeResolver->getID($comment));

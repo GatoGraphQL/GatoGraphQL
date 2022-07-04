@@ -77,17 +77,17 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     protected function prepareFieldDataProviderForObject(
         FieldDataProviderInterface $fieldDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
         parent::prepareFieldDataProviderForObject(
             $fieldDataProviderForObject,
             $objectTypeResolver,
-            $mutationField,
+            $field,
             $object,
         );
         $post = $object;
-        switch ($mutationField->getName()) {
+        switch ($field->getName()) {
             case 'update':
                 $fieldDataProviderForObject->add(MutationInputProperties::ID, $objectTypeResolver->getID($post));
                 break;

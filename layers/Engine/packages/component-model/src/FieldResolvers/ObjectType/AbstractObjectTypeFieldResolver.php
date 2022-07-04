@@ -1391,7 +1391,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function prepareFieldDataProviderForObject(
         FieldDataProviderInterface $fieldDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
     }

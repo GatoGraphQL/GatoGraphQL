@@ -140,17 +140,17 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     protected function prepareFieldDataProviderForObject(
         FieldDataProviderInterface $fieldDataProviderForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
         parent::prepareFieldDataProviderForObject(
             $fieldDataProviderForObject,
             $objectTypeResolver,
-            $mutationField,
+            $field,
             $object,
         );
         $customPost = $object;
-        switch ($mutationField->getName()) {
+        switch ($field->getName()) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
                 $fieldDataProviderForObject->add(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
