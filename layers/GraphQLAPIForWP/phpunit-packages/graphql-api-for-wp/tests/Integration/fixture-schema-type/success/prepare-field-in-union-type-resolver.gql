@@ -1,0 +1,14 @@
+############################################################
+# Field `dateStr` has argument `format` that cannot be null and,
+# if not provided, must be the set its default value via `@prepareField`.
+# This query validates that `@prepareField` then works well
+# for the UnionTypeResolver (as resolved by `customPosts`)
+############################################################
+query {
+  customPost(by: { id: 1 }) {
+    __typename
+    ...on IsCustomPost {
+      dateStr
+    }
+  }
+}
