@@ -21,6 +21,11 @@ class FieldDataProvider implements FieldDataProviderInterface
         return $this->field;
     }
 
+    final public function getFieldName(): string
+    {
+        return $this->field->getName();
+    }
+
     /**
      * @return string[]
      */
