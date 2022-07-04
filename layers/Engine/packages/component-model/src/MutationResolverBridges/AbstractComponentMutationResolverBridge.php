@@ -14,13 +14,20 @@ use PoP\ComponentModel\Mutation\FieldDataProvider;
 use PoP\ComponentModel\Mutation\FieldDataProviderInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
+use SplObjectStorage;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
+    
+    /** @var SplObjectStorage<FieldInterface,FieldDataProviderInterface> */
+    protected SplObjectStorage $fieldFieldDataProviderCache;
 
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
@@ -66,8 +73,19 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
-        $fieldDataProvider = $this->getFieldDataProvider();
-        $this->appendMutationDataToFieldDataProvider($fieldDataProvider);
+        /**
+         * Create a runtime field to be executed. It doesn't matter
+         * what's the name of the mutation field, so providing
+         * a random one suffices.
+         */
+        $mutationField = new LeafField(
+            'someMutation',
+            null,
+            [],
+            [],
+            LocationHelper::getNonSpecificLocation()
+        );
+        $fieldDataProvider = $this->getFieldDataProvider($mutationField);
         $mutationResponse = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -140,9 +158,19 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $mutationResponse;
     }
 
-    protected function getFieldDataProvider(): FieldDataProviderInterface
+    protected function getFieldDataProvider(FieldInterface $mutationField): FieldDataProviderInterface
     {
-        return new FieldDataProvider();
+        if (!$this->fieldFieldDataProviderCache->contains($mutationField)) {
+            $this->fieldFieldDataProviderCache[$mutationField] = $this->doGetFieldDataProvider($mutationField);
+        }
+        return $this->fieldFieldDataProviderCache[$mutationField];
+    }
+
+    protected function doGetFieldDataProvider(FieldInterface $mutationField): FieldDataProviderInterface
+    {
+        $fieldDataProvider = new FieldDataProvider();
+        $this->appendMutationDataToFieldDataProvider($fieldDataProvider);
+        return $fieldDataProvider;
     }
 
     protected function modifyDataProperties(array &$data_properties, string | int $resultID): void
