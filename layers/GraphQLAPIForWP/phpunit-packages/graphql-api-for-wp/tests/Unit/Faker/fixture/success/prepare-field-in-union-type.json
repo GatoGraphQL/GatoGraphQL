@@ -2,7 +2,7 @@
     "data": {
         "customPost": {
             "__typename": "Post",
-            "dateStr": "2018-10-20"
+            "dateStr": "October 20, 2018"
         }
     }
 }
