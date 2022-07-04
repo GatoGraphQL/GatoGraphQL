@@ -13,7 +13,6 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeFieldResolver
 {
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
     
     final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
@@ -23,14 +22,6 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
     final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
         return $this->dateScalarTypeResolver ??= $this->instanceManager->getInstance(DateScalarTypeResolver::class);
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
     final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
     {
@@ -72,7 +63,7 @@ class IsCustomPostInterfaceTypeFieldResolver extends QueryableInterfaceTypeField
          * Please notice that the URL, slug, title and excerpt are nullable,
          * and content is not!
          */
-        switch ($field->getName()) {
+        switch ($fieldName) {
             case 'datetime':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
