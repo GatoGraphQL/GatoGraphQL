@@ -1415,43 +1415,48 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // First check if the value was cached
         $key = $relationalTypeResolver->getNamespacedTypeName();
         if (!isset($this->schemaDefinitionForDirectiveCache[$key])) {
-            $directiveName = $this->getDirectiveName();
-            $schemaDefinition = [
-                SchemaDefinition::NAME => $directiveName,
-                SchemaDefinition::DIRECTIVE_KIND => $this->getDirectiveKind(),
-                SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
-                SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),
-            ];
-            if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
-                $schemaDefinition[SchemaDefinition::DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
-            }
-            if ($description = $this->getDirectiveDescription($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
-            }
-            if ($expressions = $this->getDirectiveExpressions($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::DIRECTIVE_EXPRESSIONS] = $expressions;
-            }
-            if ($deprecationMessage = $this->getDirectiveDeprecationMessage($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
-                $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
-            }
-            if ($args = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::ARGS] = $args;
-            }
-            /**
-             * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
-             * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
-             * If the interface changes, the implementer will need to change, so the version will be upgraded
-             * But it could also be that the contract doesn't change, but the implementation changes
-             * it's really not their responsibility
-             */
-            if (Environment::enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
-                $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
-            }
-            $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getDirectiveExtensionsSchemaDefinition($relationalTypeResolver);
-            $this->schemaDefinitionForDirectiveCache[$key] = $schemaDefinition;
+            $this->schemaDefinitionForDirectiveCache[$key] = $this->doGetDirectiveSchemaDefinition($relationalTypeResolver);
         }
         return $this->schemaDefinitionForDirectiveCache[$key];
+    }
+
+    private function doGetDirectiveSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
+    {
+        $directiveName = $this->getDirectiveName();
+        $schemaDefinition = [
+            SchemaDefinition::NAME => $directiveName,
+            SchemaDefinition::DIRECTIVE_KIND => $this->getDirectiveKind(),
+            SchemaDefinition::DIRECTIVE_IS_REPEATABLE => $this->isRepeatable(),
+            SchemaDefinition::DIRECTIVE_IS_GLOBAL => $this->isGlobal($relationalTypeResolver),
+        ];
+        if ($limitedToFields = $this->getFieldNamesToApplyTo()) {
+            $schemaDefinition[SchemaDefinition::DIRECTIVE_LIMITED_TO_FIELDS] = $limitedToFields;
+        }
+        if ($description = $this->getDirectiveDescription($relationalTypeResolver)) {
+            $schemaDefinition[SchemaDefinition::DESCRIPTION] = $description;
+        }
+        if ($expressions = $this->getDirectiveExpressions($relationalTypeResolver)) {
+            $schemaDefinition[SchemaDefinition::DIRECTIVE_EXPRESSIONS] = $expressions;
+        }
+        if ($deprecationMessage = $this->getDirectiveDeprecationMessage($relationalTypeResolver)) {
+            $schemaDefinition[SchemaDefinition::DEPRECATED] = true;
+            $schemaDefinition[SchemaDefinition::DEPRECATION_MESSAGE] = $deprecationMessage;
+        }
+        if ($args = $this->getDirectiveArgsSchemaDefinition($relationalTypeResolver)) {
+            $schemaDefinition[SchemaDefinition::ARGS] = $args;
+        }
+        /**
+         * Please notice: the version always comes from the directiveResolver, and not from the schemaDefinitionResolver
+         * That is because it is the implementer the one who knows what version it is, and not the one defining the interface
+         * If the interface changes, the implementer will need to change, so the version will be upgraded
+         * But it could also be that the contract doesn't change, but the implementation changes
+         * it's really not their responsibility
+         */
+        if (Environment::enableSemanticVersionConstraints() && $this->hasDirectiveVersion($relationalTypeResolver)) {
+            $schemaDefinition[SchemaDefinition::VERSION] = $this->getDirectiveVersion($relationalTypeResolver);
+        }
+        $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getDirectiveExtensionsSchemaDefinition($relationalTypeResolver);
+        return $schemaDefinition;
     }
 
     public function getDirectiveExtensionsSchemaDefinition(RelationalTypeResolverInterface $relationalTypeResolver): array
