@@ -1243,12 +1243,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * Indicate: if the field has a single field argument, which is of type InputObject,
      * then retrieve the value for its input fields?
+     *
+     * By default, that's the case with mutations, as they pass a single input
+     * under name "input".
      */
     protected function extractInputObjectFieldForMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
-        return true;
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        return $mutationResolver !== null;
     }
 
     /**
