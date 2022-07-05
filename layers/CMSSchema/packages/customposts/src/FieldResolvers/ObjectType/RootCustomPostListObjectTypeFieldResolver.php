@@ -135,7 +135,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'customPost':
                 $query = array_merge(
                     $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),

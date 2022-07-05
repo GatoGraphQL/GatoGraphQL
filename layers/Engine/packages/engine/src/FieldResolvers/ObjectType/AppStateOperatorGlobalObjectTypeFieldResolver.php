@@ -137,7 +137,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'var':
                 return App::getState($field->getArgumentValue('name'));
             case 'context':

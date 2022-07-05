@@ -176,7 +176,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'menu':
                 $by = $field->getArgumentValue('by');
                 if (isset($by->id)) {

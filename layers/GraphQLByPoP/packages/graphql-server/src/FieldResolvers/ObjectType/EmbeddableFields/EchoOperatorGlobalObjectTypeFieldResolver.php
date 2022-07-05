@@ -120,7 +120,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'echoStr':
                 return $field->getArgumentValue('value');
         }

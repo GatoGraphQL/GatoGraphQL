@@ -62,7 +62,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'locationsmapURL':
                 $locations = $objectTypeResolver->resolveValue(
                     $object,

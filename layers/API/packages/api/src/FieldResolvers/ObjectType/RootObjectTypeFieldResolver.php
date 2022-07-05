@@ -127,7 +127,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'fullSchema':
                 // Convert from array to stdClass
                 /** @var SchemaDefinitionServiceInterface */

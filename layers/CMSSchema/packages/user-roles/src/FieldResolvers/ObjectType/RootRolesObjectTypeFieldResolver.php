@@ -64,7 +64,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'roles':
                 return $this->getUserRoleTypeAPI()->getRoleNames();
             case 'capabilities':

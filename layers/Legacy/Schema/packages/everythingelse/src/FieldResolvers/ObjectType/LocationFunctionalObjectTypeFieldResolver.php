@@ -73,7 +73,7 @@ class LocationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'mapURL':
                 // Decode it, because add_query_arg sends the params encoded and it doesn't look nice
                 return urldecode(GeneralUtils::addQueryArgs([

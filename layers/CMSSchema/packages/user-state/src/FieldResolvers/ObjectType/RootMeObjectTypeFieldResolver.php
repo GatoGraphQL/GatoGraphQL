@@ -54,7 +54,7 @@ class RootMeObjectTypeFieldResolver extends AbstractUserStateObjectTypeFieldReso
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'me':
                 return App::getState('current-user-id');
         }

@@ -182,7 +182,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':

@@ -88,7 +88,7 @@ class CustomPostAndUserObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'hasLocation':
                 $locations = $objectTypeResolver->resolveValue(
                     $object,

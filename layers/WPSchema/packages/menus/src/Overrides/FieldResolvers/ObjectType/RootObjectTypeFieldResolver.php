@@ -18,7 +18,7 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'menu':
                 $menuParam = null;
                 $by = $field->getArgumentValue('by');

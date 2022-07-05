@@ -70,7 +70,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'author':
                 return $this->getCustomPostUserTypeAPI()->getAuthorID($object);
         }

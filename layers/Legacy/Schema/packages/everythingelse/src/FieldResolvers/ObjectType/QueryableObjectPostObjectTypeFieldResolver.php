@@ -64,7 +64,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'endpoint':
                 return APIUtils::getEndpoint(
                     $objectTypeResolver->resolveValue(

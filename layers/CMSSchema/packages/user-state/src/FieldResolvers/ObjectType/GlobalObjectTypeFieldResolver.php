@@ -64,7 +64,7 @@ class GlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolve
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'isUserLoggedIn':
                 return App::getState('is-user-logged-in');
         }

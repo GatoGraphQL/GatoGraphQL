@@ -54,7 +54,7 @@ class GlobalUserStateObjectTypeFieldResolver extends AbstractGlobalUserStateObje
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'loggedInUserID':
                 return App::getState('current-user-id');
         }
