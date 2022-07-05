@@ -189,7 +189,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return null;
         }
 
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'menus':
                 return $this->getMenuTypeAPI()->getMenus($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);

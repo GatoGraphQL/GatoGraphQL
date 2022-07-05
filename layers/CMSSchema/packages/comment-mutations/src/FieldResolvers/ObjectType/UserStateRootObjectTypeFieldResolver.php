@@ -199,7 +199,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
             [
                 'authors' => [App::getState('current-user-id')],
             ]

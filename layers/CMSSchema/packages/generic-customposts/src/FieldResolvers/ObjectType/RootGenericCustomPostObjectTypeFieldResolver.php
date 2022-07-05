@@ -225,7 +225,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'genericCustomPost':
                 if ($customPosts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {

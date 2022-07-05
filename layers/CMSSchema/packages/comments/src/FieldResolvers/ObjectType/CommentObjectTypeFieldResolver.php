@@ -361,7 +361,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
             [
                 'parent-id' => $objectTypeResolver->getID($comment),
             ]

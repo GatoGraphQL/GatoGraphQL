@@ -182,7 +182,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'mediaItemCount':
                 return $this->getMediaTypeAPI()->getMediaItemCount($query);

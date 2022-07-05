@@ -186,9 +186,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'myCustomPost',
             'myCustomPosts',
             'myCustomPostCount'
@@ -207,8 +207,8 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
-            $this->getQuery($objectTypeResolver, $object, $field)
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+            $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
         );
         switch ($fieldDataAccessor->getFieldName()) {
             case 'myCustomPostCount':

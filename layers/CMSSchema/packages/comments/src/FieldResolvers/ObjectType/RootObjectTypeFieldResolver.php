@@ -218,7 +218,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         /**
          * If "status" is admin and won't be shown, then default to "approve" only
          */

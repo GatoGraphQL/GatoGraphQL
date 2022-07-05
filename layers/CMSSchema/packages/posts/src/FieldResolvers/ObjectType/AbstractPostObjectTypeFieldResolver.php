@@ -144,7 +144,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         return [];
     }
@@ -156,8 +156,8 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
-            $this->getQuery($objectTypeResolver, $object, $field)
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+            $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
         );
         switch ($fieldDataAccessor->getFieldName()) {
             case 'posts':

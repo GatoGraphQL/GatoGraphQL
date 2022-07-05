@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\Categories\ModuleContracts\CategoryAPIRequestedContractObjectTypeFieldResolverInterface;
@@ -28,12 +29,12 @@ abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends Abs
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        $query = parent::getQuery($objectTypeResolver, $object, $field);
+        $query = parent::getQuery($objectTypeResolver, $object, $fieldDataAccessor);
 
         $category = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'customPosts':
             case 'customPostCount':
                 $query[$this->getQueryProperty()] = [$objectTypeResolver->getID($category)];

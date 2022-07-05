@@ -164,7 +164,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
             [
                 'parent-id' => $objectTypeResolver->getID($page),
             ]

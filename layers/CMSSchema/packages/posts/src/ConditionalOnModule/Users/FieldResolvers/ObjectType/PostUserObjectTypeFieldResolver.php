@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Posts\ConditionalOnModule\Users\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\Posts\FieldResolvers\ObjectType\AbstractPostObjectTypeFieldResolver;
@@ -33,12 +34,12 @@ class PostUserObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        $query = parent::getQuery($objectTypeResolver, $object, $field);
+        $query = parent::getQuery($objectTypeResolver, $object, $fieldDataAccessor);
 
         $user = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'posts':
             case 'postCount':
                 $query['authors'] = [$objectTypeResolver->getID($user)];

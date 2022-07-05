@@ -182,7 +182,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'page':
                 if ($pages = $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {

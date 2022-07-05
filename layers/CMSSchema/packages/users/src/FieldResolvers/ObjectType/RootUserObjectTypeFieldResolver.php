@@ -92,7 +92,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'user':
                 if ($users = $this->getUserTypeAPI()->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
