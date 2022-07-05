@@ -27,13 +27,13 @@ class InputObjectUnderFieldArgumentFieldDataAccessor extends FieldDataAccessor i
         return array_keys((array) $inputObjectValue);
     }
 
-    protected function hasInField(string $propertyName): bool
+    protected function hasValueInField(string $propertyName): bool
     {
         $inputObjectValue = $this->getInputObjectValue();
         return property_exists($inputObjectValue, $propertyName);
     }
 
-    protected function getFromField(string $propertyName): mixed
+    protected function getValueFromField(string $propertyName): mixed
     {
         $inputObjectValue = $this->getInputObjectValue();
         return $inputObjectValue->$propertyName;

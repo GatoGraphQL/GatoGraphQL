@@ -58,34 +58,34 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     public function hasValue(string $propertyName): bool
     {
-        return $this->hasInField($propertyName)
-            || $this->hasInCustomValues($propertyName);
+        return $this->hasValueInField($propertyName)
+            || $this->hasValueInCustomValues($propertyName);
     }
 
-    protected function hasInField(string $propertyName): bool
+    protected function hasValueInField(string $propertyName): bool
     {
         return $this->field->hasArgument($propertyName);
     }
 
-    protected function hasInCustomValues(string $propertyName): bool
+    protected function hasValueInCustomValues(string $propertyName): bool
     {
         return array_key_exists($propertyName, $this->customValues);
     }
 
     public function getValue(string $propertyName): mixed
     {
-        if ($this->hasInField($propertyName)) {
-            return $this->getFromField($propertyName);
+        if ($this->hasValueInField($propertyName)) {
+            return $this->getValueFromField($propertyName);
         }
-        return $this->getFromCustomValues($propertyName);
+        return $this->getValueFromCustomValues($propertyName);
     }
 
-    protected function getFromField(string $propertyName): mixed
+    protected function getValueFromField(string $propertyName): mixed
     {
         return $this->field->getArgumentValue($propertyName);
     }
 
-    protected function getFromCustomValues(string $propertyName): mixed
+    protected function getValueFromCustomValues(string $propertyName): mixed
     {
         return $this->customValues[$propertyName] ?? null;
     }
