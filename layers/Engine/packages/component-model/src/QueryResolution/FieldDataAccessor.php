@@ -21,7 +21,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return $this->field;
     }
 
-    final public function getName(): string
+    final public function getFieldName(): string
     {
         return $this->field->getName();
     }

@@ -9,7 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 interface FieldDataAccessorInterface
 {
     public function getField(): FieldInterface;
-    public function getName(): string;
+    public function getFieldName(): string;
     /**
      * @return string[]
      */
