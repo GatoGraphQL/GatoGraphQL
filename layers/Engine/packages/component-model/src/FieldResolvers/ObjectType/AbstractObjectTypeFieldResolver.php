@@ -1284,18 +1284,18 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null) {
             return $this->executeMutation(
                 $objectTypeResolver,
                 $object,
-                $field,
+                $fieldDataAccessor->getField(),
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
         // Base case: If the field->getName() exists as property in the object, then retrieve it
-        if (\property_exists($object, $field->getName())) {
-            return $object->{$field->getName()};
+        if (\property_exists($object, $fieldDataAccessor->getFieldName())) {
+            return $object->{$fieldDataAccessor->getFieldName()};
         }
         return null;
     }
