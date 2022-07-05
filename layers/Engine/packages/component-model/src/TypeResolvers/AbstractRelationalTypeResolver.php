@@ -18,6 +18,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
