@@ -14,21 +14,16 @@ use PoP\ComponentModel\Mutation\FieldDataAccessor;
 use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
-use SplObjectStorage;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
     
-    /** @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface> */
-    protected SplObjectStorage $fieldFieldDataAccessorCache;
-
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
@@ -73,19 +68,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
-        /**
-         * Create a runtime field to be executed. It doesn't matter
-         * what's the name of the mutation field, so providing
-         * a random one suffices.
-         */
-        $mutationField = new LeafField(
-            'someMutation',
-            null,
-            [],
-            [],
-            LocationHelper::getNonSpecificLocation()
-        );
-        $fieldDataAccessor = $this->getFieldDataAccessor($mutationField);
+        $fieldDataAccessor = $this->getFieldDataAccessor();
         $mutationResponse = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -158,16 +141,24 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $mutationResponse;
     }
 
-    protected function getFieldDataAccessor(FieldInterface $mutationField): FieldDataAccessorInterface
+    protected function getFieldDataAccessor(): FieldDataAccessorInterface
     {
-        if (!$this->fieldFieldDataAccessorCache->contains($mutationField)) {
-            $this->fieldFieldDataAccessorCache[$mutationField] = $this->doGetFieldDataAccessor($mutationField);
-        }
-        return $this->fieldFieldDataAccessorCache[$mutationField];
-    }
-
-    protected function doGetFieldDataAccessor(FieldInterface $mutationField): FieldDataAccessorInterface
-    {
+        /**
+         * Create a runtime field to be executed. It doesn't matter
+         * what's the name of the mutation field, so providing
+         * a random one suffices.
+         */
+        $mutationField = new LeafField(
+            'someMutation',
+            null,
+            [],
+            [],
+            LocationHelper::getNonSpecificLocation()
+        );
+        /**
+         * Inject the data straight as normalized value (no need to add defaults
+         * or coerce values)
+         */
         $mutationData = [];
         $this->addMutationDataForFieldDataAccessor($mutationData);
         $fieldDataAccessor = new FieldDataAccessor($mutationField, $mutationData);
