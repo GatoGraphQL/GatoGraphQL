@@ -1122,9 +1122,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              *   3. Data for a specific object (eg: for nested mutations)
              *
              * @see FieldDataAccessProvider
+             *
+             * @var FieldDataAccessProvider[]
              */
-            /** @var array<SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>> */
-            $pipelineFieldObjectTypeResolverObjectFieldData = [];
+            $pipelineFieldDataAccessProvider = [];
             /** @var DirectiveResolverInterface $directiveResolverInstance */
             foreach ($directivePipelineData as $directiveResolverInstance) {
                 /** @var FieldInterface[] */
@@ -1163,7 +1164,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveFieldIDs[$directive],
                     $idObjects
                 );
-                $pipelineFieldObjectTypeResolverObjectFieldData[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
+                $pipelineFieldDataAccessProvider[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
             }
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
