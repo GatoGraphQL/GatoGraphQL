@@ -33,21 +33,25 @@ class CreateUpdateProfileMutationResolverBridge extends AbstractComponentMutatio
         return $this->getCreateUpdateProfileMutationResolver();
     }
 
-    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
-        parent::appendMutationDataToFieldDataAccessor($fieldDataAccessor);
+        parent::addMutationDataForFieldDataAccessor($mutationData);
 
         $inputs = $this->getFormInputs();
-        $fieldDataAccessor->add('short_description', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description'])));
-        $fieldDataAccessor->add('display_email', $this->getComponentProcessorManager()->getComponentProcessor($inputs['display_email'])->getValue($inputs['display_email']));
-        $fieldDataAccessor->add('facebook', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['facebook'])->getValue($inputs['facebook'])));
-        $fieldDataAccessor->add('twitter', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['twitter'])->getValue($inputs['twitter'])));
-        $fieldDataAccessor->add('linkedin', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['linkedin'])->getValue($inputs['linkedin'])));
-        $fieldDataAccessor->add('youtube', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['youtube'])->getValue($inputs['youtube'])));
-        $fieldDataAccessor->add('instagram', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['instagram'])->getValue($inputs['instagram'])));
+        $mutationData['short_description'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['short_description'])->getValue($inputs['short_description']));
+        $mutationData['display_email'] = $this->getComponentProcessorManager()->getComponentProcessor($inputs['display_email'])->getValue($inputs['display_email']);
+        $mutationData['facebook'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['facebook'])->getValue($inputs['facebook']));
+        $mutationData['twitter'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['twitter'])->getValue($inputs['twitter']));
+        $mutationData['linkedin'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['linkedin'])->getValue($inputs['linkedin']));
+        $mutationData['youtube'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['youtube'])->getValue($inputs['youtube']));
+        $mutationData['instagram'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['instagram'])->getValue($inputs['instagram']));
 
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_profile:form_data', $fieldDataAccessor);
+        $mutationDataInArray = [&$mutationData];
+        App::doAction('gd_createupdate_profile:form_data', $mutationDataInArray);
     }
 
     private function getFormInputs()

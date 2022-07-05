@@ -9,10 +9,13 @@ use PoP\Root\App;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {
-    public function appendMutationDataToFieldDataAccessor(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
-        $fieldDataAccessor->add('histid', App::query($this->getRequestKey()));
-        $fieldDataAccessor->add('user_id', App::getState('current-user-id'));
+        $mutationData['histid'] = App::query($this->getRequestKey());
+        $mutationData['user_id'] = App::getState('current-user-id');
     }
 
     protected function getRequestKey()

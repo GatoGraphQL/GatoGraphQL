@@ -168,8 +168,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
 
     protected function doGetFieldDataAccessor(FieldInterface $mutationField): FieldDataAccessorInterface
     {
-        $fieldDataAccessor = new FieldDataAccessor($mutationField);
-        $this->appendMutationDataToFieldDataAccessor($fieldDataAccessor);
+        $mutationData = [];
+        $this->addMutationDataForFieldDataAccessor($mutationData);
+        $fieldDataAccessor = new FieldDataAccessor($mutationField, $mutationData);
         return $fieldDataAccessor;
     }
 

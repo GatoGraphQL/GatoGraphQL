@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
-use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
 interface ComponentMutationResolverBridgeInterface
@@ -14,5 +13,8 @@ interface ComponentMutationResolverBridgeInterface
      */
     public function executeMutation(array &$data_properties): ?array;
     public function getMutationResolver(): MutationResolverInterface;
-    public function appendMutationDataToFieldDataAccessor(FieldDataAccessorInterface $fieldDataAccessor): void;
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void;
 }
