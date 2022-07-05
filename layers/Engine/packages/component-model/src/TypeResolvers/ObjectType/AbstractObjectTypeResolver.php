@@ -185,25 +185,25 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     final public function collectFieldValidationErrors(
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): void {
         list(
             $validField,
             $fieldName,
             $fieldArgs,
-        ) = $this->dissectFieldForSchema($field, /* @todo Review: Replaced $variables with [] */[]/*$variables*/, $objectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($fieldDataAccessor->getField(), /* @todo Review: Replaced $variables with [] */[]/*$variables*/, $objectTypeFieldResolutionFeedbackStore);
         // Dissecting the field may already fail, then already return the error
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
         }
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
         if ($objectTypeFieldResolver === null) {
             /**
              * If the error happened from requesting a version that doesn't exist, show an appropriate error message
              */
             $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
-                && ($versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT));
+                && ($versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT));
             $feedbackItemResolution = $useSemanticVersionConstraints
                 ? new FeedbackItemResolution(
                     ErrorFeedbackItemProvider::class,
@@ -232,7 +232,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
-        $objectTypeFieldResolver->collectFieldValidationErrors($this, $field, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function collectFieldValidationWarnings(

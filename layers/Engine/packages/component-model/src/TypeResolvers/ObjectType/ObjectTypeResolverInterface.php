@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -18,7 +19,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     public function getFieldSchemaDefinition(FieldInterface $field): ?array;
     public function hasObjectTypeFieldResolversForField(FieldInterface $field): bool;
     public function collectFieldValidationErrors(
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): void;
     public function collectFieldValidationWarnings(
