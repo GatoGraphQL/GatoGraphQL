@@ -162,6 +162,8 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
     ): void {
+        // @todo Remove directive, temporarily bypass code
+        return;
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
          * (that depends on each object), it can't resolve this functionality
