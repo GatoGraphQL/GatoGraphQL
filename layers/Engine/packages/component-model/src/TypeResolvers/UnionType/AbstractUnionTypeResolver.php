@@ -490,11 +490,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
         foreach ($fields as $field) {
-            /** @var array<string,mixed> */
-            $fieldData = [];
-            foreach ($field->getArguments() as $argument) {
-                $fieldData[$argument->getName()] = $argument->getValue();
-            }
+            $fieldData = $field->getArgumentKeyValues();
             // @todo Call ->prepareFieldData here!
 
             /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
