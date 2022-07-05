@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -33,6 +34,9 @@ trait AliasSchemaObjectTypeFieldResolverTrait
 {
     /** @var SplObjectStorage<FieldInterface,FieldInterface> */
     protected ?SplObjectStorage $aliasedFieldCache = null;
+
+    /** @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface> */
+    protected ?SplObjectStorage $aliasedFieldDataAccessorCache = null;
 
     /**
      * The fieldName that is being aliased
@@ -110,19 +114,33 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         return $this->aliasedFieldCache[$field];
     }
 
+    protected function getAliasedFieldDataAccessor(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): FieldDataAccessorInterface {
+        /** @var SplObjectStorage<FieldInterface,FieldInterface> */
+        $this->aliasedFieldDataAccessorCache ??= new SplObjectStorage();
+        if (!$this->aliasedFieldDataAccessorCache->contains($fieldDataAccessor)) {
+            $this->aliasedFieldDataAccessorCache[$fieldDataAccessor] = new FieldDataAccessor(
+                $fieldDataAccessor->getField(),
+                $fieldDataAccessor->getKeyValues()
+            );
+        }
+        return $this->aliasedFieldDataAccessorCache[$fieldDataAccessor];
+    }
+
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
      */
     public function collectFieldValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->collectFieldValidationErrors(
             $objectTypeResolver,
-            $this->getAliasedField($field),
+            $this->getAliasedFieldDataAccessor($fieldDataAccessor),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
@@ -464,7 +482,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         return $aliasedObjectTypeFieldResolver->resolveValue(
             $objectTypeResolver,
             $object,
-            $this->getAliasedField($field),
+            $this->getAliasedFieldDataAccessor($fieldDataAccessor),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
