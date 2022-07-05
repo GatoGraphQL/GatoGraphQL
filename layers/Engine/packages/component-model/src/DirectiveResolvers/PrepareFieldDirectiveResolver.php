@@ -124,6 +124,7 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
@@ -136,6 +137,7 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
+        array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
@@ -163,7 +165,7 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
         FieldInterface $field,
     ): void {
         // @todo Remove directive, temporarily bypass code
-        return;
+        // return;
         /**
          * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
          * (that depends on each object), it can't resolve this functionality

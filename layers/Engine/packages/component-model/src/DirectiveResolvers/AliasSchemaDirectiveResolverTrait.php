@@ -308,6 +308,7 @@ trait AliasSchemaDirectiveResolverTrait
      *
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
@@ -320,6 +321,7 @@ trait AliasSchemaDirectiveResolverTrait
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
+        array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
@@ -335,6 +337,7 @@ trait AliasSchemaDirectiveResolverTrait
             $unionTypeOutputKeyIDs,
             $previouslyResolvedIDFieldValues,
             $succeedingPipelineIDFieldSet,
+            $succeedingPipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
             $variables,
             $messages,
