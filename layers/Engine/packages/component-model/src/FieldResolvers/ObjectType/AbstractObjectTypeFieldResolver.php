@@ -1289,7 +1289,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             return $this->executeMutation(
                 $objectTypeResolver,
                 $object,
-                $fieldDataAccessor->getField(),
+                $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
@@ -1303,14 +1303,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function executeMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        $fieldDataAccessor = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
-            ? $this->getFieldDataAccessorForObject($objectTypeResolver, $field, $object)
-            : $this->getFieldDataAccessor($objectTypeResolver, $field);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         try {
             return $mutationResolver->executeMutation($fieldDataAccessor);
         } catch (Exception $e) {
@@ -1323,7 +1320,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6A,
                             [
-                                $field->getName(),
+                                $fieldDataAccessor->getFieldName(),
                                 $e->getMessage(),
                                 $e->getTraceAsString(),
                             ]
@@ -1341,7 +1338,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E6A,
                         [
-                            $field->getName(),
+                            $fieldDataAccessor->getFieldName(),
                             $e->getMessage(),
                             $e->getTraceAsString(),
                         ]
@@ -1350,7 +1347,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E6,
                         [
-                            $field->getName(),
+                            $fieldDataAccessor->getFieldName(),
                             $e->getMessage(),
                         ]
                     )
@@ -1359,7 +1356,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     ErrorFeedbackItemProvider::class,
                     ErrorFeedbackItemProvider::E7,
                     [
-                        $field->getName()
+                        $fieldDataAccessor->getFieldName(),
                     ]
                 );
             $objectTypeFieldResolutionFeedbackStore->addError(
