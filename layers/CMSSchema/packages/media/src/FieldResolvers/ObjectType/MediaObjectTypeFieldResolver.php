@@ -252,7 +252,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    protected function obtainImageSizeFromParameters(FieldInterface $field): ?string
+    protected function obtainImageSizeFromParameters(FieldDataAccessorInterface $fieldDataAccessor): ?string
     {
         return $fieldDataAccessor->getValue('size');
     }
