@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -43,7 +44,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        \PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,

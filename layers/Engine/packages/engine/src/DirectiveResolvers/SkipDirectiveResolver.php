@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\DirectiveResolvers;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -51,7 +52,7 @@ class SkipDirectiveResolver extends AbstractGlobalDirectiveResolver
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        \PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,

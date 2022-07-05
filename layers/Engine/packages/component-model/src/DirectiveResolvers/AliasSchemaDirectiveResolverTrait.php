@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -313,7 +314,7 @@ trait AliasSchemaDirectiveResolverTrait
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        \PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,

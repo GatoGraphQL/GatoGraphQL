@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -129,7 +130,7 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        \PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,

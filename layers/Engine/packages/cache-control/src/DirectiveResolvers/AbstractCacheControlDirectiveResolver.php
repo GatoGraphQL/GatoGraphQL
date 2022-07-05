@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\CacheControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
@@ -138,7 +139,7 @@ abstract class AbstractCacheControlDirectiveResolver extends AbstractGlobalDirec
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
-        \PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface $fieldDataAccessProvider,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
