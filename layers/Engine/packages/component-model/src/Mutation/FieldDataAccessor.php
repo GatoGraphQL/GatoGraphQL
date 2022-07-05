@@ -43,7 +43,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     protected function getPropertiesInField(): array
     {
         return array_map(
-            fn(Argument $argument) => $argument->getName(),
+            fn (Argument $argument) => $argument->getName(),
             $this->field->getArguments()
         );
     }
