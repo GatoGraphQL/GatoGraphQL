@@ -147,7 +147,6 @@ abstract class AbstractReflectionPropertyObjectTypeFieldResolver extends Abstrac
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // Simply return the value of the property in the object
-        $fieldName = $field->getName();
-        return $object->$fieldName;
+        return $object->{$fieldDataAccessor->getFieldName()};
     }
 }

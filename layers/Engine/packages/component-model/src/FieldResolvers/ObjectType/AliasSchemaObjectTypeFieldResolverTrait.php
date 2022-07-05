@@ -101,7 +101,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
                     $field->getArguments(),
                     $field->getFieldsOrFragmentBonds(),
                     $field->getDirectives(),
-                    $fieldDataAccessor->getField()->getLocation(),
+                    $field->getLocation(),
                 )
                 : new LeafField(
                     $field->getName(),

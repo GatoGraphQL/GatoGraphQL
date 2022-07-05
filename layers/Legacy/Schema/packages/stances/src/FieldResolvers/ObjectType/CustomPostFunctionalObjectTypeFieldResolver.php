@@ -224,7 +224,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                     'postStancesAgainstURL' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
                 $url = $customPostTypeAPI->getPermalink($post);
-                return RequestUtils::addRoute($url, $routes[$field->getName()]);
+                return RequestUtils::addRoute($url, $routes[$fieldDataAccessor->getFieldName()]);
 
             // Lazy Loading fields
             case 'createStanceButtonLazy':
