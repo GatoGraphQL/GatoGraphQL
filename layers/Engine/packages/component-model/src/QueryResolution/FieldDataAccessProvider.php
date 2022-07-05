@@ -56,7 +56,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
     use StandaloneServiceTrait;
 
     /**
-     * @param SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> $fieldData
+     * @param SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> $fieldObjectTypeResolverObjectFieldData
      */
     public function __construct(
         protected SplObjectStorage $fieldObjectTypeResolverObjectFieldData,
@@ -82,7 +82,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
         }
         /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
         $objectTypeResolverObjectFieldData = $this->fieldObjectTypeResolverObjectFieldData[$field];
-        if ($this->objectTypeResolverObjectFieldData->count() === 0) {
+        if ($objectTypeResolverObjectFieldData->count() === 0) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__('No ObjectTypeResolvers were set under Field \'%s\''),
@@ -114,11 +114,12 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
          * If not passing the object, then the data must be under the '*' object,
          * which contains data for "all objects"
          */
-        if ($object === null || !$objectFieldData->contains($object)) {
+        $isNullObject = $object === null;
+        if ($isNullObject || !$objectFieldData->contains($object)) {
             $object = FieldDataAccessWildcardObjectFactory::getWildcardObject();
             if (!$objectFieldData->contains($object)) {
                 throw new ShouldNotHappenException(
-                    $object === null
+                    $isNullObject
                         ? sprintf(
                             $this->__('In the FieldDataAccessProvider, no data for "all objects" has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
                             $field->getName(),
@@ -133,7 +134,6 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
                 );
             }
         }
-        /** @var object $object */
         /** @var array<string,mixed> */
         $fieldData = $objectFieldData[$object];
         return $fieldData;
