@@ -240,7 +240,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
         if ($executableObjectTypeFieldResolver === null) {
             return;
         }
@@ -425,6 +425,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = [],
     ): mixed {
+        $fieldDataAccessor = null;
         $isFieldDataAccessor = $fieldOrFieldDataAccessor instanceof FieldDataAccessorInterface;
         if ($isFieldDataAccessor) {
             /** @var FieldDataAccessorInterface */
