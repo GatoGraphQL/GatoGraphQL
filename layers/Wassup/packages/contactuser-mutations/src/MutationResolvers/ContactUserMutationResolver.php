@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;

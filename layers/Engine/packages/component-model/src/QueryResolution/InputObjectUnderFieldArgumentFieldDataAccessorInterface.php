@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Mutation;
+namespace PoP\ComponentModel\QueryResolution;
 
 interface InputObjectUnderFieldArgumentFieldDataAccessorInterface extends FieldDataAccessorInterface
 {

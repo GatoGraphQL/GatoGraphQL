@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentFieldDataAccessorInterface;
-use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
-use PoP\ComponentModel\Mutation\PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;

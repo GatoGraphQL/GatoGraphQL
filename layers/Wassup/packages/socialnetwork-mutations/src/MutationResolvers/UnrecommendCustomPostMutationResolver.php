@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
@@ -44,7 +44,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
         App::doAction('gd_unrecommendpost', $target_id, $fieldDataAccessor);
     }
 
-    // protected function updateValue($value, \PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor) {
+    // protected function updateValue($value, \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor) {
     //     // Remove the user from the list
     //     $target_id = $fieldDataAccessor->getValue('target_id');
     //     array_splice($value, array_search($target_id, $value), 1);

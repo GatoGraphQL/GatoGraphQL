@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP_ApplicationProcessors_Utils;
 use GD_CreateUpdate_Utils;
 use PoP\Root\Feedback\FeedbackItemResolution;

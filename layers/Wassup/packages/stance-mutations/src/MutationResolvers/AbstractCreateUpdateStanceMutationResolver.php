@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use UserStance_Module_Processor_CustomSectionBlocksUtils;
 use PoP_UserStance_PostNameUtils;
 use PoP\Root\App;
@@ -117,7 +117,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     }
 
     // Moved to WordPress-specific code
-    // protected function getCreatepostData(\PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor)
+    // protected function getCreatepostData(\PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor)
     // {
     //     $post_data = parent::getCreatepostData($fieldDataAccessor);
 

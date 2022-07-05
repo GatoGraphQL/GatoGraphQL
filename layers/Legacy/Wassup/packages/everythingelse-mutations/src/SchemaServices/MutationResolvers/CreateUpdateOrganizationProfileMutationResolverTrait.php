@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoPCMSSchema\UserMeta\Utils;
 use PoPCMSSchema\UserRoles\FunctionAPIFactory;
 trait CreateUpdateOrganizationProfileMutationResolverTrait
