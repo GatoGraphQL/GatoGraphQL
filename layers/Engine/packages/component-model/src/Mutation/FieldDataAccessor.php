@@ -90,7 +90,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return $this->customValues[$propertyName] ?? null;
     }
 
-    public function add(string $propertyName, mixed $value): void
+    public function addValue(string $propertyName, mixed $value): void
     {
         $this->customValues[$propertyName] = $value;
     }
