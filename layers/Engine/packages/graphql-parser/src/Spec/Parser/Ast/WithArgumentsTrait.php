@@ -14,6 +14,9 @@ trait WithArgumentsTrait
     /** @var array<string,Argument> Keep separate to validate that no 2 Arguments have same name */
     protected array $nameArguments = [];
 
+    /** @var array<string,mixed>|null */
+    protected ?array $argumentKeyValues = null;
+
 
     public function hasArguments(): bool
     {
@@ -52,6 +55,7 @@ trait WithArgumentsTrait
 
     public function addArgument(Argument $argument): void
     {
+        $this->argumentKeyValues = null;
         $this->arguments[] = $argument;
         $this->nameArguments[$argument->getName()] = $argument;
     }
@@ -61,9 +65,26 @@ trait WithArgumentsTrait
      */
     protected function setArguments(array $arguments): void
     {
+        $this->argumentKeyValues = null;
         foreach ($arguments as $argument) {
             $this->arguments[] = $argument;
             $this->nameArguments[$argument->getName()] = $argument;
         };
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getArgumentKeyValues(): array
+    {
+        if ($this->argumentKeyValues !== null) {
+            return $this->argumentKeyValues;
+        }
+
+        $this->argumentKeyValues = [];
+        foreach ($this->getArguments() as $argument) {
+            $this->argumentKeyValues[$argument->getName()] = $argument->getValue();
+        }
+        return $this->argumentKeyValues;
     }
 }
