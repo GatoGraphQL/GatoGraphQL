@@ -165,19 +165,19 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
         FieldInterface $field,
     ): void {
         // @todo Remove directive, temporarily bypass code
-        // return;
-        /**
-         * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
-         * (that depends on each object), it can't resolve this functionality
-         */
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            return;
-        }
+        return;
+        // /**
+        //  * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+        //  * (that depends on each object), it can't resolve this functionality
+        //  */
+        // if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+        //     return;
+        // }
 
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
+        // /** @var ObjectTypeResolverInterface */
+        // $objectTypeResolver = $relationalTypeResolver;
 
-        $objectTypeResolver->prepareField($field);
+        // $objectTypeResolver->prepareField($field);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
