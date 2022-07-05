@@ -506,10 +506,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
+        if (!$isFieldDataAccessor) {
+            /**
+             * If executed within a FieldResolver we will (most likely)
+             * receive a Field, and we can assume there's no need to
+             * normalize the values, they will be coded/provided as required.
+             */
+            $fieldDataAccessor = new FieldDataAccessor($field);
+        }
+
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-            $objectTypeFieldResolver->collectFieldValidationErrors($this, $field, $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -524,15 +533,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
 
-        if (!$isFieldDataAccessor) {
-            /**
-             * If executed within a FieldResolver we will (most likely)
-             * receive a Field, and we can assume there's no need to
-             * normalize the values, they will be coded/provided as required.
-             */
-            $fieldDataAccessor = new FieldDataAccessor($field);
-        }
-
         // Resolve the value. If the field resolver throws an Exception,
         // catch it and return the equivalent GraphQL error so that it
         // fails gracefully in production (but not on development!)
@@ -541,7 +541,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $value = $objectTypeFieldResolver->resolveValue(
                 $this,
                 $object,
-                $field,
+                $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         } catch (Exception $e) {
