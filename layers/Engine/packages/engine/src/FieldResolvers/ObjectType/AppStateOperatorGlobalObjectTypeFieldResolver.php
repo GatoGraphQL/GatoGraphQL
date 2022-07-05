@@ -110,9 +110,9 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
 
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'var':
                 if (!App::hasState($fieldDataAccessor->getValue('name'))) {
                     return [
@@ -128,7 +128,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldDataAccessor);
     }
 
     public function resolveValue(

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Meta\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -44,9 +45,9 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
 
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'metaValue':
             case 'metaValues':
                 if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($fieldDataAccessor->getValue('key'))) {
@@ -63,7 +64,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldDataAccessor);
     }
 
     public function validateResolvedFieldType(

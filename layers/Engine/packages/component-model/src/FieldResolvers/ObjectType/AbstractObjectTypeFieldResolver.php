@@ -804,7 +804,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // Custom validations
         $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrors(
             $objectTypeResolver,
-            $field,
+            $fieldDataAccessor,
         );
         foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -881,7 +881,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         return [];
     }

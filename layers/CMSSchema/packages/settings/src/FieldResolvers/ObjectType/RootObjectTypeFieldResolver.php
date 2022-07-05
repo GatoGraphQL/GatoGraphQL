@@ -137,9 +137,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
@@ -157,7 +157,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldDataAccessor);
     }
 
     public function validateResolvedFieldType(
