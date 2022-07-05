@@ -507,6 +507,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
                 /** @var SplObjectStorage<object,array<string,mixed>> */
                 $objectFieldData = $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] ?? new SplObjectStorage();
+                
+                /**
+                 * If the schema validation is the same for all fields, and has already been set,
+                 * can then skip.
+                 */
+                if ($objectFieldData->contains($wildcardObject)) {
+                    continue;
+                }
 
                 $executableObjectTypeFieldResolver = $targetObjectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
                 if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
@@ -536,8 +544,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                      */
                     $objectFieldData[$object] = $fieldData;
                     // @todo Call ->prepareFieldDataForObject here!
-                }
-                
+                }                
                 $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $objectFieldData;
             }
             $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
