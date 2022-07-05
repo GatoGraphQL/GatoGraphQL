@@ -108,7 +108,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
                     $this->getAliasedFieldName($field->getName()),
                     $field->getArguments(),
                     $field->getDirectives(),
-                    $fieldDataAccessor->getField()->getLocation(),
+                    $field->getLocation(),
                 );
         }
         return $this->aliasedFieldCache[$field];
