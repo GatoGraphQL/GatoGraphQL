@@ -12,7 +12,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */
-        protected array $customValues = [],
+        protected array $normalizedValues = [],
     ) {
     }
 
@@ -33,7 +33,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     {
         return array_unique(array_merge(
             $this->getPropertiesInField(),
-            $this->getPropertiesInCustomValues(),
+            $this->getPropertiesInNormalizedValues(),
         ));
     }
 
@@ -51,7 +51,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     /**
      * @return string[]
      */
-    protected function getPropertiesInCustomValues(): array
+    protected function getPropertiesInNormalizedValues(): array
     {
         return array_keys($this->customValues);
     }
@@ -59,7 +59,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     public function hasValue(string $propertyName): bool
     {
         return $this->hasValueInField($propertyName)
-            || $this->hasValueInCustomValues($propertyName);
+            || $this->hasValueInNormalizedValues($propertyName);
     }
 
     protected function hasValueInField(string $propertyName): bool
@@ -67,7 +67,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return $this->field->hasArgument($propertyName);
     }
 
-    protected function hasValueInCustomValues(string $propertyName): bool
+    protected function hasValueInNormalizedValues(string $propertyName): bool
     {
         return array_key_exists($propertyName, $this->customValues);
     }
