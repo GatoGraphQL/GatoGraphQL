@@ -1174,6 +1174,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
         foreach ($fields as $field) {
             $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+            /**
+             * If the field does not exist, then nothing to do
+             */
+            if ($executableObjectTypeFieldResolver === null) {
+                continue;
+            }
             /** @var array<string,mixed> */
             $fieldData = [];
             foreach ($field->getArguments() as $argument) {

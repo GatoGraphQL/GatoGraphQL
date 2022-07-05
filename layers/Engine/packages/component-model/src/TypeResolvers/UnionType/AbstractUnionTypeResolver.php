@@ -505,6 +505,12 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             foreach ($ids as $id) {
                 $object = $idObjects[$id];
                 $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
+                /**
+                 * If the object is not handled, then nothing to do
+                 */
+                if ($targetObjectTypeResolver === null) {
+                    continue;
+                }
 
                 /** @var SplObjectStorage<object,array<string,mixed>> */
                 $objectFieldData = $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] ?? new SplObjectStorage();
@@ -518,6 +524,12 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 }
 
                 $executableObjectTypeFieldResolver = $targetObjectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
+                /**
+                 * If the field does not exist, then nothing to do
+                 */
+                if ($executableObjectTypeFieldResolver === null) {
+                    continue;
+                }
                 if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
                     /** 
                      * Handle case:
