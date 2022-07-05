@@ -110,7 +110,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
             return;
         }
         $objectTypeResolver->collectFieldValidationWarnings($fieldDataAccessor, $variables, $objectTypeFieldResolutionFeedbackStore);
-        $objectTypeResolver->collectFieldDeprecations($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeResolver->collectFieldDeprecations($fieldDataAccessor, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

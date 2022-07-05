@@ -273,11 +273,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     final public function collectFieldDeprecations(
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
         if ($executableObjectTypeFieldResolver === null) {
             return;
         }
@@ -288,7 +288,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $validField,
             $fieldName,
             $fieldArgs,
-        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($fieldDataAccessor->getField(), $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting deprecations on the field may not work correctly
