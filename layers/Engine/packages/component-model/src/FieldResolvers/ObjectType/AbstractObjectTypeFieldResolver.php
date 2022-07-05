@@ -720,17 +720,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         /**
          * Validate all mandatory args have been provided
          */
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldDataAccessor->getFieldName());
         $mandatoryConsolidatedFieldArgNames = array_keys(array_filter(
             $consolidatedFieldArgNameTypeResolvers,
-            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $field->getName(), $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
+            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldDataAccessor->getFieldName(), $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
             ARRAY_FILTER_USE_KEY
         ));
         try {
             if (
                 $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
                     $mandatoryConsolidatedFieldArgNames,
-                    $field,
+                    $fieldDataAccessor->getField(),
                     ResolverTypes::FIELD
                 )
             ) {
@@ -767,7 +767,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (
             $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
                 $objectTypeResolver,
-                $field,
+                $fieldDataAccessor->getField(),
             )
         ) {
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
@@ -785,9 +785,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         /**
          * If a MutationResolver is declared, let it validate the schema
          */
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
+        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
             $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
