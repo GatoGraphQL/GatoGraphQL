@@ -1075,8 +1075,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array
-    {
+    public function resolveFieldValidationWarnings(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor
+    ): array {
         $warningFeedbackItemResolutions = [];
         if (Environment::enableSemanticVersionConstraints()) {
             /**
@@ -1091,8 +1093,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         WarningFeedbackItemProvider::class,
                         WarningFeedbackItemProvider::W2,
                         [
-                            $field->getName(),
-                            $this->getFieldVersion($objectTypeResolver, $field->getName()) ?? '',
+                            $fieldDataAccessor->getFieldName(),
+                            $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
                             $versionConstraint
                         ]
                     );
@@ -1100,9 +1102,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null) {
-            $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
                 $mutationResolver->validateWarnings($fieldDataAccessor)
