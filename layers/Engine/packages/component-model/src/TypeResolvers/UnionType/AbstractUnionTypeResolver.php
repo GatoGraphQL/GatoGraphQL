@@ -13,6 +13,7 @@ use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -23,6 +24,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
@@ -465,5 +467,82 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getImplementedInterfaceTypeResolvers(): array
     {
         return [];
+    }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param FieldInterface[] $fields
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     */
+    protected function getFieldObjectTypeResolverObjectFieldData(
+        array $fields,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+    ): SplObjectStorage {
+        /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
+        $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
+
+        $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
+        foreach ($fields as $field) {
+            /** @var array<string,mixed> */
+            $fieldData = [];
+            foreach ($field->getArguments() as $argument) {
+                $fieldData[$argument->getName()] = $argument->getValue();
+            }
+            // @todo Call ->prepareFieldData here!
+
+            /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
+            $objectTypeResolverObjectFieldData = new SplObjectStorage();
+            
+            $ids = $fieldIDs[$field];
+            foreach ($ids as $id) {
+                $object = $idObjects[$id];
+                $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
+
+                /** @var SplObjectStorage<object,array<string,mixed>> */
+                $objectFieldData = $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] ?? new SplObjectStorage();
+
+                $executableObjectTypeFieldResolver = $targetObjectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
+                if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
+                    /** 
+                     * Handle case:
+                     *
+                     * 2. Data from a Field in an UnionTypeResolver: the union field does not have
+                     *    the schema information, but only the corresponding ObjectTypeResolver
+                     *    that will resolve the entity does.
+                     *    For instance, when querying 'customPosts { dateStr }', field `dateStr`
+                     *    could be evaluated against a Post or Page types, and they could have
+                     *    different definitions of the `dateStr` field, such as making argument
+                     *    `$format` mandatory or not. Then, there will be a different FieldArgs
+                     *    produced for each targetObjectTypeResolver in the UnionTypeResolver
+                     */                
+                    $objectFieldData[$wildcardObject] = $fieldData;
+                } else {
+                    /** 
+                     * Handle case:
+                     *
+                     * 3. Data for a specific object: When executing nested mutations, the FieldArgs
+                     *    for each object will be different, as it will contain implicit information
+                     *    belonging to the object.
+                     *    For instance, when querying `mutation { posts { update(title: "New title") { id } } }`,
+                     *    the value for the `$postID` is injected into the FieldArgs for each object,
+                     *    and the validation of the FieldArgs must also be executed for each object.
+                     */
+                    $objectFieldData[$object] = $fieldData;
+                    // @todo Call ->prepareFieldDataForObject here!
+                }
+                
+                $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $objectFieldData;
+            }
+            $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
+        }
+
+        return $fieldObjectTypeResolverObjectFieldData;
     }
 }
