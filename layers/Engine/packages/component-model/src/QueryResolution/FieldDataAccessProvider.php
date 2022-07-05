@@ -114,26 +114,24 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
          * If not passing the object, then the data must be under the '*' object,
          * which contains data for "all objects"
          */
-        if ($object === null) {
+        if ($object === null || !$objectFieldData->contains($object)) {
             $object = FieldDataAccessWildcardObjectFactory::getWildcardObject();
             if (!$objectFieldData->contains($object)) {
                 throw new ShouldNotHappenException(
-                    sprintf(
-                        $this->__('In the FieldDataAccessProvider, no data for "all objects" has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
-                        $field->getName(),
-                        $objectTypeResolver->getMaybeNamespacedTypeName()
-                    )
+                    $object === null
+                        ? sprintf(
+                            $this->__('In the FieldDataAccessProvider, no data for "all objects" has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
+                            $field->getName(),
+                            $objectTypeResolver->getMaybeNamespacedTypeName()
+                        )
+                        : sprintf(
+                            $this->__('In the FieldDataAccessProvider, no data for object with ID \'%s\' has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
+                            $objectTypeResolver->getID($object),
+                            $field->getName(),
+                            $objectTypeResolver->getMaybeNamespacedTypeName()
+                        )
                 );
             }
-        } elseif (!$objectFieldData->contains($object)) {
-            throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__('In the FieldDataAccessProvider, no data for object with ID \'%s\' has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
-                    $objectTypeResolver->getID($object),
-                    $field->getName(),
-                    $objectTypeResolver->getMaybeNamespacedTypeName()
-                )
-            );
         }
         /** @var object $object */
         /** @var array<string,mixed> */
