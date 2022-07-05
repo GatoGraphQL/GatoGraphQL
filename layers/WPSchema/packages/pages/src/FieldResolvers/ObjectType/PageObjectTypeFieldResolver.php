@@ -74,7 +74,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         /** @var WP_Post */
         $page = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'menuOrder':
                 return $page->menu_order;
         }

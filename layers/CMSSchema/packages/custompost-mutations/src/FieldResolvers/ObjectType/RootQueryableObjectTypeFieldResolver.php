@@ -210,7 +210,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             $this->getQuery($objectTypeResolver, $object, $field)
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'myCustomPostCount':
                 return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
 

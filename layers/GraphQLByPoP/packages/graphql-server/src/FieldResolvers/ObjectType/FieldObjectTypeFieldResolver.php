@@ -139,7 +139,7 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var Field */
         $fieldObject = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'name':
                 return $fieldObject->getName();
             case 'description':

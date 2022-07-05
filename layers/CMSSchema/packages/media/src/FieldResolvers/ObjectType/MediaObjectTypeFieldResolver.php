@@ -206,7 +206,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     ): mixed {
         $media = $object;
         $size = $this->obtainImageSizeFromParameters($field);
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL

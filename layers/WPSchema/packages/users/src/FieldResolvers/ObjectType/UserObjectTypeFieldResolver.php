@@ -123,7 +123,7 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         /** @var WP_User */
         $user = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'nicename':
                 return $user->user_nicename;
             case 'nickname':

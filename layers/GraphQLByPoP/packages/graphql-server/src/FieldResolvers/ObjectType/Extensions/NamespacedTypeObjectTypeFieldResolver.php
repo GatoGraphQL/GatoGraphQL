@@ -126,7 +126,7 @@ class NamespacedTypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
     ): mixed {
         /** @var NamedTypeInterface */
         $type = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'name':
                 if ($fieldDataAccessor->getValue('namespaced')) {
                     return $type->getNamespacedName();

@@ -94,7 +94,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
                 if ($ofKinds = $fieldDataAccessor->getValue('ofKinds')) {

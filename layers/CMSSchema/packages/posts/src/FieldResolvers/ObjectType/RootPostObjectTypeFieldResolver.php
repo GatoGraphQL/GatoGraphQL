@@ -119,7 +119,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'post':
                 if ($posts = $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];

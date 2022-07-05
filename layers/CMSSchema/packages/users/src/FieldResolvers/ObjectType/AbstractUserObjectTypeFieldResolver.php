@@ -145,7 +145,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'users':
                 return $this->getUserTypeAPI()->getUsers($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 

@@ -118,7 +118,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $customPost = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'stances':
                 $query = array(
                     'limit' => ModuleConfiguration::getStanceListDefaultLimit(),
@@ -137,7 +137,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -158,7 +158,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Override the category
                 $query['tax-query'][] = [
                     'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
-                    'terms'    => $cats[$field->getName()],
+                    'terms'    => $cats[$fieldDataAccessor->getFieldName()],
                 ];
 
                 // // All results

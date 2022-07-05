@@ -80,7 +80,7 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var Site */
         $site = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'domain':
                 return $site->getDomain();
             case 'host':

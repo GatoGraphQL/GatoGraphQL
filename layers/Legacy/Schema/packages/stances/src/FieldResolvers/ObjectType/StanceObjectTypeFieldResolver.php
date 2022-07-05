@@ -138,7 +138,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $stance = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':
                 return $taxonomyapi->getCustomPostTaxonomyTerms(
                     $objectTypeResolver->getID($stance),

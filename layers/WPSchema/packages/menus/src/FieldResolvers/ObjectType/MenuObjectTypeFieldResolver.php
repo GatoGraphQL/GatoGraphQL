@@ -112,7 +112,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var WP_Term */
         $menu = $object;
         $menuID = $objectTypeResolver->getID($menu);
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'name':
                 return $menu->name;
             case 'slug':

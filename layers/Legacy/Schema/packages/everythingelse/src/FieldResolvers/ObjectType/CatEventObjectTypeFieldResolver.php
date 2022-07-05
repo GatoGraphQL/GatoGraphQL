@@ -81,7 +81,7 @@ class CatEventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $eventTagTypeAPI = EventTagTypeAPIFacade::getInstance();
         $event = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
              // Override
             case 'catSlugs':
                 $value = array();

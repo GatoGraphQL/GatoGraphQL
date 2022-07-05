@@ -158,7 +158,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $page = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'parent':
                 return $this->getPageTypeAPI()->getParentPageID($page);
         }
@@ -169,7 +169,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 'parent-id' => $objectTypeResolver->getID($page),
             ]
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'children':
                 return $this->getPageTypeAPI()->getPages($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childCount':

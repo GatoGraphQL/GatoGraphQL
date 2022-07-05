@@ -87,11 +87,11 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var WP_Post */
         $mediaItem = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
             case 'urlAbsolutePath':
                 $url = \get_permalink($mediaItem->ID);
-                if ($field->getName() === 'url') {
+                if ($fieldDataAccessor->getFieldName() === 'url') {
                     return $url;
                 }
                 /** @var string */

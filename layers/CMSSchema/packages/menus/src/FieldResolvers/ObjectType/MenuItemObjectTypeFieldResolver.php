@@ -157,7 +157,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var MenuItem */
         $menuItem = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'children':
                 return array_keys($this->getMenuItemRuntimeRegistry()->getMenuItemChildren($objectTypeResolver->getID($menuItem)));
             case 'localURLPath':

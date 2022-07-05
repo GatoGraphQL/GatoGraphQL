@@ -223,7 +223,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var TypeInterface */
         $type = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'kind':
                 return $type->getKind();
             case 'name':

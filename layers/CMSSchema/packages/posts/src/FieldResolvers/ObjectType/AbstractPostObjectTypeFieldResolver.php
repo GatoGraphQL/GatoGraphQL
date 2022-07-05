@@ -159,7 +159,7 @@ abstract class AbstractPostObjectTypeFieldResolver extends AbstractQueryableObje
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             $this->getQuery($objectTypeResolver, $object, $field)
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'posts':
                 return $this->getPostTypeAPI()->getPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 

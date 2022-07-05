@@ -64,7 +64,7 @@ class CommentsCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $post = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'commentsURL':
                 // @todo: fix this, add the ?#comment_id=... to the post URL
                 return $objectTypeResolver->resolveValue(

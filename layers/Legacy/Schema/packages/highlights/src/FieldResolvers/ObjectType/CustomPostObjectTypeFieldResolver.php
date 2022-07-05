@@ -110,7 +110,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $customPost = $object;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'highlights':
                 $query = array(
                     // 'fields' => 'ids',

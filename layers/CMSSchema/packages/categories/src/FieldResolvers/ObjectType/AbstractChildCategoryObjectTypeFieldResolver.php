@@ -151,7 +151,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 'parent-id' => $objectTypeResolver->getID($category),
             ]
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'children':
                 return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childNames':

@@ -110,7 +110,7 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var EnumValue */
         $enumValue = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'name':
                 return $enumValue->getName();
             case 'description':

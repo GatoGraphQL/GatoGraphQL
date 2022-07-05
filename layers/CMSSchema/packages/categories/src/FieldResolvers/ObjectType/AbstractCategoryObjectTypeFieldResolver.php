@@ -111,7 +111,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     ): mixed {
         $categoryTypeAPI = $this->getCategoryTypeAPI();
         $category = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
                 return $categoryTypeAPI->getCategoryURL($objectTypeResolver->getID($category));
 

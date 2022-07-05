@@ -87,7 +87,7 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     ): mixed {
         /** @var WP_Comment */
         $comment = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'karma':
                 return (int)$comment->comment_karma;
             case 'authorIP':

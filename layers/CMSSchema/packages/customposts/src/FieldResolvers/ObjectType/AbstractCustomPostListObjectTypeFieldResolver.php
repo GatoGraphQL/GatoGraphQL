@@ -143,7 +143,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
             $this->getQuery($objectTypeResolver, $object, $field)
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'customPosts':
                 return $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 

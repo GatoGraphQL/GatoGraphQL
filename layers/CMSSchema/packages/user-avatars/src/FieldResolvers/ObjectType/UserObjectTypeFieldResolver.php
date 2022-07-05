@@ -128,7 +128,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $user = $object;
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
                 $avatarSize = $fieldDataAccessor->getValue('size') ?? $moduleConfiguration->getUserAvatarDefaultSize();

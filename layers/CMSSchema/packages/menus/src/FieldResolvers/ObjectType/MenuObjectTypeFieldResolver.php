@@ -136,7 +136,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $menu = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'itemDataEntries':
                 $isFlat = $fieldDataAccessor->getValue('flat') ?? false;
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);

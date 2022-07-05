@@ -123,7 +123,7 @@ class EventObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
              // Override 'locations' field
             case 'locations':
                 // Events can have no location

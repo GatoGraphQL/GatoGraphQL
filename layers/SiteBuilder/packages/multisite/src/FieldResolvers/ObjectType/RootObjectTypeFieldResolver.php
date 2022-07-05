@@ -76,8 +76,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-            $root = $object;
-        switch ($field->getName()) {
+        $root = $object;
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'sites':
                 return [
                     $this->getSite()->getID(),

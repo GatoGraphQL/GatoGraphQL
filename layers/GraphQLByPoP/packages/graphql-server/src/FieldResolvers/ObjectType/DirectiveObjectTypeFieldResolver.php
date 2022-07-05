@@ -136,7 +136,7 @@ class DirectiveObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var Directive */
         $directive = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'name':
                 return $directive->getName();
             case 'description':

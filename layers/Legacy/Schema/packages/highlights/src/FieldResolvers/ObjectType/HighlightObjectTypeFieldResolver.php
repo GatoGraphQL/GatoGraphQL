@@ -105,7 +105,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $highlight = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
          // Override fields for Highlights
          // The Stance has no title, so return the excerpt instead.
          // Needed for when adding a comment on the Stance, where it will say: Add comment for...
@@ -113,10 +113,10 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'excerpt':
             case 'content':
                 $value = $customPostTypeAPI->getRawContent($highlight);
-                if ($field->getName() === 'title') {
+                if ($fieldDataAccessor->getFieldName() === 'title') {
                     return limitString($value, 100);
                 }
-                if ($field->getName() === 'excerpt') {
+                if ($fieldDataAccessor->getFieldName() === 'excerpt') {
                     return limitString($value, 300);
                 }
                 return $value;

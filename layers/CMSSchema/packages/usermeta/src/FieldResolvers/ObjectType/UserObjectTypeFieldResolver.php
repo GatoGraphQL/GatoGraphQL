@@ -45,13 +45,13 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $user = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'metaValue':
             case 'metaValues':
                 return $this->getUserMetaTypeAPI()->getUserMeta(
                     $objectTypeResolver->getID($user),
                     $fieldDataAccessor->getValue('key'),
-                    $field->getName() === 'metaValue'
+                    $fieldDataAccessor->getFieldName() === 'metaValue'
                 );
         }
 

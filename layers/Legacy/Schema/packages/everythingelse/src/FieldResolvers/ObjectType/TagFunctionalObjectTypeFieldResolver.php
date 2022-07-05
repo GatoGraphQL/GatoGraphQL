@@ -75,7 +75,7 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     ): mixed {
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'symbol':
                 return TagHelpers::getTagSymbol();
 

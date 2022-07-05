@@ -65,7 +65,7 @@ class CommentUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
             $comment = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'author':
                 return $this->getCommentTypeAPI()->getCommentUserId($comment);
         }

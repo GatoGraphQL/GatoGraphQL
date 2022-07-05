@@ -73,7 +73,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $notification = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'multilayoutKeys':
                 // If multiple-layouts, then we need 'objectType' and 'action' data-fields
                 $object_type = $objectTypeResolver->resolveValue(
@@ -83,7 +83,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -94,7 +94,7 @@ class NotificationFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );

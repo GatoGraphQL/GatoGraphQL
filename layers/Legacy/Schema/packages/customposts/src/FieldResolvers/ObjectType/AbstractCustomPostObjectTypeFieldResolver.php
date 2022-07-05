@@ -54,7 +54,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $dateFormatter = DateFormatterFacade::getInstance();
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'datetime':
                 // If it is the current year, don't add the year. Otherwise, do
                 // 15 Jul, 21:47 or // 15 Jul 2018, 21:47

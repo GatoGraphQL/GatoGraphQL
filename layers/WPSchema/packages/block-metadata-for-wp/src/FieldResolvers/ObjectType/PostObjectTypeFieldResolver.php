@@ -101,7 +101,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     // public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     // {
     //     $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-    //     switch ($field->getName()) {
+    //     switch ($fieldDataAccessor->getFieldName()) {
     //         case 'blockMetadata':
     //             return array_merge(
     //                 $schemaFieldArgs,
@@ -138,7 +138,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $post = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'blockMetadata':
                 $block_data = Data::get_block_data($post->post_content);
                 $block_metadata = Metadata::get_block_metadata($block_data);

@@ -184,7 +184,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $user = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'roles':
                 return $this->getUserRoleTypeAPI()->getUserRoles($user);
             case 'capabilities':

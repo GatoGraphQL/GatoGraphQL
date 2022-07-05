@@ -110,7 +110,7 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var InputValue */
         $inputValue = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'name':
                 return $inputValue->getName();
             case 'description':

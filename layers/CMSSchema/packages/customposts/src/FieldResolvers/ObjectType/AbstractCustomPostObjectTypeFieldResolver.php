@@ -76,7 +76,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     ): mixed {
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
                 return $customPostTypeAPI->getPermalink($customPost);
 

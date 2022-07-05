@@ -45,13 +45,13 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $comment = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'metaValue':
             case 'metaValues':
                 return $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $objectTypeResolver->getID($comment),
                     $fieldDataAccessor->getValue('key'),
-                    $field->getName() === 'metaValue'
+                    $fieldDataAccessor->getFieldName() === 'metaValue'
                 );
         }
 

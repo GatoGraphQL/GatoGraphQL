@@ -84,7 +84,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
             return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         }
 
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'authorName':
                 return $this->getUserTypeAPI()->getUserDisplayName($commentUserID);
 

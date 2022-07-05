@@ -82,7 +82,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
                 $scope = $objectTypeResolver->resolveValue(

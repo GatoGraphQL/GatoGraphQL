@@ -108,7 +108,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     ): mixed {
         $tagTypeAPI = $this->getTagTypeAPI();
         $tag = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
                 return $tagTypeAPI->getTagURL($objectTypeResolver->getID($tag));
 

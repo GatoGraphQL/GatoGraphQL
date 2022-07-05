@@ -274,7 +274,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'action':
                 return $notification->action;
             case 'objectType':

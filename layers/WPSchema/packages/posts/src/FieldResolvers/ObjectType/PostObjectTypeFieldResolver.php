@@ -90,7 +90,7 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         /** @var WP_Post */
         $post = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'postFormat':
                 $postFormat = \get_post_format($post);
                 // @see https://developer.wordpress.org/reference/functions/get_post_format/#more-information

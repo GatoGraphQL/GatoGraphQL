@@ -204,7 +204,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
                 'authors' => [App::getState('current-user-id')],
             ]
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'myCommentCount':
                 return $this->getCommentTypeAPI()->getCommentCount($query);
             case 'myComments':
