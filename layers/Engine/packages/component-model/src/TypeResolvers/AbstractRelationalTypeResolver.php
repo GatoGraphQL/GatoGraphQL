@@ -15,6 +15,7 @@ use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -1157,11 +1158,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $pipelineIDFieldSet[] = $idFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
-                $pipelineFieldObjectTypeResolverObjectFieldData[] = $this->getFieldObjectTypeResolverObjectFieldData(
+                $fieldObjectTypeResolverObjectFieldData = $this->getFieldObjectTypeResolverObjectFieldData(
                     $directiveDirectFieldsToProcess,
                     $directiveFieldIDs[$directive],
                     $idObjects
                 );
+                $pipelineFieldObjectTypeResolverObjectFieldData[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
             }
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
