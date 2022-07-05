@@ -802,13 +802,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $value;
     }
 
-    final protected function integrateDefaultFieldArguments(FieldInterface $field): void
-    {
+    /**
+     * @param array<string,mixed> $fieldData
+     */
+    final protected function integrateDefaultFieldArguments(
+        array &$fieldData,
+        FieldInterface $field
+    ): void {
         $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($field);
         if ($fieldArgumentNameDefaultValues === null) {
             return;
         }
         $this->integrateDefaultFieldOrDirectiveArguments(
+            $fieldData,
             $field,
             $fieldArgumentNameDefaultValues,
         );
@@ -847,13 +853,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * Add the default Arguments to the field, and needed customizations
+     *
+     * @param array<string,mixed> $fieldData
      */
-    public function prepareField(FieldInterface $field): void
+    public function prepareFieldData(array &$fieldData, FieldInterface $field): void
     {
         /**
          * Add the default Arguments to the Field
          */
-        $this->integrateDefaultFieldArguments($field);
+        $this->integrateDefaultFieldArguments($fieldData, $field);
 
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($objectTypeFieldResolver === null) {
@@ -863,7 +871,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Allow to inject additional Arguments
          */
-        $objectTypeFieldResolver->prepareField($this, $field);
+        $objectTypeFieldResolver->prepareFieldData($fieldData, $this, $field);
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
@@ -1181,7 +1189,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 continue;
             }
             $fieldData = $field->getArgumentKeyValues();
-            // @todo Call ->prepareFieldData here!
+            $this->prepareFieldData($fieldData, $field);
 
             /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
             $objectTypeResolverObjectFieldData = new SplObjectStorage();

@@ -108,8 +108,11 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
     /**
      * Allow to add additional Arguments
+     *
+     * @param array<string,mixed> $fieldData
      */
-    public function prepareField(
+    public function prepareFieldData(
+        array &$fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void;

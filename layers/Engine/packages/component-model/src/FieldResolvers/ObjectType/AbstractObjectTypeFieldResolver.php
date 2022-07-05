@@ -1390,8 +1390,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Allow to add additional Arguments
+     *
+     * @param array<string,mixed> $fieldData
      */
-    public function prepareField(
+    public function prepareFieldData(
+        array &$fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void {

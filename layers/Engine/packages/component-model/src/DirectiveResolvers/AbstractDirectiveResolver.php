@@ -225,7 +225,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if ($directiveArgumentNameDefaultValues === null) {
             return;
         }
+        // @todo Fix integrate with Directive
+        $directiveData = [];
         $this->integrateDefaultFieldOrDirectiveArguments(
+            $directiveData,
             $this->directive,
             $directiveArgumentNameDefaultValues,
         );

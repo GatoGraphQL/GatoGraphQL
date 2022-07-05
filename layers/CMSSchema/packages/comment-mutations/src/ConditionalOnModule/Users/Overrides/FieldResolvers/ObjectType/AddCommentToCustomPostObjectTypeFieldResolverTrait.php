@@ -20,8 +20,11 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
 
     /**
      * If not provided, set the properties from the logged-in user
+     *
+     * @param array<string,mixed> $fieldData
      */
-    protected function prepareAddCommentField(
+    protected function prepareAddCommentFieldData(
+        array &$fieldData,
         FieldInterface $field,
     ): void {
         /** @var ModuleConfiguration */
@@ -32,6 +35,29 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         ) {
             $userID = App::getState('current-user-id');
             $inputArgument = $field->getArgument(MutationInputProperties::INPUT);
+            $inputValue = $inputArgument->getValue();
+            if (!property_exists($inputValue, MutationInputProperties::AUTHOR_NAME)) {
+                $inputValue->{MutationInputProperties::AUTHOR_NAME} = new Literal(
+                    $this->getUserTypeAPI()->getUserDisplayName($userID),
+                    LocationHelper::getNonSpecificLocation()
+                );
+            }
+            if (!property_exists($inputValue, MutationInputProperties::AUTHOR_EMAIL)) {
+                $inputValue->{MutationInputProperties::AUTHOR_EMAIL} = new Literal(
+                    $this->getUserTypeAPI()->getUserEmail($userID),
+                    LocationHelper::getNonSpecificLocation()
+                );
+            }
+            if (!property_exists($inputValue, MutationInputProperties::AUTHOR_URL)) {
+                $inputValue->{MutationInputProperties::AUTHOR_URL} = new Literal(
+                    $this->getUserTypeAPI()->getUserWebsiteURL($userID),
+                    LocationHelper::getNonSpecificLocation()
+                );
+            }
+            $fieldData[MutationInputProperties::INPUT] = $inputValue;
+            
+            
+            // @todo Fix integrate with Directive
             /** @var InputObject */
             $inputValueAST = $inputArgument->getValueAST();
             $inputValue = $inputValueAST->getValue();

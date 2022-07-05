@@ -34,11 +34,14 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
 
     /**
      * If not provided, set the properties from the logged-in user
+     *
+     * @param array<string,mixed> $fieldData
      */
-    public function prepareField(
+    public function prepareFieldData(
+        array &$fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): void {
-        $this->prepareAddCommentField($field);
+        $this->prepareAddCommentFieldData($fieldData, $field);
     }
 }

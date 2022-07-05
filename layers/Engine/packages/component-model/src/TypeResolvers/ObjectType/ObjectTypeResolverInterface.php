@@ -67,8 +67,10 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
     public function getObjectTypeFieldResolversByField(bool $global): array;
     /**
      * Add the default Arguments to the field, and needed customizations
+     *
+     * @param array<string,mixed> $fieldData
      */
-    public function prepareField(FieldInterface $field): void;
+    public function prepareFieldData(array &$fieldData, FieldInterface $field): void;
     /**
      * Get the first FieldResolver that resolves the field
      */
