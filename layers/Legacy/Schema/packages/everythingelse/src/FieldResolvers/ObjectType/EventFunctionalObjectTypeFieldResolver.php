@@ -92,7 +92,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -113,7 +113,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );

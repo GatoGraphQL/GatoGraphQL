@@ -71,7 +71,7 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );

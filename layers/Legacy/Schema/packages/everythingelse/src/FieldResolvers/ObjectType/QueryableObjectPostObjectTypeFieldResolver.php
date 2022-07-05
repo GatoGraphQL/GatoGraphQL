@@ -74,7 +74,7 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
                             null,
                             [],
                             [],
-                            $field->getLocation()
+                            $fieldDataAccessor->getField()->getLocation()
                         ),
                         $objectTypeFieldResolutionFeedbackStore,
                     )

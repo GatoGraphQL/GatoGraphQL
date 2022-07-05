@@ -323,7 +323,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -337,7 +337,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );

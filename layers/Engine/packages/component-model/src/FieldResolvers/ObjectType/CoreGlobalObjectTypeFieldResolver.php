@@ -279,13 +279,13 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                                 'type',
                                 new Literal(
                                     $fieldDataAccessor->getValue('typeOrInterface'),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
-                                $field->getLocation()
+                                $fieldDataAccessor->getField()->getLocation()
                             ),
                         ],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -305,13 +305,13 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                                 'interface',
                                 new Literal(
                                     $fieldDataAccessor->getValue('typeOrInterface'),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
-                                $field->getLocation()
+                                $fieldDataAccessor->getField()->getLocation()
                             ),
                         ],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -331,13 +331,13 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                                 'type',
                                 new Literal(
                                     $fieldDataAccessor->getValue('typeOrInterface'),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
-                                $field->getLocation()
+                                $fieldDataAccessor->getField()->getLocation()
                             ),
                         ],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -361,13 +361,13 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                                     'typeOrInterface',
                                     new Literal(
                                         $typeOrInterface,
-                                        $field->getLocation()
+                                        $fieldDataAccessor->getField()->getLocation()
                                     ),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
                             ],
                             [],
-                            $field->getLocation()
+                            $fieldDataAccessor->getField()->getLocation()
                         ),
                         $objectTypeFieldResolutionFeedbackStore,
                     );

@@ -101,14 +101,14 @@ trait AliasSchemaObjectTypeFieldResolverTrait
                     $field->getArguments(),
                     $field->getFieldsOrFragmentBonds(),
                     $field->getDirectives(),
-                    $field->getLocation(),
+                    $fieldDataAccessor->getField()->getLocation(),
                 )
                 : new LeafField(
                     $field->getName(),
                     $this->getAliasedFieldName($field->getName()),
                     $field->getArguments(),
                     $field->getDirectives(),
-                    $field->getLocation(),
+                    $fieldDataAccessor->getField()->getLocation(),
                 );
         }
         return $this->aliasedFieldCache[$field];
