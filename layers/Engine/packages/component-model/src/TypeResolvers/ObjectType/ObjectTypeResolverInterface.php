@@ -23,7 +23,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
     ): void;
     public function collectFieldValidationWarnings(
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;

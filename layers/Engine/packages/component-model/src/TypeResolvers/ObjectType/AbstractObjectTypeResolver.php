@@ -236,7 +236,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     final public function collectFieldValidationWarnings(
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -251,7 +251,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $validField,
             $fieldName,
             $fieldArgs,
-        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        ) = $this->dissectFieldForSchema($fieldDataAccessor->getField(), $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         /**
          * If the field is not valid, the fieldArgs may be empty,
          * and getting warnings on the field may not work correctly
@@ -259,7 +259,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($validField === null) {
             return;
         }
-        if ($maybeWarningFeedbackItemResolutions = $executableObjectTypeFieldResolver->resolveFieldValidationWarnings($this, $field)) {
+        if ($maybeWarningFeedbackItemResolutions = $executableObjectTypeFieldResolver->resolveFieldValidationWarnings($this, $fieldDataAccessor)) {
             foreach ($maybeWarningFeedbackItemResolutions as $warningFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addWarning(
                     new ObjectTypeFieldResolutionFeedback(
