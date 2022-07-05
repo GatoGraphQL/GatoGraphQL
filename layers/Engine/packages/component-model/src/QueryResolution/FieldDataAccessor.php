@@ -56,6 +56,33 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return array_keys($this->normalizedValues);
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    public function getKeyValues(): array
+    {
+        return array_merge(
+            $this->getKeyValuesInField(),
+            $this->getKeyValuesInNormalizedValues(),
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getKeyValuesInField(): array
+    {
+        return $this->field->getArgumentKeyValues();
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getKeyValuesInNormalizedValues(): array
+    {
+        return $this->normalizedValues;
+    }
+
     public function hasValue(string $propertyName): bool
     {
         return $this->hasValueInField($propertyName)
