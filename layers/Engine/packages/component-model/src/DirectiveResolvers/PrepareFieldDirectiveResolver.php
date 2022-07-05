@@ -46,7 +46,7 @@ use SplObjectStorage;
  *           }
  *       }
  *   }
- *   
+ *
  *   fragment FullType on __Type {
  *       fields(includeDeprecated: true) {
  *           args {
@@ -66,13 +66,13 @@ use SplObjectStorage;
  *           ...TypeRef
  *       }
  *   }
- *   
+ *
  *   fragment InputValue on __InputValue {
  *       type {
  *           ...TypeRef
  *       }
  *   }
- *   
+ *
  *   fragment TypeRef on __Type {
  *       kind
  *       name

@@ -47,7 +47,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
             $this->field->getArguments()
         );
     }
-    
+
     /**
      * @return string[]
      */

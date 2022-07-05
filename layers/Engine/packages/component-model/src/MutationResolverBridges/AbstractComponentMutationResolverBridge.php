@@ -23,7 +23,7 @@ use PoP\Root\Services\BasicServiceTrait;
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
