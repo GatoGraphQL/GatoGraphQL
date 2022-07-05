@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
@@ -14,8 +13,12 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -75,6 +78,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $relationalTypeResolver,
             $idObjects,
             $idFieldSet,
+            $fieldDataAccessProvider,
             $resolvedIDFieldValues,
             $previouslyResolvedIDFieldValues,
             $variables,
@@ -92,6 +96,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idObjects,
         array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
         array &$variables,
@@ -136,6 +141,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $id,
                 $object,
                 $idFieldSet[$id]->fields,
+                $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
                 $variables,
@@ -183,6 +189,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         string | int $id,
         object $object,
         array $fieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
         array &$variables,
@@ -195,6 +202,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $id,
                 $object,
                 $field,
+                $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
                 $variables,
@@ -213,17 +221,39 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         string | int $id,
         object $object,
         FieldInterface $field,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+            /** @var UnionTypeResolverInterface */
+            $unionTypeResolver = $relationalTypeResolver;
+            $objectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
+            if ($objectTypeResolver === null) {
+                return;
+            }
+        } else {
+            /** @var ObjectTypeResolverInterface */
+            $objectTypeResolver = $relationalTypeResolver;
+        }
+
         // 1. Resolve the value against the TypeResolver
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $fieldData = $fieldDataAccessProvider->getFieldData(
+            $field,
+            $objectTypeResolver,
+            $object,
+        );
+        $fieldDataAccessor = new FieldDataAccessor(
+            $field,
+            $fieldData,
+        );
         $value = $relationalTypeResolver->resolveValue(
             $object,
-            $field,
+            $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
