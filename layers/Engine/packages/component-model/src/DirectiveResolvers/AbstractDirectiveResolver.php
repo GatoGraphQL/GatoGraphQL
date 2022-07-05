@@ -20,6 +20,7 @@ use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
@@ -1077,6 +1078,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $unionTypeOutputKeyIDs,
             $previouslyResolvedIDFieldValues,
             $pipelineIDFieldSet,
+            $pipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
             $variables,
             $messages,
@@ -1085,11 +1087,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         /** @var array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet */
+        /** @var array<FieldDataAccessProviderInterface> $pipelineFieldDataAccessProviders */
         /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues */
 
         // Extract the head, keep passing down the rest
         $idFieldSet = $pipelineIDFieldSet[0];
         array_shift($pipelineIDFieldSet);
+        $fieldDataAccessProvider = $pipelineFieldDataAccessProviders[0];
+        array_shift($pipelineFieldDataAccessProviders);
+
         // The $pipelineDirectiveResolvers is the series of directives executed in the pipeline
         // The current stage is at the head. Remove it
         array_shift($pipelineDirectiveResolvers);
@@ -1099,6 +1105,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $relationalTypeResolver,
         //     $idFieldSet,
         //     $pipelineIDFieldSet,
+        //     $pipelineFieldDataAccessProviders,
         //     $pipelineDirectiveResolvers,
         //     $idObjects,
         //     $resolvedIDFieldValues,
@@ -1124,6 +1131,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $unionTypeOutputKeyIDs,
                     $previouslyResolvedIDFieldValues,
                     $pipelineIDFieldSet,
+                    $pipelineFieldDataAccessProviders,
                     $resolvedIDFieldValues,
                     $variables,
                     $messages,
@@ -1214,6 +1222,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $unionTypeOutputKeyIDs,
             $previouslyResolvedIDFieldValues,
             $pipelineIDFieldSet,
+            $pipelineFieldDataAccessProviders,
             $resolvedIDFieldValues,
             $variables,
             $messages,

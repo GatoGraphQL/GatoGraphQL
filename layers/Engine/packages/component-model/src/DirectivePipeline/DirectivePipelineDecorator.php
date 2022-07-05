@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\DirectivePipeline;
 use League\Pipeline\PipelineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
@@ -20,12 +21,14 @@ class DirectivePipelineDecorator
 
     /**
      * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet
+     * @param array<FieldDataAccessProviderInterface> $pipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     public function resolveDirectivePipeline(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$pipelineIDFieldSet,
+        array &$pipelineFieldDataAccessProviders,
         array $pipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
@@ -43,6 +46,7 @@ class DirectivePipelineDecorator
                 $unionTypeOutputKeyIDs,
                 $previouslyResolvedIDFieldValues,
                 $pipelineIDFieldSet,
+                $pipelineFieldDataAccessProviders,
                 $resolvedIDFieldValues,
                 $variables,
                 $messages,
@@ -57,6 +61,8 @@ class DirectivePipelineDecorator
             $previouslyResolvedIDFieldValues,
             /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDFieldSet,
+            /** @var array<FieldDataAccessProviderInterface> */
+            $pipelineFieldDataAccessProviders,
             /** @var array<string|int,SplObjectStorage<FieldInterface,mixed>> */
             $resolvedIDFieldValues,
             $variables,

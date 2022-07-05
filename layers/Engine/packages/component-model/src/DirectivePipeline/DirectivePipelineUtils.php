@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\DirectivePipeline;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
@@ -14,6 +15,7 @@ class DirectivePipelineUtils
 {
     /**
      * @param array<array<string|int,EngineIterationFieldSet>> $pipelineIDFieldSet
+     * @param array<FieldDataAccessProviderInterface> $pipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
@@ -24,6 +26,7 @@ class DirectivePipelineUtils
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$pipelineIDFieldSet,
+        array &$pipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
@@ -36,6 +39,7 @@ class DirectivePipelineUtils
             'unionTypeOutputKeyIDs' => &$unionTypeOutputKeyIDs,
             'previouslyResolvedIDFieldValues' => &$previouslyResolvedIDFieldValues,
             'pipelineIDFieldSet' => &$pipelineIDFieldSet,
+            'pipelineFieldDataAccessProviders' => &$pipelineFieldDataAccessProviders,
             'resolvedIDFieldValues' => &$resolvedIDFieldValues,
             'variables' => &$variables,
             'messages' => &$messages,

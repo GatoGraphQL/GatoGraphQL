@@ -1172,6 +1172,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipeline->resolveDirectivePipeline(
                 $this,
                 $pipelineIDFieldSet,
+                $pipelineFieldDataAccessProviders,
                 $directiveResolverInstances,
                 $idObjects,
                 $unionTypeOutputKeyIDs,
