@@ -1168,8 +1168,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $fields,
         SplObjectStorage $fieldIDs,
         array $idObjects,
-    ): SplObjectStorage
-    {
+    ): SplObjectStorage {
         /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
         $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
 
