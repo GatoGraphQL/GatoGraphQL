@@ -15,19 +15,13 @@ use stdClass;
  */
 class FieldDataAccessWildcardObjectFactory
 {
-    private static object $wildcardObject = new stdClass();
+    private static ?object $wildcardObject = null;
 
     public static function getWildcardObject(): object
     {
+        if (self::$wildcardObject === null) {
+            self::$wildcardObject = new stdClass();
+        }
         return self::$wildcardObject;
     }
-
-    // private static ?object $wildcardObject = null;
-    // public static function getWildcardObject(): object
-    // {
-    //     if (self::$wildcardObject === null) {
-    //         self::$wildcardObject = new stdClass();
-    //     }
-    //     return self::$wildcardObject;
-    // }
 }
