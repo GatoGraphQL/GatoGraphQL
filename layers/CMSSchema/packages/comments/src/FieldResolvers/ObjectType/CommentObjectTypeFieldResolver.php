@@ -351,12 +351,12 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentParent($comment);
 
             case 'date':
-                return new DateTime($this->getCommentTypeAPI()->getCommentDate($comment, $field->getArgumentValue('gmt')));
+                return new DateTime($this->getCommentTypeAPI()->getCommentDate($comment, $fieldDataAccessor->getValue('gmt')));
 
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $this->getCommentTypeAPI()->getCommentDate($comment, $field->getArgumentValue('gmt'))
+                    $fieldDataAccessor->getValue('format'),
+                    $this->getCommentTypeAPI()->getCommentDate($comment, $fieldDataAccessor->getValue('gmt'))
                 );
         }
 

@@ -49,13 +49,13 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
         switch ($field->getName()) {
             case 'metaValue':
             case 'metaValues':
-                if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($field->getArgumentValue('key'))) {
+                if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($fieldDataAccessor->getValue('key'))) {
                     return [
                         new FeedbackItemResolution(
                             FeedbackItemProvider::class,
                             FeedbackItemProvider::E1,
                             [
-                                $field->getArgumentValue('key'),
+                                $fieldDataAccessor->getValue('key'),
                             ]
                         ),
                     ];

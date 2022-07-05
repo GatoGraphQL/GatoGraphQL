@@ -162,10 +162,10 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_Posts extends AbstractObj
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $post = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'favicon':
             case 'thumb':
-                return $this->getThumb($post, $objectTypeResolver, $field->getArgumentValue('size'), $field->getArgumentValue('addDescription'));
+                return $this->getThumb($post, $objectTypeResolver, $fieldDataAccessor->getValue('size'), $fieldDataAccessor->getValue('addDescription'));
 
             case 'thumbFullSrc':
                 $thumb = $objectTypeResolver->resolveValue($post, /* @todo Re-do this code! Left undone */ new Field('thumb', ['size' => 'full', 'addDescription' => true]), $objectTypeFieldResolutionFeedbackStore);

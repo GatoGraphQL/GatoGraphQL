@@ -399,7 +399,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $notification->object_type == 'Taxonomy';
 
             case 'isAction':
-                return $field->getArgumentValue('action') == $notification->action;
+                return $fieldDataAccessor->getValue('action') == $notification->action;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

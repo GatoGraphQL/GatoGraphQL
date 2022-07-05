@@ -122,7 +122,7 @@ class EchoOperatorGlobalObjectTypeFieldResolver extends OperatorGlobalObjectType
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'echoStr':
-                return $field->getArgumentValue('value');
+                return $fieldDataAccessor->getValue('value');
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

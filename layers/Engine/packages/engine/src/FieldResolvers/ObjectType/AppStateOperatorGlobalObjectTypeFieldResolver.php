@@ -114,13 +114,13 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
     ): array {
         switch ($field->getName()) {
             case 'var':
-                if (!App::hasState($field->getArgumentValue('name'))) {
+                if (!App::hasState($fieldDataAccessor->getValue('name'))) {
                     return [
                         new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6,
                             [
-                                $field->getArgumentValue('name'),
+                                $fieldDataAccessor->getValue('name'),
                             ]
                         ),
                     ];
@@ -139,7 +139,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'var':
-                return App::getState($field->getArgumentValue('name'));
+                return App::getState($fieldDataAccessor->getValue('name'));
             case 'context':
                 return App::getAppStateManager()->all();
         }

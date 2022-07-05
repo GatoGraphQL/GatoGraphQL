@@ -96,24 +96,24 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getStatus($customPost);
 
             case 'isStatus':
-                return $field->getArgumentValue('status') == $customPostTypeAPI->getStatus($customPost);
+                return $fieldDataAccessor->getValue('status') == $customPostTypeAPI->getStatus($customPost);
 
             case 'date':
-                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt') ?? false));
+                return new DateTime($customPostTypeAPI->getPublishedDate($customPost, $fieldDataAccessor->getValue('gmt') ?? false));
 
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $customPostTypeAPI->getPublishedDate($customPost, $field->getArgumentValue('gmt') ?? false)
+                    $fieldDataAccessor->getValue('format'),
+                    $customPostTypeAPI->getPublishedDate($customPost, $fieldDataAccessor->getValue('gmt') ?? false)
                 );
 
             case 'modifiedDate':
-                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt') ?? false));
+                return new DateTime($customPostTypeAPI->getModifiedDate($customPost, $fieldDataAccessor->getValue('gmt') ?? false));
 
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $customPostTypeAPI->getModifiedDate($customPost, $field->getArgumentValue('gmt') ?? false)
+                    $fieldDataAccessor->getValue('format'),
+                    $customPostTypeAPI->getModifiedDate($customPost, $fieldDataAccessor->getValue('gmt') ?? false)
                 );
 
             case 'title':

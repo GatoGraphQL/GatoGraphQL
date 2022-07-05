@@ -178,7 +178,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'menu':
-                $by = $field->getArgumentValue('by');
+                $by = $fieldDataAccessor->getValue('by');
                 if (isset($by->id)) {
                     // Validate the ID exists
                     $menuID = $by->id;

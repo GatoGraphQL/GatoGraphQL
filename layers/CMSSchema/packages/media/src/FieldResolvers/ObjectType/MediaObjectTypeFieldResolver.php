@@ -232,18 +232,18 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt')));
+                return new DateTime($this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt')));
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt'))
+                    $fieldDataAccessor->getValue('format'),
+                    $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'))
                 );
             case 'modifiedDate':
-                return new DateTime($this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt')));
+                return new DateTime($this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt')));
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt'))
+                    $fieldDataAccessor->getValue('format'),
+                    $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'))
                 );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
@@ -254,6 +254,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
 
     protected function obtainImageSizeFromParameters(FieldInterface $field): ?string
     {
-        return $field->getArgumentValue('size');
+        return $fieldDataAccessor->getValue('size');
     }
 }

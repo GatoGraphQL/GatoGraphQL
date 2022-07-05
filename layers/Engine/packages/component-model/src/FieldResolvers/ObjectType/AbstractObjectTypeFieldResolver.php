@@ -661,7 +661,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
-     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $field->getArgumentValue('branch'))
+     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldDataAccessor->getValue('branch'))
      */
     public function resolveCanProcess(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -1083,7 +1083,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
              */
-            if ($versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)) {
+            if ($versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT)) {
                 /**
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */

@@ -50,7 +50,7 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
             case 'metaValues':
                 return $this->getUserMetaTypeAPI()->getUserMeta(
                     $objectTypeResolver->getID($user),
-                    $field->getArgumentValue('key'),
+                    $fieldDataAccessor->getValue('key'),
                     $field->getName() === 'metaValue'
                 );
         }

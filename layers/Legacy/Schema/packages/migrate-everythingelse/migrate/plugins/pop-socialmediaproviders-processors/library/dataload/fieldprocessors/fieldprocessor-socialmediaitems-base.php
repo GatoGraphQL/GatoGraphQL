@@ -107,7 +107,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
                     return $title;
                 }
                 $providerURLs = $this->socialMediaProviderEnumTypeResolver->getEnumValues();
-                return $this->getShareUrl($url, $title, $providerURLs[$field->getArgumentValue('provider')]);
+                return $this->getShareUrl($url, $title, $providerURLs[$fieldDataAccessor->getValue('provider')]);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

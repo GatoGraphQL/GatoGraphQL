@@ -59,7 +59,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 // If it is the current year, don't add the year. Otherwise, do
                 // 15 Jul, 21:47 or // 15 Jul 2018, 21:47
                 $date = $customPostTypeAPI->getPublishedDate($customPost);
-                $format = $field->getArgumentValue('format');
+                $format = $fieldDataAccessor->getValue('format');
                 if (!$format) {
                     $format = ($dateFormatter->format('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i';
                 }

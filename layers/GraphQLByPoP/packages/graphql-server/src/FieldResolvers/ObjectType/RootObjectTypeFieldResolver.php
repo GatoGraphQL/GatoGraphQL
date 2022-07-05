@@ -154,7 +154,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Obtain the instance of the schema
                 $schemaInstances = $this->getSchemaTypeDataLoader()->getObjects([$schemaID]);
                 $schema = $schemaInstances[0];
-                return $schema->getTypeID($field->getArgumentValue('name'));
+                return $schema->getTypeID($fieldDataAccessor->getValue('name'));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

@@ -50,7 +50,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
             case 'metaValues':
                 return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(
                     $objectTypeResolver->getID($customPost),
-                    $field->getArgumentValue('key'),
+                    $fieldDataAccessor->getValue('key'),
                     $field->getName() === 'metaValue'
                 );
         }
