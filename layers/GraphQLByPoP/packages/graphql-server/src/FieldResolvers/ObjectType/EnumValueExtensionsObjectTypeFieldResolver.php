@@ -66,7 +66,7 @@ class EnumValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     ): mixed {
         /** @var EnumValueExtensions */
         $enumValueExtensions = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'isAdminElement' => $enumValueExtensions->isAdminElement(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };

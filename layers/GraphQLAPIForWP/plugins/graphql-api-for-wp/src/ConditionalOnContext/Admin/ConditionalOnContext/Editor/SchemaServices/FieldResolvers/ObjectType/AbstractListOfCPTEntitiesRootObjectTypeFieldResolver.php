@@ -73,7 +73,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
             'limit' => -1,
             // Execute for the corresponding field name
             'custompost-types' => [
-                $this->getFieldCustomPostType($field),
+                $this->getFieldCustomPostType($fieldDataAccessor),
             ],
         ];
         $options = [
@@ -84,7 +84,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         return $this->getCustomPostTypeAPI()->getCustomPosts($query, $options);
     }
 
-    abstract protected function getFieldCustomPostType(FieldInterface $field): string;
+    abstract protected function getFieldCustomPostType(FieldDataAccessorInterface $fieldDataAccessor): string;
 
     public function getFieldTypeResolver(
         ObjectTypeResolverInterface $objectTypeResolver,

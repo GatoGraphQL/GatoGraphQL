@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Media\ConditionalOnModule\Users\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -65,7 +64,7 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'author' => $this->getUserMediaTypeAPI()->getMediaAuthorId($media),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };

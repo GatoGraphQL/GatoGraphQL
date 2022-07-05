@@ -71,7 +71,7 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     ): mixed {
         /** @var NamedTypeExtensions */
         $namedTypeExtensions = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'elementName' => $namedTypeExtensions->getTypeElementName(),
             'namespacedName' => $namedTypeExtensions->getTypeNamespacedName(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),

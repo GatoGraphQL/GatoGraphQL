@@ -140,7 +140,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'queryType' => $schema->getQueryRootObjectTypeID(),
             'mutationType' => $schema->getMutationRootObjectTypeID(),
             'subscriptionType' => $schema->getSubscriptionRootObjectTypeID(),

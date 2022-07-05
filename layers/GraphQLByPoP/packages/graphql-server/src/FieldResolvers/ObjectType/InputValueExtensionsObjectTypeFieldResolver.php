@@ -66,7 +66,7 @@ class InputValueExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFiel
     ): mixed {
         /** @var InputValueExtensions */
         $inputValueExtensions = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'isAdminElement' => $inputValueExtensions->isAdminElement(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };

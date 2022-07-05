@@ -66,7 +66,7 @@ class SchemaExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldRes
     ): mixed {
         /** @var SchemaExtensions */
         $schemaExtensions = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'isNamespaced' => $schemaExtensions->isSchemaNamespaced(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };

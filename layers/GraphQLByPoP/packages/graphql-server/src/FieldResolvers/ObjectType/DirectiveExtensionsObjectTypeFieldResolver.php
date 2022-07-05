@@ -68,7 +68,7 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     ): mixed {
         /** @var DirectiveExtensions */
         $directiveExtensions = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'needsDataToExecute' => $directiveExtensions->needsDataToExecute(),
             default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
