@@ -19,4 +19,11 @@ interface FieldDataAccessProviderInterface
         ?ObjectTypeResolverInterface $objectTypeResolver = null,
         ?object $object = null,
     ): array;
+    /**
+     * Used by the nested directive resolver
+     */
+    public function duplicateFieldData(
+        FieldInterface $fromField,
+        FieldInterface $toField,
+    ): void;
 }

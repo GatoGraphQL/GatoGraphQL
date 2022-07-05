@@ -140,4 +140,22 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
         $fieldData = $objectFieldData[$object];
         return $fieldData;
     }
+
+    /**
+     * Used by the nested directive resolver
+     */
+    public function duplicateFieldData(
+        FieldInterface $fromField,
+        FieldInterface $toField,
+    ): void {
+        if (!$this->fieldObjectTypeResolverObjectFieldData->contains($fromField)) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__('Field \'%s\' is not contained in the FieldDataAccessProvider'),
+                    $fromField->getName()
+                )
+            );
+        }
+        $this->fieldObjectTypeResolverObjectFieldData[$toField] = $this->fieldObjectTypeResolverObjectFieldData[$fromField];
+    }
 }
