@@ -1280,7 +1280,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value

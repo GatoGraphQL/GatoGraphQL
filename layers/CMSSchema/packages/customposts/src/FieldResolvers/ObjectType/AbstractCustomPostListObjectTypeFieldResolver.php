@@ -135,7 +135,7 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = array_merge(
@@ -150,6 +150,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
                 return $this->getCustomPostTypeAPI()->getCustomPostCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

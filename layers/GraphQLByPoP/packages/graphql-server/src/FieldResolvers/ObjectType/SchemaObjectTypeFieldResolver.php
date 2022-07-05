@@ -134,7 +134,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         /** @var Schema */
@@ -147,7 +147,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'directives' => $schema->getDirectiveIDs(),
             'type' => $schema->getTypeID($field->getArgumentValue('name')),
             'extensions' => $schema->getExtensions()->getID(),
-            default => parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
 

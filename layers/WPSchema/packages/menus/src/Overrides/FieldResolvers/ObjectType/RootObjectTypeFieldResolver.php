@@ -14,7 +14,7 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($field->getName()) {
@@ -31,7 +31,7 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                     }
                 }
                 if ($menuParam === null) {
-                    return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+                    return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
                 }
                 $menu = wp_get_nav_menu_object($menuParam);
                 if ($menu === false) {
@@ -40,6 +40,6 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                 return $menu->term_id;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

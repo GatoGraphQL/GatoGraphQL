@@ -139,7 +139,7 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $category = $object;
@@ -159,6 +159,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
                 return $categoryTypeAPI->getCategoryCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

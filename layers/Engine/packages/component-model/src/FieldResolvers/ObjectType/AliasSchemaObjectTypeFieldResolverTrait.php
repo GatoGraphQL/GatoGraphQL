@@ -456,7 +456,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();

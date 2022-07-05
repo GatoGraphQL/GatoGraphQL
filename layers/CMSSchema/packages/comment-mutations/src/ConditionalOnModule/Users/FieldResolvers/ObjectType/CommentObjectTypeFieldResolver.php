@@ -70,7 +70,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $comment = $object;
@@ -80,7 +80,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
          * Check there is an author. Otherwise, let the upstream resolve it
          */
         if ($commentUserID === null) {
-            return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+            return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         }
 
         switch ($field->getName()) {
@@ -94,6 +94,6 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
                 return $this->getUserTypeAPI()->getUserEmail($commentUserID);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
