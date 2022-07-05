@@ -205,7 +205,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        $size = $this->obtainImageSizeFromParameters($field);
+        $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'src':
                 // The media item may be an image, or a video or audio.
