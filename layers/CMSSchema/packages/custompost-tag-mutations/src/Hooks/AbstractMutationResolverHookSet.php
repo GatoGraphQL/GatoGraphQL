@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
@@ -35,16 +35,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeSetTags(int | string $customPostID, MutationDataProviderInterface $mutationDataProvider): void
+    public function maybeSetTags(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Only for that specific CPT
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!$mutationDataProvider->has(MutationInputProperties::TAGS)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::TAGS)) {
             return;
         }
-        $customPostTags = $mutationDataProvider->get(MutationInputProperties::TAGS);
+        $customPostTags = $fieldDataAccessor->getValue(MutationInputProperties::TAGS);
         $customPostTagTypeMutationAPI = $this->getCustomPostTagTypeMutationAPI();
         $customPostTagTypeMutationAPI->setTags($customPostID, $customPostTags, false);
     }

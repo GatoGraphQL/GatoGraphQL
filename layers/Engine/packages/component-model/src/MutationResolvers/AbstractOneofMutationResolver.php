@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentMutationDataProviderInterface;
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
-use PoP\ComponentModel\Mutation\PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider;
+use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentFieldDataAccessorInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
+use PoP\ComponentModel\Mutation\PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -112,9 +112,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      *
      * @throws QueryResolutionException If more than 1 argument is passed to the field executing the OneofMutation
      */
-    protected function getOneofInputObjectPropertyName(MutationDataProviderInterface $mutationDataProvider): string
+    protected function getOneofInputObjectPropertyName(FieldDataAccessorInterface $fieldDataAccessor): string
     {
-        $propertyNames = $mutationDataProvider->getPropertyNames();
+        $propertyNames = $fieldDataAccessor->getProperties();
         $formDataSize = count($propertyNames);
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
@@ -132,26 +132,26 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
+     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
      * @throws AbstractException In case of error
      */
-    final public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    final public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
+        [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
         /** @var MutationResolverInterface $inputFieldMutationResolver */
-        return $inputFieldMutationResolver->executeMutation($mutationDataProvider);
+        return $inputFieldMutationResolver->executeMutation($fieldDataAccessor);
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
+     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
      */
-    final public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    final public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         try {
-            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
+            [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            return $inputFieldMutationResolver->validateErrors($mutationDataProvider);
+            return $inputFieldMutationResolver->validateErrors($fieldDataAccessor);
         } catch (QueryResolutionException $e) {
             // Return the error message from the exception
             return [
@@ -167,15 +167,15 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentMutationDataProviderInterface $mutationDataProvider
+     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
      */
-    final public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
+    final public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         try {
-            [$inputFieldMutationResolver, $mutationDataProvider] = $this->getInputFieldMutationResolverAndOneOfMutationDataProvider($mutationDataProvider);
+            [$inputFieldMutationResolver, $fieldDataAccessor] = $this->getInputFieldMutationResolverAndOneOfFieldDataAccessor($fieldDataAccessor);
             /** @var MutationResolverInterface $inputFieldMutationResolver */
-            return $inputFieldMutationResolver->validateWarnings($mutationDataProvider);
+            return $inputFieldMutationResolver->validateWarnings($fieldDataAccessor);
         } catch (QueryResolutionException $e) {
             // Do nothing since the Error will already return the problem
             return [];
@@ -186,13 +186,13 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndOneOfMutationDataProvider(InputObjectUnderFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider): array
+    final protected function getInputFieldMutationResolverAndOneOfFieldDataAccessor(InputObjectUnderFieldArgumentFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor): array
     {
         // Create a new Field, passing the corresponding Argument only
-        $oneOfPropertyName = $this->getOneofInputObjectPropertyName($inputObjectFieldArgumentMutationDataProvider);
+        $oneOfPropertyName = $this->getOneofInputObjectPropertyName($inputObjectFieldArgumentFieldDataAccessor);
         $inputFieldMutationResolver = $this->getInputFieldMutationResolver($oneOfPropertyName);
-        $oneOfMutationDataProvider = $this->getOneOfMutationDataProvider(
-            $inputObjectFieldArgumentMutationDataProvider,
+        $oneOfFieldDataAccessor = $this->getOneOfFieldDataAccessor(
+            $inputObjectFieldArgumentFieldDataAccessor,
             $oneOfPropertyName
         );
         /**
@@ -201,16 +201,16 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
          */
         // $inputFieldFormData = $this->getInputFieldFormData($inputFieldName, $oneofInputObjectFormData);
         // return [$inputFieldMutationResolver, $inputFieldFormData];
-        return [$inputFieldMutationResolver, $oneOfMutationDataProvider];
+        return [$inputFieldMutationResolver, $oneOfFieldDataAccessor];
     }
 
-    final protected function getOneOfMutationDataProvider(
-        InputObjectUnderFieldArgumentMutationDataProviderInterface $inputObjectFieldArgumentMutationDataProvider,
+    final protected function getOneOfFieldDataAccessor(
+        InputObjectUnderFieldArgumentFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor,
         string $oneOfPropertyName,
-    ): PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider {
-        return new PropertyUnderInputObjectUnderFieldArgumentMutationDataProvider(
-            $inputObjectFieldArgumentMutationDataProvider->getField(),
-            $inputObjectFieldArgumentMutationDataProvider->getArgumentName(),
+    ): PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor {
+        return new PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor(
+            $inputObjectFieldArgumentFieldDataAccessor->getField(),
+            $inputObjectFieldArgumentFieldDataAccessor->getArgumentName(),
             $oneOfPropertyName
         );
     }

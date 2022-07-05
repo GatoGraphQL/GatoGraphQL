@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -74,22 +74,22 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
-    protected function prepareMutationDataProviderForObject(
-        MutationDataProviderInterface $mutationDataProviderForObject,
+    protected function prepareFieldDataAccessorForObject(
+        FieldDataAccessorInterface $fieldDataAccessorForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareMutationDataProviderForObject(
-            $mutationDataProviderForObject,
+        parent::prepareFieldDataAccessorForObject(
+            $fieldDataAccessorForObject,
             $objectTypeResolver,
-            $mutationField,
+            $field,
             $object,
         );
         $post = $object;
-        switch ($mutationField->getName()) {
+        switch ($field->getName()) {
             case 'update':
-                $mutationDataProviderForObject->add(MutationInputProperties::ID, $objectTypeResolver->getID($post));
+                $fieldDataAccessorForObject->addValue(MutationInputProperties::ID, $objectTypeResolver->getID($post));
                 break;
         }
     }

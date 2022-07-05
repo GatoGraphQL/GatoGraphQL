@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostLinkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_ApplicationProcessors_Utils;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
@@ -12,25 +12,25 @@ use PoPSitesWassup\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutat
 
 abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCreateUpdatePostMutationResolver
 {
-    protected function getCategories(MutationDataProviderInterface $mutationDataProvider): ?array
+    protected function getCategories(FieldDataAccessorInterface $fieldDataAccessor): ?array
     {
-        $ret = parent::getCategories($mutationDataProvider);
+        $ret = parent::getCategories($fieldDataAccessor);
         $ret[] = \POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
         return $ret;
     }
 
-    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::validateContent($errors, $mutationDataProvider);
-        MutationResolverUtils::validateContent($errors, $mutationDataProvider);
+        parent::validateContent($errors, $fieldDataAccessor);
+        MutationResolverUtils::validateContent($errors, $fieldDataAccessor);
     }
 
-    protected function additionals(string | int $post_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(string | int $post_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($post_id, $mutationDataProvider);
+        parent::additionals($post_id, $fieldDataAccessor);
 
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $mutationDataProvider->get('linkaccess'), true);
+            Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $fieldDataAccessor->getValue('linkaccess'), true);
         }
     }
 }

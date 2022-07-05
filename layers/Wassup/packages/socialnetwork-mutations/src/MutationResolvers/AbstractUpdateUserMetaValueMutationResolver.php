@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $target_id = $mutationDataProvider->get('target_id');
+        $target_id = $fieldDataAccessor->getValue('target_id');
         if (!$target_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -26,27 +26,27 @@ abstract class AbstractUpdateUserMetaValueMutationResolver extends AbstractMutat
         return $errors;
     }
 
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('gd_updateusermetavalue', $target_id, $mutationDataProvider);
+        App::doAction('gd_updateusermetavalue', $target_id, $fieldDataAccessor);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
-        $target_id = $mutationDataProvider->get('target_id');
+        $target_id = $fieldDataAccessor->getValue('target_id');
         return $target_id;
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $target_id = $this->update($mutationDataProvider);
-        $this->additionals($target_id, $mutationDataProvider);
+        $target_id = $this->update($fieldDataAccessor);
+        $this->additionals($target_id, $fieldDataAccessor);
 
         return $target_id;
     }

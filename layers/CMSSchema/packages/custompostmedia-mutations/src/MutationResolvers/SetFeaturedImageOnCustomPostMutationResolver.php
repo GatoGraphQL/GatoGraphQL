@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\Exception\AbstractException;
@@ -30,15 +30,15 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $customPostID = $mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID);
-        $mediaItemID = $mutationDataProvider->get(MutationInputProperties::MEDIA_ITEM_ID);
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
         $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -49,13 +49,13 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractMutationResol
         }
 
         $errors = [];
-        if (!$mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
             );
         }
-        if (!$mutationDataProvider->get(MutationInputProperties::MEDIA_ITEM_ID)) {
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,

@@ -59,7 +59,10 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
         return $inputs;
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
         $inputs = $this->getFormInputs();
         return array_merge(

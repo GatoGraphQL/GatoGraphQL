@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NotificationMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_Notifications_API;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -12,10 +12,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends AbstractMutationResolver
 {
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $histid = $mutationDataProvider->get('histid');
+        $histid = $fieldDataAccessor->getValue('histid');
         if (!$histid) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -38,27 +38,27 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
         return $errors;
     }
 
-    protected function additionals($histid, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($histid, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $mutationDataProvider);
+        App::doAction('GD_NotificationMarkAsReadUnread:additionals', $histid, $fieldDataAccessor);
     }
 
     abstract protected function getStatus();
 
-    protected function setStatus(MutationDataProviderInterface $mutationDataProvider)
+    protected function setStatus(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        // return AAL_Main::instance()->api->setStatus($mutationDataProvider->get('histid'), $mutationDataProvider->get('user_id'), $this->getStatus());
-        return PoP_Notifications_API::setStatus($mutationDataProvider->get('histid'), $mutationDataProvider->get('user_id'), $this->getStatus());
+        // return AAL_Main::instance()->api->setStatus($fieldDataAccessor->getValue('histid'), $fieldDataAccessor->getValue('user_id'), $this->getStatus());
+        return PoP_Notifications_API::setStatus($fieldDataAccessor->getValue('histid'), $fieldDataAccessor->getValue('user_id'), $this->getStatus());
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $hist_ids = $this->setStatus($mutationDataProvider);
-        $this->additionals($mutationDataProvider->get('histid'), $mutationDataProvider);
+        $hist_ids = $this->setStatus($fieldDataAccessor);
+        $this->additionals($fieldDataAccessor->getValue('histid'), $fieldDataAccessor);
 
-        return $hist_ids; //$mutationDataProvider->get('histid');
+        return $hist_ids; //$fieldDataAccessor->getValue('histid');
     }
 }

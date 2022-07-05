@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
@@ -31,7 +31,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();

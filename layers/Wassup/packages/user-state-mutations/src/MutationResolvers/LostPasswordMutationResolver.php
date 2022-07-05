@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
@@ -83,10 +83,10 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         return $message;
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $user_login = $mutationDataProvider->get(MutationInputProperties::USER_LOGIN);
+        $user_login = $fieldDataAccessor->getValue(MutationInputProperties::USER_LOGIN);
 
         // Code copied from file wp-login.php (We can't invoke it directly, since wp-login.php has not been loaded, and we can't do it since it executes a lot of unwanted code producing and output)
         if (empty($user_login)) {
@@ -126,10 +126,10 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $user_login = $mutationDataProvider->get(MutationInputProperties::USER_LOGIN);
+        $user_login = $fieldDataAccessor->getValue(MutationInputProperties::USER_LOGIN);
 
         if (strpos($user_login, '@')) {
             $user = $this->getUserTypeAPI()->getUserByEmail(trim($user_login));

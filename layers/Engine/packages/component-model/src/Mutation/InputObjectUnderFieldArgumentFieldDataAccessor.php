@@ -8,49 +8,35 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use stdClass;
 
-class InputObjectUnderFieldArgumentMutationDataProvider extends MutationDataProvider implements InputObjectUnderFieldArgumentMutationDataProviderInterface
+class InputObjectUnderFieldArgumentFieldDataAccessor extends FieldDataAccessor implements InputObjectUnderFieldArgumentFieldDataAccessorInterface
 {
     public function __construct(
-        protected FieldInterface $field,
+        FieldInterface $field,
         protected string $fieldInputArgumentName,
-        array $propertyValues = [],
+        array $normalizedValues = [],
     ) {
-        parent::__construct($propertyValues);
-    }
-
-    public function getField(): FieldInterface
-    {
-        return $this->field;
+        parent::__construct($field, $normalizedValues);
     }
 
     /**
      * @return string[]
      */
-    public function getPropertyNames(): array
+    protected function getPropertiesInField(): array
     {
         $inputObjectValue = $this->getInputObjectValue();
-        return array_unique(array_merge(
-            parent::getPropertyNames(),
-            array_keys((array) $inputObjectValue)
-        ));
+        return array_keys((array) $inputObjectValue);
     }
 
-    public function has(string $propertyName): bool
+    protected function hasValueInField(string $propertyName): bool
     {
         $inputObjectValue = $this->getInputObjectValue();
-        if (property_exists($inputObjectValue, $propertyName)) {
-            return true;
-        }
-        return parent::has($propertyName);
+        return property_exists($inputObjectValue, $propertyName);
     }
 
-    public function get(string $propertyName): mixed
+    protected function getValueFromField(string $propertyName): mixed
     {
         $inputObjectValue = $this->getInputObjectValue();
-        if (property_exists($inputObjectValue, $propertyName)) {
-            return $inputObjectValue->$propertyName;
-        }
-        return parent::get($propertyName);
+        return $inputObjectValue->$propertyName;
     }
 
     protected function getInputObjectValue(): stdClass

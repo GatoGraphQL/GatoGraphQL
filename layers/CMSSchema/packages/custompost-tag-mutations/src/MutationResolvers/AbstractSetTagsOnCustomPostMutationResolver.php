@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\Exception\AbstractException;
@@ -19,11 +19,11 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $customPostID = $mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID);
-        $postTags = $mutationDataProvider->get(MutationInputProperties::TAGS);
-        $append = $mutationDataProvider->get(MutationInputProperties::APPEND);
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        $postTags = $fieldDataAccessor->getValue(MutationInputProperties::TAGS);
+        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         $customPostTagTypeAPI = $this->getCustomPostTagTypeMutationAPI();
         $customPostTagTypeAPI->setTags($customPostID, $postTags, $append);
         return $customPostID;
@@ -31,7 +31,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
     abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -42,7 +42,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
 
         $errors = [];
-        if (!$mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\Hooks;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties;
@@ -37,12 +37,12 @@ class MutationResolverHookSet extends AbstractHookSet
     /**
      * If entry "featuredImageID" has an ID, set it. If it is null, remove it
      */
-    public function setOrRemoveFeaturedImage(int | string $customPostID, MutationDataProviderInterface $mutationDataProvider): void
+    public function setOrRemoveFeaturedImage(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if (!$mutationDataProvider->has(MutationInputProperties::FEATUREDIMAGE_ID)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::FEATUREDIMAGE_ID)) {
             return;
         }
-        if ($featuredImageID = $mutationDataProvider->get(MutationInputProperties::FEATUREDIMAGE_ID)) {
+        if ($featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID)) {
             $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
         } else {
             $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);

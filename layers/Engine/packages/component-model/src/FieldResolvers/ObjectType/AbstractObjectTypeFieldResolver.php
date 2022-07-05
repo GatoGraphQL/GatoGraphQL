@@ -23,9 +23,9 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\Mutation\FieldArgumentMutationDataProvider;
-use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentMutationDataProvider;
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessor;
+use PoP\ComponentModel\Mutation\InputObjectUnderFieldArgumentFieldDataAccessor;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -96,10 +96,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @var array<string,ObjectTypeFieldSchemaDefinitionResolverInterface>
      */
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
-    /** @var SplObjectStorage<FieldInterface,MutationDataProviderInterface> */
-    protected SplObjectStorage $fieldMutationDataProviderCache;
-    /** @var SplObjectStorage<FieldInterface,SplObjectStorage<object,MutationDataProviderInterface>> */
-    protected SplObjectStorage $fieldMutationDataProviderForObjectCache;
+    /** @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface> */
+    protected SplObjectStorage $fieldFieldDataAccessorCache;
+    /** @var SplObjectStorage<FieldInterface,SplObjectStorage<object,FieldDataAccessorInterface>> */
+    protected SplObjectStorage $fieldFieldDataAccessorForObjectCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
@@ -186,8 +186,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     public function __construct()
     {
-        $this->fieldMutationDataProviderCache = new SplObjectStorage();
-        $this->fieldMutationDataProviderForObjectCache = new SplObjectStorage();
+        $this->fieldFieldDataAccessorCache = new SplObjectStorage();
+        $this->fieldFieldDataAccessorForObjectCache = new SplObjectStorage();
     }
 
     final public function getClassesToAttachTo(): array
@@ -787,9 +787,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProvider);
+            $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1104,11 +1103,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null) {
-            $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+            $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
-                $mutationResolver->validateWarnings($mutationDataProvider)
+                $mutationResolver->validateWarnings($fieldDataAccessor)
             );
         }
         return $warningFeedbackItemResolutions;
@@ -1157,9 +1155,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
         if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
             // Validate on the object
-            $mutationField = $this->getMutationField($objectTypeResolver, $field);
-            $mutationDataProviderForObject = $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($mutationDataProviderForObject);
+            $fieldDataAccessorForObject = $this->getFieldDataAccessorForObject($objectTypeResolver, $field, $object);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessorForObject);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -1173,82 +1170,75 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
     }
 
-    /**
-     * Retrieve the field to pass to the MutationResolver,
-     * for instance it can change for an InputObject.
-     */
-    protected function getMutationField(
+    final protected function getFieldDataAccessor(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): FieldInterface {
-        return $field;
-    }
-
-    final protected function getMutationDataProvider(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
-    ): MutationDataProviderInterface {
-        if (!$this->fieldMutationDataProviderCache->contains($mutationField)) {
-            $this->fieldMutationDataProviderCache[$mutationField] = $this->doGetMutationDataProvider($objectTypeResolver, $mutationField);
+    ): FieldDataAccessorInterface {
+        if (!$this->fieldFieldDataAccessorCache->contains($field)) {
+            $this->fieldFieldDataAccessorCache[$field] = $this->doGetFieldDataAccessor($objectTypeResolver, $field);
         }
-        return $this->fieldMutationDataProviderCache[$mutationField];
+        return $this->fieldFieldDataAccessorCache[$field];
     }
 
-    protected function doGetMutationDataProvider(
+    protected function doGetFieldDataAccessor(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
-    ): MutationDataProviderInterface {
-        if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $mutationField->getName())) {
-            $fieldInputArgumentName = $this->getInputObjectUnderFieldArgumentName($objectTypeResolver, $mutationField);
+        FieldInterface $field,
+    ): FieldDataAccessorInterface {
+        if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $field->getName())) {
+            $fieldInputArgumentName = $this->getInputObjectUnderFieldArgumentName($objectTypeResolver, $field);
             if ($fieldInputArgumentName) {
-                return new InputObjectUnderFieldArgumentMutationDataProvider(
-                    $mutationField,
+                return new InputObjectUnderFieldArgumentFieldDataAccessor(
+                    $field,
                     $fieldInputArgumentName,
                 );
             }
         }
-        return new FieldArgumentMutationDataProvider($mutationField);
+        return new FieldDataAccessor($field);
     }
 
-    final protected function getMutationDataProviderForObject(
+    final protected function getFieldDataAccessorForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
-    ): MutationDataProviderInterface {
-        if (!$this->fieldMutationDataProviderForObjectCache->contains($mutationField)) {
-            $this->fieldMutationDataProviderForObjectCache[$mutationField] = new SplObjectStorage();
+    ): FieldDataAccessorInterface {
+        if (!$this->fieldFieldDataAccessorForObjectCache->contains($field)) {
+            $this->fieldFieldDataAccessorForObjectCache[$field] = new SplObjectStorage();
         }
-        if (!$this->fieldMutationDataProviderForObjectCache[$mutationField]->contains($object)) {
-            $this->fieldMutationDataProviderForObjectCache[$mutationField][$object] = $this->doGetMutationDataProviderForObject($objectTypeResolver, $mutationField, $object);
+        if (!$this->fieldFieldDataAccessorForObjectCache[$field]->contains($object)) {
+            $this->fieldFieldDataAccessorForObjectCache[$field][$object] = $this->doGetFieldDataAccessorForObject($objectTypeResolver, $field, $object);
         }
-        return $this->fieldMutationDataProviderForObjectCache[$mutationField][$object];
+        return $this->fieldFieldDataAccessorForObjectCache[$field][$object];
     }
 
-    protected function doGetMutationDataProviderForObject(
+    protected function doGetFieldDataAccessorForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
-    ): MutationDataProviderInterface {
-        $mutationDataProvider = $this->getMutationDataProvider($objectTypeResolver, $mutationField);
-        $mutationDataProviderForObject = clone $mutationDataProvider;
-        $this->prepareMutationDataProviderForObject(
-            $mutationDataProviderForObject,
+    ): FieldDataAccessorInterface {
+        $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
+        $fieldDataAccessorForObject = clone $fieldDataAccessor;
+        $this->prepareFieldDataAccessorForObject(
+            $fieldDataAccessorForObject,
             $objectTypeResolver,
-            $mutationField,
+            $field,
             $object,
         );
-        return $mutationDataProviderForObject;
+        return $fieldDataAccessorForObject;
     }
 
     /**
      * Indicate: if the field has a single field argument, which is of type InputObject,
      * then retrieve the value for its input fields?
+     *
+     * By default, that's the case with mutations, as they pass a single input
+     * under name "input".
      */
     protected function extractInputObjectFieldForMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
-        return true;
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldName);
+        return $mutationResolver !== null;
     }
 
     /**
@@ -1318,12 +1308,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        $mutationField = $this->getMutationField($objectTypeResolver, $field);
-        $mutationDataProvider = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
-            ? $this->getMutationDataProviderForObject($objectTypeResolver, $mutationField, $object)
-            : $this->getMutationDataProvider($objectTypeResolver, $mutationField);
+        $fieldDataAccessor = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
+            ? $this->getFieldDataAccessorForObject($objectTypeResolver, $field, $object)
+            : $this->getFieldDataAccessor($objectTypeResolver, $field);
         try {
-            return $mutationResolver->executeMutation($mutationDataProvider);
+            return $mutationResolver->executeMutation($fieldDataAccessor);
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1384,10 +1373,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
     }
 
-    protected function prepareMutationDataProviderForObject(
-        MutationDataProviderInterface $mutationDataProviderForObject,
+    protected function prepareFieldDataAccessorForObject(
+        FieldDataAccessorInterface $fieldDataAccessorForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
     }

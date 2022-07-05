@@ -10,10 +10,12 @@ use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\Mutation\MutationDataProvider;
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessor;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
@@ -66,8 +68,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
-        $mutationDataProvider = $this->getMutationDataProvider();
-        $this->fillMutationDataProvider($mutationDataProvider);
+        $fieldDataAccessor = $this->getFieldDataAccessor();
         $mutationResponse = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -76,7 +77,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             ErrorTypes::CODES => ResponseConstants::ERRORCODES,
         ];
         $errorTypeKey = $errorTypeKeys[$errorType];
-        if ($errors = $mutationResolver->validateErrors($mutationDataProvider)) {
+        if ($errors = $mutationResolver->validateErrors($fieldDataAccessor)) {
             // @todo Migrate from string to FeedbackItemProvider
             $mutationResponse[$errorTypeKey] = array_map(
                 fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
@@ -88,7 +89,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             }
             return $mutationResponse;
         }
-        if ($warnings = $mutationResolver->validateWarnings($mutationDataProvider)) {
+        if ($warnings = $mutationResolver->validateWarnings($fieldDataAccessor)) {
             $warningTypeKeys = [
                 ErrorTypes::DESCRIPTIONS => ResponseConstants::WARNINGSTRINGS,
                 ErrorTypes::CODES => ResponseConstants::WARNINGCODES,
@@ -104,7 +105,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $errorMessage = null;
         $resultID = null;
         try {
-            $resultID = $mutationResolver->executeMutation($mutationDataProvider);
+            $resultID = $mutationResolver->executeMutation($fieldDataAccessor);
         } catch (AbstractClientException $e) {
             $errorMessage = $e->getMessage();
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
@@ -140,9 +141,28 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $mutationResponse;
     }
 
-    protected function getMutationDataProvider(): MutationDataProviderInterface
+    protected function getFieldDataAccessor(): FieldDataAccessorInterface
     {
-        return new MutationDataProvider();
+        /**
+         * Create a runtime field to be executed. It doesn't matter
+         * what's the name of the mutation field, so providing
+         * a random one suffices.
+         */
+        $mutationField = new LeafField(
+            'someMutation',
+            null,
+            [],
+            [],
+            LocationHelper::getNonSpecificLocation()
+        );
+        /**
+         * Inject the data straight as normalized value (no need to add defaults
+         * or coerce values)
+         */
+        $mutationData = [];
+        $this->addMutationDataForFieldDataAccessor($mutationData);
+        $fieldDataAccessor = new FieldDataAccessor($mutationField, $mutationData);
+        return $fieldDataAccessor;
     }
 
     protected function modifyDataProperties(array &$data_properties, string | int $resultID): void

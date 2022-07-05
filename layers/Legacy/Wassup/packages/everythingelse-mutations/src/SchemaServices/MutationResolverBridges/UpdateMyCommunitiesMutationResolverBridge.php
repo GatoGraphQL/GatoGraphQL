@@ -33,16 +33,20 @@ class UpdateMyCommunitiesMutationResolverBridge extends AbstractComponentMutatio
         return $this->getUpdateMyCommunitiesMutationResolver();
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         $communities = $this->getComponentProcessorManager()->getComponentProcessor($inputs['communities'])->getValue($inputs['communities']);
         
-        $mutationDataProvider->add('user_id', $user_id);
-        $mutationDataProvider->add('communities', $communities ?? array());
+        $mutationData['user_id'] = $user_id;
+        $mutationData['communities'] = $communities ?? array();
 
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_mycommunities:form_data', $mutationDataProvider);
+        $mutationDataInArray = [&$mutationData];
+        App::doAction('gd_createupdate_mycommunities:form_data', $mutationDataInArray);
     }
 }

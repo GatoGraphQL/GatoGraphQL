@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -15,7 +15,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [];
     }
@@ -23,7 +23,7 @@ abstract class AbstractMutationResolver implements MutationResolverInterface
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [];
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Application\PostsFunctionAPIFactory;
 
@@ -20,9 +20,9 @@ abstract class AbstractRecommendOrUnrecommendCustomPostMutationResolver extends 
     /**
      * Function to override
      */
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($target_id, $mutationDataProvider);
-        App::doAction('gd_recommendunrecommend_post', $target_id, $mutationDataProvider);
+        parent::additionals($target_id, $fieldDataAccessor);
+        App::doAction('gd_recommendunrecommend_post', $target_id, $fieldDataAccessor);
     }
 }

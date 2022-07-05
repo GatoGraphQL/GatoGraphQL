@@ -29,7 +29,10 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         );
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
         // Get the list of all emails
         $emails = array();
@@ -60,14 +63,14 @@ abstract class AbstractEmailInviteMutationResolverBridge extends AbstractCompone
         }
         $additional_msg = trim($this->getComponentProcessorManager()->getComponentProcessor([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE])->getValue([PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_ADDITIONALMESSAGE]));
         
-        $mutationDataProvider->add('emails', $emails);
-        $mutationDataProvider->add('user_id', $user_id);
-        $mutationDataProvider->add('sender-name', $sender_name);
-        $mutationDataProvider->add('sender-url', $sender_url);
-        $mutationDataProvider->add('additional-msg', $additional_msg);
+        $mutationData['emails'] = $emails;
+        $mutationData['user_id'] = $user_id;
+        $mutationData['sender-name'] = $sender_name;
+        $mutationData['sender-url'] = $sender_url;
+        $mutationData['additional-msg'] = $additional_msg;
         
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $mutationDataProvider->add('captcha', $captcha);
+            $mutationData['captcha'] = $captcha;
         }
     }
 }

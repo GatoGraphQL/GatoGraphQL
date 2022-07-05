@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\LooseContracts\NameResolverInterface;
@@ -78,24 +78,24 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return FeedbackItemResolution[]
      */
-    protected function validateCreateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    protected function validateCreateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
 
         // If there are errors here, don't keep validating others
-        $this->validateCreateUpdateErrors($errors, $mutationDataProvider);
+        $this->validateCreateUpdateErrors($errors, $fieldDataAccessor);
         if ($errors) {
             return $errors;
         }
 
         // If already exists any of these errors above, return errors
-        $this->validateCreate($errors, $mutationDataProvider);
+        $this->validateCreate($errors, $fieldDataAccessor);
         if ($errors) {
             return $errors;
         }
 
-        $this->validateContent($errors, $mutationDataProvider);
-        $this->validateCreateContent($errors, $mutationDataProvider);
+        $this->validateContent($errors, $fieldDataAccessor);
+        $this->validateCreateContent($errors, $fieldDataAccessor);
 
         return $errors;
     }
@@ -103,24 +103,24 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @return FeedbackItemResolution[]
      */
-    protected function validateUpdateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    protected function validateUpdateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
 
         // If there are errors here, don't keep validating others
-        $this->validateCreateUpdateErrors($errors, $mutationDataProvider);
+        $this->validateCreateUpdateErrors($errors, $fieldDataAccessor);
         if ($errors) {
             return $errors;
         }
 
         // If already exists any of these errors above, return errors
-        $this->validateUpdate($errors, $mutationDataProvider);
+        $this->validateUpdate($errors, $fieldDataAccessor);
         if ($errors) {
             return $errors;
         }
 
-        $this->validateContent($errors, $mutationDataProvider);
-        $this->validateUpdateContent($errors, $mutationDataProvider);
+        $this->validateContent($errors, $fieldDataAccessor);
+        $this->validateUpdateContent($errors, $fieldDataAccessor);
 
         return $errors;
     }
@@ -128,7 +128,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateCreateUpdateErrors(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateCreateUpdateErrors(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -155,7 +155,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check if the user can publish custom posts
-        if ($mutationDataProvider->get(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
+        if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
             $publishCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
             if (
                 !$this->getUserRoleTypeAPI()->userCan(
@@ -183,11 +183,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Validate that the status is valid
-        if ($mutationDataProvider->has(MutationInputProperties::STATUS)) {
-            $status = $mutationDataProvider->get(MutationInputProperties::STATUS);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
+            $status = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
             if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
                 $errors[] = new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
@@ -203,33 +203,33 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         App::doAction(
             self::HOOK_VALIDATE_CONTENT,
             array(&$errors),
-            $mutationDataProvider
+            $fieldDataAccessor
         );
     }
 
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateCreateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
 
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdateContent(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
 
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateCreate(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateCreate(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Either the title or the content must be set
         if (
-            !$mutationDataProvider->has(MutationInputProperties::TITLE)
-            && !$mutationDataProvider->has(MutationInputProperties::CONTENT)
+            !$fieldDataAccessor->hasValue(MutationInputProperties::TITLE)
+            && !$fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)
         ) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
@@ -241,9 +241,9 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     /**
      * @param FeedbackItemResolution[] $errors
      */
-    protected function validateUpdate(array &$errors, MutationDataProviderInterface $mutationDataProvider): void
+    protected function validateUpdate(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        $customPostID = $mutationDataProvider->get(MutationInputProperties::ID);
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         if (!$customPostID) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
@@ -278,13 +278,13 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
     }
 
-    protected function additionals(int | string $customPostID, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
-    protected function updateAdditionals(int | string $customPostID, MutationDataProviderInterface $mutationDataProvider, array $log): void
+    protected function updateAdditionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
     }
-    protected function createAdditionals(int | string $customPostID, MutationDataProviderInterface $mutationDataProvider): void
+    protected function createAdditionals(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
 
@@ -293,35 +293,35 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     //     $post_data['custompost-type'] = $this->getCustomPostType();
     // }
 
-    protected function addCreateUpdateCustomPostData(array &$post_data, MutationDataProviderInterface $mutationDataProvider): void
+    protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if ($mutationDataProvider->has(MutationInputProperties::CONTENT)) {
-            $post_data['content'] = $mutationDataProvider->get(MutationInputProperties::CONTENT);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)) {
+            $post_data['content'] = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT);
         }
-        if ($mutationDataProvider->has(MutationInputProperties::TITLE)) {
-            $post_data['title'] = $mutationDataProvider->get(MutationInputProperties::TITLE);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
+            $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
         }
-        if ($mutationDataProvider->has(MutationInputProperties::STATUS)) {
-            $post_data['status'] = $mutationDataProvider->get(MutationInputProperties::STATUS);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
+            $post_data['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
     }
 
-    protected function getUpdateCustomPostData(MutationDataProviderInterface $mutationDataProvider): array
+    protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = array(
-            'id' => $mutationDataProvider->get(MutationInputProperties::ID),
+            'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
-        $this->addCreateUpdateCustomPostData($post_data, $mutationDataProvider);
+        $this->addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
 
         return $post_data;
     }
 
-    protected function getCreateCustomPostData(MutationDataProviderInterface $mutationDataProvider): array
+    protected function getCreateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = [
             'custompost-type' => $this->getCustomPostType(),
         ];
-        $this->addCreateUpdateCustomPostData($post_data, $mutationDataProvider);
+        $this->addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
 
         return $post_data;
     }
@@ -336,11 +336,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         return $this->getCustomPostTypeMutationAPI()->updateCustomPost($post_data);
     }
 
-    protected function createUpdateCustomPost(MutationDataProviderInterface $mutationDataProvider, int | string $customPostID): void
+    protected function createUpdateCustomPost(FieldDataAccessorInterface $fieldDataAccessor, int | string $customPostID): void
     {
     }
 
-    protected function getUpdateCustomPostDataLog(int | string $customPostID, MutationDataProviderInterface $mutationDataProvider): array
+    protected function getUpdateCustomPostDataLog(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [
             'previous-status' => $this->getCustomPostTypeAPI()->getStatus($customPostID),
@@ -351,27 +351,27 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exists)
      */
-    protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
-        $post_data = $this->getUpdateCustomPostData($mutationDataProvider);
+        $post_data = $this->getUpdateCustomPostData($fieldDataAccessor);
         $customPostID = $post_data['id'];
 
         // Create the operation log, to see what changed. Needed for
         // - Send email only when post published
         // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
-        $log = $this->getUpdateCustomPostDataLog($customPostID, $mutationDataProvider);
+        $log = $this->getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);
 
         $customPostID = $this->executeUpdateCustomPost($post_data);
 
-        $this->createUpdateCustomPost($mutationDataProvider, $customPostID);
+        $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionals($customPostID, $mutationDataProvider);
-        $this->updateAdditionals($customPostID, $mutationDataProvider, $log);
+        $this->additionals($customPostID, $fieldDataAccessor);
+        $this->updateAdditionals($customPostID, $fieldDataAccessor, $log);
 
         // Inject Share profiles here
-        App::doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $mutationDataProvider);
-        App::doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $mutationDataProvider);
+        App::doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
+        App::doAction(self::HOOK_EXECUTE_UPDATE, $customPostID, $log, $fieldDataAccessor);
 
         return $customPostID;
     }
@@ -390,20 +390,20 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      * @return string|int The ID of the created entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function create(MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function create(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
-        $post_data = $this->getCreateCustomPostData($mutationDataProvider);
+        $post_data = $this->getCreateCustomPostData($fieldDataAccessor);
         $customPostID = $this->executeCreateCustomPost($post_data);
 
-        $this->createUpdateCustomPost($mutationDataProvider, $customPostID);
+        $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionals($customPostID, $mutationDataProvider);
-        $this->createAdditionals($customPostID, $mutationDataProvider);
+        $this->additionals($customPostID, $fieldDataAccessor);
+        $this->createAdditionals($customPostID, $fieldDataAccessor);
 
         // Inject Share profiles here
-        App::doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $mutationDataProvider);
-        App::doAction(self::HOOK_EXECUTE_CREATE, $customPostID, $mutationDataProvider);
+        App::doAction(self::HOOK_EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
+        App::doAction(self::HOOK_EXECUTE_CREATE, $customPostID, $fieldDataAccessor);
 
         return $customPostID;
     }

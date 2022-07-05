@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -109,23 +109,23 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
         };
     }
 
-    protected function prepareMutationDataProviderForObject(
-        MutationDataProviderInterface $mutationDataProviderForObject,
+    protected function prepareFieldDataAccessorForObject(
+        FieldDataAccessorInterface $fieldDataAccessorForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareMutationDataProviderForObject(
-            $mutationDataProviderForObject,
+        parent::prepareFieldDataAccessorForObject(
+            $fieldDataAccessorForObject,
             $objectTypeResolver,
-            $mutationField,
+            $field,
             $object,
         );
         $comment = $object;
-        switch ($mutationField->getName()) {
+        switch ($field->getName()) {
             case 'reply':
-                $mutationDataProviderForObject->add(MutationInputProperties::CUSTOMPOST_ID, $this->getCommentTypeAPI()->getCommentPostId($comment));
-                $mutationDataProviderForObject->add(MutationInputProperties::PARENT_COMMENT_ID, $objectTypeResolver->getID($comment));
+                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $this->getCommentTypeAPI()->getCommentPostId($comment));
+                $fieldDataAccessorForObject->addValue(MutationInputProperties::PARENT_COMMENT_ID, $objectTypeResolver->getID($comment));
                 break;
         }
     }

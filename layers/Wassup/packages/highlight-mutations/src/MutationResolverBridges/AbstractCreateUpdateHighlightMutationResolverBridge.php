@@ -63,15 +63,18 @@ abstract class AbstractCreateUpdateHighlightMutationResolverBridge extends Abstr
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::COMPONENT_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
-        parent::fillMutationDataProvider($mutationDataProvider);
+        parent::addMutationDataForFieldDataAccessor($mutationData);
 
         $highlightedPost = $this->getComponentProcessorManager()->getComponentProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
-        $mutationDataProvider->add('highlightedpost', $highlightedPost);
+        $mutationData['highlightedpost'] = $highlightedPost;
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
         $referenced = $this->getCustomPostTypeAPI()->getCustomPost($highlightedPost);
-        $mutationDataProvider->add('title', $this->getCustomPostTypeAPI()->getTitle($referenced));
+        $mutationData['title'] = $this->getCustomPostTypeAPI()->getTitle($referenced);
     }
 }

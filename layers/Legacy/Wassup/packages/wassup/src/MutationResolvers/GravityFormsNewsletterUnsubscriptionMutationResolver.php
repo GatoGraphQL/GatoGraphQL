@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use GFAPI;
 use PoP_Newsletter_GFHelpers;
 use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptionMutationResolver;
@@ -20,9 +20,9 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
         }
     }
 
-    protected function getNewsletterData(MutationDataProviderInterface $mutationDataProvider)
+    protected function getNewsletterData(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        $ret = parent::getNewsletterData($mutationDataProvider);
+        $ret = parent::getNewsletterData($fieldDataAccessor);
 
         // Find the entry_id from the email (let's assume there is only one. If there is more than one, that is the user subscribed more than once, so will have to unsubscribe more than once. HOhohoho)
         $search_criteria = array(
@@ -30,7 +30,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
             'field_filters' => array(
                 array(
                     'key' => '1'/*POP_GENERICFORMS_NEWSLETTER_FIELDNAME_EMAIL_ID*/,
-                    'value' => $mutationDataProvider->get('email'),
+                    'value' => $fieldDataAccessor->getValue('email'),
                 ),
             ),
         );

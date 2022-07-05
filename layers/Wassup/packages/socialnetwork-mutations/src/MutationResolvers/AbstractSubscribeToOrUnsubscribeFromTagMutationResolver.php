@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 
@@ -21,11 +21,11 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $this->postTagTypeAPI ??= $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $errors = parent::validateErrors($mutationDataProvider);
+        $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
-            $target_id = $mutationDataProvider->get('target_id');
+            $target_id = $fieldDataAccessor->getValue('target_id');
 
             // Make sure the post exists
             $target = $this->getPostTagTypeAPI()->getTag($target_id);
@@ -41,9 +41,9 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
         return $errors;
     }
 
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction('gd_subscritetounsubscribefrom_tag', $target_id, $mutationDataProvider);
-        parent::additionals($target_id, $mutationDataProvider);
+        App::doAction('gd_subscritetounsubscribefrom_tag', $target_id, $fieldDataAccessor);
+        parent::additionals($target_id, $fieldDataAccessor);
     }
 }

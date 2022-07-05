@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SystemMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
@@ -59,7 +59,7 @@ class ActivatePluginsMutationResolver extends AbstractMutationResolver
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin

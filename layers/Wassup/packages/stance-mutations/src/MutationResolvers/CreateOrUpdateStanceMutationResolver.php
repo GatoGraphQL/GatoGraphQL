@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties;
 
@@ -13,28 +13,28 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        if ($this->isUpdate($mutationDataProvider)) {
-            return $this->update($mutationDataProvider);
+        if ($this->isUpdate($fieldDataAccessor)) {
+            return $this->update($fieldDataAccessor);
         }
-        return $this->create($mutationDataProvider);
+        return $this->create($fieldDataAccessor);
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        if ($this->isUpdate($mutationDataProvider)) {
-            return $this->validateUpdateErrors($mutationDataProvider);
+        if ($this->isUpdate($fieldDataAccessor)) {
+            return $this->validateUpdateErrors($fieldDataAccessor);
         }
-        return $this->validateCreateErrors($mutationDataProvider);
+        return $this->validateCreateErrors($fieldDataAccessor);
     }
 
     /**
      * If there's an "id" entry => It's Update
      * Otherwise => It's Create
      */
-    protected function isUpdate(MutationDataProviderInterface $mutationDataProvider): bool
+    protected function isUpdate(FieldDataAccessorInterface $fieldDataAccessor): bool
     {
-        return !empty($mutationDataProvider->get(MutationInputProperties::ID));
+        return !empty($fieldDataAccessor->getValue(MutationInputProperties::ID));
     }
 }

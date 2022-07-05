@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\Hooks;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\MutationInputProperties;
@@ -35,16 +35,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    public function maybeSetCategories(int | string $customPostID, MutationDataProviderInterface $mutationDataProvider): void
+    public function maybeSetCategories(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Only for that specific CPT
         if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()) {
             return;
         }
-        if (!$mutationDataProvider->has(MutationInputProperties::CATEGORY_IDS)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_IDS)) {
             return;
         }
-        $customPostCategoryIDs = $mutationDataProvider->get(MutationInputProperties::CATEGORY_IDS);
+        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
         $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
     }

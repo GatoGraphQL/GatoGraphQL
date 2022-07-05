@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\Exception\AbstractException;
@@ -19,11 +19,11 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $customPostID = $mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID);
-        $postCategoryIDs = $mutationDataProvider->get(MutationInputProperties::CATEGORY_IDS);
-        $append = $mutationDataProvider->get(MutationInputProperties::APPEND);
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        $postCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
+        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         $customPostCategoryTypeAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeAPI->setCategories($customPostID, $postCategoryIDs, $append);
         return $customPostID;
@@ -31,7 +31,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
     abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
@@ -42,7 +42,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
 
         $errors = [];
-        if (!$mutationDataProvider->get(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

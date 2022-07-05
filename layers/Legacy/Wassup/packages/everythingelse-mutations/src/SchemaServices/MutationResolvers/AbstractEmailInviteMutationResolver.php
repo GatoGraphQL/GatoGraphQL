@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP_EmailSender_Utils;
 use PoP_FormUtils;
@@ -20,25 +20,25 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @throws AbstractException In case of error
      */
-    public function executeMutation(MutationDataProviderInterface $mutationDataProvider): mixed
+    public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $emails = $mutationDataProvider->get('emails');
+        $emails = $fieldDataAccessor->getValue('emails');
         // Remove the invalid emails
         $emails = array_diff($emails, $this->getInvalidEmails($emails));
         if (!empty($emails)) {
-            $subject = $this->getEmailSubject($mutationDataProvider);
-            $content = $this->getEmailContent($mutationDataProvider);
+            $subject = $this->getEmailSubject($fieldDataAccessor);
+            $content = $this->getEmailContent($fieldDataAccessor);
             PoP_EmailSender_Utils::sendemailToUsers($emails, array(), $subject, $content, true);
             return true;
         }
         return false;
     }
 
-    protected function validateCaptcha(&$errors, &$mutationDataProvider): void
+    protected function validateCaptcha(&$errors, &$fieldDataAccessor): void
     {
         // Validate the captcha
         if (!PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
-            $captcha = $mutationDataProvider->get('captcha');
+            $captcha = $fieldDataAccessor->getValue('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
@@ -47,17 +47,17 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         }
     }
 
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
-        $this->validateCaptcha($errors, $mutationDataProvider);
+        $this->validateCaptcha($errors, $fieldDataAccessor);
 
         if ($errors) {
             return $errors;
         }
 
-        $emails = $mutationDataProvider->get('emails');
+        $emails = $fieldDataAccessor->getValue('emails');
         if (empty($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -83,11 +83,11 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     /**
      * @return FeedbackItemResolution[]
      */
-    public function validateWarnings(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $warnings = [];
 
-        $emails = $mutationDataProvider->get('emails');
+        $emails = $fieldDataAccessor->getValue('emails');
         if ($invalid_emails = $this->getInvalidEmails($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $warnings[] = new FeedbackItemResolution(
@@ -103,7 +103,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         return $warnings;
     }
 
-    abstract protected function getEmailContent(MutationDataProviderInterface $mutationDataProvider);
+    abstract protected function getEmailContent(FieldDataAccessorInterface $fieldDataAccessor);
 
-    abstract protected function getEmailSubject(MutationDataProviderInterface $mutationDataProvider);
+    abstract protected function getEmailSubject(FieldDataAccessorInterface $fieldDataAccessor);
 }

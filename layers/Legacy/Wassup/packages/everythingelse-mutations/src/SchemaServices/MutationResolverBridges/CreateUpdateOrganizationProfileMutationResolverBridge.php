@@ -66,20 +66,23 @@ class CreateUpdateOrganizationProfileMutationResolverBridge extends CreateUpdate
         return $inputs;
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
-        $this->getCommonuserrolesFormData($mutationField);
-        $this->getUsercommunitiesFormData($mutationField);
+        $this->getCommonuserrolesFormData($mutationData);
+        $this->getUsercommunitiesFormData($mutationData);
     }
-    protected function getCommonuserrolesFormData(FieldInterface $mutationField)
+    protected function getCommonuserrolesFormData(array &$mutationData): void
     {
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
         $inputs = $this->getFormInputs();
         $organizationtypes = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationtypes'])->getValue($inputs['organizationtypes']);
         $organizationcategories = $this->getComponentProcessorManager()->getComponentProcessor($inputs['organizationcategories'])->getValue($inputs['organizationcategories']);
-        $mutationDataProvider->add('organizationtypes', $organizationtypes ?? array());
-        $mutationDataProvider->add('organizationcategories', $organizationcategories ?? array());
-        $mutationDataProvider->add('contact_number', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number']))));
-        $mutationDataProvider->add('contact_person', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person']))));
+        $mutationData['organizationtypes'] = $organizationtypes ?? array();
+        $mutationData['organizationcategories'] = $organizationcategories ?? array();
+        $mutationData['contact_number'] = trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_number'])->getValue($inputs['contact_number'])));
+        $mutationData['contact_person'] = trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['contact_person'])->getValue($inputs['contact_person'])));
     }
 }

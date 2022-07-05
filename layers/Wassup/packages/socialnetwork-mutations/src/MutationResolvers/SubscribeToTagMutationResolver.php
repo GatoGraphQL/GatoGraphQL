@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
@@ -12,12 +12,12 @@ use PoPCMSSchema\UserMeta\Utils;
 
 class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFromTagMutationResolver
 {
-    public function validateErrors(MutationDataProviderInterface $mutationDataProvider): array
+    public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $errors = parent::validateErrors($mutationDataProvider);
+        $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $mutationDataProvider->get('target_id');
+            $target_id = $fieldDataAccessor->getValue('target_id');
 
             // Check that the logged in user has not already subscribed to this tag
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
@@ -41,19 +41,19 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
     /**
      * Function to override
      */
-    protected function additionals($target_id, MutationDataProviderInterface $mutationDataProvider): void
+    protected function additionals($target_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        parent::additionals($target_id, $mutationDataProvider);
-        App::doAction('gd_subscribetotag', $target_id, $mutationDataProvider);
+        parent::additionals($target_id, $fieldDataAccessor);
+        App::doAction('gd_subscribetotag', $target_id, $fieldDataAccessor);
     }
 
     /**
      * @throws AbstractException In case of error
      */
-    protected function update(MutationDataProviderInterface $mutationDataProvider): string | int
+    protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $mutationDataProvider->get('target_id');
+        $target_id = $fieldDataAccessor->getValue('target_id');
 
         // Update value
         Utils::addUserMeta($user_id, \GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
@@ -64,6 +64,6 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
         $count = $count ? $count : 0;
         \PoPCMSSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, \GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count + 1), true);
 
-        return parent::update($mutationDataProvider);
+        return parent::update($fieldDataAccessor);
     }
 }

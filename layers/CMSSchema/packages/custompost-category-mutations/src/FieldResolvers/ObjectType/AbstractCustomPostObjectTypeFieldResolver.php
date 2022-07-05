@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\Mutation\MutationDataProviderInterface;
+use PoP\ComponentModel\Mutation\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -81,22 +81,22 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
 
-    protected function prepareMutationDataProviderForObject(
-        MutationDataProviderInterface $mutationDataProviderForObject,
+    protected function prepareFieldDataAccessorForObject(
+        FieldDataAccessorInterface $fieldDataAccessorForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $mutationField,
+        FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareMutationDataProviderForObject(
-            $mutationDataProviderForObject,
+        parent::prepareFieldDataAccessorForObject(
+            $fieldDataAccessorForObject,
             $objectTypeResolver,
-            $mutationField,
+            $field,
             $object,
         );
         $customPost = $object;
-        switch ($mutationField->getName()) {
+        switch ($field->getName()) {
             case 'setCategories':
-                $mutationDataProviderForObject->add(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
+                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
                 break;
         }
     }

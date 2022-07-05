@@ -52,46 +52,58 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
         }
     }
 
-    public function fillMutationDataProvider(\PoP\ComponentModel\Mutation\MutationDataProviderInterface $mutationDataProvider): void
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    public function addMutationDataForFieldDataAccessor(array &$mutationData): void
     {
         $cmseditusershelpers = HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         $user_id = App::getState('is-user-logged-in') ? App::getState('current-user-id') : '';
         $inputs = $this->getFormInputs();
         
-        $mutationDataProvider->add('user_id', $user_id);
-        $mutationDataProvider->add('username', $cmseditusershelpers->sanitizeUsername($this->getComponentProcessorManager()->getComponentProcessor($inputs['username'])->getValue($inputs['username'])));
-        $mutationDataProvider->add('password', $this->getComponentProcessorManager()->getComponentProcessor($inputs['password'])->getValue($inputs['password']));
-        $mutationDataProvider->add('repeat_password', $this->getComponentProcessorManager()->getComponentProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']));
-        $mutationDataProvider->add('first_name', trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['first_name'])->getValue($inputs['first_name']))));
-        $mutationDataProvider->add('user_email', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['user_email'])->getValue($inputs['user_email'])));
-        $mutationDataProvider->add('description', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['description'])->getValue($inputs['description'])));
-        $mutationDataProvider->add('user_url', trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['user_url'])->getValue($inputs['user_url'])));
+        $mutationData['user_id'] = $user_id;
+        $mutationData['username'] = $cmseditusershelpers->sanitizeUsername($this->getComponentProcessorManager()->getComponentProcessor($inputs['username'])->getValue($inputs['username']));
+        $mutationData['password'] = $this->getComponentProcessorManager()->getComponentProcessor($inputs['password'])->getValue($inputs['password']);
+        $mutationData['repeat_password'] = $this->getComponentProcessorManager()->getComponentProcessor($inputs['repeat_password'])->getValue($inputs['repeat_password']);
+        $mutationData['first_name'] = trim($cmsapplicationhelpers->escapeAttributes($this->getComponentProcessorManager()->getComponentProcessor($inputs['first_name'])->getValue($inputs['first_name'])));
+        $mutationData['user_email'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['user_email'])->getValue($inputs['user_email']));
+        $mutationData['description'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['description'])->getValue($inputs['description']));
+        $mutationData['user_url'] = trim($this->getComponentProcessorManager()->getComponentProcessor($inputs['user_url'])->getValue($inputs['user_url']));
 
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $mutationDataProvider->add('captcha', $this->getComponentProcessorManager()->getComponentProcessor($inputs['captcha'])->getValue($inputs['captcha']));
+            $mutationData['captcha'] = $this->getComponentProcessorManager()->getComponentProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_user:form_data', $mutationField);
+        $mutationDataInArray = [&$mutationData];
+        App::doAction('gd_createupdate_user:form_data', $mutationDataInArray);
 
         if ($user_id) {
-            $this->getUpdateuserFormData($mutationField);
+            $this->getUpdateuserFormData($mutationData);
         } else {
-            $this->getCreateuserFormData($mutationField);
+            $this->getCreateuserFormData($mutationData);
         }
     }
 
-    protected function getCreateuserFormData(FieldInterface $mutationField)
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    protected function getCreateuserFormData(array &$mutationData): void
     {
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_user:form_data:create', $mutationField);
+        $mutationDataInArray = [&$mutationData];
+        App::doAction('gd_createupdate_user:form_data:create', $mutationDataInArray);
     }
 
-    protected function getUpdateuserFormData(FieldInterface $mutationField)
+    /**
+     * @param array<string,mixed> $mutationData
+     */
+    protected function getUpdateuserFormData(array &$mutationData): void
     {
         // Allow to add extra inputs
-        App::doAction('gd_createupdate_user:form_data:update', $mutationField);
+        $mutationDataInArray = [&$mutationData];
+        App::doAction('gd_createupdate_user:form_data:update', $mutationDataInArray);
     }
 
     private function getFormInputs()
