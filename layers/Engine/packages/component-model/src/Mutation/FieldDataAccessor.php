@@ -53,7 +53,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
      */
     protected function getPropertiesInNormalizedValues(): array
     {
-        return array_keys($this->customValues);
+        return array_keys($this->normalizedValues);
     }
 
     public function hasValue(string $propertyName): bool
@@ -69,7 +69,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     protected function hasValueInNormalizedValues(string $propertyName): bool
     {
-        return array_key_exists($propertyName, $this->customValues);
+        return array_key_exists($propertyName, $this->normalizedValues);
     }
 
     public function getValue(string $propertyName): mixed
@@ -87,11 +87,11 @@ class FieldDataAccessor implements FieldDataAccessorInterface
 
     protected function getValueFromCustomValues(string $propertyName): mixed
     {
-        return $this->customValues[$propertyName] ?? null;
+        return $this->normalizedValues[$propertyName] ?? null;
     }
 
     public function addValue(string $propertyName, mixed $value): void
     {
-        $this->customValues[$propertyName] = $value;
+        $this->normalizedValues[$propertyName] = $value;
     }
 }
