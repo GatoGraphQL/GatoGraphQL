@@ -74,6 +74,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
+    // @todo Remove this function
     protected function prepareFieldDataAccessorForObject(
         FieldDataAccessorInterface $fieldDataAccessorForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -90,6 +91,29 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         switch ($field->getName()) {
             case 'update':
                 $fieldDataAccessorForObject->addValue(MutationInputProperties::ID, $objectTypeResolver->getID($post));
+                break;
+        }
+    }
+
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+        object $object,
+    ): void {
+        parent::prepareFieldDataForObject(
+            $fieldDataForObject,
+            $objectTypeResolver,
+            $field,
+            $object,
+        );
+        $post = $object;
+        switch ($field->getName()) {
+            case 'update':
+                $fieldDataForObject[MutationInputProperties::ID] = $objectTypeResolver->getID($post);
                 break;
         }
     }

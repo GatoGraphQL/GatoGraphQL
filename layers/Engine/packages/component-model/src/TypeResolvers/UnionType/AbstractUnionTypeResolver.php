@@ -490,8 +490,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
         foreach ($fields as $field) {
-            $fieldData = $field->getArgumentKeyValues();
-            // @todo Call ->prepareFieldData here!
+            $sourceFieldData = $field->getArgumentKeyValues();
 
             /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
             $objectTypeResolverObjectFieldData = new SplObjectStorage();
@@ -526,6 +525,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 if ($executableObjectTypeFieldResolver === null) {
                     continue;
                 }
+                $fieldData = clone $sourceFieldData;
+                $targetObjectTypeResolver->prepareFieldData($fieldData, $field);
+
                 if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
                     /** 
                      * Handle case:
@@ -551,8 +553,14 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                      *    the value for the `$postID` is injected into the FieldArgs for each object,
                      *    and the validation of the FieldArgs must also be executed for each object.
                      */
-                    $objectFieldData[$object] = $fieldData;
-                    // @todo Call ->prepareFieldDataForObject here!
+                    $fieldDataForObject = clone $fieldData;
+                    $executableObjectTypeFieldResolver->prepareFieldDataForObject(
+                        $fieldDataForObject,
+                        $targetObjectTypeResolver,
+                        $field,
+                        $object,
+                    );
+                    $objectFieldData[$object] = $fieldDataForObject;
                 }                
                 $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $objectFieldData;
             }

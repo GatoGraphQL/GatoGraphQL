@@ -1219,8 +1219,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $ids = $fieldIDs[$field];
                 foreach ($ids as $id) {
                     $object = $idObjects[$id];
-                    $objectFieldData[$object] = $fieldData;
-                    // @todo Call ->prepareFieldDataForObject here!
+                    $fieldDataForObject = clone $fieldData;
+                    $executableObjectTypeFieldResolver->prepareFieldDataForObject(
+                        $fieldDataForObject,
+                        $this,
+                        $field,
+                        $object,
+                    );
+                    $objectFieldData[$object] = $fieldDataForObject;
                 }
             }
             $objectTypeResolverObjectFieldData[$this] = $objectFieldData;

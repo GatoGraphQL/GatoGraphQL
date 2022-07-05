@@ -100,6 +100,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         };
     }
 
+    // @todo Remove this function
     protected function prepareFieldDataAccessorForObject(
         FieldDataAccessorInterface $fieldDataAccessorForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -116,6 +117,29 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         switch ($field->getName()) {
             case 'addComment':
                 $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
+                break;
+        }
+    }
+
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+        object $object,
+    ): void {
+        parent::prepareFieldDataForObject(
+            $fieldDataForObject,
+            $objectTypeResolver,
+            $field,
+            $object,
+        );
+        $customPost = $object;
+        switch ($field->getName()) {
+            case 'addComment':
+                $fieldDataForObject[MutationInputProperties::CUSTOMPOST_ID] = $objectTypeResolver->getID($customPost);
                 break;
         }
     }
