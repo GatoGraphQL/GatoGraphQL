@@ -20,6 +20,7 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
@@ -29,12 +30,14 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -1148,5 +1151,74 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Return all the units that resolve the fieldName
         return array_values($objectTypeFieldResolvers);
+    }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param FieldInterface[] $fields
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     */
+    protected function getFieldObjectTypeResolverObjectFieldData(
+        array $fields,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+    ): SplObjectStorage
+    {
+        /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
+        $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
+
+        $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
+        foreach ($fields as $field) {
+            $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+            /** @var array<string,mixed> */
+            $fieldData = [];
+            foreach ($field->getArguments() as $argument) {
+                $fieldData[$argument->getName()] = $argument->getValue();
+            }
+            // @todo Call ->prepareFieldData here!
+
+            /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
+            $objectTypeResolverObjectFieldData = new SplObjectStorage();
+            /** @var SplObjectStorage<object,array<string,mixed>> */
+            $objectFieldData = new SplObjectStorage();
+            
+            if (!$executableObjectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
+                /** 
+                 * Handle case:
+                 *
+                 * 1. Data from a Field in an ObjectTypeResolver: a single instance of the
+                 *    FieldArgs will satisfy all queried objects, since the same schema applies
+                 *    to all of them.
+                 */                
+                $objectFieldData[$wildcardObject] = $fieldData;
+            } else {
+                /** 
+                 * Handle case:
+                 *
+                 * 3. Data for a specific object: When executing nested mutations, the FieldArgs
+                 *    for each object will be different, as it will contain implicit information
+                 *    belonging to the object.
+                 *    For instance, when querying `mutation { posts { update(title: "New title") { id } } }`,
+                 *    the value for the `$postID` is injected into the FieldArgs for each object,
+                 *    and the validation of the FieldArgs must also be executed for each object.
+                 */
+                $ids = $fieldIDs[$field];
+                foreach ($ids as $id) {
+                    $object = $idObjects[$id];
+                    $objectFieldData[$object] = $fieldData;
+                    // @todo Call ->prepareFieldDataForObject here!
+                }
+            }
+            $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
+            $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
+        }
+
+        return $fieldObjectTypeResolverObjectFieldData;
     }
 }

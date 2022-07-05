@@ -1108,6 +1108,22 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolverInstances = [];
             /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDFieldSet = [];
+            /**
+             * For each of the elements in the pipeline, convert the FieldArgs
+             * into its corresponding FieldDataAccessor, which integrates
+             * within the default values and coerces them according to the schema.
+             *
+             * This object is provided via a FieldDataAccessProvider, which can handle
+             * 3 different cases:
+             *
+             *   1. Data from a Field in an ObjectTypeResolver
+             *   2. Data from a Field in an UnionTypeResolver
+             *   3. Data for a specific object (eg: for nested mutations)
+             *
+             * @see FieldDataAccessProvider
+             */
+            /** @var array<SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>> */
+            $pipelineFieldObjectTypeResolverObjectFieldData = [];
             /** @var DirectiveResolverInterface $directiveResolverInstance */
             foreach ($directivePipelineData as $directiveResolverInstance) {
                 /** @var FieldInterface[] */
@@ -1141,6 +1157,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $pipelineIDFieldSet[] = $idFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
+                $pipelineFieldObjectTypeResolverObjectFieldData[] = $this->getFieldObjectTypeResolverObjectFieldData(
+                    $directiveDirectFieldsToProcess,
+                    $directiveFieldIDs[$directive],
+                    $idObjects
+                );
             }
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
@@ -1159,6 +1180,32 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             );
         }
     }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * This object is provided via a FieldDataAccessProvider, which can handle
+     * 3 different cases:
+     *
+     *   1. Data from a Field in an ObjectTypeResolver
+     *   2. Data from a Field in an UnionTypeResolver
+     *   3. Data for a specific object (eg: for nested mutations)
+     *
+     * The format of the response of this function is defined in class FieldDataAccessProvider
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param FieldInterface[] $fields
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     */
+    abstract protected function getFieldObjectTypeResolverObjectFieldData(
+        array $fields,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+    ): SplObjectStorage;
 
     public function getSchemaDirectiveResolvers(bool $global): array
     {
