@@ -56,6 +56,7 @@ class DirectivePipelineUtils
             &$payload['unionTypeOutputKeyIDs'],
             &$payload['previouslyResolvedIDFieldValues'],
             &$payload['pipelineIDFieldSet'],
+            &$payload['pipelineFieldDataAccessProviders'],
             &$payload['resolvedIDFieldValues'],
             &$payload['variables'],
             &$payload['messages'],
