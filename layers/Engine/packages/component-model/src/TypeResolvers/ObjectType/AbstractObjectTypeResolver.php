@@ -805,7 +805,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @param array<string,mixed> $fieldData
      */
-    final protected function integrateDefaultFieldArguments(
+    final protected function integrateDefaultFieldArgumentsIntoFieldData(
         array &$fieldData,
         FieldInterface $field
     ): void {
@@ -861,7 +861,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Add the default Arguments to the Field
          */
-        $this->integrateDefaultFieldArguments($fieldData, $field);
+        $this->integrateDefaultFieldArgumentsIntoFieldData($fieldData, $field);
 
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($objectTypeFieldResolver === null) {
