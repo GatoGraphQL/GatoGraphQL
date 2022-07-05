@@ -13,6 +13,7 @@ use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
@@ -424,7 +425,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      */
     public function resolveValue(
         object $object,
-        FieldInterface $field,
+        FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = [],
     ): mixed {
@@ -452,7 +453,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
         return $targetObjectTypeResolver->resolveValue(
             $object,
-            $field,
+            $fieldOrFieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
             $options,
         );

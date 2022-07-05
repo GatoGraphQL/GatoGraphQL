@@ -20,6 +20,8 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
@@ -378,19 +380,34 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
+     * When coming from @resolveAndMerge, we will receive a
+     * FieldDataAccessor with the fieldData already normalized.
+     *
+     * If executed within a FieldResolver we will (most likely)
+     * receive a Field, and we can assume there's no need to
+     * normalize the values, they will be coded/provided as required.
+     *
      * @param array<string,mixed> $options
      */
     final public function resolveValue(
         object $object,
-        FieldInterface $field,
+        FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = [],
     ): mixed {
         $engineState = App::getEngineState();
+        if ($fieldOrFieldDataAccessor instanceof FieldDataAccessorInterface) {
+            /** @var FieldDataAccessorInterface */
+            $fieldDataAccessor = $fieldOrFieldDataAccessor;
+            $field = $fieldDataAccessor->getField();
+        } else {
+            /** @var FieldInterface */
+            $field = $fieldOrFieldDataAccessor;
+        }
         if (!$engineState->hasObjectTypeResolvedValue($this, $object, $field)) {
             $value = $this->doResolveValue(
                 $object,
-                $field,
+                $fieldOrFieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
                 $options,
             );
@@ -404,10 +421,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final protected function doResolveValue(
         object $object,
-        FieldInterface $field,
+        FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = [],
     ): mixed {
+        $isFieldDataAccessor = $fieldOrFieldDataAccessor instanceof FieldDataAccessorInterface;
+        if ($isFieldDataAccessor) {
+            /** @var FieldDataAccessorInterface */
+            $fieldDataAccessor = $fieldOrFieldDataAccessor;
+            $field = $fieldDataAccessor->getField();
+        } else {
+            /** @var FieldInterface */
+            $field = $fieldOrFieldDataAccessor;
+        }
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($objectTypeFieldResolver === null) {
             /**
@@ -496,6 +522,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
+        }
+
+        if (!$isFieldDataAccessor) {
+            /**
+             * If executed within a FieldResolver we will (most likely)
+             * receive a Field, and we can assume there's no need to
+             * normalize the values, they will be coded/provided as required.
+             */
+            $fieldDataAccessor = new FieldDataAccessor($field);
         }
 
         // Resolve the value. If the field resolver throws an Exception,
