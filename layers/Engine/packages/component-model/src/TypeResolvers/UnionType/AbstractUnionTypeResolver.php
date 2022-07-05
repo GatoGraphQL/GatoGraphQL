@@ -500,6 +500,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
             $objectTypeResolverObjectFieldData = new SplObjectStorage();
             
+            /** @var array<string|int> */
             $ids = $fieldIDs[$field];
             foreach ($ids as $id) {
                 $object = $idObjects[$id];
