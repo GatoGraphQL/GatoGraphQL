@@ -57,7 +57,16 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $idObjects, $resolvedIDFieldValues, $variables, $engineIterationFeedbackStore);
+        $this->validateAndFilterFields(
+            $relationalTypeResolver,
+            $idFieldSet,
+            $fieldDataAccessProvider,
+            $succeedingPipelineIDFieldSet,
+            $idObjects,
+            $resolvedIDFieldValues,
+            $variables,
+            $engineIterationFeedbackStore,
+        );
     }
 
     /**
@@ -67,6 +76,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$succeedingPipelineIDFieldSet,
         array $idObjects,
         array &$resolvedIDFieldValues,
@@ -83,7 +93,14 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $fieldSet->fields
             )));
         }
-        $this->validateFields($relationalTypeResolver, $fields, $variables, $engineIterationFeedbackStore, $failedFields);
+        $this->validateFields(
+            $relationalTypeResolver,
+            $fields,
+            $fieldDataAccessProvider,
+            $variables,
+            $engineIterationFeedbackStore,
+            $failedFields
+        );
 
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedFields) {
@@ -121,6 +138,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     abstract protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$failedFields,

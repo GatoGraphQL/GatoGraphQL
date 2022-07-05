@@ -8,6 +8,9 @@ use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterfa
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -52,6 +55,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
     protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$failedFields,
@@ -61,6 +65,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
             $this->validateField(
                 $relationalTypeResolver,
                 $field,
+                $fieldDataAccessProvider,
                 $variables,
                 $objectTypeFieldResolutionFeedbackStore
             );
@@ -79,6 +84,7 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
     protected function validateField(
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -92,8 +98,13 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
-
-        $objectTypeResolver->collectFieldValidationErrors($field, $objectTypeFieldResolutionFeedbackStore);
+        // @todo Review $object as null here
+        // @todo Check: should simplify this logic? Have FieldDataAccessor be produced by $fieldDataAccessProvider?
+        $fieldDataAccessor = new FieldDataAccessor(
+            $field,
+            $fieldDataAccessProvider->getFieldData($field, $objectTypeResolver, null)
+        );
+        $objectTypeResolver->collectFieldValidationErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         // If there are errors, do not check warnings/deprecations for fear of producing some exception
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return;
