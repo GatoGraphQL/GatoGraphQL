@@ -313,6 +313,7 @@ trait AliasSchemaDirectiveResolverTrait
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
@@ -327,6 +328,7 @@ trait AliasSchemaDirectiveResolverTrait
         $aliasedDirectiveResolver->resolveDirective(
             $relationalTypeResolver,
             $idFieldSet,
+            $fieldDataAccessProvider,
             $succeedingPipelineDirectiveResolvers,
             $idObjects,
             $unionTypeOutputKeyIDs,

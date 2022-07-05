@@ -1126,6 +1126,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 $this->resolveDirective(
                     $relationalTypeResolver,
                     $idFieldSet,
+                    $fieldDataAccessProvider,
                     $pipelineDirectiveResolvers,
                     $idObjects,
                     $unionTypeOutputKeyIDs,
