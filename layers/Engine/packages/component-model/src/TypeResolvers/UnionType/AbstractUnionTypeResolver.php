@@ -525,7 +525,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 if ($executableObjectTypeFieldResolver === null) {
                     continue;
                 }
-                $fieldData = clone $sourceFieldData;
+                // Clone array
+                $fieldData = array_merge([], $sourceFieldData);
                 $targetObjectTypeResolver->prepareFieldData($fieldData, $field);
 
                 if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
@@ -553,7 +554,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                      *    the value for the `$postID` is injected into the FieldArgs for each object,
                      *    and the validation of the FieldArgs must also be executed for each object.
                      */
-                    $fieldDataForObject = clone $fieldData;
+                    // Clone array
+                    $fieldDataForObject = array_merge([], $fieldData);
                     $executableObjectTypeFieldResolver->prepareFieldDataForObject(
                         $fieldDataForObject,
                         $targetObjectTypeResolver,
