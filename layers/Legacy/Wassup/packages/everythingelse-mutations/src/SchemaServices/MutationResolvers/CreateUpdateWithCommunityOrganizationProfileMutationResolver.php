@@ -17,7 +17,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolver extends Creat
 
         // Is community?
         $cmsuserrolesapi = FunctionAPIFactory::getInstance();
-        if ($fieldDataAccessor->get('is_community')) {
+        if ($fieldDataAccessor->getValue('is_community')) {
             $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_COMMUNITY);
         } else {
             $cmsuserrolesapi->removeRoleFromUser($user_id, GD_URE_ROLE_COMMUNITY);

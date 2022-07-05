@@ -29,6 +29,6 @@ trait CreateUpdateIndividualProfileMutationResolverTrait
     }
     protected function commonuserrolesCreateupdateuser($user_id, FieldDataAccessorInterface $fieldDataAccessor)
     {
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $fieldDataAccessor->get('individualinterests'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $fieldDataAccessor->getValue('individualinterests'));
     }
 }

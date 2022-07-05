@@ -15,7 +15,7 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $histid = $fieldDataAccessor->get('histid');
+        $histid = $fieldDataAccessor->getValue('histid');
         if (!$histid) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -47,8 +47,8 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
 
     protected function setStatus(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        // return AAL_Main::instance()->api->setStatus($fieldDataAccessor->get('histid'), $fieldDataAccessor->get('user_id'), $this->getStatus());
-        return PoP_Notifications_API::setStatus($fieldDataAccessor->get('histid'), $fieldDataAccessor->get('user_id'), $this->getStatus());
+        // return AAL_Main::instance()->api->setStatus($fieldDataAccessor->getValue('histid'), $fieldDataAccessor->getValue('user_id'), $this->getStatus());
+        return PoP_Notifications_API::setStatus($fieldDataAccessor->getValue('histid'), $fieldDataAccessor->getValue('user_id'), $this->getStatus());
     }
 
     /**
@@ -57,8 +57,8 @@ abstract class AbstractMarkAsReadOrUnreadNotificationMutationResolver extends Ab
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         $hist_ids = $this->setStatus($fieldDataAccessor);
-        $this->additionals($fieldDataAccessor->get('histid'), $fieldDataAccessor);
+        $this->additionals($fieldDataAccessor->getValue('histid'), $fieldDataAccessor);
 
-        return $hist_ids; //$fieldDataAccessor->get('histid');
+        return $hist_ids; //$fieldDataAccessor->getValue('histid');
     }
 }

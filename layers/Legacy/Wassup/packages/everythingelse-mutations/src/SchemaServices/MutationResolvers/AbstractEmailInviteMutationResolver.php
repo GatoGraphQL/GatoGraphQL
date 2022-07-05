@@ -22,7 +22,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
      */
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $emails = $fieldDataAccessor->get('emails');
+        $emails = $fieldDataAccessor->getValue('emails');
         // Remove the invalid emails
         $emails = array_diff($emails, $this->getInvalidEmails($emails));
         if (!empty($emails)) {
@@ -38,7 +38,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     {
         // Validate the captcha
         if (!PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
-            $captcha = $fieldDataAccessor->get('captcha');
+            $captcha = $fieldDataAccessor->getValue('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
@@ -57,7 +57,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
             return $errors;
         }
 
-        $emails = $fieldDataAccessor->get('emails');
+        $emails = $fieldDataAccessor->getValue('emails');
         if (empty($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -87,7 +87,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     {
         $warnings = [];
 
-        $emails = $fieldDataAccessor->get('emails');
+        $emails = $fieldDataAccessor->getValue('emails');
         if ($invalid_emails = $this->getInvalidEmails($emails)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $warnings[] = new FeedbackItemResolution(

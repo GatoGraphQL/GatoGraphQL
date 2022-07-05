@@ -21,9 +21,9 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
      */
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $customPostID = $fieldDataAccessor->get(MutationInputProperties::CUSTOMPOST_ID);
-        $postTags = $fieldDataAccessor->get(MutationInputProperties::TAGS);
-        $append = $fieldDataAccessor->get(MutationInputProperties::APPEND);
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        $postTags = $fieldDataAccessor->getValue(MutationInputProperties::TAGS);
+        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         $customPostTagTypeAPI = $this->getCustomPostTagTypeMutationAPI();
         $customPostTagTypeAPI->setTags($customPostID, $postTags, $append);
         return $customPostID;
@@ -42,7 +42,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
 
         $errors = [];
-        if (!$fieldDataAccessor->get(MutationInputProperties::CUSTOMPOST_ID)) {
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,

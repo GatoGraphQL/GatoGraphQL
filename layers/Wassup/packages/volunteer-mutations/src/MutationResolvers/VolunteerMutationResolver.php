@@ -28,7 +28,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        if (empty($fieldDataAccessor->get('name'))) {
+        if (empty($fieldDataAccessor->getValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -37,14 +37,14 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataAccessor->get('email'))) {
+        if (empty($fieldDataAccessor->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($fieldDataAccessor->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -53,7 +53,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataAccessor->get('target-id'))) {
+        if (empty($fieldDataAccessor->getValue('target-id'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -62,7 +62,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $target = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->get('target-id'));
+            $target = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->getValue('target-id'));
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -73,7 +73,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             }
         }
 
-        if (empty($fieldDataAccessor->get('whyvolunteer'))) {
+        if (empty($fieldDataAccessor->getValue('whyvolunteer'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -95,13 +95,13 @@ class VolunteerMutationResolver extends AbstractMutationResolver
     protected function doExecute(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $post_title = $this->getCustomPostTypeAPI()->getTitle($fieldDataAccessor->get('target-id'));
+        $post_title = $this->getCustomPostTypeAPI()->getTitle($fieldDataAccessor->getValue('target-id'));
         $subject = sprintf(
             $this->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
             sprintf(
                 $this->__('%s applied to volunteer for %s', 'pop-genericforms'),
-                $fieldDataAccessor->get('name'),
+                $fieldDataAccessor->getValue('name'),
                 $post_title
             )
         );
@@ -113,8 +113,8 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             '<p>%s</p>',
             sprintf(
                 $this->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
-                $fieldDataAccessor->get('name'),
-                $this->getCustomPostTypeAPI()->getPermalink($fieldDataAccessor->get('target-id')),
+                $fieldDataAccessor->getValue('name'),
+                $this->getCustomPostTypeAPI()->getPermalink($fieldDataAccessor->getValue('target-id')),
                 $post_title
             )
         ) . sprintf(
@@ -122,19 +122,19 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $fieldDataAccessor->get('email')
+                $fieldDataAccessor->getValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Phone', 'pop-genericforms'),
-            $fieldDataAccessor->get('phone')
+            $fieldDataAccessor->getValue('phone')
         ) . sprintf(
             $placeholder,
             $this->__('Why volunteer', 'pop-genericforms'),
-            $fieldDataAccessor->get('whyvolunteer')
+            $fieldDataAccessor->getValue('whyvolunteer')
         );
 
-        return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($fieldDataAccessor->get('target-id')), $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($fieldDataAccessor->getValue('target-id')), $subject, $msg);
     }
 
     /**

@@ -31,7 +31,7 @@ class AbstractCustomPostUpdateUserMetaValueMutationResolver extends AbstractUpda
     {
         $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
-            $target_id = $fieldDataAccessor->get('target_id');
+            $target_id = $fieldDataAccessor->getValue('target_id');
 
             // Make sure the post exists
             $target = $this->getCustomPostTypeAPI()->getCustomPost($target_id);

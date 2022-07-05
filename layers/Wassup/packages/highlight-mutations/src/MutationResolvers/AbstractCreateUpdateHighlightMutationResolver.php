@@ -21,7 +21,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
     {
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
-        if (!$fieldDataAccessor->get('highlightedpost')) {
+        if (!$fieldDataAccessor->getValue('highlightedpost')) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -30,7 +30,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
             $errors[] = $this->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
-            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->get('highlightedpost'));
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->getValue('highlightedpost'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -61,7 +61,7 @@ abstract class AbstractCreateUpdateHighlightMutationResolver extends AbstractCre
     {
         parent::createAdditionals($post_id, $fieldDataAccessor);
 
-        Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $fieldDataAccessor->get('highlightedpost'), true);
+        Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $fieldDataAccessor->getValue('highlightedpost'), true);
 
         // Allow to create a Notification
         App::doAction('GD_CreateUpdate_Highlight:createAdditionals', $post_id, $fieldDataAccessor);

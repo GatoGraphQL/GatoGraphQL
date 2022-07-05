@@ -16,14 +16,14 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        if (empty($fieldDataAccessor->get('email'))) {
+        if (empty($fieldDataAccessor->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($fieldDataAccessor->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -60,12 +60,12 @@ class NewsletterSubscriptionMutationResolver extends AbstractMutationResolver
             $this->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
-                $fieldDataAccessor->get('email')
+                $fieldDataAccessor->getValue('email')
             )
         ) . sprintf(
             $placeholder,
             $this->__('Name', 'pop-genericforms'),
-            $fieldDataAccessor->get('name')
+            $fieldDataAccessor->getValue('name')
         );
 
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);

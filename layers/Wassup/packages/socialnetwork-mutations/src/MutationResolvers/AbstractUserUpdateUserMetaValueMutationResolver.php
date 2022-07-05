@@ -26,7 +26,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
     {
         $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
-            $target_id = $fieldDataAccessor->get('target_id');
+            $target_id = $fieldDataAccessor->getValue('target_id');
 
             // Make sure the user exists
             $target = $this->getUserTypeAPI()->getUserByID($target_id);

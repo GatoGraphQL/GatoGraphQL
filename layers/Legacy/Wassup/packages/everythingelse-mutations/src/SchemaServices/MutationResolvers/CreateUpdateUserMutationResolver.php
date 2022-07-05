@@ -24,7 +24,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if (empty($fieldDataAccessor->get('first_name'))) {
+        if (empty($fieldDataAccessor->getValue('first_name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -34,7 +34,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Validate email
-        $user_email = $fieldDataAccessor->get('user_email');
+        $user_email = $fieldDataAccessor->getValue('user_email');
         if ($user_email === '') {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -68,7 +68,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     protected function validateCreateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Check the username
-        $user_login = $fieldDataAccessor->get('username');
+        $user_login = $fieldDataAccessor->getValue('username');
         if ($user_login == '') {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -93,7 +93,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Check the e-mail address
-        $user_email = $fieldDataAccessor->get('user_email');
+        $user_email = $fieldDataAccessor->getValue('user_email');
         if (email_exists($user_email)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -104,8 +104,8 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Validate Password
-        $password = $fieldDataAccessor->get('password');
-        $repeatpassword =  $fieldDataAccessor->get('repeat_password');
+        $password = $fieldDataAccessor->getValue('password');
+        $repeatpassword =  $fieldDataAccessor->getValue('repeat_password');
 
         if (!$password) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -141,7 +141,7 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         // Validate the captcha
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $captcha = $fieldDataAccessor->get('captcha');
+            $captcha = $fieldDataAccessor->getValue('captcha');
             try {
                 GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
@@ -160,8 +160,8 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
      */
     protected function validateUpdateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        $user_id = $fieldDataAccessor->get('user_id');
-        $user_email = $fieldDataAccessor->get('user_email');
+        $user_id = $fieldDataAccessor->getValue('user_id');
+        $user_email = $fieldDataAccessor->getValue('user_email');
 
         $email_user_id = email_exists($user_email);
         if ($email_user_id && $email_user_id !== $user_id) {
@@ -177,11 +177,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     protected function getUpdateuserData(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $user_data = array(
-            'id' => $fieldDataAccessor->get('user_id'),
-            'firstName' => $fieldDataAccessor->get('first_name'),
-            'email' => $fieldDataAccessor->get('user_email'),
-            'description' => $fieldDataAccessor->get('description'),
-            'url' => $fieldDataAccessor->get('user_url')
+            'id' => $fieldDataAccessor->getValue('user_id'),
+            'firstName' => $fieldDataAccessor->getValue('first_name'),
+            'email' => $fieldDataAccessor->getValue('user_email'),
+            'description' => $fieldDataAccessor->getValue('description'),
+            'url' => $fieldDataAccessor->getValue('user_url')
         );
 
         return $user_data;
@@ -198,10 +198,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $user_data['role'] = $this->getRole();
 
         // Add the password
-        $user_data['password'] = $fieldDataAccessor->get('password');
+        $user_data['password'] = $fieldDataAccessor->getValue('password');
 
         // Username
-        $user_data['login'] = $fieldDataAccessor->get('username');
+        $user_data['login'] = $fieldDataAccessor->getValue('username');
 
         return $user_data;
     }
@@ -318,6 +318,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_id;
         // Comment Leo 21/09/2015: we don't use this function anymore to send the notifications to the admin/user. Instead, use our own hooks.
         // Send notification of new user
-        // wpNewUserNotification( $user_id, $fieldDataAccessor->get('password') );
+        // wpNewUserNotification( $user_id, $fieldDataAccessor->getValue('password') );
     }
 }

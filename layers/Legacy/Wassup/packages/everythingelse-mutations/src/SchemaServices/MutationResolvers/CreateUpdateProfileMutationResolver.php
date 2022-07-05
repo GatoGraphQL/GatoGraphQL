@@ -51,14 +51,14 @@ class CreateUpdateProfileMutationResolver extends CreateUpdateUserMutationResolv
         // Last Edited: needed for the user thumbprint
         Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, ComponentModelModuleInfo::get('time'));
 
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $fieldDataAccessor->get('display_email'), true, true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $fieldDataAccessor->get('short_description'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_DISPLAYEMAIL, $fieldDataAccessor->getValue('display_email'), true, true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_SHORTDESCRIPTION, $fieldDataAccessor->getValue('short_description'), true);
 
         // Comment Leo 05/12/2016: LinkedIn is removed from AgendaUrbana, however we don't check for the condition here, so it will still save null
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $fieldDataAccessor->get('facebook'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $fieldDataAccessor->get('twitter'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $fieldDataAccessor->get('linkedin'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $fieldDataAccessor->get('youtube'), true);
-        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $fieldDataAccessor->get('instagram'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_FACEBOOK, $fieldDataAccessor->getValue('facebook'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_TWITTER, $fieldDataAccessor->getValue('twitter'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_LINKEDIN, $fieldDataAccessor->getValue('linkedin'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_YOUTUBE, $fieldDataAccessor->getValue('youtube'), true);
+        Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_INSTAGRAM, $fieldDataAccessor->getValue('instagram'), true);
     }
 }

@@ -16,7 +16,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        if (empty($fieldDataAccessor->get('name'))) {
+        if (empty($fieldDataAccessor->getValue('name'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -25,14 +25,14 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataAccessor->get('email'))) {
+        if (empty($fieldDataAccessor->getValue('email'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
-        } elseif (!filter_var($fieldDataAccessor->get('email'), FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($fieldDataAccessor->getValue('email'), FILTER_VALIDATE_EMAIL)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -41,7 +41,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataAccessor->get('target-url'))) {
+        if (empty($fieldDataAccessor->getValue('target-url'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -50,7 +50,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $errors[] = $this->__('The shared-page URL cannot be empty.', 'pop-genericforms');
         }
 
-        if (empty($fieldDataAccessor->get('target-title'))) {
+        if (empty($fieldDataAccessor->getValue('target-title'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -77,8 +77,8 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $cmsapplicationapi->getSiteName(),
             sprintf(
                 $this->__('%s is sharing with you: %s', 'pop-genericforms'),
-                $fieldDataAccessor->get('name'),
-                $fieldDataAccessor->get('target-title')
+                $fieldDataAccessor->getValue('name'),
+                $fieldDataAccessor->getValue('target-title')
             )
         );
         $placeholder = '<p><b>%s:</b> %s</p>';
@@ -86,17 +86,17 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             '<p>%s</p>',
             sprintf(
                 $this->__('%s is sharing with you: <a href="%s">%s</a>', 'pop-genericforms'),
-                $fieldDataAccessor->get('name'),
-                $fieldDataAccessor->get('target-url'),
-                $fieldDataAccessor->get('target-title')
+                $fieldDataAccessor->getValue('name'),
+                $fieldDataAccessor->getValue('target-url'),
+                $fieldDataAccessor->getValue('target-title')
             )
-        ) . ($fieldDataAccessor->get('message') ? sprintf(
+        ) . ($fieldDataAccessor->getValue('message') ? sprintf(
             $placeholder,
             $this->__('Additional message', 'pop-genericforms'),
-            $fieldDataAccessor->get('message')
+            $fieldDataAccessor->getValue('message')
         ) : '');
 
-        return PoP_EmailSender_Utils::sendEmail($fieldDataAccessor->get('email'), $subject, $msg);
+        return PoP_EmailSender_Utils::sendEmail($fieldDataAccessor->getValue('email'), $subject, $msg);
     }
 
     /**

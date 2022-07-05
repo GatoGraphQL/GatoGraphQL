@@ -19,9 +19,9 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         // Validate Password
         // Check current password really belongs to the user
-        $current_password = $fieldDataAccessor->get('current_password');
-        $password = $fieldDataAccessor->get('password');
-        $repeatpassword =  $fieldDataAccessor->get('repeat_password');
+        $current_password = $fieldDataAccessor->getValue('current_password');
+        $password = $fieldDataAccessor->getValue('password');
+        $repeatpassword =  $fieldDataAccessor->getValue('repeat_password');
 
         if (!$current_password) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -30,7 +30,7 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
             //     MutationErrorFeedbackItemProvider::E1,
             // );
             $errors[] = $this->getTranslationAPI()->__('Please provide the current password.', 'pop-application');
-        } elseif (!$cmsuseraccountapi->checkPassword($fieldDataAccessor->get('user_id'), $current_password)) {
+        } elseif (!$cmsuseraccountapi->checkPassword($fieldDataAccessor->getValue('user_id'), $current_password)) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -82,8 +82,8 @@ class ChangeUserPasswordMutationResolver extends AbstractMutationResolver
     protected function getChangepasswordData(FieldDataAccessorInterface $fieldDataAccessor)
     {
         $user_data = array(
-            'id' => $fieldDataAccessor->get('user_id'),
-            'password' => $fieldDataAccessor->get('password')
+            'id' => $fieldDataAccessor->getValue('user_id'),
+            'password' => $fieldDataAccessor->getValue('password')
         );
 
         return $user_data;

@@ -41,8 +41,8 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $username_or_email = $fieldDataAccessor->get(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $fieldDataAccessor->get(MutationInputProperties::PASSWORD);
+        $username_or_email = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 
         if (!$username_or_email) {
             $errors[] = new FeedbackItemResolution(
@@ -77,8 +77,8 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $fieldDataAccessor->get(MutationInputProperties::USERNAME_OR_EMAIL);
-        $pwd = $fieldDataAccessor->get(MutationInputProperties::PASSWORD);
+        $username_or_email = $fieldDataAccessor->getValue(MutationInputProperties::USERNAME_OR_EMAIL);
+        $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');

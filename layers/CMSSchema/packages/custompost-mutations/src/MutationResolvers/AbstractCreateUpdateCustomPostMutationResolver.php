@@ -155,7 +155,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
         }
 
         // Check if the user can publish custom posts
-        if ($fieldDataAccessor->get(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
+        if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
             $publishCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_CUSTOMPOSTS_CAPABILITY);
             if (
                 !$this->getUserRoleTypeAPI()->userCan(
@@ -186,8 +186,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         // Validate that the status is valid
-        if ($fieldDataAccessor->has(MutationInputProperties::STATUS)) {
-            $status = $fieldDataAccessor->get(MutationInputProperties::STATUS);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
+            $status = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
             if (!in_array($status, $this->getCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues())) {
                 $errors[] = new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
@@ -228,8 +228,8 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
     {
         // Either the title or the content must be set
         if (
-            !$fieldDataAccessor->has(MutationInputProperties::TITLE)
-            && !$fieldDataAccessor->has(MutationInputProperties::CONTENT)
+            !$fieldDataAccessor->hasValue(MutationInputProperties::TITLE)
+            && !$fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)
         ) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
@@ -243,7 +243,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
      */
     protected function validateUpdate(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        $customPostID = $fieldDataAccessor->get(MutationInputProperties::ID);
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         if (!$customPostID) {
             $errors[] = new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
@@ -295,21 +295,21 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 
     protected function addCreateUpdateCustomPostData(array &$post_data, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if ($fieldDataAccessor->has(MutationInputProperties::CONTENT)) {
-            $post_data['content'] = $fieldDataAccessor->get(MutationInputProperties::CONTENT);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT)) {
+            $post_data['content'] = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT);
         }
-        if ($fieldDataAccessor->has(MutationInputProperties::TITLE)) {
-            $post_data['title'] = $fieldDataAccessor->get(MutationInputProperties::TITLE);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
+            $post_data['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
         }
-        if ($fieldDataAccessor->has(MutationInputProperties::STATUS)) {
-            $post_data['status'] = $fieldDataAccessor->get(MutationInputProperties::STATUS);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
+            $post_data['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
     }
 
     protected function getUpdateCustomPostData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $post_data = array(
-            'id' => $fieldDataAccessor->get(MutationInputProperties::ID),
+            'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
         $this->addCreateUpdateCustomPostData($post_data, $fieldDataAccessor);
 

@@ -31,10 +31,10 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $user_id = $fieldDataAccessor->get('user_id');
+        $user_id = $fieldDataAccessor->getValue('user_id');
 
         $previous_communities = gdUreGetCommunities($user_id);
-        $communities = $fieldDataAccessor->get('communities');
+        $communities = $fieldDataAccessor->getValue('communities');
         // $maybe_new_communities = array_diff($communities, $previous_communities);
         $new_communities = array();
 
@@ -73,10 +73,10 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $user_id = $fieldDataAccessor->get('user_id');
+        $user_id = $fieldDataAccessor->getValue('user_id');
 
         // Validate the Community doesn't belong to itself as a member
-        if (in_array($user_id, $fieldDataAccessor->get('communities'))) {
+        if (in_array($user_id, $fieldDataAccessor->getValue('communities'))) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
             //     MutationErrorFeedbackItemProvider::class,
@@ -93,9 +93,9 @@ class UpdateMyCommunitiesMutationResolver extends AbstractMutationResolver
     public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $warnings = [];
-        $user_id = $fieldDataAccessor->get('user_id');
+        $user_id = $fieldDataAccessor->getValue('user_id');
         $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
-        $communities = $fieldDataAccessor->get('communities');
+        $communities = $fieldDataAccessor->getValue('communities');
         $banned_communities = array();
 
         // Check all the $maybe_new_communities and double check they are not banned

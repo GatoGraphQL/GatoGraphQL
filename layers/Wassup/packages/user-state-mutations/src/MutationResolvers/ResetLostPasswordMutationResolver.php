@@ -35,9 +35,9 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errorcodes = array();
-        $code = $fieldDataAccessor->get(MutationInputProperties::CODE);
-        $pwd = $fieldDataAccessor->get(MutationInputProperties::PASSWORD);
-        $repeatpwd = $fieldDataAccessor->get(MutationInputProperties::REPEAT_PASSWORD);
+        $code = $fieldDataAccessor->getValue(MutationInputProperties::CODE);
+        $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
+        $repeatpwd = $fieldDataAccessor->getValue(MutationInputProperties::REPEAT_PASSWORD);
 
         if (!$code) {
             // @todo Migrate from string to FeedbackItemProvider
@@ -85,8 +85,8 @@ class ResetLostPasswordMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $code = $fieldDataAccessor->get(MutationInputProperties::CODE);
-        $pwd = $fieldDataAccessor->get(MutationInputProperties::PASSWORD);
+        $code = $fieldDataAccessor->getValue(MutationInputProperties::CODE);
+        $pwd = $fieldDataAccessor->getValue(MutationInputProperties::PASSWORD);
 
         $cmsuseraccountapi = FunctionAPIFactory::getInstance();
         $decoded = MutationResolverUtils::decodeLostPasswordCode($code);

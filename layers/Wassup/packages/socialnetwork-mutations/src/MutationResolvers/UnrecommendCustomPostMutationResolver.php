@@ -16,7 +16,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
         $errors = parent::validateErrors($fieldDataAccessor);
         if (!$errors) {
             $user_id = App::getState('current-user-id');
-            $target_id = $fieldDataAccessor->get('target_id');
+            $target_id = $fieldDataAccessor->getValue('target_id');
 
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS);
@@ -46,7 +46,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
 
     // protected function updateValue($value, \PoP\ComponentModel\Mutation\FieldDataAccessorInterface $fieldDataAccessor) {
     //     // Remove the user from the list
-    //     $target_id = $fieldDataAccessor->get('target_id');
+    //     $target_id = $fieldDataAccessor->getValue('target_id');
     //     array_splice($value, array_search($target_id, $value), 1);
     // }
     /**
@@ -55,7 +55,7 @@ class UnrecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecomme
     protected function update(FieldDataAccessorInterface $fieldDataAccessor): string | int
     {
         $user_id = App::getState('current-user-id');
-        $target_id = $fieldDataAccessor->get('target_id');
+        $target_id = $fieldDataAccessor->getValue('target_id');
 
         // Update value
         Utils::deleteUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS, $target_id);

@@ -14,7 +14,7 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
     {
         $user_data = parent::getUpdateuserData($fieldDataAccessor);
 
-        $user_data['lastName'] = $fieldDataAccessor->get('last_name');
+        $user_data['lastName'] = $fieldDataAccessor->getValue('last_name');
 
         return $user_data;
     }
@@ -22,6 +22,6 @@ class CreateUpdateIndividualProfileMutationResolver extends CreateUpdateProfileM
     {
         parent::createupdateuser($user_id, $fieldDataAccessor);
 
-        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $fieldDataAccessor->get('individualinterests'));
+        Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $fieldDataAccessor->getValue('individualinterests'));
     }
 }

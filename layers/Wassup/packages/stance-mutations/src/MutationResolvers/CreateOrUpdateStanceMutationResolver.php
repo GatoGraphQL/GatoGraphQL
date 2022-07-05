@@ -35,6 +35,6 @@ class CreateOrUpdateStanceMutationResolver extends AbstractCreateUpdateStanceMut
      */
     protected function isUpdate(FieldDataAccessorInterface $fieldDataAccessor): bool
     {
-        return !empty($fieldDataAccessor->get(MutationInputProperties::ID));
+        return !empty($fieldDataAccessor->getValue(MutationInputProperties::ID));
     }
 }

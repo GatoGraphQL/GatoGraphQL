@@ -19,8 +19,8 @@ class MarkAllAsReadNotificationMutationResolver extends AbstractMutationResolver
 
     protected function markAllAsRead(FieldDataAccessorInterface $fieldDataAccessor)
     {
-        // return AAL_Main::instance()->api->setStatusMultipleNotifications($fieldDataAccessor->get('user_id'), AAL_POP_STATUS_READ);
-        return PoP_Notifications_API::setStatusMultipleNotifications($fieldDataAccessor->get('user_id'), \AAL_POP_STATUS_READ);
+        // return AAL_Main::instance()->api->setStatusMultipleNotifications($fieldDataAccessor->getValue('user_id'), AAL_POP_STATUS_READ);
+        return PoP_Notifications_API::setStatusMultipleNotifications($fieldDataAccessor->getValue('user_id'), \AAL_POP_STATUS_READ);
     }
 
     /**

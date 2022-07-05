@@ -24,11 +24,11 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $user_id = $fieldDataAccessor->get('user_id');
-        $community = $fieldDataAccessor->get('community');
-        $new_community_status = $fieldDataAccessor->get('status');
-        $new_community_privileges = $fieldDataAccessor->get('privileges');
-        $new_community_tags = $fieldDataAccessor->get('tags');
+        $user_id = $fieldDataAccessor->getValue('user_id');
+        $community = $fieldDataAccessor->getValue('community');
+        $new_community_status = $fieldDataAccessor->getValue('status');
+        $new_community_privileges = $fieldDataAccessor->getValue('privileges');
+        $new_community_tags = $fieldDataAccessor->getValue('tags');
 
         // Get all the current values for that user
         $status = Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
@@ -90,7 +90,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
     public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $errors = [];
-        $user_id = $fieldDataAccessor->get('user_id');
+        $user_id = $fieldDataAccessor->getValue('user_id');
         if (!$user_id) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -101,13 +101,13 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
             return $errors;
         }
 
-        // $nonce = $fieldDataAccessor->get('nonce');
+        // $nonce = $fieldDataAccessor->getValue('nonce');
         // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
         //     $errors[] = $this->getTranslationAPI()->__('Incorrect URL', 'ure-pop');
         //     return;
         // }
 
-        $status = $fieldDataAccessor->get('status');
+        $status = $fieldDataAccessor->getValue('status');
         if (!$status) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(

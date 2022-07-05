@@ -56,7 +56,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return array_keys($this->customValues);
     }
 
-    public function has(string $propertyName): bool
+    public function hasValue(string $propertyName): bool
     {
         return $this->hasInField($propertyName)
             || $this->hasInCustomValues($propertyName);
@@ -72,7 +72,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
         return array_key_exists($propertyName, $this->customValues);
     }
 
-    public function get(string $propertyName): mixed
+    public function getValue(string $propertyName): mixed
     {
         if ($this->hasInField($propertyName)) {
             return $this->getFromField($propertyName);

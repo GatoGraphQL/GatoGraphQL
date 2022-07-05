@@ -39,10 +39,10 @@ class MutationResolverHookSet extends AbstractHookSet
      */
     public function setOrRemoveFeaturedImage(int | string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if (!$fieldDataAccessor->has(MutationInputProperties::FEATUREDIMAGE_ID)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::FEATUREDIMAGE_ID)) {
             return;
         }
-        if ($featuredImageID = $fieldDataAccessor->get(MutationInputProperties::FEATUREDIMAGE_ID)) {
+        if ($featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID)) {
             $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
         } else {
             $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);

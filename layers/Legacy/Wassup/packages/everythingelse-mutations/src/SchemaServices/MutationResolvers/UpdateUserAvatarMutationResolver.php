@@ -25,7 +25,7 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
     {
-        $user_id = $fieldDataAccessor->get('user_id');
+        $user_id = $fieldDataAccessor->getValue('user_id');
         $this->savePicture($user_id);
         $this->additionals($user_id, $fieldDataAccessor);
 

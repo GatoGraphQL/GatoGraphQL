@@ -20,9 +20,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     // Update Post Validation
     protected function validateContent(array &$errors, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        if ($fieldDataAccessor->get('stancetarget')) {
+        if ($fieldDataAccessor->getValue('stancetarget')) {
             // Check that the referenced post exists
-            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->get('stancetarget'));
+            $referenced = $this->getCustomPostTypeAPI()->getCustomPost($fieldDataAccessor->getValue('stancetarget'));
             if (!$referenced) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(
@@ -73,7 +73,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
         // If this validation already fails, the rest does not matter
         // Validate that the referenced post has been added (protection against hacking)
         // For highlights, we only add 1 reference, and not more.
-        $referenced_id = $fieldDataAccessor->get('stancetarget');
+        $referenced_id = $fieldDataAccessor->getValue('stancetarget');
 
         // Check if there is already an existing stance
         $query = array(
@@ -123,7 +123,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
 
     //     // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
     //     // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
-    //     if ($fieldDataAccessor->get('stancetarget')) {
+    //     if ($fieldDataAccessor->getValue('stancetarget')) {
     //         $post_data['menu-order'] = 1;
     //     }
 
@@ -134,7 +134,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
     {
         parent::createAdditionals($post_id, $fieldDataAccessor);
 
-        if ($target = $fieldDataAccessor->get('stancetarget')) {
+        if ($target = $fieldDataAccessor->getValue('stancetarget')) {
             Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 
