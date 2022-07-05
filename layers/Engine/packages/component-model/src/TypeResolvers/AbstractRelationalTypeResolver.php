@@ -1125,7 +1125,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              *
              * @var FieldDataAccessProvider[]
              */
-            $pipelineFieldDataAccessProvider = [];
+            $pipelineFieldDataAccessProviders = [];
             /** @var DirectiveResolverInterface $directiveResolverInstance */
             foreach ($directivePipelineData as $directiveResolverInstance) {
                 /** @var FieldInterface[] */
@@ -1164,7 +1164,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $directiveFieldIDs[$directive],
                     $idObjects
                 );
-                $pipelineFieldDataAccessProvider[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
+                $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
             }
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
