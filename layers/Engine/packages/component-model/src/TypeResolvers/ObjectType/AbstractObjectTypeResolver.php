@@ -519,10 +519,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if (!$isFieldDataAccessor) {
             /**
              * If executed within a FieldResolver we will (most likely)
-             * receive a Field, and we can assume there's no need to
-             * normalize the values, they will be coded/provided as required.
+             * receive a Field.
              */
-            $fieldDataAccessor = new FieldDataAccessor($field);
+            $fieldDataAccessor = new FieldDataAccessor(
+                $field,
+                $this->getFieldData(
+                    $field,
+                    $objectTypeFieldResolutionFeedbackStore
+                )
+            );
         }
 
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
