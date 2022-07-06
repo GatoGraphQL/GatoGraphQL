@@ -81,4 +81,14 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      * Get the first FieldResolver that resolves the field
      */
     public function getExecutableObjectTypeFieldResolverForField(FieldInterface|string $fieldOrFieldName): ?ObjectTypeFieldResolverInterface;
+    /**
+     * Extract the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * @return array<string,mixed>
+     */
+    public function getFieldData(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array;
 }

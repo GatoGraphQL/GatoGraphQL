@@ -9,7 +9,6 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
@@ -80,6 +79,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var InterfaceTypeFieldResolverInterface[]|null
      */
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
+    /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
+    protected SplObjectStorage $fieldDataCache;
 
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?OutputServiceInterface $outputService = null;
@@ -117,6 +118,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getSchemaCastingService(): SchemaCastingServiceInterface
     {
         return $this->schemaCastingService ??= $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
+    }
+
+    public function __construct()
+    {
+        $this->fieldDataCache = new SplObjectStorage();
+        parent::__construct();
     }
 
     /**
@@ -1246,9 +1253,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($executableObjectTypeFieldResolver === null) {
                 continue;
             }
-            $fieldData = $field->getArgumentKeyValues();
-            $this->prepareFieldData(
-                $fieldData,
+            $fieldData = $this->getFieldData(
                 $field,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -1297,5 +1302,40 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         return $fieldObjectTypeResolverObjectFieldData;
+    }
+
+    /**
+     * Extract the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * @return array<string,mixed>
+     */
+    public function getFieldData(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {    
+        if (!$this->fieldDataCache->contains($field)) {
+            $this->fieldDataCache[$field] = $this->doGetFieldData(
+                $field,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+        return $this->fieldDataCache[$field];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function doGetFieldData(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {        
+        $fieldData = $field->getArgumentKeyValues();
+        $this->prepareFieldData(
+            $fieldData,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        return $fieldData;
     }
 }

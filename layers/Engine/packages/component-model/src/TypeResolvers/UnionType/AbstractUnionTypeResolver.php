@@ -492,8 +492,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
 
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
         foreach ($fields as $field) {
-            $sourceFieldData = $field->getArgumentKeyValues();
-
             /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
             $objectTypeResolverObjectFieldData = new SplObjectStorage();
             
@@ -527,10 +525,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 if ($executableObjectTypeFieldResolver === null) {
                     continue;
                 }
-                // Clone array
-                $fieldData = array_merge([], $sourceFieldData);
-                $targetObjectTypeResolver->prepareFieldData(
-                    $fieldData,
+                $fieldData = $targetObjectTypeResolver->getFieldData(
                     $field,
                     $objectTypeFieldResolutionFeedbackStore,
                 );
