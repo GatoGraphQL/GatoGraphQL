@@ -552,18 +552,11 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             } else {
-                /**
-                 * Re-create the list of fieldIDs for this ObjectTypeResolver
-                 *
-                 * @var array<string|int>
-                 */
+                /** @var array<string|int> */
                 $objectIDs = $objectTypeResolverObjectIDs[$objectTypeResolver];
-                /** @var SplObjectStorage(FieldInterface,array<string|int>) */
-                $objectFieldIDs = new SplObjectStorage();
-                $objectFieldIDs[$field] = $objectIDs;
                 $targetObjectTypeResolverObjectFieldData = $targetObjectTypeResolver->getIndependentObjectTypeResolverObjectFieldData(
                     $field,
-                    $objectFieldIDs,
+                    $objectIDs,
                     $idObjects,
                     $objectTypeFieldResolutionFeedbackStore,
                 );

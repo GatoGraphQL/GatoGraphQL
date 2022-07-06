@@ -124,13 +124,13 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      *    the value for the `$postID` is injected into the FieldArgs for each object,
      *    and the validation of the FieldArgs must also be executed for each object.
      *
-     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int> $objectIDs
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
     public function getIndependentObjectTypeResolverObjectFieldData(
         FieldInterface $field,
-        SplObjectStorage $fieldIDs,
+        array $objectIDs,
         array $idObjects,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): SplObjectStorage;
