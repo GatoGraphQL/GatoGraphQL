@@ -16,7 +16,7 @@ class InputObjectUnderFieldArgumentFieldDataAccessor extends FieldDataAccessor i
     public function __construct(
         FieldInterface $field,
         protected string $fieldInputArgumentName,
-        array $normalizedValues = [],
+        array $normalizedValues,
     ) {
         parent::__construct($field, $normalizedValues);
     }

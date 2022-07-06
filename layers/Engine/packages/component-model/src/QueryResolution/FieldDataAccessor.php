@@ -11,7 +11,7 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     public function __construct(
         protected FieldInterface $field,
         /** @var array<string,mixed> */
-        protected array $normalizedValues = [],
+        protected array $normalizedValues,
     ) {
     }
 
