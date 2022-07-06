@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\QueryResolution;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Exception\ShouldNotHappenException;
+use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
 class InputObjectUnderFieldArgumentFieldDataAccessor extends FieldDataAccessor implements InputObjectUnderFieldArgumentFieldDataAccessorInterface
 {
+    use StandaloneServiceTrait;
+
     public function __construct(
         FieldInterface $field,
         protected string $fieldInputArgumentName,
@@ -19,36 +22,30 @@ class InputObjectUnderFieldArgumentFieldDataAccessor extends FieldDataAccessor i
     }
 
     /**
-     * @return string[]
+     * @return array<string,mixed>
      */
-    protected function getPropertiesInField(): array
+    protected function getKeyValuesSource(): array
     {
-        $inputObjectValue = $this->getInputObjectValue();
-        return array_keys((array) $inputObjectValue);
+        return (array) $this->getInputObjectValue();
     }
 
-    protected function hasValueInField(string $propertyName): bool
-    {
-        $inputObjectValue = $this->getInputObjectValue();
-        return property_exists($inputObjectValue, $propertyName);
-    }
-
-    protected function getValueFromField(string $propertyName): mixed
-    {
-        $inputObjectValue = $this->getInputObjectValue();
-        return $inputObjectValue->$propertyName;
-    }
-
+    /**
+     * @throws ShouldNotHappenException If the argument value under the provided inputName is not an InputObject
+     */
     protected function getInputObjectValue(): stdClass
     {
-        return $this->getInputObject()->getValue();
-    }
-
-    final protected function getInputObject(): InputObject
-    {
-        $argument = $this->field->getArgument($this->getArgumentName());
-        /** @var InputObject */
-        return $argument->getValueAST();
+        $inputObjectValue = $this->normalizedValues[$this->getArgumentName()];
+        if (!($inputObjectValue instanceof stdClass)) {
+            throw new ShouldNotHappenException(
+                sprintf(
+                    $this->__(
+                        'Input value under argument \'%s\' is not an InputObject type'
+                    ),
+                    $this->getArgumentName()
+                )
+            );
+        }
+        return $inputObjectValue;
     }
 
     public function getArgumentName(): string
