@@ -70,11 +70,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private array $directiveResolverClassDirectivesCache = [];
 
-    /**
-     * @var SplObjectStorage<FieldInterface,null|SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
-     */
-    protected SplObjectStorage $fieldObjectTypeResolverObjectFieldDataCache;
-
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
@@ -108,7 +103,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $this->directiveIDFieldSet = new SplObjectStorage();
         $this->fieldDirectives = new SplObjectStorage();
-        $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
     }
 
     /**
@@ -1228,19 +1222,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
 
         foreach ($fields as $field) {
-            if (!$this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
-                $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = $this->getObjectTypeResolverObjectFieldData(
-                    $field,
-                    $fieldIDs,
-                    $idObjects,
-                    $objectTypeFieldResolutionFeedbackStore,
-                );
-            }
+            $objectTypeResolverObjectFieldData = $this->getObjectTypeResolverObjectFieldData(
+                $field,
+                $fieldIDs,
+                $idObjects,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
             // If the field does not exist in the schema, then skip
-            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
+            if ($objectTypeResolverObjectFieldData === null) {
                 continue;
             }
-            $fieldObjectTypeResolverObjectFieldData[$field] = $this->fieldObjectTypeResolverObjectFieldDataCache[$field];
+            $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
         }
 
         return $fieldObjectTypeResolverObjectFieldData;
