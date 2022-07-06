@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\Overrides\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\CustomPostObjectTypeFieldResolver as UpstreamCustomPostObjectTypeFieldResolver;
@@ -41,6 +42,7 @@ class CustomPostObjectTypeFieldResolver extends UpstreamCustomPostObjectTypeFiel
         array &$fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $this->prepareAddCommentFieldData($fieldData, $field);
     }

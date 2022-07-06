@@ -10,6 +10,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -1160,11 +1161,22 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $pipelineIDFieldSet[] = $idFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
+                $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $fieldObjectTypeResolverObjectFieldData = $this->getFieldObjectTypeResolverObjectFieldData(
                     $directiveDirectFieldsToProcess,
                     $directiveFieldIDs[$directive],
-                    $idObjects
+                    $idObjects,
+                    $objectTypeFieldResolutionFeedbackStore
                 );
+                foreach ($directiveDirectFieldsToProcess as $field) {
+                    $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $this,
+                        $field,
+                        $id,
+                        $this->directive
+                    );
+                }
                 $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
             }
 
@@ -1210,6 +1222,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array $fields,
         SplObjectStorage $fieldIDs,
         array $idObjects,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): SplObjectStorage;
 
     public function getSchemaDirectiveResolvers(bool $global): array

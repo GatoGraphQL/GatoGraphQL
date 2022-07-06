@@ -485,6 +485,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         array $fields,
         SplObjectStorage $fieldIDs,
         array $idObjects,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): SplObjectStorage {
         /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
         $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
@@ -528,7 +529,11 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 }
                 // Clone array
                 $fieldData = array_merge([], $sourceFieldData);
-                $targetObjectTypeResolver->prepareFieldData($fieldData, $field);
+                $targetObjectTypeResolver->prepareFieldData(
+                    $fieldData,
+                    $field,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
 
                 if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
                     /** 

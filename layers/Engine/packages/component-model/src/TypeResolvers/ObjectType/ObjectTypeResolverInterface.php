@@ -71,7 +71,11 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      *
      * @param array<string,mixed> $fieldData
      */
-    public function prepareFieldData(array &$fieldData, FieldInterface $field): void;
+    public function prepareFieldData(
+        array &$fieldData,
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     /**
      * Get the first FieldResolver that resolves the field
      */

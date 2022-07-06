@@ -1406,6 +1406,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array &$fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
     }
 }

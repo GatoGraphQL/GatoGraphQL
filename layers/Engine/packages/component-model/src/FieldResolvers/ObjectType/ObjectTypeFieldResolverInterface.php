@@ -119,6 +119,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         array &$fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     /**
      * @param array<string,mixed> $fieldDataForObject
