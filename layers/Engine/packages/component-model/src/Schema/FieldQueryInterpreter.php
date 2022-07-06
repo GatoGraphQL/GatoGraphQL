@@ -543,43 +543,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         return $fieldOrDirectiveArgs;
     }
 
-    public function extractFieldArgumentsForObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        FieldInterface $field,
-        array $variables,
-        array $expressions,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        $validAndResolvedField = $field;
-        $fieldName = $this->getFieldName($field->asFieldOutputQueryString());
-        $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
-            $objectTypeResolver,
-            $field,
-            $variables,
-            $objectTypeFieldResolutionFeedbackStore
-        );
-        // Only need to extract arguments if they have fields or arrays
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
-        // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            $validAndResolvedField = null;
-        } elseif ($extractedFieldArgs !== $fieldArgs) {
-            // There are 2 reasons why the field might have changed:
-            // 1. validField: There are $objectWarnings: remove the fieldArgs that failed
-            // 2. resolvedField: Some fieldArg was a variable: replace it with its value
-            $validAndResolvedField = $this->replaceFieldArgs($field->asFieldOutputQueryString(), $fieldArgs);
-        }
-        return [
-            $validAndResolvedField,
-            $fieldName,
-            $fieldArgs ?? [],
-        ];
-    }
-
     /**
      * @param FieldInterface[] $fields
      */

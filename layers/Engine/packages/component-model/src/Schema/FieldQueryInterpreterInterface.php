@@ -48,14 +48,6 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         bool $disableDynamicFields = false
     ): array;
-    public function extractFieldArgumentsForObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        FieldInterface $field,
-        array $variables,
-        array $expressions,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array;
     /**
      * @param FieldInterface[] $fields
      */
