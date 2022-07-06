@@ -1284,9 +1284,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *    FieldArgs will satisfy all queried objects, since the same schema applies
      *    to all of them.
      *
-     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
-     * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
      */
     public function getWildcardObjectTypeResolverObjectFieldData(
         FieldInterface $field,
@@ -1340,7 +1338,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string|int> $objectIDs
      * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
      */
     public function getIndependentObjectTypeResolverObjectFieldData(
         FieldInterface $field,

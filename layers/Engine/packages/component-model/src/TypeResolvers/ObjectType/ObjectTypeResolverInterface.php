@@ -97,9 +97,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      *    FieldArgs will satisfy all queried objects, since the same schema applies
      *    to all of them.
      *
-     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
-     * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
      */
     public function getWildcardObjectTypeResolverObjectFieldData(
         FieldInterface $field,
@@ -117,7 +115,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      *
      * @param array<string|int> $objectIDs
      * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
      */
     public function getIndependentObjectTypeResolverObjectFieldData(
         FieldInterface $field,
