@@ -476,100 +476,93 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      *
      * @see FieldDataAccessProvider
      *
-     * @param FieldInterface[] $fields
      * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
      * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    protected function getFieldObjectTypeResolverObjectFieldData(
-        array $fields,
+    protected function getObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): SplObjectStorage {
-        /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
-        $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
+    ): ?SplObjectStorage {
+        /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
+        $objectTypeResolverObjectFieldData = new SplObjectStorage();
 
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
-        foreach ($fields as $field) {
-            /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
-            $objectTypeResolverObjectFieldData = new SplObjectStorage();
-            
-            /** @var array<string|int> */
-            $ids = $fieldIDs[$field];
-            foreach ($ids as $id) {
-                $object = $idObjects[$id];
-                $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
-                /**
-                 * If the object is not handled, then nothing to do
-                 */
-                if ($targetObjectTypeResolver === null) {
-                    continue;
-                }
-
-                /** @var SplObjectStorage<object,array<string,mixed>> */
-                $objectFieldData = $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] ?? new SplObjectStorage();
-                
-                /**
-                 * If the schema validation is the same for all fields, and has already been set,
-                 * can then skip.
-                 */
-                if ($objectFieldData->contains($wildcardObject)) {
-                    continue;
-                }
-
-                $executableObjectTypeFieldResolver = $targetObjectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
-                /**
-                 * If the field does not exist, then nothing to do
-                 */
-                if ($executableObjectTypeFieldResolver === null) {
-                    continue;
-                }
-                $fieldData = $targetObjectTypeResolver->getFieldData(
-                    $field,
-                    $objectTypeFieldResolutionFeedbackStore,
-                );
-
-                if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
-                    /** 
-                     * Handle case:
-                     *
-                     * 2. Data from a Field in an UnionTypeResolver: the union field does not have
-                     *    the schema information, but only the corresponding ObjectTypeResolver
-                     *    that will resolve the entity does.
-                     *    For instance, when querying 'customPosts { dateStr }', field `dateStr`
-                     *    could be evaluated against a Post or Page types, and they could have
-                     *    different definitions of the `dateStr` field, such as making argument
-                     *    `$format` mandatory or not. Then, there will be a different FieldArgs
-                     *    produced for each targetObjectTypeResolver in the UnionTypeResolver
-                     */                
-                    $objectFieldData[$wildcardObject] = $fieldData;
-                } else {
-                    /** 
-                     * Handle case:
-                     *
-                     * 3. Data for a specific object: When executing nested mutations, the FieldArgs
-                     *    for each object will be different, as it will contain implicit information
-                     *    belonging to the object.
-                     *    For instance, when querying `mutation { posts { update(title: "New title") { id } } }`,
-                     *    the value for the `$postID` is injected into the FieldArgs for each object,
-                     *    and the validation of the FieldArgs must also be executed for each object.
-                     */
-                    // Clone array
-                    $fieldDataForObject = array_merge([], $fieldData);
-                    $executableObjectTypeFieldResolver->prepareFieldDataForObject(
-                        $fieldDataForObject,
-                        $targetObjectTypeResolver,
-                        $field,
-                        $object,
-                    );
-                    $objectFieldData[$object] = $fieldDataForObject;
-                }                
-                $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $objectFieldData;
+        
+        /** @var array<string|int> */
+        $ids = $fieldIDs[$field];
+        foreach ($ids as $id) {
+            $object = $idObjects[$id];
+            $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
+            /**
+             * If the object is not handled, then nothing to do
+             */
+            if ($targetObjectTypeResolver === null) {
+                continue;
             }
-            $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
-        }
 
-        return $fieldObjectTypeResolverObjectFieldData;
+            /** @var SplObjectStorage<object,array<string,mixed>> */
+            $objectFieldData = $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] ?? new SplObjectStorage();
+            
+            /**
+             * If the schema validation is the same for all fields, and has already been set,
+             * can then skip.
+             */
+            if ($objectFieldData->contains($wildcardObject)) {
+                continue;
+            }
+
+            $executableObjectTypeFieldResolver = $targetObjectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
+            /**
+             * If the field does not exist, then nothing to do
+             */
+            if ($executableObjectTypeFieldResolver === null) {
+                continue;
+            }
+            $fieldData = $targetObjectTypeResolver->getFieldData(
+                $field,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+
+            if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
+                /** 
+                 * Handle case:
+                 *
+                 * 2. Data from a Field in an UnionTypeResolver: the union field does not have
+                 *    the schema information, but only the corresponding ObjectTypeResolver
+                 *    that will resolve the entity does.
+                 *    For instance, when querying 'customPosts { dateStr }', field `dateStr`
+                 *    could be evaluated against a Post or Page types, and they could have
+                 *    different definitions of the `dateStr` field, such as making argument
+                 *    `$format` mandatory or not. Then, there will be a different FieldArgs
+                 *    produced for each targetObjectTypeResolver in the UnionTypeResolver
+                 */                
+                $objectFieldData[$wildcardObject] = $fieldData;
+            } else {
+                /** 
+                 * Handle case:
+                 *
+                 * 3. Data for a specific object: When executing nested mutations, the FieldArgs
+                 *    for each object will be different, as it will contain implicit information
+                 *    belonging to the object.
+                 *    For instance, when querying `mutation { posts { update(title: "New title") { id } } }`,
+                 *    the value for the `$postID` is injected into the FieldArgs for each object,
+                 *    and the validation of the FieldArgs must also be executed for each object.
+                 */
+                // Clone array
+                $fieldDataForObject = array_merge([], $fieldData);
+                $executableObjectTypeFieldResolver->prepareFieldDataForObject(
+                    $fieldDataForObject,
+                    $targetObjectTypeResolver,
+                    $field,
+                    $object,
+                );
+                $objectFieldData[$object] = $fieldDataForObject;
+            }                
+            $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $objectFieldData;
+        }
+        return $objectTypeResolverObjectFieldData;
     }
 }

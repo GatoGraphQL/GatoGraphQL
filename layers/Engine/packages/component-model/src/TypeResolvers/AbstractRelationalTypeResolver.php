@@ -70,6 +70,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     private array $directiveResolverClassDirectivesCache = [];
 
+    /**
+     * @var SplObjectStorage<FieldInterface,null|SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     */
+    protected SplObjectStorage $fieldObjectTypeResolverObjectFieldDataCache;
+
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
@@ -103,6 +108,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $this->directiveIDFieldSet = new SplObjectStorage();
         $this->fieldDirectives = new SplObjectStorage();
+        $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
     }
 
     /**
@@ -1202,6 +1208,45 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
      * within the default values and coerces them according to the schema.
      *
+     * @see FieldDataAccessProvider
+     *
+     * @param FieldInterface[] $fields
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     */
+    protected function getFieldObjectTypeResolverObjectFieldData(
+        array $fields,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): SplObjectStorage {
+        /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
+        $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
+
+        foreach ($fields as $field) {
+            if (!$this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+                $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = $this->getObjectTypeResolverObjectFieldData(
+                    $field,
+                    $fieldIDs,
+                    $idObjects,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            }
+            // If the field does not exist in the schema, then skip
+            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
+                continue;
+            }
+            $fieldObjectTypeResolverObjectFieldData[$field] = $this->fieldObjectTypeResolverObjectFieldDataCache[$field];
+        }
+
+        return $fieldObjectTypeResolverObjectFieldData;
+    }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
      * This object is provided via a FieldDataAccessProvider, which can handle
      * 3 different cases:
      *
@@ -1213,17 +1258,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      *
      * @see FieldDataAccessProvider
      *
-     * @param FieldInterface[] $fields
      * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
      * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    abstract protected function getFieldObjectTypeResolverObjectFieldData(
-        array $fields,
+    abstract protected function getObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): SplObjectStorage;
+    ): ?SplObjectStorage;
 
     public function getSchemaDirectiveResolvers(bool $global): array
     {
