@@ -425,52 +425,6 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         );
     }
 
-    public function extractFieldArgumentsForSchema(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        array $variables,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        $validAndResolvedField = $field;
-        $fieldName = $this->getFieldName($field->asFieldOutputQueryString());
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $extractedFieldArgs = $fieldArgs = $this->extractFieldArguments(
-            $objectTypeResolver,
-            $field,
-            $variables,
-            $separateObjectTypeFieldResolutionFeedbackStore,
-        );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        // If there is no resolver for the field, we will already have an error by now
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return [
-                null,
-                $fieldName,
-                $fieldArgs ?? [],
-            ];
-        }
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldArgs = $this->validateExtractedFieldOrDirectiveArgumentsForSchema($objectTypeResolver, $field->asFieldOutputQueryString(), $fieldArgs, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
-        // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForSchema($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-
-        // If there's an error, those args will be removed. Then, re-create the fieldDirective to pass it to the function below
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            $validAndResolvedField = null;
-        } elseif ($extractedFieldArgs !== $fieldArgs) {
-            // There are 2 reasons why the field might have changed:
-            // 1. validField: There are $schemaWarnings: remove the fieldArgs that failed
-            // 2. resolvedField: Some fieldArg was a variable: replace it with its value
-            $validAndResolvedField = $this->replaceFieldArgs($field->asFieldOutputQueryString(), $fieldArgs);
-        }
-        return [
-            $validAndResolvedField,
-            $fieldName,
-            $fieldArgs,
-        ];
-    }
-
     /**
      * Replace the fieldArgs in the field
      *

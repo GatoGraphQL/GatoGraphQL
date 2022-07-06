@@ -36,12 +36,6 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
         array $variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
-    public function extractFieldArgumentsForSchema(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        array $variables,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array;
     /**
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      */
