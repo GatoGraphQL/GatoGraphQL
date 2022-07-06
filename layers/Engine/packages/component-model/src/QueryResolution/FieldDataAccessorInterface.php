@@ -20,6 +20,4 @@ interface FieldDataAccessorInterface
     public function getKeyValues(): array;
     public function hasValue(string $propertyName): bool;
     public function getValue(string $propertyName): mixed;
-    // @todo Remove this function
-    public function addValue(string $propertyName, mixed $value): void;
 }

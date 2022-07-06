@@ -58,10 +58,4 @@ class FieldDataAccessor implements FieldDataAccessorInterface
     {
         return $this->getKeyValuesSource()[$propertyName] ?? null;
     }
-
-    // @todo Remove this function
-    public function addValue(string $propertyName, mixed $value): void
-    {
-        $this->normalizedValues[$propertyName] = $value;
-    }
 }
