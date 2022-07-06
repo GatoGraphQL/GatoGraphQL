@@ -908,7 +908,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->getSchemaCastingService()->castArguments($field, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
+        $this->getSchemaCastingService()->castArguments($fieldData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return;
