@@ -1161,25 +1161,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $pipelineIDFieldSet[] = $idFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
-                $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
                 $fieldObjectTypeResolverObjectFieldData = $this->getFieldObjectTypeResolverObjectFieldData(
                     $directiveDirectFieldsToProcess,
                     $directiveFieldIDs[$directive],
                     $idObjects,
-                    $objectTypeFieldResolutionFeedbackStore,
+                    $engineIterationFeedbackStore,
                 );
-                foreach ($directiveDirectFieldsToProcess as $field) {
-                    $ids = $directiveFieldIDs[$directive][$field];
-                    foreach ($ids as $id) {
-                        $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-                            $objectTypeFieldResolutionFeedbackStore,
-                            $this,
-                            $field,
-                            $id,
-                            $directive,
-                        );
-                    }
-                }
                 $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
             }
 
@@ -1216,7 +1203,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         array $fields,
         SplObjectStorage $fieldIDs,
         array $idObjects,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
         /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
         $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
@@ -1226,7 +1213,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $field,
                 $fieldIDs,
                 $idObjects,
-                $objectTypeFieldResolutionFeedbackStore,
+                $engineIterationFeedbackStore,
             );
             // If the field does not exist in the schema, then skip
             if ($objectTypeResolverObjectFieldData === null) {
@@ -1261,7 +1248,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage;
 
     public function getSchemaDirectiveResolvers(bool $global): array

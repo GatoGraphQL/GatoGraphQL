@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -483,7 +484,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
         /**
          * Group the objects by ObjectTypeResolver
@@ -548,7 +549,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                  */
                 $targetObjectTypeResolverObjectFieldData = $targetObjectTypeResolver->getWildcardObjectTypeResolverObjectFieldData(
                     $field,
-                    $objectTypeFieldResolutionFeedbackStore,
+                    $engineIterationFeedbackStore,
                 );
             } else {
                 /** @var array<string|int> */
@@ -557,7 +558,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     $field,
                     $objectIDs,
                     $idObjects,
-                    $objectTypeFieldResolutionFeedbackStore,
+                    $engineIterationFeedbackStore,
                 );
             }
             $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $targetObjectTypeResolverObjectFieldData[$targetObjectTypeResolver];

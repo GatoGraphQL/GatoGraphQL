@@ -9,6 +9,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
@@ -1253,7 +1254,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         /**
@@ -1267,12 +1268,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $field,
                 $fieldIDs[$field],
                 $idObjects,
-                $objectTypeFieldResolutionFeedbackStore,
+                $engineIterationFeedbackStore,
             );
         }
         return $this->getWildcardObjectTypeResolverObjectFieldData(
             $field,
-            $objectTypeFieldResolutionFeedbackStore,
+            $engineIterationFeedbackStore,
         );
     }
 
@@ -1289,7 +1290,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     public function getWildcardObjectTypeResolverObjectFieldData(
         FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
         /**
@@ -1309,9 +1310,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /** @var SplObjectStorage<object,array<string,mixed>> */
         $objectFieldData = $objectTypeResolverObjectFieldData[$this] ?? new SplObjectStorage();
 
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldData = $this->getFieldData(
             $field,
             $objectTypeFieldResolutionFeedbackStore,
+        );
+        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $objectTypeFieldResolutionFeedbackStore,
+            $this,
+            $field,
         );
 
         $objectFieldData[$wildcardObject] = $fieldData;
@@ -1339,7 +1346,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         array $objectIDs,
         array $idObjects,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage {
         /** @var ObjectTypeFieldResolverInterface */
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
@@ -1379,9 +1386,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /** @var SplObjectStorage<object,array<string,mixed>> */
         $objectFieldDataCache = $objectTypeResolverObjectFieldDataCache[$this] ?? new SplObjectStorage();
 
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldData = $this->getFieldData(
             $field,
             $objectTypeFieldResolutionFeedbackStore,
+        );
+        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $objectTypeFieldResolutionFeedbackStore,
+            $this,
+            $field,
         );
         
         foreach ($remainingObjectIDs as $id) {

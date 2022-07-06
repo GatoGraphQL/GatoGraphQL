@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -102,7 +103,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      */
     public function getWildcardObjectTypeResolverObjectFieldData(
         FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage;
     /** 
      * Handle case:
@@ -122,6 +123,6 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         FieldInterface $field,
         array $objectIDs,
         array $idObjects,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): SplObjectStorage;
 }
