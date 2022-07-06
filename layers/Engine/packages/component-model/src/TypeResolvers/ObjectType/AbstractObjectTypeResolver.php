@@ -448,13 +448,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldData
             );
         }
-        $fieldName = $fieldDataAccessor->getFieldName();
 
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
-            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldDataAccessor->getKeyValues(), $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldDataAccessor->getKeyValues(), $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
@@ -489,7 +488,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E3A,
                             [
-                                $fieldName,
+                                $field->getName(),
                                 $e->getMessage(),
                                 $e->getTraceAsString()
                             ]
@@ -507,7 +506,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E3A,
                         [
-                            $fieldName,
+                            $field->getName(),
                             $e->getMessage(),
                             $e->getTraceAsString(),
                         ]
@@ -516,7 +515,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E3,
                         [
-                            $fieldName,
+                            $field->getName(),
                             $e->getMessage(),
                         ]
                     )
@@ -525,7 +524,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ErrorFeedbackItemProvider::class,
                     ErrorFeedbackItemProvider::E4,
                     [
-                        $fieldName,
+                        $field->getName(),
                     ]
                 );
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -571,7 +570,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * All other conditions, check them when enabled by configuration.
          */
         if ($value === null) {
-            $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $fieldName);
+            $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field->getName());
             $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
             if ($fieldTypeIsNonNullable) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -580,7 +579,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             FieldResolutionErrorFeedbackItemProvider::class,
                             FieldResolutionErrorFeedbackItemProvider::E3,
                             [
-                                $fieldName,
+                                $field->getName(),
                             ]
                         ),
                         LocationHelper::getNonSpecificLocation(),
@@ -595,7 +594,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $field,
             )
         ) {
-            $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName);
+            $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $field->getName());
             $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
 
             /**
@@ -628,7 +627,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             FieldResolutionErrorFeedbackItemProvider::class,
                             FieldResolutionErrorFeedbackItemProvider::E4,
                             [
-                                $fieldName,
+                                $field->getName(),
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
                             ]
                         ),
@@ -655,7 +654,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             FieldResolutionErrorFeedbackItemProvider::class,
                             FieldResolutionErrorFeedbackItemProvider::E5,
                             [
-                                $fieldName,
+                                $field->getName(),
                                 $valueAsString,
                             ]
                         ),
@@ -680,7 +679,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             FieldResolutionErrorFeedbackItemProvider::class,
                             FieldResolutionErrorFeedbackItemProvider::E6,
                             [
-                                $fieldName,
+                                $field->getName(),
                             ]
                         ),
                         LocationHelper::getNonSpecificLocation(),
@@ -704,7 +703,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             FieldResolutionErrorFeedbackItemProvider::class,
                             FieldResolutionErrorFeedbackItemProvider::E7,
                             [
-                                $fieldName,
+                                $field->getName(),
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
                             ]
                         ),
@@ -729,7 +728,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             FieldResolutionErrorFeedbackItemProvider::class,
                             FieldResolutionErrorFeedbackItemProvider::E8,
                             [
-                                $fieldName,
+                                $field->getName(),
                                 $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
                             ]
                         ),
@@ -757,7 +756,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                             FieldResolutionErrorFeedbackItemProvider::class,
                             FieldResolutionErrorFeedbackItemProvider::E9,
                             [
-                                $fieldName,
+                                $field->getName(),
                             ]
                         ),
                         LocationHelper::getNonSpecificLocation(),
