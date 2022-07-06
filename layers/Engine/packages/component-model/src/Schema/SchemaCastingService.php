@@ -142,7 +142,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             /**
              * No errors, re-assign the coerced value to the data
              */
-            $argumentKeyValues[$argName] = $argValue;
+            $argumentKeyValues[$argName] = $coercedArgValue;
 
             // Obtain the deprecations
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
