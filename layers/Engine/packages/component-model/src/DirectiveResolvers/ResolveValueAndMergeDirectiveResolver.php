@@ -228,11 +228,17 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             /** @var UnionTypeResolverInterface */
             $unionTypeResolver = $relationalTypeResolver;
             $objectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             if ($objectTypeResolver === null) {
+                if ($setFailingFieldResponseAsNull) {
+                    $resolvedIDFieldValues[$id][$field] = null;
+                }
                 return;
             }
         } else {
@@ -248,6 +254,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $object,
         );
         if ($fieldData === null) {
+            if ($setFailingFieldResponseAsNull) {
+                $resolvedIDFieldValues[$id][$field] = null;
+            }
             return;
         }
         $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
@@ -272,9 +281,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         // 3. Add the output in the DB
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
+            if ($setFailingFieldResponseAsNull) {
                 $resolvedIDFieldValues[$id][$field] = null;
             }
             return;
