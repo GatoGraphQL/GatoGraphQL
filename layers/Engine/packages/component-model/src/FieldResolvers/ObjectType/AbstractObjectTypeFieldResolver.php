@@ -810,9 +810,23 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldDataAccessor->getFieldName());
         foreach ($fieldDataAccessor->getKeyValues() as $argName => $argValue) {
             /**
-             * If the field is an InputObject, let it perform validations on its input fields
+             * Validate the field has been defined in the schema
              */
-            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
+            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName] ?? null;
+            if ($fieldArgTypeResolver === null) {
+                $errors[] = new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E27,
+                    [
+                        $fieldDataAccessor->getFieldName(),
+                        $argName,
+                    ]
+                );
+                continue;
+            }
+            /**
+             * If the field is an InputObject, let it perform validations on its input fields.
+             */
             if (
                 $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
             ) {
