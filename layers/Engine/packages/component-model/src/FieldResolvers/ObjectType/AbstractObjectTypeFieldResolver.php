@@ -1127,7 +1127,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldDataAccessor->getFieldName(), $fieldDataAccessor->getField()->getArguments())) {
+        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldDataAccessor->getFieldName(), $fieldDataAccessor->getKeyValues())) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
             if ($feedbackItemResolution !== null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(

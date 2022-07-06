@@ -278,7 +278,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return;
         }
 
-        $executableObjectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldDataAccessor->getFieldName(), $fieldDataAccessor->getField()->getArguments(), $objectTypeFieldResolutionFeedbackStore);
+        $executableObjectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldDataAccessor->getFieldName(), $fieldDataAccessor->getKeyValues(), $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function getFieldTypeResolver(
@@ -450,7 +450,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($validateSchemaOnObject) {
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
-            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldDataAccessor->getField()->getArguments(), $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldDataAccessor->getKeyValues(), $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
