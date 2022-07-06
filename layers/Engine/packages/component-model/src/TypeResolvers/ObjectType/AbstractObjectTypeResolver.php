@@ -431,19 +431,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         //     return null;
         // }
 
-        // Once again, the $validField becomes the $field
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        list(
-            $validatedField,
-            $fieldName,
-            $fieldArgs,
-        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, /* @todo Review: Replaced $variables with [] */[]/*$variables*/, /* @todo Review: Replaced $expressions with [] */[]/*$expressions*/, $separateObjectTypeFieldResolutionFeedbackStore);
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return null;
-        }
-
+        $fieldName = $fieldDataAccessor->getFieldName();
         if (!$isFieldDataAccessor) {
             /**
              * If executed within a FieldResolver we will (most likely)
@@ -462,7 +450,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($validateSchemaOnObject) {
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
-            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldDataAccessor->getField()->getArguments(), $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
