@@ -889,7 +889,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Add the default Arguments to the field, and needed customizations
+     * Add the default Argument values to the field, coerce them,
+     * and allow to apply customizations
      *
      * @param array<string,mixed> $fieldData
      */

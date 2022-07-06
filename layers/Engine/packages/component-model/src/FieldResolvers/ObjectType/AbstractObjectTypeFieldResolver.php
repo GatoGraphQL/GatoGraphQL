@@ -1398,7 +1398,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * Allow to add additional Arguments
+     * Apply customizations to the field data
      *
      * @param array<string,mixed> $fieldData
      */

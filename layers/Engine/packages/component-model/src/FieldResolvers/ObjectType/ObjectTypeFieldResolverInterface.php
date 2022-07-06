@@ -111,7 +111,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      */
     public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
     /**
-     * Allow to add additional Arguments
+     * Apply customizations to the field data
      *
      * @param array<string,mixed> $fieldData
      */
