@@ -533,8 +533,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 continue;
             }
 
-            $validateMutationOnObject = $executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName());
-            if (!$validateMutationOnObject) {
+            if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
                 /** 
                  * Handle case:
                  *
