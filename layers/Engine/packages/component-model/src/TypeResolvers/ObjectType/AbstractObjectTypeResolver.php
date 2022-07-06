@@ -83,7 +83,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
 
     /**
-     * @var SplObjectStorage<FieldInterface,array<string,mixed>>
+     * @var SplObjectStorage<FieldInterface,array<string,mixed>|null>
      */
     protected SplObjectStorage $fieldDataCache;
 
@@ -432,17 +432,21 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         // }
 
         $fieldName = $fieldDataAccessor->getFieldName();
+        /**
+         * If executed within a FieldResolver we will (most likely)
+         * receive a Field.
+         */
         if (!$isFieldDataAccessor) {
-            /**
-             * If executed within a FieldResolver we will (most likely)
-             * receive a Field.
-             */
+            $fieldData = $this->getFieldData(
+                $field,
+                $objectTypeFieldResolutionFeedbackStore
+            );
+            if ($fieldData === null) {
+                return null;
+            }
             $fieldDataAccessor = $this->createFieldDataAccessor(
                 $field,
-                $this->getFieldData(
-                    $field,
-                    $objectTypeFieldResolutionFeedbackStore
-                )
+                $fieldData
             );
         }
 
@@ -1190,22 +1194,26 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *    FieldArgs will satisfy all queried objects, since the same schema applies
      *    to all of them.
      *
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null null if there was an error casting the fieldArgs
      */
     public function getWildcardObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): SplObjectStorage {
+    ): ?SplObjectStorage {
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
         /**
          * Check if can retrieve the values from the cache.
          * First for the case where all objects are handled all together.
          */
-        if ($this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)
-            && $this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)
-            && $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($wildcardObject)
-        ) {
-            return $this->fieldObjectTypeResolverObjectFieldDataCache[$field];
+        if ($this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
+                return null;
+            }
+            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)
+                && $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($wildcardObject)
+            ) {
+                return $this->fieldObjectTypeResolverObjectFieldDataCache[$field];
+            }
         }
 
         /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
@@ -1224,6 +1232,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this,
             $field,
         );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
+            return null;
+        }
 
         $objectFieldData[$wildcardObject] = $fieldData;
         $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
@@ -1244,14 +1256,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string|int> $objectIDs
      * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null null if there was an error casting the fieldArgs
      */
     public function getIndependentObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         array $objectIDs,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): SplObjectStorage {
+    ): ?SplObjectStorage {
         /** @var ObjectTypeFieldResolverInterface */
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         
@@ -1266,21 +1278,24 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * the objects, for when each of them has its own FieldArgs
          */
         $remainingObjectIDs = [];
-        if ($this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)
-            && $this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)
-        ) {
-            foreach ($objectIDs as $id) {
-                $object = $idObjects[$id];
-                if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($object)) {
-                    $objectFieldData[$object] = $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this][$object];
-                    continue;
-                }
-                $remainingObjectIDs[] = $id;
+        if ($this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
+                return null;
             }
-            // Are all objects cached?
-            if ($remainingObjectIDs === []) {
-                $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
-                return $objectTypeResolverObjectFieldData;
+            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)) {
+                foreach ($objectIDs as $id) {
+                    $object = $idObjects[$id];
+                    if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($object)) {
+                        $objectFieldData[$object] = $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this][$object];
+                        continue;
+                    }
+                    $remainingObjectIDs[] = $id;
+                }
+                // Are all objects cached?
+                if ($remainingObjectIDs === []) {
+                    $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
+                    return $objectTypeResolverObjectFieldData;
+                }
             }
         }
 
@@ -1300,6 +1315,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this,
             $field,
         );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
+            return null;
+        }
         
         foreach ($remainingObjectIDs as $id) {
             $object = $idObjects[$id];
@@ -1326,12 +1345,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Extract the FieldArgs into its corresponding FieldDataAccessor, which integrates
      * within the default values and coerces them according to the schema.
      *
-     * @return array<string,mixed>
+     * @return array<string,mixed>|null
      */
     protected function getFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {    
+    ): ?array {    
         if (!$this->fieldDataCache->contains($field)) {
             $this->fieldDataCache[$field] = $this->doGetFieldData(
                 $field,
@@ -1342,18 +1361,23 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array<string,mixed>|null null in case of error
      */
     protected function doGetFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {        
+    ): ?array {        
         $fieldData = $field->getArgumentKeyValues();
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->prepareFieldData(
             $fieldData,
             $field,
-            $objectTypeFieldResolutionFeedbackStore,
+            $separateObjectTypeFieldResolutionFeedbackStore,
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
         return $fieldData;
     }
 

@@ -553,6 +553,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     $engineIterationFeedbackStore,
                 );
             }
+            if ($targetObjectTypeResolverObjectFieldData === null) {
+                continue;
+            }
             $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $targetObjectTypeResolverObjectFieldData[$targetObjectTypeResolver];
         }
         return $objectTypeResolverObjectFieldData;

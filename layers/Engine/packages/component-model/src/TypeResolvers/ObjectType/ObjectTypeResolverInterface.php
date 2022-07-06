@@ -97,12 +97,12 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      *    FieldArgs will satisfy all queried objects, since the same schema applies
      *    to all of them.
      *
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null null if there was an error casting the fieldArgs
      */
     public function getWildcardObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): SplObjectStorage;
+    ): ?SplObjectStorage;
     /** 
      * Handle case:
      *
@@ -115,12 +115,12 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      *
      * @param array<string|int> $objectIDs
      * @param array<string|int,object> $idObjects
-     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null null if there was an error casting the fieldArgs
      */
     public function getIndependentObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         array $objectIDs,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): SplObjectStorage;
+    ): ?SplObjectStorage;
 }
