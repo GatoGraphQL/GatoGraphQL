@@ -431,7 +431,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         //     return null;
         // }
 
-        $fieldName = $fieldDataAccessor->getFieldName();
         /**
          * If executed within a FieldResolver we will (most likely)
          * receive a Field.
@@ -449,6 +448,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $fieldData
             );
         }
+        $fieldName = $fieldDataAccessor->getFieldName();
 
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
