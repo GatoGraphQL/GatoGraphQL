@@ -21,22 +21,6 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
      */
     public function extractStaticFieldArguments(string $field, ?array $variables = null): array;
     /**
-     * Return `null` if there is no resolver for the field
-     */
-    public function extractFieldArguments(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        array $variables,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?array;
-    public function extractDirectiveArguments(
-        DirectiveResolverInterface $directiveResolver,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $directive,
-        array $variables,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array;
-    /**
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      */
     public function extractDirectiveArgumentsForSchema(
