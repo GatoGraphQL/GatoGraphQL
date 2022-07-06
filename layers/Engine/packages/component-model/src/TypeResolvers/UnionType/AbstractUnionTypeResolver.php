@@ -516,16 +516,8 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          * Obtain the fieldData from each of the ObjectTypeResolvers,
          * for their corresponding objects
          */
-        /** @var ObjectTypeResolverInterface $objectTypeResolver */
-        foreach ($objectTypeResolverObjectIDs as $objectTypeResolver) {
-            $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
-            /**
-             * If the object is not handled, then nothing to do
-             */
-            if ($targetObjectTypeResolver === null) {
-                continue;
-            }
-
+        /** @var ObjectTypeResolverInterface $targetObjectTypeResolver */
+        foreach ($objectTypeResolverObjectIDs as $targetObjectTypeResolver) {
             $executableObjectTypeFieldResolver = $targetObjectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
             /**
              * If the field does not exist, then nothing to do
@@ -553,7 +545,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 );
             } else {
                 /** @var array<string|int> */
-                $objectIDs = $objectTypeResolverObjectIDs[$objectTypeResolver];
+                $objectIDs = $objectTypeResolverObjectIDs[$targetObjectTypeResolver];
                 $targetObjectTypeResolverObjectFieldData = $targetObjectTypeResolver->getIndependentObjectTypeResolverObjectFieldData(
                     $field,
                     $objectIDs,
