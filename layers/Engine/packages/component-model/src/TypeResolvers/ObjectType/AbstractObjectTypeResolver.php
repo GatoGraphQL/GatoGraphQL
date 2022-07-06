@@ -1411,7 +1411,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @return array<string,mixed>
      */
-    public function getFieldData(
+    protected function getFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {    
