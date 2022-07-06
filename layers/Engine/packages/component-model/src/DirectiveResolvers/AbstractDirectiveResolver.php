@@ -485,8 +485,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ARRAY_FILTER_USE_KEY
         ));
         try {
+            /**
+             * @todo Replace with validateNotMissingFieldOrDirectiveArguments
+             * @todo Remove the try/catch then
+             */
             if (
-                $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
+                $maybeErrorFeedbackItemResolution = $this->deprecatedValidateNotMissingFieldOrDirectiveArguments(
                     $mandatoryConsolidatedDirectiveArgNames,
                     $directive,
                     ResolverTypes::DIRECTIVE

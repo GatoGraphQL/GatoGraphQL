@@ -716,34 +716,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $fieldDataAccessor->getFieldName(), $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
             ARRAY_FILTER_USE_KEY
         ));
-        try {
-            if (
-                $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
-                    $mandatoryConsolidatedFieldArgNames,
-                    $fieldDataAccessor->getField(),
-                    ResolverTypes::FIELD
-                )
-            ) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $maybeErrorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-                return;
-            }
-        } catch (InvalidDynamicContextException $e) {
-            $feedbackItemResolution = new FeedbackItemResolution(
-                GenericFeedbackItemProvider::class,
-                GenericFeedbackItemProvider::E1,
-                [
-                    $e->getMessage(),
-                ]
-            );
+        if (
+            $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
+                $mandatoryConsolidatedFieldArgNames,
+                $fieldDataAccessor,
+                ResolverTypes::FIELD
+            )
+        ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $feedbackItemResolution,
+                    $maybeErrorFeedbackItemResolution,
                     LocationHelper::getNonSpecificLocation(),
                     $objectTypeResolver,
                 )
