@@ -485,9 +485,6 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         array $idObjects,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?SplObjectStorage {
-        /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
-        $objectTypeResolverObjectFieldData = new SplObjectStorage();
-
         /**
          * Group the objects by ObjectTypeResolver
          *
@@ -510,6 +507,9 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             $objectIDs[] = $id;
             $objectTypeResolverObjectIDs[$targetObjectTypeResolver] = $objectIDs;
         }
+
+        /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
+        $objectTypeResolverObjectFieldData = new SplObjectStorage();
 
         /**
          * Obtain the fieldData from each of the ObjectTypeResolvers,
