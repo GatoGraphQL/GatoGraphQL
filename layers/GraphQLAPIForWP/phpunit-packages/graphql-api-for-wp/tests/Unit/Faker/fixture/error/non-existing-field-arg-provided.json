@@ -14,7 +14,7 @@
           "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
           "validate"
         ],
-        "code": "PoP\\Root\\e1"
+        "code": "PoP\\ComponentModel\\e27"
       }
     },
     {
@@ -32,7 +32,7 @@
           "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
           "resolveValueAndMerge"
         ],
-        "code": "PoP\\Root\\e1"
+        "code": "PoP\\ComponentModel\\e27"
       }
     },
     {
@@ -50,7 +50,7 @@
           "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
           "resolveValueAndMerge"
         ],
-        "code": "PoP\\Root\\e1"
+        "code": "PoP\\ComponentModel\\e27"
       }
     },
     {
@@ -68,7 +68,7 @@
           "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
           "resolveValueAndMerge"
         ],
-        "code": "PoP\\Root\\e1"
+        "code": "PoP\\ComponentModel\\e27"
       }
     }
   ],
