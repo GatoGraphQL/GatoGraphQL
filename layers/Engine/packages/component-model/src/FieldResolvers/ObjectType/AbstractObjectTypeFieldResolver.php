@@ -757,7 +757,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         if (
             $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
                 $objectTypeResolver,
-                $fieldDataAccessor->getField(),
+                $fieldDataAccessor,
             )
         ) {
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
@@ -822,43 +822,32 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     final protected function resolveFieldArgumentErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         $errors = [];
-        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
-        foreach ($field->getArguments() as $argument) {
+        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldDataAccessor->getFieldName());
+        foreach ($fieldDataAccessor->getKeyValues() as $argName => $argValue) {
             /**
              * If the field is an InputObject, let it perform validations on its input fields
              */
-            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argument->getName()];
-            try {
-                $argumentValue = $argument->getValue();
-                if (
-                    $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
-                ) {
-                    $errors = array_merge(
-                        $errors,
-                        $fieldArgTypeResolver->validateInputValue($argumentValue)
-                    );
-                }
+            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
+            if (
+                $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
+            ) {
                 $errors = array_merge(
                     $errors,
-                    $this->validateFieldArgValue(
-                        $objectTypeResolver,
-                        $field->getName(),
-                        $argument->getName(),
-                        $argumentValue
-                    )
-                );
-            } catch (InvalidDynamicContextException $e) {
-                $errors[] = new FeedbackItemResolution(
-                    GenericFeedbackItemProvider::class,
-                    GenericFeedbackItemProvider::E1,
-                    [
-                        $e->getMessage(),
-                    ]
+                    $fieldArgTypeResolver->validateInputValue($argValue)
                 );
             }
+            $errors = array_merge(
+                $errors,
+                $this->validateFieldArgValue(
+                    $objectTypeResolver,
+                    $fieldDataAccessor->getFieldName(),
+                    $argName,
+                    $argValue
+                )
+            );
         }
         return $errors;
     }
