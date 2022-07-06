@@ -115,13 +115,14 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     }
 
     protected function getAliasedFieldDataAccessor(
+        ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): FieldDataAccessorInterface {
         /** @var SplObjectStorage<FieldInterface,FieldInterface> */
         $this->aliasedFieldDataAccessorCache ??= new SplObjectStorage();
         if (!$this->aliasedFieldDataAccessorCache->contains($fieldDataAccessor)) {
-            $this->aliasedFieldDataAccessorCache[$fieldDataAccessor] = new FieldDataAccessor(
-                $fieldDataAccessor->getField(),
+            $this->aliasedFieldDataAccessorCache[$fieldDataAccessor] = $objectTypeResolver->createFieldDataAccessor(
+                $this->getAliasedField($fieldDataAccessor->getField()),
                 $fieldDataAccessor->getKeyValues()
             );
         }
@@ -140,7 +141,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->collectFieldValidationErrors(
             $objectTypeResolver,
-            $this->getAliasedFieldDataAccessor($fieldDataAccessor),
+            $this->getAliasedFieldDataAccessor($objectTypeResolver, $fieldDataAccessor),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
@@ -175,7 +176,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         return $aliasedObjectTypeFieldResolver->resolveFieldValidationWarnings(
             $objectTypeResolver,
-            $this->getAliasedFieldDataAccessor($fieldDataAccessor),
+            $this->getAliasedFieldDataAccessor($objectTypeResolver, $fieldDataAccessor),
         );
     }
 
@@ -193,7 +194,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         $aliasedObjectTypeFieldResolver->collectValidationErrors(
             $objectTypeResolver,
             $object,
-            $this->getAliasedFieldDataAccessor($fieldDataAccessor),
+            $this->getAliasedFieldDataAccessor($objectTypeResolver, $fieldDataAccessor),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
@@ -484,7 +485,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         return $aliasedObjectTypeFieldResolver->resolveValue(
             $objectTypeResolver,
             $object,
-            $this->getAliasedFieldDataAccessor($fieldDataAccessor),
+            $this->getAliasedFieldDataAccessor($objectTypeResolver, $fieldDataAccessor),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }

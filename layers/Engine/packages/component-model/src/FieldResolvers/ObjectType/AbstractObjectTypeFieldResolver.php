@@ -23,8 +23,6 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
-use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
@@ -98,8 +96,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
     /** @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface> */
     protected SplObjectStorage $fieldFieldDataAccessorCache;
-    /** @var SplObjectStorage<FieldInterface,SplObjectStorage<object,FieldDataAccessorInterface>> */
-    protected SplObjectStorage $fieldFieldDataAccessorForObjectCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
@@ -182,12 +178,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getEnabledMutationsCheckpoint(): EnabledMutationsCheckpoint
     {
         return $this->enabledMutationsCheckpoint ??= $this->instanceManager->getInstance(EnabledMutationsCheckpoint::class);
-    }
-
-    public function __construct()
-    {
-        $this->fieldFieldDataAccessorCache = new SplObjectStorage();
-        $this->fieldFieldDataAccessorForObjectCache = new SplObjectStorage();
     }
 
     final public function getClassesToAttachTo(): array
@@ -1169,62 +1159,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
     }
 
-    final protected function getFieldDataAccessor(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): FieldDataAccessorInterface {
-        if (!$this->fieldFieldDataAccessorCache->contains($field)) {
-            $this->fieldFieldDataAccessorCache[$field] = $this->doGetFieldDataAccessor($objectTypeResolver, $field);
-        }
-        return $this->fieldFieldDataAccessorCache[$field];
-    }
-
-    protected function doGetFieldDataAccessor(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): FieldDataAccessorInterface {
-        if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $field->getName())) {
-            $fieldInputArgumentName = $this->getInputObjectUnderFieldArgumentName($objectTypeResolver, $field);
-            if ($fieldInputArgumentName) {
-                return new InputObjectUnderFieldArgumentFieldDataAccessor(
-                    $field,
-                    $fieldInputArgumentName,
-                );
-            }
-        }
-        return new FieldDataAccessor($field);
-    }
-
-    final protected function getFieldDataAccessorForObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): FieldDataAccessorInterface {
-        if (!$this->fieldFieldDataAccessorForObjectCache->contains($field)) {
-            $this->fieldFieldDataAccessorForObjectCache[$field] = new SplObjectStorage();
-        }
-        if (!$this->fieldFieldDataAccessorForObjectCache[$field]->contains($object)) {
-            $this->fieldFieldDataAccessorForObjectCache[$field][$object] = $this->doGetFieldDataAccessorForObject($objectTypeResolver, $field, $object);
-        }
-        return $this->fieldFieldDataAccessorForObjectCache[$field][$object];
-    }
-
-    protected function doGetFieldDataAccessorForObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): FieldDataAccessorInterface {
-        $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
-        $fieldDataAccessorForObject = clone $fieldDataAccessor;
-        $this->prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
-            $objectTypeResolver,
-            $field,
-            $object,
-        );
-        return $fieldDataAccessorForObject;
-    }
-
     /**
      * Indicate: if the field has a single field argument, which is of type InputObject,
      * then retrieve the value for its input fields?
@@ -1232,7 +1166,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * By default, that's the case with mutations, as they pass a single input
      * under name "input".
      */
-    protected function extractInputObjectFieldForMutation(
+    public function extractInputObjectFieldForMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
@@ -1244,7 +1178,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
      */
-    protected function getInputObjectUnderFieldArgumentName(
+    public function getInputObjectUnderFieldArgumentName(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): ?string {

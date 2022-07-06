@@ -247,7 +247,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $objectTypeResolver,
             $object,
         );
-        $fieldDataAccessor = new FieldDataAccessor(
+        $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
             $field,
             $fieldData,
         );

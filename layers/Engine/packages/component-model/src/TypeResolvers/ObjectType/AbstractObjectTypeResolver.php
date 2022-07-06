@@ -23,6 +23,7 @@ use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
+use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessor;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
@@ -521,7 +522,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * If executed within a FieldResolver we will (most likely)
              * receive a Field.
              */
-            $fieldDataAccessor = new FieldDataAccessor(
+            $fieldDataAccessor = $this->createFieldDataAccessor(
                 $field,
                 $this->getFieldData(
                     $field,
@@ -1335,5 +1336,29 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolutionFeedbackStore,
         );
         return $fieldData;
+    }
+
+    /**
+     * @param array<string,mixed> $fieldData
+     */
+    public function createFieldDataAccessor(
+        FieldInterface $field,
+        array $fieldData,
+    ): FieldDataAccessorInterface {
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver->extractInputObjectFieldForMutation($this, $field->getName())) {
+            $fieldInputArgumentName = $executableObjectTypeFieldResolver->getInputObjectUnderFieldArgumentName($this, $field);
+            if ($fieldInputArgumentName) {
+                return new InputObjectUnderFieldArgumentFieldDataAccessor(
+                    $field,
+                    $fieldInputArgumentName,
+                    $fieldData,
+                );
+            }
+        }
+        return new FieldDataAccessor(
+            $field,
+            $fieldData,
+        );
     }
 }

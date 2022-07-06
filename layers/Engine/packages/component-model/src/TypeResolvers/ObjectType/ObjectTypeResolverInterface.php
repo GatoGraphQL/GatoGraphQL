@@ -91,4 +91,11 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
+    /**
+     * @param array<string,mixed> $fieldData
+     */
+    public function createFieldDataAccessor(
+        FieldInterface $field,
+        array $fieldData,
+    ): FieldDataAccessorInterface;
 }

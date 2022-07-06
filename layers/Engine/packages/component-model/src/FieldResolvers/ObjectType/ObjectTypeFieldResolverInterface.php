@@ -130,4 +130,23 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         FieldInterface $field,
         object $object,
     ): void;
+    /**
+     * Indicate: if the field has a single field argument, which is of type InputObject,
+     * then retrieve the value for its input fields?
+     *
+     * By default, that's the case with mutations, as they pass a single input
+     * under name "input".
+     */
+    public function extractInputObjectFieldForMutation(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+    ): bool;
+    /**
+     * If the field has a single argument, which is of type InputObject,
+     * then retrieve the value for its input fields.
+     */
+    public function getInputObjectUnderFieldArgumentName(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): ?string;
 }
