@@ -41,7 +41,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     }
 
     /**
-     * @param array<string,mixed> $fieldData
+     * @param array<string,mixed> $argumentKeyValues
      * @param array<string,array<string,mixed>> $argumentSchemaDefinition
      */
     public function castArguments(

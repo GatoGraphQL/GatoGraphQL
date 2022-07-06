@@ -1175,13 +1175,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $objectTypeFieldResolutionFeedbackStore,
                 );
                 foreach ($directiveDirectFieldsToProcess as $field) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-                        $objectTypeFieldResolutionFeedbackStore,
-                        $this,
-                        $field,
-                        $id,
-                        $directive,
-                    );
+                    $ids = $directiveFieldIDs[$directive][$field];
+                    foreach ($ids as $id) {
+                        $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                            $objectTypeFieldResolutionFeedbackStore,
+                            $this,
+                            $field,
+                            $id,
+                            $directive,
+                        );
+                    }
                 }
                 $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
             }
