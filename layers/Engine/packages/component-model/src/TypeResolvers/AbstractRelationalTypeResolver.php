@@ -1174,7 +1174,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $this,
                         $field,
                         $id,
-                        $this->directive
+                        $directive
                     );
                 }
                 $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
