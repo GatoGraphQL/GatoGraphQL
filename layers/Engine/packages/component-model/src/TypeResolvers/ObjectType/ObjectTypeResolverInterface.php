@@ -13,6 +13,7 @@ use PoP\ComponentModel\TypeResolvers\OutputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use SplObjectStorage;
 
 interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, OutputTypeResolverInterface
 {
@@ -98,4 +99,39 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         FieldInterface $field,
         array $fieldData,
     ): FieldDataAccessorInterface;
+    /** 
+     * Handle case:
+     *
+     * 1. Data from a Field in an ObjectTypeResolver: a single instance of the
+     *    FieldArgs will satisfy all queried objects, since the same schema applies
+     *    to all of them.
+     *
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     */
+    public function getWildcardObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): SplObjectStorage;
+    /** 
+     * Handle case:
+     *
+     * 3. Data for a specific object: When executing nested mutations, the FieldArgs
+     *    for each object will be different, as it will contain implicit information
+     *    belonging to the object.
+     *    For instance, when querying `mutation { posts { update(title: "New title") { id } } }`,
+     *    the value for the `$postID` is injected into the FieldArgs for each object,
+     *    and the validation of the FieldArgs must also be executed for each object.
+     *
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     */
+    public function getIndependentObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): SplObjectStorage;
 }

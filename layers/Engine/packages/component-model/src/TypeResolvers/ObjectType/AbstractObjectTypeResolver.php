@@ -1287,7 +1287,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    protected function getWildcardObjectTypeResolverObjectFieldData(
+    public function getWildcardObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): SplObjectStorage {
@@ -1335,7 +1335,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    protected function getIndependentObjectTypeResolverObjectFieldData(
+    public function getIndependentObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
