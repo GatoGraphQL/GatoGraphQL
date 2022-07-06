@@ -79,8 +79,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var InterfaceTypeFieldResolverInterface[]|null
      */
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
+
     /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
     protected SplObjectStorage $fieldDataCache;
+
+    /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
+    protected SplObjectStorage $fieldObjectTypeResolverObjectFieldDataCache;
 
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?OutputServiceInterface $outputService = null;
@@ -123,6 +127,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function __construct()
     {
         $this->fieldDataCache = new SplObjectStorage();
+        $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
         parent::__construct();
     }
 
@@ -1246,59 +1251,62 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $wildcardObject = FieldDataAccessWildcardObjectFactory::getWildcardObject();
         foreach ($fields as $field) {
-            $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-            /**
-             * If the field does not exist, then nothing to do
-             */
-            if ($executableObjectTypeFieldResolver === null) {
-                continue;
-            }
-            $fieldData = $this->getFieldData(
-                $field,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-
-            /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
-            $objectTypeResolverObjectFieldData = new SplObjectStorage();
-            /** @var SplObjectStorage<object,array<string,mixed>> */
-            $objectFieldData = new SplObjectStorage();
-            
-            if (!$executableObjectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
-                /** 
-                 * Handle case:
-                 *
-                 * 1. Data from a Field in an ObjectTypeResolver: a single instance of the
-                 *    FieldArgs will satisfy all queried objects, since the same schema applies
-                 *    to all of them.
-                 */                
-                $objectFieldData[$wildcardObject] = $fieldData;
-            } else {
-                /** 
-                 * Handle case:
-                 *
-                 * 3. Data for a specific object: When executing nested mutations, the FieldArgs
-                 *    for each object will be different, as it will contain implicit information
-                 *    belonging to the object.
-                 *    For instance, when querying `mutation { posts { update(title: "New title") { id } } }`,
-                 *    the value for the `$postID` is injected into the FieldArgs for each object,
-                 *    and the validation of the FieldArgs must also be executed for each object.
+            if (!$this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+                $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+                /**
+                 * If the field does not exist, then nothing to do
                  */
-                $ids = $fieldIDs[$field];
-                foreach ($ids as $id) {
-                    $object = $idObjects[$id];
-                    // Clone array
-                    $fieldDataForObject = array_merge([], $fieldData);
-                    $executableObjectTypeFieldResolver->prepareFieldDataForObject(
-                        $fieldDataForObject,
-                        $this,
-                        $field,
-                        $object,
-                    );
-                    $objectFieldData[$object] = $fieldDataForObject;
+                if ($executableObjectTypeFieldResolver === null) {
+                    continue;
                 }
+                $fieldData = $this->getFieldData(
+                    $field,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+
+                /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
+                $objectTypeResolverObjectFieldData = new SplObjectStorage();
+                /** @var SplObjectStorage<object,array<string,mixed>> */
+                $objectFieldData = new SplObjectStorage();
+                
+                if (!$executableObjectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
+                    /** 
+                     * Handle case:
+                     *
+                     * 1. Data from a Field in an ObjectTypeResolver: a single instance of the
+                     *    FieldArgs will satisfy all queried objects, since the same schema applies
+                     *    to all of them.
+                     */                
+                    $objectFieldData[$wildcardObject] = $fieldData;
+                } else {
+                    /** 
+                     * Handle case:
+                     *
+                     * 3. Data for a specific object: When executing nested mutations, the FieldArgs
+                     *    for each object will be different, as it will contain implicit information
+                     *    belonging to the object.
+                     *    For instance, when querying `mutation { posts { update(title: "New title") { id } } }`,
+                     *    the value for the `$postID` is injected into the FieldArgs for each object,
+                     *    and the validation of the FieldArgs must also be executed for each object.
+                     */
+                    $ids = $fieldIDs[$field];
+                    foreach ($ids as $id) {
+                        $object = $idObjects[$id];
+                        // Clone array
+                        $fieldDataForObject = array_merge([], $fieldData);
+                        $executableObjectTypeFieldResolver->prepareFieldDataForObject(
+                            $fieldDataForObject,
+                            $this,
+                            $field,
+                            $object,
+                        );
+                        $objectFieldData[$object] = $fieldDataForObject;
+                    }
+                }
+                $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
+                $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = $objectTypeResolverObjectFieldData;
             }
-            $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
-            $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
+            $fieldObjectTypeResolverObjectFieldData[$field] = $this->fieldObjectTypeResolverObjectFieldDataCache[$field];
         }
 
         return $fieldObjectTypeResolverObjectFieldData;
