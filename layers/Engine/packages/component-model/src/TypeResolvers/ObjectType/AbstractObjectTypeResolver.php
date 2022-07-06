@@ -542,7 +542,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $objectTypeFieldResolver->collectValidationErrors($this, $object, $field, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolver->collectValidationErrors($this, $object, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;

@@ -186,14 +186,14 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
         $aliasedObjectTypeFieldResolver->collectValidationErrors(
             $objectTypeResolver,
             $object,
-            $this->getAliasedField($field),
+            $this->getAliasedFieldDataAccessor($fieldDataAccessor),
             $objectTypeFieldResolutionFeedbackStore,
         );
     }

@@ -1133,11 +1133,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function collectValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $field->getName(), $field->getArguments())) {
+        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldDataAccessor->getFieldName(), $fieldDataAccessor->getField()->getArguments())) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
             if ($feedbackItemResolution !== null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1152,11 +1152,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
+        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
             // Validate on the object
-            $fieldDataAccessorForObject = $this->getFieldDataAccessorForObject($objectTypeResolver, $field, $object);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessorForObject);
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
             foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
