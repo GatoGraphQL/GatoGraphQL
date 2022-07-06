@@ -64,31 +64,21 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
     }
 
     /**
-     * @return array<string,mixed>
-     * @throws ShouldNotHappenException If accessing a non-set Field/ObjectTypeResolver/object
+     * @return array<string,mixed>|null null if casting the fieldArgs produced an error
+     * @throws ShouldNotHappenException
      */
     public function getFieldData(
         FieldInterface $field,
         ?ObjectTypeResolverInterface $objectTypeResolver = null,
         ?object $object = null,
-    ): array {
+    ): ?array {
         if (!$this->fieldObjectTypeResolverObjectFieldData->contains($field)) {
-            throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__('Field \'%s\' is not contained in the FieldDataAccessProvider'),
-                    $field->getName()
-                )
-            );
+            return null;
         }
         /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
         $objectTypeResolverObjectFieldData = $this->fieldObjectTypeResolverObjectFieldData[$field];
         if ($objectTypeResolverObjectFieldData->count() === 0) {
-            throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__('No ObjectTypeResolvers were set under Field \'%s\''),
-                    $field->getName()
-                )
-            );
+            return null;
         }
         /**
          * If not passing the ObjectTypeResolver, then it's the only one that's been set
@@ -108,13 +98,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
             /** @var ObjectTypeResolverInterface */
             $objectTypeResolver = $objectTypeResolvers[0];
         } elseif (!$objectTypeResolverObjectFieldData->contains($objectTypeResolver)) {
-            throw new ShouldNotHappenException(
-               sprintf(
-                    $this->__('In the FieldDataAccessProvider, no data has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
-                    $field->getName(),
-                    $objectTypeResolver->getMaybeNamespacedTypeName()
-                )
-            );
+            return null;
         }
 
         /** @var SplObjectStorage<object,array<string,mixed>> */
@@ -127,20 +111,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
         if ($isNullObject || !$objectFieldData->contains($object)) {
             $object = FieldDataAccessWildcardObjectFactory::getWildcardObject();
             if (!$objectFieldData->contains($object)) {
-                throw new ShouldNotHappenException(
-                    $isNullObject
-                        ? sprintf(
-                            $this->__('In the FieldDataAccessProvider, no data for "all objects" has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
-                            $field->getName(),
-                            $objectTypeResolver->getMaybeNamespacedTypeName()
-                        )
-                        : sprintf(
-                            $this->__('In the FieldDataAccessProvider, no data for object with ID \'%s\' has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
-                            $objectTypeResolver->getID($object),
-                            $field->getName(),
-                            $objectTypeResolver->getMaybeNamespacedTypeName()
-                        )
-                );
+                return null;
             }
         }
         /** @var array<string,mixed> */
@@ -156,12 +127,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
         FieldInterface $toField,
     ): void {
         if (!$this->fieldObjectTypeResolverObjectFieldData->contains($fromField)) {
-            throw new ShouldNotHappenException(
-                sprintf(
-                    $this->__('Field \'%s\' is not contained in the FieldDataAccessProvider'),
-                    $fromField->getName()
-                )
-            );
+            return;
         }
         $this->fieldObjectTypeResolverObjectFieldData[$toField] = $this->fieldObjectTypeResolverObjectFieldData[$fromField];
     }

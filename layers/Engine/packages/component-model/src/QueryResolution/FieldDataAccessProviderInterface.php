@@ -11,14 +11,14 @@ use PoP\Root\Exception\ShouldNotHappenException;
 interface FieldDataAccessProviderInterface
 {
     /**
-     * @return array<string,mixed>
-     * @throws ShouldNotHappenException If accessing a non-set Field/ObjectTypeResolver/object
+     * @return array<string,mixed>|null null if casting the fieldArgs produced an error
+     * @throws ShouldNotHappenException
      */
     public function getFieldData(
         FieldInterface $field,
         ?ObjectTypeResolverInterface $objectTypeResolver = null,
         ?object $object = null,
-    ): array;
+    ): ?array;
     /**
      * Used by the nested directive resolver
      */

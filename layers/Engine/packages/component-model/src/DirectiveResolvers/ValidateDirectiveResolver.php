@@ -98,11 +98,15 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
 
         /** @var ObjectTypeResolverInterface */
         $objectTypeResolver = $relationalTypeResolver;
+        $fieldData = $fieldDataAccessProvider->getFieldData($field, $objectTypeResolver, null);
+        if ($fieldData === null) {
+            return;
+        }
         // @todo Review $object as null here
         // @todo Check: should simplify this logic? Have FieldDataAccessor be produced by $fieldDataAccessProvider?
         $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
             $field,
-            $fieldDataAccessProvider->getFieldData($field, $objectTypeResolver, null)
+            $fieldData
         );
         $objectTypeResolver->collectFieldValidationErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         // If there are errors, do not check warnings/deprecations for fear of producing some exception
