@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -135,28 +134,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default
                 => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
         };
-    }
-
-    // @todo Remove this function
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
-            $objectTypeResolver,
-            $field,
-            $object,
-        );
-        $customPost = $object;
-        switch ($field->getName()) {
-            case 'setFeaturedImage':
-            case 'removeFeaturedImage':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
-                break;
-        }
     }
 
     /**

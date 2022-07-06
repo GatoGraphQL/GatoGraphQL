@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -107,28 +106,6 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
             'reply' => true,
             default => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
         };
-    }
-
-    // @todo Remove this function
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
-            $objectTypeResolver,
-            $field,
-            $object,
-        );
-        $comment = $object;
-        switch ($field->getName()) {
-            case 'reply':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $this->getCommentTypeAPI()->getCommentPostId($comment));
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::PARENT_COMMENT_ID, $objectTypeResolver->getID($comment));
-                break;
-        }
     }
 
     /**

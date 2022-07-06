@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -72,27 +71,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return true;
         }
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
-    }
-
-    // @todo Remove this function
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
-            $objectTypeResolver,
-            $field,
-            $object,
-        );
-        $post = $object;
-        switch ($field->getName()) {
-            case 'update':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::ID, $objectTypeResolver->getID($post));
-                break;
-        }
     }
 
     /**

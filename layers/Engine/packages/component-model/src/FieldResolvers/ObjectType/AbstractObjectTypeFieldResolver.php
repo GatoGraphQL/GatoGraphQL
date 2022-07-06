@@ -1303,15 +1303,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
     }
 
-    // @todo Remove this function
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): void {
-    }
-
     /**
      * @param array<string,mixed> $fieldDataForObject
      */
