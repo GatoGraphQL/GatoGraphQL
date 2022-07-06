@@ -107,7 +107,16 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
             }
             /** @var ObjectTypeResolverInterface */
             $objectTypeResolver = $objectTypeResolvers[0];
+        } elseif (!$objectTypeResolverObjectFieldData->contains($objectTypeResolver)) {
+            throw new ShouldNotHappenException(
+               sprintf(
+                    $this->__('In the FieldDataAccessProvider, no data has been set for field \'%s\' and ObjectTypeResolver \'%s\''),
+                    $field->getName(),
+                    $objectTypeResolver->getMaybeNamespacedTypeName()
+                )
+            );
         }
+
         /** @var SplObjectStorage<object,array<string,mixed>> */
         $objectFieldData = $objectTypeResolverObjectFieldData[$objectTypeResolver];
         /**
