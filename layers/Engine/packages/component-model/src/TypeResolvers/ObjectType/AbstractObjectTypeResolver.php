@@ -1411,7 +1411,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Return an error if the query contains an argument that
+     * Return an error if the query contains argument(s) that
      * does not exist in the field.
      *
      * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
@@ -1423,16 +1423,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
     ): array {
         $errors = [];
-        $nonExistingArgNames = [];
-        foreach (array_keys($fieldData) as $argName) {
-            /**
-             * Validate the field has been defined in the schema
-             */
-            if (isset($fieldArgsSchemaDefinition[$argName])) {
-                continue;
-            }
-            $nonExistingArgNames[] = $argName;
-        }
+        $nonExistingArgNames = array_diff(
+            array_keys($fieldData),
+            array_keys($fieldArgsSchemaDefinition)
+        );
         if ($nonExistingArgNames !== []) {
             $errors[] = new FeedbackItemResolution(
                 ErrorFeedbackItemProvider::class,
