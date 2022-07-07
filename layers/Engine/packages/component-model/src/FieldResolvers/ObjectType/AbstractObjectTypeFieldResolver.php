@@ -707,23 +707,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        /**
-         * If a MutationResolver is declared, let it validate the schema
-         */
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-            }
-            return;
-        }
 
         // Custom validations
         $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrors(

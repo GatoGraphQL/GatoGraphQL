@@ -1304,11 +1304,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         /**
-         * Validate that:
+         * Validations:
          *
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
-         * - constraints of the arguments
          */
         $errorFeedbackItemResolutions = [];
         $maybeErrorFeedbackItemResolution = $this->validateNonMissingMandatoryFieldArguments(
@@ -1327,6 +1326,26 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($maybeErrorFeedbackItemResolution !== null) {
             $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
         }
+        
+        if ($errorFeedbackItemResolutions !== []) {
+            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $field->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return null;
+        }
+
+        /**
+         * Validations:
+         *
+         * - constraints of the arguments
+         * - mutation custom validations
+         */
         $errorFeedbackItemResolutions = array_merge(
             $errorFeedbackItemResolutions,
             $this->validateFieldArgumentConstraints(
@@ -1335,6 +1354,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $field,
             )
         );
+        /**
+         * If a MutationResolver is declared, let it validate the schema
+         */
+        $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $field->getName());
+        if ($mutationResolver !== null && !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
+            $fieldDataAccessor = new FieldDataAccessor(
+                $field,
+                $fieldData,
+            );
+            $errorFeedbackItemResolutions = array_merge(
+                $errorFeedbackItemResolutions,
+                $mutationResolver->validateErrors($fieldDataAccessor)
+            );
+        }
         
         if ($errorFeedbackItemResolutions !== []) {
             foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
