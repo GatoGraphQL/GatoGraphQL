@@ -88,33 +88,35 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         array &$variables,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        /**
-         * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
-         * (that depends on each object), it can't resolve this functionality
-         */
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            return;
-        }
+        // @todo Temporarily disable, check if to completely remove!
+        return;
+        // /**
+        //  * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+        //  * (that depends on each object), it can't resolve this functionality
+        //  */
+        // if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+        //     return;
+        // }
 
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
-        $fieldData = $fieldDataAccessProvider->getFieldData($field, $objectTypeResolver, null);
-        if ($fieldData === null) {
-            return;
-        }
-        // @todo Review $object as null here
-        // @todo Check: should simplify this logic? Have FieldDataAccessor be produced by $fieldDataAccessProvider?
-        $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
-            $field,
-            $fieldData
-        );
-        $objectTypeResolver->collectFieldValidationErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        // If there are errors, do not check warnings/deprecations for fear of producing some exception
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return;
-        }
-        $objectTypeResolver->collectFieldValidationWarnings($fieldDataAccessor, $variables, $objectTypeFieldResolutionFeedbackStore);
-        $objectTypeResolver->collectFieldDeprecations($fieldDataAccessor, $variables, $objectTypeFieldResolutionFeedbackStore);
+        // /** @var ObjectTypeResolverInterface */
+        // $objectTypeResolver = $relationalTypeResolver;
+        // $fieldData = $fieldDataAccessProvider->getFieldData($field, $objectTypeResolver, null);
+        // if ($fieldData === null) {
+        //     return;
+        // }
+        // // @todo Review $object as null here
+        // // @todo Check: should simplify this logic? Have FieldDataAccessor be produced by $fieldDataAccessProvider?
+        // $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
+        //     $field,
+        //     $fieldData
+        // );
+        // $objectTypeResolver->collectFieldValidationErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        // // If there are errors, do not check warnings/deprecations for fear of producing some exception
+        // if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        //     return;
+        // }
+        // $objectTypeResolver->collectFieldValidationWarnings($fieldDataAccessor, $variables, $objectTypeFieldResolutionFeedbackStore);
+        // $objectTypeResolver->collectFieldDeprecations($fieldDataAccessor, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
