@@ -1349,7 +1349,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): ?array {        
         $fieldData = $field->getArgumentKeyValues();
         /**
-         * Add the default Arguments to the Field
+         * Add the default Argument values
          */
         $fieldData = $this->addDefaultFieldArguments(
             $fieldData,
