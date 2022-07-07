@@ -124,8 +124,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
             self::E27 => $this->__('On field \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
             self::E28 => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
-            self::E29 => $this->__('Argument(s) \'%1$s\' in field \'%2$s\' cannot be empty', 'component-model'),
-            self::E30 => $this->__('Argument(s) \'%1$s\' in directive \'%2$s\' cannot be empty', 'component-model'),
+            self::E29 => $this->__('Argument \'%1$s\' in field \'%2$s\' cannot be empty', 'component-model'),
+            self::E30 => $this->__('Argument \'%1$s\' in directive \'%2$s\' cannot be empty', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
