@@ -962,7 +962,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $validationCheckpoints;
     }
 
-    public function collectValidationErrors(
+    public function validateFieldDataForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,

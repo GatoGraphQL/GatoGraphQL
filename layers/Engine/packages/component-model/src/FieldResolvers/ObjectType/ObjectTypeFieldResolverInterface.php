@@ -100,7 +100,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         FieldDataAccessorInterface $fieldDataAccessor
     ): array;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
-    public function collectValidationErrors(
+    public function validateFieldDataForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
