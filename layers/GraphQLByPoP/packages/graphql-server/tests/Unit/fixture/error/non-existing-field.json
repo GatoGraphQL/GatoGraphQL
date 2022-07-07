@@ -10,10 +10,7 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "nonExisting",
-          "validate"
-        ],
+        "field": "nonExisting",
         "code": "PoP\\ComponentModel\\e16"
       }
     }
