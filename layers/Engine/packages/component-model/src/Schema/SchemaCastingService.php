@@ -50,7 +50,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
         array $argumentSchemaDefinition,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): array {
-        $castedArgumentKeyValues = [];
         // Cast all argument values
         foreach ($argumentKeyValues as $argName => $argValue) {
             /**
@@ -144,7 +143,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             /**
              * No errors, re-assign the coerced value to the data
              */
-            $castedArgumentKeyValues[$argName] = $coercedArgValue;
+            $argumentKeyValues[$argName] = $coercedArgValue;
 
             // Obtain the deprecations
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
@@ -171,6 +170,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 }
             }
         }
-        return $castedArgumentKeyValues;
+        return $argumentKeyValues;
     }
 }
