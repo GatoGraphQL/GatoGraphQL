@@ -1317,34 +1317,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * @return array<string,mixed>|null null in case of error
-     */
-    protected function doGetFieldData(
-        FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?array {        
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $fieldData = $this->prepareFieldData(
-            $field,
-            $separateObjectTypeFieldResolutionFeedbackStore,
-        );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return null;
-        }
-        return $fieldData;
-    }
-
-    /**
      * Retrieve the Field Arguments data, adding the default values
      * coercing all values, and allowing to apply customizations
      *
      * @return array<string,mixed>|null null if there was a validation error
      */
-    private function prepareFieldData(
+    protected function doGetFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?array {
+    ): ?array {        
         $fieldData = $field->getArgumentKeyValues();
         /**
          * Add the default Arguments to the Field
