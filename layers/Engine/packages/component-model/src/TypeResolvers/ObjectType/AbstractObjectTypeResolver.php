@@ -421,6 +421,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
             $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            // ...
             $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldDataAccessor->getKeyValues(), $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
@@ -1357,12 +1358,50 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         /**
+         * Perform validations
+         */
+        $errorFeedbackItemResolutions = $this->validateFieldData(
+            $fieldData,
+            $field,
+        );
+        if ($errorFeedbackItemResolutions !== []) {
+            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $field->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return null;
+        }
+
+        return $fieldData;
+    }
+
+    /**
+     * Validate the field data
+     *
+     * @param array<string,mixed> $fieldData
+     * @return FeedbackItemResolution[] if there was some validation error
+     */
+    protected function validateFieldData(
+        array $fieldData,
+        FieldInterface $field,
+    ): array {
+        $errorFeedbackItemResolutions = [];
+        /** @var array */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+
+        /**
          * Validations:
          *
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
-        $errorFeedbackItemResolutions = [];
         $maybeErrorFeedbackItemResolution = $this->validateNonMissingMandatoryFieldArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
@@ -1381,16 +1420,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         
         if ($errorFeedbackItemResolutions !== []) {
-            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        $field->getLocation(),
-                        $this,
-                    )
-                );
-            }
-            return null;
+            return $errorFeedbackItemResolutions;
         }
 
         /**
@@ -1413,6 +1443,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             ),
             $objectTypeFieldResolver->validateFieldKeyValues($this, $fieldDataAccessor)
         );
+
         /**
          * If a MutationResolver is declared, let it validate the schema
          */
@@ -1424,20 +1455,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
         
-        if ($errorFeedbackItemResolutions !== []) {
-            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        $field->getLocation(),
-                        $this,
-                    )
-                );
-            }
-            return null;
-        }
-
-        return $fieldData;
+        return $errorFeedbackItemResolutions;
     }
 
     /**
