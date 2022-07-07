@@ -74,7 +74,6 @@ trait ObjectTypeOrDirectiveResolverTrait
         array $fieldOrDirectiveData,
         array $argumentNameDefaultValues,
     ): array {
-        $completedFieldOrDirectiveData = [];
         foreach ($argumentNameDefaultValues as $argName => $argDefaultValue) {
             if (array_key_exists($argName, $fieldOrDirectiveData)) {
                 $completedFieldOrDirectiveData[$argName] = $fieldOrDirectiveData[$argName];
@@ -82,7 +81,7 @@ trait ObjectTypeOrDirectiveResolverTrait
             }            
             $fieldOrDirectiveData[$argName] = $argDefaultValue;
         }
-        return $completedFieldOrDirectiveData;
+        return $fieldOrDirectiveData;
     }
 
     /**
