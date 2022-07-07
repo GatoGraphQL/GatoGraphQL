@@ -1303,8 +1303,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         /**
-         * Validate that no mandatory arg is missing, no non-existing
-         * arg has been provided
+         * Validate that:
+         *
+         * - no mandatory arg is missing
+         * - no non-existing arg has been provided
          */
         if ($feedbackItemResolution = $this->validateNotMissingFieldArgumentValues(
             $fieldData,
