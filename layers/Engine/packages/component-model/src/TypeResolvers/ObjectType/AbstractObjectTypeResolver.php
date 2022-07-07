@@ -820,56 +820,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $fieldArgsSchemaDefinition;
     }
 
-    /**
-     * Retrieve the Field Arguments data, adding the default values
-     * coercing all values, and allowing to apply customizations
-     *
-     * @return array<string,mixed>|null null if there was a validation error
-     */
-    protected function prepareFieldData(
-        FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?array {
-        $fieldData = $field->getArgumentKeyValues();
-        /**
-         * Add the default Arguments to the Field
-         */
-        $this->integrateDefaultFieldArgumentsIntoFieldData($fieldData, $field);
-
-        /**
-         * Cast the Arguments, return if any of them produced an error
-         */
-        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $fieldData = $this->getSchemaCastingService()->castArguments($fieldData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
-        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-            return null;
-        }
-
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        if ($objectTypeFieldResolver === null) {
-            return null;
-        }
-
-        /**
-         * Allow to inject additional Arguments
-         */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $objectTypeFieldResolver->prepareFieldData(
-            $fieldData,
-            $this,
-            $field,
-            $separateObjectTypeFieldResolutionFeedbackStore
-        );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return null;
-        }
-
-        return $fieldData;
-    }
-
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
     {
         $cacheKey = $global ? 'global' : 'non-global';
@@ -1382,6 +1332,56 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
+        return $fieldData;
+    }
+
+    /**
+     * Retrieve the Field Arguments data, adding the default values
+     * coercing all values, and allowing to apply customizations
+     *
+     * @return array<string,mixed>|null null if there was a validation error
+     */
+    private function prepareFieldData(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        $fieldData = $field->getArgumentKeyValues();
+        /**
+         * Add the default Arguments to the Field
+         */
+        $this->integrateDefaultFieldArgumentsIntoFieldData($fieldData, $field);
+
+        /**
+         * Cast the Arguments, return if any of them produced an error
+         */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $fieldData = $this->getSchemaCastingService()->castArguments($fieldData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($objectTypeFieldResolver === null) {
+            return null;
+        }
+
+        /**
+         * Allow to inject additional Arguments
+         */
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $objectTypeFieldResolver->prepareFieldData(
+            $fieldData,
+            $this,
+            $field,
+            $separateObjectTypeFieldResolutionFeedbackStore
+        );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
         return $fieldData;
     }
 
