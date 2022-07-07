@@ -37,13 +37,14 @@ class CustomPostObjectTypeFieldResolver extends UpstreamCustomPostObjectTypeFiel
      * If not provided, set the properties from the logged-in user
      *
      * @param array<string,mixed> $fieldData
+     * @return array<string,mixed>|null null in case of validation error
      */
     public function prepareFieldData(
-        array &$fieldData,
+        array $fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $this->prepareAddCommentFieldData($fieldData, $field);
+    ): ?array {
+        return $this->prepareAddCommentFieldData($fieldData);
     }
 }

@@ -1354,17 +1354,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Allow to inject additional Arguments
          */
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $objectTypeFieldResolver->prepareFieldData(
+        $fieldData = $objectTypeFieldResolver->prepareFieldData(
             $fieldData,
             $this,
             $field,
-            $separateObjectTypeFieldResolutionFeedbackStore
+            $objectTypeFieldResolutionFeedbackStore
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return null;
-        }
 
         return $fieldData;
     }

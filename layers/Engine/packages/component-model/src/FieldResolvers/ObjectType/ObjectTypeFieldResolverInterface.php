@@ -114,13 +114,14 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      * Apply customizations to the field data
      *
      * @param array<string,mixed> $fieldData
+     * @return array<string,mixed>|null null in case of validation error
      */
     public function prepareFieldData(
-        array &$fieldData,
+        array $fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void;
+    ): ?array;
     /**
      * @param array<string,mixed> $fieldDataForObject
      */
