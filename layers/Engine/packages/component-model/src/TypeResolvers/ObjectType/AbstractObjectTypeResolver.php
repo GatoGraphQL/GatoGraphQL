@@ -749,9 +749,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * Validate the field data for the object
-     *
-     * @param array<string,mixed> $fieldData
-     * @return FeedbackItemResolution[] if there was some validation error
      */
     protected function validateFieldDataForObject(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -1212,7 +1209,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
             return null;
         }
-
+        /** @var array<string,mixed> $fieldData */
+        
         $objectFieldData[$wildcardObject] = $fieldData;
         $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
         // Store in the cache
@@ -1557,7 +1555,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
      *
-     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
+     * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
     private function validateNonMissingMandatoryFieldArguments(
         array $fieldData,
@@ -1588,7 +1586,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Return an error if the query contains argument(s) that
      * does not exist in the field.
      *
-     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
+     * @param array<string,mixed> $fieldArgsSchemaDefinition
      */
     private function validateOnlyExistingFieldArguments(
         array $fieldData,
