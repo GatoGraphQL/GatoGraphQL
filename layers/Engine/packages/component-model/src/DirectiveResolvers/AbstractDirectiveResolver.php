@@ -226,9 +226,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             return;
         }
         // @todo Fix integrate with Directive
-        $directiveData = [];
         $this->deprecatedIntegrateDefaultFieldOrDirectiveArguments(
-            $directiveData,
             $this->directive,
             $directiveArgumentNameDefaultValues,
         );
