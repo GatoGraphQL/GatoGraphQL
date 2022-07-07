@@ -6,4 +6,7 @@ query {
   passingInputObject: post(by: { slug: {slug: "block-category-common"} }) {
     id
   }
+  passingNonDate: posts(filter: { dateQuery: {after: 1.0} }) {
+    id
+  }
 }
