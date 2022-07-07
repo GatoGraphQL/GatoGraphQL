@@ -1574,10 +1574,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $fieldArgsSchemaDefinition,
         FieldInterface $field,
     ): ?FeedbackItemResolution {
-        $nonExistingArgNames = array_diff(
+        $nonExistingArgNames = array_values(array_diff(
             array_keys($fieldData),
             array_keys($fieldArgsSchemaDefinition)
-        );
+        ));
         if ($nonExistingArgNames !== []) {
             return new FeedbackItemResolution(
                 ErrorFeedbackItemProvider::class,
