@@ -992,23 +992,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return;
             }
         }
-
-        // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
-            // Validate on the object
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-            }
-            return;
-        }
     }
 
     /**

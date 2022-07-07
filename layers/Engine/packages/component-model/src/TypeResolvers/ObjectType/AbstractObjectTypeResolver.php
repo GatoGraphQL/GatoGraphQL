@@ -419,6 +419,25 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
         }
 
+        /**
+         * If a MutationResolver is declared, let it validate the schema
+         */
+        $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $field->getName());
+        if ($mutationResolver !== null && $objectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
+            // Validate on the object
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
+            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $field->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return null;
+        }
+
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $objectTypeFieldResolver->collectValidationErrors($this, $object, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
