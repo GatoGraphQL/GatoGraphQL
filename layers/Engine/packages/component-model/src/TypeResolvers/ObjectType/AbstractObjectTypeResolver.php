@@ -821,16 +821,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
-     * Add the default Argument values to the field, coerce them,
-     * and allow to apply customizations
+     * Retrieve the Field Arguments data, adding the default values
+     * coercing all values, and allowing to apply customizations
      *
-     * @param array<string,mixed> $fieldData
+     * @return array<string,mixed>|null null if there was a validation error
      */
-    public function prepareFieldData(
-        array &$fieldData,
+    protected function prepareFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
+    ): ?array {
+        $fieldData = $field->getArgumentKeyValues();
         /**
          * Add the default Arguments to the Field
          */
@@ -844,23 +844,30 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldData = $this->getSchemaCastingService()->castArguments($fieldData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-            return;
+            return null;
         }
 
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($objectTypeFieldResolver === null) {
-            return;
+            return null;
         }
 
         /**
          * Allow to inject additional Arguments
          */
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $objectTypeFieldResolver->prepareFieldData(
             $fieldData,
             $this,
             $field,
-            $objectTypeFieldResolutionFeedbackStore
+            $separateObjectTypeFieldResolutionFeedbackStore
         );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        return $fieldData;
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
@@ -1366,10 +1373,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {        
-        $fieldData = $field->getArgumentKeyValues();
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->prepareFieldData(
-            $fieldData,
+        $fieldData = $this->prepareFieldData(
             $field,
             $separateObjectTypeFieldResolutionFeedbackStore,
         );
