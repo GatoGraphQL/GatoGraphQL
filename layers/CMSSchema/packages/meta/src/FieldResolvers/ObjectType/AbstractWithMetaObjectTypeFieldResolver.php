@@ -43,28 +43,32 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
 
     abstract protected function getMetaTypeAPI(): MetaTypeAPIInterface;
 
-    protected function doResolveSchemaValidationErrors(
+    /**
+     * Custom validations
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
+        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'metaValue':
             case 'metaValues':
                 if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($fieldDataAccessor->getValue('key'))) {
-                    return [
-                        new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::E1,
-                            [
-                                $fieldDataAccessor->getValue('key'),
-                            ]
-                        ),
-                    ];
+                    $errors[] = new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E1,
+                        [
+                            $fieldDataAccessor->getValue('key'),
+                        ]
+                    );
                 }
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldDataAccessor);
+        return $errors;
     }
 
     public function validateResolvedFieldType(

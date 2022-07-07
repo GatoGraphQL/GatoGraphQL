@@ -150,4 +150,13 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): ?string;
+    /**
+     * Custom validations
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function validateFieldKeyValues(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array;
 }

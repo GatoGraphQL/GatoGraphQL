@@ -108,27 +108,31 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         };
     }
 
-    protected function doResolveSchemaValidationErrors(
+    /**
+     * Custom validations
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
+        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'var':
                 if (!App::hasState($fieldDataAccessor->getValue('name'))) {
-                    return [
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E6,
-                            [
-                                $fieldDataAccessor->getValue('name'),
-                            ]
-                        ),
-                    ];
+                    $errors[] = new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E6,
+                        [
+                            $fieldDataAccessor->getValue('name'),
+                        ]
+                    );
                 };
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldDataAccessor);
+        return $errors;
     }
 
     public function resolveValue(

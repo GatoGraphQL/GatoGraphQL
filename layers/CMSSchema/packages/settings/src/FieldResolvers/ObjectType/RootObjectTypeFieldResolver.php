@@ -135,29 +135,33 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function doResolveSchemaValidationErrors(
+    /**
+     * Custom validations
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
+        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
                 if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldDataAccessor->getValue('name'))) {
-                    return [
-                        new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::E1,
-                            [
-                                $fieldDataAccessor->getValue('name'),
-                            ]
-                        ),
-                    ];
+                    $errors[] = new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E1,
+                        [
+                            $fieldDataAccessor->getValue('name'),
+                        ]
+                    );
                 }
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldDataAccessor);
+        return $errors;
     }
 
     public function validateResolvedFieldType(

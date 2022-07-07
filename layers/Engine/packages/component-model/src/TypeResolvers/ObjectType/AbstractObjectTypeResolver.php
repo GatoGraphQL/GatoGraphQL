@@ -1344,25 +1344,27 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * Validations:
          *
          * - constraints of the arguments
+         * - custom constraints of the arguments set by the field resolver
          * - mutation custom validations
          */
+        $fieldDataAccessor = new FieldDataAccessor(
+            $field,
+            $fieldData,
+        );
         $errorFeedbackItemResolutions = array_merge(
             $errorFeedbackItemResolutions,
             $this->validateFieldArgumentConstraints(
                 $fieldData,
                 $objectTypeFieldResolver,
                 $field,
-            )
+            ),
+            $objectTypeFieldResolver->validateFieldKeyValues($this, $fieldDataAccessor)
         );
         /**
          * If a MutationResolver is declared, let it validate the schema
          */
         $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $field->getName());
         if ($mutationResolver !== null && !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
-            $fieldDataAccessor = new FieldDataAccessor(
-                $field,
-                $fieldData,
-            );
             $errorFeedbackItemResolutions = array_merge(
                 $errorFeedbackItemResolutions,
                 $mutationResolver->validateErrors($fieldDataAccessor)
@@ -1381,8 +1383,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             }
             return null;
         }
-
-        // $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         return $fieldData;
     }
