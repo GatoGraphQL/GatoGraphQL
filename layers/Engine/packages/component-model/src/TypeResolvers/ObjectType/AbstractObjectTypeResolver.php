@@ -777,9 +777,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final protected function integrateDefaultFieldArgumentsIntoFieldData(
         array $fieldData,
-        FieldInterface $field
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($field);
+        $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues(
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
         if ($fieldArgumentNameDefaultValues === null) {
             return null;
         }
@@ -798,10 +802,26 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @return array<string,mixed>|null
      */
-    final protected function getFieldArgumentNameDefaultValues(FieldInterface $field): ?array
-    {
+    final protected function getFieldArgumentNameDefaultValues(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         if ($fieldArgsSchemaDefinition === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E16,
+                        [
+                            $field->getName(),
+                            $this->getMaybeNamespacedTypeName()
+                        ]
+                    ),
+                    $field->getLocation(),
+                    $this,
+                )
+            );
             return null;
         }
 
@@ -1332,7 +1352,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Add the default Arguments to the Field
          */
-        $fieldData = $this->integrateDefaultFieldArgumentsIntoFieldData($fieldData, $field);
+        $fieldData = $this->integrateDefaultFieldArgumentsIntoFieldData(
+            $fieldData,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
         if ($fieldData === null) {
             return null;
         }
