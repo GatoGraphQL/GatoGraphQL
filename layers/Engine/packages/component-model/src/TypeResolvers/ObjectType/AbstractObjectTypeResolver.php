@@ -773,58 +773,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * @param array<string,mixed> $fieldData
-     * @return array<string,mixed>|null null if there was an error
+     * @param array<string,array<string,mixed>> $fieldArgsSchemaDefinition
+     * @return array<string,mixed>
      */
     final protected function addDefaultFieldArguments(
         array $fieldData,
-        FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $fieldArgsSchemaDefinition,
     ): array {
-        $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues(
-            $field,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        if ($fieldArgumentNameDefaultValues === null) {
-            return null;
-        }
+        $fieldArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($fieldArgsSchemaDefinition);
         $fieldData = $this->addDefaultFieldOrDirectiveArguments(
             $fieldData,
             $fieldArgumentNameDefaultValues,
         );
         return $fieldData;
-    }
-
-    /**
-     * Get the field arguments which have a default value.
-     * Set the missing InputObject as {} to give it a chance to set
-     * its default input field values
-     *
-     * @return array<string,mixed>|null
-     */
-    final protected function getFieldArgumentNameDefaultValues(
-        FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?array {
-        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-        if ($fieldArgsSchemaDefinition === null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E16,
-                        [
-                            $field->getName(),
-                            $this->getMaybeNamespacedTypeName()
-                        ]
-                    ),
-                    $field->getLocation(),
-                    $this,
-                )
-            );
-            return null;
-        }
-
-        return $this->getFieldOrDirectiveArgumentNameDefaultValues($fieldArgsSchemaDefinition);
     }
 
     final protected function getFieldArgumentsSchemaDefinition(FieldInterface $field): ?array
@@ -1347,23 +1308,37 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {        
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        if ($fieldArgsSchemaDefinition === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E16,
+                        [
+                            $field->getName(),
+                            $this->getMaybeNamespacedTypeName()
+                        ]
+                    ),
+                    $field->getLocation(),
+                    $this,
+                )
+            );
+            return null;
+        }
+        
         $fieldData = $field->getArgumentKeyValues();
         /**
          * Add the default Argument values
          */
         $fieldData = $this->addDefaultFieldArguments(
             $fieldData,
-            $field,
-            $objectTypeFieldResolutionFeedbackStore,
+            $fieldArgsSchemaDefinition,
         );
-        if ($fieldData === null) {
-            return null;
-        }
 
         /**
          * Cast the Arguments, return if any of them produced an error
          */
-        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
         $fieldData = $this->getSchemaCastingService()->castArguments($fieldData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
