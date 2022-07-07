@@ -40,6 +40,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E26 = 'e26';
     public final const E27 = 'e27';
     public final const E28 = 'e28';
+    public final const E29 = 'e29';
+    public final const E30 = 'e30';
 
     /**
      * @return string[]
@@ -78,6 +80,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E26,
             self::E27,
             self::E28,
+            self::E29,
+            self::E30,
         ];
     }
 
@@ -120,6 +124,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
             self::E27 => $this->__('On field \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
             self::E28 => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
+            self::E29 => $this->__('Argument(s) \'%1$s\' in field \'%2$s\' cannot be empty', 'component-model'),
+            self::E30 => $this->__('Argument(s) \'%1$s\' in directive \'%2$s\' cannot be empty', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }

@@ -1381,21 +1381,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($missing === []) {
             return null;
         }
-        if (count($missing) === 1) {
-            return new FeedbackItemResolution(
-                ErrorFeedbackItemProvider::class,
-                ErrorFeedbackItemProvider::E24,
-                [
-                    $missing[0],
-                    $field->getName()
-                ]
-            );
-        }
         return new FeedbackItemResolution(
             ErrorFeedbackItemProvider::class,
-            ErrorFeedbackItemProvider::E25,
+            ErrorFeedbackItemProvider::E29,
             [
-                implode($this->getTranslationAPI()->__('\', \''), $missing),
+                count($missing) === 1
+                    ? $missing[0]
+                    : implode($this->getTranslationAPI()->__('\', \''), $missing),
                 $field->getName()
             ]
         );
