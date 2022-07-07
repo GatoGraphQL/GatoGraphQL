@@ -246,8 +246,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver === null) {
             return;
         }
-
-        $executableObjectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldDataAccessor->getFieldName(), $fieldDataAccessor->getKeyValues(), $objectTypeFieldResolutionFeedbackStore);
     }
 
     final public function getFieldTypeResolver(
@@ -420,22 +418,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
-            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldDataAccessor->getKeyValues(), $objectTypeFieldResolutionFeedbackStore);
-            $errorFeedbackItemResolutions = $this->validateFieldData(
+            $this->validateFieldData(
                 $fieldData,
                 $field,
-                false // Mutation validation will be performed always in validateFieldDataForObject
+                false, // Mutation validation will be performed always in validateFieldDataForObject
+                $objectTypeFieldResolutionFeedbackStore,
             );
-            if ($errorFeedbackItemResolutions !== []) {
-                foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            $errorFeedbackItemResolution,
-                            $field->getLocation(),
-                            $this,
-                        )
-                    );
-                }
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 return null;
             }
         }
@@ -1392,21 +1381,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Perform validations
          */
-        $errorFeedbackItemResolutions = $this->validateFieldData(
+        $this->validateFieldData(
             $fieldData,
             $field,
-            !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName())
+            !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
+            $objectTypeFieldResolutionFeedbackStore,
         );
-        if ($errorFeedbackItemResolutions !== []) {
-            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        $field->getLocation(),
-                        $this,
-                    )
-                );
-            }
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
@@ -1417,25 +1398,28 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Validate the field data
      *
      * @param array<string,mixed> $fieldData
-     * @return FeedbackItemResolution[] if there was some validation error
      */
     protected function validateFieldData(
         array $fieldData,
         FieldInterface $field,
-        bool $validateMutation
-    ): array {
-        $errorFeedbackItemResolutions = [];
+        bool $validateMutation,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         /** @var array */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         /** @var ObjectTypeFieldResolverInterface */
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-
+        
+        // Collect the deprecations from the queried fields
+        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldData, $objectTypeFieldResolutionFeedbackStore);
+        
         /**
          * Validations:
          *
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
+        $errorFeedbackItemResolutions = [];
         $maybeErrorFeedbackItemResolution = $this->validateNonMissingMandatoryFieldArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
@@ -1454,7 +1438,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         
         if ($errorFeedbackItemResolutions !== []) {
-            return $errorFeedbackItemResolutions;
+            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $field->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return;
         }
 
         /**
@@ -1488,8 +1481,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $mutationResolver->validateErrors($fieldDataAccessor)
             );
         }
-        
-        return $errorFeedbackItemResolutions;
+
+        if ($errorFeedbackItemResolutions !== []) {
+            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $field->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return;
+        }
     }
 
     /**
