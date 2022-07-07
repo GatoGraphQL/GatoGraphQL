@@ -1233,9 +1233,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
      * within the default values and coerces them according to the schema.
      *
-     * Attempt to get the value from the cache first. This is important since,
-     * if the field does not exist, the validation will be performed only once,
-     * and the error message will appear only once in the response.
+     * Attempt to get the value from the cache first, as the same field, with the same
+     * set of IDs, will be called multiple times for the several directives processing
+     * them (@resolveValueAndMerge, @serialize, etc)
      *
      * @see FieldDataAccessProvider
      *
