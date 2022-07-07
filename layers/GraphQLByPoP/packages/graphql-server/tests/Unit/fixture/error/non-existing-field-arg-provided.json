@@ -13,9 +13,24 @@
         "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "code": "PoP\\ComponentModel\\e27"
       }
+    },
+    {
+      "message": "On field 'implements', there is no argument with name 'someType', 'anotherType'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 13
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+        "code": "PoP\\ComponentModel\\e27"
+      }
     }
   ],
   "data": {
-    "implements": null
+    "implements": null,
+    "multiple": null
   }
 }
