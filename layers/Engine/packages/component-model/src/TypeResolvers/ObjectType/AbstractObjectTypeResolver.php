@@ -32,6 +32,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -1307,6 +1308,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          *
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
+         * - constraints of the arguments
          */
         $errorFeedbackItemResolutions = [];
         $maybeErrorFeedbackItemResolution = $this->maybeGetMissingMandatoryFieldArgumentErrorFeedbackItemResolution(
@@ -1325,6 +1327,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($maybeErrorFeedbackItemResolution !== null) {
             $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
         }
+        $errorFeedbackItemResolutions = array_merge(
+            $errorFeedbackItemResolutions,
+            $this->validateFieldArgumentConstraints(
+                $fieldData,
+                $objectTypeFieldResolver,
+                $field,
+            )
+        );
         
         if ($errorFeedbackItemResolutions !== []) {
             foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
@@ -1439,6 +1449,42 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
         return null;
+    }
+
+    /**
+     * Validate the constraints for the field arguments
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    private function validateFieldArgumentConstraints(
+        array $fieldData,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        FieldInterface $field,
+    ): array {
+        $errors = [];
+        $fieldArgNameTypeResolvers = $objectTypeFieldResolver->getConsolidatedFieldArgNameTypeResolvers($this, $field->getName());
+        foreach ($fieldData as $argName => $argValue) {
+            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
+            /**
+             * If the field is an InputObject, let it perform validations on its input fields.
+             */
+            if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
+                $errors = array_merge(
+                    $errors,
+                    $fieldArgTypeResolver->validateInputValue($argValue)
+                );
+            }
+            $errors = array_merge(
+                $errors,
+                $objectTypeFieldResolver->validateFieldArgValue(
+                    $this,
+                    $field->getName(),
+                    $argName,
+                    $argValue
+                )
+            );
+        }
+        return $errors;
     }
 
     /**
