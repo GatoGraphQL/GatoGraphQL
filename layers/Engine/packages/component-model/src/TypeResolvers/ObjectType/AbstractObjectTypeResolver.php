@@ -203,48 +203,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $field->getName());
     }
 
-    final public function collectFieldValidationErrors(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
-    ): void {
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());
-        if ($objectTypeFieldResolver === null) {
-            /**
-             * If the error happened from requesting a version that doesn't exist, show an appropriate error message
-             */
-            $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
-                && ($versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT));
-            $feedbackItemResolution = $useSemanticVersionConstraints
-                ? new FeedbackItemResolution(
-                    ErrorFeedbackItemProvider::class,
-                    ErrorFeedbackItemProvider::E26,
-                    [
-                        $fieldDataAccessor->getFieldName(),
-                        $this->getMaybeNamespacedTypeName(),
-                        $versionConstraint,
-                    ]
-                )
-                : new FeedbackItemResolution(
-                    ErrorFeedbackItemProvider::class,
-                    ErrorFeedbackItemProvider::E16,
-                    [
-                        $fieldDataAccessor->getFieldName(),
-                        $this->getMaybeNamespacedTypeName(),
-                    ]
-                );
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $feedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
-                    $this,
-                )
-            );
-            return;
-        }
-
-        $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-    }
-
     final public function collectFieldValidationWarnings(
         FieldDataAccessorInterface $fieldDataAccessor,
         array $variables,
@@ -1308,21 +1266,19 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
+        $fieldData = $field->getArgumentKeyValues();
+        
         /**
-         * First check that the field has been defined in the schema
+         * Check that the field has been defined in the schema
          */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($fieldArgsSchemaDefinition === null || $objectTypeFieldResolver === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E16,
-                        [
-                            $field->getName(),
-                            $this->getMaybeNamespacedTypeName()
-                        ]
+                    $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution(
+                        $fieldData,
+                        $field,
                     ),
                     $field->getLocation(),
                     $this,
@@ -1331,8 +1287,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
         
-        $fieldData = $field->getArgumentKeyValues();
-
         /**
          * Add the default Argument values
          */
@@ -1360,8 +1314,51 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $field,
             $objectTypeFieldResolutionFeedbackStore
         );
+        if ($fieldData === null) {
+            return null;
+        }
+
+        /**
+         * Validate that no mandatory arg is missing, no non-existing
+         * arg has been provided
+         */
+
+        // $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         return $fieldData;
+    }
+
+    /**
+     * Provide a different error message if a particular version was requested,
+     * or if not.
+     *
+     * @param array<string,mixed> $fieldData
+     */
+    private function getFieldNotResolvedByObjectTypeFeedbackItemResolution(
+        array $fieldData,
+        FieldInterface $field,
+    ): FeedbackItemResolution {
+        $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
+            && ($versionConstraint = $fieldData[SchemaDefinition::VERSION_CONSTRAINT] ?? null);
+        if ($useSemanticVersionConstraints) {
+            return new FeedbackItemResolution(
+                ErrorFeedbackItemProvider::class,
+                ErrorFeedbackItemProvider::E26,
+                [
+                    $field->getName(),
+                    $this->getMaybeNamespacedTypeName(),
+                    $versionConstraint,
+                ]
+            );
+        }
+        return new FeedbackItemResolution(
+            ErrorFeedbackItemProvider::class,
+            ErrorFeedbackItemProvider::E16,
+            [
+                $field->getName(),
+                $this->getMaybeNamespacedTypeName(),
+            ]
+        );
     }
 
     /**
