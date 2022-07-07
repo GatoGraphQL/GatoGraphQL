@@ -1309,7 +1309,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * - no non-existing arg has been provided
          */
         $errorFeedbackItemResolutions = [];
-        $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldArgumentValues(
+        $maybeErrorFeedbackItemResolution = $this->maybeGetMissingMandatoryFieldArgumentErrorFeedbackItemResolution(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field
@@ -1317,7 +1317,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($maybeErrorFeedbackItemResolution !== null) {
             $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
         }
-        $maybeErrorFeedbackItemResolution = $this->validateNonExistingFieldArgumentValues(
+        $maybeErrorFeedbackItemResolution = $this->maybeGetNonExistingFieldArgumentErrorFeedbackItemResolution(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field
@@ -1386,7 +1386,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
      */
-    private function validateNotMissingFieldArgumentValues(
+    private function maybeGetMissingMandatoryFieldArgumentErrorFeedbackItemResolution(
         array $fieldData,
         array $fieldArgsSchemaDefinition,
         FieldInterface $field,
@@ -1417,7 +1417,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      *
      * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
      */
-    private function validateNonExistingFieldArgumentValues(
+    private function maybeGetNonExistingFieldArgumentErrorFeedbackItemResolution(
         array $fieldData,
         array $fieldArgsSchemaDefinition,
         FieldInterface $field,
