@@ -1308,18 +1308,25 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * - no mandatory arg is missing
          * - no non-existing arg has been provided
          */
-        if ($feedbackItemResolution = $this->validateNotMissingFieldArgumentValues(
+        $errorFeedbackItemResolutions = [];
+        $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldArgumentValues(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field
-        )) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $feedbackItemResolution,
-                    $field->getLocation(),
-                    $this,
-                )
-            );
+        );
+        if ($maybeErrorFeedbackItemResolution !== null) {
+            $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
+        }
+        if ($errorFeedbackItemResolutions !== []) {
+            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $field->getLocation(),
+                        $this,
+                    )
+                );
+            }
             return null;
         }
 
