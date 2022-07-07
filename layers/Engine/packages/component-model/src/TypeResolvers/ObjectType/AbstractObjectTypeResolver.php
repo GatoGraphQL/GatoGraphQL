@@ -1115,7 +1115,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    protected function getObjectTypeResolverObjectFieldData(
+    protected function doGetObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,

@@ -10,7 +10,6 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Engine\DataloadingEngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
@@ -69,6 +68,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
      */
     private array $directiveResolverClassDirectivesCache = [];
+    /**
+     * @var SplObjectStorage<FieldInterface,array<string,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>>
+     */
+    private SplObjectStorage $objectTypeResolverObjectFieldDataCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
@@ -103,6 +106,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $this->directiveIDFieldSet = new SplObjectStorage();
         $this->fieldDirectives = new SplObjectStorage();
+        $this->objectTypeResolverObjectFieldDataCache = new SplObjectStorage();
     }
 
     /**
@@ -1215,29 +1219,78 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $idObjects,
                 $engineIterationFeedbackStore,
             );
-            // If the field does not exist in the schema, then add an error and skip it
+            // If the field does not exist in the schema, then skip it
             if ($objectTypeResolverObjectFieldData === null) {
-                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                    new SchemaFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E16,
-                            [
-                                $field->getName(),
-                                $this->getMaybeNamespacedTypeName()
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this,
-                        $field,
-                    )
-                );
                 continue;
             }
             $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
         }
 
         return $fieldObjectTypeResolverObjectFieldData;
+    }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * Attempt to get the value from the cache first. This is important since,
+     * if the field does not exist, the validation will be performed only once,
+     * and the error message will appear only once in the response.
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     */
+    protected function getObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?SplObjectStorage {
+        /** @var array<string|int> */
+        $ids = $fieldIDs[$field];
+        $cacheKey = implode('|', $ids);
+        if ($this->objectTypeResolverObjectFieldDataCache->contains($field)
+            // The cached value can be `null` (in case of error), so can't use `isset`
+            && array_key_exists($cacheKey, $this->objectTypeResolverObjectFieldDataCache[$field])
+        ) {
+            return $this->objectTypeResolverObjectFieldDataCache[$field][$cacheKey];
+        }
+        $objectTypeResolverObjectFieldData = $this->doGetObjectTypeResolverObjectFieldData(
+            $field,
+            $fieldIDs,
+            $idObjects,
+            $engineIterationFeedbackStore,
+        );
+        $fieldObjectTypeResolverObjectFieldDataCache = $this->objectTypeResolverObjectFieldDataCache[$field] ?? [];
+        $fieldObjectTypeResolverObjectFieldDataCache[$cacheKey] = $objectTypeResolverObjectFieldData;
+        $this->objectTypeResolverObjectFieldDataCache[$field] = $fieldObjectTypeResolverObjectFieldDataCache;
+        
+        /**
+         * If the field does not exist in the schema, then add an error and skip it.
+         * This validation happens only once. From now on, the cached value
+         * (for the other directives that process the same field) is retrieved.
+         */
+        if ($objectTypeResolverObjectFieldData === null) {
+            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                new SchemaFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E16,
+                        [
+                            $field->getName(),
+                            $this->getMaybeNamespacedTypeName()
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this,
+                    $field,
+                )
+            );
+        }
+        return $objectTypeResolverObjectFieldData;
     }
 
     /**
@@ -1259,7 +1312,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param array<string|int,object> $idObjects
      * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
      */
-    abstract protected function getObjectTypeResolverObjectFieldData(
+    abstract protected function doGetObjectTypeResolverObjectFieldData(
         FieldInterface $field,
         SplObjectStorage $fieldIDs,
         array $idObjects,
