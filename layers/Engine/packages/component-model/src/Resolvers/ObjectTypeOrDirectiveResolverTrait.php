@@ -52,7 +52,7 @@ trait ObjectTypeOrDirectiveResolverTrait
      * @param array<string,mixed> $argumentNameDefaultValues
      * @return array<string,mixed>
      */
-    final protected function integrateDefaultFieldOrDirectiveArguments(
+    final protected function addDefaultFieldOrDirectiveArguments(
         array $fieldOrDirectiveData,
         array $argumentNameDefaultValues,
     ): array {
@@ -69,7 +69,7 @@ trait ObjectTypeOrDirectiveResolverTrait
 
     /**
      * @todo Fix integrate with Directive
-     * @todo Replace with integrateDefaultFieldOrDirectiveArguments
+     * @todo Replace with addDefaultFieldOrDirectiveArguments
      * @param array<string,mixed> $argumentNameDefaultValues
      */
     final protected function deprecatedIntegrateDefaultFieldOrDirectiveArguments(
