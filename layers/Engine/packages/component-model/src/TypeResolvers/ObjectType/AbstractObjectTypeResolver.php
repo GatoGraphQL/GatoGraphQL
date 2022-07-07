@@ -1317,6 +1317,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($maybeErrorFeedbackItemResolution !== null) {
             $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
         }
+        $errorFeedbackItemResolutions = array_merge(
+            $errorFeedbackItemResolutions,
+            $this->validateNonExistingFieldArgumentValues(
+                $fieldData,
+                $fieldArgsSchemaDefinition,
+                $field,
+            )
+        );
         if ($errorFeedbackItemResolutions !== []) {
             foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1382,24 +1390,62 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $fieldArgsSchemaDefinition,
         FieldInterface $field,
     ): ?FeedbackItemResolution {
-        $mandatoryFieldArgumentNames = $this->getFieldOrDirectiveMandatoryArgumentNames($fieldArgsSchemaDefinition);
-        $missing = array_values(array_filter(
-            $mandatoryFieldArgumentNames,
+        $mandatoryFieldArgNames = $this->getFieldOrDirectiveMandatoryArgumentNames($fieldArgsSchemaDefinition);
+        $missingMandatoryFieldArgNames = array_values(array_filter(
+            $mandatoryFieldArgNames,
             fn (string $fieldArgName) => ($fieldData[$fieldArgName] ?? null) === null
         ));
-        if ($missing === []) {
+        if ($missingMandatoryFieldArgNames === []) {
             return null;
         }
         return new FeedbackItemResolution(
             ErrorFeedbackItemProvider::class,
             ErrorFeedbackItemProvider::E29,
             [
-                count($missing) === 1
-                    ? $missing[0]
-                    : implode($this->getTranslationAPI()->__('\', \''), $missing),
+                count($missingMandatoryFieldArgNames) === 1
+                    ? $missingMandatoryFieldArgNames[0]
+                    : implode($this->getTranslationAPI()->__('\', \''), $missingMandatoryFieldArgNames),
                 $field->getName()
             ]
         );
+    }
+
+    /**
+     * Return an error if the query contains an argument that
+     * does not exist in the field.
+     *
+     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
+     * @return FeedbackItemResolution[]
+     */
+    private function validateNonExistingFieldArgumentValues(
+        array $fieldData,
+        array $fieldArgsSchemaDefinition,
+        FieldInterface $field,
+    ): array {
+        $errors = [];
+        $nonExistingArgNames = [];
+        foreach (array_keys($fieldData) as $argName) {
+            /**
+             * Validate the field has been defined in the schema
+             */
+            if (isset($fieldArgsSchemaDefinition[SchemaDefinition::FIELDS][$argName])) {
+                continue;
+            }
+            $nonExistingArgNames[] = $argName;
+        }
+        if ($nonExistingArgNames !== []) {
+            $errors[] = new FeedbackItemResolution(
+                ErrorFeedbackItemProvider::class,
+                ErrorFeedbackItemProvider::E27,
+                [
+                    $field->getName(),
+                    count($nonExistingArgNames) === 1
+                        ? $nonExistingArgNames[0]
+                        : implode($this->getTranslationAPI()->__('\', \''), $nonExistingArgNames),
+                ]
+            );
+        }
+        return $errors;
     }
 
     /**
