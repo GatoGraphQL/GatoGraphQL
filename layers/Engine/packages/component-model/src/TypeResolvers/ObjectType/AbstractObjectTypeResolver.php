@@ -420,11 +420,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
-            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-            // ...
-            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldDataAccessor->getKeyValues(), $separateObjectTypeFieldResolutionFeedbackStore);
-            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldDataAccessor->getKeyValues(), $objectTypeFieldResolutionFeedbackStore);
+            $errorFeedbackItemResolutions = $this->validateFieldData(
+                $fieldData,
+                $field,
+                false
+            );
+            if ($errorFeedbackItemResolutions !== []) {
+                foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            $errorFeedbackItemResolution,
+                            $field->getLocation(),
+                            $this,
+                        )
+                    );
+                }
                 return null;
             }
         }
