@@ -1317,14 +1317,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($maybeErrorFeedbackItemResolution !== null) {
             $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
         }
-        $errorFeedbackItemResolutions = array_merge(
-            $errorFeedbackItemResolutions,
-            $this->validateNonExistingFieldArgumentValues(
-                $fieldData,
-                $fieldArgsSchemaDefinition,
-                $field,
-            )
+        $maybeErrorFeedbackItemResolution = $this->validateNonExistingFieldArgumentValues(
+            $fieldData,
+            $fieldArgsSchemaDefinition,
+            $field
         );
+        if ($maybeErrorFeedbackItemResolution !== null) {
+            $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
+        }
+        
         if ($errorFeedbackItemResolutions !== []) {
             foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1415,20 +1416,18 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * does not exist in the field.
      *
      * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
-     * @return FeedbackItemResolution[]
      */
     private function validateNonExistingFieldArgumentValues(
         array $fieldData,
         array $fieldArgsSchemaDefinition,
         FieldInterface $field,
-    ): array {
-        $errors = [];
+    ): ?FeedbackItemResolution {
         $nonExistingArgNames = array_diff(
             array_keys($fieldData),
             array_keys($fieldArgsSchemaDefinition)
         );
         if ($nonExistingArgNames !== []) {
-            $errors[] = new FeedbackItemResolution(
+            return new FeedbackItemResolution(
                 ErrorFeedbackItemProvider::class,
                 ErrorFeedbackItemProvider::E27,
                 [
@@ -1439,7 +1438,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ]
             );
         }
-        return $errors;
+        return null;
     }
 
     /**
