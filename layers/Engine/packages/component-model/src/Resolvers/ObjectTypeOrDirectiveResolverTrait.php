@@ -50,9 +50,29 @@ trait ObjectTypeOrDirectiveResolverTrait
     /**
      * @param array<string,mixed> $fieldOrDirectiveData
      * @param array<string,mixed> $argumentNameDefaultValues
+     * @return array<string,mixed>
      */
     final protected function integrateDefaultFieldOrDirectiveArguments(
-        array &$fieldOrDirectiveData,
+        array $fieldOrDirectiveData,
+        array $argumentNameDefaultValues,
+    ): array {
+        $completedFieldOrDirectiveData = [];
+        foreach ($argumentNameDefaultValues as $argName => $argDefaultValue) {
+            if (array_key_exists($argName, $fieldOrDirectiveData)) {
+                $completedFieldOrDirectiveData[$argName] = $fieldOrDirectiveData[$argName];
+                continue;
+            }            
+            $fieldOrDirectiveData[$argName] = $argDefaultValue;
+        }
+        return $completedFieldOrDirectiveData;
+    }
+
+    /**
+     * @todo Fix integrate with Directive
+     * @todo Replace with integrateDefaultFieldOrDirectiveArguments
+     * @param array<string,mixed> $argumentNameDefaultValues
+     */
+    final protected function deprecatedIntegrateDefaultFieldOrDirectiveArguments(
         FieldInterface|Directive $fieldOrDirective,
         array $argumentNameDefaultValues,
     ): void {
@@ -60,10 +80,8 @@ trait ObjectTypeOrDirectiveResolverTrait
             // If the argument does not exist, add a new one
             if ($fieldOrDirective->hasArgument($argName)) {
                 continue;
-            }            
-            $fieldOrDirectiveData[$argName] = $argValue;
+            }
             
-            // @todo Fix integrate with Directive
             $directiveArgValueAST = $this->getArgumentValueAsAST($argValue);
             $fieldOrDirective->addArgument(
                 new Argument(
