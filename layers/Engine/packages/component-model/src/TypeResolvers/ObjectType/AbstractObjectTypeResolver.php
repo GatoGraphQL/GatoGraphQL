@@ -1312,7 +1312,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * First check that the field has been defined in the schema
          */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
-        if ($fieldArgsSchemaDefinition === null) {
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($fieldArgsSchemaDefinition === null || $objectTypeFieldResolver === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -1347,11 +1348,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldData = $this->getSchemaCastingService()->castArguments($fieldData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
-            return null;
-        }
-
-        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        if ($objectTypeFieldResolver === null) {
             return null;
         }
 
