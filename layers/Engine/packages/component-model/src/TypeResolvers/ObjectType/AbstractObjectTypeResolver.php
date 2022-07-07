@@ -424,7 +424,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $errorFeedbackItemResolutions = $this->validateFieldData(
                 $fieldData,
                 $field,
-                false
+                false // Mutation validation will be performed always in validateFieldDataForObject
             );
             if ($errorFeedbackItemResolutions !== []) {
                 foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
