@@ -1215,8 +1215,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $idObjects,
                 $engineIterationFeedbackStore,
             );
-            // If the field does not exist in the schema, then skip
+            // If the field does not exist in the schema, then add an error and skip it
             if ($objectTypeResolverObjectFieldData === null) {
+                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E16,
+                            [
+                                $field->getName(),
+                                $this->getMaybeNamespacedTypeName()
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $this,
+                        $field,
+                    )
+                );
                 continue;
             }
             $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
