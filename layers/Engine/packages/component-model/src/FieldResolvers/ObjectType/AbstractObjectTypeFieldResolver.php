@@ -689,13 +689,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    public function collectFieldValidationErrors(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-    }
-
+    
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
