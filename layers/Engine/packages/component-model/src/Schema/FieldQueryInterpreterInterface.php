@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\Schema;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\FieldQueryInterpreterInterface as UpstreamFieldQueryInterpreterInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -16,10 +15,6 @@ use SplObjectStorage;
 
 interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterInterface
 {
-    /**
-     * Extract field args without using the schema. It is needed to find out which fieldResolver will process a field, where we can't depend on the schema since this one needs to know who the fieldResolver is, creating an infitine loop
-     */
-    public function extractStaticFieldArguments(string $field, ?array $variables = null): array;
     /**
      * @param SplObjectStorage<Directive,FieldInterface[]> $directiveFields
      */
