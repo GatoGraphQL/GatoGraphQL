@@ -420,7 +420,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $validateSchemaOnObject = $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? false;
         if ($validateSchemaOnObject) {
             $this->validateFieldData(
-                $fieldData,
+                $fieldDataAccessor->getKeyValues(),
                 $field,
                 false, // Mutation validation will be performed always in validateFieldDataForObject
                 $objectTypeFieldResolutionFeedbackStore,
