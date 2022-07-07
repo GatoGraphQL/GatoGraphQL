@@ -1290,7 +1290,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         /**
-         * Allow to inject additional Arguments
+         * Allow to inject additional arguments
          */
         $fieldData = $objectTypeFieldResolver->prepareFieldData(
             $fieldData,
