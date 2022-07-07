@@ -1307,7 +1307,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function doGetFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?array {        
+    ): ?array {
+        /**
+         * First check that the field has been defined in the schema
+         */
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         if ($fieldArgsSchemaDefinition === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1328,6 +1331,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         
         $fieldData = $field->getArgumentKeyValues();
+
         /**
          * Add the default Argument values
          */
