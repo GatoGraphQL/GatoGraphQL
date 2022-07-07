@@ -9,12 +9,13 @@ use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 interface SchemaCastingServiceInterface
 {
     /**
-     * @param array<string,mixed> $fieldData
+     * @param array<string,mixed> $argumentKeyValues
      * @param array<string,array<string,mixed>> $argumentSchemaDefinition
+     * @return array<string,mixed>
      */
     public function castArguments(
-        array &$fieldData,
+        array $argumentKeyValues,
         array $argumentSchemaDefinition,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): void;
+    ): array;
 }

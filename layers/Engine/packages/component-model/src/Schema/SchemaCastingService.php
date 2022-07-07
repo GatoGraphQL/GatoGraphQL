@@ -43,12 +43,14 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     /**
      * @param array<string,mixed> $argumentKeyValues
      * @param array<string,array<string,mixed>> $argumentSchemaDefinition
+     * @return array<string,mixed>
      */
     public function castArguments(
-        array &$argumentKeyValues,
+        array $argumentKeyValues,
         array $argumentSchemaDefinition,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): void {
+    ): array {
+        $castedArgumentKeyValues = [];
         // Cast all argument values
         foreach ($argumentKeyValues as $argName => $argValue) {
             /**
@@ -142,7 +144,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             /**
              * No errors, re-assign the coerced value to the data
              */
-            $argumentKeyValues[$argName] = $coercedArgValue;
+            $castedArgumentKeyValues[$argName] = $coercedArgValue;
 
             // Obtain the deprecations
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
@@ -169,5 +171,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 }
             }
         }
+        return $castedArgumentKeyValues;
     }
 }
