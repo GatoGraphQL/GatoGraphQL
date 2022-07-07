@@ -13,6 +13,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
@@ -1122,10 +1123,30 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        /**
-         * If the field does not exist, then nothing to do
-         */
         if ($executableObjectTypeFieldResolver === null) {
+            /**
+             * If the field does not exist in the schema, then add an error the first
+             * time, and retrieve it from the cache from then on, so the error is
+             * not added more than once to the response.
+             */
+            if (!$this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+                $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
+                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                    new SchemaFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E16,
+                            [
+                                $field->getName(),
+                                $this->getMaybeNamespacedTypeName()
+                            ]
+                        ),
+                        $field->getLocation(),
+                        $this,
+                        $field,
+                    )
+                );
+            }
             return null;
         }
         if ($executableObjectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {

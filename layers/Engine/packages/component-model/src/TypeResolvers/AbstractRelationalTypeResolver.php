@@ -1267,29 +1267,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $fieldObjectTypeResolverObjectFieldDataCache = $this->objectTypeResolverObjectFieldDataCache[$field] ?? [];
         $fieldObjectTypeResolverObjectFieldDataCache[$cacheKey] = $objectTypeResolverObjectFieldData;
         $this->objectTypeResolverObjectFieldDataCache[$field] = $fieldObjectTypeResolverObjectFieldDataCache;
-        
-        /**
-         * If the field does not exist in the schema, then add an error and skip it.
-         * This validation happens only once. From now on, the cached value
-         * (for the other directives that process the same field) is retrieved.
-         */
-        if ($objectTypeResolverObjectFieldData === null) {
-            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                new SchemaFeedback(
-                    new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E16,
-                        [
-                            $field->getName(),
-                            $this->getMaybeNamespacedTypeName()
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this,
-                    $field,
-                )
-            );
-        }
         return $objectTypeResolverObjectFieldData;
     }
 
