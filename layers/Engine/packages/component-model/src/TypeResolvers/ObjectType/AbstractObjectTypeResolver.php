@@ -444,50 +444,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * Custom validations by the field resolver
          */
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $objectTypeFieldResolver->validateFieldDataForObject($this, $object, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
+        $this->validateFieldDataForObject(
+            $fieldDataAccessor,
+            $objectTypeFieldResolver,
+            $object,
+            $separateObjectTypeFieldResolutionFeedbackStore,
+        );
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return null;
-        }
-
-        /**
-         * Perform validation through checkpoints
-         */
-        if ($checkpoints = $objectTypeFieldResolver->getValidationCheckpoints(
-            $this,
-            $object,
-            $fieldDataAccessor->getFieldName(),
-            $fieldDataAccessor->getKeyValues(),
-        )) {
-            $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
-            if ($feedbackItemResolution !== null) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $feedbackItemResolution,
-                        $field->getLocation(),
-                        $this
-                    )
-                );
-                return null;
-            }
-        }
-
-        /**
-         * If a MutationResolver is declared, let it validate the schema
-         */
-        $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $field->getName());
-        if ($mutationResolver !== null && $objectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
-            // Validate on the object
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        $field->getLocation(),
-                        $this,
-                    )
-                );
-            }
             return null;
         }
 
@@ -793,6 +757,65 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
         // Everything is good, return the value
         return $value;
+    }
+
+    /**
+     * Validate the field data for the object
+     *
+     * @param array<string,mixed> $fieldData
+     * @return FeedbackItemResolution[] if there was some validation error
+     */
+    protected function validateFieldDataForObject(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
+        object $object,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /**
+         * Perform validation through checkpoints
+         */
+        if ($checkpoints = $objectTypeFieldResolver->getValidationCheckpoints(
+            $this,
+            $object,
+            $fieldDataAccessor->getFieldName(),
+            $fieldDataAccessor->getKeyValues(),
+        )) {
+            $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
+            if ($feedbackItemResolution !== null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $feedbackItemResolution,
+                        $fieldDataAccessor->getField()->getLocation(),
+                        $this
+                    )
+                );
+                return;
+            }
+        }
+
+        /**
+         * If a MutationResolver is declared, let it validate the schema
+         */
+        $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $fieldDataAccessor->getFieldName());
+        if ($mutationResolver !== null && $objectTypeFieldResolver->validateMutationOnObject($this, $fieldDataAccessor->getFieldName())) {
+            // Validate on the object
+            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
+            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $fieldDataAccessor->getField()->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return;
+        }
+
+        /**
+         * Custom validations by the field resolver
+         */
+        $objectTypeFieldResolver->validateFieldDataForObject($this, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     final protected function getFieldArgumentsSchemaDefinition(FieldInterface $field): ?array
