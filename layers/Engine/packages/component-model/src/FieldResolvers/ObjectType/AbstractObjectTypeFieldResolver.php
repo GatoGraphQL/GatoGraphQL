@@ -708,27 +708,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         /**
-         * Validate field argument constraints
-         */
-        if (
-            $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
-                $objectTypeResolver,
-                $fieldDataAccessor,
-            )
-        ) {
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-            }
-            return;
-        }
-
-        /**
          * If a MutationResolver is declared, let it validate the schema
          */
         $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
@@ -769,43 +748,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->validateFieldTypeResponseWithSchemaDefinition();
-    }
-
-    /**
-     * Validate the constraints for the field arguments
-     *
-     * @return FeedbackItemResolution[] Errors
-     */
-    final protected function resolveFieldArgumentErrors(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldDataAccessorInterface $fieldDataAccessor,
-    ): array {
-        $errors = [];
-        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldDataAccessor->getFieldName());
-        foreach ($fieldDataAccessor->getKeyValues() as $argName => $argValue) {
-            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
-            /**
-             * If the field is an InputObject, let it perform validations on its input fields.
-             */
-            if (
-                $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
-            ) {
-                $errors = array_merge(
-                    $errors,
-                    $fieldArgTypeResolver->validateInputValue($argValue)
-                );
-            }
-            $errors = array_merge(
-                $errors,
-                $this->validateFieldArgValue(
-                    $objectTypeResolver,
-                    $fieldDataAccessor->getFieldName(),
-                    $argName,
-                    $argValue
-                )
-            );
-        }
-        return $errors;
     }
 
     /**
