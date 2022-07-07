@@ -773,20 +773,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
 
     /**
      * @param array<string,mixed> $fieldData
+     * @return array<string,mixed>|null null if there was an error
      */
     final protected function integrateDefaultFieldArgumentsIntoFieldData(
-        array &$fieldData,
+        array $fieldData,
         FieldInterface $field
-    ): void {
+    ): array {
         $fieldArgumentNameDefaultValues = $this->getFieldArgumentNameDefaultValues($field);
         if ($fieldArgumentNameDefaultValues === null) {
-            return;
+            return null;
         }
         $this->integrateDefaultFieldOrDirectiveArguments(
             $fieldData,
             $field,
             $fieldArgumentNameDefaultValues,
         );
+        return $fieldData;
     }
 
     /**
@@ -1330,7 +1332,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Add the default Arguments to the Field
          */
-        $this->integrateDefaultFieldArgumentsIntoFieldData($fieldData, $field);
+        $fieldData = $this->integrateDefaultFieldArgumentsIntoFieldData($fieldData, $field);
+        if ($fieldData === null) {
+            return null;
+        }
 
         /**
          * Cast the Arguments, return if any of them produced an error
