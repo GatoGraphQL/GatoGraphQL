@@ -1428,7 +1428,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             /**
              * Validate the field has been defined in the schema
              */
-            if (isset($fieldArgsSchemaDefinition[SchemaDefinition::FIELDS][$argName])) {
+            if (isset($fieldArgsSchemaDefinition[$argName])) {
                 continue;
             }
             $nonExistingArgNames[] = $argName;
