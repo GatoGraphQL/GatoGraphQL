@@ -729,23 +729,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $value;
     }
 
-    /**
-     * @param array<string,mixed> $fieldData
-     * @param array<string,array<string,mixed>> $fieldArgsSchemaDefinition
-     * @return array<string,mixed>
-     */
-    final protected function addDefaultFieldArguments(
-        array $fieldData,
-        array $fieldArgsSchemaDefinition,
-    ): array {
-        $fieldArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($fieldArgsSchemaDefinition);
-        $fieldData = $this->addDefaultFieldOrDirectiveArguments(
-            $fieldData,
-            $fieldArgumentNameDefaultValues,
-        );
-        return $fieldData;
-    }
-
     final protected function getFieldArgumentsSchemaDefinition(FieldInterface $field): ?array
     {
         $fieldSchemaDefinition = $this->getFieldSchemaDefinition($field);
@@ -1290,9 +1273,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Add the default Argument values
          */
-        $fieldData = $this->addDefaultFieldArguments(
+        $fieldArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($fieldArgsSchemaDefinition);
+        $fieldData = $this->addDefaultFieldOrDirectiveArguments(
             $fieldData,
-            $fieldArgsSchemaDefinition,
+            $fieldArgumentNameDefaultValues,
         );
 
         /**
@@ -1322,6 +1306,20 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * Validate that no mandatory arg is missing, no non-existing
          * arg has been provided
          */
+        if ($feedbackItemResolution = $this->validateNotMissingFieldArgumentValues(
+            $fieldData,
+            $fieldArgsSchemaDefinition,
+            $field
+        )) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $feedbackItemResolution,
+                    $field->getLocation(),
+                    $this,
+                )
+            );
+            return null;
+        }
 
         // $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
@@ -1359,6 +1357,47 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $this->getMaybeNamespacedTypeName(),
             ]
         );
+    }
+
+    /**
+     * Validate that if the key is missing or is `null`,
+     * but not if the value is empty such as '""' or [],
+     * because empty values could be allowed.
+     *
+     * Eg: `setTagsOnPost(tags:[])` where `tags` is mandatory
+     *
+     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
+     */
+    private function validateNotMissingFieldArgumentValues(
+        array $fieldData,
+        array $fieldArgsSchemaDefinition,
+        FieldInterface $field,
+    ): ?FeedbackItemResolution {
+        $mandatoryFieldArgumentNames = $this->getFieldOrDirectiveMandatoryArgumentNames($fieldArgsSchemaDefinition);
+        $missing = array_values(array_filter(
+            $mandatoryFieldArgumentNames,
+            fn (string $fieldArgName) => ($fieldData[$fieldArgName] ?? null) === null
+        ));
+        if ($missing !== []) {
+            return count($missing) === 1 ?
+                new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E24,
+                    [
+                        $missing[0],
+                        $field->getName()
+                    ]
+                )
+                : new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E25,
+                    [
+                        implode($this->getTranslationAPI()->__('\', \''), $missing),
+                        $field->getName()
+                    ]
+                );
+        }
+        return null;
     }
 
     /**

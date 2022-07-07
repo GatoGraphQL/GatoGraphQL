@@ -24,6 +24,7 @@ trait ObjectTypeOrDirectiveResolverTrait
      * Set the missing InputObject as {} to give it a chance to set
      * its default input values
      *
+     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
      * @return array<string,mixed>
      */
     final protected function getFieldOrDirectiveArgumentNameDefaultValues(array $fieldOrDirectiveArgsSchemaDefinition): array
@@ -45,6 +46,23 @@ trait ObjectTypeOrDirectiveResolverTrait
             }
         }
         return $fieldOrDirectiveArgNameDefaultValues;
+    }
+
+    /**
+     * Get the mandatory argument names for the field
+     *
+     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
+     * @return string[]
+     */
+    private function getFieldOrDirectiveMandatoryArgumentNames(array $fieldOrDirectiveArgsSchemaDefinition): array
+    {
+        $mandatoryFieldArgumentNames = [];
+        foreach ($fieldOrDirectiveArgsSchemaDefinition as $fieldOrDirectiveSchemaDefinitionArg) {
+            if ($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false) {
+                $mandatoryFieldArgumentNames[] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
+            }
+        }
+        return $mandatoryFieldArgumentNames;
     }
 
     /**
