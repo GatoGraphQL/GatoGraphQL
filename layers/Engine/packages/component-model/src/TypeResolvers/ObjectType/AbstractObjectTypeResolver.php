@@ -1461,7 +1461,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         FieldInterface $field,
     ): array {
-        $errors = [];
+        $errorFeedbackItemResolutions = [];
         $fieldArgNameTypeResolvers = $objectTypeFieldResolver->getConsolidatedFieldArgNameTypeResolvers($this, $field->getName());
         foreach ($fieldData as $argName => $argValue) {
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
@@ -1469,13 +1469,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * If the field is an InputObject, let it perform validations on its input fields.
              */
             if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $errors = array_merge(
-                    $errors,
+                $errorFeedbackItemResolutions = array_merge(
+                    $errorFeedbackItemResolutions,
                     $fieldArgTypeResolver->validateInputValue($argValue)
                 );
             }
-            $errors = array_merge(
-                $errors,
+            $errorFeedbackItemResolutions = array_merge(
+                $errorFeedbackItemResolutions,
                 $objectTypeFieldResolver->validateFieldArgValue(
                     $this,
                     $field->getName(),
@@ -1484,7 +1484,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 )
             );
         }
-        return $errors;
+        return $errorFeedbackItemResolutions;
     }
 
     /**
