@@ -430,6 +430,16 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
 
         /**
+         * Custom validations by the field resolver
+         */
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $objectTypeFieldResolver->collectValidationErrors($this, $object, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        /**
          * Perform validation through checkpoints
          */
         if ($checkpoints = $objectTypeFieldResolver->getValidationCheckpoints(
@@ -467,13 +477,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     )
                 );
             }
-            return null;
-        }
-
-        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $objectTypeFieldResolver->collectValidationErrors($this, $object, $fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
-        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
