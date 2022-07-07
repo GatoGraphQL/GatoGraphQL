@@ -1363,6 +1363,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $errorFeedbackItemResolutions = $this->validateFieldData(
             $fieldData,
             $field,
+            !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName())
         );
         if ($errorFeedbackItemResolutions !== []) {
             foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
@@ -1389,6 +1390,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function validateFieldData(
         array $fieldData,
         FieldInterface $field,
+        bool $validateMutation
     ): array {
         $errorFeedbackItemResolutions = [];
         /** @var array */
@@ -1448,7 +1450,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * If a MutationResolver is declared, let it validate the schema
          */
         $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $field->getName());
-        if ($mutationResolver !== null && !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName())) {
+        if ($mutationResolver !== null && $validateMutation) {
             $errorFeedbackItemResolutions = array_merge(
                 $errorFeedbackItemResolutions,
                 $mutationResolver->validateErrors($fieldDataAccessor)
