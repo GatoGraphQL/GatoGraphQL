@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -97,6 +98,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private ?OutputServiceInterface $outputService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
+    private ?EngineInterface $engine = null;
 
     final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
@@ -129,6 +131,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getSchemaCastingService(): SchemaCastingServiceInterface
     {
         return $this->schemaCastingService ??= $this->instanceManager->getInstance(SchemaCastingServiceInterface::class);
+    }
+    final public function setEngine(EngineInterface $engine): void
+    {
+        $this->engine = $engine;
+    }
+    final protected function getEngine(): EngineInterface
+    {
+        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
 
     public function __construct()
@@ -415,6 +425,28 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldDataAccessor->getKeyValues(), $separateObjectTypeFieldResolutionFeedbackStore);
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
             if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+        }
+
+        /**
+         * Perform validation through checkpoints
+         */
+        if ($checkpoints = $objectTypeFieldResolver->getValidationCheckpoints(
+            $this,
+            $object,
+            $fieldDataAccessor->getFieldName(),
+            $fieldDataAccessor->getKeyValues(),
+        )) {
+            $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
+            if ($feedbackItemResolution !== null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $feedbackItemResolution,
+                        $field->getLocation(),
+                        $this
+                    )
+                );
                 return null;
             }
         }

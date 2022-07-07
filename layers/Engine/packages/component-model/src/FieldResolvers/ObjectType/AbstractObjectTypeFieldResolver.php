@@ -9,7 +9,6 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
-use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -98,7 +97,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     private ?NameResolverInterface $nameResolver = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-    private ?EngineInterface $engine = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
@@ -135,14 +133,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
-    }
-    final public function setEngine(EngineInterface $engine): void
-    {
-        $this->engine = $engine;
-    }
-    final protected function getEngine(): EngineInterface
-    {
-        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
     }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
@@ -958,7 +948,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
-    protected function getValidationCheckpoints(
+    public function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
@@ -978,20 +968,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $fieldDataAccessor->getFieldName(), $fieldDataAccessor->getKeyValues())) {
-            $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
-            if ($feedbackItemResolution !== null) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $feedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver
-                    )
-                );
-                return;
-            }
-        }
+        
     }
 
     /**
