@@ -689,7 +689,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    
+
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
@@ -962,7 +962,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        
     }
 
     /**

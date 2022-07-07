@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPWPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use Leoloso\BlockMetadata\Data;
 use Leoloso\BlockMetadata\Metadata;

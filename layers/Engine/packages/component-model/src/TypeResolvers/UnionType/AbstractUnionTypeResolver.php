@@ -492,7 +492,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          * @var SplObjectStorage<ObjectTypeResolverInterface,array<string|int>>
          */
         $objectTypeResolverObjectIDs = new SplObjectStorage();
-        
+
         /** @var array<string|int> */
         $ids = $fieldIDs[$field];
         foreach ($ids as $id) {
@@ -527,7 +527,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
             }
 
             if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
-                /** 
+                /**
                  * Handle case:
                  *
                  * 2. Data from a Field in an UnionTypeResolver: the union field does not have

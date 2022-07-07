@@ -78,7 +78,7 @@ trait ObjectTypeOrDirectiveResolverTrait
             if (array_key_exists($argName, $fieldOrDirectiveData)) {
                 $completedFieldOrDirectiveData[$argName] = $fieldOrDirectiveData[$argName];
                 continue;
-            }            
+            }
             $fieldOrDirectiveData[$argName] = $argDefaultValue;
         }
         return $fieldOrDirectiveData;
@@ -98,7 +98,7 @@ trait ObjectTypeOrDirectiveResolverTrait
             if ($fieldOrDirective->hasArgument($argName)) {
                 continue;
             }
-            
+
             $directiveArgValueAST = $this->getArgumentValueAsAST($argValue);
             $fieldOrDirective->addArgument(
                 new Argument(

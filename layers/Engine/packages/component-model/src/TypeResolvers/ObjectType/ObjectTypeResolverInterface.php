@@ -75,7 +75,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         FieldInterface $field,
         array $fieldData,
     ): FieldDataAccessorInterface;
-    /** 
+    /**
      * Handle case:
      *
      * 1. Data from a Field in an ObjectTypeResolver: a single instance of the
@@ -88,7 +88,7 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         FieldInterface $field,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage;
-    /** 
+    /**
      * Handle case:
      *
      * 3. Data for a specific object: When executing nested mutations, the FieldArgs

@@ -759,12 +759,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Perform validation through checkpoints
          */
-        if ($checkpoints = $objectTypeFieldResolver->getValidationCheckpoints(
-            $this,
-            $object,
-            $fieldDataAccessor->getFieldName(),
-            $fieldDataAccessor->getKeyValues(),
-        )) {
+        if (
+            $checkpoints = $objectTypeFieldResolver->getValidationCheckpoints(
+                $this,
+                $object,
+                $fieldDataAccessor->getFieldName(),
+                $fieldDataAccessor->getKeyValues(),
+            )
+        ) {
             $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
             if ($feedbackItemResolution !== null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1160,7 +1162,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         );
     }
 
-    /** 
+    /**
      * Handle case:
      *
      * 1. Data from a Field in an ObjectTypeResolver: a single instance of the
@@ -1182,7 +1184,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
                 return null;
             }
-            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)
+            if (
+                $this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)
                 && $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($wildcardObject)
             ) {
                 return $this->fieldObjectTypeResolverObjectFieldDataCache[$field];
@@ -1210,7 +1213,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             return null;
         }
         /** @var array<string,mixed> $fieldData */
-        
+
         $objectFieldData[$wildcardObject] = $fieldData;
         $objectTypeResolverObjectFieldData[$this] = $objectFieldData;
         // Store in the cache
@@ -1218,7 +1221,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         return $objectTypeResolverObjectFieldData;
     }
 
-    /** 
+    /**
      * Handle case:
      *
      * 3. Data for a specific object: When executing nested mutations, the FieldArgs
@@ -1240,13 +1243,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): ?SplObjectStorage {
         /** @var ObjectTypeFieldResolverInterface */
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        
+
         /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
         $objectTypeResolverObjectFieldData = new SplObjectStorage();
 
         /** @var SplObjectStorage<object,array<string,mixed>> */
         $objectFieldData = new SplObjectStorage();
-            
+
         /**
          * Check if can retrieve the values from the cache for each of
          * the objects, for when each of them has its own FieldArgs
@@ -1293,7 +1296,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
             return null;
         }
-        
+
         foreach ($remainingObjectIDs as $id) {
             $object = $idObjects[$id];
             // Clone array
@@ -1324,7 +1327,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected function getFieldData(
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?array {    
+    ): ?array {
         if (!$this->fieldDataCache->contains($field)) {
             $this->fieldDataCache[$field] = $this->doGetFieldData(
                 $field,
@@ -1345,7 +1348,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
         $fieldData = $field->getArgumentKeyValues();
-        
+
         /**
          * Check that the field has been defined in the schema
          */
@@ -1364,7 +1367,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
             return null;
         }
-        
+
         /**
          * Add the default Argument values
          */
@@ -1428,10 +1431,10 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
         /** @var ObjectTypeFieldResolverInterface */
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
-        
+
         // Collect the deprecations from the queried fields
         $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldData, $objectTypeFieldResolutionFeedbackStore);
-        
+
         /**
          * Validations:
          *
@@ -1455,7 +1458,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($maybeErrorFeedbackItemResolution !== null) {
             $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
         }
-        
+
         if ($errorFeedbackItemResolutions !== []) {
             foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
                 $objectTypeFieldResolutionFeedbackStore->addError(

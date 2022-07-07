@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPAPI\API\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoPAPI\API\Module;
 use PoPAPI\API\ModuleConfiguration;

@@ -1252,7 +1252,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         /** @var array<string|int> */
         $ids = $fieldIDs[$field];
         $cacheKey = implode('|', $ids);
-        if ($this->objectTypeResolverObjectFieldDataCache->contains($field)
+        if (
+            $this->objectTypeResolverObjectFieldDataCache->contains($field)
             // The cached value can be `null` (in case of error), so can't use `isset`
             && array_key_exists($cacheKey, $this->objectTypeResolverObjectFieldDataCache[$field])
         ) {

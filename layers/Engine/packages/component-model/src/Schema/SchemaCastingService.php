@@ -9,8 +9,6 @@ use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\CoercibleArgumentValueAstInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;

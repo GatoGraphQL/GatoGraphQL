@@ -9,7 +9,6 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustom
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin
