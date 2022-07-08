@@ -13,8 +13,11 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
@@ -47,17 +50,20 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
+        array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
@@ -71,6 +77,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $relationalTypeResolver,
             $idObjects,
             $idFieldSet,
+            $fieldDataAccessProvider,
             $resolvedIDFieldValues,
             $previouslyResolvedIDFieldValues,
             $variables,
@@ -88,6 +95,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idObjects,
         array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
         array &$variables,
@@ -132,6 +140,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $id,
                 $object,
                 $idFieldSet[$id]->fields,
+                $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
                 $variables,
@@ -179,6 +188,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         string | int $id,
         object $object,
         array $fieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
         array &$variables,
@@ -191,6 +201,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                 $id,
                 $object,
                 $field,
+                $fieldDataAccessProvider,
                 $resolvedIDFieldValues,
                 $previouslyResolvedIDFieldValues,
                 $variables,
@@ -209,17 +220,51 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         string | int $id,
         object $object,
         FieldInterface $field,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$resolvedIDFieldValues,
         array $previouslyResolvedIDFieldValues,
         array &$variables,
         array &$expressions,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();
+        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+            /** @var UnionTypeResolverInterface */
+            $unionTypeResolver = $relationalTypeResolver;
+            $objectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
+            if ($objectTypeResolver === null) {
+                if ($setFailingFieldResponseAsNull) {
+                    $resolvedIDFieldValues[$id][$field] = null;
+                }
+                return;
+            }
+        } else {
+            /** @var ObjectTypeResolverInterface */
+            $objectTypeResolver = $relationalTypeResolver;
+        }
+
         // 1. Resolve the value against the TypeResolver
         $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $fieldData = $fieldDataAccessProvider->getFieldData(
+            $field,
+            $objectTypeResolver,
+            $object,
+        );
+        if ($fieldData === null) {
+            if ($setFailingFieldResponseAsNull) {
+                $resolvedIDFieldValues[$id][$field] = null;
+            }
+            return;
+        }
+        $fieldDataAccessor = $objectTypeResolver->createFieldDataAccessor(
+            $field,
+            $fieldData,
+        );
         $value = $relationalTypeResolver->resolveValue(
             $object,
-            $field,
+            $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
@@ -235,9 +280,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         // 3. Add the output in the DB
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
+            if ($setFailingFieldResponseAsNull) {
                 $resolvedIDFieldValues[$id][$field] = null;
             }
             return;

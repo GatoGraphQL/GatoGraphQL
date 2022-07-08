@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserAvatars\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoPCMSSchema\UserAvatars\Module;
 use PoPCMSSchema\UserAvatars\ModuleConfiguration;
@@ -121,16 +121,16 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $user = $object;
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
-                $avatarSize = $field->getArgumentValue('size') ?? $moduleConfiguration->getUserAvatarDefaultSize();
+                $avatarSize = $fieldDataAccessor->getValue('size') ?? $moduleConfiguration->getUserAvatarDefaultSize();
                 $avatarSrc = $this->getUserAvatarTypeAPI()->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;
@@ -145,7 +145,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $avatarID;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Multisite\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -74,18 +74,18 @@ class SiteObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         /** @var Site */
         $site = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'domain':
                 return $site->getDomain();
             case 'host':
                 return $site->getHost();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

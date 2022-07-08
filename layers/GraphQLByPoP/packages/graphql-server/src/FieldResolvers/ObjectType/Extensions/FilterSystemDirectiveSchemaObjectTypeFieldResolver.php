@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\Extensions;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\SchemaObjectTypeFieldResolver;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
@@ -88,15 +88,15 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'directives':
                 $directiveIDs = $schema->getDirectiveIDs();
-                if ($ofKinds = $field->getArgumentValue('ofKinds')) {
+                if ($ofKinds = $fieldDataAccessor->getValue('ofKinds')) {
                     $ofTypeDirectiveResolvers = array_filter(
                         $this->getDirectiveRegistry()->getDirectiveResolvers(),
                         fn (DirectiveResolverInterface $directiveResolver) => in_array($directiveResolver->getDirectiveKind(), $ofKinds)
@@ -123,6 +123,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                 return $directiveIDs;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

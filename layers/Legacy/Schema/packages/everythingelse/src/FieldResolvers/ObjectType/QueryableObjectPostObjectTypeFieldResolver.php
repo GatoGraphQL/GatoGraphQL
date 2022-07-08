@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -60,10 +61,10 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'endpoint':
                 return APIUtils::getEndpoint(
                     $objectTypeResolver->resolveValue(
@@ -73,13 +74,13 @@ class QueryableObjectPostObjectTypeFieldResolver extends AbstractObjectTypeField
                             null,
                             [],
                             [],
-                            $field->getLocation()
+                            $fieldDataAccessor->getField()->getLocation()
                         ),
                         $objectTypeFieldResolutionFeedbackStore,
                     )
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

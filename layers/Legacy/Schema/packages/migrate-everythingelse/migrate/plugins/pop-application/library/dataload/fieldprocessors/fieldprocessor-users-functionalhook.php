@@ -59,7 +59,7 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $user = $object;
@@ -85,11 +85,11 @@ class PoP_Application_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extends A
                     $userTypeAPI->getUserURL($objectTypeResolver->getID($user))
                 );
                 // Excerpt length can be set through fieldArgs
-                $length = $field->getArgumentValue('length') ? (int) $field->getArgumentValue('length') : 300;
+                $length = $fieldDataAccessor->getValue('length') ? (int) $fieldDataAccessor->getValue('length') : 300;
                 return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($userTypeAPI->getUserDescription($objectTypeResolver->getID($user)))), $length, $readmore));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

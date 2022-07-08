@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\Posts\FieldResolvers\ObjectType\AbstractPostObjectTypeFieldResolver;
 
@@ -33,12 +33,12 @@ class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFiel
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        $query = parent::getQuery($objectTypeResolver, $object, $field);
+        $query = parent::getQuery($objectTypeResolver, $object, $fieldDataAccessor);
 
         $category = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'posts':
             case 'postCount':
                 $query['category-ids'] = [$objectTypeResolver->getID($category)];

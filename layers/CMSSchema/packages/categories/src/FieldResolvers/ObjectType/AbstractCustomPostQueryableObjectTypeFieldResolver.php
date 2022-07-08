@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -139,13 +139,13 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $categoryTypeAPI = $this->getCategoryTypeAPI();
         $post = $object;
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field);
-        switch ($field->getName()) {
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':
                 return $categoryTypeAPI->getCustomPostCategories($objectTypeResolver->getID($post), $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'categoryNames':
@@ -154,6 +154,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
                 return $categoryTypeAPI->getCustomPostCategoryCount($objectTypeResolver->getID($post), $query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

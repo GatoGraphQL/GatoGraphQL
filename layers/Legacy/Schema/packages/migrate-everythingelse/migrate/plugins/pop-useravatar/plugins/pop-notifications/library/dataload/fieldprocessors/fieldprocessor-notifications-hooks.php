@@ -65,7 +65,7 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $notification = $object;
@@ -95,7 +95,7 @@ class PoP_AAL_UserAvatar_DataLoad_ObjectTypeFieldResolver_Notification extends A
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

@@ -5,7 +5,7 @@
         "__typename": "Post",
         "id": 1724,
         "title": "Keyboard navigation",
-        "commentCount": 7,
+        "commentCount": 4,
         "author": {
           "id": 3,
           "name": "Theme Reviewer"

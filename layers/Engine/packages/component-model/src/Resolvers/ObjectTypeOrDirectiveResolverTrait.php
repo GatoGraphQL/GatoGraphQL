@@ -24,6 +24,7 @@ trait ObjectTypeOrDirectiveResolverTrait
      * Set the missing InputObject as {} to give it a chance to set
      * its default input values
      *
+     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
      * @return array<string,mixed>
      */
     final protected function getFieldOrDirectiveArgumentNameDefaultValues(array $fieldOrDirectiveArgsSchemaDefinition): array
@@ -48,9 +49,47 @@ trait ObjectTypeOrDirectiveResolverTrait
     }
 
     /**
+     * Get the mandatory argument names for the field
+     *
+     * @param array<string,mixed> $fieldOrDirectiveArgsSchemaDefinition
+     * @return string[]
+     */
+    private function getFieldOrDirectiveMandatoryArgumentNames(array $fieldOrDirectiveArgsSchemaDefinition): array
+    {
+        $mandatoryFieldArgumentNames = [];
+        foreach ($fieldOrDirectiveArgsSchemaDefinition as $fieldOrDirectiveSchemaDefinitionArg) {
+            if ($fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::MANDATORY] ?? false) {
+                $mandatoryFieldArgumentNames[] = $fieldOrDirectiveSchemaDefinitionArg[SchemaDefinition::NAME];
+            }
+        }
+        return $mandatoryFieldArgumentNames;
+    }
+
+    /**
+     * @param array<string,mixed> $fieldOrDirectiveData
+     * @param array<string,mixed> $argumentNameDefaultValues
+     * @return array<string,mixed>
+     */
+    final protected function addDefaultFieldOrDirectiveArguments(
+        array $fieldOrDirectiveData,
+        array $argumentNameDefaultValues,
+    ): array {
+        foreach ($argumentNameDefaultValues as $argName => $argDefaultValue) {
+            if (array_key_exists($argName, $fieldOrDirectiveData)) {
+                $completedFieldOrDirectiveData[$argName] = $fieldOrDirectiveData[$argName];
+                continue;
+            }
+            $fieldOrDirectiveData[$argName] = $argDefaultValue;
+        }
+        return $fieldOrDirectiveData;
+    }
+
+    /**
+     * @todo Fix integrate with Directive
+     * @todo Replace with addDefaultFieldOrDirectiveArguments
      * @param array<string,mixed> $argumentNameDefaultValues
      */
-    final protected function integrateDefaultFieldOrDirectiveArguments(
+    final protected function deprecatedIntegrateDefaultFieldOrDirectiveArguments(
         FieldInterface|Directive $fieldOrDirective,
         array $argumentNameDefaultValues,
     ): void {
@@ -59,6 +98,7 @@ trait ObjectTypeOrDirectiveResolverTrait
             if ($fieldOrDirective->hasArgument($argName)) {
                 continue;
             }
+
             $directiveArgValueAST = $this->getArgumentValueAsAST($argValue);
             $fieldOrDirective->addArgument(
                 new Argument(

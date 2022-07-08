@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\ObjectModels\EnumType;
 use GraphQLByPoP\GraphQLServer\ObjectModels\HasFieldsTypeInterface;
@@ -217,12 +217,12 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         /** @var TypeInterface */
         $type = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'kind':
                 return $type->getKind();
             case 'name':
@@ -233,7 +233,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC1BJC3BAn6e):
                 // "should be non-null for OBJECT and INTERFACE only, must be null for the others"
                 if ($type instanceof HasFieldsTypeInterface) {
-                    return $type->getFieldIDs($field->getArgumentValue('includeDeprecated'));
+                    return $type->getFieldIDs($fieldDataAccessor->getValue('includeDeprecated'));
                 }
                 return null;
             case 'interfaces':
@@ -254,7 +254,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // From GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC7CCC9CA2nT):
                 // "should be non-null for ENUM only, must be null for the others"
                 if ($type instanceof EnumType) {
-                    return $type->getEnumValueIDs($field->getArgumentValue('includeDeprecated'));
+                    return $type->getEnumValueIDs($fieldDataAccessor->getValue('includeDeprecated'));
                 }
                 return null;
             case 'inputFields':
@@ -290,6 +290,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -14,7 +14,10 @@ interface FieldDataAccessorInterface
      * @return string[]
      */
     public function getProperties(): array;
+    /**
+     * @return array<string,mixed>
+     */
+    public function getKeyValues(): array;
     public function hasValue(string $propertyName): bool;
     public function getValue(string $propertyName): mixed;
-    public function addValue(string $propertyName, mixed $value): void;
 }

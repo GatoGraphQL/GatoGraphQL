@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\SchemaTypeDataLoader;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\SchemaObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\TypeObjectTypeResolver;
@@ -14,7 +15,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\Root\App;
 
@@ -127,11 +127,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $root = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case '__schema':
                 return 'schema';
             case '__type':
@@ -143,7 +143,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -153,10 +153,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Obtain the instance of the schema
                 $schemaInstances = $this->getSchemaTypeDataLoader()->getObjects([$schemaID]);
                 $schema = $schemaInstances[0];
-                return $schema->getTypeID($field->getArgumentValue('name'));
+                return $schema->getTypeID($fieldDataAccessor->getValue('name'));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

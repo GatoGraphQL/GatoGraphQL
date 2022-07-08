@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Settings\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -134,29 +135,33 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function doResolveSchemaValidationErrors(
+    /**
+     * Custom validations
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        switch ($field->getName()) {
+        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($field->getArgumentValue('name'))) {
-                    return [
-                        new FeedbackItemResolution(
-                            FeedbackItemProvider::class,
-                            FeedbackItemProvider::E1,
-                            [
-                                $field->getArgumentValue('name'),
-                            ]
-                        ),
-                    ];
+                if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldDataAccessor->getValue('name'))) {
+                    $errors[] = new FeedbackItemResolution(
+                        FeedbackItemProvider::class,
+                        FeedbackItemProvider::E1,
+                        [
+                            $fieldDataAccessor->getValue('name'),
+                        ]
+                    );
                 }
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
+        return $errors;
     }
 
     public function validateResolvedFieldType(
@@ -178,23 +183,23 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
-                $value = $this->getSettingsTypeAPI()->getOption($field->getArgumentValue('name'));
-                if ($field->getName() === 'optionValues') {
+                $value = $this->getSettingsTypeAPI()->getOption($fieldDataAccessor->getValue('name'));
+                if ($fieldDataAccessor->getFieldName() === 'optionValues') {
                     return (array) $value;
                 }
-                if ($field->getName() === 'optionObjectValue') {
+                if ($fieldDataAccessor->getFieldName() === 'optionObjectValue') {
                     return (object) $value;
                 }
                 return $value;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

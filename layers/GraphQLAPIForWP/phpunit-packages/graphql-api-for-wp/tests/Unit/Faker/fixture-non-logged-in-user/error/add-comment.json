@@ -4,16 +4,13 @@
       "message": "You are not logged in",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 3
         }
       ],
       "extensions": {
         "type": "MutationRoot",
-        "fields": [
-          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724})",
-          "validate"
-        ],
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724})",
         "code": "PoPCMSSchema\\CommentMutations\\e1"
       }
     }

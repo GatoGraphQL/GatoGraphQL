@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
@@ -131,14 +131,14 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'customPost':
                 $query = array_merge(
-                    $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
-                    $this->getQuery($objectTypeResolver, $object, $field)
+                    $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+                    $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
                 );
                 if ($posts = $this->getCustomPostTypeAPI()->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
                     return $posts[0];
@@ -146,7 +146,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

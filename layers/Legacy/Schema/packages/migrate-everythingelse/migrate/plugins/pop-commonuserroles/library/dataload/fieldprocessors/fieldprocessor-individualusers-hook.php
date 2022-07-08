@@ -55,7 +55,7 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $user = $object;
@@ -67,7 +67,7 @@ class ObjectTypeFieldResolver_IndividualUsers extends AbstractObjectTypeFieldRes
                 return !empty($objectTypeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

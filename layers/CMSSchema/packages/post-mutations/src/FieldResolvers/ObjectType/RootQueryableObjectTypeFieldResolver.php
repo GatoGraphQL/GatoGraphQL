@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
@@ -197,9 +197,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'myPost',
             'myPosts',
             'myPostCount'
@@ -214,14 +214,14 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
-            $this->getQuery($objectTypeResolver, $object, $field)
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+            $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'myPostCount':
                 return $this->getPostTypeAPI()->getPostCount($query);
 
@@ -235,6 +235,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

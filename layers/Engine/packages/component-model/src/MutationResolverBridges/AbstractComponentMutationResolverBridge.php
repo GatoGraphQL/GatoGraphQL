@@ -68,7 +68,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             return null;
         }
         $mutationResolver = $this->getMutationResolver();
-        $fieldDataAccessor = $this->getFieldDataAccessor();
+        $fieldDataAccessorForMutation = $this->getFieldDataAccessorForMutation();
         $mutationResponse = [];
         // Validate errors
         $errorType = $mutationResolver->getErrorType();
@@ -77,7 +77,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             ErrorTypes::CODES => ResponseConstants::ERRORCODES,
         ];
         $errorTypeKey = $errorTypeKeys[$errorType];
-        if ($errors = $mutationResolver->validateErrors($fieldDataAccessor)) {
+        if ($errors = $mutationResolver->validateErrors($fieldDataAccessorForMutation)) {
             // @todo Migrate from string to FeedbackItemProvider
             $mutationResponse[$errorTypeKey] = array_map(
                 fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
@@ -89,7 +89,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             }
             return $mutationResponse;
         }
-        if ($warnings = $mutationResolver->validateWarnings($fieldDataAccessor)) {
+        if ($warnings = $mutationResolver->validateWarnings($fieldDataAccessorForMutation)) {
             $warningTypeKeys = [
                 ErrorTypes::DESCRIPTIONS => ResponseConstants::WARNINGSTRINGS,
                 ErrorTypes::CODES => ResponseConstants::WARNINGCODES,
@@ -105,7 +105,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         $errorMessage = null;
         $resultID = null;
         try {
-            $resultID = $mutationResolver->executeMutation($fieldDataAccessor);
+            $resultID = $mutationResolver->executeMutation($fieldDataAccessorForMutation);
         } catch (AbstractClientException $e) {
             $errorMessage = $e->getMessage();
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
@@ -141,7 +141,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $mutationResponse;
     }
 
-    protected function getFieldDataAccessor(): FieldDataAccessorInterface
+    protected function getFieldDataAccessorForMutation(): FieldDataAccessorInterface
     {
         /**
          * Create a runtime field to be executed. It doesn't matter
@@ -161,8 +161,8 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
          */
         $mutationData = [];
         $this->addMutationDataForFieldDataAccessor($mutationData);
-        $fieldDataAccessor = new FieldDataAccessor($mutationField, $mutationData);
-        return $fieldDataAccessor;
+        $fieldDataAccessorForMutation = new FieldDataAccessor($mutationField, $mutationData);
+        return $fieldDataAccessorForMutation;
     }
 
     protected function modifyDataProperties(array &$data_properties, string | int $resultID): void

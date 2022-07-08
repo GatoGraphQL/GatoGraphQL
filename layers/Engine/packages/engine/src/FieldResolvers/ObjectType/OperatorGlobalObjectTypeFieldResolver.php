@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use ArgumentCountError;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -222,40 +222,40 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'if':
-                if ($field->getArgumentValue('condition')) {
-                    return $field->getArgumentValue('then');
+                if ($fieldDataAccessor->getValue('condition')) {
+                    return $fieldDataAccessor->getValue('then');
                 }
-                if ($field->hasArgument('else')) {
-                    return $field->getArgumentValue('else');
+                if ($fieldDataAccessor->hasValue('else')) {
+                    return $fieldDataAccessor->getValue('else');
                 }
                 return null;
             case 'not':
-                return !$field->getArgumentValue('value');
+                return !$fieldDataAccessor->getValue('value');
             case 'and':
-                return array_reduce($field->getArgumentValue('values'), function ($accumulated, $value) {
+                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value) {
                     $accumulated = $accumulated && $value;
                     return $accumulated;
                 }, true);
             case 'or':
-                return array_reduce($field->getArgumentValue('values'), function ($accumulated, $value) {
+                return array_reduce($fieldDataAccessor->getValue('values'), function ($accumulated, $value) {
                     $accumulated = $accumulated || $value;
                     return $accumulated;
                 }, false);
             case 'equals':
-                return $field->getArgumentValue('value1') == $field->getArgumentValue('value2');
+                return $fieldDataAccessor->getValue('value1') == $fieldDataAccessor->getValue('value2');
             case 'empty':
-                return empty($field->getArgumentValue('value'));
+                return empty($fieldDataAccessor->getValue('value'));
             case 'isNull':
-                return is_null($field->getArgumentValue('value'));
+                return is_null($fieldDataAccessor->getValue('value'));
             case 'extract':
                 try {
-                    $array = (array) $field->getArgumentValue('object');
-                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToElementItemUnderPath($array, $field->getArgumentValue('path'));
+                    $array = (array) $fieldDataAccessor->getValue('object');
+                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToElementItemUnderPath($array, $fieldDataAccessor->getValue('path'));
                 } catch (RuntimeOperationException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
@@ -276,12 +276,12 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'time':
                 return time();
             case 'echo':
-                return $field->getArgumentValue('value');
+                return $fieldDataAccessor->getValue('value');
             case 'sprintf':
                 // If more "%s" are passed than replacements provided, then `sprintf`
                 // will throw an ArgumentCountError. Catch it and return an error instead.
                 try {
-                    return sprintf($field->getArgumentValue('string'), ...$field->getArgumentValue('values'));
+                    return sprintf($fieldDataAccessor->getValue('string'), ...$fieldDataAccessor->getValue('values'));
                 } catch (ArgumentCountError $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
@@ -300,6 +300,6 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 }
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

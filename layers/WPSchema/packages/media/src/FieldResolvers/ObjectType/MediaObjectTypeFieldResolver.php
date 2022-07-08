@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Media\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -81,16 +81,16 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         /** @var WP_Post */
         $mediaItem = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
             case 'urlAbsolutePath':
                 $url = \get_permalink($mediaItem->ID);
-                if ($field->getName() === 'url') {
+                if ($fieldDataAccessor->getFieldName() === 'url') {
                     return $url;
                 }
                 /** @var string */
@@ -99,6 +99,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $mediaItem->post_name;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

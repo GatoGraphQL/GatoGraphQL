@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\BlockMetadataWP\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use Leoloso\BlockMetadata\Data;
 use Leoloso\BlockMetadata\Metadata;
@@ -100,7 +100,7 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     // public function getSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     // {
     //     $schemaFieldArgs = parent::getSchemaFieldArgs($objectTypeResolver, $fieldName);
-    //     switch ($field->getName()) {
+    //     switch ($fieldDataAccessor->getFieldName()) {
     //         case 'blockMetadata':
     //             return array_merge(
     //                 $schemaFieldArgs,
@@ -133,23 +133,23 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $post = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'blockMetadata':
                 $block_data = Data::get_block_data($post->post_content);
                 $block_metadata = Metadata::get_block_metadata($block_data);
 
                 // Filter by blockName
-                if ($blockName = $field->getArgumentValue('blockName')) {
+                if ($blockName = $fieldDataAccessor->getValue('blockName')) {
                     $block_metadata = array_filter(
                         $block_metadata,
                         fn ($block) => $block['blockName'] === $blockName
                     );
                 }
-                if ($filterBy = $field->getArgumentValue('filterBy')) {
+                if ($filterBy = $fieldDataAccessor->getValue('filterBy')) {
                     if ($blockNameStartsWith = $filterBy['blockNameStartsWith']) {
                         $block_metadata = array_filter(
                             $block_metadata,
@@ -175,6 +175,6 @@ class PostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return (object) $block_metadata;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

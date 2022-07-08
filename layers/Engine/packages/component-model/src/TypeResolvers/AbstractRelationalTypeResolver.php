@@ -15,8 +15,10 @@ use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProvider;
 use PoP\ComponentModel\RelationalTypeResolverDecorators\RelationalTypeResolverDecoratorInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -66,6 +68,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @var array<string,SplObjectStorage<Directive,DirectiveResolverInterface>>
      */
     private array $directiveResolverClassDirectivesCache = [];
+    /**
+     * @var SplObjectStorage<FieldInterface,array<string,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>>
+     */
+    private SplObjectStorage $objectTypeResolverObjectFieldDataCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?DataloadingEngineInterface $dataloadingEngine = null;
@@ -100,6 +106,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     {
         $this->directiveIDFieldSet = new SplObjectStorage();
         $this->fieldDirectives = new SplObjectStorage();
+        $this->objectTypeResolverObjectFieldDataCache = new SplObjectStorage();
     }
 
     /**
@@ -1108,6 +1115,23 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveResolverInstances = [];
             /** @var array<array<string|int,EngineIterationFieldSet>> */
             $pipelineIDFieldSet = [];
+            /**
+             * For each of the elements in the pipeline, convert the FieldArgs
+             * into its corresponding FieldDataAccessor, which integrates
+             * within the default values and coerces them according to the schema.
+             *
+             * This object is provided via a FieldDataAccessProvider, which can handle
+             * 3 different cases:
+             *
+             *   1. Data from a Field in an ObjectTypeResolver
+             *   2. Data from a Field in an UnionTypeResolver
+             *   3. Data for a specific object (eg: for nested mutations)
+             *
+             * @see FieldDataAccessProvider
+             *
+             * @var FieldDataAccessProvider[]
+             */
+            $pipelineFieldDataAccessProviders = [];
             /** @var DirectiveResolverInterface $directiveResolverInstance */
             foreach ($directivePipelineData as $directiveResolverInstance) {
                 /** @var FieldInterface[] */
@@ -1141,6 +1165,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
                 $pipelineIDFieldSet[] = $idFieldSet;
                 $directiveResolverInstances[] = $directiveResolverInstance;
+                $fieldObjectTypeResolverObjectFieldData = $this->getFieldObjectTypeResolverObjectFieldData(
+                    $directiveDirectFieldsToProcess,
+                    $directiveFieldIDs[$directive],
+                    $idObjects,
+                    $engineIterationFeedbackStore,
+                );
+                $pipelineFieldDataAccessProviders[] = new FieldDataAccessProvider($fieldObjectTypeResolverObjectFieldData);
             }
 
             // We can finally resolve the pipeline, passing along an array with the ID and fields for each directive
@@ -1148,6 +1179,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directivePipeline->resolveDirectivePipeline(
                 $this,
                 $pipelineIDFieldSet,
+                $pipelineFieldDataAccessProviders,
                 $directiveResolverInstances,
                 $idObjects,
                 $unionTypeOutputKeyIDs,
@@ -1159,6 +1191,111 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             );
         }
     }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param FieldInterface[] $fields
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>>
+     */
+    protected function getFieldObjectTypeResolverObjectFieldData(
+        array $fields,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): SplObjectStorage {
+        /** @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>> */
+        $fieldObjectTypeResolverObjectFieldData = new SplObjectStorage();
+
+        foreach ($fields as $field) {
+            $objectTypeResolverObjectFieldData = $this->getObjectTypeResolverObjectFieldData(
+                $field,
+                $fieldIDs,
+                $idObjects,
+                $engineIterationFeedbackStore,
+            );
+            // If the field does not exist in the schema, then skip it
+            if ($objectTypeResolverObjectFieldData === null) {
+                continue;
+            }
+            $fieldObjectTypeResolverObjectFieldData[$field] = $objectTypeResolverObjectFieldData;
+        }
+
+        return $fieldObjectTypeResolverObjectFieldData;
+    }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * Attempt to get the value from the cache first, as the same field, with the same
+     * set of IDs, will be called multiple times for the several directives processing
+     * them (@resolveValueAndMerge, @serialize, etc)
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     */
+    protected function getObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?SplObjectStorage {
+        /** @var array<string|int> */
+        $ids = $fieldIDs[$field];
+        $cacheKey = implode('|', $ids);
+        if (
+            $this->objectTypeResolverObjectFieldDataCache->contains($field)
+            // The cached value can be `null` (in case of error), so can't use `isset`
+            && array_key_exists($cacheKey, $this->objectTypeResolverObjectFieldDataCache[$field])
+        ) {
+            return $this->objectTypeResolverObjectFieldDataCache[$field][$cacheKey];
+        }
+        $objectTypeResolverObjectFieldData = $this->doGetObjectTypeResolverObjectFieldData(
+            $field,
+            $fieldIDs,
+            $idObjects,
+            $engineIterationFeedbackStore,
+        );
+        $fieldObjectTypeResolverObjectFieldDataCache = $this->objectTypeResolverObjectFieldDataCache[$field] ?? [];
+        $fieldObjectTypeResolverObjectFieldDataCache[$cacheKey] = $objectTypeResolverObjectFieldData;
+        $this->objectTypeResolverObjectFieldDataCache[$field] = $fieldObjectTypeResolverObjectFieldDataCache;
+        return $objectTypeResolverObjectFieldData;
+    }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * This object is provided via a FieldDataAccessProvider, which can handle
+     * 3 different cases:
+     *
+     *   1. Data from a Field in an ObjectTypeResolver
+     *   2. Data from a Field in an UnionTypeResolver
+     *   3. Data for a specific object (eg: for nested mutations)
+     *
+     * The format of the response of this function is defined in class FieldDataAccessProvider
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     */
+    abstract protected function doGetObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?SplObjectStorage;
 
     public function getSchemaDirectiveResolvers(bool $global): array
     {

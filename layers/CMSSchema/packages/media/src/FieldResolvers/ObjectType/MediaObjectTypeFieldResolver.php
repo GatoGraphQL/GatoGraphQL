@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use DateTime;
@@ -200,12 +200,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        $size = $this->obtainImageSizeFromParameters($field);
-        switch ($field->getName()) {
+        $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
@@ -217,7 +217,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'width':
             case 'height':
                 $properties = $this->getMediaTypeAPI()->getImageProperties($objectTypeResolver->getID($media), $size);
-                return $properties[$field->getName()];
+                return $properties[$fieldDataAccessor->getFieldName()];
             case 'srcSet':
                 return $this->getMediaTypeAPI()->getImageSrcSet($objectTypeResolver->getID($media), $size);
             case 'sizes':
@@ -231,28 +231,28 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'description':
                 return $this->getMediaTypeAPI()->getDescription($media);
             case 'date':
-                return new DateTime($this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt')));
+                return new DateTime($this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt')));
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $this->getMediaTypeAPI()->getDate($media, $field->getArgumentValue('gmt'))
+                    $fieldDataAccessor->getValue('format'),
+                    $this->getMediaTypeAPI()->getDate($media, $fieldDataAccessor->getValue('gmt'))
                 );
             case 'modifiedDate':
-                return new DateTime($this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt')));
+                return new DateTime($this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt')));
             case 'modifiedDateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $this->getMediaTypeAPI()->getModified($media, $field->getArgumentValue('gmt'))
+                    $fieldDataAccessor->getValue('format'),
+                    $this->getMediaTypeAPI()->getModified($media, $fieldDataAccessor->getValue('gmt'))
                 );
             case 'mimeType':
                 return $this->getMediaTypeAPI()->getMimeType($media);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    protected function obtainImageSizeFromParameters(FieldInterface $field): ?string
+    protected function obtainImageSizeFromParameters(FieldDataAccessorInterface $fieldDataAccessor): ?string
     {
-        return $field->getArgumentValue('size');
+        return $fieldDataAccessor->getValue('size');
     }
 }

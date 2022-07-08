@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -266,14 +267,14 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $notification = $object;
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'action':
                 return $notification->action;
             case 'objectType':
@@ -322,7 +323,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -336,7 +337,7 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -398,9 +399,9 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $notification->object_type == 'Taxonomy';
 
             case 'isAction':
-                return $field->getArgumentValue('action') == $notification->action;
+                return $fieldDataAccessor->getValue('action') == $notification->action;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

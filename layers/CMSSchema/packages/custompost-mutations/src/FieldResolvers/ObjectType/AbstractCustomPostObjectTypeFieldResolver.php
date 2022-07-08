@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -44,7 +43,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'update' => [
-                'input' => $this->getCustomPostUpdateFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostUpdateFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -53,7 +52,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['update' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            ['update' => MutationInputProperties::INPUT] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -74,14 +73,17 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
     }
 
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
+        parent::prepareFieldDataForObject(
+            $fieldDataForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -89,7 +91,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $post = $object;
         switch ($field->getName()) {
             case 'update':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::ID, $objectTypeResolver->getID($post));
+                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::ID} = $objectTypeResolver->getID($post);
                 break;
         }
     }

@@ -7,8 +7,8 @@ namespace GraphQLAPI\GraphQLAPI\ConditionalOnContext\Admin\ConditionalOnContext\
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustomPostType;
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 /**
  * ObjectTypeFieldResolver for the Custom Post Types from this plugin
@@ -66,9 +66,9 @@ class ListOfCPTEntitiesRootObjectTypeFieldResolver extends AbstractListOfCPTEnti
         };
     }
 
-    protected function getFieldCustomPostType(FieldInterface $field): string
+    protected function getFieldCustomPostType(FieldDataAccessorInterface $fieldDataAccessor): string
     {
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'accessControlLists' => $this->getGraphQLAccessControlListCustomPostType()->getCustomPostType(),
             'cacheControlLists' => $this->getGraphQLCacheControlListCustomPostType()->getCustomPostType(),
             'schemaConfigurations' => $this->getGraphQLSchemaConfigurationCustomPostType()->getCustomPostType(),

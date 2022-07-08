@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -47,24 +48,24 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $dateFormatter = DateFormatterFacade::getInstance();
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'datetime':
                 // If it is the current year, don't add the year. Otherwise, do
                 // 15 Jul, 21:47 or // 15 Jul 2018, 21:47
                 $date = $customPostTypeAPI->getPublishedDate($customPost);
-                $format = $field->getArgumentValue('format');
+                $format = $fieldDataAccessor->getValue('format');
                 if (!$format) {
                     $format = ($dateFormatter->format('Y', $date) == date('Y')) ? 'j M, H:i' : 'j M Y, H:i';
                 }
                 return $dateFormatter->format($format, $date);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

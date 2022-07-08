@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use DateTime;
@@ -313,11 +313,11 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $comment = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'content':
                 return $this->getCommentTypeAPI()->getCommentContent($comment);
 
@@ -350,22 +350,22 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentParent($comment);
 
             case 'date':
-                return new DateTime($this->getCommentTypeAPI()->getCommentDate($comment, $field->getArgumentValue('gmt')));
+                return new DateTime($this->getCommentTypeAPI()->getCommentDate($comment, $fieldDataAccessor->getValue('gmt')));
 
             case 'dateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
-                    $this->getCommentTypeAPI()->getCommentDate($comment, $field->getArgumentValue('gmt'))
+                    $fieldDataAccessor->getValue('format'),
+                    $this->getCommentTypeAPI()->getCommentDate($comment, $fieldDataAccessor->getValue('gmt'))
                 );
         }
 
         $query = array_merge(
-            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $field),
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
             [
                 'parent-id' => $objectTypeResolver->getID($comment),
             ]
         );
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'responses':
                 return $this->getCommentTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
@@ -373,6 +373,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 return $this->getCommentTypeAPI()->getCommentCount($query);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

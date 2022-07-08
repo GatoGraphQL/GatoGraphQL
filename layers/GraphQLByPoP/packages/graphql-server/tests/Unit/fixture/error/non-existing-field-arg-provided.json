@@ -1,24 +1,36 @@
 {
   "errors": [
     {
-      "message": "On field 'implements', there is no argument with name 'type'",
+      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'type'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 3
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
-          "validate"
-        ],
-        "code": "PoP\\Root\\e1"
+        "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+        "code": "PoP\\ComponentModel\\e27"
+      }
+    },
+    {
+      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'someType', 'anotherType'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 13
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "field": "multiple: implements(interface: \"SomeInterface\", someType: \"DoesntMatter\", anotherType: \"AlsoDoesntMatter\")",
+        "code": "PoP\\ComponentModel\\e27"
       }
     }
   ],
   "data": {
-    "implements": null
+    "implements": null,
+    "multiple": null
   }
 }

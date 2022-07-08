@@ -49,7 +49,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $post = $object;
@@ -61,7 +61,7 @@ class PoP_AddPostLinks_DataLoad_ObjectTypeFieldResolver_FunctionalPosts extends 
                 return (!is_ssl() || substr($link, 0, 8) == 'https://') && !in_array($host, $nonembeddable);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

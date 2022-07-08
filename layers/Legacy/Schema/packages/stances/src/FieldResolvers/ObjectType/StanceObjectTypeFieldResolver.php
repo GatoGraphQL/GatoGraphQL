@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -131,13 +132,13 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
         $stance = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':
                 return $taxonomyapi->getCustomPostTaxonomyTerms(
                     $objectTypeResolver->getID($stance),
@@ -165,7 +166,7 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -177,9 +178,9 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'content':
                 // Add the quotes around the content for the Stance
                 $value = $customPostTypeAPI->getRawContent($stance);
-                if ($field->getName() === 'title') {
+                if ($fieldDataAccessor->getFieldName() === 'title') {
                     return limitString($value, 100);
-                } elseif ($field->getName() === 'excerpt') {
+                } elseif ($fieldDataAccessor->getFieldName() === 'excerpt') {
                     return limitString($value, 300);
                 }
                 return $value;
@@ -196,12 +197,12 @@ class StanceObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

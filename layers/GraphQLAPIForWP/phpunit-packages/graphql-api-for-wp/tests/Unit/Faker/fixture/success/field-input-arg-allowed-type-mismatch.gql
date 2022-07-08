@@ -1,5 +1,6 @@
 query {
   # The input expects a String, but passing a Boolean/Int/Float gets coerced successfully
+  # The response is still `null`, because with the accepted wrong slug value, there's no post
   passingBoolean: post(by: { slug: false }) {
     id
   }
@@ -7,6 +8,12 @@ query {
     id
   }
   passingFloat: post(by: { slug: 15.5 }) {
+    id
+  }
+  passingDate: posts(
+    pagination: { limit: 3 }
+    filter: { dateQuery: { after: "2018-01-11" } }
+  ) {
     id
   }
 }

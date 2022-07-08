@@ -10,10 +10,7 @@
       ],
       "extensions": {
         "type": "__Schema",
-        "fields": [
-          "directives(ofKinds: [NON_EXISTING])",
-          "validate"
-        ],
+        "field": "directives(ofKinds: [NON_EXISTING])",
         "code": "PoP\\ComponentModel\\e14"
       }
     }

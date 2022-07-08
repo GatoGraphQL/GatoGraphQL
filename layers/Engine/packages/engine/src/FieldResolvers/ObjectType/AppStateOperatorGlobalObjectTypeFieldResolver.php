@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
@@ -107,42 +107,46 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
         };
     }
 
-    protected function doResolveSchemaValidationErrors(
+    /**
+     * Custom validations
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        switch ($field->getName()) {
+        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'var':
-                if (!App::hasState($field->getArgumentValue('name'))) {
-                    return [
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E6,
-                            [
-                                $field->getArgumentValue('name'),
-                            ]
-                        ),
-                    ];
+                if (!App::hasState($fieldDataAccessor->getValue('name'))) {
+                    $errors[] = new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E6,
+                        [
+                            $fieldDataAccessor->getValue('name'),
+                        ]
+                    );
                 };
                 break;
         }
 
-        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $field);
+        return $errors;
     }
 
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'var':
-                return App::getState($field->getArgumentValue('name'));
+                return App::getState($fieldDataAccessor->getValue('name'));
             case 'context':
                 return App::getAppStateManager()->all();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

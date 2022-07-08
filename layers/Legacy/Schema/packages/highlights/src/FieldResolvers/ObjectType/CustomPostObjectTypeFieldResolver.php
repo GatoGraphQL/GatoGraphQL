@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -104,12 +105,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPost = $object;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'highlights':
                 $query = array(
                     // 'fields' => 'ids',
@@ -135,7 +136,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -152,7 +153,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -162,6 +163,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return count($referencedby);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

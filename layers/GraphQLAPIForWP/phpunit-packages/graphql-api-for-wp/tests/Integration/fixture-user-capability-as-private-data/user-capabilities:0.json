@@ -4,16 +4,13 @@
       "message": "There is no field 'capabilities' on type 'QueryRoot'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 3
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "capabilities",
-          "validate"
-        ],
+        "field": "capabilities",
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -21,16 +18,13 @@
       "message": "There is no field 'capabilities' on type 'User'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 4,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "capabilities",
-          "validate"
-        ],
+        "field": "capabilities",
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -38,16 +32,13 @@
       "message": "There is no field 'hasCapability' on type 'User'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 5,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "hasCapability(capability: \"manage_options\")",
-          "validate"
-        ],
+        "field": "hasCapability(capability: \"manage_options\")",
         "code": "PoP\\ComponentModel\\e16"
       }
     },
@@ -55,16 +46,13 @@
       "message": "There is no field 'hasAnyCapability' on type 'User'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 6,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "hasAnyCapability(capabilities: [\"manage_options\"])",
-          "validate"
-        ],
+        "field": "hasAnyCapability(capabilities: [\"manage_options\"])",
         "code": "PoP\\ComponentModel\\e16"
       }
     }

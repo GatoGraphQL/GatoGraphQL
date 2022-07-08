@@ -10,10 +10,7 @@
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "passingString: avatar(size: \"Sixty\")",
-                    "validate"
-                ],
+                "field": "passingString: avatar(size: \"Sixty\")",
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
@@ -27,15 +24,12 @@
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "passingFloat: avatar(size: 24.5)",
-                    "validate"
-                ],
+                "field": "passingFloat: avatar(size: 24.5)",
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
         {
-            "message": "Cannot cast value 'false' for type 'Int'",
+            "message": "Cannot cast value '' for type 'Int'",
             "locations": [
                 {
                     "line": 1,
@@ -44,10 +38,7 @@
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "passingBool: avatar(size: false)",
-                    "validate"
-                ],
+                "field": "passingBool: avatar(size: false)",
                 "code": "PoP\\ComponentModel\\e16"
             }
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use GD_FormInput_Stance;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -152,18 +153,18 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $post = $object;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = FunctionAPIFactory::getInstance();
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'addStanceURL':
                 $routes = array(
                     'addStanceURL' => POP_USERSTANCE_ROUTE_ADDSTANCE,
                 );
-                $route = $routes[$field->getName()];
+                $route = $routes[$fieldDataAccessor->getFieldName()];
 
                 // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 // $input = [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::COMPONENT_FORMCOMPONENT_CARD_STANCETARGET];
@@ -192,7 +193,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -206,7 +207,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                     )) {
@@ -223,7 +224,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                     'postStancesAgainstURL' => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
                 );
                 $url = $customPostTypeAPI->getPermalink($post);
-                return RequestUtils::addRoute($url, $routes[$field->getName()]);
+                return RequestUtils::addRoute($url, $routes[$fieldDataAccessor->getFieldName()]);
 
             // Lazy Loading fields
             case 'createStanceButtonLazy':
@@ -241,7 +242,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -249,6 +250,6 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 return $stance->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

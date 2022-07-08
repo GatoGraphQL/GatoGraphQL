@@ -79,7 +79,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
@@ -200,7 +200,7 @@ class PoP_ContentCreation_DataLoad_ObjectTypeFieldResolver_Notifications extends
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

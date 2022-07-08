@@ -4,16 +4,13 @@
       "message": "There is no field 'nonExisting' on type 'QueryRoot'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 3
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "nonExisting",
-          "validate"
-        ],
+        "field": "nonExisting",
         "code": "PoP\\ComponentModel\\e16"
       }
     }

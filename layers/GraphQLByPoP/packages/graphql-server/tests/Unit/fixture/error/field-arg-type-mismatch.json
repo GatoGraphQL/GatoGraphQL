@@ -10,10 +10,7 @@
             ],
             "extensions": {
                 "type": "__Schema",
-                "fields": [
-                    "passingArrayOfArrays: directives(ofKinds: [[\"query\"]])",
-                    "validate"
-                ],
+                "field": "passingArrayOfArrays: directives(ofKinds: [[\"query\"]])",
                 "code": "PoP\\ComponentModel\\e11"
             }
         },
@@ -27,10 +24,7 @@
             ],
             "extensions": {
                 "type": "__Schema",
-                "fields": [
-                    "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}])",
-                    "validate"
-                ],
+                "field": "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}])",
                 "code": "PoP\\ComponentModel\\e18"
             }
         },
@@ -44,10 +38,7 @@
             ],
             "extensions": {
                 "type": "__Schema",
-                "fields": [
-                    "passingArrayOfArrays: directives(ofKinds: [\"query\", null])",
-                    "validate"
-                ],
+                "field": "passingArrayOfArrays: directives(ofKinds: [\"query\", null])",
                 "code": "PoP\\ComponentModel\\e10"
             }
         },
@@ -61,15 +52,12 @@
             ],
             "extensions": {
                 "type": "__Type",
-                "fields": [
-                    "passingFloat: name(namespaced: 1.2)",
-                    "validate"
-                ],
+                "field": "passingFloat: name(namespaced: 1.2)",
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
         {
-            "message": "Argument 'namespaced' does not expect an array, but array '[\"false\"]' was provided",
+            "message": "Argument 'namespaced' does not expect an array, but array '[false]' was provided",
             "locations": [
                 {
                     "line": 1,
@@ -78,10 +66,7 @@
             ],
             "extensions": {
                 "type": "__Type",
-                "fields": [
-                    "passingArray: name(namespaced: [false])",
-                    "validate"
-                ],
+                "field": "passingArray: name(namespaced: [false])",
                 "code": "PoP\\ComponentModel\\e8"
             }
         },
@@ -95,10 +80,7 @@
             ],
             "extensions": {
                 "type": "__Type",
-                "fields": [
-                    "passingInputObject: name(namespaced: {namespaced: true})",
-                    "validate"
-                ],
+                "field": "passingInputObject: name(namespaced: {namespaced: true})",
                 "code": "PoP\\ComponentModel\\e1"
             }
         }

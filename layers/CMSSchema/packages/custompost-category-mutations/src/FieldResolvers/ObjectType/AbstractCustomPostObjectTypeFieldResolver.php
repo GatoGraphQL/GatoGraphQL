@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -54,7 +53,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => [
-                'input' => $this->getCustomPostSetCategoriesFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostSetCategoriesFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -63,7 +62,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['setCategories' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            ['setCategories' => MutationInputProperties::INPUT] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -81,14 +80,17 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
 
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
+        parent::prepareFieldDataForObject(
+            $fieldDataForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -96,7 +98,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $customPost = $object;
         switch ($field->getName()) {
             case 'setCategories':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
+                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
     }

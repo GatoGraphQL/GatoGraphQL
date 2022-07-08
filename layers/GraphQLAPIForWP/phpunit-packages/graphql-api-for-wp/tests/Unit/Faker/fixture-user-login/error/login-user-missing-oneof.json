@@ -10,10 +10,7 @@
       ],
       "extensions": {
         "type": "MutationRoot",
-        "fields": [
-          "loginUser(by: {})",
-          "validate"
-        ],
+        "field": "loginUser(by: {})",
         "code": "PoP\\ComponentModel\\e7"
       }
     }

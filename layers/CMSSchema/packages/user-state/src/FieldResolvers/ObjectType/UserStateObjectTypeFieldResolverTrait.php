@@ -28,7 +28,7 @@ trait UserStateObjectTypeFieldResolverTrait
      * @param array<string, mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
-    protected function getValidationCheckpoints(
+    public function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,

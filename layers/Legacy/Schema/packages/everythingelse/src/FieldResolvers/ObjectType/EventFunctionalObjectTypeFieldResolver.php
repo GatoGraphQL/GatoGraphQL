@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Events\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -76,12 +77,12 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'multilayoutKeys':
                 // Override the "post" implementation: instead of depending on categories, depend on the scope of the event (future/current/past)
                 $scope = $objectTypeResolver->resolveValue(
@@ -91,7 +92,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -112,7 +113,7 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -125,6 +126,6 @@ class EventFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

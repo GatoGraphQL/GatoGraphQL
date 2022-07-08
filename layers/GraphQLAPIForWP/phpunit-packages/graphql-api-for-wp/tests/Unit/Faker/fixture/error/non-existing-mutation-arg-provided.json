@@ -1,20 +1,17 @@
 {
   "errors": [
     {
-      "message": "On field 'addCommentToCustomPost', there is no argument with name 'nonExistingArg'",
+      "message": "On field 'addCommentToCustomPost' of type 'MutationRoot', there is no argument with name 'nonExistingArg'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 3
         }
       ],
       "extensions": {
         "type": "MutationRoot",
-        "fields": [
-          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, nonExistingArg: \"Doesnt Matter\")",
-          "validate"
-        ],
-        "code": "PoP\\Root\\e1"
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, nonExistingArg: \"Doesnt Matter\")",
+        "code": "PoP\\ComponentModel\\e27"
       }
     }
   ],

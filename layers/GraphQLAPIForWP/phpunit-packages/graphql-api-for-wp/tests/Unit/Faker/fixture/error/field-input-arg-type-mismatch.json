@@ -10,10 +10,7 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "fields": [
-                    "passingArray: post(by: {slug: [\"block-category-common\"]})",
-                    "validate"
-                ],
+                "field": "passingArray: post(by: {slug: [\"block-category-common\"]})",
                 "code": "PoP\\ComponentModel\\e8"
             }
         },
@@ -27,16 +24,28 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "fields": [
-                    "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}})",
-                    "validate"
-                ],
+                "field": "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}})",
                 "code": "PoP\\ComponentModel\\e1"
+            }
+        },
+        {
+            "message": "Type 'Date' must be provided as a string",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "field": "passingNonDate: posts(filter: {dateQuery: {after: 1}})",
+                "code": "PoP\\ComponentModel\\e3"
             }
         }
     ],
     "data": {
         "passingArray": null,
-        "passingInputObject": null
+        "passingInputObject": null,
+        "passingNonDate": null
     }
 }

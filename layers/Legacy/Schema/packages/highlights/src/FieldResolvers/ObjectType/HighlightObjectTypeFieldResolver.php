@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Highlights\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -99,12 +100,12 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $highlight = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
          // Override fields for Highlights
          // The Stance has no title, so return the excerpt instead.
          // Needed for when adding a comment on the Stance, where it will say: Add comment for...
@@ -112,10 +113,10 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'excerpt':
             case 'content':
                 $value = $customPostTypeAPI->getRawContent($highlight);
-                if ($field->getName() === 'title') {
+                if ($fieldDataAccessor->getFieldName() === 'title') {
                     return limitString($value, 100);
                 }
-                if ($field->getName() === 'excerpt') {
+                if ($fieldDataAccessor->getFieldName() === 'excerpt') {
                     return limitString($value, 300);
                 }
                 return $value;
@@ -131,7 +132,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                         null,
                         [],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -141,6 +142,6 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return $customPostTypeAPI->getPermalink($highlightedPost);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

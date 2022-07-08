@@ -1,0 +1,36 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'firstNonExisting' on type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "field": "firstNonExisting",
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    },
+    {
+      "message": "There is no field 'secondNonExisting' on type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "field": "secondNonExisting",
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    }
+  ],
+  "data": {
+    "firstNonExisting": null,
+    "secondNonExisting": null
+  }
+}

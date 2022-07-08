@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -107,7 +106,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'setFeaturedImage' => [
-                'input' => $this->getCustomPostSetFeaturedImageFilterInputObjectTypeResolver(),
+                MutationInputProperties::INPUT => $this->getCustomPostSetFeaturedImageFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -116,7 +115,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['setFeaturedImage' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            ['setFeaturedImage' => MutationInputProperties::INPUT] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -137,14 +136,17 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
+        parent::prepareFieldDataForObject(
+            $fieldDataForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -153,7 +155,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($field->getName()) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
+                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
     }

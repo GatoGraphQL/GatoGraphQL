@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElse\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
@@ -69,12 +70,12 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
         $tag = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'symbol':
                 return TagHelpers::getTagSymbol();
 
@@ -88,6 +89,6 @@ class TagFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFieldResolv
                 return $applicationtaxonomyapi->getTagSymbolName($tag);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

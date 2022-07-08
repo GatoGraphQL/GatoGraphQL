@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -179,29 +179,29 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $user = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'roles':
                 return $this->getUserRoleTypeAPI()->getUserRoles($user);
             case 'capabilities':
                 return $this->getUserRoleTypeAPI()->getUserCapabilities($user);
             case 'hasRole':
                 $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($user);
-                return in_array($field->getArgumentValue('role'), $userRoles);
+                return in_array($fieldDataAccessor->getValue('role'), $userRoles);
             case 'hasAnyRole':
                 $userRoles = $this->getUserRoleTypeAPI()->getUserRoles($user);
-                return !empty(array_intersect($field->getArgumentValue('roles'), $userRoles));
+                return !empty(array_intersect($fieldDataAccessor->getValue('roles'), $userRoles));
             case 'hasCapability':
                 $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($user);
-                return in_array($field->getArgumentValue('capability'), $userCapabilities);
+                return in_array($fieldDataAccessor->getValue('capability'), $userCapabilities);
             case 'hasAnyCapability':
                 $userCapabilities = $this->getUserRoleTypeAPI()->getUserCapabilities($user);
-                return !empty(array_intersect($field->getArgumentValue('capabilities'), $userCapabilities));
+                return !empty(array_intersect($fieldDataAccessor->getValue('capabilities'), $userCapabilities));
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

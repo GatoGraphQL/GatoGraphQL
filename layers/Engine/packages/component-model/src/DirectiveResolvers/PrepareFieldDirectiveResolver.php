@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalDirectiveResolver;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 
@@ -123,17 +122,20 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
+        array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
@@ -160,18 +162,20 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
     ): void {
-        /**
-         * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
-         * (that depends on each object), it can't resolve this functionality
-         */
-        if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            return;
-        }
+        // @todo Remove directive, temporarily bypass code
+        return;
+        // /**
+        //  * Because the UnionTypeResolver doesn't know yet which TypeResolver will be used
+        //  * (that depends on each object), it can't resolve this functionality
+        //  */
+        // if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
+        //     return;
+        // }
 
-        /** @var ObjectTypeResolverInterface */
-        $objectTypeResolver = $relationalTypeResolver;
+        // /** @var ObjectTypeResolverInterface */
+        // $objectTypeResolver = $relationalTypeResolver;
 
-        $objectTypeResolver->prepareField($field);
+        // $objectTypeResolver->prepareField($field);
     }
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string

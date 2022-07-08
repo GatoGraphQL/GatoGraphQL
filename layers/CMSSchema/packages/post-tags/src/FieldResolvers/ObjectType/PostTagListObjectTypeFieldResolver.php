@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\Posts\FieldResolvers\ObjectType\AbstractPostObjectTypeFieldResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 
@@ -33,12 +33,12 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
     protected function getQuery(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        $query = parent::getQuery($objectTypeResolver, $object, $field);
+        $query = parent::getQuery($objectTypeResolver, $object, $fieldDataAccessor);
 
         $tag = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'posts':
             case 'postCount':
                 $query['tag-ids'] = [$objectTypeResolver->getID($tag)];

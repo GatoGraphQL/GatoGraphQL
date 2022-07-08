@@ -1,20 +1,17 @@
 {
   "errors": [
     {
-      "message": "Argument 'value' in field 'echo' cannot be empty",
+      "message": "Argument 'value' in field 'echo' of type 'QueryRoot' cannot be empty",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 3
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "echo(value: null)",
-          "validate"
-        ],
-        "code": "PoP\\ComponentModel\\e24"
+        "field": "echo(value: null)",
+        "code": "PoP\\ComponentModel\\e29"
       }
     }
   ],

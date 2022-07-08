@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -109,14 +108,17 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
         };
     }
 
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
+        parent::prepareFieldDataForObject(
+            $fieldDataForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -124,8 +126,8 @@ class CommentObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjec
         $comment = $object;
         switch ($field->getName()) {
             case 'reply':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $this->getCommentTypeAPI()->getCommentPostId($comment));
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::PARENT_COMMENT_ID, $objectTypeResolver->getID($comment));
+                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $this->getCommentTypeAPI()->getCommentPostId($comment);
+                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::PARENT_COMMENT_ID} = $objectTypeResolver->getID($comment);
                 break;
         }
     }

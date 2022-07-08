@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -37,23 +38,35 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<array<string|int,EngineIterationFieldSet>> $succeedingPipelineIDFieldSet
+     * @param array<FieldDataAccessProviderInterface> $succeedingPipelineFieldDataAccessProviders
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
     public function resolveDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array $succeedingPipelineDirectiveResolvers,
         array $idObjects,
         array $unionTypeOutputKeyIDs,
         array $previouslyResolvedIDFieldValues,
         array &$succeedingPipelineIDFieldSet,
+        array &$succeedingPipelineFieldDataAccessProviders,
         array &$resolvedIDFieldValues,
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->validateAndFilterFields($relationalTypeResolver, $idFieldSet, $succeedingPipelineIDFieldSet, $idObjects, $resolvedIDFieldValues, $variables, $engineIterationFeedbackStore);
+        $this->validateAndFilterFields(
+            $relationalTypeResolver,
+            $idFieldSet,
+            $fieldDataAccessProvider,
+            $succeedingPipelineIDFieldSet,
+            $idObjects,
+            $resolvedIDFieldValues,
+            $variables,
+            $engineIterationFeedbackStore,
+        );
     }
 
     /**
@@ -63,6 +76,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     protected function validateAndFilterFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$succeedingPipelineIDFieldSet,
         array $idObjects,
         array &$resolvedIDFieldValues,
@@ -79,7 +93,14 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $fieldSet->fields
             )));
         }
-        $this->validateFields($relationalTypeResolver, $fields, $variables, $engineIterationFeedbackStore, $failedFields);
+        $this->validateFields(
+            $relationalTypeResolver,
+            $fields,
+            $fieldDataAccessProvider,
+            $variables,
+            $engineIterationFeedbackStore,
+            $failedFields
+        );
 
         // Remove from the data_fields list to execute on the object for the next stages of the pipeline
         if ($failedFields) {
@@ -117,6 +138,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
     abstract protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$failedFields,

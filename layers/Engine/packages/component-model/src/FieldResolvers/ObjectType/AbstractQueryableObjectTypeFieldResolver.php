@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\FilterDataComponentProcessorInterface;
 use PoP\ComponentModel\ComponentProcessors\FilterInputContainerComponentProcessorInterface;
-use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Resolvers\QueryableFieldResolverTrait;
 use PoP\ComponentModel\Resolvers\QueryableInterfaceSchemaDefinitionResolverAdapter;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\QueryableInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements QueryableObjectTypeFieldSchemaDefinitionResolverInterface
 {
@@ -105,25 +105,22 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
      *
      * @return array<string, mixed>
      */
-    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array
+    protected function convertFieldArgsToFilteringQueryArgs(ObjectTypeResolverInterface $objectTypeResolver, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $filteringQueryArgs = [];
-        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $field->getName())) {
+        if ($filterDataloadingComponent = $this->getFieldFilterInputContainerComponent($objectTypeResolver, $fieldDataAccessor->getFieldName())) {
             /** @var FilterDataComponentProcessorInterface */
             $filterDataComponentProcessor = $this->getComponentProcessorManager()->getComponentProcessor($filterDataloadingComponent);
-
-            /** @todo Fix here! This function does not expect Argument[] */
-            $fieldArgs = $field->getArguments();
-            $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingComponent, $filteringQueryArgs, $fieldArgs);
+            $filterDataComponentProcessor->filterHeadcomponentDataloadQueryArgs($filterDataloadingComponent, $filteringQueryArgs, $fieldDataAccessor->getKeyValues());
         }
         // InputObjects can also provide filtering query values
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
-        foreach ($field->getArguments() as $argument) {
-            $fieldArgTypeResolver = $consolidatedFieldArgNameTypeResolvers[$argument->getName()];
+        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldDataAccessor->getFieldName());
+        foreach ($fieldDataAccessor->getKeyValues() as $argName => $argValue) {
+            $fieldArgTypeResolver = $consolidatedFieldArgNameTypeResolvers[$argName];
             if (!($fieldArgTypeResolver instanceof QueryableInputObjectTypeResolverInterface)) {
                 continue;
             }
-            $fieldArgTypeResolver->integrateInputValueToFilteringQueryArgs($filteringQueryArgs, $argument->getValue());
+            $fieldArgTypeResolver->integrateInputValueToFilteringQueryArgs($filteringQueryArgs, $argValue);
         }
         return $filteringQueryArgs;
     }

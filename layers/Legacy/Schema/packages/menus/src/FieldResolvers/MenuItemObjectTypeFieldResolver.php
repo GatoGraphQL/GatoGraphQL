@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Menus\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
@@ -20,12 +21,12 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $menuItemTypeAPI = MenuItemTypeAPIFacade::getInstance();
         $menuItem = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'classes':
                 // Copied from nav-menu-template.php function start_el
                 $classes = $menuItemTypeAPI->getMenuItemClasses($menuItem);
@@ -42,6 +43,6 @@ abstract class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldRe
                 return App::applyFilters('menuitem:classes', array_filter($classes), $menuItem, array());
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

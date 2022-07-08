@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
@@ -16,7 +17,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 
 class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
@@ -163,10 +163,10 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'typeName':
                 return $objectTypeResolver->getTypeName();
 
@@ -177,7 +177,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return $objectTypeResolver->getNamespacedTypeName();
 
             case 'isObjectType':
-                $typeName = $field->getArgumentValue('type');
+                $typeName = $fieldDataAccessor->getValue('type');
                 // If the provided typeName contains the namespace separator, then compare by qualifiedType
                 if (str_contains($typeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR)) {
                     /**
@@ -200,7 +200,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return $typeName === $objectTypeResolver->getTypeName();
 
             case 'implements':
-                $interface = $field->getArgumentValue('interface');
+                $interface = $fieldDataAccessor->getValue('interface');
                 $implementedInterfaceTypeResolvers = $objectTypeResolver->getImplementedInterfaceTypeResolvers();
                 // If the provided interface contains the namespace separator, then compare by qualifiedInterface
                 $useNamespaced = str_contains($interface, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);
@@ -243,7 +243,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return in_array($interface, $implementedInterfaceNames);
 
             case 'isInUnionType':
-                $unionTypeName = $field->getArgumentValue('type');
+                $unionTypeName = $fieldDataAccessor->getValue('type');
                 $unionTypeResolvers = $this->getTypeRegistry()->getUnionTypeResolvers();
                 $foundUnionTypeResolver = null;
                 /**
@@ -277,14 +277,14 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                             new Argument(
                                 'type',
                                 new Literal(
-                                    $field->getArgumentValue('typeOrInterface'),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getValue('typeOrInterface'),
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
-                                $field->getLocation()
+                                $fieldDataAccessor->getField()->getLocation()
                             ),
                         ],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -303,14 +303,14 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                             new Argument(
                                 'interface',
                                 new Literal(
-                                    $field->getArgumentValue('typeOrInterface'),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getValue('typeOrInterface'),
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
-                                $field->getLocation()
+                                $fieldDataAccessor->getField()->getLocation()
                             ),
                         ],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -329,14 +329,14 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                             new Argument(
                                 'type',
                                 new Literal(
-                                    $field->getArgumentValue('typeOrInterface'),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getValue('typeOrInterface'),
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
-                                $field->getLocation()
+                                $fieldDataAccessor->getField()->getLocation()
                             ),
                         ],
                         [],
-                        $field->getLocation()
+                        $fieldDataAccessor->getField()->getLocation()
                     ),
                     $objectTypeFieldResolutionFeedbackStore,
                 );
@@ -349,7 +349,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return false;
 
             case 'isTypeOrImplementsAll':
-                foreach ($field->getArgumentValue('typesOrInterfaces') as $typeOrInterface) {
+                foreach ($fieldDataAccessor->getValue('typesOrInterfaces') as $typeOrInterface) {
                     $isTypeOrInterface = $objectTypeResolver->resolveValue(
                         $object,
                         new LeafField(
@@ -360,13 +360,13 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                                     'typeOrInterface',
                                     new Literal(
                                         $typeOrInterface,
-                                        $field->getLocation()
+                                        $fieldDataAccessor->getField()->getLocation()
                                     ),
-                                    $field->getLocation()
+                                    $fieldDataAccessor->getField()->getLocation()
                                 ),
                             ],
                             [],
-                            $field->getLocation()
+                            $fieldDataAccessor->getField()->getLocation()
                         ),
                         $objectTypeFieldResolutionFeedbackStore,
                     );
@@ -380,6 +380,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return true;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

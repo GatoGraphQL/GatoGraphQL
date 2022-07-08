@@ -9,13 +9,11 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Checkpoints\EnabledMutationsCheckpoint;
-use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\DeprecationFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
-use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -23,15 +21,12 @@ use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefi
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
-use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\InterfaceSchemaDefinitionResolverAdapter;
-use PoP\ComponentModel\Resolvers\ResolverTypes;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -44,7 +39,6 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
-use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\LooseContracts\NameResolverInterface;
@@ -98,14 +92,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected array $interfaceTypeFieldSchemaDefinitionResolverCache = [];
     /** @var SplObjectStorage<FieldInterface,FieldDataAccessorInterface> */
     protected SplObjectStorage $fieldFieldDataAccessorCache;
-    /** @var SplObjectStorage<FieldInterface,SplObjectStorage<object,FieldDataAccessorInterface>> */
-    protected SplObjectStorage $fieldFieldDataAccessorForObjectCache;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-    private ?EngineInterface $engine = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
@@ -143,14 +134,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
-    final public function setEngine(EngineInterface $engine): void
-    {
-        $this->engine = $engine;
-    }
-    final protected function getEngine(): EngineInterface
-    {
-        return $this->engine ??= $this->instanceManager->getInstance(EngineInterface::class);
-    }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
         $this->attachableExtensionManager = $attachableExtensionManager;
@@ -182,12 +165,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     final protected function getEnabledMutationsCheckpoint(): EnabledMutationsCheckpoint
     {
         return $this->enabledMutationsCheckpoint ??= $this->instanceManager->getInstance(EnabledMutationsCheckpoint::class);
-    }
-
-    public function __construct()
-    {
-        $this->fieldFieldDataAccessorCache = new SplObjectStorage();
-        $this->fieldFieldDataAccessorForObjectCache = new SplObjectStorage();
     }
 
     final public function getClassesToAttachTo(): array
@@ -661,7 +638,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Indicates if the fieldResolver can process this combination of fieldName and fieldArgs
-     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $field->getArgumentValue('branch'))
+     * It is required to support a multiverse of fields: different fieldResolvers can resolve the field, based on the required version (passed through $fieldDataAccessor->getValue('branch'))
      */
     public function resolveCanProcess(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -712,110 +689,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return true;
     }
-    public function collectFieldValidationErrors(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        /**
-         * Validate all mandatory args have been provided
-         */
-        $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
-        $mandatoryConsolidatedFieldArgNames = array_keys(array_filter(
-            $consolidatedFieldArgNameTypeResolvers,
-            fn (string $fieldArgName) => ($this->getConsolidatedFieldArgTypeModifiers($objectTypeResolver, $field->getName(), $fieldArgName) & SchemaTypeModifiers::MANDATORY) === SchemaTypeModifiers::MANDATORY,
-            ARRAY_FILTER_USE_KEY
-        ));
-        try {
-            if (
-                $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
-                    $mandatoryConsolidatedFieldArgNames,
-                    $field,
-                    ResolverTypes::FIELD
-                )
-            ) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $maybeErrorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-                return;
-            }
-        } catch (InvalidDynamicContextException $e) {
-            $feedbackItemResolution = new FeedbackItemResolution(
-                GenericFeedbackItemProvider::class,
-                GenericFeedbackItemProvider::E1,
-                [
-                    $e->getMessage(),
-                ]
-            );
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $feedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
-                )
-            );
-            return;
-        }
-
-        /**
-         * Validate field argument constraints
-         */
-        if (
-            $maybeErrorFeedbackItemResolutions = $this->resolveFieldArgumentErrors(
-                $objectTypeResolver,
-                $field,
-            )
-        ) {
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-            }
-            return;
-        }
-
-        /**
-         * If a MutationResolver is declared, let it validate the schema
-         */
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        if ($mutationResolver !== null && !$this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessor);
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-            }
-            return;
-        }
-
-        // Custom validations
-        $maybeErrorFeedbackItemResolutions = $this->doResolveSchemaValidationErrors(
-            $objectTypeResolver,
-            $field,
-        );
-        foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $errorFeedbackItemResolution,
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
-                )
-            );
-        }
-    }
 
     public function validateResolvedFieldType(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -827,61 +700,13 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * Validate the constraints for the field arguments
+     * Custom validations
      *
      * @return FeedbackItemResolution[] Errors
      */
-    final protected function resolveFieldArgumentErrors(
+    public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): array {
-        $errors = [];
-        $fieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $field->getName());
-        foreach ($field->getArguments() as $argument) {
-            /**
-             * If the field is an InputObject, let it perform validations on its input fields
-             */
-            $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argument->getName()];
-            try {
-                $argumentValue = $argument->getValue();
-                if (
-                    $fieldArgTypeResolver instanceof InputObjectTypeResolverInterface
-                ) {
-                    $errors = array_merge(
-                        $errors,
-                        $fieldArgTypeResolver->validateInputValue($argumentValue)
-                    );
-                }
-                $errors = array_merge(
-                    $errors,
-                    $this->validateFieldArgValue(
-                        $objectTypeResolver,
-                        $field->getName(),
-                        $argument->getName(),
-                        $argumentValue
-                    )
-                );
-            } catch (InvalidDynamicContextException $e) {
-                $errors[] = new FeedbackItemResolution(
-                    GenericFeedbackItemProvider::class,
-                    GenericFeedbackItemProvider::E1,
-                    [
-                        $e->getMessage(),
-                    ]
-                );
-            }
-        }
-        return $errors;
-    }
-
-    /**
-     * Custom validations. Function to override
-     *
-     * @return FeedbackItemResolution[] Errors
-     */
-    protected function doResolveSchemaValidationErrors(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         return [];
     }
@@ -1076,14 +901,16 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array
-    {
+    public function resolveFieldValidationWarnings(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor
+    ): array {
         $warningFeedbackItemResolutions = [];
         if (Environment::enableSemanticVersionConstraints()) {
             /**
              * If restricting the version, and this fieldResolver doesn't have any version, then show a warning
              */
-            if ($versionConstraint = $field->getArgumentValue(SchemaDefinition::VERSION_CONSTRAINT)) {
+            if ($versionConstraint = $fieldDataAccessor->getValue(SchemaDefinition::VERSION_CONSTRAINT)) {
                 /**
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
@@ -1092,8 +919,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         WarningFeedbackItemProvider::class,
                         WarningFeedbackItemProvider::W2,
                         [
-                            $field->getName(),
-                            $this->getFieldVersion($objectTypeResolver, $field->getName()) ?? '',
+                            $fieldDataAccessor->getFieldName(),
+                            $this->getFieldVersion($objectTypeResolver, $fieldDataAccessor->getFieldName()) ?? '',
                             $versionConstraint
                         ]
                     );
@@ -1101,12 +928,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             }
         }
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null) {
-            $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
+            $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
             $warningFeedbackItemResolutions = array_merge(
                 $warningFeedbackItemResolutions,
-                $mutationResolver->validateWarnings($fieldDataAccessor)
+                $mutationResolver->validateWarnings($fieldDataAccessorForMutation)
             );
         }
         return $warningFeedbackItemResolutions;
@@ -1116,7 +943,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * @param array<string,mixed> $fieldArgs
      * @return CheckpointInterface[]
      */
-    protected function getValidationCheckpoints(
+    public function getValidationCheckpoints(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
@@ -1130,100 +957,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         return $validationCheckpoints;
     }
 
-    public function collectValidationErrors(
+    public function validateFieldDataForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Can perform validation through checkpoints
-        if ($checkpoints = $this->getValidationCheckpoints($objectTypeResolver, $object, $field->getName(), $field->getArguments())) {
-            $feedbackItemResolution = $this->getEngine()->validateCheckpoints($checkpoints);
-            if ($feedbackItemResolution !== null) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $feedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver
-                    )
-                );
-                return;
-            }
-        }
-
-        // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        if ($mutationResolver !== null && $this->validateMutationOnObject($objectTypeResolver, $field->getName())) {
-            // Validate on the object
-            $fieldDataAccessorForObject = $this->getFieldDataAccessorForObject($objectTypeResolver, $field, $object);
-            $maybeErrorFeedbackItemResolutions = $mutationResolver->validateErrors($fieldDataAccessorForObject);
-            foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        LocationHelper::getNonSpecificLocation(),
-                        $objectTypeResolver,
-                    )
-                );
-            }
-            return;
-        }
-    }
-
-    final protected function getFieldDataAccessor(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): FieldDataAccessorInterface {
-        if (!$this->fieldFieldDataAccessorCache->contains($field)) {
-            $this->fieldFieldDataAccessorCache[$field] = $this->doGetFieldDataAccessor($objectTypeResolver, $field);
-        }
-        return $this->fieldFieldDataAccessorCache[$field];
-    }
-
-    protected function doGetFieldDataAccessor(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): FieldDataAccessorInterface {
-        if ($this->extractInputObjectFieldForMutation($objectTypeResolver, $field->getName())) {
-            $fieldInputArgumentName = $this->getInputObjectUnderFieldArgumentName($objectTypeResolver, $field);
-            if ($fieldInputArgumentName) {
-                return new InputObjectUnderFieldArgumentFieldDataAccessor(
-                    $field,
-                    $fieldInputArgumentName,
-                );
-            }
-        }
-        return new FieldDataAccessor($field);
-    }
-
-    final protected function getFieldDataAccessorForObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): FieldDataAccessorInterface {
-        if (!$this->fieldFieldDataAccessorForObjectCache->contains($field)) {
-            $this->fieldFieldDataAccessorForObjectCache[$field] = new SplObjectStorage();
-        }
-        if (!$this->fieldFieldDataAccessorForObjectCache[$field]->contains($object)) {
-            $this->fieldFieldDataAccessorForObjectCache[$field][$object] = $this->doGetFieldDataAccessorForObject($objectTypeResolver, $field, $object);
-        }
-        return $this->fieldFieldDataAccessorForObjectCache[$field][$object];
-    }
-
-    protected function doGetFieldDataAccessorForObject(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        object $object,
-    ): FieldDataAccessorInterface {
-        $fieldDataAccessor = $this->getFieldDataAccessor($objectTypeResolver, $field);
-        $fieldDataAccessorForObject = clone $fieldDataAccessor;
-        $this->prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
-            $objectTypeResolver,
-            $field,
-            $object,
-        );
-        return $fieldDataAccessorForObject;
     }
 
     /**
@@ -1233,7 +972,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * By default, that's the case with mutations, as they pass a single input
      * under name "input".
      */
-    protected function extractInputObjectFieldForMutation(
+    public function extractInputObjectFieldForMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
     ): bool {
@@ -1245,7 +984,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
      */
-    protected function getInputObjectUnderFieldArgumentName(
+    public function getFieldDataInputObjectSubpropertyName(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): ?string {
@@ -1280,22 +1019,22 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         if ($mutationResolver !== null) {
             return $this->executeMutation(
                 $objectTypeResolver,
                 $object,
-                $field,
+                $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
         // Base case: If the field->getName() exists as property in the object, then retrieve it
-        if (\property_exists($object, $field->getName())) {
-            return $object->{$field->getName()};
+        if (\property_exists($object, $fieldDataAccessor->getFieldName())) {
+            return $object->{$fieldDataAccessor->getFieldName()};
         }
         return null;
     }
@@ -1303,16 +1042,14 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     protected function executeMutation(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // If a MutationResolver is declared, let it resolve the value
-        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $field->getName());
-        $fieldDataAccessor = $this->validateMutationOnObject($objectTypeResolver, $field->getName())
-            ? $this->getFieldDataAccessorForObject($objectTypeResolver, $field, $object)
-            : $this->getFieldDataAccessor($objectTypeResolver, $field);
+        $mutationResolver = $this->getFieldMutationResolver($objectTypeResolver, $fieldDataAccessor->getFieldName());
         try {
-            return $mutationResolver->executeMutation($fieldDataAccessor);
+            $fieldDataAccessorForMutation = $objectTypeResolver->getFieldDataAccessorForMutation($fieldDataAccessor);
+            return $mutationResolver->executeMutation($fieldDataAccessorForMutation);
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -1323,7 +1060,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6A,
                             [
-                                $field->getName(),
+                                $fieldDataAccessor->getFieldName(),
                                 $e->getMessage(),
                                 $e->getTraceAsString(),
                             ]
@@ -1341,7 +1078,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E6A,
                         [
-                            $field->getName(),
+                            $fieldDataAccessor->getFieldName(),
                             $e->getMessage(),
                             $e->getTraceAsString(),
                         ]
@@ -1350,7 +1087,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         ErrorFeedbackItemProvider::class,
                         ErrorFeedbackItemProvider::E6,
                         [
-                            $field->getName(),
+                            $fieldDataAccessor->getFieldName(),
                             $e->getMessage(),
                         ]
                     )
@@ -1359,7 +1096,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     ErrorFeedbackItemProvider::class,
                     ErrorFeedbackItemProvider::E7,
                     [
-                        $field->getName()
+                        $fieldDataAccessor->getFieldName(),
                     ]
                 );
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -1373,8 +1110,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
     }
 
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
@@ -1389,11 +1129,17 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
-     * Allow to add additional Arguments
+     * Apply customizations to the field data
+     *
+     * @param array<string,mixed> $fieldData
+     * @return array<string,mixed>|null null in case of validation error
      */
-    public function prepareField(
+    public function prepareFieldData(
+        array $fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
-    ): void {
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        return $fieldData;
     }
 }

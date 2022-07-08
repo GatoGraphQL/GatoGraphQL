@@ -7,12 +7,14 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -23,6 +25,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
@@ -422,7 +425,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      */
     public function resolveValue(
         object $object,
-        FieldInterface $field,
+        FieldInterface|FieldDataAccessorInterface $fieldOrFieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = [],
     ): mixed {
@@ -450,7 +453,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
         return $targetObjectTypeResolver->resolveValue(
             $object,
-            $field,
+            $fieldOrFieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
             $options,
         );
@@ -465,5 +468,96 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
     public function getImplementedInterfaceTypeResolvers(): array
     {
         return [];
+    }
+
+    /**
+     * Convert the FieldArgs into its corresponding FieldDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * @see FieldDataAccessProvider
+     *
+     * @param SplObjectStorage<FieldInterface,array<string|int>> $fieldIDs
+     * @param array<string|int,object> $idObjects
+     * @return SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null
+     */
+    protected function doGetObjectTypeResolverObjectFieldData(
+        FieldInterface $field,
+        SplObjectStorage $fieldIDs,
+        array $idObjects,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?SplObjectStorage {
+        /**
+         * Group the objects by ObjectTypeResolver
+         *
+         * @var SplObjectStorage<ObjectTypeResolverInterface,array<string|int>>
+         */
+        $objectTypeResolverObjectIDs = new SplObjectStorage();
+
+        /** @var array<string|int> */
+        $ids = $fieldIDs[$field];
+        foreach ($ids as $id) {
+            $object = $idObjects[$id];
+            $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
+            /**
+             * If the object is not handled, then nothing to do
+             */
+            if ($targetObjectTypeResolver === null) {
+                continue;
+            }
+            $objectIDs = $objectTypeResolverObjectIDs[$targetObjectTypeResolver] ?? [];
+            $objectIDs[] = $id;
+            $objectTypeResolverObjectIDs[$targetObjectTypeResolver] = $objectIDs;
+        }
+
+        /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
+        $objectTypeResolverObjectFieldData = new SplObjectStorage();
+
+        /**
+         * Obtain the fieldData from each of the ObjectTypeResolvers,
+         * for their corresponding objects
+         */
+        /** @var ObjectTypeResolverInterface $targetObjectTypeResolver */
+        foreach ($objectTypeResolverObjectIDs as $targetObjectTypeResolver) {
+            $executableObjectTypeFieldResolver = $targetObjectTypeResolver->getExecutableObjectTypeFieldResolverForField($field);
+            /**
+             * If the field does not exist, then nothing to do
+             */
+            if ($executableObjectTypeFieldResolver === null) {
+                continue;
+            }
+
+            if (!$executableObjectTypeFieldResolver->validateMutationOnObject($targetObjectTypeResolver, $field->getName())) {
+                /**
+                 * Handle case:
+                 *
+                 * 2. Data from a Field in an UnionTypeResolver: the union field does not have
+                 *    the schema information, but only the corresponding ObjectTypeResolver
+                 *    that will resolve the entity does.
+                 *    For instance, when querying 'customPosts { dateStr }', field `dateStr`
+                 *    could be evaluated against a Post or Page types, and they could have
+                 *    different definitions of the `dateStr` field, such as making argument
+                 *    `$format` mandatory or not. Then, there will be a different FieldArgs
+                 *    produced for each targetObjectTypeResolver in the UnionTypeResolver
+                 */
+                $targetObjectTypeResolverObjectFieldData = $targetObjectTypeResolver->getWildcardObjectTypeResolverObjectFieldData(
+                    $field,
+                    $engineIterationFeedbackStore,
+                );
+            } else {
+                /** @var array<string|int> */
+                $objectIDs = $objectTypeResolverObjectIDs[$targetObjectTypeResolver];
+                $targetObjectTypeResolverObjectFieldData = $targetObjectTypeResolver->getIndependentObjectTypeResolverObjectFieldData(
+                    $field,
+                    $objectIDs,
+                    $idObjects,
+                    $engineIterationFeedbackStore,
+                );
+            }
+            if ($targetObjectTypeResolverObjectFieldData === null) {
+                continue;
+            }
+            $objectTypeResolverObjectFieldData[$targetObjectTypeResolver] = $targetObjectTypeResolverObjectFieldData[$targetObjectTypeResolver];
+        }
+        return $objectTypeResolverObjectFieldData;
     }
 }

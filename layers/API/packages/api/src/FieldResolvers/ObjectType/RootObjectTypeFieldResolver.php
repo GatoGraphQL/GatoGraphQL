@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoPAPI\API\Module;
 use PoPAPI\API\ModuleConfiguration;
@@ -123,10 +123,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'fullSchema':
                 // Convert from array to stdClass
                 /** @var SchemaDefinitionServiceInterface */
@@ -134,6 +134,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return (object) $schemaDefinitionService->getFullSchemaDefinition();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -47,7 +47,7 @@ class GD_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($field->getName()) {
@@ -60,7 +60,7 @@ class GD_DataLoad_FunctionalObjectTypeFieldResolver extends AbstractObjectTypeFi
                 return PoP_Application_Engine_Utils::getEmbedUrl($url);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

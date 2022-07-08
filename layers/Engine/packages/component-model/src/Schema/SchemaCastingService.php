@@ -9,8 +9,6 @@ use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\CoercibleArgumentValueAstInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
@@ -41,17 +39,17 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     }
 
     /**
+     * @param array<string,mixed> $argumentKeyValues
      * @param array<string,array<string,mixed>> $argumentSchemaDefinition
+     * @return array<string,mixed>
      */
     public function castArguments(
-        WithArgumentsInterface $withArgumentsAST,
+        array $argumentKeyValues,
         array $argumentSchemaDefinition,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
-    ): void {
+    ): array {
         // Cast all argument values
-        foreach ($withArgumentsAST->getArguments() as $argument) {
-            $argName = $argument->getName();
-
+        foreach ($argumentKeyValues as $argName => $argValue) {
             /**
              * If the arg doesn't exist, there's already a warning about it missing
              * in the schema (not an error, in that case it's already not added)
@@ -91,8 +89,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $fieldOrDirectiveArgIsArrayOfArraysType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
             $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType = $argumentSchemaDefinition[$argName][SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
 
-            $argValueAST = $argument->getValueAST();
-
             /**
              * Modifying the AST and not directly its value, because
              * a VariableReference may be converted to InputList([VariableReference]),
@@ -105,8 +101,8 @@ class SchemaCastingService implements SchemaCastingServiceInterface
              *
              * @see https://spec.graphql.org/draft/#sec-List.Input-Coercion
              */
-            $argValueAST = $this->getInputCoercingService()->maybeConvertInputValueASTFromSingleToList(
-                $argValueAST,
+            $argValue = $this->getInputCoercingService()->maybeConvertInputValueFromSingleToList(
+                $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
             );
@@ -115,7 +111,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
-                $argValueAST->getValue(),
+                $argValue,
                 $argName,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsNonNullArrayItemsType,
@@ -128,19 +124,11 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 continue;
             }
 
-            if (!($argValueAST instanceof CoercibleArgumentValueAstInterface)) {
-                // Re-assign the possible single-to-list modification
-                $argument->setValueAST($argValueAST);
-                continue;
-            }
-            /** @var CoercibleArgumentValueAstInterface */
-            $coercibleArgValueAST = $argValueAST;
-
             // Cast (or "coerce" in GraphQL terms) the value
             $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
-                $coercibleArgValueAST->getValue(),
+                $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $separateSchemaInputValidationFeedbackStore,
@@ -151,11 +139,9 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             }
 
             /**
-             * No errors, re-assign the coerced value to the InputValueAST,
-             * and the InputValueAST to the Argument
+             * No errors, re-assign the coerced value to the data
              */
-            $coercibleArgValueAST->setValue($coercedArgValue);
-            $argument->setValueAST($coercibleArgValueAST);
+            $argumentKeyValues[$argName] = $coercedArgValue;
 
             // Obtain the deprecations
             if ($fieldOrDirectiveArgTypeResolver instanceof DeprecatableInputTypeResolverInterface) {
@@ -182,5 +168,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 }
             }
         }
+        return $argumentKeyValues;
     }
 }

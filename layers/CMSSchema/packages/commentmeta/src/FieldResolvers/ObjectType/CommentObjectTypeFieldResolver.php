@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMeta\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
@@ -40,20 +40,20 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $comment = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'metaValue':
             case 'metaValues':
                 return $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $objectTypeResolver->getID($comment),
-                    $field->getArgumentValue('key'),
-                    $field->getName() === 'metaValue'
+                    $fieldDataAccessor->getValue('key'),
+                    $fieldDataAccessor->getFieldName() === 'metaValue'
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

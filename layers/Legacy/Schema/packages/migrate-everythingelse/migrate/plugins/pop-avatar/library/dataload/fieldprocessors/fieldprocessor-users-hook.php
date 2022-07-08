@@ -40,7 +40,7 @@ class PoP_Avatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTy
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
@@ -55,7 +55,7 @@ class PoP_Avatar_DataLoad_ObjectTypeFieldResolver_Users extends AbstractObjectTy
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

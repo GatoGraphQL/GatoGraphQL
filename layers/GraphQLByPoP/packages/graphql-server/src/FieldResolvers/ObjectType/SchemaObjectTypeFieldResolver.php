@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use GraphQLByPoP\GraphQLServer\ObjectModels\Schema;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\DirectiveObjectTypeResolver;
@@ -134,20 +134,20 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         /** @var Schema */
         $schema = $object;
-        return match ($field->getName()) {
+        return match ($fieldDataAccessor->getFieldName()) {
             'queryType' => $schema->getQueryRootObjectTypeID(),
             'mutationType' => $schema->getMutationRootObjectTypeID(),
             'subscriptionType' => $schema->getSubscriptionRootObjectTypeID(),
             'types' => $schema->getTypeIDs(),
             'directives' => $schema->getDirectiveIDs(),
-            'type' => $schema->getTypeID($field->getArgumentValue('name')),
+            'type' => $schema->getTypeID($fieldDataAccessor->getValue('name')),
             'extensions' => $schema->getExtensions()->getID(),
-            default => parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore),
+            default => parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore),
         };
     }
 

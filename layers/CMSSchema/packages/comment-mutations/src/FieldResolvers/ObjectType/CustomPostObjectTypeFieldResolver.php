@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -100,14 +99,17 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         };
     }
 
-    protected function prepareFieldDataAccessorForObject(
-        FieldDataAccessorInterface $fieldDataAccessorForObject,
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
         object $object,
     ): void {
-        parent::prepareFieldDataAccessorForObject(
-            $fieldDataAccessorForObject,
+        parent::prepareFieldDataForObject(
+            $fieldDataForObject,
             $objectTypeResolver,
             $field,
             $object,
@@ -115,7 +117,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostOb
         $customPost = $object;
         switch ($field->getName()) {
             case 'addComment':
-                $fieldDataAccessorForObject->addValue(MutationInputProperties::CUSTOMPOST_ID, $objectTypeResolver->getID($customPost));
+                $fieldDataForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
     }

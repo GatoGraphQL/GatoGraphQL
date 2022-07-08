@@ -4,16 +4,13 @@
       "message": "There is no key with name 'nickname'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 4,
+          "column": 15
         }
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "nickname: metaValue(key: \"nickname\")",
-          "validate"
-        ],
+        "field": "nickname: metaValue(key: \"nickname\")",
         "code": "PoPCMSSchema\\Meta\\e1"
       }
     },
@@ -21,16 +18,13 @@
       "message": "There is no key with name 'first_name'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 5,
+          "column": 16
         }
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "firstname: metaValue(key: \"first_name\")",
-          "validate"
-        ],
+        "field": "firstname: metaValue(key: \"first_name\")",
         "code": "PoPCMSSchema\\Meta\\e1"
       }
     },
@@ -38,16 +32,13 @@
       "message": "There is no key with name 'last_name'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 6,
+          "column": 15
         }
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "lastname: metaValue(key: \"last_name\")",
-          "validate"
-        ],
+        "field": "lastname: metaValue(key: \"last_name\")",
         "code": "PoPCMSSchema\\Meta\\e1"
       }
     }

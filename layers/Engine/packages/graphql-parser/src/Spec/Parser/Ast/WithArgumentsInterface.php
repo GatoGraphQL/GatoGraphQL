@@ -24,8 +24,8 @@ interface WithArgumentsInterface extends AstInterface
      */
     public function addArgument(Argument $argument): void;
 
-    // /**
-    //  * @return array<string,mixed>
-    //  */
-    // public function getKeyValueArguments(): array;
+    /**
+     * @return array<string,mixed>
+     */
+    public function getArgumentKeyValues(): array;
 }

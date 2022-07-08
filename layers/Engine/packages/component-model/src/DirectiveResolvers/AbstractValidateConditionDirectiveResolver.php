@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -43,6 +44,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     protected function validateFields(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fields,
+        FieldDataAccessProviderInterface $fieldDataAccessProvider,
         array &$variables,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$failedFields,

@@ -68,7 +68,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        \PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface $field,
+        \PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface $fieldDataAccessor,
         \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $user = $object;
@@ -93,7 +93,7 @@ class ObjectTypeFieldResolver_OrganizationUsers extends AbstractObjectTypeFieldR
                     $objectTypeResolver->resolveValue($user, 'contactNumber', $objectTypeFieldResolutionFeedbackStore);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
 

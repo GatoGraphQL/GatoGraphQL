@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Users\FieldResolvers\ObjectType;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use DateTime;
@@ -117,12 +117,12 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         /** @var WP_User */
         $user = $object;
-        switch ($field->getName()) {
+        switch ($fieldDataAccessor->getFieldName()) {
             case 'nicename':
                 return $user->user_nicename;
             case 'nickname':
@@ -133,11 +133,11 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 return new DateTime($user->user_registered);
             case 'registeredDateStr':
                 return $this->getDateFormatter()->format(
-                    $field->getArgumentValue('format'),
+                    $fieldDataAccessor->getValue('format'),
                     $user->user_registered
                 );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $field, $objectTypeFieldResolutionFeedbackStore);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

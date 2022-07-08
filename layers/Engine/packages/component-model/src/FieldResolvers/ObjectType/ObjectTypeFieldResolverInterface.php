@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\FieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, ObjectTypeFieldSchemaDefinitionResolverInterface
 {
@@ -54,11 +56,6 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): bool;
-    public function collectFieldValidationErrors(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void;
     public function collectFieldValidationDeprecationMessages(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
@@ -68,7 +65,7 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed;
     /**
@@ -94,12 +91,15 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
     /**
      * @return FeedbackItemResolution[]
      */
-    public function resolveFieldValidationWarnings(ObjectTypeResolverInterface $objectTypeResolver, FieldInterface $field): array;
+    public function resolveFieldValidationWarnings(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor
+    ): array;
     public function enableOrderedSchemaFieldArgs(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool;
-    public function collectValidationErrors(
+    public function validateFieldDataForObject(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
-        FieldInterface $field,
+        FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
     /**
@@ -107,10 +107,62 @@ interface ObjectTypeFieldResolverInterface extends FieldResolverInterface, Objec
      */
     public function decideCanProcessBasedOnVersionConstraint(ObjectTypeResolverInterface $objectTypeResolver): bool;
     /**
-     * Allow to add additional Arguments
+     * Apply customizations to the field data
+     *
+     * @param array<string,mixed> $fieldData
+     * @return array<string,mixed>|null null in case of validation error
      */
-    public function prepareField(
+    public function prepareFieldData(
+        array $fieldData,
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array;
+    /**
+     * @param array<string,mixed> $fieldDataForObject
+     */
+    public function prepareFieldDataForObject(
+        array &$fieldDataForObject,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+        object $object,
     ): void;
+    /**
+     * Indicate: if the field has a single field argument, which is of type InputObject,
+     * then retrieve the value for its input fields?
+     *
+     * By default, that's the case with mutations, as they pass a single input
+     * under name "input".
+     */
+    public function extractInputObjectFieldForMutation(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        string $fieldName,
+    ): bool;
+    /**
+     * If the field has a single argument, which is of type InputObject,
+     * then retrieve the value for its input fields.
+     */
+    public function getFieldDataInputObjectSubpropertyName(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): ?string;
+    /**
+     * Custom validations
+     *
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function validateFieldKeyValues(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array;
+    /**
+     * @param array<string,mixed> $fieldArgs
+     * @return CheckpointInterface[]
+     */
+    public function getValidationCheckpoints(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        string $fieldName,
+        array $fieldArgs
+    ): array;
 }
