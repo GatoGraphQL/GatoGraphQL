@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument(s) 'interface' in field 'implements' cannot be empty",
+      "message": "Argument 'interface' in field 'implements' of type 'Post' cannot be empty",
       "locations": [
         {
           "line": 3,
@@ -15,7 +15,7 @@
       }
     },
     {
-      "message": "Argument(s) 'type' in field 'isObjectType' cannot be empty",
+      "message": "Argument 'type' in field 'isObjectType' of type 'Post' cannot be empty",
       "locations": [
         {
           "line": 6,
@@ -29,7 +29,7 @@
       }
     },
     {
-      "message": "Argument(s) 'type' in field 'isObjectType' cannot be empty",
+      "message": "Argument 'type' in field 'isObjectType' of type 'Page' cannot be empty",
       "locations": [
         {
           "line": 6,
