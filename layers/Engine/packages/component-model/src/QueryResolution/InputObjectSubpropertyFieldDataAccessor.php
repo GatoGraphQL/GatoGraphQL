@@ -9,21 +9,21 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
-class SubpropertyFieldDataAccessor extends FieldDataAccessor implements SubpropertyFieldDataAccessorInterface
+class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implements InputObjectSubpropertyFieldDataAccessorInterface
 {
     use StandaloneServiceTrait;
 
     public function __construct(
         FieldInterface $field,
-        protected string $subpropertyName,
+        protected string $inputObjectSubpropertyName,
         array $normalizedValues,
     ) {
         parent::__construct($field, $normalizedValues);
     }
 
-    public function getSubpropertyName(): string
+    public function getInputObjectSubpropertyName(): string
     {
-        return $this->subpropertyName;
+        return $this->inputObjectSubpropertyName;
     }
 
     /**
@@ -39,14 +39,14 @@ class SubpropertyFieldDataAccessor extends FieldDataAccessor implements Subprope
      */
     protected function getInputObjectValue(): stdClass
     {
-        $inputObjectValue = $this->normalizedValues[$this->getSubpropertyName()];
+        $inputObjectValue = $this->normalizedValues[$this->getInputObjectSubpropertyName()];
         if (!($inputObjectValue instanceof stdClass)) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
                         'Input value under argument \'%s\' is not an InputObject type'
                     ),
-                    $this->getSubpropertyName()
+                    $this->getInputObjectSubpropertyName()
                 )
             );
         }
