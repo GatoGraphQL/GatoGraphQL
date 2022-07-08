@@ -15,7 +15,7 @@ class SubpropertyFieldDataAccessor extends FieldDataAccessor implements Subprope
 
     public function __construct(
         FieldInterface $field,
-        protected string $fieldInputArgumentName,
+        protected string $subpropertyName,
         array $normalizedValues,
     ) {
         parent::__construct($field, $normalizedValues);
@@ -23,7 +23,7 @@ class SubpropertyFieldDataAccessor extends FieldDataAccessor implements Subprope
 
     public function getSubpropertyName(): string
     {
-        return $this->fieldInputArgumentName;
+        return $this->subpropertyName;
     }
 
     /**

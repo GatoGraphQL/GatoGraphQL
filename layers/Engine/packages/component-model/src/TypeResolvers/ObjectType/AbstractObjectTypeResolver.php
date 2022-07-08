@@ -1660,11 +1660,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     ): FieldDataAccessorInterface {
         $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
         if ($executableObjectTypeFieldResolver->extractInputObjectFieldForMutation($this, $field->getName())) {
-            $fieldInputArgumentName = $executableObjectTypeFieldResolver->getInputObjectUnderFieldArgumentName($this, $field);
-            if ($fieldInputArgumentName) {
+            $subpropertyName = $executableObjectTypeFieldResolver->getInputObjectUnderFieldArgumentName($this, $field);
+            if ($subpropertyName) {
                 return new SubpropertyFieldDataAccessor(
                     $field,
-                    $fieldInputArgumentName,
+                    $subpropertyName,
                     $fieldData,
                 );
             }
