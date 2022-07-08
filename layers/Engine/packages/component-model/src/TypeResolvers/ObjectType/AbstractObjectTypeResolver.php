@@ -1479,7 +1479,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * - custom constraints of the arguments set by the field resolver
          * - mutation custom validations
          */
-        $fieldDataAccessor = new FieldDataAccessor(
+        $fieldDataAccessor = $this->createFieldDataAccessor(
             $field,
             $fieldData,
         );
