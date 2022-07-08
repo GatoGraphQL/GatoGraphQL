@@ -6,9 +6,9 @@ namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\QueryResolution\PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -207,10 +207,9 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     final protected function getOneOfFieldDataAccessor(
         InputObjectUnderFieldArgumentFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor,
         string $oneOfPropertyName,
-    ): PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor {
-        return new PropertyUnderInputObjectUnderFieldArgumentFieldDataAccessor(
+    ): InputObjectUnderFieldArgumentFieldDataAccessorInterface {
+        return new InputObjectUnderFieldArgumentFieldDataAccessor(
             $inputObjectFieldArgumentFieldDataAccessor->getField(),
-            $inputObjectFieldArgumentFieldDataAccessor->getArgumentName(),
             $oneOfPropertyName,
             $inputObjectFieldArgumentFieldDataAccessor->getKeyValues()
         );
