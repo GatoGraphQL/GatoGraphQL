@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "On field 'implements', there is no argument with name 'type'",
+      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'type'",
       "locations": [
         {
           "line": 2,
@@ -15,7 +15,7 @@
       }
     },
     {
-      "message": "On field 'implements', there is no argument with name 'someType', 'anotherType'",
+      "message": "On field 'implements' of type 'QueryRoot', there is no argument with name 'someType', 'anotherType'",
       "locations": [
         {
           "line": 3,

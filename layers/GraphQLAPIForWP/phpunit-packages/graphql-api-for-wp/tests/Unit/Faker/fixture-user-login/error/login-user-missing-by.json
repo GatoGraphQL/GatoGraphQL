@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'by' in field 'loginUser' cannot be empty",
+      "message": "Argument 'by' in field 'loginUser' of type 'MutationRoot' cannot be empty",
       "locations": [
         {
           "line": 2,

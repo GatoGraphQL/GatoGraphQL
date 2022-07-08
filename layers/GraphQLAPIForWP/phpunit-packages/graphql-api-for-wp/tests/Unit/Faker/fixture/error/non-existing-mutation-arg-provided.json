@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "On field 'addCommentToCustomPost', there is no argument with name 'nonExistingArg'",
+      "message": "On field 'addCommentToCustomPost' of type 'MutationRoot', there is no argument with name 'nonExistingArg'",
       "locations": [
         {
           "line": 2,

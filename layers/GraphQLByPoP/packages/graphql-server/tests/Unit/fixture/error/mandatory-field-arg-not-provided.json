@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument 'interface' in field 'implements' cannot be empty",
+      "message": "Argument 'interface' in field 'implements' of type 'QueryRoot' cannot be empty",
       "locations": [
         {
           "line": 2,
