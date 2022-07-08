@@ -108,4 +108,12 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): ?SplObjectStorage;
+    /**
+     * The mutation resolver might expect to receive the data properties
+     * directly (eg: "title", "content" and "status"), and these may be
+     * contained under a subproperty (eg: "input") from the original fieldData.
+     */
+    public function getFieldDataAccessorForMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): FieldDataAccessorInterface;
 }
