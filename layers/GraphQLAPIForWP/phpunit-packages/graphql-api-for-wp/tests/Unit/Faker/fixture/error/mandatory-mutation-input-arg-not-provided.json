@@ -10,10 +10,7 @@
       ],
       "extensions": {
         "type": "MutationRoot",
-        "fields": [
-          "addCommentToCustomPost(input: {})",
-          "validate"
-        ],
+        "field": "addCommentToCustomPost(input: {})",
         "code": "PoP\\ComponentModel\\e5"
       }
     },
@@ -27,10 +24,7 @@
       ],
       "extensions": {
         "type": "MutationRoot",
-        "fields": [
-          "addCommentToCustomPost(input: {})",
-          "validate"
-        ],
+        "field": "addCommentToCustomPost(input: {})",
         "code": "PoP\\ComponentModel\\e5"
       }
     }
