@@ -10,10 +10,7 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "user(by: {id: 1, username: \"themedemos\"})",
-          "validate"
-        ],
+        "field": "user(by: {id: 1, username: \"themedemos\"})",
         "code": "PoP\\ComponentModel\\e6"
       }
     }
