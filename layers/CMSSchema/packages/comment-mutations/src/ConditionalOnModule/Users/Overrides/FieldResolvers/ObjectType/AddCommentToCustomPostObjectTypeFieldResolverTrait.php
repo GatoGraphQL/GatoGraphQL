@@ -40,22 +40,13 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         }
         $userID = App::getState('current-user-id');
         if (!property_exists($inputValue, MutationInputProperties::AUTHOR_NAME)) {
-            $inputValue->{MutationInputProperties::AUTHOR_NAME} = new Literal(
-                $this->getUserTypeAPI()->getUserDisplayName($userID),
-                LocationHelper::getNonSpecificLocation()
-            );
+            $inputValue->{MutationInputProperties::AUTHOR_NAME} = $this->getUserTypeAPI()->getUserDisplayName($userID);
         }
         if (!property_exists($inputValue, MutationInputProperties::AUTHOR_EMAIL)) {
-            $inputValue->{MutationInputProperties::AUTHOR_EMAIL} = new Literal(
-                $this->getUserTypeAPI()->getUserEmail($userID),
-                LocationHelper::getNonSpecificLocation()
-            );
+            $inputValue->{MutationInputProperties::AUTHOR_EMAIL} = $this->getUserTypeAPI()->getUserEmail($userID);
         }
         if (!property_exists($inputValue, MutationInputProperties::AUTHOR_URL)) {
-            $inputValue->{MutationInputProperties::AUTHOR_URL} = new Literal(
-                $this->getUserTypeAPI()->getUserWebsiteURL($userID),
-                LocationHelper::getNonSpecificLocation()
-            );
+            $inputValue->{MutationInputProperties::AUTHOR_URL} = $this->getUserTypeAPI()->getUserWebsiteURL($userID);
         }
         $fieldData[MutationInputProperties::INPUT] = $inputValue;
         return $fieldData;
