@@ -9,7 +9,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
-class InputObjectUnderFieldArgumentFieldDataAccessor extends FieldDataAccessor implements InputObjectUnderFieldArgumentFieldDataAccessorInterface
+class SubpropertyFieldDataAccessor extends FieldDataAccessor implements SubpropertyFieldDataAccessorInterface
 {
     use StandaloneServiceTrait;
 

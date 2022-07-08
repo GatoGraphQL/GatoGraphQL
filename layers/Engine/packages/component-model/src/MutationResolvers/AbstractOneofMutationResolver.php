@@ -7,8 +7,8 @@ namespace PoP\ComponentModel\MutationResolvers;
 use PoP\ComponentModel\Exception\QueryResolutionException;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessor;
-use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\SubpropertyFieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\SubpropertyFieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -132,7 +132,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
+     * @param SubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @throws AbstractException In case of error
      */
     final public function executeMutation(FieldDataAccessorInterface $fieldDataAccessor): mixed
@@ -143,7 +143,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
+     * @param SubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
      */
     final public function validateErrors(FieldDataAccessorInterface $fieldDataAccessor): array
@@ -167,7 +167,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @param InputObjectUnderFieldArgumentFieldDataAccessorInterface $fieldDataAccessor
+     * @param SubpropertyFieldDataAccessorInterface $fieldDataAccessor
      * @return FeedbackItemResolution[]
      */
     final public function validateWarnings(FieldDataAccessorInterface $fieldDataAccessor): array
@@ -186,7 +186,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
      * @return mixed[] An array of 2 items: the current input field's mutation resolver, and the AST with the current input field's form data
      * @throws QueryResolutionException If there is not MutationResolver for the input field
      */
-    final protected function getInputFieldMutationResolverAndOneOfFieldDataAccessor(InputObjectUnderFieldArgumentFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor): array
+    final protected function getInputFieldMutationResolverAndOneOfFieldDataAccessor(SubpropertyFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor): array
     {
         // Create a new Field, passing the corresponding Argument only
         $oneOfPropertyName = $this->getOneofInputObjectPropertyName($inputObjectFieldArgumentFieldDataAccessor);
@@ -205,10 +205,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
     }
 
     final protected function getOneOfFieldDataAccessor(
-        InputObjectUnderFieldArgumentFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor,
+        SubpropertyFieldDataAccessorInterface $inputObjectFieldArgumentFieldDataAccessor,
         string $oneOfPropertyName,
-    ): InputObjectUnderFieldArgumentFieldDataAccessorInterface {
-        return new InputObjectUnderFieldArgumentFieldDataAccessor(
+    ): SubpropertyFieldDataAccessorInterface {
+        return new SubpropertyFieldDataAccessor(
             $inputObjectFieldArgumentFieldDataAccessor->getField(),
             $oneOfPropertyName,
             $inputObjectFieldArgumentFieldDataAccessor->getKeyValues()

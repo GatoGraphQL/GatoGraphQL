@@ -26,7 +26,7 @@ use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessWildcardObjectFactory;
-use PoP\ComponentModel\QueryResolution\InputObjectUnderFieldArgumentFieldDataAccessor;
+use PoP\ComponentModel\QueryResolution\SubpropertyFieldDataAccessor;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
@@ -1662,7 +1662,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         if ($executableObjectTypeFieldResolver->extractInputObjectFieldForMutation($this, $field->getName())) {
             $fieldInputArgumentName = $executableObjectTypeFieldResolver->getInputObjectUnderFieldArgumentName($this, $field);
             if ($fieldInputArgumentName) {
-                return new InputObjectUnderFieldArgumentFieldDataAccessor(
+                return new SubpropertyFieldDataAccessor(
                     $field,
                     $fieldInputArgumentName,
                     $fieldData,
