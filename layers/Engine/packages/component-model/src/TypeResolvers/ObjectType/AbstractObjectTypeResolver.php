@@ -1576,7 +1576,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 count($missingMandatoryFieldArgNames) === 1
                     ? $missingMandatoryFieldArgNames[0]
                     : implode($this->getTranslationAPI()->__('\', \''), $missingMandatoryFieldArgNames),
-                $field->getName()
+                $field->getName(),
+                $this->getMaybeNamespacedTypeName(),
             ]
         );
     }
