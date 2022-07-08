@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\QueryResolution;
 
 interface SubpropertyFieldDataAccessorInterface extends FieldDataAccessorInterface
 {
-    public function getArgumentName(): string;
+    public function getSubpropertyName(): string;
 }

@@ -34,21 +34,21 @@ class SubpropertyFieldDataAccessor extends FieldDataAccessor implements Subprope
      */
     protected function getInputObjectValue(): stdClass
     {
-        $inputObjectValue = $this->normalizedValues[$this->getArgumentName()];
+        $inputObjectValue = $this->normalizedValues[$this->getSubpropertyName()];
         if (!($inputObjectValue instanceof stdClass)) {
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
                         'Input value under argument \'%s\' is not an InputObject type'
                     ),
-                    $this->getArgumentName()
+                    $this->getSubpropertyName()
                 )
             );
         }
         return $inputObjectValue;
     }
 
-    public function getArgumentName(): string
+    public function getSubpropertyName(): string
     {
         return $this->fieldInputArgumentName;
     }
