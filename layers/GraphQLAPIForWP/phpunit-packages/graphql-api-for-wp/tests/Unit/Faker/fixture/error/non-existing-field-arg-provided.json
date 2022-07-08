@@ -4,16 +4,13 @@
       "message": "On field 'implements', there is no argument with name 'type'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 4,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "Post",
-        "fields": [
-          "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
-          "validate"
-        ],
+        "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
         "code": "PoP\\ComponentModel\\e27"
       }
     },
@@ -21,17 +18,14 @@
       "message": "On field 'isObjectType', there is no argument with name 'interface'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 8,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "Post",
         "id": 1724,
-        "fields": [
-          "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
-          "resolveValueAndMerge"
-        ],
+        "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "code": "PoP\\ComponentModel\\e27"
       }
     },
@@ -39,17 +33,14 @@
       "message": "On field 'isObjectType', there is no argument with name 'interface'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 8,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "Page",
         "id": 2,
-        "fields": [
-          "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
-          "resolveValueAndMerge"
-        ],
+        "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "code": "PoP\\ComponentModel\\e27"
       }
     },
@@ -57,17 +48,14 @@
       "message": "On field 'isObjectType', there is no argument with name 'interface'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 8,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "Page",
         "id": 146,
-        "fields": [
-          "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
-          "resolveValueAndMerge"
-        ],
+        "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "code": "PoP\\ComponentModel\\e27"
       }
     }
