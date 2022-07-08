@@ -1782,8 +1782,6 @@ class Engine implements EngineInterface
              * to temporary variables for processing.
              */
             $this->transferFeedback(
-                $relationalTypeResolver,
-                $typeOutputKey,
                 $idObjects,
                 $engineIterationFeedbackStore,
                 $objectFeedbackEntries,
@@ -2045,23 +2043,17 @@ class Engine implements EngineInterface
     }
 
     private function transferFeedback(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $typeOutputKey,
         array $idObjects,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$objectFeedbackEntries,
         array &$schemaFeedbackEntries,
     ): void {
         $this->transferObjectFeedback(
-            $relationalTypeResolver,
-            $typeOutputKey,
             $idObjects,
             $engineIterationFeedbackStore->objectFeedbackStore,
             $objectFeedbackEntries,
         );
         $this->transferSchemaFeedback(
-            $relationalTypeResolver,
-            $typeOutputKey,
             $engineIterationFeedbackStore->schemaFeedbackStore,
             $schemaFeedbackEntries,
         );
@@ -2072,16 +2064,12 @@ class Engine implements EngineInterface
          * it will regenerated a new instance for the next iteration.
          */
         $this->transferSchemaFeedback(
-            $relationalTypeResolver,
-            $typeOutputKey,
             App::getFeedbackStore()->schemaFeedbackStore,
             $schemaFeedbackEntries,
         );
     }
 
     private function transferObjectFeedback(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $typeOutputKey,
         array $idObjects,
         ObjectFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
@@ -2190,8 +2178,6 @@ class Engine implements EngineInterface
     }
 
     private function transferSchemaFeedback(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $typeOutputKey,
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {
