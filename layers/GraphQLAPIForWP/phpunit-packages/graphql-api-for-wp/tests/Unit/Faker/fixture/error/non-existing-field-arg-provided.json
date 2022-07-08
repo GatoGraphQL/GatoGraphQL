@@ -24,7 +24,6 @@
       ],
       "extensions": {
         "type": "Post",
-        "id": 1724,
         "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "code": "PoP\\ComponentModel\\e27"
       }
@@ -39,22 +38,6 @@
       ],
       "extensions": {
         "type": "Page",
-        "id": 2,
-        "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
-        "code": "PoP\\ComponentModel\\e27"
-      }
-    },
-    {
-      "message": "On field 'isObjectType', there is no argument with name 'interface'",
-      "locations": [
-        {
-          "line": 8,
-          "column": 5
-        }
-      ],
-      "extensions": {
-        "type": "Page",
-        "id": 146,
         "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
         "code": "PoP\\ComponentModel\\e27"
       }
