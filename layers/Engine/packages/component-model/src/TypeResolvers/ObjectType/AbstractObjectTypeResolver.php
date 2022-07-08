@@ -1602,6 +1602,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 ErrorFeedbackItemProvider::E27,
                 [
                     $field->getName(),
+                    $this->getMaybeNamespacedTypeName(),
                     count($nonExistingArgNames) === 1
                         ? $nonExistingArgNames[0]
                         : implode($this->getTranslationAPI()->__('\', \''), $nonExistingArgNames),
