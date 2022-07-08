@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "On field 'implements', there is no argument with name 'type'",
+      "message": "On field 'implements' of type 'Post', there is no argument with name 'type'",
       "locations": [
         {
           "line": 4,
@@ -15,7 +15,7 @@
       }
     },
     {
-      "message": "On field 'isObjectType', there is no argument with name 'interface'",
+      "message": "On field 'isObjectType' of type 'Post', there is no argument with name 'interface'",
       "locations": [
         {
           "line": 8,
@@ -29,7 +29,7 @@
       }
     },
     {
-      "message": "On field 'isObjectType', there is no argument with name 'interface'",
+      "message": "On field 'isObjectType' of type 'Page', there is no argument with name 'interface'",
       "locations": [
         {
           "line": 8,
