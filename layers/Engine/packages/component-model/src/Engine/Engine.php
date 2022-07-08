@@ -2031,7 +2031,7 @@ class Engine implements EngineInterface
         /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
         foreach ($iterationEntries as $iterationRelationalTypeResolver) {
             $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
-            $entries = $iterationEntries[$iterationRelationalTypeResolver];            
+            $entries = $iterationEntries[$iterationRelationalTypeResolver];
             $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
             foreach ($dbNameEntries as $dbName => $entries) {
                 /** @var SplObjectStorage<FieldInterface,mixed> */
