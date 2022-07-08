@@ -4,8 +4,8 @@
       "message": "You don't have permission to edit custom post with ID '1'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 4,
+          "column": 5
         }
       ],
       "extensions": {

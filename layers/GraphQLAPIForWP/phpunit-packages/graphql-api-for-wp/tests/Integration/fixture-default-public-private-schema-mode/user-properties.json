@@ -4,16 +4,13 @@
       "message": "There is no field 'lastName' on type 'User'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 4,
+          "column": 5
         }
       ],
       "extensions": {
         "type": "User",
-        "fields": [
-          "lastName",
-          "validate"
-        ],
+        "field": "lastName",
         "code": "PoP\\ComponentModel\\e16"
       }
     }

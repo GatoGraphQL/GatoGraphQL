@@ -1,20 +1,17 @@
 {
     "errors": [
         {
-            "message": "Argument 'size' in field 'avatar' cannot be empty",
+            "message": "Argument 'size' in field 'avatar' of type 'User' cannot be empty",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 8,
+                    "column": 5
                 }
             ],
             "extensions": {
                 "type": "User",
-                "fields": [
-                    "avatar(size: null)",
-                    "validate"
-                ],
-                "code": "PoP\\ComponentModel\\e24"
+                "field": "avatar(size: null)",
+                "code": "PoP\\ComponentModel\\e29"
             }
         }
     ],

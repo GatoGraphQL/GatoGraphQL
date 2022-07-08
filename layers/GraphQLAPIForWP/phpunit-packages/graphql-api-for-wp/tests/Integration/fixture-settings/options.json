@@ -4,16 +4,13 @@
       "message": "There is no option with name 'admin_email'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 15
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "adminEmail: optionValue(name: \"admin_email\")",
-          "validate"
-        ],
+        "field": "adminEmail: optionValue(name: \"admin_email\")",
         "code": "PoPCMSSchema\\Settings\\e1"
       }
     }
