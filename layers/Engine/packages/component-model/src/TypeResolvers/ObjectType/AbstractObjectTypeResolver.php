@@ -1243,12 +1243,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * Check if can retrieve the values from the cache for each of
          * the objects, for when each of them has its own FieldArgs
          */
-        $remainingObjectIDs = [];
+        $remainingObjectIDs = $objectIDs;
         if ($this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
             if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
                 return null;
             }
             if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)) {
+                $remainingObjectIDs = [];
                 foreach ($objectIDs as $id) {
                     $object = $idObjects[$id];
                     if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($object)) {
