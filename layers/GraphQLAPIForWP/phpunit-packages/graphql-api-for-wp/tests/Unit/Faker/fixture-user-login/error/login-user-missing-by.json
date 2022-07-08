@@ -1,20 +1,17 @@
 {
   "errors": [
     {
-      "message": "Argument 'by' in field 'loginUser' cannot be empty",
+      "message": "Argument(s) 'by' in field 'loginUser' cannot be empty",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 2,
+          "column": 3
         }
       ],
       "extensions": {
         "type": "MutationRoot",
-        "fields": [
-          "loginUser",
-          "validate"
-        ],
-        "code": "PoP\\ComponentModel\\e24"
+        "field": "loginUser",
+        "code": "PoP\\ComponentModel\\e29"
       }
     }
   ],
