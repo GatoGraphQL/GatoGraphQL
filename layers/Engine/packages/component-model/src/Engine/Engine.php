@@ -2074,6 +2074,7 @@ class Engine implements EngineInterface
         ObjectFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
         $iterationObjectErrors = new SplObjectStorage();
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $this->transferObjectFeedbackEntries(
@@ -2087,6 +2088,7 @@ class Engine implements EngineInterface
             $idObjects
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
         $iterationObjectWarnings = new SplObjectStorage();
         foreach ($objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
@@ -2100,6 +2102,7 @@ class Engine implements EngineInterface
             $idObjects
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
         $iterationObjectDeprecations = new SplObjectStorage();
         foreach ($objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
@@ -2113,6 +2116,7 @@ class Engine implements EngineInterface
             $idObjects
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
         $iterationObjectNotices = new SplObjectStorage();
         foreach ($objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
@@ -2126,6 +2130,7 @@ class Engine implements EngineInterface
             $idObjects
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
         $iterationObjectSuggestions = new SplObjectStorage();
         foreach ($objectFeedbackStore->getSuggestions() as $objectFeedbackSuggestion) {
             $this->transferObjectFeedbackEntries(
@@ -2139,6 +2144,7 @@ class Engine implements EngineInterface
             $idObjects
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,array<int|string,SplObjectStorage<FieldInterface,mixed>>> */
         $iterationObjectLogs = new SplObjectStorage();
         foreach ($objectFeedbackStore->getLogs() as $objectFeedbackLog) {
             $this->transferObjectFeedbackEntries(
@@ -2181,6 +2187,7 @@ class Engine implements EngineInterface
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaErrors = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
@@ -2193,6 +2200,7 @@ class Engine implements EngineInterface
             $schemaFeedbackEntries[FeedbackCategories::ERROR],
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaWarnings = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
@@ -2205,6 +2213,7 @@ class Engine implements EngineInterface
             $schemaFeedbackEntries[FeedbackCategories::WARNING],
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaDeprecations = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
@@ -2217,6 +2226,7 @@ class Engine implements EngineInterface
             $schemaFeedbackEntries[FeedbackCategories::DEPRECATION],
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaNotices = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
@@ -2229,6 +2239,7 @@ class Engine implements EngineInterface
             $schemaFeedbackEntries[FeedbackCategories::NOTICE],
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaSuggestions = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getSuggestions() as $schemaFeedbackSuggestion) {
             $this->transferSchemaFeedbackEntries(
@@ -2241,6 +2252,7 @@ class Engine implements EngineInterface
             $schemaFeedbackEntries[FeedbackCategories::SUGGESTION],
         );
 
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaLogs = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getLogs() as $schemaFeedbackLog) {
             $this->transferSchemaFeedbackEntries(
