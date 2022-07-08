@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument(s) 'interface' in field 'implements' cannot be empty",
+      "message": "Argument 'interface' in field 'implements' cannot be empty",
       "locations": [
         {
           "line": 2,

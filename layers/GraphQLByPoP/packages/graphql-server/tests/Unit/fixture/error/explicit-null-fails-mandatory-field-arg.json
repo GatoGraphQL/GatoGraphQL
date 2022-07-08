@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Argument(s) 'value' in field 'echo' cannot be empty",
+      "message": "Argument 'value' in field 'echo' cannot be empty",
       "locations": [
         {
           "line": 2,
