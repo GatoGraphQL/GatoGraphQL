@@ -983,7 +983,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      * If the field has a single argument, which is of type InputObject,
      * then retrieve the value for its input fields.
      */
-    public function getInputObjectUnderFieldArgumentName(
+    public function getFieldDataInputObjectSubpropertyName(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldInterface $field,
     ): ?string {
