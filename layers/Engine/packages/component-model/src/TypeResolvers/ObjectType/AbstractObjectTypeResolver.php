@@ -37,6 +37,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
+use PoP\GraphQLParser\Exception\Parser\InvalidDynamicContextException;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -1342,7 +1343,26 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        $fieldData = $field->getArgumentKeyValues();
+        try {
+            $fieldData = $field->getArgumentKeyValues();
+        } catch (InvalidDynamicContextException $e) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E31,
+                        [
+                            $field->getName(),
+                            $this->getMaybeNamespacedTypeName(),
+                            $e->getMessage(),
+                        ]
+                    ),
+                    $field->getLocation(),
+                    $this,
+                )
+            );
+            return null;
+        }
 
         /**
          * Check that the field has been defined in the schema

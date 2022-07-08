@@ -74,6 +74,7 @@ trait WithArgumentsTrait
 
     /**
      * @return array<string,mixed>
+     * @throws InvalidDynamicContextException When accessing non-declared Dynamic Variables
      */
     public function getArgumentKeyValues(): array
     {

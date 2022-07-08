@@ -42,6 +42,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E28 = 'e28';
     public final const E29 = 'e29';
     public final const E30 = 'e30';
+    public final const E31 = 'e31';
 
     /**
      * @return string[]
@@ -82,6 +83,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E28,
             self::E29,
             self::E30,
+            self::E31,
         ];
     }
 
@@ -126,6 +128,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E28 => $this->__('On directive \'%1$s\', there is no argument with name \'%2$s\'', 'component-model'),
             self::E29 => $this->__('Argument \'%1$s\' in field \'%2$s\' of type \'%3$s\' cannot be empty', 'component-model'),
             self::E30 => $this->__('Argument \'%1$s\' in directive \'%2$s\' cannot be empty', 'component-model'),
+            self::E31 => $this->__('Resolving the arguments for field \'%1$s\' of type \'%2$s\' produced error: \'%3$s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }
