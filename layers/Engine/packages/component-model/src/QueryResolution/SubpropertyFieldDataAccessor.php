@@ -21,6 +21,11 @@ class SubpropertyFieldDataAccessor extends FieldDataAccessor implements Subprope
         parent::__construct($field, $normalizedValues);
     }
 
+    public function getSubpropertyName(): string
+    {
+        return $this->fieldInputArgumentName;
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -46,10 +51,5 @@ class SubpropertyFieldDataAccessor extends FieldDataAccessor implements Subprope
             );
         }
         return $inputObjectValue;
-    }
-
-    public function getSubpropertyName(): string
-    {
-        return $this->fieldInputArgumentName;
     }
 }
