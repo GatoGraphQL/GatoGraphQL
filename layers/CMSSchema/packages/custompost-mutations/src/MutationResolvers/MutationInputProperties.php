@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 class MutationInputProperties
 {
+    public final const INPUT = 'input';
     public final const ID = 'id';
     public final const TITLE = 'title';
     public final const CONTENT = 'content';
