@@ -1995,45 +1995,52 @@ class Engine implements EngineInterface
     }
 
     /**
-     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $entries
+     * @param SplObjectStorage<RelationalTypeResolverInterface,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $iterationEntries
+     * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
      */
     protected function addObjectEntriesToDestinationArray(
-        array &$entries,
+        SplObjectStorage $iterationEntries,
         array &$destination,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $typeOutputKey,
         array $idObjects,
     ): void {
-        if ($entries === []) {
+        if ($iterationEntries->count() === 0) {
             return;
         }
 
-        $dbNameEntries = $this->moveEntriesWithIDUnderDBName($entries, $relationalTypeResolver);
-        foreach ($dbNameEntries as $dbName => $entries) {
-            $destination[$dbName] ??= [];
-            $this->addDatasetToDatabase($destination[$dbName], $relationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
+        /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
+        foreach ($iterationEntries as $iterationRelationalTypeResolver) {
+            $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
+            $entries = $iterationEntries[$iterationRelationalTypeResolver];
+            $dbNameEntries = $this->moveEntriesWithIDUnderDBName($entries, $iterationRelationalTypeResolver);
+            foreach ($dbNameEntries as $dbName => $entries) {
+                $destination[$dbName] ??= [];
+                $this->addDatasetToDatabase($destination[$dbName], $iterationRelationalTypeResolver, $typeOutputKey, $entries, $idObjects, true);
+            }
         }
     }
 
     /**
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
      * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
      */
     protected function addSchemaEntriesToDestinationArray(
-        SplObjectStorage &$entries,
+        SplObjectStorage $iterationEntries,
         array &$destination,
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string $typeOutputKey,
     ): void {
-        if ($entries->count() === 0) {
+        if ($iterationEntries->count() === 0) {
             return;
         }
-
-        $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $relationalTypeResolver);
-        foreach ($dbNameEntries as $dbName => $entries) {
-            /** @var SplObjectStorage<FieldInterface,mixed> */
-            $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
-            $destinationSplObjectStorage->addAll($entries);
-            $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
+        /** @var RelationalTypeResolverInterface $iterationRelationalTypeResolver */
+        foreach ($iterationEntries as $iterationRelationalTypeResolver) {
+            $typeOutputKey = $iterationRelationalTypeResolver->getTypeOutputKey();
+            $entries = $iterationEntries[$iterationRelationalTypeResolver];            
+            $dbNameEntries = $this->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
+            foreach ($dbNameEntries as $dbName => $entries) {
+                /** @var SplObjectStorage<FieldInterface,mixed> */
+                $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
+                $destinationSplObjectStorage->addAll($entries);
+                $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
+            }
         }
     }
 
@@ -2079,7 +2086,7 @@ class Engine implements EngineInterface
         ObjectFeedbackStore $objectFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
-        $iterationObjectErrors = [];
+        $iterationObjectErrors = new SplObjectStorage();
         foreach ($objectFeedbackStore->getErrors() as $objectFeedbackError) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackError,
@@ -2089,12 +2096,10 @@ class Engine implements EngineInterface
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectErrors,
             $objectFeedbackEntries[FeedbackCategories::ERROR],
-            $relationalTypeResolver,
-            $typeOutputKey,
             $idObjects
         );
 
-        $iterationObjectWarnings = [];
+        $iterationObjectWarnings = new SplObjectStorage();
         foreach ($objectFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackWarning,
@@ -2104,12 +2109,10 @@ class Engine implements EngineInterface
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectWarnings,
             $objectFeedbackEntries[FeedbackCategories::WARNING],
-            $relationalTypeResolver,
-            $typeOutputKey,
             $idObjects
         );
 
-        $iterationObjectDeprecations = [];
+        $iterationObjectDeprecations = new SplObjectStorage();
         foreach ($objectFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackDeprecation,
@@ -2119,12 +2122,10 @@ class Engine implements EngineInterface
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectDeprecations,
             $objectFeedbackEntries[FeedbackCategories::DEPRECATION],
-            $relationalTypeResolver,
-            $typeOutputKey,
             $idObjects
         );
 
-        $iterationObjectNotices = [];
+        $iterationObjectNotices = new SplObjectStorage();
         foreach ($objectFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackNotice,
@@ -2134,12 +2135,10 @@ class Engine implements EngineInterface
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectNotices,
             $objectFeedbackEntries[FeedbackCategories::NOTICE],
-            $relationalTypeResolver,
-            $typeOutputKey,
             $idObjects
         );
 
-        $iterationObjectSuggestions = [];
+        $iterationObjectSuggestions = new SplObjectStorage();
         foreach ($objectFeedbackStore->getSuggestions() as $objectFeedbackSuggestion) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackSuggestion,
@@ -2149,12 +2148,10 @@ class Engine implements EngineInterface
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectSuggestions,
             $objectFeedbackEntries[FeedbackCategories::SUGGESTION],
-            $relationalTypeResolver,
-            $typeOutputKey,
             $idObjects
         );
 
-        $iterationObjectLogs = [];
+        $iterationObjectLogs = new SplObjectStorage();
         foreach ($objectFeedbackStore->getLogs() as $objectFeedbackLog) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackLog,
@@ -2164,31 +2161,32 @@ class Engine implements EngineInterface
         $this->addObjectEntriesToDestinationArray(
             $iterationObjectLogs,
             $objectFeedbackEntries[FeedbackCategories::LOG],
-            $relationalTypeResolver,
-            $typeOutputKey,
             $idObjects
         );
     }
 
     private function transferObjectFeedbackEntries(
         ObjectFeedbackInterface $objectFeedback,
-        array &$objectFeedbackEntries
+        SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
+        $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
         $entry = $this->getObjectOrSchemaFeedbackEntries($objectFeedback);
-        if ($nestedObjectFeedbackEntries = $objectFeedback->getNested()) {
-            $entry[Tokens::NESTED] = [];
-            foreach ($nestedObjectFeedbackEntries as $nestedObjectFeedbackEntry) {
-                $this->transferObjectFeedbackEntries(
-                    $nestedObjectFeedbackEntry,
-                    $entry[Tokens::NESTED]
-                );
-            }
-        }
+        // @todo Temporarily commented; Must remove "nested", as it won't be used and bothers after migrating to SplObjectStorage
+        // if ($nestedObjectFeedbackEntries = $objectFeedback->getNested()) {
+        //     $entry[Tokens::NESTED] = [];
+        //     foreach ($nestedObjectFeedbackEntries as $nestedObjectFeedbackEntry) {
+        //         $this->transferObjectFeedbackEntries(
+        //             $nestedObjectFeedbackEntry,
+        //             $entry[Tokens::NESTED]
+        //         );
+        //     }
+        // }
         $objectFeedbackEntriesStorage = $objectFeedbackEntries[$objectFeedback->getObjectID()] ?? new SplObjectStorage();
         $fieldObjectFeedbackEntries = $objectFeedbackEntries[$objectFeedback->getObjectID()][$objectFeedback->getField()] ?? [];
         $fieldObjectFeedbackEntries[] = $entry;
         $objectFeedbackEntriesStorage[$objectFeedback->getField()] = $fieldObjectFeedbackEntries;
         $objectFeedbackEntries[$objectFeedback->getObjectID()] = $objectFeedbackEntriesStorage;
+        $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] = $objectFeedbackEntries;
     }
 
     private function transferSchemaFeedback(
@@ -2207,8 +2205,6 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaErrors,
             $schemaFeedbackEntries[FeedbackCategories::ERROR],
-            $relationalTypeResolver,
-            $typeOutputKey,
         );
 
         $iterationSchemaWarnings = new SplObjectStorage();
@@ -2221,8 +2217,6 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaWarnings,
             $schemaFeedbackEntries[FeedbackCategories::WARNING],
-            $relationalTypeResolver,
-            $typeOutputKey,
         );
 
         $iterationSchemaDeprecations = new SplObjectStorage();
@@ -2235,8 +2229,6 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaDeprecations,
             $schemaFeedbackEntries[FeedbackCategories::DEPRECATION],
-            $relationalTypeResolver,
-            $typeOutputKey,
         );
 
         $iterationSchemaNotices = new SplObjectStorage();
@@ -2249,8 +2241,6 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaNotices,
             $schemaFeedbackEntries[FeedbackCategories::NOTICE],
-            $relationalTypeResolver,
-            $typeOutputKey,
         );
 
         $iterationSchemaSuggestions = new SplObjectStorage();
@@ -2263,8 +2253,6 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaSuggestions,
             $schemaFeedbackEntries[FeedbackCategories::SUGGESTION],
-            $relationalTypeResolver,
-            $typeOutputKey,
         );
 
         $iterationSchemaLogs = new SplObjectStorage();
@@ -2277,28 +2265,29 @@ class Engine implements EngineInterface
         $this->addSchemaEntriesToDestinationArray(
             $iterationSchemaLogs,
             $schemaFeedbackEntries[FeedbackCategories::LOG],
-            $relationalTypeResolver,
-            $typeOutputKey,
         );
     }
 
     private function transferSchemaFeedbackEntries(
         SchemaFeedbackInterface $schemaFeedback,
-        SplObjectStorage &$schemaFeedbackEntries
+        SplObjectStorage $iterationSchemaFeedbackEntries
     ): void {
+        $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
-        if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
-            $entry[Tokens::NESTED] = [];
-            foreach ($nestedSchemaFeedbackEntries as $nestedSchemaFeedbackEntry) {
-                $this->transferSchemaFeedbackEntries(
-                    $nestedSchemaFeedbackEntry,
-                    $entry[Tokens::NESTED]
-                );
-            }
-        }
+        // @todo Temporarily commented; Must remove "nested", as it won't be used and bothers after migrating to SplObjectStorage
+        // if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
+        //     $entry[Tokens::NESTED] = [];
+        //     foreach ($nestedSchemaFeedbackEntries as $nestedSchemaFeedbackEntry) {
+        //         $this->transferSchemaFeedbackEntries(
+        //             $nestedSchemaFeedbackEntry,
+        //             $entry[Tokens::NESTED]
+        //         );
+        //     }
+        // }
         $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$schemaFeedback->getField()] ?? [];
         $fieldSchemaFeedbackEntries[] = $entry;
         $schemaFeedbackEntries[$schemaFeedback->getField()] = $fieldSchemaFeedbackEntries;
+        $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] = $schemaFeedbackEntries;
     }
 
     /**
