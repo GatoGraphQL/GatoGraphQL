@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -15,7 +16,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         FeedbackItemResolution $feedbackItemResolution,
         Directive $directive,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        protected string|int $objectID,
+        /** @var array<string|int,EngineIterationFieldSet> $idFieldSet */
+        protected array $idFieldSet,
         /** @var array<string, mixed> */
         array $extensions = [],
     ) {
@@ -30,14 +32,14 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
-        string|int $objectID,
+        array $idFieldSet,
         ?Directive $directive
     ): self {
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getAstNode(),
             $relationalTypeResolver,
-            $objectID,
+            $idFieldSet,
             $objectTypeFieldResolutionFeedback->getExtensions(),
         );
     }
