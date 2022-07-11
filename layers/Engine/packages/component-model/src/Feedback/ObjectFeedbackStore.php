@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -52,65 +53,54 @@ class ObjectFeedbackStore
         );
     }
 
+    /**
+     * @var array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
     public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         RelationalTypeResolverInterface $relationalTypeResolver,
-        FieldInterface $field,
-        string|int $objectID,
-        ?Directive $directive = null,
+        array $idFieldSet,
     ): void {
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackError,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive,
+                $idFieldSet,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
             $this->warnings[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackWarning,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive,
+                $idFieldSet,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
             $this->deprecations[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackDeprecation,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive,
+                $idFieldSet,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
             $this->notices[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackNotice,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive,
+                $idFieldSet,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getSuggestions() as $objectTypeFieldResolutionFeedbackSuggestion) {
             $this->suggestions[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackSuggestion,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive,
+                $idFieldSet,
             );
         }
         foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
             $this->logs[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackLog,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive,
+                $idFieldSet,
             );
         }
     }
