@@ -636,14 +636,11 @@ GRAPHQL;
 
     /**
      * @dataProvider queryProvider
-     *
-     * @var SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
     public function testQueries(
         string $query,
         Document $document,
         string $documentAsStr,
-        ?SplObjectStorage $astNodeAncestors = null,
     ): void {
         $parser = $this->getParser();
 
@@ -660,14 +657,6 @@ GRAPHQL;
             $documentAsStr,
             $parsedDocument->asDocumentString()
         );
-
-        // 3rd test: the Document AST Node Ancestors is right
-        if ($astNodeAncestors !== null) {
-            $this->assertEquals(
-                $astNodeAncestors,
-                $parsedDocument->getASTNodeAncestors()
-            );
-        }
     }
 
     public function queryProvider()
@@ -1299,6 +1288,26 @@ GRAPHQL;
                 'query GetUsersName { users { ...on User @outside { id posts @inside { id } } } }'
             ],
         ];
+    }
+
+    /**
+     * @dataProvider astNodeAncestorProvider
+     *
+     * @var SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
+     */
+    public function testASTNodeAncestors(
+        Document $document,
+        SplObjectStorage $astNodeAncestors,
+    ): void {
+        $this->assertEquals(
+            $astNodeAncestors,
+            $document->getASTNodeAncestors()
+        );
+    }
+
+    public function astNodeAncestorProvider()
+    {
+        return [];
     }
 
     public function testVariableDefaultValue()
