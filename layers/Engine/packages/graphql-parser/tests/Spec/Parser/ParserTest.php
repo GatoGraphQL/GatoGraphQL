@@ -647,23 +647,25 @@ GRAPHQL;
     ): void {
         $parser = $this->getParser();
 
+        $parsedDocument = $parser->parse($query);
+
         // 1st test: Parsing is right
         $this->assertEquals(
             $document,
-            $parser->parse($query)
+            $parsedDocument
         );
 
         // 2nd test: Converting document back to query string is right
         $this->assertEquals(
             $documentAsStr,
-            $document->asDocumentString()
+            $parsedDocument->asDocumentString()
         );
 
         // 3rd test: the Document AST Node Ancestors is right
         if ($astNodeAncestors !== null) {
             $this->assertEquals(
                 $astNodeAncestors,
-                $document->getASTNodeAncestors()
+                $parsedDocument->getASTNodeAncestors()
             );
         }
     }
