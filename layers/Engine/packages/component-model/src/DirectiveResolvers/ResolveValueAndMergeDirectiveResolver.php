@@ -272,9 +272,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
             $objectTypeFieldResolutionFeedbackStore,
             $relationalTypeResolver,
-            $field,
-            $id,
-            $this->directive
+            [$id => new EngineIterationFieldSet([$field])]
         );
 
         // 3. Add the output in the DB

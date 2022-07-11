@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -445,8 +446,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
                 $objectTypeFieldResolutionFeedbackStore,
                 $relationalTypeResolver,
-                $field,
-                $objectID,
+                [$objectID => new EngineIterationFieldSet([$field])],
             );
         }
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
