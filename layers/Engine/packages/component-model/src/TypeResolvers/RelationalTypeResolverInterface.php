@@ -85,7 +85,11 @@ interface RelationalTypeResolverInterface extends ConcreteTypeResolverInterface
      * @param FieldInterface[] $fields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getFieldDirectiveResolvers(Directive $directive, array $fields): ?SplObjectStorage;
+    public function getFieldDirectiveResolvers(
+        Directive $directive,
+        array $fields,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?SplObjectStorage;
     /**
      * Array of directive name => resolver
      *
