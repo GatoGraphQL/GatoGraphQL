@@ -1151,28 +1151,22 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 /** @var ModuleConfiguration */
                 $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
-                    foreach ($idFieldSet as $id => $fieldSet) {
-                        foreach ($fieldSet->fields as $field) {
-                            $engineIterationFeedbackStore->objectFeedbackStore->addLog(
-                                new ObjectFeedback(
-                                    new FeedbackItemResolution(
-                                        ErrorFeedbackItemProvider::class,
-                                        ErrorFeedbackItemProvider::E11A,
-                                        [
-                                            $this->directive->asQueryString(),
-                                            $e->getMessage(),
-                                            $e->getTraceAsString(),
-                                        ]
-                                    ),
-                                    LocationHelper::getNonSpecificLocation(),
-                                    $relationalTypeResolver,
-                                    $field,
-                                    $id,
-                                    $this->directive
-                                )
-                            );
-                        }
-                    }
+                    $engineIterationFeedbackStore->objectFeedbackStore->addLog(
+                        new ObjectFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E11A,
+                                [
+                                    $this->directive->asQueryString(),
+                                    $e->getMessage(),
+                                    $e->getTraceAsString(),
+                                ]
+                            ),
+                            $this->directive,
+                            $relationalTypeResolver,
+                            $idFieldSet,
+                        )
+                    );
                 }
                 $feedbackItemResolution = $moduleConfiguration->sendExceptionErrorMessages()
                     ? ($moduleConfiguration->sendExceptionTraces()
