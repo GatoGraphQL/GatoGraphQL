@@ -76,16 +76,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected array $schemaDirectiveArgsCache = [];
 
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>
+     */
+    protected array $directiveData = [];
+    
+    /**
+     * @var array<string,mixed>
      */
     protected array $directiveArgsForSchema = [];
     /**
-     * @var array<string, mixed>
+     * @var array<string,mixed>
      */
     protected array $directiveArgsForObjects = [];
 
     /**
-     * @var array<string, array>
+     * @var array<string,array>
      */
     protected array $schemaDefinitionForDirectiveCache = [];
 
@@ -745,7 +750,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @return array<string, InputTypeResolverInterface>
+     * @return array<string,InputTypeResolverInterface>
      */
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
