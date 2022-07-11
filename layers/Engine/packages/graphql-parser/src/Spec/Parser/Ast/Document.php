@@ -742,8 +742,58 @@ class Document implements DocumentInterface
     private function setAncestorsUnderArgument(Argument $argument): void
     {
         /** @var Enum|InputList|InputObject|Literal|VariableReference */
-        $argumentValue = $argument->getValueAST();
-        $this->astNodeAncestors[$argumentValue] = $argument;
+        $argumentValueAST = $argument->getValueAST();
+        $this->astNodeAncestors[$argumentValueAST] = $argument;
+
+        $this->setAncestorsUnderArgumentValueAst($argumentValueAST);
+    }
+
+    private function setAncestorsUnderArgumentValueAst(Enum|InputList|InputObject|Literal|VariableReference $argumentValueAST): void
+    {
+        if ($argumentValueAST instanceof InputList) {
+            /** @var InputList */
+            $inputList = $argumentValueAST;
+            $this->setAncestorsUnderInputList($inputList);
+        }
+        if ($argumentValueAST instanceof InputObject) {
+            /** @var InputObject */
+            $inputObject = $argumentValueAST;
+            $this->setAncestorsUnderInputObject($inputObject);
+        }
+    }
+
+    private function setAncestorsUnderInputList(InputList $inputList): void
+    {
+        foreach ($inputList->getAstValue() as $astValue) {
+            if (!(
+                $astValue instanceof Enum
+                || $astValue instanceof InputList
+                || $astValue instanceof InputObject
+                || $astValue instanceof Literal
+                || $astValue instanceof VariableReference
+            )) {
+                continue;
+            }
+            $this->astNodeAncestors[$astValue] = $inputList;
+            $this->setAncestorsUnderArgumentValueAst($astValue);
+        }
+    }
+
+    private function setAncestorsUnderInputObject(InputObject $inputObject): void
+    {
+        foreach ($inputObject->getAstValue() as $astValue) {
+            if (!(
+                $astValue instanceof Enum
+                || $astValue instanceof InputList
+                || $astValue instanceof InputObject
+                || $astValue instanceof Literal
+                || $astValue instanceof VariableReference
+            )) {
+                continue;
+            }
+            $this->astNodeAncestors[$astValue] = $inputObject;
+            $this->setAncestorsUnderArgumentValueAst($astValue);
+        }
     }
 
     private function setAncestorsUnderFieldOrFragmentBond(FieldInterface|FragmentBondInterface $fieldOrFragmentBond): void
