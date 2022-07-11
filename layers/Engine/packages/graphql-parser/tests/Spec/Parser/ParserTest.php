@@ -1309,7 +1309,7 @@ GRAPHQL;
     public function astNodeAncestorProvider()
     {
         /** @var SplObjectStorage<AstInterface,AstInterface> */
-        $astNodeAncestors = new SplObjectStorage();
+        $astNodeAncestors1 = new SplObjectStorage();
         $leafField1 = new LeafField('title', null, [], [], new Location(1, 27));
         $literal11 = new Literal(1, new Location(1, 12));
         $argument11 = new Argument('id', $literal11, new Location(1, 8));
@@ -1331,10 +1331,10 @@ GRAPHQL;
         $queryOperation1 = new QueryOperation('', [], [], [
             $relationalField1
         ], new Location(1, 1));
-        $astNodeAncestors[$literal11] = $argument11;
-        $astNodeAncestors[$literal12] = $argument12;
-        $astNodeAncestors[$leafField1] = $relationalField1;
-        $astNodeAncestors[$relationalField1] = $queryOperation1;
+        $astNodeAncestors1[$literal11] = $argument11;
+        $astNodeAncestors1[$literal12] = $argument12;
+        $astNodeAncestors1[$leafField1] = $relationalField1;
+        $astNodeAncestors1[$relationalField1] = $queryOperation1;
         return [
             [
                 new Document(
@@ -1342,6 +1342,7 @@ GRAPHQL;
                         $queryOperation1,
                     ]
                 ),
+                $astNodeAncestors1,
             ],
         ];
         // $filter = new stdClass();
