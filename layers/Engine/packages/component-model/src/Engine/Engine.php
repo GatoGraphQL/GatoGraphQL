@@ -54,6 +54,7 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Definitions\Constants\Params as DefinitionsParams;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -2164,12 +2165,33 @@ class Engine implements EngineInterface
         SplObjectStorage $iterationObjectFeedbackEntries
     ): void {
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
-        $entry = $this->getObjectOrSchemaFeedbackEntries($objectFeedback);
-        $objectFeedbackEntriesStorage = $objectFeedbackEntries[$objectFeedback->getObjectID()] ?? new SplObjectStorage();
-        $fieldObjectFeedbackEntries = $objectFeedbackEntries[$objectFeedback->getObjectID()][$objectFeedback->getField()] ?? [];
-        $fieldObjectFeedbackEntries[] = $entry;
-        $objectFeedbackEntriesStorage[$objectFeedback->getField()] = $fieldObjectFeedbackEntries;
-        $objectFeedbackEntries[$objectFeedback->getObjectID()] = $objectFeedbackEntriesStorage;
+        foreach ($objectFeedback->getIDFieldSet() as $id => $fieldSet) {
+            foreach ($fieldSet->fields as $field) {
+                $feedbackItemResolution = $objectFeedback->getFeedbackItemResolution();
+                /** @var Directive */
+                $directive = $objectFeedback->getAstNode();
+                $specifiedByURL = $feedbackItemResolution->getSpecifiedByURL();
+                $entry = [
+                    Tokens::MESSAGE => $objectFeedback->getFeedbackItemResolution()->getMessage(),
+                    Tokens::PATH => [$directive->asQueryString()],
+                    Tokens::LOCATIONS => [$directive->getLocation()->toArray()],
+                    Tokens::EXTENSIONS => array_merge(
+                        $objectFeedback->getExtensions(),
+                        [
+                            'code' => $feedbackItemResolution->getNamespacedCode(),
+                        ],
+                        $specifiedByURL !== null ? [
+                            'specifiedBy' => $specifiedByURL,
+                        ] : []
+                    ),
+                ];
+                $objectFeedbackEntriesStorage = $objectFeedbackEntries[$id] ?? new SplObjectStorage();
+                $fieldObjectFeedbackEntries = $objectFeedbackEntries[$id][$field] ?? [];
+                $fieldObjectFeedbackEntries[] = $entry;
+                $objectFeedbackEntriesStorage[$field] = $fieldObjectFeedbackEntries;
+                $objectFeedbackEntries[$id] = $objectFeedbackEntriesStorage;
+            }
+        }
         $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] = $objectFeedbackEntries;
     }
 
