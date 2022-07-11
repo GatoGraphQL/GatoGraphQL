@@ -211,8 +211,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $directiveInstancesByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
             PipelinePositions::BEFORE_PREPARE => [],
-            PipelinePositions::AFTER_PREPARE_BEFORE_VALIDATE => [],
-            PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE => [],
+            PipelinePositions::AFTER_PREPARE_BEFORE_RESOLVE => [],
             PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE => [],
             PipelinePositions::AFTER_SERIALIZE => [],
             PipelinePositions::END => [],

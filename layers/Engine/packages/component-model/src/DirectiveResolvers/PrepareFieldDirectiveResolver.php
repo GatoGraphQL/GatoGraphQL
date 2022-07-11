@@ -116,7 +116,7 @@ final class PrepareFieldDirectiveResolver extends AbstractGlobalDirectiveResolve
      */
     public function getPipelinePosition(): string
     {
-        return PipelinePositions::AFTER_PREPARE_BEFORE_VALIDATE;
+        return PipelinePositions::AFTER_PREPARE_BEFORE_RESOLVE;
     }
 
     /**

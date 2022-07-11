@@ -40,7 +40,7 @@ class IncludeDirectiveResolver extends AbstractGlobalDirectiveResolver
      */
     public function getPipelinePosition(): string
     {
-        return PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE;
+        return PipelinePositions::AFTER_PREPARE_BEFORE_RESOLVE;
     }
 
     /**
