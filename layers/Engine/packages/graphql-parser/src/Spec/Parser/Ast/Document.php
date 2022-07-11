@@ -781,7 +781,7 @@ class Document implements DocumentInterface
 
     private function setAncestorsUnderInputObject(InputObject $inputObject): void
     {
-        foreach ($inputObject->getAstValue() as $astValue) {
+        foreach ((array) $inputObject->getAstValue() as $astValue) {
             if (!(
                 $astValue instanceof Enum
                 || $astValue instanceof InputList

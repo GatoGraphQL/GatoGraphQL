@@ -1294,7 +1294,7 @@ GRAPHQL;
     /**
      * @dataProvider astNodeAncestorProvider
      *
-     * @var SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
+     * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
     public function testASTNodeAncestors(
         Document $document,
