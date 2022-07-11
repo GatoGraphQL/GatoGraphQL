@@ -146,11 +146,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * By default, the pipeline must always have directives:
      *
-     *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
-     *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
+     *   1. ResolveAndMerge: to resolve the field and place the data into the DB object
+     *   2. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
      *
-     * Additionally to these 3, we can add other mandatory directives, such as:
+     * Additionally to these 2, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
      *   - cacheControl
      *
@@ -202,17 +201,15 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          *
          *   1. At the very beginning
          *   2. Before the PrepareField directive
-         *   3. Between the PrepareField and Validate directives
-         *   4. Between the Validate and Resolve directives
-         *   5. Between the Resolve and Serialize directives
-         *   6. After the Serialize directive
-         *   7. At the very end
+         *   3. Between the PrepareField and Resolve directives
+         *   4. Between the Resolve and Serialize directives
+         *   5. After the Serialize directive
+         *   6. At the very end
          */
         $directiveInstancesByPosition = $fieldDirectivesByPosition = $directiveFieldsByPosition = [
             PipelinePositions::BEGINNING => [],
             PipelinePositions::BEFORE_PREPARE => [],
-            PipelinePositions::AFTER_PREPARE_BEFORE_VALIDATE => [],
-            PipelinePositions::AFTER_VALIDATE_BEFORE_RESOLVE => [],
+            PipelinePositions::AFTER_PREPARE_BEFORE_RESOLVE => [],
             PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE => [],
             PipelinePositions::AFTER_SERIALIZE => [],
             PipelinePositions::END => [],
