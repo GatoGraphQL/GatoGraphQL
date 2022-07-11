@@ -27,6 +27,9 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         );
     }
 
+    /**
+     * @var array<string|int,EngineIterationFieldSet> $idFieldSet
+     */
     public static function fromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
