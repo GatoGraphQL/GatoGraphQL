@@ -32,7 +32,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         if ($this->isValidatingDirective()) {
             return PipelinePositions::AFTER_RESOLVE_BEFORE_SERIALIZE;
         }
-        return PipelinePositions::AFTER_PREPARE_BEFORE_RESOLVE;
+        return PipelinePositions::BEFORE_RESOLVE;
     }
 
     /**
