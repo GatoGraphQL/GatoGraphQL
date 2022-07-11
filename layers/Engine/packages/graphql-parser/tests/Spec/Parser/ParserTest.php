@@ -1458,6 +1458,88 @@ GRAPHQL;
             $astNodeAncestors3,
         ];
 
+        /**
+         * Query:
+         *
+         * { allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }
+         */
+        $literal41 = new Literal(1, new Location(1, 63));
+        $literal42 = new Literal(2, new Location(1, 66));
+        $literal43 = new Literal(4, new Location(1, 69));
+        $inputList41 = new InputList(
+            [
+                $literal41,
+                $literal42,
+                $literal43,
+            ],
+            new Location(1, 61)
+        );
+        $literal44 = new Literal(123, new Location(1, 87));
+        $literal45 = new Literal('asd', new Location(1, 99));
+        $inputObject41 = new InputObject(
+            (object) [
+                'a' => $literal44,
+                'b' => $literal45,
+            ],
+            new Location(1, 79)
+        );
+        $literal46 = new Literal(123, new Location(1, 37));
+        $literal47 = new Literal('asd', new Location(1, 48));
+        $inputObject42 = new InputObject(
+            (object) [
+                'a' => $literal46,
+                'd' => $literal47,
+                'b' => $inputList41,
+                'c' => $inputObject41,
+            ],
+            new Location(1, 30)
+        );
+        $argument41 = new Argument(
+            'object',
+            $inputObject42,
+            new Location(1, 22)
+        );
+        $leafField41 = new LeafField('id', null, [], [], new Location(1, 112));
+        $relationalField41 = new RelationalField(
+            'users',
+            'allUsers',
+            [
+                $argument41,
+            ],
+            [
+                $leafField41,
+            ],
+            [],
+            new Location(1, 14)
+        );
+        $queryOperation4 = new QueryOperation('', [], [], [
+            $relationalField41,
+        ], new Location(1, 1));
+
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors4 = new SplObjectStorage();
+        $astNodeAncestors4[$literal41] = $inputList41;
+        $astNodeAncestors4[$literal42] = $inputList41;
+        $astNodeAncestors4[$literal43] = $inputList41;
+        $astNodeAncestors4[$literal44] = $inputObject41;
+        $astNodeAncestors4[$literal45] = $inputObject41;
+        $astNodeAncestors4[$literal46] = $inputObject42;
+        $astNodeAncestors4[$literal47] = $inputObject42;
+        $astNodeAncestors4[$inputList41] = $inputObject42;
+        $astNodeAncestors4[$inputObject41] = $inputObject42;
+        $astNodeAncestors4[$inputObject42] = $argument41;
+        $astNodeAncestors4[$argument41] = $relationalField41;
+        $astNodeAncestors4[$leafField41] = $relationalField41;
+        $astNodeAncestors4[$relationalField41] = $queryOperation4;
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation4
+                ],
+            ),
+            $astNodeAncestors4,
+        ];
+
         return $astNodeAncestors;
     }
 
