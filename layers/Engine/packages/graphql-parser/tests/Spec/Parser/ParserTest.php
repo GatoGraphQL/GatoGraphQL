@@ -1309,8 +1309,12 @@ GRAPHQL;
     public function astNodeAncestorProvider(): array
     {
         $astNodeAncestors = [];
-        /** @var SplObjectStorage<AstInterface,AstInterface> */
-        $astNodeAncestors1 = new SplObjectStorage();
+        
+        /**
+         * Query:
+         *
+         * { film(id: 1 filmID: 2) { title } }
+         */
         $leafField1 = new LeafField('title', null, [], [], new Location(1, 27));
         $literal11 = new Literal(1, new Location(1, 12));
         $argument11 = new Argument('id', $literal11, new Location(1, 8));
@@ -1332,6 +1336,8 @@ GRAPHQL;
         $queryOperation1 = new QueryOperation('', [], [], [
             $relationalField1
         ], new Location(1, 1));
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors1 = new SplObjectStorage();
         $astNodeAncestors1[$literal11] = $argument11;
         $astNodeAncestors1[$literal12] = $argument12;
         $astNodeAncestors1[$argument11] = $relationalField1;
@@ -1347,6 +1353,15 @@ GRAPHQL;
             $astNodeAncestors1,
         ];
 
+        /**
+         * Query:
+         *
+         * query GetUsersName(\$format: String!) @someOperationDirective {
+         *     users {
+         *         name @style(format: \$format)
+         *     }
+         * }
+         */
         $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
         $variableReference2 = new VariableReference('format', $formatVariable2, new Location(3, 33));
         $argument2 = new Argument('format', $variableReference2, new Location(3, 25));
