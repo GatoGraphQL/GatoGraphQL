@@ -366,11 +366,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         $engineIterationFeedbackStore->objectFeedbackStore->addError(
                             new ObjectFeedback(
                                 $errorFeedbackItemResolution,
-                                LocationHelper::getNonSpecificLocation(),
-                                $relationalTypeResolver,
-                                $field,
-                                $objectID,
                                 $this->directive,
+                                $relationalTypeResolver,
+                                [$objectID => new EngineIterationFieldSet([$field])]
                             )
                         );
                     }
@@ -1305,11 +1303,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                            $failedField,
-                            $id,
                             $this->directive,
+                            $relationalTypeResolver,
+                            [$id => new EngineIterationFieldSet([$failedField])]
                         )
                     );
                 }
@@ -1326,11 +1322,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $engineIterationFeedbackStore->objectFeedbackStore->addError(
                         new ObjectFeedback(
                             $feedbackItemResolution,
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                            $failedField,
-                            $id,
                             $this->directive,
+                            $relationalTypeResolver,
+                            [$id => new EngineIterationFieldSet([$failedField])]
                         )
                     );
                     // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"

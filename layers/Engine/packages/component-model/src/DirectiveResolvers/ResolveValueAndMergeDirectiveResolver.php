@@ -120,11 +120,9 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
                                     $id,
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $relationalTypeResolver,
-                            $field,
-                            $id,
                             $this->directive,
+                            $relationalTypeResolver,
+                            [$id => new EngineIterationFieldSet([$field])]
                         )
                     );
                 }
