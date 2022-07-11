@@ -17,10 +17,6 @@ interface FieldInterface extends AstInterface, LocatableInterface, WithDirective
 
     public function getArgument(string $name): ?Argument;
 
-    public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void;
-
-    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface;
-
     public function asFieldOutputQueryString(): string;
 
     /**

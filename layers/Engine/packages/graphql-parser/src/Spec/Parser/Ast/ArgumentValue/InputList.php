@@ -13,8 +13,6 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class InputList extends AbstractAst implements CoercibleArgumentValueAstInterface, WithAstValueInterface
 {
-    protected InputList|InputObject|Argument $parent;
-
     /** @var mixed[] */
     protected ?array $cachedValue = null;
 
@@ -31,16 +29,6 @@ class InputList extends AbstractAst implements CoercibleArgumentValueAstInterfac
     protected function doAsQueryString(): string
     {
         return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
-    }
-
-    public function setParent(InputList|InputObject|Argument $parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): InputList|InputObject|Argument
-    {
-        return $this->parent;
     }
 
     /**

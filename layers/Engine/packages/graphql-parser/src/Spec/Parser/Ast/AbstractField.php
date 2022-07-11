@@ -12,7 +12,6 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
     use WithArgumentsTrait;
     use WithDirectivesTrait;
 
-    protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
     protected ?string $uniqueID = null;
 
     /**
@@ -44,16 +43,6 @@ abstract class AbstractField extends AbstractAst implements FieldInterface, With
     public function getOutputKey(): string
     {
         return $this->getAlias() ?? $this->getName();
-    }
-
-    public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface
-    {
-        return $this->parent;
     }
 
     /**

@@ -29,8 +29,6 @@ class Variable extends AbstractAst implements WithValueInterface
 
     protected InputList|InputObject|Literal|Enum|null $defaultValueAST = null;
 
-    protected OperationInterface $parent;
-
     public function __construct(
         protected readonly string $name,
         protected readonly string $type,
@@ -60,16 +58,6 @@ class Variable extends AbstractAst implements WithValueInterface
             $strType,
             $this->hasDefaultValue() ? sprintf(' = %s', $this->getDefaultValueAST()->asQueryString()) : ''
         );
-    }
-
-    public function setParent(OperationInterface $parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): OperationInterface
-    {
-        return $this->parent;
     }
 
     public function setContext(?Context $context): void

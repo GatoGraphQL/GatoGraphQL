@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 class Enum extends AbstractAst implements CoercibleArgumentValueAstInterface
 {
-    protected InputList|InputObject|Argument $parent;
-
     public function __construct(
         protected string $enumValue,
         Location $location
@@ -22,16 +19,6 @@ class Enum extends AbstractAst implements CoercibleArgumentValueAstInterface
     protected function doAsQueryString(): string
     {
         return $this->enumValue;
-    }
-
-    public function setParent(InputList|InputObject|Argument $parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): InputList|InputObject|Argument
-    {
-        return $this->parent;
     }
 
     /**
