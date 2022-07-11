@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\GraphQLParser\Spec\Parser\Location;
 
 abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
-        protected Location $location,
+        protected AstInterface $astNode,
         /** @var array<string, mixed> */
         protected array $extensions = [],
     ) {
@@ -20,9 +20,9 @@ abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFe
         );
     }
 
-    public function getLocation(): Location
+    public function getAstNode(): AstInterface
     {
-        return $this->location;
+        return $this->astNode;
     }
 
     /**

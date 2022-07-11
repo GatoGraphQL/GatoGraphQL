@@ -2302,7 +2302,7 @@ class Engine implements EngineInterface
             Tokens::PATH => $directive !== null
                 ? [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString(), $directive->asQueryString()]
                 : [$objectOrSchemaFeedback->getField()->asFieldOutputQueryString()],
-            Tokens::LOCATIONS => [$objectOrSchemaFeedback->getLocation()->toArray()],
+            Tokens::LOCATIONS => [$objectOrSchemaFeedback->getAstNode()->getLocation()->toArray()],
             Tokens::EXTENSIONS => array_merge(
                 $objectOrSchemaFeedback->getExtensions(),
                 [
@@ -2347,7 +2347,7 @@ class Engine implements EngineInterface
             $output[] = array_merge(
                 [
                     Tokens::MESSAGE => $documentFeedbackEntry->getFeedbackItemResolution()->getMessage(),
-                    Tokens::LOCATIONS => [$documentFeedbackEntry->getLocation()->toArray()],
+                    Tokens::LOCATIONS => [$documentFeedbackEntry->getAstNode()->getLocation()->toArray()],
                 ],
                 $documentFeedbackEntryExtensions !== [] ? [
                     Tokens::EXTENSIONS => $documentFeedbackEntryExtensions,

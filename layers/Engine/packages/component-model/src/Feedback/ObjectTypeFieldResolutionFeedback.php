@@ -41,7 +41,7 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         }
         return new self(
             $schemaInputValidationFeedback->getFeedbackItemResolution(),
-            $schemaInputValidationFeedback->getLocation(),
+            $schemaInputValidationFeedback->getAstNode()->getLocation(),
             $relationalTypeResolver,
             $schemaInputValidationFeedback->getExtensions(),
             $nestedObjectTypeFieldResolutionFeedbackEntries

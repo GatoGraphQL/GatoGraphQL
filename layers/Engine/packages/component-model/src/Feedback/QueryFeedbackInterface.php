@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
-use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 
 interface QueryFeedbackInterface extends FeedbackInterface
 {
-    public function getLocation(): Location;
+    public function getAstNode(): AstInterface;
     /**
      * @return array<string, mixed>
      */

@@ -48,7 +48,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         }
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
-            $objectTypeFieldResolutionFeedback->getLocation(),
+            $objectTypeFieldResolutionFeedback->getAstNode()->getLocation(),
             $relationalTypeResolver,
             $field,
             $directive,
