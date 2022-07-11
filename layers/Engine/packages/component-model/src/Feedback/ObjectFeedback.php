@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
@@ -13,7 +14,8 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
-        Directive $directive,
+        AstInterface $astNode,
+        protected Directive $directive,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string|int,EngineIterationFieldSet> $idFieldSet */
         protected array $idFieldSet,
@@ -22,7 +24,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
     ) {
         parent::__construct(
             $feedbackItemResolution,
-            $directive, // The Directive is the AST node
+            $astNode,
             $extensions,
         );
     }
@@ -35,15 +37,19 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $idFieldSet,
     ): self {
-        /** @var Directive */
-        $directive = $objectTypeFieldResolutionFeedback->getAstNode();
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
-            $directive,
+            $objectTypeFieldResolutionFeedback->getAstNode(),
+            $objectTypeFieldResolutionFeedback->getDirective(),
             $relationalTypeResolver,
             $idFieldSet,
             $objectTypeFieldResolutionFeedback->getExtensions(),
         );
+    }
+
+    public function getDirective(): Directive
+    {
+        return $this->directive;
     }
 
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface

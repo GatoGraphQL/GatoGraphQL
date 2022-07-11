@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Feedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements ObjectTypeFieldResolutionFeedbackInterface
@@ -14,6 +15,7 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
         AstInterface $astNode,
+        protected Directive $directive,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string, mixed> */
         array $extensions = [],
@@ -25,6 +27,11 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         );
     }
 
+    public function getDirective(): Directive
+    {
+        return $this->directive;
+    }
+
     public static function fromSchemaInputValidationFeedback(
         SchemaInputValidationFeedbackInterface $schemaInputValidationFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -32,6 +39,7 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         return new self(
             $schemaInputValidationFeedback->getFeedbackItemResolution(),
             $schemaInputValidationFeedback->getAstNode(),
+            $schemaInputValidationFeedback->getDirective(),
             $relationalTypeResolver,
             $schemaInputValidationFeedback->getExtensions(),
         );
