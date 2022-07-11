@@ -1306,7 +1306,7 @@ GRAPHQL;
         );
     }
 
-    public function astNodeAncestorProvider()
+    public function astNodeAncestorProvider(): array
     {
         $astNodeAncestors = [];
         /** @var SplObjectStorage<AstInterface,AstInterface> */
@@ -1345,6 +1345,64 @@ GRAPHQL;
                 ]
             ),
             $astNodeAncestors1,
+        ];
+
+        $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
+        $variableReference2 = new VariableReference('format', $formatVariable2, new Location(3, 33));
+        $argument2 = new Argument('format', $variableReference2, new Location(3, 25));
+        $directive22 = new Directive(
+            'style',
+            [
+                $argument2
+            ],
+            new Location(3, 19)
+        );
+        $leafField2 = new LeafField(
+            'name', null, [], [
+                $directive22
+            ], new Location(3, 13)
+        );
+        $relationalField2 = new RelationalField(
+            'users',
+            null,
+            [],
+            [
+                $leafField2,
+            ],
+            [],
+            new Location(2, 9)
+        );
+        $directive21 = new Directive('someOperationDirective', [], new Location(1, 43));
+        $queryOperation2 = new QueryOperation(
+            'GetUsersName',
+            [
+                $formatVariable2
+            ],
+            [
+                $directive21
+            ],
+            [
+                $relationalField2,
+            ],
+            new Location(1, 11)
+        );
+
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors2 = new SplObjectStorage();
+        $astNodeAncestors2[$variableReference2] = $argument2;
+        $astNodeAncestors2[$argument2] = $directive22;
+        $astNodeAncestors2[$directive22] = $leafField2;
+        $astNodeAncestors2[$leafField2] = $relationalField2;
+        $astNodeAncestors2[$formatVariable2] = $queryOperation2;
+        $astNodeAncestors2[$relationalField2] = $queryOperation2;
+        $astNodeAncestors2[$directive21] = $queryOperation2;
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation2,
+                ]
+            ),
+            $astNodeAncestors2,
         ];
         return $astNodeAncestors;
     }
