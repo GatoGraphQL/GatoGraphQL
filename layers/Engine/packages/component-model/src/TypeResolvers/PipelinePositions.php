@@ -7,14 +7,13 @@ namespace PoP\ComponentModel\TypeResolvers;
 /**
  * Define where to place the directive in the directive execution pipeline
  *
- * 3 directives are mandatory, and executed in this order:
+ * 2 directives are mandatory, and executed in this order:
  *
- *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
- *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
- *   3. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
+ *   1. ResolveAndMerge: to resolve the field and place the data into the DB object
+ *   2. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
  *
  * All other directives must indicate where to position themselves,
- * using these 3 directives as anchors.
+ * using these 2 directives as anchors.
  *
  * There are 6 positions:
  *

@@ -146,11 +146,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     /**
      * By default, the pipeline must always have directives:
      *
-     *   1. Validate: to validate that the schema, fieldNames, etc are supported, and filter them out if not
-     *   2. ResolveAndMerge: to resolve the field and place the data into the DB object
-     *   3. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
+     *   1. ResolveAndMerge: to resolve the field and place the data into the DB object
+     *   2. SerializeLeafOutputTypeValues: to serialize Scalar and Enum Type values
      *
-     * Additionally to these 3, we can add other mandatory directives, such as:
+     * Additionally to these 2, we can add other mandatory directives, such as:
      *   - setSelfAsExpression
      *   - cacheControl
      *
