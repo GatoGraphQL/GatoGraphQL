@@ -705,7 +705,9 @@ class Document implements DocumentInterface
     public function getASTNodeAncestors(): SplObjectStorage
     {
         if ($this->astNodeAncestors === null) {
-            $this->astNodeAncestors = new SplObjectStorage();
+            /** @var SplObjectStorage<AstInterface,AstInterface> */
+            $astNodeAncestors = new SplObjectStorage();
+            $this->astNodeAncestors = $astNodeAncestors;
             foreach ($this->operations as $operation) {
                 $this->setAncestorsUnderOperation($operation);
             }
