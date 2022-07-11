@@ -101,11 +101,10 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
      *
      *   1. At the very beginning
      *   2. Before the PrepareField directive
-     *   3. Between the PrepareField and Validate directives
-     *   4. Between the Validate and Resolve directives
-     *   5. Between the Resolve and Serialize directives
-     *   6. After the Serialize directive
-     *   7. At the very end
+     *   3. Between the PrepareField and Resolve directives
+     *   4. Between the Resolve and Serialize directives
+     *   5. After the Serialize directive
+     *   6. At the very end
      *
      * In the "serialize" step, the directive takes the objects
      * stored in $resolvedIDFieldValues, such as a DateTime object,
