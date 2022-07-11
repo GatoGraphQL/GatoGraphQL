@@ -11,9 +11,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
+use SplObjectStorage;
 
 class Document implements DocumentInterface
 {
@@ -686,18 +688,23 @@ class Document implements DocumentInterface
     }
 
     /**
-     * For all elements in the AST, inject them their parent.
-     * This enables them to re-create the path to them,
-     * from the root of the document.
+     * Create a dictionary mapping every element of the AST
+     * to their parent. This is useful to report the full
+     * path to an AST node in the query when displaying errors.
+     *
+     * @return SplObjectStorage<AstInterface,AstInterface>
      */
-    public function setAncestorsInAST(): void
+    public function getASTNodeAncestors(): SplObjectStorage
     {
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors = new SplObjectStorage();
         foreach ($this->operations as $operation) {
             $this->setAncestorsUnderOperation($operation);
         }
         foreach ($this->fragments as $fragment) {
             $this->setAncestorsUnderFragment($fragment);
         }
+        return $astNodeAncestors;
     }
 
     private function setAncestorsUnderOperation(OperationInterface $operation): void

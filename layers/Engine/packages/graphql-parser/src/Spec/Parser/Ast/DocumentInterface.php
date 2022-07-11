@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use SplObjectStorage;
 
 interface DocumentInterface
 {
@@ -20,9 +22,11 @@ interface DocumentInterface
     public function getVariableReferencesInOperation(OperationInterface $operation): array;
     public function asDocumentString(): string;
     /**
-     * For all elements in the AST, inject them their parent.
-     * This enables them to re-create the path to them,
-     * from the root of the document.
+     * Create a dictionary mapping every element of the AST
+     * to their parent. This is useful to report the full
+     * path to an AST node in the query when displaying errors.
+     *
+     * @return SplObjectStorage<AstInterface,AstInterface>
      */
-    public function setAncestorsInAST(): void;
+    public function getASTNodeAncestors(): SplObjectStorage;
 }
