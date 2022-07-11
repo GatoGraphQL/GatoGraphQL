@@ -78,7 +78,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @var array<string,mixed>
      */
-    protected array $directiveData = [];
+    protected ?array $directiveData = null;
     
     /**
      * @var array<string,mixed>
@@ -224,7 +224,218 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $this->integrateDefaultDirectiveArguments($relationalTypeResolver);
+        // @todo Remove commented line
+        // $this->integrateDefaultDirectiveArguments($relationalTypeResolver);
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->directiveData = $this->getDirectiveData(
+            $relationalTypeResolver,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        $engineIterationFeedbackStore->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $this->directive,
+        );
+    }
+
+    /**
+     * Extract the FieldArgs into its corresponding DirectiveDataAccessor, which integrates
+     * within the default values and coerces them according to the schema.
+     *
+     * @return array<string,mixed>|null
+     */
+    protected function getDirectiveData(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        try {
+            $directiveData = $this->directive->getArgumentKeyValues();
+        } catch (InvalidDynamicContextException $e) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E31,
+                        [
+                            $this->directive->getName(),
+                            $this->getMaybeNamespacedTypeName(),
+                            $e->getMessage(),
+                        ]
+                    ),
+                    $this->directive->getLocation(),
+                    $this,
+                )
+            );
+            return null;
+        }
+
+        /**
+         * Check that the field has been defined in the schema
+         */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($this->directive);
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($this->directive);
+        if ($fieldArgsSchemaDefinition === null || $objectTypeFieldResolver === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getFieldNotResolvedByObjectTypeFeedbackItemResolution(
+                        $directiveData,
+                        $this->directive,
+                    ),
+                    $this->directive->getLocation(),
+                    $this,
+                )
+            );
+            return null;
+        }
+
+        /**
+         * Add the default Argument values
+         */
+        $fieldArgumentNameDefaultValues = $this->getFieldOrDirectiveArgumentNameDefaultValues($fieldArgsSchemaDefinition);
+        $directiveData = $this->addDefaultFieldOrDirectiveArguments(
+            $directiveData,
+            $fieldArgumentNameDefaultValues,
+        );
+
+        /**
+         * Cast the Arguments, return if any of them produced an error
+         */
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $directiveData = $this->getSchemaCastingService()->castArguments($directiveData, $fieldArgsSchemaDefinition, $separateSchemaInputValidationFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        /**
+         * Allow to inject additional arguments
+         */
+        $directiveData = $objectTypeFieldResolver->prepareDirectiveData(
+            $directiveData,
+            $this,
+            $this->directive,
+            $objectTypeFieldResolutionFeedbackStore
+        );
+        if ($directiveData === null) {
+            return null;
+        }
+
+        /**
+         * Perform validations
+         */
+        $this->validateDirectiveData(
+            $directiveData,
+            $this->directive,
+            !$objectTypeFieldResolver->validateMutationOnObject($this, $this->directive->getName()),
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        return $directiveData;
+    }
+
+    /**
+     * Validate the field data
+     *
+     * @param array<string,mixed> $directiveData
+     */
+    protected function validateDirectiveData(
+        array $directiveData,
+        bool $validateMutation,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /** @var array */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($this->directive);
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($this->directive);
+
+        // Collect the deprecations from the queried fields
+        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $this->directive->getName(), $directiveData, $objectTypeFieldResolutionFeedbackStore);
+
+        /**
+         * Validations:
+         *
+         * - no mandatory arg is missing
+         * - no non-existing arg has been provided
+         */
+        $errorFeedbackItemResolutions = [];
+        $maybeErrorFeedbackItemResolution = $this->validateNonMissingMandatoryFieldArguments(
+            $directiveData,
+            $fieldArgsSchemaDefinition,
+            $this->directive
+        );
+        if ($maybeErrorFeedbackItemResolution !== null) {
+            $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
+        }
+        $maybeErrorFeedbackItemResolution = $this->validateOnlyExistingFieldArguments(
+            $directiveData,
+            $fieldArgsSchemaDefinition,
+            $this->directive
+        );
+        if ($maybeErrorFeedbackItemResolution !== null) {
+            $errorFeedbackItemResolutions[] = $maybeErrorFeedbackItemResolution;
+        }
+
+        if ($errorFeedbackItemResolutions !== []) {
+            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $this->directive->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return;
+        }
+
+        /**
+         * Validations:
+         *
+         * - constraints of the arguments
+         * - custom constraints of the arguments set by the field resolver
+         * - mutation custom validations
+         */
+        $directiveDataAccessor = $this->createDirectiveDataAccessor(
+            $this->directive,
+            $directiveData,
+        );
+        $errorFeedbackItemResolutions = array_merge(
+            $errorFeedbackItemResolutions,
+            $this->validateFieldArgumentConstraints(
+                $directiveData,
+                $objectTypeFieldResolver,
+                $this->directive,
+            ),
+            $objectTypeFieldResolver->validateFieldKeyValues($this, $directiveDataAccessor)
+        );
+
+        /**
+         * If a MutationResolver is declared, let it validate the schema
+         */
+        $mutationResolver = $objectTypeFieldResolver->getFieldMutationResolver($this, $this->directive->getName());
+        if ($mutationResolver !== null && $validateMutation) {
+            $directiveDataAccessorForMutation = $this->getDirectiveDataAccessorForMutation($directiveDataAccessor);
+            $errorFeedbackItemResolutions = array_merge(
+                $errorFeedbackItemResolutions,
+                $mutationResolver->validateErrors($directiveDataAccessorForMutation)
+            );
+        }
+
+        if ($errorFeedbackItemResolutions !== []) {
+            foreach ($errorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $errorFeedbackItemResolution,
+                        $this->directive->getLocation(),
+                        $this,
+                    )
+                );
+            }
+            return;
+        }
     }
 
     final protected function integrateDefaultDirectiveArguments(RelationalTypeResolverInterface $relationalTypeResolver): void
