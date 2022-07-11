@@ -1419,6 +1419,45 @@ GRAPHQL;
             ),
             $astNodeAncestors2,
         ];
+
+        /**
+         * Query:
+         *
+         * { test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }
+         */
+        $leafField31 = new LeafField('id', null, [], [], new Location(1, 70));
+        $leafField32 = new LeafField('name', null, [], [], new Location(1, 74));
+        $leafField33 = new LeafField('email', null, [], [], new Location(1, 80));
+        $fragment3 = new Fragment('userDataFragment', 'User', [], [
+            $leafField31,
+            $leafField32,
+            $leafField33,
+        ], new Location(1, 43));
+        $fragmentReference3 = new FragmentReference('userDataFragment', new Location(1, 13));
+        $relationalField3 = new RelationalField('test', null, [], [$fragmentReference3], [], new Location(1, 3));
+        $queryOperation3 = new QueryOperation('', [], [], [
+            $relationalField3,
+        ], new Location(1, 1));
+
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors3 = new SplObjectStorage();
+        $astNodeAncestors3[$leafField31] = $fragment3;
+        $astNodeAncestors3[$leafField32] = $fragment3;
+        $astNodeAncestors3[$leafField33] = $fragment3;
+        $astNodeAncestors3[$fragmentReference3] = $relationalField3;
+        $astNodeAncestors3[$relationalField3] = $queryOperation3;
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation3
+                ],
+                [
+                    $fragment3,
+                ]
+            ),
+            $astNodeAncestors3,
+        ];
+
         return $astNodeAncestors;
     }
 
