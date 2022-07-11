@@ -1308,6 +1308,7 @@ GRAPHQL;
 
     public function astNodeAncestorProvider()
     {
+        $astNodeAncestors = [];
         /** @var SplObjectStorage<AstInterface,AstInterface> */
         $astNodeAncestors1 = new SplObjectStorage();
         $leafField1 = new LeafField('title', null, [], [], new Location(1, 27));
@@ -1337,16 +1338,15 @@ GRAPHQL;
         $astNodeAncestors1[$argument12] = $relationalField1;
         $astNodeAncestors1[$leafField1] = $relationalField1;
         $astNodeAncestors1[$relationalField1] = $queryOperation1;
-        return [
-            [
-                new Document(
-                    [
-                        $queryOperation1,
-                    ]
-                ),
-                $astNodeAncestors1,
-            ],
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation1,
+                ]
+            ),
+            $astNodeAncestors1,
         ];
+        return $astNodeAncestors;
     }
 
     public function testVariableDefaultValue()
