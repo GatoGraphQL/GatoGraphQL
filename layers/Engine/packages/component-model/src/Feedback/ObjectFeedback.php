@@ -19,8 +19,6 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         protected string|int $objectID,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var ObjectFeedbackInterface[] */
-        protected array $nested = [],
     ) {
         parent::__construct(
             $feedbackItemResolution,
@@ -36,24 +34,12 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         string|int $objectID,
         ?Directive $directive
     ): self {
-        /** @var ObjectFeedbackInterface[] */
-        $nestedObjectFeedbackEntries = [];
-        foreach ($objectTypeFieldResolutionFeedback->getNested() as $nestedObjectTypeFieldResolutionFeedback) {
-            $nestedObjectFeedbackEntries[] = static::fromObjectTypeFieldResolutionFeedback(
-                $nestedObjectTypeFieldResolutionFeedback,
-                $relationalTypeResolver,
-                $field,
-                $objectID,
-                $directive
-            );
-        }
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getAstNode(),
             $relationalTypeResolver,
             $objectID,
             $objectTypeFieldResolutionFeedback->getExtensions(),
-            $nestedObjectFeedbackEntries
         );
     }
 
@@ -65,13 +51,5 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
     public function getObjectID(): string|int
     {
         return $this->objectID;
-    }
-
-    /**
-     * @return ObjectFeedbackInterface[]
-     */
-    public function getNested(): array
-    {
-        return $this->nested;
     }
 }

@@ -2165,16 +2165,6 @@ class Engine implements EngineInterface
     ): void {
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$objectFeedback->getRelationalTypeResolver()] ?? [];
         $entry = $this->getObjectOrSchemaFeedbackEntries($objectFeedback);
-        // @todo Temporarily commented; Must remove "nested", as it won't be used and bothers after migrating to SplObjectStorage
-        // if ($nestedObjectFeedbackEntries = $objectFeedback->getNested()) {
-        //     $entry[Tokens::NESTED] = [];
-        //     foreach ($nestedObjectFeedbackEntries as $nestedObjectFeedbackEntry) {
-        //         $this->transferObjectFeedbackEntries(
-        //             $nestedObjectFeedbackEntry,
-        //             $entry[Tokens::NESTED]
-        //         );
-        //     }
-        // }
         $objectFeedbackEntriesStorage = $objectFeedbackEntries[$objectFeedback->getObjectID()] ?? new SplObjectStorage();
         $fieldObjectFeedbackEntries = $objectFeedbackEntries[$objectFeedback->getObjectID()][$objectFeedback->getField()] ?? [];
         $fieldObjectFeedbackEntries[] = $entry;
@@ -2272,16 +2262,6 @@ class Engine implements EngineInterface
     ): void {
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         $entry = $this->getObjectOrSchemaFeedbackEntries($schemaFeedback);
-        // @todo Temporarily commented; Must remove "nested", as it won't be used and bothers after migrating to SplObjectStorage
-        // if ($nestedSchemaFeedbackEntries = $schemaFeedback->getNested()) {
-        //     $entry[Tokens::NESTED] = [];
-        //     foreach ($nestedSchemaFeedbackEntries as $nestedSchemaFeedbackEntry) {
-        //         $this->transferSchemaFeedbackEntries(
-        //             $nestedSchemaFeedbackEntry,
-        //             $entry[Tokens::NESTED]
-        //         );
-        //     }
-        // }
         $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$schemaFeedback->getField()] ?? [];
         $fieldSchemaFeedbackEntries[] = $entry;
         $schemaFeedbackEntries[$schemaFeedback->getField()] = $fieldSchemaFeedbackEntries;

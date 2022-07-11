@@ -17,8 +17,6 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-        protected array $nested = [],
     ) {
         parent::__construct(
             $feedbackItemResolution,
@@ -31,28 +29,11 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         SchemaInputValidationFeedbackInterface $schemaInputValidationFeedback,
         RelationalTypeResolverInterface $relationalTypeResolver,
     ): self {
-        /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
-        $nestedObjectTypeFieldResolutionFeedbackEntries = [];
-        foreach ($schemaInputValidationFeedback->getNested() as $nestedSchemaInputValidationFeedback) {
-            $nestedObjectTypeFieldResolutionFeedbackEntries[] = static::fromSchemaInputValidationFeedback(
-                $nestedSchemaInputValidationFeedback,
-                $relationalTypeResolver,
-            );
-        }
         return new self(
             $schemaInputValidationFeedback->getFeedbackItemResolution(),
             $schemaInputValidationFeedback->getAstNode(),
             $relationalTypeResolver,
             $schemaInputValidationFeedback->getExtensions(),
-            $nestedObjectTypeFieldResolutionFeedbackEntries
         );
-    }
-
-    /**
-     * @return ObjectTypeFieldResolutionFeedbackInterface[]
-     */
-    public function getNested(): array
-    {
-        return $this->nested;
     }
 }

@@ -18,8 +18,6 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var SchemaFeedbackInterface[] */
-        protected array $nested = [],
     ) {
         parent::__construct(
             $feedbackItemResolution,
@@ -34,22 +32,11 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         FieldInterface $field,
         ?Directive $directive,
     ): self {
-        /** @var SchemaFeedbackInterface[] */
-        $nestedSchemaFeedbackEntries = [];
-        foreach ($objectTypeFieldResolutionFeedback->getNested() as $nestedObjectTypeFieldResolutionFeedback) {
-            $nestedSchemaFeedbackEntries[] = static::fromObjectTypeFieldResolutionFeedback(
-                $nestedObjectTypeFieldResolutionFeedback,
-                $relationalTypeResolver,
-                $field,
-                $directive
-            );
-        }
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
             $objectTypeFieldResolutionFeedback->getAstNode(),
             $relationalTypeResolver,
             $objectTypeFieldResolutionFeedback->getExtensions(),
-            $nestedSchemaFeedbackEntries
         );
     }
 
@@ -66,13 +53,5 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
     public function getDirective(): ?Directive
     {
         return $this->directive;
-    }
-
-    /**
-     * @return SchemaFeedbackInterface[]
-     */
-    public function getNested(): array
-    {
-        return $this->nested;
     }
 }

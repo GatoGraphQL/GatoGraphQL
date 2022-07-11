@@ -10,8 +10,4 @@ interface ObjectFeedbackInterface extends QueryFeedbackInterface
 {
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface;
     public function getObjectID(): string | int;
-    /**
-     * @return ObjectFeedbackInterface[]
-     */
-    public function getNested(): array;
 }

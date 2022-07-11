@@ -16,21 +16,11 @@ class SchemaInputValidationFeedback extends AbstractQueryFeedback implements Sch
         protected InputTypeResolverInterface $inputTypeResolver,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var SchemaInputValidationFeedbackInterface[] */
-        protected array $nested = [],
     ) {
         parent::__construct(
             $feedbackItemResolution,
             $astNode,
             $extensions,
         );
-    }
-
-    /**
-     * @return SchemaInputValidationFeedbackInterface[]
-     */
-    public function getNested(): array
-    {
-        return $this->nested;
     }
 }
