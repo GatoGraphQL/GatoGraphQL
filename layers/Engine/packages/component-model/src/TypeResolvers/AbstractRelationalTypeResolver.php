@@ -494,7 +494,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      * @param FieldInterface[] $fields
      * @return SplObjectStorage<FieldInterface,DirectiveResolverInterface>|null
      */
-    public function getFieldDirectiveResolvers(
+    protected function getFieldDirectiveResolvers(
         Directive $directive,
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
