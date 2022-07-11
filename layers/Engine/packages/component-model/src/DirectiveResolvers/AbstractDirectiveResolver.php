@@ -209,9 +209,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     final public function setAndPrepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $this->setDirective($directive);
-        $this->prepareDirective($relationalTypeResolver);
+        $this->prepareDirective($relationalTypeResolver, $engineIterationFeedbackStore,);
     }
 
     /**
@@ -219,8 +220,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * such as adding the default Argument AST objects which
      * were not provided in the query.
      */
-    protected function prepareDirective(RelationalTypeResolverInterface $relationalTypeResolver): void
-    {
+    protected function prepareDirective(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
         $this->integrateDefaultDirectiveArguments($relationalTypeResolver);
     }
 

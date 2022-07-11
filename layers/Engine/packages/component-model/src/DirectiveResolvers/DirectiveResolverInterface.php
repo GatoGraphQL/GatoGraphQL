@@ -38,6 +38,7 @@ interface DirectiveResolverInterface extends AttachableExtensionInterface, Schem
     public function setAndPrepareDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,
         Directive $directive,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void;
     /**
      * Indicate to what fieldNames this directive can be applied.
