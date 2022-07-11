@@ -27,6 +27,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 use stdClass;
 
 class ParserTest extends AbstractTestCase
@@ -635,11 +636,14 @@ GRAPHQL;
 
     /**
      * @dataProvider queryProvider
+     *
+     * @var SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
     public function testQueries(
         string $query,
         Document $document,
-        string $documentAsStr
+        string $documentAsStr,
+        ?SplObjectStorage $astNodeAncestors = null,
     ): void {
         $parser = $this->getParser();
 
@@ -654,6 +658,14 @@ GRAPHQL;
             $documentAsStr,
             $document->asDocumentString()
         );
+
+        // 3rd test: the Document AST Node Ancestors is right
+        if ($astNodeAncestors !== null) {
+            $this->assertEquals(
+                $astNodeAncestors,
+                $document->getASTNodeAncestors()
+            );
+        }
     }
 
     public function queryProvider()
