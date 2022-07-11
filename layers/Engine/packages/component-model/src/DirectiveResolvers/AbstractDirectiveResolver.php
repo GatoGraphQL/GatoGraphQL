@@ -361,17 +361,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $relationalTypeResolver,
                 )
             ) {
-                foreach ($fields as $field) {
-                    foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
-                        $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                            new ObjectFeedback(
-                                $errorFeedbackItemResolution,
-                                $this->directive,
-                                $relationalTypeResolver,
-                                [$objectID => new EngineIterationFieldSet([$field])]
-                            )
-                        );
-                    }
+                foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            $errorFeedbackItemResolution,
+                            $this->directive,
+                            $relationalTypeResolver,
+                            [$objectID => new EngineIterationFieldSet($fields)]
+                        )
+                    );
                 }
             }
         }
@@ -1298,18 +1296,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
         // Show the failureMessage either as error or as warning
         if ($setFailingFieldResponseAsNull) {
-            foreach ($idFieldSetToRemove as $id => $fieldSet) {
-                foreach ($fieldSet->fields as $failedField) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectFeedback(
-                            $feedbackItemResolution,
-                            $this->directive,
-                            $relationalTypeResolver,
-                            [$id => new EngineIterationFieldSet([$failedField])]
-                        )
-                    );
-                }
-            }
+            $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                new ObjectFeedback(
+                    $feedbackItemResolution,
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $idFieldSetToRemove
+                )
+            );
         } elseif ($removeFieldIfDirectiveFailed) {
             // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
             // if (count($failedFields) == 1) {
@@ -1317,27 +1311,23 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             // } else {
             //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
             // }
-            foreach ($idFieldSetToRemove as $id => $fieldSet) {
-                foreach ($fieldSet->fields as $failedField) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectFeedback(
-                            $feedbackItemResolution,
-                            $this->directive,
-                            $relationalTypeResolver,
-                            [$id => new EngineIterationFieldSet([$failedField])]
-                        )
-                    );
-                    // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
-                    // $objectErrors[$id][] = [
-                    //     Tokens::PATH => [$failedField, $this->directive],
-                    //     Tokens::MESSAGE => sprintf(
-                    //         $message,
-                    //         $failureMessage,
-                    //         implode($this->__('\', \''), $failedFields)
-                    //     ),
-                    // ];
-                }
-            }
+            $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                new ObjectFeedback(
+                    $feedbackItemResolution,
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $idFieldSetToRemove
+                )
+            );
+            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+            // $objectErrors[$id][] = [
+            //     Tokens::PATH => [$failedField, $this->directive],
+            //     Tokens::MESSAGE => sprintf(
+            //         $message,
+            //         $failureMessage,
+            //         implode($this->__('\', \''), $failedFields)
+            //     ),
+            // ];
         } else {
             // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
             // if (count($failedFields) === 1) {

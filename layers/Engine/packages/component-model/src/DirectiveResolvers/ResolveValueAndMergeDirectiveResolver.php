@@ -110,22 +110,20 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                foreach ($fieldSet->fields as $field) {
-                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
-                        new ObjectFeedback(
-                            new FeedbackItemResolution(
-                                ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E13,
-                                [
-                                    $id,
-                                ]
-                            ),
-                            $this->directive,
-                            $relationalTypeResolver,
-                            [$id => new EngineIterationFieldSet([$field])]
-                        )
-                    );
-                }
+                $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                    new ObjectFeedback(
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E13,
+                            [
+                                $id,
+                            ]
+                        ),
+                        $this->directive,
+                        $relationalTypeResolver,
+                        [$id => $fieldSet]
+                    )
+                );
                 // This is currently pointing to NULL and returning this entry in the database. Remove it
                 // (this will also avoid errors in the Engine, which expects this result to be an array and can't be null)
                 unset($resolvedIDFieldValues[$id]);
