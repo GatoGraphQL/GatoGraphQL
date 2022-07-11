@@ -5,19 +5,17 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
-        Location $location,
+        AstInterface $astNode,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        protected FieldInterface $field,
-        protected ?Directive $directive = null,
         /** @var array<string, mixed> */
         array $extensions = [],
         /** @var SchemaFeedbackInterface[] */
@@ -25,7 +23,7 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
     ) {
         parent::__construct(
             $feedbackItemResolution,
-            $location,
+            $astNode,
             $extensions,
         );
     }
@@ -48,10 +46,8 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
         }
         return new self(
             $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
-            $objectTypeFieldResolutionFeedback->getAstNode()->getLocation(),
+            $objectTypeFieldResolutionFeedback->getAstNode(),
             $relationalTypeResolver,
-            $field,
-            $directive,
             $objectTypeFieldResolutionFeedback->getExtensions(),
             $nestedSchemaFeedbackEntries
         );

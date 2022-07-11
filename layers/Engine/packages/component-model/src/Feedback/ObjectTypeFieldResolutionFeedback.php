@@ -6,14 +6,14 @@ namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements ObjectTypeFieldResolutionFeedbackInterface
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
-        Location $location,
+        AstInterface $astNode,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         /** @var array<string, mixed> */
         array $extensions = [],
@@ -22,7 +22,7 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
     ) {
         parent::__construct(
             $feedbackItemResolution,
-            $location,
+            $astNode,
             $extensions,
         );
     }
@@ -41,7 +41,7 @@ class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements
         }
         return new self(
             $schemaInputValidationFeedback->getFeedbackItemResolution(),
-            $schemaInputValidationFeedback->getAstNode()->getLocation(),
+            $schemaInputValidationFeedback->getAstNode(),
             $relationalTypeResolver,
             $schemaInputValidationFeedback->getExtensions(),
             $nestedObjectTypeFieldResolutionFeedbackEntries
