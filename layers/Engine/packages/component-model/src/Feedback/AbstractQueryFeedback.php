@@ -7,8 +7,16 @@ namespace PoP\ComponentModel\Feedback;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
+/**
+ * Error that concern the GraphQL query. the `$astNode` is the
+ * node in the AST where the error happens.
+ */
 abstract class AbstractQueryFeedback extends AbstractFeedback implements QueryFeedbackInterface
 {
+    /**
+     * @param AstInterface $astNode AST node where the error happens (eg: a Field, or an Argument inside a Field)
+     * @param @var array<string, mixed> $extensions
+     */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
         protected AstInterface $astNode,

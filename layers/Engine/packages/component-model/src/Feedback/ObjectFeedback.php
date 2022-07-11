@@ -19,8 +19,6 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInterface
 {
     /**
-     * Undocumented function
-     *
      * @param AstInterface $astNode AST node where the error happens (eg: an Argument inside the Directive)
      * @param Directive $directive At what stage from the Directive pipeline does the error happen
      * @param @var array<string|int,EngineIterationFieldSet> $idFieldSet
