@@ -24,6 +24,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         $state['executable-document-ast'] = null;
+        $state['document-ast-node-ancestors'] = null;
         $state['does-api-query-have-errors'] = null;
 
         // Passing the query via URL param?
@@ -89,6 +90,7 @@ class AppStateProvider extends AbstractAppStateProvider
                 $operationName
             );
             $state['executable-document-ast'] = $executableDocument;
+            $state['document-ast-node-ancestors'] = $executableDocument->getDocument()->getASTNodeAncestors();
         } catch (SyntaxErrorException | InvalidRequestException $e) {
             // @todo Show GraphQL error in client
             // ...

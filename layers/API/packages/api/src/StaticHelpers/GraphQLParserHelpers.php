@@ -27,7 +27,7 @@ class GraphQLParserHelpers
         array $variableValues,
         ?string $operationName,
     ): ExecutableDocument {
-        $document = static::getParser()->parse($query)->setAncestorsInAST();
+        $document = static::getParser()->parse($query);
         /** @var ExecutableDocument */
         $executableDocument = (
             new ExecutableDocument(

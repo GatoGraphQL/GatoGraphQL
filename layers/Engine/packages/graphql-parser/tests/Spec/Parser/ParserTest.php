@@ -13,8 +13,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
@@ -24,9 +24,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
 use PoP\Root\Feedback\FeedbackItemResolution;
+use SplObjectStorage;
 use stdClass;
 
 class ParserTest extends AbstractTestCase
@@ -639,20 +641,22 @@ GRAPHQL;
     public function testQueries(
         string $query,
         Document $document,
-        string $documentAsStr
+        string $documentAsStr,
     ): void {
         $parser = $this->getParser();
+
+        $parsedDocument = $parser->parse($query);
 
         // 1st test: Parsing is right
         $this->assertEquals(
             $document,
-            $parser->parse($query)
+            $parsedDocument
         );
 
         // 2nd test: Converting document back to query string is right
         $this->assertEquals(
             $documentAsStr,
-            $document->asDocumentString()
+            $parsedDocument->asDocumentString()
         );
     }
 
@@ -1285,6 +1289,262 @@ GRAPHQL;
                 'query GetUsersName { users { ...on User @outside { id posts @inside { id } } } }'
             ],
         ];
+    }
+
+    /**
+     * @dataProvider astNodeAncestorProvider
+     *
+     * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
+     */
+    public function testASTNodeAncestors(
+        Document $document,
+        SplObjectStorage $astNodeAncestors,
+    ): void {
+        $this->assertEquals(
+            $astNodeAncestors,
+            $document->getASTNodeAncestors()
+        );
+    }
+
+    public function astNodeAncestorProvider(): array
+    {
+        $astNodeAncestors = [];
+
+        /**
+         * Query:
+         *
+         * { film(id: 1 filmID: 2) { title } }
+         */
+        $leafField1 = new LeafField('title', null, [], [], new Location(1, 27));
+        $literal11 = new Literal(1, new Location(1, 12));
+        $argument11 = new Argument('id', $literal11, new Location(1, 8));
+        $literal12 = new Literal(2, new Location(1, 22));
+        $argument12 = new Argument('filmID', $literal12, new Location(1, 14));
+        $relationalField1 = new RelationalField(
+            'film',
+            null,
+            [
+                $argument11,
+                $argument12,
+            ],
+            [
+                $leafField1,
+            ],
+            [],
+            new Location(1, 3)
+        );
+        $queryOperation1 = new QueryOperation('', [], [], [
+            $relationalField1
+        ], new Location(1, 1));
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors1 = new SplObjectStorage();
+        $astNodeAncestors1[$literal11] = $argument11;
+        $astNodeAncestors1[$literal12] = $argument12;
+        $astNodeAncestors1[$argument11] = $relationalField1;
+        $astNodeAncestors1[$argument12] = $relationalField1;
+        $astNodeAncestors1[$leafField1] = $relationalField1;
+        $astNodeAncestors1[$relationalField1] = $queryOperation1;
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation1,
+                ]
+            ),
+            $astNodeAncestors1,
+        ];
+
+        /**
+         * Query:
+         *
+         * query GetUsersName(\$format: String!) @someOperationDirective {
+         *     users {
+         *         name @style(format: \$format)
+         *     }
+         * }
+         */
+        $formatVariable2 = new Variable('format', 'String', true, false, false, new Location(1, 24));
+        $variableReference2 = new VariableReference('format', $formatVariable2, new Location(3, 33));
+        $argument2 = new Argument('format', $variableReference2, new Location(3, 25));
+        $directive22 = new Directive(
+            'style',
+            [
+                $argument2
+            ],
+            new Location(3, 19)
+        );
+        $leafField2 = new LeafField(
+            'name',
+            null,
+            [],
+            [
+                $directive22
+            ],
+            new Location(3, 13)
+        );
+        $relationalField2 = new RelationalField(
+            'users',
+            null,
+            [],
+            [
+                $leafField2,
+            ],
+            [],
+            new Location(2, 9)
+        );
+        $directive21 = new Directive('someOperationDirective', [], new Location(1, 43));
+        $queryOperation2 = new QueryOperation(
+            'GetUsersName',
+            [
+                $formatVariable2
+            ],
+            [
+                $directive21
+            ],
+            [
+                $relationalField2,
+            ],
+            new Location(1, 11)
+        );
+
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors2 = new SplObjectStorage();
+        $astNodeAncestors2[$variableReference2] = $argument2;
+        $astNodeAncestors2[$argument2] = $directive22;
+        $astNodeAncestors2[$directive22] = $leafField2;
+        $astNodeAncestors2[$leafField2] = $relationalField2;
+        $astNodeAncestors2[$formatVariable2] = $queryOperation2;
+        $astNodeAncestors2[$relationalField2] = $queryOperation2;
+        $astNodeAncestors2[$directive21] = $queryOperation2;
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation2,
+                ]
+            ),
+            $astNodeAncestors2,
+        ];
+
+        /**
+         * Query:
+         *
+         * { test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }
+         */
+        $leafField31 = new LeafField('id', null, [], [], new Location(1, 70));
+        $leafField32 = new LeafField('name', null, [], [], new Location(1, 74));
+        $leafField33 = new LeafField('email', null, [], [], new Location(1, 80));
+        $fragment3 = new Fragment('userDataFragment', 'User', [], [
+            $leafField31,
+            $leafField32,
+            $leafField33,
+        ], new Location(1, 43));
+        $fragmentReference3 = new FragmentReference('userDataFragment', new Location(1, 13));
+        $relationalField3 = new RelationalField('test', null, [], [$fragmentReference3], [], new Location(1, 3));
+        $queryOperation3 = new QueryOperation('', [], [], [
+            $relationalField3,
+        ], new Location(1, 1));
+
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors3 = new SplObjectStorage();
+        $astNodeAncestors3[$leafField31] = $fragment3;
+        $astNodeAncestors3[$leafField32] = $fragment3;
+        $astNodeAncestors3[$leafField33] = $fragment3;
+        $astNodeAncestors3[$fragmentReference3] = $relationalField3;
+        $astNodeAncestors3[$relationalField3] = $queryOperation3;
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation3
+                ],
+                [
+                    $fragment3,
+                ]
+            ),
+            $astNodeAncestors3,
+        ];
+
+        /**
+         * Query:
+         *
+         * { allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }
+         */
+        $literal41 = new Literal(1, new Location(1, 63));
+        $literal42 = new Literal(2, new Location(1, 66));
+        $literal43 = new Literal(4, new Location(1, 69));
+        $inputList41 = new InputList(
+            [
+                $literal41,
+                $literal42,
+                $literal43,
+            ],
+            new Location(1, 61)
+        );
+        $literal44 = new Literal(123, new Location(1, 87));
+        $literal45 = new Literal('asd', new Location(1, 99));
+        $inputObject41 = new InputObject(
+            (object) [
+                'a' => $literal44,
+                'b' => $literal45,
+            ],
+            new Location(1, 79)
+        );
+        $literal46 = new Literal(123, new Location(1, 37));
+        $literal47 = new Literal('asd', new Location(1, 48));
+        $inputObject42 = new InputObject(
+            (object) [
+                'a' => $literal46,
+                'd' => $literal47,
+                'b' => $inputList41,
+                'c' => $inputObject41,
+            ],
+            new Location(1, 30)
+        );
+        $argument41 = new Argument(
+            'object',
+            $inputObject42,
+            new Location(1, 22)
+        );
+        $leafField41 = new LeafField('id', null, [], [], new Location(1, 112));
+        $relationalField41 = new RelationalField(
+            'users',
+            'allUsers',
+            [
+                $argument41,
+            ],
+            [
+                $leafField41,
+            ],
+            [],
+            new Location(1, 14)
+        );
+        $queryOperation4 = new QueryOperation('', [], [], [
+            $relationalField41,
+        ], new Location(1, 1));
+
+        /** @var SplObjectStorage<AstInterface,AstInterface> */
+        $astNodeAncestors4 = new SplObjectStorage();
+        $astNodeAncestors4[$literal41] = $inputList41;
+        $astNodeAncestors4[$literal42] = $inputList41;
+        $astNodeAncestors4[$literal43] = $inputList41;
+        $astNodeAncestors4[$literal44] = $inputObject41;
+        $astNodeAncestors4[$literal45] = $inputObject41;
+        $astNodeAncestors4[$literal46] = $inputObject42;
+        $astNodeAncestors4[$literal47] = $inputObject42;
+        $astNodeAncestors4[$inputList41] = $inputObject42;
+        $astNodeAncestors4[$inputObject41] = $inputObject42;
+        $astNodeAncestors4[$inputObject42] = $argument41;
+        $astNodeAncestors4[$argument41] = $relationalField41;
+        $astNodeAncestors4[$leafField41] = $relationalField41;
+        $astNodeAncestors4[$relationalField41] = $queryOperation4;
+        $astNodeAncestors[] = [
+            new Document(
+                [
+                    $queryOperation4
+                ],
+            ),
+            $astNodeAncestors4,
+        ];
+
+        return $astNodeAncestors;
     }
 
     public function testVariableDefaultValue()

@@ -7,7 +7,6 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
-use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -16,8 +15,6 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class VariableReference extends AbstractAst implements VariableReferenceInterface
 {
     use StandaloneServiceTrait;
-
-    protected InputList|InputObject|Argument $parent;
 
     public function __construct(
         protected readonly string $name,
@@ -33,16 +30,6 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
             '$%s',
             $this->name
         );
-    }
-
-    public function setParent(InputList|InputObject|Argument $parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): InputList|InputObject|Argument
-    {
-        return $this->parent;
     }
 
     public function getVariable(): ?Variable

@@ -10,8 +10,6 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
 {
     use WithArgumentsTrait;
 
-    protected FieldInterface|OperationInterface|Fragment|InlineFragment $parent;
-
     /**
      * @param Argument[] $arguments
      */
@@ -42,16 +40,6 @@ class Directive extends AbstractAst implements WithNameInterface, WithArgumentsI
             $this->name,
             $strDirectiveArguments
         );
-    }
-
-    public function setParent(FieldInterface|OperationInterface|Fragment|InlineFragment $parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent(): FieldInterface|OperationInterface|Fragment|InlineFragment
-    {
-        return $this->parent;
     }
 
     public function getName(): string
