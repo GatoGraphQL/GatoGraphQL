@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -14,7 +13,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
 {
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
-        AstInterface $astNode,
+        Directive $directive,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
         protected string|int $objectID,
         /** @var array<string, mixed> */
@@ -22,7 +21,7 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
     ) {
         parent::__construct(
             $feedbackItemResolution,
-            $astNode,
+            $directive, // The Directive is the AST node
             $extensions,
         );
     }
