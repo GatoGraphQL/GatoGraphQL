@@ -767,13 +767,15 @@ class Document implements DocumentInterface
     private function setAncestorsUnderInputList(InputList $inputList): void
     {
         foreach ($inputList->getAstValue() as $astValue) {
-            if (!(
+            if (
+                !(
                 $astValue instanceof Enum
                 || $astValue instanceof InputList
                 || $astValue instanceof InputObject
                 || $astValue instanceof Literal
                 || $astValue instanceof VariableReference
-            )) {
+                )
+            ) {
                 continue;
             }
             $this->astNodeAncestors[$astValue] = $inputList;
@@ -784,13 +786,15 @@ class Document implements DocumentInterface
     private function setAncestorsUnderInputObject(InputObject $inputObject): void
     {
         foreach ((array) $inputObject->getAstValue() as $astValue) {
-            if (!(
+            if (
+                !(
                 $astValue instanceof Enum
                 || $astValue instanceof InputList
                 || $astValue instanceof InputObject
                 || $astValue instanceof Literal
                 || $astValue instanceof VariableReference
-            )) {
+                )
+            ) {
                 continue;
             }
             $this->astNodeAncestors[$astValue] = $inputObject;

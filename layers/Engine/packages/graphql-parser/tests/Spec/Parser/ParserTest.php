@@ -1309,7 +1309,7 @@ GRAPHQL;
     public function astNodeAncestorProvider(): array
     {
         $astNodeAncestors = [];
-        
+
         /**
          * Query:
          *
@@ -1373,9 +1373,13 @@ GRAPHQL;
             new Location(3, 19)
         );
         $leafField2 = new LeafField(
-            'name', null, [], [
+            'name',
+            null,
+            [],
+            [
                 $directive22
-            ], new Location(3, 13)
+            ],
+            new Location(3, 13)
         );
         $relationalField2 = new RelationalField(
             'users',
