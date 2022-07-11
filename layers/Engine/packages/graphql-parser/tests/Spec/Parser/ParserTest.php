@@ -1333,6 +1333,8 @@ GRAPHQL;
         ], new Location(1, 1));
         $astNodeAncestors1[$literal11] = $argument11;
         $astNodeAncestors1[$literal12] = $argument12;
+        $astNodeAncestors1[$argument11] = $relationalField1;
+        $astNodeAncestors1[$argument12] = $relationalField1;
         $astNodeAncestors1[$leafField1] = $relationalField1;
         $astNodeAncestors1[$relationalField1] = $queryOperation1;
         return [
