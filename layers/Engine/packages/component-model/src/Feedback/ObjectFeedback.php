@@ -49,8 +49,11 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         return $this->relationalTypeResolver;
     }
 
-    public function getObjectID(): string|int
+    /**
+     * @return array<string|int,EngineIterationFieldSet>
+     */
+    public function getIDFieldSet(): array
     {
-        return $this->objectID;
+        return $this->idFieldSet;
     }
 }
