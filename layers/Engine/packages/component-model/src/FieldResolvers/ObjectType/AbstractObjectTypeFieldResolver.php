@@ -700,14 +700,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Custom validations
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): array {
-        return [];
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
     }
 
     public function collectFieldValidationDeprecationMessages(

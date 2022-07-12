@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\Module;
 use PoP\Engine\ModuleConfiguration;
-use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
@@ -115,23 +116,28 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): array {
-        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'var':
                 if (!App::hasState($fieldDataAccessor->getValue('name'))) {
-                    $errors[] = new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E6,
-                        [
-                            $fieldDataAccessor->getValue('name'),
-                        ]
+                    $field = $fieldDataAccessor->getField();
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E6,
+                                [
+                                    $fieldDataAccessor->getValue('name'),
+                                ]
+                            ),
+                            $field->getArgument('name') ?? $field,
+                        )
                     );
                 };
                 break;
         }
-
-        return $errors;
     }
 
     public function resolveValue(

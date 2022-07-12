@@ -1480,11 +1480,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $fieldData,
             $objectTypeFieldResolver,
             $field,
-            $objectTypeFieldResolutionFeedbackStore
+            $objectTypeFieldResolutionFeedbackStore,
         );
-        $errorFeedbackItemResolutions = array_merge(
-            $errorFeedbackItemResolutions,
-            $objectTypeFieldResolver->validateFieldKeyValues($this, $fieldDataAccessor)
+        $objectTypeFieldResolver->validateFieldKeyValues(
+            $this,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
 
         /**

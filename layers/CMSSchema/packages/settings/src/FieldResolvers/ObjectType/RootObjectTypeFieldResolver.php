@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Settings\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -16,6 +15,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolv
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\Settings\FeedbackItemProviders\FeedbackItemProvider;
 use PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
@@ -137,31 +138,34 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     /**
      * Custom validations
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldKeyValues(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): array {
-        $errors = parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor);
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        parent::validateFieldKeyValues($objectTypeResolver, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
                 if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldDataAccessor->getValue('name'))) {
-                    $errors[] = new FeedbackItemResolution(
-                        FeedbackItemProvider::class,
-                        FeedbackItemProvider::E1,
-                        [
-                            $fieldDataAccessor->getValue('name'),
-                        ]
+                    $field = $fieldDataAccessor->getField();
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E1,
+                                [
+                                    $fieldDataAccessor->getValue('name'),
+                                ]
+                            ),
+                            $field->getArgument('name') ?? $field,
+                        )
                     );
                 }
                 break;
         }
-
-        return $errors;
     }
 
     public function validateResolvedFieldType(
