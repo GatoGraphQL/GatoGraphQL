@@ -173,8 +173,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                                     $deprecationMessage,
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $fieldOrDirectiveArgTypeResolver,
+                            $astNode,
                         )
                     );
                 }

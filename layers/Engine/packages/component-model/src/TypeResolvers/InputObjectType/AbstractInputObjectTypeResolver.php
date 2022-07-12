@@ -199,8 +199,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                             $inputValue
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return null;
@@ -271,8 +270,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                                 $this->getMaybeNamespacedTypeName(),
                             ]
                         ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $this
+                        $astNode,
                     ),
                 );
                 continue;
@@ -354,6 +352,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                 $inputFieldTypeResolver,
                 $inputFieldName,
                 $coercedInputFieldValue,
+                $astNode,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
             $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
@@ -388,8 +387,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             continue;
@@ -433,6 +431,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
+        AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
     }

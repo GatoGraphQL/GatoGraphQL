@@ -66,8 +66,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
                         $this->getDateTimeFormat(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
         return null;

@@ -58,8 +58,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
                             implode($this->__('\', \''), $possibleValues),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return null;

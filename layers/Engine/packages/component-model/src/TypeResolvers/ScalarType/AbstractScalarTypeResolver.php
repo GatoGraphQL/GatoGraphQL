@@ -78,8 +78,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }
@@ -105,8 +104,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }
@@ -128,8 +126,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }
@@ -149,8 +146,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }

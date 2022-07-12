@@ -25,7 +25,7 @@ abstract class AbstractOneofInputObjectTypeResolver extends AbstractInputObjectT
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?stdClass {
-        $this->validateOneofInputObjectValue($inputValue, $objectTypeFieldResolutionFeedbackStore);
+        $this->validateOneofInputObjectValue($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }

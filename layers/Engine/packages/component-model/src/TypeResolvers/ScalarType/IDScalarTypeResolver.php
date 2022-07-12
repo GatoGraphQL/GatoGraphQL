@@ -69,8 +69,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return null;

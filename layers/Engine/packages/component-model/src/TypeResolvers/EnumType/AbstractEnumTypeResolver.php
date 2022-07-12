@@ -107,8 +107,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                             implode($this->__('\', \''), $nonDeprecatedEnumValues)
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return null;
@@ -137,8 +136,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                         $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
-                LocationHelper::getNonSpecificLocation(),
-                $this
+                $astNode,
             ),
         );
     }

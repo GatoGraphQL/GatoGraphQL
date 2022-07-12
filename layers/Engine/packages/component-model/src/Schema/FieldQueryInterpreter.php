@@ -655,8 +655,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                                     $deprecationMessage,
                                 ]
                             ),
-                            LocationHelper::getNonSpecificLocation(),
-                            $fieldOrDirectiveArgTypeResolver,
+                            $astNode,
                         )
                     );
                 }

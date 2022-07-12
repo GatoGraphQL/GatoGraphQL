@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Translation\TranslationAPIInterface;
 use stdClass;
 
@@ -39,6 +39,7 @@ trait OneofInputObjectTypeResolverTrait
      */
     protected function validateOneofInputObjectValue(
         stdClass $inputValue,
+        AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $inputValueSize = count((array)$inputValue);
@@ -57,8 +58,7 @@ trait OneofInputObjectTypeResolverTrait
                             ),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
             return;
@@ -73,8 +73,7 @@ trait OneofInputObjectTypeResolverTrait
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $this
+                    $astNode,
                 ),
             );
         }

@@ -142,8 +142,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             json_encode($inputValue),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -165,8 +164,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             $inputValueAsString,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -188,8 +186,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             $inputName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -212,8 +209,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             json_encode($inputValue),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -237,8 +233,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             json_encode($inputValue),
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
@@ -263,8 +258,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                             $inputName,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $inputTypeResolver
+                    $astNode,
                 ),
             );
             return;
