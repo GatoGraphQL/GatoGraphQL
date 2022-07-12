@@ -4,13 +4,18 @@
       "message": "Directive 'serializeLeafOutputTypeValues' can be executed only once for field(s) 'self<serializeLeafOutputTypeValues>'",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 3,
+          "column": 9
         }
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "self<serializeLeafOutputTypeValues>",
+        "field": "self @serializeLeafOutputTypeValues { ... }",
+        "path": [
+          "@serializeLeafOutputTypeValues",
+          "self @serializeLeafOutputTypeValues { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e23"
       }
     }
