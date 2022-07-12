@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "MutationRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724})",
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724}) { ... }",
+        "path": [
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724}) { ... }",
+          "mutation { ... }"
+        ],
         "code": "PoPCMSSchema\\CommentMutations\\e1"
       }
     }

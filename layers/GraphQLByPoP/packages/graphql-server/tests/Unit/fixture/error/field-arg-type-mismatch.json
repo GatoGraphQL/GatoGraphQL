@@ -4,13 +4,20 @@
             "message": "Argument 'ofKinds' cannot receive an array containing arrays as elements",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 11,
+                    "column": 47
                 }
             ],
             "extensions": {
                 "type": "__Schema",
-                "field": "passingArrayOfArrays: directives(ofKinds: [[\"query\"]])",
+                "field": "passingArrayOfArrays: directives(ofKinds: [[\"query\"]]) { ... }",
+                "path": [
+                    "[[\"query\"]]",
+                    "(ofKinds: [[\"query\"]])",
+                    "passingArrayOfArrays: directives(ofKinds: [[\"query\"]]) { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e11"
             }
         },
@@ -18,13 +25,20 @@
             "message": "Enum values can only be strings, value '{\"ofKinds\":\"query\"}' for type 'DirectiveKindEnum' is not allowed",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 15,
+                    "column": 52
                 }
             ],
             "extensions": {
                 "type": "__Schema",
-                "field": "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}])",
+                "field": "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}]) { ... }",
+                "path": [
+                    "[{ofKinds: \"query\"}]",
+                    "(ofKinds: [{ofKinds: \"query\"}])",
+                    "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}]) { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e18"
             }
         },
@@ -32,13 +46,20 @@
             "message": "Argument 'ofKinds' cannot receive an array with `null` values",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 19,
+                    "column": 47
                 }
             ],
             "extensions": {
                 "type": "__Schema",
-                "field": "passingArrayOfArrays: directives(ofKinds: [\"query\", null])",
+                "field": "passingArrayOfArrays: directives(ofKinds: [\"query\", null]) { ... }",
+                "path": [
+                    "[\"query\", null]",
+                    "(ofKinds: [\"query\", null])",
+                    "passingArrayOfArrays: directives(ofKinds: [\"query\", null]) { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e10"
             }
         },
@@ -46,13 +67,21 @@
             "message": "Cannot cast value '1.2' for type 'Boolean'",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 6,
+                    "column": 38
                 }
             ],
             "extensions": {
                 "type": "__Type",
                 "field": "passingFloat: name(namespaced: 1.2)",
+                "path": [
+                    "1.2",
+                    "(namespaced: 1.2)",
+                    "passingFloat: name(namespaced: 1.2)",
+                    "types { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
@@ -60,13 +89,21 @@
             "message": "Argument 'namespaced' does not expect an array, but array '[false]' was provided",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 7,
+                    "column": 38
                 }
             ],
             "extensions": {
                 "type": "__Type",
                 "field": "passingArray: name(namespaced: [false])",
+                "path": [
+                    "[false]",
+                    "(namespaced: [false])",
+                    "passingArray: name(namespaced: [false])",
+                    "types { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e8"
             }
         },
@@ -74,13 +111,21 @@
             "message": "An object cannot be casted to type 'Boolean'",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 8,
+                    "column": 44
                 }
             ],
             "extensions": {
                 "type": "__Type",
                 "field": "passingInputObject: name(namespaced: {namespaced: true})",
+                "path": [
+                    "{namespaced: true}",
+                    "(namespaced: {namespaced: true})",
+                    "passingInputObject: name(namespaced: {namespaced: true})",
+                    "types { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e1"
             }
         }

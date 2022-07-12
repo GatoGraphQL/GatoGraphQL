@@ -11,6 +11,10 @@
       "extensions": {
         "type": "QueryRoot",
         "field": "nonExisting",
+        "path": [
+          "nonExisting",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }

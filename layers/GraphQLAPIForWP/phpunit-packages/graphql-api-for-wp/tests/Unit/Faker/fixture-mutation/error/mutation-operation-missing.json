@@ -10,7 +10,11 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
+        "field": "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+        "path": [
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e16"
       }
     }

@@ -10,9 +10,8 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "hi: echo(value: \"Hi there\")<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"author\", \"administrator\"]), validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])>",
-          "validateIsUserLoggedIn"
+        "path": [
+          "@validateIsUserLoggedIn"
         ],
         "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
       }
@@ -27,9 +26,8 @@
       ],
       "extensions": {
         "type": "QueryRoot",
-        "fields": [
-          "self<validateDoesLoggedInUserHaveAnyRole(roles: [\"editor\", \"administrator\"])>",
-          "validateIsUserLoggedIn"
+        "path": [
+          "@validateIsUserLoggedIn"
         ],
         "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
       }

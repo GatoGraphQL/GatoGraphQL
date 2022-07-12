@@ -4,13 +4,19 @@
             "message": "Argument 'slug' does not expect an array, but array '[\"block-category-common\"]' was provided",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 3,
+                    "column": 26
                 }
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "passingArray: post(by: {slug: [\"block-category-common\"]})",
+                "field": "passingArray: post(by: {slug: [\"block-category-common\"]}) { ... }",
+                "path": [
+                    "{slug: [\"block-category-common\"]}",
+                    "(by: {slug: [\"block-category-common\"]})",
+                    "passingArray: post(by: {slug: [\"block-category-common\"]}) { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e8"
             }
         },
@@ -18,13 +24,19 @@
             "message": "An object cannot be casted to type 'String'",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 6,
+                    "column": 32
                 }
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}})",
+                "field": "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}}) { ... }",
+                "path": [
+                    "{slug: {slug: \"block-category-common\"}}",
+                    "(by: {slug: {slug: \"block-category-common\"}})",
+                    "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}}) { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e1"
             }
         },
@@ -32,13 +44,19 @@
             "message": "Type 'Date' must be provided as a string",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 9,
+                    "column": 33
                 }
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "passingNonDate: posts(filter: {dateQuery: {after: 1}})",
+                "field": "passingNonDate: posts(filter: {dateQuery: {after: 1}}) { ... }",
+                "path": [
+                    "{dateQuery: {after: 1}}",
+                    "(filter: {dateQuery: {after: 1}})",
+                    "passingNonDate: posts(filter: {dateQuery: {after: 1}}) { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e3"
             }
         }

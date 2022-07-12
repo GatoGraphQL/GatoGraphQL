@@ -11,6 +11,10 @@
       "extensions": {
         "type": "QueryRoot",
         "field": "implements",
+        "path": [
+          "implements",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e29"
       }
     }

@@ -4,13 +4,20 @@
             "message": "Argument 'ofKinds' expects an array, but value 'query' was provided",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 3,
+                    "column": 26
                 }
             ],
             "extensions": {
                 "type": "__Schema",
-                "field": "directives(ofKinds: \"query\")",
+                "field": "directives(ofKinds: \"query\") { ... }",
+                "path": [
+                    "\"query\"",
+                    "(ofKinds: \"query\")",
+                    "directives(ofKinds: \"query\") { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e9"
             }
         }

@@ -4,13 +4,19 @@
       "message": "Argument 'if' in directive 'skip' cannot be empty",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 3,
+          "column": 9
         }
       ],
       "extensions": {
         "type": "Post",
-        "field": "id<skip>",
+        "field": "id @skip",
+        "path": [
+          "@skip",
+          "id @skip",
+          "posts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e24"
       }
     },
@@ -18,13 +24,19 @@
       "message": "Argument 'if' in directive 'include' cannot be empty",
       "locations": [
         {
-          "line": 1,
-          "column": 1
+          "line": 6,
+          "column": 9
         }
       ],
       "extensions": {
         "type": "CustomPostUnion",
-        "field": "id<include>",
+        "field": "id @include",
+        "path": [
+          "@include",
+          "id @include",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e24"
       }
     }
