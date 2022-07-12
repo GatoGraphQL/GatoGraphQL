@@ -2272,7 +2272,7 @@ class Engine implements EngineInterface
         $documentASTNodeAncestors = App::getState('document-ast-node-ancestors');
         while ($astNode !== null) {
             $astNodePath[] = $astNode->asASTNodeString();
-            if ($field !== null && $astNode instanceof FieldInterface) {
+            if ($field === null && $astNode instanceof FieldInterface) {
                 $field = $astNode;
             }
             // Move to the ancestor AST node
