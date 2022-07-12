@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implements ScalarTypeResolverInterface
@@ -62,6 +63,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
     final protected function validateIsNotStdClass(
         string|int|float|bool|stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
         if (!($inputValue instanceof stdClass)) {
@@ -84,6 +86,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
     final protected function validateFilterVar(
         mixed $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
         int $filter,
         array|int $options = [],
@@ -110,6 +113,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
     final protected function validateIsString(
         string|int|float|bool|stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
         if (is_string($inputValue)) {
@@ -132,6 +136,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
     protected function addDefaultError(
         mixed $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
         $schemaInputValidationFeedbackStore->addError(

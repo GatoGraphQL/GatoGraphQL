@@ -39,7 +39,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsNotStdClass($inputValue, $separateSchemaInputValidationFeedbackStore);
+        $this->validateIsNotStdClass($inputValue, $astNode, $separateSchemaInputValidationFeedbackStore);
         $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;

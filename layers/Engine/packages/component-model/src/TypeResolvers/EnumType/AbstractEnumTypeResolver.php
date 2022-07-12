@@ -84,7 +84,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsString($inputValue, $separateSchemaInputValidationFeedbackStore);
+        $this->validateIsString($inputValue, $astNode, $separateSchemaInputValidationFeedbackStore);
         $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
@@ -118,6 +118,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     final protected function validateIsString(
         string|int|float|bool|stdClass $inputValue,
+        AstInterface $astNode,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): void {
         if (is_string($inputValue)) {

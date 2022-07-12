@@ -37,13 +37,13 @@ class URLAbsolutePathScalarTypeResolver extends AbstractScalarTypeResolver
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsString($inputValue, $separateSchemaInputValidationFeedbackStore);
+        $this->validateIsString($inputValue, $astNode, $separateSchemaInputValidationFeedbackStore);
         $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }
 
-        $this->validateFilterVar('http://www.example.com' . $inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_URL);
+        $this->validateFilterVar('http://www.example.com' . $astNode, $inputValue, $schemaInputValidationFeedbackStore, \FILTER_VALIDATE_URL);
         if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
         }

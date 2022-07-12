@@ -31,7 +31,7 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsNotStdClass($inputValue, $separateSchemaInputValidationFeedbackStore);
+        $this->validateIsNotStdClass($inputValue, $astNode, $separateSchemaInputValidationFeedbackStore);
         $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;
@@ -44,7 +44,7 @@ class NumericScalarTypeResolver extends AbstractScalarTypeResolver
         if ($castInputValue !== null) {
             return (float) $castInputValue;
         }
-        $this->addDefaultError($inputValue, $schemaInputValidationFeedbackStore);
+        $this->addDefaultError($inputValue, $astNode, $schemaInputValidationFeedbackStore);
         return null;
     }
 }

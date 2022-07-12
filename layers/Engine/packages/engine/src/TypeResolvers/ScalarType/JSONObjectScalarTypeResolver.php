@@ -38,7 +38,7 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {
-            $this->addDefaultError($inputValue, $schemaInputValidationFeedbackStore);
+            $this->addDefaultError($inputValue, $astNode, $schemaInputValidationFeedbackStore);
             return null;
         }
         return $inputValue;
