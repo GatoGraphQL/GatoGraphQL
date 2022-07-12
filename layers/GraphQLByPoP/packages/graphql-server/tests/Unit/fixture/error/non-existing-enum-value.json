@@ -5,13 +5,14 @@
       "locations": [
         {
           "line": 3,
-          "column": 16
+          "column": 25
         }
       ],
       "extensions": {
         "type": "__Schema",
         "field": "directives(ofKinds: [NON_EXISTING]) { ... }",
         "path": [
+          "[NON_EXISTING]",
           "(ofKinds: [NON_EXISTING])",
           "directives(ofKinds: [NON_EXISTING]) { ... }",
           "__schema { ... }",
