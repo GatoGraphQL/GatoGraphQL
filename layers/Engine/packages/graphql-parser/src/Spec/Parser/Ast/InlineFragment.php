@@ -64,7 +64,7 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
     protected function doAsASTNodeString(): string
     {
         return sprintf(
-            '...on %s',
+            '...on %s { ... }',
             $this->typeName,
         );
     }

@@ -66,7 +66,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
     protected function doAsASTNodeString(): string
     {
         return sprintf(
-            'fragment %s on %s',
+            'fragment %s on %s { ... }',
             $this->name,
             $this->model,
         );

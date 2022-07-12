@@ -48,4 +48,12 @@ class RelationalField extends AbstractField implements WithFieldsOrFragmentBonds
             $strFieldFieldsOrFragmentBonds,
         );
     }
+
+    protected function doAsASTNodeString(): string
+    {
+        return sprintf(
+            '%s { ... }',
+            parent::doAsASTNodeString(),
+        );
+    }
 }

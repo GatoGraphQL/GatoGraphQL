@@ -101,7 +101,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
             $strOperationVariables,
         );
         return sprintf(
-            '%s%s',
+            '%s%s { ... }',
             $this->getOperationType(),
             $operationDefinition !== '' ? ' ' . $operationDefinition : '',
         );
