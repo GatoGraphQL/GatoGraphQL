@@ -34,34 +34,4 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
         }
         return parent::addTopLevelExtensionsEntryToResponse();
     }
-
-    /**
-     * Convert the argumentPath from array to string.
-     *
-     * The field or directive argument name is appended ":", and input fields
-     * are separated with ".":
-     *
-     *   ['filter'] => 'filter:'
-     *   ['filter', 'dateQuery'] => 'filter:dateQuery
-     *   ['filter', 'dateQuery', 'relation'] => 'filter:dateQuery.relation
-     *
-     * @param array<string,mixed> $extensions
-     * @return array<string,mixed>
-     */
-    protected function reformatExtensions(array $extensions): array
-    {
-        $extensions = parent::reformatExtensions($extensions);
-
-        if (!empty($extensions[Tokens::ARGUMENT_PATH])) {
-            // The first element is the field or directive argument name
-            $fieldOrDirectiveName = array_shift($extensions[Tokens::ARGUMENT_PATH]);
-            $extensions[Tokens::ARGUMENT_PATH] = sprintf(
-                '%s:%s',
-                $fieldOrDirectiveName,
-                implode('.', $extensions[Tokens::ARGUMENT_PATH])
-            );
-        }
-
-        return $extensions;
-    }
 }

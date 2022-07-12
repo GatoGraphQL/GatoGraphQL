@@ -12,5 +12,4 @@ class Tokens
     const LOCATIONS = 'locations';
     const NESTED = 'nested';
     const EXTENSIONS = 'extensions';
-    const ARGUMENT_PATH = 'argumentPath';
 }
