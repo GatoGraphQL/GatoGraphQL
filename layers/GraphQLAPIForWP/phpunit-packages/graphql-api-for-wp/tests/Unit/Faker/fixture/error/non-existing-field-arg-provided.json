@@ -5,12 +5,18 @@
       "locations": [
         {
           "line": 4,
-          "column": 5
+          "column": 44
         }
       ],
       "extensions": {
         "type": "Post",
         "field": "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+        "path": [
+          "(type: \"DoesntMatter\")",
+          "implements(interface: \"SomeInterface\", type: \"DoesntMatter\")",
+          "posts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e27"
       }
     },
@@ -19,12 +25,18 @@
       "locations": [
         {
           "line": 8,
-          "column": 5
+          "column": 36
         }
       ],
       "extensions": {
         "type": "Post",
         "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+        "path": [
+          "(interface: \"DoesntMatter\")",
+          "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e27"
       }
     },
@@ -33,12 +45,18 @@
       "locations": [
         {
           "line": 8,
-          "column": 5
+          "column": 36
         }
       ],
       "extensions": {
         "type": "Page",
         "field": "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+        "path": [
+          "(interface: \"DoesntMatter\")",
+          "isObjectType(type: \"SomeType\", interface: \"DoesntMatter\")",
+          "customPosts(pagination: {limit: 3}) { ... }",
+          "query { ... }"
+        ],
         "code": "PoP\\ComponentModel\\e27"
       }
     }
