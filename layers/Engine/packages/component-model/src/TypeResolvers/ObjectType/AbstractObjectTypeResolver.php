@@ -1476,13 +1476,14 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $field,
             $fieldData,
         );
+        $this->validateFieldArgumentConstraints(
+            $fieldData,
+            $objectTypeFieldResolver,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore
+        );
         $errorFeedbackItemResolutions = array_merge(
             $errorFeedbackItemResolutions,
-            $this->validateFieldArgumentConstraints(
-                $fieldData,
-                $objectTypeFieldResolver,
-                $field,
-            ),
             $objectTypeFieldResolver->validateFieldKeyValues($this, $fieldDataAccessor)
         );
 
@@ -1627,31 +1628,31 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         array $fieldData,
         ObjectTypeFieldResolverInterface $objectTypeFieldResolver,
         FieldInterface $field,
-    ): array {
-        $errorFeedbackItemResolutions = [];
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         $fieldArgNameTypeResolvers = $objectTypeFieldResolver->getConsolidatedFieldArgNameTypeResolvers($this, $field->getName());
         foreach ($fieldData as $argName => $argValue) {
             $fieldArgTypeResolver = $fieldArgNameTypeResolvers[$argName];
+            $astNode = $field->getArgument($argName) ?? $field;
             /**
              * If the field is an InputObject, let it perform validations on its input fields.
              */
             if ($fieldArgTypeResolver instanceof InputObjectTypeResolverInterface) {
-                $errorFeedbackItemResolutions = array_merge(
-                    $errorFeedbackItemResolutions,
-                    $fieldArgTypeResolver->validateInputValue($argValue)
+                $fieldArgTypeResolver->validateInputValue(
+                    $argValue,
+                    $astNode,
+                    $objectTypeFieldResolutionFeedbackStore,
                 );
             }
-            $errorFeedbackItemResolutions = array_merge(
-                $errorFeedbackItemResolutions,
-                $objectTypeFieldResolver->validateFieldArgValue(
-                    $this,
-                    $field->getName(),
-                    $argName,
-                    $argValue
-                )
+            $objectTypeFieldResolver->validateFieldArgValue(
+                $this,
+                $field->getName(),
+                $argName,
+                $argValue,
+                $astNode,
+                $objectTypeFieldResolutionFeedbackStore,
             );
         }
-        return $errorFeedbackItemResolutions;
     }
 
     /**

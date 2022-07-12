@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
@@ -41,12 +43,12 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     public function isFieldAMutation(FieldInterface|string $fieldOrFieldName): bool;
     /**
      * Validate the constraints for a field argument
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldArgValue(
         string $fieldName,
         string $fieldArgName,
-        mixed $fieldArgValue
-    ): array;
+        mixed $fieldArgValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
 }

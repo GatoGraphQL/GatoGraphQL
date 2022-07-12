@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldSchemaDefinitionResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 /**
  * A TypeResolver may be useful when retrieving the schema from a ObjectTypeFieldResolver,
@@ -113,15 +115,15 @@ class InterfaceSchemaDefinitionResolverAdapter implements ObjectTypeFieldSchemaD
 
     /**
      * Validate the constraints for a field argument
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
-        mixed $fieldArgValue
-    ): array {
-        return $this->interfaceTypeFieldSchemaDefinitionResolver->validateFieldArgValue($fieldName, $fieldArgName, $fieldArgValue);
+        mixed $fieldArgValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $this->interfaceTypeFieldSchemaDefinitionResolver->validateFieldArgValue($fieldName, $fieldArgName, $fieldArgValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
     }
 }

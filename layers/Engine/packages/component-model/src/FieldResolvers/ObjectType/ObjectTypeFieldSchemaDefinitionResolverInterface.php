@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\ObjectType;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ObjectTypeFieldSchemaDefinitionResolverInterface
 {
@@ -45,13 +47,13 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
     /**
      * Validate the constraints for a field argument
-     *
-     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         string $fieldArgName,
-        mixed $fieldArgValue
-    ): array;
+        mixed $fieldArgValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
 }
