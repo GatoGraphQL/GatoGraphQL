@@ -1084,8 +1084,13 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 && $moduleConfiguration->removeFieldIfDirectiveFailed()
             ) {
                 // Extract the failing fields from the errors
-                foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $error) {
-                    $schemaErrorFailingFields[] = $error->getField();
+                foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $objectResolutionFeedback) {
+                    foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
+                        $schemaErrorFailingFields = array_merge(
+                            $schemaErrorFailingFields,
+                            $fieldSet->fields
+                        );
+                    }
                 }
                 foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
                     $schemaErrorFailingFields = array_merge(
