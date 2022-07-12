@@ -6,8 +6,8 @@ namespace PoP\ComponentModel\Feedback;
 
 class Tokens
 {
-    const PATH = 'path';
-    const MESSAGE = 'message';
-    const LOCATIONS = 'locations';
-    const EXTENSIONS = 'extensions';
+    public const PATH = 'path';
+    public const MESSAGE = 'message';
+    public const LOCATIONS = 'locations';
+    public const EXTENSIONS = 'extensions';
 }
