@@ -7,7 +7,6 @@ namespace GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
-use PoP\ComponentModel\Feedback\Tokens;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 
 /**
