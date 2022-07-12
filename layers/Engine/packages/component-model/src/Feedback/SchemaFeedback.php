@@ -12,11 +12,15 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
 {
+    /**
+     * @param FieldInterface[] $fields
+     * @param array<string, mixed> $extensions
+     */
     public function __construct(
         FeedbackItemResolution $feedbackItemResolution,
         AstInterface $astNode,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        /** @var array<string, mixed> */
+        protected array $fields,
         array $extensions = [],
     ) {
         parent::__construct(
@@ -48,10 +52,5 @@ class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInte
     public function getField(): FieldInterface
     {
         return $this->field;
-    }
-
-    public function getDirective(): ?Directive
-    {
-        return $this->directive;
     }
 }
