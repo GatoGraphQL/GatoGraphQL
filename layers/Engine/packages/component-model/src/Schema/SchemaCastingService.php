@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
@@ -49,7 +49,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
         array $argumentKeyValues,
         array $argumentSchemaDefinition,
         WithArgumentsInterface $withArgumentsAST,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
         // Cast all argument values
         foreach ($argumentKeyValues as $argName => $argValue) {
@@ -119,7 +119,7 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             }
             
             // Validate that the expected array/non-array input is provided
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -129,24 +129,24 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
                 $astNode,
-                $separateSchemaInputValidationFeedbackStore,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $astNode,
-                $separateSchemaInputValidationFeedbackStore,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
@@ -164,8 +164,8 @@ class SchemaCastingService implements SchemaCastingServiceInterface
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
                 foreach ($deprecationMessages as $deprecationMessage) {
-                    $schemaInputValidationFeedbackStore->addDeprecation(
-                        new SchemaInputValidationFeedback(
+                    $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                        new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 GenericFeedbackItemProvider::class,
                                 GenericFeedbackItemProvider::D1,

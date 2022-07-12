@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
@@ -34,19 +34,19 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         AstInterface $astNode,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsString($inputValue, $astNode, $separateSchemaInputValidationFeedbackStore);
-        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateIsString($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateFilterVar($inputValue, $astNode, $separateSchemaInputValidationFeedbackStore, \FILTER_VALIDATE_URL);
-        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateFilterVar($inputValue, $astNode, $separateObjectTypeFieldResolutionFeedbackStore, \FILTER_VALIDATE_URL);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 

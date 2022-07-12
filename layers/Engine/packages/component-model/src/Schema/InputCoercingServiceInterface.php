@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -57,7 +57,7 @@ interface InputCoercingServiceInterface
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
         AstInterface $astNode,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
 
     /**
@@ -70,7 +70,7 @@ interface InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
         AstInterface $astNode,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed;
 
     /**

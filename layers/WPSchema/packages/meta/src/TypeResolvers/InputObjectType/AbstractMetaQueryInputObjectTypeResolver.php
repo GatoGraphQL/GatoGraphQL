@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -126,7 +126,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         switch ($inputFieldName) {
             case 'key':
@@ -137,8 +137,8 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
                         $this->getAllowOrDenyBehavior(),
                     )
                 ) {
-                    $schemaInputValidationFeedbackStore->addError(
-                        new SchemaInputValidationFeedback(
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 FeedbackItemProvider::class,
                                 FeedbackItemProvider::E1,
@@ -158,7 +158,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
             $inputFieldTypeResolver,
             $inputFieldName,
             $coercedInputFieldValue,
-            $schemaInputValidationFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
         );
     }
 

@@ -9,9 +9,6 @@ use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
@@ -509,17 +506,16 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         bool $forSchema
     ): array {
         $directiveArgSchemaDefinition = $this->getDirectiveSchemaDefinitionArgs($directiveResolver, $relationalTypeResolver);
-        $schemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $castDirectiveArguments = $this->castFieldOrDirectiveArguments(
             $relationalTypeResolver,
             $directiveArgs,
             $directiveArgSchemaDefinition,
-            $schemaInputValidationFeedbackStore,
+            $objectTypeFieldResolutionFeedbackStore,
             $forSchema
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation(
-            $schemaInputValidationFeedbackStore,
-            $relationalTypeResolver,
+        $objectTypeFieldResolutionFeedbackStore->incorporate(
+            $objectTypeFieldResolutionFeedbackStore,
         );
         return $castDirectiveArguments;
     }
@@ -528,7 +524,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $fieldOrDirectiveArgs,
         array $fieldOrDirectiveArgSchemaDefinition,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         bool $forSchema
     ): array {
         // Cast all argument values
@@ -607,7 +603,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $astNode = new Argument($argName, new Literal($argValue, LocationHelper::getNonSpecificLocation()), LocationHelper::getNonSpecificLocation());
 
             // Validate that the expected array/non-array input is provided
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $this->getInputCoercingService()->validateInputArrayModifiers(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
@@ -617,26 +613,26 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $fieldOrDirectiveArgIsNonNullArrayOfArraysItemsType,
                 $astNode,
-                $separateSchemaInputValidationFeedbackStore,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 $fieldOrDirectiveArgs[$argName] = null;
                 continue;
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
-            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $coercedArgValue = $this->getInputCoercingService()->coerceInputValue(
                 $fieldOrDirectiveArgTypeResolver,
                 $argValue,
                 $fieldOrDirectiveArgIsArrayType,
                 $fieldOrDirectiveArgIsArrayOfArraysType,
                 $astNode,
-                $separateSchemaInputValidationFeedbackStore,
+                $separateObjectTypeFieldResolutionFeedbackStore,
             );
-            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
-            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                 $fieldOrDirectiveArgs[$argName] = null;
                 continue;
             }
@@ -650,8 +646,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                     $fieldOrDirectiveArgIsArrayOfArraysType,
                 );
                 foreach ($deprecationMessages as $deprecationMessage) {
-                    $schemaInputValidationFeedbackStore->addDeprecation(
-                        new SchemaInputValidationFeedback(
+                    $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                        new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 GenericFeedbackItemProvider::class,
                                 GenericFeedbackItemProvider::D1,

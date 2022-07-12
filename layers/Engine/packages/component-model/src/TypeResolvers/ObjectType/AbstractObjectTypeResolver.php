@@ -14,7 +14,6 @@ use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
@@ -1380,15 +1379,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Cast the Arguments, return if any of them produced an error
          */
-        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldData = $this->getSchemaCastingService()->castArguments(
             $fieldData,
             $fieldArgsSchemaDefinition,
             $field,
-            $separateSchemaInputValidationFeedbackStore,
+            $separateObjectTypeFieldResolutionFeedbackStore,
         );
-        $objectTypeFieldResolutionFeedbackStore->incorporateSchemaInputValidation($separateSchemaInputValidationFeedbackStore, $this);
-        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return null;
         }
 

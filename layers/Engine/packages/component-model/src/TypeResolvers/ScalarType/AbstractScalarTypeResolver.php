@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
@@ -64,13 +64,13 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     final protected function validateIsNotStdClass(
         string|int|float|bool|stdClass $inputValue,
         AstInterface $astNode,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (!($inputValue instanceof stdClass)) {
             return;
         }
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E1,
@@ -87,7 +87,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     final protected function validateFilterVar(
         mixed $inputValue,
         AstInterface $astNode,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         int $filter,
         array|int $options = [],
     ): void {
@@ -95,8 +95,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         if ($valid !== false) {
             return;
         }
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E2,
@@ -114,13 +114,13 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     final protected function validateIsString(
         string|int|float|bool|stdClass $inputValue,
         AstInterface $astNode,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (is_string($inputValue)) {
             return;
         }
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E3,
@@ -137,10 +137,10 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
     protected function addDefaultError(
         mixed $inputValue,
         AstInterface $astNode,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $schemaInputValidationFeedbackStore->addError(
-            new SchemaInputValidationFeedback(
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     InputValueCoercionErrorFeedbackItemProvider::class,
                     InputValueCoercionErrorFeedbackItemProvider::E16,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 
 interface SchemaCastingServiceInterface
@@ -18,6 +18,6 @@ interface SchemaCastingServiceInterface
         array $argumentKeyValues,
         array $argumentSchemaDefinition,
         WithArgumentsInterface $withArgumentsAST,
-        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array;
 }
