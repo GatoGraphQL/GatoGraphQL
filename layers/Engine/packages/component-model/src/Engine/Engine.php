@@ -2293,7 +2293,7 @@ class Engine implements EngineInterface
             Tokens::PATH => $astNodePath,
         ];
         if ($field !== null) {
-            $entry[Tokens::FIELD] = $field;
+            $entry[Tokens::FIELD] = $field->asASTNodeString();
         }
         return $entry;
     }
