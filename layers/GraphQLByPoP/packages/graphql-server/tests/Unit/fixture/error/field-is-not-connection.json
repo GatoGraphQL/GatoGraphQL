@@ -4,13 +4,17 @@
             "message": "Field 'id' is not a connection",
             "locations": [
                 {
-                    "line": 1,
-                    "column": 1
+                    "line": 2,
+                    "column": 5
                 }
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "id",
+                "field": "id { ... }",
+                "path": [
+                    "id { ... }",
+                    "query { ... }"
+                ],
                 "code": "PoP\\ComponentModel\\e1"
             }
         }
