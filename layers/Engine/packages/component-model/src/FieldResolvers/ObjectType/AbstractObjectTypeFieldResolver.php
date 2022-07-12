@@ -713,8 +713,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     public function collectFieldValidationDeprecationMessages(
         ObjectTypeResolverInterface $objectTypeResolver,
-        string $fieldName,
-        array $fieldArgs,
+        FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $fieldDeprecationMessage = $this->getConsolidatedFieldDeprecationMessage($objectTypeResolver, $fieldName);
@@ -725,12 +724,11 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         DeprecationFeedbackItemProvider::class,
                         DeprecationFeedbackItemProvider::D1,
                         [
-                            $fieldName,
+                            $field->getName(),
                             $fieldDeprecationMessage,
                         ]
                     ),
-                    LocationHelper::getNonSpecificLocation(),
-                    $objectTypeResolver,
+                    $field,
                 )
             );
         }

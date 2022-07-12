@@ -1433,7 +1433,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
 
         // Collect the deprecations from the queried fields
-        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field->getName(), $fieldData, $objectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $field, $objectTypeFieldResolutionFeedbackStore);
 
         /**
          * Validations:
